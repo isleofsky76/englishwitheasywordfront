@@ -1,0 +1,69 @@
+/* 기본적인 여백 */
+body {
+    margin: 40px; /* 전체 body에 20px의 여백을 추가 */
+    background-color: #eef5f8; /* Light sky blue background color */
+    line-height: 1.4;
+    font-family: "Nanum Gothic", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 0.9rem;
+    p {
+        margin-bottom: 10px; /* 문단 간의 간격 조절 */
+    }
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    width: 80%;
+    margin: 0 auto;
+
+}
+
+.box {
+    background-color: lightblue;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 150px; /* Adjust the height as needed */
+    cursor: pointer;
+    border: 1px solid black; /* Added border to better visualize the boxes */
+    text-align: center;
+    margin-top:10px;
+
+}
+
+.image_container {
+    margin-top:20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; /* Ensure vertical alignment */
+    width: 100%; /* Ensure the container takes full width */
+}
+
+.image_container img {
+    margin-top: 10px;
+    width: 15rem; /* Set the desired width */
+    height: auto; /* Maintain aspect ratio */
+    display: block; /* Make the image a block-level element */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.content{
+    grid-column: span 3;
+    margin-top: 10px;
+    height: auto; /* Maintain aspect ratio */
+    margin-left: 120px; /* Center the image horizontally */
+    margin-right: 120px; /* Center the image horizontally */
+    text-align: center;
+}
+
+

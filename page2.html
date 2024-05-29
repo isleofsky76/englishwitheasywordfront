@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>영어대화</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dongle&family=Nanum+Gothic&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="page2.css"> <!-- 외부 CSS 파일 연결 -->
+    <script src="page2.js"></script>
+    <script src="examplepage.js"></script>
+    <script src="copy.js"></script>
+    <script src="clock.js"></script>
+    <script src="eventlistener.js"></script>
+   
+    <!-- <script src="questions.js"></script> -->
+    <!-- <script src="SpeechSynthesisUtterance.js"></script> -->
+</head>
+
+<body>
+    <h1 class="page-title">영어로 대화하기</h1>
+    <br><br>
+
+    
+    <div id="chatTerminal">
+        <div id="chatMessages"></div>
+        <input type="text" id="inputMessage" placeholder="영어로 대화해보세요...">
+        <button id="submitButton">Send</button>
+        <button onclick="clearAllMessages()">Delete All Messages</button> <!-- New button for deleting messages -->
+        <button onclick="downloadChatHistory()">Download Chat History</button>
+        <button onclick="speakText2()">Read Chat</button>
+        <!-- HTML for the stop button -->
+        <button onclick="stopSpeech()">Stop Speech</button>
+        <button type="button" class="coppytext" onclick="copyToClipboard()">COPY TEXT</button> 
+        <div class="filter-container-wrapper">
+            <div class="filter-container">
+                <label for="cityFilter">현재시간:</label>
+                <select id="cityFilter" class="form-select">
+                    <option value="서울">서울</option>
+                    <option value="뉴욕">뉴욕</option>
+                    <option value="런던">런던</option>
+                    <option value="파리">파리</option>
+                    <option value="도쿄">도쿄</option>
+                    <option value="베이징">베이징</option>
+                    <option value="모스크바">모스크바</option>
+                    <option value="제네바">제네바</option>
+                </select>
+                <div id="selectedTime"></div>
+            </div>
+        </div>
+
+        
+        
+    </div>
+    
+
+    
+
+
+    <br><br><br><br><br><br>
+
+    
+    <div id="disqus_thread"></div>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
+
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Get references to the word list and input elements
+        const wordListElement = document.getElementById('wordList');
+        const inputWordElement = document.getElementById('inputWord');
+    
+        // Fetch the contents of example_words.html
+        fetch('example_words.html')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.text(); // Parse response as text
+            })
+            .then(data => {
+                // Populate the word list with the fetched data
+                wordListElement.innerHTML = data;
+    
+                // Create an array of words and sort them alphabetically
+                const wordArray = Array.from(wordListElement.querySelectorAll('li')).map(item => item.textContent.trim());
+                wordArray.sort();
+    
+                // Re-populate the word list with the sorted words
+                wordListElement.innerHTML = wordArray.map(word => `<li>${word}</li>`).join('');
+    
+                // Add click event listeners to each word in the list
+                wordListElement.querySelectorAll('li').forEach(item => {
+                    item.addEventListener('click', function() {
+                        // Set the clicked word as the value of the input word element
+                        inputWordElement.value = this.textContent;
+                    });
+                });
+            })
+            .catch(error => console.error('Error fetching data:', error));
+    });
+    </script>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var disqus_config = function () {
+                this.page.url = window.location.href;  // 현재 페이지 URL 사용
+                this.page.identifier = document.location.pathname; // 페이지 경로를 식별자로 사용
+            };
+        
+            (function() { // DON'T EDIT BELOW THIS LINE
+                var d = document, s = d.createElement('script');
+                s.src = 'https://isleofsky76.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        });
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        
+</body>
+
+</html>

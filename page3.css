@@ -1,0 +1,208 @@
+
+/* 기본적인 여백 */
+body {
+    margin: 50px; /* 전체 body에 20px의 여백을 추가 */
+    background-color: #eef5f8; /* Light sky blue background color */
+    line-height: 1.4;
+    font-family: "Nanum Gothic", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 0.9rem;
+    p {
+        margin-bottom: 10px; /* 문단 간의 간격 조절 */
+    }
+}
+
+.page-title {
+    font-size: 24px;
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    font-weight: bold;
+}
+
+
+
+/*(2)질문하기... Add top margin to the question form */
+.question-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Add space between elements */
+    margin-bottom: 20px; /* Add bottom margin to separate from next section */
+}
+
+
+/* Define a class for the heading */
+.custom-heading {
+    color: #2C3E50; /* Example dark blue color */
+    font-family: 'Arial', sans-serif; /* Use a specific font or fallback */
+    text-align: left; /* Align the heading to the center */
+    margin-top: 20px; /* Add spacing above the heading */
+    margin-bottom: 15px; /* Add spacing below the heading */
+    font-weight: bold; /* Make the heading bold */
+    font-size : 20px;
+}
+
+/* Define a class for the input field */
+        /* Container that will be scrollable */
+
+         /* 질문입력창Response area styles with additional spacing */
+#user_question{
+    height: auto;
+    width: 100%; /* Make it responsive */
+    height:70vh;  /*가장큰테두리*/
+    border: 1px solid #ccc;
+    padding: 10px;
+    overflow-y: auto; /* Ensure scrolling within terminal */
+    display: flex;
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    flex-direction: column;
+}
+
+
+.questionInput{
+    width: 100%;
+    height:50vh;
+    padding: 8px;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    box-sizing: border-box;
+    overflow: auto;
+    resize: none;
+    margin-bottom: 10px;
+}
+
+
+
+#user_question h3 {
+    margin-top: 0; /* Remove any default margin to align it better within the container */
+    
+}
+
+/* 질문하기 버튼 Generic button styles */
+button {
+    background-color: #8badd1;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    font-size: 1rem;
+    line-height: 1.5;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    transition: background-color 0.3s ease;
+    width: auto;
+    margin-top: 10px;
+}
+
+/* Add hover effect for all buttons */
+button:hover {
+    background-color: #9adaad; /* Darker background on hover */
+}
+
+
+
+/* Specific styles for refresh button */
+#refreshButton:hover {
+    background-color: #9adaad; /* Darker red on hover */
+}
+
+/*답변출력창*/
+#responseArea {
+    width: 100%;
+    height:100vh;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    overflow-y: auto; /* Vertical scrolling */
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+#responseArea h3 {
+    font-size: 0.9rem;
+}
+
+/* Style for the form and input */
+#questionForm {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Add space between elements */
+    margin-bottom: 20px; /* Add bottom margin to separate from next section */
+}
+
+
+
+button:hover {
+    background-color: #9adaad; /* 마우스를 올렸을 때 어두운 파란색 */
+}
+
+/* Media Query for Smaller Screens */
+@media screen and (max-width: 600px) {
+    #chatTerminal, #questionContainer {
+        width: 95%; /* Further reduce the width for smaller screens */
+    }
+
+    #submitButton, #questionForm button {
+        width: 100%; /* Make the button narrower if needed */
+        padding: 10px; /* Adjust padding to save space */
+    }
+}
+
+
+/* Parent container */
+.scroll-wrapper {
+    height: 400px; /* Fixed height of the parent */
+    overflow-y: auto; /* Scroll when content overflows */
+}
+
+/* Textarea inside parent */
+#studentanswer {
+    width: 100%; /* Make input as wide as the parent */
+    height: 100%; /* Occupy the full parent height */
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/*====================================================================================================
+/* 질문 스타일 */
+.question {
+    margin-bottom: 15px;
+    color: black; /* 질문은 기본 색상으로 설정 */
+}
+
+/* 답변 스타일 */
+.answer {
+    color: blue; /* 답변 텍스트를 파란색으로 설정 */
+    margin-bottom: 20px; /* 답변과 다음 질문 사이에 여백 추가 */
+}
+/* ================================================================================================== */
+
+/*시계 */
+#clock {
+    font-size: 24px;
+    margin-top: 20px;
+}
+#dictionary-container {
+    margin-top: 20px;
+}
+#learningSites {
+    margin-top: 20px;
+}
+.english-link a {
+    text-decoration: none;
+    color: blue;
+}
+.blue-heading {
+    color: blue;
+}
+#dictionaryResult p {
+    margin: 0;
+    padding: 0;
+}

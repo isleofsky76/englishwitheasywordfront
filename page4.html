@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title>Text To Speech</title>
+  <link rel="stylesheet" href="page4.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <div class="wrapper">
+    <header>Text To Speech(텍스트를 음성으로)</header>
+    <form action="#">
+      <div class="row">
+        <label for="text"></label>
+        <textarea id="text" rows="5">Your Text Here</textarea>
+      </div>
+      <div class="row">
+        <label for="voice">Select Voice(다양한 음성을 선택할 수 있습니다)</label>
+        <select id="voice"></select>
+      </div>
+      <div class="row">
+        <button type="button" class="speak-btn" onclick="speak()">말하기</button>
+        <button type="button" class="stop-btn" onclick="stopSpeech()">멈추기</button>
+        <button type="button" class="replay-btn" onclick="replay()">반복재생</button>
+      </div>
+    </form>
+  </div>
+  <script src="page4.js"></script>
+</body>
+</html>

@@ -1,0 +1,193 @@
+
+/* 기본적인 여백 */
+body {
+    margin: 50px; /* 전체 body에 20px의 여백을 추가 */
+    background-color: #eef5f8; /* Light sky blue background color */
+    line-height: 1.4;
+    font-family: "Nanum Gothic", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 0.9rem;
+    p {
+        margin-bottom: 10px; /* 문단 간의 간격 조절 */
+    }
+}
+
+.page-title {
+    font-size: 24px;
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    font-weight: bold;
+}
+
+
+/* 질문하기 버튼 Generic button styles */
+button {
+    background-color: #8badd1;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    font-size: 1rem;
+    line-height: 1.5;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    transition: background-color 0.3s ease;
+    width: auto;
+}
+
+/* Add hover effect for all buttons */
+button:hover {
+    background-color: #9adaad; /* Darker background on hover */
+}
+
+
+
+/*====================================================================================================
+
+
+/* 영어채팅사이트 */
+#wordQuizContainer div {
+    margin-bottom: 20px;
+}
+
+
+button {
+    margin-top: 10px;
+}
+.blue-heading {
+    color: rgb(6, 6, 43);
+    font-size: 1.5em;
+    margin-top: 20px;
+}
+
+
+/* Chat Container */
+#chatContainer {
+    width: 90%; /* Use a percentage width for responsiveness */
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Chat Messages Container */
+#chatMessages{
+    width: 100%;
+    height: 300px; /* Adjust the height as necessary */
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    overflow-y: auto; /* Vertical scrolling */
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+
+
+/* Chat Terminal */
+#chatTerminal {
+    width: 100%; /* Make it responsive */
+    height: 400%;
+    border: 1px solid #ccc;
+    padding: 10px;
+    overflow-y: auto; /* Ensure scrolling within terminal */
+    line-height: 1.6; 
+}
+
+
+/* Chat Messages Container */
+#chatMessages .user-message {
+    text-align: left; /* Align user messages to the left */
+    margin-right: auto; /* Push message to the left */
+    padding: 8px;
+    border-radius: 8px;
+    margin-bottom: 4px; /* Space between messages */
+    color: #0b0225; /* White text for contrast */
+    line-height: 1.6; 
+}
+
+
+
+#chatMessages .ai-message {
+    text-align: left; /* Align AI messages to the right */
+    margin-left: auto; /* Push message to the right */
+    padding: 8px;
+    border-radius: 8px;
+    margin-bottom: 4px; /* Space between messages */
+    color: #254ac2; /* White text for contrast */
+}
+
+
+
+/* Message Input and Send Button Alignment Container */
+#messageContainer {
+    display: flex; /* Horizontal alignment */
+    margin-top: 10px;
+    width: 100%;
+}
+
+/* Input Message Field Styles */
+#inputMessage {
+    flex-grow: 1; /* Take up all remaining space */
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-sizing: border-box;
+    margin-right: 10px; /* Space between input field and button */
+    width: 100%;
+    height:500%;
+}
+
+
+
+
+
+/* delete Add your CSS styles here */
+.deleteButton {
+    color: blue;
+}
+
+
+
+
+/*시계 */
+
+/* 시계위치 */
+.filter-container-wrapper {
+    margin-top: 20px;
+    position: absolute;
+    left: 50px;
+    display: flex;
+    align-items: center;
+}
+
+.filter-container {
+    display: flex;
+    align-items: center;
+}
+
+.filter-container label {
+    margin-right: 10px;
+    font-size: 0.8rem;
+}
+
+.filter-container select {
+    width: 100px;
+    margin-right: 20px;
+    font-size: 0.8rem;
+}
+
+#selectedTime {
+    font-size: 0.8rem;
+    padding: 8px 10px;
+    border: 1px solid black;
+    background-color: white;
+    display: inline-block;
+}

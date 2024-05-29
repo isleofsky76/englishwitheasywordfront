@@ -1,0 +1,509 @@
+
+/* 기본적인 여백 */
+body {
+    margin: 100px; /* 전체 body에 20px의 여백을 추가 */
+    background-color: #eef5f8; /* Light sky blue background color */
+    line-height: 1.4;
+    font-family: "Nanum Gothic", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 0.9rem;
+    p {
+        margin-bottom: 10px; /* 문단 간의 간격 조절 */
+    }
+}
+
+.page-title {
+    font-size: 24px;
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    font-weight: bold;
+}
+
+
+#wordList {
+    display: flex;
+    flex-wrap: wrap;
+    list-style-type: none;
+    padding: 0;
+    font-size: 0.8rem;
+}
+
+#wordList li {
+    margin-right: 10px;
+    margin-bottom: 10px;
+    background-color: lightgray;
+    padding: 5px;
+}
+
+
+.form-button {
+    background-color: #8badd1;
+    color: white;
+    border: none;
+    padding: 10px 20px; /* 내부 여백 설정 */
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.7rem; /* 텍스트 크기 설정 */
+    width: 90px; /* 버튼 너비 설정 */
+    height: 30px; /* 버튼 높이 설정 */
+    text-align: center; /* 텍스트 중앙 정렬 */
+    line-height: 1.5; /* 줄 간격 설정 */
+    margin-right: 5px; /* 버튼 간격 설정 */
+    transition: background-color 0.3s ease; /* 배경색 전환 효과 */
+}
+
+.form-button:hover {
+    background-color: #9adaad; /* Darker background on hover */
+}
+
+.highlight {
+    font-size: 1rem; /* Adjust the font size as desired */
+    color: rgb(0, 0, 255); /* Adjust the color as desired */
+    font-weight: bold; /* Adjust the font weight as desired */
+    font-size: 1rem;
+}
+
+#inputWord::placeholder {
+    font-weight: bold;
+    color: black;
+}
+
+
+/* Add spacing between elements */
+#inputForm {
+    margin-top: 1rem;
+    color: rgb(6, 6, 43); /* 링크의 색상을 파란색으로 설정 */
+    text-decoration: none; /* 밑줄 없앰 */
+    font-family: Arial, sans-serif; /* 폰트 설정 */
+    font-size: 1rem;
+
+}
+
+#inputForm label {
+    margin-bottom: 10px; /* Add bottom margin to label */
+    display: block; /* Make label a block element to occupy full width */
+}
+
+#inputForm input {
+    margin-bottom: 10px; /* Add bottom margin to input field */
+}
+
+#inputForm button {
+    margin-right: 10px; /* Add right margin to buttons */
+}
+
+#outputArea {
+    width: 100%;
+    height: 50vh; /* 높이를 뷰포트 높이의 50%로 설정 */
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    overflow-x: hidden;
+    line-height: 1.8; /* Adjust the line height to add space between lines */
+}
+
+#fileFormat{
+    margin-top: 20px; /* 위쪽으로 20px의 간격 추가 */
+    white-space: pre-wrap;
+}
+
+
+
+
+
+ /* Custom CSS for hover effect */
+#wordList li:hover {
+    background-color: lightgray; /* Change background color on hover */
+    cursor: pointer; /* Change cursor to pointer on hover */
+}
+
+
+/* Custom CSS for wordStatistics */
+#wordStatistics h2 {
+    margin-top: 2rem; /* Add top margin for spacing */
+    color: rgb(6, 6, 43); /* Set the heading color to blue */
+    text-decoration: none; /* Remove underline */
+    font-family: Arial, sans-serif; /* Font family */
+    font-size: 1.2rem;
+    font-weight: bold; /* Make the text bold */
+}
+
+#wordStatistics, example {
+    margin-top: 0.1rem;
+    color: rgb(14, 14, 14); /* Set the heading color to blue */
+    text-decoration: none; /* Remove underline */
+    font-family: Arial, sans-serif; /* Font family */
+    font-size: 1rem;
+}
+
+/*pdf파일에 들어가는 나눔명조 */
+.nanum-myeongjo-regular {
+    font-family: "Nanum Myeongjo", serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+
+/* 스피너 스타일링 */
+#spinner {
+    display: none; /* 일단은 숨김 */
+}
+
+
+#영어학습사이트 h3{
+    margin-top: 5rem;
+    font-family: Arial, sans-serif; /* 폰트 설정 */
+    font-size: 20px; /* 폰트 크기 설정 */
+}
+
+
+#inputMessage {
+    flex-grow: 1;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-sizing: border-box;
+    margin-right: 10px;
+    width: 100%;
+}
+
+.controls-container {
+    width: 100%; /* Make it responsive */
+    height: 200%;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+.sliders-container {
+    display: flex;
+    align-items: center;
+}
+
+
+
+/*(2)질문하기... Add top margin to the question form */
+.question-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Add space between elements */
+    margin-bottom: 20px; /* Add bottom margin to separate from next section */
+}
+
+
+/* Define a class for the heading */
+.custom-heading {
+    color: #2C3E50; /* Example dark blue color */
+    font-family: 'Arial', sans-serif; /* Use a specific font or fallback */
+    text-align: left; /* Align the heading to the center */
+    margin-top: 20px; /* Add spacing above the heading */
+    margin-bottom: 15px; /* Add spacing below the heading */
+    font-weight: bold; /* Make the heading bold */
+    font-size : 20px;
+}
+
+/* Define a class for the input field */
+        /* Container that will be scrollable */
+
+.questionInput{
+    width: 100%;
+    height:30vh;
+    padding: 8px;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    box-sizing: border-box;
+    overflow: auto;
+    resize: none;
+    margin-bottom: 10px;
+}
+
+
+ /* Response area styles with additional spacing */
+ #user_question{
+    height: auto;
+    width: 100%; /* Make it responsive */
+    height:50vh;
+    border: 1px solid #ccc;
+    padding: 10px;
+    overflow-y: auto; /* Ensure scrolling within terminal */
+    display: flex;
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    flex-direction: column;
+}
+
+#user_question h3 {
+    margin-top: 0; /* Remove any default margin to align it better within the container */
+}
+
+/* 질문하기 버튼 Generic button styles */
+button {
+    background-color: #8badd1;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    font-size: 1rem;
+    line-height: 1.5;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    transition: background-color 0.3s ease;
+    width: auto;
+}
+
+/* Add hover effect for all buttons */
+button:hover {
+    background-color: #9adaad; /* Darker background on hover */
+}
+
+
+
+/* Specific styles for refresh button */
+#refreshButton:hover {
+    background-color: #d32f2f; /* Darker red on hover */
+}
+
+
+#responseArea {
+    width: 100%;
+    height:50vh;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    overflow-y: auto; /* Vertical scrolling */
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+
+/* Style for the form and input */
+#questionForm {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Add space between elements */
+    margin-bottom: 20px; /* Add bottom margin to separate from next section */
+}
+
+#questionInput {
+    width: 100%;
+    height: 200%;
+    padding: 8px;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    box-sizing: border-box;
+    overflow: auto;
+    resize: none;
+    margin-bottom: 10px;
+}
+
+
+
+button:hover {
+    background-color: #9adaad; /* 마우스를 올렸을 때 어두운 파란색 */
+}
+
+#responseArea {
+    width: 100%;
+    height:200%;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    overflow-y: auto; /* Vertical scrolling */
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+/* Media Query for Smaller Screens */
+@media screen and (max-width: 600px) {
+    #chatTerminal, #questionContainer {
+        width: 95%; /* Further reduce the width for smaller screens */
+    }
+
+    #submitButton, #questionForm button {
+        width: 100%; /* Make the button narrower if needed */
+        padding: 10px; /* Adjust padding to save space */
+    }
+}
+
+
+/* Parent container */
+.scroll-wrapper {
+    height: 400px; /* Fixed height of the parent */
+    overflow-y: auto; /* Scroll when content overflows */
+}
+
+/* Textarea inside parent */
+#studentanswer {
+    width: 100%; /* Make input as wide as the parent */
+    height: 100%; /* Occupy the full parent height */
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/*====================================================================================================
+
+/* Button styling */
+#questionForm button {
+    padding: 10px 15px;
+    border: none;
+    background-color: blue;
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+    font-family: Arial, sans-serif;
+    font-size: 1rem;
+}
+
+#questionForm button:hover {
+    background-color: darkblue; /* Darken the button color on hover */
+}
+
+
+/* Wrapper to limit the width of the overall input */
+.blue-heading {
+    color: rgb(6, 6, 43);/* Set text color to blue */
+    font-weight: bold; /* Make the text bold */
+    margin: 10px 0; /* Add some spacing around the heading */
+    font-family: Arial, sans-serif; /* Preferred font */
+    font-size: 1rem;
+}
+
+#questions, #answers {
+    margin-bottom: 20px; /* Add spacing between sections */
+}
+
+h3 {
+    color: rgb(6, 6, 43);/* Change this to your preferred color */
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+    font-size: 1rem;
+}
+
+/* Add spacing between "답변" and "영어학습사이트" */
+#영어학습사이트 {
+    margin-top: 100px; /* Adjust this value to your needs */
+}
+
+/* 영어채팅사이트 */
+#wordQuizContainer div {
+    margin-bottom: 20px;
+}
+button {
+    margin-top: 10px;
+}
+.blue-heading {
+    color: rgb(6, 6, 43);
+    font-size: 1.5em;
+    margin-top: 20px;
+}
+
+
+/* Chat Container */
+#chatContainer {
+    width: 90%; /* Use a percentage width for responsiveness */
+    max-width: 600px; /* Limit the maximum width for larger screens */
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Chat Messages Container */
+#chatMessages {
+    width: 100%;
+    height: 70%; /* Adjust the height as necessary */
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    overflow-y: auto; /* Vertical scrolling */
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+/* Chat Terminal */
+#chatTerminal {
+    width: 100%; /* Make it responsive */
+    height: 400px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    overflow-y: auto; /* Ensure scrolling within terminal */
+}
+
+/* Message Input and Send Button Alignment Container */
+#messageContainer {
+    display: flex; /* Horizontal alignment */
+    margin-top: 10px;
+    width: 100%;
+}
+
+/* Input Message Field Styles */
+#inputMessage {
+    flex-grow: 1; /* Take up all remaining space */
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-sizing: border-box;
+    margin-right: 10px; /* Space between input field and button */
+    width: 100%;
+}
+
+
+
+/* Media Query for Smaller Screens */
+@media screen and (max-width: 600px) {
+    #chatContainer {
+        width: 95%; /* Further reduce the width for smaller screens */
+    }
+
+    #submitButton {
+        width: 60px; /* Make the button narrower if needed */
+        padding: 5px; /* Adjust padding to save space */
+    }
+}
+
+
+
+/* delete Add your CSS styles here */
+.deleteButton {
+    color: blue;
+}
+
+
+
+
+/*시계 */
+#clock {
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+#dictionary-container {
+    margin-top: 20px;
+}
+#learningSites {
+    margin-top: 20px;
+}
+.english-link a {
+    text-decoration: none;
+    color: blue;
+}
+.blue-heading {
+    color: blue;
+}
+#dictionaryResult p {
+    margin: 0;
+    padding: 0;
+}
