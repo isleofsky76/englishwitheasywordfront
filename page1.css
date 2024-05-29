@@ -227,3 +227,39 @@ body {
 #spinner {
     display: none; /* 일단은 숨김 */
 }
+
+
+/* 미디어 쿼리 추가: 모바일 최적화 */
+@media only screen and (max-width: 600px) {
+    body {
+        margin: 20px; /* 모바일에서 여백을 줄임 */
+        font-size: 0.9rem; /* 모바일에서 글씨 크기 조정 */
+    }
+
+    .page-title {
+        font-size: 1.5rem; /* 제목 글씨 크기 조정 */
+    }
+
+    .btn, .btn-primary, .btn-sm {
+        font-size: 0.7rem; /* 버튼 텍스트 크기 조정 */
+        width: 80px; /* 버튼 너비 조정 */
+        height: 25px; /* 버튼 높이 조정 */
+    }
+
+    #inputForm {
+        font-size: 0.7rem; /* 입력 폼 텍스트 크기 조정 */
+    }
+
+    #outputArea {
+        height: 40vh; /* 모바일에서 출력 영역 높이 조정 */
+        font-size: 0.8rem; /* 출력 영역 텍스트 크기 조정 */
+    }
+
+    .filter-container-wrapper {
+        right: 20px; /* 모바일에서 시계 위치 조정 */
+    }
+
+    #wordStatistics h2, #wordStatistics example, #text-to-speech h3 {
+        font-size: 0.8rem; /* 통계와 텍스트 음성 변환 텍스트 크기 조정 */
+    }
+}
