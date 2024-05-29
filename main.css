@@ -66,4 +66,33 @@ body {
     text-align: center;
 }
 
+/* 모바일 화면에 맞춘 스타일 조정 */
+@media only screen and (max-width: 600px) {
+    body {
+        margin: 20px; /* 모바일에서 여백 줄이기 */
+        font-size: 0.8rem; /* 모바일에서 글씨 크기 조정 */
+    }
 
+    .container {
+        grid-template-columns: 1fr; /* 한 열로 조정 */
+        width: 100%; /* 전체 너비 사용 */
+    }
+
+    .box {
+        height: 100px; /* 박스 높이 조정 */
+        font-size: 0.8rem; /* 폰트 크기 조정 */
+    }
+
+    .image_container img {
+        width: 100%; /* 이미지 너비 조정 */
+        margin: 0; /* 이미지 여백 제거 */
+    }
+
+    .content {
+        grid-column: span 1;
+        margin-left: 0; /* 마진 제거 */
+        margin-right: 0; /* 마진 제거 */
+        padding: 10px; /* 내부 여백 추가 */
+        text-align: center;
+    }
+}
