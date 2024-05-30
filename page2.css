@@ -244,4 +244,9 @@ button {
     button:not(.sendButton):not(.deleteButton) {
         display: none;
     }
+
+    /* 모바일에서 시계 숨기기 */
+    .filter-container {
+        display: none;
+    }
 }
