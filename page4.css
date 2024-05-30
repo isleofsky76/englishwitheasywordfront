@@ -78,3 +78,40 @@ button {
 .replay-btn:hover {
   background: #218838;
 }
+
+
+/* 미디어 쿼리 추가: 모바일 최적화 */
+@media (max-width: 600px) {
+  body {
+    height: auto;
+    padding: 20px;
+  }
+
+  .wrapper {
+    padding: 15px;
+    box-shadow: none;
+  }
+
+  header {
+    font-size: 20px;
+    margin-bottom: 15px;
+  }
+
+  .row {
+    margin-bottom: 10px;
+  }
+
+  textarea, select, button {
+    padding: 8px;
+    font-size: 14px;
+  }
+
+  button {
+    padding: 10px;
+  }
+
+  .speak-btn, .stop-btn, .replay-btn {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}
