@@ -140,17 +140,6 @@ button:hover {
     background-color: #9adaad; /* 마우스를 올렸을 때 어두운 파란색 */
 }
 
-/* Media Query for Smaller Screens */
-@media screen and (max-width: 600px) {
-    #chatTerminal, #questionContainer {
-        width: 95%; /* Further reduce the width for smaller screens */
-    }
-
-    #submitButton, #questionForm button {
-        width: 100%; /* Make the button narrower if needed */
-        padding: 10px; /* Adjust padding to save space */
-    }
-}
 
 
 /* Parent container */
@@ -205,4 +194,37 @@ button:hover {
 #dictionaryResult p {
     margin: 0;
     padding: 0;
+}
+
+
+/* Media Query for Smaller Screens */
+@media screen and (max-width: 600px) {
+    body {
+        margin: 10px; /* Adjust body margin for smaller screens */
+        font-size: 0.8rem; /* Reduce font size for readability */
+    }
+    .page-title {
+        font-size: 20px; /* Adjust title size */
+    }
+    .custom-heading {
+        font-size: 18px; /* Adjust heading size */
+    }
+    .question-form, #questionForm {
+        gap: 5px; /* Reduce gap between elements */
+        margin-bottom: 10px; /* Adjust bottom margin */
+    }
+    #user_question, .questionInput, #responseArea {
+        height: 50vh; /* Adjust height for smaller screens */
+        padding: 5px; /* Adjust padding */
+    }
+    button {
+        padding: 5px 10px; /* Adjust button padding */
+        font-size: 0.9rem; /* Adjust button font size */
+    }
+    #clock {
+        font-size: 20px; /* Adjust clock font size */
+    }
+    .scroll-wrapper {
+        height: 300px; /* Adjust scroll wrapper height */
+    }
 }
