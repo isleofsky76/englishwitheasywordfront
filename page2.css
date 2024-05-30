@@ -191,3 +191,36 @@ button {
     background-color: white;
     display: inline-block;
 }
+
+/* Media Query for Mobile Devices */
+@media (max-width: 600px) {
+    button {
+        font-size: 0.8rem; /* Adjust font size for mobile */
+        padding: 4px 8px; /* Adjust padding for mobile */
+        width: auto; /* Allow button to resize */
+        margin-bottom: 5px; /* Reduce margin for tighter spacing */
+    }
+
+    #chatContainer {
+        width: 100%; /* Full width for mobile */
+    }
+
+    #inputMessage {
+        height: auto; /* Adjust height for mobile */
+    }
+
+    #chatTerminal {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    #chatTerminal button {
+        flex: 1 1 48%; /* Allow buttons to take up 48% of the row */
+        margin: 1%; /* Add margin for spacing between buttons */
+        box-sizing: border-box; /* Ensure padding and border are included in width */
+    }
+
+    #clockContainer {
+        margin-top: 10px; /* Adjust margin for mobile */
+    }
+}
