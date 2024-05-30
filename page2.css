@@ -192,35 +192,61 @@ button {
     display: inline-block;
 }
 
-/* Media Query for Mobile Devices */
+/* 미디어 쿼리: 모바일 기기용 스타일 */
 @media (max-width: 600px) {
+    body {
+        margin: 10px;
+    }
+    
+    .page-title {
+        font-size: 20px;
+    }
+    
     button {
-        font-size: 0.8rem; /* Adjust font size for mobile */
-        padding: 4px 8px; /* Adjust padding for mobile */
-        width: auto; /* Allow button to resize */
-        margin-bottom: 5px; /* Reduce margin for tighter spacing */
+        font-size: 0.8rem;
+        padding: 4px 8px;
+        width: auto;
+        margin-bottom: 5px;
     }
 
     #chatContainer {
-        width: 100%; /* Full width for mobile */
+        width: 100%;
+        padding: 10px;
     }
 
-    #inputMessage {
-        height: auto; /* Adjust height for mobile */
+    #chatMessages {
+        height: 200px;
     }
 
     #chatTerminal {
         display: flex;
         flex-wrap: wrap;
+        height: auto;
     }
 
     #chatTerminal button {
-        flex: 1 1 48%; /* Allow buttons to take up 48% of the row */
-        margin: 1%; /* Add margin for spacing between buttons */
-        box-sizing: border-box; /* Ensure padding and border are included in width */
+        flex: 1 1 48%;
+        margin: 1%;
+        box-sizing: border-box;
     }
 
-    #clockContainer {
-        margin-top: 10px; /* Adjust margin for mobile */
+    #inputMessage {
+        height: auto;
+    }
+
+    .filter-container-wrapper {
+        position: relative;
+        left: 0;
+        margin-top: 10px;
+    }
+
+    #selectedTime {
+        width: 100%;
+        font-size: 0.7rem;
+    }
+
+    /* 모바일에서 특정 버튼만 보이게 하기 */
+    button:not(.sendButton):not(.deleteButton) {
+        display: none;
     }
 }
