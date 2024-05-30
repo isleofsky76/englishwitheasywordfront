@@ -195,22 +195,24 @@ body {
 }
 
 /* Custom CSS for wordStatistics */
-#wordStatistics h2 {
-    margin-top: 5rem; /* Add top margin for spacing */
-    color: rgb(6, 6, 43); /* Set the heading color to blue */
+#wordStatistics{
+    display: flex;
+    flex-direction: column; /* Change to column to stack elements vertically */
+    align-items: flex-start; /* Align items to the start (left) */
+    margin-top: 0.1rem;
+    color: rgb(6, 6, 43); /* Set the text color */
     text-decoration: none; /* Remove underline */
     font-size: 0.9rem;
-    margin-left:10px;
 }
 
-#wordStatistics, example {
-    display: flex;
-    align-items: center;
-    margin-top: 0.1rem;
-    color: rgb(6, 6, 43); /* Set the heading color to blue */
+#wordStatistics h2 {
+    margin-top: 0; /* Remove top margin */
+    color: rgb(6, 6, 43); /* Set the heading color */
     text-decoration: none; /* Remove underline */
     font-size: 0.9rem;
+    margin-left: 0; /* Remove left margin */
 }
+
 
 
 #text-to-speech {
