@@ -29,13 +29,16 @@
     <div id="chatTerminal">
         <div id="chatMessages"></div>
         <input type="text" id="inputMessage" placeholder="영어로 대화해보세요...">
-        <button id="submitButton">Send</button>
-        <button onclick="clearAllMessages()">Delete All Messages</button> <!-- New button for deleting messages -->
+        <!-- <button id="submitButton">Send</button> -->
+        <button id="submitButton" class="sendButton">Send</button>
+        <!-- <button onclick="clearAllMessages()">Delete All Messages</button> New button for deleting messages -->
+        <button onclick="clearAllMessages()" class="deleteButton">Delete All Messages</button>
         <button onclick="downloadChatHistory()">Download Chat History</button>
         <button onclick="speakText2()">Read Chat</button>
         <!-- HTML for the stop button -->
         <button onclick="stopSpeech()">Stop Speech</button>
         <button type="button" class="coppytext" onclick="copyToClipboard()">COPY TEXT</button> 
+        
         <div class="filter-container-wrapper">
             <div class="filter-container">
                 <label for="cityFilter">현재시간:</label>
