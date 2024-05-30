@@ -113,4 +113,9 @@ button {
     width: 100%;
     margin-bottom: 10px;
   }
+  
+/* 모바일에서 select 요소와 레이블 숨기기 */
+  #voice, label[for="voice"] {
+    display: none;
+  }
 }
