@@ -55,16 +55,6 @@ body {
     background-color: #9adaad; /* Darker background on hover */
 }
 
-@media only screen and (max-width: 600px) {
-    .btn, .btn-primary, .btn-sm {
-        font-size: 0.7rem;
-        width: 80px;
-        height: 25px;
-        padding: 3px 8px;
-    }
-}
-
-
 .highlight {
     font-size: 0.8rem; /* 텍스트 크기 설정 */
     color: rgb(74, 74, 75); /* Adjust the color as desired */
@@ -195,6 +185,7 @@ body {
 }
 
 /* Custom CSS for wordStatistics */
+
 #wordStatistics{
     display: flex;
     flex-direction: column; /* Change to column to stack elements vertically */
@@ -212,7 +203,6 @@ body {
     font-size: 0.9rem;
     margin-left: 0; /* Remove left margin */
 }
-
 
 
 #text-to-speech {
@@ -240,38 +230,55 @@ body {
     display: none; /* 일단은 숨김 */
 }
 
-
 /* 미디어 쿼리 추가: 모바일 최적화 */
 @media only screen and (max-width: 600px) {
     body {
-        margin: 20px; /* 모바일에서 여백을 줄임 */
-        font-size: 0.9rem; /* 모바일에서 글씨 크기 조정 */
+        margin: 10px;
+        font-size: 0.9rem;
     }
 
     .page-title {
-        font-size: 1.5rem; /* 제목 글씨 크기 조정 */
+        font-size: 1.5rem;
     }
 
     .btn, .btn-primary, .btn-sm {
-        font-size: 0.7rem; /* 버튼 텍스트 크기 조정 */
-        width: 80px; /* 버튼 너비 조정 */
-        height: 25px; /* 버튼 높이 조정 */
+        font-size: 0.7rem;
+        width: 80px;
+        height: 25px;
     }
 
     #inputForm {
-        font-size: 0.7rem; /* 입력 폼 텍스트 크기 조정 */
+        font-size: 0.7rem;
     }
 
     #outputArea {
-        height: 40vh; /* 모바일에서 출력 영역 높이 조정 */
-        font-size: 0.8rem; /* 출력 영역 텍스트 크기 조정 */
+        height: 40vh;
+        font-size: 0.8rem;
     }
 
     .filter-container-wrapper {
-        right: 20px; /* 모바일에서 시계 위치 조정 */
+        position: static;
+        margin-top: 10px;
+        right: auto;
     }
 
     #wordStatistics h2, #wordStatistics example, #text-to-speech h3 {
-        font-size: 0.8rem; /* 통계와 텍스트 음성 변환 텍스트 크기 조정 */
+        font-size: 0.8rem;
+    }
+
+       /* 특정 요소 숨기기 */
+    .sliders-container,
+    #rateSlider,
+    #volumeSlider,
+    #selectedTime,
+    #text-to-speech,
+    #engUkButton,
+    #engUsButton,
+    #stopButton,
+    #downloadButton,
+    #copyButton,
+    #cityFilter {
+        display: none;
     }
 }
+
