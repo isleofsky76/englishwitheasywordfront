@@ -156,4 +156,8 @@ td {
   table, th, td {
       font-size: 12px;
   }
-}
+    /* 모바일에서는 시계를 숨기기 */
+    .filter-container-wrapper {
+      display: none;
+    }
+  }
