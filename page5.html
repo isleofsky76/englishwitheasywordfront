@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title>Text To Speech</title>
+  <link rel="stylesheet" href="page5.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6108574897789788"
+     crossorigin="anonymous"></script>
+  <script src="clock.js"></script>
+</head>
+<body>
+  <div class="container">
+    <div class="buttons">
+        <button id="saveBtn">Save</button>
+        <button id="copyBtn">Copy</button>
+        <button id="kakaoBtn">카카오보내기</button>
+        <button id="addRowBtn">Add Row</button>
+        <button id="deleteRowBtn">Delete Row</button>
+        <!-- <button id="highlightBtn">Highlight</button>
+        <button id="removeHighlightBtn">Remove Highlight</button> -->
+        <button id="toggleStrikethroughBtn">D̶e̶l̶e̶t̶e̶</button>
+    </div>
+    <div class="table-container">
+        <table id="taskTable">
+            <thead>
+                <tr>
+                    <th>Contents</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Rows will be added dynamically -->
+            </tbody>
+        </table>
+    </div>
+  </div>
+
+  <div class="filter-container-wrapper">
+    <div class="filter-container">
+        <label for="cityFilter">현재시간:</label>
+        <select id="cityFilter" class="form-select">
+            <option value="서울">서울</option>
+            <option value="뉴욕">뉴욕</option>
+            <option value="런던">런던</option>
+            <option value="파리">파리</option>
+            <option value="도쿄">도쿄</option>
+            <option value="베이징">베이징</option>
+            <option value="모스크바">모스크바</option>
+            <option value="제네바">제네바</option>
+        </select>
+        <div id="selectedTime"></div>
+    </div>
+  </div>
+
+</div>
+  <script src="page5.js"></script>
+</body>
+</html>
