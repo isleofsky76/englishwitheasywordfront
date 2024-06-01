@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', (event) => {
     const saveBtn = document.getElementById('saveBtn');
+    const downloadBtn = document.getElementById('downloadBtn');
     const copyBtn = document.getElementById('copyBtn');
     const addRowBtn = document.getElementById('addRowBtn');
     const emptyRowBtn = document.getElementById('emptyRowBtn');
@@ -10,11 +11,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
     // 페이지 로드 시 로컬 스토리지에서 메모 불러오기
     loadMemos();
 
-    saveBtn.addEventListener('click', saveToFile);
+    saveBtn.addEventListener('click', saveToLocalStorage);
+    downloadBtn.addEventListener('click', downloadAsFile);
     copyBtn.addEventListener('click', copyToClipboard);
     addRowBtn.addEventListener('click', () => {
         addNewRow();
-        saveMemosToLocalStorage();
+        saveToLocalStorage();
     });
     emptyRowBtn.addEventListener('click', emptySelectedRow);
     deleteRowBtn.addEventListener('click', deleteSelectedRow);
@@ -22,20 +24,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
     toggleStrikethroughBtn.addEventListener('click', () => {
         document.execCommand('strikeThrough');
     });
-
-    // 로컬 스토리지에서 메모 불러오기
-    function loadMemos() {
-        const memos = JSON.parse(localStorage.getItem('memos')) || [];
-        if (memos.length === 0) {
-            // 로컬 스토리지가 비어 있는 경우 기본적으로 10개의 빈 메모 칸 추가
-            for (let i = 0; i < 10; i++) {
-                addNewRow();
-            }
-        } else {
-            // 로컬 스토리지에서 불러온 메모 표시
-            memos.forEach(content => addNewRow(content));
-        }
-    }
 
     function addNewRow(content = "") {
         const newRow = taskTable.insertRow();
@@ -57,7 +45,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         if (selectedRow) {
             const cell = selectedRow.cells[0];
             cell.innerHTML = "";
-            saveMemosToLocalStorage();
+            saveToLocalStorage();
         } else {
             alert('Please select a row to empty.');
         }
@@ -67,24 +55,29 @@ document.addEventListener('DOMContentLoaded', (event) => {
         const selectedRow = taskTable.querySelector('tr.selected');
         if (selectedRow) {
             selectedRow.remove();
-            saveMemosToLocalStorage();
+            saveToLocalStorage();
         } else {
             alert('Please select a row to delete.');
         }
     }
 
-    function saveMemosToLocalStorage() {
+    function saveToLocalStorage() {
         const memos = [];
         const rows = taskTable.rows;
         for (let i = 0; i < rows.length; i++) {
             memos.push(rows[i].cells[0].innerHTML);
         }
         localStorage.setItem('memos', JSON.stringify(memos));
-        console.log("Memos saved to localStorage:", memos);
     }
 
-    function saveToFile() {
-        let tableText = "\uFEFF"; // UTF-8 BOM
+    function loadMemos() {
+        const memos = JSON.parse(localStorage.getItem('memos')) || [];
+        taskTable.innerHTML = ''; // 기존 행을 모두 제거
+        memos.forEach(content => addNewRow(content));
+    }
+
+    function downloadAsFile() {
+        let tableText = "";
         const rows = taskTable.rows;
         for (let i = 0; i < rows.length; i++) {
             const cells = rows[i].cells;
@@ -93,7 +86,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             }
             tableText += "\n";
         }
-    
+
         const blob = new Blob([tableText], { type: 'text/plain;charset=utf-8' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
@@ -125,4 +118,5 @@ document.addEventListener('DOMContentLoaded', (event) => {
         alert('Table contents copied to clipboard.');
     }
 });
+
 
