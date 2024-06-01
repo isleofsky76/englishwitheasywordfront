@@ -2,11 +2,12 @@ body {
   font-family: Arial, sans-serif;
   background-color: #f4f4f9;
   display: flex;
-  justify-content: center;
+  flex-direction: column;  /* 수직 배치 */
   align-items: center;
   height: 100vh;
   margin: 0;
   padding: 10px;
+  overflow-y: auto; /* Add vertical scroll */
 }
 
 .container {
@@ -20,7 +21,7 @@ body {
   max-height: 800px;
   display: flex;
   flex-direction: column;
-  align-items: center;  
+  align-items: center;
 }
 
 .buttons {
@@ -55,43 +56,63 @@ button#kakaoBtn {
 table {
   width: 100%;
   border-collapse: collapse;
-  table-layout: fixed;
+  table-layout: fixed; /* 고정된 테이블 레이아웃 */
 }
-
 
 thead th, tbody td {
   border: 1px solid #ddd;
   padding: 8px;
-  text-align: center;  /* 왼쪽 정렬 */
+  text-align: center;
+}
+
+thead th:nth-child(1), tbody td:nth-child(1) {
+  width: 90%; /* Contents 열의 너비 */
+}
+
+thead th:nth-child(2), tbody td:nth-child(2) {
+  width: 10%; /* Action 열의 너비 */
 }
 
 tbody td.text-left {
-  text-align: left;  /* 왼쪽 정렬 */
+  text-align: left;
 }
 
-thead th.fixed, tbody td.fixed {
-  position: -webkit-sticky;
-  position: sticky;
-  left: 0;
-  background-color: #f2f2f2;
-  z-index: 2;
+.delete-btn {
+  background-color: green;
+  color: white;
+  border: none;
+  cursor: pointer;
+  padding: 5px 10px;
 }
 
-thead th {
-  position: sticky;
-  top: 0;
-  background-color: #f2f2f2;
-  z-index: 1;
+.delete-btn:hover {
+  background-color: darkgreen;
 }
 
-td {
-  word-break: break-word;
+
+/* 메모======================================================== */
+#downloadLinkContainer {
+  width: 90%;
+  max-width: 800px;
+  margin-top: 20px;
+  text-align: left;
 }
 
-/* 시계위치 */
+#downloadLinkContainer a {
+  display: block;
+  margin-bottom: 5px;
+  color: blue;
+  text-decoration: none;
+}
+
+#downloadLinkContainer a:hover {
+  text-decoration: underline;
+}
+
+/* 시계위치 =========================================================*/
 .filter-container-wrapper {
-  position: fixed; /* 고정 위치로 설정 */
-  bottom: 20px; /* 페이지 하단에서 20px 위에 배치 */
+  position: fixed;
+  bottom: 20px;
   display: flex;
   align-items: center;
 }
@@ -114,7 +135,6 @@ td {
   padding: 5px;
   box-sizing: border-box;
   align-items: center;
-  
 }
 
 #selectedTime {
@@ -127,9 +147,8 @@ td {
   display: inline-block;
   box-sizing: border-box;
   align-items: center;
-  text-align: center;  /* 왼쪽 정렬 */
+  text-align: center;
 }
-
 
 /* 미디어 쿼리를 사용하여 모바일 친화적으로 만들기 */
 @media (max-width: 600px) {
@@ -142,22 +161,22 @@ td {
 
   .buttons {
       flex-direction: row;
-      flex-wrap: wrap; /* 버튼을 감싸고 두 줄로 배치 */
-      justify-content: center; /* 중앙 정렬 */
+      flex-wrap: wrap;
+      justify-content: center;
   }
 
   button {
       margin-bottom: 10px;
-      padding: 5px 10px; /* 버튼 패딩 축소 */
-      font-size: 12px; /* 버튼 폰트 크기 축소 */
-      flex: 1 1 45%; /* 버튼이 두 줄로 나뉘어 중앙에 정렬되도록 설정 */
+      padding: 5px 10px;
+      font-size: 12px;
+      flex: 1 1 45%;
   }
 
   table, th, td {
       font-size: 12px;
   }
-    /* 모바일에서는 시계를 숨기기 */
-    .filter-container-wrapper {
+
+  .filter-container-wrapper {
       display: none;
-    }
   }
+}
