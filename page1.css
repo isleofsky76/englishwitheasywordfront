@@ -271,13 +271,16 @@ body {
     #rateSlider,
     #volumeSlider,
     #selectedTime,
-    #clearButton,
     #text-to-speech,
     #engUkButton,
+    #engUsButton,
+    #stopButton,
     #downloadButton,
     #copyButton,
+    #wordList,
     #cityFilter {
         display: none;
     }
 }
+
 
