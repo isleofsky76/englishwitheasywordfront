@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     }
 
     function saveToFile() {
-        let tableText = "";
+        let tableText = "\uFEFF"; // UTF-8 BOM
         const rows = taskTable.rows;
         for (let i = 0; i < rows.length; i++) {
             const cells = rows[i].cells;
@@ -94,8 +94,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             tableText += "\n";
         }
     
-        const base64Text = btoa(unescape(encodeURIComponent(tableText))); // Base64 인코딩
-        const blob = new Blob([atob(base64Text)], { type: 'text/plain;charset=utf-8' });
+        const blob = new Blob([tableText], { type: 'text/plain;charset=utf-8' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
