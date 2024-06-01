@@ -26,13 +26,16 @@ document.addEventListener('DOMContentLoaded', (event) => {
     // 로컬 스토리지에서 메모 불러오기
     function loadMemos() {
         const memos = JSON.parse(localStorage.getItem('memos')) || [];
-        const numRowsToAdd = Math.max(10, memos.length);
-        
-        for (let i = 0; i < numRowsToAdd; i++) {
-            addNewRow(memos[i] || "");
+        if (memos.length === 0) {
+            // 로컬 스토리지가 비어 있는 경우 기본적으로 10개의 빈 메모 칸 추가
+            for (let i = 0; i < 10; i++) {
+                addNewRow();
+            }
+        } else {
+            // 로컬 스토리지에서 불러온 메모 표시
+            memos.forEach(content => addNewRow(content));
         }
     }
-
 
     function addNewRow(content = "") {
         const newRow = taskTable.insertRow();
@@ -40,7 +43,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
         cell1.contentEditable = "true";
         cell1.spellcheck = false;
-        cell1.className = 'text-left';  // 새로 추가된 셀에 클래스 적용
+        cell1.className = 'text-left';
         cell1.innerHTML = content;
 
         newRow.addEventListener('click', () => {
@@ -54,7 +57,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         if (selectedRow) {
             const cell = selectedRow.cells[0];
             cell.innerHTML = "";
-            saveMemosToLocalStorage(); // 메모 비울 시 로컬 스토리지에 저장
+            saveMemosToLocalStorage();
         } else {
             alert('Please select a row to empty.');
         }
@@ -64,7 +67,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         const selectedRow = taskTable.querySelector('tr.selected');
         if (selectedRow) {
             selectedRow.remove();
-            saveMemosToLocalStorage(); // 메모 삭제 시 로컬 스토리지에 저장
+            saveMemosToLocalStorage();
         } else {
             alert('Please select a row to delete.');
         }
@@ -77,6 +80,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             memos.push(rows[i].cells[0].innerHTML);
         }
         localStorage.setItem('memos', JSON.stringify(memos));
+        console.log("Memos saved to localStorage:", memos);
     }
 
     function saveToFile() {
