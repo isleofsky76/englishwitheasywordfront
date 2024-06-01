@@ -7,12 +7,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const deleteRowBtn = document.getElementById('deleteRowBtn');
     const toggleStrikethroughBtn = document.getElementById('toggleStrikethroughBtn');
     const taskTable = document.getElementById('taskTable').getElementsByTagName('tbody')[0];
+    const downloadLinkContainer = document.getElementById('downloadLinkContainer');
 
     // 페이지 로드 시 로컬 스토리지에서 메모 불러오기
     loadMemos();
 
     saveBtn.addEventListener('click', saveToLocalStorage);
-    downloadBtn.addEventListener('click', downloadAsFile);
+    downloadBtn.addEventListener('click', createDownloadLink);
     copyBtn.addEventListener('click', copyToClipboard);
     addRowBtn.addEventListener('click', () => {
         addNewRow();
@@ -76,7 +77,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         memos.forEach(content => addNewRow(content));
     }
 
-    function downloadAsFile() {
+    function createDownloadLink() {
         let tableText = "";
         const rows = taskTable.rows;
         for (let i = 0; i < rows.length; i++) {
@@ -89,13 +90,21 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
         const blob = new Blob([tableText], { type: 'text/plain;charset=utf-8' });
         const url = URL.createObjectURL(blob);
+        
+        // 타임스탬프를 이용한 파일 이름 생성
+        const timestamp = new Date().toISOString().replace(/[:.-]/g, '');
+        const filename = `memo_${timestamp}.txt`;
+
+        // 다운로드 링크 생성
         const a = document.createElement('a');
         a.href = url;
-        a.download = 'notes.txt';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
+        a.download = filename;
+        a.textContent = `Download ${filename}`;
+        a.style.display = 'block';
+        downloadLinkContainer.appendChild(a);
+
+        // 다운로드 링크 컨테이너를 화면에 표시되도록 스크롤
+        a.scrollIntoView({ behavior: 'smooth' });
     }
 
     function copyToClipboard() {
@@ -118,5 +127,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         alert('Table contents copied to clipboard.');
     }
 });
+
+
 
 
