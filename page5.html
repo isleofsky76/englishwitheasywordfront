@@ -10,29 +10,31 @@
   <script src="clock.js"></script>
 </head>
 <body>
-  <div class="container">
+    <div class="container">
     <h1 class="page-title">Memo</h1>
-    <div class="buttons">
-        <button id="saveBtn">Save</button>
-        <button type="button" id="downloadBtn">Download</button>
-        <button id="copyBtn">Copy</button>
-        <button id="addRowBtn">Add Row</button>
-        <button id="emptyRowBtn">Empty Row</button>
-        <button id="deleteRowBtn">Delete Row</button>
-        <button id="toggleStrikethroughBtn">select text and D̶e̶l̶e̶t̶e̶</button>
+    <div class="buttons" id="buttons">
+      <button type="button" id="saveBtn">Save</button>
+      <button type="button" id="downloadBtn">Download</button>
+      <button type="button" id="copyBtn">Copy</button>
+      <button type="button" id="addRowBtn">Add Row</button>
+      <button type="button" id="emptyRowBtn">Empty Row</button>
+      <button type="button" id="deleteRowBtn">Delete Row</button>
+      <button type="button" id="toggleStrikethroughBtn"> ̶ select texts a̶n̶d̶ ̶c̶l̶i̶c̶k̶ ̶"̶D̶e̶l̶e̶t̶e̶"̶ </button>
     </div>
     <div class="table-container">
-        <table id="taskTable">
-            <thead>
-                <tr>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Rows will be added dynamically -->
-            </tbody>
-        </table>
+      <table id="taskTable">
+        <thead>
+          <tr>
+            <th>Contents</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Rows will be added dynamically -->
+        </tbody>
+      </table>
     </div>
   </div>
+  <div id="downloadLinkContainer"></div> <!-- 다운로드 링크를 추가할 컨테이너 -->
 
   <div class="filter-container-wrapper">
     <div class="filter-container">
