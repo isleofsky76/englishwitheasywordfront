@@ -275,6 +275,7 @@ body {
     #engUkButton,
     #downloadButton,
     #wordList,
+    #clearButton,
     #cityFilter {
         display: none;
     }
