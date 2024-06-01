@@ -12,13 +12,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
     }
 
     saveBtn.addEventListener('click', saveToFile);
-
-    // 수정된 부분: copyBtn 이벤트 리스너 수정
     copyBtn.addEventListener('click', copyToClipboard);
-
     addRowBtn.addEventListener('click', addNewRow);
-
-    deleteRowBtn.addEventListener('click', deleteLastRow);
+    deleteRowBtn.addEventListener('click', deleteSelectedRow);
 
     toggleStrikethroughBtn.addEventListener('click', () => {
         document.execCommand('strikeThrough');
@@ -26,17 +22,26 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     function addNewRow() {
         const newRow = taskTable.insertRow();
-        const newCell = newRow.insertCell(0);
-        newCell.contentEditable = "true";
-        newCell.spellcheck = false;
-        newCell.className = 'text-left';  // 새로 추가된 셀에 클래스 적용
-        newCell.innerHTML = "";
+        const cell1 = newRow.insertCell(0);
+
+        cell1.contentEditable = "true";
+        cell1.spellcheck = false;
+        cell1.className = 'text-left';  // 새로 추가된 셀에 클래스 적용
+        cell1.innerHTML = "";
+
+        newRow.addEventListener('click', () => {
+            taskTable.querySelectorAll('tr').forEach(row => row.classList.remove('selected'));
+            newRow.classList.add('selected');
+        });
     }
 
-    function deleteLastRow() {
-        const rowCount = taskTable.rows.length;
-        if (rowCount > 0) {
-            taskTable.deleteRow(rowCount - 1);
+    function deleteSelectedRow() {
+        const selectedRow = taskTable.querySelector('tr.selected');
+        if (selectedRow) {
+            const cell = selectedRow.cells[0];
+            cell.innerHTML = "";  // 선택된 행의 내용을 비움
+        } else {
+            alert('Please select a row to delete.');
         }
     }
 
@@ -62,7 +67,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
         URL.revokeObjectURL(url);
     }
 
-    // 수정된 부분: copyToClipboard 함수
     function copyToClipboard() {
         let tableText = "";
         const rows = taskTable.rows;
@@ -83,3 +87,4 @@ document.addEventListener('DOMContentLoaded', (event) => {
         alert('Table contents copied to clipboard.');
     }
 });
+
