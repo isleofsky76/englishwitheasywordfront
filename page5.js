@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const saveBtn = document.getElementById('saveBtn');
     const copyBtn = document.getElementById('copyBtn');
     const addRowBtn = document.getElementById('addRowBtn');
+    const emptyRowBtn = document.getElementById('emptyRowBtn');
     const deleteRowBtn = document.getElementById('deleteRowBtn');
     const toggleStrikethroughBtn = document.getElementById('toggleStrikethroughBtn');
     const taskTable = document.getElementById('taskTable').getElementsByTagName('tbody')[0];
@@ -14,6 +15,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     saveBtn.addEventListener('click', saveToFile);
     copyBtn.addEventListener('click', copyToClipboard);
     addRowBtn.addEventListener('click', addNewRow);
+    emptyRowBtn.addEventListener('click', emptySelectedRow);
     deleteRowBtn.addEventListener('click', deleteSelectedRow);
 
     toggleStrikethroughBtn.addEventListener('click', () => {
@@ -35,11 +37,20 @@ document.addEventListener('DOMContentLoaded', (event) => {
         });
     }
 
-    function deleteSelectedRow() {
+    function emptySelectedRow() {
         const selectedRow = taskTable.querySelector('tr.selected');
         if (selectedRow) {
             const cell = selectedRow.cells[0];
             cell.innerHTML = "";  // 선택된 행의 내용을 비움
+        } else {
+            alert('Please select a row to empty.');
+        }
+    }
+
+    function deleteSelectedRow() {
+        const selectedRow = taskTable.querySelector('tr.selected');
+        if (selectedRow) {
+            selectedRow.remove();  // 선택된 행을 삭제
         } else {
             alert('Please select a row to delete.');
         }
