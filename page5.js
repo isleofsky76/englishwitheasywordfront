@@ -93,8 +93,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
             }
             tableText += "\n";
         }
-
-        const blob = new Blob([tableText], { type: 'text/plain;charset=utf-8' });
+    
+        const base64Text = btoa(unescape(encodeURIComponent(tableText))); // Base64 인코딩
+        const blob = new Blob([atob(base64Text)], { type: 'text/plain;charset=utf-8' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
