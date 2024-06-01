@@ -227,4 +227,11 @@ button:hover {
     .scroll-wrapper {
         height: 300px; /* Adjust scroll wrapper height */
     }
+/* 모바일에서 특정 버튼만 보이게 하기 */
+    /* downloadQnA 클래스를 가지지 않은 버튼만 보이게 하기 */
+    .downloadQnA {
+        display: none;
+    }
 }
+
+
