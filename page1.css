@@ -273,7 +273,6 @@ body {
     #selectedTime,
     #text-to-speech,
     #engUkButton,
-    #engUsButton,
     #stopButton,
     #downloadButton,
     #copyButton,
@@ -282,5 +281,6 @@ body {
         display: none;
     }
 }
+
 
 
