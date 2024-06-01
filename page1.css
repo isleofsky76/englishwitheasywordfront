@@ -273,9 +273,7 @@ body {
     #selectedTime,
     #text-to-speech,
     #engUkButton,
-    #stopButton,
     #downloadButton,
-    #copyButton,
     #wordList,
     #cityFilter {
         display: none;
