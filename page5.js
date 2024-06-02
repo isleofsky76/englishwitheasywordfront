@@ -12,8 +12,17 @@ document.addEventListener('DOMContentLoaded', (event) => {
     // 페이지 로드 시 로컬 스토리지에서 메모 불러오기
     loadMemos();
 
-    saveBtn.addEventListener('click', saveToLocalStorage);
-    downloadBtn.addEventListener('click', createDownloadLink);
+    saveBtn.addEventListener('click', () => {
+        saveToLocalStorage(true);  // save 버튼 클릭 시 메시지를 표시
+    });
+
+    downloadBtn.addEventListener('click', () => {
+        const filename = prompt("Enter the file name to download:");
+        if (filename) {
+            createDownloadLink(filename);
+        }
+    });
+
     copyBtn.addEventListener('click', copyToClipboard);
     addRowBtn.addEventListener('click', () => {
         addNewRow();
@@ -56,19 +65,22 @@ document.addEventListener('DOMContentLoaded', (event) => {
         const selectedRow = taskTable.querySelector('tr.selected');
         if (selectedRow) {
             selectedRow.remove();
-            saveToLocalStorage();
+            saveToLocalStorage(false);  // delete 버튼 클릭 시 메시지를 표시하지 않음
         } else {
             alert('Please select a row to delete.');
         }
     }
 
-    function saveToLocalStorage() {
+    function saveToLocalStorage(showAlert = false) {
         const memos = [];
         const rows = taskTable.rows;
         for (let i = 0; i < rows.length; i++) {
             memos.push(rows[i].cells[0].innerHTML);
         }
         localStorage.setItem('memos', JSON.stringify(memos));
+        if (showAlert) {
+            alert('Memos saved to local storage.');
+        }
     }
 
     function loadMemos() {
@@ -77,7 +89,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         memos.forEach(content => addNewRow(content));
     }
 
-    function createDownloadLink() {
+    function createDownloadLink(filename) {
         let tableText = "";
         const rows = taskTable.rows;
         for (let i = 0; i < rows.length; i++) {
@@ -90,21 +102,17 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
         const blob = new Blob([tableText], { type: 'text/plain;charset=utf-8' });
         const url = URL.createObjectURL(blob);
-        
-        // 타임스탬프를 이용한 파일 이름 생성
-        const timestamp = new Date().toISOString().replace(/[:.-]/g, '');
-        const filename = `memo_${timestamp}.txt`;
 
-        // 다운로드 링크 생성
         const a = document.createElement('a');
         a.href = url;
-        a.download = filename;
-        a.textContent = `Download ${filename}`;
-        a.style.display = 'block';
-        downloadLinkContainer.appendChild(a);
+        a.download = `${filename}.txt`;
+        a.style.display = 'none';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
 
-        // 다운로드 링크 컨테이너를 화면에 표시되도록 스크롤
-        a.scrollIntoView({ behavior: 'smooth' });
+        // URL.revokeObjectURL(url); // 다운로드가 완료된 후 URL을 해제합니다.
+        setTimeout(() => URL.revokeObjectURL(url), 1000); // 다운로드가 완료된 후 URL을 해제합니다.
     }
 
     function copyToClipboard() {
