@@ -4,7 +4,7 @@ body {
   display: flex;
   flex-direction: column;  /* 수직 배치 */
   align-items: center;
-  height: 100vh;
+  height: 80vh;
   margin: 0;
   padding: 10px;
   overflow-y: auto; /* Add vertical scroll */
