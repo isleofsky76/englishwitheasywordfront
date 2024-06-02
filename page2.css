@@ -94,7 +94,7 @@ button {
 /* Chat Terminal */
 #chatTerminal {
     width: 100%; /* Make it responsive */
-    height: 400%;
+    height: 500%;
     border: 1px solid #ccc;
     padding: 10px;
     overflow-y: auto; /* Ensure scrolling within terminal */
