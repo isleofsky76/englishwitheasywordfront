@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     loadMemos();
 
     saveBtn.addEventListener('click', () => {
-        saveToLocalStorage(true);  // save 버튼 클릭 시 메시지를 표시
+        saveToLocalStorage();
     });
 
     downloadBtn.addEventListener('click', () => {
@@ -93,7 +93,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
         }
     }
 
-
     function createDownloadLink(filename) {
         let tableText = "";
         const rows = taskTable.rows;
@@ -111,13 +110,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
         const a = document.createElement('a');
         a.href = url;
         a.download = `${filename}.txt`;
-        a.style.display = 'none';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
+        a.textContent = `${filename}.txt`;
+        a.style.display = 'block';
+        downloadLinkContainer.appendChild(a);
 
-        // URL.revokeObjectURL(url); // 다운로드가 완료된 후 URL을 해제합니다.
-        setTimeout(() => URL.revokeObjectURL(url), 1000); // 다운로드가 완료된 후 URL을 해제합니다.
+        a.addEventListener('click', () => {
+            setTimeout(() => URL.revokeObjectURL(url), 1000); // 다운로드가 완료된 후 URL을 해제합니다.
+        });
     }
 
     function copyToClipboard() {
