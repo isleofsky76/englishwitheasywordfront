@@ -9,8 +9,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const taskTable = document.getElementById('taskTable').getElementsByTagName('tbody')[0];
     const downloadLinkContainer = document.getElementById('downloadLinkContainer');
 
-    // 페이지 로드 시 로컬 스토리지에서 메모 불러오기
+    // 페이지 로드 시 로컬 스토리지에서 메모와 다운로드 링크 불러오기
     loadMemos();
+    loadDownloadLinks();
 
     saveBtn.addEventListener('click', () => {
         saveToLocalStorage();
@@ -93,6 +94,27 @@ document.addEventListener('DOMContentLoaded', (event) => {
         }
     }
 
+    function saveDownloadLinks() {
+        const links = [];
+        downloadLinkContainer.querySelectorAll('a').forEach(link => {
+            links.push({ href: link.href, download: link.download, textContent: link.textContent });
+        });
+        localStorage.setItem('downloadLinks', JSON.stringify(links));
+    }
+
+    function loadDownloadLinks() {
+        const links = JSON.parse(localStorage.getItem('downloadLinks')) || [];
+        downloadLinkContainer.innerHTML = ''; // 기존 링크를 모두 제거
+        links.forEach(linkData => {
+            const a = document.createElement('a');
+            a.href = linkData.href;
+            a.download = linkData.download;
+            a.textContent = linkData.textContent;
+            a.style.display = 'block';
+            downloadLinkContainer.appendChild(a);
+        });
+    }
+
     function createDownloadLink(filename) {
         let tableText = "";
         const rows = taskTable.rows;
@@ -104,7 +126,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
             tableText += "\n";
         }
 
-        const blob = new Blob([tableText], { type: 'text/plain;charset=utf-8' });
+        // UTF-8 BOM 추가
+        const bom = new Uint8Array([0xEF, 0xBB, 0xBF]);
+        const blob = new Blob([bom, tableText], { type: 'text/plain;charset=utf-8' });
         const url = URL.createObjectURL(blob);
 
         const a = document.createElement('a');
@@ -117,6 +141,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
         a.addEventListener('click', () => {
             setTimeout(() => URL.revokeObjectURL(url), 1000); // 다운로드가 완료된 후 URL을 해제합니다.
         });
+
+        saveDownloadLinks(); // 링크를 생성할 때마다 로컬 스토리지에 저장
     }
 
     function copyToClipboard() {
