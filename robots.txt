@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+
+Sitemap: https://isleofsky76.github.io/englishwitheasywordfront/sitemap.xml
