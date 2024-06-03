@@ -240,10 +240,76 @@ button {
         font-size: 0.7rem;
     }
 
+ 
+/* 미디어 쿼리: 모바일 기기용 스타일 */
+@media (max-width: 600px) {
+    body {
+        margin: 10px;
+    }
+    
+    .page-title {
+        font-size: 20px;
+    }
+    
+    button {
+        font-size: 0.8rem;
+        padding: 4px 8px;
+        width: auto;
+        margin-bottom: 5px;
+    }
+
+    #chatContainer {
+        width: 100%;
+        padding: 10px;
+    }
+
+    #chatMessages {
+        height: 200px;
+    }
+
+    #chatTerminal {
+        display: flex;
+        flex-wrap: wrap;
+        height: auto;
+    }
+
+    #chatTerminal button {
+        flex: 1 1 48%;
+        margin: 1%;
+        box-sizing: border-box;
+    }
+
+    #inputMessage {
+        height: auto;
+    }
+
+    .filter-container-wrapper {
+        position: relative;
+        left: 0;
+        margin-top: 10px;
+    }
+
+    #selectedTime {
+        width: 100%;
+        font-size: 0.7rem;
+    }
+
     /* 모바일에서 특정 버튼만 보이게 하기 */
     button:not(.sendButton):not(.deleteButton) {
         display: none;
     }
+
+    /* 모바일에서 메시지 간격 줄이기 */
+    #chatMessages .user-message {
+        margin-bottom: 1px; /* 메시지 간의 간격을 줄임 */
+        line-height: 1.1; /* 줄 간격을 줄임 */
+    }
+
+    #chatMessages .ai-message {
+        margin-bottom: 1px; /* AI 메시지 간의 간격을 줄임 */
+        line-height: 1.1; /* 줄 간격을 줄임 */
+    }
+
 
     /* 모바일에서 시계 숨기기 */
     .filter-container {
