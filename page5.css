@@ -168,7 +168,7 @@ tbody td.text-left {
   button {
       margin-bottom: 10px;
       padding: 1px 5px;
-      font-size: 10px;
+      font-size: 7px;
       flex: 1 1 5%;
       box-sizing: border-box; /* 패딩과 보더를 포함한 크기 계산 */
   }
