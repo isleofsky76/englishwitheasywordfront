@@ -1,2 +1,2 @@
-User-agent: *
-Allow:/
+User-agent: *Allow:/
+Sitmemap: https://https://englisheasystudy.com/sitemap.xml
