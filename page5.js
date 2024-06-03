@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     function loadMemos() {
         const memos = JSON.parse(localStorage.getItem('memos')) || [];
         taskTable.innerHTML = ''; // 기존 행을 모두 제거
-        const numRowsToAdd = Math.max(5 - memos.length, 0); // 최소 5개의 행이 보이도록 추가
+        const numRowsToAdd = Math.max(9 - memos.length, 0); // 최소 5개의 행이 보이도록 추가
         memos.forEach(content => addNewRow(content));
         for (let i = 0; i < numRowsToAdd; i++) {
             addNewRow();
