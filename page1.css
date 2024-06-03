@@ -230,6 +230,7 @@ body {
     display: none; /* 일단은 숨김 */
 }
 
+
 /* 미디어 쿼리 추가: 모바일 최적화 */
 @media only screen and (max-width: 600px) {
     body {
@@ -243,8 +244,8 @@ body {
     }
 
     .btn, .btn-primary, .btn-sm {
-        font-size: 0.4rem;
-        width: 50px;
+        font-size: 0.7rem;
+        width: 80px;
         height: 20px;
     }
 
@@ -253,7 +254,7 @@ body {
     }
 
     #outputArea {
-        height: 40vh;
+        height: 70vh;
         font-size: 0.8rem;
     }
 
@@ -274,13 +275,15 @@ body {
     #selectedTime,
     #text-to-speech,
     #engUkButton,
+    #stopButton,
     #downloadButton,
     #wordList,
-    #clearButton,
+    #copyButton,
     #cityFilter {
         display: none;
     }
 }
+
 
 
 
