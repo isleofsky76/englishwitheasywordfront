@@ -276,9 +276,9 @@ body {
     #selectedTime,
     #text-to-speech,
     #engUkButton,
-    #stopButton,
     #downloadButton,
     #wordList,
+    #clearButton,
     #copyButton,
     #cityFilter {
         display: none;
