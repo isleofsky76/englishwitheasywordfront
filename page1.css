@@ -92,8 +92,9 @@ body {
 }
 
 #outputArea {
+    margin-top : 10px;
     width: 100%;
-    height: 70vh; /* 높이를 뷰포트 높이의 50%로 설정 */
+    height: 60vh; /* 높이를 뷰포트 높이의 50%로 설정 */
     padding: 10px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
