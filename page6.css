@@ -1,6 +1,6 @@
 body {
   font-family: Arial, sans-serif;
-  line-height: 0.9;
+  line-height: 1.6;
   margin: 20px;
 }
 h1, h2, h3 {
@@ -15,4 +15,26 @@ a:hover {
 }
 .section {
   margin-bottom: 30px;
+}
+/* 모바일 친화적인 디자인을 위한 스타일 */
+@media (max-width: 600px) {
+  body {
+      margin: 10px;
+      line-height: 1.4;
+  }
+  h1 {
+      font-size: 1.5em;
+  }
+  h2 {
+      font-size: 1.2em;
+  }
+  h3 {
+      font-size: 1em;
+  }
+  p {
+      font-size: 0.7em;
+  }
+  .section {
+      margin-bottom: 20px;
+  }
 }
