@@ -1,13 +1,14 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: rgb(8, 8, 58);
+  background-color: rgb(165, 165, 173);
   display: flex;
   justify-content: center; /* Center horizontally */
   align-items: center; /* Center vertically */
   flex-direction: column; /* Stack elements vertically */
   height: 100vh; /* Make the body take up the full viewport height */
 }
+
 
 h1 {
   color: white;
