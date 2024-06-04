@@ -1,0 +1,82 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: rgb(8, 8, 58);
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  flex-direction: column; /* Stack elements vertically */
+  height: 100vh; /* Make the body take up the full viewport height */
+}
+
+h1 {
+  color: white;
+  text-align: center;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+#wrapper {
+  margin-right: 180px;
+  display: flex;
+  flex-direction: row; /* Align items in a row */
+  align-items: flex-start; /* Align items to the top */
+  justify-content: center; /* Center the content horizontally */
+  width: 100%; /* Make the wrapper full width */
+  position: relative; /* Set the element's position relative to its normal position */
+}
+
+#left-div {
+  display: inline-block; /* Set the display property to inline-block */
+  vertical-align: top;
+  margin: 0 20px;
+  padding: 20px;
+  transform: translate(-50%, 150%);
+}
+
+
+
+#game-wrapper {
+  display: flex;
+  flex-direction: column; /* Stack the children vertically */
+  align-items: center;
+  justify-content: flex-start; /* Align content to the top */
+}
+
+
+#game-container {
+  position: relative;
+  display: inline-block;
+  height: 600px; /* Adjust the height to fit within the viewport */
+  width: 375px; /* Adjust the width to maintain the aspect ratio */
+}
+
+
+#background {
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  height: 100%; /* Make background cover the whole height of the container */
+  width: 100%; /* Make background cover the whole width of the container */
+
+}
+
+
+#game-canvas {
+  position: absolute;
+  top: 0; /* Align the canvas to the top */
+  height: 572px; /* Adjust the height to fit within the viewport */
+  width: 313px; /* Adjust the width to maintain the aspect ratio */
+  margin-left: 30px;
+}
+
+
+#score-div,
+#lines-div {
+  color: white;
+  font-size: 23px;
+  font-weight: bold;
+  font-family: "Lucida Console", "Courier New", monospace;
+  text-align: left;
+  margin: 15px 0;
+}
