@@ -81,3 +81,40 @@ h1 {
   text-align: left;
   margin: 15px 0;
 }
+
+/* Mobile-specific styles */
+@media only screen and (max-width: 600px) {
+  body {
+    flex-direction: column;
+  }
+
+  #wrapper {
+    margin-right: 0;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #left-div {
+    transform: translate(0, 0);
+    margin: 20px 0;
+    padding: 10px;
+  }
+
+  #game-container {
+    height: auto; /* Adjust the height to fit within the viewport */
+    width: 90%; /* Make it take 90% of the viewport width */
+    max-width: 375px; /* Ensure it doesn't get too wide */
+  }
+
+  #game-canvas {
+    height: auto; /* Adjust the height to fit within the viewport */
+    width: 100%; /* Make it take the full width of the container */
+    margin-left: 0;
+  }
+
+  #score-div,
+  #lines-div {
+    font-size: 18px;
+    text-align: center;
+  }
+}
