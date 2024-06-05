@@ -18,7 +18,7 @@ h1 {
 }
 
 #wrapper {
-  margin-right: 180px;
+  margin-right: 165px;
   display: flex;
   flex-direction: row; /* Align items in a row */
   align-items: flex-start; /* Align items to the top */
