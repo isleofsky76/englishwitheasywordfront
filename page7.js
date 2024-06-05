@@ -226,6 +226,58 @@ window.onload = () => {
       gameInterval = null;
   }
 
+  // Mobile touch events
+  canvas.addEventListener("touchstart", handleTouchStart, false);
+  canvas.addEventListener("touchmove", handleTouchMove, false);
+  canvas.addEventListener("touchend", handleTouchEnd, false);
+  canvas.addEventListener("touchend", handleTap, false);
+
+  function handleTouchStart(evt) {
+      const touch = evt.touches[0];
+      startX = touch.clientX;
+      startY = touch.clientY;
+  }
+
+  function handleTouchMove(evt) {
+      if (!startX || !startY) return;
+
+      const touch = evt.touches[0];
+      const diffX = touch.clientX - startX;
+      const diffY = touch.clientY - startY;
+
+      if (Math.abs(diffX) > Math.abs(diffY)) {
+          // Horizontal movement
+          if (diffX > 0) {
+              // Right swipe
+              if (tetromino && !tetromino.collides(i => ({ x: tetromino.x[i] + 1, y: tetromino.y[i] })))
+                  tetromino.update(i => ++tetromino.x[i]);
+          } else {
+              // Left swipe
+              if (tetromino && !tetromino.collides(i => ({ x: tetromino.x[i] - 1, y: tetromino.y[i] })))
+                  tetromino.update(i => --tetromino.x[i]);
+          }
+      } else {
+          // Vertical movement
+          if (diffY > 0) {
+              // Down swipe
+              if (tetromino)
+                  delay = Tetromino.DELAY / Tetromino.DELAY_INCREASED;
+          }
+      }
+
+      // Prevent further handling
+      evt.preventDefault();
+  }
+
+  function handleTouchEnd(evt) {
+      if (tetromino) delay = Tetromino.DELAY;
+  }
+
+  function handleTap(evt) {
+      if (tetromino) tetromino.rotate();
+  }
+
+
   // Move
   window.onkeydown = event => {
       switch (event.key) {
@@ -255,12 +307,12 @@ window.onload = () => {
 
   // Update delay based on speed slider value
   speedSlider.oninput = () => {
-      delay = Tetromino.DELAY * Math.pow(Tetromino.DELAY_INCREASED, -speedSlider.value + 5);
-      if (gameInterval) {
-          clearInterval(gameInterval);
-          gameInterval = setInterval(draw, delay);
-      }
-  }
+    delay = Tetromino.DELAY * Math.pow(Tetromino.DELAY_INCREASED, -speedSlider.value + 5);
+    if (gameInterval) {
+        clearInterval(gameInterval);
+        gameInterval = setInterval(draw, delay);
+    }
+}
 
   startButton.onclick = startGame;
   stopButton.onclick = stopGame;
