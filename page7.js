@@ -227,6 +227,7 @@ window.onload = () => {
   }
 
   // Mobile touch events
+  let startX, startY;
   canvas.addEventListener("touchstart", handleTouchStart, false);
   canvas.addEventListener("touchmove", handleTouchMove, false);
   canvas.addEventListener("touchend", handleTouchEnd, false);
@@ -245,23 +246,34 @@ window.onload = () => {
       const diffX = touch.clientX - startX;
       const diffY = touch.clientY - startY;
 
-      if (Math.abs(diffX) > Math.abs(diffY)) {
-          // Horizontal movement
-          if (diffX > 0) {
-              // Right swipe
-              if (tetromino && !tetromino.collides(i => ({ x: tetromino.x[i] + 1, y: tetromino.y[i] })))
-                  tetromino.update(i => ++tetromino.x[i]);
+      // Set a threshold to avoid too fast movements
+      const threshold = Tetromino.BLOCK_SIZE / 2; // 변경된 부분: 임계값 설정
+
+      if (Math.abs(diffX) > threshold || Math.abs(diffY) > threshold) {
+          if (Math.abs(diffX) > Math.abs(diffY)) {
+              // Horizontal movement
+              if (diffX > threshold) {
+                  // Right swipe
+                  if (tetromino && !tetromino.collides(i => ({ x: tetromino.x[i] + 1, y: tetromino.y[i] }))) {
+                      tetromino.update(i => ++tetromino.x[i]);
+                      startX = touch.clientX; // 변경된 부분: startX 업데이트
+                  }
+              } else if (diffX < -threshold) {
+                  // Left swipe
+                  if (tetromino && !tetromino.collides(i => ({ x: tetromino.x[i] - 1, y: tetromino.y[i] }))) {
+                      tetromino.update(i => --tetromino.x[i]);
+                      startX = touch.clientX; // 변경된 부분: startX 업데이트
+                  }
+              }
           } else {
-              // Left swipe
-              if (tetromino && !tetromino.collides(i => ({ x: tetromino.x[i] - 1, y: tetromino.y[i] })))
-                  tetromino.update(i => --tetromino.x[i]);
-          }
-      } else {
-          // Vertical movement
-          if (diffY > 0) {
-              // Down swipe
-              if (tetromino)
-                  delay = Tetromino.DELAY / Tetromino.DELAY_INCREASED;
+              // Vertical movement
+              if (diffY > threshold) {
+                  // Down swipe
+                  if (tetromino) {
+                      delay = Tetromino.DELAY / Tetromino.DELAY_INCREASED;
+                      startY = touch.clientY; // 변경된 부분: startY 업데이트
+                  }
+              }
           }
       }
 
@@ -276,7 +288,6 @@ window.onload = () => {
   function handleTap(evt) {
       if (tetromino) tetromino.rotate();
   }
-
 
   // Move
   window.onkeydown = event => {
@@ -307,13 +318,14 @@ window.onload = () => {
 
   // Update delay based on speed slider value
   speedSlider.oninput = () => {
-    delay = Tetromino.DELAY * Math.pow(Tetromino.DELAY_INCREASED, -speedSlider.value + 5);
-    if (gameInterval) {
-        clearInterval(gameInterval);
-        gameInterval = setInterval(draw, delay);
-    }
-}
+      delay = Tetromino.DELAY * Math.pow(Tetromino.DELAY_INCREASED, -speedSlider.value + 5);
+      if (gameInterval) {
+          clearInterval(gameInterval);
+          gameInterval = setInterval(draw, delay);
+      }
+  }
 
   startButton.onclick = startGame;
   stopButton.onclick = stopGame;
 }
+
