@@ -82,39 +82,50 @@ h1 {
   margin: 15px 0;
 }
 
+
+
 /* Mobile-specific styles */
 @media only screen and (max-width: 600px) {
-  body {
-    flex-direction: column;
-  }
-
-  #wrapper {
-    margin-right: 0;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  #left-div {
-    transform: translate(0, 0);
-    margin: 20px 0;
-    padding: 10px;
+  #score-div,
+  #lines-div,
+  #speed-slider,
+  #speed-label,
+  #speed-container { /* Add this line to hide the entire speed container if necessary */
+    display: none !important; /* Hide score, lines, speed-slider, start-button, and stop-button */
   }
 
   #game-container {
-    height: auto; /* Adjust the height to fit within the viewport */
-    width: 90%; /* Make it take 90% of the viewport width */
-    max-width: 375px; /* Ensure it doesn't get too wide */
+    margin-left :100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    position: relative;
   }
 
   #game-canvas {
-    height: auto; /* Adjust the height to fit within the viewport */
-    width: 100%; /* Make it take the full width of the container */
-    margin-left: 0;
+    position: relative;
+    width: 90%; /* Set width to 90% to keep some padding */
+    height: auto; /* Maintain aspect ratio */
+    max-width: 400px; /* Set a max-width for better visibility */
+    max-height: 90vh; /* Ensure canvas does not exceed 90% of viewport height */
+    margin: 0 auto; /* Center the canvas horizontally */
   }
 
-  #score-div,
-  #lines-div {
-    font-size: 18px;
-    text-align: center;
+  #buttons-container {
+    position: absolute;
+    bottom: 20px; /* Adjust this value to position the buttons higher or lower */
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto; /* Adjust width as necessary */
+  }
+
+  #start-button{
+    margin-left: 100px; /* Space between buttons */
+  }
+
+  #stop-button {
+    margin : 1px;
   }
 }
