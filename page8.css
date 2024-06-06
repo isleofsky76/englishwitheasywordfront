@@ -114,32 +114,42 @@ canvas {
 
 /* Mobile adjustments */
 @media (max-width: 600px) {
-.container {
+  .container {
     flex-direction: column;
     padding: 10px;
-}
+  }
 
-.hangman-container,
-#words-block {
+  .hangman-container,
+  #words-block {
     margin-bottom: 10px;
-}
+  }
 
-canvas {
+  canvas {
     max-width: 300px;
-}
+  }
 
-#alphabet-input {
+  #alphabet-input {
     max-width: 100%;
-}
-#letter-container {
-  gap: 1em; /* Adjust spacing for mobile */
-  margin-bottom: 1em; /* Adjust bottom margin for mobile */
-}
+  }
 
-#letter-container button {
+  #letter-container {
+    gap: 1em; /* Adjust spacing for mobile */
+    margin-bottom: 1.2em; /* Adjust bottom margin for mobile */
+  }
+
+  #letter-container button {
     width: 2em; /* Adjust width for mobile */
     height: 2em; /* Adjust height for mobile */
-    margin: 0.2em; /* Increase spacing between buttons for mobile */
+    margin: 0.2m; /* Increase spacing between buttons for mobile */
     font-size: 1em; /* Adjust font size for mobile */
-}
+  }
+
+  /* Adjusted font sizes for hint and result text on mobile */
+  #hint-container {
+    font-size: 1.2em; /* Smaller font size for mobile */
+  }
+
+  #result-text {
+    font-size: 1.2em; /* Smaller font size for mobile */
+  }
 }
