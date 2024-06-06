@@ -132,7 +132,7 @@ canvas {
     max-width: 100%;
 }
 #letter-container {
-  gap: 0.6em; /* Adjust spacing for mobile */
+  gap: 1em; /* Adjust spacing for mobile */
   margin-bottom: 1em; /* Adjust bottom margin for mobile */
 }
 
@@ -140,6 +140,6 @@ canvas {
     width: 2em; /* Adjust width for mobile */
     height: 2em; /* Adjust height for mobile */
     margin: 0.2em; /* Increase spacing between buttons for mobile */
-    font-size: 0.7em; /* Adjust font size for mobile */
+    font-size: 1em; /* Adjust font size for mobile */
 }
 }
