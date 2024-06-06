@@ -20,7 +20,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 90vw;
+  width: 100vw;
   max-width: 800px;
   padding: 20px;
   background-color: #eedbdb;
@@ -70,7 +70,7 @@ canvas {
 
 #result-text {
   margin-bottom: 1em;
-  font-size: 1.em;
+  font-size: 1.2em;
 }
 
 #hint-container {
@@ -114,21 +114,32 @@ canvas {
 
 /* Mobile adjustments */
 @media (max-width: 600px) {
-  .container {
-      flex-direction: column;
-      padding: 10px;
-  }
+.container {
+    flex-direction: column;
+    padding: 10px;
+}
 
-  .hangman-container,
-  #words-block {
-      margin-bottom: 10px;
-  }
+.hangman-container,
+#words-block {
+    margin-bottom: 10px;
+}
 
-  canvas {
-      max-width: 300px;
-  }
+canvas {
+    max-width: 300px;
+}
 
-  #alphabet-input {
-      max-width: 100%;
-  }
+#alphabet-input {
+    max-width: 100%;
+}
+#letter-container {
+  gap: 0.6em; /* Adjust spacing for mobile */
+  margin-bottom: 1em; /* Adjust bottom margin for mobile */
+}
+
+#letter-container button {
+    width: 2em; /* Adjust width for mobile */
+    height: 2em; /* Adjust height for mobile */
+    margin: 0.2em; /* Increase spacing between buttons for mobile */
+    font-size: 0.7em; /* Adjust font size for mobile */
+}
 }
