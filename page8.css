@@ -69,14 +69,17 @@ canvas {
 }
 
 #result-text {
-  margin-bottom: 1em;
-  font-size: 1.2em;
+  font-size: 2em;
+  margin: 0 auto; /* Centers the element horizontally */
+  text-align: center; /* Centers text inside the element */
 }
 
 #hint-container {
-  margin-bottom: 1em;
-  font-size: 1em;
+  margin-top : 1.5em;
+  font-size: 2em;
   color: #333;
+  margin: 0 auto; /* Centers the element horizontally */
+  text-align: center; /* Centers text inside the element */
 }
 
 #hint-button,
@@ -103,13 +106,12 @@ canvas {
 }
 
 #user-input-section {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  padding: 0 20px;
+  margin: 0 auto; /* Centers the element horizontally */
+  text-align: center; /* Centers text inside the element */
   width: 100%;
-  font-size: 1.5em;
-  margin-top: 1em;
+  font-size: 2em;
+  gap: 0.5em; /* Adds wider spacing between dashes */
+  margin-bottom: 30px;
 }
 
 /* Mobile adjustments */
@@ -152,4 +154,13 @@ canvas {
   #result-text {
     font-size: 1.2em; /* Smaller font size for mobile */
   }
+  /* Adjust spacing for dashes on mobile */
+  #dashes-container {
+    gap: 0.5em; /* Smaller gap between dashes for mobile */
+  }
+
+  #span.dash {
+      font-size: 1.2em; /* Smaller dash size for mobile */
+      width: 1em; /* Adjust width for mobile */
+    }
 }
