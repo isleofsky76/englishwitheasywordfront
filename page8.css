@@ -1,264 +1,134 @@
 .tulpen-one-regular {
   font-family: "Tulpen One", sans-serif;
-  font-weight: 200;
+  font-weight: 400;
   font-style: normal;
 }
-
 
 body {
   background-color: #6ba37d;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 90vh; /* Ensure it takes the full height of the viewport */
-  margin: 10px;
+  height: 100vh;
+  margin: 0;
   padding: 10px;
-  font-size: 20px; /* Adjust the size as needed */
-  font-weight: 200;
+  font-size: 1.2em;
+  font-family: "Tulpen One", sans-serif;
 }
 
 .container {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  font-size: 0.8em;
+  flex-direction: column;
+  align-items: center;
+  width: 90vw;
+  max-width: 800px;
+  padding: 20px;
   background-color: #eedbdb;
-  height: 80vh; /* Ensure it takes the full height of the viewport */
-  width: 80vw;
-  max-width: 60em;
-  padding: 1em;
   border-radius: 0.6em;
   box-shadow: 0 1.2em 2.4em rgba(194, 162, 59, 0.25);
 }
 
-.block {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.hangman-container,
+#words-block {
+  width: 80%;
   margin-bottom: 20px;
 }
 
+.block {
+  width: 80%;
+  padding: 1em;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border-radius: 0.6em;
+  box-shadow: 0 1.2em 2.4em rgba(194, 162, 59, 0.25);
+}
+
+#hangman-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+canvas {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  margin: 10px auto;
+  display: block;
+}
+
+.new-game-popup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.new-game-popup.hide {
+  display: none;
+}
+
+#result-text {
+  margin-bottom: 1em;
+  font-size: 1.em;
+}
 
 #hint-container {
-  margin-top: 1em;
-  font-size: 1em;
   margin-bottom: 1em;
+  font-size: 1em;
   color: #333;
 }
-#hint-button {
+
+#hint-button,
+#skip-button,
+#new-game-button {
   padding: 0.6em 1em;
   border: 3px solid #000000;
   background-color: #f5f2f2;
   color: #000000;
   border-radius: 0.3em;
   cursor: pointer;
-  margin-bottom: 2em;
-  
-}
-
-#skip-button container {
   margin-top: 1em;
-  font-size: 1.2em;
-  margin-bottom: 1em;
-  color: #333;
+  font-size:8px;
 }
 
-#skip-button {
-  padding: 0.6em 1.2em;
-  border: 3px solid #000000;
-  background-color: #ffffff;
-  color: #000000;
-  border-radius: 0.3em;
-  cursor: pointer;
-  margin-bottom: 2em;
-
-}
-
-
-#letter-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  padding: 0;
-}
-
-#letter-container button {
-  height: 2.4em;
-  width: 2.4em;
-  border-radius: 0.3em;
-  cursor: pointer;
-}
-
-.letters {
-  font-family: 'Dancing Script', cursive;
-  font-size: 24px;
-  margin: 5px;
-  padding: 10px;
-  border: none; /* Remove the border */
-  background-color: transparent; /* Make background transparent */
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  border-radius: #140000;
-}
-
-.letters:hover {
-  background-color: #161616;
-
-}
-
-.letters:disabled {
-  color: #1a0101; /* Adjust color for disabled buttons if needed */
-  border-radius: #f7f4f4;
-}
-
-
-#user-input-section {
-  display: flex;
-  justify-content: center;
-  font-size: 1.8em;
-  margin: 0.6em 0 1.2em 0;
-}
-
-canvas {
-    /* Rounded corners with a radius of 10 pixels */
-    height: 40vh;
-    /* Set the height to 50% of the viewport height */
-    width: 20vw;
-    /* Set the width to 20% of the viewport width */
-    margin: 10px auto;
-    /* Apply a margin of 20 pixels on the top and bottom, and auto horizontally center */
-    display: block;
-    /* Display the element as a block-level element */
-}
-
-
-.popup {
-  position: fixed;
-  top: 0;
-  left: 0;
+#alphabet-input {
   width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.popup-content {
-  background-color: #ffffff;
-  padding: 2em;
-  border-radius: 0.6em;
-  text-align: center;
-  box-shadow: 0 1.2em 2.4em rgba(111, 85, 0, 0.25);
-}
-.hide {
-  display: none;
-}
-#result-text {
-  margin-bottom: 1em;
-}
-#result-text h2 {
-  font-size: 1.8em;
-}
-#result-text p {
-  font-size: 1.25em;
-  margin: 0.5em 0;
-}
-#result-text span {
-  font-weight: 600;
-}
-#close-popup-button {
-  font-size: 1.25em;
-  padding: 0.5em 1em;
-  background-color: #7ab1e4;
-  border: 3px solid #000000;
-  color: #fff;
-  border-radius: 0.2em;
-  cursor: pointer;
-}
-.letters {
-  font-family: 'Dancing Script', cursive;
-  font-size: 14px;
-  margin: 5px;
-  padding: 10px;
+  max-width: 300px;
+  padding: 0.5em;
+  font-size: 1.2em;
+  margin-top: 1em;
   border: 2px solid #000;
-  border-radius: 5px;
-  cursor: pointer;
-  background-color: #f9f9f9;
-  transition: background-color 0.3s ease;
+  border-radius: 0.3em;
 }
 
-.letters:hover {
-  background-color: #e0e0e0;
-}
-
-.dashes {
-  display: inline-block;
-  margin: 0 2px;
-  font-size: 24px;
-  border-bottom: 2px solid #000; /* Underline style */
-  width: 25px; /* Width for each character */
-  text-align: center;
-}
-.space {
-  display: inline-block;
-  margin: 0 2px;
-  font-size: 24px;
-  width: 25px; /* Width for each character */
-  text-align: center;
-}
 #user-input-section {
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
-  padding: 0 20px; /* Padding for better spacing */
-  width: 100%; /* Ensure the container takes up most of the available space */
+  flex-wrap: wrap;
+  padding: 0 20px;
+  width: 100%;
+  font-size: 1.5em;
+  margin-top: 1em;
 }
 
-
-
-
-/* Styles for result text */
-#result-text {
-  margin-bottom: 1em;
-}
-
-/* Styles for the new game button */
-#new-game-button {
-  font-size: 0.8em;
-  padding: 0.2em 0.6em;
-  background-color: #b0cfee;
-  border: 3px solid #000000;
-  color: #0f0101;
-  border-radius: 0.2em;
-  cursor: pointer;
-}
-
-/* Adjustments for smaller screens */
+/* Mobile adjustments */
 @media (max-width: 600px) {
-  #letter-container {
-    justify-content: space-around;
-    padding: 5px;
-    gap: 0.4em;
+  .container {
+      flex-direction: column;
+      padding: 10px;
   }
 
-  #letter-container button {
-    height: 6vw; /* Adjusted height for smaller screens */
-    width: 6vw; /* Adjusted width for smaller screens */
-    font-size: 0.9em;
-  }
-}
-
-/* Further adjustments for extra small screens */
-@media (max-width: 400px) {
-  #letter-container {
-    padding: 5px;
-    gap: 0.2em;
+  .hangman-container,
+  #words-block {
+      margin-bottom: 10px;
   }
 
-  #letter-container button {
-    height: 8vw; /* Further adjusted height for extra small screens */
-    width: 8vw; /* Further adjusted width for extra small screens */
-    font-size: 0.8em;
+  canvas {
+      max-width: 300px;
+  }
+
+  #alphabet-input {
+      max-width: 100%;
   }
 }
