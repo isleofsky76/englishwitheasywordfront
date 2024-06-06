@@ -28,6 +28,7 @@ body {
   box-shadow: 0 1.2em 2.4em rgba(194, 162, 59, 0.25);
 }
 
+
 .hangman-container,
 #words-block {
   width: 80%;
