@@ -442,7 +442,7 @@ const initializer = () => {
             winCount += 1;
             // If winCount equals word length ignoring spaces
             if (winCount === charArray.filter(c => c !== ' ').length) {
-              resultText.innerHTML = `<h2 class='win-msg'>Great</h2><p>The answer was <span>${chosenWord}</span></p>`;
+              resultText.innerHTML = `<h2 class='win-msg'></h2><p> Great! The answer was <span>${chosenWord}</span></p>`;
               // Block all buttons
               blocker();
             }
@@ -456,7 +456,7 @@ const initializer = () => {
         drawMan(count);
         // Count == 6 because head, body, left arm, right arm, left leg, right leg
         if (count === 6) {
-          resultText.innerHTML = `<h2 class='lose-msg'>Sorry!</h2><p>The answer was <span>${chosenWord}</span></p>`;
+          resultText.innerHTML = `<h2 class='lose-msg'></h2><p>Sorry! The answer was <span>${chosenWord}</span></p>`;
           blocker();
         }
       }
@@ -588,3 +588,4 @@ const drawMan = (count) => {
 // New Game
 newGameButton.addEventListener("click", initializer);
 window.onload = initializer;
+
