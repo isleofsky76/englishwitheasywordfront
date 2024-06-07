@@ -220,6 +220,7 @@ canvas {
 
   #result-text {
     font-size: 1.2em; /* Smaller font size for mobile */
+    color: #f313a8;
   }
   /* Adjust spacing for dashes on mobile */
   #dashes-container {
