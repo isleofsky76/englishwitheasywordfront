@@ -1,8 +1,75 @@
-.tulpen-one-regular {
-  font-family: "Tulpen One", sans-serif;
+.roboto-thin {
+  font-family: "Roboto", sans-serif;
+  font-weight: 100;
+  font-style: normal;
+}
+
+.roboto-light {
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.roboto-regular {
+  font-family: "Roboto", sans-serif;
   font-weight: 400;
   font-style: normal;
 }
+
+.roboto-medium {
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.roboto-bold {
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.roboto-black {
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+  font-style: normal;
+}
+
+.roboto-thin-italic {
+  font-family: "Roboto", sans-serif;
+  font-weight: 100;
+  font-style: italic;
+}
+
+.roboto-light-italic {
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.roboto-regular-italic {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.roboto-medium-italic {
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-style: italic;
+}
+
+.roboto-bold-italic {
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
+.roboto-black-italic {
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+  font-style: italic;
+}
+
 
 body {
   background-color: #6ba37d;
@@ -23,11 +90,10 @@ body {
   width: 100vw;
   max-width: 800px;
   padding: 20px;
-  background-color: #ffffff;
+  background-color: #338599;
   border-radius: 0.6em;
   box-shadow: 0 1.2em 2.4em rgba(194, 162, 59, 0.25);
 }
-
 
 .hangman-container,
 #words-block {
@@ -39,7 +105,8 @@ body {
   width: 80%;
   padding: 1em;
   margin-bottom: 20px;
-  background-color: #ffffff;
+  background-color: #f4f7f2;
+  border-radius: 0.6em;
   box-shadow: 0 1.2em 2.4em rgba(194, 162, 59, 0.25);
 }
 
@@ -69,17 +136,17 @@ canvas {
 }
 
 #result-text {
-  font-size: 2em;
+  font-size:14px;
   margin: 0 auto; /* Centers the element horizontally */
   text-align: center; /* Centers text inside the element */
 }
 
 #hint-container {
   margin-top : 1.5em;
-  font-size: 2em;
   color: #333;
   margin: 0 auto; /* Centers the element horizontally */
   text-align: center; /* Centers text inside the element */
+  font-size:14px;
 }
 
 #hint-button,
@@ -89,11 +156,10 @@ canvas {
   border: 3px solid #000000;
   background-color: #f5f2f2;
   color: #000000;
-  background-color: #ffffff;
   border-radius: 0.3em;
   cursor: pointer;
   margin-top: 1em;
-  font-size:8px;
+  font-size:10px;
 }
 
 #alphabet-input {
