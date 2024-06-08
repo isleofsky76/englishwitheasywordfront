@@ -1,0 +1,258 @@
+.roboto-thin {
+  font-family: "Roboto", sans-serif;
+  font-weight: 100;
+  font-style: normal;
+}
+
+.roboto-light {
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.roboto-regular {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.roboto-medium {
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.roboto-bold {
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.roboto-black {
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+  font-style: normal;
+}
+
+.roboto-thin-italic {
+  font-family: "Roboto", sans-serif;
+  font-weight: 100;
+  font-style: italic;
+}
+
+.roboto-light-italic {
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.roboto-regular-italic {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.roboto-medium-italic {
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-style: italic;
+}
+
+.roboto-bold-italic {
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
+.roboto-black-italic {
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+  font-style: italic;
+}
+
+
+body {
+  background-color: #6ba37d;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  padding: 10px;
+  font-size: 1.2em;
+  font-family: "Tulpen One", sans-serif;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+  max-width: 800px;
+  padding: 20px;
+  background-color: #338599;
+  border-radius: 0.6em;
+  box-shadow: 0 1.2em 2.4em rgba(194, 162, 59, 0.25);
+}
+
+
+.topic-selection
+{
+  text-align: center;
+}
+
+.hangman-container,
+#words-block {
+  width: 80%;
+  margin-bottom: 20px;
+}
+
+.block {
+  width: 80%;
+  padding: 1em;
+  margin-bottom: 20px;
+  background-color: #f4f7f2;
+  border-radius: 0.6em;
+  box-shadow: 0 1.2em 2.4em rgba(194, 162, 59, 0.25);
+}
+
+#hangman-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+canvas {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  margin: 10px auto;
+  display: block;
+}
+
+.new-game-popup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.new-game-popup.hide {
+  display: none;
+}
+
+#result-text {
+  font-size:14px;
+  margin: 0 auto; /* Centers the element horizontally */
+  text-align: center; /* Centers text inside the element */
+}
+
+#hint-container {
+  margin-top : 1.5em;
+  color: #333;
+  margin: 0 auto; /* Centers the element horizontally */
+  text-align: center; /* Centers text inside the element */
+  font-size:14px;
+}
+
+#hint-button,
+#skip-button,
+#new-game-button {
+  padding: 0.6em 1em;
+  border: 3px solid #000000;
+  background-color: #f5f2f2;
+  color: #000000;
+  border-radius: 0.3em;
+  cursor: pointer;
+  margin-top: 1em;
+  font-size:10px;
+}
+
+#alphabet-input {
+  width: 100%;
+  max-width: 300px;
+  padding: 0.5em;
+  font-size: 1.2em;
+  margin-top: 1em;
+  border: 2px solid #000;
+  border-radius: 0.3em;
+}
+
+
+#topics-list{
+  width: 100%;
+  border-radius: 0.3em;
+  cursor: pointer;
+  text-align: center;
+  font-size: 14px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 5px; /* This controls the space between the buttons */
+}
+
+#user-input-section {
+  margin: 0 auto; /* Centers the element horizontally */
+  text-align: center; /* Centers text inside the element */
+  width: 100%;
+  font-size: 2em;
+  gap: 0.5em; /* Adds wider spacing between dashes */
+  margin-bottom: 30px;
+}
+
+/* Mobile adjustments */
+@media (max-width: 600px) {
+  .container {
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .hangman-container,
+  #words-block {
+    margin-bottom: 10px;
+  }
+
+  canvas {
+    max-width: 300px;
+  }
+
+  #alphabet-input {
+    max-width: 100%;
+  }
+
+  #letter-container {
+    gap: 1em; /* Adjust spacing for mobile */
+    margin-bottom: 1.2em; /* Adjust bottom margin for mobile */
+  }
+
+  #letter-container button {
+    width: 2em; /* Adjust width for mobile */
+    height: 2em; /* Adjust height for mobile */
+    margin: 0.2m; /* Increase spacing between buttons for mobile */
+    font-size: 1em; /* Adjust font size for mobile */
+  }
+
+  /* Adjusted font sizes for hint and result text on mobile */
+  #hint-container {
+    font-size: 1.2em; /* Smaller font size for mobile */
+  }
+
+  #result-text {
+    font-size: 1.2em; /* Smaller font size for mobile */
+    color: #f313a8;
+  }
+  /* Adjust spacing for dashes on mobile */
+  #dashes-container {
+    gap: 0.5em; /* Smaller gap between dashes for mobile */
+  }
+
+  #span.dash {
+      font-size: 1.2em; /* Smaller dash size for mobile */
+      width: 1em; /* Adjust width for mobile */
+    }
+  #topics-list {
+    display: block; /* Change from grid to block layout */
+    width: auto;
+    padding: 0;
+    font-size: 12px; /* Smaller font size */
+  }
+}
