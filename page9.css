@@ -79,7 +79,7 @@ body {
   height: 100vh;
   margin: 0;
   padding: 10px;
-  font-size: 1.2em;
+  font-size:16px;
   font-family: "Tulpen One", sans-serif;
 }
 
@@ -93,6 +93,7 @@ body {
   background-color: #338599;
   border-radius: 0.6em;
   box-shadow: 0 1.2em 2.4em rgba(194, 162, 59, 0.25);
+  font-size:16px;
 }
 
 
@@ -105,6 +106,7 @@ body {
 #words-block {
   width: 80%;
   margin-bottom: 20px;
+  font-size:16px;
 }
 
 .block {
@@ -142,17 +144,18 @@ canvas {
 }
 
 #result-text {
-  font-size:14px;
+  font-size:24px;
   margin: 0 auto; /* Centers the element horizontally */
   text-align: center; /* Centers text inside the element */
+  color: #cc2f2f;
 }
 
 #hint-container {
   margin-top : 1.5em;
-  color: #333;
+  color: #6046d1;
   margin: 0 auto; /* Centers the element horizontally */
   text-align: center; /* Centers text inside the element */
-  font-size:14px;
+  font-size:24px;
 }
 
 #hint-button,
@@ -165,7 +168,7 @@ canvas {
   border-radius: 0.3em;
   cursor: pointer;
   margin-top: 1em;
-  font-size:10px;
+  font-size:16px;
 }
 
 #alphabet-input {
@@ -184,7 +187,7 @@ canvas {
   border-radius: 0.3em;
   cursor: pointer;
   text-align: center;
-  font-size: 14px;
+  font-size: 20px;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
   gap: 5px; /* This controls the space between the buttons */
