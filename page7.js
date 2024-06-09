@@ -226,68 +226,77 @@ window.onload = () => {
       gameInterval = null;
   }
 
-  // Mobile touch events
-  let startX, startY;
-  canvas.addEventListener("touchstart", handleTouchStart, false);
-  canvas.addEventListener("touchmove", handleTouchMove, false);
-  canvas.addEventListener("touchend", handleTouchEnd, false);
-  canvas.addEventListener("touchend", handleTap, false);
+// Mobile touch events
+let startX, startY, lastMoveTime = 0;
+let isDragging = false;
+canvas.addEventListener("touchstart", handleTouchStart, false);
+canvas.addEventListener("touchmove", handleTouchMove, false);
+canvas.addEventListener("touchend", handleTouchEnd, false);
+canvas.addEventListener("touchend", handleTap, false);
 
-  function handleTouchStart(evt) {
-      const touch = evt.touches[0];
-      startX = touch.clientX;
-      startY = touch.clientY;
-  }
+function handleTouchStart(evt) {
+    const touch = evt.touches[0];
+    startX = touch.clientX;
+    startY = touch.clientY;
+    isDragging = false; // reset dragging flag
+}
 
-  function handleTouchMove(evt) {
-      if (!startX || !startY) return;
+function handleTouchMove(evt) {
+    if (!startX || !startY) return;
 
-      const touch = evt.touches[0];
-      const diffX = touch.clientX - startX;
-      const diffY = touch.clientY - startY;
+    const touch = evt.touches[0];
+    const diffX = touch.clientX - startX;
+    const diffY = touch.clientY - startY;
 
-      // Set a threshold to avoid too fast movements
-      const threshold = Tetromino.BLOCK_SIZE / 420; // 변경된 부분: 임계값 설정
+    // Set a threshold to avoid too fast movements
+    const threshold = 40; // further increased threshold
+    const currentTime = new Date().getTime();
 
-      if (Math.abs(diffX) > threshold || Math.abs(diffY) > threshold) {
-          if (Math.abs(diffX) > Math.abs(diffY)) {
-              // Horizontal movement
-              if (diffX > threshold) {
-                  // Right swipe
-                  if (tetromino && !tetromino.collides(i => ({ x: tetromino.x[i] + 1, y: tetromino.y[i] }))) {
-                      tetromino.update(i => ++tetromino.x[i]);
-                      startX = touch.clientX; // 변경된 부분: startX 업데이트
-                  }
-              } else if (diffX < -threshold) {
-                  // Left swipe
-                  if (tetromino && !tetromino.collides(i => ({ x: tetromino.x[i] - 1, y: tetromino.y[i] }))) {
-                      tetromino.update(i => --tetromino.x[i]);
-                      startX = touch.clientX; // 변경된 부분: startX 업데이트
-                  }
-              }
-          } else {
-              // Vertical movement
-              if (diffY > threshold) {
-                  // Down swipe
-                  if (tetromino) {
-                      delay = Tetromino.DELAY / Tetromino.DELAY_INCREASED;
-                      startY = touch.clientY; // 변경된 부분: startY 업데이트
-                  }
-              }
-          }
-      }
+    if (currentTime - lastMoveTime < 100) return; // add delay between movements
 
-      // Prevent further handling
-      evt.preventDefault();
-  }
+    if (Math.abs(diffX) > threshold || Math.abs(diffY) > threshold) {
+        isDragging = true; // set dragging flag
+        if (Math.abs(diffX) > Math.abs(diffY)) {
+            // Horizontal movement
+            if (diffX > threshold) {
+                // Right swipe
+                if (tetromino && !tetromino.collides(i => ({ x: tetromino.x[i] + 1, y: tetromino.y[i] }))) {
+                    tetromino.update(i => ++tetromino.x[i]);
+                    startX = touch.clientX;
+                }
+            } else if (diffX < -threshold) {
+                // Left swipe
+                if (tetromino && !tetromino.collides(i => ({ x: tetromino.x[i] - 1, y: tetromino.y[i] }))) {
+                    tetromino.update(i => --tetromino.x[i]);
+                    startX = touch.clientX;
+                }
+            }
+        } else {
+            // Vertical movement
+            if (diffY > threshold) {
+                // Down swipe
+                if (tetromino) {
+                    delay = Tetromino.DELAY / Tetromino.DELAY_INCREASED;
+                    startY = touch.clientY;
+                }
+            }
+        }
+        lastMoveTime = currentTime; // update last move time
+    }
 
-  function handleTouchEnd(evt) {
-      if (tetromino) delay = Tetromino.DELAY;
-  }
+    // Prevent further handling
+    evt.preventDefault();
+}
 
-  function handleTap(evt) {
-      if (tetromino) tetromino.rotate();
-  }
+function handleTouchEnd(evt) {
+    if (tetromino) delay = Tetromino.DELAY;
+}
+
+function handleTap(evt) {
+    if (!isDragging && tetromino) { // only rotate if not dragging
+        tetromino.rotate();
+    }
+}
 
   // Move
   window.onkeydown = event => {
