@@ -247,7 +247,7 @@ window.onload = () => {
       const diffY = touch.clientY - startY;
 
       // Set a threshold to avoid too fast movements
-      const threshold = Tetromino.BLOCK_SIZE / 32; // 변경된 부분: 임계값 설정
+      const threshold = Tetromino.BLOCK_SIZE / 320; // 변경된 부분: 임계값 설정
 
       if (Math.abs(diffX) > threshold || Math.abs(diffY) > threshold) {
           if (Math.abs(diffX) > Math.abs(diffY)) {
