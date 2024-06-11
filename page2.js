@@ -33,6 +33,12 @@ function displayMessage(content, isUser) {
                 const sentenceElement = document.createElement('div');
                 sentenceElement.textContent = sentence.trim();
                 messageElement.appendChild(sentenceElement);
+
+                // Add space between sentences
+                const spacerElement = document.createElement('div');
+                spacerElement.innerHTML = '&nbsp;'; // Non-breaking space for spacing
+                messageElement.appendChild(spacerElement);
+
                 chatMessages.scrollTop = chatMessages.scrollHeight;
             }, index * 2000); // Adjust delay as needed (2000ms = 2 seconds per sentence)
         });
@@ -43,6 +49,7 @@ function displayMessage(content, isUser) {
     // Save messages in chat history without altering
     chatHistory.push({ sender: isUser ? 'User' : 'AI', message: content });
 }
+
 
 async function sendMessage() {
     // const inputMessage = document.getElementById('inputMessage');
