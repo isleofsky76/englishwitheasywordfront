@@ -26,8 +26,12 @@
         <canvas id="game-canvas"></canvas>
   </div>
   <div id="controls">
-    <label for="speed-slider">Speed:</label>
-    <input type="range" id="speed-slider" min="1" max="10" step="0.1" value="5">
+    <label id="speed-label">Speed:</label>
+    <select id="speed-dropdown">
+      <option value="1">Level 1</option>
+      <option value="2">Level 2</option>
+      <option value="3">Level 3</option>
+    </select>
     <button id="start-button">Start</button>
     <button id="stop-button">Stop</button>
   </div>
