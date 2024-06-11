@@ -18,13 +18,27 @@ function containsForbiddenWords(text) {
 //영어채팅하기====================================================
 let chatHistory = [];  // Array to store chat messages
 
+// Function to display message
 function displayMessage(content, isUser) {
     const chatMessages = document.getElementById('chatMessages');
     const messageElement = document.createElement('div');
-    messageElement.textContent = content; // Display content as it is received
     messageElement.className = isUser ? 'user-message' : 'ai-message';
     chatMessages.appendChild(messageElement);
     chatMessages.scrollTop = chatMessages.scrollHeight;
+
+    if (!isUser) {
+        const sentences = content.split(/(?<=[.?!])\s+/); // Split by sentence
+        sentences.forEach((sentence, index) => {
+            setTimeout(() => {
+                const sentenceElement = document.createElement('div');
+                sentenceElement.textContent = sentence.trim();
+                messageElement.appendChild(sentenceElement);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }, index * 2000); // Adjust delay as needed (2000ms = 2 seconds per sentence)
+        });
+    } else {
+        messageElement.textContent = content;
+    }
 
     // Save messages in chat history without altering
     chatHistory.push({ sender: isUser ? 'User' : 'AI', message: content });
