@@ -40,7 +40,7 @@ function displayMessage(content, isUser) {
                 messageElement.appendChild(spacerElement);
 
                 chatMessages.scrollTop = chatMessages.scrollHeight;
-            }, index * 2000); // Adjust delay as needed (2000ms = 2 seconds per sentence)
+            }, index * 9000); // Adjust delay as needed (2000ms = 2 seconds per sentence)
         });
     } else {
         messageElement.textContent = content;
@@ -94,7 +94,7 @@ async function sendMessage() {
     }
 }
 
-const typingSpeed = 100; // Adjust typing speed (milliseconds per character) for a more human-like typing speed
+const typingSpeed = 500; // Adjust typing speed (milliseconds per character) for a more human-like typing speed
 
 function simulateTyping(message) {
     const chatMessages = document.getElementById('chatMessages');
