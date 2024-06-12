@@ -283,7 +283,7 @@ window.onload = () => {
       touchEndTime = new Date().getTime(); // Record the end time
       const touchDuration = touchEndTime - touchStartTime; // Calculate the duration
   
-      if (touchDuration < 200) { // If touch duration is less than 200ms, consider it a tap
+      if (touchDuration < 100) { // If touch duration is less than 200ms, consider it a tap
         if (tetromino) tetromino.rotate();
       } else {
         if (tetromino) delay = Tetromino.DELAY_LEVELS[speedDropdown.value - 1];
