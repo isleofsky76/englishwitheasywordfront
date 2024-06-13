@@ -222,77 +222,81 @@ window.onload = () => {
       gameInterval = null;
     }
   
-    // Mobile touch events
-    let startX, startY;
-    canvas.addEventListener("touchstart", handleTouchStart, false);
-    canvas.addEventListener("touchmove", handleTouchMove, false);
-    canvas.addEventListener("touchend", handleTouchEnd, false);
-    canvas.addEventListener("touchend", handleTap, false);
-  
-    function handleTouchStart(evt) {
-      const touch = evt.touches[0];
-      startX = touch.clientX;
-      startY = touch.clientY;
-      touchStartTime = new Date().getTime(); // Record the start time
-    }
-  
-  
-    function handleTouchMove(evt) {
-      if (!startX || !startY) return;
-  
-      const touch = evt.touches[0];
-      const diffX = touch.clientX - startX;
-      const diffY = touch.clientY - startY;
-  
-      // Set a threshold to avoid too fast movements
-      const threshold = Tetromino.BLOCK_SIZE / 5;
-  
-      if (Math.abs(diffX) > threshold || Math.abs(diffY) > threshold) {
-        if (Math.abs(diffX) > Math.abs(diffY)) {
-          // Horizontal movement
-          if (diffX > threshold) {
-            // Right swipe
-            if (tetromino && !tetromino.collides(i => ({ x: tetromino.x[i] + 1, y: tetromino.y[i] }))) {
-              tetromino.update(i => ++tetromino.x[i]);
-              startX = touch.clientX;
-            }
-          } else if (diffX < -threshold) {
-            // Left swipe
-            if (tetromino && !tetromino.collides(i => ({ x: tetromino.x[i] - 1, y: tetromino.y[i] }))) {
-              tetromino.update(i => --tetromino.x[i]);
-              startX = touch.clientX;
-            }
+  // Mobile touch events
+  let startX, startY, touchStartTime;
+  canvas.addEventListener("touchstart", handleTouchStart, false);
+  canvas.addEventListener("touchmove", handleTouchMove, false);
+  canvas.addEventListener("touchend", handleTouchEnd, false);
+
+  function handleTouchStart(evt) {
+    const touch = evt.touches[0];
+    startX = touch.clientX;
+    startY = touch.clientY;
+    touchStartTime = new Date().getTime(); // Record the start time
+  }
+
+  function handleTouchMove(evt) {
+    if (!startX || !startY) return;
+
+    const touch = evt.touches[0];
+    const diffX = touch.clientX - startX;
+    const diffY = touch.clientY - startY;
+
+    // Set a threshold to avoid too fast movements
+    const threshold = Tetromino.BLOCK_SIZE / 5;
+
+    if (Math.abs(diffX) > threshold || Math.abs(diffY) > threshold) {
+      if (Math.abs(diffX) > Math.abs(diffY)) {
+        // Horizontal movement
+        if (diffX > threshold) {
+          // Right swipe
+          if (tetromino && !tetromino.collides(i => ({ x: tetromino.x[i] + 1, y: tetromino.y[i] }))) {
+            tetromino.update(i => ++tetromino.x[i]);
+            startX = touch.clientX;
           }
-        } else {
-          // Vertical movement
-          if (diffY > threshold) {
-            // Down swipe
-            if (tetromino) {
-              delay = Tetromino.DELAY_LEVELS[2];
-              startY = touch.clientY;
-            }
+        } else if (diffX < -threshold) {
+          // Left swipe
+          if (tetromino && !tetromino.collides(i => ({ x: tetromino.x[i] - 1, y: tetromino.y[i] }))) {
+            tetromino.update(i => --tetromino.x[i]);
+            startX = touch.clientX;
+          }
+        }
+      } else {
+        // Vertical movement
+        if (diffY > threshold) {
+          // Down swipe
+          if (tetromino) {
+            delay = Tetromino.DELAY_LEVELS[2];
+            startY = touch.clientY;
           }
         }
       }
-  
-      // Prevent further handling
-      evt.preventDefault();
     }
-  
-    function handleTouchEnd(evt) {
-      touchEndTime = new Date().getTime(); // Record the end time
-      const touchDuration = touchEndTime - touchStartTime; // Calculate the duration
-  
-      if (touchDuration < 100) { // If touch duration is less than 200ms, consider it a tap
-        if (tetromino) tetromino.rotate();
-      } else {
-        if (tetromino) delay = Tetromino.DELAY_LEVELS[speedDropdown.value - 1];
-      }
-    }
-    function handleTap(evt) {
+
+    // Prevent further handling
+    evt.preventDefault();
+  }
+
+  function handleTouchEnd(evt) {
+    const touchEndTime = new Date().getTime(); // Record the end time
+    const touchDuration = touchEndTime - touchStartTime; // Calculate the duration
+    const touch = evt.changedTouches[0];
+    const diffX = touch.clientX - startX;
+    const diffY = touch.clientY - startY;
+    const distance = Math.sqrt(diffX * diffX + diffY * diffY);
+
+    // Define thresholds
+    const timeThreshold = 200; // ms
+    const distanceThreshold = Tetromino.BLOCK_SIZE / 2; // pixels
+
+    if (touchDuration < timeThreshold && distance < distanceThreshold) {
+      // If touch duration is short and distance is small, consider it a tap
       if (tetromino) tetromino.rotate();
+    } else {
+      if (tetromino) delay = Tetromino.DELAY_LEVELS[speedDropdown.value - 1];
     }
-  
+  }
+
     // Move
     window.onkeydown = event => {
       switch (event.key) {
