@@ -79,7 +79,7 @@ body {
     .container {
         grid-template-columns: 1fr; /* Single column layout */
         width: 100%; /* Full width */
-        padding: 0 10px; /* Equal padding on both sides */
+        margin-right: 20px;
     }
 
     .box {
@@ -90,7 +90,7 @@ body {
 
     .image_container img {
         width: 100%; /* Full width for mobile view */
-        margin-left: 10px;
+        margin-right: 20px;
     }
 
     .content {
