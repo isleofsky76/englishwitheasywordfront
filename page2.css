@@ -2,16 +2,18 @@
 /* 기본적인 여백 */
 body {
     margin: 50px; /* 전체 body에 20px의 여백을 추가 */
-    background-color: #eef5f8; /* Light sky blue background color */
+    background-color: rgb(201, 219, 247); /* Light sky blue background color */
     line-height: 1.4;
     font-family: "Nanum Gothic", sans-serif;
     font-weight: 400;
     font-style: normal;
     font-size: 0.9rem;
+    color: rgb(32, 2, 2);
     p {
         margin-bottom: 10px; /* 문단 간의 간격 조절 */
     }
 }
+
 
 .page-title {
     font-size: 24px;
@@ -19,6 +21,7 @@ body {
     text-align: center;
     font-weight: bold;
 }
+
 
 
 /* 질문하기 버튼 Generic button styles */
@@ -67,12 +70,12 @@ button {
 
 /* Chat Container */
 #chatContainer {
-    width: 90%; /* Use a percentage width for responsiveness */
+    width: 100%; /* Use a percentage width for responsiveness */
     margin: 0 auto;
     padding: 20px;
-    border: 1px solid #ccc;
+    border: 1px solid #130000;
     border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(4, 16, 243, 0.1);
 }
 
 
@@ -87,6 +90,8 @@ button {
     box-sizing: border-box;
     overflow-y: auto; /* Vertical scrolling */
     overflow-x: hidden; /* Prevent horizontal scrolling */
+    background-color: rgb(41, 39, 56); /* Dark background color */
+    color: rgb(245, 241, 241); /* Light text color for contrast */
 }
 
 
@@ -94,11 +99,14 @@ button {
 /* Chat Terminal */
 #chatTerminal {
     width: 100%; /* Make it responsive */
-    height: 500%;
+    height: 600%;
     border: 1px solid #ccc;
     padding: 10px;
     overflow-y: auto; /* Ensure scrolling within terminal */
     line-height: 1.6; 
+    background-color: rgb(39, 33, 78); /* Dark background color */
+    color: rgb(245, 241, 241); /* Light text color for contrast */
+    border-radius: 10px;
 }
 
 
@@ -109,7 +117,7 @@ button {
     padding: 8px;
     border-radius: 8px;
     margin-bottom: 4px; /* Space between messages */
-    color: #0b0225; /* White text for contrast */
+    color: rgb(245, 241, 241); /* Light text color for contrast */
     line-height: 1.6; 
 }
 
@@ -121,7 +129,7 @@ button {
     padding: 8px;
     border-radius: 8px;
     margin-bottom: 4px; /* Space between messages */
-    color: #254ac2; /* White text for contrast */
+    color: rgb(245, 241, 241); /* Light text color for contrast */
 }
 
 
@@ -166,6 +174,7 @@ button {
 .filter-container {
     display: flex;
     align-items: center;
+    color: rgb(1, 1, 26);
 }
 
 .filter-container label {
@@ -182,8 +191,8 @@ button {
 #selectedTime {
     font-size: 0.8rem;
     padding: 8px 10px;
-    border: 1px solid black;
-    background-color: white;
+    border: 1px solid rgb(14, 9, 9);
+    background-color: rgb(250, 250, 250);
     display: inline-block;
 }
 
@@ -192,65 +201,11 @@ button {
     body {
         margin: 10px;
     }
-    
+
     .page-title {
         font-size: 20px;
     }
-    
-    button {
-        font-size: 0.8rem;
-        padding: 4px 8px;
-        width: auto;
-        margin-bottom: 5px;
-    }
 
-    #chatContainer {
-        width: 100%;
-        padding: 10px;
-    }
-
-    #chatMessages {
-        height: 200px;
-    }
-
-    #chatTerminal {
-        display: flex;
-        flex-wrap: wrap;
-        height: auto;
-    }
-
-    #chatTerminal button {
-        flex: 1 1 48%;
-        margin: 1%;
-        box-sizing: border-box;
-    }
-
-    #inputMessage {
-        height: auto;
-    }
-
-    .filter-container-wrapper {
-        position: relative;
-        left: 0;
-        margin-top: 10px;
-    }
-
-    #selectedTime {
-        width: 100%;
-        font-size: 0.7rem;
-    }
-
- 
-/* 미디어 쿼리: 모바일 기기용 스타일 */
-@media (max-width: 600px) {
-    body {
-        margin: 10px;
-    }
-    
-    .page-title {
-        font-size: 20px;
-    }
-    
     button {
         font-size: 0.8rem;
         padding: 4px 8px;
@@ -309,7 +264,6 @@ button {
         margin-bottom: 1px; /* AI 메시지 간의 간격을 줄임 */
         line-height: 1.1; /* 줄 간격을 줄임 */
     }
-
 
     /* 모바일에서 시계 숨기기 */
     .filter-container {
