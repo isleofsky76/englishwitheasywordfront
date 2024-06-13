@@ -28,7 +28,7 @@ body {
 }
 
 .box {
-    background-color: #030f0e; /* Black background color */
+    background-color: #13173a; /* Black background color */
     color: #ffffff; /* Text color to white */
     display: flex;
     align-items: center;
@@ -41,18 +41,19 @@ body {
     margin-top: 5px;
 }
 
-.image_container {
-    margin-top: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column; /* Ensure vertical alignment */
-    width: 100%; /* Ensure the container takes full width */
+
+.image_container img {
+    margin-top: 10px;
+    width: 15rem;
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .image_container img {
     margin-top: 10px;
-    width: 10rem; /* Set the desired width */
+    height: auto; /* Maintain aspect ratio */
     height: auto; /* Maintain aspect ratio */
     display: block; /* Make the image a block-level element */
     margin-left: auto;
@@ -68,35 +69,40 @@ body {
     color: #ffffff; /* Text color to white */
 }
 
-/* 모바일 화면에 맞춘 스타일 조정 */
+/* Mobile adjustments */
 @media only screen and (max-width: 600px) {
     body {
-        margin: 0px; /* 모바일에서 여백 줄이기 */
-        font-size: 0.8rem; /* 모바일에서 글씨 크기 조정 */
+        margin: 20px;
+        font-size: 0.8rem;
     }
 
     .container {
-        grid-template-columns: 1fr; /* 한 열로 조정 */
-        width: 80%; /* 전체 너비 사용 */
+        grid-template-columns: 1fr; /* Single column layout */
+        width: 100%; /* Full width */
         padding: 0 10px; /* Equal padding on both sides */
     }
 
     .box {
-        height: 80px; /* 박스 높이 조정 */
-        font-size: 0.8rem; /* 폰트 크기 조정 */
+        height: 100px;
+        font-size: 0.8rem;
+        margin: 0 0 5px 0; /* Reduced margin between boxes */
     }
 
     .image_container img {
-        width: 100%; /* 이미지 너비 조정 */
-        margin: 0; /* 이미지 여백 제거 */
+        width: 100%; /* Full width for mobile view */
+        margin-left: 10px;
     }
 
     .content {
         grid-column: span 1;
-        margin-left: 0; /* 마진 제거 */
-        margin-right: 0; /* 마진 제거 */
-        padding: 10px; /* 내부 여백 추가 */
+        margin-left: 0;
+        margin-right: 0;
+        padding: 10px;
         text-align: center;
     }
 }
 
+a {
+    color: #ffffff; /* Change email text color to white */
+    text-decoration: underline;
+}
