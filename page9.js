@@ -298,6 +298,11 @@ const generateWord = () => {
   chosenWord = randomWord.name.toUpperCase();
   chosenHints = randomWord.hints;
 
+  // Add hints for the first and last letters
+  chosenHints.push(`The first letter is ${chosenWord[0]}.`);
+  chosenHints.push(`The last letter is ${chosenWord[chosenWord.length - 1]}.`);
+  
+
   // Reset hint index and remaining hints for the new word
   hintIndex = 0;
   remainingHints = 5;
@@ -360,7 +365,7 @@ const initializer = () => {
             dashes[index].innerText = char;
             winCount += 1;
             if (winCount === charArray.filter(c => c !== ' ').length) {
-              resultText.innerHTML = `<h2 class='win-msg'></h2><p> Great! The answer was <span>${chosenWord}</span></p>`;
+              resultText.innerHTML = `<h2 class='win-msg'></h2><p> Great! <span></span></p>`;
               blocker();
             }
           }
@@ -494,3 +499,4 @@ window.onload = () => {
   generateTopicOptions();  // Generate topic options for the dropdown
   initializer();
 };
+
