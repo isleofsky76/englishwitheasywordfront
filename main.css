@@ -33,8 +33,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 70px; /* Adjust the height as needed */
-    width: 300px; /* Adjust the width as needed */
+    height: 50px; /* Adjust the height as needed */
     cursor: pointer;
     border: 2px solid #ffffff; /* White border */
     border-radius: 10px; /* Add border radius */
@@ -72,13 +71,14 @@ body {
 /* 모바일 화면에 맞춘 스타일 조정 */
 @media only screen and (max-width: 600px) {
     body {
-        margin: 20px; /* 모바일에서 여백 줄이기 */
+        margin: 0px; /* 모바일에서 여백 줄이기 */
         font-size: 0.8rem; /* 모바일에서 글씨 크기 조정 */
     }
 
     .container {
         grid-template-columns: 1fr; /* 한 열로 조정 */
-        width: 100%; /* 전체 너비 사용 */
+        width: 80%; /* 전체 너비 사용 */
+        padding: 0 10px; /* Equal padding on both sides */
     }
 
     .box {
@@ -99,3 +99,4 @@ body {
         text-align: center;
     }
 }
+
