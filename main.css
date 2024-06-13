@@ -1,12 +1,13 @@
 /* 기본적인 여백 */
 body {
-    margin: 40px; /* 전체 body에 20px의 여백을 추가 */
-    background-color: #eef5f8; /* Light sky blue background color */
+    margin: 40px; /* 전체 body에 40px의 여백을 추가 */
+    background-color: #4262a7; /* Black background color */
     line-height: 1.4;
     font-family: "Nanum Gothic", sans-serif;
     font-weight: 400;
     font-style: normal;
     font-size: 0.9rem;
+    color: #ffffff; /* Text color to white */
     p {
         margin-bottom: 10px; /* 문단 간의 간격 조절 */
     }
@@ -15,32 +16,34 @@ body {
 .header {
     text-align: center;
     margin-bottom: 20px;
+    color: #ffffff; /* Text color to white */
 }
 
 .container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
+    gap: 10px; /* Reduced space between boxes */
     width: 80%;
     margin: 0 auto;
-
 }
 
 .box {
-    background-color: lightblue;
+    background-color: #030f0e; /* Black background color */
+    color: #ffffff; /* Text color to white */
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 150px; /* Adjust the height as needed */
+    height: 70px; /* Adjust the height as needed */
+    width: 300px; /* Adjust the width as needed */
     cursor: pointer;
-    border: 1px solid black; /* Added border to better visualize the boxes */
+    border: 2px solid #ffffff; /* White border */
+    border-radius: 10px; /* Add border radius */
     text-align: center;
-    margin-top:10px;
-
+    margin-top: 5px;
 }
 
 .image_container {
-    margin-top:20px;
+    margin-top: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -50,20 +53,21 @@ body {
 
 .image_container img {
     margin-top: 10px;
-    width: 15rem; /* Set the desired width */
+    width: 10rem; /* Set the desired width */
     height: auto; /* Maintain aspect ratio */
     display: block; /* Make the image a block-level element */
     margin-left: auto;
     margin-right: auto;
 }
-.content{
+
+.content {
     grid-column: span 3;
     margin-top: 10px;
     height: auto; /* Maintain aspect ratio */
     text-align: center;
     padding: 0 20px; /* Center the image horizontally */
+    color: #ffffff; /* Text color to white */
 }
-
 
 /* 모바일 화면에 맞춘 스타일 조정 */
 @media only screen and (max-width: 600px) {
@@ -78,7 +82,7 @@ body {
     }
 
     .box {
-        height: 100px; /* 박스 높이 조정 */
+        height: 80px; /* 박스 높이 조정 */
         font-size: 0.8rem; /* 폰트 크기 조정 */
     }
 
