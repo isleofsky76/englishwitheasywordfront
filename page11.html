@@ -8,15 +8,16 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dongle&family=Nanum+Gothic&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="page2.css"> <!-- 외부 CSS 파일 연결 -->
-    <script src="page2.js"></script>
+    <link rel="stylesheet" href="page11.css"> <!-- 외부 CSS 파일 연결 -->
+    <script src="page11.js"></script>
     <script src="examplepage.js"></script>
     <script src="copy.js"></script>
     <script src="clock.js"></script>
     <script src="eventlistener.js"></script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6108574897789788" crossorigin="anonymous"></script>
+   
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6108574897789788"
+     crossorigin="anonymous"></script>
 </head>
-
 <body>
     <br>
     <h1 class="page-title">영어로 대화하기</h1>
@@ -27,32 +28,7 @@
             <input type="text" id="inputMessage" placeholder="영어로 대화해보세요...">
             <button id="submitButton" class="sendButton">Send</button>
         </div>
-        <div class="filter-container-wrapper">
-            <div class="filter-container">
-                <label for="cityFilter">현재시간:</label>
-                <select id="cityFilter" class="form-select">
-                    <option value="서울">서울</option>
-                    <option value="뉴욕">뉴욕</option>
-                    <option value="런던">런던</option>
-                    <option value="파리">파리</option>
-                    <option value="도쿄">도쿄</option>
-                    <option value="베이징">베이징</option>
-                    <option value="모스크바">모스크바</option>
-                    <option value="제네바">제네바</option>
-                </select>
-                <div id="selectedTime"></div>
-            </div>
-        </div>
     </div>
-
-    <script>
-        document.getElementById('inputMessage').addEventListener('focus', function () {
-            document.getElementById('chatTerminal').style.height = '50%';
-        });
-        
-        document.getElementById('inputMessage').addEventListener('blur', function () {
-            document.getElementById('chatTerminal').style.height = '100%';
-        });
-    </script>
 </body>
 </html>
+
