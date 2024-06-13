@@ -156,7 +156,7 @@ function processMessages(voices) {
 
     Array.from(chatMessages).forEach((chatMessage) => {
         const messageText = chatMessage.textContent.trim(); // 텍스트 내 공백 제거
-
+        
         if (messageText) { // 텍스트가 비어 있지 않은 경우에만 처리
             const englishText = extractEnglishText(messageText);
 
@@ -183,18 +183,17 @@ function processMessages(voices) {
 
 // Text-to-Speech functions
 function extractEnglishText(text) {
-   
     // Match English sentences including numbers and specified punctuation
     const englishTextParts = text.match(/[a-zA-Z0-9\s,.'?!]+/g);
     if (!englishTextParts) return ''; 
 
      // 문자열을 결합하고 "I", "tutor", ".", "?"을 제거 
-    const cleanedText = englishTextParts.join(' ')
-        .replace(/\b(I|tutor)\b/gi, '') // "I"와 "tutor" 제거
-        .replace(/[.?]/g, '')           // "."와 "?" 제거
-        .replace(/\s{2,}/g, ' ')        // 여러 개의 공백을 단일 공백으로 대체
-        .trim();                        // 앞뒤 공백 제거
-
+     const cleanedText = englishTextParts.join(' ')
+     .replace(/\b(I|tutor)\b/gi, '') // "I"와 "tutor" 제거
+     .replace(/[.?]/g, '')           // "."와 "?" 제거
+     .replace(/\s{2,}/g, ' ')        // 여러 개의 공백을 단일 공백으로 대체
+     .trim();                        // 앞뒤 공백 제거
+ 
     return cleanedText;
 }
 
@@ -223,3 +222,8 @@ inputMessage.addEventListener('keydown', function (event) {
     }
 });
 
+document.getElementById('submitButton').addEventListener('click', function () {
+    chatMessages.style.height = '50%';
+    sendMessage();
+    inputMessage.focus(); // Keep the input focused
+});
