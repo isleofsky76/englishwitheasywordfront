@@ -168,7 +168,8 @@ canvas {
   border-radius: 0.3em;
   cursor: pointer;
   margin-top: 1em;
-  font-size:13px;
+  font-size:12px;
+  margin-bottom: 2px;
 }
 
 #alphabet-input {
@@ -200,6 +201,38 @@ canvas {
   font-size: 2em;
   gap: 0.5em; /* Adds wider spacing between dashes */
   margin-bottom: 30px;
+}
+
+.letter-container button {
+  flex: 1 1 8%; /* Adjust the width of the buttons */
+  margin: 5px; /* Adjust margin for spacing */
+  max-width: 40px; /* Ensure the buttons don't get too wide */
+  box-sizing: border-box; /* Include padding and border in element's total width and height */
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  justify-content: center;
+}
+
+.mark {
+  font-weight: bold;
+  color: red;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  display: none;
+  font-size: 24px; /* Adjust font size if needed */
+  pointer-events: none; /* Ensure the "X" does not interfere with button clicks */
 }
 
 /* Mobile adjustments */
