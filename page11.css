@@ -1,16 +1,17 @@
 /* 기본적인 여백 */
 body {
-    margin: 50px; /* 전체 body에 20px의 여백을 추가 */
-    background-color: rgb(201, 219, 247); /* Light sky blue background color */
+    margin: 0;
+    padding: 0 10px 10px 10px; /* Add left, right, and bottom padding */
+    background-color: rgb(201, 219, 247); 
     line-height: 1.4;
     font-family: "Nanum Gothic", sans-serif;
     font-weight: 400;
     font-style: normal;
     font-size: 0.9rem;
     color: rgb(32, 2, 2);
-    p {
-        margin-bottom: 10px; /* 문단 간의 간격 조절 */
-    }
+    height: 100vh; 
+    display: flex;
+    flex-direction: column;
 }
 
 .page-title {
@@ -20,69 +21,53 @@ body {
     font-weight: bold;
 }
 
-/* Chat Terminal */
 #chatTerminal {
-    width: 100%; /* Make it responsive */
-    height: auto; /* Adjust height */
-    border: 1px solid #ccc;
-    padding: 10px;
-    overflow-y: auto; /* Ensure scrolling within terminal */
-    line-height: 1.6; 
-    background-color: rgb(8, 6, 22); /* Dark background color */
-    color: rgb(245, 241, 241); /* Light text color for contrast */
-    border-radius: 10px;
+    width: 100%;
+    height: 100%; 
+    display: flex;
+    flex-direction: column;
 }
 
-/* Chat Messages Container */
 #chatMessages {
-    width: 100%;
-    height: 50vh; /* Default height when not typing */
+    flex-grow: 1;
     padding: 10px;
-    margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
-    overflow-y: auto; /* Vertical scrolling */
-    overflow-x: hidden; /* Prevent horizontal scrolling */
-    background-color: rgb(8, 6, 22); /* Dark background color */
-    color: rgb(245, 241, 241); /* Light text color */
+    overflow-y: auto; 
+    overflow-x: hidden; 
+    background-color: rgb(8, 6, 22); 
+    color: rgb(245, 241, 241); 
 }
 
-/* Message Input and Send Button Alignment Container */
 #messageContainer {
-    display: flex; /* Horizontal alignment */
-    margin-top: 10px;
-    width: 100%;
+    display: flex;
+    padding-top: 10px;
 }
 
-/* Input Message Field Styles */
 #inputMessage {
-    flex-grow: 1; /* Take up all remaining space */
+    flex-grow: 1;
     padding: 5px;
     border: 1px solid #ccc;
     border-radius: 3px;
     box-sizing: border-box;
-    background-color: #081616; /* Dark background color for contrast */
-    color: rgb(245, 241, 241); /* Light text color */
+    background-color: #081616; 
+    color: rgb(245, 241, 241); 
 }
 
-/* Buttons Styles */
-.sendButton {
+#submitButton {
     padding: 6px 12px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    background-color: #8badd1; /* Button background color */
-    color: white; /* Button text color */
-    margin-left: 10px; /* Space between input field and button */
+    background-color: #8badd1;
+    color: white;
+    margin-left: 10px;
 }
+
 
 /* 미디어 쿼리: 모바일 기기용 스타일 */
 @media (max-width: 600px) {
-    body {
-        margin: 10px;
-    }
-
     .page-title {
         font-size: 20px;
     }
@@ -94,23 +79,8 @@ body {
         margin-bottom: 5px;
     }
 
-    #chatContainer {
-        width: 100%;
-        padding: 10px;
-    }
-
     #chatMessages {
-        height: 200px;
-    }
-
-    #chatTerminal {
-        display: flex;
-        flex-wrap: wrap;
-        height: auto;
-    }
-
-    #inputMessage {
-        height: auto;
+        height: 50vh; /* Half the viewport height */
     }
 }
 
