@@ -1,7 +1,7 @@
 /* 기본적인 여백 */
 body {
     margin: 50px; /* 전체 body에 20px의 여백을 추가 */
-    background-color: #f8f5f5; /* Light grey text */
+    background-color: #fdf8f8; /* Light grey text */
     line-height: 1.4;
     font-family: "Nanum Gothic", sans-serif;
     font-weight: 400;
@@ -19,9 +19,6 @@ body {
     font-weight: bold;
 }
 
-
-
-
 .highlight{
     padding: 5px;
     font-size: 1.2rem;
@@ -29,7 +26,7 @@ body {
 
 
 .centered-text {
-    font-size: 14px; /* Increase font size */
+    font-size: 16px; /* Increase font size */
     margin-top: 20px;
     line-height: 1.2; 
  
@@ -62,7 +59,7 @@ body {
 }
 
 #inputWord {
-    font-size: 1.2rem; /* 텍스트 크기 설정 */
+    font-size: 1.4rem; /* 텍스트 크기 설정 */
     width: 10%; /* You can set this to a percentage or a fixed value */
     max-width: 100px; /* Optional: to
 
@@ -104,7 +101,7 @@ body {
     height: 70vh; /* 높이를 뷰포트 높이의 50%로 설정 */
     padding: 10px;
     margin-bottom: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid #535050;
     border-radius: 4px;
     box-sizing: border-box;
     overflow-y: auto;
@@ -238,6 +235,17 @@ body {
     display: none; /* 일단은 숨김 */
 }
 
+
+.keyword-list {
+    font-size: 1.0rem; /* Adjust font size as needed */
+    margin: 14px; /* Add margin for spacing */
+    color: rgb(86, 86, 88);
+}
+.keyword-list li {
+    cursor: pointer;
+    color: rgb(86, 86, 88);
+}
+
 /* 미디어 쿼리 추가: 모바일 최적화 */
 @media only screen and (max-width: 600px) {
     body {
@@ -292,5 +300,4 @@ body {
         display: none;
     }
 }
-
 
