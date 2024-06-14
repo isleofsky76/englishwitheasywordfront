@@ -201,22 +201,34 @@ function stopSpeech() {
     speechSynthesis.cancel(); // Cancel the speech synthesis
 }
 
-// Adjust chatMessages container height on focus and blur events
+
+
+
+// Adjust the chatMessages container height on focus and blur events
 const inputMessage = document.getElementById('inputMessage');
 const chatMessages = document.getElementById('chatMessages');
 
-inputMessage.addEventListener('focus', () => {
+inputMessage.addEventListener('focus', function () {
     chatMessages.style.height = '50vh';
 });
 
-inputMessage.addEventListener('blur', () => {
+inputMessage.addEventListener('blur', function () {
     chatMessages.style.height = 'calc(100vh - 150px)';
 });
 
-document.getElementById('submitButton').addEventListener('click', () => {
+inputMessage.addEventListener('keydown', function (event) {
+    if (event.key === 'Enter') {
+        event.preventDefault(); // Prevent the default action
+        chatMessages.style.height = '50vh';
+        sendMessage(); // Call the send message function
+        inputMessage.focus(); // Keep the input focused
+    }
+});
+
+document.getElementById('submitButton').addEventListener('click', function () {
     chatMessages.style.height = '50vh';
     sendMessage();
-    inputMessage.focus();
+    inputMessage.focus(); // Keep the input focused
 });
 
 function sendMessage() {
