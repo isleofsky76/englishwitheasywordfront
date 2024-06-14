@@ -1,7 +1,8 @@
 /* 기본적인 여백 */
 body {
-    margin: 50px; /* 전체 body에 20px의 여백을 추가 */
-    background-color: #fdf8f8; /* Light grey text */
+    margin: 20px;
+    margin-top: 100px; /* Adjust the value to move content down */
+    background-color: #fff; /* Light grey text */
     line-height: 1.4;
     font-family: "Nanum Gothic", sans-serif;
     font-weight: 400;
@@ -26,32 +27,31 @@ body {
 
 
 .centered-text {
-    font-size: 16px; /* Increase font size */
+    font-size: 18px;
     margin-top: 20px;
-    line-height: 1.2; 
- 
+    line-height: 1; 
+    text-align: center;
 }
 
 
 .btn, .btn-primary, .btn-sm {
-    background-color: #8badd1;
-    color: white;
+    background: none;
     border: none;
-    padding: 5px 10px; /* 내부 여백 설정 */
-    border-radius: 5px;
+    color: #007bff; /* Link color */
+    font-size: 1rem; /* Adjust font size */
+    padding: 0; /* Remove padding */
+    margin: 5px; /* Adjust margin */
+    text-decoration: underline; /* Underline to look like a link */
     cursor: pointer;
-    font-size: 0.8rem; /* 텍스트 크기 설정 */
-    width: 100px; /* 버튼 너비 설정 */
-    height: 30px; /* 버튼 높이 설정 */
-    text-align: center; /* 텍스트 중앙 정렬 */
-    transition: background-color 0.3s ease; /* 배경색 전환 효과 */
 }
 
-.form-button:hover {
-    background-color: #9adaad; /* Darker background on hover */
+.btn:hover {
+    color: #0056b3; /* Darker color on hover */
+    text-decoration: none; /* Remove underline on hover */
 }
 
 .controls-container {
+    
     font-size: 1.2rem; /* 텍스트 크기 설정 */
     color: rgb(74, 74, 75); /* Adjust the color as desired */
     font-weight: bold; /* Adjust the font weight as desired */
@@ -59,18 +59,19 @@ body {
 }
 
 #inputWord {
-    font-size: 1.4rem; /* 텍스트 크기 설정 */
-    width: 10%; /* You can set this to a percentage or a fixed value */
-    max-width: 100px; /* Optional: to
+    margin-top: 10px;
+    font-size: 1rem; /* 텍스트 크기 설정 */
+    width: 100%; /* You can set this to a percentage or a fixed value */
+    height:10%;
+    max-width: 150px; 
+}
 
 
-
-#inputWord::placeholder {
+.inputWord::placeholder{
     font-weight: bold;
     color: rgb(74, 74, 75); /* Adjust the color as desired */
     font-size: 0.8rem; /* 텍스트 크기 설정 */
-    width: 100%;
-}
+    width: 100%;}
 
 
 /* Add spacing between elements */
@@ -96,43 +97,20 @@ body {
 }
 
 #outputArea {
-    margin-top : 10px;
-    width: 100%;
-    height: 70vh; /* 높이를 뷰포트 높이의 50%로 설정 */
+    margin: 10px auto; /* Center horizontally with top and bottom margins */
+    width: 90%; /* Default width */
+    max-width: 800px; /* Maximum width */
+    height: 70vh; /* Set height to 70% of the viewport height */
     padding: 10px;
-    margin-bottom: 10px;
     border: 1px solid #535050;
     border-radius: 4px;
     box-sizing: border-box;
     overflow-y: auto;
     overflow-x: hidden;
     line-height: 2; /* Adjust the line height to add space between lines */
-    font-size: 0.9rem; /* 텍스트 크기 설정 */
-}
-
-
-
-.sliders-container {
-    display: flex;
-    align-items: left;
-    font-size: 0.9rem;
-}
-
-
-
-.sliders-container label {
-    font-size: 0.9rem;
-
-}
-
-.sliders-container input[type="range"] {
-    margin: 0 10px;
-  
-}
-
-.sliders-container span {
-    font-size: 0.9rem;
-    margin-left: 0px;
+    font-size: 0.9rem; /* Set font size */
+    background-color: #eaeaea; /* Set background color for better visibility */
+    text-align: left;
 }
 
 
@@ -177,37 +155,6 @@ body {
 }
 
 
-#wordStatistics {
-    margin-top: 2rem; 
-    display: flex;
-    align-items: center;
-}
-
-#wordStatistics img {
-    width: 30px;
-    height: 30px;
-    margin-top: 5rem;
-}
-
-/* Custom CSS for wordStatistics */
-
-#wordStatistics{
-    display: flex;
-    flex-direction: column; /* Change to column to stack elements vertically */
-    align-items: flex-start; /* Align items to the start (left) */
-    margin-top: 0.1rem;
-    color: rgb(6, 6, 43); /* Set the text color */
-    text-decoration: none; /* Remove underline */
-    font-size: 0.9rem;
-}
-
-#wordStatistics h2 {
-    margin-top: 0; /* Remove top margin */
-    color: rgb(6, 6, 43); /* Set the heading color */
-    text-decoration: none; /* Remove underline */
-    font-size: 0.9rem;
-    margin-left: 0; /* Remove left margin */
-}
 
 
 #text-to-speech {
@@ -237,7 +184,7 @@ body {
 
 
 .keyword-list {
-    font-size: 1.0rem; /* Adjust font size as needed */
+    font-size: 1.2rem; /* Adjust font size as needed */
     margin: 14px; /* Add margin for spacing */
     color: rgb(86, 86, 88);
 }
@@ -245,11 +192,48 @@ body {
     cursor: pointer;
     color: rgb(86, 86, 88);
 }
+/* Media queries for different screen sizes */
+@media (max-width: 1200px) {
+    body {
+        margin-top: 60px; /* Ensure consistent margin for large screens */
+    }
+
+    #outputArea {
+        width: 90%; /* Adjust width for large screens */
+        height: 90vh; /* Reduce height for large screens */
+        font-size: 1rem; /* Slightly smaller font size */
+    }
+}
+
+@media (max-width: 992px) {
+    body {
+        margin-top: 60px; /* Ensure consistent margin for medium screens */
+    }
+
+    #outputArea {
+        width: 80%; /* Adjust width for medium screens */
+        height: 90vh; /* Reduce height for medium screens */
+        font-size: 0.8rem; /* Slightly smaller font size */
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        margin-top: 60px; /* Ensure consistent margin for tablets */
+    }
+
+    #outputArea {
+        width: 70%; /* Adjust width for tablets */
+        height: 90vh; /* Further reduce height for tablets */
+        font-size: 0.75rem; /* Slightly smaller font size */
+    }
+}
 
 /* 미디어 쿼리 추가: 모바일 최적화 */
-@media only screen and (max-width: 600px) {
+@media (max-width: 600px) {
     body {
         margin: 10px;
+        margin-top: 60px; /* Ensure consistent margin for small screens */
         font-size: 0.9rem;
     }
 
@@ -269,9 +253,11 @@ body {
     }
 
     #outputArea {
+        width: 100%; /* Full width for small screens */
         margin-top: 10px;
-        height: 80vh;
-        font-size: 0.8rem;
+        height: 90vh; /* Reduce height for small screens */
+        font-size: 0.85rem; /* Smaller font size */
+        padding: 10px; /* Adjust padding for small screens */
     }
 
     .filter-container-wrapper {
@@ -283,6 +269,7 @@ body {
     #wordStatistics h2, #wordStatistics example, #text-to-speech h3 {
         font-size: 0.6rem;
     }
+
 
        /* 특정 요소 숨기기 */
     .sliders-container,
@@ -300,4 +287,5 @@ body {
         display: none;
     }
 }
+
 
