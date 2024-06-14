@@ -28,6 +28,22 @@ function displayMessage(content, isUser) {
     chatHistory.push({ sender: isUser ? 'User' : 'AI', message: content });
 }
 
+// Function to display AI message with delay between sentences
+function displayAiMessage(content) {
+    const sentences = content.split(/(?<=[.?!])\s+/);
+    let currentIndex = 0;
+
+    function displayNextSentence() {
+        if (currentIndex < sentences.length) {
+            displayMessage('Tutor: ' + sentences[currentIndex], false);
+            currentIndex++;
+            setTimeout(displayNextSentence, 7000); // Adjust delay as needed (1000ms = 1 second)
+        }
+    }
+
+    displayNextSentence();
+}
+
 async function sendMessage() {
     const inputMessage = document.getElementById('inputMessage').value.trim();
 
@@ -54,7 +70,7 @@ async function sendMessage() {
             }
 
             const data = await response.json();
-            displayMessage('Tutor: ' + data.response, false);
+            displayAiMessage(data.response);
         } catch (error) {
             console.error('Error sending message:', error);
             displayMessage('Error: Unable to send message.', false);
