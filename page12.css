@@ -54,7 +54,7 @@ body {
     flex-grow: 1;
     padding: 10px;
     border: 1px solid #ccc;
-    border-radius: 3px;
+    border-radius: 15px;
     box-sizing: border-box;
     background-color:rgb(228, 228, 231); 
     color: rgb(19, 11, 11); 
@@ -68,6 +68,7 @@ body {
     background-color: #8badd1;
     color: white;
     margin-left: 10px;
+    border-radius: 15px;
 }
 
 .user-message {
@@ -112,4 +113,5 @@ body {
         height: auto;
     }
 }
+
 
