@@ -1,14 +1,14 @@
 body {
-    margin: 30px; /* Add margins to the body: top, right, bottom, left */
-    padding: 10px; /* Add padding to the body: top, right, bottom, left */
-    background-color: rgb(201, 219, 247); 
+    margin: 30px;
+    padding: 10px;
+    background-color: rgb(201, 219, 247);
     line-height: 1.4;
     font-family: "Nanum Gothic", sans-serif;
     font-weight: 400;
     font-style: normal;
     font-size: 0.9rem;
     color: rgb(32, 2, 2);
-    height: calc(100vh - 60px); /* Ensure body takes full viewport height minus margins */
+    height: calc(100vh - 60px); /* Adjust height considering margins and paddings */
     display: flex;
     flex-direction: column;
     box-sizing: border-box; /* Ensure padding and border are included in the height calculation */
@@ -70,10 +70,20 @@ body {
     margin-left: 10px;
 }
 
-/* 미디어 쿼리: 모바일 기기용 스타일 */
+.user-message {
+    margin-bottom: 10px;
+    margin-top: 5px;
+}
+
+.ai-message {
+    margin-bottom: 10px;
+    margin-top: 5px;
+}
+
 @media (max-width: 600px) {
     body {
         margin: 10px;
+        padding: 5px;
     }
 
     .page-title {
@@ -88,13 +98,13 @@ body {
     }
 
     #chatMessages {
-        height: 40vh; 
+        height: 50vh;
     }
 
     #chatTerminal {
         display: flex;
-        flex-wrap: wrap;
-        height: 70vh; 
+        flex-direction: column;
+        height: calc(100vh - 60px);
     }
 
     #inputMessage {
