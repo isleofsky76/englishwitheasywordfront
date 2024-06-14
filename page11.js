@@ -252,4 +252,3 @@ function displayMessage(content, isUser) {
     chatMessages.scrollTop = chatMessages.scrollHeight;
 }
 
-
