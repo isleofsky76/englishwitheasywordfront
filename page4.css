@@ -16,6 +16,7 @@ body {
 }
 
 .wrapper {
+  margin-top: 10px;
   background: #fff;
   padding: 20px;
   border-radius: 8px;
@@ -44,6 +45,10 @@ textarea, select, button {
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 16px;
+}
+
+textarea {
+  height: 150px; /* Increase height for larger screens */
 }
 
 button {
@@ -79,6 +84,15 @@ button {
   background: #218838;
 }
 
+.row-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.row-buttons button {
+  width: 32%; /* Adjust the width to fit three buttons in a row */
+}
+
 /* 미디어 쿼리 추가: 모바일 최적화 */
 @media (max-width: 600px) {
   body {
@@ -105,6 +119,10 @@ button {
     font-size: 14px;
   }
 
+  textarea {
+    height: 120px; /* Adjust height for smaller screens */
+  }
+
   button {
     padding: 10px;
   }
@@ -113,9 +131,14 @@ button {
     width: 100%;
     margin-bottom: 10px;
   }
-  
-/* 모바일에서 select 요소와 레이블 숨기기 */
-  #voice, label[for="voice"] {
-    display: none;
+
+  .row-buttons {
+    flex-direction: column;
+  }
+
+  .row-buttons button {
+    width: 100%; /* Full width for buttons in mobile view */
+    margin-bottom: 10px;
   }
 }
+
