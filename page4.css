@@ -104,6 +104,7 @@ button {
   }
 
   .wrapper {
+    width: 100%;
     padding: 15px;
     box-shadow: none;
   }
@@ -130,6 +131,10 @@ button {
     padding: 10px;
   }
 
+  select{
+    display: none; /* Hide select dropdown on mobile */
+  }
+
   .speak-btn, .stop-btn, .replay-btn {
     width: 100%;
     margin-bottom: 10px;
@@ -144,3 +149,6 @@ button {
     margin-bottom: 10px;
   }
 }
+
+
+
