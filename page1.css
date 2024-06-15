@@ -278,11 +278,10 @@ body {
     #selectedTime,
     #text-to-speech,
     #engUkButton,
-    #downloadButton,
     #wordList,
-    #copyButton,
     #wordStatistics,
     #cityFilter {
         display: none;
     }
 }
+
