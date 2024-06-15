@@ -120,6 +120,7 @@ button:hover {
     box-sizing: border-box;
     overflow-y: auto; /* Vertical scrolling */
     overflow-x: hidden; /* Prevent horizontal scrolling */
+    font-size: 14px;
 }
 
 #responseArea h3 {
@@ -218,6 +219,7 @@ button:hover {
         margin-top: 30px;
         height: 80vh; /* Adjust height for smaller screens */
         padding: 5px; /* Adjust padding */
+        font-size: 14px;
     }
     button {
         padding: 5px 10px; /* Adjust button padding */
@@ -236,6 +238,8 @@ button:hover {
         display: none;
     }
 }
+
+
 
 
 
