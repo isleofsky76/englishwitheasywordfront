@@ -197,6 +197,7 @@ button:hover {
 }
 
 
+
 /* Media Query for Smaller Screens */
 @media screen and (max-width: 600px) {
     body {
@@ -214,7 +215,8 @@ button:hover {
         margin-bottom: 10px; /* Adjust bottom margin */
     }
     #user_question, .questionInput, #responseArea {
-        height: 45vh; /* Adjust height for smaller screens */
+        margin-top: 30px;
+        height: 80vh; /* Adjust height for smaller screens */
         padding: 5px; /* Adjust padding */
     }
     button {
@@ -228,13 +230,12 @@ button:hover {
         height: 300px; /* Adjust scroll wrapper height */
     }
 
-
-    /* 모바일에서 특정 버튼만 보이게 하기 */
-        /* downloadQnA 클래스를 가지지 않은 버튼만 보이게 하기 */
-        .downloadQnA {
-            display: none;
-        }
-
+/* 모바일에서 특정 버튼만 보이게 하기 */
+    /* downloadQnA 클래스를 가지지 않은 버튼만 보이게 하기 */
+    .downloadQnA {
+        display: none;
+    }
 }
+
 
 
