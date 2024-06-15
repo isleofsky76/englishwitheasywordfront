@@ -78,10 +78,7 @@ button:last-child {
 }
 
 
-button#kakaoBtn {
-  background-color: #ffeb00;
-  color: black;
-}
+
 
 .table-container {
   flex: 1;
@@ -93,6 +90,7 @@ table {
   width: 100%;
   border-collapse: collapse;
   table-layout: fixed; /* 고정된 테이블 레이아웃 */
+  background-color: #faf4b5;
 }
 
 thead th, tbody td {
