@@ -13,25 +13,35 @@
     <script src="examplepage.js"></script>
     <script src="clock.js"></script>
     <script src="eventlistener.js"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6108574897789788"
+     crossorigin="anonymous"></script>
    
     <!-- <script src="questions.js"></script> -->
     <!-- <script src="SpeechSynthesisUtterance.js"></script> -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6108574897789788"
-     crossorigin="anonymous"></script>
 </head>
 
 <body>
-    <h1 class="page-title">질문하기</h1>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Ask Questions</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            </button>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <h1 class="page-title"></h1>
     <br><br>
 
 
     <!-- <h3>(2)질문하기</h3> -->
     <div id="user_question">
-    <h6 class="blue-heading">궁금한 점이 있으면 영어 또는 한국어로 자유롭게 물어보세요</h6>
+    <h6 class="blue-heading"></h6>
 <!-- <div id="questionContainer"></div> -->
         
         <div id="responseArea">
-            <h3>답변</h3>
+            <h3></h3>
             <div id="adviceDisplay"></div>
         </div>
         <form id="questionForm" onsubmit="submitQuestion(); return false;"></form>
@@ -57,61 +67,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
 
 
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Get references to the word list and input elements
-        const wordListElement = document.getElementById('wordList');
-        const inputWordElement = document.getElementById('inputWord');
-    
-        // Fetch the contents of example_words.html
-        fetch('example_words.html')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-                return response.text(); // Parse response as text
-            })
-            .then(data => {
-                // Populate the word list with the fetched data
-                wordListElement.innerHTML = data;
-    
-                // Create an array of words and sort them alphabetically
-                const wordArray = Array.from(wordListElement.querySelectorAll('li')).map(item => item.textContent.trim());
-                wordArray.sort();
-    
-                // Re-populate the word list with the sorted words
-                wordListElement.innerHTML = wordArray.map(word => `<li>${word}</li>`).join('');
-    
-                // Add click event listeners to each word in the list
-                wordListElement.querySelectorAll('li').forEach(item => {
-                    item.addEventListener('click', function() {
-                        // Set the clicked word as the value of the input word element
-                        inputWordElement.value = this.textContent;
-                    });
-                });
-            })
-            .catch(error => console.error('Error fetching data:', error));
-    });
-    </script>
 
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var disqus_config = function () {
-                this.page.url = window.location.href;  // 현재 페이지 URL 사용
-                this.page.identifier = document.location.pathname; // 페이지 경로를 식별자로 사용
-            };
-        
-            (function() { // DON'T EDIT BELOW THIS LINE
-                var d = document, s = d.createElement('script');
-                s.src = 'https://isleofsky76.disqus.com/embed.js';
-                s.setAttribute('data-timestamp', +new Date());
-                (d.head || d.body).appendChild(s);
-            })();
-        });
-    </script>
-    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-        
+
 </body>
 
 </html>
+
