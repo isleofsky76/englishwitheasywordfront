@@ -93,6 +93,9 @@ button {
   width: 32%; /* Adjust the width to fit three buttons in a row */
 }
 
+
+
+
 /* 미디어 쿼리 추가: 모바일 최적화 */
 @media (max-width: 600px) {
   body {
@@ -141,4 +144,3 @@ button {
     margin-bottom: 10px;
   }
 }
-
