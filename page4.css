@@ -48,7 +48,7 @@ textarea, select, button {
 }
 
 textarea {
-  height: 150px; /* Increase height for larger screens */
+  height: 350px !important; /* Increase height for larger screens */
 }
 
 button {
@@ -120,7 +120,7 @@ button {
   }
 
   textarea {
-    height: 120px; /* Adjust height for smaller screens */
+    height: 300px !important; /* Adjust height for smaller screens */
   }
 
   button {
