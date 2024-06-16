@@ -1,23 +1,24 @@
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f9;
-  display: flex;
-  flex-direction: column;  /* 수직 배치 */
-  align-items: center;
-  height: 100vh;
   margin: 0;
-  padding: 10px;
-  overflow-y: auto; /* Add vertical scroll */
+  padding: 0;
+  background-color: #f8f5f5; /* Light grey background */
+  line-height: 1.4;
+  font-family: sans-serif;
+  color: #535252; /* Light grey text */
+  height: 100vh; /* Adjust height considering margins and paddings */
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box; /* Ensure padding and border are included in the height calculation */
 }
+
 
 .container {
   background: white;
-  padding: 10px;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  width: 90%;
+  width: 100%;
   max-width: 800px;
-  height: 90%;
+  height: 100%;
   max-height: 800px;
   display: flex;
   flex-direction: column;
@@ -47,10 +48,11 @@ button {
 
 
 .table-container {
+  width: 100%;
   flex: 1;
-  overflow-y: auto;
-  margin-bottom: 20px;
+  /* Removed overflow-y */
 }
+
 
 table {
   width: 100%;
@@ -95,6 +97,7 @@ tbody td.text-left {
 .filter-container-wrapper {
   position: fixed;
   bottom: 20px;
+  right: 60px; /* Position at the bottom right corner */
   display: flex;
   align-items: center;
 }
@@ -145,6 +148,12 @@ tbody td.text-left {
   align-items: center;
   margin-bottom: 10px;
   justify-content: flex-start; /* Align children to the start */
+  bottom: 20px;
+  left: 0; /* Position at the bottom right corner */
+}
+
+#downloadLinkContainer a:hover {
+  text-decoration: underline;
 }
 
 #downloadLinkContainer a {
@@ -173,7 +182,10 @@ tbody td.text-left {
   display: flex;
   align-items: center;
   margin-bottom: 10px; /* Add space between each link and delete button */
+
 }
+
+
 .navbar .btn {
   font-size: 16px; /* Default font size for buttons */
   padding: 10px 20px; /* Default padding for buttons */
@@ -189,12 +201,16 @@ tbody td.text-left {
 
 @media (max-width: 600px) {
   .navbar .btn {
-      font-size: 10px; /* Smaller font size for mobile devices */
-      padding: 2px 5px; /* Reduce padding for better fit */
-      height: 30px; /* Set a smaller height */
-      width: auto; /* Set width to auto to fit the content */
-      margin: 2px; /* Add some margin for spacing */
-  }
+    font-size: 10px; /* Default font size for buttons */
+    padding: 10px 10px; /* Default padding for buttons */
+    background-color: white; /* Background color for buttons */
+    color: blue; /* Text color for buttons */
+    border: 1px solid blue; /* Border color for buttons */
+    border-radius: 5px; /* Rounded corners for buttons */
+    align-items: center;
+    justify-content: center;
+}
+
 
   .container {
       padding: 10px;
@@ -218,7 +234,8 @@ tbody td.text-left {
   }
 
   table, th, td {
-      font-size: 12px;
+    margin-top: 10px;
+    font-size: 12px;
   }
 
   .filter-container-wrapper {
