@@ -30,7 +30,9 @@ body {
 }
 
 #topic-selection {
+  margin-top: 40px;
   text-align: center;
+  font-size: 14pt;
 }
 
 canvas {
@@ -41,6 +43,7 @@ canvas {
   display: block;
   justify-content: center;
   align-items: center;
+  font-size: 12pt;
 }
 
 
@@ -213,7 +216,7 @@ canvas {
   #letter-container button {
     width: 2em; /* Adjust width for mobile */
     height: 2em; /* Adjust height for mobile */
-    font-size: 1em; /* Adjust font size for mobile */
+    font-size: 1.2em; /* Adjust font size for mobile */
     padding: 2px; /* Reduced padding */
     margin: 1px; /* Reduced margin */
     margin-left: 10px;
