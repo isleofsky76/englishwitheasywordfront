@@ -285,9 +285,9 @@ body {
     #volumeSlider,
     #selectedTime,
     #text-to-speech,
-    #engUkButton,
     #wordList,
     #wordStatistics,
+    #downloadButton,
     #cityFilter {
         display: none;
     }
