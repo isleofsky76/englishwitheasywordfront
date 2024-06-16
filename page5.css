@@ -17,7 +17,7 @@ body {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   width: 90%;
   max-width: 800px;
-  height: 80%;
+  height: 90%;
   max-height: 800px;
   display: flex;
   flex-direction: column;
@@ -124,24 +124,6 @@ tbody td.text-left {
 }
 
 
-/* 메모======================================================== */
-#downloadLinkContainer {
-  width: 90%;
-  max-width: 800px;
-  margin-top: 20px;
-  text-align: left;
-}
-
-#downloadLinkContainer a {
-  display: block;
-  margin-bottom: 5px;
-  color: blue;
-  text-decoration: none;
-}
-
-#downloadLinkContainer a:hover {
-  text-decoration: underline;
-}
 
 /* 시계위치 =========================================================*/
 .filter-container-wrapper {
@@ -184,6 +166,48 @@ tbody td.text-left {
   text-align: center;
 }
 
+/* 메모======================================================== */
+#downloadLinkContainer {
+  width: 90%;
+  max-width: 800px;
+  margin-top: 20px;
+  text-align: left;
+}
+
+.download-link-wrapper {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  justify-content: flex-start; /* Align children to the start */
+}
+
+#downloadLinkContainer a {
+  display: block;
+  margin-bottom: 5px;
+  color: blue;
+  text-decoration: none;
+}
+
+#downloadLinkContainer a:hover {
+  text-decoration: underline;
+}
+
+.delete-link-btn {
+  cursor: pointer;
+  color: red;
+  margin-left: 10px;
+}
+
+.delete-link-btn:hover {
+  text-decoration: underline;
+}
+
+/* Add spacing between each link-delete pair */
+.download-link-wrapper {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px; /* Add space between each link and delete button */
+}
 /* 미디어 쿼리를 사용하여 모바일 친화적으로 만들기 */
 @media (max-width: 600px) {
   .container {
