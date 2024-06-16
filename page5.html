@@ -1,219 +1,72 @@
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f9;
-  display: flex;
-  flex-direction: column;  /* 수직 배치 */
-  align-items: center;
-  height: 100vh;
-  margin: 0;
-  padding: 10px;
-  overflow-y: auto; /* Add vertical scroll */
-}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title>Memo</title>
+  <link rel="stylesheet" href="page5.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6108574897789788" crossorigin="anonymous"></script>
+  <script src="clock.js"></script>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+      <div class="container-fluid">
+          <a class="navbar-brand" href="#">Write Memos</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                  </li>
+              </ul>
+              <div class="d-flex">
+                <button type="button" id="saveBtn" class="btn btn-outline-light me-2"><i class="fas fa-save"></i></button>
+                <button type="button" id="downloadBtn" class="btn btn-outline-light me-2"><i class="fas fa-arrow-down"></i></button>
+                <button type="button" id="copyBtn" class="btn btn-outline-light me-2"><i class="fas fa-copy"></i></button>
+                <button type="button" id="addRowBtn" class="btn btn-outline-light me-2"><i class="fas fa-plus"></i></button>
+                <button type="button" id="emptyRowBtn" class="btn btn-outline-light me-2"><i class="fas fa-eraser"></i></button>
+                <button type="button" id="deleteRowBtn" class="btn btn-outline-light me-2"><i class="fas fa-trash"></i></button>
+                  <button type="button" id="toggleStrikethroughBtn" class="btn btn-outline-light"> ̶c̶a̶n̶c̶e̶l̶ text</button>
+              </div>
+          </div>
+      </div>
+    </nav>
 
-.container {
-  background: white;
-  padding: 10px;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  width: 90%;
-  max-width: 800px;
-  height: 90%;
-  max-height: 800px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-
-.buttons {
-  display: flex;
-  justify-content: space-between; /* Adjusted for even spacing */
-  margin-bottom: 20px;
-  width: 100%; /* Ensure the buttons container takes full width */
-}
-
-button {
-  flex: 0 0 auto;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 5px;
-  background-color: transparent; /* Make background transparent */
-  color: black; /* Ensure text color is black */
-  font-size: 14px;
-  cursor: pointer;
-  margin-right: 10px;
-  text-align: center;
-}
-
-
-.table-container {
-  flex: 1;
-  overflow-y: auto;
-  margin-bottom: 20px;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  table-layout: fixed; /* 고정된 테이블 레이아웃 */
-  background-color: #faf4b5;
-}
-
-thead th, tbody td {
-  border: 1px solid #ddd;
-  padding: 8px;
-  text-align: center;
-}
-
-thead th:nth-child(1), tbody td:nth-child(1) {
-  width: 90%; /* Contents 열의 너비 */
-}
-
-thead th:nth-child(2), tbody td:nth-child(2) {
-  width: 10%; /* Action 열의 너비 */
-}
-
-tbody td.text-left {
-  text-align: left;
-}
-
-.delete-btn {
-  background-color: green;
-  color: white;
-  border: none;
-  cursor: pointer;
-  padding: 5px 10px;
-}
-
-.delete-btn:hover {
-  background-color: darkgreen;
-}
+    <div class="container mt-5 pt-5">
+      <div class="table-container">
+        <table id="taskTable" class="table">
+          <thead>
+          </thead>
+          <tbody>
+            <!-- Rows will be added dynamically -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="filter-container-wrapper">
+      <div class="filter-container">
+          <label for="cityFilter">Current Time:</label>
+          <select id="cityFilter" class="form-select">
+              <option value="서울">Seoul</option>
+              <option value="뉴욕">New York</option>
+              <option value="런던">London</option>
+              <option value="파리">Paris</option>
+              <option value="도쿄">Tokyo</option>
+              <option value="베이징">Beijing</option>
+              <option value="모스크바">Moscow</option>
+              <option value="제네바">Geneva</option>
+          </select>
+          <div id="selectedTime"></div>
+      </div>
+    </div>
+    <div id="downloadLinkContainer"></div> <!-- 다운로드 링크를 추가할 컨테이너 -->
 
 
-
-/* 시계위치 =========================================================*/
-.filter-container-wrapper {
-  position: fixed;
-  bottom: 20px;
-  display: flex;
-  align-items: center;
-}
-
-.filter-container {
-  display: flex;
-  align-items: center;
-}
-
-.filter-container label {
-  margin-right: 10px;
-  font-size: 0.8rem;
-}
-
-.filter-container select {
-  width: 100px;
-  height: 30px;
-  margin-right: 20px;
-  font-size: 0.8rem;
-  padding: 5px;
-  box-sizing: border-box;
-  align-items: center;
-}
-
-#selectedTime {
-  width: 100px;
-  height: 30px;
-  font-size: 0.8rem;
-  padding: 5px;
-  border: 1px solid black;
-  background-color: white;
-  display: inline-block;
-  box-sizing: border-box;
-  align-items: center;
-  text-align: center;
-}
-
-/* 메모======================================================== */
-#downloadLinkContainer {
-  width: 90%;
-  max-width: 800px;
-  margin-top: 20px;
-  text-align: left;
-}
-
-.download-link-wrapper {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-  justify-content: flex-start; /* Align children to the start */
-}
-
-#downloadLinkContainer a {
-  display: block;
-  margin-bottom: 5px;
-  color: blue;
-  text-decoration: none;
-}
-
-#downloadLinkContainer a:hover {
-  text-decoration: underline;
-}
-
-.delete-link-btn {
-  cursor: pointer;
-  color: red;
-  margin-left: 10px;
-}
-
-.delete-link-btn:hover {
-  text-decoration: underline;
-}
-
-/* Add spacing between each link-delete pair */
-.download-link-wrapper {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px; /* Add space between each link and delete button */
-}
-.navbar .btn {
-  font-size: 16px; /* Default font size for buttons */
-  padding: 10px 20px; /* Default padding for buttons */
-}
-
-@media (max-width: 600px) {
-  .navbar .btn {
-      font-size: 10px; /* Smaller font size for mobile devices */
-      padding: 2px 5px; /* Reduce padding for better fit */
-      height: 30px; /* Set a smaller height */
-      width: auto; /* Set width to auto to fit the content */
-      margin: 2px; /* Add some margin for spacing */
-  }
-
-  .container {
-      padding: 10px;
-      width: 100%;
-      height: 100%;
-      max-height: none;
-  }
-
-  .buttons {
-      flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: center;
-  }
-
-  button {
-      margin-bottom: 10px;
-      padding: 1px 5px;
-      font-size: 8px;
-      flex: 1 1 5%;
-      box-sizing: border-box; /* 패딩과 보더를 포함한 크기 계산 */
-  }
-
-  table, th, td {
-      font-size: 12px;
-  }
-
-  .filter-container-wrapper {
-      display: none;
-  }
-}
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="page5.js"></script>
+</body>
+</html>
