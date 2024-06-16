@@ -37,7 +37,7 @@ function displayAiMessage(content) {
         if (currentIndex < sentences.length) {
             displayMessage('Tutor: ' + sentences[currentIndex], false);
             currentIndex++;
-            setTimeout(displayNextSentence, 7000); // Adjust delay as needed (1000ms = 1 second)
+            setTimeout(displayNextSentence, 5000); // Adjust delay as needed (1000ms = 1 second)
         }
     }
 
