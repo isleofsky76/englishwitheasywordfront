@@ -45,42 +45,9 @@ button {
   text-align: center;
 }
 
-button#saveBtn {
-  color: red;
-}
-
-button#downloadBtn {
-  color: blue;
-}
-
-button#copyBtn {
-  color: green;
-}
-
-button#addRowBtn {
-  color: purple;
-}
-
-button#emptyRowBtn {
-  color: orange;
-}
-
-button#deleteRowBtn {
-  color: brown;
-}
-
-button#toggleStrikethroughBtn {
-  color: magenta;
-}
-
-button:last-child {
-  margin-right: 0; /* Remove right margin from the last button */
-}
-
-
-
 
 .table-container {
+  margin-top: 30px;
   flex: 1;
   overflow-y: auto;
   margin-bottom: 20px;
@@ -208,8 +175,28 @@ tbody td.text-left {
   align-items: center;
   margin-bottom: 10px; /* Add space between each link and delete button */
 }
-/* 미디어 쿼리를 사용하여 모바일 친화적으로 만들기 */
+.navbar .btn {
+  font-size: 16px; /* Default font size for buttons */
+  padding: 10px 20px; /* Default padding for buttons */
+  background-color: white; /* Background color for buttons */
+  color: rgb(4, 4, 252); /* Text color for buttons */
+  border: 1px solid blue; /* Border color for buttons */
+  border-radius: 5px; /* Rounded corners for buttons */
+}
+
+.navbar .btn i {
+  margin-right: 5px; /* Optional: add some space between the icon and text */
+}
+
 @media (max-width: 600px) {
+  .navbar .btn {
+      font-size: 10px; /* Smaller font size for mobile devices */
+      padding: 2px 5px; /* Reduce padding for better fit */
+      height: 30px; /* Set a smaller height */
+      width: auto; /* Set width to auto to fit the content */
+      margin: 2px; /* Add some margin for spacing */
+  }
+
   .container {
       padding: 10px;
       width: 100%;
@@ -234,6 +221,11 @@ tbody td.text-left {
   table, th, td {
       font-size: 12px;
   }
+
+  .filter-container-wrapper {
+      display: none;
+  }
+}
 
   .filter-container-wrapper {
       display: none;
