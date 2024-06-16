@@ -1,87 +1,17 @@
-.roboto-thin {
-  font-family: "Roboto", sans-serif;
-  font-weight: 100;
-  font-style: normal;
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 80vh;
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box; /
 }
-
-.roboto-light {
-  font-family: "Roboto", sans-serif;
-  font-weight: 300;
-  font-style: normal;
-}
-
-.roboto-regular {
-  font-family: "Roboto", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-}
-
-.roboto-medium {
-  font-family: "Roboto", sans-serif;
-  font-weight: 500;
-  font-style: normal;
-}
-
-.roboto-bold {
-  font-family: "Roboto", sans-serif;
-  font-weight: 700;
-  font-style: normal;
-}
-
-.roboto-black {
-  font-family: "Roboto", sans-serif;
-  font-weight: 900;
-  font-style: normal;
-}
-
-.roboto-thin-italic {
-  font-family: "Roboto", sans-serif;
-  font-weight: 100;
-  font-style: italic;
-}
-
-.roboto-light-italic {
-  font-family: "Roboto", sans-serif;
-  font-weight: 300;
-  font-style: italic;
-}
-
-.roboto-regular-italic {
-  font-family: "Roboto", sans-serif;
-  font-weight: 400;
-  font-style: italic;
-}
-
-.roboto-medium-italic {
-  font-family: "Roboto", sans-serif;
-  font-weight: 500;
-  font-style: italic;
-}
-
-.roboto-bold-italic {
-  font-family: "Roboto", sans-serif;
-  font-weight: 700;
-  font-style: italic;
-}
-
-.roboto-black-italic {
-  font-family: "Roboto", sans-serif;
-  font-weight: 900;
-  font-style: italic;
-}
-
 
 body {
-  background-color: #6ba37d;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  margin: 0;
-  padding: 20px; /* Adjust padding to fit the container */
-  font-size:14px;
-  font-family: "Tulpen One", sans-serif;
-  box-sizing: border-box;
+  margin-bottom: 10px;
 }
 
 .container {
@@ -89,55 +19,61 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  max-width: 800px; /* Adjust max-width */
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 900px;
   padding: 20px;
-  background-color: #338599;
-  border-radius: 0.6em;
-  box-shadow: 0 1.2em 2.4em rgba(194, 162, 59, 0.25);
-  font-size: 14px;
+  height: 80vh;
   box-sizing: border-box;
 }
 
-
-.topic-selection
-{
+#topic-selection {
   text-align: center;
 }
 
-.hangman-container,
-#words-block {
-  width: 100%; /* Adjust width */
-  margin-top: 20px;
-  margin-bottom: 10px; /* Adjust margin */
-  font-size: 24px;
-  padding: 1em;
-}
-
-.block {
-  width: 90%;
-  background-color: #f4f7f2;
-  border-radius: 0.6em;
-  box-shadow: 0 1.2em 2.4em rgba(194, 162, 59, 0.25);
-  margin-bottom: 10px; /* Adjust margin */
-  padding: 1em;
-}
-
-#hangman-block {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
 canvas {
+  height: 100%;
   width: 100%;
-  max-width: 400px;
   height: auto;
   margin: 10px auto;
   display: block;
   justify-content: center;
   align-items: center;
 }
+
+
+.hangman-container,
+#words-block {
+  padding: 0;
+  justify-content: center;
+  align-items: center;
+  height: 90vh; /* Increase height */
+  width: 100%; /* Adjust width */
+  font-size: 12px;
+}
+
+
+
+.block {
+  width: 90%;
+  background-color: #f4f7f2;
+  border-radius: 0.6em;
+  box-shadow: 0 1.2em 2.4em rgba(194, 162, 59, 0.25);
+  padding: 1pt;
+  font-size: 16px;
+  justify-content: center;
+  align-items: center;
+}
+
+#hangman-block {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 
 .new-game-popup {
   display: flex;
@@ -150,20 +86,28 @@ canvas {
   display: none;
 }
 
+#hint-container {
+  color: #6046d1;
+  text-align: center; 
+  font-size: 20px;
+}
+
 #result-text {
-  font-size:18px;
-  margin: 0 auto; /* Centers the element horizontally */
-  text-align: center; /* Centers text inside the element */
+  font-size: 20px;
+  text-align: center; 
   color: #cc2f2f;
 }
 
-#hint-container {
-  margin-top : 1.5em;
-  color: #6046d1;
-  margin: 0 auto; /* Centers the element horizontally */
-  text-align: center; /* Centers text inside the element */
-  font-size:24px;
+#user-input-section {
+  margin: 1px auto; /* Further reduce margin */
+  text-align: center; 
+  width: 100%;
+  font-size: 20px;
+  gap: 0.5em; /* Adds wider spacing between dashes */
+  margin-bottom: 20px;
+  margin-left: 10px;
 }
+
 
 #hint-button,
 #skip-button,
@@ -177,6 +121,7 @@ canvas {
   margin-top: 1em;
   font-size:12px;
   margin-bottom: 2px;
+  margin-left: 10px;
 }
 
 #alphabet-input {
@@ -184,7 +129,6 @@ canvas {
   max-width: 300px;
   padding: 0.5em;
   font-size: 1.2em;
-  margin-top: 1em;
   border: 2px solid #000;
   border-radius: 0.3em;
 }
@@ -201,14 +145,7 @@ canvas {
   gap: 5px; /* This controls the space between the buttons */
 }
 
-#user-input-section {
-  margin: 0 auto; /* Centers the element horizontally */
-  text-align: center; /* Centers text inside the element */
-  width: 100%;
-  font-size: 2em;
-  gap: 0.5em; /* Adds wider spacing between dashes */
-  margin-bottom: 30px;
-}
+
 
 .letter-container button {
   flex: 1 1 8%; /* Adjust the width of the buttons */
@@ -228,6 +165,7 @@ canvas {
   border-radius: 12px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   justify-content: center;
+  margin-bottom: 20px;
 }
 
 .mark {
@@ -246,12 +184,13 @@ canvas {
 @media (max-width: 600px) {
   .container {
     flex-direction: column;
-    padding: 10px;
+    padding: 0; /* Reduced padding */
+    margin: 0; /* Removed margin */
   }
 
   .hangman-container,
   #words-block {
-    margin-bottom: 10px;
+    margin-bottom: 5px;
   }
 
   canvas {
@@ -268,15 +207,16 @@ canvas {
   }
 
   #letter-container {
-    gap: 1em; /* Adjust spacing for mobile */
-    margin-bottom: 1.2em; /* Adjust bottom margin for mobile */
+    gap: 0.5em; /* Adjust spacing for mobile */
   }
 
   #letter-container button {
     width: 2em; /* Adjust width for mobile */
     height: 2em; /* Adjust height for mobile */
-    margin: 0.2m; /* Increase spacing between buttons for mobile */
-    font-size: 0.8em; /* Adjust font size for mobile */
+    font-size: 1em; /* Adjust font size for mobile */
+    padding: 2px; /* Reduced padding */
+    margin: 1px; /* Reduced margin */
+    margin-left: 10px;
   }
 
   /* Adjusted font sizes for hint and result text on mobile */
@@ -287,6 +227,7 @@ canvas {
   #result-text {
     font-size: 1.2em; /* Smaller font size for mobile */
     color: #f313a8;
+
   }
   /* Adjust spacing for dashes on mobile */
   #dashes-container {
@@ -297,6 +238,7 @@ canvas {
       font-size: 1.2em; /* Smaller dash size for mobile */
       width: 1em; /* Adjust width for mobile */
     }
+
   #topics-list {
     display: block; /* Change from grid to block layout */
     width: auto;
@@ -305,13 +247,12 @@ canvas {
   }
 
   #topic-heading {
-    font-size: 14px; /* Reduce font size */
+    font-size: 16px; /* Reduce font size */
   }
 
   #topic-dropdown {
     font-size: 12px; /* Reduce font size */
     padding: 3px; /* Adjust padding */
     height: 25px; /* Adjust height */
-    margin-top: 5px; /* Adjust margin */
   }
 }
