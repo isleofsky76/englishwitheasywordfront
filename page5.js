@@ -96,7 +96,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     function saveDownloadLinks() {
         const links = [];
-        downloadLinkContainer.querySelectorAll('a').forEach(link => {
+        downloadLinkContainer.querySelectorAll('.download-link-wrapper').forEach(wrapper => {
+            const link = wrapper.querySelector('a');
             links.push({ href: link.href, download: link.download, textContent: link.textContent });
         });
         localStorage.setItem('downloadLinks', JSON.stringify(links));
@@ -106,15 +107,28 @@ document.addEventListener('DOMContentLoaded', (event) => {
         const links = JSON.parse(localStorage.getItem('downloadLinks')) || [];
         downloadLinkContainer.innerHTML = ''; // 기존 링크를 모두 제거
         links.forEach(linkData => {
+            const wrapper = document.createElement('div');
+            wrapper.className = 'download-link-wrapper';
+    
             const a = document.createElement('a');
             a.href = linkData.href;
             a.download = linkData.download;
             a.textContent = linkData.textContent;
-            a.style.display = 'block';
-            downloadLinkContainer.appendChild(a);
+    
+            const deleteBtn = document.createElement('span');
+            deleteBtn.textContent = 'Delete';
+            deleteBtn.className = 'delete-link-btn';
+            deleteBtn.addEventListener('click', () => {
+                wrapper.remove();
+                saveDownloadLinks();
+            });
+    
+            wrapper.appendChild(a);
+            wrapper.appendChild(deleteBtn);
+            downloadLinkContainer.appendChild(wrapper);
         });
     }
-
+    
     function createDownloadLink(filename) {
         let tableText = "";
         const rows = taskTable.rows;
@@ -125,23 +139,36 @@ document.addEventListener('DOMContentLoaded', (event) => {
             }
             tableText += "\n";
         }
-
+    
         // UTF-8 BOM 추가
         const bom = new Uint8Array([0xEF, 0xBB, 0xBF]);
         const blob = new Blob([bom, tableText], { type: 'text/plain;charset=utf-8' });
         const url = URL.createObjectURL(blob);
-
+    
+        const wrapper = document.createElement('div');
+        wrapper.className = 'download-link-wrapper';
+    
         const a = document.createElement('a');
         a.href = url;
         a.download = `${filename}.txt`;
         a.textContent = `${filename}.txt`;
-        a.style.display = 'block';
-        downloadLinkContainer.appendChild(a);
-
+    
+        const deleteBtn = document.createElement('span');
+        deleteBtn.textContent = 'Delete';
+        deleteBtn.className = 'delete-link-btn';
+        deleteBtn.addEventListener('click', () => {
+            wrapper.remove();
+            saveDownloadLinks();
+        });
+    
+        wrapper.appendChild(a);
+        wrapper.appendChild(deleteBtn);
+        downloadLinkContainer.appendChild(wrapper);
+    
         a.addEventListener('click', () => {
             setTimeout(() => URL.revokeObjectURL(url), 1000); // 다운로드가 완료된 후 URL을 해제합니다.
         });
-
+    
         saveDownloadLinks(); // 링크를 생성할 때마다 로컬 스토리지에 저장
     }
 
@@ -165,6 +192,5 @@ document.addEventListener('DOMContentLoaded', (event) => {
         alert('Table contents copied to clipboard.');
     }
 });
-
 
 
