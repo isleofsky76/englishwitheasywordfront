@@ -46,6 +46,11 @@
   <loc>https://englisheasystudy.com/page12.html</loc>
   <lastmod>2024-06-18T03:37:05+00:00</lastmod>
 </url>
-
+<url>
+  <loc>http://englisheasystudy.com/ads.txt</loc>
+  <lastmod>2024-06-26T12:00:00+00:00</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.8</priority>
+</url>
 </urlset>
 
