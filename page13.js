@@ -5,12 +5,19 @@ const countdownElement = document.getElementById('countdown');
 document.getElementById('startRecognition').onclick = function() {
     const selectedLanguage = document.getElementById('languageSelect').value;
 
+    // Check if browser supports Speech Recognition
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRecognition) {
+        alert("Your browser does not support speech recognition. Please use Google Chrome or another supported browser.");
+        return;
+    }
+
     // Check if recognition instance already exists and is running, if so, stop it
     if (recognition) {
         recognition.stop();
     }
 
-    recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+    recognition = new SpeechRecognition();
     recognition.lang = selectedLanguage;
     recognition.interimResults = true;  // Enable interim results to get partial results
     recognition.continuous = true;      // Keep recognition running
