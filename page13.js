@@ -109,4 +109,3 @@ function startCountdown() {
         }
     }, 1000);  // Update every second
 }
-
