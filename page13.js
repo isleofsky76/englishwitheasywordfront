@@ -1,4 +1,6 @@
 let recognition;
+let countdownInterval;
+const countdownElement = document.getElementById('countdown');
 
 document.getElementById('startRecognition').onclick = function() {
     const selectedLanguage = document.getElementById('languageSelect').value;
@@ -49,6 +51,8 @@ document.getElementById('startRecognition').onclick = function() {
 
     recognition.onend = function() {
         clearTimeout(silenceTimer);
+        clearInterval(countdownInterval);
+        countdownElement.innerText = '';  // Clear the countdown display
     };
 
     recognition.start();
@@ -91,15 +95,15 @@ function speakResponse(text) {
 
 function startCountdown() {
     let countdown = 5;
-    const countdownElement = document.getElementById('countdown');
     countdownElement.innerText = countdown;
 
-    const countdownInterval = setInterval(() => {
+    clearInterval(countdownInterval);  // Clear any existing interval
+    countdownInterval = setInterval(() => {
         countdown -= 1;
         countdownElement.innerText = countdown;
 
         if (countdown <= 0) {
             clearInterval(countdownInterval);
         }
-    }, 1000);
+    }, 1000);  // Update every second
 }
