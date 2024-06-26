@@ -47,6 +47,8 @@ document.getElementById('startRecognition').onclick = function() {
 
     recognition.onerror = function(event) {
         console.error('Speech recognition error:', event.error);
+        // Display error to the user
+        document.getElementById('result').innerText = 'Error: ' + event.error;
     };
 
     recognition.onend = function() {
