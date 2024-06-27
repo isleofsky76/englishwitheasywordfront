@@ -14,8 +14,11 @@ document.getElementById('startRecognition').onclick = function() {
     recognition.continuous = true;      // Keep recognition running
 
     let finalTranscript = '';
+    let silenceTimer;
 
     recognition.onresult = function(event) {
+        clearTimeout(silenceTimer);
+
         let interimTranscript = '';
 
         for (let i = event.resultIndex; i < event.results.length; ++i) {
@@ -27,6 +30,16 @@ document.getElementById('startRecognition').onclick = function() {
         }
 
         document.getElementById('result').innerText = 'You said: ' + finalTranscript + interimTranscript;
+
+        // Reset the silence timer
+        silenceTimer = setTimeout(() => {
+            recognition.stop();
+            if (finalTranscript.trim()) {
+                document.getElementById('result').innerText = 'You said: ' + finalTranscript;
+                addChatMessage('You said: ' + finalTranscript, 'user-message');
+                sendToServer(finalTranscript);
+            }
+        }, 5000);  // 5 seconds of silence
     };
 
     recognition.onerror = function(event) {
@@ -34,11 +47,7 @@ document.getElementById('startRecognition').onclick = function() {
     };
 
     recognition.onend = function() {
-        if (finalTranscript.trim()) {
-            document.getElementById('result').innerText = 'You said: ' + finalTranscript;
-            addChatMessage('You said: ' + finalTranscript, 'user-message');
-            sendToServer(finalTranscript);
-        }
+        clearTimeout(silenceTimer);
     };
 
     recognition.start();
@@ -78,4 +87,5 @@ function speakResponse(text) {
     utterance.lang = selectedLanguage;
     synth.speak(utterance);
 }
+
 
