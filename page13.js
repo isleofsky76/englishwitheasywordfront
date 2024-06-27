@@ -1,33 +1,21 @@
 let recognition;
-let countdownInterval;
-const countdownElement = document.getElementById('countdown');
 
 document.getElementById('startRecognition').onclick = function() {
     const selectedLanguage = document.getElementById('languageSelect').value;
-
-    // Check if browser supports Speech Recognition
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-    if (!SpeechRecognition) {
-        alert("Your browser does not support speech recognition. Please use Google Chrome or another supported browser.");
-        return;
-    }
 
     // Check if recognition instance already exists and is running, if so, stop it
     if (recognition) {
         recognition.stop();
     }
 
-    recognition = new SpeechRecognition();
+    recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
     recognition.lang = selectedLanguage;
     recognition.interimResults = true;  // Enable interim results to get partial results
     recognition.continuous = true;      // Keep recognition running
 
     let finalTranscript = '';
-    let silenceTimer;
 
     recognition.onresult = function(event) {
-        clearTimeout(silenceTimer);
-
         let interimTranscript = '';
 
         for (let i = event.resultIndex; i < event.results.length; ++i) {
@@ -39,29 +27,18 @@ document.getElementById('startRecognition').onclick = function() {
         }
 
         document.getElementById('result').innerText = 'You said: ' + finalTranscript + interimTranscript;
-
-        // Reset the silence timer and start the countdown
-        startCountdown();
-        silenceTimer = setTimeout(() => {
-            recognition.stop();
-            if (finalTranscript.trim()) {
-                document.getElementById('result').innerText = 'You said: ' + finalTranscript;
-                addChatMessage('You said: ' + finalTranscript, 'user-message');
-                sendToServer(finalTranscript);
-            }
-        }, 5000);  // 5 seconds of silence
     };
 
     recognition.onerror = function(event) {
         console.error('Speech recognition error:', event.error);
-        // Display error to the user
-        document.getElementById('result').innerText = 'Error: ' + event.error;
     };
 
     recognition.onend = function() {
-        clearTimeout(silenceTimer);
-        clearInterval(countdownInterval);
-        countdownElement.innerText = '';  // Clear the countdown display
+        if (finalTranscript.trim()) {
+            document.getElementById('result').innerText = 'You said: ' + finalTranscript;
+            addChatMessage('You said: ' + finalTranscript, 'user-message');
+            sendToServer(finalTranscript);
+        }
     };
 
     recognition.start();
@@ -102,17 +79,3 @@ function speakResponse(text) {
     synth.speak(utterance);
 }
 
-function startCountdown() {
-    let countdown = 5;
-    countdownElement.innerText = countdown;
-
-    clearInterval(countdownInterval);  // Clear any existing interval
-    countdownInterval = setInterval(() => {
-        countdown -= 1;
-        countdownElement.innerText = countdown;
-
-        if (countdown <= 0) {
-            clearInterval(countdownInterval);
-        }
-    }, 1000);  // Update every second
-}
