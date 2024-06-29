@@ -17,36 +17,14 @@ document.getElementById('startRecognition').onclick = function() {
 
     recognition = new SpeechRecognition();
     recognition.lang = selectedLanguage;
-    recognition.interimResults = true;  // Enable interim results to get partial results
-    recognition.continuous = true;      // Keep recognition running
-
-    let finalTranscript = '';
-    let silenceTimer;
+    recognition.interimResults = false;  // Interim results disabled for final result only
+    recognition.continuous = false;      // Recognition stops after one result
 
     recognition.onresult = function(event) {
-        clearTimeout(silenceTimer);
-
-        let interimTranscript = '';
-
-        for (let i = event.resultIndex; i < event.results.length; ++i) {
-            if (event.results[i].isFinal) {
-                finalTranscript += event.results[i][0].transcript;
-            } else {
-                interimTranscript += event.results[i][0].transcript;
-            }
-        }
-
-        document.getElementById('result').innerText = 'You said: ' + finalTranscript + interimTranscript;
-
-        // Reset the silence timer
-        silenceTimer = setTimeout(() => {
-            recognition.stop();
-            if (finalTranscript.trim()) {
-                document.getElementById('result').innerText = 'You said: ' + finalTranscript;
-                addChatMessage('You said: ' + finalTranscript, 'user-message');
-                sendToServer(finalTranscript);
-            }
-        }, 5000);  // 5 seconds of silence
+        const finalTranscript = event.results[0][0].transcript;
+        document.getElementById('result').innerText = 'You said: ' + finalTranscript;
+        addChatMessage('You said: ' + finalTranscript, 'user-message');
+        sendToServer(finalTranscript);
     };
 
     recognition.onerror = function(event) {
@@ -55,7 +33,7 @@ document.getElementById('startRecognition').onclick = function() {
     };
 
     recognition.onend = function() {
-        clearTimeout(silenceTimer);
+        console.log('Speech recognition service disconnected');
     };
 
     recognition.start();
@@ -71,7 +49,7 @@ function addChatMessage(message, messageType) {
 }
 
 function sendToServer(text) {
-    fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/speaking-practice2', {
+    fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/speaking-practice2', {  // 실제 백엔드 주소로 변경
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -95,3 +73,4 @@ function speakResponse(text) {
     utterance.lang = selectedLanguage;
     synth.speak(utterance);
 }
+
