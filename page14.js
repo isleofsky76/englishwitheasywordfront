@@ -71,7 +71,7 @@ function addChatMessage(message, messageType) {
 }
 
 function sendToServer(text) {
-    fetch('http://localhost:3000/speaking-practice2', {
+    fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/speaking-practice2', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
