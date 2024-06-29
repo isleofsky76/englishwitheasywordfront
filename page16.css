@@ -17,18 +17,18 @@ body {
 }
 
 h1 {
-  font-size: 20px; /* 원하는 글자 크기로 변경 */
+  font-size: 18px; /* 원하는 글자 크기로 변경 */
   color: #06053c; /* 변경하려는 글자 색 */
 }
 
 h2 {
-  font-size: 12px; /* 원하는 글자 크기로 변경 */
+  font-size: 13px; /* 원하는 글자 크기로 변경 */
   color: #d42856; /* 변경하려는 글자 색 */
 }
 
 #question {
   font-size: 18px; /* 원하는 글자 크기로 변경 */
-  line-height: 1.5; /* 줄 간격 조정 */
+  line-height: 2; /* 줄 간격 조정 */
   color: #444452; /* 변경하려는 글자 색 */
 }
 
@@ -51,7 +51,7 @@ button:hover {
 }
 
 #result {
-  margin-top: 20px;
+  margin-top: 18px;
   text-align: left; /* 결과 텍스트를 왼쪽 정렬로 변경 */
   color: #2e2ca1; /* 변경하려는 글자 색 */
 }
