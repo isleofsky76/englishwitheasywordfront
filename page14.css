@@ -1,0 +1,47 @@
+body {
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    padding: 20px;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+button {
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 16px;
+}
+
+#result {
+    margin-top: 20px;
+    font-size: 18px;
+}
+
+#chatgpt-response {
+    margin-top: 20px;
+    font-size: 18px;
+    color: green;
+}
+
+#chatMessages {
+    text-align: left; /* Align text to the left */
+}
+
+.message {
+    display: block;
+    margin: 5px 0;
+}
+
+.user-message {
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    padding: 10px;
+    display: inline-block;
+}
+
+.assistant-message {
+    color: green;
+}
