@@ -30,7 +30,7 @@ h1 {
 
 #answerInput {
   height: 70px; /* Adjusted input field height */
-  font-size: 14px; /* Adjusted input field text size */
+  font-size: 24px; /* Adjusted input field text size */
 }
 
 .button-group {
@@ -42,6 +42,28 @@ h1 {
 #hints {
   margin-top: 10px; /* Reduced space below the hints block */
   color: #2e2ca1;
+}
+
+.faq h4 {
+  margin-top: 15px;
+}
+/* 폰트 크기 및 간격 조정 */
+.rules-section {
+  font-size: 0.6em; /* 글자 크기 조정 */
+  line-height: 1.2; /* 라인 간격 조정 */
+}
+.rules-section ul {
+  padding-left: 20px; /* 리스트 인덴
+  트 조정 */
+  font-size: 0.6em; /* 글자 크기 조정 */
+}
+.rules-section li {
+  margin-bottom: 10px; /* 리스트 항목 간 간격 조정 */
+  font-size: 0.6em; /* 글자 크기 조정 */
+}
+.spacing {
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 /* Mobile-friendly adjustments */
@@ -72,4 +94,3 @@ h1 {
   font-size: 14px; /* Adjust button text size */
   margin: 5px; /* Adjust button margin */
 }
-
