@@ -1,86 +1,74 @@
-let currentHintIndex = 0;
-let currentItem = '';
-
-document.getElementById('hintButton').addEventListener('click', showHint);
-document.getElementById('submitAnswer').addEventListener('click', submitAnswer);
-document.getElementById('showAnswer').addEventListener('click', showAnswer);
-document.getElementById('refreshQuiz').addEventListener('click', () => location.reload());
-
-async function startNewQuiz() {
-    try {
-        const response = await fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/get-random-item');
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data = await response.json();
-        currentItem = data.item;
-        currentHintIndex = 0;
-        for (let i = 1; i <= 20; i++) {
-            document.getElementById(`hint${i}`).innerText = '';
-        }
-        document.getElementById('result').innerText = '';
-        document.getElementById('answerInput').value = '';
-        console.log(`New quiz started with item: ${currentItem}`); // Debugging
-
-        // Display the first hint by default
-        await showHint();
-    } catch (error) {
-        console.error('Error starting new quiz:', error);
-        document.getElementById('result').innerText = `Error: ${error.message}`;
-    }
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f0f0f0;
+  padding-top: 60px; /* Adjusted for navbar height */
+  margin: 0;
 }
 
-async function showHint() {
-    try {
-        const response = await fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/get-hint', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                item: currentItem,
-                hintIndex: currentHintIndex
-            })
-        });
-
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const data = await response.json();
-        console.log(data);  // Debugging
-        let hint = data.hint.replace(/Hint\s*#?\d*:\s*/i, ''); // Remove any existing "Hint X:" or "Hint #" text
-
-        if (currentHintIndex < 19) {
-            document.getElementById(`hint${currentHintIndex + 1}`).textContent = `Hint ${currentHintIndex + 1}: ${hint}`;
-        } else if (currentHintIndex === 19) {
-            hint = `The first letter of the word is "${currentItem.charAt(0)}". ${hint}`;
-            document.getElementById(`hint${currentHintIndex + 1}`).textContent = `Hint ${currentHintIndex + 1}: ${hint}`;
-        }
-
-        currentHintIndex++;
-    } catch (error) {
-        console.error('Error getting hint:', error);  // Error handling
-        document.getElementById('result').innerText = `Error: ${error.message}`;
-    }
+.quiz-container {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  width: 100%;
+  max-width: 600px;
+  margin: 20px auto;
 }
 
-function submitAnswer() {
-    const userAnswer = document.getElementById('answerInput').value.toLowerCase();
-
-    if (userAnswer === currentItem) {
-        document.getElementById('result').innerText = "Congratulations! You guessed it right!";
-        document.getElementById('result').style.color = "green";
-    } else {
-        document.getElementById('result').innerText = "Incorrect. Try again.";
-        document.getElementById('result').style.color = "red";
-    }
+h1 {
+  font-size: 24px;
+  color: #06053c;
 }
 
-function showAnswer() {
-    document.getElementById('result').innerText = `The correct answer is: ${currentItem}`;
-    document.getElementById('result').style.color = "blue";
+#result {
+  margin-top: 20px;
+  color: #2e2ca1;
 }
 
-// Start the first quiz when the page loads
-startNewQuiz();
+#answerInput {
+  height: 70px; /* 모바일 환경에서 입력 필드 높이 조정 */
+  font-size: 12px; /* 입력 필드 텍스트 크기 조정 */
+}
+
+.button-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+#hints {
+  margin-top: 20px; /* Add space below the hints block */
+  color: #2e2ca1;
+}
+
+/* Mobile-friendly adjustments */
+@media (max-width: 600px) {
+  .quiz-container {
+    padding: 15px;
+    margin: 10px auto;
+  }
+
+  h1 {
+    font-size: 20px;
+  }
+
+  .button-group button {
+    padding: 4px 5px; /* 패딩을 줄여서 버튼 크기 줄이기 */
+    font-size: 12px; /* 폰트 크기 줄이기 */
+    margin: 5px; /* 버튼 사이의 간격 조정 */
+  }
+
+  #answerInput {
+    height: 100px; /* 모바일 환경에서 입력 필드 높이 조정 */
+    font-size: 12px; /* 입력 필드 텍스트 크기 조정 */
+  }
+}
+
+/* General button adjustments for all screen sizes */
+.button-group button {
+  padding: 2px 5px;
+    /* top and bottom padding is 8px, left and right padding is 15px */
+  font-size: 14px; /* 폰트 크기 줄이기 */
+  margin: 5px; /* 버튼 사이의 간격 조정 */
+}
