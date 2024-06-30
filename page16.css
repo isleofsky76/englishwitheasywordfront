@@ -1,8 +1,8 @@
 body {
   font-family: 'Poppins', sans-serif;
   background-color: #f0f0f0;
-  margin: 0;
-  padding-top: 2px; /* Adjusted for navbar height */
+  padding-top: 0; /* 네비게이션 바 높이에 맞춰 패딩을 0으로 설정 */
+  margin: 0; /* 기본 margin 제거 */
 }
 
 .quiz-container {
@@ -10,95 +10,79 @@ body {
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  text-align: left;
+  text-align: left; /* 텍스트를 왼쪽 정렬로 변경 */
   width: 100%;
   max-width: 600px;
-  margin: 0 auto; /* Centering the container */
-  margin-top: 5px; /* Margin top adjustment */
+  margin: 10px auto; /* 화면을 조금 위로 올리기 위해 margin-top을 조정 */
 }
 
-h1{
-  font-size: 36px; /* Adjust button text size */
-  color: #06053c;
-  margin-bottom: 10px; /* Reduce space below the heading */
+h1 {
+  font-size: 20px; /* 원하는 글자 크기로 변경 */
+  color: #06053c; /* 변경하려는 글자 색 */
 }
 
+h2 {
+  font-size: 20px; /* 원하는 글자 크기로 변경 */
+  color: #d42856; /* 변경하려는 글자 색 */
+}
 
-h2{
-  font-size: 20px; /* Adjust button text size */
-  color: #eb0835;
-  margin-bottom: 10px; /* Reduce space below the heading */
+#question {
+  font-size: 18px; /* 원하는 글자 크기로 변경 */
+  line-height: 1.5; /* 줄 간격 조정 */
+  color: #444452; /* 변경하려는 글자 색 */
+}
+
+button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-top: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: #45a049;
 }
 
 #result {
-  margin-top: 10px; /* Reduce margin top */
-  color: #2e2ca1;
-}
-
-#answerInput {
-  height: 70px; /* Adjusted input field height */
-  font-size: 16px; /* Adjusted input field text size */
-}
-
-.button-group {
-  display: flex;
-  gap: 10px;
-  margin-top: 10px;
-}
-
-#hints {
-  margin-top: 30px; /* Reduced space below the hints block */
-  color: #2e2ca1;
-  font-size: 16px; /* Adjusted input field text size */
-}
-
-.faq h4 {
-  margin-top: 15px;
-}
-/* 폰트 크기 및 간격 조정 */
-.rules-section {
-  font-size: 16px; /* Adjust button text size */
-  line-height: 1.2; /* 라인 간격 조정 */
-}
-.rules-section ul {
-  padding-left: 20px; /* 리스트 인덴
-  트 조정 */
-  font-size: 16px; /* Adjust button text size */
-}
-.rules-section li {
-  margin-bottom: 10px; /* 리스트 항목 간 간격 조정 */
-  font-size: 16px; /* Adjust button text size */
-}
-.spacing {
   margin-top: 20px;
-  margin-bottom: 20px;
+  text-align: left; /* 결과 텍스트를 왼쪽 정렬로 변경 */
+  color: #2e2ca1; /* 변경하려는 글자 색 */
 }
 
-/* Mobile-friendly adjustments */
+  /* 규칙과 퀴즈 사이의 선 추가 */
+  .divider {
+    border-top: 1px solid #ccc;
+    margin: 20px 0;
+}
+
+/* 모바일 친화적인 디자인 */
 @media (max-width: 600px) {
   .quiz-container {
     padding: 15px;
+    margin: 5px auto; /* 모바일에서 화면을 조금 위로 올리기 위해 margin 조정 */
   }
 
   h1 {
-    font-size: 20px;
+    font-size: 18px; /* 모바일에서 원하는 글자 크기로 변경 */
   }
 
-  .button-group button {
-    padding: 4px 5px; /* Reduce button padding */
-    font-size: 12px; /* Reduce button text size */
-    margin: 5px; /* Adjust button margin */
+  h2 {
+    font-size: 20px; /* 모바일에서 원하는 글자 크기로 변경 */
   }
 
-  #answerInput {
-    height: 70px; /* Adjust input field height for mobile */
-    font-size: 20px; /* Adjust input field text size for mobile */
+  #question {
+    font-size: 16px; /* 모바일에서 원하는 글자 크기로 변경 */
   }
-}
 
-/* General button adjustments for all screen sizes */
-.button-group button {
-  padding: 6px 10px; /* Adjust button padding */
-  font-size: 16px; /* Adjust button text size */
-  margin: 0px; /* Adjust button margin */
+  button {
+    padding: 4px 10px; /* 모바일에서 버튼 크기 조정 */
+    font-size: 14px; /* 모바일에서 버튼 글자 크기 조정 */
+  }
 }
