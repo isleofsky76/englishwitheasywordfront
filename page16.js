@@ -6,7 +6,7 @@ document.getElementById('refreshQuiz').addEventListener('click', () => location.
 
 async function startQuiz() {
     try {
-        const response = await fetch('http://localhost:3000/quiz', {  // 백엔드 서버 엔드포인트를 업데이트하십시오.
+        const response = await fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/quiz', {  // 백엔드 서버 엔드포인트를 업데이트하십시오.
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -37,7 +37,7 @@ async function submitAnswer() {
         const userAnswer = document.getElementById('answerInput').value;
         const question = document.getElementById('question').innerText;
 
-        const response = await fetch('http://localhost:3000/quiz/check', {  // 백엔드 서버 엔드포인트를 업데이트하십시오.
+        const response = await fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/quiz/check', {  // 백엔드 서버 엔드포인트를 업데이트하십시오.
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -67,7 +67,7 @@ async function showAnswer() {
     try {
         const question = document.getElementById('question').innerText;
 
-        const response = await fetch('http://localhost:3000/quiz/show', {
+        const response = await fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/quiz/show', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -89,4 +89,5 @@ async function showAnswer() {
         document.getElementById('result').innerText = `Error: ${error.message}`;
     }
 }
+
 
