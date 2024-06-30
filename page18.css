@@ -26,6 +26,11 @@ h1 {
   color: #2e2ca1;
 }
 
+#answerInput {
+  height: 50px; /* 모바일 환경에서 입력 필드 높이 조정 */
+  font-size: 12px; /* 입력 필드 텍스트 크기 조정 */
+}
+
 .button-group {
   display: flex;
   gap: 10px;
@@ -49,8 +54,22 @@ h1 {
   }
 
   .button-group button {
-    flex: 1;
-    padding: 8px;
-    font-size: 14px;
+    padding: 4px 5px; /* 패딩을 줄여서 버튼 크기 줄이기 */
+    font-size: 12px; /* 폰트 크기 줄이기 */
+    margin: 5px; /* 버튼 사이의 간격 조정 */
+  }
+
+  #answerInput {
+    height: 50px; /* 모바일 환경에서 입력 필드 높이 조정 */
+    font-size: 12px; /* 입력 필드 텍스트 크기 조정 */
   }
 }
+
+/* General button adjustments for all screen sizes */
+.button-group button {
+  padding: 2px 5px;
+    /* top and bottom padding is 8px, left and right padding is 15px */
+  font-size: 14px; /* 폰트 크기 줄이기 */
+  margin: 5px; /* 버튼 사이의 간격 조정 */
+}
+
