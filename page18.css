@@ -29,7 +29,7 @@ h1 {
 }
 
 #answerInput {
-  height: 50px; /* Adjusted input field height */
+  height: 70px; /* Adjusted input field height */
   font-size: 14px; /* Adjusted input field text size */
 }
 
@@ -61,7 +61,7 @@ h1 {
   }
 
   #answerInput {
-    height: 40px; /* Adjust input field height for mobile */
+    height: 70px; /* Adjust input field height for mobile */
     font-size: 12px; /* Adjust input field text size for mobile */
   }
 }
