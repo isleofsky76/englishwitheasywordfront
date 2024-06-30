@@ -84,7 +84,7 @@ h1 {
 
   #answerInput {
     height: 70px; /* Adjust input field height for mobile */
-    font-size: 12px; /* Adjust input field text size for mobile */
+    font-size: 16px; /* Adjust input field text size for mobile */
   }
 }
 
@@ -92,5 +92,5 @@ h1 {
 .button-group button {
   padding: 6px 10px; /* Adjust button padding */
   font-size: 14px; /* Adjust button text size */
-  margin: 5px; /* Adjust button margin */
+  margin: 0px; /* Adjust button margin */
 }
