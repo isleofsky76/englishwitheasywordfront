@@ -17,9 +17,16 @@ body {
   margin-top: 5px; /* Margin top adjustment */
 }
 
-h1 {
-  font-size: 24px;
+h1{
+  font-size: 36px; /* Adjust button text size */
   color: #06053c;
+  margin-bottom: 10px; /* Reduce space below the heading */
+}
+
+
+h2{
+  font-size: 20px; /* Adjust button text size */
+  color: #eb0835;
   margin-bottom: 10px; /* Reduce space below the heading */
 }
 
@@ -30,7 +37,7 @@ h1 {
 
 #answerInput {
   height: 70px; /* Adjusted input field height */
-  font-size: 24px; /* Adjusted input field text size */
+  font-size: 16px; /* Adjusted input field text size */
 }
 
 .button-group {
@@ -40,8 +47,9 @@ h1 {
 }
 
 #hints {
-  margin-top: 10px; /* Reduced space below the hints block */
+  margin-top: 30px; /* Reduced space below the hints block */
   color: #2e2ca1;
+  font-size: 16px; /* Adjusted input field text size */
 }
 
 .faq h4 {
@@ -49,17 +57,17 @@ h1 {
 }
 /* 폰트 크기 및 간격 조정 */
 .rules-section {
-  font-size: 0.6em; /* 글자 크기 조정 */
+  font-size: 16px; /* Adjust button text size */
   line-height: 1.2; /* 라인 간격 조정 */
 }
 .rules-section ul {
   padding-left: 20px; /* 리스트 인덴
   트 조정 */
-  font-size: 0.6em; /* 글자 크기 조정 */
+  font-size: 16px; /* Adjust button text size */
 }
 .rules-section li {
   margin-bottom: 10px; /* 리스트 항목 간 간격 조정 */
-  font-size: 0.6em; /* 글자 크기 조정 */
+  font-size: 16px; /* Adjust button text size */
 }
 .spacing {
   margin-top: 20px;
@@ -84,13 +92,14 @@ h1 {
 
   #answerInput {
     height: 70px; /* Adjust input field height for mobile */
-    font-size: 16px; /* Adjust input field text size for mobile */
+    font-size: 20px; /* Adjust input field text size for mobile */
   }
 }
 
 /* General button adjustments for all screen sizes */
 .button-group button {
   padding: 6px 10px; /* Adjust button padding */
-  font-size: 14px; /* Adjust button text size */
+  font-size: 16px; /* Adjust button text size */
   margin: 0px; /* Adjust button margin */
 }
+
