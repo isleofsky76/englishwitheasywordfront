@@ -25,12 +25,23 @@
         <div class="quiz-container">
             <section>
                 <h1>Test Your Knowledge with a Quiz!</h1>
-                <h2>If there is an error, please press next Quiz!</h2>
+                <div class="divider"></div> <!-- 선 추가 -->
+                <h2>Rules</h2>
+                <ul class="rules-section">
+                    <p>
+                        Click "Start Quiz" to generate 5 example sentences. Each sentence will have a blank (____) that should be filled with the same word.
+                        The words are suitable for middle and high school levels.
+                        Enter the word in the text box below and click "Submit Answer" to check if your answer is correct.
+                        Click "Next Quiz" for a new set of questions.
+                    </p>                  
+                </ul>
+                <div class="divider"></div> <!-- 선 추가 -->
                 <button id="startButton">Start Quiz</button>
                 <div id="quiz" style="display:none;">
-                    <p id="question">1. Every summer, my family and I love to (____) in the clear lake near our cabin.<br>2. The swim team captain asked me to (____) next week's relay race.<br>3. Despite her fear of water, Sarah decided to (____) in the school swimming competition.<br>4. During vacation, we hope to (____) with dolphins on our trip to Hawaii.<br>5. The lifeguard instructed the children to never (____) alone in the pool.</p>
+                    <p id="question"></p>
                     <input type="text" id="answerInput" placeholder="Enter your answer">
                     <button id="submitAnswer">Submit Answer</button>
+                    <button id="showAnswer">Show Answer</button>
                     <button id="nextQuiz">Next Quiz</button>
                     <button id="refreshQuiz" style="display:none;">Restart Quiz</button>
                 </div>
