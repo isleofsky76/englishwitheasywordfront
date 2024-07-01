@@ -49,7 +49,7 @@ function addChatMessage(message, messageType) {
 }
 
 function sendToServer(text) {
-    fetch('http://localhost:3000/speaking-practice2', {  // 실제 백엔드 주소로 변경
+    fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/speaking-practice2', {  // 실제 백엔드 주소로 변경
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
