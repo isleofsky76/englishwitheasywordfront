@@ -1,0 +1,124 @@
+body {
+  font-family: 'Poppins', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f0f0f0;
+}
+
+header {
+  background-color: #050df7;
+  color: white;
+  text-align: left;
+  padding: 1em 0;
+}
+
+main {
+  margin: 2em;
+}
+
+section {
+  margin-bottom: 2em;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 0.5em;
+  margin: 1em 0;
+  box-sizing: border-box;
+}
+
+button {
+  padding: 0.5em 1em;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+#results, #loading {
+  margin-top: 2em;
+  text-align: left;
+}
+
+#sentenceList {
+  list-style-type: none;
+  padding: 0;
+}
+
+#sentenceList li {
+  background-color: white;
+  padding: 1em;
+  margin-bottom: 0.5em;
+}
+
+.spinner-border {
+  width: 3rem;
+  height: 3rem;
+  margin: 1em auto;
+}
+
+.keyword-list-horizontal {
+  margin-left: 1px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-size: 12px;
+  text-align: left;
+}
+
+.keyword-list-horizontal li {
+  list-style-type: none;
+  padding: 0.3em 0.7em;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  text-align: left;
+}
+
+.keyword-list-horizontal li:hover {
+  background-color: #45a049;
+  color: white;
+  text-align: left;
+}
+
+/* 모바일 뷰포트용 스타일 */
+@media (max-width: 600px) {
+  header {
+    text-align: left;
+    padding: 0.5em 0;
+    font-size: 14px;
+  }
+
+  main {
+    margin: 1em;
+  }
+
+  input[type="text"] {
+    padding: 0.5em;
+  }
+
+  button {
+    padding: 0.5em;
+    font-size: 0.9em;
+  }
+
+  .keyword-list-horizontal {
+    flex-direction: column;
+    gap: 5px;
+    font-size: 14px;
+  }
+
+  .keyword-list-horizontal li {
+    font-size: 0.9em;
+  }
+
+  .try-more-title {
+    font-size: 1.5em;
+  }
+}
