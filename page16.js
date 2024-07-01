@@ -56,12 +56,14 @@ async function submitAnswer() {
         console.log(data);  // 디버그를 위해 추가
         const result = data.result;
 
-        document.getElementById('result').innerText = result.includes("correct") ? `${result}` : `You are wrong. ${result}`;
+        // Display the result directly
+        document.getElementById('result').innerText = result;
     } catch (error) {
         console.error('Error submitting answer:', error);  // 에러를 캐치하기 위해 추가
         document.getElementById('result').innerText = `Error: ${error.message}`;
     }
 }
+
 
 async function showAnswer() {
     try {
