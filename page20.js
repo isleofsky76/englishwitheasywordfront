@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const resultsSection = document.getElementById('results');
     const sentenceList = document.getElementById('sentenceList');
     const topicInput = document.getElementById('topicInput');
-    const readButton = document.getElementById('readButton');
 
     const keywords = [
         "airport(공항)", "luggage(수하물)", "security(보안)", "boarding pass(탑승권)", "customs(세관)", "duty-free(면세)",
@@ -89,7 +88,6 @@ document.addEventListener('DOMContentLoaded', function() {
         li.textContent = keyword;
         li.addEventListener('click', async () => {
             topicInput.value = keyword;
-            generateButton.style.display = 'block';
             topicInput.scrollIntoView({ behavior: 'smooth' });
 
             // Automatically generate sentences after setting the topic
@@ -132,7 +130,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     async function generateSentences(topic) {
         try {
-            const response = await fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/generate-sentences', {
+            const response = await fetch('http://localhost:3000/generate-sentences', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -176,6 +174,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const englishPart = sentence.split('(')[0].trim();
         const utterance = new SpeechSynthesisUtterance(englishPart);
         utterance.lang = 'en-US'; // Set the language to English (United States)
+        utterance.rate = 0.9; // Slow down the speech rate
         window.speechSynthesis.speak(utterance);
     }
 });
