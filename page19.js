@@ -86,8 +86,23 @@ document.addEventListener('DOMContentLoaded', function() {
     keywords.forEach(keyword => {
         const li = document.createElement('li');
         li.textContent = keyword;
-        li.addEventListener('click', () => {
+        li.addEventListener('click', async () => {
             topicInput.value = keyword;
+            generateButton.style.display = 'block';
+            topicInput.scrollIntoView({ behavior: 'smooth' });
+            
+            // Automatically generate sentences after setting the topic
+            resultsSection.style.display = 'none';
+            loadingSection.style.display = 'block';
+
+            try {
+                const sentences = await generateSentences(keyword);
+                displaySentences(sentences);
+            } catch (error) {
+                alert('Error generating sentences. Please try again later.');
+            } finally {
+                loadingSection.style.display = 'none';
+            }
         });
         keywordList.appendChild(li);
     });
@@ -116,7 +131,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     async function generateSentences(topic) {
         try {
-            const response = await fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/generate-sentences', {
+            const response = await fetch('http://localhost:3000/generate-sentences', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
