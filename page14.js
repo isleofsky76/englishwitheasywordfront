@@ -20,10 +20,6 @@ document.getElementById('startRecognition').onclick = function() {
     recognition.interimResults = false;  // Interim results disabled for final result only
     recognition.continuous = false;      // Recognition stops after one result
 
-    recognition.onstart = function() {
-        console.log('Speech recognition service has started');
-    };
-
     recognition.onresult = function(event) {
         const finalTranscript = event.results[0][0].transcript;
         document.getElementById('result').innerText = 'You said: ' + finalTranscript;
@@ -38,13 +34,8 @@ document.getElementById('startRecognition').onclick = function() {
 
     recognition.onend = function() {
         console.log('Speech recognition service disconnected');
-        // Automatically restart the recognition if it ended unintentionally
-        if (recognition && !recognition.stopped) {
-            recognition.start();
-        }
     };
 
-    recognition.stopped = false;
     recognition.start();
 };
 
@@ -58,7 +49,7 @@ function addChatMessage(message, messageType) {
 }
 
 function sendToServer(text) {
-    fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/speaking-practice2', {  // 실제 백엔드 주소로 변경
+    fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app//speaking-practice2', {  // 실제 백엔드 주소로 변경
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -82,4 +73,5 @@ function speakResponse(text) {
     utterance.lang = selectedLanguage;
     synth.speak(utterance);
 }
+
 
