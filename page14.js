@@ -20,6 +20,10 @@ document.getElementById('startRecognition').onclick = function() {
     recognition.interimResults = false;  // Interim results disabled for final result only
     recognition.continuous = false;      // Recognition stops after one result
 
+    recognition.onstart = function() {
+        console.log('Speech recognition service has started');
+    };
+
     recognition.onresult = function(event) {
         const finalTranscript = event.results[0][0].transcript;
         document.getElementById('result').innerText = 'You said: ' + finalTranscript;
@@ -34,8 +38,13 @@ document.getElementById('startRecognition').onclick = function() {
 
     recognition.onend = function() {
         console.log('Speech recognition service disconnected');
+        // Automatically restart the recognition if it ended unintentionally
+        if (recognition && !recognition.stopped) {
+            recognition.start();
+        }
     };
 
+    recognition.stopped = false;
     recognition.start();
 };
 
