@@ -48,8 +48,8 @@ h2{
 
 #hints {
   margin-top: 30px; /* Reduced space below the hints block */
-  color: #2e2ca1;
-  font-size: 16px; /* Adjusted input field text size */
+  color: #d81643;
+  font-size: 20px; /* Adjusted input field text size */
 }
 
 .faq h4 {
@@ -102,3 +102,4 @@ h2{
   font-size: 16px; /* Adjust button text size */
   margin: 0px; /* Adjust button margin */
 }
+
