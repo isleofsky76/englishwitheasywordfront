@@ -63,7 +63,8 @@ button:hover {
 }
 
 .keyword-list-horizontal {
-  margin-left: 1px;
+  position: absolute;
+  left: 0;
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
@@ -117,6 +118,12 @@ button:hover {
   .keyword-list-horizontal li {
     font-size: 0.9em;
   }
+
+  #sentenceList li {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
 
   .try-more-title {
     font-size: 1.5em;
