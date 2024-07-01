@@ -16,10 +16,6 @@ main {
   margin: 2em;
 }
 
-section {
-  margin-bottom: 2em;
-}
-
 input[type="text"] {
   width: 100%;
   padding: 0.5em;
@@ -34,6 +30,7 @@ button {
   border: none;
   cursor: pointer;
   transition: background-color 0.3s;
+  margin-bottom: 50px;
 }
 
 button:hover {
@@ -41,8 +38,8 @@ button:hover {
 }
 
 #results, #loading {
-  margin-top: 2em;
   text-align: left;
+  margin-bottom: 20px;
 }
 
 #sentenceList {
