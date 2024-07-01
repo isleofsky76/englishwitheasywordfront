@@ -38,6 +38,7 @@ document.getElementById('startRecognition').onclick = function() {
     };
 
     recognition.start();
+    console.log('Speech recognition started');  // Debugging
 };
 
 function addChatMessage(message, messageType) {
@@ -50,6 +51,7 @@ function addChatMessage(message, messageType) {
 }
 
 function sendToServer(text) {
+    console.log('Sending text to server:', text);  // Debugging
     fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/speaking-practice2', {  // 실제 백엔드 주소로 변경
         method: 'POST',
         headers: {
@@ -57,7 +59,10 @@ function sendToServer(text) {
         },
         body: JSON.stringify({ spokenText: text })
     })
-    .then(response => response.json())
+    .then(response => {
+        console.log('Server response status:', response.status);  // Debugging
+        return response.json();
+    })
     .then(data => {
         const chatgptResponse = data.response;
         console.log('ChatGPT Response:', chatgptResponse);  // Debugging
@@ -73,7 +78,6 @@ function speakResponse(text) {
     const synth = window.speechSynthesis;
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = selectedLanguage;
+    console.log('Speaking response:', text);  // Debugging
     synth.speak(utterance);
 }
-
-
