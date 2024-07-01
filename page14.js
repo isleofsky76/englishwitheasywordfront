@@ -22,6 +22,7 @@ document.getElementById('startRecognition').onclick = function() {
 
     recognition.onresult = function(event) {
         const finalTranscript = event.results[0][0].transcript;
+        console.log('Final Transcript:', finalTranscript);  // Debugging
         document.getElementById('result').innerText = 'You said: ' + finalTranscript;
         addChatMessage('You said: ' + finalTranscript, 'user-message');
         sendToServer(finalTranscript);
@@ -49,7 +50,7 @@ function addChatMessage(message, messageType) {
 }
 
 function sendToServer(text) {
-    fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app//speaking-practice2', {  // 실제 백엔드 주소로 변경
+    fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/speaking-practice2', {  // 실제 백엔드 주소로 변경
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -59,6 +60,7 @@ function sendToServer(text) {
     .then(response => response.json())
     .then(data => {
         const chatgptResponse = data.response;
+        console.log('ChatGPT Response:', chatgptResponse);  // Debugging
         document.getElementById('chatgpt-response').innerText = chatgptResponse;
         addChatMessage('ChatGPT: ' + chatgptResponse, 'assistant-message');
         speakResponse(chatgptResponse);
