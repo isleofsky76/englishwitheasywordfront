@@ -13,12 +13,15 @@
             <a class="navbar-brand" href="#">English Speaking Practice</a>
         </div>
     </nav>
-    <h2>Website Information</h2>
-    <ul>
-        <li>여행 회화 공부 사이트입니다.</li>
-        <li>단어를 입력하면 30개의 예문이 생성됩니다.</li>
-        <li>오류가 발생하면 "Generate Sentences"를 다시 눌러주세요.</li>
-    </ul>
+    <div id="websiteInfo" class="container">
+        <h2>Information</h2>
+        <ul>
+            <li>회화 학습 사이트입니다.</li>
+            <li>"Start Speaking"을 누르고 대화를 해보세요.</li>
+            <li>다양한 주제로 대화 할 수 있습니다</li>
+
+        </ul>
+    </div>
     <div id="chatTerminal" class="container mt-5 pt-5">
         <div class="mb-3">
             <label for="languageSelect" class="form-label"></label>
@@ -26,7 +29,7 @@
                 <option value="en-US">American English</option>
                 <option value="en-GB">British English</option>
             </select>
-        </div>
+    </div>
         <div id="chatMessages" class="border p-3 mb-3" style="height: 300px; overflow-y: auto;"></div>
         <div id="messageContainer" class="input-group">
             <button id="startRecognition" class="btn btn-success">Start Speaking</button>
