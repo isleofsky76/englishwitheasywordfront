@@ -85,11 +85,10 @@ async function showAnswer() {
         console.log(data);
         const correctAnswer = data.answer;
 
-        document.getElementById('result').innerText = `The correct answer is: ${correctAnswer}`;
+        document.getElementById('result').innerText = `${correctAnswer}`;
     } catch (error) {
         console.error('Error showing answer:', error);
         document.getElementById('result').innerText = `Error: ${error.message}`;
     }
 }
-
 
