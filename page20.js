@@ -171,7 +171,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function readSentence(sentence) {
         // Extract only the English part of the sentence
-        const englishPart = sentence.split('(')[0].trim();
+        const englishPartMatch = sentence.match(/^[^\(]+/);
+        const englishPart = englishPartMatch ? englishPartMatch[0].trim() : sentence;
         const utterance = new SpeechSynthesisUtterance(englishPart);
         utterance.lang = 'en-US'; // Set the language to English (United States)
         utterance.rate = 0.9; // Slow down the speech rate
