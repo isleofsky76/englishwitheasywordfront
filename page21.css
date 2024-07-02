@@ -48,7 +48,7 @@ button.loading .spinner-border {
 
 /* Adjust font size of the topic buttons */
 #wordsContainer button {
-  font-size: 0.9em; /* Adjust as needed */
+  font-size: 1.2em; /* Adjust as needed */
 }
 
 @media (max-width: 768px) {
@@ -69,7 +69,7 @@ button.loading .spinner-border {
   }
 
   #wordList {
-      font-size: 10px;
+      font-size: 1.1em; /* Adjust as needed */
   }
 
   .spinner-border {
@@ -87,3 +87,4 @@ button.loading .spinner-border {
     font-size: 0.9em; /* Adjust as needed for smaller screens */
   }
 }
+
