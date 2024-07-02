@@ -98,17 +98,16 @@ document.addEventListener('DOMContentLoaded', () => {
         wordItem.className = 'btn btn-outline-primary m-1';
         wordItem.textContent = word;
         wordItem.addEventListener('click', () => {
-            inputTopic.value = word;
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-            generateShortText(); // Automatically generate text on word click
-            highlightSelectedWord(wordItem); // Highlight the selected word
+        inputTopic.value = word;
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+        generateShortText(); // Automatically generate text on word click
+        highlightSelectedWord(wordItem); // Highlight the selected word
         });
         wordsContainer.appendChild(wordItem);
     });
-
 
     // Function to highlight the selected word
     function highlightSelectedWord(selectedItem) {
@@ -130,11 +129,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // Function to toggle loading spinner on button
     function toggleButtonLoading(button, isLoading) {
         if (isLoading) {
-            button.classList.add('loading');
-            button.innerHTML = 'Loading... <div class="spinner-border spinner-border-sm text-light" role="status"></div>';
+        button.classList.add('loading');
+        button.innerHTML = 'Loading... <div class="spinner-border spinner-border-sm text-light" role="status"></div>';
         } else {
-            button.classList.remove('loading');
-            button.innerHTML = button.getAttribute('data-original-text');
+        button.classList.remove('loading');
+        button.innerHTML = button.getAttribute('data-original-text');
         }
     }
 
@@ -149,41 +148,40 @@ document.addEventListener('DOMContentLoaded', () => {
         const topic = inputTopic.value.trim();
 
         if (!topic) {
-            alert("Please enter a topic.");
-            return;
+        alert("Please enter a topic.");
+        return;
         }
 
         // Check for forbidden words in the topic
         if (containsForbiddenWords(topic)) {
-            alert("The input contains forbidden words. Please remove them and try again.");
-            return;
+        alert("The input contains forbidden words. Please remove them and try again.");
+        return;
         }
 
         toggleButtonLoading(generateTextButton, true);
 
         try {
-            const response = await fetch('https://app.cloudtype.io/@isleofsky76/englishwitheasyword-backend:main/englishwitheasyword-backend/generate-short-text', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ topic })
-            });
+        const response = await fetch('http://localhost:3000/generate-short-text', {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ topic })
+        });
 
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
 
-            const responseData = await response.json();
-            shortTextElement.textContent = responseData.shortText;
-            showShortTextSection();
+        const responseData = await response.json();
+        shortTextElement.textContent = responseData.shortText;
+        showShortTextSection();
         } catch (error) {
-            console.error('Error generating short text:', error.message);
+        console.error('Error generating short text:', error.message);
         } finally {
-            toggleButtonLoading(generateTextButton, false);
+        toggleButtonLoading(generateTextButton, false);
         }
     }
-
 
     // Function to generate and display random text
     async function generateRandomText() {
@@ -193,38 +191,38 @@ document.addEventListener('DOMContentLoaded', () => {
 
         await generateShortText();
     }
-    
+
     // Function to fetch and display translation and explanation
     async function getTranslationAndExplanation() {
         const shortText = shortTextElement.textContent.trim();
 
         if (!shortText) {
-            alert("No short text to translate. Please generate a short text first.");
-            return;
+        alert("No short text to translate. Please generate a short text first.");
+        return;
         }
 
         toggleButtonLoading(getTranslationButton, true);
 
         try {
-            const response = await fetch('https://app.cloudtype.io/@isleofsky76/englishwitheasyword-backend:main/englishwitheasyword-backend/get-translation-explanation', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ shortText })
-            });
+        const response = await fetch('http://localhost:3000/get-translation-explanation', {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ shortText })
+        });
 
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
 
-            const responseData = await response.json();
-            translationExplanationElement.innerHTML = responseData.translationExplanation.replace(/\n/g, "<br>");
-            showTranslationSection();
+        const responseData = await response.json();
+        translationExplanationElement.innerHTML = responseData.translationExplanation.replace(/\n/g, "<br>");
+        showTranslationSection();
         } catch (error) {
-            console.error('Error getting translation and explanation:', error.message);
+        console.error('Error getting translation and explanation:', error.message);
         } finally {
-            toggleButtonLoading(getTranslationButton, false);
+        toggleButtonLoading(getTranslationButton, false);
         }
     }
 
@@ -232,7 +230,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function readEnglishText(text) {
         const englishText = text.match(/[A-Za-z0-9 .,!?']+/g).join(' ');
         if (currentUtterance) {
-            speechSynthesis.cancel();
+        speechSynthesis.cancel();
         }
         currentUtterance = new SpeechSynthesisUtterance(englishText);
         currentUtterance.lang = 'en-US';
@@ -243,13 +241,10 @@ document.addEventListener('DOMContentLoaded', () => {
     function stopReading() {
         speechSynthesis.cancel();
         if (currentUtterance) {
-            currentUtterance.onend = null; // Clear the onend event
-            currentUtterance = null;
+        currentUtterance.onend = null; // Clear the onend event
+        currentUtterance = null;
         }
     }
-
-    
-
 
     // Save original button text for restoring later
     generateTextButton.setAttribute('data-original-text', generateTextButton.innerHTML);
@@ -259,5 +254,4 @@ document.addEventListener('DOMContentLoaded', () => {
     getTranslationButton.addEventListener('click', getTranslationAndExplanation);
     readShortTextButton.addEventListener('click', () => readEnglishText(shortTextElement.textContent));
     stopShortTextButton.addEventListener('click', stopReading);
-});
-
+    });
