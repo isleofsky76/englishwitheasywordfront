@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>english easy free story learning</title>
+    <meta name="google-adsense-account" content="ca-pub-6108574897789788">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6108574897789788" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dongle&family=Nanum+Gothic&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="page21.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Reading</a>
+        </div>
+    </nav>
+    <div id="websiteInfo">
+        <h1>Information</h1>
+        <ul>
+            <li>주제어를 넣고 generate text를 누르면 문장이 생성됩니다. </li>
+            <li>문장이 생성되면 옆에 "Get Translation" 버튼이 보입니다. </li>
+            <li>해당 버튼을 누르면 지문에 대한 번역이 제공됩니다 </li>
+        </ul>
+    </div>
+    <div class="container mt-5">
+        <h2 class="text-center"></h2>
+        <div class="mb-3">
+            <label for="inputTopic" class="form-label">Enter a Topic:</label>
+            <input type="text" class="form-control" id="inputTopic" placeholder="e.g., travel, school, airport, hotel, restaurant, park, library, beach, office, market, hospital, museum, cinema, zoo, stadium, theater, gym, farm, garden, mall, bakery, cafe, factory, bank, post office, bus station, train station, university, apartment, house, church, temple, mosque, playground, swimming pool, grocery store, pharmacy, bookstore, music store, clothing store, hardware store, car dealership, salon, barbershop, gas station, convenience store, nightclub, pub, wine shop, furniture store">
+        </div>
+        <button id="generateTextButton" class="btn btn-primary mb-3">Generate Text</button>
+        <button id="randomTextButton" class="btn btn-secondary mb-3">Random Text</button>
+        <div id="shortTextSection" class="mb-3" style="display: none;">
+            <h3>Generated Short Text:</h3>
+            <p id="shortText"></p>
+            <button id="readShortTextButton" class="btn btn-secondary">Read</button>
+            <button id="stopShortTextButton" class="btn btn-danger">Stop</button>
+            <button id="getTranslationButton" class="btn btn-secondary">Get Translation</button>
+        </div>
+        <div id="translationSection" class="mb-3" style="display: none;">
+            <h3>Translation and Explanation:</h3>
+            <p id="translationExplanation"></p>
+            <!-- <button id="readExplanationButton" class="btn btn-secondary">Read</button> -->
+            <!-- <button id="stopExplanationButton" class="btn btn-danger">Stop</button> -->
+        </div>
+        <div id="wordList" class="mt-5">
+            <h2>Suggested Topics:</h2>
+            <div id="wordsContainer" class="d-flex flex-wrap">
+                <!-- Words will be dynamically inserted here -->
+            </div>
+        </div>
+    </div>
+    <script src="page21.js"></script>
+</body>
+</html>
