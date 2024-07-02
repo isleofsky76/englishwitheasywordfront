@@ -162,7 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
         toggleButtonLoading(generateTextButton, true);
 
         try {
-            const response = await fetch('http://localhost:3000/generate-short-text', {
+            const response = await fetch('https://app.cloudtype.io/@isleofsky76/englishwitheasyword-backend:main/englishwitheasyword-backend/generate-short-text', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -206,7 +206,7 @@ document.addEventListener('DOMContentLoaded', () => {
         toggleButtonLoading(getTranslationButton, true);
 
         try {
-            const response = await fetch('http://localhost:3000/get-translation-explanation', {
+            const response = await fetch('https://app.cloudtype.io/@isleofsky76/englishwitheasyword-backend:main/englishwitheasyword-backend/get-translation-explanation', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
