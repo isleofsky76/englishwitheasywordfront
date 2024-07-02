@@ -15,42 +15,37 @@
     </head>
     
     <body>
-        <header>
-            <h1>Travel English Sentences Generator</h1>
-        </header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Travel English Sentences Generator</a>
+            </div>
+        </nav>
         <main>
             <section>
-                <h2>Website Information</h2>
-                <ul>
-                    <li>여행 회화 공부 사이트입니다.</li>
-                    <li>단어를 입력하면 30개의 예문이 생성됩니다.</li>
-                    <li>오류가 발생하면 "Generate Sentences"를 다시 눌러주세요.</li>
-                </ul>
-                <br>
-            <section>
                 <h2>Enter a Topic:</h2>
-                <input type="text" id="topicInput" placeholder="Enter a topic (e.g., airport, hotel)">
-                <button id="generateButton">Generate Sentences</button>
-            </section>
-            <section id="loading" style="display: none;">
-                <div class="spinner-border" role="status">
-                    <span class="visually-hidden">Loading...</span>
-                </div>
-                <p>Please Hold on, we are fetching some awesome sentences for you!</p>
-            </section>
-            <section id="results" style="display: none;">
-                <h2>Generated Sentences for <span id="selectedTopic"></span>:</h2>
-                <ul id="sentenceList"></ul>
-            </section>
-            <section>
-                <div class="keyword-list">
-                    <h3>Try More!</h3>
-                    <ul id="keywordList" class="keyword-list-horizontal">
-                        <!-- Keywords will be inserted here by JavaScript -->
-                    </ul>
-                </div>
-            </section>
-        </main>
-        <script src="page19.js"></script>
-    </body>
-    </html>
+            <input type="text" id="topicInput" placeholder="Enter a topic (e.g., airport, hotel)">
+            <button id="generateButton">Generate Sentences</button>
+            <button id="readButton" style="display: none;">Read Sentences</button>
+        </section>
+        <section id="loading" style="display: none;">
+            <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <p>Please Hold on, we are fetching some awesome sentences for you!</p>
+        </section>
+        <section id="results" style="display: none;">
+            <h2>Generated Sentences for <span id="selectedTopic"></span>:</h2>
+            <ul id="sentenceList"></ul>
+        </section>
+        <section>
+            <div class="keyword-list">
+                <h3>Try More!</h3>
+                <ul id="keywordList" class="keyword-list-horizontal">
+                    <!-- Keywords will be inserted here by JavaScript -->
+                </ul>
+            </div>
+        </section>
+    </main>
+    <script src="page19.js"></script>
+</body>
+</html>
