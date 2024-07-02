@@ -79,12 +79,12 @@ button.loading .spinner-border {
 
   /* Adjust font size of suggested topics heading for smaller screens */
   #wordList h2 {
-    font-size: 1em; /* Adjust as needed for smaller screens */
+    font-size: 1.1em; /* Adjust as needed for smaller screens */
   }
 
   /* Adjust font size of the topic buttons for smaller screens */
   #wordsContainer button {
-    font-size: 0.9em; /* Adjust as needed for smaller screens */
+    font-size: 1.1em; /* Adjust as needed for smaller screens */
   }
 }
 
