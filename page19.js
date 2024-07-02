@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const resultsSection = document.getElementById('results');
     const sentenceList = document.getElementById('sentenceList');
     const topicInput = document.getElementById('topicInput');
+    const readButton = document.getElementById('readButton');
 
     const keywords = [
         "airport(공항)", "luggage(수하물)", "security(보안)", "boarding pass(탑승권)", "customs(세관)", "duty-free(면세)",
@@ -90,8 +91,7 @@ document.addEventListener('DOMContentLoaded', function() {
             topicInput.value = keyword;
             generateButton.style.display = 'block';
             topicInput.scrollIntoView({ behavior: 'smooth' });
-            
-            // Automatically generate sentences after setting the topic
+
             resultsSection.style.display = 'none';
             loadingSection.style.display = 'block';
 
@@ -156,8 +156,24 @@ document.addEventListener('DOMContentLoaded', function() {
         sentences.split('\n').forEach(sentence => {
             const li = document.createElement('li');
             li.textContent = sentence;
+            const readButton = document.createElement('button');
+            readButton.textContent = 'Read';
+            readButton.className = 'btn btn-secondary btn-sm ms-2';
+            readButton.addEventListener('click', () => {
+                readSentence(sentence);
+            });
+            li.appendChild(readButton);
             sentenceList.appendChild(li);
         });
         resultsSection.style.display = 'block';
     }
+
+    function readSentence(sentence) {
+        // 영어 문장만 추출하여 읽음
+        const englishSentence = sentence.split('(')[0].trim();
+        const utterance = new SpeechSynthesisUtterance(englishSentence);
+        utterance.lang = 'en-US';
+        window.speechSynthesis.speak(utterance);
+    }
+    
 });
