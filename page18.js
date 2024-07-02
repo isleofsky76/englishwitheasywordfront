@@ -4,11 +4,11 @@ let currentItem = '';
 document.getElementById('hintButton').addEventListener('click', showHint);
 document.getElementById('submitAnswer').addEventListener('click', submitAnswer);
 document.getElementById('showAnswer').addEventListener('click', showAnswer);
-document.getElementById('refreshQuiz').addEventListener('click', () => location.reload());
+document.getElementById('refreshQuiz').addEventListener('click', startNewQuiz);
 
 async function startNewQuiz() {
     try {
-        const response = await fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/get-random-item');
+        const response = await fetch('http://localhost:3000/get-random-item');
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -32,7 +32,7 @@ async function startNewQuiz() {
 
 async function showHint() {
     try {
-        const response = await fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/get-hint', { // Update the URL if needed
+        const response = await fetch('http://localhost:3000/get-hint', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -60,7 +60,7 @@ async function showHint() {
 
         currentHintIndex++;
     } catch (error) {
-        console.error('Error getting hint:', error);  // Error handling
+        console.error('Error getting hint:', error);
         document.getElementById('result').innerText = `Error: ${error.message}`;
     }
 }
@@ -84,3 +84,4 @@ function showAnswer() {
 
 // Start the first quiz when the page loads
 startNewQuiz();
+
