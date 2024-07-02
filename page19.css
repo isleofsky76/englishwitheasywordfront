@@ -3,6 +3,7 @@ body {
   margin: 0;
   padding: 0;
   background-color: #f0f0f0;
+  margin-top: 70px;
 }
 
 header {
@@ -14,6 +15,10 @@ header {
 
 main {
   margin: 2em;
+}
+
+section {
+  margin-bottom: 2em;
 }
 
 input[type="text"] {
@@ -30,7 +35,6 @@ button {
   border: none;
   cursor: pointer;
   transition: background-color 0.3s;
-  margin-bottom: 50px;
 }
 
 button:hover {
@@ -38,8 +42,8 @@ button:hover {
 }
 
 #results, #loading {
+  margin-top: 2em;
   text-align: left;
-  margin-bottom: 20px;
 }
 
 #sentenceList {
