@@ -116,7 +116,7 @@ document.addEventListener('DOMContentLoaded', function() {
     async function fetchSynonyms(word) {
         try {
             spinner.style.display = 'block';
-            const response = await fetch('http://localhost:3000/get-synonyms', {
+            const response = await fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/get-synonyms', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -141,7 +141,7 @@ document.addEventListener('DOMContentLoaded', function() {
     async function askQuestion(question) {
         try {
             spinner.style.display = 'block';
-            const response = await fetch('http://localhost:3000/ask-question', {
+            const response = await fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/ask-question', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
