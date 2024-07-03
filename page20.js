@@ -79,7 +79,20 @@ document.addEventListener('DOMContentLoaded', function() {
         "hair curler(고데기)", "hair gel(헤어 젤)", "hair spray(헤어 스프레이)", "shaving cream(면도 크림)", "razor(면도기)", "electric razor(전기 면도기)", "beard trimmer(수염 트리머)", "nose hair trimmer(코털 트리머)", "eyebrow trimmer(눈썹 트리머)", "scissors(가위)",
         "nail clippers(손톱깎이)", "tweezers(핀셋)", "eyelash curler(뷰러)", "cotton pads(화장솜)", "cotton swabs(면봉)", "tissue(티슈)", "wet wipes(물티슈)", "face wipes(페이스 와입스)", "makeup remover(메이크업 리무버)", "makeup brush(메이크업 브러시)", "makeup sponge(메이크업 스펀지)",
         "foundation(파운데이션)", "concealer(컨실러)", "blush(블러쉬)", "bronzer(브론저)", "highlighter(하이라이터)", "contour(컨투어)", "eye shadow(아이섀도우)", "eyeliner(아이라이너)", "mascara(마스카라)", "lipstick(립스틱)", "lip gloss(립글로스)", "lip liner(립 라이너)",
-        "brow pencil(브로우 펜슬)", "brow gel(브로우 젤)", "brow powder(브로우 파우더)", "brow brush(브로우 브러시)", "lash serum(래쉬 세럼)", "lash extensions(속눈썹 연장)"
+        "brow pencil(브로우 펜슬)", "brow gel(브로우 젤)", "brow powder(브로우 파우더)", "brow brush(브로우 브러시)", "lash serum(래쉬 세럼)", "lash extensions(속눈썹 연장)","tourist attraction(관광명소)", "cultural heritage(문화유산)", "scenic view(경치)", "local cuisine(현지 음식)", 
+        "tourist information center(관광안내소)", "travel guide(여행 가이드)", "public transportation(대중교통)", 
+        "travel budget(여행 예산)", "travel itinerary(여행 일정)", "historic site(역사적 장소)", "local market(현지 시장)", 
+        "travel companion(여행 동반자)", "souvenir shop(기념품 가게)", "guided tour(가이드 투어)", "travel visa(여행 비자)",
+        "emergency contact(비상 연락처)", "hotel reservation(호텔 예약)", "travel insurance(여행 보험)", 
+        "language barrier(언어 장벽)", "currency exchange rate(환율)", "travel agency(여행사)", "group tour(단체 여행)",
+        "solo travel(혼자 여행)", "adventure travel(모험 여행)", "budget travel(저렴한 여행)", "luxury travel(호화 여행)",
+        "eco-friendly travel(친환경 여행)", "backpacking(배낭여행)", "volunteer travel(자원봉사 여행)", "health and safety(건강과 안전)",
+        "local customs(현지 풍습)", "weather forecast(날씨 예보)", "travel restrictions(여행 제한)", "passport renewal(여권 갱신)",
+        "travel vaccination(여행 예방접종)", "travel advisory(여행 권고)", "digital nomad(디지털 노마드)", "off the beaten path(비인기 여행지)",
+        "guided hiking(가이드 하이킹)", "wildlife safari(야생 사파리)", "mountain expedition(산 탐험)", "river rafting(강 래프팅)",
+        "scuba certification(스쿠버 자격증)", "tropical destination(열대 목적지)", "island hopping(섬 여행)", "cultural festival(문화 축제)",
+        "local traditions(현지 전통)", "travel photography(여행 사진)", "travel blog(여행 블로그)", "travel influencer(여행 인플루언서)",
+        "city tour(도시 투어)", "national park(국립 공원)", "world heritage site(세계 유산)"
     ];
 
     const keywordList = document.getElementById('keywordList');
