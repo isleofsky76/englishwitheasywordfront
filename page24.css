@@ -1,0 +1,47 @@
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 90px;
+}
+
+.container {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center the container */
+  height: 80px;
+}
+
+input, button {
+  padding: 10px;
+  margin: 10px;
+  font-size: 0.8em;
+  width: 100px;
+  height: 40px;
+  border-width: 2px;
+  border-style: solid;
+  border-color: rgb(120, 119, 119);
+}
+
+
+input {
+  width: 100%;
+  max-width: 1000px;
+  box-sizing: border-box;
+  text-align: left;
+}
+
+#fortuneOutput {
+  margin-top: 20px;
+  font-size: 1.1em;
+  color: #333;
+  text-align: left; /* Change text alignment to left */
+  width: 100%;
+  max-width: 1000px;
+}
+
+h1 {
+  font-size: 2rem; /* 폰트 크기를 원하는 크기로 조절 */
+}
