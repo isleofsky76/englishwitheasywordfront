@@ -3,6 +3,8 @@ body {
   margin: 0;
   padding: 0;
   background-color: #f0f0f0;
+  margin-top: 80px;
+  font-size: 16px;
 }
 
 header {
@@ -123,6 +125,6 @@ button:hover {
 
 
   .try-more-title {
-    font-size: 1.5em;
+    font-size: 1.2em;
   }
 }
