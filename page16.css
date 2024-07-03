@@ -19,3 +19,10 @@ body {
 #result {
   margin-top: 20px;
 }
+
+#question {
+  background-color: #f9f9f9; /* Background color for the question */
+  padding: 10px; /* Add padding for better spacing */
+  border-radius: 5px; /* Optional: rounded corners */
+  border: 1px solid #ddd; /* Optional: add a border */
+}
