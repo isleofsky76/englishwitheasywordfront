@@ -4,6 +4,10 @@ body {
   font-size: 14px;
 }
 
+#websiteInfo {
+  padding-left: 20px; /* Add padding here */
+}
+
 h1 {
   font-size: 1.5em; /* Adjust as needed */
   margin-bottom: 20px;
