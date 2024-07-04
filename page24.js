@@ -19,7 +19,7 @@ document.getElementById('getFortuneButton').addEventListener('click', async () =
 
     try {
         const response = await fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/get-fortune', {
-            method: 'POST',
+                        method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -60,4 +60,3 @@ document.getElementById('getFortuneButton').addEventListener('click', async () =
         spinner.style.display = 'none';
     }
 });
-
