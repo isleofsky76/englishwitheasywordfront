@@ -18,7 +18,7 @@ input {
   padding: 10px;
   margin: 10px;
   font-size: 0.8em;
-  width: 90%; /* 버튼과 구분되는 너비 설정 */
+  width: 100%; /* 버튼과 구분되는 너비 설정 */
   height: 60px; /* 높이 설정 */
   border-width: 2px;
   border-style: solid;
@@ -40,8 +40,8 @@ h1 {
 }
 
 .spinner-border {
-  width: 3rem; /* Adjust width as desired */
-  height: 3rem; /* Adjust height as desired */
+  width: 2rem; /* Adjust width as desired */
+  height: 2rem; /* Adjust height as desired */
   margin: 1em auto;
   color: #FF5733; /* Adjust color as desired */
   text-align: left; /* Ensures text alignment to the left */
