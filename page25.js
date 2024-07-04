@@ -169,7 +169,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     async function generateSentences(topic) {
         try {
-            const response = await fetch('http://localhost:3000/generate-sentences2', {
+            const response = await fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/generate-sentences2', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ topic: topic })
