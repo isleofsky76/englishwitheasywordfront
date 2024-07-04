@@ -18,8 +18,8 @@ document.getElementById('getFortuneButton').addEventListener('click', async () =
     stopButton.style.display = 'none';
 
     try {
-        const response = await fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/get-fortune', {
-                        method: 'POST',
+        const response = await fetch('http://localhost:3000/get-fortune', {
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -35,13 +35,15 @@ document.getElementById('getFortuneButton').addEventListener('click', async () =
         const data = JSON.parse(responseText);
 
         console.log(`Received fortune: ${data.fortune}`);
-        // Extract the English part (assuming it's the first part before a space or '(')
-        const englishPart = data.fortune.match(/^[^\(]+/)[0].trim();
-        fortuneOutput.innerText = englishPart;
+        // Display the full fortune (English and Korean)
+        fortuneOutput.innerText = data.fortune; // ***여기 수정***
         readButton.style.display = 'inline';
         stopButton.style.display = 'inline';
 
-        const utterance = new SpeechSynthesisUtterance(englishPart);
+        // Extract the English part using a regular expression to match only English characters
+        const englishPart = data.fortune.match(/[A-Za-z0-9\s.,!?'":;()&\-]+/g).join(' ').trim(); // ***여기 수정***
+
+        const utterance = new SpeechSynthesisUtterance(englishPart); // ***여기 수정***
         utterance.lang = 'en-US';
         utterance.rate = 1;
 
