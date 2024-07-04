@@ -4,7 +4,8 @@ body {
   padding: 0;
   background-color: #f0f0f0;
   margin-top: 80px;
-  font-size: 16px;
+  font-size: 14px;
+  text-align: left; /* Ensures text alignment to the left */
 }
 
 header {
@@ -33,6 +34,7 @@ button {
   cursor: pointer;
   transition: background-color 0.3s;
   margin-bottom: 50px;
+  text-align: left; /* Ensures text alignment to the left */
 }
 
 button:hover {
@@ -47,23 +49,25 @@ button:hover {
 #sentenceList {
   list-style-type: none;
   padding: 0;
+  text-align: left; /* Ensures text alignment to the left */
 }
 
 #sentenceList li {
   background-color: white;
   padding: 1em;
   margin-bottom: 0.5em;
+  text-align: left; /* Ensures text alignment to the left */
 }
 
 .spinner-border {
-  width: 3rem;
-  height: 3rem;
+  width: 2rem;
+  height: 2rem;
   margin: 1em auto;
+  color: #FF5733; /* 원하는 색상으로 조정 */
 }
 
+
 .keyword-list-horizontal {
-  position: absolute;
-  left: 0;
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
@@ -123,17 +127,10 @@ button:hover {
     align-items: flex-start;
   }
 
-
   .try-more-title {
     font-size: 1.2em;
   }
 
-  .keyword-headline{
-    font-size: 1em; /* 원하는 글자 크기로 조정 */
-    margin-top: 20px; /* 그룹 사이의 여백 조정 */
-    margin-bottom: 10px; /* 헤드라인과 키워드 리스트 사이의 여백 조정 */
-    color: #333; /* 원하는 색상으로 조정 */
-}
   .keyword-headline {
     font-size: 1.5em; /* 원하는 글자 크기로 조정 */
     font-family: 'Poppins', sans-serif; /* 원하는 글꼴로 조정 */
