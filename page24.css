@@ -18,7 +18,7 @@ input {
   padding: 10px;
   margin: 10px;
   font-size: 0.8em;
-  width: 1000px; /* 버튼과 구분되는 너비 설정 */
+  width: 90%; /* 버튼과 구분되는 너비 설정 */
   height: 60px; /* 높이 설정 */
   border-width: 2px;
   border-style: solid;
