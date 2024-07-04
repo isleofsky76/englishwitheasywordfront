@@ -164,7 +164,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function formatSynonyms(synonyms) {
-        return synonyms.replace(/(\d+\.)/g, '<br>$1');
+        return synonyms.replace(/(\d+\.)/g, '<br><br>$1');  // ***여기***
     }
 
     function formatResponse(response) {
