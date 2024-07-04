@@ -108,11 +108,12 @@ button:hover {
     font-size: 0.9em;
   }
 
-  .keyword-list-horizontal {
-    flex-direction: column;
-    gap: 5px;
-    font-size: 14px;
-  }
+
+  .keyword-list-horizontal li:hover {
+    background-color: #45a049;
+    color: white;
+    text-align: left;
+}
 
   .keyword-list-horizontal li {
     font-size: 0.9em;
@@ -128,3 +129,4 @@ button:hover {
     font-size: 1.2em;
   }
 }
+
