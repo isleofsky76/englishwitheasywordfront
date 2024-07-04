@@ -3,15 +3,15 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 30px;
+  margin-top: 90px;
 }
 
 .container {
   text-align: center;
   display: flex;
   flex-direction: column;
-  align-items: center; /* Center the container */
-  height: 60px;
+  align-items: center;
+  height: 80px;
 }
 
 input, button {
@@ -25,7 +25,6 @@ input, button {
   border-color: rgb(120, 119, 119);
 }
 
-
 input {
   width: 100%;
   max-width: 1000px;
@@ -37,19 +36,58 @@ input {
   margin-top: 20px;
   font-size: 1.1em;
   color: #333;
-  text-align: left; /* Change text alignment to left */
+  text-align: left;
   width: 100%;
   max-width: 1000px;
 }
 
 h1 {
-  font-size: 2rem; /* 폰트 크기를 원하는 크기로 조절 */
+  font-size: 2rem;
 }
 
 .spinner-border {
-  width: 1rem; /* Adjust width as desired */
-  height: 1rem; /* Adjust height as desired */
+  width: 3rem; /* Adjust width as desired */
+  height: 3rem; /* Adjust height as desired */
   margin: 1em auto;
   color: #FF5733; /* Adjust color as desired */
   text-align: left; /* Ensures text alignment to the left */
+}
+
+#buttonsContainer {
+  display: flex;
+  justify-content: center; /* 가운데 정렬 */
+  gap: 10px; /* 버튼 사이의 간격 */
+}
+
+#readButton {
+  background-color: #28a745;
+  color: white;
+}
+
+#stopButton {
+  background-color: #dc3545;
+  color: white;
+}
+
+
+#fortuneContainer {
+  display: flex;
+  flex-direction: column; /* 기본적으로 컨테이너 내부를 세로 정렬 */
+  align-items: center; /* 수평 중앙 정렬 */
+  gap: 20px; /* 요소 간 간격 */
+}
+
+#buttonsContainer {
+  display: flex;
+  gap: 10px; /* 버튼 사이의 간격 */
+}
+
+#readButton {
+  background-color: #28a745;
+  color: white;
+}
+
+#stopButton {
+  background-color: #dc3545;
+  color: white;
 }
