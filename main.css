@@ -33,12 +33,12 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 50px; /* Adjust the height as needed */
     cursor: pointer;
     border: 2px solid #ffffff; /* White border */
     border-radius: 10px; /* Add border radius */
     text-align: center;
     margin-top: 5px;
+    height: 50pt;
 }
 
 
@@ -69,6 +69,9 @@ body {
     color: #ffffff; /* Text color to white */
 }
 
+
+
+
 /* Mobile adjustments */
 @media only screen and (max-width: 600px) {
     body {
@@ -77,24 +80,24 @@ body {
     }
 
     .container {
-        grid-template-columns: 1fr; /* Single column layout */
-        width: 100%; /* Full width */
-        margin-right: 20px;
+        grid-template-columns: repeat(2, 1fr); /* Two column layout for mobile */
+        width: 100%;
+        gap: 5px;
     }
 
     .box {
         height: 50px;
         font-size: 0.8rem;
-        margin: 0 0 5px 0; /* Reduced margin between boxes */
+        margin: 0 0 5px 0;
     }
 
     .image_container img {
-        width: 100%; /* Full width for mobile view */
+        width: 100%;
         margin-right: 20px;
     }
 
     .content {
-        grid-column: span 1;
+        grid-column: span 2;
         margin-left: 0;
         margin-right: 0;
         padding: 10px;
@@ -103,6 +106,6 @@ body {
 }
 
 a {
-    color: #ffffff; /* Change email text color to white */
+    color: #ffffff;
     text-decoration: underline;
 }
