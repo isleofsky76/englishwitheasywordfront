@@ -57,6 +57,7 @@ button:hover {
   padding: 1em;
   margin-bottom: 0.5em;
   text-align: left; /* Ensures text alignment to the left */
+  align-items: flex-start;
 }
 
 .spinner-border {
@@ -73,6 +74,7 @@ button:hover {
   gap: 10px;
   font-size: 12px;
   text-align: left;
+  align-items: flex-start; /* Align items to the start (left) */
 }
 
 .keyword-list-horizontal li {
@@ -113,10 +115,14 @@ button:hover {
   }
 
   .keyword-list-horizontal {
+    display: flex; /* Ensure the container is a flex container */
     flex-direction: column;
     gap: 5px;
     font-size: 14px;
-  }
+    position: relative; /* Use position relative to adjust left */
+    left: 0px; /* Align to the left */
+    align-items: flex-start; /* Align items to the start (left) */
+}
 
   .keyword-list-horizontal li {
     font-size: 0.9em;
@@ -143,3 +149,4 @@ button:hover {
     color: #FF5733; /* 원하는 색상으로 조정 */
   }
 }
+
