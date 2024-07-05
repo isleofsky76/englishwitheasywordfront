@@ -3,24 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Effective English Study Tips and Resources fortune teller | English Easy Study 영어 무료 공부 여행</title>
+    <title>Effective English Study Tips and Resources | English Easy Study 영어 무료 공부 여행</title>
     <meta name="description" content="Learn easy English with our beginner-friendly lessons. Start speaking English confidently with our easy English grammar guides and vocabulary tips.">
     <meta name="google-adsense-account" content="ca-pub-6108574897789788">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6108574897789788" crossorigin="anonymous"></script>
     <meta name="naver-site-verification" content="49ce4ce26cb6b92d2bf01a441655ca396f47aca1" />
     <meta name="description" content="Discover effective English study tips, grammar guides, vocabulary lists, and resources to enhance your language learning. Join English Easy Study today!">
+       
+    <!-- Bootstrap CSS 추가 -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    
     <link rel="stylesheet" href="main.css">
     <script src="homepage_eventlistener.js"></script>
 </head>
 <body>
-    <div class="header">
-        <h1>Learning English</h1>
+    <nav id="navbar" class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="resources/eng.png" alt="Learning English Logo" height="30">
+                <span style="vertical-align: middle; margin-left: 10px;">Learning English</span>
+            </a>
+        </div>
+    </nav>
+    <div class="intro-text">
+        <h2>AI Tutor</h2> <br>
+        <p>Welcome! Learn English easily with our fun and helpful resources, including quizzes, vocabulary exercises, and games. For any questions, email us at <a href="mailto:everydayalittlehelp@gmail.com" style="color: #ffffff; text-decoration: none;">everydayalittlehelp@gmail.com</a>. Happy learning!</p>
+        
     </div>
+    <br>
     <div class="container">
         <div class="box" onclick="navigateTo('page16.html')">Quiz!</div>
         <div class="box" onclick="navigateTo('page26.html')">Daily Routines</div>  
         <div class="box" onclick="navigateTo('page25.html')">Vocabulary</div>  
-        <div class="box" onclick="navigateTo('page24.html')">Fortune Teller</div>  
         <div class="box" onclick="navigateTo('page22.html')">Synonyms</div>  
         <div class="box" onclick="navigateTo('page20.html')">Travel English</div>  
         <div class="box" onclick="navigateTo('page21.html')">Reading</div>  
@@ -32,28 +46,54 @@
         <div class="box" onclick="navigateTo('page4.html')">Text to Speech</div>
         <div class="box" onclick="navigateTo('page5.html')">Notes</div>
         <div class="box" onclick="navigateTo('page6.html')">English Learning Sites</div>
+        <div class="box" onclick="navigateTo('page24.html')">Fortune Teller</div>  
         <div class="box" onclick="navigateTo('page9.html')">Hangman</div>
         <div class="box" onclick="navigateTo('page7.html')">Tetris Game</div>
-        <div class="box" onclick="navigateTo('https://diarywriter.streamlit.app/')">English Diary Writer</div>
-        <div class="box" onclick="navigateTo('https://pdfreaderr.streamlit.app')">PDF to Text</div>
-
     </div>
-    
-    <div class="image_container">
-        <div class="image">
-            <img src="assets/code5.jpg" alt="Animated Square">
-            
-        </div>
- 
+    <br>
+  
+    <div>
+        <ul>
+            <h4>Our Resources!</h4>
+            <li><b>Quiz:</b> Learn by filling in the blanks in sentences.</li>
+            <li><b>Daily Routines:</b> Study expressions used in everyday situations.</li>
+            <li><b>Vocabulary:</b> Learn words by using them in sentences.</li>
+            <li><b>Synonyms:</b> Learn different words that mean the same thing to use varied expressions.</li>
+            <li><b>Travel English:</b> Learn expressions for different travel situations.</li>
+            <li><b>Speaking Practice:</b> Talk with AI Tutor in English</li>
+            <li><b>Reading:</b> Create various reading passages to learn new expressions.</li>
+            <li><b>Word Generator:</b> Study sentences with simple words.</li>
+            <li><b>English Chatting:</b> Talk to an AI model in English.</li>
+            <li><b>20 Questions:</b> Guess the word with 20 hints.</li>
+            <li><b>Ask Questions:</b> Ask questions about English.</li>
+            <li><b>text to speech:</b> AI will read your scripts.</li>
+            <li><b>Notes:</b> Write memo during your study.</li>
+            <li><b>English Learning Sites:</b> Useful English learning Youtube</li>
+            <li><b>text to speech:</b> AI will read your scripts.</li>
+            <li><b>Fortune Teller/Hangman/Tetris:</b> Have fun studying English during breaks.</li>
+        </ul>
+    </div>   
+    <!-- Bootstrap JS 및 의존성 추가 -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-        <div class="content">
-            <p>Thank you for your visit. I am a beginner coder and developing a website for learning English and Korean.
-                <br>Please let me know if there is any material you would like to experience.
-            </p>            
-                 <a href="mailto:everydayalittlehelp@gmail.com">everydayalittlehelp@gmail.com</a>
-            </p>
-        </div>
-    </div>
-    
+    <!-- 네비게이션 바 스크롤 제어 스크립트 -->
+    <script>
+        let lastScrollTop = 0;
+        const navbar = document.getElementById('navbar');
+
+        window.addEventListener('scroll', function() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > lastScrollTop) {
+                // Scroll down
+                navbar.style.top = '-70px';
+            } else {
+                // Scroll up
+                navbar.style.top = '0';
+            }
+            lastScrollTop = scrollTop;
+        });
+    </script>
 </body>
 </html>
