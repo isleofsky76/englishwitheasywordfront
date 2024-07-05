@@ -1,46 +1,99 @@
 /* 기본적인 여백 */
 body {
-    margin: 40px; /* 전체 body에 40px의 여백을 추가 */
     background-color: #4262a7; /* Black background color */
+    margin: 50px;
     line-height: 1.4;
     font-family: "Nanum Gothic", sans-serif;
     font-weight: 400;
     font-style: normal;
-    font-size: 0.9rem;
-    color: #ffffff; /* Text color to white */
+    font-size: 1.2rem;
+    background-color: #02051d; /* Dark blue background color */
+    justify-content: center;
+    align-items: center;
+    color: white;
     p {
         margin-bottom: 10px; /* 문단 간의 간격 조절 */
     }
 }
 
-.header {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #ffffff; /* Text color to white */
+.h2, h2 {
+    font-size: 1.6rem;
+    justify-content: center;
+    align-items: center;
+    color: rgb(255, 255, 255);
 }
 
+.navbar-custom {
+    background-color: #02051d; /* Dark blue background color */
+    transition: top 0.3s; /* Smooth transition for hiding and showing the navbar */
+    font-size: 14px;
+}
+
+.navbar-brand {
+    font-size: 14px; /* Font size */
+    font-weight: bold; /* Font bold */
+    color: #fff; /* Font color */
+    text-decoration: none; /* Remove underline */
+}
+
+.navbar-brand:hover {
+    color: #ccc; /* Font color on hover */
+    text-decoration: none; /* Remove underline on hover */
+}
+
+.intro-text {
+    text-align: center;
+    margin: 100px 0 20px 0; /* Add margin-top to create space from the navbar */
+    color: white;
+    font-size:15px;
+}
+
+.intro-text2{
+    text-align: center;
+    font-size: 8px; /* Ensure this is not being overridden */
+    color: #fff; /* Font color */
+}
+
+ul {
+    list-style-position: inside;
+    text-align: left;
+    padding: 1px;
+    margin-left: 130px;
+    font-size: 12px;
+
+}
+
+li {
+    margin: 10px 0;
+}
+
+
 .container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px; /* Reduced space between boxes */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     width: 80%;
-    margin: 0 auto;
 }
 
 .box {
-    background-color: #13173a; /* Black background color */
-    color: #ffffff; /* Text color to white */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    border: 2px solid #ffffff; /* White border */
-    border-radius: 10px; /* Add border radius */
+    border: 2px solid #fff;
+    color: white;
+    padding: 20px;
+    margin: 6px;
     text-align: center;
-    margin-top: 5px;
-    height: 50pt;
+    cursor: pointer;
+    border-radius: 10px;
+    align-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.13);
+    background: rgba(255, 255, 255, 0.02);
+    width: calc(33% - 12px);
+    display: flex;
+    justify-content: center;
 }
 
+.box:hover {
+    background-color: #13173a;
+}
 
 .image_container img {
     margin-top: 10px;
@@ -71,6 +124,17 @@ body {
 
 
 
+ul h4 {
+    font-size: 14px; /* Change this to your desired header size */
+    margin-bottom: 10px; /* Space between header and list */
+    color: #f4f5f4; /* Text color to white */
+}
+
+ul li {
+    margin-bottom: 8px; /* Space between list items */
+    font-size: 13px; /* Change this to your desired header size */
+}
+
 
 /* Mobile adjustments */
 @media only screen and (max-width: 600px) {
@@ -87,7 +151,7 @@ body {
 
     .box {
         height: 50px;
-        font-size: 1.1 rem;
+        font-size: 0.8rem;
         margin: 0 0 5px 0;
     }
 
@@ -103,6 +167,15 @@ body {
         padding: 10px;
         text-align: center;
     }
+    ul {
+        list-style-position: inside;
+        text-align: left;
+        padding: 1px;
+        margin-left: 1px;
+        
+    
+    }
+    
 }
 
 a {
