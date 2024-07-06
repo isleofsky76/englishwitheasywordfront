@@ -49,6 +49,7 @@ header {
   width: auto; /* Allow buttons to auto-size */
   flex: 0 0 auto; /* Prevent flexbox from resizing the buttons */
   text-align: center; /* Center text */
+  color: rgb(38, 243, 11);
 }
 
 #synonymsContent {
