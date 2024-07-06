@@ -1,93 +1,157 @@
 body {
   font-family: 'Poppins', sans-serif;
+  background-color: #02051d; /* Dark blue background color */
+  color: #f5f6f7; /* Dark text color */
   margin-top: 70px;
+  font-size: 14px;
+  padding : 20px;
+}
+
+.bg-primary {
+  --bs-bg-opacity: 1;
+  background-color: #05071e !important;
+}
+
+.navbar-custom {
+  background-color: #02051d; /* Dark blue background color */
+  transition: top 0.3s; /* Smooth transition for hiding and showing the navbar */
   font-size: 14px;
 }
 
-#websiteInfo {
-  padding-left: 20px; /* Add padding here */
+
+header {
+  font-size: 12px;
+  background-color: #02051d; /* Dark blue background color */
+  color: white;
+  text-align: left;
+  padding: 1em 0;
 }
 
-h1 {
-  font-size: 1.5em; /* Adjust as needed */
+header {
+  background-color: #050df7;
+  color: white;
+  text-align: left;
+  padding: 1em 0;
+}
+
+main {
+  margin: 1em;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 0.5em;
+  margin: 1em 0;
+  box-sizing: border-box;
+}
+
+button {
+  padding: 0.5em 1em;
+  background-color: #f8fcf8;
+  color: rgb(12, 0, 0);
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-bottom: 50px;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+#results, #loading {
+  text-align: left;
   margin-bottom: 20px;
 }
 
-h2 {
-  font-size: 1.5em; /* Adjust as needed */
+#sentenceList {
+  list-style-type: none;
+  padding: 0;
 }
 
-h3 {
-  font-size: 1.5em; /* Adjust as needed */
+#sentenceList li {
+  background-color: white;
+  padding: 1em;
+  margin-bottom: 0.5em;
 }
 
-#shortTextSection, #translationSection {
-  margin-top: 20px;
+.spinner-border {
+  width: 3rem;
+  height: 3rem;
+  margin: 1em auto;
 }
 
-#wordList {
-  margin-top: 20px;
-  font-size: 12px;
-}
-
-button.loading {
-  position: relative;
-  pointer-events: none;
-  opacity: 0.7; /* Slight transparency to indicate loading */
-}
-
-button.loading .spinner-border {
+.keyword-list-horizontal {
   position: absolute;
-  width: 1rem;
-  height: 1rem;
-  border-width: 0.15em;
-  top: 50%;
-  left: 50%;
+  left: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-size: 12px;
+  text-align: left;
 }
 
-/* Adjust font size of suggested topics heading */
-#wordList h2 {
-  font-size: 1.2em; /* Adjust as needed */
+.keyword-list-horizontal li {
+  list-style-type: none;
+  padding: 0.3em 0.7em;
+  background-color: #282a9b;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  text-align: left;
 }
 
-/* Adjust font size of the topic buttons */
-#wordsContainer button {
-  font-size: 1.2em; /* Adjust as needed */
+.keyword-list-horizontal li:hover {
+  background-color: #45a049;
+  color: white;
+  text-align: left;
 }
 
-@media (max-width: 768px) {
-  body {
-      font-size: 14px;
+
+.h1, h1 {
+  font-size: 1.4rem;
+}
+
+/* 모바일 뷰포트용 스타일 */
+@media (max-width: 600px) {
+  header {
+    text-align: left;
+    padding: 0.5em 0;
+    font-size: 14px;
   }
 
-  h1 {
-      font-size: 1.2em; /* Adjust as needed for smaller screens */
+  main {
+    margin: 1em;
   }
 
-  h2 {
-      font-size: 1.2em; /* Adjust as needed for smaller screens */
+  input[type="text"] {
+    padding: 0.5em;
   }
 
-  h3 {
-      font-size: 1.2em; /* Adjust as needed for smaller screens */
+  button {
+    padding: 0.5em;
+    font-size: 0.9em;
   }
 
-  #wordList {
-      font-size: 1.1em; /* Adjust as needed */
+
+  .keyword-list-horizontal li:hover {
+    background-color: #45a049;
+    color: white;
+    text-align: left;
+}
+
+  .keyword-list-horizontal li {
+    font-size: 0.9em;
   }
 
-  .spinner-border {
-      width: 1rem;
-      height: 1rem;
+  #sentenceList li {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
-  /* Adjust font size of suggested topics heading for smaller screens */
-  #wordList h2 {
-    font-size: 1em; /* Adjust as needed for smaller screens */
-  }
 
-  /* Adjust font size of the topic buttons for smaller screens */
-  #wordsContainer button {
-    font-size: 1.1em; /* Adjust as needed for smaller screens */
+  .try-more-title {
+    font-size: 1.2em;
   }
 }
+
