@@ -10,8 +10,17 @@ body {
   box-sizing: border-box; /
 }
 
-body {
-  margin-bottom: 10px;
+/* Specificity adjustment */
+.navbar.navbar-expand-lg.navbar-dark.bg-primary.fixed-top.navbar-custom {
+  --bs-bg-opacity: 1;
+  background-color: rgb(5, 19, 41) !important; /* Your desired background color */
+}
+
+header {
+  background-color: #02051d; /* Dark blue background color */
+  color: white;
+  text-align: left;
+  padding: 1em 0;
 }
 
 .container {
