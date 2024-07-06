@@ -2,27 +2,34 @@
 body {
     margin: 20px;
     margin-top: 100px; /* Adjust the value to move content down */
-    background-color: #fff; /* Light grey text */
+    background-color: #02051d; /* Dark b /* Light grey text */
     line-height: 1.4;
     font-family: "Nanum Gothic", sans-serif;
     font-weight: 400;
     font-style: normal;
     font-size: 1.2rem;
-    color: rgb(0, 0, 10);
+    color: rgb(234, 234, 236);
     p {
         margin-bottom: 10px; /* 문단 간의 간격 조절 */
     }
 }
 
+.bg-primary {
+    --bs-bg-opacity: 1;
+    background-color: #05071e !important;
+  }
+
 .page-title {
     font-size: 24px;
     text-align: center;
     font-weight: bold;
+    color: #ebeef1; /* Link color */
 }
 
 .highlight{
     padding: 5px;
     font-size: 1.2rem;
+    color: #ebeef1; /* Link color */
 }
 
 
@@ -37,7 +44,7 @@ body {
 .btn, .btn-primary, .btn-sm {
     background: none;
     border: none;
-    color: #007bff; /* Link color */
+    color: #ebeef1; /* Link color */
     font-size: 1rem; /* Adjust font size */
     padding: 0; /* Remove padding */
     margin: 5px; /* Adjust margin */
@@ -77,7 +84,7 @@ body {
 /* Add spacing between elements */
 #inputForm {
     margin-top: 1rem;
-    color: rgb(74, 74, 75); /* Adjust the color as desired */
+    color: rgb(244, 244, 245); /* Adjust the color as desired */
     text-decoration: none; /* 밑줄 없앰 */
     font-size: 0.8rem; /* 텍스트 크기 설정 */
 
@@ -110,6 +117,7 @@ body {
     line-height: 2; /* Adjust the line height to add space between lines */
     font-size: 0.9rem; /* Set font size */
     background-color: #eaeaea; /* Set background color for better visibility */
+    color: rgb(1, 1, 19); /* Adjust the color as desired */
     text-align: left;
 }
 
@@ -192,13 +200,20 @@ body {
 }
 
 .keyword-list-horizontal li {
-    margin: 5px;
+    list-style-type: none;
+    padding: 0.3em 0.7em;
+    background-color: #282a9b;
+    border: 1px solid #ccc;
     cursor: pointer;
-    background-color: #f0f0f0;
-    padding: 5px;
-    border-radius: 4px;
-    font-size: 12px;
+    transition: background-color 0.3s;
+    text-align: left;
+    margin: 0.5em; /* Added margin to increase space between items */
 }
+
+
+
+
+
 
 /* Media queries for different screen sizes */
 @media (max-width: 1200px) {
@@ -285,11 +300,12 @@ body {
     #volumeSlider,
     #selectedTime,
     #text-to-speech,
+    #engUkButton,
     #wordList,
     #wordStatistics,
-    #downloadButton,
     #cityFilter {
         display: none;
     }
 }
+
 
