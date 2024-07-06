@@ -101,7 +101,19 @@ button:hover {
   text-align: left;
 }
 
+#wordsContainer .btn {
+  background-color: #282a9b;
+  color: white; /* White text color */
+  border-color: #001f3f; /* Match the border color to the background */
+  font-size: 12px;
+  border: 1px solid #ccc;
+}
 
+#wordsContainer .btn:hover {
+  background-color: #001a35; /* Slightly darker navy for hover */
+  color: white; /* Ensure text remains white on hover */
+  border-color: #001a35; /* Match the border color on hover */
+}
 .h1, h1 {
   font-size: 1.4rem;
 }
