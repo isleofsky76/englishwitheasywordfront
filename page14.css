@@ -6,7 +6,7 @@ body {
     margin-top: 70px;
     font-size: 14px;
   }
-  
+
   .bg-primary {
     --bs-bg-opacity: 1;
     background-color: #05071e !important;
@@ -25,6 +25,7 @@ body {
     text-align: left;
     padding: 1em 0;
   }
+
   
   header {
     background-color: #050df7;
