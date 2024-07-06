@@ -1,15 +1,53 @@
 body {
   font-family: 'Poppins', sans-serif;
-  margin-top: 30px;
+  background-color: #02051d; /* Dark blue background color */
+  color: #f5f6f7; /* Dark text color */
+  margin-top: 70px;
   font-size: 14px;
 }
+
+.bg-primary {
+  --bs-bg-opacity: 1;
+  background-color: #05071e !important;
+}
+
+.navbar-custom {
+  background-color: #02051d; /* Dark blue background color */
+  transition: top 0.3s; /* Smooth transition for hiding and showing the navbar */
+  font-size: 14px;
+}
+
+.navbar-brand {
+  font-family: 'Nanum Gothic', sans-serif; /* Font for the brand name */
+  font-size: 1.5rem; /* Increase brand font size */
+  color: #ffdd57; /* Yellow color for brand text */
+  
+}
+
+.navbar .navbar-brand:hover {
+  color: #ffc107; /* Slightly lighter yellow on hover */
+}
+
+.navbar-nav .nav-link {
+  color: white; /* White text color for nav links */
+}
+
+.navbar-nav .nav-link:hover {
+  color: #ffdd57; /* Yellow text color on hover */
+}
+
+
+
 .quiz-container {
   padding: 20px;
   margin: 0 auto;
   max-width: 600px;
 }
+
 .rules-section {
   padding-left: 20px;
+
+
 }
 .divider {
   height: 1px;
@@ -21,7 +59,7 @@ body {
 }
 
 #question {
-  background-color: #f9f9f9; /* Background color for the question */
+  background-color: #02051d; /* Dark blue background color */
   padding: 10px; /* Add padding for better spacing */
   border-radius: 5px; /* Optional: rounded corners */
   border: 1px solid #ddd; /* Optional: add a border */
