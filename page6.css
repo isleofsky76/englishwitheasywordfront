@@ -3,6 +3,28 @@ body {
   line-height: 1.6;
   margin: 20px;
 }
+
+.bg-primary {
+  --bs-bg-opacity: 1;
+  background-color: #05071e !important;
+}
+
+.navbar-custom {
+  background-color: #02051d; /* Dark blue background color */
+  transition: top 0.3s; /* Smooth transition for hiding and showing the navbar */
+  font-size: 14px;
+}
+
+
+header {
+  background-color: #02051d; /* Dark blue background color */
+  color: white;
+  text-align: left;
+  padding: 1em 0;
+}
+
+
+
 h1, h2, h3 {
   color: #2c3e50;
 }
