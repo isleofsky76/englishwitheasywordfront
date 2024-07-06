@@ -19,9 +19,8 @@ body {
 
 .navbar-brand {
   font-family: 'Nanum Gothic', sans-serif; /* Font for the brand name */
-  font-size: 1.5rem; /* Increase brand font size */
+  font-size: 1rem; /* Increase brand font size */
   color: #f7f6f5; /* Yellow color for brand text */
-  
 }
 
 .navbar .navbar-brand:hover {
