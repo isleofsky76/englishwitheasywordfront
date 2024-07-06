@@ -87,7 +87,6 @@ button:hover {
 }
 
 
-
 .keyword-list-horizontal {
   position: absolute;
   left: 0;
@@ -101,11 +100,11 @@ button:hover {
 .keyword-list-horizontal li {
   list-style-type: none;
   padding: 0.3em 0.7em;
-  background-color: #f0f0f0;
+  background-color: #282a9b;
   border: 1px solid #ccc;
   cursor: pointer;
   transition: background-color 0.3s;
-  color: #f30789; /* 원하는 색상으로 조정 */
+  color: #f1eff0; /* 원하는 색상으로 조정 */
   text-align: left;
 }
 
