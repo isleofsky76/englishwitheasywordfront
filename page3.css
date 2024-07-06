@@ -1,17 +1,38 @@
-
-/* 기본적인 여백 */
 body {
-    margin: 50px; /* 전체 body에 20px의 여백을 추가 */
-    background-color: #eef5f8; /* Light sky blue background color */
+    margin: 30px;
+    padding: 10px;
+    background-color: #f8f5f5; /* Light grey text */
     line-height: 1.4;
-    font-family: "Nanum Gothic", sans-serif;
+    font-family: sans-serif;
     font-weight: 400;
     font-style: normal;
-    font-size: 0.9rem;
-    p {
-        margin-bottom: 10px; /* 문단 간의 간격 조절 */
-    }
-}
+    font-size: 1rem;
+    color: #727272; /* Light grey text */
+    height: calc(100vh - 30px); /* Adjust height considering margins and paddings */
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box; /* Ensure padding and border are included in the height calculation */
+    background-color: #05071e !important;
+  }
+  
+  
+  .bg-primary {
+    --bs-bg-opacity: 1;
+    background-color: #05071e !important;
+  }
+  
+  .navbar-custom {
+    background-color: #02051d; /* Dark blue background color */
+    transition: top 0.3s; /* Smooth transition for hiding and showing the navbar */
+    font-size: 14px;
+  }
+  
+  .navbar-brand {
+    font-family: 'Nanum Gothic', sans-serif; /* Font for the brand name */
+    font-size: 1.5rem; /* Increase brand font size */
+    color: #f7f6f5; /* Yellow color for brand text */
+    
+  }
 
 .page-title {
     font-size: 24px;
