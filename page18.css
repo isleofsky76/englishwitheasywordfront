@@ -1,8 +1,37 @@
 body {
-  font-family: 'Poppins', sans-serif;
-  background-color: #f0f0f0;
-  margin: 0;
-  padding-top: 2px; /* Adjusted for navbar height */
+  margin: 30px;
+  padding: 10px;
+  background-color: #f8f5f5; /* Light grey text */
+  line-height: 1.4;
+  font-family: sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 1rem;
+  color: #727272; /* Light grey text */
+  height: calc(100vh - 60px); /* Adjust height considering margins and paddings */
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box; /* Ensure padding and border are included in the height calculation */
+  background-color: #05071e !important;
+}
+
+
+.bg-primary {
+  --bs-bg-opacity: 1;
+  background-color: #05071e !important;
+}
+
+.navbar-custom {
+  background-color: #02051d; /* Dark blue background color */
+  transition: top 0.3s; /* Smooth transition for hiding and showing the navbar */
+  font-size: 14px;
+}
+
+.navbar-brand {
+  font-family: 'Nanum Gothic', sans-serif; /* Font for the brand name */
+  font-size: 1.5rem; /* Increase brand font size */
+  color: #f7f6f5; /* Yellow color for brand text */
+  
 }
 
 .quiz-container {
