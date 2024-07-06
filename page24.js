@@ -18,7 +18,7 @@ document.getElementById('getFortuneButton').addEventListener('click', async () =
     stopButton.style.display = 'none';
 
     try {
-        const response = await fetch('http://localhost:3000/get-fortune', {
+        const response = await fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/get-fortune', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
