@@ -1,13 +1,33 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: rgb(74, 74, 190);
+  background-color: rgb(2, 8, 22);
   display: flex;
   justify-content: center; /* Center horizontally */
   align-items: center; /* Center vertically */
   flex-direction: column; /* Stack elements vertically */
   height: 100vh; /* Make the body take up the full viewport height */
 }
+
+
+.bg-primary {
+  --bs-bg-opacity: 1;
+  background-color: #05071e !important;
+}
+
+.navbar-custom {
+  background-color: #02051d; /* Dark blue background color */
+  transition: top 0.3s; /* Smooth transition for hiding and showing the navbar */
+  font-size: 14px;
+}
+
+
+header {
+  background-color: #02051d; /* Dark blue background color */
+  color: white;
+  text-align: left;
+  padding: 1em 0;}
+
 
 
 h1 {
@@ -18,6 +38,7 @@ h1 {
 }
 
 #wrapper {
+  margin-top:70px;
   margin-right: 160px;
   display: flex;
   flex-direction: row; /* Align items in a row */
@@ -36,7 +57,6 @@ h1 {
 }
 
 
-
 #game-wrapper {
   display: flex;
   flex-direction: column; /* Stack the children vertically */
@@ -48,7 +68,7 @@ h1 {
 #game-container {
   position: relative;
   display: inline-block;
-  height: 600px; /* Adjust the height to fit within the viewport */
+  height: 500px; /* Adjust the height to fit within the viewport */
   width: 375px; /* Adjust the width to maintain the aspect ratio */
 }
 
@@ -79,6 +99,12 @@ h1 {
   font-weight: bold;
   font-family: "Lucida Console", "Courier New", monospace;
   text-align: left;
-  margin: 15px 0;
+  margin: 10px 0;
 }
 
+
+#controls{
+  color: white;
+  text-align: left;
+  padding: 1em 0;
+}
