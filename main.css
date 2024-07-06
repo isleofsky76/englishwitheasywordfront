@@ -125,14 +125,14 @@ li {
 
 
 ul h4 {
-    font-size: 14px; /* Change this to your desired header size */
+    font-size: 16px; /* Change this to your desired header size */
     margin-bottom: 10px; /* Space between header and list */
     color: #f4f5f4; /* Text color to white */
 }
 
 ul li {
     margin-bottom: 8px; /* Space between list items */
-    font-size: 13px; /* Change this to your desired header size */
+    font-size: 14px; /* Change this to your desired header size */
 }
 
 
