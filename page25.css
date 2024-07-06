@@ -25,6 +25,13 @@ header {
   padding: 1em 0;
 }
 
+header {
+  background-color: #050df7;
+  color: white;
+  text-align: left;
+  padding: 1em 0;
+}
+
 main {
   margin: 2em;
 }
@@ -38,13 +45,12 @@ input[type="text"] {
 
 button {
   padding: 0.5em 1em;
-  background-color: #ecf3ed;
-  color: rgb(7, 0, 0);
+  background-color: #f8fcf8;
+  color: rgb(12, 0, 0);
   border: none;
   cursor: pointer;
   transition: background-color 0.3s;
   margin-bottom: 50px;
-  text-align: left; /* Ensures text alignment to the left */
 }
 
 button:hover {
@@ -59,34 +65,19 @@ button:hover {
 #sentenceList {
   list-style-type: none;
   padding: 0;
-  text-align: left; /* Ensures text alignment to the left */
 }
 
 #sentenceList li {
-  background-color: rgb(255, 255, 255);
+  background-color: white;
   padding: 1em;
   margin-bottom: 0.5em;
-  text-align: left; /* Ensures text alignment to the left */
-  align-items: flex-start;
 }
 
 .spinner-border {
-  width: 2rem;
-  height: 2rem;
+  width: 3rem;
+  height: 3rem;
   margin: 1em auto;
-  color: #FF5733; /* 원하는 색상으로 조정 */
 }
-
-
-.keyword-headline {
-  font-size: 1.5em;
-  font-family: 'Poppins', sans-serif;
-  margin-top: 20px;
-  margin-bottom: 10px;
-  color: #0ee744;
-}
-
-
 
 .keyword-list-horizontal {
   position: absolute;
@@ -101,17 +92,16 @@ button:hover {
 .keyword-list-horizontal li {
   list-style-type: none;
   padding: 0.3em 0.7em;
-  background-color: #f0f0f0;
+  background-color: #282a9b;
   border: 1px solid #ccc;
   cursor: pointer;
   transition: background-color 0.3s;
-  color: #f30789; /* 원하는 색상으로 조정 */
   text-align: left;
 }
 
 .keyword-list-horizontal li:hover {
   background-color: #45a049;
-  color: rgb(255, 255, 255);
+  color: white;
   text-align: left;
 }
 
@@ -136,14 +126,11 @@ button:hover {
     font-size: 0.9em;
   }
 
-  .keyword-list-horizontal {
-    display: flex; /* Ensure the container is a flex container */
-    flex-direction: column;
-    gap: 5px;
-    font-size: 14px;
-    position: relative; /* Use position relative to adjust left */
-    left: 0px; /* Align to the left */
-    align-items: flex-start; /* Align items to the start (left) */
+
+  .keyword-list-horizontal li:hover {
+    background-color: #45a049;
+    color: white;
+    text-align: left;
 }
 
   .keyword-list-horizontal li {
@@ -155,19 +142,9 @@ button:hover {
     align-items: flex-start;
   }
 
+
   .try-more-title {
     font-size: 1.2em;
   }
-
-  .keyword-headline {
-    font-size: 1.5em; /* 원하는 글자 크기로 조정 */
-    font-family: 'Poppins', sans-serif; /* 원하는 글꼴로 조정 */
-    margin-top: 20px; /* 그룹 사이의 여백 조정 */
-    margin-bottom: 10px; /* 헤드라인과 키워드 리스트 사이의 여백 조정 */
-    color: #0af150; /* 원하는 색상으로 조정 */
-  }
-
-  .loading-text {
-    color: #FF5733; /* 원하는 색상으로 조정 */
-  }
 }
+
