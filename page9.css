@@ -1,12 +1,13 @@
 body {
-  margin: 0;
+  padding: 100px; /* 내부 패딩을 상하좌우 20px으로 설정 */
   font-family: 'Roboto', sans-serif;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-sizing: border-box; /
+  box-sizing: border-box;
   background-color: #02051d; /* Dark blue background color */
-  height: 100vh;
+  height: 110vh; /* 적절한 여백을 위해 높이 조정 */
+  margin-bottom: 20px;
 }
 
 
@@ -24,6 +25,7 @@ header {
 }
 
 #topic-selection {
+  margin-top: 30px;
   text-align: center;
   font-size: 14pt;
   height: 40vh;
@@ -48,7 +50,7 @@ header {
 
 canvas {
   width: 100%;
-  height: 150vh;
+  height: 30vh;
   margin: 10px auto;
   display: block;
   justify-content: center;
@@ -59,11 +61,9 @@ canvas {
 
 .hangman-container,
 #words-block {
-  margin-top: 30px;
   padding: 0;
   justify-content: center;
   align-items: center;
-  height: 100vh; /* Increase height */
   width: 100%; /* Adjust width */
   font-size: 10px;
 }
@@ -194,11 +194,13 @@ canvas {
 
 /* Mobile adjustments */
 @media (max-width: 600px) {
-  .container {
-    flex-direction: column;
-    padding: 0; /* Reduced padding */
-    margin: 0; /* Removed margin */
+  body {
+    padding: 1px; /* 모바일에서는 패딩을 줄입니다 */
+    height: auto; /* 높이를 자동으로 조정 */
+    width : auto; /* 높이를 자동으로 조정 */
+    margin-bottom: 50px; /* 하단 여백 제거 */
   }
+
 
   .hangman-container,
   #words-block {
@@ -206,7 +208,7 @@ canvas {
   }
 
   #topic-selection {
-    margin-top: 10px;
+    margin-top: 100px;
     text-align: center;
     font-size: 14pt;
     height: 30vh;
@@ -229,13 +231,13 @@ canvas {
   }
 
   #letter-container {
-    gap: 0.5em; /* Adjust spacing for mobile */
+    gap: 0.2em; /* Adjust spacing for mobile */
   }
 
   #letter-container button {
     position: relative; /* Ensure the button can hold an absolute positioned element */
     flex: 1 1 8%; /* Adjust the width of the buttons */
-    margin: 5px; /* Adjust margin for spacing */
+    margin: 2px; /* Adjust margin for spacing */
     max-width: 40px; /* Ensure the buttons don't get too wide */
     box-sizing: border-box; /* Include padding and border in element's total width and height */
     background-color: #4CAF50;
@@ -293,7 +295,7 @@ canvas {
   }
 
   #topic-heading {
-    font-size: 16px; /* Reduce font size */
+    font-size: 14px; /* Reduce font size */
   }
 
   #topic-dropdown {
