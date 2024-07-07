@@ -2,7 +2,11 @@ body {
   font-family: Arial, sans-serif;
   line-height: 1.6;
   margin: 20px;
+  background-color: #05071e !important;
+  color: white;
+  font-size: 20px;
 }
+
 
 .bg-primary {
   --bs-bg-opacity: 1;
@@ -22,7 +26,6 @@ header {
   text-align: left;
   padding: 1em 0;
 }
-
 
 
 h1, h2, h3 {
@@ -54,7 +57,7 @@ a:hover {
       font-size: 1em;
   }
   p {
-      font-size: 0.8em;
+      font-size: 0.7em;
   }
   .section {
       margin-bottom: 20px;
