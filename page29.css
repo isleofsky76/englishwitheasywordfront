@@ -45,10 +45,11 @@ header {
   list-style-type: none;
   padding: 0;
   font-size: 14px;
+  margin-bottom: 1rem;
 }
 
 .section ul li {
-  margin-bottom: 0.5rem; /* Decreased margin to reduce spacing */
+  margin-bottom: 2rem; /* Decreased margin to reduce spacing */
   font-size: 14px;
   position: relative; /* Required for positioning the bullet */
   padding-left: 1.5rem; /* Space for the bullet */
