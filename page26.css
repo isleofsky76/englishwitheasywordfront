@@ -51,16 +51,44 @@ button:hover {
   background-color: #45a049;
 }
 
-#results, #loading {
+#results{
   text-align: left;
   margin-bottom: 20px;
   color: rgb(10, 21, 56);
+  background-color: #02051d; /* Dark blue background color */
 }
+
+#loading {
+  text-align: left;
+  margin-bottom: 20px;
+  color: rgb(92, 238, 7);
+  background-color: #02051d; /* Dark blue background color */
+}
+
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+  margin-top: 0;
+  margin-bottom: .5rem;
+  font-weight: 500;
+  line-height: 1.2;
+  color: rgb(92, 245, 4);
+  font-size: 14px;
+}
+
+#selectedTopic {
+  background-color: rgb(255, 255, 255);
+  padding: 1em;
+  margin-bottom: 0.5em;
+  text-align: left; /* Ensures text alignment to the left */
+  align-items: flex-start;
+  background-color: #02051d; /* Dark blue background color */
+}
+
 
 #sentenceList {
   list-style-type: none;
   padding: 0;
   text-align: left; /* Ensures text alignment to the left */
+  background-color: #02051d; /* Dark blue background color */
 }
 
 #sentenceList li {
@@ -69,6 +97,8 @@ button:hover {
   margin-bottom: 0.5em;
   text-align: left; /* Ensures text alignment to the left */
   align-items: flex-start;
+  background-color: #02051d; /* Dark blue background color */
+  color: rgb(251, 252, 251);
 }
 
 .spinner-border {
