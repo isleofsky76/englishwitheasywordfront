@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const topicInput = document.getElementById('topicInput');
 
     const keywords = {
-        daily_routines: [
+         examples: [
             "wake up(일어나다)", "brush teeth(양치하다)", "take a shower(샤워하다)", "eat breakfast(아침 먹다)", 
             "go to work(출근하다)", "have lunch(점심 먹다)", "finish work(퇴근하다)", "have dinner(저녁 먹다)", 
             "watch TV(텔레비전 보다)", "read a book(책 읽다)", "exercise(운동하다)", "go to bed(잠자리에 들다)", 
