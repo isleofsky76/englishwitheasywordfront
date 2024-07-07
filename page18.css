@@ -1,5 +1,4 @@
 body {
-  margin: 30px;
   padding: 10px;
   background-color: #f8f5f5; /* Light grey text */
   line-height: 1.4;
@@ -48,14 +47,17 @@ body {
 
 h1{
   font-size: 36px; /* Adjust button text size */
-  color: #06053c;
+  color: #0a06f5;
   margin-bottom: 10px; /* Reduce space below the heading */
+  font-size: 24px;
+  margin-bottom: 20px; /* Reduce space below the heading */
+  font-weight: bold;
 }
 
 
 h2{
   font-size: 20px; /* Adjust button text size */
-  color: #eb0835;
+  color: #010518;
   margin-bottom: 10px; /* Reduce space below the heading */
 }
 
@@ -66,19 +68,22 @@ h2{
 
 #answerInput {
   height: 70px; /* Adjusted input field height */
-  font-size: 16px; /* Adjusted input field text size */
+  font-size: 10px; /* Adjusted input field text size */
 }
 
 .button-group {
   display: flex;
-  gap: 10px;
+  gap: 3px;
   margin-top: 10px;
+  gap:10px;
 }
 
 #hints {
   margin-top: 30px; /* Reduced space below the hints block */
-  color: #d81643;
-  font-size: 20px; /* Adjusted input field text size */
+  color: #fa5f06;
+  font-size: 16px; /* Adjusted input field text size */
+  text-align: left;
+  font-weight: bold;
 }
 
 .faq h4 {
@@ -106,7 +111,7 @@ h2{
 /* Mobile-friendly adjustments */
 @media (max-width: 600px) {
   .quiz-container {
-    padding: 15px;
+    padding: 10px;
   }
 
   h1 {
@@ -114,21 +119,23 @@ h2{
   }
 
   .button-group button {
-    padding: 4px 5px; /* Reduce button padding */
-    font-size: 12px; /* Reduce button text size */
+    padding: 10px 20px; /* Reduce button padding */
+    font-size: 10px; /* Reduce button text size */
     margin: 5px; /* Adjust button margin */
+    border-radius: 10px;
   }
 
   #answerInput {
-    height: 70px; /* Adjust input field height for mobile */
+    height: 60px; /* Adjust input field height for mobile */
     font-size: 20px; /* Adjust input field text size for mobile */
   }
 }
 
 /* General button adjustments for all screen sizes */
 .button-group button {
-  padding: 6px 10px; /* Adjust button padding */
-  font-size: 16px; /* Adjust button text size */
+  padding: 3px 4px; /* Adjust button padding */
+  font-size: 14px; /* Adjust button text size */
   margin: 0px; /* Adjust button margin */
+  width: 80px; /* Adjust button width */
+  height: 55px; /* Adjust button height */
 }
-
