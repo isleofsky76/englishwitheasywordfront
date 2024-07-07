@@ -6,7 +6,7 @@ body {
     margin-top: 70px;
     font-size: 14px;
   }
-
+  
   .bg-primary {
     --bs-bg-opacity: 1;
     background-color: #05071e !important;
@@ -27,15 +27,6 @@ body {
   }
 
   
-  header {
-    background-color: #050df7;
-    color: white;
-    text-align: left;
-    padding: 1em 0;
-  }
-
-  
-
 .h2, h2 {
     font-size: 24px;
 }
@@ -98,13 +89,15 @@ section {
     border-radius: 5px;
     padding: 10px;
     display: inline-block;
+    color: rgb(1, 12, 1);
 }
 
 .assistant-message {
-    color: green;
+    color: rgb(4, 247, 4);
 }
 
 .container {
     max-width: 600px;
     margin: 0 auto;
 }
+
