@@ -185,7 +185,7 @@ button:hover {
     color: #f7f4f5; /* Desired color adjustment */
     text-align: left;
     margin: 0; /* Remove margin from list items */
-    width: 190px; /* Set a fixed width */
+    width: 180px; /* Set a fixed width */
     height: 35px; /* Set a fixed height */
 }
 
