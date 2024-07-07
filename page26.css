@@ -112,7 +112,6 @@ button:hover {
 .keyword-headline {
   font-size: 1.5em;
   font-family: 'Poppins', sans-serif;
-  margin-top: 20px;
   margin-bottom: 10px;
   color: #0ee744;
 }
@@ -126,8 +125,6 @@ button:hover {
   gap: 10px;
   font-size: 12px;
   text-align: left;
-  
-  
 }
 
 .keyword-list-horizontal li {
@@ -194,7 +191,6 @@ button:hover {
   .keyword-headline {
     font-size: 1.5em; /* 원하는 글자 크기로 조정 */
     font-family: 'Poppins', sans-serif; /* 원하는 글꼴로 조정 */
-    margin-top: 20px; /* 그룹 사이의 여백 조정 */
     margin-bottom: 10px; /* 헤드라인과 키워드 리스트 사이의 여백 조정 */
     color: #0af150; /* 원하는 색상으로 조정 */
   }
@@ -203,5 +199,6 @@ button:hover {
     color: #FF5733; /* 원하는 색상으로 조정 */
   }
 }
+
 
 
