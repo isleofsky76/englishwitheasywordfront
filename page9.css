@@ -1,14 +1,14 @@
 body {
   margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 80vh;
   font-family: 'Roboto', sans-serif;
   display: flex;
   align-items: center;
   justify-content: center;
   box-sizing: border-box; /
+  background-color: #02051d; /* Dark blue background color */
+  height: 100vh;
 }
+
 
 /* Specificity adjustment */
 .navbar.navbar-expand-lg.navbar-dark.bg-primary.fixed-top.navbar-custom {
@@ -28,24 +28,22 @@ header {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: white;
+  background-color: #02051d; /* Dark blue background color */
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   width: 90%;
-  max-width: 900px;
-  padding: 20px;
-  height: 80vh;
+  height: 90vh;
   box-sizing: border-box;
+  margin-bottom: 50px;
 }
 
 #topic-selection {
-  margin-top: 40px;
   text-align: center;
   font-size: 14pt;
+  height: 40vh;
 }
 
 canvas {
-  height: 100%;
   width: 100%;
   height: auto;
   margin: 10px auto;
@@ -61,11 +59,10 @@ canvas {
   padding: 0;
   justify-content: center;
   align-items: center;
-  height: 90vh; /* Increase height */
+  height: 120vh; /* Increase height */
   width: 100%; /* Adjust width */
-  font-size: 12px;
+  font-size: 10px;
 }
-
 
 
 .block {
@@ -80,7 +77,6 @@ canvas {
 }
 
 #hangman-block {
-  margin-top: 50px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -186,7 +182,7 @@ canvas {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, 50%);
+  transform: translate(-50%, -5%);
   display: none;
   font-size: 24px; /* Adjust font size if needed */
   pointer-events: none; /* Ensure the "X" does not interfere with button clicks */
@@ -202,17 +198,27 @@ canvas {
 
   .hangman-container,
   #words-block {
-    margin-bottom: 5px;
+    margin-bottom: 10px;
+  }
+
+  #topic-selection {
+    margin-top: 50px;
+    text-align: center;
+    font-size: 14pt;
+    height: 30vh;
   }
 
   canvas {
     width: 100%;
-    max-width: 300px;
-    height: 200px; /* Adjust height as needed */
+    height: auto;
+    margin: 10px auto;
     display: block;
     justify-content: center;
     align-items: center;
+    font-size: 12pt;
+    margin-bottom: 30px;
   }
+  
 
   #alphabet-input {
     max-width: 100%;
@@ -223,12 +229,36 @@ canvas {
   }
 
   #letter-container button {
-    width: 2em; /* Adjust width for mobile */
-    height: 2em; /* Adjust height for mobile */
-    font-size: 1.2em; /* Adjust font size for mobile */
-    padding: 2px; /* Reduced padding */
-    margin: 1px; /* Reduced margin */
-    margin-left: 10px;
+    position: relative; /* Ensure the button can hold an absolute positioned element */
+    flex: 1 1 8%; /* Adjust the width of the buttons */
+    margin: 5px; /* Adjust margin for spacing */
+    max-width: 40px; /* Ensure the buttons don't get too wide */
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    justify-content: center;
+  }
+
+  .mark {
+    font-weight: bold;
+    color: red;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -5%);
+    display: none;
+    font-size: 24px; /* Adjust font size if needed */
+    pointer-events: none; /* Ensure the "X" does not interfere with button clicks */
   }
 
   /* Adjusted font sizes for hint and result text on mobile */
