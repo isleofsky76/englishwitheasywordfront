@@ -42,12 +42,13 @@ header {
   height: 90vh;
   box-sizing: border-box;
   margin-bottom: 20px;
+  
 }
 
 
 canvas {
   width: 100%;
-  height: auto;
+  height: 150vh;
   margin: 10px auto;
   display: block;
   justify-content: center;
@@ -62,7 +63,7 @@ canvas {
   padding: 0;
   justify-content: center;
   align-items: center;
-  height: 120vh; /* Increase height */
+  height: 100vh; /* Increase height */
   width: 100%; /* Adjust width */
   font-size: 10px;
 }
