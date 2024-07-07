@@ -74,6 +74,14 @@ body {
 
 #result {
   margin-top: 20px;
+  font-size: 16px;
+  color: #ddd;
+  line-height: 1.5; /* Adjust this value to increase or decrease the line spacing */
+}
+
+
+.rules-section {
+  margin-top: 20px;
   font-size: 14px;
   color: #ddd;
   line-height: 1.5; /* Adjust this value to increase or decrease the line spacing */
