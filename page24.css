@@ -5,6 +5,7 @@ body {
   align-items: center;
   margin-top: 30px;
   background-color: #05071e !important;
+  
 }
 
 
@@ -27,34 +28,29 @@ header {
   padding: 1em 0;
 }
 
+
 .container {
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100px;
 }
 
 input {
   padding: 10px;
   margin: 10px;
-  font-size: 0.8em;
+  font-size: 1.0em;
   width: 100%; /* 버튼과 구분되는 너비 설정 */
-  height: 60px; /* 높이 설정 */
+  height: 50px; /* 높이 설정 */
   border-width: 2px;
   border-style: solid;
   border-color: rgb(120, 119, 119);
   box-sizing: border-box; /* 패딩과 보더를 포함한 높이/너비 설정 */
+  border-radius: 10px;
+  /* Set border radius to 50 pixels */
 }
 
-#fortuneOutput {
-  margin-top: 20px;
-  font-size: 1.1em;
-  color: #544e4e;
-  text-align: left;
-  width: 100%;
-  max-width: 1000px;
-}
+
 
 h1 {
   font-size: 2rem;
@@ -66,12 +62,14 @@ h1 {
   margin: 1em auto;
   color: #FF5733; /* Adjust color as desired */
   text-align: left; /* Ensures text alignment to the left */
+  
 }
 
 #buttonsContainer {
   display: flex;
   justify-content: center; /* 가운데 정렬 */
   gap: 10px; /* 버튼 사이의 간격 */
+  margin-top: 30px;
 }
 
 #readButton {
@@ -92,6 +90,7 @@ h1 {
   flex-direction: column; /* 기본적으로 컨테이너 내부를 세로 정렬 */
   align-items: center; /* 수평 중앙 정렬 */
   gap: 10px; /* 요소 간 간격 */
+  color: rgb(68, 182, 58);
 }
 
 #buttonsContainer {
