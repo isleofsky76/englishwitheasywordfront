@@ -68,7 +68,8 @@ header {
   height: 200px; /* 고정된 높이로 설정 */
   overflow-y: auto;
   margin-top: 10px; /* Add some margin at the top */
-  background-color: #f9f9f9; /* 바탕색 지정 */
+  background-color: #02051d; /* Dark blue background color */
+  color: white;
   border: 1px solid #454040; /* Border similar to .bordered */
   padding: 10px; /* Padding for better readability */
   border-radius: 5px; /* Optional: To match the .bordered style */
@@ -123,6 +124,5 @@ hr.dashed-line {
   border-top: 2px dashed #0303f8; /* Change color and style as needed */
   margin: 20px 0; /* Adjust margin to create space around the line */
 }
-
 
 
