@@ -1,0 +1,94 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #02051d; /* Dark blue background color */
+  color: #070827; /* Dark text color */
+  padding: 80px;
+  font-size: 14px;
+  margin-top: 30px;
+}
+
+.bg-primary {
+  --bs-bg-opacity: 1;
+  background-color: #05071e !important;
+}
+
+.navbar-custom {
+  background-color: #02051d; /* Dark blue background color */
+  transition: top 0.3s; /* Smooth transition for hiding and showing the navbar */
+  font-size: 14px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  height: 500%;
+}
+
+  
+
+#post-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#post-header {
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+}
+
+#post-title {
+  font-size: 24px;
+  margin: 0;
+}
+
+#post-meta {
+  font-size: 14px;
+  color: #888;
+}
+
+#post-message {
+  font-size: 16px;
+  white-space: pre-wrap; /* Ensure white spaces are respected */
+}
+
+
+/* Mobile styles */
+@media (max-width: 767px) {
+  body {
+    padding: 20px;
+    margin-top: 10px;
+  }
+
+  h1 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+
+  #post-container {
+    max-width: 100%;
+    padding: 10px;
+
+  }
+
+  #post-title {
+    font-size: 20px;
+  }
+
+  #post-meta {
+    font-size: 12px;
+  }
+
+  #post-message {
+    font-size: 14px;
+  }
+}
