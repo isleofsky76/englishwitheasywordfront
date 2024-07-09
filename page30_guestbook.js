@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const isSecret = document.getElementById('isSecret').checked;
 
         try {
-            const response = await fetch('http://localhost:3000/guestbook', {
+            const response = await fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/guestbook', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const isSecret = document.getElementById('edit-isSecret').checked;
 
         try {
-            const response = await fetch('http://localhost:3000/updatepost', {
+            const response = await fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/updatepost', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function loadMessages() {
         try {
-            const response = await fetch('http://localhost:3000/guestbook');
+            const response = await fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/guestbook');
             if (!response.ok) {
                 throw new Error('Failed to load messages');
             }
@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const password = prompt('Enter password to delete this post:');
         if (password) {
             try {
-                const response = await fetch('http://localhost:3000/deletepost', {
+                const response = await fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/deletepost', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -133,7 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const password = prompt('Enter password to edit this post:');
         if (password) {
             try {
-                const response = await fetch(`http://localhost:3000/viewpost`, {
+                const response = await fetch(`https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/viewpost`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -167,7 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const adminPasswordInput = prompt('Enter admin password to delete this post:');
         if (adminPasswordInput) {
             try {
-                const response = await fetch('http://localhost:3000/admin/deletepost', {
+                const response = await fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/deletepost', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
