@@ -232,10 +232,14 @@ th.actions {
     margin: 1px;
   }
 
-  #write-post-button {
+ #write-post-button {
     width: 80px;
     height: 25px;
     font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 50px; /* 버튼의 높이에 맞게 line-height를 설정하세요 */
   }
 
   .sliders-container,
