@@ -4,6 +4,7 @@ body {
   color: #f2f2f5; /* Dark text color */
   font-size: 14px;
   margin: 0 auto; /* 양쪽 여백 제거 */
+  margin-top: 50px;
 }
 
 
