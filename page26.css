@@ -137,11 +137,12 @@ button:hover {
   text-align: left;
 }
 
-/* 모바일 뷰포트용 스타일 */
+
+
 @media (max-width: 600px) {
   header {
       text-align: left;
-      padding: 0.5em 0;
+      padding: 0.5em 2rem;
       font-size: 14px;
   }
 
@@ -164,29 +165,18 @@ button:hover {
 }
 
 .keyword-list-horizontal {
-    display: grid; /* Use grid layout */
-    grid-template-columns: repeat(2, 1fr); /* Create two equal columns */
-    gap: 10px; /* Adjust the gap between items */
-    font-size: 10px;
-    position: relative;
-    left: 0px; 
-    align-items: flex-start;
-    padding: 0; /* Remove padding from the grid container */
-    margin: 0; /* Remove margin from the grid container */
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* Adjust the minmax value for mobile view */
 }
 
   .keyword-list-horizontal li {
-    list-style-type: none;
-    padding: 0.5em 0.9em;
+    padding: 0.5em;
     background-color: #282a9b;
     border: 1px solid #ccc;
     cursor: pointer;
     transition: background-color 0.3s;
     color: #f7f4f5; /* Desired color adjustment */
     text-align: left;
-    margin: 0; /* Remove margin from list items */
-    width: 190px; /* Set a fixed width */
-    height: 100px; /* Set a fixed height */
+    margin: 0;
     font-size: 14px;
 }
 
@@ -200,14 +190,12 @@ button:hover {
   }
 
   .keyword-headline {
-      font-size: 1.5em; /* 원하는 글자 크기로 조정 */
-      font-family: 'Poppins', sans-serif; /* 원하는 글꼴로 조정 */
-      color: #0af150; /* 원하는 색상으로 조정 */
+      font-size: 1.5em; /* Desired font size adjustment */
+      font-family: 'Poppins', sans-serif; /* Desired font family */
+      color: #0af150; /* Desired color adjustment */
   }
 
   .loading-text {
-      color: #FF5733; /* 원하는 색상으로 조정 */
+      color: #FF5733; /* Desired color adjustment */
   }
 }
-
-
