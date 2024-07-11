@@ -1,9 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const jobs = [
-        
-    ];
-    
-
+    const jobs = [];
     const jobList = document.getElementById('jobList');
     const synonymsDiv = document.getElementById('synonymsContent');
     const jobInput = document.getElementById('jobInput');
@@ -44,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function() {
     async function fetchSynonyms(word) {
         try {
             spinner.style.display = 'block';
-            const response = await fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/get-synonyms', {
+            const response = await fetch('http://localhost:3000/get-synonyms', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -57,6 +53,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
     
             const data = await response.json();
+            console.log('Synonyms received:', data);
             synonymsDiv.innerHTML = formatSynonyms(data.synonyms);
             synonymsDiv.scrollTop = 0; // ***여기*** Scroll to the top after loading content
         } catch (error) {
@@ -70,7 +67,8 @@ document.addEventListener('DOMContentLoaded', function() {
     async function askQuestion(question) {
         try {
             spinner.style.display = 'block';
-            const response = await fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/ask-question', {
+            console.log('Asking question:', question);
+            const response = await fetch('http://localhost:3000/ask-question', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -83,7 +81,8 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             const data = await response.json();
-            chatResponse.innerHTML = formatResponse(data.response);
+            console.log('Response received:', data);
+            chatResponse.innerHTML = formatResponse(data.synonyms || '');
         } catch (error) {
             console.error('Error asking question:', error);
             chatResponse.textContent = `Error: ${error.message}`;
@@ -93,10 +92,13 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function formatSynonyms(synonyms) {
-        return synonyms.replace(/(\d+\.)/g, '<br><br>$1');  // ***여기***
+        if (!synonyms) return '';  // synonyms가 undefined일 경우 빈 문자열을 반환
+        return synonyms.replace(/(\d+\.)/g, '<br><br>$1');
     }
 
     function formatResponse(response) {
+        if (!response) return '';  // response가 undefined일 경우 빈 문자열을 반환
         return response.replace(/\n/g, '<br>');
     }
 });
+
