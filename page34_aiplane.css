@@ -122,13 +122,17 @@ button:hover {
 
 .keyword-list-horizontal li {
   list-style-type: none;
-  padding: 12px;
-  background-color: #282a9b; /* Dark blue-purple background color */
+  padding: 0.5em 0.9em;
+  background-color: #282a9b;
   border: 1px solid #ccc;
   cursor: pointer;
   transition: background-color 0.3s;
-  color: #f7f4f5; /* 원하는 색상으로 조정 */
+  color: #f7f4f5; /* Desired color adjustment */
   text-align: left;
+  margin: 0; /* Remove margin from list items */
+  width: 190px; /* Set a fixed width */
+  height: 150px; /* Set a fixed height */
+  font-size: 14px;
 }
 
 .keyword-list-horizontal li:hover {
