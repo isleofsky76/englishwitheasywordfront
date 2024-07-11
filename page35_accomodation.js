@@ -162,6 +162,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 }
 
+
     function displaySentences(sentences) {
         sentenceList.innerHTML = '';
         sentences.split('\n').forEach(sentence => {
