@@ -103,6 +103,8 @@ document.addEventListener('DOMContentLoaded', () => {
         'Hematology', 'Infectious Disease', 'Nephrology', 'Neurology', 'Oncology', 'Ophthalmology', 'Orthopedics',
         'Otolaryngology', 'Palliative Care', 'Pulmonology', 'Rheumatology', 'Urology', 'Veterinary Medicine'
     ];
+    
+
     const generateTextButton = document.getElementById('generateTextButton');
     const randomTextButton = document.getElementById('randomTextButton');
     const getTranslationButton = document.getElementById('getTranslationButton');
@@ -186,7 +188,7 @@ document.addEventListener('DOMContentLoaded', () => {
         toggleButtonLoading(generateTextButton, true);
 
         try {
-        const response = await fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/generate-short-text', {
+        const response = await fetch('http://localhost:3000/generate-short-text', {
             method: 'POST',
             headers: {
             'Content-Type': 'application/json'
@@ -229,7 +231,7 @@ document.addEventListener('DOMContentLoaded', () => {
         toggleButtonLoading(getTranslationButton, true);
 
         try {
-        const response = await fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/get-translation-explanation', {
+        const response = await fetch('http://localhost:3000/get-translation-explanation', {
             method: 'POST',
             headers: {
             'Content-Type': 'application/json'
@@ -255,10 +257,23 @@ document.addEventListener('DOMContentLoaded', () => {
     function readEnglishText(text) {
         const englishText = text.match(/[A-Za-z0-9 .,!?']+/g).join(' ');
         if (currentUtterance) {
-        speechSynthesis.cancel();
+            speechSynthesis.cancel();
         }
         currentUtterance = new SpeechSynthesisUtterance(englishText);
         currentUtterance.lang = 'en-US';
+
+        currentUtterance.onstart = function() {
+            console.log('Speech started');
+        };
+
+        currentUtterance.onend = function() {
+            console.log('Speech ended');
+        };
+
+        currentUtterance.onerror = function(event) {
+            console.error('Speech error', event.error);
+        };
+
         speechSynthesis.speak(currentUtterance);
     }
 
@@ -266,8 +281,8 @@ document.addEventListener('DOMContentLoaded', () => {
     function stopReading() {
         speechSynthesis.cancel();
         if (currentUtterance) {
-        currentUtterance.onend = null; // Clear the onend event
-        currentUtterance = null;
+            currentUtterance.onend = null; // Clear the onend event
+            currentUtterance = null;
         }
     }
 
