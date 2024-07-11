@@ -127,16 +127,6 @@ async function generateSentences(topic) {
 }
 
 
-
-    
-            const data = await response.json();
-            return data.sentences;
-        } catch (error) {
-            console.error('Error generating sentences:', error);
-            throw error;
-        }
-    }
-
     function displaySentences(sentences) {
         sentenceList.innerHTML = '';
         sentences.split('\n').forEach(sentence => {
