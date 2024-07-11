@@ -143,22 +143,24 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     async function generateSentences(topic) {
-        try {
-            const response = await fetch('http://localhost:3000/generate-sentences-routines', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ topic: topic })
-            });
+    try {
+        const response = await fetch('http://localhost:3000/generate-sentences-routines', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ topic: topic })
+        });
 
-            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-
-            const data = await response.json();
-            return data.sentences;
-        } catch (error) {
-            console.error('Error generating sentences:', error);
-            throw error;
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
         }
+
+        const data = await response.json();
+        return data.sentences;
+    } catch (error) {
+        console.error('Error generating sentences:', error);
+        throw error;
     }
+}
 
     function displaySentences(sentences) {
         sentenceList.innerHTML = '';
