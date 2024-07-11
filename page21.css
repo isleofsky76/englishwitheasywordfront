@@ -71,16 +71,14 @@ button:hover {
 }
 
 .spinner-border {
-  width: 3rem;
-  height: 3rem;
-  margin: 1em auto;
+  width: 0.5rem;
+  height: 0.5rem;
+  margin: 0.5em auto;
 }
 
 .keyword-list-horizontal {
-  position: absolute;
-  left: 0;
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Adjust the minmax value to set the minimum size */
   gap: 10px;
   font-size: 12px;
   text-align: left;
@@ -88,17 +86,18 @@ button:hover {
 
 .keyword-list-horizontal li {
   list-style-type: none;
-  padding: 0.3em 0.7em;
-  background-color: #282a9b;
+  padding: 0.5em; /* Reduce padding */
+  background-color: #282a9b; /* Dark blue-purple background color */
   border: 1px solid #ccc;
   cursor: pointer;
   transition: background-color 0.3s;
+  color: #f7f4f5; /* Desired color adjustment */
   text-align: left;
 }
 
 .keyword-list-horizontal li:hover {
   background-color: #45a049;
-  color: white;
+  color: rgb(14, 0, 0);
   text-align: left;
 }
 
@@ -117,10 +116,10 @@ button:hover {
   border-color: #001a35; /* Match the border color on hover */
 }
 
+
 .h1, h1 {
   font-size: 1.2rem;
 }
-
 /* 모바일 뷰포트용 스타일 */
 @media (max-width: 600px) {
   header {
