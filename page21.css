@@ -1,10 +1,10 @@
 body {
   font-family: 'Poppins', sans-serif;
   background-color: #02051d; /* Dark blue background color */
-  color: #f5f6f7; /* Dark text color */
+  color: #f5f6f7; /* Light text color */
   margin-top: 70px;
   font-size: 14px;
-  padding : 20px;
+  padding: 20px;
 }
 
 .bg-primary {
@@ -18,7 +18,6 @@ body {
   font-size: 14px;
 }
 
-
 header {
   font-size: 12px;
   background-color: #02051d; /* Dark blue background color */
@@ -26,7 +25,6 @@ header {
   text-align: left;
   padding: 1em 0;
 }
-
 
 main {
   margin: 1em;
@@ -101,7 +99,6 @@ button:hover {
   text-align: left;
 }
 
-
 #wordsContainer .btn {
   background-color: #282a9b;
   color: white; /* White text color */
@@ -116,69 +113,69 @@ button:hover {
   border-color: #001a35; /* Match the border color on hover */
 }
 
-
 .h1, h1 {
   font-size: 1.2rem;
 }
+
 /* 모바일 뷰포트용 스타일 */
 @media (max-width: 600px) {
   header {
-      text-align: left;
-      padding: 0.5em 2rem;
-      font-size: 14px;
+    text-align: left;
+    padding: 0.5em 2rem;
+    font-size: 14px;
   }
 
   main {
-      margin: 1em;
+    margin: 1em;
   }
 
   input[type="text"] {
-      padding: 0.5em;
+    padding: 0.5em;
   }
 
   button {
-      padding: 0.5em;
-      font-size: 0.9em;
+    padding: 0.5em;
+    font-size: 0.9em;
   }
 
   .keyword-list {
-      padding: 0; /* Remove padding from the parent container */
-      margin: 0; /* Remove margin from the parent container */
+    padding: 0; /* Remove padding from the parent container */
+    margin: 0; /* Remove margin from the parent container */
   }
 
   .keyword-list-horizontal {
-      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* Adjust the minmax value for mobile view */
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* Adjust the minmax value for mobile view */
   }
 
   .keyword-list-horizontal li {
-      padding: 0.5em; /* Reduce padding */
-      background-color: #282a9b;
-      border: 1px solid #ccc;
-      cursor: pointer;
-      transition: background-color 0.3s;
-      color: #f7f4f5; /* Desired color adjustment */
-      text-align: left;
-      margin: 0;
-      font-size: 14px;
+    padding: 0.5em; /* Reduce padding */
+    background-color: #282a9b;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    color: #f7f4f5; /* Desired color adjustment */
+    text-align: left;
+    margin: 0;
+    font-size: 14px;
   }
 
   #sentenceList li {
-      flex-direction: column;
-      align-items: flex-start;
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .try-more-title {
-      font-size: 1.2em;
+    font-size: 1.2em;
   }
 
   .keyword-headline {
-      font-size: 1.5em; /* Desired font size adjustment */
-      font-family: 'Poppins', sans-serif; /* Desired font family */
-      color: #0af150; /* Desired color adjustment */
+    font-size: 1.5em; /* Desired font size adjustment */
+    font-family: 'Poppins', sans-serif; /* Desired font family */
+    color: #0af150; /* Desired color adjustment */
   }
 
   .loading-text {
-      color: #FF5733; /* Desired color adjustment */
+    color: #FF5733; /* Desired color adjustment */
   }
 }
 
