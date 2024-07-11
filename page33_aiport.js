@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const topicInput = document.getElementById('topicInput');
 
     const keywords = {
-        examples:  [
+        examples: [
             "Where is the check-in counter?(체크인 카운터는 어디인가요?)",
             "Can I see your passport and ticket?(여권과 티켓을 보여주시겠어요?)",
             "Do you have any luggage to check?(수하물 맡길 것이 있으신가요?)",
@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Create and append the category headline
         const headline = document.createElement('h3');
         headline.textContent = category.charAt(0).toUpperCase() + category.slice(1);
-        headline.classList.add('keyword-headline'); // *** Add a class for styling ***
+        headline.classList.add('keyword-headline'); // Add a class for styling
         keywordList.appendChild(headline);
 
         // Append each keyword under the respective headline
@@ -108,24 +108,23 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-async function generateSentences(topic) {
-    try {
-        const response = await fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/generate-sentences-routines', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ topic: topic })
-        });
+    async function generateSentences(topic) {
+        try {
+            const response = await fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/generate-sentences-routines', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ topic: topic })
+            });
 
-        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+            if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
 
-        const data = await response.json();
-        return data.sentences;
-    } catch (error) {
-        console.error('Error generating sentences:', error);
-        throw error;
+            const data = await response.json();
+            return data.sentences;
+        } catch (error) {
+            console.error('Error generating sentences:', error);
+            throw error;
+        }
     }
-}
-
 
     function displaySentences(sentences) {
         sentenceList.innerHTML = '';
