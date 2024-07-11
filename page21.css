@@ -56,6 +56,7 @@ button:hover {
 #results, #loading {
   text-align: left;
   margin-bottom: 20px;
+  font-size: 16px;
 }
 
 #sentenceList {
@@ -101,11 +102,12 @@ button:hover {
   text-align: left;
 }
 
+
 #wordsContainer .btn {
   background-color: #282a9b;
   color: white; /* White text color */
   border-color: #001f3f; /* Match the border color to the background */
-  font-size: 12px;
+  font-size: 14px;
   border: 1px solid #ccc;
 }
 
@@ -114,8 +116,9 @@ button:hover {
   color: white; /* Ensure text remains white on hover */
   border-color: #001a35; /* Match the border color on hover */
 }
+
 .h1, h1 {
-  font-size: 1.4rem;
+  font-size: 1.2rem;
 }
 
 /* 모바일 뷰포트용 스타일 */
@@ -123,12 +126,27 @@ button:hover {
   header {
     text-align: left;
     padding: 0.5em 0;
-    font-size: 14px;
+    font-size: 16px;
   }
 
   main {
     margin: 1em;
   }
+
+  /* styles.css */
+#shortTextSection {
+  font-size: 14px; /* 섹션 전체의 기본 폰트 크기 */
+}
+
+#shortTextSection h3 {
+  font-size: 24px; /* 헤딩의 폰트 크기 */
+}
+
+#shortText {
+  font-size: 16px; /* 본문의 폰트 크기 */
+  letter-spacing: 0.5px; /* 본문의 글자 간 간격 */
+  line-height: 1.5; /* 본문의 줄 간격 */
+}
 
   input[type="text"] {
     padding: 0.5em;
@@ -160,4 +178,5 @@ button:hover {
     font-size: 1.2em;
   }
 }
+
 
