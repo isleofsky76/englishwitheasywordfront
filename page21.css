@@ -124,59 +124,62 @@ button:hover {
 /* 모바일 뷰포트용 스타일 */
 @media (max-width: 600px) {
   header {
-    text-align: left;
-    padding: 0.5em 0;
-    font-size: 16px;
+      text-align: left;
+      padding: 0.5em 2rem;
+      font-size: 14px;
   }
 
   main {
-    margin: 1em;
+      margin: 1em;
   }
 
-  /* styles.css */
-#shortTextSection {
-  font-size: 14px; /* 섹션 전체의 기본 폰트 크기 */
-}
-
-#shortTextSection h3 {
-  font-size: 24px; /* 헤딩의 폰트 크기 */
-}
-
-#shortText {
-  font-size: 16px; /* 본문의 폰트 크기 */
-  letter-spacing: 0.5px; /* 본문의 글자 간 간격 */
-  line-height: 1.5; /* 본문의 줄 간격 */
-}
-
   input[type="text"] {
-    padding: 0.5em;
+      padding: 0.5em;
   }
 
   button {
-    padding: 0.5em;
-    font-size: 0.9em;
+      padding: 0.5em;
+      font-size: 0.9em;
   }
 
+  .keyword-list {
+      padding: 0; /* Remove padding from the parent container */
+      margin: 0; /* Remove margin from the parent container */
+  }
 
-  .keyword-list-horizontal li:hover {
-    background-color: #45a049;
-    color: white;
-    text-align: left;
-}
+  .keyword-list-horizontal {
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* Adjust the minmax value for mobile view */
+  }
 
   .keyword-list-horizontal li {
-    font-size: 0.9em;
+      padding: 0.5em; /* Reduce padding */
+      background-color: #282a9b;
+      border: 1px solid #ccc;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      color: #f7f4f5; /* Desired color adjustment */
+      text-align: left;
+      margin: 0;
+      font-size: 14px;
   }
 
   #sentenceList li {
-    flex-direction: column;
-    align-items: flex-start;
+      flex-direction: column;
+      align-items: flex-start;
   }
-
 
   .try-more-title {
-    font-size: 1.2em;
+      font-size: 1.2em;
+  }
+
+  .keyword-headline {
+      font-size: 1.5em; /* Desired font size adjustment */
+      font-family: 'Poppins', sans-serif; /* Desired font family */
+      color: #0af150; /* Desired color adjustment */
+  }
+
+  .loading-text {
+      color: #FF5733; /* Desired color adjustment */
   }
 }
-
 
