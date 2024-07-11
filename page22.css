@@ -61,8 +61,8 @@ header {
   border: 1px solid rgb(216, 214, 214); /* 테두리 색을 회색으로 설정 */
   text-align: left; /* 텍스트 왼쪽 정렬 */
   padding: 10px; /* 텍스트와 테두리 사이에 여백 추가 */
+  color: rgb(38, 243, 11);
 }
-
 
 #chatResponse {
   height: 200px; /* 고정된 높이로 설정 */
