@@ -172,6 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Function to fetch and display short text
     async function generateShortText() {
+        console.log("generateShortText called");
         const topic = inputTopic.value.trim();
 
         if (!topic) {
@@ -294,4 +295,5 @@ document.addEventListener('DOMContentLoaded', () => {
     getTranslationButton.addEventListener('click', getTranslationAndExplanation);
     readShortTextButton.addEventListener('click', () => readEnglishText(shortTextElement.textContent));
     stopShortTextButton.addEventListener('click', stopReading);
-    });
+});
+
