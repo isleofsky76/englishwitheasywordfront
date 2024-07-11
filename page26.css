@@ -1,7 +1,7 @@
 body {
   font-family: 'Poppins', sans-serif;
   background-color: #02051d; /* Dark blue background color */
-  color: #f5f6f7; /* Dark text color */
+  color: #dcdcdc; /* Light grey text color */
   margin-top: 70px;
   font-size: 14px;
 }
@@ -122,8 +122,8 @@ button:hover {
 
 .keyword-list-horizontal li {
   list-style-type: none;
-  padding: 0.3em 0.7em;
-  background-color: #282a9b;
+  padding: 12px;
+  background-color: #282a9b; /* Dark blue-purple background color */
   border: 1px solid #ccc;
   cursor: pointer;
   transition: background-color 0.3s;
@@ -177,7 +177,7 @@ button:hover {
 
   .keyword-list-horizontal li {
     list-style-type: none;
-    padding: 0.3em 0.7em;
+    padding: 0.5em 0.9em;
     background-color: #282a9b;
     border: 1px solid #ccc;
     cursor: pointer;
@@ -185,8 +185,9 @@ button:hover {
     color: #f7f4f5; /* Desired color adjustment */
     text-align: left;
     margin: 0; /* Remove margin from list items */
-    width: 170px; /* Set a fixed width */
-    height: 35px; /* Set a fixed height */
+    width: 190px; /* Set a fixed width */
+    height: 100px; /* Set a fixed height */
+    font-size: 14px;
 }
 
   #sentenceList li {
