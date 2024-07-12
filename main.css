@@ -151,11 +151,16 @@ ul li {
     }
 
     .box {
-        height: 80px;
+        height: 100px;
         font-size: 1.0rem;
-        margin: 0 0 5px 0;
+        margin: 0; /* 버튼 간 공백 최소화 */
         width: 40%;
-        
+        border-radius: 10px;
+        border: 1px solid #ffffff; /* 테두리를 추가하여 가장자리를 뚜렷하게 */
+        background-color: #02051d; /* Dark blue background color */
+        color: #ffffff;
+        cursor: pointer;
+        transition: background-color 0.1s, border-color 0.1s;
     }
 
     .image_container img {
