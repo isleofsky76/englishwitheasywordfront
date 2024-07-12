@@ -182,9 +182,10 @@ ul li {
         list-style-position: inside;
         text-align: left;
         padding: 1px;
-        margin-left: 10px;
-        
-    
+        margin-left: 3px;
+        font-size: 14px;
+        margin: 2px;
+        line-height: 2;
     }
     
 }
