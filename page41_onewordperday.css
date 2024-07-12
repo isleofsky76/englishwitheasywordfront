@@ -29,6 +29,7 @@ main {
 }
 
 .container {
+  margin-top:30px;
   text-align: center;
   background-color: #80dab9;
   padding: 20px;
