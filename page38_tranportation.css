@@ -1,0 +1,201 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #02051d; /* Dark blue background color */
+  color: #dcdcdc; /* Light grey text color */
+  margin-top: 70px;
+  font-size: 14px;
+}
+
+.bg-primary {
+  --bs-bg-opacity: 1;
+  background-color: #05071e !important;
+}
+
+.navbar-custom {
+  background-color: #02051d; /* Dark blue background color */
+  transition: top 0.3s; /* Smooth transition for hiding and showing the navbar */
+  font-size: 14px;
+}
+
+header {
+  background-color: #02051d; /* Dark blue background color */
+  color: white;
+  text-align: left;
+  padding: 1em 0;
+}
+
+main {
+  margin: 1em;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 0.5em;
+  margin: 0.5em 0; /* Reduced margin */
+  box-sizing: border-box;
+}
+
+button {
+  padding: 0.5em 1em;
+  background-color: #ecf3ed;
+  color: rgb(7, 0, 0);
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-bottom: 20px; /* Reduced margin */
+  text-align: left; /* Ensures text alignment to the left */
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+#results {
+  text-align: left;
+  margin-bottom: 20px;
+  color: rgb(10, 21, 56);
+  background-color: #02051d; /* Dark blue background color */
+}
+
+#loading {
+  text-align: left;
+  color: rgb(92, 238, 7);
+  background-color: #02051d; /* Dark blue background color */
+}
+
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+  margin-top: 0;
+  font-weight: 500;
+  line-height: 1.2;
+  color: rgb(92, 245, 4);
+  font-size: 14px;
+}
+
+#selectedTopic {
+  background-color: rgb(255, 255, 255);
+  padding: 1em;
+  text-align: left; /* Ensures text alignment to the left */
+  align-items: flex-start;
+  background-color: #02051d; /* Dark blue background color */
+}
+
+#sentenceList {
+  list-style-type: none;
+  padding: 0;
+  text-align: left; /* Ensures text alignment to the left */
+  background-color: #02051d; /* Dark blue background color */
+  gap: 10px;
+}
+
+#sentenceList li {
+  background-color: rgb(255, 255, 255);
+  padding: 0.5em 1em; /* Reduced padding */
+  margin-bottom: 0.2em; /* Reduced margin */
+  text-align: left; /* Ensures text alignment to the left */
+  align-items: flex-start;
+  background-color: #02051d; /* Dark blue background color */
+  color: rgb(251, 252, 251);
+  gap: 10px;
+}
+
+.spinner-border {
+  width: 2rem;
+  height: 2rem;
+  margin: 1em auto;
+  color: #FF5733; /* 원하는 색상으로 조정 */
+}
+
+.keyword-headline {
+  font-size: 1.5em;
+  font-family: 'Poppins', sans-serif;
+  margin-bottom: 10px;
+  color: #0ee744;
+}
+
+.keyword-list-horizontal {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 12px;
+  text-align: left;
+  gap: 10px;
+}
+
+.keyword-list-horizontal li {
+  list-style-type: none;
+  padding: 12px;
+  background-color: #282a9b; /* Dark blue-purple background color */
+  border: 1px solid #ccc;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  color: #f7f4f5; /* 원하는 색상으로 조정 */
+  text-align: left;
+}
+
+.keyword-list-horizontal li:hover {
+  background-color: #45a049;
+  color: rgb(14, 0, 0);
+  text-align: left;
+}
+
+
+
+@media (max-width: 600px) {
+  header {
+      text-align: left;
+      padding: 0.5em 2rem;
+      font-size: 14px;
+  }
+
+  main {
+      margin: 1em;
+  }
+
+  input[type="text"] {
+      padding: 0.5em;
+  }
+
+  button {
+      padding: 0.5em;
+      font-size: 0.9em;
+  }
+
+.keyword-list {
+  padding: 0; /* Remove padding from the parent container */
+  margin: 0; /* Remove margin from the parent container */
+}
+
+.keyword-list-horizontal {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* Adjust the minmax value for mobile view */
+}
+
+  .keyword-list-horizontal li {
+    padding: 0.5em;
+    background-color: #282a9b;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    color: #f7f4f5; /* Desired color adjustment */
+    text-align: left;
+    margin: 0;
+    font-size: 14px;
+}
+
+  #sentenceList li {
+      flex-direction: column;
+      align-items: flex-start;
+  }
+
+  .try-more-title {
+      font-size: 1.2em;
+  }
+
+  .keyword-headline {
+      font-size: 1.5em; /* Desired font size adjustment */
+      font-family: 'Poppins', sans-serif; /* Desired font family */
+      color: #0af150; /* Desired color adjustment */
+  }
+
+  .loading-text {
+      color: #FF5733; /* Desired color adjustment */
+  }
+}
