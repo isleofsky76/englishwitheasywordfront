@@ -537,11 +537,3 @@ function autoPlay() {
 }
 
 updateWord();
-
-function startSandClock() {
-    const sandClock = document.querySelector('.sand-clock');
-    sandClock.style.display = 'block';
-    setTimeout(() => {
-        sandClock.style.display = 'none';
-    }, 300000); // 5분 후 숨김
-}
