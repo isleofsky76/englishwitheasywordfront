@@ -2,8 +2,13 @@ body {
   font-family: 'Poppins', sans-serif;
   background-color: #02051d; /* Dark blue background color */
   color: #090000; /* Light grey text color */
-  margin-top: 70px;
+  margin: 0;
   font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 120px;
 }
 
 .bg-primary {
@@ -25,11 +30,10 @@ header {
 }
 
 main {
-  margin: 1em;
+  margin: 0em;
 }
 
 .container {
-  margin-top:30px;
   text-align: center;
   background-color: #80dab9;
   padding: 20px;
@@ -42,6 +46,12 @@ main {
   font-size: 24px;
 }
 
+.buttons-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 .buttons-container button {
   margin: 5px;
   padding: 10px 20px;
@@ -51,11 +61,47 @@ main {
   border-radius: 15px;
   background-color: #02051d; /* Dark blue background color */
   color: #f8f8f8;
-  flex: 1 1 200px; /* 최소 너비를 200px로 설정하여 동일한 크기 유지 */
+  flex: 1 1 calc(33% - 10px); /* 3개씩 정렬되도록 설정 */
   box-sizing: border-box; /* 패딩과 보더가 전체 크기에 포함되도록 */
-  width: 30%;
+  max-width: calc(33% - 10px); /* 최대 너비 설정 */
 }
 
 .buttons-container button:hover {
   background-color: #0056b3;
+}
+
+/* page42_onewordperday.css */
+
+/* 다른 스타일 유지 */
+
+.list-group-item {
+  text-align: left;
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 768px) {
+  body {
+    font-size: 12px; /* Smaller font size for mobile */
+    margin-top: 50px; /* Adjust top margin for mobile */
+  }
+
+  .buttons-container button {
+    flex: 1 1 calc(50% - 10px); /* Adjust button size for smaller screens */
+    max-width: calc(50% - 10px); /* Adjust max width for smaller screens */
+  }
+
+  .word-container {
+    font-size: 20px; /* Adjust font size for smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .buttons-container button {
+    flex: 1 1 100%; /* Adjust button size for very small screens */
+    max-width: 100%;
+  }
+
+  .word-container {
+    font-size: 18px; /* Adjust font size for very small screens */
+  }
 }
