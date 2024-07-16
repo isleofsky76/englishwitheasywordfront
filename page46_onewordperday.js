@@ -264,7 +264,7 @@ function showWordList() {
     words.forEach(word => {
         const listItem = document.createElement('li');
         listItem.classList.add('list-group-item');
-        listItem.innerHTML = `<strong>${word.korean}</strong> - ${word.english} <em>${word.pronunciation}</em>`;
+        listItem.innerHTML = `<strong>${word.korean}</strong><br>${word.english}<em><br>${word.pronunciation}</em><br><br>`;
         wordList.appendChild(listItem);
     });
 }
