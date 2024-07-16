@@ -3,11 +3,12 @@ body {
   background-color: #02051d; /* Dark blue background color */
   color: #090000; /* Light grey text color */
   margin: 0;
-  font-size: 14px;
+  font-size: 18px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-top: 120px;
 }
 
 .bg-primary {
@@ -38,6 +39,7 @@ main {
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  font-size: 18px;
 }
 
 .word-container {
@@ -80,7 +82,7 @@ main {
 /* Media Queries for Responsive Design */
 @media (max-width: 768px) {
   body {
-    font-size: 12px; /* Smaller font size for mobile */
+    font-size: 18px; /* Smaller font size for mobile */
     margin-top: 50px; /* Adjust top margin for mobile */
   }
 
@@ -104,3 +106,4 @@ main {
     font-size: 18px; /* Adjust font size for very small screens */
   }
 }
+
