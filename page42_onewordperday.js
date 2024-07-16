@@ -175,3 +175,20 @@ function startSandClock() {
         sandClock.style.display = 'none';
     }, 300000); // 5분 후 숨김
 }
+
+
+// 단어 목록을 화면에 표시하는 함수
+function showWordList() {
+    const wordList = document.getElementById('word-list');
+    words.forEach(word => {
+        const listItem = document.createElement('li');
+        listItem.classList.add('list-group-item');
+        listItem.innerHTML = `<strong>${word.korean}</strong><br>${word.english}<em><br>${word.pronunciation}</em><br><br>`;
+        wordList.appendChild(listItem);
+    });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    updateWord();
+    showWordList(); // 페이지 로드 시 단어 목록 표시
+});
