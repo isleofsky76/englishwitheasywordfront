@@ -533,7 +533,24 @@ function autoPlay() {
                 currentWordIndex = 0; // 끝에 도달하면 처음으로 돌아가기
             }
         });
-    }, 6000); // 6초마다 다음 단어로 넘어가고 발음 (발음 시간 3초 + 대기 시간 3초)
+    }, 8000); // 6초마다 다음 단어로 넘어가고 발음 (발음 시간 3초 + 대기 시간 3초)
 }
 
 updateWord();
+
+// 단어 목록을 화면에 표시하는 함수
+function showWordList() {
+    const wordList = document.getElementById('word-list');
+    words.forEach(word => {
+        const listItem = document.createElement('li');
+        listItem.classList.add('list-group-item');
+        listItem.innerHTML = `<strong>${word.korean}</strong><br>${word.english}<em><br>${word.pronunciation}</em><br><br>`;
+        wordList.appendChild(listItem);
+    });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    updateWord();
+    showWordList(); // 페이지 로드 시 단어 목록 표시
+});
+
