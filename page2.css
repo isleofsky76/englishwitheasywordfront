@@ -1,0 +1,155 @@
+body {
+    margin: 30px;
+    padding: 10px;
+    background-color: #f8f5f5; /* Light grey text */
+    line-height: 1.4;
+    font-family: sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 1rem;
+    color: #727272; /* Light grey text */
+    height: calc(100vh - 60px); /* Adjust height considering margins and paddings */
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box; /* Ensure padding and border are included in the height calculation */
+}
+
+
+.bg-primary {
+    --bs-bg-opacity: 1;
+    background-color: #05071e !important;
+  }
+  
+  .navbar-custom {
+    background-color: #02051d; /* Dark blue background color */
+    transition: top 0.3s; /* Smooth transition for hiding and showing the navbar */
+    font-size: 14px;
+  }
+  
+  .navbar-brand {
+    font-family: 'Nanum Gothic', sans-serif; /* Font for the brand name */
+    font-size: 1.5rem; /* Increase brand font size */
+    color: #f7f6f5; /* Yellow color for brand text */
+    
+  }
+  
+.page-title {
+    font-size: 24px;
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+#chatTerminal {
+    margin-top: 50px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #fcfbfb;
+    border-radius: 4px;
+    background-color: rgb(8, 6, 22);
+    color: rgb(26, 20, 20);
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+#chatMessages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px;
+    background-color:rgb(245, 245, 247);
+    color: rgb(92, 87, 87); 
+    border-bottom: 1px solid #f8f6f6;
+}
+
+#messageContainer {
+    display: flex;
+    padding: 10px;
+    background-color:rgb(251, 251, 253);
+    border-top: 1px solid #ccc;
+}
+
+#inputMessage {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    box-sizing: border-box;
+    background-color:rgb(228, 228, 231); 
+    color: rgb(92, 87, 87); 
+}
+
+#submitButton {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    background-color: #8badd1;
+    color: white;
+    margin-left: 10px;
+    border-radius: 15px;
+}
+
+.user-message {
+    display: inline-block;
+        /* Set the display property to inline-block */
+        margin-bottom: 10px;
+        /* Add a bottom margin of 10 pixels */
+        margin-top: 5px;
+        /* Add a top margin of 5 pixels */
+        color: rgb(68, 61, 61); 
+        /* Set text color to a shade of red using RGB values */
+        background-color: #dedfde;
+        /* Light green background */
+        padding: 10px;
+        /* Add 10 pixels of padding inside the element */
+        border-radius: 10px;
+        /* Apply a border radius of 10 pixels */
+        max-width: 80%;
+        /* Set the maximum width of the element to 80% */
+        align-self: flex-end;
+        /* Align the element to the flex-end along the cross axis */
+        border-radius: 20px;
+        /* Increase the border radius to 20 pixels */
+        align-self: flex-end;
+        /* Realign the element to the flex-end along the cross axis */
+}
+
+.ai-message {
+    margin-bottom: 10px;
+    margin-top: 5px;
+    color: rgb(82, 79, 79); 
+}
+
+@media (max-width: 600px) {
+    body {
+        margin: 10px;
+        padding: 5px;
+    }
+
+    .page-title {
+        font-size: 20px;
+    }
+
+    button {
+        font-size: 0.8rem;
+        padding: 4px 8px;
+        width: auto;
+        margin-bottom: 5px;
+    }
+
+    #chatMessages {
+        height: 50vh;
+    }
+
+    #chatTerminal {
+        display: flex;
+        flex-direction: column;
+        height: calc(100vh - 60px);
+    }
+
+    #inputMessage {
+        height: auto;
+    }
+}
