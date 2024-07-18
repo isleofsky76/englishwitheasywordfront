@@ -8819,3 +8819,4 @@ document.addEventListener('DOMContentLoaded', () => {
     updateWord();
     showWordList(); // 페이지 로드 시 단어 목록 표시
 });
+
