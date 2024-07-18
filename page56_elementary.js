@@ -133,7 +133,7 @@ function pronounceWord(times, callback) {
             englishUtteranceWord.onend = () => {
                 setTimeout(() => {
                     synth.speak(englishUtteranceDefinition);
-                }, 1000); // 1 second delay between word and definition
+                }, 1000); // 1초 지연
             };
 
             englishUtteranceDefinition.onend = () => {
@@ -152,7 +152,6 @@ function pronounceWord(times, callback) {
     speak();
 }
 
-
 function stopPronouncing() {
     clearInterval(pronounceInterval);
     clearInterval(autoPlayInterval);
@@ -167,7 +166,6 @@ function nextWord() {
 
 function autoPlay() {
     stopPronouncing();
-    currentWordIndex = 0;
 
     function playNextWord() {
         updateWord();
@@ -179,11 +177,11 @@ function autoPlay() {
         });
     }
 
-    playNextWord(); // 첫 단어를 즉시 업데이트하고 발음
+    playNextWord(); // 첫 단어를 즉시 재생
 
     autoPlayInterval = setInterval(() => {
         playNextWord();
-    }, 15000); // 이후 15초 간격으로 반복
+    }, 15000); // 15초 간격으로 다음 단어 재생
 }
 
 updateWord();
@@ -197,8 +195,3 @@ function showWordList() {
         wordList.appendChild(listItem);
     });
 }
-
-document.addEventListener('DOMContentLoaded', () => {
-    updateWord();
-    showWordList();
-});
