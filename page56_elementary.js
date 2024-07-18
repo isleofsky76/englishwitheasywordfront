@@ -122,11 +122,21 @@ function pronounceWord(times, callback) {
 
     function speak() {
         if (count < times) {
-            let englishUtterance = new SpeechSynthesisUtterance(words[currentWordIndex].word + ", " + words[currentWordIndex].definition);
-            englishUtterance.lang = 'en-US';
-            englishUtterance.rate = 1;
+            let englishUtteranceWord = new SpeechSynthesisUtterance(words[currentWordIndex].word);
+            let englishUtteranceDefinition = new SpeechSynthesisUtterance(words[currentWordIndex].definition);
 
-            englishUtterance.onend = () => {
+            englishUtteranceWord.lang = 'en-US';
+            englishUtteranceWord.rate = 1;
+            englishUtteranceDefinition.lang = 'en-US';
+            englishUtteranceDefinition.rate = 1;
+
+            englishUtteranceWord.onend = () => {
+                setTimeout(() => {
+                    synth.speak(englishUtteranceDefinition);
+                }, 1000); // 1 second delay between word and definition
+            };
+
+            englishUtteranceDefinition.onend = () => {
                 count++;
                 if (count < times) {
                     speak();
@@ -135,12 +145,13 @@ function pronounceWord(times, callback) {
                 }
             };
 
-            synth.speak(englishUtterance);
+            synth.speak(englishUtteranceWord);
         }
     }
 
     speak();
 }
+
 
 function stopPronouncing() {
     clearInterval(pronounceInterval);
@@ -157,7 +168,8 @@ function nextWord() {
 function autoPlay() {
     stopPronouncing();
     currentWordIndex = 0;
-    autoPlayInterval = setInterval(() => {
+
+    function playNextWord() {
         updateWord();
         pronounceWord(1, () => {
             currentWordIndex++;
@@ -165,7 +177,13 @@ function autoPlay() {
                 currentWordIndex = 0;
             }
         });
-    }, 10000);
+    }
+
+    playNextWord(); // 첫 단어를 즉시 업데이트하고 발음
+
+    autoPlayInterval = setInterval(() => {
+        playNextWord();
+    }, 15000); // 이후 15초 간격으로 반복
 }
 
 updateWord();
