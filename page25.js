@@ -211,8 +211,10 @@ const words = [
     { korean: "베이킹소다", english: "baking soda", pronunciation: "[ˈbeɪkɪŋ ˈsoʊdə]" },
     { korean: "잼", english: "jam", pronunciation: "[ʤæm]" },
     { korean: "크림", english: "cream", pronunciation: "[krim]" },
-    { korean: "글루텐", english: "gluten", pronunciation: "[ˈɡluːtən]" }
+    { korean: "글루텐", english: "gluten", pronunciation: "[ˈɡluːtən]" },
 ];
+
+
 let currentWordIndex = 0;
 let pronounceInterval;
 let synth = window.speechSynthesis;
@@ -230,12 +232,12 @@ function pronounceWord(times, callback) {
     function speak() {
         if (count < times) {
             let koreanUtterance = new SpeechSynthesisUtterance(words[currentWordIndex].korean);
-            koreanUtterance.lang = 'ko-KR'; // 한국어 발음 설정
-            koreanUtterance.rate = 1; // 발음 속도 설정 (1배 빠르게)
+            koreanUtterance.lang = 'ko-KR';
+            koreanUtterance.rate = 1;
 
             let englishUtterance = new SpeechSynthesisUtterance(words[currentWordIndex].english);
-            englishUtterance.lang = 'en-US'; // 영어 발음 설정
-            englishUtterance.rate = 1; // 발음 속도 설정 (1배 빠르게)
+            englishUtterance.lang = 'en-US';
+            englishUtterance.rate = 1;
 
             koreanUtterance.onend = () => {
                 setTimeout(() => {
@@ -287,13 +289,12 @@ function autoPlay() {
     playNextWord(); // 첫 단어를 즉시 재생
 
     autoPlayInterval = setInterval(() => {
-        playNextWord(); // 8초 간격으로 다음 단어 재생
-    }, 8000);
+        playNextWord();
+    }, 8000); // 8초 간격으로 다음 단어 재생
 }
 
 updateWord();
 
-// 단어 목록을 화면에 표시하는 함수
 function showWordList() {
     const wordList = document.getElementById('word-list');
     words.forEach(word => {
