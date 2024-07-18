@@ -6925,8 +6925,9 @@ function stopPronouncing() {
 function nextWord() {
     currentWordIndex = (currentWordIndex + 1) % words.length;
     updateWord();
-    pronounceWord(1);
+    setTimeout(() => pronounceWord(1), 1000); // 1초 지연
 }
+
 
 function autoPlay() {
     stopPronouncing();
@@ -6944,7 +6945,7 @@ function autoPlay() {
     playNextWord(); // 첫 단어를 즉시 재생
 
     autoPlayInterval = setInterval(() => {
-        playNextWord(); // 8초 간격으로 다음 단어 재생
+        playNextWord(); // 초 간격으로 다음 단어 재생
     }, 15000);
 }
 
@@ -6964,4 +6965,5 @@ function showWordList() {
 document.addEventListener('DOMContentLoaded', () => {
     updateWord();
     showWordList(); // 페이지 로드 시 단어 목록 표시
+    setTimeout(() => pronounceWord(1), 1000); // 페이지 로드 후 1초 지연
 });
