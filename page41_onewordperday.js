@@ -491,7 +491,9 @@ function pronounceWord(times, callback) {
             englishUtterance.rate = 1; // 발음 속도 설정 (1배 빠르게)
 
             koreanUtterance.onend = () => {
-                synth.speak(englishUtterance);
+                setTimeout(() => {
+                    synth.speak(englishUtterance);
+                }, 1000); // 1초 지연
             };
 
             englishUtterance.onend = () => {
@@ -524,16 +526,22 @@ function nextWord() {
 
 function autoPlay() {
     stopPronouncing();
-    currentWordIndex = 0; // 처음부터 시작
-    autoPlayInterval = setInterval(() => {
+
+    function playNextWord() {
         updateWord();
         pronounceWord(1, () => {
             currentWordIndex++;
             if (currentWordIndex >= words.length) {
-                currentWordIndex = 0; // 끝에 도달하면 처음으로 돌아가기
+                currentWordIndex = 0;
             }
         });
-    }, 8000); // 6초마다 다음 단어로 넘어가고 발음 (발음 시간 3초 + 대기 시간 3초)
+    }
+
+    playNextWord(); // 첫 단어를 즉시 재생
+
+    autoPlayInterval = setInterval(() => {
+        playNextWord(); // 8초 간격으로 다음 단어 재생
+    }, 8000);
 }
 
 updateWord();
@@ -553,4 +561,5 @@ document.addEventListener('DOMContentLoaded', () => {
     updateWord();
     showWordList(); // 페이지 로드 시 단어 목록 표시
 });
+
 
