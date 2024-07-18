@@ -48,6 +48,7 @@ const words = [
 
     
     
+
 let currentWordIndex = 0;
 let pronounceInterval;
 let synth = window.speechSynthesis;
@@ -122,11 +123,13 @@ function autoPlay() {
     playNextWord(); // 첫 단어를 즉시 재생
 
     autoPlayInterval = setInterval(() => {
-        playNextWord(); // 8초 간격으로 다음 단어 재생
-    }, 8000);
+        playNextWord();
+    }, 13000); // 8초 간격으로 다음 단어 재생
 }
 
 updateWord();
+
+
 
 // 단어 목록을 화면에 표시하는 함수
 function showWordList() {
@@ -143,3 +146,4 @@ document.addEventListener('DOMContentLoaded', () => {
     updateWord();
     showWordList(); // 페이지 로드 시 단어 목록 표시
 });
+
