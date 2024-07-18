@@ -195,9 +195,7 @@ function pronounceWord(times, callback) {
             englishUtterance.rate = 1; // 발음 속도 설정 (1배 빠르게)
 
             koreanUtterance.onend = () => {
-                setTimeout(() => {
-                    synth.speak(englishUtterance);
-                }, 1000); // 1초 지연
+                synth.speak(englishUtterance);
             };
 
             englishUtterance.onend = () => {
@@ -244,8 +242,8 @@ function autoPlay() {
     playNextWord(); // 첫 단어를 즉시 재생
 
     autoPlayInterval = setInterval(() => {
-        playNextWord(); // 8초 간격으로 다음 단어 재생
-    }, 8000);
+        playNextWord();
+    }, 8000); // 8초 간격으로 다음 단어 재생
 }
 
 updateWord();
@@ -265,3 +263,4 @@ document.addEventListener('DOMContentLoaded', () => {
     updateWord();
     showWordList(); // 페이지 로드 시 단어 목록 표시
 });
+
