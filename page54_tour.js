@@ -266,9 +266,7 @@ function pronounceWord(times, callback) {
             englishUtterance.rate = 1; // 발음 속도 설정 (1배 빠르게)
 
             koreanUtterance.onend = () => {
-                setTimeout(() => {
-                    synth.speak(englishUtterance);
-                }, 1000); // 1초 지연
+                synth.speak(englishUtterance);
             };
 
             englishUtterance.onend = () => {
@@ -298,7 +296,6 @@ function nextWord() {
     updateWord();
     pronounceWord(1);
 }
-
 function autoPlay() {
     stopPronouncing();
 
@@ -315,8 +312,8 @@ function autoPlay() {
     playNextWord(); // 첫 단어를 즉시 재생
 
     autoPlayInterval = setInterval(() => {
-        playNextWord(); // 8초 간격으로 다음 단어 재생
-    }, 8000);
+        playNextWord();
+    }, 13000); // 13초 간격으로 다음 단어 재생
 }
 
 updateWord();
