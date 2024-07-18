@@ -1,0 +1,146 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #02051d; /* Dark blue background color */
+  color: #090000; /* Light grey text color */
+  margin: 0;
+  font-size: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 120px;
+}
+
+.bg-primary {
+  --bs-bg-opacity: 1;
+  background-color: #05071e !important;
+}
+
+.navbar-custom {
+  background-color: #02051d; /* Dark blue background color */
+  transition: top 0.3s; /* Smooth transition for hiding and showing the navbar */
+  font-size: 14px;
+}
+
+header {
+  background-color: #02051d; /* Dark blue background color */
+  color: white;
+  text-align: left;
+  padding: 1em 0;
+}
+
+main {
+  margin: 0em;
+}
+
+.container {
+  text-align: center;
+  background-color: #80dab9;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  font-size: 18px;
+  font-weight: bold;
+  align-items: left;
+}
+
+.word-container {
+  margin-bottom: 20px;
+  font-size: 24px;
+  align-items: left;
+}
+
+.buttons-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.buttons-container button {
+  margin: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 15px;
+  background-color: #02051d; /* Dark blue background color */
+  color: #f8f8f8;
+  flex: 1 1 calc(33% - 10px); /* 3개씩 정렬되도록 설정 */
+  box-sizing: border-box; /* 패딩과 보더가 전체 크기에 포함되도록 */
+  max-width: calc(33% - 10px); /* 최대 너비 설정 */
+}
+
+.buttons-container button:hover {
+  background-color: #0056b3;
+}
+
+/* page42_onewordperday.css */
+
+/* 다른 스타일 유지 */
+
+.list-group-item {
+  text-align: left;
+}
+
+#word-list {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 20px;
+  align-items: left;
+}
+
+.example-container li {
+  text-align: left; /* 왼쪽 정렬 */
+  margin-bottom: 10px;
+}
+
+
+/* Media Queries for Responsive Design */
+@media (max-width: 768px) {
+  body {
+    font-size: 18px; /* Smaller font size for mobile */
+    margin-top: 50px; /* Adjust top margin for mobile */
+  }
+
+  .buttons-container button {
+    flex: 1 1 calc(50% - 10px); /* Adjust button size for smaller screens */
+    max-width: calc(50% - 10px); /* Adjust max width for smaller screens */
+  }
+
+  .word-container {
+    font-size: 20px; /* Adjust font size for smaller screens */
+    align-items: left;
+  }
+  .container {
+    text-align: center;
+    background-color: #80dab9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-size: 18px;
+    font-weight: bold;
+    align-items: left;
+  }
+}
+
+@media (max-width: 480px) {
+  .buttons-container button {
+    flex: 1 1 100%; /* Adjust button size for very small screens */
+    max-width: 100%;
+  }
+
+  .word-container {
+    font-size: 18px; /* Adjust font size for very small screens */
+    align-items: left;
+  }
+  .container {
+    text-align: center;
+    background-color: #80dab9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-size: 18px;
+    font-weight: bold;
+    align-items: left;
+  }
+}
