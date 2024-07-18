@@ -268,7 +268,7 @@ function autoPlay() {
 
     autoPlayInterval = setInterval(() => {
         playNextWord();
-    }, 13000); // 8초 간격으로 다음 단어 재생
+    }, 8000); // 8초 간격으로 다음 단어 재생
 }
 
 updateWord();
