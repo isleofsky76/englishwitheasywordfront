@@ -1463,9 +1463,6 @@ const words = [
         "pronunciation": "[haʊ lɔŋ dʌz ðɪs ˈprɑdʌkt læst]",
         "hangul_pronunciation": "[하우 롱 더즈 디스 프로덕트 라스트]"
     },
-
-
-
 ];
 
 let currentWordIndex = 0;
@@ -1527,7 +1524,7 @@ function stopPronouncing() {
 function nextWord() {
     currentWordIndex = (currentWordIndex + 1) % words.length;
     updateWord();
-    setTimeout(() => pronounceWord(1), 1000); // 1초 지연
+    setTimeout(() => pronounceWord(1), 2000); // 1초 지연
 }
 
 function autoPlay() {
@@ -1547,7 +1544,7 @@ function autoPlay() {
 
     autoPlayInterval = setInterval(() => {
         playNextWord(); // 초 간격으로 다음 단어 재생
-    }, 6000);
+    }, 9000);
 }
 
 function showWordList() {
@@ -1563,5 +1560,5 @@ function showWordList() {
 document.addEventListener('DOMContentLoaded', () => {
     updateWord();
     showWordList(); // 페이지 로드 시 단어 목록 표시
-    setTimeout(() => pronounceWord(1), 1000); // 페이지 로드 후 1초 지연
+    setTimeout(() => pronounceWord(1), 2000); // 페이지 로드 후 1초 지연
 });
