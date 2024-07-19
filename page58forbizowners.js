@@ -1544,7 +1544,7 @@ function autoPlay() {
 
     autoPlayInterval = setInterval(() => {
         playNextWord(); // 초 간격으로 다음 단어 재생
-    }, 9000);
+    }, 15000);
 }
 
 function showWordList() {
