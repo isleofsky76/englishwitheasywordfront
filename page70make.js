@@ -500,7 +500,6 @@ const words = [
         ]
     }
 ];
-
 let currentWordIndex = 0;
 let synth = window.speechSynthesis;
 let autoPlayInterval;
@@ -523,7 +522,7 @@ function updateWord() {
 function pronounceWord(times, callback) {
     let count = 0;
     const word = words[currentWordIndex];
-    const { korean, english, examples } = word;
+    const { korean, examples } = word;
 
     function speak() {
         if (count < times) {
@@ -531,21 +530,11 @@ function pronounceWord(times, callback) {
             koreanUtterance.lang = 'ko-KR';
             koreanUtterance.rate = 1;
 
-            const englishUtterance = new SpeechSynthesisUtterance(english);
-            englishUtterance.lang = 'en-GB';
-            englishUtterance.rate = 1;
-
             koreanUtterance.onend = () => {
-                setTimeout(() => {
-                    synth.speak(englishUtterance);
-                }, 500);
-            };
-
-            englishUtterance.onend = () => {
                 let exampleIndex = 0;
                 function speakExample() {
                     if (exampleIndex < examples.length) {
-                        const exampleUtterance = new SpeechSynthesisUtterance(examples[exampleIndex].split(" (")[0]); // 한글을 제외한 영어 부분만 발음
+                        const exampleUtterance = new SpeechSynthesisUtterance(examples[exampleIndex]);
                         exampleUtterance.lang = 'en-GB';
                         exampleUtterance.rate = 1;
                         exampleUtterance.onend = () => {
@@ -604,7 +593,7 @@ function autoPlay() {
 
     autoPlayInterval = setInterval(() => {
         playNextWord(); // 15초 간격으로 다음 단어 재생
-    }, 15000);
+    }, 17000);
 }
 
 updateWord();
