@@ -5,14 +5,6 @@ let autoPlayInterval;
 
 const words = [
     {
-        "korean": "있다",
-        "english": "be",
-        "pronunciation": "[biː]",
-        "hangul_pronunciation": "[비]",
-        "sample_sentence": "There will be a meeting tomorrow.",
-        "korean_sentence": "내일 회의가 있을 것입니다."
-    },
-    {
         "korean": "존재하다",
         "english": "be",
         "pronunciation": "[biː]",
@@ -99,6 +91,14 @@ const words = [
         "hangul_pronunciation": "[비컴]",
         "sample_sentence": "He became a famous actor.",
         "korean_sentence": "그는 유명한 배우가 되었습니다."
+    },
+    {
+        "korean": "있다",
+        "english": "be",
+        "pronunciation": "[biː]",
+        "hangul_pronunciation": "[비]",
+        "sample_sentence": "There will be a meeting tomorrow.",
+        "korean_sentence": "내일 회의가 있을 것입니다."
     },
     {
         "korean": "있다 (상태에)",
@@ -1021,7 +1021,7 @@ function pronounceWord(times, callback) {
             sampleSentenceUtterance.onend = () => {
                 count++;
                 if (count < times) {
-                    speak();
+                    setTimeout(speak, 1000); // 1초 후 다음 발음 시작
                 } else if (callback) {
                     callback();
                 }
