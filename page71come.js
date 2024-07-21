@@ -940,6 +940,9 @@ const words = [
         ]
     }
 ];
+
+
+
 let currentWordIndex = 0;
 let synth = window.speechSynthesis;
 let autoPlayInterval;
@@ -953,8 +956,9 @@ function updateWord() {
     const exampleList = document.getElementById('example-list');
     exampleList.innerHTML = '';
     word.examples.forEach(example => {
+        const [english, korean] = example.split(" (");
         const listItem = document.createElement('li');
-        listItem.innerText = example;
+        listItem.innerHTML = `${english}<br>(${korean}`;
         exampleList.appendChild(listItem);
     });
 }
