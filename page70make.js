@@ -534,7 +534,7 @@ function pronounceWord(times, callback) {
                 let exampleIndex = 0;
                 function speakExample() {
                     if (exampleIndex < examples.length) {
-                        const exampleUtterance = new SpeechSynthesisUtterance(examples[exampleIndex]);
+                        const exampleUtterance = new SpeechSynthesisUtterance(examples[exampleIndex].split(" (")[0]); // 예문의 영어 부분만 발음
                         exampleUtterance.lang = 'en-GB';
                         exampleUtterance.rate = 1;
                         exampleUtterance.onend = () => {
@@ -592,7 +592,7 @@ function autoPlay() {
     playNextWord(); // 첫 단어를 즉시 재생
 
     autoPlayInterval = setInterval(() => {
-        playNextWord(); // 15초 간격으로 다음 단어 재생
+        playNextWord(); // 17초 간격으로 다음 단어 재생
     }, 17000);
 }
 
