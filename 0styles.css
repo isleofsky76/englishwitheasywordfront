@@ -9,7 +9,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh; /* Full viewport height */
-    padding: 0 20px; /* 좌우 여백 추가 */
+    padding: 0 10px; /* 좌우 여백 추가 */
   }
   
   .bg-primary {
@@ -103,7 +103,7 @@ body {
   @media (max-width: 768px) {
     body {
       font-size: 18px; /* Smaller font size for mobile */
-      margin-top: 20px; /* Adjust top margin for mobile */
+      margin-top: 50px; /* Adjust top margin for mobile */
     }
   
     .buttons-container button {
