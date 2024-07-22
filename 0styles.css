@@ -103,7 +103,7 @@ body {
   @media (max-width: 768px) {
     body {
       font-size: 18px; /* Smaller font size for mobile */
-      margin-top: 50px; /* Adjust top margin for mobile */
+      margin-top: 30px;
     }
   
     .buttons-container button {
@@ -122,6 +122,11 @@ body {
   }
   
   @media (max-width: 480px) {
+    body {
+        font-size: 18px; /* Smaller font size for mobile */
+        margin-top: 50px;
+      }
+
     .buttons-container button {
       flex: 1 1 100%; /* Adjust button size for very small screens */
       max-width: 100%;
