@@ -791,31 +791,32 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   
     function autoPlay() {
-    stopPronouncing(); // 자동 재생 시작 전에 현재 재생 중인 오디오 멈추기
-    isStopped = false;
+        stopPronouncing(); // 자동 재생 시작 전에 현재 재생 중인 오디오 멈추기
+        isStopped = false;
 
-    function playNextWord() {
-        if (isStopped) return;
-        updateWord();
-        pronounceWord(1, () => {
-            currentWordIndex++;
-            if (currentWordIndex >= words.length) {
-                currentWordIndex = 0;
-            }
-            setTimeout(playNextWord, 2000); // 다음 단어 재생 전에 2초 지연
-        });
+        function playNextWord() {
+            if (isStopped) return;
+            updateWord();
+            pronounceWord(1, () => {
+                currentWordIndex++;
+                if (currentWordIndex >= words.length) {
+                    currentWordIndex = 0;
+                }
+                setTimeout(playNextWord, 2000); // 다음 단어 재생 전에 2초 지연
+            });
+        }
+
+        setTimeout(playNextWord, 2000); // 첫 단어 재생 전에 2초 지연
     }
+  
+    document.getElementById('pronounce-1').addEventListener('click', () => pronounceWord(1));
+    document.getElementById('pronounce-5').addEventListener('click', () => pronounceWord(5));
+    document.getElementById('pronounce-10').addEventListener('click', () => pronounceWord(10));
+    document.getElementById('stop-pronouncing').addEventListener('click', stopPronouncing);
+    document.getElementById('next-word').addEventListener('click', nextWord);
+    document.getElementById('auto-play').addEventListener('click', autoPlay);
 
-    setTimeout(playNextWord, 2000); // 첫 단어 재생 전에 2초 지연
-}
-  
-    document.querySelector('button[onclick="pronounceWord(1)"]').addEventListener('click', () => pronounceWord(1));
-    document.querySelector('button[onclick="pronounceWord(5)"]').addEventListener('click', () => pronounceWord(5));
-    document.querySelector('button[onclick="pronounceWord(10)"]').addEventListener('click', () => pronounceWord(10));
-    document.querySelector('button[onclick="stopPronouncing()"]').addEventListener('click', stopPronouncing);
-    document.querySelector('button[onclick="nextWord()"]').addEventListener('click', nextWord);
-    document.querySelector('button[onclick="autoPlay()"]').addEventListener('click', autoPlay);
-  
     updateWord();
     setTimeout(() => pronounceWord(1), 2000); // 페이지 로드 후 2초 지연
-  });
+});
+
