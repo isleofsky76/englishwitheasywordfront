@@ -5124,7 +5124,7 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('request Audio for:', text, 'in', language);
   
         try {
-            const response = await fetch(`http://localhost:3000/generate-audio?text=${encodeURIComponent(text)}&language=${language}`, {
+            const response = await fetch(`https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/generate-audio?text=${encodeURIComponent(text)}&language=${language}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json'
