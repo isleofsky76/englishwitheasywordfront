@@ -1,5 +1,15 @@
 const words = [
     {
+        "korean": "위로 가다, 오르다",
+        "english": "go up",
+        "pronunciation": "[ɡoʊ ʌp]",
+        "examples": [
+            "We decided to go up the hill to enjoy the view (우리는 경치를 즐기기 위해 언덕 위로 가기로 했다).",
+            "The price of the product went up last week (그 제품의 가격이 지난주에 올랐다).",
+      
+        ]
+    },
+    {
         "korean": "계속하다",
         "english": "go on",
         "pronunciation": "[ɡoʊ ɑn]",
@@ -117,6 +127,16 @@ const words = [
             "She put in a lot of effort into the project (그녀는 프로젝트에 많은 노력을 기울였다).",
             "He put in the keys into the drawer (그는 열쇠를 서랍에 넣었다).",
 
+        ]
+    },
+    {
+        "korean": "팝업하다",
+        "english": "pop up",
+        "pronunciation": "[pɑp ʌp]",
+        "examples": [
+            "A new window popped up on my screen (새 창이 화면에 팝업되었다).",
+            "The notification will pop up after a few minutes (알림이 몇 분 후에 팝업될 것이다).",
+        
         ]
     },
     {
@@ -474,7 +494,7 @@ const words = [
         "examples": [
             "He took on the challenge of learning a new language (그는 새로운 언어를 배우는 도전을 받았다).",
             "She took on additional responsibilities at work (그녀는 직장에서 추가적인 책임을 지게 되었다).",
-            "They took on a large project last year (그들은 작년에 큰 프로젝트를 맡았다)."
+      
         ]
     },
     {
@@ -484,7 +504,7 @@ const words = [
         "examples": [
             "He took in the beautiful scenery (그는 아름다운 경치를 감상했다).",
             "She couldn't take in all the information at once (그녀는 한 번에 모든 정보를 받아들일 수 없었다).",
-            "The sponge took in the spilled water (스펀지가 쏟아진 물을 흡수했다)."
+     
         ]
     },
     {
@@ -494,7 +514,7 @@ const words = [
         "examples": [
             "He stirred up excitement among the fans (그는 팬들 사이에 흥분을 일으켰다).",
             "The rumors stirred up trouble in the office (소문이 사무실에서 문제를 일으켰다).",
-            "She tried to stir up support for the cause (그녀는 그 원인을 위해 지지를 일으키려고 했다)."
+         
         ]
     },
     {
@@ -504,7 +524,7 @@ const words = [
         "examples": [
             "She decided to try out for the school play (그녀는 학교 연극에 출연해 보겠다고 결정했다).",
             "He tried out the new software before buying it (그는 구매하기 전에 새로운 소프트웨어를 시험해 보았다).",
-            "They will try out the new recipe tonight (그들은 오늘 밤 새로운 레시피를 시도할 것이다)."
+         
         ]
     },
     {
@@ -514,7 +534,7 @@ const words = [
         "examples": [
             "The shop closes up at 9 PM (가게는 오후 9시에 문을 닫는다).",
             "He closed up the store for the night (그는 밤을 위해 가게를 닫았다).",
-            "She tends to close up when she feels nervous (그녀는 긴장할 때 자기 자신을 닫는 경향이 있다)."
+   
         ]
     },
     {
@@ -524,7 +544,7 @@ const words = [
         "examples": [
             "They set up the conference room for the meeting (그들은 회의를 위해 회의실을 준비했다).",
             "She set up a new business last year (그녀는 지난해 새 사업을 시작했다).",
-            "He set up the equipment before the event (그는 행사 전에 장비를 설치했다)."
+
         ]
     },
     {
@@ -975,6 +995,1356 @@ const words = [
         examples: [
             "We plan on going to the beach (우리는 해변에 갈 계획이다).",
             "They plan on expanding the business (그들은 사업 확장을 계획하고 있다)."
+        ]
+    },
+    {
+        korean: "지불하다",
+        english: "pay for",
+        pronunciation: "[peɪ fɔːr]",
+        examples: [
+            "He will pay for the damages (그는 피해를 배상할 것이다).",
+            "You need to pay for your groceries (당신은 식료품 값을 지불해야 합니다)."
+        ]
+    },
+    {
+        korean: "갚다",
+        english: "pay back",
+        pronunciation: "[peɪ bæk]",
+        examples: [
+            "She promised to pay back the loan (그녀는 대출을 갚기로 약속했다).",
+            "I need to pay back my friend (나는 내 친구에게 돈을 갚아야 한다)."
+        ]
+    },
+    {
+        korean: "거절하다",
+        english: "pass up",
+        pronunciation: "[pæs ʌp]",
+        examples: [
+            "Don't pass up this opportunity (이 기회를 놓치지 마세요).",
+            "She passed up the chance to go abroad (그녀는 해외로 갈 기회를 놓쳤다)."
+        ]
+    },
+    {
+        korean: "기절하다",
+        english: "pass out",
+        pronunciation: "[pæs aʊt]",
+        examples: [
+            "He passed out from exhaustion (그는 피로로 기절했다).",
+            "The teacher will pass out the exams (선생님이 시험지를 나눠 줄 것이다)."
+        ]
+    },
+    {
+        korean: "이사 나가다",
+        english: "move out",
+        pronunciation: "[muːv aʊt]",
+        examples: [
+            "They decided to move out of the city (그들은 도시를 떠나기로 결정했다).",
+            "I'm planning to move out next month (나는 다음 달에 이사 나갈 계획이다)."
+        ]
+    },
+    {
+        korean: "놓치다",
+        english: "miss out",
+        pronunciation: "[mɪs aʊt]",
+        examples: [
+            "Don't miss out on this deal (이 거래를 놓치지 마세요).",
+            "She missed out on the fun (그녀는 재미를 놓쳤다)."
+        ]
+    },
+    {
+        korean: "만들다",
+        english: "make up",
+        pronunciation: "[meɪk ʌp]",
+        examples: [
+            "She likes to make up stories (그녀는 이야기를 꾸미는 것을 좋아한다).",
+            "They made up after the fight (그들은 싸운 후 화해했다)."
+        ]
+    },
+    {
+        korean: "작성하다",
+        english: "make out",
+        pronunciation: "[meɪk aʊt]",
+        examples: [
+            "Can you make out what he is saying? (그가 말하는 것을 알아들을 수 있나요?)",
+            "They made out a check (그들은 수표를 작성했다)."
+        ]
+    },
+    {
+        korean: "운 좋게도",
+        english: "luck out",
+        pronunciation: "[lʌk aʊt]",
+        examples: [
+            "We lucked out and found a parking spot (우리는 운 좋게도 주차 공간을 찾았다).",
+            "She lucked out with the weather (그녀는 날씨 덕분에 운이 좋았다)."
+        ]
+    },
+    {
+        korean: "조심하다",
+        english: "look out",
+        pronunciation: "[lʊk aʊt]",
+        examples: [
+            "Look out for that car! (저 차를 조심해!)",
+            "You need to look out for your health (당신은 건강을 돌봐야 합니다)."
+        ]
+    },
+    {
+        korean: "찾다",
+        english: "look for",
+        pronunciation: "[lʊk fɔːr]",
+        examples: [
+            "She is looking for her keys (그녀는 열쇠를 찾고 있다).",
+            "I'm looking for a new job (나는 새 직장을 찾고 있다)."
+        ]
+    },
+    {
+        korean: "밝히다",
+        english: "light up",
+        pronunciation: "[laɪt ʌp]",
+        examples: [
+            "Her face lit up when she saw him (그녀는 그를 보자 얼굴이 환해졌다).",
+            "He lit up a cigarette (그는 담배에 불을 붙였다)."
+        ]
+    },
+    {
+        korean: "눕다",
+        english: "lie down",
+        pronunciation: "[laɪ daʊn]",
+        examples: [
+            "I'm going to lie down for a while (나는 잠시 누울 것이다).",
+            "He lay down on the sofa (그는 소파에 누웠다)."
+        ]
+    },
+    {
+        korean: "실망시키다",
+        english: "let down",
+        pronunciation: "[lɛt daʊn]",
+        examples: [
+            "Don't let me down (나를 실망시키지 마세요).",
+            "She let down her team (그녀는 팀을 실망시켰다)."
+        ]
+    },
+    {
+        korean: "내쫓다",
+        english: "kick out",
+        pronunciation: "[kɪk aʊt]",
+        examples: [
+            "They were kicked out of the club (그들은 클럽에서 쫓겨났다).",
+            "He was kicked out of school (그는 학교에서 퇴학당했다)."
+        ]
+    },
+    {
+        korean: "시작하다",
+        english: "kick off",
+        pronunciation: "[kɪk ɔːf]",
+        examples: [
+            "The game will kick off at noon (경기는 정오에 시작될 것이다).",
+            "They kicked off the meeting with a joke (그들은 농담으로 회의를 시작했다)."
+        ]
+    },
+    {
+        korean: "금지하다",
+        english: "keep off",
+        pronunciation: "[kiːp ɔːf]",
+        examples: [
+            "Please keep off the grass (잔디에 들어가지 마세요).",
+            "Keep off sugary foods (설탕이 든 음식을 피하세요)."
+        ]
+    },
+    {
+        korean: "서두르다",
+        english: "hurry up",
+        pronunciation: "[ˈhɜːri ʌp]",
+        examples: [
+            "Hurry up, we're going to be late (서둘러, 우리 늦겠다).",
+            "She needs to hurry up and finish her work (그녀는 서둘러 일을 끝내야 한다)."
+        ]
+    },
+    {
+        korean: "견디다",
+        english: "hold out",
+        pronunciation: "[hoʊld aʊt]",
+        examples: [
+            "They held out against the attackers (그들은 공격자들에 맞서 버텼다).",
+            "I don't know how much longer we can hold out (우리가 얼마나 더 버틸 수 있을지 모르겠다)."
+        ]
+    },
+    {
+        korean: "돕다",
+        english: "help out",
+        pronunciation: "[hɛlp aʊt]",
+        examples: [
+            "Can you help me out with this problem? (이 문제를 도와줄 수 있나요?)",
+            "She helps out at the local shelter (그녀는 지역 보호소에서 도와준다)."
+        ]
+    },
+    {
+        korean: "막다",
+        english: "head off",
+        pronunciation: "[hɛd ɔːf]",
+        examples: [
+            "We need to head off the crisis (우리는 위기를 막아야 한다).",
+            "They headed off in the opposite direction (그들은 반대 방향으로 떠났다)."
+        ]
+    },
+    {
+        korean: "향하다",
+        english: "head for",
+        pronunciation: "[hɛd fɔːr]",
+        examples: [
+            "They are heading for the mountains (그들은 산으로 향하고 있다).",
+            "I'm heading for the station (나는 역으로 향하고 있다)."
+        ]
+    },
+    {
+        korean: "어울리다",
+        english: "hang out",
+        pronunciation: "[hæŋ aʊt]",
+        examples: [
+            "We used to hang out at the park (우리는 공원에서 어울리곤 했다).",
+            "Do you want to hang out this weekend? (이번 주말에 같이 놀래?)"
+        ]
+    },
+    {
+        korean: "기다리다",
+        english: "hang on",
+        pronunciation: "[hæŋ ɔːn]",
+        examples: [
+            "Hang on a minute, I'll be right back (잠시만 기다려, 금방 돌아올게).",
+            "She told him to hang on tight (그녀는 그에게 꽉 잡으라고 말했다)."
+        ]
+    },
+    {
+        korean: "나눠주다",
+        english: "hand out",
+        pronunciation: "[hænd aʊt]",
+        examples: [
+            "They handed out flyers (그들은 전단지를 나눠주었다).",
+            "Can you hand out these papers? (이 서류들을 나눠줄 수 있나요?)"
+        ]
+    },
+    {
+        korean: "내려가다",
+        english: "go down",
+        pronunciation: "[ɡoʊ daʊn]",
+        examples: [
+            "The sun is going down (해가 지고 있다).",
+            "Prices are expected to go down (가격이 내려갈 것으로 예상된다)."
+        ]
+    },
+    {
+        korean: "계속하다",
+        english: "go ahead",
+        pronunciation: "[ɡoʊ əˈhɛd]",
+        examples: [
+            "You can go ahead with your plan (당신의 계획을 계속 진행하세요).",
+            "They decided to go ahead without him (그들은 그 없이 진행하기로 결정했다)."
+        ]
+    },
+    {
+        korean: "뒤쫓다",
+        english: "go after",
+        pronunciation: "[ɡoʊ ˈæftər]",
+        examples: [
+            "He went after his dreams (그는 자신의 꿈을 뒤쫓았다).",
+            "The police went after the suspect (경찰이 용의자를 뒤쫓았다)."
+        ]
+    },
+    {
+        korean: "포기하다",
+        english: "give up",
+        pronunciation: "[ɡɪv ʌp]",
+        examples: [
+            "Don't give up on your goals (당신의 목표를 포기하지 마세요).",
+            "She gave up smoking (그녀는 담배를 끊었다)."
+        ]
+    },
+    {
+        korean: "나눠주다",
+        english: "give out",
+        pronunciation: "[ɡɪv aʊt]",
+        examples: [
+            "They gave out free samples (그들은 무료 샘플을 나눠주었다).",
+            "The teacher gave out the assignments (선생님이 과제를 나눠주었다)."
+        ]
+    },
+    {
+        korean: "극복하다",
+        english: "get over",
+        pronunciation: "[ɡɛt ˈoʊvər]",
+        examples: [
+            "It took her a long time to get over the breakup (그녀는 이별을 극복하는 데 오랜 시간이 걸렸다).",
+            "He needs to get over his fear of flying (그는 비행에 대한 두려움을 극복해야 한다)."
+        ]
+    },
+    {
+        korean: "내려오다",
+        english: "get down",
+        pronunciation: "[ɡɛt daʊn]",
+        examples: [
+            "Get down from there! (거기서 내려와!)",
+            "He got down on one knee (그는 한쪽 무릎을 꿇었다)."
+        ]
+    },
+    {
+        korean: "도망치다",
+        english: "get away",
+        pronunciation: "[ɡɛt əˈweɪ]",
+        examples: [
+            "They managed to get away (그들은 도망치는 데 성공했다).",
+            "I need to get away for a few days (나는 며칠 동안 떠나야 한다)."
+        ]
+    },
+    {
+        korean: "집중하다",
+        english: "focus on",
+        pronunciation: "[ˈfoʊkəs ɑːn]",
+        examples: [
+            "You need to focus on your studies (당신은 공부에 집중해야 합니다).",
+            "Let's focus on the main issue (주요 문제에 집중합시다)."
+        ]
+    },
+    {
+        korean: "알아내다",
+        english: "find out",
+        pronunciation: "[faɪnd aʊt]",
+        examples: [
+            "I need to find out the truth (나는 진실을 알아내야 한다).",
+            "Did you find out what happened? (무슨 일이 있었는지 알아냈나요?)"
+        ]
+    },
+    {
+        korean: "작성하다",
+        english: "fill out",
+        pronunciation: "[fɪl aʊt]",
+        examples: [
+            "Please fill out this form (이 양식을 작성해 주세요).",
+            "He filled out the application (그는 신청서를 작성했다)."
+        ]
+    },
+    {
+        korean: "싸우다",
+        english: "fall out",
+        pronunciation: "[fɔːl aʊt]",
+        examples: [
+            "They fell out over a trivial matter (그들은 사소한 일로 싸웠다).",
+            "Her hair started to fall out (그녀의 머리카락이 빠지기 시작했다)."
+        ]
+    },
+    {
+        korean: "반하다",
+        english: "fall for",
+        pronunciation: "[fɔːl fɔːr]",
+        examples: [
+            "He fell for her at first sight (그는 첫눈에 그녀에게 반했다).",
+            "Don't fall for that trick (그 속임수에 넘어가지 마세요)."
+        ]
+    },
+    {
+        korean: "균등하게 하다",
+        english: "even out",
+        pronunciation: "[ˈiːvən aʊt]",
+        examples: [
+            "They need to even out the workload (그들은 업무량을 균등하게 해야 한다).",
+            "The surface was evened out (표면이 평평하게 되었다)."
+        ]
+    },
+    {
+        korean: "중퇴하다",
+        english: "drop out",
+        pronunciation: "[drɑːp aʊt]",
+        examples: [
+            "He decided to drop out of school (그는 학교를 중퇴하기로 결정했다).",
+            "She dropped out of the race (그녀는 경주에서 중도 하차했다)."
+        ]
+    },
+    {
+        korean: "내려주다",
+        english: "drop off",
+        pronunciation: "[drɑːp ɔːf]",
+        examples: [
+            "Can you drop me off at the station? (나를 역에 내려줄 수 있나요?)",
+            "I need to drop off the package (나는 소포를 내려줘야 한다)."
+        ]
+    },
+    {
+        korean: "차려입다",
+        english: "dress up",
+        pronunciation: "[drɛs ʌp]",
+        examples: [
+            "She likes to dress up for parties (그녀는 파티를 위해 차려입는 것을 좋아한다).",
+            "He dressed up as a pirate (그는 해적 복장을 했다)."
+        ]
+    },
+    {
+        korean: "길게 하다",
+        english: "draw out",
+        pronunciation: "[drɔː aʊt]",
+        examples: [
+            "He drew out the conversation (그는 대화를 길게 늘였다).",
+            "She drew out the meeting (그녀는 회의를 길게 끌었다)."
+        ]
+    },
+    {
+        korean: "졸다",
+        english: "doze off",
+        pronunciation: "[doʊz ɔːf]",
+        examples: [
+            "He dozed off during the lecture (그는 강의 중에 졸았다).",
+            "I dozed off while watching TV (나는 TV를 보다가 졸았다)."
+        ]
+    },
+    {
+        korean: "진정되다",
+        english: "die down",
+        pronunciation: "[daɪ daʊn]",
+        examples: [
+            "The storm finally died down (폭풍이 마침내 진정되었다).",
+            "The noise will die down soon (소음이 곧 잦아들 것이다)."
+        ]
+    },
+    {
+        korean: "사라지다",
+        english: "die away",
+        pronunciation: "[daɪ əˈweɪ]",
+        examples: [
+            "The sound of the music slowly died away (음악 소리가 서서히 사라졌다).",
+            "Her voice died away as she left (그녀가 떠나면서 목소리가 사라졌다)."
+        ]
+    },
+    {
+        korean: "줄이다",
+        english: "cut down",
+        pronunciation: "[kʌt daʊn]",
+        examples: [
+            "You need to cut down on sugar (당신은 설탕을 줄여야 합니다).",
+            "They cut down the tree (그들은 나무를 베었다)."
+        ]
+    },
+    {
+        korean: "줄이다",
+        english: "cut back",
+        pronunciation: "[kʌt bæk]",
+        examples: [
+            "We need to cut back on expenses (우리는 비용을 줄여야 한다).",
+            "They cut back production (그들은 생산을 줄였다)."
+        ]
+    },
+    {
+        korean: "의지하다",
+        english: "count on",
+        pronunciation: "[kaʊnt ɑːn]",
+        examples: [
+            "You can count on me (당신은 나를 믿어도 돼).",
+            "He is counting on your support (그는 당신의 지지를 기대하고 있다)."
+        ]
+    },
+    {
+        korean: "나오다",
+        english: "come out",
+        pronunciation: "[kʌm aʊt]",
+        examples: [
+            "The new book will come out next month (새 책이 다음 달에 나온다).",
+            "She came out of the room (그녀는 방에서 나왔다)."
+        ]
+    },
+    {
+        korean: "떨어지다",
+        english: "come off",
+        pronunciation: "[kʌm ɔːf]",
+        examples: [
+            "The paint is starting to come off (페인트가 벗겨지기 시작하고 있다).",
+            "He came off his bike (그는 자전거에서 떨어졌다)."
+        ]
+    },
+    {
+        korean: "들어오다",
+        english: "come in",
+        pronunciation: "[kʌm ɪn]",
+        examples: [
+            "Please come in (들어오세요).",
+            "The train is coming in now (기차가 지금 들어오고 있다)."
+        ]
+    },
+    {
+        korean: "클릭하다",
+        english: "click on",
+        pronunciation: "[klɪk ɔːn]",
+        examples: [
+            "Click on the link (링크를 클릭하세요).",
+            "He clicked on the icon (그는 아이콘을 클릭했다)."
+        ]
+    },
+    {
+        korean: "청소하다",
+        english: "clean up",
+        pronunciation: "[kliːn ʌp]",
+        examples: [
+            "Let's clean up this mess (이 어질러진 것을 치우자).",
+            "She cleaned up the kitchen (그녀는 부엌을 청소했다)."
+        ]
+    },
+    {
+        korean: "기운 내다",
+        english: "cheer up",
+        pronunciation: "[tʃɪr ʌp]",
+        examples: [
+            "Cheer up! Everything will be fine (기운 내! 모든 것이 잘 될 거야).",
+            "He tried to cheer up his friend (그는 친구를 격려하려고 했다)."
+        ]
+    },
+    {
+        korean: "체크인하다",
+        english: "check in",
+        pronunciation: "[tʃɛk ɪn]",
+        examples: [
+            "We need to check in at the hotel (우리는 호텔에 체크인해야 한다).",
+            "She checked in for her flight (그녀는 비행기에 탑승 수속을 했다)."
+        ]
+    },
+    {
+        korean: "바람을 피다",
+        english: "cheat on",
+        pronunciation: "[tʃiːt ɔːn]",
+        examples: [
+            "He cheated on his wife (그는 아내를 속였다).",
+            "She found out he was cheating on her (그녀는 그가 그녀를 속이고 있다는 것을 알게 되었다)."
+        ]
+    },
+    {
+        korean: "따라잡다",
+        english: "catch up",
+        pronunciation: "[kætʃ ʌp]",
+        examples: [
+            "I need to catch up on my work (나는 내 일을 따라잡아야 한다).",
+            "They finally caught up with the group (그들은 마침내 그룹을 따라잡았다)."
+        ]
+    },
+    {
+        korean: "인기를 얻다",
+        english: "catch on",
+        pronunciation: "[kætʃ ɔːn]",
+        examples: [
+            "The new song is starting to catch on (새 노래가 인기를 얻기 시작하고 있다).",
+            "It took him a while to catch on (그는 이해하는 데 시간이 좀 걸렸다)."
+        ]
+    },
+    {
+        korean: "계속하다",
+        english: "carry on",
+        pronunciation: "[ˈkæri ɔːn]",
+        examples: [
+            "Carry on with your work (당신의 일을 계속하세요).",
+            "They decided to carry on despite the difficulties (그들은 어려움에도 불구하고 계속하기로 결정했다)."
+        ]
+    },
+    {
+        korean: "돌보다",
+        english: "care for",
+        pronunciation: "[kɛr fɔːr]",
+        examples: [
+            "She cares for her elderly parents (그녀는 노부모를 돌본다).",
+            "He doesn't care for spicy food (그는 매운 음식을 좋아하지 않는다)."
+        ]
+    },
+    {
+        korean: "취소하다",
+        english: "call off",
+        pronunciation: "[kɔːl ɔːf]",
+        examples: [
+            "They called off the meeting (그들은 회의를 취소했다).",
+            "The event was called off due to rain (행사는 비 때문에 취소되었다)."
+        ]
+    },
+    {
+        korean: "지치다",
+        english: "burn out",
+        pronunciation: "[bɜrn aʊt]",
+        examples: [
+            "He burned out after working too hard (그는 너무 열심히 일해서 지쳤다).",
+            "The light bulb burned out (전구가 나갔다)."
+        ]
+    },
+    {
+        korean: "쌓아 올리다",
+        english: "build up",
+        pronunciation: "[bɪld ʌp]",
+        examples: [
+            "She built up a successful business (그녀는 성공적인 사업을 일구었다).",
+            "Traffic is building up on the highway (고속도로에 교통이 몰리고 있다)."
+        ]
+    },
+    {
+        korean: "헤어지다",
+        english: "break up",
+        pronunciation: "[breɪk ʌp]",
+        examples: [
+            "They decided to break up (그들은 헤어지기로 결정했다).",
+            "The party broke up at midnight (파티는 자정에 끝났다)."
+        ]
+    },
+    {
+        korean: "침입하다",
+        english: "break in",
+        pronunciation: "[breɪk ɪn]",
+        examples: [
+            "Someone broke in last night (어젯밤에 누군가가 침입했다).",
+            "He broke in the new shoes (그는 새 신발을 길들였다)."
+        ]
+    },
+    {
+        korean: "꺼지다",
+        english: "blow out",
+        pronunciation: "[bloʊ aʊt]",
+        examples: [
+            "The candle blew out (촛불이 꺼졌다).",
+            "She blew out the candles on her birthday cake (그녀는 생일 케이크 위의 촛불을 껐다)."
+        ]
+    },
+    {
+        korean: "초대하다",
+        english: "ask over",
+        pronunciation: "[æsk ˈoʊvər]",
+        examples: [
+            "We should ask them over for dinner (우리는 저녁 식사에 그들을 초대해야 한다).",
+            "He asked his friends over to his house (그는 친구들을 집으로 초대했다)."
+        ]
+    },
+    {
+        korean: "데이트 신청하다",
+        english: "ask out",
+        pronunciation: "[æsk aʊt]",
+        examples: [
+            "He asked her out on a date (그는 그녀에게 데이트 신청을 했다).",
+            "She was nervous about asking him out (그녀는 그에게 데이트 신청하는 것에 대해 긴장했다)."
+        ]
+    },
+    {
+        korean: "짜내다",
+        english: "wring out",
+        pronunciation: "[rɪŋ aʊt]",
+        examples: [
+            "She wrung out the wet towel (그녀는 젖은 수건을 짰다).",
+            "He wrung the water out of his clothes (그는 옷에서 물을 짜냈다)."
+        ]
+    },
+    {
+        korean: "조심하다",
+        english: "watch out",
+        pronunciation: "[wɑːtʃ aʊt]",
+        examples: [
+            "Watch out for the cars (차를 조심해).",
+            "You need to watch out for scams (당신은 사기를 조심해야 한다)."
+        ]
+    },
+    {
+        korean: "걸어가다",
+        english: "walk away",
+        pronunciation: "[wɔːk əˈweɪ]",
+        examples: [
+            "She walked away from the argument (그녀는 논쟁에서 물러났다).",
+            "He decided to walk away from the job (그는 일을 그만두기로 결정했다)."
+        ]
+    },
+    {
+        korean: "뒤집다",
+        english: "turn over",
+        pronunciation: "[tɜrn ˈoʊvər]",
+        examples: [
+            "Please turn over the paper (종이를 뒤집어 주세요).",
+            "He turned over the business to his son (그는 아들에게 사업을 넘겼다)."
+        ]
+    },
+    {
+        korean: "끄다",
+        english: "turn off",
+        pronunciation: "[tɜrn ɔːf]",
+        examples: [
+            "Please turn off the lights (불을 꺼 주세요).",
+            "He turned off the TV (그는 TV를 껐다)."
+        ]
+    },
+    {
+        korean: "거절하다",
+        english: "turn down",
+        pronunciation: "[tɜrn daʊn]",
+        examples: [
+            "She turned down the offer (그녀는 제안을 거절했다).",
+            "He turned down the volume (그는 볼륨을 줄였다)."
+        ]
+    },
+    {
+        korean: "되돌아가다",
+        english: "turn back",
+        pronunciation: "[tɜrn bæk]",
+        examples: [
+            "We had to turn back because of the storm (우리는 폭풍 때문에 되돌아가야 했다).",
+            "He decided to turn back and apologize (그는 돌아가서 사과하기로 결심했다)."
+        ]
+    },
+    {
+        korean: "설득하다",
+        english: "talk into",
+        pronunciation: "[tɔk ˈɪntuː]",
+        examples: [
+            "She talked him into going to the party (그녀는 그를 파티에 가도록 설득했다).",
+            "He talked her into buying the car (그는 그녀를 설득해서 그 차를 사게 했다)."
+        ]
+    },
+    {
+        korean: "이륙하다",
+        english: "take off",
+        pronunciation: "[teɪk ɔːf]",
+        examples: [
+            "The plane will take off soon (비행기가 곧 이륙할 것이다).",
+            "He took off his jacket (그는 재킷을 벗었다)."
+        ]
+    },
+    {
+        korean: "되돌리다",
+        english: "take back",
+        pronunciation: "[teɪk bæk]",
+        examples: [
+            "She took back her words (그녀는 자신의 말을 취소했다).",
+            "He took back the faulty product (그는 결함이 있는 제품을 반품했다)."
+        ]
+    },
+    {
+        korean: "제거하다",
+        english: "take away",
+        pronunciation: "[teɪk əˈweɪ]",
+        examples: [
+            "The waiter took away the plates (웨이터가 접시를 치웠다).",
+            "They took away his driving license (그들은 그의 운전면허증을 압수했다)."
+        ]
+    },
+    {
+        korean: "고수하다",
+        english: "stick to",
+        pronunciation: "[stɪk tuː]",
+        examples: [
+            "You should stick to your principles (당신은 자신의 원칙을 고수해야 한다).",
+            "They decided to stick to the original plan (그들은 원래 계획을 고수하기로 결정했다)."
+        ]
+    },
+    {
+        korean: "한 발 물러서다",
+        english: "step back",
+        pronunciation: "[stɛp bæk]",
+        examples: [
+            "Please step back from the edge (가장자리에서 한 발 물러서 주세요).",
+            "He stepped back to think about the situation (그는 상황을 생각하기 위해 한 발 물러섰다)."
+        ]
+    },
+    {
+        korean: "시작하다",
+        english: "start out",
+        pronunciation: "[stɑrt aʊt]",
+        examples: [
+            "They started out as a small company (그들은 작은 회사로 시작했다).",
+            "I started out by reading a book (나는 책을 읽는 것으로 시작했다)."
+        ]
+    },
+    {
+        korean: "시작하다",
+        english: "start off",
+        pronunciation: "[stɑrt ɔːf]",
+        examples: [
+            "Let's start off with some warm-up exercises (준비 운동부터 시작합시다).",
+            "She started off her career in marketing (그녀는 마케팅에서 경력을 시작했다)."
+        ]
+    },
+    {
+        korean: "눈에 띄다",
+        english: "stand out",
+        pronunciation: "[stænd aʊt]",
+        examples: [
+            "She really stands out in a crowd (그녀는 군중 속에서 정말 눈에 띈다).",
+            "His performance stood out among the rest (그의 공연은 다른 것들 중에서 눈에 띄었다)."
+        ]
+    },
+    {
+        korean: "상징하다",
+        english: "stand for",
+        pronunciation: "[stænd fɔːr]",
+        examples: [
+            "What does 'USA' stand for? (USA는 무엇을 상징하나요?)",
+            "He stands for equality and justice (그는 평등과 정의를 상징한다)."
+        ]
+    },
+    {
+        korean: "정리하다",
+        english: "sort out",
+        pronunciation: "[sɔːrt aʊt]",
+        examples: [
+            "We need to sort out these files (우리는 이 파일들을 정리해야 한다).",
+            "He sorted out his problems (그는 자신의 문제를 해결했다)."
+        ]
+    },
+    {
+        korean: "잠을 자면서 고민하다",
+        english: "sleep on",
+        pronunciation: "[sliːp ɔːn]",
+        examples: [
+            "Let me sleep on it and I'll give you an answer tomorrow (하룻밤 자면서 고민해보고 내일 답을 줄게요).",
+            "She decided to sleep on the decision (그녀는 결정을 잠시 미루기로 했다)."
+        ]
+    },
+    {
+        korean: "게으름 피우다",
+        english: "slack off",
+        pronunciation: "[slæk ɔːf]",
+        examples: [
+            "He's been slacking off at work (그는 직장에서 게으름을 피우고 있다).",
+            "Don't slack off, we need to finish this project (게으름 피우지 마, 우리는 이 프로젝트를 끝내야 해)."
+        ]
+    },
+    {
+        korean: "앉다",
+        english: "sit down",
+        pronunciation: "[sɪt daʊn]",
+        examples: [
+            "Please sit down and relax (앉아서 쉬세요).",
+            "He sat down on the bench (그는 벤치에 앉았다)."
+        ]
+    },
+    {
+        korean: "떨쳐내다",
+        english: "shake off",
+        pronunciation: "[ʃeɪk ɔːf]",
+        examples: [
+            "She tried to shake off her fears (그녀는 두려움을 떨쳐내려고 했다).",
+            "He shook off the dirt from his shoes (그는 신발에서 먼지를 털어냈다)."
+        ]
+    },
+    {
+        korean: "정착하다",
+        english: "settle in",
+        pronunciation: "[ˈsɛtl ɪn]",
+        examples: [
+            "They settled in their new home (그들은 새 집에 정착했다).",
+            "It took a while for him to settle in (그가 정착하는 데 시간이 좀 걸렸다)."
+        ]
+    },
+    {
+        korean: "따로 떼어 두다",
+        english: "set aside",
+        pronunciation: "[sɛt əˈsaɪd]",
+        examples: [
+            "She set aside some money for a rainy day (그녀는 만일을 대비해 돈을 따로 떼어 두었다).",
+            "He set aside his differences with his colleague (그는 동료와의 의견 차이를 제쳐 두었다)."
+        ]
+    },
+    {
+        korean: "시작하다",
+        english: "set about",
+        pronunciation: "[sɛt əˈbaʊt]",
+        examples: [
+            "He set about fixing the car (그는 차를 고치는 것을 시작했다).",
+            "They set about their work with enthusiasm (그들은 열정적으로 일을 시작했다)."
+        ]
+    },
+    {
+        korean: "처리하다",
+        english: "see about",
+        pronunciation: "[si əˈbaʊt]",
+        examples: [
+            "I'll see about getting tickets (내가 티켓을 구할 수 있는지 알아볼게요).",
+            "She needs to see about her visa (그녀는 비자를 처리해야 한다)."
+        ]
+    },
+    {
+        korean: "스크롤 올리다",
+        english: "scroll up",
+        pronunciation: "[skroʊl ʌp]",
+        examples: [
+            "Scroll up to read the previous messages (이전 메시지를 읽으려면 스크롤을 올리세요).",
+            "He scrolled up the webpage (그는 웹페이지를 스크롤 올렸다)."
+        ]
+    },
+    {
+        korean: "차로 치다",
+        english: "run over",
+        pronunciation: "[rʌn ˈoʊvər]",
+        examples: [
+            "She was run over by a car (그녀는 차에 치였다).",
+            "The meeting ran over the scheduled time (회의가 예정된 시간을 초과했다)."
+        ]
+    },
+    {
+        korean: "되돌리다",
+        english: "roll back",
+        pronunciation: "[roʊl bæk]",
+        examples: [
+            "They decided to roll back the prices (그들은 가격을 인하하기로 결정했다).",
+            "The policy changes were rolled back (정책 변화가 되돌려졌다)."
+        ]
+    },
+    {
+        korean: "차를 세우다",
+        english: "pull over",
+        pronunciation: "[pʊl ˈoʊvər]",
+        examples: [
+            "The police officer told him to pull over (경찰관이 그에게 차를 세우라고 말했다).",
+            "He pulled over to check the map (그는 지도를 확인하기 위해 차를 세웠다)."
+        ]
+    },
+    {
+        korean: "인쇄하다",
+        english: "print out",
+        pronunciation: "[prɪnt aʊt]",
+        examples: [
+            "Can you print out the document? (문서를 인쇄해 줄 수 있나요?)",
+            "He printed out the tickets (그는 티켓을 인쇄했다)."
+        ]
+    },
+    {
+        korean: "분해하다",
+        english: "take apart",
+        pronunciation: "[teɪk əˈpɑrt]",
+        examples: [
+            "He took the engine apart (그는 엔진을 분해했다).",
+            "She likes to take apart old gadgets (그녀는 오래된 기계를 분해하는 것을 좋아한다)."
+        ]
+    },
+    {
+        korean: "닮다",
+        english: "take after",
+        pronunciation: "[teɪk ˈæftər]",
+        examples: [
+            "She takes after her mother (그녀는 엄마를 닮았다).",
+            "He takes after his father in many ways (그는 많은 면에서 아버지를 닮았다)."
+        ]
+    },
+    {
+        korean: "스트레스를 주다",
+        english: "stress out",
+        pronunciation: "[strɛs aʊt]",
+        examples: [
+            "Work has been stressing me out (일이 나를 스트레스 받게 하고 있다).",
+            "Don't stress out over the small things (작은 일들로 스트레스 받지 마세요)."
+        ]
+    },
+    {
+        korean: "속도를 늦추다",
+        english: "slow down",
+        pronunciation: "[sloʊ daʊn]",
+        examples: [
+            "Please slow down, you're driving too fast (속도를 늦추세요, 너무 빨리 운전하고 있어요).",
+            "He decided to slow down and take it easy (그는 속도를 늦추고 편하게 하기로 결정했다)."
+        ]
+    },
+    {
+        korean: "닫다",
+        english: "shut down",
+        pronunciation: "[ʃʌt daʊn]",
+        examples: [
+            "The factory will shut down next month (공장이 다음 달에 폐쇄될 것이다).",
+            "Please shut down your computer (컴퓨터를 종료해 주세요)."
+        ]
+    },
+    {
+        korean: "돌려보내다",
+        english: "send back",
+        pronunciation: "[sɛnd bæk]",
+        examples: [
+            "She decided to send back the faulty item (그녀는 결함이 있는 물건을 돌려보내기로 했다).",
+            "He sent back the letter (그는 편지를 돌려보냈다)."
+        ]
+    },
+    {
+        korean: "다 써버리다",
+        english: "run out of",
+        pronunciation: "[rʌn aʊt ʌv]",
+        examples: [
+            "We've run out of milk (우리는 우유가 다 떨어졌다).",
+            "They ran out of time (그들은 시간이 다 되었다)."
+        ]
+    },
+    {
+        korean: "돌아다니다",
+        english: "run around",
+        pronunciation: "[rʌn əˈraʊnd]",
+        examples: [
+            "The children were running around the park (아이들이 공원에서 뛰어다니고 있었다).",
+            "I've been running around all day (나는 하루 종일 돌아다녔다)."
+        ]
+    },
+    {
+        korean: "우연히 만나다",
+        english: "run across",
+        pronunciation: "[rʌn əˈkrɔs]",
+        examples: [
+            "I ran across an old friend yesterday (나는 어제 옛 친구를 우연히 만났다).",
+            "She ran across some interesting information (그녀는 흥미로운 정보를 우연히 발견했다)."
+        ]
+    },
+    {
+        korean: "죽다",
+        english: "pass away",
+        pronunciation: "[pæs əˈweɪ]",
+        examples: [
+            "He passed away last year (그는 작년에 세상을 떠났다).",
+            "She passed away peacefully in her sleep (그녀는 잠자던 중 평화롭게 세상을 떠났다)."
+        ]
+    },
+    {
+        korean: "존경하다",
+        english: "look up to",
+        pronunciation: "[lʊk ʌp tuː]",
+        examples: [
+            "I look up to my older brother (나는 내 형을 존경한다).",
+            "She looks up to her mentor (그녀는 그녀의 멘토를 존경한다)."
+        ]
+    },
+    {
+        korean: "돌보다",
+        english: "look after",
+        pronunciation: "[lʊk ˈæftər]",
+        examples: [
+            "She looks after her younger siblings (그녀는 어린 형제자매를 돌본다).",
+            "He asked me to look after his dog (그는 나에게 그의 개를 돌봐달라고 부탁했다)."
+        ]
+    },
+    {
+        korean: "기분 전환하다",
+        english: "lighten up",
+        pronunciation: "[ˈlaɪtn ʌp]",
+        examples: [
+            "You need to lighten up and have some fun (너는 기분 전환을 하고 좀 재미를 봐야 해).",
+            "She told him to lighten up and stop worrying (그녀는 그에게 기분 전환을 하고 걱정을 그만하라고 말했다)."
+        ]
+    },
+    {
+        korean: "남겨두다",
+        english: "leave over",
+        pronunciation: "[liːv ˈoʊvər]",
+        examples: [
+            "There were some leftovers from the party (파티에서 남은 음식이 있었다).",
+            "He left over some money for emergencies (그는 비상사태에 대비해 돈을 남겨두었다)."
+        ]
+    },
+    {
+        korean: "무릎을 꿇다",
+        english: "kneel down",
+        pronunciation: "[niːl daʊn]",
+        examples: [
+            "She knelt down to tie her shoe (그녀는 신발끈을 묶기 위해 무릎을 꿇었다).",
+            "He knelt down in prayer (그는 기도하기 위해 무릎을 꿇었다)."
+        ]
+    },
+    {
+        korean: "멀어지다",
+        english: "grow apart",
+        pronunciation: "[ɡroʊ əˈpɑrt]",
+        examples: [
+            "They grew apart after college (그들은 대학 졸업 후 멀어졌다).",
+            "Friends sometimes grow apart over time (친구들은 때때로 시간이 지나면서 멀어지기도 한다)."
+        ]
+    },
+    {
+        korean: "겪다",
+        english: "go through",
+        pronunciation: "[ɡoʊ θruː]",
+        examples: [
+            "She went through a lot during the crisis (그녀는 위기 동안 많은 일을 겪었다).",
+            "He went through the documents carefully (그는 서류를 꼼꼼히 살펴봤다)."
+        ]
+    },
+    {
+        korean: "약속을 어기다",
+        english: "go back on",
+        pronunciation: "[ɡoʊ bæk ɑːn]",
+        examples: [
+            "He went back on his word (그는 약속을 어겼다).",
+            "She went back on their agreement (그녀는 그들의 합의를 어겼다)."
+        ]
+    },
+    {
+        korean: "반대하다",
+        english: "go against",
+        pronunciation: "[ɡoʊ əˈɡɛnst]",
+        examples: [
+            "They went against the rules (그들은 규칙을 어겼다).",
+            "She went against her parents' wishes (그녀는 부모님의 뜻에 반했다)."
+        ]
+    },
+    {
+        korean: "이해시키다",
+        english: "get across",
+        pronunciation: "[ɡɛt əˈkrɔs]",
+        examples: [
+            "He tried to get his point across (그는 자신의 요점을 전달하려고 노력했다).",
+            "She got the message across clearly (그녀는 메시지를 명확하게 전달했다)."
+        ]
+    },
+    {
+        korean: "이해하다",
+        english: "figure out",
+        pronunciation: "[ˈfɪɡjər aʊt]",
+        examples: [
+            "I need to figure out how to fix this (나는 이것을 어떻게 고칠지 알아내야 한다).",
+            "She finally figured out the problem (그녀는 마침내 문제를 알아냈다)."
+        ]
+    },
+    {
+        korean: "무너지다",
+        english: "fall apart",
+        pronunciation: "[fɔːl əˈpɑrt]",
+        examples: [
+            "The old building is falling apart (그 오래된 건물은 무너지고 있다).",
+            "Their relationship fell apart (그들의 관계는 무너졌다)."
+        ]
+    },
+    {
+        korean: "직면하다",
+        english: "face up to",
+        pronunciation: "[feɪs ʌp tuː]",
+        examples: [
+            "You need to face up to your responsibilities (당신은 자신의 책임에 직면해야 합니다).",
+            "He faced up to the challenge (그는 도전에 직면했다)."
+        ]
+    },
+    {
+        korean: "폐쇄하다",
+        english: "close down",
+        pronunciation: "[kloʊz daʊn]",
+        examples: [
+            "The shop closed down last year (그 가게는 작년에 문을 닫았다).",
+            "They decided to close down the factory (그들은 공장을 폐쇄하기로 결정했다)."
+        ]
+    },
+    {
+        korean: "진정하다",
+        english: "calm down",
+        pronunciation: "[kɑːm daʊn]",
+        examples: [
+            "She tried to calm down the crying baby (그녀는 우는 아기를 진정시키려고 했다).",
+            "He needs to calm down before making a decision (그는 결정을 내리기 전에 진정해야 한다)."
+        ]
+    },
+    {
+        korean: "다시 전화하다",
+        english: "call back",
+        pronunciation: "[kɔːl bæk]",
+        examples: [
+            "I'll call you back later (나중에 다시 전화할게요).",
+            "She called back to confirm the appointment (그녀는 약속을 확인하기 위해 다시 전화했다)."
+        ]
+    },
+    {
+        korean: "갑자기 ~하다",
+        english: "burst into",
+        pronunciation: "[bɜrst ˈɪntuː]",
+        examples: [
+            "She burst into tears (그녀는 갑자기 눈물을 흘렸다).",
+            "He burst into the room (그는 방에 갑자기 들어왔다)."
+        ]
+    },
+    {
+        korean: "되돌리다",
+        english: "bring back",
+        pronunciation: "[brɪŋ bæk]",
+        examples: [
+            "This song brings back memories (이 노래는 추억을 되살린다).",
+            "Can you bring back some milk? (우유 좀 사다 줄래요?)"
+        ]
+    },
+    {
+        korean: "발발하다",
+        english: "break out",
+        pronunciation: "[breɪk aʊt]",
+        examples: [
+            "A fire broke out in the kitchen (부엌에서 불이 났다).",
+            "The war broke out unexpectedly (전쟁이 예기치 않게 발발했다)."
+        ]
+    },
+    {
+        korean: "고장 나다",
+        english: "break down",
+        pronunciation: "[breɪk daʊn]",
+        examples: [
+            "The car broke down on the highway (차가 고속도로에서 고장 났다).",
+            "She broke down in tears (그녀는 눈물을 터뜨렸다)."
+        ]
+    },
+    {
+        korean: "여기저기 물어보다",
+        english: "ask around",
+        pronunciation: "[æsk əˈraʊnd]",
+        examples: [
+            "I'll ask around to see if anyone knows (누가 아는지 여기저기 물어볼게요).",
+            "She asked around about the best places to visit (그녀는 방문할 최고의 장소에 대해 여기저기 물어보았다)."
+        ]
+    },
+    {
+        korean: "적다",
+        english: "write down",
+        pronunciation: "[raɪt daʊn]",
+        examples: [
+            "Please write down your name and address (이름과 주소를 적어 주세요).",
+            "He wrote down the instructions (그는 지시 사항을 적었다)."
+        ]
+    },
+    {
+        korean: "돌아보다",
+        english: "turn around",
+        pronunciation: "[tɜrn əˈraʊnd]",
+        examples: [
+            "She turned around to see who was calling (그녀는 누가 부르는지 보기 위해 돌아섰다).",
+            "He turned the business around (그는 사업을 호전시켰다)."
+        ]
+    },
+    {
+        korean: "돌이켜보다",
+        english: "think back",
+        pronunciation: "[θɪŋk bæk]",
+        examples: [
+            "Think back to your childhood (어린 시절을 돌이켜보세요).",
+            "She thought back to the time they first met (그녀는 그들이 처음 만났던 때를 돌이켜보았다)."
+        ]
+    },
+    {
+        korean: "남다",
+        english: "stay behind",
+        pronunciation: "[steɪ bɪˈhaɪnd]",
+        examples: [
+            "She stayed behind to help clean up (그녀는 청소를 돕기 위해 남았다).",
+            "He decided to stay behind after the meeting (그는 회의 후에 남기로 결정했다)."
+        ]
+    },
+    {
+        korean: "밤을 보내다",
+        english: "sleep over",
+        pronunciation: "[sliːp ˈoʊvər]",
+        examples: [
+            "Can I sleep over at your place? (너희 집에서 자도 될까?)",
+            "The kids are having a sleepover (아이들이 함께 자며 놀고 있다)."
+        ]
+    },
+    {
+        korean: "여기저기 돌아다니다",
+        english: "shop around",
+        pronunciation: "[ʃɑp əˈraʊnd]",
+        examples: [
+            "I need to shop around for a better deal (나는 더 좋은 거래를 찾아봐야 한다).",
+            "She shopped around before buying a car (그녀는 차를 사기 전에 여기저기 돌아다녔다)."
+        ]
+    },
+    {
+        korean: "정착하다",
+        english: "settle down",
+        pronunciation: "[ˈsɛtl daʊn]",
+        examples: [
+            "They decided to settle down in the countryside (그들은 시골에 정착하기로 결정했다).",
+            "He settled down with a good book (그는 좋은 책과 함께 편히 앉았다)."
+        ]
+    },
+    {
+        korean: "스크롤 내리다",
+        english: "scroll down",
+        pronunciation: "[skroʊl daʊn]",
+        examples: [
+            "Scroll down to read more (더 읽으려면 스크롤을 내리세요).",
+            "She scrolled down the webpage (그녀는 웹페이지를 스크롤 내렸다)."
+        ]
+    },
+    {
+        korean: "참다",
+        english: "put up with",
+        pronunciation: "[pʊt ʌp wɪð]",
+        examples: [
+            "She has to put up with a lot of noise (그녀는 많은 소음을 참아야 한다).",
+            "I can't put up with his behavior anymore (나는 그의 행동을 더 이상 참을 수 없다)."
+        ]
+    },
+    {
+        korean: "~을 피하다",
+        english: "keep out of",
+        pronunciation: "[kiːp aʊt ʌv]",
+        examples: [
+            "Please keep out of the restricted area (제한 구역에 들어가지 마세요).",
+            "He tried to keep out of trouble (그는 문제를 피하려고 노력했다)."
+        ]
+    },
+    {
+        korean: "빈둥거리다",
+        english: "hang around",
+        pronunciation: "[hæŋ əˈraʊnd]",
+        examples: [
+            "They like to hang around the park (그들은 공원에서 빈둥거리는 것을 좋아한다).",
+            "Stop hanging around and do something productive (빈둥거리지 말고 생산적인 일을 해라)."
+        ]
+    },
+    {
+        korean: "보복하다",
+        english: "get back at",
+        pronunciation: "[ɡɛt bæk æt]",
+        examples: [
+            "She wanted to get back at him for the prank (그녀는 장난에 대해 그에게 보복하고 싶어했다).",
+            "He got back at his rival (그는 라이벌에게 복수했다)."
+        ]
+    },
+    {
+        korean: "놀다",
+        english: "fool around",
+        pronunciation: "[fuːl əˈraʊnd]",
+        examples: [
+            "They were just fooling around (그들은 그냥 놀고 있었다).",
+            "Stop fooling around and get to work (장난 그만하고 일해라)."
+        ]
+    },
+    {
+        korean: "뒤처지다",
+        english: "fall behind",
+        pronunciation: "[fɔːl bɪˈhaɪnd]",
+        examples: [
+            "He fell behind in his studies (그는 학업에서 뒤처졌다).",
+            "They fell behind schedule (그들은 일정에 뒤처졌다)."
+        ]
+    },
+    {
+        korean: "정신을 차리다",
+        english: "come round",
+        pronunciation: "[kʌm raʊnd]",
+        examples: [
+            "He finally came round after fainting (그는 기절 후 마침내 정신을 차렸다).",
+            "She'll come round to our way of thinking (그녀는 우리 생각에 동의하게 될 것이다)."
+        ]
+    },
+    {
+        korean: "우연히 발견하다",
+        english: "come across",
+        pronunciation: "[kʌm əˈkrɔs]",
+        examples: [
+            "I came across an old photo (나는 오래된 사진을 우연히 발견했다).",
+            "She came across as very confident (그녀는 매우 자신감 있는 인상을 주었다)."
+        ]
+    },
+    {
+        korean: "전화하다",
+        english: "call around",
+        pronunciation: "[kɔːl əˈraʊnd]",
+        examples: [
+            "I need to call around to find a plumber (나는 배관공을 찾기 위해 여기저기 전화해야 한다).",
+            "She called around to get more information (그녀는 더 많은 정보를 얻기 위해 여기저기 전화했다)."
+        ]
+    },
+    {
+        korean: "초래하다",
+        english: "bring about",
+        pronunciation: "[brɪŋ əˈbaʊt]",
+        examples: [
+            "The new policy brought about many changes (새 정책은 많은 변화를 초래했다).",
+            "He wants to bring about positive change (그는 긍정적인 변화를 초래하고 싶어한다)."
+        ]
+    },
+    {
+        korean: "말대꾸하다",
+        english: "answer back",
+        pronunciation: "[ˈænsər bæk]",
+        examples: [
+            "Don't answer back to your parents (부모님께 말대꾸하지 마세요).",
+            "She got in trouble for answering back to the teacher (그녀는 선생님께 말대꾸해서 혼났다)."
         ]
     }
 ];
