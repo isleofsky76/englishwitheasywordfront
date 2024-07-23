@@ -39,8 +39,6 @@ main {
   color: #817a7a; /* Light grey text color */
   box-sizing: border-box;
   width: 100%;
-  margin: 10px;
-  padding: 10px;
   max-width: 1500px; /* Maximum width for the content */
   display: flex;
   justify-content: center;
@@ -58,8 +56,8 @@ main {
   font-weight: bold;
   width: 100%;
   margin-top: 50px;
-  margin: 50px;
-  padding: 50px;
+  margin: 10px;
+  padding: 10px;
 }
 
 .word-container p {
@@ -100,7 +98,7 @@ ul#example-list {
 ul#example-list li {
   margin: 20px 0; /* 문장 사이의 간격 추가 */
   color: #3e3a3a; /* Light grey text color */
-  text-align: left;
+  text-align: center; /* 왼쪽 정렬 */
 }
 
 /* 단어 목록 스타일 */
