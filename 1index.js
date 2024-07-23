@@ -1,15 +1,5 @@
 const words = [
     {
-        "korean": "위로 가다",
-        "english": "go up",
-        "pronunciation": "[ɡoʊ ʌp]",
-        "examples": [
-            "We decided to go up the hill to enjoy the view (우리는 경치를 즐기기 위해 언덕 위로 가기로 했다).",
-            "The price of the product went up last week (그 제품의 가격이 지난주에 올랐다).",
-      
-        ]
-    },
-    {
         "korean": "계속하다",
         "english": "go on",
         "pronunciation": "[ɡoʊ ɑn]",
@@ -127,16 +117,6 @@ const words = [
             "She put in a lot of effort into the project (그녀는 프로젝트에 많은 노력을 기울였다).",
             "He put in the keys into the drawer (그는 열쇠를 서랍에 넣었다).",
 
-        ]
-    },
-    {
-        "korean": "팝업하다",
-        "english": "pop up",
-        "pronunciation": "[pɑp ʌp]",
-        "examples": [
-            "A new window popped up on my screen (새 창이 화면에 팝업되었다).",
-            "The notification will pop up after a few minutes (알림이 몇 분 후에 팝업될 것이다).",
-        
         ]
     },
     {
