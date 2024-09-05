@@ -929,8 +929,6 @@ const words = [
 ];
 
 
-
-
 let currentWordIndex = 0;
 let currentAudioSource = null;
 let isStopped = false;
@@ -942,15 +940,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Add event listeners for pronunciation and controls
     document.getElementById('pronounce-1').addEventListener('click', () => {
-        resumeAudioContext(); // Ensure AudioContext is resumed on mobile
         handlePronunciation();
     });
+
     document.getElementById('stop-pronouncing').addEventListener('click', stopPronouncing);
     document.getElementById('next-word').addEventListener('click', handleNextWord);
-    document.getElementById('auto-play').addEventListener('click', () => {
-        resumeAudioContext(); // Resume context on autoplay
-        autoPlay();
-    });
+    document.getElementById('auto-play').addEventListener('click', autoPlay);
 
     // Populate the word list
     const wordsListContainer = document.getElementById('words-list');
@@ -979,15 +974,6 @@ function highlightKeywords(text, keywords) {
 
 function stripNumbers(text) {
     return text.replace(/\d+\.\s*/g, '');
-}
-
-function resumeAudioContext() {
-    const audioContext = getAudioContext();
-    if (audioContext.state === 'suspended') {
-        audioContext.resume().then(() => {
-            console.log('Audio context resumed.');
-        });
-    }
 }
 
 async function fetchAudio(text, language) {
@@ -1027,6 +1013,9 @@ function getAudioContext() {
 }
 
 async function pronounceWord() {
+    // Make sure to resume AudioContext first, especially for mobile devices
+    resumeAudioContext();
+
     if (!isStopped) {
         if (currentAudioSource) {
             currentAudioSource.stop();
@@ -1047,6 +1036,15 @@ async function pronounceWord() {
             // Play explanation after Korean
             await handleExplanationParts(word);
         };
+    }
+}
+
+function resumeAudioContext() {
+    const audioContext = getAudioContext();
+    if (audioContext.state === 'suspended') {
+        audioContext.resume().then(() => {
+            console.log('Audio context resumed.');
+        });
     }
 }
 
