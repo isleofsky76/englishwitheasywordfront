@@ -1,0 +1,301 @@
+body {
+  font-family: 'Comic Neue', cursive; /* 기본적으로 영어 텍스트에 적용할 폰트 */
+  background-color: #02051d; /* Dark blue background color */
+  /* background-color: #242c39; Background color for the margin area */
+  color: #030cf8; /* Light grey text color */
+  margin: 0;
+  font-size: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 400vh; /* Full viewport height */
+  padding: 10 10px; /* 좌우 여백 추가 */
+  line-height: 1.5; /* 줄 간격 설정 (1.5배) */
+}
+
+.nanum-gothic-coding-regular {
+  font-family: "Nanum Gothic Coding", monospace;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.nanum-gothic-coding-bold {
+  font-family: "Nanum Gothic Coding", monospace;
+  font-weight: 700;
+  font-style: normal;
+}
+
+
+
+.highlight {
+  background-color: yellow;
+}
+
+.example-sentence {
+  margin-bottom: 10px; /* 간격을 동일하게 설정 */
+  line-height: 1.5;
+}
+
+.wrapper {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-color: #000308;  /* Background color for the margin area */
+  /* #242c39 */
+  color: #fcfbfb; /* Light grey text color */
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  border-radius: 10px;
+  flex: 1;
+  align-items: left;
+  padding: 0px 30px; /* 좌우 여백 추가 */
+}
+
+.bg-primary {
+  --bs-bg-opacity: 1;
+  background-color: #000308; !important;
+}
+
+.navbar-custom {
+  background-color: #02051d; /* Dark blue background color */
+  transition: top 0.3s; /* Smooth transition for hiding and showing the navbar */
+  font-size: 14px;
+}
+
+header {
+  background-color: #02051d; /* Dark blue background color */
+  color: white;
+  text-align: left;
+  padding: 1em 0;
+}
+
+main {
+  margin: 0em;
+}
+
+.content {
+  margin-top: 10px;
+  display: inline-block;
+  text-align: center;
+  /* background-color: #000008;  Background color for the margin area #242c39 */
+  background-color: #000308;;  /* Background color for the margin area #242c39 */
+  color: #f9f6f9; /* Light grey text color */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  font-size: 12px;
+  font-weight: bold;
+  width: 100%;
+  height: 50%;
+  margin: 10px 0; /* 문장 간의 간격 조정 */
+  padding: 50 50px; /* 좌우 여백 추가 */
+  border-radius: 10px;
+  line-height: 1.5; /* 줄 간격 설정 (1.5배) */
+  align-items: left;
+}
+
+
+.word-container {
+  margin-top: 10px;
+  height: 160px; /* 높이 조정 */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* 공간 균등 배분 */
+  justify-content: center;
+  align-items: center; /* 수평 중앙 정렬 */
+  position: absolute; /* 절대 위치 */
+  top: 250px; /* 예문들이 나타나는 위치 조정 */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  color: #0e000e; /* Light grey text color */
+  background-color: #242c39; 
+}
+
+.buttons-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  background-color: #000308; 
+}
+
+.buttons-container button {
+  margin: 1px;
+  padding: 10px 20px;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+  border-radius: 15px;
+  /* background-color: #00040b; Background color for the margin area */
+  background-color:#000308;
+  color: #f8f8f8;
+  flex: 1 1 calc(33% - 10px); /* 3개씩 정렬되도록 설정 */
+  box-sizing: border-box; /* 패딩과 보더가 전체 크기에 포함되도록 */
+  max-width: calc(33% - 10px); /* 최대 너비 설정 */
+}
+
+.buttons-container button:hover {
+  background-color: #0056b3;
+}
+
+ul#example-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0; /* 예문 위치 조정 */
+  line-height: 1.5; /* 줄 간격 설정 (1.5배) */
+  position: absolute; /* 절대 위치 */
+  top: 250px; /* 예문들이 나타나는 위치 조정 */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+}
+
+ul#example-list li {
+  margin: 5px 0; /* 문장 사이의 간격을 줄임 */
+  color: #3e3a3a; /* Light grey text color */
+  text-align: center; /* 중앙 정렬 */
+  line-height: 1.5; /* 줄 간격 설정 (1.5배) */
+  width: 100%; /* li 요소가 부모 요소의 너비를 가지도록 설정 */
+  position: relative; /* 부모 요소에 대한 상대 위치 */
+}
+
+/* 단어 목록 스타일 */
+#words-list {
+  text-align: left;
+  padding: 0px 30px; /* 좌우 여백 추가 */
+  border: 1px solid #ddd;
+  background-color: #f7f705;
+  max-height: 300px;
+  overflow-y: auto;
+  margin: 5px 0; /* 문장 사이의 간격을 줄임 */
+  line-height: 1.5; /* 줄 간격 설정 (1.5배) */
+}
+
+/* 기존 스타일 유지 */
+#word-english {
+  color: rgb(134, 152, 244);
+  font-weight: bold;
+  padding: 0 30px;
+  align-items: left;
+}
+
+#word-pronunciation {
+  color: rgb(246, 246, 248);
+  margin: 10px 0; /* 적절한 여백을 줍니다 */
+  padding: 0 30px;
+  align-items: left;
+}
+
+
+#word-definition {
+  font-size: 16px; /* Adjust as needed */
+}
+
+#word-explanation {
+  font-size: 16px;
+}
+
+#word-pronunciation {
+  font-size: 16px;
+}
+/* 기존 CSS */
+h1 {
+  font-size: 1.0em; /* 필요한 크기로 설정 */
+  color: #333333;   /* 글자 색상 설정 */
+  margin-top: 50px;
+  line-height: 1.5; /* 줄 간격 설정 (1.5배) */
+}
+
+h2 {
+  font-size: 1em; /* 필요한 크기로 설정 */
+  color: rgb(7, 3, 250);     /* 글자 색상 설정 */
+  line-height: 1.5; /* 줄 간격 설정 (1.5배) */
+}
+
+.word-text {
+  min-height: 50px; /* 한글과 영어 텍스트의 높이를 동일하게 유지 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1.5; /* 줄 간격 설정 (1.5배) */
+}
+
+.example-sentence {
+  margin-bottom: 5px; /* 간격을 줄입니다 */
+  line-height: 1.5;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.word-container {
+  margin-bottom: 10px; /* 간격을 동일하게 설정 */
+  color: rgb(3, 28, 250);     /* 글자 색상 설정 */
+  padding: 0 30px;
+}
+
+#word-definition, #word-explanation, #word-pronunciation, #other-expression {
+  text-align: left; /* 텍스트 왼쪽 정렬 */
+  padding: 0px 10px; /* 좌우 여백 추가 */
+}
+
+/* Responsive design */
+
+.custom-font {
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  padding: 15px;
+  border-radius: 8px;
+  text-align: left; /* 텍스트 왼쪽 정렬 */
+  padding: 0 60px;
+  color: rgb(229, 171, 124);     /* 글자 색상 설정 */
+}
+
+
+/* General mobile styles */
+@media (max-width: 768px) {
+  .wrapper, .content {
+      width: 100%;
+      padding: 0; /* Remove padding to fit smaller screens */
+  }
+  .word-box {
+      width: 90%; /* Adjust the box size */
+      margin: 0 auto; /* Center the box */
+      height: auto; /* Let the height adjust automatically */
+      font-size: 16px; /* Decrease font size for buttons */
+  }
+  .content {
+    font-size: 18px;
+    padding: 10px;
+  }
+  #word-container {
+      height: auto; /* Auto-adjust the height for mobile */
+      padding: 10px; /* Adjust padding for readability */
+  }
+  p {
+     font-size: 16px; /* Decrease font size for buttons */
+  }
+}
+
+/* For very small screens (like mobile phones in portrait mode) */
+@media (max-width: 480px) {
+  .wrapper, .content {
+    width: 100%;
+    padding: 0; /* Remove padding to fit smaller screens */
+}
+.word-box {
+    width: 90%; /* Adjust the box size */
+    margin: 0 auto; /* Center the box */
+    height: auto; /* Let the height adjust automatically */
+    font-size: 12px; /* Decrease font size for buttons */
+}
+.content {
+  font-size: 12px;
+  padding: 5px;
+}
+  .word-box {
+      font-size: 12px; /* Decrease font size for buttons */
+  }
+}
