@@ -928,6 +928,9 @@ const words = [
     
 ];
 
+
+
+
 let currentWordIndex = 0;
 let currentAudioSource = null;
 let isStopped = false;
@@ -935,14 +938,21 @@ let speakTimeouts = [];
 let autoPlayInterval;
 
 document.addEventListener('DOMContentLoaded', () => {
-    updateWord();
-    setTimeout(() => pronounceWord(), 500);
+    updateWord();  // Update the word when the page loads
 
-    document.getElementById('pronounce-1').addEventListener('click', () => handlePronunciation());
+    // Add event listeners for pronunciation and controls
+    document.getElementById('pronounce-1').addEventListener('click', () => {
+        resumeAudioContext(); // Ensure AudioContext is resumed on mobile
+        handlePronunciation();
+    });
     document.getElementById('stop-pronouncing').addEventListener('click', stopPronouncing);
     document.getElementById('next-word').addEventListener('click', handleNextWord);
-    document.getElementById('auto-play').addEventListener('click', autoPlay);
+    document.getElementById('auto-play').addEventListener('click', () => {
+        resumeAudioContext(); // Resume context on autoplay
+        autoPlay();
+    });
 
+    // Populate the word list
     const wordsListContainer = document.getElementById('words-list');
     words.forEach(word => {
         const wordItem = document.createElement('p');
@@ -962,13 +972,22 @@ function updateWord() {
 function highlightKeywords(text, keywords) {
     keywords.forEach(keyword => {
         const regex = new RegExp(`(${keyword})`, 'gi');
-        text = text.replace(regex, '<span style="color: orange;">$1</span>'); // 오렌지색으로 강조 표시
+        text = text.replace(regex, '<span style="color: orange;">$1</span>'); // Highlight key words
     });
     return text;
 }
 
 function stripNumbers(text) {
     return text.replace(/\d+\.\s*/g, '');
+}
+
+function resumeAudioContext() {
+    const audioContext = getAudioContext();
+    if (audioContext.state === 'suspended') {
+        audioContext.resume().then(() => {
+            console.log('Audio context resumed.');
+        });
+    }
 }
 
 async function fetchAudio(text, language) {
@@ -1016,7 +1035,7 @@ async function pronounceWord() {
         const word = words[currentWordIndex];
         console.log("Pronouncing word:", word);
 
-        // Step 1: Play Korean sentence
+        // Play Korean sentence first
         const koreanAudio = await fetchAudio(word.korean, 'ko-KR');
         if (!koreanAudio) return;
         currentAudioSource = koreanAudio;
@@ -1025,7 +1044,7 @@ async function pronounceWord() {
         koreanAudio.onended = async () => {
             if (isStopped) return;
 
-            // Step 2: Play Explanation
+            // Play explanation after Korean
             await handleExplanationParts(word);
         };
     }
@@ -1039,25 +1058,23 @@ async function handleExplanationParts(word) {
         if (currentPartIndex < explanationParts.length) {
             const part = explanationParts[currentPartIndex].trim();
 
-            // 한국어 부분만 추출 (영어 부분을 제외)
+            // Extract Korean and English parts
             const koreanPart = part.split('(')[0].trim();
-
-            // 영어 부분만 추출
             const englishPart = part.match(/\(([^)]+)\)/)[1];
 
-            // 줄바꿈을 위해 <p> 태그 사용
+            // Display explanation part
             const explanationElement = document.createElement('p');
             explanationElement.innerHTML = `${highlightKeywords(koreanPart, word.key_words)} <span>(${highlightKeywords(englishPart, word.key_words)})</span>`;
             document.getElementById('word-explanation').appendChild(explanationElement);
 
-            // 한국어 음성 재생
+            // Play Korean audio first
             const koreanPartAudio = await fetchAudio(stripNumbers(koreanPart), 'ko-KR');
             if (koreanPartAudio) {
                 koreanPartAudio.start();
                 koreanPartAudio.onended = async () => {
                     if (isStopped) return;
 
-                    // 영어 음성 재생
+                    // Play English audio after Korean part ends
                     const englishPartAudio = await fetchAudio(stripNumbers(englishPart), 'en-GB');
                     if (englishPartAudio) {
                         englishPartAudio.start();
@@ -1079,21 +1096,21 @@ async function handleExplanationParts(word) {
 async function handleEnglishPronunciation(word) {
     const englishText = word.english;
     const element = document.getElementById('word-pronunciation');
-    element.innerHTML = ""; // 초기화
+    element.innerHTML = ""; // Clear previous pronunciation
 
-    let charArray = [...englishText]; // 텍스트를 문자 배열로 변환
+    let charArray = [...englishText]; // Convert text to character array
     let index = 0;
 
     function typeWriter() {
         if (index < charArray.length) {
             element.innerHTML += charArray[index];
             index++;
-            setTimeout(typeWriter, 100); // 각 글자마다 100ms 간격
+            setTimeout(typeWriter, 100); // 100ms per character
         } else {
-            // 모든 글자가 다 쓰여진 후, key_words를 하이라이트
+            // Highlight key words once all characters are displayed
             element.innerHTML = highlightKeywords(englishText, word.key_words);
 
-            // 영어 음성 재생
+            // Play English audio
             fetchAudio(englishText, 'en-GB').then(englishAudio => {
                 if (englishAudio) {
                     currentAudioSource = englishAudio;
