@@ -71,7 +71,6 @@ const words = [
     
 ];
 
-
 let currentWordIndex = 0;
 let currentAudioSource = null;
 let isStopped = false;
@@ -88,7 +87,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function updateWord() {
     const word = words[currentWordIndex];
-    // 업데이트된 word 내용이 화면에 반영됩니다.
     document.getElementById('word-definition').innerHTML = highlightKeywords(word.korean, word.key_words);
     document.getElementById('word-explanation').innerHTML = "";
     document.getElementById('word-pronunciation').innerHTML = "";
@@ -126,9 +124,7 @@ async function fetchAudio(text, language) {
         const source = audioContext.createBufferSource();
         source.buffer = audioBuffer;
         source.connect(audioContext.destination);
-        source.onended = () => {
-            currentAudioSource = null;
-        };
+        source.onended = () => currentAudioSource = null;
         return source;
     } catch (error) {
         console.error('Error fetching audio data:', error);
@@ -141,82 +137,91 @@ function getAudioContext() {
     return new AudioContext();
 }
 
-async function playAudio(audioSource) {
-    return new Promise((resolve) => {
-        if (isStopped) {
-            return resolve(); // 멈추면 즉시 종료
-        }
-        audioSource.start();
-        audioSource.onended = () => resolve(); // 오디오가 끝나면 완료
-    });
-}
+async function pronounceWord() {
+    await resumeAudioContext();  // Ensure audio context is resumed for mobile
 
-function resumeAudioContext() {
-    const audioContext = getAudioContext();
-    if (audioContext.state === 'suspended') {
-        audioContext.resume().then(() => {
-            console.log('Audio context resumed.');
-        });
+    if (!isStopped) {
+        updateWord(); // Update the text for the current word
+
+        document.getElementById('word-explanation').innerHTML = ""; // Clear previous explanation
+        document.getElementById('word-pronunciation').innerHTML = ""; // Clear previous pronunciation
+
+        if (currentAudioSource) {
+            currentAudioSource.stop();
+        }
+
+        const word = words[currentWordIndex]; // Use currentWordIndex to fetch the correct word data
+        console.log("Pronouncing word:", word);
+
+        // Play Korean sentence first
+        const koreanAudio = await fetchAudio(word.korean, 'ko-KR');
+        if (!koreanAudio) return;
+        currentAudioSource = koreanAudio;
+
+        await playAudio(koreanAudio); // Wait for Korean audio to finish
+
+        await handleExplanationParts(word); // Handle explanation parts
+
+        document.getElementById('word-pronunciation').innerHTML = word.english;
+
+        const englishAudio = await fetchAudio(word.english, 'en-GB');
+        if (englishAudio) {
+            await playAudio(englishAudio); // Wait for English audio to finish
+        }
     }
 }
 
-async function pronounceWord() {
-    resumeAudioContext();
-    if (isStopped) return; // 멈췄으면 진행하지 않음
+function playAudio(audioSource) {
+    return new Promise((resolve) => {
+        if (!audioSource) {
+            resolve();
+        } else {
+            audioSource.start();
+            audioSource.onended = () => resolve();
+        }
+    });
+}
 
-    updateWord(); // 화면에 단어 업데이트
-
-    if (currentAudioSource) currentAudioSource.stop();
-
-    const word = words[currentWordIndex];
-    console.log("Pronouncing word:", word.korean);
-
-    // Play Korean sentence first
-    const koreanAudio = await fetchAudio(word.korean, 'ko-KR');
-    if (!koreanAudio || isStopped) return; // 멈췄는지 체크
-    currentAudioSource = koreanAudio;
-
-    await playAudio(koreanAudio);
-    if (isStopped) return; // 멈췄는지 체크
-
-    // 설명 부분 처리
-    await handleExplanationParts(word);
-    if (isStopped) return; // 멈췄는지 체크
-
-    // 영어 문장 표시 및 발음
-    document.getElementById('word-pronunciation').innerHTML = word.english;
-    const englishAudio = await fetchAudio(word.english, 'en-GB');
-    if (englishAudio && !isStopped) {
-        await playAudio(englishAudio);
+async function resumeAudioContext() {
+    const audioContext = getAudioContext();
+    if (audioContext.state === 'suspended') {
+        await audioContext.resume();
     }
 }
 
 async function handleExplanationParts(word) {
     const explanationParts = word.explanation.split('/');
-    for (let part of explanationParts) {
-        if (isStopped) return; // 멈췄으면 설명도 중단
+    let currentPartIndex = 0;
 
-        const koreanPartWithNumber = part.split('(')[0].trim(); // Keep number for display
-        const koreanPart = koreanPartWithNumber.replace(/^\d+\.\s*/, ''); // Remove number for reading
-        const englishPart = part.match(/\(([^)]+)\)/)[1];
+    async function showNextPart() {
+        if (isStopped) return;
 
-        // 화면에 설명 표시
-        const explanationElement = document.createElement('p');
-        explanationElement.innerHTML = `${highlightKeywords(koreanPartWithNumber, word.key_words)} <span>(${highlightKeywords(englishPart, word.key_words)})</span>`;
-        document.getElementById('word-explanation').appendChild(explanationElement);
+        if (currentPartIndex < explanationParts.length) {
+            const part = explanationParts[currentPartIndex].trim();
 
-        // Play Korean part
-        const koreanPartAudio = await fetchAudio(koreanPart, 'ko-KR');
-        if (koreanPartAudio && !isStopped) {
-            await playAudio(koreanPartAudio);
-        }
+            const koreanPartWithNumber = part.split('(')[0].trim(); // Keep number for display
+            const koreanPart = koreanPartWithNumber.replace(/^\d+\.\s*/, ''); // Remove number for reading
+            const englishPart = part.match(/\(([^)]+)\)/)[1];
 
-        // Play English part
-        const englishPartAudio = await fetchAudio(englishPart, 'en-GB');
-        if (englishPartAudio && !isStopped) {
-            await playAudio(englishPartAudio);
+            const explanationElement = document.createElement('p');
+            explanationElement.innerHTML = `${highlightKeywords(koreanPartWithNumber, word.key_words)} <span>(${highlightKeywords(englishPart, word.key_words)})</span>`;
+            document.getElementById('word-explanation').appendChild(explanationElement);
+
+            const koreanPartAudio = await fetchAudio(koreanPart, 'ko-KR');
+            if (koreanPartAudio) {
+                await playAudio(koreanPartAudio);
+
+                const englishPartAudio = await fetchAudio(englishPart, 'en-GB');
+                if (englishPartAudio) {
+                    await playAudio(englishPartAudio);
+                    currentPartIndex++;
+                    await showNextPart();
+                }
+            }
         }
     }
+
+    await showNextPart();
 }
 
 function stopPronouncing() {
@@ -225,14 +230,14 @@ function stopPronouncing() {
         currentAudioSource.stop();
     }
     currentAudioSource = null;
-    clearTimeout(autoPlayInterval); // 자동재생 멈춤
+    clearTimeout(autoPlayInterval);
 }
 
 function handleNextWord() {
     stopPronouncing();
-    isStopped = false;
-    currentWordIndex = (currentWordIndex + 1) % words.length; // 다음 단어로 이동
-    setTimeout(() => pronounceWord(), 500); // 0.5초 후에 발음 시작
+    currentWordIndex = (currentWordIndex + 1) % words.length;
+    updateWord();
+    setTimeout(() => pronounceWord(), 500);
 }
 
 function autoPlay() {
@@ -241,11 +246,11 @@ function autoPlay() {
 
     async function playNextWord() {
         if (isStopped) return;
-
-        await pronounceWord(); // 단어 발음
-        currentWordIndex = (currentWordIndex + 1) % words.length; // 다음 단어로 이동
-        autoPlayInterval = setTimeout(playNextWord, 2000); // 2초 후 다음 단어 발음
+        await pronounceWord();
+        currentWordIndex = (currentWordIndex + 1) % words.length;
+        autoPlayInterval = setTimeout(playNextWord, 2000); // 2-second delay between words
     }
 
-    playNextWord(); // 자동 재생 시작
+    playNextWord();
 }
+
