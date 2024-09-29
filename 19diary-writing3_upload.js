@@ -162,7 +162,8 @@ async function pronounceWord() {
 
         await handleExplanationParts(word); // Handle explanation parts
 
-        document.getElementById('word-pronunciation').innerHTML = word.english;
+        // Display English translation with highlighted key words
+        document.getElementById('word-pronunciation').innerHTML = highlightKeywords(word.english, word.key_words);
 
         const englishAudio = await fetchAudio(word.english, 'en-GB');
         if (englishAudio) {
@@ -227,10 +228,10 @@ async function handleExplanationParts(word) {
 function stopPronouncing() {
     isStopped = true;
     if (currentAudioSource) {
-        currentAudioSource.stop();
+        currentAudioSource.stop();  // Stop current audio immediately
+        currentAudioSource = null;
     }
-    currentAudioSource = null;
-    clearTimeout(autoPlayInterval);
+    clearTimeout(autoPlayInterval);  // Stop autoPlay if it's running
 }
 
 function handleNextWord() {
@@ -253,3 +254,4 @@ function autoPlay() {
 
     playNextWord();
 }
+
