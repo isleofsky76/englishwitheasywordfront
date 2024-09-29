@@ -244,13 +244,23 @@ function autoPlay() {
     stopPronouncing();
     isStopped = false;
 
+    // Ensure audio context is resumed when autoplay starts
+    resumeAudioContext();
+
     async function playNextWord() {
         if (isStopped) return;
+
+        // First, resume AudioContext to ensure it works on mobile
+        resumeAudioContext(); 
+
+        // Play the word's audio
         await pronounceWord();
+
+        // Move to the next word after a delay
         currentWordIndex = (currentWordIndex + 1) % words.length;
         autoPlayInterval = setTimeout(playNextWord, 2000); // 2-second delay between words
     }
 
-    playNextWord();
+    // Manually resume audio context once user interacts with the autoplay button
+    playNextWord(); // Start autoplay
 }
-
