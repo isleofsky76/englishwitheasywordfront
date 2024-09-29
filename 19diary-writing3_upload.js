@@ -8,27 +8,68 @@ const words = [
     {
         "korean": "그의 행동은 / 테이블에 있던 대부분의 사람들을 / 움찔하게 만들었다.",
         "explanation": "1. 그의 행동은 (His actions) / 2. 테이블에 있던 대부분의 사람들을 (most at the table) / 3. 움찔하게 만들었다 (made flinch).",
-        "english": "His actions made most at the table flinch. / (His behavior caused most people at the table to react with surprise.)",
+        "english": "His actions made most at the table flinch. (His behavior caused most people at the table to react with surprise.)",
         "key_words": ["made flinch", "움찔하게 만들었다"]
     },
-    
-    
+    {
+        "korean": "그는/ 밖에서 피어나는/ 하얀 목련에 경이로움을 느꼈다.",
+        "explanation": "1. 그는 (He) / 2. 밖에서 피어나는 (blooming outside) / 3. 하얀 목련에 경이로움을 느꼈다 (was awestruck by the white magnolias).",
+        "english": "He was awestruck by the white magnolias blooming outside. (He felt amazed by the beauty of the white magnolias blossoming outdoors.)",
+        "key_words": ["Awestruck", "경이로움을"]
+    },
+    {
+        "korean": "그의 행동은 / 테이블에 있던 대부분의 사람들을 / 움찔하게 만들었다.",
+        "explanation": "1. 그의 행동은 (His actions) / 2. 테이블에 있던 대부분의 사람들을 (most at the table) / 3. 움찔하게 만들었다 (made flinch).",
+        "english": "His actions made most at the table flinch. (His behavior caused most people at the table to react with surprise.)",
+        "key_words": ["made flinch", "움찔하게 만들었다"]
+    },
+    {
+        "korean": "그는/ 밖에서 피어나는/ 하얀 목련에 경이로움을 느꼈다.",
+        "explanation": "1. 그는 (He) / 2. 밖에서 피어나는 (blooming outside) / 3. 하얀 목련에 경이로움을 느꼈다 (was awestruck by the white magnolias).",
+        "english": "He was awestruck by the white magnolias blooming outside. (He felt amazed by the beauty of the white magnolias blossoming outdoors.)",
+        "key_words": ["Awestruck", "경이로움을"]
+    },
+    {
+        "korean": "그의 행동은 / 테이블에 있던 대부분의 사람들을 / 움찔하게 만들었다.",
+        "explanation": "1. 그의 행동은 (His actions) / 2. 테이블에 있던 대부분의 사람들을 (most at the table) / 3. 움찔하게 만들었다 (made flinch).",
+        "english": "His actions made most at the table flinch. (His behavior caused most people at the table to react with surprise.)",
+        "key_words": ["made flinch", "움찔하게 만들었다"]
+    },
+    {
+        "korean": "그는/ 밖에서 피어나는/ 하얀 목련에 경이로움을 느꼈다.",
+        "explanation": "1. 그는 (He) / 2. 밖에서 피어나는 (blooming outside) / 3. 하얀 목련에 경이로움을 느꼈다 (was awestruck by the white magnolias).",
+        "english": "He was awestruck by the white magnolias blooming outside. (He felt amazed by the beauty of the white magnolias blossoming outdoors.)",
+        "key_words": ["Awestruck", "경이로움을"]
+    },
+    {
+        "korean": "그의 행동은 / 테이블에 있던 대부분의 사람들을 / 움찔하게 만들었다.",
+        "explanation": "1. 그의 행동은 (His actions) / 2. 테이블에 있던 대부분의 사람들을 (most at the table) / 3. 움찔하게 만들었다 (made flinch).",
+        "english": "His actions made most at the table flinch. (His behavior caused most people at the table to react with surprise.)",
+        "key_words": ["made flinch", "움찔하게 만들었다"]
+    },
+    {
+        "korean": "그는/ 밖에서 피어나는/ 하얀 목련에 경이로움을 느꼈다.",
+        "explanation": "1. 그는 (He) / 2. 밖에서 피어나는 (blooming outside) / 3. 하얀 목련에 경이로움을 느꼈다 (was awestruck by the white magnolias).",
+        "english": "He was awestruck by the white magnolias blooming outside. (He felt amazed by the beauty of the white magnolias blossoming outdoors.)",
+        "key_words": ["Awestruck", "경이로움을"]
+    },
+    {
+        "korean": "그의 행동은 / 테이블에 있던 대부분의 사람들을 / 움찔하게 만들었다.",
+        "explanation": "1. 그의 행동은 (His actions) / 2. 테이블에 있던 대부분의 사람들을 (most at the table) / 3. 움찔하게 만들었다 (made flinch).",
+        "english": "His actions made most at the table flinch. (His behavior caused most people at the table to react with surprise.)",
+        "key_words": ["made flinch", "움찔하게 만들었다"]
+    },
 ];
 
 let currentWordIndex = 0;
 let currentAudioSource = null;
 let isStopped = false;
-let speakTimeouts = [];
 let autoPlayInterval;
 
 document.addEventListener('DOMContentLoaded', () => {
     updateWord();  // Update the word when the page loads
 
     // Add event listeners for pronunciation and controls
-    document.getElementById('pronounce-1').addEventListener('click', () => {
-        handlePronunciation();
-    });
-
     document.getElementById('stop-pronouncing').addEventListener('click', stopPronouncing);
     document.getElementById('next-word').addEventListener('click', handleNextWord);
     document.getElementById('auto-play').addEventListener('click', autoPlay);
@@ -36,9 +77,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function updateWord() {
     const word = words[currentWordIndex];
+    // 업데이트된 word 내용이 화면에 반영됩니다.
     document.getElementById('word-definition').innerHTML = highlightKeywords(word.korean, word.key_words);
     document.getElementById('word-explanation').innerHTML = "";
     document.getElementById('word-pronunciation').innerHTML = "";
+    console.log("Updating word:", word.korean);
 }
 
 function highlightKeywords(text, keywords) {
@@ -49,25 +92,87 @@ function highlightKeywords(text, keywords) {
     return text;
 }
 
-function stripNumbers(text) {
-    return text.replace(/\d+\.\s*/g, '');
+async function fetchAudio(text, language) {
+    console.log('Requesting Audio for:', text, 'in', language);
+
+    try {
+        const response = await fetch(`http://localhost:3000/generate-audio?text=${encodeURIComponent(text)}&language=${language}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (!response.ok) {
+            console.error('Failed to fetch audio data:', response.statusText);
+            return null;
+        }
+
+        const arrayBuffer = await response.arrayBuffer();
+        const audioContext = getAudioContext();
+        const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
+
+        const source = audioContext.createBufferSource();
+        source.buffer = audioBuffer;
+        source.connect(audioContext.destination);
+        source.onended = () => currentAudioSource = null;
+        return source;
+    } catch (error) {
+        console.error('Error fetching audio data:', error);
+        return null;
+    }
 }
 
 function getAudioContext() {
     const AudioContext = window.AudioContext || window.webkitAudioContext;
     return new AudioContext();
 }
+async function pronounceWord() {
+    resumeAudioContext();
 
-async function fetchAudio(text, language) {
-    const response = await fetch(`http://localhost:3000/generate-audio?text=${encodeURIComponent(text)}&language=${language}`);
-    const arrayBuffer = await response.arrayBuffer();
-    const audioContext = getAudioContext();
-    const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
-    const source = audioContext.createBufferSource();
-    source.buffer = audioBuffer;
-    source.connect(audioContext.destination);
-    source.onended = () => currentAudioSource = null;
-    return source;
+    if (!isStopped) {
+        // 화면의 단어를 먼저 업데이트 (korean text 포함)
+        updateWord(); // This updates the text displayed on the screen for the current word
+
+        // Clear the explanation and pronunciation each time the pronunciation starts
+        document.getElementById('word-explanation').innerHTML = ""; // Clear previous explanation
+        document.getElementById('word-pronunciation').innerHTML = ""; // Clear previous pronunciation
+
+        if (currentAudioSource) {
+            currentAudioSource.stop();
+        }
+
+        const word = words[currentWordIndex]; // Use currentWordIndex to fetch the correct word data
+        console.log("Pronouncing word:", word);
+
+        // Play Korean sentence first
+        const koreanAudio = await fetchAudio(word.korean, 'ko-KR');
+        if (!koreanAudio) return;
+        currentAudioSource = koreanAudio;
+
+        // Wait until the Korean sentence finishes playing
+        await playAudio(koreanAudio);
+
+        // After the Korean sentence finishes, handle explanation parts
+        await handleExplanationParts(word);
+
+        // Display English translation
+        document.getElementById('word-pronunciation').innerHTML = word.english;
+
+        // Play the English sentence
+        const englishAudio = await fetchAudio(word.english, 'en-GB');
+        if (englishAudio) {
+            await playAudio(englishAudio);
+        }
+    }
+}
+
+
+function playAudio(audioSource) {
+    return new Promise((resolve) => {
+        audioSource.start();
+        audioSource.onended = () => resolve(); // Resolve the promise when the audio finishes playing
+    });
 }
 
 function resumeAudioContext() {
@@ -78,97 +183,46 @@ function resumeAudioContext() {
         });
     }
 }
-
-async function pronounceWord() {
-    resumeAudioContext();
-    if (!isStopped && currentAudioSource) currentAudioSource.stop();
-
-    const word = words[currentWordIndex];
-    const koreanAudio = await fetchAudio(word.korean, 'ko-KR');
-    if (koreanAudio) {
-        currentAudioSource = koreanAudio;
-        koreanAudio.start();
-        koreanAudio.onended = async () => {
-            if (isStopped) return;
-            await handleExplanationParts(word);
-        };
-    }
-}
-
 async function handleExplanationParts(word) {
     const explanationParts = word.explanation.split('/');
     let currentPartIndex = 0;
 
     async function showNextPart() {
+        if (isStopped) return; // Ensure that explanation does not continue if stopped
+
         if (currentPartIndex < explanationParts.length) {
             const part = explanationParts[currentPartIndex].trim();
-            const koreanPart = part.split('(')[0].trim();
+
+            // Extract Korean and English parts
+            const koreanPartWithNumber = part.split('(')[0].trim(); // Keep number for display
+            const koreanPart = koreanPartWithNumber.replace(/^\d+\.\s*/, ''); // Remove number for reading
             const englishPart = part.match(/\(([^)]+)\)/)[1];
 
+            // Display explanation part with number for visual display
             const explanationElement = document.createElement('p');
-            explanationElement.innerHTML = `${highlightKeywords(koreanPart, word.key_words)} <span>(${highlightKeywords(englishPart, word.key_words)})</span>`;
+            explanationElement.innerHTML = `${highlightKeywords(koreanPartWithNumber, word.key_words)} <span>(${highlightKeywords(englishPart, word.key_words)})</span>`;
             document.getElementById('word-explanation').appendChild(explanationElement);
 
-            const koreanPartAudio = await fetchAudio(stripNumbers(koreanPart), 'ko-KR');
+            // Play Korean audio first (without numbering)
+            const koreanPartAudio = await fetchAudio(koreanPart, 'ko-KR');
             if (koreanPartAudio) {
-                koreanPartAudio.start();
-                koreanPartAudio.onended = async () => {
-                    if (isStopped) return;
+                await playAudio(koreanPartAudio);
 
-                    const englishPartAudio = await fetchAudio(stripNumbers(englishPart), 'en-GB');
-                    if (englishPartAudio) {
-                        englishPartAudio.start();
-                        englishPartAudio.onended = async () => {
-                            currentPartIndex++;
-                            await showNextPart();
-                        };
-                    }
-                };
+                // Play English audio after Korean part (without numbering)
+                const englishPartAudio = await fetchAudio(englishPart, 'en-GB');
+                if (englishPartAudio) {
+                    await playAudio(englishPartAudio);
+                    currentPartIndex++;
+                    await showNextPart();
+                }
             }
-        } else {
-            await handleEnglishPronunciation(word);
         }
     }
 
     await showNextPart();
 }
 
-async function handleEnglishPronunciation(word) {
-    const englishText = word.english;
-    const element = document.getElementById('word-pronunciation');
-    element.innerHTML = ""; 
 
-    let charArray = [...englishText]; 
-    let index = 0;
-
-    function typeWriter() {
-        if (index < charArray.length) {
-            element.innerHTML += charArray[index];
-            index++;
-            setTimeout(typeWriter, 100); 
-        } else {
-            element.innerHTML = highlightKeywords(englishText, word.key_words);
-            fetchAudio(englishText, 'en-GB').then(englishAudio => {
-                if (englishAudio) {
-                    currentAudioSource = englishAudio;
-                    englishAudio.start();
-                }
-            });
-        }
-    }
-
-    typeWriter();
-}
-
-function handlePronunciation() {
-    stopPronouncing();
-    pronounceWord();
-}
-
-function handleNextWord() {
-    stopPronouncing();
-    nextWord();
-}
 
 function stopPronouncing() {
     isStopped = true;
@@ -176,12 +230,11 @@ function stopPronouncing() {
         currentAudioSource.stop();
     }
     currentAudioSource = null;
-    speakTimeouts.forEach(timeoutId => clearTimeout(timeoutId));
-    speakTimeouts = [];
     clearTimeout(autoPlayInterval);
 }
 
-function nextWord() {
+function handleNextWord() {
+    stopPronouncing();
     currentWordIndex = (currentWordIndex + 1) % words.length;
     updateWord();
     setTimeout(() => pronounceWord(), 500);
@@ -191,17 +244,13 @@ function autoPlay() {
     stopPronouncing();
     isStopped = false;
 
-    function playNextWord() {
+    async function playNextWord() {
         if (isStopped) return;
-        updateWord();
-        pronounceWord(() => {
-            currentWordIndex++;
-            if (currentWordIndex >= words.length) {
-                currentWordIndex = 0;
-            }
-            autoPlayInterval = setTimeout(playNextWord, 500);
-        });
+        await pronounceWord();
+        currentWordIndex = (currentWordIndex + 1) % words.length;
+        autoPlayInterval = setTimeout(playNextWord, 2000); // 2-second delay between words
     }
 
-    autoPlayInterval = setTimeout(playNextWord, 500);
+    playNextWord();
 }
+
