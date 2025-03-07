@@ -41,11 +41,16 @@ a:hover {
 .section {
   margin-bottom: 30px;
 }
+
+a.channel-name {
+  color: #FFD700 !important; /* 링크 텍스트를 노란색으로 설정 */
+}
+
 /* 모바일 친화적인 디자인을 위한 스타일 */
 @media (max-width: 600px) {
   body {
       margin: 10px;
-      line-height: 1.6;
+      line-height: 1.4;
   }
   h1 {
       font-size: 1.5em;
@@ -62,4 +67,8 @@ a:hover {
   .section {
       margin-bottom: 20px;
   }
+}
+
+a.channel-name {
+  color: #FFD700 !important; /* 링크 텍스트를 노란색으로 설정 */
 }
