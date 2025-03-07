@@ -1,10 +1,10 @@
 body {
   font-family: Arial, sans-serif;
-  line-height: 1.6;
+  line-height: 2.0;
   margin: 20px;
   background-color: #05071e !important;
   color: white;
-  font-size: 20px;
+  font-size: 24px;
 }
 
 
@@ -45,7 +45,7 @@ a:hover {
 @media (max-width: 600px) {
   body {
       margin: 10px;
-      line-height: 1.4;
+      line-height: 1.6;
   }
   h1 {
       font-size: 1.5em;
