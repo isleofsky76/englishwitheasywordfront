@@ -14,6 +14,10 @@ body {
     }
 }
 
+.navbar-brand {
+    right: 10px;
+}
+
 .bg-primary {
     --bs-bg-opacity: 1;
     background-color: #05071e !important;
@@ -115,7 +119,7 @@ body {
     overflow-y: auto;
     overflow-x: hidden;
     line-height: 2; /* Adjust the line height to add space between lines */
-    font-size: 0.9rem; /* Set font size */
+    font-size: 1.2rem; /* Set font size */
     background-color: #eaeaea; /* Set background color for better visibility */
     color: rgb(1, 1, 19); /* Adjust the color as desired */
     text-align: left;
@@ -248,7 +252,7 @@ body {
     #outputArea {
         width: 70%; /* Adjust width for tablets */
         height: 90vh; /* Further reduce height for tablets */
-        font-size: 0.75rem; /* Slightly smaller font size */
+        font-size: 1rem; /* Slightly smaller font size */
     }
 }
 
@@ -257,7 +261,7 @@ body {
     body {
         margin: 10px;
         margin-top: 60px; /* Ensure consistent margin for small screens */
-        font-size: 0.9rem;
+        font-size: 1rem;
     }
 
     .page-title {
@@ -279,7 +283,7 @@ body {
         width: 100%; /* Full width for small screens */
         margin-top: 10px;
         height: 90vh; /* Reduce height for small screens */
-        font-size: 0.85rem; /* Smaller font size */
+        font-size: 1rem; /* Smaller font size */
         padding: 10px; /* Adjust padding for small screens */
     }
 
@@ -293,7 +297,6 @@ body {
         font-size: 0.6rem;
     }
 
-
        /* 특정 요소 숨기기 */
     .sliders-container,
     #rateSlider,
@@ -306,6 +309,14 @@ body {
     #cityFilter {
         display: none;
     }
+
+    input::placeholder {
+        font-size: 16px; /* 글자 크기 조정 */
+        font-weight: bold;
+        color: black; /* 붉은색으로 설정 */
+        opacity: 1; /* 일부 브라우저에서 흐려지는 문제 방지 */
+    }
+
 }
 
 
