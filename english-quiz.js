@@ -8,7 +8,7 @@ document.getElementById('startButton').addEventListener('click', startQuiz);
             try {
                 document.getElementById('submitAnswer').disabled = true; // 초기 비활성화
         
-                const response = await fetch('http://localhost:3000/quiz', {
+                const response = await fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/quiz', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' }
                 });
