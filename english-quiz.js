@@ -72,7 +72,8 @@ document.getElementById('startButton').addEventListener('click', startQuiz);
             try {
                 const question = document.getElementById('question').innerText;
 
-                const response = await fetch(https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/quiz/show', {
+                const response = await fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/quiz/show', {
+                                        
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
