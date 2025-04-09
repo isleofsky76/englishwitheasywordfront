@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dongle&family=Nanum+Gothic&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="page16.css"> <!-- 외부 CSS 파일 연결 -->
+    <link rel="stylesheet" href="english-quiz.css"> <!-- 외부 CSS 파일 연결 -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -18,19 +18,19 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">English Quiz</a>
-            <a class="navbar-brand" href="https://englisheasystudy.com/">Home</a>
+            <a class="navbar-brand" href="https://englisheasystudy.com/">Return Home</a>
         </div>
     </nav>
 
     <div class="container mt-5 pt-5">
         <div class="quiz-container">
             <section>
-                <h1>Test Your Knowledge!</h1>
+                <h1>Quiz ?</h1>
                 <div class="divider"></div>
                 <button id="startButton" class="btn btn-primary">Start Quiz</button>
                 <div id="quiz" style="display:none;">
                     <p id="question"></p>
-                    <input type="text" id="answerInput" placeholder="Enter your answer" class="form-control">
+                    <input type="text" id="answerInput" placeholder="Enter the number" class="form-control">
                     <button id="submitAnswer" class="btn btn-success mt-2">Submit</button>
                     <button id="showAnswer" class="btn btn-warning mt-2">Explantion</button>
                     <button id="nextQuiz" class="btn btn-info mt-2">Next Quiz</button>
@@ -38,18 +38,16 @@
                 </div>
                 <div id="result"></div>
                 <div class="divider"></div> <!-- 선 추가 -->
-                <h2>Rules</h2>
+                <h2>Notice</h2>
                 <ul class="rules-section">
                     <p>
-                        <li>Click "Start Quiz" to generate example sentences.</li>
-                        <li>Enter the word in the text box below and click "Submit Answer" to check if your answer is correct.</li>
-                        <li>Click "Next Quiz" for a new set of questions.</li>
-                        <li>The normal question should be like 'e.g., The teacher asked the students to ( ) aside their phones and focus on the lesson'. If the blanks are already filled in, it is an error. Please click 'Next Quiz' for a new question.</li>
+                        <li>Occasionally, there may be a glitch or formatting issue. <br>If something seems off, simply click "Next Quiz" to try again.<br>가끔 오류나 형식 문제(예: 빈칸이 채워져 있는 경우)가 있을 수 있습니다. <br>이상해 보이시면 'Next Quiz'를 눌러 주세요.</li>
+
                     </p>                  
                 </ul>
             </section>
         </div>
     </div>   
-    <script src="page16.js"></script>
+    <script src="english-quiz.js"></script>
 </body>
 </html>
