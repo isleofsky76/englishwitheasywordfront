@@ -11,6 +11,7 @@ const resultText = document.getElementById("result-text");
 const topicHeading = document.getElementById("topic-heading");
 const topicDropdown = document.getElementById("topic-dropdown");
 const gameContainer = document.getElementById("words-block");
+const canvasMessage = document.getElementById("canvas-message");
 
 // Topics with words and hints
 const topics = [
@@ -311,9 +312,13 @@ const generateWord = () => {
   hintContainer.innerText = `Hint: ${chosenHints[hintIndex]}`;
 
   // Replace every letter with a span containing a dash, handle spaces
-  let displayItem = chosenWord.split('').map(char => 
-    char === ' ' ? '<span class="space"> </span>' : '<span class="dashes">_</span>'
-  ).join('');
+  let displayItem = chosenWord.split('').map(char => {
+    if (char === ' ') return '<span class="space"> </span>';
+    // 랜덤 길이와 margin
+    const width = 32 + Math.floor(Math.random() * 18); // 32~49px
+    const margin = 12 + Math.floor(Math.random() * 18); // 12~29px
+    return `<span class="dashes" style="min-width:${width}px; margin-right:${margin}px;">_</span>`;
+  }).join('');
 
   // Display each element as a span
   userInputSection.innerHTML = displayItem;
@@ -330,6 +335,7 @@ const initializer = () => {
   userInputSection.innerHTML = "";
   hintContainer.innerText = "";
   resultText.innerText = "";
+  canvasMessage.textContent = "";
   newGameContainer.classList.add("hide");
   letterContainer.innerHTML = "";
   hintButton.disabled = false;
@@ -338,9 +344,8 @@ const initializer = () => {
     let button = document.createElement("button");
     button.classList.add("letters");
     button.innerText = String.fromCharCode(i);
-    let color = getRandomColor();
-    button.style.backgroundColor = color;
-    button.style.color = "#fff";
+    let colorClass = "color" + (Math.floor(Math.random() * 10) + 1);
+    button.classList.add(colorClass);
     button.style.position = "relative";  // To position the "X" correctly
 
     // Create a span to hold the "X" mark
@@ -365,7 +370,8 @@ const initializer = () => {
             dashes[index].innerText = char;
             winCount += 1;
             if (winCount === charArray.filter(c => c !== ' ').length) {
-              resultText.innerHTML = `<h2 class='win-msg'></h2><p> Great! <span></span></p>`;
+              canvasMessage.textContent = "Great!";
+              resultText.innerHTML = "";
               blocker();
             }
           }
@@ -376,7 +382,8 @@ const initializer = () => {
         drawMan(count);
         mark.style.display = "block";  // Show the "X" mark
         if (count === 6) {
-          resultText.innerHTML = `<h2 class='lose-msg'></h2><p>Sorry! The answer was <span>${chosenWord}</span></p>`;
+          canvasMessage.textContent = "Sorry! The answer was " + chosenWord;
+          resultText.innerHTML = "";
           blocker();
         }
       }
@@ -429,31 +436,41 @@ const canvasCreator = () => {
     context.stroke();
   };
 
-  const head = () => {
+  // 코믹한 얼굴
+  const head = (isLose = false) => {
     context.beginPath();
-    context.arc(70, 30, 10, 0, Math.PI * 2, true);
+    context.arc(70, 30, 15, 0, Math.PI * 2, true); // bigger head
+    context.fillStyle = "#fffbe7";
+    context.fill();
+    context.stroke();
+
+    // Eyes
+    context.beginPath();
+    context.arc(64, 27, 2.5, 0, Math.PI * 2, true); // left
+    context.arc(76, 27, 2.5, 0, Math.PI * 2, true); // right
+    context.fillStyle = "#222";
+    context.fill();
+
+    // Mouth (웃음/찡그림)
+    context.beginPath();
+    if (isLose) {
+      context.arc(70, 36, 6, Math.PI, 0, true); // sad
+    } else {
+      context.arc(70, 34, 6, 0, Math.PI, false); // smile
+    }
+    context.strokeStyle = "#222";
+    context.lineWidth = 2;
     context.stroke();
   };
 
   const body = () => {
-    drawLine(70, 40, 70, 80);
+    drawLine(70, 45, 70, 90);
   };
-
-  const leftArm = () => {
-    drawLine(70, 50, 50, 40);
-  };
-
-  const rightArm = () => {
-    drawLine(70, 50, 90, 40);
-  };
-
-  const leftLeg = () => {
-    drawLine(70, 80, 50, 110);
-  };
-
-  const rightLeg = () => {
-    drawLine(70, 80, 90, 110);
-  };
+  // 팔, 다리 각도 더 코믹하게
+  const leftArm = () => { drawLine(70, 55, 50, 60); };
+  const rightArm = () => { drawLine(70, 55, 90, 60); };
+  const leftLeg = () => { drawLine(70, 90, 55, 120); };
+  const rightLeg = () => { drawLine(70, 90, 85, 120); };
 
   const initialDrawing = () => {
     context.clearRect(0, 0, context.canvas.width, context.canvas.height);
@@ -471,7 +488,7 @@ const drawMan = (count) => {
   let { head, body, leftArm, rightArm, leftLeg, rightLeg } = canvasCreator();
   switch (count) {
     case 1:
-      head();
+      head(count === 6); // 실패 시 찡그린 얼굴
       break;
     case 2:
       body();
@@ -487,6 +504,7 @@ const drawMan = (count) => {
       break;
     case 6:
       rightLeg();
+      head(true); // 마지막에 찡그린 얼굴로 다시 그림
       break;
     default:
       break;
@@ -499,4 +517,5 @@ window.onload = () => {
   generateTopicOptions();  // Generate topic options for the dropdown
   initializer();
 };
+
 
