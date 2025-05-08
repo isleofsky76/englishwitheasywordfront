@@ -218,20 +218,38 @@
             .generator-container {
                 padding: 1rem;
             }
+            .btn-emoji {
+                font-size: 2.2rem;
+            }
+            .navbar {
+                padding-top: 0.118rem;
+                padding-bottom: 0.118rem;
+            }
         }
 
         .input-border-bold {
             border: 2.5px solid #4a90e2 !important;
             box-shadow: 0 0 0 0.15rem rgba(74, 144, 226, 0.25);
         }
+
+        .btn-emoji {
+            font-size: 1.5rem;
+            vertical-align: middle;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
     </style>
 </head>
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-        <div class="container">
-            <a class="navbar-brand" href="#">Sentence Generator</a>
-            <a class="navbar-brand" href="https://englisheasystudy.com/">Home</a>
+        <div class="container d-flex justify-content-between align-items-center">
+            <a class="navbar-brand d-flex align-items-center" href="https://englisheasystudy.com/">
+                <img src="resources/eng.png" alt="Learning English Logo" height="32" style="margin-right:10px;">
+                <span style="font-weight:600; font-size:1.4rem; letter-spacing:1px;">Sentence</span>
+            </a>
+            <a class="navbar-brand ms-auto" href="https://englisheasystudy.com/">Home</a>
         </div>
     </nav>
 
@@ -243,13 +261,13 @@
                         <input type="text" class="form-control input-border-bold" id="inputWord" placeholder="Enter a word">
                     </div>
                     <div class="d-flex justify-content-center gap-2 mb-3">
-                        <button type="submit" class="btn btn-primary btn-sm" title="Generate">⚡</button>
-                        <button id="engUkButton" class="btn btn-secondary btn-sm" title="UK">🇬🇧</button>
-                        <button id="engUsButton" class="btn btn-secondary btn-sm" title="US">🇺🇸</button>
-                        <button id="stopButton" class="btn btn-danger btn-sm" title="Stop">⏹️</button>
-                        <button id="downloadButton" class="btn btn-info btn-sm" title="Download">⬇️</button>
-                        <button id="copyButton" class="btn btn-info btn-sm" title="Copy">📋</button>
-                        <button id="clearButton" class="btn btn-warning btn-sm" title="Clear">🧹</button>
+                        <button type="submit" class="btn btn-primary btn-sm" title="Generate"><span class="btn-emoji">⚡</span></button>
+                        <button id="engUkButton" class="btn btn-secondary btn-sm" title="UK"><span class="btn-emoji">🇬🇧</span></button>
+                        <button id="engUsButton" class="btn btn-secondary btn-sm" title="US"><span class="btn-emoji">🇺🇸</span></button>
+                        <button id="stopButton" class="btn btn-danger btn-sm" title="Stop"><span class="btn-emoji">⏹️</span></button>
+                        <button id="downloadButton" class="btn btn-info btn-sm" title="Download"><span class="btn-emoji">⬇️</span></button>
+                        <button id="copyButton" class="btn btn-info btn-sm" title="Copy"><span class="btn-emoji">📋</span></button>
+                        <button id="clearButton" class="btn btn-warning btn-sm" title="Clear"><span class="btn-emoji">🧹</span></button>
                     </div>
                 </form>
             </div>
@@ -269,6 +287,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
+
+
 
 
 
