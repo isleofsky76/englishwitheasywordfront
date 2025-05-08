@@ -171,6 +171,14 @@ canvas {
   body {
     padding-top: 56px !important;
   }
+  #canvas {
+    width: 98vw !important;
+    max-width: 400px !important;
+    height: 320px !important;
+    min-height: unset !important;
+    margin: 0 auto 4px auto !important;
+    display: block;
+  }
 }
 
 #user-input-section {
@@ -257,4 +265,3 @@ body, #user-input-section, .letter-container button, #canvas-message {
 .navbar-brand {
   font-size: 22px;
 }
-
