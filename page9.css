@@ -1,321 +1,260 @@
-/* 기본적인 여백 */
 body {
-    margin: 20px;
-    margin-top: 100px; /* Adjust the value to move content down */
-    background-color: #02051d; /* Dark b /* Light grey text */
-    line-height: 1.4;
-    font-family: "Nanum Gothic", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 1.2rem;
-    color: rgb(234, 234, 236);
-    p {
-        margin-bottom: 10px; /* 문단 간의 간격 조절 */
-    }
+  padding: 20px 2px 2px 2px;
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  background-color: #f0f8ff; /* 밝은 하늘색 배경 */
+  min-height: 100vh;
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+header {
+  background-color: #02051d; /* Dark blue background color */
+  color: white;
+  text-align: left;
+  padding: 1em 0;
+}
+
+#topic-selection {
+  margin-top: -10px !important;
+  text-align: center;
+  font-size: 30px;
+  width: 100%;
+}
+
+.container {
+  padding: 2px;
+  margin-top: 2px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: transparent;
+  width: 100%;
+  max-width: 1200px;
+  min-height: unset;
+}
+
+#words-block, #button-block {
+  margin-bottom: 4px;
+}
+
+#hangman-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#canvas {
+  margin-bottom: 8px;
+}
+
+canvas {
+  width: 100%;
+  max-width: 500px;
+  height: 400px;
+  margin: 20px auto;
+  display: block;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.block {
+  width: 100%;
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+#topic-heading {
+  color: #333;
+  margin-bottom: 15px;
+  margin-top: 50px;
+  font-size: 34px;
+}
+
+#topic-dropdown {
+  width: 80%;
+  max-width: 300px;
+  padding: 8px;
+  font-size: 28px !important;
+  border: 2px solid #1e90ff;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+#hint-container, #result-text {
+  min-height: 32px;
+  margin: 1px 0 0 0;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#hint-container {
+  margin-top: 30px;
+  color: #1e90ff;
+  font-size: 28px;
+}
+
+#result-text {
+  font-size: 24px;
+  color: #333;
+  min-height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#button-block {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin: 8px 0 0 0;
+  padding: 0;
+  background: none;
+  box-shadow: none;
+}
+
+#button-block button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font-size: 19px;
+  padding: 6px 14px;
+  border-radius: 8px;
+  border: none;
+  background: #1e90ff;
+  color: #fff;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+  min-width: 0;
+  box-shadow: 0 2px 8px rgba(30,144,255,0.10);
+}
+
+#button-block button:hover {
+  background: #187bcd;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 600px) {
+  .container {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+  #words-block,
+  #hangman-block {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  #topic-selection {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .block {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+  body {
+    padding-top: 56px !important;
+  }
+}
+
+#user-input-section {
+  margin: 0;
+  font-size: 2.5rem;
+  min-height: 48px;
+  text-align: center;
+}
+
+#user-input-section .dash {
+  display: inline-block;
+  border-bottom: 3px dotted #bbb !important;
+  font-size: 28px;
+  color: #222;
+  text-align: center;
+  vertical-align: bottom;
+  font-weight: bold;
+  margin: 0 18px 0 0;
+  min-width: 32px;
+}
+
+#canvas-message {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  font-size: 2.8rem;
+  font-weight: bold;
+  color: #1e90ff;
+  text-shadow: 2px 2px 8px #fff, 0 0 2px #000;
+  z-index: 2;
+  text-align: center;
+}
+
+.letter-container button.color1 { background: #ffb3ba; color: #222; }
+.letter-container button.color2 { background: #bae1ff; color: #222; }
+.letter-container button.color3 { background: #baffc9; color: #222; }
+.letter-container button.color4 { background: #ffffba; color: #222; }
+.letter-container button.color5 { background: #ffdfba; color: #222; }
+.letter-container button.color6 { background: #e2f0cb; color: #222; }
+.letter-container button.color7 { background: #b5ead7; color: #222; }
+.letter-container button.color8 { background: #c7ceea; color: #222; }
+.letter-container button.color9 { background: #f7cac9; color: #222; }
+.letter-container button.color10 { background: #f6eac2; color: #222; }
+
+.letter-container button.used::after {
+  content: '✖️';
+  color: #e74c3c;
+  font-size: 22px;
+  position: absolute;
+  top: 2px;
+  right: 6px;
+  font-family: 'Segoe UI', 'Arial', sans-serif;
+  font-weight: bold;
+}
+
+.letter-container {
+  margin-top: 10px !important;
+}
+
+body, #user-input-section, .letter-container button, #canvas-message {
+  font-family: 'Nanum Pen Script', cursive;
+}
+
+.letter-container button {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  font-size: 18px;
+  font-weight: bold;
+  margin: 3px;
+  box-shadow: 0 2px 8px rgba(30,144,255,0.15);
+  border: none;
+  transition: background 0.2s, color 0.2s, transform 0.1s;
+  color: #222;
+  position: relative;
 }
 
 .navbar-brand {
-    right: 10px;
-}
-
-.bg-primary {
-    --bs-bg-opacity: 1;
-    background-color: #05071e !important;
-  }
-
-.page-title {
-    font-size: 24px;
-    text-align: center;
-    font-weight: bold;
-    color: #ebeef1; /* Link color */
-}
-
-.highlight{
-    padding: 5px;
-    font-size: 1.2rem;
-    color: #ebeef1; /* Link color */
-}
-
-
-.centered-text {
-    font-size: 18px;
-    margin-top: 20px;
-    line-height: 1; 
-    text-align: center;
-}
-
-
-.btn, .btn-primary, .btn-sm {
-    background: none;
-    border: none;
-    color: #ebeef1; /* Link color */
-    font-size: 1rem; /* Adjust font size */
-    padding: 0; /* Remove padding */
-    margin: 5px; /* Adjust margin */
-    text-decoration: underline; /* Underline to look like a link */
-    cursor: pointer;
-}
-
-.btn:hover {
-    color: #0056b3; /* Darker color on hover */
-    text-decoration: none; /* Remove underline on hover */
-}
-
-.controls-container {
-    
-    font-size: 1.2rem; /* 텍스트 크기 설정 */
-    color: rgb(74, 74, 75); /* Adjust the color as desired */
-    font-weight: bold; /* Adjust the font weight as desired */
-    font-size: 0.8rem; /* 텍스트 크기 설정 */
-}
-
-#inputWord {
-    margin-top: 10px;
-    font-size: 1rem; /* 텍스트 크기 설정 */
-    width: 100%; /* You can set this to a percentage or a fixed value */
-    height:10%;
-    max-width: 150px; 
-}
-
-
-.inputWord::placeholder{
-    font-weight: bold;
-    color: rgb(74, 74, 75); /* Adjust the color as desired */
-    font-size: 0.8rem; /* 텍스트 크기 설정 */
-    width: 100%;}
-
-
-/* Add spacing between elements */
-#inputForm {
-    margin-top: 1rem;
-    color: rgb(244, 244, 245); /* Adjust the color as desired */
-    text-decoration: none; /* 밑줄 없앰 */
-    font-size: 0.8rem; /* 텍스트 크기 설정 */
-
-}
-
-#inputForm label {
-    margin-bottom: 10px; /* Add bottom margin to label */
-    display: block; /* Make label a block element to occupy full width */
-}
-
-#inputForm input {
-    margin-bottom: 10px; /* Add bottom margin to input field */
-}
-
-#inputForm button {
-    margin-right: 10px; /* Add right margin to buttons */
-}
-
-#outputArea {
-    margin: 10px auto; /* Center horizontally with top and bottom margins */
-    width: 90%; /* Default width */
-    max-width: 800px; /* Maximum width */
-    height: 100vh; /* Set height to 70% of the viewport height */
-    padding: 10px;
-    border: 1px solid #535050;
-    border-radius: 4px;
-    box-sizing: border-box;
-    overflow-y: auto;
-    overflow-x: hidden;
-    line-height: 2; /* Adjust the line height to add space between lines */
-    font-size: 1.2rem; /* Set font size */
-    background-color: #eaeaea; /* Set background color for better visibility */
-    color: rgb(1, 1, 19); /* Adjust the color as desired */
-    text-align: left;
-}
-
-
-/* 시계위치 */
-.filter-container-wrapper {
-    position: absolute;
-    right: 50px;
-    display: flex;
-    align-items: center;
-}
-
-.filter-container {
-    display: flex;
-    align-items: center;
-}
-
-.filter-container label {
-    margin-right: 10px;
-    font-size: 0.8rem;
-}
-
-.filter-container select {
-    width: 100px;
-    margin-right: 20px;
-    font-size: 0.8rem;
-}
-
-#selectedTime {
-    font-size: 0.8rem;
-    padding: 7px 10px;
-    border: 1px solid black;
-    background-color: white;
-    display: inline-block;
-}
-
-
- /* Custom CSS for hover effect */
-#wordList li:hover {
-    background-color: lightgray; /* Change background color on hover */
-    cursor: pointer; /* Change cursor to pointer on hover */
-    font-size: 0.8rem;
-}
-
-
-
-
-#text-to-speech {
-    display: flex;
-    align-items: center;
-}
-
-#text-to-speech img {
-    margin-right: 0px;
-}
-
-
-#text-to-speech h3 {
-    margin-top:2px;
-    left :0px;
-    font-size: 0.9rem;
-    display: flex;
-    align-items: center;
-    color: rgb(6, 6, 43); /* Set the heading color to blue */
-}
-
-
-/* 스피너 스타일링 */
-#spinner {
-    display: none; /* 일단은 숨김 */
-}
-
-
-.keyword-list-horizontal {
-    display: flex;
-    flex-wrap: wrap;
-    list-style-type: none;
-    padding: 0;
-    font-size: 12px;
-}
-
-.keyword-list-horizontal li {
-    list-style-type: none;
-    padding: 0.3em 0.7em;
-    background-color: #282a9b;
-    border: 1px solid #ccc;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    text-align: left;
-    margin: 0.5em; /* Added margin to increase space between items */
-}
-
-
-
-
-
-
-/* Media queries for different screen sizes */
-@media (max-width: 1200px) {
-    body {
-        margin-top: 60px; /* Ensure consistent margin for large screens */
-    }
-
-    #outputArea {
-        width: 90%; /* Adjust width for large screens */
-        height: 90vh; /* Reduce height for large screens */
-        font-size: 1rem; /* Slightly smaller font size */
-    }
-}
-
-@media (max-width: 992px) {
-    body {
-        margin-top: 60px; /* Ensure consistent margin for medium screens */
-    }
-
-    #outputArea {
-        width: 80%; /* Adjust width for medium screens */
-        height: 90vh; /* Reduce height for medium screens */
-        font-size: 0.8rem; /* Slightly smaller font size */
-    }
-}
-
-@media (max-width: 768px) {
-    body {
-        margin-top: 60px; /* Ensure consistent margin for tablets */
-    }
-
-    #outputArea {
-        width: 70%; /* Adjust width for tablets */
-        height: 90vh; /* Further reduce height for tablets */
-        font-size: 1rem; /* Slightly smaller font size */
-    }
-}
-
-/* 미디어 쿼리 추가: 모바일 최적화 */
-@media (max-width: 600px) {
-    body {
-        margin: 10px;
-        margin-top: 60px; /* Ensure consistent margin for small screens */
-        font-size: 1rem;
-    }
-
-    .page-title {
-        margin-top: 20px;
-        font-size: 1.3rem;
-    }
-
-    .btn, .btn-primary, .btn-sm {
-        font-size: 0.9rem;
-        width: 80px;
-        height: 20px;
-    }
-
-    #inputForm {
-        font-size: 0.7rem;
-    }
-
-    #outputArea {
-        width: 100%; /* Full width for small screens */
-        margin-top: 10px;
-        height: 90vh; /* Reduce height for small screens */
-        font-size: 1rem; /* Smaller font size */
-        padding: 10px; /* Adjust padding for small screens */
-    }
-
-    .filter-container-wrapper {
-        position: static;
-        margin-top: 10px;
-        right: auto;
-    }
-
-    #wordStatistics h2, #wordStatistics example, #text-to-speech h3 {
-        font-size: 0.6rem;
-    }
-
-       /* 특정 요소 숨기기 */
-    .sliders-container,
-    #rateSlider,
-    #volumeSlider,
-    #selectedTime,
-    #text-to-speech,
-    #engUkButton,
-    #wordList,
-    #wordStatistics,
-    #cityFilter {
-        display: none;
-    }
-
-    input::placeholder {
-        font-size: 16px; /* 글자 크기 조정 */
-        font-weight: bold;
-        color: black; /* 붉은색으로 설정 */
-        opacity: 1; /* 일부 브라우저에서 흐려지는 문제 방지 */
-    }
-
+  font-size: 22px;
 }
 
