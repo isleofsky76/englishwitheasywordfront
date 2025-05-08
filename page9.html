@@ -52,13 +52,13 @@
               <!-- Options will be added dynamically -->
             </select>
           </div>
-          <div class="canvas-wrapper" style="position:relative; display:flex; justify-content:center; align-items:center;">
+          <div class="canvas-wrapper" style="position:relative; display:flex; justify-content:center; align-items:center; flex-direction:column;">
+            <div id="hint-container"></div>
             <canvas id="canvas"></canvas>
             <div id="canvas-message" style="position:absolute; top:0; left:0; width:100%; height:100%; display:flex; align-items:center; justify-content:center; pointer-events:none; font-size:2.2rem; font-weight:bold; color:#1e90ff; text-shadow: 2px 2px 8px #fff, 0 0 2px #000; z-index:2;"></div>
           </div>
           <div id="user-input-section" style="font-size:2rem;"></div>
           <div id="letter-container" class="letter-container"></div>
-          <div id="hint-container"></div>
           <div id="result-text"></div>
         </div>
         
@@ -80,5 +80,4 @@
     <script src="page9.js"></script>
   </body>
 </html>
-
 
