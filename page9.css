@@ -159,8 +159,7 @@ canvas {
     padding: 0 !important;
   }
   #topic-selection {
-    margin: 0 !important;
-    padding: 0 !important;
+    margin-top: 3px !important;
   }
   .block {
     margin-top: 0 !important;
