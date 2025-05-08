@@ -26,16 +26,20 @@
         }
 
         .navbar {
-            background: linear-gradient(135deg, var(--primary-color), var(--hover-color)) !important;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            padding: 1rem 0;
+            background: linear-gradient(135deg, #4a90e2, #357abd) !important;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            padding-top: 0.7rem;
+            padding-bottom: 0.7rem;
         }
 
         .navbar-brand {
             font-weight: 600;
             font-size: 1.4rem;
             color: white !important;
+            letter-spacing: 1px;
             transition: transform 0.3s ease;
+            line-height: 1;
+            padding: 0;
         }
 
         .navbar-brand:hover {
@@ -126,6 +130,10 @@
             .quiz-container {
                 padding: 1rem;
             }
+            .navbar {
+                padding-top: 0.118rem;
+                padding-bottom: 0.118rem;
+            }
         }
     </style>
 </head>
@@ -133,8 +141,11 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="#">English Quiz</a>
-            <a class="navbar-brand" href="https://englisheasystudy.com/">Home</a>
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <img src="resources/eng.png" alt="Learning English Logo" height="32" style="margin-right:10px;">
+                <span style="font-weight:600; font-size:1.4rem; letter-spacing:1px;">Learning English</span>
+            </a>
+            <a class="navbar-brand ms-auto" href="https://englisheasystudy.com/">Home</a>
         </div>
     </nav>
 
