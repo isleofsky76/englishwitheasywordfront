@@ -80,10 +80,10 @@ canvas {
 }
 
 #topic-dropdown {
-  width: 80%;
-  max-width: 300px;
+  width: 100%;
+  max-width: 400px;
   padding: 8px;
-  font-size: 28px !important;
+  font-size: 25.2px !important;
   border: 2px solid #1e90ff;
   border-radius: 8px;
   margin-bottom: 20px;
@@ -164,6 +164,13 @@ canvas {
     min-height: unset !important;
     margin: 0 auto 4px auto !important;
     display: block;
+  }
+  #topic-dropdown {
+    width: 100% !important;
+    max-width: 320px !important;
+    font-size: 1rem !important;
+    padding: 4px !important;
+    margin-bottom: 8px !important;
   }
 }
 
