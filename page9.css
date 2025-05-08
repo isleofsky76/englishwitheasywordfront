@@ -76,7 +76,7 @@ canvas {
   color: #333;
   margin-bottom: 15px;
   margin-top: 50px;
-  font-size: 34px;
+  font-size: 26px !important;
 }
 
 #topic-dropdown {
@@ -94,21 +94,22 @@ canvas {
   color: #1e90ff !important;
   text-align: center !important;
   min-height: 24px !important;
-  margin: 4px 0 !important;
+  margin: 2px 0 0 0 !important;
   word-break: break-word !important;
   white-space: pre-line !important;
   display: block !important;
 }
 
 #button-block {
+  margin-top: 2px !important;
+  margin-bottom: 0 !important;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 8px;
-  margin: 8px 0 0 0;
-  padding: 0;
   background: none;
   box-shadow: none;
+  padding: 0 !important;
 }
 
 #button-block button {
