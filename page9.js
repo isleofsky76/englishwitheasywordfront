@@ -282,7 +282,9 @@ topicDropdown.addEventListener("change", (event) => {
 // Handle topic selection
 const selectTopic = (index) => {
   currentTopic = topics[index];
-  topicHeading.innerText = `Topic: ${currentTopic.category}`;
+  if (topicHeading) {
+    topicHeading.innerText = `Topic: ${currentTopic.category}`;
+  }
   gameContainer.classList.remove("hide");
   initializer();
 };
@@ -308,8 +310,10 @@ const generateWord = () => {
   hintIndex = 0;
   remainingHints = 5;
 
-  // Display the initial hint
-  hintContainer.innerText = `Hint: ${chosenHints[hintIndex]}`;
+  // 처음엔 hint를 비워둠
+  if (hintContainer) {
+    hintContainer.innerText = "";
+  }
 
   // Replace every letter with a span containing a dash, handle spaces
   let displayItem = chosenWord.split('').map(char => {
@@ -392,9 +396,19 @@ const initializer = () => {
     letterContainer.append(button);
   }
 
-  generateWord();
+  // for문 이후에 반드시 generateWord() 호출
+  if (currentTopic) {
+    generateWord();
+  }
+
+  // 항상 교수대(행맨 기본 그림)를 초기화
   let { initialDrawing } = canvasCreator();
   initialDrawing();
+
+  // currentTopic이 없을 때만 밑줄 표시
+  if (!currentTopic) {
+    userInputSection.innerHTML = '<span class="dashes">_</span> '.repeat(5);
+  }
 };
 
 // Function to generate a random color
@@ -409,9 +423,9 @@ function getRandomColor() {
 
 // Hint button event listener
 hintButton.addEventListener("click", () => {
-  if (remainingHints > 0 && hintIndex < chosenHints.length - 1) {
-    hintIndex += 1;
+  if (remainingHints > 0 && hintIndex < chosenHints.length) {
     hintContainer.innerText = `${chosenHints[hintIndex]}`;
+    hintIndex += 1;
     remainingHints -= 1;
   } else {
     hintButton.disabled = true;
@@ -517,5 +531,4 @@ window.onload = () => {
   generateTopicOptions();  // Generate topic options for the dropdown
   initializer();
 };
-
 
