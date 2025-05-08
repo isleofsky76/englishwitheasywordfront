@@ -7,123 +7,162 @@
     <meta name="description" content="Learn easy English with our beginner-friendly lessons. Start speaking English confidently with our easy English grammar guides and vocabulary tips.">
     <meta name="keywords" content="English study, easy English, free English lessons, English grammar, vocabulary tips, 영어 공부, 무료 영어, 영어 문법, 어휘 팁, 독해, 독학, 퀴즈, 점보기, Fortuneteller, hangman">
     <link rel="alternate" type="application/rss+xml" title="RSS" href="https://englisheasystudy.com/rss">
-    <meta name="description" content="Learn easy English with our beginner-friendly lessons. Start speaking English confidently with our easy English grammar guides and vocabulary tips.">
     <meta name="google-adsense-account" content="ca-pub-6108574897789788">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6108574897789788" crossorigin="anonymous"></script>
     <meta name="naver-site-verification" content="49ce4ce26cb6b92d2bf01a441655ca396f47aca1" />
     <meta name="description" content="Discover effective English study tips, grammar guides, vocabulary lists, and resources to enhance your language learning. Join English Easy Study today!">
-       
-    <!-- Bootstrap CSS 추가 -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    
-    <link rel="stylesheet" href="main.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f5f7fa;
+            color: #222;
+        }
+        .navbar {
+            background: linear-gradient(135deg, #4a90e2, #357abd) !important;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .navbar-brand {
+            font-weight: 600;
+            font-size: 1.4rem;
+            color: white !important;
+            letter-spacing: 1px;
+        }
+        .main-content {
+            margin-top: 90px;
+            margin-bottom: 30px;
+        }
+        .intro-text {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            padding: 2rem 1.5rem 1.5rem 1.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        .intro-text h2 {
+            color: #4a90e2;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .intro-text p {
+            color: #333;
+            font-size: 1.1rem;
+        }
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+        .menu-card {
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 2px 8px rgba(74,144,226,0.08);
+            padding: 2.2rem 1.2rem 1.2rem 1.2rem;
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #357abd;
+            cursor: pointer;
+            transition: transform 0.18s, box-shadow 0.18s;
+            border: 2px solid #e3eaf3;
+            position: relative;
+        }
+        .menu-card:hover {
+            transform: translateY(-6px) scale(1.04);
+            box-shadow: 0 8px 24px rgba(74,144,226,0.18);
+            background: #f0f7ff;
+            color: #4a90e2;
+            border-color: #4a90e2;
+        }
+        .menu-card span {
+            display: block;
+            font-size: 2.1rem;
+            margin-bottom: 0.5rem;
+        }
+        .resources-section {
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            padding: 1.5rem 1.2rem;
+            margin-bottom: 2rem;
+        }
+        .resources-section h4 {
+            color: #357abd;
+            font-weight: 600;
+            margin-bottom: 0.7rem;
+        }
+        .resources-section p {
+            color: #444;
+            font-size: 1.05rem;
+        }
+        @media (max-width: 600px) {
+            .main-content {
+                margin-top: 70px;
+            }
+            .intro-text {
+                padding: 1.2rem 0.5rem 1rem 0.5rem;
+            }
+            .menu-card {
+                padding: 1.2rem 0.5rem 0.7rem 0.5rem;
+                font-size: 1rem;
+            }
+        }
+    </style>
     <script src="homepage_eventlistener.js"></script>
 </head>
 <body>
-    <nav id="navbar" class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
-        <div class="container-fluid">
+    <nav id="navbar" class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
             <a class="navbar-brand" href="#">
-                <img src="resources/eng.png" alt="Learning English Logo" height="30">
-                <span style="vertical-align: middle; margin-left: 10px;">Learning English</span>
+                <img src="resources/eng.png" alt="Learning English Logo" height="32" style="margin-right:10px;">
+                Learning English
             </a>
         </div>
     </nav>
-    <div class="intro-text">
-        <h2>AI Tutor</h2> <br>
-                <p>Welcome! Learn English easily with our fun and helpful resources. For any questions, email us at <a href="mailto:everydayalittlehelp@gmail.com" style="color: #ffffff; text-decoration: none;">everydayalittlehelp@gmail.com</a>. Happy learning! You can also enjoy our content on <a href="http://www.youtube.com/@istudyeng" style="color: #06f33d; text-decoration: none;">YouTube</a>.</p>
-      
-    </div>
-    <br>
-    <div class="container">
-        <div class="box" onclick="navigateTo('learning-site.html')">학습사이트<br>(Learning Sites)</div>
-        <div class="box" onclick="navigateTo('english-news-study.html')">English<br>News<br></div>
-            <div class="box" onclick="navigateTo('english-quiz.html')">퀴즈!<br>(Quiz!)</div>
-           <div class="box" onclick="navigateTo('sentence-generator.html')">예문생성기<br></div>     
-        <div class="box" onclick="navigateTo('page9.html')">행맨게임<br>(Hangman)</div>    
-        <div class="box" onclick="navigateTo('page18.html')">스무고개<br></div>        
-        <div class="box" onclick="navigateTo('page12.html')">영어채팅<br></div> 
-<!--         <div class="box" onclick="navigateTo('page14.html')">영어말하기<br></div>    -->
-<!--         <div class="box" onclick="navigateTo('19diary-writing3_upload.html')">[고급]<br> 영어작문<br></div>
-        <div class="box" onclick="navigateTo('page55_elementary.html')">[초급]<br> 초등학교<br> 필수어(한.영)<br></div>
-        <div class="box" onclick="navigateTo('page46_examples.html')">[초급]<br> 초등학교<br> 필수어(예문)<br></div>
-        <div class="box" onclick="navigateTo('page56_elementary.html')">[초급]<br> 초등학교<br> 필수어(영.영)<br></div>
-        <div class="box" onclick="navigateTo('page41_onewordperday.html')">[중급]<br> 중/고교 단어<br></div> -->
-      
-<!--         <div class="box important" onclick="navigateTo('page25.html')">[초급]<br> 어휘<br></div>  
-        <div class="box" onclick="navigateTo('page46_onewordperday.html')">[초급]<br> 여행<br></div>
-        <div class="box" onclick="navigateTo('page26.html')">[중급]<br> 일상표현<br></div>  
-        <div class="box" onclick="navigateTo('page49_dailyexpression.html')">[중급]<br> 일상표현 II <br></div>  
-        <div class="box" onclick="navigateTo('page41_1_daily.html')">[중급]<br> 일상표현<br>(예문) III <br></div>  
-        <div class="box" onclick="navigateTo('travelpreparation.html')">[중급]<br> 여행준비<br></div>  
-        <div class="box" onclick="navigateTo('page59_travel.html')">[초급]<br> 공항 <br></div>
-        <div class="box" onclick="navigateTo('page33_aiport.html')">[중급]<br> 공항<br></div>  
-        <div class="box" onclick="navigateTo('page47_onewordperday.html')">[중급]<br> 공항 II<br></div>  
-        <div class="box" onclick="navigateTo('page34_aiplane.html')">[중급]<br> 비행기<br></div> 
-        <div class="box" onclick="navigateTo('page50_shopping.html')">[초급]<br> 쇼핑 <br></div> 
-        <div class="box" onclick="navigateTo('page58forbizowners.html')">[초급]<br> 쇼핑 I<br></div> 
-        <div class="box" onclick="navigateTo('page36_shopping.html')">[중급]<br> 쇼핑 <br></div> 
-        <div class="box" onclick="navigateTo('page35_accomodation.html')">[중급]<br> 숙소<br></div> 
-        <div class="box" onclick="navigateTo('page51_accomodation.html')">[중급]<br> 숙소 II<br></div>
-        <div class="box" onclick="navigateTo('page37_emergency.html')">[중급]<br> 긴급상황<br></div> 
-        <div class="box" onclick="navigateTo('page52_emergency.html')">[중급]<br> 긴급상황 II<br></div> 
-        <div class="box" onclick="navigateTo('page38_tranportation.html')">[중급]<br> 교통수단<br></div>
-        <div class="box" onclick="navigateTo('page53_transportation.html')">[중급]<br> 교통수단 II<br></div>
-        <div class="box" onclick="navigateTo('page39_Sightseeing.html')">[중급]<br> 관광<br></div>
-        <div class="box" onclick="navigateTo('page54_tour.html')">[중급]<br> 관광 II<br></div>
-        <div class="box" onclick="navigateTo('page40_dining.html')">[중급]<br> 식사<br></div> -->
-        <div class="box" onclick="navigateTo('page22.html')">동의어<br>생성기<br></div>  
-<!--         <div class="box" onclick="navigateTo('english-news-study.html')">뉴스<br></div> -->
-<!--         <div class="box" onclick="navigateTo('page42_onewordperday.html')">[고급]<br> 경제용어<br></div>
-        <div class="box" onclick="navigateTo('page43_onewordperday.html')">[중급]<br> 경제용어II<br></div>
-        <div class="box" onclick="navigateTo('page61_ksat_voca.html')">[중급]<br>수능영어<br></div>
-        <div class="box" onclick="navigateTo('page63_get.html')">[초급]<br>GET동사<br></div>
-        <div class="box" onclick="navigateTo('page63_Take.html')">[초급]<br>Take 동사<br></div>
-        <div class="box" onclick="navigateTo('page64be.html')">[초급]<br>Be 동사<br></div>
-        <div class="box" onclick="navigateTo('page65have.html')">[초급]<br>Have 동사<br></div>
-        <div class="box" onclick="navigateTo('page70make.html')">[초급]<br>Make 동사<br></div>
-        <div class="box" onclick="navigateTo('page71come.html')">[초급]<br>Come 동사<br></div>
-        <div class="box" onclick="navigateTo('page72put.html')">[초급]<br>Put 동사<br></div>
-        <div class="box" onclick="navigateTo('page73know.html')">[초급]<br>Know 동사<br></div>
-        <div class="box" onclick="navigateTo('0index.html')">[초급]<br>Find 동사<br></div> -->
-<!--         <div class="box" onclick="navigateTo('page70.html')">[초급]<br>필수단어<br></div> -->
-        <div class="box" onclick="navigateTo('page21.html')">독해<br></div>  
-    
-
-    
-        <div class="box" onclick="navigateTo('page5.html')">메모장<br>(Notes)</div>
-      
-        <div class="box" onclick="navigateTo('page24.html')">AI 점술사<br>(AI Fortune Teller)</div>  
-        <div class="box" onclick="navigateTo('page30_guestbook.html')">방명록<br></div>
-        <div class="box" onclick="navigateTo('page31_personalinfor.html')">Privacy Policy</div>
-        <div class="box" onclick="navigateTo('page32_termsofservice.html')">Terms of Service</div>
-    </div>
-    <br>
-  
-    <div>
-        <ul>
+    <div class="container main-content">
+        <div class="intro-text">
+            <h2>AI Tutor</h2>
+            <p>Welcome! Learn English easily with our fun and helpful resources.<br>For any questions, email us at <a href="mailto:everydayalittlehelp@gmail.com" style="color: #4a90e2; text-decoration: underline;">everydayalittlehelp@gmail.com</a>.<br>Happy learning! You can also enjoy our content on <a href="http://www.youtube.com/@istudyeng" style="color: #06f33d; text-decoration: underline;">YouTube</a>.</p>
+        </div>
+        <div class="menu-grid">
+            <div class="menu-card" onclick="navigateTo('learning-site.html')"><span>📚</span>학습사이트<br>(Learning Sites)</div>
+            <div class="menu-card" onclick="navigateTo('english-news-study.html')"><span>📰</span>English News</div>
+            <div class="menu-card" onclick="navigateTo('english-quiz.html')"><span>❓</span>퀴즈!<br>(Quiz!)</div>
+            <div class="menu-card" onclick="navigateTo('sentence-generator.html')"><span>✏️</span>예문생성기</div>
+            <div class="menu-card" onclick="navigateTo('page9.html')"><span>🎮</span>행맨게임<br>(Hangman)</div>
+            <div class="menu-card" onclick="navigateTo('page18.html')"><span>🔍</span>스무고개</div>
+            <div class="menu-card" onclick="navigateTo('page12.html')"><span>💬</span>영어채팅</div>
+            <div class="menu-card" onclick="navigateTo('page22.html')"><span>🔗</span>동의어<br>생성기</div>
+            <div class="menu-card" onclick="navigateTo('page21.html')"><span>📖</span>독해</div>
+            <div class="menu-card" onclick="navigateTo('page5.html')"><span>📝</span>메모장<br>(Notes)</div>
+            <div class="menu-card" onclick="navigateTo('page24.html')"><span>🔮</span>AI 점술사<br>(AI Fortune Teller)</div>
+            <div class="menu-card" onclick="navigateTo('page30_guestbook.html')"><span>📔</span>방명록</div>
+            <div class="menu-card" onclick="navigateTo('page31_personalinfor.html')"><span>🔒</span>Privacy Policy</div>
+            <div class="menu-card" onclick="navigateTo('page32_termsofservice.html')"><span>📜</span>Terms of Service</div>
+        </div>
+        <div class="resources-section">
             <h4>Our Resources!</h4>
-            <p>AI와의 대화, 게임, 퀴즈, 동의어 학습, 읽기 자료, 유튜브 채널 등 다양한 영어 학습 도구와 자료를 제공합니다. 
-</p>
-           <p>Various English learning tools and materials are provided, including conversations with AI, quizzes, news, diverse reading materials, and YouTube channels.</p>
-        </ul>
-    </div>   
-    <!-- Bootstrap JS 및 의존성 추가 -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-    <!-- 네비게이션 바 스크롤 제어 스크립트 -->
+            <p>AI와의 대화, 게임, 퀴즈, 동의어 학습, 읽기 자료, 유튜브 채널 등 다양한 영어 학습 도구와 자료를 제공합니다.</p>
+            <p>Various English learning tools and materials are provided, including conversations with AI, quizzes, news, diverse reading materials, and YouTube channels.</p>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        function navigateTo(page) {
+            window.location.href = page;
+        }
         let lastScrollTop = 0;
         const navbar = document.getElementById('navbar');
-
         window.addEventListener('scroll', function() {
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
             if (scrollTop > lastScrollTop) {
-                // Scroll down
                 navbar.style.top = '-70px';
             } else {
-                // Scroll up
                 navbar.style.top = '0';
             }
             lastScrollTop = scrollTop;
