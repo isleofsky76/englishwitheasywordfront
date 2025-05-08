@@ -43,7 +43,7 @@
         }
 
         .main-content {
-            margin-top: 100px;
+            margin-top: 110px;
             padding-top: 20px;
         }
 
@@ -219,6 +219,11 @@
                 padding: 1rem;
             }
         }
+
+        .input-border-bold {
+            border: 2.5px solid #4a90e2 !important;
+            box-shadow: 0 0 0 0.15rem rgba(74, 144, 226, 0.25);
+        }
     </style>
 </head>
 <body>
@@ -233,23 +238,20 @@
     <div class="container main-content">
         <div class="row">
             <div class="col-md-6">
-                <h2>Enter a word to generate sentences</h2>
-                <form id="inputForm">
+                <form id="inputForm" style="margin-top: 32px;">
                     <div class="mb-3">
-                        <input type="text" class="form-control" id="inputWord" placeholder="Enter a word">
+                        <input type="text" class="form-control input-border-bold" id="inputWord" placeholder="Enter a word">
                     </div>
-                    <button type="submit" class="btn btn-primary">Generate</button>
+                    <div class="d-flex justify-content-center gap-2 mb-3">
+                        <button type="submit" class="btn btn-primary btn-sm" title="Generate">⚡</button>
+                        <button id="engUkButton" class="btn btn-secondary btn-sm" title="UK">🇬🇧</button>
+                        <button id="engUsButton" class="btn btn-secondary btn-sm" title="US">🇺🇸</button>
+                        <button id="stopButton" class="btn btn-danger btn-sm" title="Stop">⏹️</button>
+                        <button id="downloadButton" class="btn btn-info btn-sm" title="Download">⬇️</button>
+                        <button id="copyButton" class="btn btn-info btn-sm" title="Copy">📋</button>
+                        <button id="clearButton" class="btn btn-warning btn-sm" title="Clear">🧹</button>
+                    </div>
                 </form>
-                <div class="mt-3">
-                    <button id="engUkButton" class="btn btn-secondary">UK Pronunciation</button>
-                    <button id="engUsButton" class="btn btn-secondary">US Pronunciation</button>
-                    <button id="stopButton" class="btn btn-danger">Stop</button>
-                </div>
-                <div class="mt-3">
-                    <button id="downloadButton" class="btn btn-info">Download</button>
-                    <button id="copyButton" class="btn btn-info">Copy</button>
-                    <button id="clearButton" class="btn btn-warning">Clear</button>
-                </div>
             </div>
             <div class="col-md-6">
                 <div id="spinner" class="text-center" style="display: none;">
@@ -267,6 +269,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
 
 
 
