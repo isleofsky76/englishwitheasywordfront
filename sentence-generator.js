@@ -1,3 +1,4 @@
+
 document.addEventListener('DOMContentLoaded', () => {
     const forbiddenWords = [
         "sex", "sexual", "rape", "molest", "violence", "murder", "gore", "drugs", "narcotics", 
@@ -46,25 +47,33 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             console.log("Sending request to server with word:", inputWord);
-
+          
+         
             const response = await fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/englishstudy', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
                 },
                 body: JSON.stringify({ inputWord })
             });
 
             if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
+                const errorText = await response.text();
+                throw new Error(`Server error: ${response.status} - ${errorText}`);
             }
 
             const responseData = await response.json();
+            if (!responseData.assistant) {
+                throw new Error('Invalid response format from server');
+            }
+
             const highlightedText = highlightWord(responseData.assistant, inputWord);
             document.getElementById("outputArea").innerHTML = highlightedText.replace(/\n/g, "<br>");
         } catch (error) {
             console.error('Error:', error);
             document.getElementById("outputArea").innerText = 'Failed to fetch data: ' + error.message;
+            alert('Error: ' + error.message + '\nPlease try again later or contact support if the problem persists.');
         } finally {
             hideSpinner();
         }
@@ -219,4 +228,5 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
 
