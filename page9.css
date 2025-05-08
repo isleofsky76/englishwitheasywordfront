@@ -49,13 +49,9 @@ header {
 }
 
 #canvas {
-  margin-bottom: 8px;
-}
-
-canvas {
   width: 100%;
-  max-width: 500px;
-  height: 400px;
+  max-width: 360px;
+  height: 288px;
   margin: 20px auto;
   display: block;
   background-color: white;
@@ -81,9 +77,9 @@ canvas {
 
 #topic-dropdown {
   width: 100%;
-  max-width: 400px;
+  max-width: 360px;
   padding: 8px;
-  font-size: 25.2px !important;
+  font-size: 26.2px !important;
   border: 2px solid #1e90ff;
   border-radius: 8px;
   margin-bottom: 20px;
@@ -94,7 +90,7 @@ canvas {
   color: #1e90ff !important;
   text-align: center !important;
   min-height: 24px !important;
-  margin: 2px 0 0 0 !important;
+  margin: 6px 0 0 0 !important;
   word-break: break-word !important;
   white-space: pre-line !important;
   display: block !important;
@@ -158,17 +154,17 @@ canvas {
     padding-top: 56px !important;
   }
   #canvas {
-    width: 98vw !important;
-    max-width: 320px !important;
-    height: 256px !important;
+    width: 100% !important;
+    max-width: 288px !important;
+    height: 230px !important;
     min-height: unset !important;
     margin: 0 auto 4px auto !important;
     display: block;
   }
   #topic-dropdown {
     width: 100% !important;
-    max-width: 320px !important;
-    font-size: 1rem !important;
+    max-width: 288px !important;
+    font-size: 19px !important;
     padding: 4px !important;
     margin-bottom: 8px !important;
   }
