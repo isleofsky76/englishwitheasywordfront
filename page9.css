@@ -147,7 +147,7 @@ header {
   }
   .block {
     margin-bottom: 16px !important;
-    margin-top: 3.2px !important;
+    margin-top: 1.6px !important;
     padding: 16px !important;
   }
   body {
@@ -195,16 +195,18 @@ header {
   left: 0;
   width: 100%;
   height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: flex !important;
+  align-items: flex-end !important;
+  justify-content: center !important;
   pointer-events: none;
-  font-size: 2.8rem;
+  font-size: 24px;
   font-weight: bold;
   color: #1e90ff;
   text-shadow: 2px 2px 8px #fff, 0 0 2px #000;
   z-index: 2;
   text-align: center;
+  box-sizing: border-box;
+  padding-bottom: 8px;
 }
 
 .letter-container button.color1 { background: #ffb3ba; color: #222; }
@@ -253,4 +255,21 @@ body, #user-input-section, .letter-container button, #canvas-message {
 
 .navbar-brand {
   font-size: 22px;
+}
+
+.letters {
+  position: relative;
+}
+.letters .mark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, calc(-50% + 15px));
+  color: red;
+  font-size: 54px;
+  font-weight: bold;
+  display: none;
+  pointer-events: none;
+  z-index: 2;
+  background: none !important;
 }
