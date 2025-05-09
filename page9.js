@@ -386,7 +386,7 @@ const initializer = () => {
         drawMan(count);
         mark.style.display = "block";  // Show the "X" mark
         if (count === 6) {
-          canvasMessage.textContent = "Sorry! The answer was " + chosenWord;
+          canvasMessage.innerHTML = "Sorry!<br>The answer was " + chosenWord;
           resultText.innerHTML = "";
           blocker();
         }
@@ -450,27 +450,39 @@ const canvasCreator = () => {
     context.stroke();
   };
 
-  // 코믹한 얼굴
+  // 교수대(가로 막대)와 줄의 간격을 40% 줄이고 전체적으로 위로 올림
+  const initialDrawing = () => {
+    context.clearRect(0, 0, context.canvas.width, context.canvas.height);
+    context.save();
+    context.lineWidth = 0.6; // 바닥선만 얇게
+    drawLine(10, 145, 130, 145); // 바닥
+    context.restore();
+    context.lineWidth = 2; // 나머지는 원래 두께
+    drawLine(10, 25, 10, 146);   // 기둥
+    drawLine(10, 25, 70, 25);    // 가로 막대
+    drawLine(70, 25, 70, 43);    // 줄
+  };
+
   const head = (isLose = false) => {
     context.beginPath();
-    context.arc(70, 30, 15, 0, Math.PI * 2, true); // bigger head
+    context.arc(70, 58, 15, 0, Math.PI * 2, true); // y=70→58
     context.fillStyle = "#fffbe7";
     context.fill();
     context.stroke();
 
     // Eyes
     context.beginPath();
-    context.arc(64, 27, 2.5, 0, Math.PI * 2, true); // left
-    context.arc(76, 27, 2.5, 0, Math.PI * 2, true); // right
+    context.arc(64, 55, 2.5, 0, Math.PI * 2, true);
+    context.arc(76, 55, 2.5, 0, Math.PI * 2, true);
     context.fillStyle = "#222";
     context.fill();
 
-    // Mouth (웃음/찡그림)
+    // Mouth
     context.beginPath();
     if (isLose) {
-      context.arc(70, 36, 6, Math.PI, 0, true); // sad
+      context.arc(70, 67 - 1.2, 6, Math.PI, 0, true); // 10% 위로 (67→65.8)
     } else {
-      context.arc(70, 34, 6, 0, Math.PI, false); // smile
+      context.arc(70, 65 - 1.2, 6, 0, Math.PI, false); // 10% 위로 (65→63.8)
     }
     context.strokeStyle = "#222";
     context.lineWidth = 2;
@@ -478,21 +490,12 @@ const canvasCreator = () => {
   };
 
   const body = () => {
-    drawLine(70, 45, 70, 90);
+    drawLine(70, 73, 70, 109); // 몸통 길이 45→36 (20% 줄임, 73~109)
   };
-  // 팔, 다리 각도 더 코믹하게
-  const leftArm = () => { drawLine(70, 55, 50, 60); };
-  const rightArm = () => { drawLine(70, 55, 90, 60); };
-  const leftLeg = () => { drawLine(70, 90, 55, 120); };
-  const rightLeg = () => { drawLine(70, 90, 85, 120); };
-
-  const initialDrawing = () => {
-    context.clearRect(0, 0, context.canvas.width, context.canvas.height);
-    drawLine(10, 130, 130, 130);
-    drawLine(10, 10, 10, 131);
-    drawLine(10, 10, 70, 10);
-    drawLine(70, 10, 70, 20);
-  };
+  const leftArm = () => { drawLine(70, 83, 50, 88); };
+  const rightArm = () => { drawLine(70, 83, 90, 88); };
+  const leftLeg = () => { drawLine(70, 109, 55, 139); }; // 다리 시작점도 위로
+  const rightLeg = () => { drawLine(70, 109, 85, 139); };
 
   return { initialDrawing, head, body, leftArm, rightArm, leftLeg, rightLeg };
 };
