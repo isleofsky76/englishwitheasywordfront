@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
         toggleLoading(true);
 
         try {
-            const response = await fetch('http://localhost:3000/generate-short-text', {
+            const response = await fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/generate-short-text', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
