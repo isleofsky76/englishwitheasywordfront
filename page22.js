@@ -16,11 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // 초기 메시지 표시
     const initialMessages = [
         "Hi there! 👋",
-        "I'm your English tutor, and I'm here to help you practice English conversation.",
-        "What would you like to talk about today?",
-        "Don't worry about making mistakes - that's how we learn!",
-        "Note: This is a practice session - your chat history will be cleared when you refresh the page.",
-        "You can start your questions. For example, 'What is the meaning of gorgeous?'"
+        "Please feel free to ask questions"
     ];
 
     let currentMessageIndex = 0;
