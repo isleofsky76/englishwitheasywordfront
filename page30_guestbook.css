@@ -176,7 +176,7 @@ th.actions {
 #edit-message {
   height: 200px !important; /* Adjust this value to set the desired height */
   padding: 10px;
-  font-size: 16px;
+  font-size: 12px;
   border: 1px solid #ccc;
   border-radius: 5px;
   background-color: #ffffff; /* Background color */
@@ -189,12 +189,24 @@ th.actions {
     max-width: 90%;
     padding: 0; /* Padding 제거 */
     margin: 0 auto; /* 양쪽 여백 제거 */
+    font-size: 14px;
+  }
+
+  #edit-message {
+    height: auto;
+    padding: 10px;
+    font-size: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #ffffff; /* Background color */
+    resize: vertical; /* Allows the user to resize the textarea vertically */
   }
 
   form input,
   form textarea {
     padding: 5px; /* 패딩 최소화 */
     margin: 5px 0; /* 세로 여백 최소화 */
+    font-size: 10px;
   }
 
   form button {
@@ -206,11 +218,13 @@ th.actions {
     max-width: 95%;
     padding: 5px;
     margin: 0 auto;
+    font-size: 10px;
   }
 
 
   #write-post-container, .guestbook-container {
-    max-width: 90%;
+    max-width: auto;
+    font-size: 10px;
   }
 
   table, th, td {
@@ -233,7 +247,7 @@ th.actions {
     margin: 1px;
   }
 
- #write-post-button {
+  #write-post-button {
     width: 80px;
     height: 25px;
     font-size: 12px;
@@ -248,4 +262,42 @@ th.actions {
     display: none;
   }
 
+}
+
+.guestbook-item {
+  border-bottom: 1px solid #ddd;
+  padding: 12px 0 6px 0;
+}
+.item-title a {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #222;
+  text-decoration: none;
+}
+.item-title a:hover {
+  color: #2b6cb0;
+  text-decoration: underline;
+}
+.item-meta {
+  font-size: 0.92rem;
+  color: #888;
+  margin-top: 2px;
+}
+.item-meta span {
+  margin-right: 12px;
+}
+
+.item-number {
+  font-weight: bold;
+  color: #2b6cb0;
+  margin-right: 8px;
+  font-size: 1.05rem;
+}
+
+.item-author {
+  margin-left: 2.2rem;
+}
+
+.guestbook-list {
+  margin-top: 4rem;
 }
