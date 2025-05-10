@@ -73,6 +73,10 @@ body {
   border: 1px solid #e2e8f0;
 }
 
+#readBtn, #stopBtn {
+  display: none;
+}
+
 @media (max-width: 768px) {
   .container {
     margin: 70px 10px 20px;
