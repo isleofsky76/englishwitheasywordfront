@@ -25,21 +25,21 @@
         <div class="synonyms-container">
             <div class="input-group mb-3">
                 <input type="text" id="jobInput" class="form-control" placeholder="Enter a word(단어입력)" aria-label="Enter a word" aria-describedby="submitButton">
-                <button class="btn btn-outline-secondary" type="button" id="submitButton">Submit</button>
+                <button class="btn btn-outline-secondary" type="button" id="submitButton" data-text="Submit">🔍</button>
             </div>
             <div id="synonyms">
                 <p id="synonymsContent">(1)단어를 입력하면 동의어와 예문이 생성됩니다.
                     <br>(2)오류가 발생하면 submit버튼을 다시 눌러주세요</p>
             </div>
-            
         </div>
-        <hr class="dashed-line"> <!-- Add this line to create a dashed horizontal line -->
-        <div class="input-group mb-3">
-            <input type="text" id="chatInput" class="form-control" placeholder="Ask a question(질문하기)" aria-label="Ask a question" aria-describedby="chatButton">
-            <button class="btn btn-outline-secondary" type="button" id="chatButton">Ask</button>
+        <hr class="dashed-line">
+        <div class="chat-container">
+            <div id="chatMessages" class="chat-messages"></div>
+            <div class="input-group">
+                <input type="text" id="inputMessage" class="form-control" placeholder="Ask a question(질문하기)" aria-label="Ask a question">
+                <button class="btn btn-outline-secondary" type="button" id="chatButton" data-text="Ask">✨</button>
+            </div>
         </div>
-        <div id="chatResponse" class="bordered">Answers(답변)</div>    
-        <br>
         <div id="jobList"></div>
 
         <div class="d-flex justify-content-center mt-3" id="spinner-container">
