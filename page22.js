@@ -1,6 +1,3 @@
-// const response = await fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/ask-question', {
-
-
 
 document.addEventListener('DOMContentLoaded', function() {
     const jobs = [];
@@ -140,8 +137,7 @@ document.addEventListener('DOMContentLoaded', function() {
     async function fetchSynonyms(word) {
         try {
             spinner.style.display = 'block';
-            const response = await fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/ask-question', {
-           
+            const response = await fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/get-synonyms', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -176,7 +172,7 @@ document.addEventListener('DOMContentLoaded', function() {
             inputMessage.value = '';
 
             try {
-                const response = await fetch('http://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/english-chat', {
+                const response = await fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/english-chat', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -216,7 +212,6 @@ document.addEventListener('DOMContentLoaded', function() {
         return synonyms.replace(/(\d+\.)/g, '<br><br>$1');
     }
 });
-
 
 
 
