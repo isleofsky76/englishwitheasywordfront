@@ -13,20 +13,60 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 상태 관리
     const state = {
-        selectedRow: null
+        selectedRow: null,
+        activeTooltip: null
     };
 
     // 이벤트 리스너 설정
     function setupEventListeners() {
-        elements.saveBtn.addEventListener('click', saveToLocalStorage);
-        elements.downloadBtn.addEventListener('click', handleDownload);
-        elements.copyBtn.addEventListener('click', copyToClipboard);
-        elements.addRowBtn.addEventListener('click', () => {
+        // 모든 이모지에 클릭 이벤트 추가
+        const tooltips = document.querySelectorAll('.emoji-tooltip');
+        tooltips.forEach(tooltip => {
+            tooltip.addEventListener('click', (e) => {
+                // 이미 활성화된 툴팁이 있으면 비활성화
+                if (state.activeTooltip && state.activeTooltip !== tooltip) {
+                    state.activeTooltip.classList.remove('active');
+                }
+                // 현재 툴팁 토글
+                tooltip.classList.toggle('active');
+                state.activeTooltip = tooltip.classList.contains('active') ? tooltip : null;
+            });
+        });
+
+        // 문서 클릭 시 툴팁 닫기
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.emoji-tooltip') && state.activeTooltip) {
+                state.activeTooltip.classList.remove('active');
+                state.activeTooltip = null;
+            }
+        });
+
+        // 기존 기능 이벤트 리스너
+        elements.saveBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            saveToLocalStorage();
+        });
+        elements.downloadBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            handleDownload();
+        });
+        elements.copyBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            copyToClipboard();
+        });
+        elements.addRowBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
             addNewRow();
             saveToLocalStorage();
         });
-        elements.emptyRowBtn.addEventListener('click', emptySelectedRow);
-        elements.deleteRowBtn.addEventListener('click', deleteSelectedRow);
+        elements.emptyRowBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            emptySelectedRow();
+        });
+        elements.deleteRowBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            deleteSelectedRow();
+        });
     }
 
     // 새 행 추가
