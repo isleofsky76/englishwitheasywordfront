@@ -8,7 +8,7 @@ document.getElementById('refreshQuiz').addEventListener('click', startNewQuiz);
 
 async function startNewQuiz() {
     try {
-        const response = await fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/get-random-item');
+        const response = await fetch('http://localhost:3000/get-random-item');
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -32,7 +32,7 @@ async function startNewQuiz() {
 
 async function showHint() {
     try {
-        const response = await fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/get-hint', {
+        const response = await fetch('http://localhost:3000/get-hint', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -52,10 +52,14 @@ async function showHint() {
         let hint = data.hint.replace(/Hint\s*#?\d*:\s*/i, ''); // Remove any existing "Hint X:" or "Hint #" text
 
         if (currentHintIndex < 19) {
-            document.getElementById(`hint${currentHintIndex + 1}`).textContent = `Hint ${currentHintIndex + 1}: ${hint}`;
+            const hintElem = document.getElementById(`hint${currentHintIndex + 1}`);
+            hintElem.textContent = `Hint ${currentHintIndex + 1}: ${hint}`;
+            hintElem.classList.add('show');
         } else if (currentHintIndex === 19) {
             hint = `The first letter of the word is "${currentItem.charAt(0)}". ${hint}`;
-            document.getElementById(`hint${currentHintIndex + 1}`).textContent = `Hint ${currentHintIndex + 1}: ${hint}`;
+            const hintElem = document.getElementById(`hint${currentHintIndex + 1}`);
+            hintElem.textContent = `Hint ${currentHintIndex + 1}: ${hint}`;
+            hintElem.classList.add('show');
         }
 
         currentHintIndex++;
