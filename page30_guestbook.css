@@ -1,23 +1,64 @@
 body {
   font-family: 'Poppins', sans-serif;
-  background-color: #f0f3f5; /* Dark blue background color */
+  background-color: #f0f3f5; /* Light grey background color */
   color: #f2f2f5; /* Dark text color */
   font-size: 14px;
   margin: 0 auto; /* 양쪽 여백 제거 */
-  margin-top: 50px;
+  margin-top: 80px; /* PC 버전 margin-top 추가 */
 }
-
-
 
 .bg-primary {
   --bs-bg-opacity: 1;
-  background-color: #05071e !important;
+  background-color: #2b6cb0 !important;
 }
 
 .navbar-custom {
-  background-color: #02051d; /* Dark blue background color */
+  background-color: #2b6cb0; /* Blue background color */
   transition: top 0.3s; /* Smooth transition for hiding and showing the navbar */
   font-size: 14px;
+}
+
+/* Navbar styles */
+.navbar {
+  background-color: #2b6cb0 !important;
+}
+
+.navbar .container-fluid {
+  background-color: #2b6cb0 !important;
+  padding: 0.5rem 1rem;
+  margin: 0;
+  width: 100%;
+  display: flex;
+  flex-wrap: inherit;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar-brand {
+  color: white !important;
+  padding: 0.3125rem 0;
+  margin-right: 1rem;
+  font-size: 1.25rem;
+}
+
+/* Override Bootstrap's default styles */
+.container-fluid {
+  --bs-gutter-x: 0 !important;
+  --bs-gutter-y: 0 !important;
+  width: 100% !important;
+  padding-right: 0 !important;
+  padding-left: 0 !important;
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+  background-color: #2b6cb0 !important;
+}
+
+/* Remove all previous navbar styles */
+.bg-primary,
+.navbar-dark,
+.navbar-expand-lg,
+.navbar-custom {
+  background-color: #2b6cb0 !important;
 }
 
 h1, h2 {
@@ -72,6 +113,28 @@ form button:hover {
   height: 30px;
   font-size: 14px;
   justify-content: center;
+  background: none;
+  position: relative;
+}
+
+#write-post-button::before {
+  content: "✏️";
+  font-size: 20px;
+}
+
+#write-post-button:hover::after {
+  content: "Write";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+  margin-top: 5px;
 }
 
 #write-post-container {
@@ -129,7 +192,6 @@ th.actions {
   width: 20%;
 }
 
-
 .btn-danger {
   background-color: #d9534f; /* Delete 버튼의 배경 색상 */
   border: none; /* 버튼의 테두리 제거 */
@@ -185,83 +247,99 @@ th.actions {
 
 /* Mobile styles */
 @media (max-width: 767px) {
-  form {
-    max-width: 90%;
-    padding: 0; /* Padding 제거 */
-    margin: 0 auto; /* 양쪽 여백 제거 */
-    font-size: 14px;
+  body {
+    padding: 10px;
+    margin-top: 15px;
+    font-size: 10px; /* 더 작게 조정 */
   }
 
-  #edit-message {
-    height: auto;
-    padding: 10px;
-    font-size: 12px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #ffffff; /* Background color */
-    resize: vertical; /* Allows the user to resize the textarea vertically */
+  h1 {
+    font-size: 14px; /* 더 작게 조정 */
+    margin-bottom: 8px;
+  }
+
+  #post-container {
+    max-width: 100%;
+    padding: 8px;
+  }
+
+  #post-title {
+    font-size: 16px; /* 더 작게 조정 */
+  }
+
+  #post-meta {
+    font-size: 8px; /* 더 작게 조정 */
+  }
+
+  #post-content {
+    font-size: 10px; /* 더 작게 조정 */
+  }
+
+  form {
+    max-width: 90%;
+    padding: 0;
+    margin: 0 auto;
+    font-size: 10px; /* 더 작게 조정 */
   }
 
   form input,
   form textarea {
-    padding: 5px; /* 패딩 최소화 */
-    margin: 5px 0; /* 세로 여백 최소화 */
-    font-size: 10px;
+    padding: 4px;
+    margin: 4px 0;
+    font-size: 8px; /* 더 작게 조정 */
   }
 
   form button {
-    padding: 8px 10px; /* 버튼 패딩 최소화 */
-    margin: 5px 0; /* 세로 여백 최소화 */
+    padding: 6px 8px;
+    margin: 4px 0;
+    font-size: 8px; /* 더 작게 조정 */
   }
 
   .guestbook-container {
     max-width: 95%;
-    padding: 5px;
+    padding: 4px;
     margin: 0 auto;
-    font-size: 10px;
+    font-size: 8px; /* 더 작게 조정 */
   }
-
 
   #write-post-container, .guestbook-container {
     max-width: auto;
-    font-size: 10px;
+    font-size: 8px; /* 더 작게 조정 */
   }
 
   table, th, td {
-    font-size: 10px;
-    padding: 5px;
-  }
-
-  th.title {
-    width: 40%;
-    align-items: center;
-  }
-
-  th.actions {
-    width: 30%;
+    font-size: 8px; /* 더 작게 조정 */
+    padding: 4px;
   }
 
   .btn-danger, .btn-warning, .btn-danger2 {
-    padding: 4px 8px;
-    font-size: 10px;
+    padding: 3px 6px;
+    font-size: 8px; /* 더 작게 조정 */
     margin: 1px;
   }
 
   #write-post-button {
-    width: 80px;
-    height: 25px;
-    font-size: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    line-height: 50px; /* 버튼의 높이에 맞게 line-height를 설정하세요 */
+    width: 60px; /* 더 작게 조정 */
+    height: 20px; /* 더 작게 조정 */
+    font-size: 8px; /* 더 작게 조정 */
+  }
+
+  .item-title a {
+    font-size: 0.9rem; /* 더 작게 조정 */
+  }
+
+  .item-meta {
+    font-size: 0.8rem; /* 더 작게 조정 */
+  }
+
+  .item-number {
+    font-size: 0.85rem; /* 더 작게 조정 */
   }
 
   .sliders-container,
   .btn-danger2 {
     display: none;
   }
-
 }
 
 .guestbook-item {
