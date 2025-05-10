@@ -1,111 +1,91 @@
 body {
-  font-family: Arial, sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 30px;
-  background-color: #05071e !important;
-  
-}
-
-
-.bg-primary {
-  --bs-bg-opacity: 1;
-  background-color: #05071e !important;
+  margin: 0;
+  padding: 0;
+  background-color: #f5f7fa;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #2d3748;
+  min-height: 100vh;
 }
 
 .navbar-custom {
-  background-color: #02051d; /* Dark blue background color */
-  transition: top 0.3s; /* Smooth transition for hiding and showing the navbar */
-  font-size: 14px;
+  background-color: #2b6cb0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 0.5rem 1rem;
 }
 
+.navbar-brand {
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: white !important;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
 
-header {
-  background-color: #02051d; /* Dark blue background color */
+.navbar-brand:hover {
+  color: #e2e8f0 !important;
+}
+
+.btn-outline-light {
+  border-color: rgba(255, 255, 255, 0.5);
   color: white;
-  text-align: left;
-  padding: 1em 0;
+  transition: all 0.3s ease;
 }
 
+.btn-outline-light:hover {
+  background-color: white;
+  color: #2b6cb0;
+  border-color: white;
+}
 
 .container {
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  max-width: 1000px;
+  margin: 80px auto 20px;
+  padding: 20px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
 
-input {
-  padding: 10px;
-  margin: 10px;
-  font-size: 1.0em;
-  width: 100%; /* 버튼과 구분되는 너비 설정 */
-  height: 50px; /* 높이 설정 */
-  border-width: 2px;
-  border-style: solid;
-  border-color: rgb(120, 119, 119);
-  box-sizing: border-box; /* 패딩과 보더를 포함한 높이/너비 설정 */
-  border-radius: 10px;
-  /* Set border radius to 50 pixels */
-}
-
-
-
-h1 {
-  font-size: 2rem;
-}
-
-.spinner-border {
-  width: 2rem; /* Adjust width as desired */
-  height: 2rem; /* Adjust height as desired */
-  margin: 1em auto;
-  color: #FF5733; /* Adjust color as desired */
-  text-align: left; /* Ensures text alignment to the left */
-  
-}
-
-#buttonsContainer {
-  display: flex;
-  justify-content: center; /* 가운데 정렬 */
-  gap: 10px; /* 버튼 사이의 간격 */
-  margin-top: 30px;
-}
-
-#readButton {
-  background-color: #28a745;
-  color: white;
+.form-control {
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 8px 12px;
   font-size: 1rem;
+  color: #2d3748;
+  background-color: white;
+  transition: border-color 0.2s ease;
 }
 
-#stopButton {
-  background-color: #dc3545;
-  color: white;
-  font-size: 1rem;
+.form-control:focus {
+  border-color: #4299e1;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1);
 }
 
-
-#fortuneContainer {
-  display: flex;
-  flex-direction: column; /* 기본적으로 컨테이너 내부를 세로 정렬 */
-  align-items: center; /* 수평 중앙 정렬 */
-  gap: 10px; /* 요소 간 간격 */
-  color: rgb(68, 182, 58);
+#fortuneOutput {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #2d3748;
+  margin: 20px 0;
+  padding: 15px;
+  background-color: #f7fafc;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
 }
 
-#buttonsContainer {
-  display: flex; /* 플렉스 컨테이너로 설정하여 내부 요소를 수평으로 정렬 */
-  justify-content: center; /* 버튼을 수평 중앙에 배치 */
-}
+@media (max-width: 768px) {
+  .container {
+    margin: 70px 10px 20px;
+    padding: 15px;
+  }
 
-#readButton {
-  background-color: #28a745;
-  color: white;
-  display: none; /* 기본적으로 숨김 */
-}
+  .btn-outline-light {
+    font-size: 0.9rem;
+    padding: 0.375rem 0.75rem;
+  }
 
-#stopButton {
-  background-color: #dc3545;
-  color: white;
-  display: none; /* 기본적으로 숨김 */
+  #fortuneOutput {
+    font-size: 1rem;
+    padding: 10px;
+  }
 }
