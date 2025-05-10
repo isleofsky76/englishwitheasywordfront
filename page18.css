@@ -15,6 +15,8 @@ body {
   flex-direction: column;
   box-sizing: border-box;
   background-color: transparent !important;
+  margin-top: 8px;
+  padding-top: 8px;
 }
 
 .bg-primary {
@@ -55,24 +57,48 @@ body {
 .button-group {
   display: flex;
   justify-content: center;
-  gap: 10px;
+  gap: 16px;
   margin-top: 20px;
   flex-wrap: wrap;
 }
 
 .button-group button {
-  padding: 10px 20px;
-  font-size: 16px;
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  font-size: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
   border: none;
-  border-radius: 5px;
   background-color: #1e90ff;
   color: white;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(30,144,255,0.10);
+  position: relative;
 }
 
 .button-group button:hover {
   background-color: #187bcd;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(30,144,255,0.20);
+}
+
+.button-group button:hover::after {
+  content: attr(title);
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 14px;
+  white-space: nowrap;
+  z-index: 1000;
 }
 
 h1 {
@@ -98,17 +124,38 @@ h2 {
 
 #hints {
   margin-top: 20px;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
 }
 
 #hints p {
-  font-size: 16px;
-  color: #666;
-  margin: 5px 0;
-  display: none;
+  font-size: 18px;
+  color: #333;
+  margin: 8px 0;
+  padding: 8px;
+  border-left: 3px solid #1e90ff;
+  background-color: white;
+  border-radius: 4px;
+  display: block;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 #hints p.show {
-  display: block;
+  opacity: 1;
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 ul {
@@ -140,13 +187,27 @@ ul li {
     font-size: 16px;
   }
   
+  .button-group {
+    gap: 10px;
+  }
   .button-group button {
-    padding: 8px 16px;
-    font-size: 14px;
+    width: 50px;
+    height: 50px;
+    font-size: 2rem;
   }
   
   ul li {
     font-size: 14px;
+  }
+  
+  #hints p {
+    font-size: 16px;
+    padding: 6px;
+  }
+  
+  .button-group button:hover::after {
+    font-size: 12px;
+    bottom: -25px;
   }
 }
 
