@@ -1,269 +1,227 @@
 body {
   margin: 0;
-  padding: 10px;
-  background-color: #f8f5f5; /* Light grey background */
-  line-height: 1.4;
-  font-family: sans-serif;
-  color: #535252; /* Light grey text */
-  height: 100vh; /* Adjust height considering margins and paddings */
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box; /* Ensure padding and border are included in the height calculation */
-  
-}
-
-
-.bg-primary {
-  --bs-bg-opacity: 1;
-  background-color: #05071e !important;
+  padding: 0;
+  background-color: #f5f7fa;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #2d3748;
+  min-height: 100vh;
 }
 
 .navbar-custom {
-  background-color: #02051d; /* Dark blue background color */
-  transition: top 0.3s; /* Smooth transition for hiding and showing the navbar */
-  font-size: 14px;
+  background-color: #2b6cb0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 0.5rem 1rem;
 }
 
+.navbar-brand {
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: white !important;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
 
-header {
-  background-color: #02051d; /* Dark blue background color */
-  color: white;
-  text-align: left;
-  padding: 1em 0;
+.navbar-brand:hover {
+  color: #e2e8f0 !important;
 }
 
 .container {
+  max-width: 1000px;
+  margin: 80px auto 20px;
+  padding: 20px;
   background: white;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 800px;
-  height: 100%;
-  max-height: 800px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
-
-
-.buttons {
-  display: flex;
-  justify-content: space-between; /* Adjusted for even spacing */
-  margin-bottom: 20px;
-  width: 100%; /* Ensure the buttons container takes full width */
-}
-
-button {
-  flex: 0 0 auto;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 5px;
-  background-color: transparent; /* Make background transparent */
-  color: black; /* Ensure text color is black */
-  font-size: 14px;
-  cursor: pointer;
-  margin-right: 10px;
-  text-align: center;
-}
-
 
 .table-container {
   width: 100%;
-  flex: 1;
-  /* Removed overflow-y */
+  overflow-x: auto;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-
-table {
+.table {
   width: 100%;
-  border-collapse: collapse;
-  table-layout: fixed; /* 고정된 테이블 레이아웃 */
-  background-color: #faf4b5;
-}
-
-thead th, tbody td {
-  border: 1px solid #ddd;
-  padding: 8px;
-  text-align: center;
-}
-
-thead th:nth-child(1), tbody td:nth-child(1) {
-  width: 90%; /* Contents 열의 너비 */
-}
-
-thead th:nth-child(2), tbody td:nth-child(2) {
-  width: 10%; /* Action 열의 너비 */
-}
-
-tbody td.text-left {
-  text-align: left;
-}
-
-.delete-btn {
-  background-color: green;
-  color: white;
+  border-collapse: separate;
+  border-spacing: 0;
+  background-color: white;
   border: none;
-  cursor: pointer;
-  padding: 5px 10px;
 }
 
-.delete-btn:hover {
-  background-color: darkgreen;
+tbody tr {
+  transition: background-color 0.2s ease;
+  border-bottom: 2px solid #cbd5e0;
 }
 
+tbody tr:first-child td {
+  border-top: none;
+}
 
+td {
+  padding: 12px;
+  border-bottom: 2px solid #cbd5e0;
+  background-color: white;
+  border-top: none;
+}
 
-/* 시계위치 =========================================================*/
+td[contenteditable="true"] {
+  outline: none;
+  transition: background-color 0.2s ease;
+}
+
+td[contenteditable="true"]:focus {
+  background-color: #f7fafc;
+}
+
+.btn {
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.btn-outline-light {
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  color: white;
+}
+
+.btn-outline-light:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: white;
+}
+
+.btn i {
+  font-size: 1rem;
+}
+
 .filter-container-wrapper {
   position: fixed;
   bottom: 20px;
-  right: 60px; /* Position at the bottom right corner */
-  display: flex;
-  align-items: center;
+  right: 20px;
+  background: white;
+  padding: 10px 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
 }
 
 .filter-container {
   display: flex;
   align-items: center;
+  gap: 10px;
 }
 
 .filter-container label {
-  margin-right: 10px;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
+  color: #4a5568;
+  margin: 0;
 }
 
-.filter-container select {
-  width: 100px;
-  height: 30px;
-  margin-right: 20px;
-  font-size: 0.8rem;
-  padding: 5px;
-  box-sizing: border-box;
-  align-items: center;
+.form-select {
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  color: #2d3748;
+  background-color: white;
+  transition: border-color 0.2s ease;
+}
+
+.form-select:focus {
+  border-color: #4299e1;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1);
 }
 
 #selectedTime {
-  width: 100px;
-  height: 30px;
-  font-size: 0.8rem;
-  padding: 5px;
-  border: 1px solid black;
+  font-size: 0.9rem;
+  color: #2d3748;
+  padding: 6px 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
   background-color: white;
-  display: inline-block;
-  box-sizing: border-box;
-  align-items: center;
+  min-width: 120px;
   text-align: center;
-}
-
-/* 메모======================================================== */
-#downloadLinkContainer {
-  width: 90%;
-  max-width: 800px;
-  margin-top: 20px;
-  text-align: left;
 }
 
 .download-link-wrapper {
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
-  justify-content: flex-start; /* Align children to the start */
-  bottom: 20px;
-  left: 0; /* Position at the bottom right corner */
+  gap: 10px;
+  padding: 8px 12px;
+  background-color: #f7fafc;
+  border-radius: 6px;
+  margin-bottom: 8px;
 }
 
-#downloadLinkContainer a:hover {
-  text-decoration: underline;
-}
-
-#downloadLinkContainer a {
-  display: block;
-  margin-bottom: 5px;
-  color: blue;
+.download-link-wrapper a {
+  color: #2b6cb0;
   text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.2s ease;
 }
 
-#downloadLinkContainer a:hover {
+.download-link-wrapper a:hover {
+  color: #2c5282;
   text-decoration: underline;
 }
 
 .delete-link-btn {
+  color: #e53e3e;
   cursor: pointer;
-  color: red;
-  margin-left: 10px;
+  font-size: 0.9rem;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
 }
 
 .delete-link-btn:hover {
-  text-decoration: underline;
+  background-color: #fff5f5;
 }
 
-/* Add spacing between each link-delete pair */
-.download-link-wrapper {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px; /* Add space between each link and delete button */
-
-}
-
-
-.navbar .btn {
-  font-size: 16px; /* Default font size for buttons */
-  padding: 10px 20px; /* Default padding for buttons */
-  background-color: white; /* Background color for buttons */
-  color: rgb(4, 4, 252); /* Text color for buttons */
-  border: 1px solid blue; /* Border color for buttons */
-  border-radius: 5px; /* Rounded corners for buttons */
-}
-
-.navbar .btn i {
-  margin-right: 5px; /* Optional: add some space between the icon and text */
-}
-
-@media (max-width: 600px) {
-  .navbar .btn {
-    font-size: 10px; /* Default font size for buttons */
-    padding: 10px 10px; /* Default padding for buttons */
-    background-color: white; /* Background color for buttons */
-    color: blue; /* Text color for buttons */
-    border: 1px solid blue; /* Border color for buttons */
-    border-radius: 5px; /* Rounded corners for buttons */
-    align-items: center;
-    justify-content: center;
-}
-
-
+@media (max-width: 768px) {
   .container {
-      padding: 10px;
-      width: 100%;
-      height: 100%;
-      max-height: none;
+    margin: 70px 10px 20px;
+    padding: 15px;
   }
 
-  .buttons {
-      flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: center;
-  }
-
-  button {
-      margin-bottom: 10px;
-      padding: 1px 5px;
-      font-size: 8px;
-      flex: 1 1 5%;
-      box-sizing: border-box; /* 패딩과 보더를 포함한 크기 계산 */
-  }
-
-  table, th, td {
-    margin-top: 10px;
-    font-size: 12px;
+  .btn {
+    padding: 6px 12px;
+    font-size: 0.8rem;
   }
 
   .filter-container-wrapper {
-      display: none;
+    bottom: 10px;
+    right: 10px;
+    padding: 8px 12px;
   }
 
+  .filter-container label {
+    font-size: 0.8rem;
+  }
 
-  .filter-container-wrapper {
-      display: none;
+  .form-select, #selectedTime {
+    font-size: 0.8rem;
+    padding: 4px 8px;
+  }
+
+  td {
+    padding: 10px;
+    border-bottom: 2px solid #cbd5e0;
+  }
+
+  tbody tr {
+    border-bottom: 2px solid #cbd5e0;
+  }
+
+  tbody tr.selected {
+    border-bottom: 2px solid #3182ce;
   }
 }
