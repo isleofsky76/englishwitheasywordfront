@@ -1,3 +1,5 @@
+// const response = await fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/generate-short-text', {
+
 document.addEventListener('DOMContentLoaded', () => {
     const forbiddenWords = [
         "sex", "sexual", "rape", "molest", "violence", "murder", "gore", "drugs", "narcotics", 
@@ -13,6 +15,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const readButton = document.getElementById('readButton');
     const stopButton = document.getElementById('stopButton');
     let currentUtterance = null;
+    let sentences = [];
+    let currentSentenceIndex = 0;
 
     // Function to check for forbidden words
     function containsForbiddenWords(text) {
@@ -24,6 +28,39 @@ document.addEventListener('DOMContentLoaded', () => {
     function toggleLoading(isLoading) {
         generateTextButton.style.display = isLoading ? 'none' : 'flex';
         loadingSpinner.style.display = isLoading ? 'block' : 'none';
+    }
+
+    // Function to split text into sentences
+    function splitIntoSentences(text) {
+        // 문장 구분자: 마침표, 느낌표, 물음표 뒤에 공백이 오는 경우
+        return text.match(/[^.!?]+[.!?]+/g) || [text];
+    }
+
+    // Function to highlight current sentence
+    function highlightCurrentSentence() {
+        // 모든 문장의 하이라이트 제거
+        const allSentences = shortTextElement.getElementsByClassName('sentence');
+        for (let sentence of allSentences) {
+            sentence.classList.remove('highlight');
+        }
+
+        // 현재 문장 하이라이트
+        if (allSentences[currentSentenceIndex]) {
+            allSentences[currentSentenceIndex].classList.add('highlight');
+            // 현재 문장이 보이도록 스크롤
+            allSentences[currentSentenceIndex].scrollIntoView({
+                behavior: 'smooth',
+                block: 'center'
+            });
+        }
+    }
+
+    // Function to display text with sentence spans
+    function displayTextWithSentences(text) {
+        sentences = splitIntoSentences(text);
+        shortTextElement.innerHTML = sentences
+            .map(sentence => `<span class="sentence">${sentence.trim()}</span>`)
+            .join(' ');
     }
 
     // Function to fetch and display short text
@@ -59,15 +96,44 @@ document.addEventListener('DOMContentLoaded', () => {
             const data = await response.json();
             console.log("Received data:", data);
 
-            const text = data.text || data.shortText || data.content || data.message;
-            
-            if (text) {
-                shortTextElement.textContent = text;
-                document.querySelector('.text-container').style.display = 'block';
-                document.querySelector('.action-buttons').style.display = 'flex';
+            // JSON 응답에서 텍스트만 추출
+            let text;
+            if (typeof data === 'string') {
+                text = data;
+            } else if (data.text) {
+                text = data.text;
+            } else if (data.shortText) {
+                text = data.shortText;
+            } else if (data.content) {
+                text = data.content;
+            } else if (data.message) {
+                text = data.message;
             } else {
                 console.error("Unexpected response structure:", data);
                 throw new Error('No text content found in server response');
+            }
+
+            // JSON 문자열인 경우 파싱 시도
+            try {
+                const parsedText = JSON.parse(text);
+                if (typeof parsedText === 'string') {
+                    text = parsedText;
+                } else if (parsedText.text) {
+                    text = parsedText.text;
+                }
+            } catch (e) {
+                // JSON 파싱 실패 시 원본 텍스트 사용
+                console.log("Text is not JSON, using as is");
+            }
+            
+            if (text) {
+                // 텍스트에서 JSON 형식 제거
+                text = text.replace(/^[{\[]|[}\]]$/g, '').trim();
+                displayTextWithSentences(text);
+                document.querySelector('.text-container').style.display = 'block';
+                document.querySelector('.action-buttons').style.display = 'flex';
+            } else {
+                throw new Error('Empty text content in server response');
             }
         } catch (error) {
             console.error('Error:', error);
@@ -89,28 +155,49 @@ document.addEventListener('DOMContentLoaded', () => {
             speechSynthesis.cancel();
         }
 
-        currentUtterance = new SpeechSynthesisUtterance(text);
-        currentUtterance.lang = 'en-US';
+        currentSentenceIndex = 0;
+        highlightCurrentSentence();
 
-        currentUtterance.onstart = function() {
-            console.log('Speech started');
-            readButton.disabled = true;
-            stopButton.disabled = false;
-        };
+        // 각 문장을 순차적으로 읽기
+        function readNextSentence() {
+            if (currentSentenceIndex >= sentences.length) {
+                readButton.disabled = false;
+                stopButton.disabled = true;
+                return;
+            }
 
-        currentUtterance.onend = function() {
-            console.log('Speech ended');
-            readButton.disabled = false;
-            stopButton.disabled = true;
-        };
+            const sentence = sentences[currentSentenceIndex];
+            currentUtterance = new SpeechSynthesisUtterance(sentence);
+            currentUtterance.lang = 'en-US';
 
-        currentUtterance.onerror = function(event) {
-            console.error('Speech error', event.error);
-            readButton.disabled = false;
-            stopButton.disabled = true;
-        };
+            currentUtterance.onstart = function() {
+                console.log('Speech started');
+                readButton.disabled = true;
+                stopButton.disabled = false;
+                highlightCurrentSentence();
+            };
 
-        speechSynthesis.speak(currentUtterance);
+            currentUtterance.onend = function() {
+                console.log('Speech ended');
+                currentSentenceIndex++;
+                if (currentSentenceIndex < sentences.length) {
+                    readNextSentence();
+                } else {
+                    readButton.disabled = false;
+                    stopButton.disabled = true;
+                }
+            };
+
+            currentUtterance.onerror = function(event) {
+                console.error('Speech error', event.error);
+                readButton.disabled = false;
+                stopButton.disabled = true;
+            };
+
+            speechSynthesis.speak(currentUtterance);
+        }
+
+        readNextSentence();
     }
 
     // Function to stop reading
@@ -120,6 +207,11 @@ document.addEventListener('DOMContentLoaded', () => {
             currentUtterance = null;
             readButton.disabled = false;
             stopButton.disabled = true;
+            // 하이라이트 제거
+            const allSentences = shortTextElement.getElementsByClassName('sentence');
+            for (let sentence of allSentences) {
+                sentence.classList.remove('highlight');
+            }
         }
     }
 
@@ -221,3 +313,7 @@ document.addEventListener('DOMContentLoaded', () => {
     stopButton.disabled = true;
 });
 
+
+       
+            
+              
