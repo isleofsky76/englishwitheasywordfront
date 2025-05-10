@@ -1,7 +1,26 @@
+  // const response = await fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/english-chat',
+
+
 document.addEventListener('DOMContentLoaded', function () {
     const inputMessage = document.getElementById('inputMessage');
     const chatMessages = document.getElementById('chatMessages');
     const submitButton = document.getElementById('submitButton');
+
+    // 초기 메시지 표시
+    const initialMessages = [
+        "Hi there! 👋",
+        "I'm your English tutor, and I'm here to help you practice English conversation.",
+        "What would you like to talk about today?",
+        "Don't worry about making mistakes - that's how we learn!",
+        "Note: This is a practice session - your chat history will be cleared when you refresh the page."
+    ];
+
+    // 초기 메시지를 순차적으로 표시
+    initialMessages.forEach((message, index) => {
+        setTimeout(() => {
+            displayMessage('Tutor: ' + message, false);
+        }, index * 1000); // 각 메시지 사이에 1초 간격
+    });
 
     // 금지된 단어 리스트
     const forbiddenWords = [
@@ -57,7 +76,7 @@ document.addEventListener('DOMContentLoaded', function () {
             inputMessage.value = '';
 
             try {
-                const response = await fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/english-chat', {
+                const response = await fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/english-chat',{
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
