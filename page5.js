@@ -1,12 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
     // DOM 요소
     const elements = {
-        saveBtn: document.getElementById('saveBtn'),
-        downloadBtn: document.getElementById('downloadBtn'),
-        copyBtn: document.getElementById('copyBtn'),
-        addRowBtn: document.getElementById('addRowBtn'),
-        emptyRowBtn: document.getElementById('emptyRowBtn'),
-        deleteRowBtn: document.getElementById('deleteRowBtn'),
+        saveBtn: document.querySelector('.emoji-tooltip[title="Save"]'),
+        downloadBtn: document.querySelector('.emoji-tooltip[title="Download"]'),
+        copyBtn: document.querySelector('.emoji-tooltip[title="Copy"]'),
+        addRowBtn: document.querySelector('.emoji-tooltip[title="Add Row"]'),
+        emptyRowBtn: document.querySelector('.emoji-tooltip[title="Empty Row"]'),
+        deleteRowBtn: document.querySelector('.emoji-tooltip[title="Delete Row"]'),
         taskTable: document.getElementById('taskTable').getElementsByTagName('tbody')[0],
         downloadLinkContainer: document.getElementById('downloadLinkContainer')
     };
@@ -39,6 +39,23 @@ document.addEventListener('DOMContentLoaded', () => {
         cell.className = 'text-left';
         cell.innerHTML = content;
 
+        // 방향키 이벤트 처리
+        cell.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                const prevRow = newRow.previousElementSibling;
+                if (prevRow) {
+                    prevRow.cells[0].focus();
+                }
+            } else if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                const nextRow = newRow.nextElementSibling;
+                if (nextRow) {
+                    nextRow.cells[0].focus();
+                }
+            }
+        });
+
         newRow.addEventListener('click', () => {
             if (state.selectedRow) {
                 state.selectedRow.classList.remove('selected');
@@ -57,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
         state.selectedRow.cells[0].innerHTML = "";
-        saveToLocalStorage();
+        saveToLocalStorage(false);
     }
 
     // 선택된 행 삭제
@@ -90,8 +107,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // 첫 번째 행에 기본 메시지 추가
         addNewRow("여기에 메모를 작성해 보세요");
         
-        // 나머지 빈 행 추가
-        for (let i = 0; i < 14; i++) {
+        // 나머지 빈 행 추가 (총 7개 행)
+        for (let i = 0; i < 6; i++) {
             addNewRow();
         }
     }
