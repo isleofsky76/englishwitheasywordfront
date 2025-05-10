@@ -180,7 +180,7 @@ document.addEventListener('DOMContentLoaded', function() {
             inputMessage.value = '';
 
             try {
-                const response = await fetch('http://localhost:3000/english-chat', {
+                const response = await fetch('http://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/english-chat', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
