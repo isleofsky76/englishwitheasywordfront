@@ -253,7 +253,16 @@ td[contenteditable="true"]:focus {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.emoji-tooltip:hover .tooltip-text {
+/* 데스크톱에서는 호버링으로 표시 */
+@media (hover: hover) {
+    .emoji-tooltip:hover .tooltip-text {
+        visibility: visible;
+        opacity: 1;
+    }
+}
+
+/* 모바일에서는 active 클래스로 표시 */
+.emoji-tooltip.active .tooltip-text {
     visibility: visible;
     opacity: 1;
 }
