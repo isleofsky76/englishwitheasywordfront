@@ -1,15 +1,126 @@
+// const response = await fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/ask-question', {
+
+
+
 document.addEventListener('DOMContentLoaded', function() {
     const jobs = [];
     const jobList = document.getElementById('jobList');
     const synonymsDiv = document.getElementById('synonymsContent');
     const jobInput = document.getElementById('jobInput');
     const submitButton = document.getElementById('submitButton');
-    const chatInput = document.getElementById('chatInput');
+    const inputMessage = document.getElementById('inputMessage');
     const chatButton = document.getElementById('chatButton');
-    const chatResponse = document.getElementById('chatResponse');
+    const chatMessages = document.getElementById('chatMessages');
     const spinner = document.getElementById('spinner');
 
-    // Populate job list buttons
+    // 초기 메시지 표시
+    const initialMessages = [
+        "Hi there! 👋",
+        "I'm your English tutor, and I'm here to help you practice English conversation.",
+        "What would you like to talk about today?",
+        "Don't worry about making mistakes - that's how we learn!",
+        "Note: This is a practice session - your chat history will be cleared when you refresh the page.",
+        "You can start your questions. For example, 'What is the meaning of gorgeous?'"
+    ];
+
+    let currentMessageIndex = 0;
+    let isTyping = false;
+
+    function displayNextInitialMessage() {
+        if (currentMessageIndex < initialMessages.length && !isTyping) {
+            isTyping = true;
+            const messageElement = document.createElement('div');
+            messageElement.className = 'ai-message';
+            chatMessages.appendChild(messageElement);
+
+            let index = 0;
+            const typingSpeed = 30;
+            const currentMessage = 'Tutor: ' + initialMessages[currentMessageIndex];
+
+            function typeNextChar() {
+                if (index < currentMessage.length) {
+                    messageElement.textContent += currentMessage[index];
+                    index++;
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                    setTimeout(typeNextChar, typingSpeed);
+                } else {
+                    isTyping = false;
+                    currentMessageIndex++;
+                    setTimeout(displayNextInitialMessage, 1000);
+                }
+            }
+
+            typeNextChar();
+        }
+    }
+
+    // 초기 메시지 표시 시작
+    displayNextInitialMessage();
+
+    // Function to display message
+    function displayMessage(content, isUser) {
+        const messageElement = document.createElement('div');
+        messageElement.className = isUser ? 'user-message' : 'ai-message';
+        chatMessages.appendChild(messageElement);
+
+        if (isUser) {
+            messageElement.textContent = content;
+        } else {
+            let index = 0;
+            const typingSpeed = 30;
+
+            function typeNextChar() {
+                if (index < content.length) {
+                    messageElement.textContent += content[index];
+                    index++;
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                    setTimeout(typeNextChar, typingSpeed);
+                }
+            }
+
+            typeNextChar();
+        }
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    // Function to display AI message with delay between sentences
+    function displayAiMessage(content) {
+        const sentences = content.split(/(?<=[.?!])\s+/);
+        let currentIndex = 0;
+        let isTyping = false;
+
+        function displayNextSentence() {
+            if (currentIndex < sentences.length && !isTyping) {
+                isTyping = true;
+                const messageElement = document.createElement('div');
+                messageElement.className = 'ai-message';
+                chatMessages.appendChild(messageElement);
+
+                let index = 0;
+                const typingSpeed = 30;
+                const currentSentence = 'Tutor: ' + sentences[currentIndex];
+
+                function typeNextChar() {
+                    if (index < currentSentence.length) {
+                        messageElement.textContent += currentSentence[index];
+                        index++;
+                        chatMessages.scrollTop = chatMessages.scrollHeight;
+                        setTimeout(typeNextChar, typingSpeed);
+                    } else {
+                        isTyping = false;
+                        currentIndex++;
+                        setTimeout(displayNextSentence, 1000);
+                    }
+                }
+
+                typeNextChar();
+            }
+        }
+
+        displayNextSentence();
+    }
+
+    // Synonyms functionality
     jobs.forEach(job => {
         const button = document.createElement('button');
         button.textContent = job;
@@ -22,7 +133,6 @@ document.addEventListener('DOMContentLoaded', function() {
         jobList.appendChild(button);
     });
 
-    // Event listener for submit button to fetch synonyms
     submitButton.addEventListener('click', () => {
         const job = jobInput.value.trim();
         if (job) {
@@ -31,35 +141,26 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Event listener for chat button to ask a question
-    chatButton.addEventListener('click', () => {
-        const question = chatInput.value.trim();
-        if (question) {
-            askQuestion(question);
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-    });
-
-    // Function to fetch synonyms from server
     async function fetchSynonyms(word) {
         try {
             spinner.style.display = 'block';
-            const response = await fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/get-synonyms', {
+            const response = await fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/ask-question', {
+           
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({ word })
             });
-
+    
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
-
+    
             const data = await response.json();
             console.log('Synonyms received:', data);
             synonymsDiv.innerHTML = formatSynonyms(data.synonyms);
-            synonymsDiv.scrollTop = 0; // Scroll to the top after loading content
+            synonymsDiv.scrollTop = 0;
         } catch (error) {
             console.error('Error fetching synonyms:', error);
             synonymsDiv.textContent = `Error: ${error.message}`;
@@ -68,43 +169,59 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Function to ask a question to the server
-    async function askQuestion(question) {
-        try {
-            spinner.style.display = 'block';
-            console.log('Asking question:', question);
-            const response = await fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/ask-question', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ question })
-            });
+    // Chat functionality
+    async function sendMessage(event) {
+        if (event) event.preventDefault();
+        
+        const inputMessageValue = inputMessage.value.trim();
 
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+        if (inputMessageValue) {
+            displayMessage('I: ' + inputMessageValue, true);
+            inputMessage.value = '';
+
+            try {
+                const response = await fetch('http://localhost:3000/english-chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ inputMessage: inputMessageValue })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                displayAiMessage(data.response);
+            } catch (error) {
+                console.error('Error sending message:', error);
+                displayMessage('Error: Unable to send message.', false);
             }
-
-            const data = await response.json();
-            console.log('Response received:', data);
-            chatResponse.innerHTML = formatResponse(data.synonyms || '');
-        } catch (error) {
-            console.error('Error asking question:', error);
-            chatResponse.textContent = `Error: ${error.message}`;
-        } finally {
-            spinner.style.display = 'none';
         }
     }
 
-    // Function to format synonyms into HTML
-    function formatSynonyms(synonyms) {
-        if (!synonyms) return '';  // Return an empty string if synonyms is undefined
-        return synonyms.replace(/(\d+\.)/g, '<br><br>$1');
+    // Event listeners for chat
+    if (inputMessage) {
+        inputMessage.addEventListener('keydown', function (event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                sendMessage();
+            }
+        });
     }
 
-    // Function to format chat response into HTML
-    function formatResponse(response) {
-        if (!response) return '';  // Return an empty string if response is undefined
-        return response.replace(/\n/g, '<br>');
+    if (chatButton) {
+        chatButton.addEventListener('click', sendMessage);
+    }
+
+    function formatSynonyms(synonyms) {
+        if (!synonyms) return '';
+        return synonyms.replace(/(\d+\.)/g, '<br><br>$1');
     }
 });
+
+
+
+
+            
