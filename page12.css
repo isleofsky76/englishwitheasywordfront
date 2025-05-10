@@ -1,171 +1,176 @@
 body {
-    margin: 30px;
     padding: 10px;
-    background-color: #f8f5f5; /* Light grey text */
+    background-color: #f0f8ff;
     line-height: 1.4;
     font-family: sans-serif;
     font-weight: 400;
     font-style: normal;
     font-size: 1rem;
-    color: #727272; /* Light grey text */
-    height: calc(100vh - 60px); /* Adjust height considering margins and paddings */
-    display: flex;
-    flex-direction: column;
-    box-sizing: border-box; /* Ensure padding and border are included in the height calculation */
+    color: #727272;
+    height: calc(100vh - 60px);
 }
 
-body {
-    margin: 30px;
-    padding: 10px;
-    background-color: #f8f5f5; /* Light grey text */
-    line-height: 1.4;
-    font-family: sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 1rem;
-    color: #727272; /* Light grey text */
-    height: calc(100vh - 60px); /* Adjust height considering margins and paddings */
+.container {
     display: flex;
     flex-direction: column;
-    box-sizing: border-box; /* Ensure padding and border are included in the height calculation */
+    box-sizing: border-box;
+    background-color: transparent !important;
+    margin-top: 8px;
+    padding-top: 8px;
 }
-
 
 .bg-primary {
     --bs-bg-opacity: 1;
-    background-color: #05071e !important;
-  }
-  
-  .navbar-custom {
-    background-color: #02051d; /* Dark blue background color */
-    transition: top 0.3s; /* Smooth transition for hiding and showing the navbar */
-    font-size: 14px;
-  }
-  
-  .navbar-brand {
-    font-family: 'Nanum Gothic', sans-serif; /* Font for the brand name */
-    font-size: 1.5rem; /* Increase brand font size */
-    color: #f7f6f5; /* Yellow color for brand text */
-    
-  }
-.page-title {
-    font-size: 24px;
-    font-family: 'Arial', sans-serif;
-    text-align: center;
-    font-weight: bold;
-    margin-bottom: 10px;
+    background-color: #1e90ff !important;
+}
+
+.navbar {
+    background-color: #1e90ff !important;
+    padding: 0.5rem 1rem;
+}
+
+.navbar-brand {
+    font-family: 'Nanum Gothic', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #f7f6f5;
+    margin-right: 1rem;
+}
+
+.navbar-brand:hover {
+    color: #f7f6f5;
+    opacity: 0.8;
 }
 
 #chatTerminal {
-    margin-top: 50px;
-    flex: 1;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    margin-top: 70px;
+    height: calc(100vh - 100px);
     display: flex;
     flex-direction: column;
-    border: 1px solid #fcfbfb;
-    border-radius: 4px;
-    background-color: rgb(8, 6, 22);
-    color: rgb(26, 20, 20);
-    overflow: hidden;
-    border-radius: 10px;
 }
 
 #chatMessages {
-    flex: 1;
+    flex-grow: 1;
     overflow-y: auto;
     padding: 10px;
-    background-color:rgb(245, 245, 247);
-    color: rgb(92, 87, 87); 
-    border-bottom: 1px solid #f8f6f6;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
 #messageContainer {
     display: flex;
-    padding: 10px;
-    background-color:rgb(251, 251, 253);
-    border-top: 1px solid #ccc;
+    gap: 10px;
+    align-items: center;
 }
 
 #inputMessage {
     flex-grow: 1;
     padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 15px;
-    box-sizing: border-box;
-    background-color:rgb(228, 228, 231); 
-    color: rgb(92, 87, 87); 
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
 }
 
-#submitButton {
-    padding: 10px 20px;
+.sendButton {
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+    font-size: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
     border: none;
-    border-radius: 3px;
-    cursor: pointer;
-    background-color: #8badd1;
+    background-color: #1e90ff;
     color: white;
-    margin-left: 10px;
-    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(30,144,255,0.10);
+    position: relative;
+}
+
+.sendButton:hover {
+    background-color: #187bcd;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(30,144,255,0.20);
+}
+
+.sendButton:hover::after {
+    content: attr(title);
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 14px;
+    white-space: nowrap;
+    z-index: 1000;
+}
+
+@media (max-width: 600px) {
+    #chatTerminal {
+        padding: 15px;
+        margin-top: 60px;
+    }
+    
+    #inputMessage {
+        font-size: 14px;
+        padding: 8px;
+    }
+    
+    .sendButton {
+        width: 50px;
+        height: 50px;
+        font-size: 2rem;
+    }
+    
+    .sendButton:hover::after {
+        font-size: 12px;
+        bottom: -25px;
+    }
 }
 
 .user-message {
     display: inline-block;
-        /* Set the display property to inline-block */
-        margin-bottom: 10px;
-        /* Add a bottom margin of 10 pixels */
-        margin-top: 5px;
-        /* Add a top margin of 5 pixels */
-        color: rgb(68, 61, 61); 
-        /* Set text color to a shade of red using RGB values */
-        background-color: #dedfde;
-        /* Light green background */
-        padding: 10px;
-        /* Add 10 pixels of padding inside the element */
-        border-radius: 10px;
-        /* Apply a border radius of 10 pixels */
-        max-width: 80%;
-        /* Set the maximum width of the element to 80% */
-        align-self: flex-end;
-        /* Align the element to the flex-end along the cross axis */
-        border-radius: 20px;
-        /* Increase the border radius to 20 pixels */
-        align-self: flex-end;
-        /* Realign the element to the flex-end along the cross axis */
-}
-
-.ai-message {
     margin-bottom: 10px;
     margin-top: 5px;
-    color: rgb(82, 79, 79); 
+    color: #1e90ff;
+    background-color: #f0f8ff;
+    padding: 12px 16px;
+    border-radius: 12px;
+    max-width: 80%;
+    align-self: flex-end;
+    line-height: 1.5;
+    font-weight: 500;
+    box-shadow: 0 2px 4px rgba(30,144,255,0.1);
 }
 
-@media (max-width: 600px) {
-    body {
-        margin: 10px;
-        padding: 5px;
-    }
-
-    .page-title {
-        font-size: 20px;
-    }
-
-    button {
-        font-size: 0.8rem;
-        padding: 4px 8px;
-        width: auto;
-        margin-bottom: 5px;
-    }
-
-    #chatMessages {
-        height: 50vh;
-    }
-
-    #chatTerminal {
-        display: flex;
-        flex-direction: column;
-        height: calc(100vh - 60px);
-    }
-
-    #inputMessage {
-        height: auto;
-    }
+.tutor-message {
+    display: inline-block;
+    margin-bottom: 10px;
+    margin-top: 5px;
+    color: #333;
+    background-color: #f8f9fa;
+    padding: 12px 16px;
+    border-radius: 12px;
+    max-width: 80%;
+    align-self: flex-start;
+    line-height: 1.5;
+    font-weight: 500;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    border-left: 3px solid #1e90ff;
 }
+
 
