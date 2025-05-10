@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
         elements.actionButtons.style.display = 'none';
 
         try {
-            const response = await fetch('http://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/get-fortune', {
+            const response = await fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/get-fortune', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
         elements.stopBtn.classList.remove('disabled');
 
         try {
-            const response = await fetch(`http://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/generate-audio?text=${encodeURIComponent(elements.fortuneOutput.textContent)}&language=en-US&voice=en-US-News-N`, {
+            const response = await fetch(`https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/generate-audio?text=${encodeURIComponent(elements.fortuneOutput.textContent)}&language=en-US&voice=en-US-News-N`, {
                 method: 'GET'
             });
 
