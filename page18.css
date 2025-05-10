@@ -1,36 +1,43 @@
 body {
   padding: 10px;
-  background-color: #f8f5f5; /* Light grey text */
+  background-color: #f0f8ff;
   line-height: 1.4;
   font-family: sans-serif;
   font-weight: 400;
   font-style: normal;
   font-size: 1rem;
-  color: #727272; /* Light grey text */
-  height: calc(100vh - 60px); /* Adjust height considering margins and paddings */
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box; /* Ensure padding and border are included in the height calculation */
-  background-color: #05071e !important;
+  color: #727272;
+  height: calc(100vh - 60px);
 }
 
+.container {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  background-color: transparent !important;
+}
 
 .bg-primary {
   --bs-bg-opacity: 1;
-  background-color: #05071e !important;
+  background-color: #1e90ff !important;
 }
 
-.navbar-custom {
-  background-color: #02051d; /* Dark blue background color */
-  transition: top 0.3s; /* Smooth transition for hiding and showing the navbar */
-  font-size: 14px;
+.navbar {
+  background-color: #1e90ff !important;
+  padding: 0.5rem 1rem;
 }
 
 .navbar-brand {
-  font-family: 'Nanum Gothic', sans-serif; /* Font for the brand name */
-  font-size: 1.5rem; /* Increase brand font size */
-  color: #f7f6f5; /* Yellow color for brand text */
-  
+  font-family: 'Nanum Gothic', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #f7f6f5;
+  margin-right: 1rem;
+}
+
+.navbar-brand:hover {
+  color: #f7f6f5;
+  opacity: 0.8;
 }
 
 .quiz-container {
@@ -41,101 +48,190 @@ body {
   text-align: left;
   width: 100%;
   max-width: 600px;
-  margin: 0 auto; /* Centering the container */
-  margin-top: 5px; /* Margin top adjustment */
-}
-
-h1{
-  font-size: 36px; /* Adjust button text size */
-  color: #0a06f5;
-  margin-bottom: 10px; /* Reduce space below the heading */
-  font-size: 24px;
-  margin-bottom: 20px; /* Reduce space below the heading */
-  font-weight: bold;
-}
-
-
-h2{
-  font-size: 20px; /* Adjust button text size */
-  color: #010518;
-  margin-bottom: 10px; /* Reduce space below the heading */
-}
-
-#result {
-  margin-top: 10px; /* Reduce margin top */
-  color: #2e2ca1;
-}
-
-#answerInput {
-  height: 70px; /* Adjusted input field height */
-  font-size: 10px; /* Adjusted input field text size */
+  margin: 0 auto;
+  margin-top: 5px;
 }
 
 .button-group {
   display: flex;
-  gap: 3px;
-  margin-top: 10px;
-  gap:10px;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.button-group button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  background-color: #1e90ff;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.button-group button:hover {
+  background-color: #187bcd;
+}
+
+h1 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+h2 {
+  font-size: 20px;
+  color: #333;
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+#result {
+  font-size: 18px;
+  color: #666;
+  margin: 15px 0;
+  text-align: center;
 }
 
 #hints {
-  margin-top: 30px; /* Reduced space below the hints block */
-  color: #fa5f06;
-  font-size: 16px; /* Adjusted input field text size */
-  text-align: left;
-  font-weight: bold;
-}
-
-.faq h4 {
-  margin-top: 15px;
-}
-/* 폰트 크기 및 간격 조정 */
-.rules-section {
-  font-size: 16px; /* Adjust button text size */
-  line-height: 1.2; /* 라인 간격 조정 */
-}
-.rules-section ul {
-  padding-left: 20px; /* 리스트 인덴
-  트 조정 */
-  font-size: 16px; /* Adjust button text size */
-}
-.rules-section li {
-  margin-bottom: 10px; /* 리스트 항목 간 간격 조정 */
-  font-size: 16px; /* Adjust button text size */
-}
-.spacing {
   margin-top: 20px;
-  margin-bottom: 20px;
 }
 
-/* Mobile-friendly adjustments */
+#hints p {
+  font-size: 16px;
+  color: #666;
+  margin: 5px 0;
+  display: none;
+}
+
+#hints p.show {
+  display: block;
+}
+
+ul {
+  list-style-type: disc;
+  margin-left: 20px;
+  color: #666;
+}
+
+ul li {
+  margin: 10px 0;
+  font-size: 16px;
+}
+
 @media (max-width: 600px) {
   .quiz-container {
-    padding: 10px;
+    padding: 15px;
+    margin-top: 10px;
   }
-
+  
   h1 {
     font-size: 20px;
   }
-
-  .button-group button {
-    padding: 10px 20px; /* Reduce button padding */
-    font-size: 10px; /* Reduce button text size */
-    margin: 5px; /* Adjust button margin */
-    border-radius: 10px;
+  
+  h2 {
+    font-size: 18px;
   }
-
-  #answerInput {
-    height: 60px; /* Adjust input field height for mobile */
-    font-size: 20px; /* Adjust input field text size for mobile */
+  
+  #result {
+    font-size: 16px;
+  }
+  
+  .button-group button {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+  
+  ul li {
+    font-size: 14px;
   }
 }
 
-/* General button adjustments for all screen sizes */
-.button-group button {
-  padding: 3px 4px; /* Adjust button padding */
-  font-size: 14px; /* Adjust button text size */
-  margin: 0px; /* Adjust button margin */
-  width: 80px; /* Adjust button width */
-  height: 55px; /* Adjust button height */
+.hidden-eng {
+  display: none;
+  color: #1e90ff;
+  font-weight: 500;
+}
+
+.visible {
+  display: block !important;
+}
+
+.highlighted-dialogue {
+  color: #1e90ff !important;
+  font-weight: bold !important;
+}
+
+.number-highlight {
+  color: #1e90ff;
+  font-weight: bold;
+  margin-right: 8px;
+}
+
+.indented {
+  display: block;
+  margin-left: 20px;
+  margin-top: 5px;
+}
+
+.dialogue-paragraph {
+  margin-bottom: 15px;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.daniel-dialogue {
+  background-color: #f0f8ff;
+}
+
+.olivia-dialogue {
+  background-color: #fff0f5;
+}
+
+.speaker-name {
+  font-weight: bold;
+  color: #1e90ff;
+}
+
+.dialogue-text {
+  margin-left: 5px;
+}
+
+.summary-title {
+  color: #1e90ff;
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+.summary-item {
+  margin-bottom: 8px;
+  color: #666;
+}
+
+.word-list-title {
+  color: #1e90ff;
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+.vocab-item {
+  margin-bottom: 15px;
+  padding: 10px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+}
+
+.korean-text {
+  color: #333;
+  font-weight: bold;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.vocab-english {
+  color: #666;
+  font-size: 0.9em;
 }
