@@ -29,31 +29,34 @@
         </ul>
     </div>
     <div class="container mt-5">
-        <h2 class="text-center"></h2>
-        <div class="mb-3">
-            <label for="inputTopic" class="form-label">Enter a Topic:</label>
-            <input type="text" class="form-control" id="inputTopic" placeholder="your word here">
-        </div>
-        <button id="generateTextButton" class="btn btn-primary mb-3">Generate Text</button>
-        <button id="randomTextButton" class="btn btn-secondary mb-3">Random Text</button>
-        <div id="shortTextSection" class="mb-3" style="display: none;">
-            <h3>Generated Short Text:</h3>
-            <p id="shortText"></p>
-            <button id="readShortTextButton" class="btn btn-secondary">Read</button>
-            <button id="stopShortTextButton" class="btn btn-danger">Stop</button>
-            <button id="getTranslationButton" class="btn btn-secondary">Get Translation</button>
-        </div>
-        <div id="translationSection" class="mb-3" style="display: none;">
-            <h3>Translation and Explanation:</h3>
-            <p id="translationExplanation"></p>
-            <!-- <button id="readExplanationButton" class="btn btn-secondary">Read</button> -->
-            <!-- <button id="stopExplanationButton" class="btn btn-danger">Stop</button> -->
-        </div>
-        <div id="wordList" class="mt-5">
-            <h2>Suggested Topics:</h2>
-            <div id="wordsContainer" class="d-flex flex-wrap">
-                <!-- Words will be dynamically inserted here -->
+        <div class="input-section">
+            <div class="mb-3">
+                <label for="inputTopic" class="form-label">Enter a Topic:</label>
+                <input type="text" class="form-control" id="inputTopic" placeholder="your word here">
             </div>
+            <div class="button-group mb-4">
+                <button id="generateTextButton" class="action-button" title="Generate Text">✨</button>
+                <div id="loadingSpinner" class="spinner" style="display: none;">
+                    <div class="spinner-inner"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Text Output Container -->
+        <div class="text-container">
+            <div id="shortText" class="short-text"></div>
+            <div class="action-buttons" style="display: none;">
+                <button id="copyButton" class="action-button" title="Copy Text">📋</button>
+                <button id="downloadButton" class="action-button" title="Download Text">💾</button>
+                <button id="readButton" class="action-button" title="Read Text">🔊</button>
+                <button id="stopButton" class="action-button" title="Stop Reading">⏹️</button>
+            </div>
+        </div>
+
+        <!-- Translation Container -->
+        <div class="translation-container" style="display: none;">
+            <h3>Translation</h3>
+            <div id="translationExplanation" class="translation-explanation"></div>
         </div>
     </div>
     <script src="page21.js"></script>
