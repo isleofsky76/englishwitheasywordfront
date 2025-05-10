@@ -12,15 +12,43 @@ document.addEventListener('DOMContentLoaded', function () {
         "I'm your English tutor, and I'm here to help you practice English conversation.",
         "What would you like to talk about today?",
         "Don't worry about making mistakes - that's how we learn!",
-        "Note: This is a practice session - your chat history will be cleared when you refresh the page."
+        "Note: This is a practice session - your chat history will be cleared when you refresh the page.",
+        "You can start your questions. For example, 'What is the meaning of gorgeous?'"
     ];
 
-    // 초기 메시지를 순차적으로 표시
-    initialMessages.forEach((message, index) => {
-        setTimeout(() => {
-            displayMessage('Tutor: ' + message, false);
-        }, index * 1000); // 각 메시지 사이에 1초 간격
-    });
+    let currentMessageIndex = 0;
+    let isTyping = false;
+
+    function displayNextInitialMessage() {
+        if (currentMessageIndex < initialMessages.length && !isTyping) {
+            isTyping = true;
+            const messageElement = document.createElement('div');
+            messageElement.className = 'ai-message';
+            chatMessages.appendChild(messageElement);
+
+            let index = 0;
+            const typingSpeed = 30;
+            const currentMessage = 'Tutor: ' + initialMessages[currentMessageIndex];
+
+            function typeNextChar() {
+                if (index < currentMessage.length) {
+                    messageElement.textContent += currentMessage[index];
+                    index++;
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                    setTimeout(typeNextChar, typingSpeed);
+                } else {
+                    isTyping = false;
+                    currentMessageIndex++;
+                    setTimeout(displayNextInitialMessage, 1000);
+                }
+            }
+
+            typeNextChar();
+        }
+    }
+
+    // 초기 메시지 표시 시작
+    displayNextInitialMessage();
 
     // 금지된 단어 리스트
     const forbiddenWords = [
@@ -40,8 +68,26 @@ document.addEventListener('DOMContentLoaded', function () {
     function displayMessage(content, isUser) {
         const messageElement = document.createElement('div');
         messageElement.className = isUser ? 'user-message' : 'ai-message';
-        messageElement.textContent = content;
         chatMessages.appendChild(messageElement);
+
+        if (isUser) {
+            messageElement.textContent = content;
+        } else {
+            // AI 메시지인 경우 타이핑 효과 적용
+            let index = 0;
+            const typingSpeed = 30; // 타이핑 속도 (밀리초)
+
+            function typeNextChar() {
+                if (index < content.length) {
+                    messageElement.textContent += content[index];
+                    index++;
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                    setTimeout(typeNextChar, typingSpeed);
+                }
+            }
+
+            typeNextChar();
+        }
         chatMessages.scrollTop = chatMessages.scrollHeight;
     }
 
@@ -49,12 +95,34 @@ document.addEventListener('DOMContentLoaded', function () {
     function displayAiMessage(content) {
         const sentences = content.split(/(?<=[.?!])\s+/);
         let currentIndex = 0;
+        let isTyping = false;
 
         function displayNextSentence() {
-            if (currentIndex < sentences.length) {
-                displayMessage('Tutor: ' + sentences[currentIndex], false);
-                currentIndex++;
-                setTimeout(displayNextSentence, 1000); // Adjust delay as needed (1000ms = 1 second)
+            if (currentIndex < sentences.length && !isTyping) {
+                isTyping = true;
+                const messageElement = document.createElement('div');
+                messageElement.className = 'ai-message';
+                chatMessages.appendChild(messageElement);
+
+                let index = 0;
+                const typingSpeed = 30; // 타이핑 속도 (밀리초)
+                const currentSentence = 'Tutor: ' + sentences[currentIndex];
+
+                function typeNextChar() {
+                    if (index < currentSentence.length) {
+                        messageElement.textContent += currentSentence[index];
+                        index++;
+                        chatMessages.scrollTop = chatMessages.scrollHeight;
+                        setTimeout(typeNextChar, typingSpeed);
+                    } else {
+                        // 현재 문장 타이핑이 완료되면 다음 문장으로 넘어감
+                        isTyping = false;
+                        currentIndex++;
+                        setTimeout(displayNextSentence, 1000); // 1초 후 다음 문장 시작
+                    }
+                }
+
+                typeNextChar();
             }
         }
 
@@ -76,7 +144,7 @@ document.addEventListener('DOMContentLoaded', function () {
             inputMessage.value = '';
 
             try {
-                const response = await fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/english-chat',{
+              const response = await fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/english-chat', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -130,4 +198,5 @@ document.addEventListener('DOMContentLoaded', function () {
         console.error('submitButton element not found');
     }
 });
+
 
