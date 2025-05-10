@@ -1,120 +1,128 @@
-document.addEventListener('DOMContentLoaded', (event) => {
-    const saveBtn = document.getElementById('saveBtn');
-    const downloadBtn = document.getElementById('downloadBtn');
-    const copyBtn = document.getElementById('copyBtn');
-    const addRowBtn = document.getElementById('addRowBtn');
-    const emptyRowBtn = document.getElementById('emptyRowBtn');
-    const deleteRowBtn = document.getElementById('deleteRowBtn');
-    const toggleStrikethroughBtn = document.getElementById('toggleStrikethroughBtn');
-    const taskTable = document.getElementById('taskTable').getElementsByTagName('tbody')[0];
-    const downloadLinkContainer = document.getElementById('downloadLinkContainer');
+document.addEventListener('DOMContentLoaded', () => {
+    // DOM 요소
+    const elements = {
+        saveBtn: document.getElementById('saveBtn'),
+        downloadBtn: document.getElementById('downloadBtn'),
+        copyBtn: document.getElementById('copyBtn'),
+        addRowBtn: document.getElementById('addRowBtn'),
+        emptyRowBtn: document.getElementById('emptyRowBtn'),
+        deleteRowBtn: document.getElementById('deleteRowBtn'),
+        taskTable: document.getElementById('taskTable').getElementsByTagName('tbody')[0],
+        downloadLinkContainer: document.getElementById('downloadLinkContainer')
+    };
 
-    // 페이지 로드 시 로컬 스토리지에서 메모와 다운로드 링크 불러오기
-    loadMemos();
-    loadDownloadLinks();
+    // 상태 관리
+    const state = {
+        selectedRow: null
+    };
 
-    saveBtn.addEventListener('click', () => {
-        saveToLocalStorage();
-    });
+    // 이벤트 리스너 설정
+    function setupEventListeners() {
+        elements.saveBtn.addEventListener('click', saveToLocalStorage);
+        elements.downloadBtn.addEventListener('click', handleDownload);
+        elements.copyBtn.addEventListener('click', copyToClipboard);
+        elements.addRowBtn.addEventListener('click', () => {
+            addNewRow();
+            saveToLocalStorage();
+        });
+        elements.emptyRowBtn.addEventListener('click', emptySelectedRow);
+        elements.deleteRowBtn.addEventListener('click', deleteSelectedRow);
+    }
 
-    downloadBtn.addEventListener('click', () => {
-        const filename = prompt("Enter the file name to download:");
-        if (filename) {
-            createDownloadLink(filename);
-        }
-    });
-
-    copyBtn.addEventListener('click', copyToClipboard);
-    addRowBtn.addEventListener('click', () => {
-        addNewRow();
-        saveToLocalStorage();
-    });
-    emptyRowBtn.addEventListener('click', emptySelectedRow);
-    deleteRowBtn.addEventListener('click', deleteSelectedRow);
-
-    toggleStrikethroughBtn.addEventListener('click', () => {
-        document.execCommand('strikeThrough');
-    });
-
+    // 새 행 추가
     function addNewRow(content = "") {
-        const newRow = taskTable.insertRow();
-        const cell1 = newRow.insertCell(0);
+        const newRow = elements.taskTable.insertRow();
+        const cell = newRow.insertCell(0);
 
-        cell1.contentEditable = "true";
-        cell1.spellcheck = false;
-        cell1.className = 'text-left';
-        cell1.innerHTML = content;
+        cell.contentEditable = "true";
+        cell.spellcheck = false;
+        cell.className = 'text-left';
+        cell.innerHTML = content;
 
         newRow.addEventListener('click', () => {
-            taskTable.querySelectorAll('tr').forEach(row => row.classList.remove('selected'));
+            if (state.selectedRow) {
+                state.selectedRow.classList.remove('selected');
+            }
             newRow.classList.add('selected');
+            state.selectedRow = newRow;
         });
+
+        return newRow;
     }
 
+    // 선택된 행 비우기
     function emptySelectedRow() {
-        const selectedRow = taskTable.querySelector('tr.selected');
-        if (selectedRow) {
-            const cell = selectedRow.cells[0];
-            cell.innerHTML = "";
-            saveToLocalStorage();
-        } else {
-            alert('Please select a row to empty.');
+        if (!state.selectedRow) {
+            showAlert('Please select a row to empty.');
+            return;
         }
+        state.selectedRow.cells[0].innerHTML = "";
+        saveToLocalStorage();
     }
 
+    // 선택된 행 삭제
     function deleteSelectedRow() {
-        const selectedRow = taskTable.querySelector('tr.selected');
-        if (selectedRow) {
-            selectedRow.remove();
-            saveToLocalStorage(false);  // delete 버튼 클릭 시 메시지를 표시하지 않음
-        } else {
-            alert('Please select a row to delete.');
+        if (!state.selectedRow) {
+            showAlert('Please select a row to delete.');
+            return;
         }
+        state.selectedRow.remove();
+        state.selectedRow = null;
+        saveToLocalStorage(false);
     }
 
-    function saveToLocalStorage(showAlert = false) {
-        const memos = [];
-        const rows = taskTable.rows;
-        for (let i = 0; i < rows.length; i++) {
-            memos.push(rows[i].cells[0].innerHTML);
-        }
+    // 로컬 스토리지에 저장
+    function saveToLocalStorage(showMessage = true) {
+        const memos = Array.from(elements.taskTable.rows).map(row => row.cells[0].innerHTML);
         localStorage.setItem('memos', JSON.stringify(memos));
-        if (showAlert) {
-            alert('Memos saved to local storage.');
+        if (showMessage) {
+            showAlert('Memos saved to local storage.');
         }
     }
 
+    // 메모 불러오기
     function loadMemos() {
-        const memos = JSON.parse(localStorage.getItem('memos')) || [];
-        taskTable.innerHTML = ''; // 기존 행을 모두 제거
-        const numRowsToAdd = Math.max(15 - memos.length, 0); // 최소 5개의 행이 보이도록 추가
-        memos.forEach(content => addNewRow(content));
-        for (let i = 0; i < numRowsToAdd; i++) {
+        // 로컬 스토리지 초기화
+        localStorage.removeItem('memos');
+        
+        elements.taskTable.innerHTML = '';
+        
+        // 첫 번째 행에 기본 메시지 추가
+        addNewRow("여기에 메모를 작성해 보세요");
+        
+        // 나머지 빈 행 추가
+        for (let i = 0; i < 14; i++) {
             addNewRow();
         }
     }
 
+    // 다운로드 링크 저장
     function saveDownloadLinks() {
-        const links = [];
-        downloadLinkContainer.querySelectorAll('.download-link-wrapper').forEach(wrapper => {
+        const links = Array.from(elements.downloadLinkContainer.querySelectorAll('.download-link-wrapper')).map(wrapper => {
             const link = wrapper.querySelector('a');
-            links.push({ href: link.href, download: link.download, textContent: link.textContent });
+            return {
+                href: link.href,
+                download: link.download,
+                textContent: link.textContent
+            };
         });
         localStorage.setItem('downloadLinks', JSON.stringify(links));
     }
 
+    // 다운로드 링크 불러오기
     function loadDownloadLinks() {
         const links = JSON.parse(localStorage.getItem('downloadLinks')) || [];
-        downloadLinkContainer.innerHTML = ''; // 기존 링크를 모두 제거
+        elements.downloadLinkContainer.innerHTML = '';
+        
         links.forEach(linkData => {
             const wrapper = document.createElement('div');
             wrapper.className = 'download-link-wrapper';
-    
+
             const a = document.createElement('a');
             a.href = linkData.href;
             a.download = linkData.download;
             a.textContent = linkData.textContent;
-    
+
             const deleteBtn = document.createElement('span');
             deleteBtn.textContent = 'Delete';
             deleteBtn.className = 'delete-link-btn';
@@ -122,37 +130,34 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 wrapper.remove();
                 saveDownloadLinks();
             });
-    
+
             wrapper.appendChild(a);
             wrapper.appendChild(deleteBtn);
-            downloadLinkContainer.appendChild(wrapper);
+            elements.downloadLinkContainer.appendChild(wrapper);
         });
     }
-    
-    function createDownloadLink(filename) {
-        let tableText = "";
-        const rows = taskTable.rows;
-        for (let i = 0; i < rows.length; i++) {
-            const cells = rows[i].cells;
-            for (let j = 0; j < cells.length; j++) {
-                tableText += cells[j].innerText + "\t";
-            }
-            tableText += "\n";
-        }
-    
-        // UTF-8 BOM 추가
+
+    // 다운로드 처리
+    function handleDownload() {
+        const filename = prompt("Enter the file name to download:");
+        if (!filename) return;
+
+        const tableText = Array.from(elements.taskTable.rows)
+            .map(row => row.cells[0].innerText)
+            .join('\n');
+
         const bom = new Uint8Array([0xEF, 0xBB, 0xBF]);
         const blob = new Blob([bom, tableText], { type: 'text/plain;charset=utf-8' });
         const url = URL.createObjectURL(blob);
-    
+
         const wrapper = document.createElement('div');
         wrapper.className = 'download-link-wrapper';
-    
+
         const a = document.createElement('a');
         a.href = url;
         a.download = `${filename}.txt`;
         a.textContent = `${filename}.txt`;
-    
+
         const deleteBtn = document.createElement('span');
         deleteBtn.textContent = 'Delete';
         deleteBtn.className = 'delete-link-btn';
@@ -160,37 +165,45 @@ document.addEventListener('DOMContentLoaded', (event) => {
             wrapper.remove();
             saveDownloadLinks();
         });
-    
+
         wrapper.appendChild(a);
         wrapper.appendChild(deleteBtn);
-        downloadLinkContainer.appendChild(wrapper);
-    
+        elements.downloadLinkContainer.appendChild(wrapper);
+
         a.addEventListener('click', () => {
-            setTimeout(() => URL.revokeObjectURL(url), 1000); // 다운로드가 완료된 후 URL을 해제합니다.
+            setTimeout(() => URL.revokeObjectURL(url), 1000);
         });
-    
-        saveDownloadLinks(); // 링크를 생성할 때마다 로컬 스토리지에 저장
+
+        saveDownloadLinks();
     }
 
+    // 클립보드에 복사
     function copyToClipboard() {
-        let tableText = "";
-        const rows = taskTable.rows;
-        for (let i = 0; i < rows.length; i++) {
-            const cells = rows[i].cells;
-            for (let j = 0; j < cells.length; j++) {
-                tableText += cells[j].innerText + "\t";
-            }
-            tableText += "\n";
-        }
+        const tableText = Array.from(elements.taskTable.rows)
+            .map(row => row.cells[0].innerText)
+            .join('\n');
 
-        const textarea = document.createElement('textarea');
-        textarea.value = tableText;
-        document.body.appendChild(textarea);
-        textarea.select();
-        document.execCommand('copy');
-        document.body.removeChild(textarea);
-        alert('Table contents copied to clipboard.');
+        navigator.clipboard.writeText(tableText)
+            .then(() => showAlert('Table contents copied to clipboard.'))
+            .catch(err => {
+                console.error('Failed to copy text: ', err);
+                showAlert('Failed to copy text. Please try again.');
+            });
     }
-});
 
+    // 알림 표시
+    function showAlert(message) {
+        alert(message);
+    }
+
+    // 초기화
+    function init() {
+        setupEventListeners();
+        loadMemos();
+        loadDownloadLinks();
+    }
+
+    // 앱 시작
+    init();
+});
 
