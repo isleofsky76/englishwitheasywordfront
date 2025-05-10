@@ -1,4 +1,22 @@
+// port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app
+
 document.addEventListener('DOMContentLoaded', () => {
+    // 기본적으로 모든 form 숨기기
+    document.getElementById('write-post-container').style.display = 'none';
+    document.getElementById('edit-post-container').style.display = 'none';
+
+    // URL 파라미터 확인
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('edit') === 'true') {
+        document.getElementById('edit-id').value = params.get('id');
+        document.getElementById('edit-title').value = decodeURIComponent(params.get('title'));
+        document.getElementById('edit-message').value = decodeURIComponent(params.get('message'));
+        document.getElementById('edit-nickname').value = decodeURIComponent(params.get('nickname'));
+        document.getElementById('edit-isSecret').checked = params.get('isSecret') === 'true';
+        
+        document.getElementById('edit-post-container').style.display = 'block';
+    }
+
     document.getElementById('write-post-button').addEventListener('click', () => {
         document.getElementById('write-post-container').style.display = 'block';
         document.getElementById('edit-post-container').style.display = 'none';
@@ -13,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const isSecret = document.getElementById('isSecret').checked;
 
         try {
-            const response = await fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/guestbook', {
+            const response = await fetch('http://localhost:3000/guestbook', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -44,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const isSecret = document.getElementById('edit-isSecret').checked;
 
         try {
-            const response = await fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/updatepost', {
+            const response = await fetch('http://localhost:3000/updatepost', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -73,32 +91,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 throw new Error('Failed to load messages');
             }
             const messages = await response.json();
-            const messagesContainer = document.getElementById('messages');
-            messagesContainer.innerHTML = '';
-            const today = new Date().toDateString();
-
-            messages.entries.forEach((entry, index) => {
-                const postDate = new Date(entry.date);
-                const isToday = postDate.toDateString() === today;
-
-                const formattedDate = isToday
-                    ? `${('0' + (postDate.getMonth() + 1)).slice(-2)}/${('0' + postDate.getDate()).slice(-2)} ${postDate.getHours().toString().padStart(2, '0')}:${postDate.getMinutes().toString().padStart(2, '0')}`
-                    : `${('0' + (postDate.getMonth() + 1)).slice(-2)}/${('0' + postDate.getDate()).slice(-2)}`;
-
-                const msgDiv = document.createElement('tr');
-                msgDiv.innerHTML = `
-                    <td>${index + 1}</td>
-                    <td><a href="page30_viewpost.html?index=${index}">${entry.title}</a></td>
-                    <td>${entry.nickname}</td>
-                    <td>${formattedDate}</td>
-                    <td>${entry.views}</td>
-                    <td>
-                        <button class="btn btn-danger" onclick="deletePost('${entry._id}')">Del</button>
-                        <button class="btn btn-warning" onclick="editPost('${entry._id}')">Edit</button>
-                        <button class="btn btn-danger2" onclick="adminDeletePost('${entry._id}')">Adm</button>
-                    </td>
+            const list = document.getElementById('guestbook-list');
+            list.innerHTML = '';
+            const total = messages.entries.length;
+            const reversedEntries = [...messages.entries].reverse();
+            reversedEntries.forEach((entry, idx) => {
+                const item = document.createElement('div');
+                item.className = 'guestbook-item';
+                const number = total - idx;
+                const originalIndex = total - 1 - idx;
+                item.innerHTML = `
+                  <div class="item-title">
+                    <span class="item-number">${number}.</span> <a href="page30_viewpost.html?index=${originalIndex}">${entry.title}</a>
+                  </div>
+                  <div class="item-meta">
+                    <span class="item-author">${entry.nickname}</span>
+                    <span class="item-time">${new Date(entry.date).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span>
+                    <span class="item-views">조회 ${entry.views}</span>
+                  </div>
                 `;
-                messagesContainer.appendChild(msgDiv);
+                list.appendChild(item);
             });
         } catch (error) {
             console.error('Error while loading messages:', error);
@@ -167,7 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const adminPasswordInput = prompt('Enter admin password to delete this post:');
         if (adminPasswordInput) {
             try {
-                const response = await fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/deletepost', {
+                const response = await fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/admin/deletepost', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -189,3 +201,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
     loadMessages();
 });
+
