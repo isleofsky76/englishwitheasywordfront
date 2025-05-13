@@ -66,24 +66,26 @@
         }
 
         .section li {
-            margin-bottom: 1.5rem;
-            padding: 1rem;
-            border-radius: 10px;
-            transition: all 0.3s ease;
-            border: 1px solid #eee;
+            margin-bottom: 0.5rem;
+            padding: 0.3rem 0.5rem;
+            border: none;
+            border-radius: 0;
+            box-shadow: none;
+            background: none;
+            transition: none;
         }
 
         .section li:hover {
-            transform: translateX(10px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            border-color: var(--primary-color);
+            transform: none;
+            box-shadow: none;
+            border-color: inherit;
         }
 
         .channel-name {
             color: var(--primary-color);
             text-decoration: none;
             font-weight: 600;
-            font-size: 1.1rem;
+            font-size: 0.88rem;
             transition: color 0.3s ease;
         }
 
@@ -95,6 +97,14 @@
         p {
             margin: 0;
             color: #666;
+        }
+
+        .desc {
+            color: #888;
+            margin-left: 0;
+            font-size: 0.8em;
+            text-align: left;
+            display: block;
         }
 
         @media (max-width: 768px) {
@@ -117,7 +127,7 @@
     </style>
 </head>
 <body>
-    <!-- Navbar -->
+     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container d-flex justify-content-between align-items-center">
             <a class="navbar-brand d-flex align-items-center" href="https://englisheasystudy.com/">
@@ -131,179 +141,129 @@
     <div class="container mt-5 pt-5">
         <div class="section">
             <div class="mb-4" style="text-align:left;">
-                <span style="font-size:2.2rem; color:#ff0000; vertical-align:middle;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 48 48" fill="none"><rect width="48" height="48" rx="10" fill="#FF0000"/><path d="M19.5 31.5V16.5L32.5 24L19.5 31.5Z" fill="white"/></svg>
-                </span>
+                <h2 style="font-size: 1.5rem; font-weight: 600; background: linear-gradient(135deg, #FF0000, #FF6B6B); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 0; padding: 0.5rem 0;">Youtube Channel</h2>
             </div>
             <ul>
                 <li>
-                    <p>
-                        <a href="https://www.youtube.com/@voalearningenglish" target="_blank" class="channel-name">VOA Learning English</a>
-                        - 미국의 소리, 다양한 주제의 뉴스와 함께 영어 학습 자료 제공
-                    </p>
+                    <a href="https://www.youtube.com/@voalearningenglish" target="_blank" class="channel-name">VOA Learning English</a>
+                    <div class="desc">미국의 소리, 다양한 주제의 뉴스와 함께 영어 학습 자료 제공</div>
                 </li>
                 
                 <li>
-                    <p>
-                        <a href="https://www.youtube.com/@bbclearningenglish" target="_blank" class="channel-name">BBC Learning English</a>
-                        - 영국 공영방송 BBC, 다양한 주제와 레벨의 영어 학습 동영상 제공
-                    </p>
+                    <a href="https://www.youtube.com/@bbclearningenglish" target="_blank" class="channel-name">BBC Learning English</a>
+                    <div class="desc">영국 공영방송 BBC, 다양한 주제와 레벨의 영어 학습 동영상 제공</div>
                 </li>
                 
                 <li>
-                    <p>
-                        <a href="https://www.youtube.com/@CNN" target="_blank" class="channel-name">CNN</a>
-                        - 미국의 주요 뉴스 채널, 최신 뉴스와 함께 영어 학습 가능
-                    </p>
+                    <a href="https://www.youtube.com/@CNN" target="_blank" class="channel-name">CNN</a>
+                    <div class="desc">미국의 주요 뉴스 채널, 최신 뉴스와 함께 영어 학습 가능</div>
                 </li>
                 
                 <li>
-                    <p>
-                        <a href="https://www.youtube.com/@AlJazeeraEnglish" target="_blank" class="channel-name">Al Jazeera English</a>
-                        - 중동의 시각에서 바라본 글로벌 뉴스 제공
-                    </p>
+                    <a href="https://www.youtube.com/@AlJazeeraEnglish" target="_blank" class="channel-name">Al Jazeera English</a>
+                    <div class="desc">중동의 시각에서 바라본 글로벌 뉴스 제공</div>
                 </li>
                 
                 <li>
-                    <p>
-                        <a href="https://www.youtube.com/@DWNews" target="_blank" class="channel-name">DW News</a>
-                        - 독일의 국제 뉴스 채널, 유럽의 시각에서 바라본 뉴스 제공
-                    </p>
+                    <a href="https://www.youtube.com/@DWNews" target="_blank" class="channel-name">DW News</a>
+                    <div class="desc">독일의 국제 뉴스 채널, 유럽의 시각에서 바라본 뉴스 제공</div>
                 </li>
                 
                 <li>
-                    <p>
-                        <a href="https://www.youtube.com/@France24English" target="_blank" class="channel-name">FRANCE 24 English</a>
-                        - 프랑스의 국제 뉴스 채널, 유럽의 시각에서 바라본 뉴스 제공
-                    </p>
+                    <a href="https://www.youtube.com/@France24English" target="_blank" class="channel-name">FRANCE 24 English</a>
+                    <div class="desc">프랑스의 국제 뉴스 채널, 유럽의 시각에서 바라본 뉴스 제공</div>
                 </li>
             </ul>
         </div>
 
         <div class="section">
             <div class="mb-4" style="text-align:left;">
-                <span style="font-size:2.2rem; color:#357abd; vertical-align:middle;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="5" fill="#357abd"/><path d="M7 7H17V9H7V7ZM7 11H17V13H7V11ZM7 15H13V17H7V15Z" fill="white"/></svg>
-                </span>
+                <h2 style="font-size: 1.5rem; font-weight: 600; background: linear-gradient(135deg, #357abd, #4a90e2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 0; padding: 0.5rem 0;">English Newspaper</h2>
             </div>
             <ul>
                 <li>
-                    <p>
-                        <a href="https://www.koreaherald.com" target="_blank" class="channel-name">Korea Herald</a>
-                        - 한국의 대표적인 영자 신문
-                    </p>
+                    <a href="https://www.koreaherald.com" target="_blank" class="channel-name">Korea Herald</a>
+                    <div class="desc">한국의 대표적인 영자 신문</div>
                 </li>
                 
                 <li>
-                    <p>
-                        <a href="https://www.koreatimes.co.kr" target="_blank" class="channel-name">Korea Times</a>
-                        - 한국의 주요 영자 신문
-                    </p>
+                    <a href="https://www.koreatimes.co.kr" target="_blank" class="channel-name">Korea Times</a>
+                    <div class="desc">한국의 주요 영자 신문</div>
                 </li>
                 
                 <li>
-                    <p>
-                        <a href="https://en.yna.co.kr" target="_blank" class="channel-name">Yonhap News</a>
-                        - 한국의 대표 뉴스 통신사
-                    </p>
+                    <a href="https://en.yna.co.kr" target="_blank" class="channel-name">Yonhap News</a>
+                    <div class="desc">한국의 대표 뉴스 통신사</div>
                 </li>
                 
                 <li>
-                    <p>
-                        <a href="https://www.bbc.com/news" target="_blank" class="channel-name">BBC News</a>
-                        - 영국의 공영 방송 뉴스
-                    </p>
+                    <a href="https://www.bbc.com/news" target="_blank" class="channel-name">BBC News</a>
+                    <div class="desc">영국의 공영 방송 뉴스</div>
                 </li>
                 
                 <li>
-                    <p>
-                        <a href="https://www.cnn.com" target="_blank" class="channel-name">CNN</a>
-                        - 미국의 주요 뉴스 네트워크
-                    </p>
+                    <a href="https://www.cnn.com" target="_blank" class="channel-name">CNN</a>
+                    <div class="desc">미국의 주요 뉴스 네트워크</div>
                 </li>
                 
                 <li>
-                    <p>
-                        <a href="https://www.reuters.com" target="_blank" class="channel-name">Reuters</a>
-                        - 글로벌 뉴스 통신사
-                    </p>
+                    <a href="https://www.reuters.com" target="_blank" class="channel-name">Reuters</a>
+                    <div class="desc">글로벌 뉴스 통신사</div>
                 </li>
                 
                 <li>
-                    <p>
-                        <a href="https://www.apnews.com" target="_blank" class="channel-name">Associated Press (AP)</a>
-                        - 미국의 대표 뉴스 통신사
-                    </p>
+                    <a href="https://www.apnews.com" target="_blank" class="channel-name">Associated Press (AP)</a>
+                    <div class="desc">미국의 대표 뉴스 통신사</div>
                 </li>
                 
                 <li>
-                    <p>
-                        <a href="https://www.theguardian.com" target="_blank" class="channel-name">The Guardian</a>
-                        - 영국의 주요 일간지
-                    </p>
+                    <a href="https://www.theguardian.com" target="_blank" class="channel-name">The Guardian</a>
+                    <div class="desc">영국의 주요 일간지</div>
                 </li>
                 
                 <li>
-                    <p>
-                        <a href="https://www.nytimes.com" target="_blank" class="channel-name">The New York Times</a>
-                        - 미국의 대표 일간지
-                    </p>
+                    <a href="https://www.nytimes.com" target="_blank" class="channel-name">The New York Times</a>
+                    <div class="desc">미국의 대표 일간지</div>
                 </li>
                 
                 <li>
-                    <p>
-                        <a href="https://www.bloomberg.com" target="_blank" class="channel-name">Bloomberg</a>
-                        - 글로벌 경제 뉴스
-                    </p>
+                    <a href="https://www.bloomberg.com" target="_blank" class="channel-name">Bloomberg</a>
+                    <div class="desc">글로벌 경제 뉴스</div>
                 </li>
                 
                 <li>
-                    <p>
-                        <a href="https://www.aljazeera.com" target="_blank" class="channel-name">Al Jazeera English</a>
-                        - 중동의 대표 뉴스 채널
-                    </p>
+                    <a href="https://www.aljazeera.com" target="_blank" class="channel-name">Al Jazeera English</a>
+                    <div class="desc">중동의 대표 뉴스 채널</div>
                 </li>
                 
                 <li>
-                    <p>
-                        <a href="https://www.wsj.com" target="_blank" class="channel-name">The Wall Street Journal</a>
-                        - 미국의 대표 경제 일간지
-                    </p>
+                    <a href="https://www.wsj.com" target="_blank" class="channel-name">The Wall Street Journal</a>
+                    <div class="desc">미국의 대표 경제 일간지</div>
                 </li>
                 
                 <li>
-                    <p>
-                        <a href="https://www.ft.com" target="_blank" class="channel-name">Financial Times</a>
-                        - 영국의 대표 경제 일간지
-                    </p>
+                    <a href="https://www.ft.com" target="_blank" class="channel-name">Financial Times</a>
+                    <div class="desc">영국의 대표 경제 일간지</div>
                 </li>
                 
                 <li>
-                    <p>
-                        <a href="https://www.washingtonpost.com" target="_blank" class="channel-name">The Washington Post</a>
-                        - 미국의 주요 일간지
-                    </p>
+                    <a href="https://www.washingtonpost.com" target="_blank" class="channel-name">The Washington Post</a>
+                    <div class="desc">미국의 주요 일간지</div>
                 </li>
                 
                 <li>
-                    <p>
-                        <a href="https://www.economist.com" target="_blank" class="channel-name">The Economist</a>
-                        - 글로벌 경제 주간지
-                    </p>
+                    <a href="https://www.economist.com" target="_blank" class="channel-name">The Economist</a>
+                    <div class="desc">글로벌 경제 주간지</div>
                 </li>
                 
                 <li>
-                    <p>
-                        <a href="https://www.voanews.com" target="_blank" class="channel-name">Voice of America (VOA)</a>
-                        - 미국의 대표 국제 방송
-                    </p>
+                    <a href="https://www.voanews.com" target="_blank" class="channel-name">Voice of America (VOA)</a>
+                    <div class="desc">미국의 대표 국제 방송</div>
                 </li>
                 
                 <li>
-                    <p>
-                        <a href="https://www.japantimes.co.jp" target="_blank" class="channel-name">Japan Times</a>
-                        - 일본의 대표 영자 신문
-                    </p>
+                    <a href="https://www.japantimes.co.jp" target="_blank" class="channel-name">Japan Times</a>
+                    <div class="desc">일본의 대표 영자 신문</div>
                 </li>
             </ul>
         </div>
