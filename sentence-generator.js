@@ -1,4 +1,4 @@
-
+/// https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app
 
 document.addEventListener('DOMContentLoaded', () => {
     const forbiddenWords = [
@@ -49,9 +49,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
             console.log("Sending request to server with word:", inputWord);
           
-          
+            //여기로 변경 const response = await fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/englishstudy', {
             const response = await fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/englishstudy', {
-                
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -123,6 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
             isSpeaking = true;
             console.log('Sending request to server...');
             
+            // localhost 서버로 요청
             const serverUrl = 'https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app';
             const response = await fetch(`${serverUrl}/generate-audio`, {
                 method: 'POST',
@@ -344,4 +344,5 @@ document.addEventListener('DOMContentLoaded', () => {
         inputWord.placeholder = "문장 생성을 원하시면 단어를 입력하고 아래 이모티콘을 눌러주세요";
     }
 });
+
 
