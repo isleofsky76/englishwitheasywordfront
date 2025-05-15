@@ -49,9 +49,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
             console.log("Sending request to server with word:", inputWord);
           
-            //여기로 변경 
-            //const response = await fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app', {
-            const response = await fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/englishstudy', {
+            //여기로 변경 const response = await fetch('port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/englishstudy', {
+            const response = await fetch('http://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/englishstudy', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -113,31 +112,36 @@ document.addEventListener('DOMContentLoaded', () => {
         const englishText = fullText.replace(/\([^)]*\)/g, '').trim();
         console.log('English text to speak:', englishText);
 
+        // 텍스트 길이 제한 (1000자)
+        if (englishText.length > 1000) {
+            alert('텍스트가 너무 깁니다. 1000자 이하로 입력해주세요.');
+            return;
+        }
+
         try {
             isSpeaking = true;
             console.log('Sending request to server...');
             
-            // GET 요청으로 변경
-            const serverUrl = 'https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app';
-            const params = new URLSearchParams({
-                text: englishText,
-                language: language,
-                voice: language === 'en-US' ? 'en-US-Neural2-C' : 'en-GB-Neural2-A'
-            });
-
-            const response = await fetch(`${serverUrl}/generate-audio?${params.toString()}`, {
-                method: 'GET',
+            const serverUrl = 'http://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app';
+            const response = await fetch(`${serverUrl}/generate-audio`, {
+                method: 'POST',
                 headers: {
+                    'Content-Type': 'application/json',
                     'Accept': 'application/json'
-                }
+                },
+                body: JSON.stringify({
+                    text: englishText,
+                    language: language,
+                    voice: language === 'en-US' ? 'en-US-Neural2-C' : 'en-GB-Neural2-A'
+                })
             });
 
             console.log('Server response status:', response.status);
 
             if (!response.ok) {
-                const errorData = await response.text();
+                const errorData = await response.json().catch(() => ({ error: 'Unknown error' }));
                 console.error('Server error details:', errorData);
-                throw new Error(`Failed to generate audio: ${response.status} - ${errorData}`);
+                throw new Error(`Failed to generate audio: ${response.status} - ${errorData.error || 'Unknown error'}`);
             }
 
             const audioBlob = await response.blob();
@@ -290,7 +294,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 서버 TTS를 호출하는 함수 추가
     async function fetchServerTTS(text, langCode) {
         try {
-            const response = await fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/generate-audio', {
+            const response = await fetch('http://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/generate-audio', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
