@@ -1,6 +1,5 @@
 //https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/englishstudy
 
-
 document.addEventListener('DOMContentLoaded', () => {
     const forbiddenWords = [
         "sex", "sexual", "rape", "molest", "violence", "murder", "gore", "drugs", "narcotics", 
@@ -51,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log("Sending request to server with word:", inputWord);
           
             //여기로 변경 const response = await fetch('port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/englishstudy', {
-            const response = await fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/englishstudy', {
+            const response = await fetch('http://localhost:3000/englishstudy', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -92,28 +91,71 @@ document.addEventListener('DOMContentLoaded', () => {
     let isSpeaking = false;
     let sentenceQueue = [];
     let selectedVoice = null;
+    let currentAudio = null;  // 현재 재생 중인 Audio 객체를 추적하기 위한 변수 추가
 
-    function speakText() {
+    // speakText 함수 수정
+    async function speakText(language = 'en-US') {
+        console.log('Starting speakText with language:', language);
+        
         if (isSpeaking) {
             console.log("Speech synthesis is already active.");
             return;
         }
 
-        const text = document.getElementById("outputArea").textContent;
-        if (!text) {
+        const fullText = document.getElementById("outputArea").textContent;
+        if (!fullText) {
             console.log("No text to speak.");
             return;
         }
 
-        const englishTextParts = text.match(/(?:[a-zA-Z]+\s*)+[0-9]*(?:[a-zA-Z0-9\s,.'?!]*)/g);
-        if (!englishTextParts || englishTextParts.length === 0) {
-            console.log("No English sentences found.");
-            return;
-        }
+        // 영어 부분만 추출 (괄호 안의 한글 제외)
+        const englishText = fullText.replace(/\([^)]*\)/g, '').trim();
+        console.log('English text to speak:', englishText);
 
-        sentenceQueue = englishTextParts.map(sentence => cleanText(sentence));
-        isSpeaking = true;
-        processNextSentence();
+        try {
+            isSpeaking = true;
+            console.log('Sending request to server...');
+            
+            const response = await fetch(`https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/generate-audio?text=${encodeURIComponent(englishText)}&language=${language}&voice=${language === 'en-US' ? 'en-US-Neural2-C' : 'en-GB-Neural2-A'}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            console.log('Server response status:', response.status);
+
+            if (!response.ok) {
+                throw new Error(`Failed to generate audio: ${response.status}`);
+            }
+
+            const audioBlob = await response.blob();
+            console.log('Received audio blob:', audioBlob.size, 'bytes');
+            
+            const audioUrl = URL.createObjectURL(audioBlob);
+            currentAudio = new Audio(audioUrl);  // currentAudio에 현재 Audio 객체 저장
+
+            currentAudio.onended = () => {
+                console.log('Audio playback ended');
+                URL.revokeObjectURL(audioUrl);
+                isSpeaking = false;
+                currentAudio = null;  // 재생이 끝나면 currentAudio 초기화
+            };
+
+            currentAudio.onerror = (error) => {
+                console.error('Audio playback error:', error);
+                isSpeaking = false;
+                currentAudio = null;  // 에러 발생 시 currentAudio 초기화
+            };
+
+            console.log('Starting audio playback...');
+            await currentAudio.play();
+            console.log('Audio playback started');
+        } catch (error) {
+            console.error('Error in speakText:', error);
+            isSpeaking = false;
+            currentAudio = null;  // 에러 발생 시 currentAudio 초기화
+        }
     }
 
     function processNextSentence() {
@@ -147,15 +189,26 @@ document.addEventListener('DOMContentLoaded', () => {
         speechSynthesis.speak(utterance);
     }
 
+    // UK/US 버튼 이벤트 리스너 수정
+    document.getElementById('engUkButton').addEventListener('click', async (event) => {
+        event.preventDefault();
+        console.log('UK button clicked');
+        await speakText('en-GB');
+    });
+
+    document.getElementById('engUsButton').addEventListener('click', async (event) => {
+        event.preventDefault();
+        console.log('US button clicked');
+        await speakText('en-US');
+    });
+
+    // stopText 함수 수정
     function stopText() {
-        if (isSpeaking) {
-            try {
-                speechSynthesis.cancel();
-            } catch (error) {
-                console.error("Failed to stop speech synthesis:", error);
-            }
+        if (isSpeaking && currentAudio) {
+            currentAudio.pause();
+            currentAudio.currentTime = 0;
             isSpeaking = false;
-            sentenceQueue = [];
+            currentAudio = null;
             console.log("Speech synthesis stopped.");
         }
     }
@@ -173,18 +226,6 @@ document.addEventListener('DOMContentLoaded', () => {
     speechSynthesis.onvoiceschanged = () => {
         setVoice('en-GB'); // 기본 목소리를 설정합니다
     };
-
-    document.getElementById('engUkButton').addEventListener('click', (event) => {
-        event.preventDefault();
-        setVoice('en-GB');
-        speakText();
-    });
-
-    document.getElementById('engUsButton').addEventListener('click', (event) => {
-        event.preventDefault();
-        setVoice('en-US');
-        speakText();
-    });
 
     document.getElementById('stopButton').addEventListener('click', (event) => {
         event.preventDefault();
@@ -275,6 +316,11 @@ document.addEventListener('DOMContentLoaded', () => {
             fetchServerTTS(text, 'en-US');
         });
     }
-});
 
+    // 입력 필드에 placeholder 추가
+    const inputWord = document.getElementById("inputWord");
+    if (inputWord) {
+        inputWord.placeholder = "문장 생성을 원하시면 단어를 입력하고 아래 이모티콘을 눌러주세요";
+    }
+});
 
