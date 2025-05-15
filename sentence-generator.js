@@ -124,11 +124,10 @@ document.addEventListener('DOMContentLoaded', () => {
             isSpeaking = true;
             console.log('Sending request to server...');
             
-            // localhost 서버로 요청
+
             const params = new URLSearchParams({
                 text: englishText,
-                language: language,
-                voice: language === 'en-US' ? 'en-US-Neural2-C' : 'en-GB-Neural2-A'
+                language: language
             });
             
             const response = await fetch(`${serverUrl}/generate-audio?${params.toString()}`, {
