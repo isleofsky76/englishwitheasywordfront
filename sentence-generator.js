@@ -1,3 +1,5 @@
+//https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/englishstudy
+
 
 document.addEventListener('DOMContentLoaded', () => {
     const forbiddenWords = [
@@ -48,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             console.log("Sending request to server with word:", inputWord);
           
-         
+            //여기로 변경 const response = await fetch('port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/englishstudy', {
             const response = await fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/englishstudy', {
                 method: 'POST',
                 headers: {
@@ -225,6 +227,52 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log('Text copied to clipboard');
         }).catch(err => {
             console.error('Failed to copy text: ', err);
+        });
+    }
+
+    // 서버 TTS를 호출하는 함수 추가
+    async function fetchServerTTS(text, langCode) {
+        try {
+            const response = await fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/generate-audio', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ text, language: langCode })
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to generate audio');
+            }
+
+            const audioBlob = await response.blob();
+            const audioUrl = URL.createObjectURL(audioBlob);
+            const audio = new Audio(audioUrl);
+
+            audio.onended = () => {
+                URL.revokeObjectURL(audioUrl);
+            };
+
+            audio.play();
+        } catch (error) {
+            console.error('Error fetching server TTS:', error);
+        }
+    }
+
+    // UK/US 버튼에 서버 TTS 연동
+    const ukVoiceBtn = document.getElementById('ukVoiceBtn');
+    const usVoiceBtn = document.getElementById('usVoiceBtn');
+
+    if (ukVoiceBtn) {
+        ukVoiceBtn.addEventListener('click', () => {
+            const text = document.getElementById('outputArea').textContent;
+            fetchServerTTS(text, 'en-GB');
+        });
+    }
+    if (usVoiceBtn) {
+        usVoiceBtn.addEventListener('click', () => {
+            const text = document.getElementById('outputArea').textContent;
+            fetchServerTTS(text, 'en-US');
         });
     }
 });
