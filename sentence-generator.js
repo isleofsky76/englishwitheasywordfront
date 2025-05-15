@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log("Sending request to server with word:", inputWord);
           
             //여기로 변경 const response = await fetch('port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/englishstudy', {
-            const response = await fetch('http://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/englishstudy', {
+            const response = await fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/englishstudy', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -122,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
             isSpeaking = true;
             console.log('Sending request to server...');
             
-            const serverUrl = 'http://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app';
+            const serverUrl = 'https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app';
             const response = await fetch(`${serverUrl}/generate-audio`, {
                 method: 'POST',
                 headers: {
@@ -294,7 +294,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 서버 TTS를 호출하는 함수 추가
     async function fetchServerTTS(text, langCode) {
         try {
-            const response = await fetch('http://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/generate-audio', {
+            const response = await fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/generate-audio', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
