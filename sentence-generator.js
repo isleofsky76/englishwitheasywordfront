@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log("Sending request to server with word:", inputWord);
           
             //여기로 변경 const response = await fetch('port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/englishstudy', {
-            const response = await fetch('http://localhost:3000/englishstudy', {
+            const response = await fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/englishstudy', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
