@@ -49,7 +49,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
             console.log("Sending request to server with word:", inputWord);
           
-            //여기로 변경 const response = await fetch('port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/englishstudy', {
+            //여기로 변경 
+            //const response = await fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app', {
             const response = await fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/englishstudy', {
                 method: 'POST',
                 headers: {
@@ -116,36 +117,50 @@ document.addEventListener('DOMContentLoaded', () => {
             isSpeaking = true;
             console.log('Sending request to server...');
             
-            const response = await fetch(`https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/generate-audio?text=${encodeURIComponent(englishText)}&language=${language}&voice=${language === 'en-US' ? 'en-US-Neural2-C' : 'en-GB-Neural2-A'}`, {
+            // GET 요청으로 변경
+            const serverUrl = 'https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app';
+            const params = new URLSearchParams({
+                text: englishText,
+                language: language,
+                voice: language === 'en-US' ? 'en-US-Neural2-C' : 'en-GB-Neural2-A'
+            });
+
+            const response = await fetch(`${serverUrl}/generate-audio?${params.toString()}`, {
                 method: 'GET',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Accept': 'application/json'
                 }
             });
 
             console.log('Server response status:', response.status);
 
             if (!response.ok) {
-                throw new Error(`Failed to generate audio: ${response.status}`);
+                const errorData = await response.text();
+                console.error('Server error details:', errorData);
+                throw new Error(`Failed to generate audio: ${response.status} - ${errorData}`);
             }
 
             const audioBlob = await response.blob();
+            if (audioBlob.size === 0) {
+                throw new Error('Received empty audio data');
+            }
+            
             console.log('Received audio blob:', audioBlob.size, 'bytes');
             
             const audioUrl = URL.createObjectURL(audioBlob);
-            currentAudio = new Audio(audioUrl);  // currentAudio에 현재 Audio 객체 저장
+            currentAudio = new Audio(audioUrl);
 
             currentAudio.onended = () => {
                 console.log('Audio playback ended');
                 URL.revokeObjectURL(audioUrl);
                 isSpeaking = false;
-                currentAudio = null;  // 재생이 끝나면 currentAudio 초기화
+                currentAudio = null;
             };
 
             currentAudio.onerror = (error) => {
                 console.error('Audio playback error:', error);
                 isSpeaking = false;
-                currentAudio = null;  // 에러 발생 시 currentAudio 초기화
+                currentAudio = null;
             };
 
             console.log('Starting audio playback...');
@@ -153,8 +168,9 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log('Audio playback started');
         } catch (error) {
             console.error('Error in speakText:', error);
+            alert('음성 생성 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
             isSpeaking = false;
-            currentAudio = null;  // 에러 발생 시 currentAudio 초기화
+            currentAudio = null;
         }
     }
 
