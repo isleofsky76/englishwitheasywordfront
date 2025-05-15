@@ -1,6 +1,8 @@
 /// https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app
 
 document.addEventListener('DOMContentLoaded', () => {
+    const serverUrl = 'https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app';
+
     const forbiddenWords = [
         "sex", "sexual", "rape", "molest", "violence", "murder", "gore", "drugs", "narcotics", 
         "prostitute", "prostitution", "pedophile", "pedophilia", "incest", "self-harm", "bully", 
@@ -123,19 +125,16 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log('Sending request to server...');
             
             // localhost 서버로 요청
-            const serverUrl = 'https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app';
-            const response = await fetch(`${serverUrl}/generate-audio`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: JSON.stringify({
-                    text: englishText,
-                    language: language,
-                    voice: language === 'en-US' ? 'en-US-Neural2-C' : 'en-GB-Neural2-A'
-                })
+            const params = new URLSearchParams({
+                text: englishText,
+                language: language,
+                voice: language === 'en-US' ? 'en-US-Neural2-C' : 'en-GB-Neural2-A'
             });
+            
+            const response = await fetch(`${serverUrl}/generate-audio?${params.toString()}`, {
+                method: 'GET'
+            });
+
 
             console.log('Server response status:', response.status);
 
@@ -293,33 +292,36 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // 서버 TTS를 호출하는 함수 추가
+    // 🔧 고쳐야 할 부분: fetchServerTTS 함수 전체 중괄호 열기
     async function fetchServerTTS(text, langCode) {
         try {
-            const response = await fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/generate-audio', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ text, language: langCode })
+            const params = new URLSearchParams({
+                text: text,
+                language: langCode
             });
-
+    
+            const response = await fetch(`${serverUrl}/generate-audio?${params.toString()}`, {
+                method: 'GET'
+            });
+            
             if (!response.ok) {
                 throw new Error('Failed to generate audio');
             }
-
+    
             const audioBlob = await response.blob();
             const audioUrl = URL.createObjectURL(audioBlob);
             const audio = new Audio(audioUrl);
-
+    
             audio.onended = () => {
                 URL.revokeObjectURL(audioUrl);
             };
-
+    
             audio.play();
         } catch (error) {
             console.error('Error fetching server TTS:', error);
         }
     }
+
 
     // UK/US 버튼에 서버 TTS 연동
     const ukVoiceBtn = document.getElementById('ukVoiceBtn');
