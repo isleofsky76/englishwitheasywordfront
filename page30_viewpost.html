@@ -15,10 +15,10 @@
 </head>
 <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Guestbook</a>
-            <a class="navbar-brand" href="https://englisheasystudy.com/">Home</a>
+    <nav class="navbar navbar-expand-lg fixed-top" style="background-color: #05071e !important;">
+        <div class="container-fluid" style="background-color: #05071e !important;">
+            <a class="navbar-brand" href="#" style="color: white !important;">Guestbook</a>
+            <a class="navbar-brand" href="https://englisheasystudy.com/" style="color: white !important;">Home</a>
         </div>
     </nav>
     <div id="post-container">
@@ -28,6 +28,11 @@
         </div>
         <div id="post-content">
             <p id="post-message"></p>
+        </div>
+        <div class="viewpost-actions mt-4">
+            <button class="btn btn-warning me-2" id="editBtn">Edit</button>
+            <button class="btn btn-danger me-2" id="deleteBtn">Delete</button>
+            <button class="btn btn-secondary" id="backBtn">Back</button>
         </div>
     </div>
     <script src="page30_viewpost.js"></script>
