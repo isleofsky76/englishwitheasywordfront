@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const isSecret = document.getElementById('isSecret').checked;
 
         try {
-            const response = await fetch('http://localhost:3000/guestbook', {
+            const response = await fetch('port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype/guestbook', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const isSecret = document.getElementById('edit-isSecret').checked;
 
         try {
-            const response = await fetch('http://localhost:3000/updatepost', {
+            const response = await fetch('http:port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype/updatepost', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
