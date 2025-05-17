@@ -18,16 +18,106 @@ const topics = [
   {
     category: "Countries",
     words: [
-      { name: "United States", hints: ["North America.", "Diverse culture.", "Statue of Liberty.", "Large economy.", "Elvis Presley."] },
-      { name: "Brazil", hints: ["South America.", "Carnival festival.", "Amazon Rainforest.", "Famous for soccer.", "Pelé."] },
-      { name: "Canada", hints: ["North America.", "Maple leaf.", "Hockey.", "Niagara Falls.", "Cold winters."] },
-      { name: "China", hints: ["Asia.", "Great Wall.", "Pandas.", "Largest population.", "Tea."] },
-      { name: "France", hints: ["Europe.", "Eiffel Tower.", "Paris.", "Baguettes.", "Fashion."] },
-      { name: "India", hints: ["Asia.", "Taj Mahal.", "Spicy food.", "Bollywood.", "Elephants."] },
-      { name: "Japan", hints: ["Asia.", "Mount Fuji.", "Sushi.", "Cherry blossoms.", "Samurai."] },
-      { name: "Australia", hints: ["Oceania.", "Sydney Opera House.", "Kangaroos.", "Great Barrier Reef.", "Outback."] },
-      { name: "Egypt", hints: ["Africa.", "Pyramids.", "Pharaohs.", "Nile River.", "Sphinx."] },
-      { name: "Italy", hints: ["Europe.", "Rome.", "Pizza.", "Colosseum.", "Venice."] }
+      {
+        "name": "United States",
+        "hints": [
+          "This country is in North America and has 50 states.",
+          "It is known for its mix of cultures and people from all over the world.",
+          "The Statue of Liberty is one of its most famous symbols.",
+          "It has one of the biggest economies in the world.",
+          "A famous singer from here is Elvis Presley."
+        ]
+      },
+      {
+        "name": "Brazil",
+        "hints": [
+          "This country is in South America and speaks Portuguese.",
+          "It has a big festival called Carnival with dancing and costumes.",
+          "The Amazon Rainforest is mostly in this country.",
+          "People here love soccer and have won the World Cup many times.",
+          "Pelé, a world-famous soccer player, is from this country."
+        ]
+      },
+      {
+        "name": "Canada",
+        "hints": [
+          "This country is in North America, above the United States.",
+          "Its flag has a red maple leaf in the middle.",
+          "Ice hockey is one of the most popular sports here.",
+          "You can visit the beautiful Niagara Falls here.",
+          "The winters are very cold with a lot of snow."
+        ]
+      },
+      {
+        "name": "China",
+        "hints": [
+          "This is a large country in Asia with many people.",
+          "It has a long wall called the Great Wall that you can see from space.",
+          "Pandas live in the forests of this country.",
+          "It has the largest population in the world.",
+          "People here have a long history of drinking tea."
+        ]
+      },
+      {
+        "name": "France",
+        "hints": [
+          "This country is in Europe and has a city called Paris.",
+          "The Eiffel Tower is one of its most famous places.",
+          "People here are known for fashion and style.",
+          "They enjoy eating baguettes and cheese.",
+          "It is a popular place for tourists to visit."
+        ]
+      },
+      {
+        "name": "India",
+        "hints": [
+          "This country is in Asia and has a lot of different cultures.",
+          "The Taj Mahal is a beautiful white building here.",
+          "People here love spicy food and use many kinds of spices.",
+          "It is home to Bollywood, the biggest movie industry in the world.",
+          "Elephants are respected and sometimes used in festivals."
+        ]
+      },
+      {
+        "name": "Japan",
+        "hints": [
+          "This country is in Asia and has many islands.",
+          "Mount Fuji is a tall, snowy mountain here.",
+          "People love to eat sushi and rice dishes.",
+          "In spring, cherry blossom trees bloom all over.",
+          "Long ago, there were warriors called samurai."
+        ]
+      },
+      {
+        "name": "Australia",
+        "hints": [
+          "This country is in Oceania and is also a continent.",
+          "The Sydney Opera House is shaped like white sails.",
+          "You can see kangaroos and koalas in the wild here.",
+          "It has a giant coral reef called the Great Barrier Reef.",
+          "The Outback is a big, dry area in the middle of the country."
+        ]
+      },
+      {
+        "name": "Egypt",
+        "hints": [
+          "This country is in Africa and has a desert climate.",
+          "The ancient pyramids were built here a long time ago.",
+          "Pharaohs were powerful rulers from the past.",
+          "The Nile River flows through this country.",
+          "You can see the Sphinx, a statue with a lion’s body and a human face."
+        ]
+      },
+      {
+        "name": "Italy",
+        "hints": [
+          "This country is in Europe and shaped like a boot.",
+          "Its capital city is Rome, which has old buildings and ruins.",
+          "Pizza and pasta are famous foods from here.",
+          "The Colosseum is a big round stadium from ancient times.",
+          "Venice is a city with canals instead of streets."
+        ]
+      }
     ]
   },
   {
@@ -534,4 +624,5 @@ window.onload = () => {
   generateTopicOptions();  // Generate topic options for the dropdown
   initializer();
 };
+
 
