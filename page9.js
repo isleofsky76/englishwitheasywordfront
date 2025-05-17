@@ -105,7 +105,7 @@ const topics = [
           "The ancient pyramids were built here a long time ago.",
           "Pharaohs were powerful rulers from the past.",
           "The Nile River flows through this country.",
-          "You can see the Sphinx, a statue with a lion’s body and a human face."
+          "You can see the Sphinx, a statue with a lion's body and a human face."
         ]
       },
       {
@@ -120,216 +120,526 @@ const topics = [
       }
     ]
   },
+  
   {
-    category: "Fruits",
-    words: [
-      { name: "Apple", hints: ["Common fruit.", "Red, green, yellow.", "Keeps the doctor away.", "Used to make cider.", "An apple a day..."] },
-      { name: "Banana", hints: ["Long, yellow fruit.", "High in potassium.", "Monkeys love it.", "Used in smoothies.", "Can be eaten raw or cooked."] },
-      { name: "Orange", hints: ["Citrus fruit.", "Orange color.", "Juicy.", "Vitamin C.", "Peel to eat."] },
-      { name: "Grapes", hints: ["Small, round fruit.", "Grows in bunches.", "Can be green or purple.", "Used to make wine.", "Raisins are dried..."] },
-      { name: "Strawberry", hints: ["Red fruit.", "Has seeds on the outside.", "Sweet.", "Used in desserts.", "Summer fruit."] },
-      { name: "Watermelon", hints: ["Large, green fruit.", "Red inside.", "Lots of seeds.", "Summer fruit.", "Very juicy."] },
-      { name: "Pineapple", hints: ["Tropical fruit.", "Spiky outside.", "Sweet and sour.", "Yellow inside.", "Used in piña colada."] },
-      { name: "Mango", hints: ["Tropical fruit.", "Orange inside.", "Sweet.", "Stone fruit.", "Used in smoothies."] },
-      { name: "Blueberry", hints: ["Small, blue fruit.", "Grows on bushes.", "Sweet.", "Used in muffins.", "Summer fruit."] },
-      { name: "Kiwi", hints: ["Brown, fuzzy outside.", "Green inside.", "Tiny black seeds.", "Sweet and tart.", "Tropical fruit."] }
+    "category": "Jobs",
+    "words": [
+      {
+        "name": "Teacher",
+        "hints": [
+          "This person works at a school and helps students learn new things.",
+          "They explain lessons and make sure everyone understands the subject.",
+          "They give homework so students can practice at home.",
+          "They check and grade tests to see how well students are doing.",
+          "Teachers love helping children grow smarter and more confident."
+        ]
+      },
+      {
+        "name": "Doctor",
+        "hints": [
+          "This person works at a hospital or clinic and helps people who are sick.",
+          "They listen to your symptoms and find out what's wrong with you.",
+          "They often use a stethoscope to check your heartbeat.",
+          "Doctors give you medicine to help you feel better.",
+          "They can also do surgeries if someone needs an operation."
+        ]
+      },
+      {
+        "name": "Police Officer",
+        "hints": [
+          "This person keeps people safe by making sure everyone follows the law.",
+          "They wear a uniform so people can recognize them easily.",
+          "They drive special police cars when responding to emergencies.",
+          "They help people in danger and keep peace in the community.",
+          "Police officers can arrest people who break the law."
+        ]
+      },
+      {
+        "name": "Firefighter",
+        "hints": [
+          "This person puts out fires and rescues people from dangerous places.",
+          "They wear a strong helmet and special clothes to stay safe.",
+          "They drive big red fire trucks with loud sirens.",
+          "Firefighters help during emergencies like car accidents and floods.",
+          "They use a hose to spray water and stop fires from spreading."
+        ]
+      },
+      {
+        "name": "Chef",
+        "hints": [
+          "This person works in a kitchen and makes delicious food.",
+          "They follow recipes and mix ingredients to make meals.",
+          "Chefs wear tall white hats and aprons while cooking.",
+          "They prepare food in restaurants for many hungry customers.",
+          "They make sure every dish looks and tastes perfect."
+        ]
+      },
+      {
+        "name": "Engineer",
+        "hints": [
+          "This person uses science and math to design and build things.",
+          "They work on big projects like buildings, machines, or bridges.",
+          "Engineers love solving problems and making ideas come to life.",
+          "They use tools, computers, and blueprints to plan their work.",
+          "Their work helps make our lives easier and safer."
+        ]
+      },
+      {
+        "name": "Pilot",
+        "hints": [
+          "This person flies airplanes and takes people to different places.",
+          "They work at airports and spend time in the cockpit.",
+          "Pilots wear uniforms and sometimes special hats.",
+          "They use many buttons and controls to fly safely in the sky.",
+          "They make sure all passengers have a safe flight."
+        ]
+      },
+      {
+        "name": "Farmer",
+        "hints": [
+          "This person works on a farm and grows food for people to eat.",
+          "They plant seeds and take care of crops until they are ready to harvest.",
+          "Farmers also raise animals like cows, chickens, and pigs.",
+          "They often use tractors and other big machines.",
+          "Their hard work helps put food on our tables every day."
+        ]
+      },
+      {
+        "name": "Artist",
+        "hints": [
+          "This person creates beautiful things like paintings, drawings, or sculptures.",
+          "They often use paints, brushes, pencils, or clay to make their art.",
+          "Artists share their work in galleries or online for others to enjoy.",
+          "They use their imagination and feelings to express ideas.",
+          "Art helps make the world more colorful and creative."
+        ]
+      },
+      {
+        "name": "Nurse",
+        "hints": [
+          "This person works in a hospital and helps take care of patients.",
+          "They support doctors and help people feel better.",
+          "Nurses check temperatures, give medicine, and comfort the sick.",
+          "They wear scrubs and often work long hours to help others.",
+          "Nurses are kind, caring, and very important in healthcare."
+        ]
+      }
+    ]
+  }
+  
+  ,
+  {
+    "category": "Entertainers",
+    "words": [
+      {
+        "name": "Mickey Mouse",
+        "hints": [
+          "This famous cartoon character was created by Walt Disney.",
+          "He is a cheerful mouse with big round ears.",
+          "He usually wears red shorts and yellow shoes.",
+          "He is one of the most popular Disney characters in the world.",
+          "His best friends are Donald Duck and Goofy."
+        ]
+      },
+      {
+        "name": "Elmo",
+        "hints": [
+          "This red Muppet is a character on Sesame Street.",
+          "He has a high-pitched voice and laughs a lot.",
+          "He speaks in the third person and says things like 'Elmo loves you!'",
+          "He has a pet goldfish named Dorothy.",
+          "Children love him because he is cute and funny."
+        ]
+      },
+      {
+        "name": "SpongeBob",
+        "hints": [
+          "He is a yellow sponge who lives in a pineapple under the sea.",
+          "He works at a restaurant called the Krusty Krab.",
+          "His best friend is a pink starfish named Patrick.",
+          "He has a pet snail named Gary that meows like a cat.",
+          "He always wears square pants and is full of energy."
+        ]
+      },
+      {
+        "name": "Barbie",
+        "hints": [
+          "She is a fashion doll that was first introduced in 1959.",
+          "She is famous for her long blonde hair and stylish clothes.",
+          "She has had many careers, like doctor, pilot, and astronaut.",
+          "She lives in a pink Dreamhouse with her friends.",
+          "Many children love to dress her up and play pretend."
+        ]
+      },
+      {
+        "name": "Batman",
+        "hints": [
+          "He is a superhero who protects the city of Gotham.",
+          "His real name is Bruce Wayne, a rich man with a secret identity.",
+          "He wears a black suit and uses cool gadgets and vehicles.",
+          "His sidekick is Robin, and they fight crime together.",
+          "He drives the Batmobile, a fast and powerful car."
+        ]
+      },
+      {
+        "name": "Spider-Man",
+        "hints": [
+          "He is a superhero with spider-like powers.",
+          "His real name is Peter Parker, a high school student.",
+          "He can climb walls and swing from building to building.",
+          "He shoots webs from his hands to catch bad guys.",
+          "He lives in New York City and wears a red and blue suit."
+        ]
+      },
+      {
+        "name": "Elsa",
+        "hints": [
+          "She is a queen in the Disney movie Frozen.",
+          "She has magical powers that let her create ice and snow.",
+          "She sings the famous song 'Let It Go'.",
+          "Her younger sister's name is Anna.",
+          "She learns to control her powers and protect her kingdom."
+        ]
+      },
+      {
+        "name": "Harry Potter",
+        "hints": [
+          "He is a young wizard with a lightning bolt scar on his forehead.",
+          "He goes to a magical school called Hogwarts.",
+          "His best friends are Ron and Hermione.",
+          "He uses a wand and learns spells and potions.",
+          "He is known for fighting the dark wizard Voldemort."
+        ]
+      },
+      {
+        "name": "Dora",
+        "hints": [
+          "She is a young girl who loves to go on adventures.",
+          "She speaks both Spanish and English.",
+          "She carries a talking backpack and uses a map to find her way.",
+          "Her best friend is a monkey named Boots.",
+          "She solves problems and helps others along the way."
+        ]
+      },
+      {
+        "name": "Mario",
+        "hints": [
+          "He is a video game character who wears a red hat and blue overalls.",
+          "He is a plumber who goes on adventures to save Princess Peach.",
+          "He often jumps over enemies and breaks blocks.",
+          "His brother Luigi helps him on many missions.",
+          "He is one of the most famous characters in video games."
+        ]
+      }
     ]
   },
+
   {
-    category: "Animals",
-    words: [
-      { name: "Lion", hints: ["Big cat.", "King of the jungle.", "Mane.", "Roars.", "Lives in Africa."] },
-      { name: "Elephant", hints: ["Large animal.", "Big ears.", "Long trunk.", "Tusks.", "Lives in Africa and Asia."] },
-      { name: "Giraffe", hints: ["Tall animal.", "Long neck.", "Spots.", "Eats leaves.", "Lives in Africa."] },
-      { name: "Kangaroo", hints: ["Australia.", "Hops.", "Pouch.", "Marsupial.", "Eats plants."] },
-      { name: "Panda", hints: ["Black and white.", "Bear.", "Eats bamboo.", "Lives in China.", "Cute."] },
-      { name: "Penguin", hints: ["Bird.", "Cannot fly.", "Lives in Antarctica.", "Waddles.", "Eats fish."] },
-      { name: "Dolphin", hints: ["Ocean.", "Smart.", "Mammal.", "Echolocation.", "Swims fast."] },
-      { name: "Tiger", hints: ["Big cat.", "Stripes.", "Roars.", "Lives in Asia.", "Strong."] },
-      { name: "Zebra", hints: ["Stripes.", "Horse family.", "Lives in Africa.", "Herbivore.", "Fast runner."] },
-      { name: "Koala", hints: ["Australia.", "Eats eucalyptus.", "Marsupial.", "Sleeps a lot.", "Cute."] }
+    "category": "household items",
+    "words": [
+      {
+        "name": "table",
+        "hints": [
+          "People often sit around it during meals.",
+          "It usually stands on four legs and supports objects.",
+          "It can be used for dining, working, or studying.",
+          "Commonly found in kitchens, offices, or dining rooms.",
+          "Chairs are often placed next to it."
+        ]
+      },
+      {
+        "name": "lamp",
+        "hints": [
+          "It provides light in dark rooms or during nighttime.",
+          "Often placed on desks, nightstands, or the floor.",
+          "Many people use it for reading or studying.",
+          "It can have a switch or button to turn on.",
+          "Comes in different shapes, sizes, and styles."
+        ]
+      },
+      {
+        "name": "mirror",
+        "hints": [
+          "Used to see your own reflection.",
+          "Often placed in bathrooms or bedrooms.",
+          "Helps people check their face or outfit.",
+          "Usually made of glass and mounted on a wall or frame.",
+          "Common in personal grooming or decoration."
+        ]
+      },
+      {
+        "name": "sofa",
+        "hints": [
+          "Offers a comfortable place to sit or lie down.",
+          "Usually large and soft, placed in living rooms.",
+          "People use it to relax, watch TV, or nap.",
+          "Often comes with cushions and armrests.",
+          "Can seat more than one person at a time."
+        ]
+      },
+      {
+        "name": "refrigerator",
+        "hints": [
+          "Keeps food fresh and cold.",
+          "Found in almost every kitchen.",
+          "Has shelves and compartments inside.",
+          "Often includes a freezer section on top or bottom.",
+          "Used to store fruits, drinks, and leftovers."
+        ]
+      },
+      {
+        "name": "bed",
+        "hints": [
+          "Provides a place to sleep and rest.",
+          "Usually covered with sheets, blankets, and pillows.",
+          "Comes in sizes like twin, queen, or king.",
+          "Found in bedrooms and used daily.",
+          "Helps people relax and recover energy."
+        ]
+      },
+      {
+        "name": "chair",
+        "hints": [
+          "Supports a person sitting down.",
+          "Usually has four legs and a backrest.",
+          "Used at tables, desks, and workspaces.",
+          "Some have armrests and cushions for comfort.",
+          "Common in dining rooms, offices, and classrooms."
+        ]
+      },
+      {
+        "name": "toaster",
+        "hints": [
+          "Browns slices of bread by heating them.",
+          "Often used for making breakfast quickly.",
+          "Found on kitchen counters.",
+          "Heats food from both sides at once.",
+          "Pops up the food when it's done."
+        ]
+      },
+      {
+        "name": "microwave",
+        "hints": [
+          "Heats food very quickly using special waves.",
+          "Can defrost, cook, or reheat meals.",
+          "Found on kitchen counters or shelves.",
+          "Often has buttons and a timer.",
+          "Popular for popcorn, leftovers, and snacks."
+        ]
+      },
+      {
+        "name": "oven",
+        "hints": [
+          "Used for baking and roasting food.",
+          "Often built into the kitchen wall or below the stove.",
+          "Heats slowly but cooks thoroughly.",
+          "Great for cakes, cookies, or roasts.",
+          "Gets very hot and needs oven mitts for safety."
+        ]
+      },
+      {
+        "name": "stove",
+        "hints": [
+          "Provides direct heat for cooking on top.",
+          "Used with pots and pans for boiling or frying.",
+          "Usually has burners and control knobs.",
+          "Often combined with an oven.",
+          "Found in most kitchens for daily use."
+        ]
+      },
+      {
+        "name": "blender",
+        "hints": [
+          "Blends or mixes liquids and soft foods.",
+          "Has sharp blades and a clear container.",
+          "Commonly used for smoothies or soups.",
+          "Operates with a button and electricity.",
+          "Should be used with the lid on for safety."
+        ]
+      },
+      {
+        "name": "fan",
+        "hints": [
+          "Creates airflow to cool down a space.",
+          "Has spinning blades inside a safety cover.",
+          "Used in bedrooms, offices, or living rooms.",
+          "Can be ceiling-mounted or portable.",
+          "Useful during summer or in warm places."
+        ]
+      },
+      {
+        "name": "television",
+        "hints": [
+          "Shows moving pictures with sound.",
+          "Used for watching shows, news, or games.",
+          "Often placed on walls or stands.",
+          "Controlled with buttons or a remote.",
+          "Popular in living rooms and bedrooms."
+        ]
+      },
+      {
+        "name": "remote",
+        "hints": [
+          "Used to control a TV or other devices from a distance.",
+          "Has buttons for volume, channels, and power.",
+          "Often held in one hand while sitting.",
+          "Runs on batteries and sends signals.",
+          "Lets people stay relaxed while watching."
+        ]
+      },
+      {
+        "name": "vacuum",
+        "hints": [
+          "Cleans floors by sucking up dirt and dust.",
+          "Usually plugged in and pushed across the floor.",
+          "Makes a loud noise while working.",
+          "Has wheels and a dust container or bag.",
+          "Used on carpets, rugs, and tiles."
+        ]
+      },
+      {
+        "name": "washing machine",
+        "hints": [
+          "Cleans dirty clothes with water and soap.",
+          "Has a large drum and spinning motion.",
+          "People load clothes and press buttons to start.",
+          "Found in laundry rooms or bathrooms.",
+          "Saves time and cleans many clothes at once."
+        ]
+      },
+      {
+        "name": "dryer",
+        "hints": [
+          "Dries wet clothes using heat and spinning.",
+          "Often used after washing clothes.",
+          "Has a round door and timer.",
+          "Found in laundry areas or utility rooms.",
+          "Clothes come out dry and warm."
+        ]
+      },
+      {
+        "name": "sink",
+        "hints": [
+          "Used to wash hands, dishes, or food.",
+          "Has a bowl-shaped basin and a drain.",
+          "Usually connected to a faucet.",
+          "Found in kitchens and bathrooms.",
+          "Made of metal or ceramic material."
+        ]
+      },
+      {
+        "name": "faucet",
+        "hints": [
+          "Releases water when turned on.",
+          "Attached to sinks, tubs, or basins.",
+          "Can be moved left or right for temperature.",
+          "Water flows out in a stream.",
+          "Turned on by handles or knobs."
+        ]
+      },
+      {
+        "name": "toilet",
+        "hints": [
+          "Flushes waste using water.",
+          "Used in bathrooms or restrooms.",
+          "Has a seat and a lid.",
+          "Connected to plumbing and pipes.",
+          "Helps keep hygiene in the home."
+        ]
+      },
+      {
+        "name": "shower",
+        "hints": [
+          "Sprays water for cleaning the body.",
+          "Has hot and cold settings for comfort.",
+          "Common in bathrooms with a curtain or door.",
+          "Used while standing under running water.",
+          "Helps people feel clean and refreshed."
+        ]
+      },
+      {
+        "name": "bathtub",
+        "hints": [
+          "Filled with water for soaking the body.",
+          "Larger than a sink but smaller than a pool.",
+          "Often used with soap and warm water.",
+          "Made from plastic, ceramic, or metal.",
+          "Takes more time than a shower."
+        ]
+      },
+      {
+        "name": "towel",
+        "hints": [
+          "Used to dry the body after bathing.",
+          "Made from cotton or microfiber cloth.",
+          "Usually hangs on a rack in the bathroom.",
+          "Comes in different colors and sizes.",
+          "Needed for keeping clean and dry."
+        ]
+      },
+      {
+        "name": "pillow",
+        "hints": [
+          "Supports the head while sleeping.",
+          "Placed on beds or sofas.",
+          "Filled with soft material for comfort.",
+          "Covered in fabric or pillowcases.",
+          "Helps with sleep and neck support."
+        ]
+      },
+      {
+        "name": "blanket",
+        "hints": [
+          "Covers the body to keep warm during sleep.",
+          "Usually made of soft fabric like fleece or cotton.",
+          "Used on beds during cold nights.",
+          "Can be folded or spread out.",
+          "Helps people stay cozy and comfortable."
+        ]
+      },
+      {
+        "name": "curtain",
+        "hints": [
+          "Hangs in front of windows or doors.",
+          "Blocks sunlight or adds privacy.",
+          "Made of fabric and held with a rod.",
+          "Comes in many colors and patterns.",
+          "Can be opened or closed easily."
+        ]
+      },
+      {
+        "name": "clock",
+        "hints": [
+          "Shows the time with hands or digits.",
+          "Can hang on a wall or stand on a table.",
+          "Makes a ticking or beeping sound.",
+          "Used to wake up or keep on schedule.",
+          "Runs on batteries or electricity."
+        ]
+      },
+      {
+        "name": "bookshelf",
+        "hints": [
+          "Holds books upright on shelves.",
+          "Has levels for placing items.",
+          "Found in studies, offices, or living rooms.",
+          "Can be made of wood, metal, or plastic.",
+          "Helps keep reading materials organized."
+        ]
+      },
+      {
+        "name": "cabinet",
+        "hints": [
+          "Used to store items in drawers or shelves.",
+          "Usually placed in kitchens, bathrooms, or bedrooms.",
+          "Has doors that open to reveal space inside.",
+          "Made of wood, metal, or plastic.",
+          "Used for keeping things tidy and out of sight."
+        ]
+      }
     ]
   },
-  {
-    category: "Colors",
-    words: [
-      { name: "Red", hints: ["Color of fire.", "Color of apples.", "Color of stop signs.", "Primary color.", "Color of roses."] },
-      { name: "Blue", hints: ["Color of the sky.", "Color of the ocean.", "Primary color.", "Color of blueberries.", "Calm color."] },
-      { name: "Green", hints: ["Color of grass.", "Color of leaves.", "Color of limes.", "Primary color.", "Nature color."] },
-      { name: "Yellow", hints: ["Color of the sun.", "Color of bananas.", "Bright color.", "Primary color.", "Color of lemons."] },
-      { name: "Orange", hints: ["Color of oranges.", "Mix of red and yellow.", "Warm color.", "Color of pumpkins.", "Bright color."] },
-      { name: "Purple", hints: ["Color of grapes.", "Mix of red and blue.", "Royal color.", "Color of lavender.", "Deep color."] },
-      { name: "Pink", hints: ["Color of cotton candy.", "Mix of red and white.", "Light color.", "Color of flamingos.", "Sweet color."] },
-      { name: "Black", hints: ["Color of the night.", "Opposite of white.", "Dark color.", "Color of coal.", "Strong color."] },
-      { name: "White", hints: ["Color of snow.", "Opposite of black.", "Bright color.", "Color of milk.", "Pure color."] },
-      { name: "Brown", hints: ["Color of chocolate.", "Color of soil.", "Earth color.", "Color of bears.", "Neutral color."] }
-    ]
-  },
-  {
-    category: "Shapes",
-    words: [
-      { name: "Circle", hints: ["Round.", "No corners.", "Looks like a wheel.", "Smooth.", "Continuous line."] },
-      { name: "Square", hints: ["Four equal sides.", "Four corners.", "Looks like a box.", "Equal angles.", "Straight lines."] },
-      { name: "Triangle", hints: ["Three sides.", "Three corners.", "Looks like a pyramid.", "Equal or different sides.", "Straight lines."] },
-      { name: "Rectangle", hints: ["Four sides.", "Two long sides.", "Two short sides.", "Four corners.", "Looks like a door."] },
-      { name: "Oval", hints: ["Egg-shaped.", "Round.", "No corners.", "Stretched circle.", "Smooth."] },
-      { name: "Star", hints: ["Five points.", "Shines.", "Seen in the sky.", "Twinkles.", "Looks like a drawing."] },
-      { name: "Heart", hints: ["Two curves.", "Pointed bottom.", "Symbol of love.", "Looks like a Valentine's card.", "Red color."] },
-      { name: "Diamond", hints: ["Four sides.", "Pointed top and bottom.", "Looks like a kite.", "Two wide sides.", "Two narrow sides."] },
-      { name: "Hexagon", hints: ["Six sides.", "Six corners.", "Beehive shape.", "Equal or different sides.", "Straight lines."] },
-      { name: "Pentagon", hints: ["Five sides.", "Five corners.", "Equal or different sides.", "Looks like a house.", "Straight lines."] }
-    ]
-  },
-  {
-    category: "Vehicles",
-    words: [
-      { name: "Car", hints: ["Has wheels.", "Drives on roads.", "Has a steering wheel.", "Transports people.", "Has an engine."] },
-      { name: "Bicycle", hints: ["Two wheels.", "Pedals.", "Handlebars.", "Rides on roads.", "Human-powered."] },
-      { name: "Airplane", hints: ["Flies in the sky.", "Has wings.", "Has engines.", "Carries passengers.", "Flies long distances."] },
-      { name: "Train", hints: ["Runs on tracks.", "Has carriages.", "Carries passengers and goods.", "Has a locomotive.", "Travels long distances."] },
-      { name: "Bus", hints: ["Large vehicle.", "Carries many passengers.", "Has stops.", "Drives on roads.", "Public transport."] },
-      { name: "Truck", hints: ["Large vehicle.", "Carries goods.", "Has a cargo area.", "Drives on roads.", "Can be very big."] },
-      { name: "Boat", hints: ["Floats on water.", "Used for traveling on rivers and lakes.", "Can be rowed or have a motor.", "Can be small or large.", "Used for fishing."] },
-      { name: "Helicopter", hints: ["Flies in the sky.", "Has rotors on top.", "Can hover in place.", "Used for rescue and transport.", "Can land on small areas."] },
-      { name: "Motorcycle", hints: ["Two wheels.", "Has an engine.", "Rides on roads.", "Faster than a bicycle.", "Needs a helmet."] },
-      { name: "Scooter", hints: ["Two wheels.", "Stands on it.", "Kicks to move.", "Has handlebars.", "Fun for kids."] }
-    ]
-  },
-  {
-    category: "Food",
-    words: [
-      { name: "Pizza", hints: ["Round.", "Has cheese.", "Often has pepperoni.", "Baked in an oven.", "Popular in Italy."] },
-      { name: "Ice Cream", hints: ["Cold.", "Sweet.", "Melts.", "Comes in a cone.", "Popular in summer."] },
-      { name: "Banana", hints: ["Yellow.", "Curved.", "Peel it to eat.", "Monkeys love it.", "Rich in potassium."] },
-      { name: "Apple", hints: ["Round.", "Can be red or green.", "Keeps the doctor away.", "Grows on trees.", "Often found in pies."] },
-      { name: "Carrot", hints: ["Orange.", "Crunchy.", "Bugs Bunny eats it.", "Grows underground.", "Good for eyesight."] },
-      { name: "Bread", hints: ["Made from flour.", "Baked.", "Used for sandwiches.", "Can be white or brown.", "Common breakfast food."] },
-      { name: "Cheese", hints: ["Made from milk.", "Can be sliced.", "Used in sandwiches.", "Comes in many types.", "Popular in pizzas."] },
-      { name: "Tomato", hints: ["Red.", "Round.", "Used in salads.", "Can be made into ketchup.", "Grows on a vine."] },
-      { name: "Egg", hints: ["Comes from chickens.", "Can be boiled.", "Used in baking.", "Often eaten for breakfast.", "Has a shell."] },
-      { name: "Fish", hints: ["Lives in water.", "Can be grilled.", "Eaten with chips.", "Has fins.", "Rich in omega-3."] }
-    ]
-  },
-  {
-    category: "Sports",
-    words: [
-      { name: "Soccer", hints: ["Played with a round ball.", "Has goals.", "Popular worldwide.", "Teams have 11 players.", "Known as football outside the US."] },
-      { name: "Basketball", hints: ["Played with an orange ball.", "Has hoops.", "Teams have 5 players.", "Dribbled on a court.", "Michael Jordan's sport."] },
-      { name: "Tennis", hints: ["Played with a racket.", "Uses a yellow ball.", "Played on a court.", "Has nets.", "Famous players include Serena Williams."] },
-      { name: "Swimming", hints: ["Done in water.", "Uses various strokes.", "Olympic sport.", "Requires goggles.", "Michael Phelps' sport."] },
-      { name: "Baseball", hints: ["Uses a bat.", "Has bases.", "Played with a white ball.", "Teams have 9 players.", "Popular in the USA."] },
-      { name: "Gymnastics", hints: ["Involves flips and jumps.", "Uses beams and bars.", "Requires flexibility.", "Olympic sport.", "Famous gymnast: Simone Biles."] },
-      { name: "Cycling", hints: ["Uses bicycles.", "Can be competitive.", "Tour de France.", "Requires helmets.", "Good exercise."] },
-      { name: "Golf", hints: ["Uses clubs.", "Has holes.", "Played on a course.", "Uses small white balls.", "Famous player: Tiger Woods."] },
-      { name: "Volleyball", hints: ["Played with a net.", "Uses a ball.", "Teams have 6 players.", "Played on a court or beach.", "Popular in the Olympics."] },
-      { name: "Cricket", hints: ["Uses a bat and ball.", "Played on a pitch.", "Teams have 11 players.", "Popular in England and India.", "Has wickets."] }
-    ]
-  },
-  {
-    category: "Nature",
-    words: [
-      { name: "Tree", hints: ["Has leaves.", "Grows tall.", "Produces oxygen.", "Home to birds.", "Grows from a seed."] },
-      { name: "Flower", hints: ["Colorful.", "Has petals.", "Grows in gardens.", "Bees love it.", "Can be given as a gift."] },
-      { name: "River", hints: ["Flows.", "Contains water.", "Can be wide or narrow.", "Home to fish.", "Flows to the sea."] },
-      { name: "Mountain", hints: ["Very tall.", "Made of rock.", "Can be climbed.", "Often has snow at the top.", "Part of the landscape."] },
-      { name: "Ocean", hints: ["Very large.", "Salty water.", "Home to whales.", "Covers most of Earth.", "Has waves."] },
-      { name: "Desert", hints: ["Very dry.", "Has sand.", "Little rain.", "Can be hot or cold.", "Few plants."] },
-      { name: "Rainbow", hints: ["Has many colors.", "Seen after rain.", "Arch-shaped.", "In the sky.", "Caused by sunlight."] },
-      { name: "Forest", hints: ["Lots of trees.", "Home to animals.", "Can be dense.", "Provides shade.", "Found in many places."] },
-      { name: "Cloud", hints: ["Seen in the sky.", "Made of water droplets.", "Can be white or gray.", "Causes rain.", "Fluffy appearance."] },
-      { name: "Sun", hints: ["Bright.", "Hot.", "Star.", "Gives light and warmth.", "Rises in the east."] }
-    ]
-  },
-  {
-    category: "Sports Players",
-    words: [
-      { name: "Michael Jordan", hints: ["Famous basketball player.", "Played for the Chicago Bulls.", "Won 6 NBA championships.", "Considered the greatest of all time.", "Known for his incredible dunks."] },
-      { name: "Lionel Messi", hints: ["Famous soccer player.", "Played for FC Barcelona.", "Won multiple Ballon d'Or awards.", "Argentine.", "Known for his dribbling skills."] },
-      { name: "Serena Williams", hints: ["Famous tennis player.", "Won 23 Grand Slam singles titles.", "American.", "Known for her powerful serve.", "One of the greatest female athletes."] },
-      { name: "Tom Brady", hints: ["Famous American football player.", "Played for the New England Patriots.", "Won 7 Super Bowl titles.", "Considered the greatest quarterback.", "Known for his leadership and passing skills."] },
-      { name: "Usain Bolt", hints: ["Famous sprinter.", "From Jamaica.", "World's fastest man.", "Won 8 Olympic gold medals.", "Known for his lightning speed."] },
-      { name: "Roger Federer", hints: ["Famous tennis player.", "Won 20 Grand Slam singles titles.", "Swiss.", "Known for his elegant playing style.", "Considered one of the greatest in tennis."] },
-      { name: "LeBron James", hints: ["Famous basketball player.", "Played for the Cleveland Cavaliers and Los Angeles Lakers.", "Won 4 NBA championships.", "Known for his versatility and athleticism.", "One of the best players in the NBA."] },
-      { name: "Cristiano Ronaldo", hints: ["Famous soccer player.", "Played for Real Madrid and Manchester United.", "Portuguese.", "Won multiple Ballon d'Or awards.", "Known for his goal-scoring abilities."] },
-      { name: "Tiger Woods", hints: ["Famous golfer.", "Won 15 major championships.", "American.", "Known for his dominance in golf.", "Considered one of the greatest golfers."] },
-      { name: "Simone Biles", hints: ["Famous gymnast.", "Won multiple Olympic gold medals.", "American.", "Known for her difficult routines.", "One of the greatest gymnasts of all time."] }
-    ]
-  },
-  {
-    category: "Music Instruments",
-    words: [
-      { name: "Piano", hints: ["Has keys.", "Played with fingers.", "Often used in classical music.", "Can be upright or grand.", "Produces sound by hammering strings."] },
-      { name: "Guitar", hints: ["Has strings.", "Played with fingers or a pick.", "Common in rock and pop music.", "Can be acoustic or electric.", "Produces sound by plucking strings."] },
-      { name: "Drum", hints: ["Percussion instrument.", "Played with sticks.", "Common in many music genres.", "Produces sound by striking a membrane.", "Part of a drum set."] },
-      { name: "Violin", hints: ["Has strings.", "Played with a bow.", "Common in classical music.", "Produces sound by drawing the bow across the strings.", "Small and held under the chin."] },
-      { name: "Flute", hints: ["Woodwind instrument.", "Played by blowing air.", "Has keys.", "Common in classical and jazz music.", "Produces sound by blowing air across an opening."] },
-      { name: "Trumpet", hints: ["Brass instrument.", "Played by buzzing lips.", "Has valves.", "Common in classical and jazz music.", "Produces a bright, powerful sound."] },
-      { name: "Saxophone", hints: ["Woodwind instrument.", "Played with a reed.", "Common in jazz music.", "Has keys.", "Produces a smooth, rich sound."] },
-      { name: "Harp", hints: ["Has strings.", "Played with fingers.", "Common in classical music.", "Large and often triangular.", "Produces a soft, ethereal sound."] },
-      { name: "Clarinet", hints: ["Woodwind instrument.", "Played with a reed.", "Common in classical and jazz music.", "Has keys.", "Produces a warm, mellow sound."] },
-      { name: "Cello", hints: ["Has strings.", "Played with a bow.", "Common in classical music.", "Larger than a violin.", "Produces a deep, rich sound."] }
-    ]
-  },
-  {
-    category: "Jobs",
-    words: [
-      { name: "Teacher", hints: ["Works in a school.", "Teaches students.", "Gives homework.", "Grades tests.", "Helps children learn."] },
-      { name: "Doctor", hints: ["Works in a hospital.", "Helps sick people.", "Uses a stethoscope.", "Prescribes medicine.", "Can perform surgery."] },
-      { name: "Police Officer", hints: ["Maintains law and order.", "Wears a uniform.", "Drives a police car.", "Helps keep people safe.", "Can arrest criminals."] },
-      { name: "Firefighter", hints: ["Puts out fires.", "Wears a helmet.", "Drives a fire truck.", "Helps in emergencies.", "Uses a hose."] },
-      { name: "Chef", hints: ["Works in a kitchen.", "Cooks food.", "Uses recipes.", "Wears a hat.", "Can work in a restaurant."] },
-      { name: "Engineer", hints: ["Designs and builds things.", "Uses math and science.", "Works on projects.", "Can build bridges.", "Solves problems."] },
-      { name: "Pilot", hints: ["Flies airplanes.", "Works in an airport.", "Wears a uniform.", "Uses a cockpit.", "Takes passengers to destinations."] },
-      { name: "Farmer", hints: ["Works on a farm.", "Grows crops.", "Raises animals.", "Uses a tractor.", "Produces food."] },
-      { name: "Artist", hints: ["Creates art.", "Uses paint and brushes.", "Can draw or sculpt.", "Shows work in galleries.", "Expresses creativity."] },
-      { name: "Nurse", hints: ["Works in a hospital.", "Helps doctors.", "Cares for patients.", "Can give medicine.", "Wears scrubs."] }
-    ]
-  },
-  {
-    category: "Home",
-    words: [
-      { name: "Bed", hints: ["You sleep on it.", "Has a mattress.", "Often in a bedroom.", "Can be single or double.", "You use blankets and pillows."] },
-      { name: "Sofa", hints: ["You sit on it.", "Usually in a living room.", "Can be a couch.", "Comfortable seating.", "Often used for watching TV."] },
-      { name: "Table", hints: ["You eat on it.", "Has legs.", "Often in a dining room.", "Can be round or rectangular.", "Used to hold things."] },
-      { name: "Chair", hints: ["You sit on it.", "Has legs and a back.", "Often used with a table.", "Can have armrests.", "Found in many rooms."] },
-      { name: "Lamp", hints: ["Provides light.", "Can stand on a table.", "Often has a shade.", "Uses a bulb.", "Turned on and off with a switch."] },
-      { name: "Refrigerator", hints: ["Keeps food cold.", "Found in the kitchen.", "Has a freezer section.", "Stores perishable items.", "Runs on electricity."] },
-      { name: "Oven", hints: ["Used for baking.", "Found in the kitchen.", "Can be gas or electric.", "Gets very hot.", "Often used for cooking."] },
-      { name: "Television", hints: ["Shows programs.", "Often in the living room.", "Can be flat-screen.", "Displays movies and shows.", "Controlled with a remote."] },
-      { name: "Wardrobe", hints: ["Stores clothes.", "Found in the bedroom.", "Has doors.", "Can have drawers.", "Keeps clothes organized."] },
-      { name: "Mirror", hints: ["Reflects images.", "Often in the bathroom.", "Used for checking appearance.", "Can be handheld or mounted.", "Has a glass surface."] }
-    ]
-  },
-  {
-    category: "Entertainers",
-    words: [
-      { name: "Mickey Mouse", hints: ["Created by Walt Disney.", "Famous cartoon character.", "Has large round ears.", "Wears red shorts.", "Friends with Donald Duck and Goofy."] },
-      { name: "Elmo", hints: ["Red Muppet.", "Lives on Sesame Street.", "Loves to laugh.", "Has a goldfish named Dorothy.", "Speaks in the third person."] },
-      { name: "SpongeBob", hints: ["Lives in a pineapple under the sea.", "Works at the Krusty Krab.", "Best friend is Patrick Star.", "Has a pet snail named Gary.", "Wears square pants."] },
-      { name: "Barbie", hints: ["Fashion doll.", "First introduced in 1959.", "Has many careers.", "Lives in a Dreamhouse.", "Famous for her pink wardrobe."] },
-      { name: "Batman", hints: ["Superhero.", "Real name is Bruce Wayne.", "Lives in Gotham City.", "Has a sidekick named Robin.", "Drives the Batmobile."] },
-      { name: "Spider-Man", hints: ["Superhero.", "Real name is Peter Parker.", "Can climb walls.", "Shoots webs.", "Lives in New York City."] },
-      { name: "Elsa", hints: ["From the movie Frozen.", "Has ice powers.", "Queen of Arendelle.", "Sister is Anna.", "Sings 'Let It Go'."] },
-      { name: "Harry Potter", hints: ["Boy wizard.", "Goes to Hogwarts.", "Has a lightning bolt scar.", "Friends with Ron and Hermione.", "Fights Voldemort."] },
-      { name: "Dora", hints: ["Explorer.", "Speaks Spanish and English.", "Has a backpack.", "Friends with Boots the monkey.", "Solves problems with a map."] },
-      { name: "Mario", hints: ["Video game character.", "Wears a red hat.", "Has a brother named Luigi.", "Saves Princess Peach.", "Famous for jumping."] }
-    ]
-  },
-  {
-    category: "Singers",
-    words: [
-      { name: "Taylor Swift", hints: ["Famous pop singer.", "Known for 'Shake It Off'.", "Started in country music.", "Writes her own songs.", "Album '1989'."] },
-      { name: "Beyoncé", hints: ["Former member of Destiny's Child.", "Hit song 'Single Ladies'.", "Married to Jay-Z.", "Known as Queen Bey.", "Album 'Lemonade'."] },
-      { name: "Justin Bieber", hints: ["Canadian pop singer.", "Discovered on YouTube.", "Hit song 'Baby'.", "Married to Hailey Baldwin.", "Album 'Purpose'."] },
-      { name: "Ariana Grande", hints: ["Former Nickelodeon star.", "Hit song 'Thank U, Next'.", "High ponytail hairstyle.", "Album 'Sweetener'.", "Known for her powerful voice."] },
-      { name: "Ed Sheeran", hints: ["British singer-songwriter.", "Hit song 'Shape of You'.", "Plays guitar.", "Album '+' (Plus).", "Known for his red hair."] },
-      { name: "Selena Gomez", hints: ["Former Disney star.", "Hit song 'Come & Get It'.", "Actress in 'Wizards of Waverly Place'.", "Founded Rare Beauty.", "Album 'Revival'."] },
-      { name: "Bruno Mars", hints: ["Hit song 'Uptown Funk'.", "Known for energetic performances.", "Album '24K Magic'.", "Plays multiple instruments.", "Real name is Peter Gene Hernandez."] },
-      { name: "Shawn Mendes", hints: ["Canadian singer-songwriter.", "Hit song 'Stitches'.", "Plays guitar.", "Album 'Illuminate'.", "Known for his boy-next-door image."] },
-      { name: "Rihanna", hints: ["Hit song 'Umbrella'.", "Founder of Fenty Beauty.", "From Barbados.", "Album 'Anti'.", "Actress in 'Ocean's 8'."] },
-      { name: "Billie Eilish", hints: ["Young pop sensation.", "Hit song 'Bad Guy'.", "Known for her unique style.", "Album 'When We All Fall Asleep, Where Do We Go?'", "Often changes hair color."] }
-    ]
-  },
+
 ];
 
 // Variables
