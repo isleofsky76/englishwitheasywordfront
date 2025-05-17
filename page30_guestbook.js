@@ -146,7 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const password = prompt('Enter password to edit this post:');
         if (password) {
             try {
-                const response = await fetch(https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/viewpost`, {
+                const response = await fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/viewpost`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
