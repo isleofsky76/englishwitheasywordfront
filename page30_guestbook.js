@@ -1,4 +1,5 @@
 // https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app
+// https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app
 
 document.addEventListener('DOMContentLoaded', () => {
     // 기본적으로 모든 form 숨기기
@@ -145,7 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const password = prompt('Enter password to edit this post:');
         if (password) {
             try {
-                const response = await fetch(`https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/viewpost`, {
+                const response = await fetch(https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/viewpost`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -201,4 +202,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
     loadMessages();
 });
+
 
