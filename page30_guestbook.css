@@ -80,6 +80,18 @@ form input, form textarea {
   border-radius: 5px;
 }
 
+form input::placeholder,
+form textarea::placeholder {
+  color: #999;
+  transition: all 0.2s ease;
+}
+
+form input:focus::placeholder,
+form textarea:focus::placeholder {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
 form button {
   padding: 10px;
   font-size: 16px;
@@ -286,7 +298,7 @@ th.actions {
   form textarea {
     padding: 4px;
     margin: 4px 0;
-    font-size: 8px; /* 더 작게 조정 */
+    font-size: 8px;
   }
 
   form button {
