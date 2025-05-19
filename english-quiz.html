@@ -122,6 +122,71 @@
             background: var(--secondary-color);
         }
 
+        .quiz-result {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            margin-top: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .result-section {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .result-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .result-section h3 {
+            color: var(--primary-color);
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .result-section p {
+            margin: 0;
+            line-height: 1.6;
+            color: var(--text-color);
+        }
+
+        .answer {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .sentence {
+            font-style: italic;
+            color: #34495e;
+        }
+
+        .translation {
+            color: #7f8c8d;
+        }
+
+        .explanation {
+            color: #2c3e50;
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 6px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .error-message {
+            color: #dc3545;
+            background: #fff5f5;
+            padding: 12px;
+            border-radius: 6px;
+            border-left: 4px solid #dc3545;
+            margin: 0;
+        }
+
         @media (max-width: 768px) {
             .container {
                 padding: 1rem;
@@ -133,6 +198,14 @@
             .navbar {
                 padding-top: 0.118rem;
                 padding-bottom: 0.118rem;
+            }
+            .quiz-result {
+                padding: 16px;
+            }
+            
+            .result-section {
+                margin-bottom: 16px;
+                padding-bottom: 16px;
             }
         }
     </style>
