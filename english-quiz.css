@@ -78,7 +78,8 @@ body {
 
 #result {
   margin-top: 10px;
-  font-size: 14px;
+  font-size: 14px; /* Changed back to 14px as requested */
+  font-weight: normal; /* Added normal font weight */
   color: #ddd;
   line-height: 1.3; /* Adjust this value to increase or decrease the line spacing */
 }
@@ -89,4 +90,18 @@ body {
   font-size: 14px;
   color: #ddd;
   line-height: 1.3; /* Adjust this value to increase or decrease the line spacing */
+}
+
+/* Force explanation/result text to 14px and normal weight */
+.quiz-result, .quiz-result * {
+  font-size: 14px !important;
+  font-weight: normal !important;
+}
+
+.quiz-result .answer,
+.quiz-result .result-section,
+.quiz-result .result-section h3,
+.quiz-result .result-section p {
+  font-size: 14px !important;
+  font-weight: normal !important;
 }
