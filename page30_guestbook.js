@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function loadMessages() {
         try {
-            const response = await fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/guestbook');
+            const response = await fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app0/guestbook');
             if (!response.ok) {
                 throw new Error('Failed to load messages');
             }
@@ -202,5 +202,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     loadMessages();
 });
+
 
 
