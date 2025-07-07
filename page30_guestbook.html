@@ -21,11 +21,11 @@
         </div>
     </nav>
     <div class="guestbook-container">
+      <div class="container">
+        <button id="write-post-button" class="btn btn-primary">Write</button>
+      </div>
       <div class="guestbook-list" id="guestbook-list">
         <!-- JS로 게시글 리스트가 생성됩니다 -->
-      </div>
-      <div class="container mt-5">
-        <button id="write-post-button" class="btn btn-primary my-3">Write</button>
       </div>
     </div>
     <div class="guestbook-card shadow-lg p-4 mb-4 bg-white rounded" id="write-post-container" style="display: none;">
@@ -40,7 +40,7 @@
                 </div>
             </div>
             <div class="mt-2">
-                <textarea id="message" class="form-control" placeholder="Message" rows="3" required></textarea>
+                <textarea id="message" class="form-control" placeholder="Message" rows="6" required></textarea>
             </div>
             <div class="row g-2 mt-2">
                 <div class="col-md-6">
