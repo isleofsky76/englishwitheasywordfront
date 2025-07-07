@@ -4,7 +4,7 @@ async function loadPost() {
     const params = new URLSearchParams(window.location.search);
     const index = params.get('index');
 
-    const response = await fetch('http://localhost:3000/guestbook');
+    const response = await fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/guestbook');
     const messages = await response.json();
 
     if (index >= 0 && index < messages.entries.length) {
