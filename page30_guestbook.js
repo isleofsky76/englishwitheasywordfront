@@ -181,7 +181,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const adminPasswordInput = prompt('Enter admin password to delete this post:');
         if (adminPasswordInput) {
             try {
-                const response = await fetch('https://'port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/admin/deletepost', {
+                const response = await fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/admin/deletepost', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
