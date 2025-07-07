@@ -1,6 +1,6 @@
 body {
   font-family: 'Poppins', sans-serif;
-  background-color: #f0f3f5; /* Light grey background color */
+  background-color: #f0f3f5 !important; /* Light grey background color */
   color: #f2f2f5; /* Dark text color */
   font-size: 14px;
   margin: 0 auto; /* 양쪽 여백 제거 */
