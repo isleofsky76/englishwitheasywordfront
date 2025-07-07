@@ -162,6 +162,10 @@ h1 {
   #post-message {
     margin-left: -10px !important;
   }
+  #post-title,
+  #post-content {
+    margin-left: 5px !important;
+  }
 }
 
 /* Navbar styles */
@@ -224,7 +228,7 @@ body {
 #post-message {
   width: calc(100vw - 20px) !important;
   max-width: calc(100vw - 20px) !important;
-  margin-left: 10px !important;
+  margin-left: 0px !important;
   margin-right: 10px !important;
   margin-top: 0 !important;
   margin-bottom: 0 !important;
