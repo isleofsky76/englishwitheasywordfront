@@ -113,7 +113,7 @@ h1 {
 
 .viewpost-actions {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center !important;
   gap: 10px;
   margin-top: 2rem;
   padding-top: 1rem;
