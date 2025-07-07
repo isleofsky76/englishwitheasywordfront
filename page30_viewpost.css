@@ -1,7 +1,7 @@
 body {
   font-family: 'Poppins', sans-serif;
-  background-color: #f7f8fa; /* Blue background color */
-  color: #f2f2f5; /* Light text color */
+  background-color: #f0f3f5 ; /* Blue background color */
+  color: #f0f3f5; /* Light text color */
   padding: 80px;
   font-size: 14px;
   margin-top: 30px;
@@ -10,7 +10,7 @@ body {
   padding: 0 !important;
   width: 100vw !important;
   box-sizing: border-box;
-  background-color: #fff !important;
+  background-color: #f0f3f5 !important;
 }
 
 .bg-primary {
@@ -73,14 +73,14 @@ h1 {
   margin: 0 auto;
   padding: 0 !important;
   margin-top: 10px !important;  /* navbar와의 간격을 늘림 */
-  background-color: #fff;
+  background-color: #f0f3f5 ;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 #post-header {
   margin-top: 80px;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #f0f3f5 ;
   margin-bottom: 1rem;
   padding-bottom: 5px;
 }
@@ -108,7 +108,7 @@ h1 {
   margin: 0 !important;
   padding: 0 !important;
   box-sizing: border-box;
-  background-color: #fff !important;
+  background-color: #f0f3f5 !important;
 }
 
 .viewpost-actions {
