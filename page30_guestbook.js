@@ -146,7 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const password = prompt('Enter password to edit this post:');
         if (password) {
             try {
-                 const response = await fetch(`https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/viewpost`, {
+                const response = await fetch(`https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/viewpost`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -154,7 +154,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     body: JSON.stringify({ id, password })
                 });
 
-            
                 if (response.ok) {
                     const data = await response.json();
                     const entry = data.entry;
@@ -181,7 +180,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const adminPasswordInput = prompt('Enter admin password to delete this post:');
         if (adminPasswordInput) {
             try {
-                const response = await fetch('https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/admin/deletepost', {
+                const response = await fetch(https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app/admin/deletepost', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
