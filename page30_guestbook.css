@@ -5,6 +5,11 @@ body {
   font-size: 14px;
   margin: 0 auto; /* 양쪽 여백 제거 */
   margin-top: 100px; /* navbar 아래로 들어가지 않도록 margin-top 증가 */
+  padding: 0 !important;
+  margin-top: 0 !important;
+  padding-top: 30px !important;
+  width: 100vw !important;
+  box-sizing: border-box;
 }
 
 .bg-primary {
@@ -318,6 +323,11 @@ th.actions {
   #post-container {
     max-width: 100%;
     padding: 8px;
+    margin-top: 30px !important;
+  }
+
+  #post-header {
+    margin-top: 20px;
   }
 
   #post-title {
@@ -450,4 +460,33 @@ th.actions {
   border: none !important;
   outline: none !important;
   box-shadow: none !important;
+}
+
+#post-container {
+  width: calc(100% + 40px) !important;
+  max-width: calc(100% + 40px) !important;
+  margin-left: -20px !important;
+  margin-right: -20px !important;
+}
+
+#post-content {
+  width: 100% !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+}
+
+#post-message {
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+#post-container,
+#post-content,
+#post-message {
+  width: 100vw !important;
+  max-width: 100vw !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box;
 }
