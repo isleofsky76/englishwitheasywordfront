@@ -74,15 +74,15 @@ h1 {
 
 #post-header {
   border-bottom: 1px solid #ddd;
-  margin-bottom: 2rem;
-  padding-bottom: 10px;
+  margin-bottom: 1rem;
+  padding-bottom: 5px;
 }
 
 #post-title {
   font-size: 1.8rem;
   font-weight: 600;
   color: #222;
-  margin-bottom: 1rem;
+  margin-bottom: 0rem;
 }
 
 #post-meta {
@@ -109,8 +109,14 @@ h1 {
 /* Mobile styles */
 @media (max-width: 767px) {
   body {
-    padding: 20px;
-    margin-top: 0;
+    padding-top: 0 !important;
+  }
+  #post-container {
+    padding-top: 0 !important;
+  }
+  .navbar {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
   }
 
   h1 {
@@ -135,6 +141,10 @@ h1 {
   #post-content {
     font-size: 14px;
   }
+
+  .navbar-brand {
+    margin-left: 20px !important; /* 원하는 만큼(px 단위) 조절 */
+  }
 }
 
 /* Navbar styles */
@@ -155,9 +165,11 @@ h1 {
 
 .navbar-brand {
   color: white !important;
-  padding: 0.3125rem 0;
-  margin-right: 1rem;
-  font-size: 1.25rem;
+  padding: 0.3125rem 0 !important;
+  margin-right: 1rem  !important;
+  margin-left: 1rem  !important;
+  font-size: 1.25rem  !important;
+  
 }
 
 /* Override Bootstrap's default styles */
