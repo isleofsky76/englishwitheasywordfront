@@ -490,3 +490,7 @@ th.actions {
   padding: 0 !important;
   box-sizing: border-box;
 }
+
+#write-post-button {
+  margin-top: 70px !important;
+}
