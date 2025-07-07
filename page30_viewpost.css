@@ -10,6 +10,7 @@ body {
   padding: 0 !important;
   width: 100vw !important;
   box-sizing: border-box;
+  background-color: #fff !important;
 }
 
 .bg-primary {
@@ -107,6 +108,7 @@ h1 {
   margin: 0 !important;
   padding: 0 !important;
   box-sizing: border-box;
+  background-color: #fff !important;
 }
 
 .viewpost-actions {
@@ -239,4 +241,10 @@ body {
 
 #post-message {
   margin-left: -10px !important;
+}
+
+#post-content,
+#post-message {
+  border: none !important;
+  box-shadow: none !important;
 }
