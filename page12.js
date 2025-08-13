@@ -10,7 +10,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const initialMessages = [
         "Hi there! 👋",
         "What would you like to talk about today?",
-        "You can start your questions. For example, 'What is the meaning of love?'"
     ];
 
     let currentMessageIndex = 0;
@@ -195,6 +194,7 @@ document.addEventListener('DOMContentLoaded', function () {
         console.error('submitButton element not found');
     }
 });
+
 
 
 
