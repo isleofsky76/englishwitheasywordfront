@@ -1,6 +1,52 @@
 // 글 데이터
 const articles = [
     {
+        "date": "August 17th, 2025",
+        "title": "아파트 화재 사고 (Apartment Fire Accident)",
+        "sentences": [
+            {
+                "korean": "아파트에서 화재가 발생했다.",
+                "english": "A fire broke out in an apartment building.",
+                "hidden": "broke out"
+            },
+            {
+                "korean": "검은 연기가 아파트에서 나오는 것을 사람들이 보았다.",
+                "english": "People saw black smoke coming from the apartment building.",
+                "hidden": "saw"
+            },
+            {
+                "korean": "사람들이 즉시 소방서에 신고했다.",
+                "english": "People immediately reported it to the fire station.",
+                "hidden": "reported"
+            },
+            {
+                "korean": "소방인력 수백명이 현장에 투입되었다.",
+                "english": "Hundreds of firefighters were dispatched to the scene.",
+                "hidden": "were dispatched"
+            },
+            {
+                "korean": "화재로 인해 2명이 숨졌다.",
+                "english": "Two people died because of the fire.",
+                "hidden": "died"
+            },
+            {
+                "korean": "13명이 다쳤다.",
+                "english": "Thirteen people were injured.",
+                "hidden": "were injured"
+            },
+            {
+                "korean": "부상자들은 병원으로 이송되었다.",
+                "english": "The injured people were transported to hospitals.",
+                "hidden": "were transported"
+            },
+            {
+                "korean": "일부 부상자는 현장에서 응급처치를 받았다.",
+                "english": "Some injured people received emergency treatment at the scene.",
+                "hidden": "received"
+            }
+        ]
+    },
+    {
         "date": "August 17th, 2024",
         "title": "헬스장 운동 루틴 (My Gym Workout Routine)",
         "sentences": [
