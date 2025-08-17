@@ -132,6 +132,73 @@ body {
     text-align: center;
 }
 
+.sentences-container {
+    margin-top: 20px;
+}
+
+.sentence-pair {
+    margin-bottom: 20px;
+    padding: 15px;
+    background: #f8fafc;
+    border-radius: 8px;
+    border-left: 4px solid #667eea;
+}
+
+.korean-sentence {
+    font-size: 0.875rem;
+    color: #333;
+    margin-bottom: 8px;
+    line-height: 1.5;
+}
+
+.english-sentence {
+    font-size: 0.875rem;
+    color: #4a5568;
+    line-height: 1.5;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    word-break: keep-all;
+}
+
+.english-text {
+    flex: 1;
+    min-width: 0;
+}
+
+.hidden-word {
+    color: #e53e3e;
+    font-weight: 600;
+    background: #fed7d7;
+    padding: 2px 6px;
+    border-radius: 4px;
+    border: 1px dashed #e53e3e;
+    transition: all 0.3s ease;
+}
+
+.hidden-word.revealed {
+    background: #c6f6d5;
+    color: #22543d;
+    border-color: #38a169;
+}
+
+.show-word-btn {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    color: #667eea;
+}
+
+.show-word-btn:hover {
+    background: #e6fffa;
+    transform: scale(1.1);
+}
+
 .article-title {
     color: #333;
     font-size: 1.5rem;
@@ -153,9 +220,9 @@ body {
 }
 
 .article-content {
-    font-size: 1.1rem;
+    font-size: 0.875rem;
     color: #333;
-    line-height: 1.8;
+    line-height: 1.5;
     text-align: justify;
 }
 
