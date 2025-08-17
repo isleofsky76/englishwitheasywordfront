@@ -1,4 +1,4 @@
-// 글 데이터
+/// 글 데이터
 const articles = [
     {
         "date": "August 17th, 2025",
