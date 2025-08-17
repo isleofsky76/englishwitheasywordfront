@@ -1,16 +1,29 @@
 // 글 데이터
 const articles = [
     {
-        "date": "August 17th, 2025",
+        "date": "August 17th, 2024",
         "title": "My Gym Workout Routine",
-        "image": "1.webp",
         "content": "Today I went to the gym for my regular workout session. I started with a warm-up on the treadmill for about 10 minutes to get my heart rate up. Then I moved to the weight training area where I did some bench presses with dumbbells. The gym was quite crowded today, so I had to wait a bit for the equipment. I also did some squats and deadlifts to work on my lower body strength. My personal trainer gave me some great advice on proper form. After the weights, I did some cardio on the elliptical machine for 20 minutes. I was feeling really motivated today, so I pushed myself harder than usual. The workout was quite intense, but I feel amazing now!"
     },
     {
-        "date": "August 18th, 2025",
+        "date": "August 18th, 2024",
         "title": "Swimming at the Pool",
-        "image": "2.webp",
         "content": "Today I went swimming at the local pool. The water was really refreshing and the pool was quite spacious. I started with some warm-up laps using the freestyle stroke. The lifeguard was very attentive and made sure everyone was safe. I also practiced the breaststroke and backstroke to improve my technique. The pool has different lanes for different skill levels, which is very convenient. I swam for about an hour and felt really energized afterwards. The changing rooms were clean and well-maintained. I think swimming is such a great full-body workout!"
+    },
+    {
+        "date": "August 19th, 2024",
+        "title": "A Day at the Park",
+        "content": "Yesterday I spent a wonderful afternoon at the city park. The weather was perfect with clear blue skies and a gentle breeze. I brought a picnic basket with sandwiches and fruit. There were many families with children playing on the swings and slides. I sat under a big oak tree and read my favorite book. Some people were walking their dogs, and others were playing frisbee on the grass. I also saw a group of friends having a barbecue near the lake. The park was full of life and happiness. I felt so peaceful and relaxed. It was the perfect way to spend a Sunday afternoon!"
+    },
+    {
+        "date": "August 20th, 2024",
+        "title": "Cooking Dinner",
+        "content": "Tonight I decided to cook dinner for my family. I chose to make spaghetti with tomato sauce because it's everyone's favorite. First, I boiled water in a large pot and added salt. Then I put the spaghetti noodles in the boiling water. While the pasta was cooking, I prepared the sauce with fresh tomatoes, garlic, and herbs. I also made a simple green salad with lettuce, cucumber, and carrots. The kitchen smelled amazing with all the cooking aromas. My family was very excited when they saw what I was making. We all sat together at the dining table and enjoyed the meal. Cooking for others is such a rewarding experience!"
+    },
+    {
+        "date": "August 21st, 2024",
+        "title": "Shopping at the Mall",
+        "content": "Today I went shopping at the local mall with my best friend. We started by looking at clothes in different stores. I found a nice blue shirt that was on sale, so I bought it. My friend tried on several dresses but couldn't decide which one to get. We also visited the bookstore where I bought a new novel to read. For lunch, we ate at the food court. I had a delicious burger and fries, and my friend ordered pizza. After lunch, we walked around the mall and looked at the window displays. We stopped at the coffee shop for some hot chocolate before heading home. It was a fun day spent with good company!"
     }
 ];
 
@@ -32,9 +45,6 @@ function displayAllArticles() {
             <div class="article">
                 <div class="article-date">${article.date}</div>
                 <h2 class="article-title">${article.title}</h2>
-                <div class="article-image">
-                    <img src="${article.image}" alt="${article.title}" />
-                </div>
                 <div class="article-content">${article.content}</div>
             </div>
         `;
@@ -164,3 +174,4 @@ document.addEventListener('keydown', function(e) {
     
 
 });
+
