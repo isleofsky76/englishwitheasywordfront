@@ -1,5 +1,63 @@
 /// 글 데이터
 const articles = [
+{
+  "date": "August 17th, 2025",
+  "title": "호텔 로비 공연 (Hotel Lobby Performance)",
+  "sentences": [
+    {
+      "korean": "호텔 로비에서 가수가 노래를 부르고 있었다.",
+      "english": "A singer was singing in the hotel lobby.",
+      "hidden": "was singing"
+    },
+    {
+      "korean": "사람들은 테이블에 앉아 있었다.",
+      "english": "People were sitting at the tables.",
+      "hidden": "were sitting"
+    },
+    {
+      "korean": "그들은 음식을 먹고 있었다.",
+      "english": "They were eating food.",
+      "hidden": "were eating"
+    },
+    {
+      "korean": "또한 와인을 마시고 있었다.",
+      "english": "They were also drinking wine.",
+      "hidden": "were drinking"
+    },
+    {
+      "korean": "창문 너머로 한강이 보였다.",
+      "english": "The Han River was visible through the window.",
+      "hidden": "was visible"
+    },
+    {
+      "korean": "불빛이 물 위에서 반짝였다.",
+      "english": "Lights were shining on the water.",
+      "hidden": "were shining"
+    },
+    {
+      "korean": "아이들은 조용히 음악을 듣고 있었다.",
+      "english": "Children were quietly listening to the music.",
+      "hidden": "were listening"
+    },
+    {
+      "korean": "어른들은 웃으며 대화를 나누었다.",
+      "english": "Adults talked and laughed together.",
+      "hidden": "talked and laughed"
+    },
+    {
+      "korean": "휴가의 끝이 다가오고 있었다.",
+      "english": "The end of the vacation was coming soon.",
+      "hidden": "was coming"
+    },
+    {
+      "korean": "사람들은 편안하고 행복해 보였다.",
+      "english": "People looked relaxed and happy.",
+      "hidden": "looked"
+    }
+  ]
+}
+,
+    
     {
         "date": "August 17th, 2025",
         "title": "아파트 화재 사고 (Apartment Fire Accident)",
