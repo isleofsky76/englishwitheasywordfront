@@ -3,14 +3,14 @@ const articles = [
     {
         "date": "August 17th, 2025",
         "title": "My Gym Workout Routine",
-        "image": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=400&fit=crop",
-        "content": "Today I went to the gym for my regular workout session. I started with a warm-up on the treadmill (러닝머신) for about 10 minutes to get my heart rate up. Then I moved to the weight training area where I did some bench presses (벤치프레스) with dumbbells. The gym was quite crowded (혼잡한) today, so I had to wait a bit for the equipment. I also did some squats (스쿼트) and deadlifts (데드리프트) to work on my lower body strength. My personal trainer (개인 트레이너) gave me some great advice on proper form. After the weights, I did some cardio (유산소 운동) on the elliptical machine (엘립티컬) for 20 minutes. I was feeling really motivated (동기부여된) today, so I pushed myself harder than usual. The workout was quite intense (격렬한), but I feel amazing now!"
+        "image": "1.webp",
+        "content": "Today I went to the gym for my regular workout session. I started with a warm-up on the treadmill for about 10 minutes to get my heart rate up. Then I moved to the weight training area where I did some bench presses with dumbbells. The gym was quite crowded today, so I had to wait a bit for the equipment. I also did some squats and deadlifts to work on my lower body strength. My personal trainer gave me some great advice on proper form. After the weights, I did some cardio on the elliptical machine for 20 minutes. I was feeling really motivated today, so I pushed myself harder than usual. The workout was quite intense, but I feel amazing now!"
     },
     {
         "date": "August 18th, 2025",
         "title": "Swimming at the Pool",
-        "image": "https://images.unsplash.com/photo-1530549387789-4c1017266635?w=800&h=400&fit=crop",
-        "content": "Today I went swimming at the local pool. The water was really refreshing (시원한) and the pool was quite spacious (넓은). I started with some warm-up laps (준비 운동 랩) using the freestyle stroke (자유형). The lifeguard (구조원) was very attentive (주의 깊은) and made sure everyone was safe. I also practiced the breaststroke (평영) and backstroke (배영) to improve my technique. The pool has different lanes (레인) for different skill levels, which is very convenient (편리한). I swam for about an hour and felt really energized (활력이 넘치는) afterwards. The changing rooms (탈의실) were clean and well-maintained (잘 관리된). I think swimming is such a great full-body workout (전신 운동)!"
+        "image": "2.webp",
+        "content": "Today I went swimming at the local pool. The water was really refreshing and the pool was quite spacious. I started with some warm-up laps using the freestyle stroke. The lifeguard was very attentive and made sure everyone was safe. I also practiced the breaststroke and backstroke to improve my technique. The pool has different lanes for different skill levels, which is very convenient. I swam for about an hour and felt really energized afterwards. The changing rooms were clean and well-maintained. I think swimming is such a great full-body workout!"
     }
 ];
 
