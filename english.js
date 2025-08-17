@@ -8,9 +8,9 @@ const articles = [
     },
     {
         "date": "August 18th, 2025",
-        "title": "Group Fitness Class Experience",
-        "image": "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=800&h=400&fit=crop",
-        "content": "I decided to try a new group fitness class today called 'Body Pump'. The instructor (강사) was very energetic (활기찬) and encouraging. The class involved using barbells (바벨) and doing various exercises like lunges (런지), shoulder presses (숄더 프레스), and bicep curls (바이셉 컬). The music was really motivating (동기부여하는) and helped keep the energy high throughout the session. I was sweating (땀을 흘리는) a lot, but it felt great! The class was quite challenging (도전적인), but everyone was supportive (지지하는) of each other. I think I'll definitely come back next week. The gym has a great atmosphere (분위기) and the equipment is well-maintained (잘 관리된)."
+        "title": "Swimming at the Pool",
+        "image": "https://images.unsplash.com/photo-1530549387789-4c1017266635?w=800&h=400&fit=crop",
+        "content": "Today I went swimming at the local pool. The water was really refreshing (시원한) and the pool was quite spacious (넓은). I started with some warm-up laps (준비 운동 랩) using the freestyle stroke (자유형). The lifeguard (구조원) was very attentive (주의 깊은) and made sure everyone was safe. I also practiced the breaststroke (평영) and backstroke (배영) to improve my technique. The pool has different lanes (레인) for different skill levels, which is very convenient (편리한). I swam for about an hour and felt really energized (활력이 넘치는) afterwards. The changing rooms (탈의실) were clean and well-maintained (잘 관리된). I think swimming is such a great full-body workout (전신 운동)!"
     }
 ];
 
