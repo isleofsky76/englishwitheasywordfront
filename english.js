@@ -21,9 +21,14 @@ const articles = [
       "hidden": "scored"
     },
     {
-      "korean": "사람들은 그것을 접시에 올려놓은 공이라고 말했다.",
-      "english": "People said it was like putting the ball on a plate.",
-      "hidden": "putting"
+      "korean": "그 선수는 손흥민이 접시에 음식을 잘 차려주었고 자신은 먹기만 했다고 겸손하게 말했다.",
+      "english": "The player humbly said that Son Heung-min had prepared the food on a plate and he only had to eat it.",
+      "hidden": "humbly said"
+    },
+    {
+      "korean": "이 말은 손흥민의 완벽한 패스를 칭찬한 것이다.",
+      "english": "This comment was a compliment to Son Heung-min’s perfect pass.",
+      "hidden": "compliment"
     },
     {
       "korean": "손흥민은 행복한 축구를 하는 것처럼 보였다.",
@@ -42,7 +47,6 @@ const articles = [
     }
   ]
 },
-
 
 {
   "date": "August 17th, 2025",
