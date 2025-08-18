@@ -1,5 +1,49 @@
 /// 글 데이터
 const articles = [
+
+{
+  "date": "August 17th, 2025",
+  "title": "Sonny Footballer – LAFC 첫 어시스트",
+  "sentences": [
+    {
+      "korean": "손흥민은 LAFC 이적 후 첫 어시스트를 기록했다.",
+      "english": "Son Heung-min made his first assist after moving to LAFC.",
+      "hidden": "made"
+    },
+    {
+      "korean": "그는 토트넘 140년 역사에서 가장 많은 어시스트를 기록한 선수이다.",
+      "english": "He is the player with the most assists in Tottenham’s 140-year history.",
+      "hidden": "the most assists"
+    },
+    {
+      "korean": "그의 패스를 받은 선수가 데뷔 첫 골을 넣었다.",
+      "english": "The player who received his pass scored his debut goal.",
+      "hidden": "scored"
+    },
+    {
+      "korean": "사람들은 그것을 접시에 올려놓은 공이라고 말했다.",
+      "english": "People said it was like putting the ball on a plate.",
+      "hidden": "putting"
+    },
+    {
+      "korean": "손흥민은 행복한 축구를 하는 것처럼 보였다.",
+      "english": "Son Heung-min looked like he was playing happy football.",
+      "hidden": "looked"
+    },
+    {
+      "korean": "그는 은퇴를 하기 위해 미국에 간 것이 아니다.",
+      "english": "He did not go to the U.S. to retire.",
+      "hidden": "retire"
+    },
+    {
+      "korean": "그는 새로운 역사를 쓰기 위해 갔다.",
+      "english": "He went there to make new history.",
+      "hidden": "make new history"
+    }
+  ]
+},
+
+
 {
   "date": "August 17th, 2025",
   "title": "호텔 로비 공연 (Hotel Lobby Performance)",
