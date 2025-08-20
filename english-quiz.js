@@ -1,6 +1,7 @@
+
 document.addEventListener('DOMContentLoaded', function() {
     // 서버 URL 설정
-    cconst SERVER_URL = 'https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app';  // 백엔드 서버 주소로 변경
+    const SERVER_URL = 'https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app';  // 백엔드 서버 주소로 변경
     
     document.getElementById('startButton').addEventListener('click', startQuiz);
     document.getElementById('showAnswer').addEventListener('click', showAnswer);
