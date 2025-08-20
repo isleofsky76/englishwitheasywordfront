@@ -1,73 +1,124 @@
 body {
-  font-family: Arial, sans-serif;
-  line-height: 2.0;
-  margin: 20px;
-  background-color: #05071e !important;
-  color: white;
-  font-size: 24px;
+  background: #f7f7fa;
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
-
-.bg-primary {
-  --bs-bg-opacity: 1;
-  background-color: #05071e !important;
-}
-
-.navbar, .navbar-custom {
+.navbar {
   background: linear-gradient(135deg, #4a90e2, #357abd) !important;
-  transition: top 0.3s; /* Smooth transition for hiding and showing the navbar */
-  font-size: 14px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  padding-top: 0.7rem;
+  padding-bottom: 0.7rem;
+  width: 100%;
 }
 
-header {
-  background-color: #02051d; /* Dark blue background color */
-  color: white;
-  text-align: left;
-  padding: 1em 0;
+.navbar-brand {
+  font-weight: 600;
+  font-size: 1.4rem;
+  color: white !important;
+  letter-spacing: 1px;
+  transition: transform 0.3s ease;
+  line-height: 1;
+  padding: 0;
 }
 
-
-h1, h2, h3 {
-  color: #2c3e50;
+.navbar-brand:hover {
+  transform: translateY(-2px);
 }
-a {
-  color: #3498db;
+
+.simple-navbar {
+  width: 100%;
+  background: #f7f7fa;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 2rem 1.2rem 1.2rem;
+  border-bottom: 1px solid #e0e0e0;
+  font-size: 1.3rem;
+}
+
+.logo {
+  font-weight: 700;
+  color: #222;
+  font-size: 1.3rem;
+  letter-spacing: 1px;
+}
+
+.home-link {
+  color: #357abd;
   text-decoration: none;
+  font-weight: 500;
+  font-size: 1.1rem;
+  padding: 0.3rem 1rem;
+  border-radius: 6px;
+  transition: background 0.2s, color 0.2s;
 }
-a:hover {
-  text-decoration: underline;
-}
-.section {
-  margin-bottom: 30px;
+.home-link:hover {
+  background: #eaf4fd;
+  color: #174a7c;
 }
 
-a.channel-name {
-  color: #FFD700 !important; /* 링크 텍스트를 노란색으로 설정 */
+main {
+  display: flex;
+  justify-content: center;
+  margin-top: 2.5rem;
 }
 
-/* 모바일 친화적인 디자인을 위한 스타일 */
+.note-container {
+  background: #fff;
+  border-radius: 10px;
+  padding: 2rem 1.5rem;
+  box-shadow: none;
+  width: 100%;
+  max-width: 600px;
+  min-height: 300px;
+}
+
+.expression-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.expression-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 1.3rem;
+  cursor: pointer;
+  transition: background 0.15s;
+  border-radius: 6px;
+  padding: 0.7rem 0.7rem 0.7rem 0.7rem;
+}
+.expression-item:hover {
+  background: #f0f4ff;
+}
+
+.expression-english {
+  color: #222;
+  font-size: 1.08rem;
+  font-weight: 500;
+  margin-bottom: 0.3rem;
+}
+
+.expression-korean {
+  color: #1565c0;
+  font-size: 1.05rem;
+  word-break: keep-all;
+  margin-left: 0;
+}
+
 @media (max-width: 600px) {
-  body {
-      margin: 10px;
-      line-height: 1.4;
+  .note-container {
+    padding: 1rem 0.5rem;
   }
-  h1 {
-      font-size: 1.5em;
+  .simple-navbar {
+    padding: 0.8rem 0.7rem;
+    font-size: 1rem;
   }
-  h2 {
-      font-size: 1.2em;
+  .expression-item {
+    padding: 0.5rem 0.3rem;
   }
-  h3 {
-      font-size: 1em;
-  }
-  p {
-      font-size: 0.7em;
-  }
-  .section {
-      margin-bottom: 20px;
-  }
-}
+} 
 
-a.channel-name {
-  color: #FFD700 !important; /* 링크 텍스트를 노란색으로 설정 */
-}
