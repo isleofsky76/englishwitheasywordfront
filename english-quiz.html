@@ -38,7 +38,7 @@
 
         body {
             font-family: 'Inter', 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #fafafa;
             color: var(--text-color);
             line-height: 1.6;
             height: 100vh;
@@ -84,11 +84,7 @@
 
         /* Main Quiz Container */
         .quiz-container {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            border-radius: 24px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: #ffffff;
             margin-top: 100px;
             margin-bottom: 0;
             overflow: hidden;
@@ -101,7 +97,7 @@
 
 
         .quiz-content {
-            padding: 2rem;
+            padding: 1rem;
             flex: 1;
             min-height: 300px;
         }
@@ -109,17 +105,19 @@
         /* Buttons */
         .btn {
             font-weight: 600;
-            padding: 12px 24px;
-            border-radius: 12px;
+            padding: 8px 12px;
+            border-radius: 8px;
             border: none;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             cursor: pointer;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            margin: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            justify-content: center;
+            margin: 4px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            min-width: 40px;
+            height: 40px;
         }
 
         .btn:hover {
@@ -173,16 +171,12 @@
 
         /* Question Styling */
         #question {
-            background: var(--light-bg);
             padding: 1.5rem;
-            border-radius: 16px;
             font-size: 1.8rem;
             font-weight: 500;
             color: var(--text-color);
-            border: 2px solid var(--border-color);
             margin: 1rem 0;
             line-height: 1.8;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
         }
 
         /* Result Styling */
@@ -191,11 +185,7 @@
         }
 
         .quiz-result {
-            background: white;
-            border-radius: 16px;
             padding: 1.5rem;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            border: 1px solid var(--border-color);
             animation: slideInUp 0.3s ease-out;
         }
 
@@ -213,11 +203,9 @@
         .result-section {
             margin-bottom: 1.5rem;
             padding-bottom: 1.5rem;
-            border-bottom: 1px solid var(--border-color);
         }
 
         .result-section:last-child {
-            border-bottom: none;
             margin-bottom: 0;
             padding-bottom: 0;
         }
@@ -245,9 +233,7 @@
             font-size: 1.1rem;
             font-weight: 700;
             color: var(--success-color);
-            background: rgba(40, 167, 69, 0.1);
             padding: 8px 16px;
-            border-radius: 8px;
             display: inline-block;
             margin-left: -10px !important;
         }
@@ -255,10 +241,7 @@
         .sentence {
             font-style: italic;
             color: var(--text-color);
-            background: var(--light-bg);
             padding: 12px;
-            border-radius: 8px;
-            border-left: 4px solid var(--primary-color);
         }
 
         .translation {
@@ -269,10 +252,7 @@
 
         .explanation {
             color: var(--text-color);
-            background: var(--light-bg);
             padding: 16px;
-            border-radius: 12px;
-            border-left: 4px solid var(--primary-color);
             font-size: 1.1rem;
             font-weight: 500;
             white-space: pre-line;
@@ -280,10 +260,7 @@
 
         .error-message {
             color: var(--danger-color);
-            background: rgba(220, 53, 69, 0.1);
             padding: 16px;
-            border-radius: 12px;
-            border-left: 4px solid var(--danger-color);
             margin: 0;
             font-weight: 500;
         }
@@ -322,11 +299,11 @@
             }
             
             .btn {
-                padding: 12px 16px;
-                font-size: 0.9rem;
-                margin: 4px;
-                width: 100%;
-                max-width: 200px;
+                padding: 6px 10px;
+                font-size: 1rem;
+                margin: 3px;
+                min-width: 35px;
+                height: 35px;
             }
             
             #question {
@@ -424,13 +401,13 @@
                     <div id="question">Question</div>
                     <div class="text-center">
                         <button id="showAnswer" class="btn btn-warning">
-                            <i class="fas fa-lightbulb me-2"></i>Show Answer
+                            💡
                         </button>
                         <button id="nextQuiz" class="btn btn-info">
-                            <i class="fas fa-arrow-right me-2"></i>Next Quiz
+                            ➡️
                         </button>
                         <button id="refreshQuiz" class="btn btn-secondary" style="display:none;">
-                            <i class="fas fa-redo me-2"></i>Restart
+                            🔄
                         </button>
                     </div>
                 </div>
@@ -444,3 +421,4 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
