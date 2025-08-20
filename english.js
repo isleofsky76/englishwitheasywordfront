@@ -1,6 +1,61 @@
 //// 글 데이터
 const articles = [
-
+{
+        "date": "August 20th, 2025",
+        "title": "AI 버블 발언으로 증시 급락",
+        "sentences": [
+          {
+            "korean": "샘 올트먼이 'AI 버블'이라고 말하자 전 세계 증시가 크게 흔들렸다.",
+            "english": "When Sam Altman said there was an 'AI bubble,' stock markets around the world fell sharply.",
+            "hidden": "AI bubble"
+          },
+          {
+            "korean": "특히 반도체와 전력 관련 주식들이 큰 타격을 입었다.",
+            "english": "Semiconductor and power-related stocks were hit the hardest.",
+            "hidden": "were hit"
+          },
+          {
+            "korean": "엔비디아, AMD, TSMC 같은 미국 반도체 기업 주가도 크게 하락했다.",
+            "english": "U.S. chip companies like Nvidia, AMD, and TSMC also dropped sharply.",
+            "hidden": "dropped"
+          },
+          {
+            "korean": "한국의 SK하이닉스와 다른 반도체 부품 기업들도 주가가 내려갔다.",
+            "english": "In Korea, SK Hynix and other semiconductor parts companies also saw their stock prices fall.",
+            "hidden": "fall"
+          },
+          {
+            "korean": "데이터센터 투자가 줄어들 것이라는 우려로 전력주도 하락했다.",
+            "english": "Power stocks fell as investors worried that data center investment would shrink.",
+            "hidden": "fell"
+          },
+          {
+            "korean": "코스피 지수는 장중 3100선을 깨고 크게 떨어졌다.",
+            "english": "The KOSPI index dropped below 3100 during trading.",
+            "hidden": "dropped"
+          },
+          {
+            "korean": "외국인 투자자들이 한국 주식을 많이 팔면서 하락이 더 심해졌다.",
+            "english": "Foreign investors sold a lot of Korean stocks, making the fall worse.",
+            "hidden": "sold"
+          },
+          {
+            "korean": "미국 증시에서도 테슬라, 엔비디아, 팔란티어 같은 인기 기술주가 큰 폭으로 하락했다.",
+            "english": "In the U.S. market, popular tech stocks like Tesla, Nvidia, and Palantir also fell sharply.",
+            "hidden": "fell sharply"
+          },
+          {
+            "korean": "투자자들은 8월 말 열리는 잭슨홀 미팅과 엔비디아 실적 발표에 주목하고 있다.",
+            "english": "Investors are watching the Jackson Hole meeting and Nvidia’s earnings report at the end of August.",
+            "hidden": "are watching"
+          },
+          {
+            "korean": "이 발표들이 시장 불안을 잠재울 수 있을지 관심이 크다.",
+            "english": "There is strong interest in whether these announcements can calm market fears.",
+            "hidden": "calm"
+          }
+        ]
+      },
 {
   "date": "August 17th, 2025",
   "title": "Sonny Footballer – LAFC 첫 어시스트",
