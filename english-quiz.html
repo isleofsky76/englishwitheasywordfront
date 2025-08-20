@@ -98,25 +98,7 @@
             height: calc(100vh - 120px);
         }
 
-        .quiz-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 2rem;
-            text-align: center;
-        }
 
-        .quiz-header h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .quiz-header p {
-            font-size: 1.1rem;
-            opacity: 0.9;
-            margin: 0;
-        }
 
         .quiz-content {
             padding: 2rem;
@@ -334,13 +316,7 @@
                 margin-bottom: 20px;
             }
             
-            .quiz-header {
-                padding: 1.5rem;
-            }
-            
-            .quiz-header h1 {
-                font-size: 2rem;
-            }
+
             
             .quiz-content {
                 padding: 1.5rem;
@@ -395,11 +371,6 @@
 
     <div class="container">
         <div class="quiz-container">
-            <div class="quiz-header">
-                <h1><i class="fas fa-brain me-2"></i>English Quiz</h1>
-                <p>Practice vocabulary with interactive quizzes</p>
-            </div>
-            
             <div class="quiz-content">
                 <div class="text-center">
                     <button id="startButton" class="btn btn-primary">
@@ -408,7 +379,7 @@
                 </div>
                 
                 <div id="quiz" style="display:none;">
-                    <div id="question"></div>
+                    <div id="question">Question</div>
                     <div class="text-center">
                         <button id="showAnswer" class="btn btn-warning">
                             <i class="fas fa-lightbulb me-2"></i>Show Answer
