@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const submitButton = document.getElementById('submitButton');
 
     const initialMessages = [
-        "Hi there! 👋 I'm your AI English tutor. Let's have a fun conversation!",
+        "Hi there!",
     ];
 
     // Display initial messages
