@@ -32,6 +32,25 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('question').innerText = question;
             document.getElementById('startButton').style.display = 'none';
             document.getElementById('result').innerText = '';
+            
+            // 카운트다운 표시
+            let countdown = 10;
+            const countdownElement = document.createElement('div');
+            countdownElement.id = 'countdown';
+            countdownElement.style.cssText = 'text-align: center; font-size: 2rem; color: #dc3545; margin: 10px 0; font-weight: bold;';
+            countdownElement.textContent = countdown;
+            document.getElementById('quiz').appendChild(countdownElement);
+            
+            const timer = setInterval(() => {
+                countdown--;
+                countdownElement.textContent = countdown;
+                
+                if (countdown <= 0) {
+                    clearInterval(timer);
+                    countdownElement.remove();
+                    showAnswer();
+                }
+            }, 1000);
         } catch (error) {
             console.error('Error starting quiz:', error);
             document.getElementById('result').innerHTML = `
