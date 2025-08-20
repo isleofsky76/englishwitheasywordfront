@@ -1,4 +1,5 @@
-// document.addEventListener('DOMContentLoaded', function () {
+//아래코드 참고 쭉 아래
+//    document.addEventListener('DOMContentLoaded', function () {
 //     const inputMessage = document.getElementById('inputMessage');
 //     const chatMessages = document.getElementById('chatMessages');
 //     const submitButton = document.getElementById('submitButton');
