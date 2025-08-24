@@ -15,7 +15,10 @@ body {
   background-color: #02051d; /* Dark blue background color */
   transition: top 0.3s; /* Smooth transition for hiding and showing the navbar */
   font-size: 16px;
-  
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
 }
 
 .navbar-brand {
@@ -42,21 +45,20 @@ body {
   margin: 0 auto;
   max-width: 600px;
   font-size: 18px;
+  margin-top: 80px; /* Add top margin to account for fixed navbar */
 }
 
 .rules-section {
   padding-left: 20px;
   font-size: 18px;
-
-
 }
+
 .divider {
   height: 1px;
   background-color: #ddd;
   margin: 20px 0;
   font-size: 14px;
 }
-
 
 #question {
   background-color: #2d8331; /* Dark blue background color */
@@ -65,7 +67,6 @@ body {
   border: 1px solid #ddd; /* Optional: add a border */
   font-size: 18px;
 }
-
 
 .btn{
   background-color: #08082e; /* Dark blue background color */
@@ -83,7 +84,6 @@ body {
   color: #ddd;
   line-height: 1.3; /* Adjust this value to increase or decrease the line spacing */
 }
-
 
 .rules-section {
   margin-top: 20px;
@@ -104,4 +104,112 @@ body {
 .quiz-result .result-section p {
   font-size: 14px !important;
   font-weight: normal !important;
+}
+
+/* Mobile responsive styles */
+@media (max-width: 768px) {
+  body {
+    font-size: 18px;
+    margin-top: 5px;
+  }
+  
+  .navbar-custom {
+    font-size: 14px;
+    padding: 8px 0;
+  }
+  
+  .navbar-brand {
+    font-size: 0.9rem;
+  }
+  
+  .quiz-container {
+    margin-top: 70px;
+    padding: 8px;
+    font-size: 16px;
+  }
+  
+  #question {
+    font-size: 16px;
+    padding: 8px;
+  }
+  
+  .btn {
+    height: 45px;
+    width: 90px;
+    font-size: 12px;
+  }
+  
+  .rules-section {
+    font-size: 12px;
+    padding-left: 15px;
+  }
+  
+  #result {
+    font-size: 12px;
+  }
+  
+  .quiz-result, .quiz-result * {
+    font-size: 12px !important;
+  }
+  
+  .quiz-result .answer,
+  .quiz-result .result-section,
+  .quiz-result .result-section h3,
+  .quiz-result .result-section p {
+    font-size: 12px !important;
+  }
+}
+
+/* Extra small mobile devices */
+@media (max-width: 480px) {
+  body {
+    font-size: 16px;
+    margin-top: 3px;
+  }
+  
+  .navbar-custom {
+    font-size: 12px;
+    padding: 6px 0;
+  }
+  
+  .navbar-brand {
+    font-size: 0.8rem;
+  }
+  
+  .quiz-container {
+    margin-top: 60px;
+    padding: 5px;
+    font-size: 14px;
+  }
+  
+  #question {
+    font-size: 14px;
+    padding: 6px;
+  }
+  
+  .btn {
+    height: 40px;
+    width: 80px;
+    font-size: 11px;
+  }
+  
+  .rules-section {
+    font-size: 11px;
+    padding-left: 10px;
+  }
+  
+  #result {
+    font-size: 11px;
+  }
+  
+  .quiz-result, .quiz-result * {
+    font-size: 11px !important;
+  }
+  
+  .quiz-result .answer,
+  .quiz-result .result-section,
+  .quiz-result .result-section h3,
+  .quiz-result .result-section p {
+    font-size: 11px !important;
+  }
 }
