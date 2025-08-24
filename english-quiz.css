@@ -282,3 +282,63 @@ body {
   }
 }
 
+/* Sidebar menu responsive styles */
+.sidebar, .sidebar-menu, .side-menu, .menu-sidebar, [class*="sidebar"], [class*="side-menu"] {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  z-index: 9999 !important;
+  height: 100vh !important;
+  overflow-y: auto !important;
+}
+
+/* Mobile sidebar styles */
+@media (max-width: 768px) {
+  .sidebar, .sidebar-menu, .side-menu, .menu-sidebar, [class*="sidebar"], [class*="side-menu"] {
+    width: 100% !important;
+    max-width: 300px !important;
+    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%) !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar, .sidebar-menu, .side-menu, .menu-sidebar, [class*="sidebar"], [class*="side-menu"] {
+    width: 100% !important;
+    max-width: 250px !important;
+    font-size: 14px !important;
+  }
+  
+  .sidebar *, .sidebar-menu *, .side-menu *, .menu-sidebar *, [class*="sidebar"] *, [class*="side-menu"] * {
+    font-size: 14px !important;
+  }
+}
+
+@media (max-width: 320px) {
+  .sidebar, .sidebar-menu, .side-menu, .menu-sidebar, [class*="sidebar"], [class*="side-menu"] {
+    width: 100% !important;
+    max-width: 200px !important;
+    font-size: 12px !important;
+  }
+  
+  .sidebar *, .sidebar-menu *, .side-menu *, .menu-sidebar *, [class*="sidebar"] *, [class*="side-menu"] * {
+    font-size: 12px !important;
+  }
+}
+
+/* Prevent sidebar from being pushed down */
+body {
+  overflow-x: hidden !important;
+}
+
+/* Ensure main content doesn't overlap with sidebar */
+.main-content, .content, .container, [class*="content"], [class*="container"] {
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+}
+
+@media (min-width: 769px) {
+  .main-content, .content, .container, [class*="content"], [class*="container"] {
+    margin-left: 300px !important;
+  }
+}
+
