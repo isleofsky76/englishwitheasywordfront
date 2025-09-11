@@ -15,7 +15,7 @@
 
 .navbar-brand {
     font-weight: 600;
-    font-size: 1.4rem;
+    font-size: 1.1rem;
     color: white !important;
     letter-spacing: 1px;
     transition: transform 0.3s ease;
@@ -25,6 +25,11 @@
 
 .navbar-brand:hover {
     transform: translateY(-2px);
+}
+
+.nav-link {
+    font-size: 1.0rem;
+    font-weight: 500;
 }
 
 body {
@@ -242,27 +247,6 @@ body {
     text-align: left;
 }
 
-/* 음성 재생 버튼 스타일 */
-.play-audio-btn {
-    background: none;
-    color: #667eea;
-    border: none;
-    padding: 2px 4px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin-left: 8px;
-    display: inline-block;
-}
-
-.play-audio-btn:hover {
-    color: #4a5568;
-    transform: scale(1.1);
-}
-
-.play-audio-btn:active {
-    transform: scale(0.95);
-}
 
 
 
@@ -668,11 +652,6 @@ body {
         line-height: 1.6;
     }
     
-    .play-audio-btn {
-        font-size: 0.9rem;
-        margin-left: 6px;
-        padding: 1px 3px;
-    }
     
     .example-section {
         padding: 20px;
