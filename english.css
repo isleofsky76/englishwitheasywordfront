@@ -116,9 +116,6 @@ body {
     margin: 0 auto;
     border-radius: 12px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-}
-
-.article-text {
     line-height: 1.8;
 }
 
@@ -237,17 +234,12 @@ body {
     font-weight: 600;
 }
 
-/* 단어 텍스트 스타일 */
-.words-text {
+/* 단어 텍스트 스타일 - article-section에 직접 적용 */
+.article-section {
     font-size: 1.1rem;
     line-height: 1.8;
     color: #2d3748;
     text-align: left;
-    padding: 20px;
-    background: #f8fafc;
-    border-radius: 8px;
-    border: 1px solid #e2e8f0;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
 }
 
 /* 음성 재생 버튼 스타일 */
@@ -657,10 +649,33 @@ body {
     }
     
     .container {
+        padding: 10px;
+    }
+    
+    .article-section {
         padding: 15px;
+        max-width: 100%;
+        margin: 0;
+    }
+    
+    .words-title {
+        font-size: 1rem;
+        margin-bottom: 8px;
+    }
+    
+    .article-section {
+        font-size: 0.9rem;
+        line-height: 1.6;
+    }
+    
+    .play-audio-btn {
+        font-size: 0.9rem;
+        margin-left: 6px;
+        padding: 1px 3px;
     }
     
     .example-section {
         padding: 20px;
     }
 }
+
