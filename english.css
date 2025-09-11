@@ -111,14 +111,168 @@ body {
 /* Article Section */
 .article-section {
     background: white;
-    padding: 20px;
-    max-width: 800px;
+    padding: 30px;
+    max-width: 1000px;
     margin: 0 auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
 }
 
 .article-text {
     line-height: 1.8;
 }
+
+/* Word Card Styles */
+.word-card {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 8px 15px;
+    margin-bottom: 5px;
+    transition: all 0.3s ease;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.word-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    border-color: #667eea;
+}
+
+.word-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0;
+    flex-wrap: wrap;
+    gap: 8px;
+    font-size: 1rem;
+    line-height: 1.3;
+}
+
+.word-number {
+    color: #a0aec0;
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-right: 5px;
+    min-width: 20px;
+}
+
+.word-title {
+    color: #667eea;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin: 0;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.separator {
+    color: #a0aec0;
+    font-weight: 300;
+    margin: 0 4px;
+}
+
+.korean-pronunciation {
+    color: #4a5568;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.english-pronunciation {
+    color: #718096;
+    font-size: 0.9rem;
+    font-style: italic;
+}
+
+.word-meaning {
+    color: #2d3748;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+/* 날짜 컨트롤 버튼 */
+.date-controls {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    gap: 10px;
+}
+
+.date-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+    flex: 1;
+}
+
+.date-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.date-btn:active {
+    transform: translateY(0);
+}
+
+.date-btn:disabled {
+    background: #a0aec0;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* 단어 제목 스타일 */
+.words-title {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #2d3748;
+    text-align: left;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+/* 단어 텍스트 스타일 */
+.words-text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #2d3748;
+    text-align: left;
+    padding: 20px;
+    background: #f8fafc;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+/* 음성 재생 버튼 스타일 */
+.play-audio-btn {
+    background: none;
+    color: #667eea;
+    border: none;
+    padding: 2px 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-left: 8px;
+    display: inline-block;
+}
+
+.play-audio-btn:hover {
+    color: #4a5568;
+    transform: scale(1.1);
+}
+
+.play-audio-btn:active {
+    transform: scale(0.95);
+}
+
+
 
 .article {
     padding: 20px 0;
