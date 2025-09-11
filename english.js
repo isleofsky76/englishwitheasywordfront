@@ -1,3 +1,4 @@
+// 단어장 데이터 - 날짜별로 구성
 const wordsByDate = {
    
     "20250911": [
@@ -184,13 +185,7 @@ const wordsByDate = {
             "meaning": "중단하다",
             "language": "en-GB"
         },
-        {
-            "word": "videoconference",
-            "korean_pronunciation": "비디오컨퍼런스",
-            "english_pronunciation": "/ˈvɪdiəʊˌkɒnfərəns/",
-            "meaning": "화상 회의",
-            "language": "en-GB"
-        },
+     
         {
             "word": "consular",
             "korean_pronunciation": "컨슐러",
@@ -198,13 +193,7 @@ const wordsByDate = {
             "meaning": "영사의",
             "language": "en-GB"
         },
-        {
-            "word": "services",
-            "korean_pronunciation": "서비스즈",
-            "english_pronunciation": "/ˈsɜːvɪsɪz/",
-            "meaning": "서비스",
-            "language": "en-GB"
-        },
+        
         {
             "word": "fallout",
             "korean_pronunciation": "폴아웃",
