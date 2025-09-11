@@ -261,35 +261,6 @@ function getAvailableDates() {
 }
 
 
-// 단어 음성 재생 (웹 TTS 사용)
-function playWordAudio(word, language) {
-    if ('speechSynthesis' in window) {
-        // 기존 음성 중지
-        speechSynthesis.cancel();
-        
-        const utterance = new SpeechSynthesisUtterance(word);
-        
-        // 언어 설정
-        if (language === 'en-GB') {
-            utterance.lang = 'en-GB';
-        } else if (language === 'ko-KR') {
-            utterance.lang = 'ko-KR';
-        } else {
-            utterance.lang = 'en-US';
-        }
-        
-        // 음성 속도와 볼륨 설정
-        utterance.rate = 0.8;
-        utterance.volume = 1.0;
-        utterance.pitch = 1.0;
-        
-        // 음성 재생
-        speechSynthesis.speak(utterance);
-    } else {
-        console.error('Speech synthesis not supported');
-        alert('이 브라우저는 음성 재생을 지원하지 않습니다.');
-    }
-}
 
 // 모든 단어 표시 (모든 날짜를 아래로 쭉 나열)
 function displayAllWords() {
@@ -302,7 +273,7 @@ function displayAllWords() {
         
         if (words.length > 0) {
             words.forEach((word, index) => {
-                wordsText += `${index + 1}. <strong>${word.word}</strong> / ${word.korean_pronunciation} / ${word.english_pronunciation} / ${word.meaning} <button class="play-audio-btn" onclick="playWordAudio('${word.word}', '${word.language}')">🔊</button><br>`;
+                wordsText += `${index + 1}. <strong>${word.word}</strong> / ${word.korean_pronunciation} / ${word.english_pronunciation} / ${word.meaning}<br>`;
             });
             
             allWordsHTML += `
@@ -327,6 +298,15 @@ function init() {
 document.addEventListener('DOMContentLoaded', function() {
     // 단어장 초기화
     init();
+    
+    // Home 링크 클릭 이벤트
+    const homeLink = document.querySelector('.nav-link[href="https://englisheasystudy.com/"]');
+    if (homeLink) {
+        homeLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.location.href = 'https://englisheasystudy.com/';
+        });
+    }
     
     // 팝업 관련 이벤트
     if (popupClose) {
