@@ -231,7 +231,7 @@ body {
 
 /* 단어 제목 스타일 */
 .words-title {
-    font-size: 1.1rem;
+    font-size: 1rem;
     line-height: 1.8;
     color: #2d3748;
     text-align: left;
@@ -241,7 +241,7 @@ body {
 
 /* 단어 텍스트 스타일 - article-section에 직접 적용 */
 .article-section {
-    font-size: 1.1rem;
+    font-size: 0.875rem;
     line-height: 1.8;
     color: #2d3748;
     text-align: left;
@@ -643,12 +643,12 @@ body {
     }
     
     .words-title {
-        font-size: 1rem;
+        font-size: 0.9rem;
         margin-bottom: 8px;
     }
     
     .article-section {
-        font-size: 0.9rem;
+        font-size: 0.75rem;
         line-height: 1.6;
     }
     
@@ -656,5 +656,43 @@ body {
     .example-section {
         padding: 20px;
     }
+}
+
+/* 날짜 간격 스타일 */
+.date-spacing {
+    height: 30px;
+    margin: 20px 0;
+}
+
+/* 단어 부분별 색상 스타일 */
+.word-part {
+    font-weight: 600;
+    padding: 2px 4px;
+    border-radius: 3px;
+}
+
+.word-english {
+    color: #2563eb; /* 파란색 - 영어 단어 */
+    background-color: #dbeafe;
+    font-size: 0.875rem; /* 14px */
+}
+
+.word-korean {
+    color: #dc2626; /* 빨간색 - 한글 발음 */
+    background-color: #fee2e2;
+    font-size: 0.875rem; /* 14px */
+}
+
+.word-phonetic {
+    color: #059669; /* 초록색 - 발음기호 */
+    background-color: #d1fae5;
+    font-family: 'Courier New', monospace;
+    font-size: 0.875rem; /* 14px */
+}
+
+.word-meaning {
+    color: #7c3aed; /* 보라색 - 뜻 */
+    background-color: #ede9fe;
+    font-size: 0.875rem; /* 14px */
 }
 
