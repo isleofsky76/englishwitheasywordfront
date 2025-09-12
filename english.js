@@ -610,7 +610,7 @@ function displayAllWords() {
         
         if (words.length > 0) {
             words.forEach((word, index) => {
-                wordsText += `${index + 1}. <span class="word-part word-english">${word.word}</span> / <span class="word-part word-korean">${word.korean_pronunciation}</span> / <span class="word-part word-phonetic">${word.english_pronunciation}</span> / <span class="word-part word-meaning">${word.meaning}</span><br>`;
+                wordsText += `${index + 1}. <span class="word-part word-english">${word.word}</span> / <span class="word-part word-korean">${word.korean_pronunciation}</span> / <span class="word-part word-meaning">${word.meaning}</span><br>`;
             });
             
             allWordsHTML += `
