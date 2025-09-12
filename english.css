@@ -673,26 +673,21 @@ body {
 
 .word-english {
     color: #2563eb; /* 파란색 - 영어 단어 */
-    background-color: #dbeafe;
     font-size: 0.875rem; /* 14px */
 }
 
 .word-korean {
     color: #dc2626; /* 빨간색 - 한글 발음 */
-    background-color: #fee2e2;
     font-size: 0.875rem; /* 14px */
 }
 
 .word-phonetic {
     color: #059669; /* 초록색 - 발음기호 */
-    background-color: #d1fae5;
     font-family: 'Courier New', monospace;
     font-size: 0.875rem; /* 14px */
 }
 
 .word-meaning {
     color: #7c3aed; /* 보라색 - 뜻 */
-    background-color: #ede9fe;
     font-size: 0.875rem; /* 14px */
 }
-
