@@ -1,5 +1,218 @@
 // 단어장 데이터 - 날짜별로 구성
 const wordsByDate = {
+    "20250918": [
+        {
+            "word": "concession",
+            "korean_pronunciation": "컨세션",
+            "english_pronunciation": "/kənˈseʃən/",
+            "meaning": "양보, 인정",
+            "language": "en-GB"
+          },
+          {
+            "word": "pre-empt",
+            "korean_pronunciation": "프리엠프트",
+            "english_pronunciation": "/priːˈɛmpt/",
+            "meaning": "선제적으로 막다, 방송을 대체하다",
+            "language": "en-GB"
+          },
+          {
+            "word": "indefinitely",
+            "korean_pronunciation": "인데피니틀리",
+            "english_pronunciation": "/ɪnˈdɛfɪnətli/",
+            "meaning": "무기한으로",
+            "language": "en-GB"
+          },
+          {
+            "word": "conservative",
+            "korean_pronunciation": "컨서버티브",
+            "english_pronunciation": "/kənˈsɜːvətɪv/",
+            "meaning": "보수적인; 보수주의자",
+            "language": "en-GB"
+          },
+          {
+            "word": "regulatory",
+            "korean_pronunciation": "레귤러토리",
+            "english_pronunciation": "/ˈrɛɡjʊlətəri/",
+            "meaning": "규제의, 규제 기관의",
+            "language": "en-GB"
+          },
+          {
+            "word": "affiliate",
+            "korean_pronunciation": "어필리에이트",
+            "english_pronunciation": "/əˈfɪlieɪt/",
+            "meaning": "계열사, 지부",
+            "language": "en-GB"
+          },
+          {
+            "word": "criticism",
+            "korean_pronunciation": "크리티시즘",
+            "english_pronunciation": "/ˈkrɪtɪˌsɪzəm/",
+            "meaning": "비판, 비난",
+            "language": "en-GB"
+          },
+          {
+            "word": "mourning",
+            "korean_pronunciation": "모닝",
+            "english_pronunciation": "/ˈmɔːnɪŋ/",
+            "meaning": "애도, 슬퍼함",
+            "language": "en-GB"
+          },
+          {
+            "word": "capitalize",
+            "korean_pronunciation": "캐피털라이즈",
+            "english_pronunciation": "/ˈkæpɪtəlaɪz/",
+            "meaning": "기회를 이용하다",
+            "language": "en-GB"
+          },
+          {
+            "word": "spectrum",
+            "korean_pronunciation": "스펙트럼",
+            "english_pronunciation": "/ˈspɛktrəm/",
+            "meaning": "범위, 스펙트럼",
+            "language": "en-GB"
+          },
+          {
+            "word": "values",
+            "korean_pronunciation": "밸류즈",
+            "english_pronunciation": "/ˈvæljuːz/",
+            "meaning": "가치관",
+            "language": "en-GB"
+          },
+          {
+            "word": "commitment",
+            "korean_pronunciation": "커밋먼트",
+            "english_pronunciation": "/kəˈmɪtmənt/",
+            "meaning": "헌신, 약속",
+            "language": "en-GB"
+          },
+          {
+            "word": "accountability",
+            "korean_pronunciation": "어카운터빌리티",
+            "english_pronunciation": "/əˌkaʊntəˈbɪləti/",
+            "meaning": "책임, 책무",
+            "language": "en-GB"
+          },
+          {
+            "word": "leadership",
+            "korean_pronunciation": "리더십",
+            "english_pronunciation": "/ˈliːdəʃɪp/",
+            "meaning": "지도력, 리더십",
+            "language": "en-GB"
+          },
+          {
+            "word": "discourse",
+            "korean_pronunciation": "디스코스",
+            "english_pronunciation": "/ˈdɪskɔːs/",
+            "meaning": "담론, 토론",
+            "language": "en-GB"
+          },
+          {
+            "word": "suppress",
+            "korean_pronunciation": "서프레스",
+            "english_pronunciation": "/səˈprɛs/",
+            "meaning": "억압하다, 억누르다",
+            "language": "en-GB"
+          },
+          {
+            "word": "lawful",
+            "korean_pronunciation": "로플",
+            "english_pronunciation": "/ˈlɔːfʊl/",
+            "meaning": "합법적인",
+            "language": "en-GB"
+          },
+          {
+            "word": "expression",
+            "korean_pronunciation": "익스프레션",
+            "english_pronunciation": "/ɪkˈsprɛʃən/",
+            "meaning": "표현",
+            "language": "en-GB"
+          },
+          {
+            "word": "censorship",
+            "korean_pronunciation": "센서십",
+            "english_pronunciation": "/ˈsɛnsəʃɪp/",
+            "meaning": "검열",
+            "language": "en-GB"
+          },
+          {
+            "word": "settlement",
+            "korean_pronunciation": "세틀먼트",
+            "english_pronunciation": "/ˈsɛtlmənt/",
+            "meaning": "합의, 해결",
+            "language": "en-GB"
+          },
+          {
+            "word": "defamation",
+            "korean_pronunciation": "데퍼메이션",
+            "english_pronunciation": "/ˌdɛfəˈmeɪʃən/",
+            "meaning": "명예훼손",
+            "language": "en-GB"
+          },
+          {
+            "word": "donation",
+            "korean_pronunciation": "도네이션",
+            "english_pronunciation": "/dəʊˈneɪʃən/",
+            "meaning": "기부",
+            "language": "en-GB"
+          },
+          {
+            "word": "sensitive",
+            "korean_pronunciation": "센서티브",
+            "english_pronunciation": "/ˈsɛnsɪtɪv/",
+            "meaning": "민감한",
+            "language": "en-GB"
+          },
+          {
+            "word": "controversial",
+            "korean_pronunciation": "컨트러버셜",
+            "english_pronunciation": "/ˌkɒntrəˈvɜːʃəl/",
+            "meaning": "논란이 많은",
+            "language": "en-GB"
+          },
+          {
+            "word": "enforce",
+            "korean_pronunciation": "엔포스",
+            "english_pronunciation": "/ɪnˈfɔːs/",
+            "meaning": "집행하다, 강제하다",
+            "language": "en-GB"
+          },
+          {
+            "word": "ideology",
+            "korean_pronunciation": "아이디올로지",
+            "english_pronunciation": "/ˌaɪdɪˈɒlədʒi/",
+            "meaning": "이데올로기, 사상",
+            "language": "en-GB"
+          },
+          {
+            "word": "circus",
+            "korean_pronunciation": "서커스",
+            "english_pronunciation": "/ˈsɜːkəs/",
+            "meaning": "광란의 상황, 서커스",
+            "language": "en-GB"
+          },
+          {
+            "word": "merger",
+            "korean_pronunciation": "머저",
+            "english_pronunciation": "/ˈmɜːdʒə/",
+            "meaning": "합병",
+            "language": "en-GB"
+          },
+          {
+            "word": "probe",
+            "korean_pronunciation": "프롭",
+            "english_pronunciation": "/prəʊb/",
+            "meaning": "조사, 탐사",
+            "language": "en-GB"
+          },
+          {
+            "word": "equity",
+            "korean_pronunciation": "에퀴티",
+            "english_pronunciation": "/ˈɛkwɪti/",
+            "meaning": "지분, 공평",
+            "language": "en-GB"
+          },
+     
+    ],
     "20250912": [
         {
             "word": "allegation",
@@ -211,132 +424,8 @@ const wordsByDate = {
             "meaning": "겁주다, 위협하다",
             "language": "en-GB"
         },
-        {
-            "word": "jurisdiction",
-            "korean_pronunciation": "주리스딕션",
-            "english_pronunciation": "/ˌdʒʊərɪsˈdɪkʃən/",
-            "meaning": "관할권",
-            "language": "en-GB"
-        },
-        {
-            "word": "legitimate",
-            "korean_pronunciation": "레지티미트",
-            "english_pronunciation": "/lɪˈdʒɪtɪmət/",
-            "meaning": "합법적인, 정당한",
-            "language": "en-GB"
-        },
-        {
-            "word": "lethal",
-            "korean_pronunciation": "리썰",
-            "english_pronunciation": "/ˈliːθəl/",
-            "meaning": "치명적인",
-            "language": "en-GB"
-        },
-        {
-            "word": "manipulate",
-            "korean_pronunciation": "매니퓰레이트",
-            "english_pronunciation": "/məˈnɪpjuleɪt/",
-            "meaning": "조종하다, 조작하다",
-            "language": "en-GB"
-        },
-        {
-            "word": "menacing",
-            "korean_pronunciation": "메너싱",
-            "english_pronunciation": "/ˈmɛnəsɪŋ/",
-            "meaning": "위협적인",
-            "language": "en-GB"
-        },
-        {
-            "word": "meticulous",
-            "korean_pronunciation": "메티큘러스",
-            "english_pronunciation": "/məˈtɪkjʊləs/",
-            "meaning": "꼼꼼한",
-            "language": "en-GB"
-        },
-        {
-            "word": "notorious",
-            "korean_pronunciation": "노토리어스",
-            "english_pronunciation": "/nəʊˈtɔːriəs/",
-            "meaning": "악명 높은",
-            "language": "en-GB"
-        },
-        {
-            "word": "obstruction",
-            "korean_pronunciation": "옵스트럭션",
-            "english_pronunciation": "/əbˈstrʌkʃən/",
-            "meaning": "방해, 장애",
-            "language": "en-GB"
-        },
-        {
-            "word": "ominous",
-            "korean_pronunciation": "오미너스",
-            "english_pronunciation": "/ˈɒmɪnəs/",
-            "meaning": "불길한",
-            "language": "en-GB"
-        },
-        {
-            "word": "perpetrator",
-            "korean_pronunciation": "펄퍼트레이터",
-            "english_pronunciation": "/ˈpɜːpɪtreɪtə/",
-            "meaning": "범인, 가해자",
-            "language": "en-GB"
-        },
-        {
-            "word": "premeditated",
-            "korean_pronunciation": "프리메디테이티드",
-            "english_pronunciation": "/ˌpriːˈmɛdɪteɪtɪd/",
-            "meaning": "계획적인, 고의적인",
-            "language": "en-GB"
-        },
-        {
-            "word": "prosecutor",
-            "korean_pronunciation": "프로시큐터",
-            "english_pronunciation": "/ˈprɒsɪkjuːtə/",
-            "meaning": "검사, 기소자",
-            "language": "en-GB"
-        },
-        {
-            "word": "repercussion",
-            "korean_pronunciation": "리퍼커션",
-            "english_pronunciation": "/ˌriːpəˈkʌʃən/",
-            "meaning": "영향, 파급 효과",
-            "language": "en-GB"
-        },
-        {
-            "word": "retaliate",
-            "korean_pronunciation": "리탤리에이트",
-            "english_pronunciation": "/rɪˈtælieɪt/",
-            "meaning": "보복하다",
-            "language": "en-GB"
-        },
-        {
-            "word": "scrutiny",
-            "korean_pronunciation": "스크루티니",
-            "english_pronunciation": "/ˈskruːtɪni/",
-            "meaning": "정밀조사",
-            "language": "en-GB"
-        },
-        {
-            "word": "surveillance",
-            "korean_pronunciation": "서베일런스",
-            "english_pronunciation": "/səˈveɪləns/",
-            "meaning": "감시",
-            "language": "en-GB"
-        },
-        {
-            "word": "unsubstantiated",
-            "korean_pronunciation": "언섭스탠시에이티드",
-            "english_pronunciation": "/ˌʌnsəbˈstænʃieɪtɪd/",
-            "meaning": "입증되지 않은",
-            "language": "en-GB"
-        },
-        {
-            "word": "vindictive",
-            "korean_pronunciation": "빈딕티브",
-            "english_pronunciation": "/vɪnˈdɪktɪv/",
-            "meaning": "앙심을 품은, 보복적인",
-            "language": "en-GB"
-        }
+       
+       
     ],
     "20250911": [
         {
@@ -552,20 +641,7 @@ const wordsByDate = {
             "meaning": "불확실성",
             "language": "en-GB"
         },
-        {
-            "word": "navigate",
-            "korean_pronunciation": "내비게이트",
-            "english_pronunciation": "/ˈnævɪɡeɪt/",
-            "meaning": "헤쳐 나가다, 대응하다",
-            "language": "en-GB"
-        },
-        {
-            "word": "monitor",
-            "korean_pronunciation": "모니터",
-            "english_pronunciation": "/ˈmɒnɪtər/",
-            "meaning": "면밀히 관찰하다",
-            "language": "en-GB"
-        }
+      
     ],
 };
 
@@ -610,7 +686,7 @@ function displayAllWords() {
         
         if (words.length > 0) {
             words.forEach((word, index) => {
-                wordsText += `${index + 1}. <span class="word-part word-english">${word.word}</span> / <span class="word-part word-korean">${word.korean_pronunciation}</span> / <span class="word-part word-meaning">${word.meaning}</span><br>`;
+                wordsText += `<div class="word-with-underline"><span class="word-number">${index + 1}.</span> <span class="word-part">${word.word}</span> / <span class="word-part">${word.korean_pronunciation}</span> / <span class="word-part">${word.meaning}</span></div>`;
             });
             
             allWordsHTML += `
