@@ -13,6 +13,8 @@
     padding-bottom: 8px;
     margin-bottom: 10px;
     color: #2d3748; /* 검정색 계열 - 눈에 피로가 덜함 */
+    text-align: left; /* 기본 왼쪽 정렬 */
+    word-break: keep-all; /* 한글 줄바뀜 방지 */
 }
 
 .word-with-underline::after {
@@ -34,6 +36,8 @@
 
 .word-part {
     color: #2d3748; /* 검정색 계열 - 눈에 피로가 덜함 */
+    display: inline-block; /* 인라인 블록으로 변경하여 줄바뀜 개선 */
+    margin-right: 3px; /* 단어 간 간격 */
 }
 
 .word-item {
@@ -287,6 +291,7 @@ body {
     text-align: left;
     margin-bottom: 10px;
     font-weight: 600;
+    word-break: keep-all; /* 한글 줄바뀜 방지 */
 }
 
 /* 단어 텍스트 스타일 - article-section에 직접 적용 */
@@ -295,6 +300,7 @@ body {
     line-height: 1.8;
     color: #2d3748;
     text-align: left;
+    word-break: keep-all; /* 한글 줄바뀜 방지 */
 }
 
 
@@ -699,23 +705,38 @@ body {
         margin: 0;
         border-radius: 0;
         box-shadow: none;
+        text-align: left; /* 왼쪽 정렬 강제 */
     }
     
     .words-title {
         font-size: 0.9rem;
         margin-bottom: 8px;
+        text-align: left; /* 제목도 왼쪽 정렬 */
     }
     
     .article-section {
         font-size: 0.75rem;
         line-height: 1.6;
+        text-align: left; /* 텍스트 왼쪽 정렬 */
     }
     
     .word-part {
         padding: 1px 2px;
         font-size: 0.75rem;
+        display: inline-block; /* 인라인 블록으로 변경하여 줄바뀜 개선 */
+        word-break: keep-all; /* 한글 줄바뀜 방지 */
     }
     
+    /* 모바일에서 단어 정렬 개선 */
+    .word-with-underline {
+        text-align: left; /* 왼쪽 정렬 강제 */
+        word-break: keep-all; /* 한글 줄바뀜 방지 */
+        white-space: normal; /* 정상적인 줄바뀜 허용 */
+    }
+    
+    .word-with-underline .word-part {
+        margin-right: 4px; /* 단어 간 간격 추가 */
+    }
     
     .example-section {
         padding: 20px;
@@ -755,4 +776,3 @@ body {
     color: #7c3aed; /* 보라색 - 뜻 */
     font-size: 0.875rem; /* 14px */
 }
-
