@@ -33,15 +33,13 @@
     color: #0066cc !important; /* 더 진한 파란색 - 눈에 더 잘 띄는 색상 */
     font-weight: 700 !important; /* 더 굵게 */
     font-size: 0.95rem !important; /* 약간 크게 */
-    background-color: rgba(0, 102, 204, 0.1) !important; /* 배경색 추가 */
-    padding: 2px 4px !important; /* 패딩 추가 */
-    border-radius: 3px !important; /* 모서리 둥글게 */
 }
 
 .word-part {
-    color: #2d3748; /* 검정색 계열 - 눈에 피로가 덜함 */
-    display: inline-block; /* 인라인 블록으로 변경하여 줄바뀜 개선 */
-    margin-right: 3px; /* 단어 간 간격 */
+    color: #2d3748 !important; /* 검정색 계열 - 눈에 피로가 덜함 */
+    display: inline-block !important; /* 인라인 블록으로 변경하여 줄바뀜 개선 */
+    margin-right: 3px !important; /* 단어 간 간격 */
+    font-weight: bold !important; /* 볼드체로 변경 */
 }
 
 .word-item {
@@ -300,7 +298,7 @@ body {
 
 /* 단어 텍스트 스타일 - article-section에 직접 적용 */
 .article-section {
-    font-size: 0.875rem;
+    font-size: 0.75rem; /* 12px로 변경 */
     line-height: 1.8;
     color: #2d3748;
     text-align: left;
@@ -719,14 +717,14 @@ body {
     }
     
     .article-section {
-        font-size: 0.875rem; /* 14px로 변경 */
+        font-size: 0.75rem; /* 12px로 변경 */
         line-height: 1.6;
         text-align: left; /* 텍스트 왼쪽 정렬 */
     }
     
     .word-part {
         padding: 1px 2px;
-        font-size: 0.875rem; /* 14px로 변경 */
+        font-size: 0.75rem; /* 12px로 변경 */
         display: inline-block; /* 인라인 블록으로 변경하여 줄바뀜 개선 */
         word-break: keep-all; /* 한글 줄바뀜 방지 */
     }
