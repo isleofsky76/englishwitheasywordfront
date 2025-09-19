@@ -1,4 +1,4 @@
-* Reset and Base Styles */
+/* Reset and Base Styles */
 * {
     margin: 0;
     padding: 0;
@@ -36,7 +36,7 @@
 }
 
 .word-part {
-    color: #2d3748 !important; /* 검정색 계열 - 눈에 피로가 덜함 */
+    color: #1a1a1a !important; /* WSJ와 동일한 연한 회색 */
     display: inline-block !important; /* 인라인 블록으로 변경하여 줄바뀜 개선 */
     margin-right: 3px !important; /* 단어 간 간격 */
     font-weight: bold !important; /* 볼드체로 변경 */
@@ -287,22 +287,27 @@ body {
 
 /* 단어 제목 스타일 */
 .words-title {
-    font-size: 1rem;
-    line-height: 1.8;
-    color: #2d3748;
-    text-align: left;
-    margin-bottom: 10px;
-    font-weight: 600;
-    word-break: keep-all; /* 한글 줄바뀜 방지 */
+    font-size: 1rem !important;
+    line-height: 1.8 !important;
+    color: #2563eb !important; /* 파란색으로 변경 */
+    text-align: left !important;
+    margin-bottom: 10px !important;
+    font-weight: 600 !important;
+    word-break: keep-all !important; /* 한글 줄바뀜 방지 */
 }
 
 /* 단어 텍스트 스타일 - article-section에 직접 적용 */
 .article-section {
     font-size: 0.875rem; /* 14px로 변경 */
     line-height: 1.8;
-    color: #2d3748;
+    color: #1a1a1a; /* WSJ와 동일한 연한 회색 */
     text-align: left;
     word-break: keep-all; /* 한글 줄바뀜 방지 */
+}
+
+/* 예문과 번역은 normal weight */
+.article-section br + .word-part {
+    font-weight: normal !important; /* 예문과 번역은 일반 굵기 */
 }
 
 
