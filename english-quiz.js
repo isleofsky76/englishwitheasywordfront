@@ -542,18 +542,18 @@ window.selectOption = function(selectedIndex) {
     const question = quizData[currentCategory][currentQuestionIndex];
     const isCorrect = question.options[selectedIndex] === question.answer;
     
-    // 옵션 버튼들 색상 변경 및 ✓/✗ 표시 추가
+    // Change option button colors and add ✓/✗ indicators
     const optionButtons = document.querySelectorAll('.option-btn');
     optionButtons.forEach((btn, index) => {
         btn.disabled = true;
-        const originalText = question.options[index]; // 원래 텍스트 저장
+        const originalText = question.options[index]; // Save original text
         if (question.options[index] === question.answer) {
-            // 정답은 연한 초록색 배경에 원래 텍스트 유지
+            // Correct answer with light green background and original text
             btn.style.backgroundColor = '#d4edda';
             btn.style.color = '#2d3748';
             btn.innerHTML = `<span style="color: #28a745; font-weight: bold; margin-right: 8px;">✓</span><span style="color: #2d3748;">${originalText}</span>`;
         } else {
-            // 오답은 연한 빨간색 배경에 원래 텍스트 유지
+            // Incorrect answer with light red background and original text
             btn.style.backgroundColor = '#f8d7da';
             btn.style.color = '#2d3748';
             btn.innerHTML = `<span style="color: #dc3545; font-weight: bold; margin-right: 8px;">✗</span><span style="color: #2d3748;">${originalText}</span>`;
@@ -567,12 +567,12 @@ window.selectOption = function(selectedIndex) {
     document.getElementById('result').innerHTML = `
         <div class="quiz-result">
             <div class="result-section">
-                <h3><i class="fas fa-${isCorrect ? 'check' : 'times'} me-2"></i>${isCorrect ? '정답!' : '오답'}</h3>
-                <p class="answer">정답: ${question.answer}</p>
-                ${!isCorrect ? `<p class="selected-answer">선택한 답: ${question.options[selectedIndex]}</p>` : ''}
+                <h3><i class="fas fa-${isCorrect ? 'check' : 'times'} me-2"></i>${isCorrect ? 'Correct!' : 'Incorrect'}</h3>
+                <p class="answer">Answer: ${question.answer}</p>
+                ${!isCorrect ? `<p class="selected-answer">Your choice: ${question.options[selectedIndex]}</p>` : ''}
             </div>
             <div class="result-section">
-                <h3><i class="fas fa-info-circle me-2"></i>설명</h3>
+                <h3><i class="fas fa-info-circle me-2"></i>Explanation</h3>
                 <p class="explanation">${question.explanation}</p>
             </div>
         </div>
@@ -624,7 +624,7 @@ function showQuestionList() {
     const questions = quizData[currentCategory];
     
     let questionListHTML = `<div class="question-list">
-        <h3>${currentCategory} 문제를 선택하세요:</h3>
+        <h3>Select a ${currentCategory} question:</h3>
         <div class="question-grid">`;
     
     questions.forEach((question, index) => {
@@ -663,8 +663,12 @@ function showQuestion() {
     const question = quizData[currentCategory][currentQuestionIndex];
     console.log('question:', question); // 디버깅용
     
+    const totalQuestions = quizData[currentCategory].length;
+    const questionNumber = currentQuestionIndex + 1;
+    
     document.getElementById('question').innerHTML = `
-        <div class="question-text">${currentQuestionIndex + 1}. ${question.question}</div>
+        <div class="question-counter">${questionNumber} of ${totalQuestions}</div>
+        <div class="question-text">${question.question}</div>
         <div class="options-container">
             ${question.options.map((option, index) => `
                 <button class="option-btn" onclick="selectOption(${index})">${option}</button>
@@ -681,23 +685,23 @@ function showQuestion() {
 }
 
 
-// 옵션 선택 함수
+// Option selection function
 function selectOption(selectedIndex) {
     const question = quizData[currentCategory][currentQuestionIndex];
     const isCorrect = question.options[selectedIndex] === question.answer;
     
-    // 옵션 버튼들 색상 변경 및 ✓/✗ 표시 추가
+    // Change option button colors and add ✓/✗ indicators
     const optionButtons = document.querySelectorAll('.option-btn');
     optionButtons.forEach((btn, index) => {
         btn.disabled = true;
-        const originalText = question.options[index]; // 원래 텍스트 저장
+        const originalText = question.options[index]; // Save original text
         if (question.options[index] === question.answer) {
-            // 정답은 연한 초록색 배경에 원래 텍스트 유지
+            // Correct answer with light green background and original text
             btn.style.backgroundColor = '#d4edda';
             btn.style.color = '#2d3748';
             btn.innerHTML = `<span style="color: #28a745; font-weight: bold; margin-right: 8px;">✓</span><span style="color: #2d3748;">${originalText}</span>`;
         } else {
-            // 오답은 연한 빨간색 배경에 원래 텍스트 유지
+            // Incorrect answer with light red background and original text
             btn.style.backgroundColor = '#f8d7da';
             btn.style.color = '#2d3748';
             btn.innerHTML = `<span style="color: #dc3545; font-weight: bold; margin-right: 8px;">✗</span><span style="color: #2d3748;">${originalText}</span>`;
@@ -722,18 +726,18 @@ function selectOption(selectedIndex) {
 function showAnswer() {
     const question = quizData[currentCategory][currentQuestionIndex];
     
-    // 모든 옵션 버튼 비활성화하고 정답/오답 표시
+    // Disable all option buttons and show correct/incorrect answers
     const optionButtons = document.querySelectorAll('.option-btn');
     optionButtons.forEach((btn, index) => {
         btn.disabled = true;
-        const originalText = question.options[index]; // 원래 텍스트 저장
+        const originalText = question.options[index]; // Save original text
         if (question.options[index] === question.answer) {
-            // 정답은 연한 초록색 배경에 원래 텍스트 유지
+            // Correct answer with light green background and original text
             btn.style.backgroundColor = '#d4edda';
             btn.style.color = '#2d3748';
             btn.innerHTML = `<span style="color: #28a745; font-weight: bold; margin-right: 8px;">✓</span><span style="color: #2d3748;">${originalText}</span>`;
         } else {
-            // 오답은 연한 빨간색 배경에 원래 텍스트 유지
+            // Incorrect answer with light red background and original text
             btn.style.backgroundColor = '#f8d7da';
             btn.style.color = '#2d3748';
             btn.innerHTML = `<span style="color: #dc3545; font-weight: bold; margin-right: 8px;">✗</span><span style="color: #2d3748;">${originalText}</span>`;
@@ -743,11 +747,11 @@ function showAnswer() {
     document.getElementById('result').innerHTML = `
         <div class="quiz-result">
             <div class="result-section">
-                <h3><i class="fas fa-lightbulb me-2"></i>정답</h3>
-                <p class="answer">정답: ${question.answer}</p>
+                <h3><i class="fas fa-lightbulb me-2"></i>Answer</h3>
+                <p class="answer">Answer: ${question.answer}</p>
             </div>
             <div class="result-section">
-                <h3><i class="fas fa-info-circle me-2"></i>설명</h3>
+                <h3><i class="fas fa-info-circle me-2"></i>Explanation</h3>
                 <p class="explanation">${question.explanation}</p>
             </div>
         </div>
@@ -789,4 +793,5 @@ function showFinalScore() {
         document.getElementById('result').innerHTML = '';
     });
 }
+
 
