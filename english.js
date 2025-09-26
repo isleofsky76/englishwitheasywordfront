@@ -8,7 +8,7 @@ const wordsByDate = {
                 "korean_pronunciation": "리턴",
                 "meaning": "복귀, 돌아옴",
                 "example_sentence": "Jimmy Kimmel’s return to ABC drew nationwide attention.",
-                "korean_translation": "지미 키멜의 ABC 복귀는 전국적인 관심을 끌었다.",
+                "korean_translation": "[지미 키멜의 ABC 복귀(return)는 전국적인 관심을 끌었다(drew).]",
                 "key_words": ["return"]
               },
             {
@@ -16,7 +16,7 @@ const wordsByDate = {
                 "korean_pronunciation": "서스펜드",
                 "meaning": "중단하다, 정지시키다",
                 "example_sentence": "ABC suspended Jimmy Kimmel's show after the controversy.",
-                "korean_translation": "논란 이후 ABC는 지미 키멜의 쇼를 중단했다.",
+                "korean_translation": "[논란(controversy) 이후 ABC는 지미 키멜의 쇼를 중단했다(suspended).]",
                 "key_words": ["suspended"]
               },
               {
@@ -24,7 +24,7 @@ const wordsByDate = {
                 "korean_pronunciation": "스파크",
                 "meaning": "촉발하다, 불을 일으키다",
                 "example_sentence": "The suspension sparked a nationwide free speech controversy.",
-                "korean_translation": "그 중단은 전국적인 표현의 자유 논란을 촉발했다.",
+                "korean_translation": "[그 중단(suspension)은 전국적인 표현의 자유 논란을 촉발했다(sparked).]",
                 "key_words": ["sparked"]
               },
               {
@@ -32,7 +32,7 @@ const wordsByDate = {
                 "korean_pronunciation": "아규",
                 "meaning": "주장하다, 논쟁하다",
                 "example_sentence": "Many argued that free speech was under threat.",
-                "korean_translation": "많은 사람들이 표현의 자유가 위협받고 있다고 주장했다.",
+                "korean_translation": "[많은 사람들이 표현의 자유(free speech)가 위협받고 있다고(under threat) 주장했다(argued).]",
                 "key_words": ["argued"]
               },
             
@@ -41,7 +41,7 @@ const wordsByDate = {
                 "korean_pronunciation": "브로드캐스트",
                 "meaning": "방송하다",
                 "example_sentence": "The network could not broadcast the episode in many cities.",
-                "korean_translation": "방송사는 많은 도시에서 그 에피소드를 방송할 수 없었다.",
+                "korean_translation": "[방송사(network)는 많은 도시에서 그 에피소드를 방송할 수 없었다(could not broadcast).]",
                 "key_words": ["broadcast"]
               },
               {
@@ -49,7 +49,7 @@ const wordsByDate = {
                 "korean_pronunciation": "사인",
                 "meaning": "서명하다, 사인하다",
                 "example_sentence": "Outraged fans signed an online petition to bring the show back.",
-                "korean_translation": "분노한 팬들은 프로그램 복귀를 요구하는 온라인 청원에 서명했다.",
+                "korean_translation": "[분노한 팬들(outraged fans)은 프로그램 복귀를 요구하는 온라인 청원(petition)에 서명했다(signed).]",
                 "key_words": ["signed"]
               },
               {
@@ -57,7 +57,7 @@ const wordsByDate = {
                 "korean_pronunciation": "캔슬",
                 "meaning": "취소하다, 중단하다",
                 "example_sentence": "Some viewers canceled their Disney subscriptions in protest.",
-                "korean_translation": "일부 시청자들은 항의의 표시로 디즈니 구독을 취소했다.",
+                "korean_translation": "[일부 시청자들(some viewers)은 항의의 표시로(in protest) 디즈니 구독을 취소했다(canceled).]",
                 "key_words": ["canceled"]
               },
               {
@@ -65,7 +65,7 @@ const wordsByDate = {
                 "korean_pronunciation": "스레튼",
                 "meaning": "위협하다",
                 "example_sentence": "The boycott threatened millions in advertising revenue.",
-                "korean_translation": "그 보이콧은 수백만 달러의 광고 수익을 위협했다.",
+                "korean_translation": "[그 보이콧(boycott)은 수백만 달러의 광고 수익을 위협했다(threatened).]",
                 "key_words": ["threatened"]
               },
               {
@@ -73,7 +73,7 @@ const wordsByDate = {
                 "korean_pronunciation": "드로",
                 "meaning": "끌다, 이끌다",
                 "example_sentence": "Jimmy Kimmel's return drew nationwide attention.",
-                "korean_translation": "지미 키멜의 복귀는 전국적인 관심을 끌었다.",
+                "korean_translation": "지미 키멜의 복귀는 전국적인 관심(nationwide attention)을 끌었다(drew).]",
                 "key_words": ["drew"]
               },
              
