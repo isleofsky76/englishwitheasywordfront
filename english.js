@@ -1,16 +1,89 @@
 // 단어장 데이터 - 날짜별로 구성
 const wordsByDate = {
+    "20250925": {
+        "title": "지미 키멜 복귀(20250925)",
+        "words": [
+            {
+                "word": "return",
+                "korean_pronunciation": "리턴",
+                "meaning": "복귀, 돌아옴",
+                "example_sentence": "Jimmy Kimmel’s return to ABC drew nationwide attention.",
+                "korean_translation": "지미 키멜의 ABC 복귀는 전국적인 관심을 끌었다.",
+                "key_words": ["return"]
+              },
+            {
+                "word": "suspend",
+                "korean_pronunciation": "서스펜드",
+                "meaning": "중단하다, 정지시키다",
+                "example_sentence": "ABC suspended Jimmy Kimmel's show after the controversy.",
+                "korean_translation": "논란 이후 ABC는 지미 키멜의 쇼를 중단했다.",
+                "key_words": ["suspended"]
+              },
+              {
+                "word": "spark",
+                "korean_pronunciation": "스파크",
+                "meaning": "촉발하다, 불을 일으키다",
+                "example_sentence": "The suspension sparked a nationwide free speech controversy.",
+                "korean_translation": "그 중단은 전국적인 표현의 자유 논란을 촉발했다.",
+                "key_words": ["sparked"]
+              },
+              {
+                "word": "argue",
+                "korean_pronunciation": "아규",
+                "meaning": "주장하다, 논쟁하다",
+                "example_sentence": "Many argued that free speech was under threat.",
+                "korean_translation": "많은 사람들이 표현의 자유가 위협받고 있다고 주장했다.",
+                "key_words": ["argued"]
+              },
+            
+              {
+                "word": "broadcast",
+                "korean_pronunciation": "브로드캐스트",
+                "meaning": "방송하다",
+                "example_sentence": "The network could not broadcast the episode in many cities.",
+                "korean_translation": "방송사는 많은 도시에서 그 에피소드를 방송할 수 없었다.",
+                "key_words": ["broadcast"]
+              },
+              {
+                "word": "sign",
+                "korean_pronunciation": "사인",
+                "meaning": "서명하다, 사인하다",
+                "example_sentence": "Outraged fans signed an online petition to bring the show back.",
+                "korean_translation": "분노한 팬들은 프로그램 복귀를 요구하는 온라인 청원에 서명했다.",
+                "key_words": ["signed"]
+              },
+              {
+                "word": "cancel",
+                "korean_pronunciation": "캔슬",
+                "meaning": "취소하다, 중단하다",
+                "example_sentence": "Some viewers canceled their Disney subscriptions in protest.",
+                "korean_translation": "일부 시청자들은 항의의 표시로 디즈니 구독을 취소했다.",
+                "key_words": ["canceled"]
+              },
+              {
+                "word": "threaten",
+                "korean_pronunciation": "스레튼",
+                "meaning": "위협하다",
+                "example_sentence": "The boycott threatened millions in advertising revenue.",
+                "korean_translation": "그 보이콧은 수백만 달러의 광고 수익을 위협했다.",
+                "key_words": ["threatened"]
+              },
+              {
+                "word": "draw",
+                "korean_pronunciation": "드로",
+                "meaning": "끌다, 이끌다",
+                "example_sentence": "Jimmy Kimmel's return drew nationwide attention.",
+                "korean_translation": "지미 키멜의 복귀는 전국적인 관심을 끌었다.",
+                "key_words": ["drew"]
+              },
+             
+             
+        ]
+    },
     "20250919": {
         "title": "엔비디아 인텔에 투자(20250918)",
         "words": [
-            {
-                "word": "soar",
-                "korean_pronunciation": "소어",
-                "meaning": "급등하다, 치솟다",
-                "example_sentence": "Intel shares soared 25% after Nvidia's investment announcement.",
-                "korean_translation": "엔비디아 투자 발표 후 인텔 주가가 25% 급등했다.",
-                "key_words": ["soared", "rise", "surge"]
-            },
+            
             {
                 "word": "shore up",
                 "korean_pronunciation": "쇼어 업",
