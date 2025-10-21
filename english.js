@@ -333,9 +333,6 @@ const wordsByDate = {
     
 };
 
-
-
-
 let currentWordIndex = 0;
 
 // 키워드 하이라이트 함수
@@ -402,12 +399,12 @@ function displayAllWords() {
                 wordsText += `<div class="word-with-underline">
                     <span class="word-number">${index + 1}.</span> 
                     <span class="word-part">${word.meaning}</span> / 
-                    <span class="word-part word-hideable" data-date="${date}" id="${wordId}-english">${word.word}${partOfSpeech}</span> / 
-                    <span class="word-part word-hideable" data-date="${date}" id="${wordId}-korean">${word.korean_pronunciation}</span>
+                    <span class="word-part word-hideable" data-date="${date}" id="${wordId}-english">${word.word}${partOfSpeech}</span>
                     ${hasExample ? ` / <span class="example-toggle" onclick="toggleExample('${exampleId}')" style="color: #007bff; cursor: pointer; text-decoration: underline;">예문</span>` : ''}
                     ${hasExample ? `<div id="${exampleId}" class="example-content" style="display: none; padding-left: 2.0em; margin-top: 8px;">
-                        <span class="word-part">${highlightKeywords(word.example_sentence, word.key_words || [])}</span>
+                        <span class="word-part" style="white-space: nowrap;">${highlightKeywords(word.example_sentence, word.key_words || [])}</span>
                         <br><span class="word-part">(${word.korean_translation})</span>
+                        ${word.sentence_pronunciation ? `<br><span class="word-part" style="color: #666; font-style: italic;">[${word.sentence_pronunciation}]</span>` : ''}
                     </div>` : ''}
                 </div>`;
             });
