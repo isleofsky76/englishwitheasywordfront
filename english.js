@@ -1,5 +1,150 @@
 // 단어장 데이터 - 날짜별로 구성
 const wordsByDate = {
+      "20251021": {
+  "title": "월마트와 ChatGPT의 파트너십(20251021)",
+  "words": [
+   
+    {
+      "word": "monetize",
+      "part_of_speech": "v",
+      "korean_pronunciation": "머니타이즈",
+      "meaning": "수익화하다",
+      "example_sentence": "OpenAI is exploring ways to monetize ChatGPT’s massive user base.",
+      "korean_translation": "오픈AI는 ChatGPT의 방대한 사용자 기반을 수익화할 방법을 모색하고 있다.",
+      "key_words": ["monetize"]
+    },
+    {
+      "word": "frictionless",
+      "part_of_speech": "adj",
+      "korean_pronunciation": "프릭션리스",
+      "meaning": "마찰 없는, 매끄러운",
+      "example_sentence": "Fast, frictionless shopping is every retailer’s dream.",
+      "korean_translation": "빠르고 마찰 없는 쇼핑은 모든 소매업체의 꿈이다.",
+      "key_words": ["frictionless"]
+    },
+
+    {
+      "word": "loyalty",
+      "part_of_speech": "n",
+      "korean_pronunciation": "로열티",
+      "meaning": "충성도, 충성심",
+      "example_sentence": "Easy AI shopping could weaken customer loyalty to retailers.",
+      "korean_translation": "AI 쇼핑의 편리함은 소매업체에 대한 고객 충성도를 약화시킬 수 있다.",
+      "key_words": ["loyalty"]
+    },
+   
+    {
+      "word": "partnership",
+      "part_of_speech": "n",
+      "korean_pronunciation": "파트너십",
+      "meaning": "협력, 제휴",
+      "example_sentence": "Retailers announced new partnerships with ChatGPT to reach shoppers.",
+      "korean_translation": "소매업체들은 소비자에게 다가가기 위해 ChatGPT와 새로운 협력을 발표했다.",
+      "key_words": ["partnerships"]
+    },
+    {
+      "word": "visibility",
+      "part_of_speech": "n",
+      "korean_pronunciation": "비저빌리티",
+      "meaning": "가시성, 노출도",
+      "example_sentence": "AI platforms give sellers visibility that traditional ads cannot match.",
+      "korean_translation": "AI 플랫폼은 기존 광고로는 얻기 어려운 노출 효과를 판매자에게 제공한다.",
+      "key_words": ["visibility"]
+    },
+    {
+      "word": "dominance",
+      "part_of_speech": "n",
+      "korean_pronunciation": "도미넌스",
+      "meaning": "지배, 우세",
+      "example_sentence": "ChatGPT has established clear dominance among AI chatbots.",
+      "korean_translation": "ChatGPT는 AI 챗봇들 중에서 확실한 지배적 위치를 차지했다.",
+      "key_words": ["dominance"]
+    },
+    {
+      "word": "upstream",
+      "part_of_speech": "adv",
+      "korean_pronunciation": "업스트림",
+      "meaning": "상류에, 앞단계에",
+      "example_sentence": "If discovery moves upstream to AI assistants, ad budgets may follow.",
+      "korean_translation": "상품 검색이 AI 비서 쪽으로 이동한다면 광고 예산도 따라갈 수 있다.",
+      "key_words": ["upstream"]
+    },
+    {
+      "word": "adoption",
+      "part_of_speech": "n",
+      "korean_pronunciation": "어돕션",
+      "meaning": "채택, 도입",
+      "example_sentence": "Walmart’s move could accelerate GenAI adoption by other retailers.",
+      "korean_translation": "Walmart의 결정은 다른 소매업체들의 생성형 AI 도입을 가속화할 수 있다.",
+      "key_words": ["adoption"]
+    },
+    {
+      "word": "profitability",
+      "part_of_speech": "n",
+      "korean_pronunciation": "프로피터빌리티",
+      "meaning": "수익성",
+      "example_sentence": "Retailers’ ad businesses have boosted their e-commerce profitability.",
+      "korean_translation": "소매업체들의 광고 사업은 전자상거래의 수익성을 높였다.",
+      "key_words": ["profitability"]
+    },
+    {
+      "word": "comparison",
+      "part_of_speech": "n",
+      "korean_pronunciation": "컴패리즌",
+      "meaning": "비교, 대조",
+      "example_sentence": "Easy price comparisons could erode retailers’ pricing power.",
+      "korean_translation": "가격 비교가 쉬워지면 소매업체의 가격 결정력이 약해질 수 있다.",
+      "key_words": ["comparisons"]
+    },
+    {
+      "word": "revenue",
+      "part_of_speech": "n",
+      "korean_pronunciation": "레버뉴",
+      "meaning": "수익, 매출",
+      "example_sentence": "Ad revenue makes up a growing share of retailers’ profits.",
+      "korean_translation": "광고 수익은 소매업체 이익에서 점점 더 큰 비중을 차지하고 있다.",
+      "key_words": ["revenue"]
+    },
+   
+    {
+      "word": "negotiate",
+      "part_of_speech": "v",
+      "korean_pronunciation": "니고시에이트",
+      "meaning": "협상하다, 교섭하다",
+      "example_sentence": "Retailers may later negotiate for a share of chatbot profits.",
+      "korean_translation": "소매업체들은 나중에 챗봇 수익의 일부를 얻기 위해 협상할 수도 있다.",
+      "key_words": ["negotiate"]
+    },
+    {
+      "word": "displace",
+      "part_of_speech": "v",
+      "korean_pronunciation": "디스플레이스",
+      "meaning": "대체하다, 밀어내다",
+      "example_sentence": "AI shopping may not fully displace traditional retail.",
+      "korean_translation": "AI 쇼핑이 전통적인 소매업을 완전히 대체하지는 않을 것이다.",
+      "key_words": ["displace"]
+    },
+    {
+      "word": "consequential",
+      "part_of_speech": "adj",
+      "korean_pronunciation": "컨시퀀셜",
+      "meaning": "중대한, 결과를 초래하는",
+      "example_sentence": "Walmart’s partnership with ChatGPT is consequential for the industry.",
+      "korean_translation": "Walmart의 ChatGPT 제휴는 업계에 중대한 영향을 미친다.",
+      "key_words": ["consequential"]
+    },
+    {
+      "word": "ecosystem",
+      "part_of_speech": "n",
+      "korean_pronunciation": "에코시스템",
+      "meaning": "생태계, 시스템 구조",
+      "example_sentence": "Universal AI platforms could reshape the retail ecosystem.",
+      "korean_translation": "범용 AI 플랫폼은 소매 산업의 생태계를 재편할 수 있다.",
+      "key_words": ["ecosystem"]
+    }
+  ]
+},
+
     "20250925": {
         "title": "지미 키멜 복귀(20250925)",
         "words": [
