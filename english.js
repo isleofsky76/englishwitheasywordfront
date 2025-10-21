@@ -1,6 +1,4 @@
-// 단어장 데이터 - 날짜별로 구성
-const wordsByDate = {
-    "20251021": {
+ "20251021": {
   "title": "비행기 안에서 대화",
         "words": [
             
@@ -11,6 +9,7 @@ const wordsByDate = {
         "meaning": "귀마개",
         "example_sentence": "Excuse me, could I have a pair of earplugs, please?",
         "korean_translation": "실례지만 귀마개 한 쌍 주실 수 있을까요?",
+        "sentence_pronunciation": "익스큐즈 미, 쿳 아이 해브 어 페어 오브 이어플러그스, 플리즈?",
          "key_words": ["earplugs"]
         },
         {
@@ -18,8 +17,9 @@ const wordsByDate = {
         "part_of_speech": "n",
         "korean_pronunciation": "블랭킷",
         "meaning": "담요",
-        "example_sentence": "Could I get a blanket? It’s a bit cold here.",
+        "example_sentence": "Could I get a blanket? It's a bit cold here.",
         "korean_translation": "담요 하나 주실 수 있을까요? 여기 조금 춥네요.",
+        "sentence_pronunciation": "쿳 아이 겟 어 블랭킷? 잇츠 어 빗 콜드 히어.",
          "key_words": ["blanket"]
         },
         {
@@ -29,6 +29,7 @@ const wordsByDate = {
         "meaning": "수면 안대",
         "example_sentence": "Do you have a sleeping mask available?",
         "korean_translation": "수면 안대가 있나요?",
+        "sentence_pronunciation": "두 유 해브 어 슬리핑 마스크 어베일러블?",
          "key_words": ["sleeping mask"]
         },
         {
@@ -36,8 +37,9 @@ const wordsByDate = {
         "part_of_speech": "n",
         "korean_pronunciation": "스파클링 워터",
         "meaning": "탄산수",
-        "example_sentence": "I’d like sparkling water, please.",
+        "example_sentence": "I'd like sparkling water, please.",
         "korean_translation": "탄산수로 부탁드립니다.",
+        "sentence_pronunciation": "아이드 라이크 스파클링 워터, 플리즈.",
          "key_words": ["sparkling water"]
         },
         {
@@ -47,6 +49,7 @@ const wordsByDate = {
         "meaning": "생수, 탄산 없는 물",
         "example_sentence": "Could I get still water, please?",
         "korean_translation": "탄산 없는 생수 부탁드립니다.",
+        "sentence_pronunciation": "쿳 아이 겟 스틸 워터, 플리즈?",
         "key_words": ["still water"]
         },
         {
@@ -56,6 +59,7 @@ const wordsByDate = {
         "meaning": "베개",
         "example_sentence": "Could I get an extra pillow, please?",
         "korean_translation": "베개 하나 더 받을 수 있을까요?",
+        "sentence_pronunciation": "쿳 아이 겟 언 엑스트라 필로우, 플리즈?",
         "key_words": ["pillow"]
         },
         {
@@ -65,6 +69,7 @@ const wordsByDate = {
         "meaning": "가방, 짐",
         "example_sentence": "Could you help me with my bag?",
         "korean_translation": "제 가방 좀 도와주실 수 있나요?",
+        "sentence_pronunciation": "쿳 유 헬프 미 위드 마이 백?",
         "key_words": ["bag"]
         },
         {
@@ -74,6 +79,7 @@ const wordsByDate = {
         "meaning": "헤드폰",
         "example_sentence": "Do you have any headphones available?",
         "korean_translation": "헤드폰 있나요?",
+        "sentence_pronunciation": "두 유 해브 애니 헤드폰스 어베일러블?",
          "key_words": ["headphones"]
         },
         {
@@ -83,6 +89,7 @@ const wordsByDate = {
         "meaning": "도움, 지원",
         "example_sentence": "I need some assistance with my seatbelt.",
         "korean_translation": "안전벨트 매는 것 좀 도와주세요.",
+        "sentence_pronunciation": "아이 니드 썸 어시스턴스 위드 마이 싯벨트.",
         "key_words": ["assistance"]
         },
         {
@@ -92,6 +99,7 @@ const wordsByDate = {
         "meaning": "통로",
         "example_sentence": "Excuse me, I need to get to the aisle.",
         "korean_translation": "실례합니다, 통로로 나가야 해요.",
+        "sentence_pronunciation": "익스큐즈 미, 아이 니드 투 겟 투 디 아일.",
         "key_words": ["aisle"]
         },
         {
@@ -101,6 +109,7 @@ const wordsByDate = {
         "meaning": "머리 위 짐칸",
         "example_sentence": "Please put your bag in the overhead compartment.",
         "korean_translation": "짐을 머리 위 짐칸에 넣어주세요.",
+        "sentence_pronunciation": "플리즈 풋 유어 백 인 디 오버헤드 컴파트먼트.",
         "key_words": ["overhead compartment"]
         },
         {
@@ -110,6 +119,7 @@ const wordsByDate = {
         "meaning": "좌석",
         "example_sentence": "Is this seat taken?",
         "korean_translation": "이 좌석 사람 있나요?",
+        "sentence_pronunciation": "이즈 디스 싯 테이큰?",
         "key_words": ["seat"]
         },
         {
@@ -119,6 +129,7 @@ const wordsByDate = {
         "meaning": "젖히다",
         "example_sentence": "May I recline my seat?",
         "korean_translation": "좌석을 뒤로 젖혀도 될까요?",
+        "sentence_pronunciation": "메이 아이 리클라인 마이 싯?",
         "key_words": ["recline"]
         },
         {
@@ -128,6 +139,7 @@ const wordsByDate = {
         "meaning": "잠그다, 매다",
         "example_sentence": "Please fasten your seatbelt.",
         "korean_translation": "안전벨트를 매주세요.",
+        "sentence_pronunciation": "플리즈 패슨 유어 싯벨트.",
         "key_words": ["fasten"]
         },
         {
@@ -137,6 +149,7 @@ const wordsByDate = {
         "meaning": "난기류, 흔들림",
         "example_sentence": "We're experiencing some turbulence.",
         "korean_translation": "난기류를 겪고 있습니다.",
+        "sentence_pronunciation": "위어 익스피어리언싱 썸 터뷸런스.",
         "key_words": ["turbulence"]
         },
         {
@@ -146,6 +159,7 @@ const wordsByDate = {
         "meaning": "다시 채우다, 리필하다",
         "example_sentence": "Could I have a refill of water, please?",
         "korean_translation": "물 한 번 더 리필해 주실 수 있나요?",
+        "sentence_pronunciation": "쿳 아이 해브 어 리필 오브 워터, 플리즈?",
         "key_words": ["refill"]
         },
         {
@@ -155,6 +169,7 @@ const wordsByDate = {
         "meaning": "안전벨트 사인",
         "example_sentence": "Please remain seated while the seatbelt sign is on.",
         "korean_translation": "안전벨트 사인이 켜진 동안 자리에 앉아 계세요.",
+        "sentence_pronunciation": "플리즈 리메인 시티드 와일 더 싯벨트 싸인 이즈 온.",
         "key_words": ["seatbelt sign"]
         },
         {
@@ -164,6 +179,7 @@ const wordsByDate = {
         "meaning": "착륙",
         "example_sentence": "We'll be landing in 10 minutes.",
         "korean_translation": "10분 후에 착륙합니다.",
+        "sentence_pronunciation": "윌 비 랜딩 인 텐 미닛츠.",
         "key_words": ["landing"]
         },
         {
@@ -173,6 +189,7 @@ const wordsByDate = {
         "meaning": "식탁 받침대, 접이식 테이블",
         "example_sentence": "Please fold your tray table before landing.",
         "korean_translation": "착륙 전 트레이 테이블을 접어주세요.",
+        "sentence_pronunciation": "플리즈 폴드 유어 트레이 테이블 비포 랜딩.",
         "key_words": ["tray table"]
         },
         {
@@ -182,6 +199,7 @@ const wordsByDate = {
         "meaning": "승무원",
         "example_sentence": "If you need assistance, please call the cabin crew.",
         "korean_translation": "도움이 필요하시면 승무원을 불러주세요.",
+        "sentence_pronunciation": "이프 유 니드 어시스턴스, 플리즈 콜 더 캐빈 크루.",
         "key_words": ["cabin crew"]
         },
         {
@@ -191,6 +209,7 @@ const wordsByDate = {
         "meaning": "닭고기",
         "example_sentence": "Would you like chicken or beef?",
         "korean_translation": "닭고기 드시겠어요, 아니면 소고기 드시겠어요?",
+        "sentence_pronunciation": "우쥬 라이크 치킨 오어 비프?",
         "key_words": ["chicken"]
         },
         {
@@ -200,6 +219,7 @@ const wordsByDate = {
         "meaning": "소고기",
         "example_sentence": "I'll have the beef, please.",
         "korean_translation": "소고기로 주세요.",
+        "sentence_pronunciation": "아일 해브 더 비프, 플리즈.",
         "key_words": ["beef"]
         },
         {
@@ -209,6 +229,7 @@ const wordsByDate = {
         "meaning": "음료",
         "example_sentence": "Would you like a beverage?",
         "korean_translation": "음료 드시겠어요?",
+        "sentence_pronunciation": "우쥬 라이크 어 베버리지?",
         "key_words": ["beverage"]
         },
         {
@@ -218,6 +239,7 @@ const wordsByDate = {
         "meaning": "창가 좌석",
         "example_sentence": "I'd like to sit in the window seat.",
         "korean_translation": "창가 좌석에 앉고 싶습니다.",
+        "sentence_pronunciation": "아이드 라이크 투 싯 인 더 윈도우 싯.",
         "key_words": ["window seat"]
         },
         {
@@ -227,6 +249,7 @@ const wordsByDate = {
         "meaning": "복도 좌석",
         "example_sentence": "Can I change to an aisle seat?",
         "korean_translation": "복도 좌석으로 바꿀 수 있나요?",
+        "sentence_pronunciation": "캔 아이 체인지 투 언 아일 싯?",
         "key_words": ["aisle seat"]
         },
         {
@@ -236,6 +259,7 @@ const wordsByDate = {
         "meaning": "바꾸다, 변경하다",
         "example_sentence": "Can I change my seat?",
         "korean_translation": "제 좌석을 바꿀 수 있나요?",
+        "sentence_pronunciation": "캔 아이 체인지 마이 싯?",
         "key_words": ["change"]
         },
         {
@@ -245,6 +269,7 @@ const wordsByDate = {
         "meaning": "소화제",
         "example_sentence": "Do you have any digestive medicine?",
         "korean_translation": "소화제 있나요?",
+        "sentence_pronunciation": "두 유 해브 애니 다이제스티브 메디슨?",
         "key_words": ["digestive medicine"]
         },
         {
@@ -254,6 +279,7 @@ const wordsByDate = {
         "meaning": "지사제",
         "example_sentence": "I need some anti-diarrheal medicine.",
         "korean_translation": "지사제가 필요해요.",
+        "sentence_pronunciation": "아이 니드 썸 안티 다이어리얼 메디슨.",
         "key_words": ["anti-diarrheal"]
         },
         {
@@ -263,12 +289,44 @@ const wordsByDate = {
         "meaning": "탑승권",
         "example_sentence": "May I see your boarding pass?",
         "korean_translation": "탑승권을 보여주시겠어요?",
+        "sentence_pronunciation": "메이 아이 씨 유어 보딩 패스?",
         "key_words": ["boarding pass"]
-        }
+        },
+         {
+             "word": "unavailable",
+             "part_of_speech": "adj",
+             "korean_pronunciation": "언어베일러블",
+             "meaning": "이용할 수 없는, 제공되지 않는",
+             "example_sentence": "Some meals may be unavailable during the flight.",
+             "korean_translation": "일부 식사는 비행 중 제공되지 않을 수도 있습니다.",
+             "sentence_pronunciation": "썸 밀스 메이 비 언어베일러블 듀어링 더 플라잇.",
+             "key_words": ["unavailable"]
+           },
+           {
+             "word": "upright position",
+             "part_of_speech": "n",
+             "korean_pronunciation": "업라잇 포지션",
+             "meaning": "직립 상태, 원위치",
+             "example_sentence": "Please return your seat to the upright position.",
+             "korean_translation": "좌석을 원위치로 되돌려 주세요.",
+             "sentence_pronunciation": "플리즈 리턴 유어 싯 투 디 업라잇 포지션.",
+             "key_words": ["upright position"]
+           },
+           {
+             "word": "return",
+             "part_of_speech": "v",
+             "korean_pronunciation": "리턴",
+             "meaning": "되돌리다, 반환하다",
+             "example_sentence": "Please return your seat to its original position for landing.",
+             "korean_translation": "착륙을 위해 좌석을 원위치로 되돌려 주세요.",
+             "sentence_pronunciation": "플리즈 리턴 유어 싯 투 잇츠 오리지널 포지션 포 랜딩.",
+             "key_words": ["return"]
+           }
+              
   ]
 },
-    
-};
+
+
 
 let currentWordIndex = 0;
 
