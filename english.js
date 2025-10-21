@@ -1,785 +1,462 @@
-/* Reset and Base Styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-/* Word Underline Styles - Full Width */
-.word-with-underline {
-    display: block;
-    width: 100%;
-    position: relative;
-    padding-bottom: 8px;
-    margin-bottom: 10px;
-    color: #2d3748; /* 검정색 계열 - 눈에 피로가 덜함 */
-    text-align: left; /* 기본 왼쪽 정렬 */
-    word-break: keep-all; /* 한글 줄바뀜 방지 */
-}
-
-.word-with-underline::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background-color: #cbd5e0; /* 회색 계열 - 눈에 피로가 덜함 */
-    width: 100%;
-}
-
-/* 번호 - 눈에 띄는 파란색 */
-.word-number {
-    color: #0066cc !important; /* 더 진한 파란색 - 눈에 더 잘 띄는 색상 */
-    font-weight: 700 !important; /* 더 굵게 */
-    font-size: 0.95rem !important; /* 약간 크게 */
-}
-
-.word-part {
-    color: #1a1a1a !important; /* WSJ와 동일한 연한 회색 */
-    display: inline-block !important; /* 인라인 블록으로 변경하여 줄바뀜 개선 */
-    margin-right: 3px !important; /* 단어 간 간격 */
-    font-weight: bold !important; /* 볼드체로 변경 */
-}
-
-.word-item {
-    display: block;
-    width: 100%;
-    border-bottom: 1px solid #e0e0e0;
-    padding: 10px 0;
-    margin-bottom: 5px;
-}
-
-.word-item:last-child {
-    border-bottom: none;
-}
-
-/* Navbar Styles */
-.navbar {
-    background: linear-gradient(135deg, #4a90e2, #357abd) !important;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-}
-
-.navbar-brand {
-    font-weight: 600;
-    font-size: 0.8rem;
-    color: white !important;
-    letter-spacing: 1px;
-    transition: transform 0.3s ease;
-    line-height: 1;
-    padding: 0;
-}
-
-.navbar-brand:hover {
-    transform: translateY(-2px);
-}
-
-.nav-link {
-    font-size: 0.7rem;
-    font-weight: 500;
-}
-
-body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background: white;
-    min-height: 100vh;
-    color: #333;
-    line-height: 1.6;
-}
-
-.container {
-    max-width: 100vw;
-    margin: 0;
-    padding: 0;
-}
-
-.main-container {
-    max-width: 100vw;
-    margin: 0;
-    padding: 120px 0 20px 0;
-}
-
-/* Header Styles */
-.header {
-    text-align: center;
-    margin-bottom: 40px;
-    color: white;
-}
-
-.header h1 {
-    font-size: 3rem;
-    font-weight: 700;
-    margin-bottom: 10px;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-}
-
-.subtitle {
-    font-size: 1.2rem;
-    opacity: 0.9;
-    font-weight: 300;
-}
-
-/* Main Content */
-.main-content {
-    display: grid;
-    gap: 30px;
-}
-
-/* Controls */
-.controls {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
-}
-
-.control-btn {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    border: none;
-    padding: 12px 20px;
-    border-radius: 25px;
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
-}
-
-.control-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
-}
-
-.control-btn:active {
-    transform: translateY(0);
-}
-
-.progress-info {
-    background: rgba(255, 255, 255, 0.9);
-    padding: 8px 16px;
-    border-radius: 20px;
-    font-weight: 600;
-    color: #667eea;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-/* Article Section - PC 버전 */
-.article-section {
-    background: white;
-    padding: 30px 20px;
-    max-width: 100vw;
-    width: 100vw;
-    margin: 0;
-    border-radius: 0;
-    box-shadow: none;
-    line-height: 1.8;
-}
-
-/* Word Card Styles */
-.word-card {
-    background: #f8fafc;
-    border: 1px solid #e2e8f0;
-    border-radius: 8px;
-    padding: 8px 15px;
-    margin-bottom: 5px;
-    transition: all 0.3s ease;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-}
-
-.word-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-    border-color: #667eea;
-}
-
-.word-info {
-    display: flex;
-    align-items: center;
-    margin-bottom: 0;
-    flex-wrap: wrap;
-    gap: 8px;
-    font-size: 1rem;
-    line-height: 1.3;
-}
-
-.word-number {
-    color: #a0aec0;
-    font-weight: 600;
-    font-size: 0.9rem;
-    margin-right: 5px;
-    min-width: 20px;
-}
-
-.word-title {
-    color: #667eea;
-    font-size: 1.1rem;
-    font-weight: 700;
-    margin: 0;
-    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
-}
-
-.separator {
-    color: #a0aec0;
-    font-weight: 300;
-    margin: 0 4px;
-}
-
-.korean-pronunciation {
-    color: #4a5568;
-    font-size: 1rem;
-    font-weight: 500;
-}
-
-.english-pronunciation {
-    color: #718096;
-    font-size: 0.9rem;
-    font-style: italic;
-}
-
-.word-meaning {
-    color: #2d3748;
-    font-size: 1rem;
-    font-weight: 500;
-}
-
-/* 날짜 컨트롤 버튼 */
-.date-controls {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
-    gap: 10px;
-}
-
-.date-btn {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 8px;
-    font-size: 0.9rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
-    flex: 1;
-}
-
-.date-btn:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-}
-
-.date-btn:active {
-    transform: translateY(0);
-}
-
-.date-btn:disabled {
-    background: #a0aec0;
-    cursor: not-allowed;
-    transform: none;
-    box-shadow: none;
-}
-
-/* 단어 제목 스타일 */
-.words-title {
-    font-size: 1rem !important;
-    line-height: 1.8 !important;
-    color: #2563eb !important; /* 파란색으로 변경 */
-    text-align: left !important;
-    margin-bottom: 10px !important;
-    font-weight: 600 !important;
-    word-break: keep-all !important; /* 한글 줄바뀜 방지 */
-}
-
-/* 단어 텍스트 스타일 - article-section에 직접 적용 */
-.article-section {
-    font-size: 0.875rem; /* 14px로 변경 */
-    line-height: 1.8;
-    color: #1a1a1a; /* WSJ와 동일한 연한 회색 */
-    text-align: left;
-    word-break: keep-all; /* 한글 줄바뀜 방지 */
-}
-
-/* 예문과 번역은 normal weight */
-.article-section br + .word-part {
-    font-weight: normal !important; /* 예문과 번역은 일반 굵기 */
-}
-
-
-
-
-.article {
-    padding: 20px 0;
-}
-
-.article-date {
-    color: #666;
-    font-size: 0.9rem;
-    font-style: italic;
-    margin-bottom: 10px;
-    text-align: center;
-}
-
-.sentences-container {
-    margin-top: 20px;
-}
-
-.sentence-pair {
-    margin-bottom: 20px;
-    padding: 15px;
-    background: #f8fafc;
-    border-radius: 8px;
-    border-left: 4px solid #667eea;
-}
-
-.korean-sentence {
-    font-size: 0.875rem;
-    color: #333;
-    margin-bottom: 8px;
-    line-height: 1.5;
-}
-
-.english-sentence {
-    font-size: 0.875rem;
-    color: #4a5568;
-    line-height: 1.5;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    flex-wrap: wrap;
-    word-break: keep-all;
-}
-
-.english-text {
-    flex: 1;
-    min-width: 0;
-}
-
-.hidden-word {
-    color: #e53e3e;
-    font-weight: 600;
-    background: #fed7d7;
-    padding: 2px 6px;
-    border-radius: 4px;
-    border: 1px dashed #e53e3e;
-    transition: all 0.3s ease;
-}
-
-.hidden-word.revealed {
-    background: #c6f6d5;
-    color: #22543d;
-    border-color: #38a169;
-}
-
-.show-word-btn {
-    background: none;
-    border: none;
-    font-size: 1.2rem;
-    cursor: pointer;
-    padding: 4px;
-    border-radius: 4px;
-    transition: all 0.3s ease;
-    color: #667eea;
-}
-
-.show-word-btn:hover {
-    background: #e6fffa;
-    transform: scale(1.1);
-}
-
-.article-title {
-    color: #333;
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-.article-image {
-    margin: 20px 0;
-    text-align: center;
-}
-
-.article-image img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
-
-.article-content {
-    font-size: 0.875rem;
-    color: #333;
-    line-height: 1.5;
-    text-align: justify;
-}
-
-/* Word Entry */
-.word-entry {
-    padding: 20px;
-    background: #f8fafc;
-    border-radius: 12px;
-    margin-bottom: 15px;
-    transition: all 0.3s ease;
-}
-
-.word-entry:hover {
-    transform: translateX(5px);
-    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
-}
-
-.main-word {
-    color: #667eea;
-    font-size: 1.8rem;
-    font-weight: 700;
-    margin-bottom: 10px;
-    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
-}
-
-.word-description {
-    color: #6b7280;
-    font-size: 0.95rem;
-    line-height: 1.5;
-    margin-bottom: 15px;
-    padding: 8px 12px;
-    background: #f3f4f6;
-    border-radius: 6px;
-    border-left: 3px solid #9ca3af;
-    font-style: italic;
-}
-
-.word-origin {
-    color: #059669;
-    font-size: 0.9rem;
-    line-height: 1.4;
-    margin-bottom: 15px;
-    padding: 8px 12px;
-    background: #ecfdf5;
-    border-radius: 6px;
-    border-left: 3px solid #10b981;
-    font-style: italic;
-}
-
-.english-definition {
-    color: #2d3748;
-    font-size: 1.1rem;
-    font-weight: 500;
-    line-height: 1.5;
-    margin-bottom: 8px;
-    font-style: italic;
-    background: #edf2f7;
-    padding: 8px 12px;
-    border-radius: 6px;
-}
-
-.korean-meaning {
-    color: #718096;
-    font-size: 1rem;
-    line-height: 1.4;
-    padding: 6px 10px;
-    background: #f7fafc;
-    border-radius: 6px;
-    margin-bottom: 10px;
-    border-left: 3px solid #e2e8f0;
-}
-
-.example {
-    color: #059669;
-    font-size: 1rem;
-    line-height: 1.5;
-    padding: 8px 12px;
-    background: #ecfdf5;
-    border-radius: 6px;
-    margin-bottom: 4px;
-    border-left: 3px solid #10b981;
-}
-
-.highlight {
-    color: #ea580c;
-    font-weight: 700;
-    text-shadow: 0 1px 2px rgba(234, 88, 12, 0.1);
-}
-
-.example-korean {
-    color: #718096;
-    font-size: 0.95rem;
-    line-height: 1.4;
-    padding: 6px 10px;
-    background: #f7fafc;
-    border-radius: 6px;
-    border-left: 3px solid #e2e8f0;
-}
-
-/* Related Words */
-.related-words {
-    margin-top: 15px;
-    padding: 10px;
-    background: #f0f4ff;
-    border-radius: 8px;
-    border-left: 4px solid #667eea;
-}
-
-.related-title {
-    color: #667eea;
-    font-weight: 600;
-    font-size: 0.9rem;
-    margin-bottom: 5px;
-}
-
-.related-list {
-    color: #4a5568;
-    font-size: 0.95rem;
-    font-style: italic;
-}
-
-/* Next Word */
-.next-word {
-    margin-top: 15px;
-    padding: 8px 12px;
-    background: #ecfdf5;
-    border-radius: 6px;
-    color: #059669;
-    font-size: 0.9rem;
-    border-left: 3px solid #10b981;
-}
-
-/* Learned State */
-.word-entry.learned {
-    background: #f0fff4;
-    border-left-color: #48bb78;
-    position: relative;
-}
-
-.word-entry.learned::after {
-    content: "✓ 학습완료";
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    background: #48bb78;
-    color: white;
-    padding: 4px 8px;
-    border-radius: 12px;
-    font-size: 0.75rem;
-    font-weight: 600;
-}
-
-/* Keyboard Instructions */
-.keyboard-hint {
-    text-align: center;
-    margin-top: 20px;
-    padding: 15px;
-    background: rgba(255, 255, 255, 0.8);
-    border-radius: 10px;
-    font-size: 0.9rem;
-    color: #4a5568;
-}
-
-.keyboard-hint strong {
-    color: #667eea;
-}
-
-/* Date Headers */
-.date-header {
-    margin: 20px 0 8px 0;
-    padding-bottom: 4px;
-    border-bottom: 1px solid #e2e8f0;
-}
-
-.date-header h3 {
-    color: #667eea;
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin: 0;
-}
-
-/* Note Entries */
-.note-entry {
-    border-left: 3px solid #667eea;
-    padding-left: 15px;
-    margin-bottom: 8px;
-}
-
-.note-entry .english {
-    color: #2d3748;
-    font-size: 1rem;
-    font-weight: 500;
-    line-height: 1.4;
-    margin-bottom: 4px;
-}
-
-.note-entry .korean {
-    color: #718096;
-    font-size: 0.95rem;
-    line-height: 1.4;
-    padding: 4px 8px;
-    background: #f7fafc;
-    border-radius: 4px;
-    margin-bottom: 4px;
-}
-
-.note-entry .native {
-    color: #059669;
-    font-size: 0.9rem;
-    line-height: 1.4;
-    padding: 4px 8px;
-    background: #ecfdf5;
-    border-radius: 4px;
-    font-style: italic;
-    border-left: 2px solid #10b981;
-}
-
-/* Word Popup */
-.word-popup {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.5);
-    display: none;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-}
-
-.popup-content {
-    background: white;
-    padding: 30px;
-    border-radius: 16px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-    position: relative;
-    max-width: 400px;
-    width: 90%;
-    text-align: center;
-}
-
-.popup-word {
-    display: block;
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #667eea;
-    margin-bottom: 10px;
-}
-
-.popup-meaning {
-    display: block;
-    font-size: 1.1rem;
-    color: #4a5568;
-    line-height: 1.6;
-}
-
-.popup-close {
-    position: absolute;
-    top: 15px;
-    right: 20px;
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-    color: #a0aec0;
-    transition: color 0.3s ease;
-}
-
-.popup-close:hover {
-    color: #4a5568;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .header h1 {
-        font-size: 2rem;
+/* Reset and Base Styles */// 단어장 데이터 - 날짜별로 구성
+const wordsByDate = {
+    "20251021": {
+  "title": "월마트와 ChatGPT의 파트너십(20251021)",
+  "words": [
+   
+    {
+      "word": "monetize",
+      "part_of_speech": "v",
+      "korean_pronunciation": "머니타이즈",
+      "meaning": "수익화하다",
+      "example_sentence": "OpenAI is exploring ways to monetize ChatGPT’s massive user base.",
+      "korean_translation": "오픈AI는 ChatGPT의 방대한 사용자 기반을 수익화할 방법을 모색하고 있다.",
+      "key_words": ["monetize"]
+    },
+    {
+      "word": "frictionless",
+      "part_of_speech": "adj",
+      "korean_pronunciation": "프릭션리스",
+      "meaning": "마찰 없는, 매끄러운",
+      "example_sentence": "Fast, frictionless shopping is every retailer’s dream.",
+      "korean_translation": "빠르고 마찰 없는 쇼핑은 모든 소매업체의 꿈이다.",
+      "key_words": ["frictionless"]
+    },
+
+    {
+      "word": "loyalty",
+      "part_of_speech": "n",
+      "korean_pronunciation": "로열티",
+      "meaning": "충성도, 충성심",
+      "example_sentence": "Easy AI shopping could weaken customer loyalty to retailers.",
+      "korean_translation": "AI 쇼핑의 편리함은 소매업체에 대한 고객 충성도를 약화시킬 수 있다.",
+      "key_words": ["loyalty"]
+    },
+   
+    {
+      "word": "partnership",
+      "part_of_speech": "n",
+      "korean_pronunciation": "파트너십",
+      "meaning": "협력, 제휴",
+      "example_sentence": "Retailers announced new partnerships with ChatGPT to reach shoppers.",
+      "korean_translation": "소매업체들은 소비자에게 다가가기 위해 ChatGPT와 새로운 협력을 발표했다.",
+      "key_words": ["partnerships"]
+    },
+    {
+      "word": "visibility",
+      "part_of_speech": "n",
+      "korean_pronunciation": "비저빌리티",
+      "meaning": "가시성, 노출도",
+      "example_sentence": "AI platforms give sellers visibility that traditional ads cannot match.",
+      "korean_translation": "AI 플랫폼은 기존 광고로는 얻기 어려운 노출 효과를 판매자에게 제공한다.",
+      "key_words": ["visibility"]
+    },
+    {
+      "word": "dominance",
+      "part_of_speech": "n",
+      "korean_pronunciation": "도미넌스",
+      "meaning": "지배, 우세",
+      "example_sentence": "ChatGPT has established clear dominance among AI chatbots.",
+      "korean_translation": "ChatGPT는 AI 챗봇들 중에서 확실한 지배적 위치를 차지했다.",
+      "key_words": ["dominance"]
+    },
+    {
+      "word": "upstream",
+      "part_of_speech": "adv",
+      "korean_pronunciation": "업스트림",
+      "meaning": "상류에, 앞단계에",
+      "example_sentence": "If discovery moves upstream to AI assistants, ad budgets may follow.",
+      "korean_translation": "상품 검색이 AI 비서 쪽으로 이동한다면 광고 예산도 따라갈 수 있다.",
+      "key_words": ["upstream"]
+    },
+    {
+      "word": "adoption",
+      "part_of_speech": "n",
+      "korean_pronunciation": "어돕션",
+      "meaning": "채택, 도입",
+      "example_sentence": "Walmart’s move could accelerate GenAI adoption by other retailers.",
+      "korean_translation": "Walmart의 결정은 다른 소매업체들의 생성형 AI 도입을 가속화할 수 있다.",
+      "key_words": ["adoption"]
+    },
+    {
+      "word": "profitability",
+      "part_of_speech": "n",
+      "korean_pronunciation": "프로피터빌리티",
+      "meaning": "수익성",
+      "example_sentence": "Retailers’ ad businesses have boosted their e-commerce profitability.",
+      "korean_translation": "소매업체들의 광고 사업은 전자상거래의 수익성을 높였다.",
+      "key_words": ["profitability"]
+    },
+    {
+      "word": "comparison",
+      "part_of_speech": "n",
+      "korean_pronunciation": "컴패리즌",
+      "meaning": "비교, 대조",
+      "example_sentence": "Easy price comparisons could erode retailers’ pricing power.",
+      "korean_translation": "가격 비교가 쉬워지면 소매업체의 가격 결정력이 약해질 수 있다.",
+      "key_words": ["comparisons"]
+    },
+    {
+      "word": "revenue",
+      "part_of_speech": "n",
+      "korean_pronunciation": "레버뉴",
+      "meaning": "수익, 매출",
+      "example_sentence": "Ad revenue makes up a growing share of retailers’ profits.",
+      "korean_translation": "광고 수익은 소매업체 이익에서 점점 더 큰 비중을 차지하고 있다.",
+      "key_words": ["revenue"]
+    },
+   
+    {
+      "word": "negotiate",
+      "part_of_speech": "v",
+      "korean_pronunciation": "니고시에이트",
+      "meaning": "협상하다, 교섭하다",
+      "example_sentence": "Retailers may later negotiate for a share of chatbot profits.",
+      "korean_translation": "소매업체들은 나중에 챗봇 수익의 일부를 얻기 위해 협상할 수도 있다.",
+      "key_words": ["negotiate"]
+    },
+    {
+      "word": "displace",
+      "part_of_speech": "v",
+      "korean_pronunciation": "디스플레이스",
+      "meaning": "대체하다, 밀어내다",
+      "example_sentence": "AI shopping may not fully displace traditional retail.",
+      "korean_translation": "AI 쇼핑이 전통적인 소매업을 완전히 대체하지는 않을 것이다.",
+      "key_words": ["displace"]
+    },
+    {
+      "word": "consequential",
+      "part_of_speech": "adj",
+      "korean_pronunciation": "컨시퀀셜",
+      "meaning": "중대한, 결과를 초래하는",
+      "example_sentence": "Walmart’s partnership with ChatGPT is consequential for the industry.",
+      "korean_translation": "Walmart의 ChatGPT 제휴는 업계에 중대한 영향을 미친다.",
+      "key_words": ["consequential"]
+    },
+    {
+      "word": "ecosystem",
+      "part_of_speech": "n",
+      "korean_pronunciation": "에코시스템",
+      "meaning": "생태계, 시스템 구조",
+      "example_sentence": "Universal AI platforms could reshape the retail ecosystem.",
+      "korean_translation": "범용 AI 플랫폼은 소매 산업의 생태계를 재편할 수 있다.",
+      "key_words": ["ecosystem"]
+    }
+  ]
+},
+
+
+
+    "20250919": {
+        "title": "엔비디아 인텔에 투자(20250918)",
+        "words": [
+            
+            {
+                "word": "shore up",
+                "part_of_speech": "v",
+                "korean_pronunciation": "쇼어 업",
+                "meaning": "강화하다, 떠받치다",
+                "example_sentence": "The investment shores up Intel's struggling finances.",
+                "korean_translation": "이 투자는 인텔의 어려운 재정 상황을 안정시킨다.",
+                "key_words": ["shores up"]
+            },
+            {
+                "word": "foundry",
+                "part_of_speech": "n",
+                "korean_pronunciation": "파운드리",
+                "meaning": "반도체 위탁 생산 사업",
+                "example_sentence": "Intel's foundry ambition faces tough competition from TSMC.",
+                "korean_translation": "인텔의 파운드리 야망은 TSMC와의 치열한 경쟁에 직면해 있다.",
+                "key_words": ["foundry"]
+            },
+            {
+                "word": "stake",
+                "part_of_speech": "n",
+                "korean_pronunciation": "스테이크",
+                "meaning": "지분, 이해관계",
+                "example_sentence": "The U.S. government took a 10% stake in Intel.",
+                "korean_translation": "미국 정부는 인텔의 10% 지분을 취득했다.",
+                "key_words": ["stake"]
+            },
+            {
+                "word": "premarket",
+                "part_of_speech": "adj",
+                "korean_pronunciation": "프리마켓",
+                "meaning": "장전 거래",
+                "example_sentence": "Intel's shares jumped 30% in premarket trading.",
+                "korean_translation": "인텔 주가는 장전 거래에서 30% 급등했다.",
+                "key_words": ["premarket"]
+            },
+            {
+                "word": "collaboration",
+                "part_of_speech": "n",
+                "korean_pronunciation": "콜래버레이션",
+                "meaning": "협력",
+                "example_sentence": "The companies announced a collaboration on new chip designs.",
+                "korean_translation": "양사는 새로운 칩 설계에 대한 협력을 발표했다.",
+                "key_words": ["collaboration"]
+            },
+            {
+                "word": "revive",
+                "part_of_speech": "v",
+                "korean_pronunciation": "리바이브",
+                "meaning": "되살리다, 회복시키다",
+                "example_sentence": "The new deals may revive Intel's weakening position.",
+                "korean_translation": "새로운 거래들이 인텔의 약화된 입지를 되살릴 수 있다.",
+                "key_words": ["revive"]
+            },
+            {
+                "word": "struggle",
+                "part_of_speech": "v",
+                "korean_pronunciation": "스트러글",
+                "meaning": "고군분투하다",
+                "example_sentence": "Intel has been struggling to keep up with rivals.",
+                "korean_translation": "인텔은 경쟁사들을 따라잡기 위해 고군분투해 왔다.",
+                "key_words": ["struggling"]
+            },
+            {
+                "word": "erode",
+                "part_of_speech": "v",
+                "korean_pronunciation": "이로드",
+                "meaning": "침식하다, 약화시키다",
+                "example_sentence": "Intel's delays eroded confidence among investors.",
+                "korean_translation": "인텔의 지연은 투자자들의 신뢰를 약화시켰다.",
+                "key_words": ["eroded"]
+            },
+            {
+                "word": "boost",
+                "part_of_speech": "v",
+                "korean_pronunciation": "부스트",
+                "meaning": "끌어올리다, 촉진하다",
+                "example_sentence": "The government aims to boost Intel's manufacturing capacity.",
+                "korean_translation": "정부는 인텔의 제조 역량을 끌어올리려 한다.",
+                "key_words": ["boost"]
+            },
+            
+        ]
+    }
+};
+
+let currentWordIndex = 0;
+
+// 키워드 하이라이트 함수
+function highlightKeywords(text, keywords) {
+    if (!keywords || keywords.length === 0) return text;
+    
+    let highlightedText = text;
+    keywords.forEach(keyword => {
+        const regex = new RegExp(`\\b${keyword}\\b`, 'gi');
+        highlightedText = highlightedText.replace(regex, (match) => `<span style="color: red; font-weight: bold;">${match}</span>`);
+    });
+    return highlightedText;
+}
+
+// DOM 요소들
+const wordContainer = document.getElementById('article-container');
+const wordPopup = document.getElementById('wordPopup');
+const popupWord = document.querySelector('.popup-word');
+const popupMeaning = document.querySelector('.popup-meaning');
+const popupClose = document.querySelector('.popup-close');
+
+// 현재 날짜 설정 (YYYYMMDD 형식)
+function getCurrentDate() {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+    return `${year}${month}${day}`;
+}
+
+// 현재 날짜의 단어들 가져오기
+function getWordsForDate(date) {
+    return wordsByDate[date]?.words || [];
+}
+
+// 현재 날짜의 제목 가져오기
+function getTitleForDate(date) {
+    return wordsByDate[date]?.title || `뉴스 단어 (${date})`;
+}
+
+// 사용 가능한 날짜 목록 가져오기 (최신 날짜부터)
+function getAvailableDates() {
+    return Object.keys(wordsByDate).sort().reverse();
+}
+
+// 모든 단어 표시 (모든 날짜를 아래로 쭉 나열)
+function displayAllWords() {
+    const availableDates = getAvailableDates();
+    let allWordsHTML = '';
+    
+    availableDates.forEach(date => {
+        const words = getWordsForDate(date);
+        const title = getTitleForDate(date);
+        let wordsText = '';
+        
+        if (words.length > 0) {
+            words.forEach((word, index) => {
+                const hasExample = word.example_sentence && word.korean_translation;
+                const exampleId = `example-${date}-${index}`;
+                const wordId = `word-${date}-${index}`;
+                
+                const partOfSpeech = word.part_of_speech ? ` <span style="color: #999; font-size: 0.85rem;">(${word.part_of_speech})</span>` : '';
+                
+                wordsText += `<div class="word-with-underline">
+                    <span class="word-number">${index + 1}.</span> 
+                    <span class="word-part">${word.meaning}</span> / 
+                    <span class="word-part word-hideable" data-date="${date}" id="${wordId}-english">${word.word}${partOfSpeech}</span> / 
+                    <span class="word-part word-hideable" data-date="${date}" id="${wordId}-korean">${word.korean_pronunciation}</span>
+                    ${hasExample ? ` / <span class="example-toggle" onclick="toggleExample('${exampleId}')" style="color: #007bff; cursor: pointer; text-decoration: underline;">예문</span>` : ''}
+                    ${hasExample ? `<div id="${exampleId}" class="example-content" style="display: none; padding-left: 2.0em; margin-top: 8px;">
+                        <span class="word-part">${highlightKeywords(word.example_sentence, word.key_words || [])}</span>
+                        <br><span class="word-part">(${word.korean_translation})</span>
+                    </div>` : ''}
+                </div>`;
+            });
+            
+            allWordsHTML += `
+                <div class="words-title">
+                    ${title}
+                    <span id="toggle-all-${date}" onclick="toggleAllExamples('${date}')" style="color: #28a745; cursor: pointer; text-decoration: underline; font-size: 0.95rem; margin-left: 15px; font-weight: 500;">예문 펼치기</span>
+                </div>
+                <div class="words-text">${wordsText}</div>
+                <div class="date-spacing"></div>
+            `;
+        }
+    });
+    
+    wordContainer.innerHTML = allWordsHTML;
+}
+
+// 초기화
+function init() {
+    console.log("JavaScript가 로드되었습니다!");
+    displayAllWords();
+}
+
+// 이벤트 리스너 등록
+document.addEventListener('DOMContentLoaded', function() {
+    // 단어장 초기화
+    init();
+    
+    // Home 링크 클릭 이벤트
+    const homeLink = document.querySelector('.nav-link[href="https://englisheasystudy.com/"]');
+    if (homeLink) {
+        homeLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.location.href = 'https://englisheasystudy.com/';
+        });
     }
     
-    .container {
-        padding: 10px;
-        max-width: 100%;
+    // 팝업 관련 이벤트
+    if (popupClose) {
+        popupClose.addEventListener('click', closePopup);
     }
     
-    .main-container {
-        padding: 100px 0 10px 0;
-        max-width: 100%;
+    // 팝업 외부 클릭 시 닫기
+    if (wordPopup) {
+        wordPopup.addEventListener('click', function(e) {
+            if (e.target === wordPopup) {
+                closePopup();
+            }
+        });
     }
-    
-    .article-section {
-        padding: 15px 20px;
-        max-width: 100vw;
-        width: 100vw;
-        margin: 0;
-        border-radius: 0;
-        box-shadow: none;
-        text-align: left; /* 왼쪽 정렬 강제 */
-    }
-    
-    .words-title {
-        font-size: 0.9rem;
-        margin-bottom: 8px;
-        text-align: left; /* 제목도 왼쪽 정렬 */
-    }
-    
-    .article-section {
-        font-size: 0.875rem; /* 14px로 변경 */
-        line-height: 1.6;
-        text-align: left; /* 텍스트 왼쪽 정렬 */
-    }
-    
-    .word-part {
-        padding: 1px 2px;
-        font-size: 0.875rem; /* 14px로 변경 */
-        display: inline-block; /* 인라인 블록으로 변경하여 줄바뀜 개선 */
-        word-break: keep-all; /* 한글 줄바뀜 방지 */
-    }
-    
-    /* 모바일에서 단어 정렬 개선 */
-    .word-with-underline {
-        text-align: left; /* 왼쪽 정렬 강제 */
-        word-break: keep-all; /* 한글 줄바뀜 방지 */
-        white-space: normal; /* 정상적인 줄바뀜 허용 */
-    }
-    
-    .word-with-underline .word-part {
-        margin-right: 4px; /* 단어 간 간격 추가 */
-    }
-    
-    .example-section {
-        padding: 20px;
+});
+
+// 팝업 닫기
+function closePopup() {
+    if (wordPopup) {
+        wordPopup.style.display = 'none';
     }
 }
 
-/* 날짜 간격 스타일 */
-.date-spacing {
-    height: 30px;
-    margin: 20px 0;
+// 키보드 단축키
+document.addEventListener('keydown', function(e) {
+    // Escape로 팝업 닫기
+    if (e.key === 'Escape') {
+        closePopup();
+    }
+});
+
+// 예문 토글 함수
+function toggleExample(exampleId) {
+    const exampleElement = document.getElementById(exampleId);
+    if (exampleElement) {
+        if (exampleElement.style.display === 'none') {
+            exampleElement.style.display = 'block';
+        } else {
+            exampleElement.style.display = 'none';
+        }
+    }
 }
 
-/* 단어 부분별 색상 스타일 */
-.word-part {
-    font-weight: 600;
-    padding: 2px 4px;
-    border-radius: 3px;
+// 단어 숨기기/보이기 토글 함수
+function toggleWord(wordId) {
+    const englishElement = document.getElementById(`${wordId}-english`);
+    const koreanElement = document.getElementById(`${wordId}-korean`);
+    
+    if (englishElement && koreanElement) {
+        if (englishElement.style.display === 'none') {
+            // 단어 보이기
+            englishElement.style.display = 'inline-block';
+            koreanElement.style.display = 'inline-block';
+        } else {
+            // 단어 숨기기
+            englishElement.style.display = 'none';
+            koreanElement.style.display = 'none';
+        }
+    }
 }
 
-.word-english {
-    color: #2563eb; /* 파란색 - 영어 단어 */
-    font-size: 0.875rem; /* 14px */
+// 특정 날짜의 모든 단어 숨기기/보이기 토글 함수
+function toggleAllWords(date) {
+    const allWordsInDate = document.querySelectorAll(`.word-hideable[data-date="${date}"]`);
+    
+    if (allWordsInDate.length > 0) {
+        const firstWord = allWordsInDate[0];
+        const isHidden = firstWord.style.backgroundColor === 'white';
+        
+        allWordsInDate.forEach(wordElement => {
+            if (isHidden) {
+                // 모든 단어 보이기
+                wordElement.style.backgroundColor = 'transparent';
+                wordElement.style.color = '#1a1a1a';
+            } else {
+                // 모든 단어 흰색 배경으로 가리기
+                wordElement.style.backgroundColor = 'white';
+                wordElement.style.color = 'white';
+            }
+        });
+    }
 }
 
-.word-korean {
-    color: #dc2626; /* 빨간색 - 한글 발음 */
-    font-size: 0.875rem; /* 14px */
-}
-
-.word-phonetic {
-    color: #059669; /* 초록색 - 발음기호 */
-    font-family: 'Courier New', monospace;
-    font-size: 0.875rem; /* 14px */
-}
-
-.word-meaning {
-    color: #7c3aed; /* 보라색 - 뜻 */
-    font-size: 0.875rem; /* 14px */
+// 특정 날짜의 모든 예문 펼치기/닫기 토글 함수
+function toggleAllExamples(date) {
+    const allExamplesInDate = document.querySelectorAll(`[id^="example-${date}-"]`);
+    const toggleButton = document.getElementById(`toggle-all-${date}`);
+    
+    if (allExamplesInDate.length > 0) {
+        const firstExample = allExamplesInDate[0];
+        const isHidden = firstExample.style.display === 'none' || firstExample.style.display === '';
+        
+        allExamplesInDate.forEach(exampleElement => {
+            if (isHidden) {
+                // 모든 예문 펼치기
+                exampleElement.style.display = 'block';
+            } else {
+                // 모든 예문 닫기
+                exampleElement.style.display = 'none';
+            }
+        });
+        
+        // 버튼 텍스트 변경
+        if (toggleButton) {
+            if (isHidden) {
+                toggleButton.textContent = '예문 닫기';
+                toggleButton.style.color = '#dc3545';
+            } else {
+                toggleButton.textContent = '예문 펼치기';
+                toggleButton.style.color = '#28a745';
+            }
+        }
+    }
 }
