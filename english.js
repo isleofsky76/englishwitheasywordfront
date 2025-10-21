@@ -1,240 +1,273 @@
-/* Reset and Base Styles */// 단어장 데이터 - 날짜별로 구성
+// 단어장 데이터 - 날짜별로 구성
 const wordsByDate = {
     "20251021": {
-  "title": "월마트와 ChatGPT의 파트너십(20251021)",
-  "words": [
-   
-    {
-      "word": "monetize",
-      "part_of_speech": "v",
-      "korean_pronunciation": "머니타이즈",
-      "meaning": "수익화하다",
-      "example_sentence": "OpenAI is exploring ways to monetize ChatGPT’s massive user base.",
-      "korean_translation": "오픈AI는 ChatGPT의 방대한 사용자 기반을 수익화할 방법을 모색하고 있다.",
-      "key_words": ["monetize"]
-    },
-    {
-      "word": "frictionless",
-      "part_of_speech": "adj",
-      "korean_pronunciation": "프릭션리스",
-      "meaning": "마찰 없는, 매끄러운",
-      "example_sentence": "Fast, frictionless shopping is every retailer’s dream.",
-      "korean_translation": "빠르고 마찰 없는 쇼핑은 모든 소매업체의 꿈이다.",
-      "key_words": ["frictionless"]
-    },
-
-    {
-      "word": "loyalty",
-      "part_of_speech": "n",
-      "korean_pronunciation": "로열티",
-      "meaning": "충성도, 충성심",
-      "example_sentence": "Easy AI shopping could weaken customer loyalty to retailers.",
-      "korean_translation": "AI 쇼핑의 편리함은 소매업체에 대한 고객 충성도를 약화시킬 수 있다.",
-      "key_words": ["loyalty"]
-    },
-   
-    {
-      "word": "partnership",
-      "part_of_speech": "n",
-      "korean_pronunciation": "파트너십",
-      "meaning": "협력, 제휴",
-      "example_sentence": "Retailers announced new partnerships with ChatGPT to reach shoppers.",
-      "korean_translation": "소매업체들은 소비자에게 다가가기 위해 ChatGPT와 새로운 협력을 발표했다.",
-      "key_words": ["partnerships"]
-    },
-    {
-      "word": "visibility",
-      "part_of_speech": "n",
-      "korean_pronunciation": "비저빌리티",
-      "meaning": "가시성, 노출도",
-      "example_sentence": "AI platforms give sellers visibility that traditional ads cannot match.",
-      "korean_translation": "AI 플랫폼은 기존 광고로는 얻기 어려운 노출 효과를 판매자에게 제공한다.",
-      "key_words": ["visibility"]
-    },
-    {
-      "word": "dominance",
-      "part_of_speech": "n",
-      "korean_pronunciation": "도미넌스",
-      "meaning": "지배, 우세",
-      "example_sentence": "ChatGPT has established clear dominance among AI chatbots.",
-      "korean_translation": "ChatGPT는 AI 챗봇들 중에서 확실한 지배적 위치를 차지했다.",
-      "key_words": ["dominance"]
-    },
-    {
-      "word": "upstream",
-      "part_of_speech": "adv",
-      "korean_pronunciation": "업스트림",
-      "meaning": "상류에, 앞단계에",
-      "example_sentence": "If discovery moves upstream to AI assistants, ad budgets may follow.",
-      "korean_translation": "상품 검색이 AI 비서 쪽으로 이동한다면 광고 예산도 따라갈 수 있다.",
-      "key_words": ["upstream"]
-    },
-    {
-      "word": "adoption",
-      "part_of_speech": "n",
-      "korean_pronunciation": "어돕션",
-      "meaning": "채택, 도입",
-      "example_sentence": "Walmart’s move could accelerate GenAI adoption by other retailers.",
-      "korean_translation": "Walmart의 결정은 다른 소매업체들의 생성형 AI 도입을 가속화할 수 있다.",
-      "key_words": ["adoption"]
-    },
-    {
-      "word": "profitability",
-      "part_of_speech": "n",
-      "korean_pronunciation": "프로피터빌리티",
-      "meaning": "수익성",
-      "example_sentence": "Retailers’ ad businesses have boosted their e-commerce profitability.",
-      "korean_translation": "소매업체들의 광고 사업은 전자상거래의 수익성을 높였다.",
-      "key_words": ["profitability"]
-    },
-    {
-      "word": "comparison",
-      "part_of_speech": "n",
-      "korean_pronunciation": "컴패리즌",
-      "meaning": "비교, 대조",
-      "example_sentence": "Easy price comparisons could erode retailers’ pricing power.",
-      "korean_translation": "가격 비교가 쉬워지면 소매업체의 가격 결정력이 약해질 수 있다.",
-      "key_words": ["comparisons"]
-    },
-    {
-      "word": "revenue",
-      "part_of_speech": "n",
-      "korean_pronunciation": "레버뉴",
-      "meaning": "수익, 매출",
-      "example_sentence": "Ad revenue makes up a growing share of retailers’ profits.",
-      "korean_translation": "광고 수익은 소매업체 이익에서 점점 더 큰 비중을 차지하고 있다.",
-      "key_words": ["revenue"]
-    },
-   
-    {
-      "word": "negotiate",
-      "part_of_speech": "v",
-      "korean_pronunciation": "니고시에이트",
-      "meaning": "협상하다, 교섭하다",
-      "example_sentence": "Retailers may later negotiate for a share of chatbot profits.",
-      "korean_translation": "소매업체들은 나중에 챗봇 수익의 일부를 얻기 위해 협상할 수도 있다.",
-      "key_words": ["negotiate"]
-    },
-    {
-      "word": "displace",
-      "part_of_speech": "v",
-      "korean_pronunciation": "디스플레이스",
-      "meaning": "대체하다, 밀어내다",
-      "example_sentence": "AI shopping may not fully displace traditional retail.",
-      "korean_translation": "AI 쇼핑이 전통적인 소매업을 완전히 대체하지는 않을 것이다.",
-      "key_words": ["displace"]
-    },
-    {
-      "word": "consequential",
-      "part_of_speech": "adj",
-      "korean_pronunciation": "컨시퀀셜",
-      "meaning": "중대한, 결과를 초래하는",
-      "example_sentence": "Walmart’s partnership with ChatGPT is consequential for the industry.",
-      "korean_translation": "Walmart의 ChatGPT 제휴는 업계에 중대한 영향을 미친다.",
-      "key_words": ["consequential"]
-    },
-    {
-      "word": "ecosystem",
-      "part_of_speech": "n",
-      "korean_pronunciation": "에코시스템",
-      "meaning": "생태계, 시스템 구조",
-      "example_sentence": "Universal AI platforms could reshape the retail ecosystem.",
-      "korean_translation": "범용 AI 플랫폼은 소매 산업의 생태계를 재편할 수 있다.",
-      "key_words": ["ecosystem"]
-    }
-  ]
-},
-
-
-
-    "20250919": {
-        "title": "엔비디아 인텔에 투자(20250918)",
+  "title": "비행기 안에서 대화",
         "words": [
             
             {
-                "word": "shore up",
-                "part_of_speech": "v",
-                "korean_pronunciation": "쇼어 업",
-                "meaning": "강화하다, 떠받치다",
-                "example_sentence": "The investment shores up Intel's struggling finances.",
-                "korean_translation": "이 투자는 인텔의 어려운 재정 상황을 안정시킨다.",
-                "key_words": ["shores up"]
-            },
-            {
-                "word": "foundry",
-                "part_of_speech": "n",
-                "korean_pronunciation": "파운드리",
-                "meaning": "반도체 위탁 생산 사업",
-                "example_sentence": "Intel's foundry ambition faces tough competition from TSMC.",
-                "korean_translation": "인텔의 파운드리 야망은 TSMC와의 치열한 경쟁에 직면해 있다.",
-                "key_words": ["foundry"]
-            },
-            {
-                "word": "stake",
-                "part_of_speech": "n",
-                "korean_pronunciation": "스테이크",
-                "meaning": "지분, 이해관계",
-                "example_sentence": "The U.S. government took a 10% stake in Intel.",
-                "korean_translation": "미국 정부는 인텔의 10% 지분을 취득했다.",
-                "key_words": ["stake"]
-            },
-            {
-                "word": "premarket",
-                "part_of_speech": "adj",
-                "korean_pronunciation": "프리마켓",
-                "meaning": "장전 거래",
-                "example_sentence": "Intel's shares jumped 30% in premarket trading.",
-                "korean_translation": "인텔 주가는 장전 거래에서 30% 급등했다.",
-                "key_words": ["premarket"]
-            },
-            {
-                "word": "collaboration",
-                "part_of_speech": "n",
-                "korean_pronunciation": "콜래버레이션",
-                "meaning": "협력",
-                "example_sentence": "The companies announced a collaboration on new chip designs.",
-                "korean_translation": "양사는 새로운 칩 설계에 대한 협력을 발표했다.",
-                "key_words": ["collaboration"]
-            },
-            {
-                "word": "revive",
-                "part_of_speech": "v",
-                "korean_pronunciation": "리바이브",
-                "meaning": "되살리다, 회복시키다",
-                "example_sentence": "The new deals may revive Intel's weakening position.",
-                "korean_translation": "새로운 거래들이 인텔의 약화된 입지를 되살릴 수 있다.",
-                "key_words": ["revive"]
-            },
-            {
-                "word": "struggle",
-                "part_of_speech": "v",
-                "korean_pronunciation": "스트러글",
-                "meaning": "고군분투하다",
-                "example_sentence": "Intel has been struggling to keep up with rivals.",
-                "korean_translation": "인텔은 경쟁사들을 따라잡기 위해 고군분투해 왔다.",
-                "key_words": ["struggling"]
-            },
-            {
-                "word": "erode",
-                "part_of_speech": "v",
-                "korean_pronunciation": "이로드",
-                "meaning": "침식하다, 약화시키다",
-                "example_sentence": "Intel's delays eroded confidence among investors.",
-                "korean_translation": "인텔의 지연은 투자자들의 신뢰를 약화시켰다.",
-                "key_words": ["eroded"]
-            },
-            {
-                "word": "boost",
-                "part_of_speech": "v",
-                "korean_pronunciation": "부스트",
-                "meaning": "끌어올리다, 촉진하다",
-                "example_sentence": "The government aims to boost Intel's manufacturing capacity.",
-                "korean_translation": "정부는 인텔의 제조 역량을 끌어올리려 한다.",
-                "key_words": ["boost"]
-            },
-            
-        ]
-    }
+        "word": "earplugs",
+        "part_of_speech": "n",
+        "korean_pronunciation": "이어플러그",
+        "meaning": "귀마개",
+        "example_sentence": "Excuse me, could I have a pair of earplugs, please?",
+        "korean_translation": "실례지만 귀마개 한 쌍 주실 수 있을까요?",
+         "key_words": ["earplugs"]
+        },
+        {
+        "word": "blanket",
+        "part_of_speech": "n",
+        "korean_pronunciation": "블랭킷",
+        "meaning": "담요",
+        "example_sentence": "Could I get a blanket? It’s a bit cold here.",
+        "korean_translation": "담요 하나 주실 수 있을까요? 여기 조금 춥네요.",
+         "key_words": ["blanket"]
+        },
+        {
+        "word": "sleeping mask",
+        "part_of_speech": "n",
+        "korean_pronunciation": "슬리핑 마스크",
+        "meaning": "수면 안대",
+        "example_sentence": "Do you have a sleeping mask available?",
+        "korean_translation": "수면 안대가 있나요?",
+         "key_words": ["sleeping mask"]
+        },
+        {
+        "word": "sparkling water",
+        "part_of_speech": "n",
+        "korean_pronunciation": "스파클링 워터",
+        "meaning": "탄산수",
+        "example_sentence": "I’d like sparkling water, please.",
+        "korean_translation": "탄산수로 부탁드립니다.",
+         "key_words": ["sparkling water"]
+        },
+        {
+        "word": "still water",
+        "part_of_speech": "n",
+        "korean_pronunciation": "스틸 워터",
+        "meaning": "생수, 탄산 없는 물",
+        "example_sentence": "Could I get still water, please?",
+        "korean_translation": "탄산 없는 생수 부탁드립니다.",
+        "key_words": ["still water"]
+        },
+        {
+        "word": "pillow",
+        "part_of_speech": "n",
+        "korean_pronunciation": "필로우",
+        "meaning": "베개",
+        "example_sentence": "Could I get an extra pillow, please?",
+        "korean_translation": "베개 하나 더 받을 수 있을까요?",
+        "key_words": ["pillow"]
+        },
+        {
+        "word": "bag",
+        "part_of_speech": "n",
+        "korean_pronunciation": "백",
+        "meaning": "가방, 짐",
+        "example_sentence": "Could you help me with my bag?",
+        "korean_translation": "제 가방 좀 도와주실 수 있나요?",
+        "key_words": ["bag"]
+        },
+        {
+        "word": "headphones",
+        "part_of_speech": "n",
+        "korean_pronunciation": "헤드폰스",
+        "meaning": "헤드폰",
+        "example_sentence": "Do you have any headphones available?",
+        "korean_translation": "헤드폰 있나요?",
+         "key_words": ["headphones"]
+        },
+        {
+        "word": "assistance",
+        "part_of_speech": "n",
+        "korean_pronunciation": "어시스턴스",
+        "meaning": "도움, 지원",
+        "example_sentence": "I need some assistance with my seatbelt.",
+        "korean_translation": "안전벨트 매는 것 좀 도와주세요.",
+        "key_words": ["assistance"]
+        },
+        {
+        "word": "aisle",
+        "part_of_speech": "n",
+        "korean_pronunciation": "아일",
+        "meaning": "통로",
+        "example_sentence": "Excuse me, I need to get to the aisle.",
+        "korean_translation": "실례합니다, 통로로 나가야 해요.",
+        "key_words": ["aisle"]
+        },
+        {
+        "word": "overhead compartment",
+        "part_of_speech": "n",
+        "korean_pronunciation": "오버헤드 컴파트먼트",
+        "meaning": "머리 위 짐칸",
+        "example_sentence": "Please put your bag in the overhead compartment.",
+        "korean_translation": "짐을 머리 위 짐칸에 넣어주세요.",
+        "key_words": ["overhead compartment"]
+        },
+        {
+        "word": "seat",
+        "part_of_speech": "n",
+        "korean_pronunciation": "싯",
+        "meaning": "좌석",
+        "example_sentence": "Is this seat taken?",
+        "korean_translation": "이 좌석 사람 있나요?",
+        "key_words": ["seat"]
+        },
+        {
+        "word": "recline",
+        "part_of_speech": "v",
+        "korean_pronunciation": "리클라인",
+        "meaning": "젖히다",
+        "example_sentence": "May I recline my seat?",
+        "korean_translation": "좌석을 뒤로 젖혀도 될까요?",
+        "key_words": ["recline"]
+        },
+        {
+        "word": "fasten",
+        "part_of_speech": "v",
+        "korean_pronunciation": "패슨",
+        "meaning": "잠그다, 매다",
+        "example_sentence": "Please fasten your seatbelt.",
+        "korean_translation": "안전벨트를 매주세요.",
+        "key_words": ["fasten"]
+        },
+        {
+        "word": "turbulence",
+        "part_of_speech": "n",
+        "korean_pronunciation": "터뷸런스",
+        "meaning": "난기류, 흔들림",
+        "example_sentence": "We're experiencing some turbulence.",
+        "korean_translation": "난기류를 겪고 있습니다.",
+        "key_words": ["turbulence"]
+        },
+        {
+        "word": "Refill",
+        "part_of_speech": "n/v",
+        "korean_pronunciation": "리필",
+        "meaning": "다시 채우다, 리필하다",
+        "example_sentence": "Could I have a refill of water, please?",
+        "korean_translation": "물 한 번 더 리필해 주실 수 있나요?",
+        "key_words": ["refill"]
+        },
+        {
+        "word": "seatbelt sign",
+        "part_of_speech": "n",
+        "korean_pronunciation": "싯벨트 싸인",
+        "meaning": "안전벨트 사인",
+        "example_sentence": "Please remain seated while the seatbelt sign is on.",
+        "korean_translation": "안전벨트 사인이 켜진 동안 자리에 앉아 계세요.",
+        "key_words": ["seatbelt sign"]
+        },
+        {
+        "word": "landing",
+        "part_of_speech": "n",
+        "korean_pronunciation": "랜딩",
+        "meaning": "착륙",
+        "example_sentence": "We'll be landing in 10 minutes.",
+        "korean_translation": "10분 후에 착륙합니다.",
+        "key_words": ["landing"]
+        },
+        {
+        "word": "tray table",
+        "part_of_speech": "n",
+        "korean_pronunciation": "트레이 테이블",
+        "meaning": "식탁 받침대, 접이식 테이블",
+        "example_sentence": "Please fold your tray table before landing.",
+        "korean_translation": "착륙 전 트레이 테이블을 접어주세요.",
+        "key_words": ["tray table"]
+        },
+        {
+        "word": "cabin crew",
+        "part_of_speech": "n",
+        "korean_pronunciation": "캐빈 크루",
+        "meaning": "승무원",
+        "example_sentence": "If you need assistance, please call the cabin crew.",
+        "korean_translation": "도움이 필요하시면 승무원을 불러주세요.",
+        "key_words": ["cabin crew"]
+        },
+        {
+        "word": "chicken",
+        "part_of_speech": "n",
+        "korean_pronunciation": "치킨",
+        "meaning": "닭고기",
+        "example_sentence": "Would you like chicken or beef?",
+        "korean_translation": "닭고기 드시겠어요, 아니면 소고기 드시겠어요?",
+        "key_words": ["chicken"]
+        },
+        {
+        "word": "beef",
+        "part_of_speech": "n",
+        "korean_pronunciation": "비프",
+        "meaning": "소고기",
+        "example_sentence": "I'll have the beef, please.",
+        "korean_translation": "소고기로 주세요.",
+        "key_words": ["beef"]
+        },
+        {
+        "word": "beverage",
+        "part_of_speech": "n",
+        "korean_pronunciation": "베버리지",
+        "meaning": "음료",
+        "example_sentence": "Would you like a beverage?",
+        "korean_translation": "음료 드시겠어요?",
+        "key_words": ["beverage"]
+        },
+        {
+        "word": "window seat",
+        "part_of_speech": "n",
+        "korean_pronunciation": "윈도우 싯",
+        "meaning": "창가 좌석",
+        "example_sentence": "I'd like to sit in the window seat.",
+        "korean_translation": "창가 좌석에 앉고 싶습니다.",
+        "key_words": ["window seat"]
+        },
+        {
+        "word": "aisle seat",
+        "part_of_speech": "n",
+        "korean_pronunciation": "아일 싯",
+        "meaning": "복도 좌석",
+        "example_sentence": "Can I change to an aisle seat?",
+        "korean_translation": "복도 좌석으로 바꿀 수 있나요?",
+        "key_words": ["aisle seat"]
+        },
+        {
+        "word": "change",
+        "part_of_speech": "v",
+        "korean_pronunciation": "체인지",
+        "meaning": "바꾸다, 변경하다",
+        "example_sentence": "Can I change my seat?",
+        "korean_translation": "제 좌석을 바꿀 수 있나요?",
+        "key_words": ["change"]
+        },
+        {
+        "word": "digestive medicine",
+        "part_of_speech": "n",
+        "korean_pronunciation": "다이제스티브 메디슨",
+        "meaning": "소화제",
+        "example_sentence": "Do you have any digestive medicine?",
+        "korean_translation": "소화제 있나요?",
+        "key_words": ["digestive medicine"]
+        },
+        {
+        "word": "anti-diarrheal",
+        "part_of_speech": "n",
+        "korean_pronunciation": "안티 다이어리얼",
+        "meaning": "지사제",
+        "example_sentence": "I need some anti-diarrheal medicine.",
+        "korean_translation": "지사제가 필요해요.",
+        "key_words": ["anti-diarrheal"]
+        },
+        {
+        "word": "boarding pass",
+        "part_of_speech": "n",
+        "korean_pronunciation": "보딩 패스",
+        "meaning": "탑승권",
+        "example_sentence": "May I see your boarding pass?",
+        "korean_translation": "탑승권을 보여주시겠어요?",
+        "key_words": ["boarding pass"]
+        }
+  ]
+},
+    
 };
 
 let currentWordIndex = 0;
