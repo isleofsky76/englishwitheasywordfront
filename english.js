@@ -1,5 +1,193 @@
 // 단어장 데이터 - 날짜별로 구성
+// 단어장 데이터 - 날짜별로 구성
 const wordsByDate = {
+  "20251022": {
+    "title": "커피 주문하기",
+        "words": [
+            {
+            "word": "What can I get for you?",
+            "part_of_speech": "expression",
+            "korean_pronunciation": "왓 캔 아이 겟 포 유?",
+            "meaning": "무엇을 드릴까요?",
+            "example_sentence": "What can I get for you today?",
+            "korean_translation": "오늘은 무엇을 드릴까요?",
+            "sentence_pronunciation": "왓 캔 아이 겟 포 유 투데이?",
+            "key_words": ["get", "for you"]
+          },
+          {
+            "word": "I'd like an iced latte, please.",
+            "part_of_speech": "expression",
+            "korean_pronunciation": "아이드 라이크 언 아이스트 라떼, 플리즈.",
+            "meaning": "아이스 라떼로 주세요.",
+            "example_sentence": "I'd like an iced latte, please.",
+            "korean_translation": "아이스 라떼로 부탁드립니다.",
+            "sentence_pronunciation": "아이드 라이크 언 아이스트 라떼, 플리즈.",
+            "key_words": ["iced latte", "please"]
+          },
+          {
+            "word": "Which size would you like?",
+            "part_of_speech": "expression",
+            "korean_pronunciation": "위치 사이즈 우쥬 라이크?",
+            "meaning": "사이즈는 어떤 걸로 하시겠어요?",
+            "example_sentence": "Which size would you like for your drink?",
+            "korean_translation": "음료 사이즈는 어떤 걸로 하시겠어요?",
+            "sentence_pronunciation": "위치 사이즈 우쥬 라이크 포 유어 드링크?",
+            "key_words": ["which", "size"]
+          },
+          {
+            "word": "Grande, please.",
+            "part_of_speech": "expression",
+            "korean_pronunciation": "그란데 플리즈.",
+            "meaning": "그란데로 주세요.",
+            "example_sentence": "Grande, please.",
+            "korean_translation": "그란데 사이즈로 부탁드립니다.",
+            "sentence_pronunciation": "그란데 플리즈.",
+            "key_words": ["grande"]
+          },
+          {
+            "word": "Hot or iced?",
+            "part_of_speech": "expression",
+            "korean_pronunciation": "핫 오어 아이스트?",
+            "meaning": "뜨겁게 하시겠어요, 아니면 아이스로요?",
+            "example_sentence": "Hot or iced for your latte?",
+            "korean_translation": "라떼는 뜨겁게 하시겠어요, 아니면 아이스로요?",
+            "sentence_pronunciation": "핫 오어 아이스트 포 유어 라떼?",
+            "key_words": ["hot", "iced"]
+          },
+          {
+            "word": "Iced, please.",
+            "part_of_speech": "expression",
+            "korean_pronunciation": "아이스트 플리즈.",
+            "meaning": "아이스로 주세요.",
+            "example_sentence": "Iced, please.",
+            "korean_translation": "아이스로 부탁드립니다.",
+            "sentence_pronunciation": "아이스트 플리즈.",
+            "key_words": ["iced", "please"]
+          },
+          {
+            "word": "What kind of milk would you like?",
+            "part_of_speech": "expression",
+            "korean_pronunciation": "왓 카인드 오브 밀크 우쥬 라이크?",
+            "meaning": "어떤 우유로 드릴까요?",
+            "example_sentence": "What kind of milk would you like in your coffee?",
+            "korean_translation": "커피에 어떤 우유를 넣어드릴까요?",
+            "sentence_pronunciation": "왓 카인드 오브 밀크 우쥬 라이크 인 유어 커피?",
+            "key_words": ["milk", "kind"]
+          },
+          {
+            "word": "Soy milk, please.",
+            "part_of_speech": "expression",
+            "korean_pronunciation": "소이 밀크 플리즈.",
+            "meaning": "두유로 주세요.",
+            "example_sentence": "Soy milk, please.",
+            "korean_translation": "두유로 부탁드립니다.",
+            "sentence_pronunciation": "소이 밀크 플리즈.",
+            "key_words": ["soy milk"]
+          },
+          {
+            "word": "Do you want a sleeve?",
+            "part_of_speech": "expression",
+            "korean_pronunciation": "두 유 원 어 슬리브?",
+            "meaning": "컵홀더 필요하세요?",
+            "example_sentence": "Do you want a sleeve for your drink?",
+            "korean_translation": "음료 컵홀더 드릴까요?",
+            "sentence_pronunciation": "두 유 원 어 슬리브 포 유어 드링크?",
+            "key_words": ["sleeve"]
+          },
+          {
+            "word": "Yes, please. It’s a bit hot.",
+            "part_of_speech": "expression",
+            "korean_pronunciation": "예스 플리즈. 잇츠 어 빗 핫.",
+            "meaning": "네, 부탁드려요. 좀 뜨거워요.",
+            "example_sentence": "Yes, please. It’s a bit hot.",
+            "korean_translation": "네, 부탁드려요. 좀 뜨거워요.",
+            "sentence_pronunciation": "예스 플리즈. 잇츠 어 빗 핫.",
+            "key_words": ["sleeve", "hot"]
+          },
+          {
+            "word": "To go or for here?",
+            "part_of_speech": "expression",
+            "korean_pronunciation": "투 고 오어 포 히어?",
+            "meaning": "포장이세요, 아니면 매장에서 드시겠어요?",
+            "example_sentence": "To go or for here?",
+            "korean_translation": "포장이세요, 아니면 매장에서 드시겠어요?",
+            "sentence_pronunciation": "투 고 오어 포 히어?",
+            "key_words": ["to go", "for here"]
+          },
+          {
+            "word": "For here, please.",
+            "part_of_speech": "expression",
+            "korean_pronunciation": "포 히어 플리즈.",
+            "meaning": "매장에서 마실게요.",
+            "example_sentence": "For here, please.",
+            "korean_translation": "매장에서 마실게요.",
+            "sentence_pronunciation": "포 히어 플리즈.",
+            "key_words": ["for here", "please"]
+          },
+          {
+            "word": "That will be five dollars.",
+            "part_of_speech": "expression",
+            "korean_pronunciation": "댓 윌 비 파이브 달러스.",
+            "meaning": "5달러입니다.",
+            "example_sentence": "That will be five dollars, please.",
+            "korean_translation": "5달러입니다.",
+            "sentence_pronunciation": "댓 윌 비 파이브 달러스, 플리즈.",
+            "key_words": ["five dollars"]
+          },
+          {
+            "word": "Here you go.",
+            "part_of_speech": "expression",
+            "korean_pronunciation": "히어 유 고.",
+            "meaning": "여기요.",
+            "example_sentence": "Here you go.",
+            "korean_translation": "여기 있습니다.",
+            "sentence_pronunciation": "히어 유 고.",
+            "key_words": ["here you go"]
+          },
+          {
+            "word": "Can I get a refill?",
+            "part_of_speech": "expression",
+            "korean_pronunciation": "캔 아이 겟 어 리필?",
+            "meaning": "리필 가능할까요?",
+            "example_sentence": "Can I get a refill of coffee?",
+            "korean_translation": "커피 리필 가능할까요?",
+            "sentence_pronunciation": "캔 아이 겟 어 리필 오브 커피?",
+            "key_words": ["refill", "coffee"]
+          },
+          {
+            "word": "Sure, one moment please.",
+            "part_of_speech": "expression",
+            "korean_pronunciation": "슈어 원 모먼트 플리즈.",
+            "meaning": "물론이죠, 잠시만요.",
+            "example_sentence": "Sure, one moment please.",
+            "korean_translation": "물론이죠, 잠시만요.",
+            "sentence_pronunciation": "슈어 원 모먼트 플리즈.",
+            "key_words": ["sure", "please"]
+          },
+          {
+            "word": "Let's go grab some coffee.",
+            "part_of_speech": "expression",
+            "korean_pronunciation": "렛츠 고 그래브 썸 커피.",
+            "meaning": "커피 마시러 가자!",
+            "example_sentence": "Let's go grab some coffee after work.",
+            "korean_translation": "퇴근 후에 커피 마시러 가자.",
+            "sentence_pronunciation": "렛츠 고 그래브 썸 커피 애프터 워크.",
+            "key_words": ["grab", "coffee"]
+          },
+          {
+            "word": "Sounds good!",
+            "part_of_speech": "expression",
+            "korean_pronunciation": "사운즈 굿!",
+            "meaning": "좋아요!",
+            "example_sentence": "Sounds good!",
+            "korean_translation": "좋아요!",
+            "sentence_pronunciation": "사운즈 굿!",
+            "key_words": ["sounds good"]
+          },
+     
+    ]
+  },
+  
     "20251021": {
   "title": "비행기 안에서 대화",
         "words": [
@@ -328,7 +516,334 @@ const wordsByDate = {
   ]
 },
 
-
+"20251023": {
+  "title": "음식점에서의 대화",
+  "words": [
+    {
+      "word": "How many people?",
+      "part_of_speech": "expression",
+      "korean_pronunciation": "하우 메니 피플?",
+      "meaning": "몇 명이세요?",
+      "example_sentence": "How many people are in your party?",
+      "korean_translation": "몇 분이세요?",
+      "sentence_pronunciation": "하우 메니 피플 아 인 유어 파티?",
+      "key_words": ["how many", "people"]
+    },
+    {
+      "word": "Table for two, please.",
+      "part_of_speech": "expression",
+      "korean_pronunciation": "테이블 포 투, 플리즈.",
+      "meaning": "2명용 테이블로 주세요.",
+      "example_sentence": "Table for two, please.",
+      "korean_translation": "2명용 테이블로 부탁드립니다.",
+      "sentence_pronunciation": "테이블 포 투, 플리즈.",
+      "key_words": ["table", "two"]
+    },
+    {
+      "word": "Do you have a window seat?",
+      "part_of_speech": "expression",
+      "korean_pronunciation": "두 유 해브 어 윈도우 싯?",
+      "meaning": "창가 자리가 있나요?",
+      "example_sentence": "Do you have a window seat available?",
+      "korean_translation": "창가 자리가 있나요?",
+      "sentence_pronunciation": "두 유 해브 어 윈도우 싯 어베일러블?",
+      "key_words": ["window seat"]
+    },
+    {
+      "word": "Right this way.",
+      "part_of_speech": "expression",
+      "korean_pronunciation": "라잇 디스 웨이.",
+      "meaning": "이쪽으로 오세요.",
+      "example_sentence": "Right this way, please.",
+      "korean_translation": "이쪽으로 오세요.",
+      "sentence_pronunciation": "라잇 디스 웨이, 플리즈.",
+      "key_words": ["right", "way"]
+    },
+    {
+      "word": "Here are your menus.",
+      "part_of_speech": "expression",
+      "korean_pronunciation": "히어 아 유어 메뉴스.",
+      "meaning": "메뉴입니다.",
+      "example_sentence": "Here are your menus.",
+      "korean_translation": "메뉴입니다.",
+      "sentence_pronunciation": "히어 아 유어 메뉴스.",
+      "key_words": ["menus"]
+    },
+    {
+      "word": "Are you ready to order?",
+      "part_of_speech": "expression",
+      "korean_pronunciation": "아 유 레디 투 오더?",
+      "meaning": "주문하실 준비 되셨나요?",
+      "example_sentence": "Are you ready to order?",
+      "korean_translation": "주문하실 준비 되셨나요?",
+      "sentence_pronunciation": "아 유 레디 투 오더?",
+      "key_words": ["ready", "order"]
+    },
+    {
+      "word": "I'll have the pasta, please.",
+      "part_of_speech": "expression",
+      "korean_pronunciation": "아일 해브 더 파스타, 플리즈.",
+      "meaning": "파스타로 주세요.",
+      "example_sentence": "I'll have the pasta, please.",
+      "korean_translation": "파스타로 부탁드립니다.",
+      "sentence_pronunciation": "아일 해브 더 파스타, 플리즈.",
+      "key_words": ["pasta", "please"]
+    },
+    {
+      "word": "What would you like to drink?",
+      "part_of_speech": "expression",
+      "korean_pronunciation": "왓 우쥬 라이크 투 드링크?",
+      "meaning": "음료는 무엇으로 하시겠어요?",
+      "example_sentence": "What would you like to drink?",
+      "korean_translation": "음료는 무엇으로 하시겠어요?",
+      "sentence_pronunciation": "왓 우쥬 라이크 투 드링크?",
+      "key_words": ["drink"]
+    },
+    {
+      "word": "I'll have water, please.",
+      "part_of_speech": "expression",
+      "korean_pronunciation": "아일 해브 워터, 플리즈.",
+      "meaning": "물로 주세요.",
+      "example_sentence": "I'll have water, please.",
+      "korean_translation": "물로 부탁드립니다.",
+      "sentence_pronunciation": "아일 해브 워터, 플리즈.",
+      "key_words": ["water"]
+    },
+    {
+      "word": "Still water, please.",
+      "part_of_speech": "expression",
+      "korean_pronunciation": "스틸 워터, 플리즈.",
+      "meaning": "탄산 없는 물로 주세요.",
+      "example_sentence": "Still water, please.",
+      "korean_translation": "탄산 없는 물로 부탁드립니다.",
+      "sentence_pronunciation": "스틸 워터, 플리즈.",
+      "key_words": ["still water"]
+    },
+    {
+      "word": "Sparkling water, please.",
+      "part_of_speech": "expression",
+      "korean_pronunciation": "스파클링 워터, 플리즈.",
+      "meaning": "탄산수로 주세요.",
+      "example_sentence": "Sparkling water, please.",
+      "korean_translation": "탄산수로 부탁드립니다.",
+      "sentence_pronunciation": "스파클링 워터, 플리즈.",
+      "key_words": ["sparkling water"]
+    },
+    {
+      "word": "I'll have a beer, please.",
+      "part_of_speech": "expression",
+      "korean_pronunciation": "아일 해브 어 비어, 플리즈.",
+      "meaning": "맥주로 주세요.",
+      "example_sentence": "I'll have a beer, please.",
+      "korean_translation": "맥주로 부탁드립니다.",
+      "sentence_pronunciation": "아일 해브 어 비어, 플리즈.",
+      "key_words": ["beer"]
+    },
+    {
+      "word": "I'll have a Coke, please.",
+      "part_of_speech": "expression",
+      "korean_pronunciation": "아일 해브 어 코크, 플리즈.",
+      "meaning": "콜라로 주세요.",
+      "example_sentence": "I'll have a Coke, please.",
+      "korean_translation": "콜라로 부탁드립니다.",
+      "sentence_pronunciation": "아일 해브 어 코크, 플리즈.",
+      "key_words": ["Coke"]
+    },
+    {
+      "word": "How would you like your steak?",
+      "part_of_speech": "expression",
+      "korean_pronunciation": "하우 우쥬 라이크 유어 스테이크?",
+      "meaning": "스테이크는 어떻게 구워드릴까요?",
+      "example_sentence": "How would you like your steak cooked?",
+      "korean_translation": "스테이크는 어떻게 구워드릴까요?",
+      "sentence_pronunciation": "하우 우쥬 라이크 유어 스테이크 쿡트?",
+      "key_words": ["steak", "cooked"]
+    },
+    {
+      "word": "Medium rare, please.",
+      "part_of_speech": "expression",
+      "korean_pronunciation": "미디엄 레어, 플리즈.",
+      "meaning": "미디엄 레어로 주세요.",
+      "example_sentence": "Medium rare, please.",
+      "korean_translation": "미디엄 레어로 부탁드립니다.",
+      "sentence_pronunciation": "미디엄 레어, 플리즈.",
+      "key_words": ["medium rare"]
+    },
+    {
+      "word": "Is everything okay?",
+      "part_of_speech": "expression",
+      "korean_pronunciation": "이즈 에브리씽 오케이?",
+      "meaning": "모든 게 괜찮으세요?",
+      "example_sentence": "Is everything okay with your meal?",
+      "korean_translation": "식사는 괜찮으세요?",
+      "sentence_pronunciation": "이즈 에브리씽 오케이 위드 유어 밀?",
+      "key_words": ["everything", "okay"]
+    },
+    {
+      "word": "Everything is delicious!",
+      "part_of_speech": "expression",
+      "korean_pronunciation": "에브리씽 이즈 딜리셔스!",
+      "meaning": "모든 게 맛있어요!",
+      "example_sentence": "Everything is delicious!",
+      "korean_translation": "모든 게 맛있어요!",
+      "sentence_pronunciation": "에브리씽 이즈 딜리셔스!",
+      "key_words": ["delicious"]
+    },
+      
+    {
+        "word": "Where is the restroom?",
+        "part_of_speech": "expression",
+        "korean_pronunciation": "웨어 이즈 더 레스트룸?",
+        "meaning": "화장실이 어디에 있나요?",
+        "example_sentence": "Excuse me, where is the restroom?",
+        "korean_translation": "실례합니다, 화장실이 어디에 있나요?",
+        "sentence_pronunciation": "익스큐즈 미, 웨어 이즈 더 레스트룸?",
+        "key_words": ["restroom", "where"]
+      },
+      {
+        "word": "It's down the hall.",
+        "part_of_speech": "expression",
+        "korean_pronunciation": "잇츠 다운 더 홀.",
+        "meaning": "복도를 따라 가세요.",
+        "example_sentence": "It's down the hall on the right.",
+        "korean_translation": "복도 오른쪽으로 가세요.",
+        "sentence_pronunciation": "잇츠 다운 더 홀 온 더 라잇.",
+        "key_words": ["down", "hall"]
+      },
+      {
+        "word": "It's around the corner.",
+        "part_of_speech": "expression",
+        "korean_pronunciation": "잇츠 어라운드 더 코너.",
+        "meaning": "모퉁이를 돌면 있어요.",
+        "example_sentence": "It's around the corner.",
+        "korean_translation": "모퉁이를 돌면 있어요.",
+        "sentence_pronunciation": "잇츠 어라운드 더 코너.",
+        "key_words": ["around", "corner"]
+      },
+      {
+        "word": "I'll be right back.",
+        "part_of_speech": "expression",
+        "korean_pronunciation": "아일 비 라잇 백.",
+        "meaning": "금방 돌아올게요.",
+        "example_sentence": "I'll be right back.",
+        "korean_translation": "금방 돌아올게요.",
+        "sentence_pronunciation": "아일 비 라잇 백.",
+        "key_words": ["right back"]
+      },
+      {
+        "word": "Take your time.",
+        "part_of_speech": "expression",
+        "korean_pronunciation": "테이크 유어 타임.",
+        "meaning": "천천히 하세요.",
+        "example_sentence": "Take your time.",
+        "korean_translation": "천천히 하세요.",
+        "sentence_pronunciation": "테이크 유어 타임.",
+        "key_words": ["take", "time"]
+      },
+      {
+        "word": "Is it occupied?",
+        "part_of_speech": "expression",
+        "korean_pronunciation": "이즈 잇 어큐파이드?",
+        "meaning": "사용 중인가요?",
+        "example_sentence": "Is the restroom occupied?",
+        "korean_translation": "화장실이 사용 중인가요?",
+        "sentence_pronunciation": "이즈 더 레스트룸 어큐파이드?",
+        "key_words": ["occupied"]
+      },
+      {
+        "word": "It's available.",
+        "part_of_speech": "expression",
+        "korean_pronunciation": "잇츠 어베일러블.",
+        "meaning": "사용 가능해요.",
+        "example_sentence": "It's available now.",
+        "korean_translation": "지금 사용 가능해요.",
+        "sentence_pronunciation": "잇츠 어베일러블 나우.",
+        "key_words": ["available"]
+      },
+      {
+        "word": "There's no toilet paper.",
+        "part_of_speech": "expression",
+        "korean_pronunciation": "데어즈 노 토일릿 페이퍼.",
+        "meaning": "화장지가 없어요.",
+        "example_sentence": "There's no toilet paper in here.",
+        "korean_translation": "여기 화장지가 없어요.",
+        "sentence_pronunciation": "데어즈 노 토일릿 페이퍼 인 히어.",
+        "key_words": ["toilet paper"]
+      },
+     
+    {
+      "word": "Can I get the check, please?",
+      "part_of_speech": "expression",
+      "korean_pronunciation": "캔 아이 겟 더 체크, 플리즈?",
+      "meaning": "계산서 주세요.",
+      "example_sentence": "Can I get the check, please?",
+      "korean_translation": "계산서 부탁드립니다.",
+      "sentence_pronunciation": "캔 아이 겟 더 체크, 플리즈?",
+      "key_words": ["check"]
+    },
+    {
+      "word": "How would you like to pay?",
+      "part_of_speech": "expression",
+      "korean_pronunciation": "하우 우쥬 라이크 투 페이?",
+      "meaning": "어떻게 결제하시겠어요?",
+      "example_sentence": "How would you like to pay?",
+      "korean_translation": "어떻게 결제하시겠어요?",
+      "sentence_pronunciation": "하우 우쥬 라이크 투 페이?",
+      "key_words": ["pay"]
+    },
+    {
+      "word": "I'll pay by card.",
+      "part_of_speech": "expression",
+      "korean_pronunciation": "아일 페이 바이 카드.",
+      "meaning": "카드로 결제하겠습니다.",
+      "example_sentence": "I'll pay by card.",
+      "korean_translation": "카드로 결제하겠습니다.",
+      "sentence_pronunciation": "아일 페이 바이 카드.",
+      "key_words": ["card"]
+    },
+    {
+      "word": "Can I split the bill?",
+      "part_of_speech": "expression",
+      "korean_pronunciation": "캔 아이 스플릿 더 빌?",
+      "meaning": "계산서를 나눌 수 있나요?",
+      "example_sentence": "Can I split the bill?",
+      "korean_translation": "계산서를 나눌 수 있나요?",
+      "sentence_pronunciation": "캔 아이 스플릿 더 빌?",
+      "key_words": ["split", "bill"]
+    },
+    {
+      "word": "Keep the change.",
+      "part_of_speech": "expression",
+      "korean_pronunciation": "킵 더 체인지.",
+      "meaning": "거스름돈은 가지세요.",
+      "example_sentence": "Keep the change.",
+      "korean_translation": "거스름돈은 가지세요.",
+      "sentence_pronunciation": "킵 더 체인지.",
+      "key_words": ["change"]
+    },
+    {
+      "word": "Thank you for coming!",
+      "part_of_speech": "expression",
+      "korean_pronunciation": "땡큐 포 컴잉!",
+      "meaning": "방문해 주셔서 감사합니다!",
+      "example_sentence": "Thank you for coming!",
+      "korean_translation": "방문해 주셔서 감사합니다!",
+      "sentence_pronunciation": "땡큐 포 컴잉!",
+      "key_words": ["thank you", "coming"]
+    },
+    {
+      "word": "Have a great day!",
+      "part_of_speech": "expression",
+      "korean_pronunciation": "해브 어 그레이트 데이!",
+      "meaning": "좋은 하루 되세요!",
+      "example_sentence": "Have a great day!",
+      "korean_translation": "좋은 하루 되세요!",
+      "sentence_pronunciation": "해브 어 그레이트 데이!",
+      "key_words": ["great day"]
+    },
+ 
+    ]
+    }
 
     
 };
