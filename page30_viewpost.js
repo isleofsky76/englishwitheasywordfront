@@ -90,10 +90,30 @@
 
 
 
-// API 베이스 URL 설정 (GitHub/프로덕션 환경용)
-// 프로덕션 API 서버 URL 고정
-const API_BASE_URL = 'https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app';
-console.log('🟢 Production 모드 - API_BASE_URL:', API_BASE_URL);
+// API 베이스 URL 설정 (로컬/프로덕션 자동 전환)
+// URL 파라미터로 강제 설정 가능: ?api=local 또는 ?api=prod
+let API_BASE_URL;
+const urlParams = new URLSearchParams(window.location.search);
+const apiMode = urlParams.get('api'); // 'local' 또는 'prod'로 강제 설정 가능
+
+if (apiMode === 'prod') {
+    // URL 파라미터로 프로덕션 강제 지정
+    API_BASE_URL = 'https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app';
+    console.log('🟢 Production 모드 (강제) - API_BASE_URL:', API_BASE_URL);
+} else if (apiMode === 'local') {
+    // URL 파라미터로 로컬 강제 지정
+    API_BASE_URL = `http://${window.location.hostname}:3000`;
+    console.log('🔵 Localhost 모드 (강제) - API_BASE_URL:', API_BASE_URL);
+} else if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+    // 자동 감지: 로컬 호스트면 로컬 API 사용
+    API_BASE_URL = `http://${window.location.hostname}:3000`;
+    console.log('🔵 Localhost 모드 (자동) - API_BASE_URL:', API_BASE_URL);
+    console.log('💡 프로덕션 API를 사용하려면 URL에 ?api=prod 를 추가하세요');
+} else {
+    // 자동 감지: 프로덕션 호스트면 프로덕션 API 사용
+    API_BASE_URL = 'https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app';
+    console.log('🟢 Production 모드 (자동) - API_BASE_URL:', API_BASE_URL);
+}
 
 // HTML 이스케이프 헬퍼 함수 (전역)
 function escapeHtml(text) {
@@ -238,11 +258,12 @@ function showLoading() {
 // 에러 메시지 표시 함수
 function showError(message, details = '') {
     const postContainer = document.getElementById('post-container');
+    const apiParam = apiMode ? `?api=${apiMode}` : '';
     postContainer.innerHTML = `
         <div style="text-align: center; padding: 30px; color: #d32f2f; background-color: #ffebee; border-radius: 8px; margin: 20px;">
             <p style="font-size: 1.2em; font-weight: bold; margin-bottom: 10px;">⚠️ ${message}</p>
             ${details ? `<p style="font-size: 0.9em; color: #666; margin-top: 10px;">${details}</p>` : ''}
-            <button class="btn btn-primary mt-3" onclick="window.location.href='page30_guestbook.html'">목록으로 돌아가기</button>
+            <button class="btn btn-primary mt-3" onclick="window.location.href='page30_guestbook.html${apiParam}'">목록으로 돌아가기</button>
         </div>
     `;
 }
@@ -314,35 +335,46 @@ async function loadPost() {
         console.log(`📌 인덱스 ${indexNum}로 게시글 찾기 (총 ${entries.length}개)`);
 
         console.log('📝 로드된 게시글:', post);
+        console.log('📅 게시글 날짜 정보:', post.date, typeof post.date);
 
         // 게시글 표시 - HTML 구조를 다시 생성
         const postContainer = document.getElementById('post-container');
         
         let postDate;
-        let formattedDate = '날짜 없음';
+        let formattedDate = 'Date not available';
         
         if (post.date) {
             try {
                 postDate = new Date(post.date);
+                console.log('📅 파싱된 날짜:', postDate);
                 // 유효한 날짜인지 확인
                 if (isNaN(postDate.getTime())) {
                     console.warn('유효하지 않은 날짜:', post.date);
-                    formattedDate = '날짜 없음';
+                    formattedDate = 'Date not available';
                 } else {
-                    // 형식: "2025.12.29 16:45"
+                    // 형식: "2025.12.29  17:00" (날짜와 시간 사이 공백 2개)
                     const year = postDate.getFullYear();
                     const month = ('0' + (postDate.getMonth() + 1)).slice(-2);
                     const day = ('0' + postDate.getDate()).slice(-2);
                     const hours = ('0' + postDate.getHours()).slice(-2);
                     const minutes = ('0' + postDate.getMinutes()).slice(-2);
-                    formattedDate = `${year}.${month}.${day} ${hours}:${minutes}`;
+                    formattedDate = `${year}.${month}.${day}  ${hours}:${minutes}`;
+                    console.log('📅 포맷된 날짜:', formattedDate);
                 }
             } catch (e) {
                 console.error('날짜 파싱 오류:', e, post.date);
-                formattedDate = '날짜 없음';
+                formattedDate = 'Date not available';
             }
         } else {
             console.warn('게시글에 날짜 정보가 없습니다:', post);
+            // 날짜가 없으면 현재 시간 사용 (임시)
+            formattedDate = new Date().toLocaleString('ko-KR', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit'
+            }).replace(/\. /g, '.').replace(/\.$/, '');
         }
 
         // 이미지/동영상 링크 변환하여 표시
@@ -380,7 +412,8 @@ async function loadPost() {
 
         // 버튼 기능 연결
         document.getElementById('backBtn').onclick = () => {
-            window.location.href = 'page30_guestbook.html';
+            const apiParam = apiMode ? `?api=${apiMode}` : '';
+            window.location.href = `page30_guestbook.html${apiParam}`;
         };
         
         document.getElementById('editBtn').onclick = async () => {
@@ -452,7 +485,8 @@ async function loadPost() {
 
                 if (response.ok) {
                     // 수정 완료 후 페이지 새로고침
-                    window.location.href = `${window.location.pathname}?index=${window.currentIndex}`;
+                    const apiParam = apiMode ? `&api=${apiMode}` : '';
+                    window.location.href = `${window.location.pathname}?index=${window.currentIndex}${apiParam}`;
                 } else {
                     const errorData = await response.json();
                     alert(`오류: ${errorData.error || '게시글 수정에 실패했습니다.'}`);
@@ -491,7 +525,8 @@ async function loadPost() {
                 });
                 if (response.ok) {
                     alert('게시글이 삭제되었습니다.');
-                    window.location.href = 'page30_guestbook.html';
+                    const apiParam = apiMode ? `?api=${apiMode}` : '';
+                    window.location.href = `page30_guestbook.html${apiParam}`;
                 } else {
                     const errorData = await response.json();
                     alert(`오류: ${errorData.error || '게시글 삭제에 실패했습니다.'}`);
@@ -511,6 +546,3 @@ async function loadPost() {
 }
 
 loadPost();
-
-
-
