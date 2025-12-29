@@ -207,10 +207,31 @@
 
 ////////////////////////////////////////////////////
 ///20251229///////////////////////////////////////////
-// API 베이스 URL 설정 (GitHub/프로덕션 환경용)
-// 프로덕션 API 서버 URL 고정
-const API_BASE_URL = 'https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app';
-console.log('🟢 Production 모드 - API_BASE_URL:', API_BASE_URL);
+
+// API 베이스 URL 설정 (로컬/프로덕션 자동 전환)
+// URL 파라미터로 강제 설정 가능: ?api=local 또는 ?api=prod
+let API_BASE_URL;
+const urlParams = new URLSearchParams(window.location.search);
+const apiMode = urlParams.get('api'); // 'local' 또는 'prod'로 강제 설정 가능
+
+if (apiMode === 'prod') {
+    // URL 파라미터로 프로덕션 강제 지정
+    API_BASE_URL = 'https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app';
+    console.log('🟢 Production 모드 (강제) - API_BASE_URL:', API_BASE_URL);
+} else if (apiMode === 'local') {
+    // URL 파라미터로 로컬 강제 지정
+    API_BASE_URL = `http://${window.location.hostname}:3000`;
+    console.log('🔵 Localhost 모드 (강제) - API_BASE_URL:', API_BASE_URL);
+} else if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+    // 자동 감지: 로컬 호스트면 로컬 API 사용
+    API_BASE_URL = `http://${window.location.hostname}:3000`;
+    console.log('🔵 Localhost 모드 (자동) - API_BASE_URL:', API_BASE_URL);
+    console.log('💡 프로덕션 API를 사용하려면 URL에 ?api=prod 를 추가하세요');
+} else {
+    // 자동 감지: 프로덕션 호스트면 프로덕션 API 사용
+    API_BASE_URL = 'https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app';
+    console.log('🟢 Production 모드 (자동) - API_BASE_URL:', API_BASE_URL);
+}
 
 // 성능 최적화: 캐시 및 상태 관리
 const cache = {
@@ -1090,7 +1111,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const number = total - idx;
             const originalIndex = total - 1 - idx;
             
-            // 시간 포맷팅 최적화
+            // 날짜 포맷팅: "yyyy.mm.dd  hh:mm" 형식
             let timeString = '';
             if (entry.date) {
                 try {
@@ -1100,12 +1121,13 @@ document.addEventListener('DOMContentLoaded', () => {
                         console.warn('유효하지 않은 날짜:', entry.date);
                         timeString = '';
                     } else {
-                        // 한국어 로케일로 시간 표시 (예: "오후 02:30")
-                        timeString = date.toLocaleTimeString('ko-KR', {
-                            hour: '2-digit', 
-                            minute: '2-digit',
-                            hour12: true
-                        });
+                        // 형식: "2025.12.29  17:00" (날짜와 시간 사이 공백 2개)
+                        const year = date.getFullYear();
+                        const month = ('0' + (date.getMonth() + 1)).slice(-2);
+                        const day = ('0' + date.getDate()).slice(-2);
+                        const hours = ('0' + date.getHours()).slice(-2);
+                        const minutes = ('0' + date.getMinutes()).slice(-2);
+                        timeString = `${year}.${month}.${day}  ${hours}:${minutes}`;
                     }
                 } catch (e) {
                     console.error('날짜 파싱 오류:', e, entry.date);
@@ -1113,10 +1135,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
             
+            // API 파라미터 유지
+            const apiParam = apiMode ? `&api=${apiMode}` : '';
+            
             item.innerHTML = `
               <div class="item-title">
                 <span class="item-number">${number}.</span> 
-                <a href="page30_viewpost.html?index=${originalIndex}">${escapeHtml(entry.title || '제목 없음')}</a>
+                <a href="page30_viewpost.html?index=${originalIndex}${apiParam}">${escapeHtml(entry.title || '제목 없음')}</a>
               </div>
               <div class="item-meta">
                 <span class="item-author">${escapeHtml(entry.nickname || '익명')}</span>
