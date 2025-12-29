@@ -1,180 +1,34 @@
+/* ============================================
+   ViewPost Page - 최적화된 스타일
+   ============================================ */
+
+/* 기본 스타일 */
 body {
   font-family: 'Poppins', sans-serif;
-  background-color: #f0f3f5 ; /* Blue background color */
-  color: #f0f3f5; /* Light text color */
-  padding: 80px;
-  font-size: 14px;
-  margin-top: 30px;
-  padding-top: 10px !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  width: 100vw !important;
-  box-sizing: border-box;
-  background-color: #f0f3f5 !important;
-}
-
-.bg-primary {
-  --bs-bg-opacity: 1;
-  background-color: #4a90e2 !important;
-}
-
-/* Custom Navbar */
-.custom-navbar {
-  background-color: #4a90e2 !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.custom-navbar .navbar-brand {
-  color: #ffffff !important;
-}
-
-.custom-navbar .container-fluid {
-  background-color: #4a90e2 !important;
-}
-
-/* Remove all previous navbar styles */
-.navbar,
-.navbar-dark,
-.navbar-expand-lg,
-.bg-primary,
-.navbar-custom {
-  background-color: #4a90e2 !important;
-}
-
-.navbar.fixed-top {
-  background-color: #4a90e2 !important;
-}
-
-/* Override Bootstrap's default navbar styles */
-.navbar-dark.bg-primary {
-  background-color: #4a90e2 !important;
-}
-
-/* Ensure the background color is applied to the entire navbar */
-.navbar > * {
-  background-color: #4a90e2 !important;
-}
-
-h1 {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.form-control {
-  display: block;
-  width: 100%;
-  height: 500%;
-}
-
-  
-
-#post-container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 !important;
-  margin-top: 10px !important;  /* navbar와의 간격을 늘림 */
-  background-color: #f0f3f5 ;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-#post-header {
-  margin-top: 80px;
-  border-bottom: 1px solid #f0f3f5 ;
-  margin-bottom: 1rem;
-  padding-bottom: 5px;
-}
-
-#post-title {
-  font-size: 1.8rem;
-  font-weight: 600;
-  color: #222;
-  margin-bottom: 0rem;
-}
-
-#post-meta {
-  color: #666;
-  font-size: 0.9rem;
-}
-
-#post-content {
-  font-size: 1.1rem;
+  background-color: #f5f7fa;
+  color: #2c3e50;
+  margin: 0;
+  padding: 0;
+  padding-top: 70px;
+  font-size: 16px;
   line-height: 1.6;
-  color: #333;
-  white-space: pre-wrap;
-  padding: 0 !important;
-  width: 100vw !important;
-  max-width: 100vw !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  box-sizing: border-box;
-  background-color: #f0f3f5 !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
-.viewpost-actions {
-  display: flex;
-  justify-content: center !important;
-  gap: 10px;
-  margin-top: 2rem;
-  padding-top: 1rem;
-  border-top: 1px solid #eee;
+/* 게시글 컨테이너 기본 여백 */
+#post-container {
+  margin-top: 0;
 }
 
-/* Mobile styles */
-@media (max-width: 767px) {
-  body {
-    padding-top: 0 !important;
-  }
-  #post-container {
-    padding-top: 0 !important;
-  }
-  .navbar {
-    margin-bottom: 0 !important;
-    padding-bottom: 0 !important;
-  }
-
-  h1 {
-    font-size: 18px;
-    margin-bottom: 10px;
-  }
-
-  #post-container {
-    max-width: 100%;
-    padding: 10px;
-
-  }
-
-  #post-title {
-    font-size: 20px;
-  }
-
-  #post-meta {
-    font-size: 12px;
-  }
-
-  #post-content {
-    font-size: 14px;
-  }
-
-  .navbar-brand {
-    margin-left: 20px !important; /* 원하는 만큼(px 단위) 조절 */
-  }
-  #post-message {
-    margin-left: -10px !important;
-  }
-  #post-title,
-  #post-content {
-    margin-left: 5px !important;
-  }
-}
-
-/* Navbar styles */
+/* Navbar 스타일 - guestbook과 동일 */
 .navbar {
-  background-color: #4a90e2 !important;
+  background-color: #2b6cb0 !important;
 }
 
 .navbar .container-fluid {
-  background-color: #4a90e2 !important;
+  background-color: #2b6cb0 !important;
   padding: 0.5rem 1rem;
   margin: 0;
   width: 100%;
@@ -186,74 +40,477 @@ h1 {
 
 .navbar-brand {
   color: white !important;
-  padding: 0.3125rem 0 !important;
-  margin-right: 1rem  !important;
-  margin-left: 1rem  !important;
-  font-size: 1.25rem  !important;
-  
+  padding: 0.3125rem 0;
+  margin-right: 1rem;
+  font-size: 1.25rem;
 }
 
 /* Override Bootstrap's default styles */
-.container-fluid {
-  --bs-gutter-x: 0 !important;
-  --bs-gutter-y: 0 !important;
-  width: 100% !important;
-  padding-right: 0 !important;
-  padding-left: 0 !important;
-  margin-right: 0 !important;
-  margin-left: 0 !important;
-  background-color: #4a90e2 !important;
-}
-
-/* Remove all previous navbar styles */
 .bg-primary,
 .navbar-dark,
-.navbar-expand-lg,
-.navbar-custom {
-  background-color: #4a90e2 !important;
+.navbar-expand-lg {
+  background-color: #2b6cb0 !important;
 }
 
-body {
-  margin-left: 10px !important;
-  margin-right: 10px !important;
-  margin-top: 0 !important;
-  margin-bottom: 0 !important;
-  padding: 0 !important;
-  width: calc(100vw - 20px) !important;
+/* 게시글 컨테이너 */
+#post-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 30px 20px;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* 게시글 헤더 */
+#post-header {
+  margin-bottom: 25px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #e8ecf1;
+}
+
+#post-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1a202c;
+  margin-bottom: 12px;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+}
+
+#post-meta {
+  color: #64748b;
+  font-size: 0.95rem;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+/* 게시글 내용 */
+#post-content {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #2d3748;
+  padding: 0;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+#post-message {
+  margin: 0;
+  padding: 0;
+  color: #2d3748;
+  line-height: 1.8;
+}
+
+/* 이미지/비디오 스타일 */
+#post-message img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 20px 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: block;
+}
+
+/* Base64 이미지도 표시되도록 */
+#post-message img[src^="data:image"] {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 20px 0;
+  display: block;
+}
+
+#post-message a {
+  color: #2b6cb0;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s;
+  display: inline-block;
+  padding: 2px 4px;
+  margin: 0 2px;
+  -webkit-tap-highlight-color: rgba(43, 108, 176, 0.3);
+  touch-action: manipulation;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+}
+
+#post-message a:hover {
+  border-bottom-color: #2b6cb0;
+}
+
+#post-message a:active {
+  background-color: rgba(43, 108, 176, 0.1);
+  border-radius: 3px;
+}
+
+/* 버튼 영역 */
+.viewpost-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 40px;
+  padding-top: 30px;
+  border-top: 1px solid #e8ecf1;
+  flex-wrap: wrap;
+}
+
+.viewpost-actions .btn {
+  min-width: 90px;
+  padding: 10px 24px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.viewpost-actions .btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.viewpost-actions .btn:active {
+  transform: translateY(0);
+}
+
+/* 모바일 스타일 */
+@media (max-width: 767px) {
+  body {
+    padding-top: 56px;
+    padding-left: 0;
+    padding-right: 0;
+    font-size: 15px;
+  }
+
+  .navbar {
+    padding: 0.5rem 0;
+  }
+
+  .navbar .container-fluid {
+    padding: 0.5rem 1rem;
+  }
+
+  .navbar-brand {
+    font-size: 1.25rem;
+    padding: 0.3125rem 0;
+    margin-right: 1rem;
+  }
+
+  #post-container {
+    max-width: 100%;
+    padding: 20px 16px;
+    margin: 0;
+    margin-top: 20px;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  #post-header {
+    margin-top: 0;
+    margin-bottom: 20px;
+    padding-top: 0;
+    padding-bottom: 16px;
+    border-bottom-width: 1px;
+  }
+
+  #post-title {
+    margin-top: 0;
+    padding-top: 0;
+    margin-bottom: 10px;
+  }
+
+  #post-title {
+    font-size: 1.4rem;
+    line-height: 1.35;
+    margin-bottom: 10px;
+    padding-right: 0;
+  }
+
+  #post-meta {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  #post-content {
+    font-size: 1rem;
+    line-height: 1.75;
+    padding: 0;
+    margin-top: -20px;
+  }
+
+  #post-message {
+    margin: 0;
+    padding: 0;
+    word-break: break-word;
+  }
+
+  #post-message img {
+    margin: 16px 0;
+    border-radius: 6px;
+  }
+
+  .viewpost-actions {
+    gap: 10px;
+    margin-top: 32px;
+    padding-top: 24px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .viewpost-actions .btn {
+    min-width: 0;
+    padding: 12px 20px;
+    font-size: 0.9rem;
+    flex: 1;
+    max-width: none;
+  }
+
+  .navbar-brand {
+    font-size: 1.25rem;
+    margin-right: 1rem;
+  }
+}
+
+/* 매우 작은 화면 (320px ~ 480px) */
+@media (max-width: 480px) {
+  body {
+    padding-top: 52px;
+    font-size: 14px;
+  }
+
+  #post-container {
+    padding: 16px 12px;
+    margin-top: 20px;
+  }
+
+  #post-title {
+    font-size: 1.25rem;
+    line-height: 1.3;
+  }
+
+  #post-meta {
+    font-size: 0.8rem;
+  }
+
+  #post-content {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin-top: -20px;
+  }
+
+  .viewpost-actions {
+    gap: 8px;
+    margin-top: 24px;
+    padding-top: 20px;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .viewpost-actions .btn {
+    padding: 11px 16px;
+    font-size: 0.85rem;
+  }
+
+  .navbar-brand {
+    font-size: 1.1rem;
+    margin-right: 0.75rem;
+    padding: 0.3125rem 0;
+  }
+}
+
+/* 작은 화면 (태블릿) */
+@media (min-width: 768px) and (max-width: 1024px) {
+  #post-container {
+    max-width: 700px;
+    padding: 25px;
+  }
+
+  #post-title {
+    font-size: 1.75rem;
+  }
+}
+
+/* 큰 화면 최적화 */
+@media (min-width: 1200px) {
+  #post-container {
+    max-width: 1000px;
+    padding: 40px;
+  }
+
+  #post-title {
+    font-size: 2.25rem;
+  }
+}
+
+/* 수정 폼 스타일 */
+#edit-post-container {
+  max-width: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 40px 60px;
+  background-color: white;
+  border-radius: 0;
+  box-shadow: none;
+  min-height: calc(100vh - 56px);
   box-sizing: border-box;
 }
 
-#post-container,
-#post-content,
-#post-message {
-  width: calc(100vw - 20px) !important;
-  max-width: calc(100vw - 20px) !important;
-  margin-left: 0px !important;
-  margin-right: 10px !important;
-  margin-top: 0 !important;
-  margin-bottom: 0 !important;
-  padding: 0 !important;
+.edit-form-wrapper {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+#edit-post-container h3 {
+  font-size: 1.75rem;
+  margin-bottom: 30px;
+  font-weight: 600;
+}
+
+#edit-post-container .form-control {
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 14px 16px;
+  font-size: 1.05rem;
+  width: 100%;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
   box-sizing: border-box;
 }
 
-#post-title,
-#post-message {
-  text-align: left !important;
-  margin-left: 0 !important;
-  padding-left: 0 !important;
+#edit-post-container textarea.form-control {
+  min-height: 500px;
+  resize: vertical;
+  font-family: inherit;
+  line-height: 1.7;
+  padding: 16px 18px;
 }
 
-#post-message {
-  margin-left: -10px !important;
+#edit-post-container .form-control:focus {
+  outline: none;
+  border-color: #2b6cb0;
+  box-shadow: 0 0 0 3px rgba(43, 108, 176, 0.1);
 }
 
-#post-content,
-#post-message {
-  border: none !important;
-  box-shadow: none !important;
-  padding-left: -16px !important;
-  padding-right: 20px !important;
-  margin-left: 0 !important;
-  margin-right: 0 !important;
-  box-sizing: border-box;
+#edit-post-container .btn {
+  border-radius: 6px;
+  font-weight: 500;
+  padding: 12px 24px;
+  font-size: 1rem;
 }
+
+.gap-2 {
+  gap: 10px;
+}
+
+#edit-post-container .row {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+#edit-post-container .row > * {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+#edit-post-container .row.g-2 {
+  margin-left: -8px;
+  margin-right: -8px;
+}
+
+#edit-post-container .row.g-2 > * {
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+/* 모바일 수정 폼 스타일 */
+@media (max-width: 767px) {
+  #edit-post-container {
+    padding: 24px 20px;
+    margin: 0;
+    min-height: calc(100vh - 56px);
+  }
+
+  .edit-form-wrapper {
+    max-width: 100%;
+  }
+
+  #edit-post-container h3 {
+    font-size: 1.4rem;
+    margin-bottom: 24px;
+  }
+
+  #edit-post-container .form-control {
+    padding: 14px 16px;
+    font-size: 1rem;
+  }
+
+  #edit-post-container textarea.form-control {
+    min-height: 400px;
+    padding: 14px 16px;
+  }
+
+  #edit-post-container .btn {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+
+  #edit-post-container .row.g-2 {
+    margin-left: -4px;
+    margin-right: -4px;
+  }
+
+  #edit-post-container .row.g-2 > * {
+    padding-left: 4px;
+    padding-right: 4px;
+  }
+
+  #edit-post-container .d-flex.gap-2 {
+    flex-direction: column;
+  }
+
+  #edit-post-container .d-flex.gap-2 .btn {
+    width: 100%;
+  }
+}
+
+/* 작은 화면 (320px ~ 480px) */
+@media (max-width: 480px) {
+  #edit-post-container {
+    padding: 20px 16px;
+  }
+
+  #edit-post-container h3 {
+    font-size: 1.25rem;
+    margin-bottom: 20px;
+  }
+
+  #edit-post-container .form-control {
+    padding: 12px 14px;
+    font-size: 0.95rem;
+  }
+
+  #edit-post-container textarea.form-control {
+    min-height: 350px;
+    padding: 12px 14px;
+  }
+}
+
+/* 태블릿 최적화 */
+@media (min-width: 768px) and (max-width: 1024px) {
+  #edit-post-container {
+    padding: 35px 50px;
+  }
+
+  .edit-form-wrapper {
+    max-width: 100%;
+  }
+
+  #edit-post-container textarea.form-control {
+    min-height: 450px;
+  }
+}
+
