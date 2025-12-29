@@ -636,4 +636,15 @@ th.actions {
     z-index: 10 !important;
     background-color: white !important;
   }
+  
+  #write-post-modal .modal-body {
+    overflow-y: auto !important;
+    max-height: calc(100vh - 120px) !important;
+    padding: 15px !important;
+  }
+  
+  #write-post-modal .modal-body .form-control,
+  #write-post-modal .modal-body .editor-content {
+    font-size: 16px !important; /* 모바일에서 자동 줌 방지 */
+  }
 }
