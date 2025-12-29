@@ -1,7 +1,7 @@
 // https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app
 // https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app
 
-원본본
+//
 // document.addEventListener('DOMContentLoaded', () => {
 //     // 기본적으로 모든 form 숨기기
 //     document.getElementById('write-post-container').style.display = 'none';
@@ -207,6 +207,9 @@
 
 ////////////////////////////////////////////////////
 ///20251229///////////////////////////////////////////
+
+
+///////////////////------------------------------------------------------
 
 // API 베이스 URL 설정 (로컬/프로덕션 자동 전환)
 // URL 파라미터로 강제 설정 가능: ?api=local 또는 ?api=prod
@@ -1140,7 +1143,6 @@ document.addEventListener('DOMContentLoaded', () => {
             
             item.innerHTML = `
               <div class="item-title">
-                <span class="item-number">${number}.</span> 
                 <a href="page30_viewpost.html?index=${originalIndex}${apiParam}">${escapeHtml(entry.title || '제목 없음')}</a>
               </div>
               <div class="item-meta">
