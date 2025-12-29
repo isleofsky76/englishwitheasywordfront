@@ -278,13 +278,13 @@ async function loadPost() {
         } else {
             console.warn('게시글에 날짜 정보가 없습니다:', post);
             // 날짜가 없으면 현재 시간 사용 (임시)
-            formattedDate = new Date().toLocaleString('ko-KR', {
-                year: 'numeric',
-                month: '2-digit',
-                day: '2-digit',
-                hour: '2-digit',
-                minute: '2-digit'
-            }).replace(/\. /g, '.').replace(/\.$/, '');
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = ('0' + (now.getMonth() + 1)).slice(-2);
+            const day = ('0' + now.getDate()).slice(-2);
+            const hours = ('0' + now.getHours()).slice(-2);
+            const minutes = ('0' + now.getMinutes()).slice(-2);
+            formattedDate = `${year}.${month}.${day}  ${hours}:${minutes}`;
         }
 
         // 이미지/동영상 링크 변환하여 표시
@@ -456,4 +456,6 @@ async function loadPost() {
 }
 
 loadPost();
+
+
 
