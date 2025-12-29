@@ -1,15 +1,17 @@
 body {
   font-family: 'Poppins', sans-serif;
   background-color: #f0f3f5 !important; /* Light grey background color */
-  color: #f2f2f5; /* Dark text color */
+  color: #2c3e50; /* Dark text color for better readability */
   font-size: 14px;
   margin: 0 auto; /* 양쪽 여백 제거 */
-  margin-top: 100px; /* navbar 아래로 들어가지 않도록 margin-top 증가 */
   padding: 0 !important;
-  margin-top: 0 !important;
   padding-top: 30px !important;
   width: 100vw !important;
   box-sizing: border-box;
+  /* 성능 최적화 */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 .bg-primary {
@@ -83,6 +85,53 @@ form input, form textarea {
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* 텍스트 에디터 스타일 */
+.editor-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  padding: 8px;
+  background-color: #f8f9fa;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.editor-toolbar .btn {
+  min-width: 36px;
+  padding: 4px 8px;
+  font-size: 12px;
+}
+
+.editor-content {
+  min-height: 150px;
+  max-height: 400px;
+  overflow-y: auto;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-top: none;
+}
+
+.editor-content:empty:before {
+  content: attr(placeholder);
+  color: #999;
+  pointer-events: none;
+}
+
+.editor-content:focus {
+  outline: none;
+  border-color: #2b6cb0;
+  box-shadow: 0 0 0 3px rgba(43, 108, 176, 0.1);
+}
+
+form input:focus, form textarea:focus {
+  outline: none;
+  border-color: #2b6cb0;
+  box-shadow: 0 0 0 3px rgba(43, 108, 176, 0.1);
 }
 
 form input::placeholder,
@@ -130,11 +179,32 @@ form button:hover {
   border-radius: 5px !important;
   margin-left: 0 !important;
   margin-right: auto !important;
-  margin-top: 10px !important;
+  margin-top: 20px !important;
+  margin-bottom: 20px !important;
   width: 100px !important;
   height: 40px !important;
   font-size: 14px !important;
   box-shadow: none !important;
+  transition: all 0.2s ease !important;
+  cursor: pointer !important;
+}
+
+#write-post-button:hover {
+  background: #2b6cb0 !important;
+  color: #f0f3f5 !important;
+  transform: translateY(-1px);
+}
+
+#write-post-button:active {
+  transform: translateY(0);
+}
+
+#refresh-button {
+  transition: all 0.2s ease;
+}
+
+#refresh-button:hover {
+  transform: rotate(180deg);
 }
 
 #write-post-button::before {
@@ -418,6 +488,16 @@ th.actions {
 .guestbook-item {
   border-bottom: 1px solid #ddd;
   padding: 12px 0 6px 0;
+  transition: background-color 0.2s ease;
+}
+
+.guestbook-item:hover {
+  background-color: rgba(43, 108, 176, 0.05);
+  border-radius: 4px;
+  padding-left: 8px;
+  padding-right: 8px;
+  margin-left: -8px;
+  margin-right: -8px;
 }
 .item-title a {
   font-size: 1.1rem;
@@ -450,7 +530,40 @@ th.actions {
 }
 
 .guestbook-list {
-  margin-top: 4rem;
+  margin-top: calc(4rem - 80px);
+  /* 성능 최적화: GPU 가속 */
+  will-change: contents;
+  transform: translateZ(0);
+}
+
+/* 로딩 스피너 애니메이션 최적화 */
+.loading-spinner {
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* 에러 메시지 스타일 */
+.error-message {
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 #write-post-button,
@@ -498,5 +611,29 @@ th.actions {
 @media (max-width: 767px) {
   #write-post-button {
     background: #f0f3f5  !important;
+  }
+  
+  /* 모바일에서 모달이 상단에 잘 보이도록 */
+  #write-post-modal .modal-dialog {
+    margin: 0 !important;
+    max-width: 100% !important;
+    height: 100vh !important;
+    display: flex !important;
+    align-items: flex-start !important;
+  }
+  
+  #write-post-modal .modal-content {
+    border-radius: 0 !important;
+    border-left: none !important;
+    border-right: none !important;
+    min-height: 100vh !important;
+    margin-top: 56px !important; /* navbar 높이만큼 */
+  }
+  
+  #write-post-modal .modal-header {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 10 !important;
+    background-color: white !important;
   }
 }
