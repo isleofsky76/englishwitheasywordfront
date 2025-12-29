@@ -1,6 +1,9 @@
 /* ============================================
    ViewPost Page - 최적화된 스타일
    ============================================ */
+/* ============================================
+   ViewPost Page - 최적화된 스타일
+   ============================================ */
 
 /* 기본 스타일 */
 body {
@@ -93,6 +96,8 @@ body {
   padding: 0;
   word-wrap: break-word;
   overflow-wrap: break-word;
+  max-height: none;
+  overflow: visible;
 }
 
 #post-message {
@@ -100,6 +105,11 @@ body {
   padding: 0;
   color: #2d3748;
   line-height: 1.8;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  max-height: none;
+  overflow: visible;
 }
 
 /* 이미지/비디오 스타일 */
@@ -513,4 +523,5 @@ body {
     min-height: 450px;
   }
 }
+
 
