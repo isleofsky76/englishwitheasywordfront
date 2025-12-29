@@ -72,11 +72,22 @@ function convertMediaLinks(text) {
     // HTML이 포함되어 있는지 확인 (태그가 있는지)
     const hasHtml = /<[^>]+>/.test(text);
     
-    // URL 패턴 찾기
-    const urlPattern = /(https?:\/\/[^\s<]+)/g;
+    // URL 패턴 찾기 (더 정확한 패턴: 공백, 줄바꿈, 괄호, 따옴표 전까지)
+    const urlPattern = /(https?:\/\/[^\s<>"'\n\r()]+)/g;
+    
+    // HTML이 있으면 그대로 사용, 없으면 이스케이프
     let result = hasHtml ? text : escapeHtml(text);
     
-    result = result.replace(urlPattern, (url) => {
+    // URL을 찾아서 링크로 변환 (이미 링크 태그가 있는 경우는 건너뛰기)
+    result = result.replace(urlPattern, (url, offset) => {
+        // 이미 <a> 태그 안에 있는 URL은 건너뛰기
+        const beforeMatch = result.substring(0, offset);
+        const lastATagOpen = beforeMatch.lastIndexOf('<a');
+        const lastATagClose = beforeMatch.lastIndexOf('</a>');
+        // <a> 태그가 열려있고 닫히지 않았다면 이미 링크 안에 있는 것
+        if (lastATagOpen > lastATagClose) {
+            return url;
+        }
         // YouTube 링크 처리 (일반 동영상, Shorts, youtu.be 모두 포함)
         const youtubeRegex = /(?:youtube\.com\/(?:watch\?v=|shorts\/)|youtu\.be\/)([a-zA-Z0-9_-]+)/;
         const youtubeMatch = url.match(youtubeRegex);
@@ -130,22 +141,10 @@ function convertMediaLinks(text) {
         return `<a href="${url}" target="_blank" rel="noopener noreferrer" style="display: inline-block; padding: 4px 6px; margin: 2px; -webkit-tap-highlight-color: rgba(43, 108, 176, 0.3); touch-action: manipulation; cursor: pointer; position: relative; z-index: 10;">${url}</a>`;
     });
     
-    // HTML이 없는 경우에만 이스케이프 처리
-    if (!hasHtml) {
-        // HTML 태그가 아닌 부분만 이스케이프 처리
-        result = result.replace(/([^<]+)(?![^<]*>)/g, (match) => {
-            // 이미 HTML 태그인 부분은 그대로 유지
-            if (match.trim().startsWith('<')) {
-                return match;
-            }
-            return escapeHtml(match);
-        });
-    }
-    
     // 줄바꿈 처리 (sanitizeHtml 전에 처리)
     result = result.replace(/\n/g, '<br>');
     
-    // 안전한 HTML만 허용 (이모지와 특수 문자는 유지)
+    // 안전한 HTML만 허용 (이모지와 특수 문자는 유지, 링크도 유지)
     result = sanitizeHtml(result);
     
     return result;
