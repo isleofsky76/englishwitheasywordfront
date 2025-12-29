@@ -142,11 +142,11 @@ function convertMediaLinks(text) {
         });
     }
     
-    // 안전한 HTML만 허용
-    result = sanitizeHtml(result);
-    
-    // 줄바꿈 처리
+    // 줄바꿈 처리 (sanitizeHtml 전에 처리)
     result = result.replace(/\n/g, '<br>');
+    
+    // 안전한 HTML만 허용 (이모지와 특수 문자는 유지)
+    result = sanitizeHtml(result);
     
     return result;
 }
@@ -455,6 +455,7 @@ async function loadPost() {
 }
 
 loadPost();
+
 
 
 
