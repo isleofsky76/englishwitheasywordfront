@@ -4,6 +4,9 @@
 //
 ///////////////////------------------------------------------------------
 
+
+///////////////////------------------------------------------------------
+
 // API 베이스 URL 설정 (로컬/프로덕션 자동 전환)
 // URL 파라미터로 강제 설정 가능: ?api=local 또는 ?api=prod
 let API_BASE_URL;
@@ -42,6 +45,79 @@ function escapeHtml(text) {
     const div = document.createElement('div');
     div.textContent = text;
     return div.innerHTML;
+}
+
+// contentEditable에서 가져온 HTML을 정리하는 함수 (모바일 최적화)
+function cleanHtml(html) {
+    if (!html) return '';
+    
+    // 임시 div에 HTML 넣기
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = html;
+    
+    // 불필요한 빈 태그 제거
+    const emptyTags = tempDiv.querySelectorAll('div:empty, p:empty, span:empty, br:only-child');
+    emptyTags.forEach(tag => {
+        // 부모가 div나 p이고 자식이 br만 있는 경우
+        if (tag.tagName === 'BR' && tag.parentElement && 
+            (tag.parentElement.tagName === 'DIV' || tag.parentElement.tagName === 'P')) {
+            if (tag.parentElement.children.length === 1) {
+                tag.parentElement.remove();
+            }
+        } else {
+            tag.remove();
+        }
+    });
+    
+    // 불필요한 wrapper div/p 제거 (텍스트만 있는 경우)
+    const wrapperTags = tempDiv.querySelectorAll('div, p');
+    wrapperTags.forEach(tag => {
+        // 자식이 텍스트 노드만 있거나, span 하나만 있는 경우
+        if (tag.children.length === 0 || 
+            (tag.children.length === 1 && tag.children[0].tagName === 'SPAN' && 
+             tag.textContent.trim() === tag.children[0].textContent.trim())) {
+            const parent = tag.parentElement;
+            if (parent && parent !== tempDiv) {
+                tag.replaceWith(...Array.from(tag.childNodes));
+            }
+        }
+    });
+    
+    // 연속된 공백과 줄바꿈 정리
+    let cleaned = tempDiv.innerHTML;
+    
+    // 불필요한 <br> 태그 제거 (연속된 <br>)
+    cleaned = cleaned.replace(/(<br\s*\/?>){3,}/gi, '<br><br>');
+    
+    // <div><br></div> 같은 빈 구조 제거
+    cleaned = cleaned.replace(/<div[^>]*>\s*<br\s*\/?>\s*<\/div>/gi, '<br>');
+    cleaned = cleaned.replace(/<p[^>]*>\s*<br\s*\/?>\s*<\/p>/gi, '<br>');
+    cleaned = cleaned.replace(/<span[^>]*>\s*<br\s*\/?>\s*<\/span>/gi, '<br>');
+    
+    // 불필요한 style 속성 제거 (빈 style이나 기본값만 있는 경우)
+    cleaned = cleaned.replace(/style\s*=\s*["'][^"']*["']/gi, (match) => {
+        const styleContent = match.replace(/style\s*=\s*["']|["']/g, '');
+        // 빈 style이나 의미 없는 style 제거
+        if (!styleContent || styleContent.trim() === '' || 
+            styleContent.includes('font-family:') && !styleContent.includes('color:') && !styleContent.includes('background')) {
+            return '';
+        }
+        return match;
+    });
+    
+    // 연속된 공백 정리 (HTML 태그 내부는 제외)
+    cleaned = cleaned.replace(/(?![^<]*>)\s{2,}/g, ' ');
+    
+    // 시작과 끝의 불필요한 태그 제거
+    cleaned = cleaned.trim();
+    
+    // 최종 크기 확인 및 경고
+    const cleanedSize = new Blob([cleaned]).size;
+    if (cleanedSize > 2 * 1024 * 1024) { // 2MB 초과 시
+        console.warn('⚠️ 정리 후에도 메시지 크기가 큽니다:', (cleanedSize / 1024 / 1024).toFixed(2), 'MB');
+    }
+    
+    return cleaned;
 }
 
 // 디바운스 함수
@@ -530,9 +606,15 @@ document.addEventListener('DOMContentLoaded', () => {
         submitButton.textContent = '제출 중...';
         
         const title = document.getElementById('title').value.trim();
-        // contentEditable에서 HTML 가져오기
+        // contentEditable에서 HTML 가져오기 및 정리
         const messageElement = document.getElementById('message');
-        const message = messageElement.innerHTML.trim() || messageElement.textContent.trim();
+        let message = messageElement.innerHTML.trim() || messageElement.textContent.trim();
+        
+        // 모바일에서 생성된 불필요한 HTML 태그 정리
+        if (message) {
+            message = cleanHtml(message);
+        }
+        
         const nickname = document.getElementById('nickname').value.trim();
         const password = document.getElementById('password').value;
         const isSecret = document.getElementById('isSecret').checked;
@@ -558,6 +640,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 body: requestBody
             });
 
+            // 413 오류 처리 (Payload Too Large)
+            if (response.status === 413) {
+                const errorText = await response.text();
+                console.error('❌ 413 오류 - 요청 크기 초과:', errorText);
+                alert('요청 크기가 너무 큽니다.\n\n해결 방법:\n1. 이미지를 줄이거나 제거하세요\n2. 텍스트를 줄이세요\n3. 불필요한 서식을 제거하세요');
+                submitButton.disabled = false;
+                submitButton.textContent = originalButtonText;
+                return;
+            }
+            
             if (response.ok) {
                 // 응답이 JSON인지 확인
                 const contentType = response.headers.get('content-type');
