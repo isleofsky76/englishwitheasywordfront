@@ -7,6 +7,9 @@
 
 ///////////////////------------------------------------------------------
 
+
+///////////////////------------------------------------------------------
+
 // API 베이스 URL 설정 (로컬/프로덕션 자동 전환)
 // URL 파라미터로 강제 설정 가능: ?api=local 또는 ?api=prod
 let API_BASE_URL;
@@ -431,22 +434,24 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
     
-    // 이미지 업로드 처리 (보안 강화)
+    // 이미지 업로드 처리 (보안 강화) - 이미지 업로드가 있는 경우에만 활성화
     const imageUpload = document.getElementById('image-upload');
     const imagePreview = document.getElementById('image-preview');
     const messageTextarea = messageEditor; // 호환성을 위해 유지
     
-    // 업로드 제한 설정 (서버 제한 고려)
-    const MAX_FILE_SIZE = 1 * 1024 * 1024; // 1MB (Base64 변환 후 약 1.3MB)
-    const MAX_FILES = 3; // 최대 3개 (서버 제한 고려)
-    const MAX_TOTAL_SIZE = 2 * 1024 * 1024; // 전체 최대 2MB (Base64 변환 후 약 2.6MB)
-    const MAX_IMAGE_DIMENSION = 1920; // 최대 이미지 크기 (가로/세로)
-    const ALLOWED_TYPES = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp'];
-    const ALLOWED_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.gif', '.webp'];
-    
-    let uploadedImages = []; // 업로드된 이미지 추적
-    
-    imageUpload.addEventListener('change', (event) => {
+    // 이미지 업로드가 있는 경우에만 처리
+    if (imageUpload && imagePreview) {
+        // 업로드 제한 설정 (서버 제한 고려)
+        const MAX_FILE_SIZE = 1 * 1024 * 1024; // 1MB (Base64 변환 후 약 1.3MB)
+        const MAX_FILES = 3; // 최대 3개 (서버 제한 고려)
+        const MAX_TOTAL_SIZE = 2 * 1024 * 1024; // 전체 최대 2MB (Base64 변환 후 약 2.6MB)
+        const MAX_IMAGE_DIMENSION = 1920; // 최대 이미지 크기 (가로/세로)
+        const ALLOWED_TYPES = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp'];
+        const ALLOWED_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.gif', '.webp'];
+        
+        let uploadedImages = []; // 업로드된 이미지 추적
+        
+        imageUpload.addEventListener('change', (event) => {
         const files = event.target.files;
         if (!files || files.length === 0) return;
         
@@ -563,18 +568,55 @@ document.addEventListener('DOMContentLoaded', () => {
                         previewDiv.remove();
                         // 업로드된 이미지 목록에서 제거
                         uploadedImages = uploadedImages.filter(img => img.url !== resizedImageUrl);
-                    // 메시지에서 해당 이미지 URL 제거
-                    const currentMessage = messageTextarea.innerHTML || messageTextarea.textContent;
-                    const newMessage = currentMessage.replace(resizedImageUrl + '\n', '').replace('\n' + resizedImageUrl, '').replace(resizedImageUrl, '');
-                    messageTextarea.innerHTML = newMessage.trim();
+                        // 메시지에서 해당 이미지 태그 제거
+                        const imgTags = messageEditor.querySelectorAll('img[src="' + resizedImageUrl + '"]');
+                        imgTags.forEach(img => {
+                            const brAfter = img.nextSibling;
+                            if (brAfter && brAfter.nodeName === 'BR') {
+                                brAfter.remove();
+                            }
+                            img.remove();
+                        });
                     });
                     
                     imagePreview.appendChild(previewDiv);
                     
-                    // 메시지에 이미지 URL 추가 (새 줄로 구분)
-                    const currentMessage = messageTextarea.innerHTML || messageTextarea.textContent;
-                    const br = currentMessage && !currentMessage.endsWith('<br>') && !currentMessage.endsWith('\n') ? '<br>' : '';
-                    messageTextarea.innerHTML = (currentMessage || '') + br + resizedImageUrl + '<br>';
+                    // 메시지에 이미지 태그로 삽입 (텍스트가 아닌 이미지로 표시)
+                    messageEditor.focus();
+                    const selection = window.getSelection();
+                    
+                    // 선택 영역이 없으면 에디터 끝에 추가
+                    let range;
+                    if (selection.rangeCount > 0) {
+                        range = selection.getRangeAt(0);
+                    } else {
+                        range = document.createRange();
+                        range.selectNodeContents(messageEditor);
+                        range.collapse(false); // 끝으로 이동
+                    }
+                    
+                    // 이미지 태그 생성
+                    const imgTag = document.createElement('img');
+                    imgTag.src = resizedImageUrl;
+                    imgTag.style.maxWidth = '100%';
+                    imgTag.style.height = 'auto';
+                    imgTag.style.borderRadius = '8px';
+                    imgTag.style.margin = '10px 0';
+                    imgTag.style.display = 'block';
+                    
+                    // 현재 커서 위치에 이미지 삽입
+                    range.insertNode(imgTag);
+                    
+                    // 이미지 뒤에 줄바꿈 추가
+                    const br = document.createElement('br');
+                    range.setStartAfter(imgTag);
+                    range.insertNode(br);
+                    
+                    // 커서를 이미지 뒤로 이동
+                    range.setStartAfter(br);
+                    range.collapse(true);
+                    selection.removeAllRanges();
+                    selection.addRange(range);
                 };
                 
                 img.onerror = () => {
@@ -593,7 +635,8 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // 입력 초기화 (같은 파일 다시 선택 가능하도록)
         event.target.value = '';
-    });
+        });
+    } // 이미지 업로드가 있는 경우에만 처리하는 블록 종료
 
     document.getElementById('guestbook-form').addEventListener('submit', async (event) => {
         event.preventDefault();
@@ -667,8 +710,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 // 폼 리셋 및 모달 닫기
                 form.reset();
-                document.getElementById('image-preview').innerHTML = '';
-                uploadedImages = []; // 업로드된 이미지 목록 초기화
+                const imagePreview = document.getElementById('image-preview');
+                if (imagePreview) {
+                    imagePreview.innerHTML = '';
+                }
                 const writeModal = bootstrap.Modal.getInstance(document.getElementById('write-post-modal'));
                 if (writeModal) {
                     writeModal.hide();
@@ -1159,3 +1204,4 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
