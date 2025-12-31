@@ -1,10 +1,6 @@
 // https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app
 // https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app
 
-//
-/
-
-///////////////////------------------------------------------------------
 ///////////////////------------------------------------------------------
 
 // API 베이스 URL 설정 (로컬/프로덕션 자동 전환)
