@@ -2,6 +2,8 @@
 // https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app
 
 //
+/
+
 ///////////////////------------------------------------------------------
 
 // API 베이스 URL 설정 (로컬/프로덕션 자동 전환)
@@ -1036,7 +1038,14 @@ document.addEventListener('DOMContentLoaded', () => {
             const item = document.createElement('div');
             item.className = 'guestbook-item';
             const number = total - idx;
-            const originalIndex = total - 1 - idx;
+            // 원본 배열의 인덱스 계산 (역순이므로)
+            const originalIndex = total > 0 ? total - 1 - idx : 0;
+            
+            // 인덱스 유효성 검사
+            if (originalIndex < 0 || originalIndex >= total) {
+                console.error(`⚠️ 잘못된 인덱스 계산: originalIndex=${originalIndex}, total=${total}, idx=${idx}`);
+                return; // 이 항목은 건너뛰기
+            }
             
             // 날짜 포맷팅: "yyyy.mm.dd  hh:mm" 형식
             let timeString = '';
