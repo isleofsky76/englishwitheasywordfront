@@ -226,8 +226,13 @@ async function loadPost() {
         }
 
         const indexNum = parseInt(index, 10);
-        if (isNaN(indexNum) || indexNum < 0 || indexNum >= entries.length) {
-            showError('게시글을 찾을 수 없습니다', `인덱스 ${index}에 해당하는 게시글이 없습니다. (총 ${entries.length}개)`);
+        if (isNaN(indexNum)) {
+            showError('게시글을 찾을 수 없습니다', `잘못된 인덱스 파라미터입니다: "${index}". 목록으로 돌아가주세요.`);
+            return;
+        }
+        
+        if (indexNum < 0 || indexNum >= entries.length) {
+            showError('게시글을 찾을 수 없습니다', `인덱스 ${indexNum}에 해당하는 게시글이 없습니다. (총 ${entries.length}개)`);
             return;
         }
 
@@ -241,6 +246,28 @@ async function loadPost() {
         }
         
         console.log(`📌 인덱스 ${indexNum}로 게시글 찾기 (총 ${entries.length}개)`);
+
+        // 조회수 증가 API 호출
+        try {
+            const viewResponse = await fetch(`${API_BASE_URL}/guestbook/${post._id}/view`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            
+            if (viewResponse.ok) {
+                const viewData = await viewResponse.json();
+                // 조회수가 업데이트된 경우 게시글 정보 업데이트
+                if (viewData.entry && viewData.entry.views !== undefined) {
+                    post.views = viewData.entry.views;
+                    console.log('👁️ 조회수 업데이트:', post.views);
+                }
+            }
+        } catch (viewError) {
+            console.warn('조회수 증가 실패 (무시):', viewError);
+            // 조회수 증가 실패해도 게시글은 표시
+        }
 
         console.log('📝 로드된 게시글:', post);
         console.log('📅 게시글 날짜 정보:', post.date, typeof post.date);
@@ -454,7 +481,3 @@ async function loadPost() {
 }
 
 loadPost();
-
-
-
-
