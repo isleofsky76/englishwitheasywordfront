@@ -5,6 +5,7 @@
 /
 
 ///////////////////------------------------------------------------------
+///////////////////------------------------------------------------------
 
 // API 베이스 URL 설정 (로컬/프로덕션 자동 전환)
 // URL 파라미터로 강제 설정 가능: ?api=local 또는 ?api=prod
@@ -160,6 +161,12 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('edit-post-container').style.display = 'none';
     // 모달은 기본적으로 숨김 상태 (Bootstrap이 자동 처리)
 
+    // 게시글 목록은 기본적으로 보이도록 설정
+    const guestbookList = document.getElementById('guestbook-list');
+    if (guestbookList) {
+        guestbookList.style.display = 'block';
+    }
+
     // URL 파라미터 확인
     const params = new URLSearchParams(window.location.search);
     if (params.get('edit') === 'true') {
@@ -170,9 +177,10 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('edit-isSecret').checked = params.get('isSecret') === 'true';
         
         document.getElementById('edit-post-container').style.display = 'block';
+        if (guestbookList) {
+            guestbookList.style.display = 'none';
+        }
     }
-
-    const guestbookList = document.getElementById('guestbook-list');
     const writeModalElement = document.getElementById('write-post-modal');
     const writeModal = new bootstrap.Modal(writeModalElement);
     
