@@ -21,13 +21,17 @@
             background: #f5f7fa;
             color: #222;
         }
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
         .navbar {
             background: linear-gradient(135deg, #4a90e2, #357abd) !important;
             box-shadow: 0 2px 8px rgba(0,0,0,0.08);
         }
         .navbar-brand {
             font-weight: 600;
-            font-size: 1.4rem;
+            font-size: 1.33rem;
+            font-family: 'Poppins', sans-serif;
             color: white !important;
             letter-spacing: 1px;
         }
@@ -41,48 +45,88 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.06);
             padding: 2rem 1.5rem 1.5rem 1.5rem;
             margin-bottom: 2rem;
-            text-align: center;
+            text-align: left;
         }
         .intro-text h2 {
             color: #4a90e2;
             font-weight: 700;
+            font-size: 1.14rem;
+            font-family: 'Poppins', sans-serif;
             margin-bottom: 0.5rem;
         }
         .intro-text p {
             color: #333;
-            font-size: 1.1rem;
+            font-size: 1.045rem;
+            font-family: 'Poppins', sans-serif;
         }
-        .menu-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2.5rem;
-        }
-        .menu-card {
+        .preview-section {
             background: #fff;
             border-radius: 14px;
             box-shadow: 0 2px 8px rgba(74,144,226,0.08);
-            padding: 2.2rem 1.2rem 1.2rem 1.2rem;
-            text-align: center;
-            font-size: 1.1rem;
-            font-weight: 500;
+            padding: 1.4rem 1.5rem;
+            margin-bottom: 1.2rem;
+            text-align: left;
+        }
+        .preview-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.25rem;
+            padding-bottom: 0.2rem;
+            border-bottom: 1px solid #bbb;
+        }
+        .preview-section h3 {
+            font-size: 1.14rem;
+            font-weight: 700;
+            font-family: 'Poppins', sans-serif;
             color: #357abd;
-            cursor: pointer;
-            transition: transform 0.18s, box-shadow 0.18s;
-            border: 2px solid #e3eaf3;
-            position: relative;
+            margin: 0;
+            line-height: 1.3;
         }
-        .menu-card:hover {
-            transform: translateY(-6px) scale(1.04);
-            box-shadow: 0 8px 24px rgba(74,144,226,0.18);
-            background: #f0f7ff;
-            color: #4a90e2;
-            border-color: #4a90e2;
+        .preview-section > h3 {
+            margin-bottom: 0.2rem;
+            padding-bottom: 0.2rem;
+            border-bottom: 1px solid #bbb;
         }
-        .menu-card span {
+        .preview-more {
+            font-size: 0.855rem;
+            font-family: 'Poppins', sans-serif;
+            flex-shrink: 0;
+        }
+        .preview-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .preview-list li {
+            padding: 0.25rem 0;
+            font-size: 0.95rem;
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.35;
+            color: #333;
+        }
+        .preview-list li a {
+            color: #333;
+            text-decoration: none;
             display: block;
-            font-size: 2.1rem;
-            margin-bottom: 0.5rem;
+        }
+        .preview-list li a:hover {
+            color: #4a90e2;
+        }
+        .preview-list li {
+            border-bottom: 1px solid #e0e4e8;
+        }
+        .preview-list li:last-child {
+            border-bottom: none;
+        }
+        .preview-more a {
+            color: #333;
+            font-weight: 400;
+            text-decoration: none;
+        }
+        .preview-more a:hover {
+            color: #4a90e2;
+            text-decoration: underline;
         }
         .resources-section {
             background: #fff;
@@ -98,7 +142,8 @@
         }
         .resources-section p {
             color: #444;
-            font-size: 1.05rem;
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
         }
         @media (max-width: 600px) {
             .main-content {
@@ -107,9 +152,11 @@
             .intro-text {
                 padding: 1.2rem 0.5rem 1rem 0.5rem;
             }
-            .menu-card {
-                padding: 1.2rem 0.5rem 0.7rem 0.5rem;
-                font-size: 1rem;
+            .preview-section {
+                padding: 1rem 1rem;
+            }
+            .preview-section h3 {
+                font-size: 1.045rem;
             }
         }
     </style>
@@ -119,40 +166,71 @@
     <nav id="navbar" class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container">
             <a class="navbar-brand" href="#">
-                <img src="resources/eng.png" alt="Learning English Logo" height="32" style="margin-right:10px;">
-                Learning English
+                <img src="resources/eng.png" alt="News English Lab" height="32" style="margin-right:10px;">
+                News English Lab
             </a>
         </div>
     </nav>
     <div class="container main-content">
-        <div class="menu-grid">
-            <div class="menu-card" onclick="navigateTo('learning-site.html')"><span>📚</span>학습사이트<br>(Learning Sites)</div>
-                 <div class="menu-card" onclick="navigateTo('page30_guestbook.html')"><span>📰</span>News Voca</div>
-            <div class="menu-card" onclick="navigateTo('page30_guestbook_v.html')"><span>💬</span>synonym</div>
-<!--             <div class="menu-card" onclick="navigateTo('english-news-study.html')"><span>📰</span>English News</div> -->
-            <div class="menu-card" onclick="navigateTo('english.html')"><span>📖</span>Easy Voca</div>
-            <div class="menu-card" onclick="navigateTo('english-quiz.html')"><span>❓</span>퀴즈!<br>(Quiz!)</div>
-<!--             <div class="menu-card" onclick="navigateTo('sentence-generator.html')"><span>✏️</span>예문생성기</div> -->
-            <div class="menu-card" onclick="navigateTo('page9.html')"><span>🎮</span>행맨게임<br>(Hangman)</div>
-<!--             <div class="menu-card" onclick="navigateTo('page18.html')"><span>🔍</span>스무고개</div> -->
-            <!-- <div class="menu-card" onclick="navigateTo('chatting.html')"><span>💬</span>영어채팅</div> -->
-<!--             <div class="menu-card" onclick="navigateTo('page22.html')"><span>🔗</span>동의어<br>생성기</div> -->
-<!--             <div class="menu-card" onclick="navigateTo('page21.html')"><span>📖</span>독해</div> -->
-<!--             <div class="menu-card" onclick="navigateTo('page5.html')"><span>📝</span>메모장<br>(Notes)</div> -->
-<!--             <div class="menu-card" onclick="navigateTo('page24.html')"><span>🔮</span>AI 점술사<br>(AI Fortune Teller)</div> -->
-       
-<!--             <div class="menu-card" onclick="navigateTo('page31_personalinfor.html')"><span>🔒</span>Privacy Policy</div> -->
-            
-            
+        <div class="preview-section">
+            <div class="preview-header">
+                <h3>학습사이트 (Learning Sites)</h3>
+                <div class="preview-more"><a href="learning-site.html">전체보기 →</a></div>
+            </div>
+            <ul class="preview-list">
+                <li><a href="learning-site.html">유아/어린이 · KidsTV123, Starfall</a></li>
+                <li><a href="learning-site.html">기초/초급 · 홍시쌤, 프랭크쌤영어</a></li>
+                <li><a href="learning-site.html">중급 · BBC Learning English, Shaw English</a></li>
+                <li><a href="learning-site.html">고급/전문 · VOA, 윤희영 News English</a></li>
+                <li><a href="learning-site.html">비즈니스 · 실무 영어 채널</a></li>
+            </ul>
         </div>
+        <div class="preview-section">
+            <div class="preview-header">
+                <h3>News Voca</h3>
+                <div class="preview-more"><a href="page30_guestbook.html">전체보기 →</a></div>
+            </div>
+            <ul class="preview-list" id="news-voca-preview-list">
+                <li><a href="page30_guestbook.html">뉴스 어휘 로딩 중...</a></li>
+            </ul>
+        </div>
+        <div class="preview-section">
+            <div class="preview-header">
+                <h3>Synonym (유의어)</h3>
+                <div class="preview-more"><a href="page30_guestbook_v.html">전체보기 →</a></div>
+            </div>
+            <ul class="preview-list" id="synonym-preview-list">
+                <li><a href="page30_guestbook_v.html">유의어 로딩 중...</a></li>
+            </ul>
+        </div>
+        <div class="preview-section">
+            <div class="preview-header">
+                <h3>Popular Voca</h3>
+                <div class="preview-more"><a href="page30_guestbook_v_easy.html">전체보기 →</a></div>
+            </div>
+            <ul class="preview-list" id="easy-voca-preview-list">
+                <li><a href="page30_guestbook_v_easy.html">Popular Voca 로딩 중...</a></li>
+            </ul>
+        </div>
+        <!-- 퀴즈 · 행맨게임 (일단 비표시)
+        <div class="preview-section">
+            <h3>퀴즈 · 행맨게임</h3>
+            <ul class="preview-list">
+                <li><a href="english-quiz.html">영어 퀴즈</a></li>
+                <li><a href="page9.html">행맨 게임 (Hangman)</a></li>
+                <li><a href="english-quiz.html">단어 뜻 맞추기</a></li>
+                <li><a href="english-quiz.html">빈칸 채우기</a></li>
+                <li><a href="page9.html">스펠링 게임</a></li>
+            </ul>
+        </div>
+        -->
         <div class="resources-section">
             <!-- <h4>Our Resources!</h4>
             <p>AI와의 대화, 게임, 퀴즈, 동의어 학습, 읽기 자료, 유튜브 채널 등 다양한 영어 학습 도구와 자료를 제공합니다.</p>
             <p>Various English learning tools and materials are provided, including conversations with AI, quizzes, news, diverse reading materials, and YouTube channels.</p> -->
         </div>
         <div class="intro-text">
-            <h2>AI Tutor</h2>
-            <p>Welcome! Learn English easily with our fun and helpful resources.<br>For any questions, email us at <a href="mailto:everydayalittlehelp@gmail.com" style="color: #4a90e2; text-decoration: underline;">everydayalittlehelp@gmail.com</a>.<br>Happy learning! You can also enjoy our content on <a href="http://www.youtube.com/@istudyeng" style="color: #ff0000; text-decoration: underline;">YouTube</a>.</p>
+            <p>Thank you for being here. For any questions, email us at <a href="mailto:everydayalittlehelp@gmail.com" style="color: #4a90e2; text-decoration: underline;">everydayalittlehelp@gmail.com</a>. You can also enjoy our content on <a href="http://www.youtube.com/@istudyeng" style="color: #ff0000; text-decoration: underline;">YouTube</a>.</p>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -171,6 +249,150 @@
             }
             lastScrollTop = scrollTop;
         });
+
+        // News Voca 실제 데이터 로드 (API와 동일한 베이스 URL 사용)
+        (function loadNewsVocaPreview() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const apiMode = urlParams.get('api');
+            let apiBase;
+            if (apiMode === 'prod') {
+                apiBase = 'https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app';
+            } else if (apiMode === 'local') {
+                apiBase = 'http://' + window.location.hostname + ':3000';
+            } else if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                apiBase = 'http://' + window.location.hostname + ':3000';
+            } else {
+                apiBase = 'https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app';
+            }
+
+            const listEl = document.getElementById('news-voca-preview-list');
+            if (!listEl) return;
+
+            fetch(apiBase + '/guestbook')
+                .then(function(r) { return r.json(); })
+                .then(function(data) {
+                    let entries = [];
+                    if (Array.isArray(data)) entries = data;
+                    else if (data.entries) entries = data.entries;
+                    else if (data.data) entries = Array.isArray(data.data) ? data.data : [];
+
+                    const reversed = entries.slice().reverse();
+                    const preview = reversed.slice(0, 5);
+                    const total = entries.length;
+
+                    if (preview.length === 0) {
+                        listEl.innerHTML = '<li><a href="page30_guestbook.html">게시글이 없습니다.</a></li>';
+                        return;
+                    }
+
+                    const apiParam = apiMode ? '&api=' + apiMode : '';
+                    listEl.innerHTML = preview.map(function(entry, idx) {
+                        var origIdx = total - 1 - idx;
+                        var title = (entry.title || '제목 없음').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+                        if (title.length > 45) title = title.slice(0, 42) + '...';
+                        return '<li><a href="page30_viewpost.html?index=' + origIdx + apiParam + '">' + title + '</a></li>';
+                    }).join('');
+                })
+                .catch(function() {
+                    listEl.innerHTML = '<li><a href="page30_guestbook.html">뉴스 어휘 리스트</a></li><li><a href="page30_guestbook.html">최신 기사 기반 단어 학습</a></li><li><a href="page30_guestbook.html">WSJ · CBS 뉴스 어휘</a></li><li><a href="page30_guestbook.html">뉴스 영어 표현 정리</a></li><li><a href="page30_guestbook.html">토픽별 뉴스 단어</a></li>';
+                });
+        })();
+
+        // Synonym (유의어) 실제 데이터 로드
+        (function loadSynonymPreview() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const apiMode = urlParams.get('api');
+            let apiBase;
+            if (apiMode === 'prod') {
+                apiBase = 'https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app';
+            } else if (apiMode === 'local') {
+                apiBase = 'http://' + window.location.hostname + ':3000';
+            } else if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                apiBase = 'http://' + window.location.hostname + ':3000';
+            } else {
+                apiBase = 'https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app';
+            }
+
+            const listEl = document.getElementById('synonym-preview-list');
+            if (!listEl) return;
+
+            fetch(apiBase + '/vocabulary')
+                .then(function(r) { return r.json(); })
+                .then(function(data) {
+                    let entries = [];
+                    if (Array.isArray(data)) entries = data;
+                    else if (data.entries) entries = data.entries;
+                    else if (data.data) entries = Array.isArray(data.data) ? data.data : [];
+
+                    const reversed = entries.slice().reverse();
+                    const preview = reversed.slice(0, 5);
+                    const total = entries.length;
+
+                    if (preview.length === 0) {
+                        listEl.innerHTML = '<li><a href="page30_guestbook_v.html">게시글이 없습니다.</a></li>';
+                        return;
+                    }
+
+                    const apiParam = apiMode ? '&api=' + apiMode : '';
+                    listEl.innerHTML = preview.map(function(entry, idx) {
+                        var origIdx = total - 1 - idx;
+                        var title = (entry.title || '제목 없음').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+                        if (title.length > 45) title = title.slice(0, 42) + '...';
+                        return '<li><a href="page30_viewpost_v.html?index=' + origIdx + apiParam + '">' + title + '</a></li>';
+                    }).join('');
+                })
+                .catch(function() {
+                    listEl.innerHTML = '<li><a href="page30_guestbook_v.html">유의어 연습</a></li><li><a href="page30_guestbook_v.html">동의어 퀴즈</a></li><li><a href="page30_guestbook_v.html">유의어 카드 학습</a></li><li><a href="page30_guestbook_v.html">문맥별 유의어</a></li><li><a href="page30_guestbook_v.html">유의어 복습</a></li>';
+                });
+        })();
+
+        // Popular Voca: /easy-voca API, page30_guestbook_v_easy / viewpost_v_easy
+        (function loadEasyVocaPreview() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const apiMode = urlParams.get('api');
+            let apiBase;
+            if (apiMode === 'prod') {
+                apiBase = 'https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app';
+            } else if (apiMode === 'local') {
+                apiBase = 'http://' + window.location.hostname + ':3000';
+            } else if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                apiBase = 'http://' + window.location.hostname + ':3000';
+            } else {
+                apiBase = 'https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app';
+            }
+
+            const listEl = document.getElementById('easy-voca-preview-list');
+            if (!listEl) return;
+
+            fetch(apiBase + '/easy-voca')
+                .then(function(r) { return r.json(); })
+                .then(function(data) {
+                    let entries = [];
+                    if (Array.isArray(data)) entries = data;
+                    else if (data.entries) entries = data.entries;
+                    else if (data.data) entries = Array.isArray(data.data) ? data.data : [];
+
+                    const reversed = entries.slice().reverse();
+                    const preview = reversed.slice(0, 5);
+                    const total = entries.length;
+
+                    if (preview.length === 0) {
+                        listEl.innerHTML = '<li><a href="page30_guestbook_v_easy.html">게시글이 없습니다.</a></li>';
+                        return;
+                    }
+
+                    const apiParam = apiMode ? '&api=' + apiMode : '';
+                    listEl.innerHTML = preview.map(function(entry, idx) {
+                        var origIdx = total - 1 - idx;
+                        var title = (entry.title || '제목 없음').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+                        if (title.length > 45) title = title.slice(0, 42) + '...';
+                        return '<li><a href="page30_viewpost_v_easy.html?index=' + origIdx + apiParam + '">' + title + '</a></li>';
+                    }).join('');
+                })
+                .catch(function() {
+                    listEl.innerHTML = '<li><a href="page30_guestbook_v_easy.html">Popular Voca 로딩 실패</a></li>';
+                });
+        })();
     </script>
 </body>
 </html>
