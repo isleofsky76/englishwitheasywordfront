@@ -6,7 +6,7 @@ body {
   font-weight: 400;
   margin: 0 auto;
   padding: 0 !important;
-  padding-top: 30px !important;
+  padding-top: 56px !important;
   width: 100vw !important;
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
@@ -384,7 +384,8 @@ th.actions {
 @media (max-width: 767px) {
   body {
     padding: 10px;
-    margin-top: 80px;
+    padding-top: 52px !important; /* navbar 바로 아래, 간격 최소화 */
+    margin-top: 0 !important;
     font-size: 10px; /* 더 작게 조정 */
   }
 
@@ -396,7 +397,7 @@ th.actions {
   #post-container {
     max-width: 100%;
     padding: 8px;
-    margin-top: 30px !important;
+    margin-top: 12px !important;
   }
 
   #post-header {
@@ -543,7 +544,7 @@ th.actions {
 }
 
 .guestbook-list {
-  margin-top: calc(4rem - 80px);
+  margin-top: 0.5rem;
   /* 성능 최적화: GPU 가속 */
   will-change: contents;
   transform: translateZ(0);
@@ -618,7 +619,7 @@ th.actions {
 }
 
 #write-post-button {
-  margin-top: 70px !important;
+  margin-top: 1rem !important;
 }
 
 @media (max-width: 767px) {
@@ -640,7 +641,7 @@ th.actions {
     border-left: none !important;
     border-right: none !important;
     min-height: 100vh !important;
-    margin-top: 40px !important; /* navbar 높이만큼 */
+    margin-top: 48px !important; /* 모바일 navbar 높이만큼 */
   }
   
   #write-post-modal .modal-header {
