@@ -483,6 +483,8 @@
 
 // loadPost();
 
+// ============20260309
+
 // API 베이스 URL 설정 (로컬/프로덕션 자동 전환)
 // URL 파라미터로 강제 설정 가능: ?api=local 또는 ?api=prod
 let API_BASE_URL;
@@ -500,8 +502,8 @@ if (apiMode === 'prod') {
 } else if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
     // 자동 감지: 로컬 호스트면 로컬 API 사용
     API_BASE_URL = `http://${window.location.hostname}:3000`;
-    console.log('🔵 Localhost 모드 (자동) - API_BASE_URL:', API_BASE_URL);
-    console.log('💡 프로덕션 API를 사용하려면 URL에 ?api=prod 를 추가하세요');
+    // console.log('🔵 Localhost 모드 (자동) - API_BASE_URL:', API_BASE_URL);
+    // console.log('💡 프로덕션 API를 사용하려면 URL에 ?api=prod 를 추가하세요');
 } else {
     // 자동 감지: 프로덕션 호스트면 프로덕션 API 사용
     API_BASE_URL = 'https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app';
@@ -549,24 +551,6 @@ function sanitizeHtml(html) {
     return div.innerHTML;
 }
 
-/** 라이브 등에서 앞부분이 잘려 나온 깨진 링크 복구 (URL">기사 보기, ">예문 영상 보기 등) */
-function repairBrokenLinks(html) {
-    if (!html || typeof html !== 'string') return html;
-    let out = html;
-    // WSJ: URL">기사 보기 → <a href="URL">기사 보기</a>
-    out = out.replace(/(https:\/\/www\.wsj\.com\/[^"<>\s]+)">기사 보기/g, '<a href="$1">기사 보기</a>');
-    // YouTube: URL">예문 영상 보기 → <a href="URL">예문 영상 보기</a>
-    out = out.replace(/(https:\/\/[^"<>\s]*(?:youtube\.com|youtu\.be)[^"<>\s]*)">예문 영상 보기/g, '<a href="$1">예문 영상 보기</a>');
-    // 깨진 썸네일 블록 제거 후 남는 "> (YouTube Video + ">예문 영상 보기)
-    out = out.replace(/(<[^>]*>)?\s*YouTube Video\s*(<\/[^>]+>)?\s*">/g, '">');
-    // 남는 잔여 문구 제거: ">기사 보기 / ">예문 영상 보기 (앞에 URL 없이)
-    out = out.replace(/">기사 보기\s*</g, '기사 보기<');
-    out = out.replace(/">예문 영상 보기\s*</g, '예문 영상 보기<');
-    out = out.replace(/">기사 보기\s*$/gm, '기사 보기');
-    out = out.replace(/">예문 영상 보기\s*$/gm, '예문 영상 보기');
-    return out;
-}
-
 // 이미지/동영상 링크를 HTML로 변환하는 함수
 function convertMediaLinks(text) {
     if (!text) return text;
@@ -581,26 +565,32 @@ function convertMediaLinks(text) {
     let result = hasHtml ? text : escapeHtml(text);
     
     // URL을 찾아서 링크로 변환 (이미 링크 태그가 있는 경우는 건너뛰기)
-    result = result.replace(urlPattern, (match, url, offset, fullString) => {
-        const str = fullString !== undefined ? fullString : result;
-        const off = typeof offset === 'number' ? offset : str.indexOf(match);
-        const beforeMatch = str.substring(0, off);
-        // 이미 href=" 또는 href=' 바로 뒤에 있는 URL은 절대 감싸지 않기 (기존 <a> 안의 URL)
-        if (/href\s*=\s*["']$/.test(beforeMatch.replace(/\s+/g, ' '))) {
-            return match;
-        }
+    result = result.replace(urlPattern, (url, offset) => {
+        // 이미 <a> 태그 안에 있는 URL은 건너뛰기
+        const beforeMatch = result.substring(0, offset);
         const lastATagOpen = beforeMatch.lastIndexOf('<a');
         const lastATagClose = beforeMatch.lastIndexOf('</a>');
+        // <a> 태그가 열려있고 닫히지 않았다면 이미 링크 안에 있는 것
         if (lastATagOpen > lastATagClose) {
-            return match;
+            return url;
         }
-        // YouTube 링크: 미리보기 없이 클릭 링크만 표시
+        // YouTube 링크 처리 (일반 동영상, Shorts, youtu.be 모두 포함)
         const youtubeRegex = /(?:youtube\.com\/(?:watch\?v=|shorts\/)|youtu\.be\/)([a-zA-Z0-9_-]+)/;
         const youtubeMatch = url.match(youtubeRegex);
         if (youtubeMatch) {
             const videoId = youtubeMatch[1];
+            const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
             const youtubeUrl = `https://www.youtube.com/watch?v=${videoId}`;
-            return `<a href="${youtubeUrl}" target="_blank" rel="noopener noreferrer" style="display: inline-block; padding: 4px 6px; margin: 2px; -webkit-tap-highlight-color: rgba(43, 108, 176, 0.3); touch-action: manipulation; cursor: pointer; position: relative; z-index: 10;">${url}</a>`;
+            return `<div class="video-preview-container" style="position: relative; max-width: 100%; margin: 10px 0; cursor: pointer; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); z-index: 1;">
+                <a href="${youtubeUrl}" target="_blank" rel="noopener noreferrer" style="text-decoration: none; display: block; -webkit-tap-highlight-color: rgba(0, 0, 0, 0.3); touch-action: manipulation; position: relative; z-index: 10;">
+                    <div class="video-thumbnail" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; background: #000;">
+                        <img src="${thumbnailUrl}" alt="YouTube Video" loading="lazy" decoding="async" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="this.src='https://img.youtube.com/vi/${videoId}/hqdefault.jpg'">
+                        <div class="play-button" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 68px; height: 48px; background: rgba(23, 35, 34, 0.9); border-radius: 14px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.3s; pointer-events: none; z-index: 2;">
+                            <div style="width: 0; height: 0; border-left: 24px solid white; border-top: 14px solid transparent; border-bottom: 14px solid transparent; margin-left: 6px;"></div>
+                        </div>
+                    </div>
+                </a>
+            </div>`;
         }
         
         // Vimeo 링크 처리
@@ -660,7 +650,7 @@ function showLoading() {
 }
 
 // 에러 메시지 표시 함수
-function showError(message, details = '', listPage = 'page30_guestbook_v_easy.html') {
+function showError(message, details = '', listPage = 'page30_guestbook_v.html') {
     const postContainer = document.getElementById('post-container');
     const apiParam = apiMode ? `?api=${apiMode}` : '';
     const listUrl = listPage + apiParam;
@@ -681,7 +671,7 @@ async function loadPost() {
         showError(
             '게시글을 찾을 수 없습니다',
             '주소에 글 번호(index)가 없습니다. 글 목록에서 제목을 클릭하면 해당 글이 열립니다.',
-            'page30_guestbook_v_easy.html'
+            'page30_guestbook_v.html'
         );
         return;
     }
@@ -690,7 +680,7 @@ async function loadPost() {
     showLoading();
 
     try {
-        const url = `${API_BASE_URL}/easy-voca`;
+        const url = `${API_BASE_URL}/vocabulary`;
         console.log('📡 API 요청 URL:', url);
         const response = await fetch(url);
         console.log('📥 응답 상태:', response.status, response.statusText);
@@ -750,7 +740,7 @@ async function loadPost() {
 
         // 조회수 증가 API 호출
         try {
-            const viewResponse = await fetch(`${API_BASE_URL}/easy-voca/${post._id}/view`, {
+            const viewResponse = await fetch(`${API_BASE_URL}/vocabulary/${post._id}/view`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -814,16 +804,17 @@ async function loadPost() {
         }
 
         // 이미지/동영상 링크 변환하여 표시
-        const messageRaw = repairBrokenLinks(post.message || '');
-        const convertedMessage = convertMediaLinks(messageRaw);
+        const convertedMessage = convertMediaLinks(post.message || '');
         console.log('원본 메시지:', post.message);
         console.log('변환된 메시지:', convertedMessage);
         
+        const isAdmin = (post.nickname || '').toLowerCase() === 'admin';
+        const metaHtml = isAdmin ? '' : `<p id="post-meta">Author: ${escapeHtml(post.nickname || 'Anonymous')} | Date: ${formattedDate} | Views: ${post.views || 0}</p>`;
         // HTML 구조 재생성
         postContainer.innerHTML = `
             <div id="post-header">
                 <h2 id="post-title">${escapeHtml(post.title || '제목 없음')}</h2>
-                <p id="post-meta">Author: ${escapeHtml(post.nickname || 'Anonymous')} | Date: ${formattedDate} | Views: ${post.views || 0}</p>
+                ${metaHtml}
             </div>
             <div id="post-content">
                 <p id="post-message">${convertedMessage || '<span style="color: #999;">내용이 없습니다.</span>'}</p>
@@ -850,7 +841,7 @@ async function loadPost() {
         // 버튼 기능 연결
         document.getElementById('backBtn').onclick = () => {
             const apiParam = apiMode ? `?api=${apiMode}` : '';
-            window.location.href = `page30_guestbook_v_easy.html${apiParam}`;
+            window.location.href = `page30_guestbook_v.html${apiParam}`;
         };
         
         document.getElementById('editBtn').onclick = async () => {
@@ -858,7 +849,7 @@ async function loadPost() {
             if (!password) return;
             
             try {
-                const response = await fetch(`${API_BASE_URL}/easy-voca/viewpost`, {
+                const response = await fetch(`${API_BASE_URL}/vocabulary/viewpost`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -912,7 +903,7 @@ async function loadPost() {
             const isSecret = document.getElementById('edit-isSecret').checked;
 
             try {
-                const response = await fetch(`${API_BASE_URL}/easy-voca/updatepost`, {
+                const response = await fetch(`${API_BASE_URL}/vocabulary/updatepost`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -953,7 +944,7 @@ async function loadPost() {
             if (!confirm('정말로 이 게시글을 삭제하시겠습니까?')) return;
             
             try {
-                const response = await fetch(`${API_BASE_URL}/easy-voca/deletepost`, {
+                const response = await fetch(`${API_BASE_URL}/vocabulary/deletepost`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -963,7 +954,7 @@ async function loadPost() {
                 if (response.ok) {
                     alert('게시글이 삭제되었습니다.');
                     const apiParam = apiMode ? `?api=${apiMode}` : '';
-                    window.location.href = `page30_guestbook_v_easy.html${apiParam}`;
+                    window.location.href = `page30_guestbook_v.html${apiParam}`;
                 } else {
                     const errorData = await response.json();
                     alert(`오류: ${errorData.error || '게시글 삭제에 실패했습니다.'}`);
