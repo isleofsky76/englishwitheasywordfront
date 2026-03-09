@@ -481,6 +481,7 @@
 
 // loadPost();
 
+// API 베이스 URL 설정 (로컬/프로덕션 자동 전환)
 // URL 파라미터로 강제 설정 가능: ?api=local 또는 ?api=prod
 let API_BASE_URL;
 const urlParams = new URLSearchParams(window.location.search);
@@ -992,5 +993,7 @@ async function loadPost() {
 }
 
 loadPost();
+
+
 
 
