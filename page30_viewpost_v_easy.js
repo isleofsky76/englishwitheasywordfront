@@ -481,7 +481,6 @@
 
 // loadPost();
 
-// API 베이스 URL 설정 (로컬/프로덕션 자동 전환)
 // URL 파라미터로 강제 설정 가능: ?api=local 또는 ?api=prod
 let API_BASE_URL;
 const urlParams = new URLSearchParams(window.location.search);
@@ -548,6 +547,9 @@ function sanitizeHtml(html) {
 }
 
 /** 라이브 등에서 앞부분이 잘려 나온 깨진 링크 복구 (URL">기사 보기, ">예문 영상 보기 등) */
+var POPULAR_VOCA_WSJ_URL = 'https://www.wsj.com/lifestyle/alarm-clocks-that-shock-you-make-you-do-math-and-take-your-money-9189327a';
+var POPULAR_VOCA_YOUTUBE_URL = 'https://www.youtube.com/shorts/E6at-MOLI_M';
+
 function repairBrokenLinks(html) {
     if (!html || typeof html !== 'string') return html;
     let out = html;
@@ -563,14 +565,13 @@ function repairBrokenLinks(html) {
     // 3) 깨진 썸네일 블록 제거
     out = out.replace(/(<[^>]*>)?\s*YouTube Video\s*(<\/[^>]+>)?\s*"\s*>/g, '">');
 
-    // 4) 남는 ">기사 보기 / ">예문 영상 보기 전부 제거 (따옴표·공백 포함, 유니코드 따옴표 포함)
-    out = out.replace(/["\u201c\u201d]?\s*>\s*기사 보기\s*</g, '기사 보기<');
-    out = out.replace(/["\u201c\u201d]?\s*>\s*예문 영상 보기\s*</g, '예문 영상 보기<');
-    out = out.replace(/["\u201c\u201d]?\s*>\s*기사 보기\s*$/gm, '기사 보기');
-    out = out.replace(/["\u201c\u201d]?\s*>\s*예문 영상 보기\s*$/gm, '예문 영상 보기');
-    // 태그 뒤에 붙은 ">기사 보기 (예: </a></p>">기사 보기)
-    out = out.replace(/(<\/[ap]>)\s*["\u201c\u201d]?\s*>\s*기사 보기/gi, '$1기사 보기');
-    out = out.replace(/(<\/[ap]>)\s*["\u201c\u201d]?\s*>\s*예문 영상 보기/gi, '$1예문 영상 보기');
+    // 4) 남는 ">기사 보기 / ">예문 영상 보기 → 링크 복원 (잔여만 제거하지 말고 링크로 치환)
+    out = out.replace(/["\u201c\u201d]?\s*>\s*기사 보기\s*</g, '<a href="' + POPULAR_VOCA_WSJ_URL + '">기사 보기</a><');
+    out = out.replace(/["\u201c\u201d]?\s*>\s*예문 영상 보기\s*</g, '<a href="' + POPULAR_VOCA_YOUTUBE_URL + '">예문 영상 보기</a><');
+    out = out.replace(/["\u201c\u201d]?\s*>\s*기사 보기\s*$/gm, '<a href="' + POPULAR_VOCA_WSJ_URL + '">기사 보기</a>');
+    out = out.replace(/["\u201c\u201d]?\s*>\s*예문 영상 보기\s*$/gm, '<a href="' + POPULAR_VOCA_YOUTUBE_URL + '">예문 영상 보기</a>');
+    out = out.replace(/(<\/[ap]>)\s*["\u201c\u201d]?\s*>\s*기사 보기/gi, '$1<a href="' + POPULAR_VOCA_WSJ_URL + '">기사 보기</a>');
+    out = out.replace(/(<\/[ap]>)\s*["\u201c\u201d]?\s*>\s*예문 영상 보기/gi, '$1<a href="' + POPULAR_VOCA_YOUTUBE_URL + '">예문 영상 보기</a>');
 
     return out;
 }
