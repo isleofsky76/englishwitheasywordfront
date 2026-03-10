@@ -1,0 +1,229 @@
+/* Word of the Day view post – page30_viewpost_wordofday
+   기존 guestbook view 스타일(page30_viewpost_v.css)을 재사용 */
+
+@import url('page30_viewpost_v.css');
+
+/* 전체 배경을 교재 느낌의 그라디언트로 */
+body {
+  background: radial-gradient(circle at top left, #fdfbfb 0%, #ebedff 35%, #f9f5ff 70%, #fdf2ff 100%);
+}
+
+/* 카드 전체를 Word of the Day 전용 스타일로 감싸기 */
+#post-container {
+  background: linear-gradient(135deg, #ffffff 0%, #f7f9ff 45%, #fff7ff 100%);
+  border-radius: 18px;
+  box-shadow: 0 14px 35px rgba(15, 23, 42, 0.12);
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  position: relative;
+  overflow: hidden;
+}
+
+/* 상단 형광 하이라이트 바 */
+#post-container::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(56, 189, 248, 0.28), rgba(168, 85, 247, 0.22), rgba(244, 114, 182, 0.28));
+  opacity: 0.25;
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+#post-header,
+#post-content {
+  position: relative;
+  z-index: 1;
+}
+
+/* 본문 전체 줄 간격 · 마진 조정 */
+#post-message {
+  line-height: 1.6;
+}
+
+#post-message p {
+  margin-bottom: 0.5em;
+}
+
+/* ===== Word of the Day 전용 블록 ===== */
+
+.wotd-card {
+  display: flex;
+  flex-direction: row;
+  gap: 1.8rem;
+  align-items: stretch;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 16px;
+  padding: 1.4rem 1.6rem;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.16);
+  backdrop-filter: blur(6px);
+}
+
+.wotd-image-wrap {
+  flex: 0 0 220px;
+  max-width: 220px;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 12px 30px rgba(30, 64, 175, 0.35);
+  position: relative;
+}
+
+.wotd-image-wrap::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at bottom right, rgba(59, 130, 246, 0.15), transparent 60%);
+  pointer-events: none;
+}
+
+.wotd-image-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.wotd-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.wotd-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: #1d4ed8;
+  background: linear-gradient(90deg, rgba(56, 189, 248, 0.18), rgba(129, 140, 248, 0.22));
+  border-radius: 999px;
+  padding: 0.25rem 0.75rem;
+  font-weight: 600;
+}
+
+.wotd-label::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: #22c55e;
+  box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.28);
+}
+
+.wotd-word {
+  font-size: 2.2rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  margin: 0.1rem 0 0.3rem;
+  background: linear-gradient(120deg, #1d4ed8, #db2777);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.wotd-pos {
+  margin: 0.1rem 0 0.4rem;
+  font-size: 0.98rem;
+  color: #374151;
+}
+
+.wotd-pos-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.12rem 0.55rem;
+  margin-right: 0.4rem;
+  border-radius: 999px;
+  background: rgba(56, 189, 248, 0.12);
+  color: #0369a1;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.wotd-pos-tag::before {
+  content: '';
+  width: 4px;
+  height: 4px;
+  border-radius: 999px;
+  background: currentColor;
+}
+
+.wotd-pos-text {
+  font-weight: 500;
+}
+
+.wotd-examples {
+  margin-top: 0.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.wotd-example {
+  padding: 0.65rem 0.75rem 0.7rem;
+  border-radius: 12px;
+  background: rgba(248, 250, 252, 0.9);
+  border: 1px dashed rgba(148, 163, 184, 0.6);
+}
+
+.wotd-example-header {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 0.35rem;
+}
+
+.wotd-example-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.14rem 0.6rem;
+  border-radius: 999px;
+  background: #fef3c7;
+  color: #b45309;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.wotd-example-badge::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: #f97316;
+}
+
+.wotd-example-en {
+  margin: 0.1rem 0 0.1rem;
+  font-size: 0.97rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.wotd-example-ko {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #4b5563;
+}
+
+/* 모바일 레이아웃 정리 */
+@media (max-width: 767px) {
+  .wotd-card {
+    flex-direction: column;
+    padding: 1.1rem 1.15rem;
+  }
+
+  .wotd-image-wrap {
+    flex: 0 0 auto;
+    max-width: 100%;
+    box-shadow: 0 10px 22px rgba(30, 64, 175, 0.3);
+  }
+
+  .wotd-word {
+    font-size: 1.8rem;
+  }
+}
+
