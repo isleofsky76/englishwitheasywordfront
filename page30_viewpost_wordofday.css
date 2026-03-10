@@ -35,13 +35,25 @@ body {
   z-index: 1;
 }
 
-/* 본문 전체 줄 간격 · 마진 조정 */
+/* 본문 전체 줄 간격 · 마진 최소화 (Word of the Day 간격 넓지 않게) */
 #post-message {
-  line-height: 1.6;
+  line-height: 1.4;
+}
+
+#post-message > div {
+  margin: 0;
 }
 
 #post-message p {
-  margin-bottom: 0.5em;
+  margin: 0.05em 0;
+}
+
+#post-message p:first-child {
+  margin-top: 0;
+}
+
+#post-message p:last-child {
+  margin-bottom: 0;
 }
 
 /* ===== Word of the Day 전용 블록 ===== */
