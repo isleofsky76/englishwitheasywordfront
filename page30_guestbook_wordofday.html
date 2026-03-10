@@ -99,7 +99,34 @@
         </div>
     </div>
     <div class="guestbook-card shadow-lg p-4 mb-4 bg-white rounded" id="write-post-container" style="display: none;"></div>
-    <div class="guestbook-card shadow-lg p-4 mb-4 bg-white rounded" id="edit-post-container" style="display: none;"></div>
+    <div class="guestbook-card shadow-lg p-4 mb-4 bg-white rounded" id="edit-post-container" style="display: none;">
+        <form id="edit-guestbook-form">
+            <h5 class="text-primary mb-3">Edit Message</h5>
+            <input type="hidden" id="edit-id">
+            <div class="row g-2 mb-2">
+                <div class="col-md-6">
+                    <input type="text" id="edit-title" class="form-control" placeholder="Title" required>
+                </div>
+                <div class="col-md-6">
+                    <input type="text" id="edit-nickname" class="form-control" placeholder="Nickname" required>
+                </div>
+            </div>
+            <div class="mb-2">
+                <textarea id="edit-message" class="form-control" placeholder="Message" rows="6" required></textarea>
+            </div>
+            <div class="row g-2 mb-2">
+                <div class="col-md-6">
+                    <input type="password" id="edit-password" class="form-control" placeholder="Password" required>
+                </div>
+                <div class="col-md-6 d-flex align-items-center">
+                    <input type="checkbox" id="edit-isSecret" class="form-check-input me-2">
+                    <label for="edit-isSecret" class="form-check-label">Secret</label>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary me-2">Update</button>
+            <button type="button" class="btn btn-secondary" id="edit-cancel-btn">Cancel</button>
+        </form>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="page30_guestbook_wordofday.js"></script>
 </body>

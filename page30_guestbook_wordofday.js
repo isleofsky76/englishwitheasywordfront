@@ -756,7 +756,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    document.getElementById('edit-guestbook-form').addEventListener('submit', async (event) => {
+    var editFormEl = document.getElementById('edit-guestbook-form');
+    if (editFormEl) {
+        editFormEl.addEventListener('submit', async (event) => {
         event.preventDefault();
         const form = event.target;
         const submitButton = form.querySelector('button[type="submit"]');
@@ -846,6 +848,13 @@ document.addEventListener('DOMContentLoaded', () => {
             submitButton.disabled = false;
         }
     });
+    }
+    var editCancelBtn = document.getElementById('edit-cancel-btn');
+    if (editCancelBtn) {
+        editCancelBtn.addEventListener('click', function() {
+            document.getElementById('edit-post-container').style.display = 'none';
+        });
+    }
 
     // 이미지/동영상 링크를 HTML로 변환하는 함수
     function convertMediaLinks(text) {
