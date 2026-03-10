@@ -174,7 +174,7 @@
     <div class="container main-content">
         <div class="preview-section">
             <div class="preview-header">
-                <h3>학습사이트</h3>
+                <h3>학습사이트 (Learning Sites)</h3>
                 <div class="preview-more"><a href="learning-site.html">전체보기 →</a></div>
             </div>
             <ul class="preview-list">
@@ -185,22 +185,14 @@
                 <li><a href="learning-site.html">비즈니스 · 실무 영어 채널</a></li>
             </ul>
         </div>
-          <div class="preview-section">
+    
+        <div class="preview-section">
             <div class="preview-header">
                 <h3>Word of the Day</h3>
                 <div class="preview-more"><a href="page30_guestbook_wordofday.html?api=prod">전체보기 →</a></div>
             </div>
             <ul class="preview-list" id="wordofday-preview-list">
                 <li><a href="page30_guestbook_wordofday.html?api=prod">Word of the Day 로딩 중...</a></li>
-            </ul>
-        </div>
-        <div class="preview-section">
-            <div class="preview-header">
-                <h3>Popular Voca</h3>
-                <div class="preview-more"><a href="page30_guestbook_v_easy.html">전체보기 →</a></div>
-            </div>
-            <ul class="preview-list" id="easy-voca-preview-list">
-                <li><a href="page30_guestbook_v_easy.html">Popular Voca 로딩 중...</a></li>
             </ul>
         </div>
         <div class="preview-section">
@@ -214,14 +206,22 @@
         </div>
         <div class="preview-section">
             <div class="preview-header">
-                <h3>Synonyms</h3>
+                <h3>Synonym (유의어)</h3>
                 <div class="preview-more"><a href="page30_guestbook_v.html">전체보기 →</a></div>
             </div>
             <ul class="preview-list" id="synonym-preview-list">
                 <li><a href="page30_guestbook_v.html">유의어 로딩 중...</a></li>
             </ul>
         </div>
-
+        <div class="preview-section">
+            <div class="preview-header">
+                <h3>Popular Voca</h3>
+                <div class="preview-more"><a href="page30_guestbook_v_easy.html">전체보기 →</a></div>
+            </div>
+            <ul class="preview-list" id="easy-voca-preview-list">
+                <li><a href="page30_guestbook_v_easy.html">Popular Voca 로딩 중...</a></li>
+            </ul>
+        </div>
         <!-- 퀴즈 · 행맨게임 (일단 비표시)
         <div class="preview-section">
             <h3>퀴즈 · 행맨게임</h3>
@@ -240,7 +240,7 @@
             <p>Various English learning tools and materials are provided, including conversations with AI, quizzes, news, diverse reading materials, and YouTube channels.</p> -->
         </div>
         <div class="intro-text">
-            <p>Thank you for being here. For any questions, Please email us at <a href="mailto:everydayalittlehelp@gmail.com" style="color: #4a90e2; text-decoration: underline;">everydayalittlehelp@gmail.com</a>. You can also enjoy our content on <a href="http://www.youtube.com/@istudyeng" style="color: #ff0000; text-decoration: underline;">YouTube</a>.</p>
+            <p>Thank you for being here. For any questions, email us at <a href="mailto:everydayalittlehelp@gmail.com" style="color: #4a90e2; text-decoration: underline;">everydayalittlehelp@gmail.com</a>. You can also enjoy our content on <a href="http://www.youtube.com/@istudyeng" style="color: #ff0000; text-decoration: underline;">YouTube</a>.</p>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -403,12 +403,65 @@
                     listEl.innerHTML = '<li><a href="page30_guestbook_v_easy.html">Popular Voca 로딩 실패</a></li>';
                 });
         })();
+
+        // Word of the Day: /wordofday API, page30_guestbook_wordofday / viewpost_wordofday
+        (function loadWordOfDayPreview() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const apiMode = urlParams.get('api');
+            let apiBase;
+            if (apiMode === 'prod') {
+                apiBase = 'https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app';
+            } else if (apiMode === 'local') {
+                apiBase = 'http://' + window.location.hostname + ':3000';
+            } else if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                apiBase = 'http://' + window.location.hostname + ':3000';
+            } else {
+                apiBase = 'https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app';
+            }
+
+            const listEl = document.getElementById('wordofday-preview-list');
+            if (!listEl) return;
+
+            const apiParam = apiMode ? '&api=' + apiMode : (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1' ? '&api=prod' : '');
+            const fallbackHtml = '<li><a href="page30_guestbook_wordofday.html?api=prod">Word of the Day 보기</a></li>';
+
+            var timeoutId = setTimeout(function() {
+                listEl.innerHTML = fallbackHtml;
+            }, 8000);
+
+            fetch(apiBase + '/wordofday')
+                .then(function(r) { return r.json(); })
+                .then(function(data) {
+                    clearTimeout(timeoutId);
+                    var entries = [];
+                    if (Array.isArray(data)) entries = data;
+                    else if (data && data.entries) entries = data.entries;
+                    else if (data && data.data) entries = Array.isArray(data.data) ? data.data : [];
+
+                    var reversed = entries.slice().reverse();
+                    var preview = reversed.slice(0, 5);
+                    var total = entries.length;
+
+                    if (preview.length === 0) {
+                        listEl.innerHTML = '<li><a href="page30_guestbook_wordofday.html?api=prod">게시글이 없습니다.</a></li>';
+                        return;
+                    }
+
+                    listEl.innerHTML = preview.map(function(entry, idx) {
+                        var origIdx = total - 1 - idx;
+                        var title = (entry.title || '제목 없음').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+                        if (title.length > 45) title = title.slice(0, 42) + '...';
+                        return '<li><a href="page30_viewpost_wordofday.html?index=' + origIdx + apiParam + '">' + title + '</a></li>';
+                    }).join('');
+                })
+                .catch(function() {
+                    clearTimeout(timeoutId);
+                    listEl.innerHTML = fallbackHtml;
+                });
+        })();
     </script>
 </body>
 </html>
-
-
-
 
 
 
