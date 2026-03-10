@@ -37,19 +37,24 @@ body {
 
 /* 본문 전체 줄 간격 · 마진 최소화 (Word of the Day 간격 넓지 않게) */
 #post-message {
-  line-height: 1.4;
+  line-height: 1.25;
+  text-align: left;
 }
 
 #post-message > div {
   margin: 0;
-}
-
-#post-message img {
-  margin: 0 0 0.15rem 0 !important;
+  text-align: left;
 }
 
 #post-message p {
   margin: 0 !important;
+  line-height: 1.25 !important;
+}
+
+#post-message p span[style*="padding-left"] {
+  line-height: 1.25;
+  margin: 0;
+  display: block;
 }
 
 #post-message p:first-child {
@@ -58,6 +63,10 @@ body {
 
 #post-message p:last-child {
   margin-bottom: 0;
+}
+
+#post-message img {
+  margin: 0 0 0.15rem 0 !important;
 }
 
 /* ===== Word of the Day 전용 블록 ===== */
