@@ -69,6 +69,21 @@ body {
   margin: 0 0 0.15rem 0 !important;
 }
 
+/* 예문 한 줄 TTS 스피커 아이콘 */
+.wotd-inline-speaker {
+  border: none;
+  background: transparent;
+  color: #4b5563;
+  font-size: 0.9rem;
+  cursor: pointer;
+  padding: 0 2px;
+  margin-left: 6px;
+}
+
+.wotd-inline-speaker:hover {
+  color: #1d4ed8;
+}
+
 /* 예문 1, 예문 2 제목을 10px 아래로 (클래스 없어도 적용: 본문 p 안 2번째·3번째 strong) */
 #post-message .wotd-example-heading,
 #post-message p strong:nth-of-type(2),

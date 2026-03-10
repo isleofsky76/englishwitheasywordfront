@@ -67,6 +67,59 @@ function convertMediaLinks(text) {
     return sanitizeHtml(result);
 }
 
+// 예문 한 줄 뒤에 개별 스피커 아이콘 추가
+function addInlineExampleSpeakers() {
+    const container = document.getElementById('post-message');
+    if (!container) return;
+    if (!('speechSynthesis' in window)) return;
+
+    const spans = container.querySelectorAll('span[style*="padding-left"]');
+    spans.forEach((span) => {
+        const html = span.innerHTML || '';
+        const firstPart = html.split('<br')[0] || '';
+        if (!firstPart.trim()) return;
+
+        const tmp = document.createElement('div');
+        tmp.innerHTML = firstPart;
+        const text = (tmp.textContent || '').trim();
+        if (!text) return;
+
+        // 이미 스피커가 붙어 있으면 중복 추가 방지
+        if (span.querySelector('.wotd-inline-speaker')) return;
+
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'wotd-inline-speaker';
+        btn.textContent = '🔊';
+        btn.addEventListener('click', () => {
+            const synth = window.speechSynthesis;
+            if (!synth) return;
+            // 한 번 더 누르면 재생 중이면 멈춤
+            if (btn.dataset.speaking === 'true') {
+                synth.cancel();
+                btn.dataset.speaking = 'false';
+                return;
+            }
+            synth.cancel();
+            const u = new SpeechSynthesisUtterance(text);
+            u.lang = 'en-US';
+            u.rate = 0.9;
+            u.pitch = 1.0;
+            u.onend = () => { btn.dataset.speaking = 'false'; };
+            u.onerror = () => { btn.dataset.speaking = 'false'; };
+            btn.dataset.speaking = 'true';
+            synth.speak(u);
+        });
+
+        const firstBr = span.querySelector('br');
+        if (firstBr) {
+            span.insertBefore(btn, firstBr);
+        } else {
+            span.appendChild(btn);
+        }
+    });
+}
+
 function showLoading() {
     document.getElementById('post-container').innerHTML = `
         <div style="text-align: center; padding: 40px;">
@@ -138,6 +191,8 @@ async function loadPost() {
             <div id="post-content">
                 <div id="post-message">${convertedMessage || '<span style="color: #999;">내용이 없습니다.</span>'}</div>
             </div>`;
+        // 예문 한 줄 뒤에 개별 스피커 아이콘 추가
+        addInlineExampleSpeakers();
 
         document.getElementById('backBtn').onclick = () => {
             window.location.href = `page30_guestbook_wordofday.html${apiMode ? '?api=' + apiMode : ''}`;
