@@ -35,9 +35,9 @@ body {
   z-index: 1;
 }
 
-/* 본문 전체 줄 간격 · 마진 최소화 (Word of the Day 간격 넓지 않게) */
+/* 본문 전체 줄 간격 (읽기 좋게) */
 #post-message {
-  line-height: 1.25;
+  line-height: 1.85;
   text-align: left;
 }
 
@@ -47,13 +47,13 @@ body {
 }
 
 #post-message p {
-  margin: 0 !important;
-  line-height: 1.25 !important;
+  margin: 0 0 0.75em 0 !important;
+  line-height: 1.85 !important;
 }
 
 #post-message p span[style*="padding-left"] {
-  line-height: 1.25;
-  margin: 0;
+  line-height: 1.85 !important;
+  margin: 0.08em 0 0 0 !important;
   display: block;
 }
 
@@ -67,6 +67,14 @@ body {
 
 #post-message img {
   margin: 0 0 0.15rem 0 !important;
+}
+
+/* 예문 1, 예문 2 제목을 10px 아래로 (클래스 없어도 적용: 본문 p 안 2번째·3번째 strong) */
+#post-message .wotd-example-heading,
+#post-message p strong:nth-of-type(2),
+#post-message p strong:nth-of-type(3) {
+  display: block !important;
+  margin-top: 10px !important;
 }
 
 /* ===== Word of the Day 전용 블록 ===== */
