@@ -10,23 +10,12 @@ body {
 
 /* 카드 전체를 Word of the Day 전용 스타일로 감싸기 */
 #post-container {
-  background: linear-gradient(135deg, #ffffff 0%, #f7f9ff 45%, #fff7ff 100%);
+  background: #fff;
   border-radius: 18px;
   box-shadow: 0 14px 35px rgba(15, 23, 42, 0.12);
   border: 1px solid rgba(148, 163, 184, 0.28);
   position: relative;
   overflow: hidden;
-}
-
-/* 상단 형광 하이라이트 바 */
-#post-container::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, rgba(56, 189, 248, 0.28), rgba(168, 85, 247, 0.22), rgba(244, 114, 182, 0.28));
-  opacity: 0.25;
-  mix-blend-mode: screen;
-  pointer-events: none;
 }
 
 #post-header,
@@ -35,9 +24,9 @@ body {
   z-index: 1;
 }
 
-/* 본문 전체 줄 간격 */
+/* 본문 전체 – 블로그 읽기용 여백/줄 간격 */
 #post-message {
-  line-height: 1.35;
+  line-height: 1.6;
   text-align: left;
 }
 
@@ -47,14 +36,8 @@ body {
 }
 
 #post-message p {
-  margin: 0 0 0.2em 0 !important;
-  line-height: 1.35 !important;
-}
-
-#post-message p span[style*="padding-left"] {
-  line-height: 1.35 !important;
-  margin: 0.02em 0 0 0 !important;
-  display: block;
+  margin: 0 0 0.6rem 0;
+  line-height: 1.6;
 }
 
 #post-message p:first-child {
@@ -66,7 +49,7 @@ body {
 }
 
 #post-message img {
-  margin: 0 0 0.15rem 0 !important;
+  margin: 0 0 0.5rem 0;
 }
 
 /* 예문 한 줄 TTS 스피커 아이콘 */
@@ -84,12 +67,10 @@ body {
   color: #1d4ed8;
 }
 
-/* 섹션 제목 위 간격 (좁게) */
-#post-message .wotd-example-heading,
-#post-message p strong:nth-of-type(2),
-#post-message p strong:nth-of-type(3) {
-  display: block !important;
-  margin-top: 4px !important;
+/* 섹션 제목 – 불필요한 박스 스타일 제거 */
+#post-message .wotd-example-heading {
+  display: block;
+  margin-top: 2px;
 }
 
 /* ===== Word of the Day 전용 블록 ===== */
