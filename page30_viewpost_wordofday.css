@@ -198,14 +198,14 @@ body {
 }
 
 .wotd-examples {
-  margin-top: 0.4rem;
+  margin-top: 0.25rem;
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 0.4rem; /* 예문 블록들 사이 간격 축소 */
 }
 
 .wotd-example {
-  padding: 0.65rem 0.75rem 0.7rem;
+  padding: 0.4rem 0.6rem 0.45rem; /* 카드 안쪽 여백 축소 */
   border-radius: 12px;
   background: rgba(248, 250, 252, 0.9);
   border: 1px dashed rgba(148, 163, 184, 0.6);
@@ -214,7 +214,7 @@ body {
 .wotd-example-header {
   display: flex;
   justify-content: flex-start;
-  margin-bottom: 0.35rem;
+  margin-bottom: 0.18rem; /* "예문 1"과 문장 사이 간격 축소 */
 }
 
 .wotd-example-badge {
@@ -239,7 +239,7 @@ body {
 }
 
 .wotd-example-en {
-  margin: 0.1rem 0 0.1rem;
+  margin: 0 0 0.05rem; /* 영어 문장과 번역 사이 간격 최소화 */
   font-size: 0.97rem;
   font-weight: 600;
   color: #111827;
