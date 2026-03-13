@@ -139,11 +139,7 @@ function showError(message, details = '') {
 }
 
 async function loadPost() {
-    const index = new URLSearchParams(window.location.search).get('index');
-    if (!index) {
-        showError('게시글을 찾을 수 없습니다', 'index 파라미터가 없습니다.');
-        return;
-    }
+    const indexParam = new URLSearchParams(window.location.search).get('index');
     showLoading();
     try {
         const response = await fetch(`${API_BASE_URL}/wordofday`);
@@ -157,9 +153,15 @@ async function loadPost() {
         }
         const messages = await response.json();
         let entries = Array.isArray(messages) ? messages : (messages.entries || messages.data || []);
-        const indexNum = parseInt(index, 10);
+
+        // index 파라미터가 없으면 최신 글(0번)로 기본 설정
+        const fallbackIndex = 0;
+        const indexNum = indexParam == null || indexParam === ''
+            ? fallbackIndex
+            : parseInt(indexParam, 10);
+
         if (isNaN(indexNum) || indexNum < 0 || indexNum >= entries.length) {
-            showError('게시글을 찾을 수 없습니다', `인덱스 ${index}에 해당하는 게시글이 없습니다.`);
+            showError('게시글을 찾을 수 없습니다', `인덱스 ${indexParam ?? fallbackIndex}에 해당하는 게시글이 없습니다.`);
             return;
         }
         const post = entries[indexNum];

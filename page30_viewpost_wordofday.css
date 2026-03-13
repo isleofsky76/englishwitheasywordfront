@@ -24,9 +24,9 @@ body {
   z-index: 1;
 }
 
-/* 본문 전체 – 블로그 읽기용 여백/줄 간격 */
+/* 본문 전체 – 노트처럼 촘촘한 줄 간격 */
 #post-message {
-  line-height: 1.6;
+  line-height: 1.45;
   text-align: left;
 }
 
@@ -36,8 +36,8 @@ body {
 }
 
 #post-message p {
-  margin: 0 0 0.6rem 0;
-  line-height: 1.6;
+  margin: 0.12rem 0 0.28rem 0; /* 위 아주 조금, 아래도 얇게 */
+  line-height: 1.45;
 }
 
 #post-message p:first-child {
