@@ -67,10 +67,10 @@ body {
   color: #1d4ed8;
 }
 
-/* 섹션 제목 – 불필요한 박스 스타일 제거 */
+/* 섹션 제목 – 예문 번호와 문장 사이 여백 제거 */
 #post-message .wotd-example-heading {
   display: block;
-  margin-top: 2px;
+  margin: 0; /* 위·아래 여백 제거해서 바로 아래 문장과 붙게 */
 }
 
 /* ===== Word of the Day 전용 블록 ===== */

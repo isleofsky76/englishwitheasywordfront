@@ -185,6 +185,87 @@ async function loadPost() {
         const convertedMessage = convertMediaLinks(post.message || '');
         const isAdmin = (post.nickname || '').toLowerCase() === 'admin';
         const metaHtml = isAdmin ? '' : `<p id="post-meta">Author: ${escapeHtml(post.nickname || 'Anonymous')} | Date: ${formattedDate} | Views: ${post.views || 0}</p>`;
+        // SEO / 공유용 메타 태그 동적 설정
+        try {
+            const plainText = (post.message || '').replace(/<[^>]+>/g, ' ');
+            const shortSnippet = plainText.trim().slice(0, 140);
+            const baseTitle = 'Word of the Day';
+            const pageTitle = post.title ? `${post.title} | ${baseTitle}` : baseTitle;
+            document.title = pageTitle;
+
+            const indexForUrl = indexParam == null || indexParam === '' ? fallbackIndex : indexParam;
+            const canonicalUrl = `${window.location.origin}${window.location.pathname}?index=${indexForUrl}`;
+
+            const ensureMeta = (selector, creator) => {
+                let el = document.querySelector(selector);
+                if (!el) {
+                    el = creator();
+                    document.head.appendChild(el);
+                }
+                return el;
+            };
+
+            // description
+            ensureMeta('meta[name="description"]', () => {
+                const m = document.createElement('meta');
+                m.name = 'description';
+                return m;
+            }).setAttribute('content', shortSnippet || `${post.title || 'Word of the Day'} - English vocabulary example and explanation.`);
+
+            // canonical
+            ensureMeta('link[rel="canonical"]', () => {
+                const l = document.createElement('link');
+                l.rel = 'canonical';
+                return l;
+            }).setAttribute('href', canonicalUrl);
+
+            // Open Graph
+            ensureMeta('meta[property="og:title"]', () => {
+                const m = document.createElement('meta');
+                m.setAttribute('property', 'og:title');
+                return m;
+            }).setAttribute('content', pageTitle);
+
+            ensureMeta('meta[property="og:description"]', () => {
+                const m = document.createElement('meta');
+                m.setAttribute('property', 'og:description');
+                return m;
+            }).setAttribute('content', shortSnippet || `${post.title || 'Word of the Day'} - English vocabulary example and explanation.`);
+
+            ensureMeta('meta[property="og:url"]', () => {
+                const m = document.createElement('meta');
+                m.setAttribute('property', 'og:url');
+                return m;
+            }).setAttribute('content', canonicalUrl);
+
+            ensureMeta('meta[property="og:type"]', () => {
+                const m = document.createElement('meta');
+                m.setAttribute('property', 'og:type');
+                return m;
+            }).setAttribute('content', 'article');
+
+            // Twitter Card
+            ensureMeta('meta[name="twitter:card"]', () => {
+                const m = document.createElement('meta');
+                m.name = 'twitter:card';
+                return m;
+            }).setAttribute('content', 'summary_large_image');
+
+            ensureMeta('meta[name="twitter:title"]', () => {
+                const m = document.createElement('meta');
+                m.name = 'twitter:title';
+                return m;
+            }).setAttribute('content', pageTitle);
+
+            ensureMeta('meta[name="twitter:description"]', () => {
+                const m = document.createElement('meta');
+                m.name = 'twitter:description';
+                return m;
+            }).setAttribute('content', shortSnippet || `${post.title || 'Word of the Day'} - English vocabulary example and explanation.`);
+        } catch (e) {
+            console.warn('SEO meta update failed:', e);
+        }
+
         document.getElementById('post-container').innerHTML = `
             <div id="post-header">
                 <h2 id="post-title">${escapeHtml(post.title || '제목 없음')}</h2>
