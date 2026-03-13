@@ -24,6 +24,11 @@ body {
   z-index: 1;
 }
 
+/* 작성자 / 날짜 / 조회수 메타 정보 글자 크기 */
+#post-meta {
+  font-size: 0.75rem;
+}
+
 /* 본문 전체 – 노트처럼 촘촘한 줄 간격 */
 #post-message {
   line-height: 1.25; /* 전체 줄 간격을 조금 더 촘촘하게 */
