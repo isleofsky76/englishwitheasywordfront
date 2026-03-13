@@ -67,10 +67,18 @@ body {
   color: #1d4ed8;
 }
 
-/* 섹션 제목 – 예문 번호와 문장 사이 여백 제거 */
+/* 섹션 제목 – 예문 번호와 문장 사이 여백 최대한 축소 */
 #post-message .wotd-example-heading {
   display: block;
-  margin: 0; /* 위·아래 여백 제거해서 바로 아래 문장과 붙게 */
+  margin: 0 0 -0.15rem 0; /* 제목 아래쪽을 살짝 끌어올려서 문장과 거의 붙게 */
+  line-height: 1;
+}
+
+/* 제목 바로 아래 예문 문장 블록 간격도 줄이기 */
+#post-message .wotd-example-heading + span {
+  display: block;
+  margin-top: 0;          /* 제목과 문장 사이 여백 제거 */
+  line-height: 1.15;
 }
 
 /* ===== Word of the Day 전용 블록 ===== */
