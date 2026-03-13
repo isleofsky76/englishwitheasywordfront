@@ -26,7 +26,7 @@ body {
 
 /* 본문 전체 – 노트처럼 촘촘한 줄 간격 */
 #post-message {
-  line-height: 1.45;
+  line-height: 1.25; /* 전체 줄 간격을 조금 더 촘촘하게 */
   text-align: left;
 }
 
@@ -36,8 +36,8 @@ body {
 }
 
 #post-message p {
-  margin: 0.12rem 0 0.28rem 0; /* 위 아주 조금, 아래도 얇게 */
-  line-height: 1.45;
+  margin: 0.05rem 0 0.16rem 0; /* 문장 블록 사이 여백 더 축소 */
+  line-height: 1.25;
 }
 
 #post-message p:first-child {
