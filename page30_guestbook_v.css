@@ -524,10 +524,29 @@ th.actions {
   text-decoration: underline;
 }
 .item-meta {
-  font-size: 0.95rem;
+  font-size: 0.78rem;
   font-weight: 400;
   color: #666;
   margin-top: 2px;
+  line-height: 1.25;
+}
+.item-meta .meta-author {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: #4b5563;
+  font-weight: 500;
+  line-height: 1;
+  vertical-align: middle;
+}
+.item-meta .meta-author-logo {
+  width: 13px;
+  height: 13px;
+  object-fit: cover;
+  display: inline-block;
+  flex-shrink: 0;
+  border-radius: 50%;
+  overflow: hidden;
 }
 .item-meta span {
   margin-right: 12px;
@@ -663,10 +682,5 @@ th.actions {
     font-size: 16px !important; /* 모바일에서 자동 줌 방지 */
   }
 }
-
-
-
-
-
 
 

@@ -1043,43 +1043,37 @@ document.addEventListener('DOMContentLoaded', () => {
                 return; // 이 항목은 건너뛰기
             }
             
-            // 날짜 포맷팅: "yyyy.mm.dd  hh:mm" 형식
-            let timeString = '';
+            // 날짜 포맷팅: "yyyy.mm.dd", "hh:mm" 분리
+            let datePart = '';
+            let timePart = '';
             if (entry.date) {
                 try {
                     const date = new Date(entry.date);
-                    // 유효한 날짜인지 확인
-                    if (isNaN(date.getTime())) {
-                        console.warn('유효하지 않은 날짜:', entry.date);
-                        timeString = '';
-                    } else {
-                        // 형식: "2025.12.29  17:00" (날짜와 시간 사이 공백 2개)
+                    if (!isNaN(date.getTime())) {
                         const year = date.getFullYear();
                         const month = ('0' + (date.getMonth() + 1)).slice(-2);
                         const day = ('0' + date.getDate()).slice(-2);
                         const hours = ('0' + date.getHours()).slice(-2);
                         const minutes = ('0' + date.getMinutes()).slice(-2);
-                        timeString = `${year}.${month}.${day}  ${hours}:${minutes}`;
+                        datePart = `${year}.${month}.${day}`;
+                        timePart = `${hours}:${minutes}`;
                     }
                 } catch (e) {
                     console.error('날짜 파싱 오류:', e, entry.date);
-                    timeString = '';
                 }
             }
             
             // API 파라미터 유지
             const apiParam = apiMode ? `&api=${apiMode}` : '';
-            
+            const author = escapeHtml(entry.nickname || '익명');
+            const views = entry.views || 0;
+            const authorWithLogo = `<span class="meta-author"><img class="meta-author-logo" src="resources/logo.jpg" alt="News English Lab logo">${author}</span>`;
+            const metaText = [authorWithLogo, datePart, timePart].filter(Boolean).join(' | ') + ` 조회 ${views}`;
             item.innerHTML = `
               <div class="item-title">
                 <a href="page30_viewpost_v.html?index=${originalIndex}${apiParam}">${escapeHtml(entry.title || '제목 없음')}</a>
               </div>
-              <div class="item-meta">
-                <span class="item-author">${escapeHtml(entry.nickname || '익명')}</span>
-                <span class="item-time">${timeString}</span>
-                <span class="item-views">조회 ${entry.views || 0}</span>
-              </div>
-            `;
+              <div class="item-meta">${metaText}</div>`;
             fragment.appendChild(item);
         });
         
