@@ -93,7 +93,7 @@ body {
 #post-content {
   font-size: 0.95rem;
   font-weight: 400;
-  line-height: 1.8;
+  line-height: 1.75;
   color: #333;
   padding: 0;
   word-wrap: break-word;
@@ -108,12 +108,20 @@ body {
   color: #333;
   font-size: 0.95rem;
   font-weight: 400;
-  line-height: 1.8;
-  white-space: pre-wrap;
+  line-height: 1.75;
+  white-space: normal;
   word-wrap: break-word;
   overflow-wrap: break-word;
   max-height: none;
   overflow: visible;
+}
+
+#post-message p {
+  margin: 0 0 0.6em 0;
+}
+
+#post-message p:last-child {
+  margin-bottom: 0;
 }
 
 /* 이미지/비디오 스타일 */
@@ -533,8 +541,5 @@ body {
     min-height: 450px;
   }
 }
-
-
-
 
 
