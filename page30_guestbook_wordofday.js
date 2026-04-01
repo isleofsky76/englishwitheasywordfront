@@ -1076,7 +1076,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const apiParam = apiMode ? `&api=${apiMode}` : '';
             const author = escapeHtml(entry.nickname || '익명');
             const views = entry.views || 0;
-            const metaText = [author, datePart, timePart].filter(Boolean).join(' | ') + ` 조회 ${views}`;
+            const authorWithLogo = `<span class="meta-author"><img class="meta-author-logo" src="resources/logo.jpg" alt="News English Lab logo">${author}</span>`;
+            const metaText = [authorWithLogo, datePart, timePart].filter(Boolean).join(' | ') + ` 조회 ${views}`;
             item.innerHTML = `
               <div class="item-title">
                 <a href="page30_viewpost_wordofday.html?index=${originalIndex}${apiParam}">${escapeHtml(entry.title || '제목 없음')}</a>
