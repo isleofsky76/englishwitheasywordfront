@@ -1,8 +1,14 @@
+.item-title a {
+  font-family: 'IBM Plex Sans', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+  color: #1a1a1b;
+}
+
 .item-meta {
+  font-family: 'IBM Plex Sans', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
   font-size: 0.78rem;
   font-weight: 400;
-  color: #666;
-  margin-top: 2px;
+  color: #787c7e;
+  margin-top: 6px;
   line-height: 1.25;
 }
 
@@ -10,7 +16,7 @@
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  color: #4b5563;
+  color: #5a5e61;
   font-weight: 500;
   line-height: 1;
   vertical-align: middle;
