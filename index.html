@@ -290,9 +290,16 @@
             const listEl = document.getElementById('news-voca-preview-list');
             if (!listEl) return;
 
+            const fallbackNews = '<li><a href="page30_guestbook.html">뉴스 어휘 리스트</a></li><li><a href="page30_guestbook.html">최신 기사 기반 단어 학습</a></li><li><a href="page30_guestbook.html">WSJ · CBS 뉴스 어휘</a></li><li><a href="page30_guestbook.html">뉴스 영어 표현 정리</a></li><li><a href="page30_guestbook.html">토픽별 뉴스 단어</a></li>';
+            var newsTimeoutId = setTimeout(function() { listEl.innerHTML = fallbackNews; }, 8000);
+
             fetch(apiBase + '/guestbook')
-                .then(function(r) { return r.json(); })
+                .then(function(r) {
+                    if (!r.ok) throw new Error('HTTP ' + r.status);
+                    return r.json();
+                })
                 .then(function(data) {
+                    clearTimeout(newsTimeoutId);
                     let entries = [];
                     if (Array.isArray(data)) entries = data;
                     else if (data.entries) entries = data.entries;
@@ -316,7 +323,8 @@
                     }).join('');
                 })
                 .catch(function() {
-                    listEl.innerHTML = '<li><a href="page30_guestbook.html">뉴스 어휘 리스트</a></li><li><a href="page30_guestbook.html">최신 기사 기반 단어 학습</a></li><li><a href="page30_guestbook.html">WSJ · CBS 뉴스 어휘</a></li><li><a href="page30_guestbook.html">뉴스 영어 표현 정리</a></li><li><a href="page30_guestbook.html">토픽별 뉴스 단어</a></li>';
+                    clearTimeout(newsTimeoutId);
+                    listEl.innerHTML = fallbackNews;
                 });
         })();
 
@@ -338,9 +346,16 @@
             const listEl = document.getElementById('synonym-preview-list');
             if (!listEl) return;
 
+            const fallbackSyn = '<li><a href="page30_guestbook_v.html">유의어 연습</a></li><li><a href="page30_guestbook_v.html">동의어 퀴즈</a></li><li><a href="page30_guestbook_v.html">유의어 카드 학습</a></li><li><a href="page30_guestbook_v.html">문맥별 유의어</a></li><li><a href="page30_guestbook_v.html">유의어 복습</a></li>';
+            var synTimeoutId = setTimeout(function() { listEl.innerHTML = fallbackSyn; }, 8000);
+
             fetch(apiBase + '/vocabulary')
-                .then(function(r) { return r.json(); })
+                .then(function(r) {
+                    if (!r.ok) throw new Error('HTTP ' + r.status);
+                    return r.json();
+                })
                 .then(function(data) {
+                    clearTimeout(synTimeoutId);
                     let entries = [];
                     if (Array.isArray(data)) entries = data;
                     else if (data.entries) entries = data.entries;
@@ -364,7 +379,8 @@
                     }).join('');
                 })
                 .catch(function() {
-                    listEl.innerHTML = '<li><a href="page30_guestbook_v.html">유의어 연습</a></li><li><a href="page30_guestbook_v.html">동의어 퀴즈</a></li><li><a href="page30_guestbook_v.html">유의어 카드 학습</a></li><li><a href="page30_guestbook_v.html">문맥별 유의어</a></li><li><a href="page30_guestbook_v.html">유의어 복습</a></li>';
+                    clearTimeout(synTimeoutId);
+                    listEl.innerHTML = fallbackSyn;
                 });
         })();
 
@@ -386,9 +402,16 @@
             const listEl = document.getElementById('easy-voca-preview-list');
             if (!listEl) return;
 
+            const fallbackEasy = '<li><a href="page30_guestbook_v_easy.html">Popular Voca 보기</a></li>';
+            var easyTimeoutId = setTimeout(function() { listEl.innerHTML = fallbackEasy; }, 8000);
+
             fetch(apiBase + '/easy-voca')
-                .then(function(r) { return r.json(); })
+                .then(function(r) {
+                    if (!r.ok) throw new Error('HTTP ' + r.status);
+                    return r.json();
+                })
                 .then(function(data) {
+                    clearTimeout(easyTimeoutId);
                     let entries = [];
                     if (Array.isArray(data)) entries = data;
                     else if (data.entries) entries = data.entries;
@@ -412,6 +435,7 @@
                     }).join('');
                 })
                 .catch(function() {
+                    clearTimeout(easyTimeoutId);
                     listEl.innerHTML = '<li><a href="page30_guestbook_v_easy.html">Popular Voca 로딩 실패</a></li>';
                 });
         })();
@@ -442,7 +466,10 @@
             }, 8000);
 
             fetch(apiBase + '/wordofday')
-                .then(function(r) { return r.json(); })
+                .then(function(r) {
+                    if (!r.ok) throw new Error('HTTP ' + r.status);
+                    return r.json();
+                })
                 .then(function(data) {
                     clearTimeout(timeoutId);
                     var entries = [];
@@ -474,6 +501,8 @@
     </script>
 </body>
 </html>
+
+
 
 
 
