@@ -1012,9 +1012,10 @@ document.addEventListener('DOMContentLoaded', () => {
             
             if (error.name === 'TypeError' && error.message.includes('fetch')) {
                 errorMessage += '<br><br><strong>가능한 원인:</strong><br>';
-                errorMessage += '1. 백엔드 서버가 실행되지 않았습니다<br>';
-                errorMessage += '2. CORS 설정 문제일 수 있습니다<br>';
-                errorMessage += '3. 네트워크 연결을 확인해주세요';
+                errorMessage += '1. 백엔드(Cloudtype 등)가 꺼져 있거나 503을 반환하는 경우 — 응답에 CORS 헤더가 없으면 브라우저는 "Failed to fetch"만 보여줍니다. 호스팅 대시보드에서 컨테이너·로그·환경변수(MongoDB URI 등)를 확인하세요.<br>';
+                errorMessage += '2. 로컬에서 테스트할 때는 URL에서 <code>?api=prod</code>를 빼거나 <code>?api=local</code>로 두고, 백엔드를 <code>http://127.0.0.1:3000</code>에서 실행하세요.<br>';
+                errorMessage += '3. CORS 설정 문제일 수 있습니다<br>';
+                errorMessage += '4. 네트워크·방화벽·VPN을 확인해주세요';
             }
             
             errorMessage += `<br><br><strong>에러 메시지:</strong> ${error.message}`;

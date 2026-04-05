@@ -145,8 +145,17 @@ async function loadPost() {
         const response = await fetch(`${API_BASE_URL}/wordofday`);
         if (!response.ok) {
             if (response.status === 503) {
-                const errorData = await response.json();
-                showError('데이터베이스 연결 오류', errorData.error || 'MongoDB 연결을 확인해주세요.');
+                let detail = '서버 또는 DB가 준비되지 않았습니다. (503)';
+                try {
+                    const ct = response.headers.get('content-type') || '';
+                    if (ct.includes('application/json')) {
+                        const errorData = await response.json();
+                        detail = errorData.error || detail;
+                    }
+                } catch (_) {
+                    /* 프록시 503 HTML 등 JSON이 아니면 위 기본 문구 사용 */
+                }
+                showError('데이터베이스 연결 오류', detail);
                 return;
             }
             throw new Error(`HTTP error! status: ${response.status}`);
