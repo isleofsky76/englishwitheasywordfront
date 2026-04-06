@@ -542,11 +542,16 @@ body {
   }
 }
 
-/* Popular Voca: 브라우저 Web Speech (영문 예문 듣기) — 테두리·박스 없이 이모지만 */
+/* Popular Voca: 브라우저 Web Speech (영문 예문 듣기) — 테두리·박스 없이 이모지만, 모바일 탭 영역 확보 */
 #post-content .pv-tts-btn {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   margin-left: 6px;
-  padding: 0;
+  padding: 0.35rem;
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  box-sizing: border-box;
   font-size: 0.95em;
   line-height: 1;
   vertical-align: middle;

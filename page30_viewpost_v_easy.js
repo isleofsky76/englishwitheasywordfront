@@ -93,30 +93,29 @@ function pvIsMostlyEnglish(text) {
 
 function pvStartEnglishTTS(text, btn) {
     if (!text || !window.speechSynthesis) return;
-    const run = () => {
-        try {
-            speechSynthesis.cancel();
-            const u = new SpeechSynthesisUtterance(text);
-            u.lang = 'en-US';
-            u.rate = 0.92;
-            const voices = speechSynthesis.getVoices();
-            const en =
-                voices.find((v) => v.lang && /^en-US/i.test(v.lang)) ||
-                voices.find((v) => v.lang && /^en(-|$)/i.test(v.lang));
-            if (en) u.voice = en;
-            const done = () => {
-                if (btn) btn.classList.remove('pv-tts-playing');
-            };
-            u.onend = done;
-            u.onerror = done;
-            speechSynthesis.speak(u);
-        } catch (e) {
+    // 모바일(iOS Safari 등): voiceschanged로 speak를 미루면 사용자 제스처 밖에서 실행되어 재생이 막힘 → 반드시 탭/클릭과 동기적으로 speak()
+    try {
+        speechSynthesis.cancel();
+        const u = new SpeechSynthesisUtterance(text);
+        u.lang = 'en-US';
+        u.rate = 0.92;
+        u.volume = 1;
+        u.pitch = 1;
+        const voices = speechSynthesis.getVoices();
+        const en =
+            voices.find((v) => v.lang && /^en-US/i.test(v.lang)) ||
+            voices.find((v) => v.lang && /^en(-|$)/i.test(v.lang));
+        if (en) u.voice = en;
+        const done = () => {
             if (btn) btn.classList.remove('pv-tts-playing');
-            console.warn('Web TTS:', e);
-        }
-    };
-    if (speechSynthesis.getVoices().length) run();
-    else speechSynthesis.addEventListener('voiceschanged', run, { once: true });
+        };
+        u.onend = done;
+        u.onerror = done;
+        speechSynthesis.speak(u);
+    } catch (e) {
+        if (btn) btn.classList.remove('pv-tts-playing');
+        console.warn('Web TTS:', e);
+    }
 }
 
 function pvTtsButtonHtml(speakText) {
@@ -140,6 +139,14 @@ function attachPopularVocaWebTTS(container) {
     } catch (_) {}
     if (container.dataset.pvTtsBound !== '1') {
         container.dataset.pvTtsBound = '1';
+        const warmVoices = () => {
+            try {
+                speechSynthesis.getVoices();
+            } catch (_) {}
+        };
+        container.addEventListener('touchstart', warmVoices, { passive: true });
+        container.addEventListener('pointerdown', warmVoices, { passive: true });
+
         container.addEventListener('click', (e) => {
             const btn = e.target.closest('.pv-tts-btn');
             if (!btn || !container.contains(btn)) return;
