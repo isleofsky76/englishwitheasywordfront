@@ -38,8 +38,11 @@ function sanitizeHtml(html) {
     div.innerHTML = html;
     
     // 허용된 태그와 속성
-    const allowedTags = ['p', 'br', 'strong', 'b', 'em', 'i', 'u', 'span', 'div', 'a', 'img'];
-    const allowedAttributes = ['style', 'href', 'target', 'rel', 'src', 'alt', 'loading', 'decoding', 'onerror'];
+    const allowedTags = ['p', 'br', 'strong', 'b', 'em', 'i', 'u', 'span', 'div', 'a', 'img', 'button'];
+    const allowedAttributes = [
+        'style', 'href', 'target', 'rel', 'src', 'alt', 'loading', 'decoding', 'onerror',
+        'type', 'class', 'aria-label', 'title', 'data-pv-tts',
+    ];
     
     // 위험한 태그 제거
     const allElements = div.querySelectorAll('*');
@@ -127,7 +130,14 @@ function pvTtsButtonHtml(speakText) {
  * '뉴스 예문' 아래는 번호 없는 영문 줄에도 동일 적용(한글 안내 줄·Source 등은 제외).
  */
 function attachPopularVocaWebTTS(container) {
-    if (!container || !window.speechSynthesis) return;
+    if (!container) return;
+    if (!window.speechSynthesis) {
+        console.warn('Popular Voca: 이 브라우저는 Web Speech API(speechSynthesis)를 지원하지 않아 발음 버튼을 쓸 수 없습니다.');
+        return;
+    }
+    try {
+        speechSynthesis.getVoices();
+    } catch (_) {}
     if (container.dataset.pvTtsBound !== '1') {
         container.dataset.pvTtsBound = '1';
         container.addEventListener('click', (e) => {
@@ -481,7 +491,7 @@ async function loadPost() {
                 <p id="post-meta">Author: ${escapeHtml(post.nickname || 'Anonymous')} | Date: ${formattedDate} | Views: ${post.views || 0}</p>
             </div>
             <div id="post-content">
-                <p id="post-message">${convertedMessage || '<span style="color: #999;">내용이 없습니다.</span>'}</p>
+                <div id="post-message">${convertedMessage || '<span style="color: #999;">내용이 없습니다.</span>'}</div>
             </div>
         `;
         

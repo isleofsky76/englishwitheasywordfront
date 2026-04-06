@@ -26,7 +26,8 @@
             <p id="post-meta"></p>
         </div>
         <div id="post-content">
-            <p id="post-message"></p>
+            <!-- 본문에 여러 <p>가 올 수 있어 단락용 <p>로 감싸면 깨지므로 div 사용 (웹 TTS 대상 문단 유지) -->
+            <div id="post-message"></div>
         </div>
     </div>
     <div class="viewpost-actions mt-4" id="viewpost-actions">
