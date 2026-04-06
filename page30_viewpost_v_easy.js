@@ -128,30 +128,17 @@ function pvTtsButtonHtml(speakText) {
 }
 
 /**
- * '예문'이 포함된 문단에서만: 1) 2) … 영문 줄 뒤에 🔊 버튼 삽입.
- * '뉴스 예문' 아래는 번호 없는 영문 줄에도 동일 적용(한글 안내 줄·Source 등은 제외).
+ * Word of the Day(page30_viewpost_wordofday.js)와 동일: 스피커마다 click 리스너 직접 부착.
+ * 컨테이너 위임 + touchend/preventDefault 는 일부 모바일에서 스크롤/클릭과 충돌하거나 Web Speech 제스처와 어긋날 수 있음.
  */
-function attachPopularVocaWebTTS(container) {
-    if (!container) return;
-    if (!window.speechSynthesis) {
-        console.warn('Popular Voca: 이 브라우저는 Web Speech API(speechSynthesis)를 지원하지 않아 발음 버튼을 쓸 수 없습니다.');
-        return;
-    }
-    try {
-        speechSynthesis.getVoices();
-    } catch (_) {}
-    if (container.dataset.pvTtsBound !== '1') {
-        container.dataset.pvTtsBound = '1';
-        const warmVoices = () => {
-            try {
-                speechSynthesis.getVoices();
-            } catch (_) {}
-        };
-        container.addEventListener('touchstart', warmVoices, { passive: true });
-        container.addEventListener('pointerdown', warmVoices, { passive: true });
-
-        let pvTtsLastTouchTs = 0;
-        function runPvTtsFromUi(e, btn) {
+function bindPopularVocaTtsButtons(container) {
+    if (!container || !window.speechSynthesis) return;
+    container.querySelectorAll('.pv-tts-btn').forEach((btn) => {
+        if (btn.dataset.pvTtsListener === '1') return;
+        btn.dataset.pvTtsListener = '1';
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
             const raw = btn.getAttribute('data-pv-tts');
             if (!raw) return;
 
@@ -170,31 +157,23 @@ function attachPopularVocaWebTTS(container) {
             );
             btn.classList.add('pv-tts-playing');
             pvStartEnglishTTS(raw, btn);
-        }
-
-        // 모바일(iOS): 터치 후 늦게 오는 synthetic click은 사용자 제스처로 인정되지 않아 TTS가 무음일 수 있음 → touchend에서 즉시 speak
-        container.addEventListener(
-            'touchend',
-            (e) => {
-                const btn = e.target.closest('.pv-tts-btn');
-                if (!btn || !container.contains(btn)) return;
-                e.preventDefault();
-                e.stopPropagation();
-                pvTtsLastTouchTs = Date.now();
-                runPvTtsFromUi(e, btn);
-            },
-            { passive: false }
-        );
-
-        container.addEventListener('click', (e) => {
-            const btn = e.target.closest('.pv-tts-btn');
-            if (!btn || !container.contains(btn)) return;
-            if (Date.now() - pvTtsLastTouchTs < 500) return;
-            e.preventDefault();
-            e.stopPropagation();
-            runPvTtsFromUi(e, btn);
         });
+    });
+}
+
+/**
+ * '예문'이 포함된 문단에서만: 1) 2) … 영문 줄 뒤에 스피커 버튼 삽입.
+ * '뉴스 예문' 아래는 번호 없는 영문 줄에도 동일 적용(한글 안내 줄·Source 등은 제외).
+ */
+function attachPopularVocaWebTTS(container) {
+    if (!container) return;
+    if (!window.speechSynthesis) {
+        console.warn('Popular Voca: 이 브라우저는 Web Speech API(speechSynthesis)를 지원하지 않아 발음 버튼을 쓸 수 없습니다.');
+        return;
     }
+    try {
+        speechSynthesis.getVoices();
+    } catch (_) {}
 
     const paragraphs = container.querySelectorAll('p');
     paragraphs.forEach((p) => {
@@ -230,6 +209,8 @@ function attachPopularVocaWebTTS(container) {
         p.innerHTML = newLines.join('<br>');
         p.setAttribute('data-pv-tts', '1');
     });
+
+    bindPopularVocaTtsButtons(container);
 }
 
 /** 라이브 등에서 앞부분이 잘려 나온 깨진 링크 복구 (URL">기사 보기, ">예문 영상 보기 등) */
