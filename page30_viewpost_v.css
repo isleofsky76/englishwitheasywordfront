@@ -542,15 +542,23 @@ body {
   }
 }
 
-/* Popular Voca: 브라우저 Web Speech (영문 예문 듣기) — 테두리·박스 없이 이모지만, 모바일 탭 영역 확보 */
+/* Popular Voca: 영문 문장 바로 옆 인라인 스피커 */
+#post-content .pv-tts-slot {
+  display: inline;
+  white-space: nowrap;
+  margin-left: 0.2em;
+  vertical-align: baseline;
+}
+
+/* Popular Voca: 브라우저 Web Speech (영문 예문 듣기) — 테두리·박스 없이, 모바일 탭 영역 */
 #post-content .pv-tts-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  margin-left: 6px;
-  padding: 0.35rem;
-  min-width: 2.75rem;
-  min-height: 2.75rem;
+  margin-left: 0;
+  padding: 0.25rem;
+  min-width: 2.25rem;
+  min-height: 2.25rem;
   box-sizing: border-box;
   font-size: 0.95em;
   line-height: 1;

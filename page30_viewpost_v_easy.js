@@ -127,6 +127,28 @@ function pvTtsButtonHtml(speakText) {
     return `<button type="button" class="pv-tts-btn" data-pv-tts="${pvEscapeAttr(t)}" aria-label="영어 읽기, 다시 누르면 멈춤" title="듣기 / 다시 누르면 멈춤">${icon}</button>`;
 }
 
+/** 영문 옆에 붙는 인라인 래퍼 */
+function pvTtsSlotHtml(speakText) {
+    const inner = pvTtsButtonHtml(speakText);
+    if (!inner) return '';
+    return `<span class="pv-tts-slot">${inner}</span>`;
+}
+
+/**
+ * 영어 문장 끝(. ! ?)과 닫는 태그 바로 뒤에 스피커 — 읽을 텍스트와 UI 위치를 맞춤.
+ * 이미 .pv-tts-btn 이 있으면 추가하지 않음.
+ */
+function pvAppendTtsInlineAfterEnglish(lineHtml, speak) {
+    if (/pv-tts-btn|pv-tts-slot/i.test(lineHtml)) return lineHtml;
+    const slot = pvTtsSlotHtml(speak);
+    if (!slot) return lineHtml;
+    const s = lineHtml.trimEnd();
+    const re = /^([\s\S]*[.!?])((?:\s*<\/[a-zA-Z][a-zA-Z0-9]*\s*>\s*)*)$/;
+    const m = s.match(re);
+    if (m) return m[1] + m[2] + slot;
+    return s + slot;
+}
+
 /**
  * Word of the Day(page30_viewpost_wordofday.js)와 동일: 스피커마다 click 리스너 직접 부착.
  * 컨테이너 위임 + touchend/preventDefault 는 일부 모바일에서 스크롤/클릭과 충돌하거나 Web Speech 제스처와 어긋날 수 있음.
@@ -192,7 +214,7 @@ function attachPopularVocaWebTTS(container) {
             const num = plain.match(/^\s*(\d+)\)\s*(.+)$/);
             if (num && pvIsMostlyEnglish(num[2])) {
                 const speak = num[2].trim().replace(/\s*🔊\s*$/u, '');
-                return `${lineHtml.trim()} ${pvTtsButtonHtml(speak)}`;
+                return pvAppendTtsInlineAfterEnglish(lineHtml, speak);
             }
 
             if (newsIdx >= 0 && i > newsIdx) {
@@ -200,7 +222,7 @@ function attachPopularVocaWebTTS(container) {
                 if (/^Source\b/i.test(plain) || /^💡/.test(plain)) return lineHtml;
                 if (plain.length > 20 && pvIsMostlyEnglish(plain)) {
                     const speak = plain.replace(/\s*🔊\s*$/u, '').trim();
-                    return `${lineHtml.trim()} ${pvTtsButtonHtml(speak)}`;
+                    return pvAppendTtsInlineAfterEnglish(lineHtml, speak);
                 }
             }
             return lineHtml;
