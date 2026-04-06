@@ -542,11 +542,12 @@ body {
   }
 }
 
-/* Popular Voca: 영문 문장 바로 옆 인라인 스피커 */
+/* Popular Voca: 마침표 직후에 붙는 인라인 스피커(추가 들여쓰기 최소) */
 #post-content .pv-tts-slot {
   display: inline;
   white-space: nowrap;
-  margin-left: 0.2em;
+  margin-left: 0;
+  padding-left: 0.06em;
   vertical-align: baseline;
 }
 

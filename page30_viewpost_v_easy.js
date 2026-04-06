@@ -135,17 +135,20 @@ function pvTtsSlotHtml(speakText) {
 }
 
 /**
- * 영어 문장 끝(. ! ?)과 닫는 태그 바로 뒤에 스피커 — 읽을 텍스트와 UI 위치를 맞춤.
- * 이미 .pv-tts-btn 이 있으면 추가하지 않음.
+ * 줄 끝의 마침표·물음표·느낌표 바로 뒤에 스피커(그 다음에 오던 닫는 태그는 그대로 유지).
+ * 예: ...jiffy</span>. → ...jiffy</span>.[슬롯] / ...word.</span> → ...word.[슬롯]</span>
  */
 function pvAppendTtsInlineAfterEnglish(lineHtml, speak) {
     if (/pv-tts-btn|pv-tts-slot/i.test(lineHtml)) return lineHtml;
     const slot = pvTtsSlotHtml(speak);
     if (!slot) return lineHtml;
     const s = lineHtml.trimEnd();
-    const re = /^([\s\S]*[.!?])((?:\s*<\/[a-zA-Z][a-zA-Z0-9]*\s*>\s*)*)$/;
-    const m = s.match(re);
-    if (m) return m[1] + m[2] + slot;
+    const endRe = /([.!?])((?:\s*<\/[a-zA-Z][a-zA-Z0-9]*\s*>\s*)*)$/;
+    const m = s.match(endRe);
+    if (m) {
+        const prefix = s.slice(0, s.length - m[0].length);
+        return prefix + m[1] + slot + m[2];
+    }
     return s + slot;
 }
 
