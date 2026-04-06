@@ -88,7 +88,7 @@ function pvIsMostlyEnglish(text) {
     return letters.length / (letters.length + nonLatin + 1) > 0.5;
 }
 
-function pvSpeakEnglish(text) {
+function pvStartEnglishTTS(text, btn) {
     if (!text || !window.speechSynthesis) return;
     const run = () => {
         try {
@@ -101,8 +101,14 @@ function pvSpeakEnglish(text) {
                 voices.find((v) => v.lang && /^en-US/i.test(v.lang)) ||
                 voices.find((v) => v.lang && /^en(-|$)/i.test(v.lang));
             if (en) u.voice = en;
+            const done = () => {
+                if (btn) btn.classList.remove('pv-tts-playing');
+            };
+            u.onend = done;
+            u.onerror = done;
             speechSynthesis.speak(u);
         } catch (e) {
+            if (btn) btn.classList.remove('pv-tts-playing');
             console.warn('Web TTS:', e);
         }
     };
@@ -113,7 +119,7 @@ function pvSpeakEnglish(text) {
 function pvTtsButtonHtml(speakText) {
     const t = speakText.replace(/\s*🔊\s*$/u, '').trim();
     if (!t) return '';
-    return `<button type="button" class="pv-tts-btn" data-pv-tts="${pvEscapeAttr(t)}" aria-label="영어 읽기" title="영어 읽기 (브라우저 발음)">🔊</button>`;
+    return `<button type="button" class="pv-tts-btn" data-pv-tts="${pvEscapeAttr(t)}" aria-label="영어 읽기, 다시 누르면 멈춤" title="듣기 / 다시 누르면 멈춤">🔊</button>`;
 }
 
 /**
@@ -130,7 +136,23 @@ function attachPopularVocaWebTTS(container) {
             e.preventDefault();
             e.stopPropagation();
             const raw = btn.getAttribute('data-pv-tts');
-            if (raw) pvSpeakEnglish(raw);
+            if (!raw) return;
+
+            const playing =
+                btn.classList.contains('pv-tts-playing') &&
+                (speechSynthesis.speaking || speechSynthesis.pending);
+            if (playing) {
+                speechSynthesis.cancel();
+                btn.classList.remove('pv-tts-playing');
+                return;
+            }
+
+            speechSynthesis.cancel();
+            container.querySelectorAll('.pv-tts-btn.pv-tts-playing').forEach((b) =>
+                b.classList.remove('pv-tts-playing')
+            );
+            btn.classList.add('pv-tts-playing');
+            pvStartEnglishTTS(raw, btn);
         });
     }
 
