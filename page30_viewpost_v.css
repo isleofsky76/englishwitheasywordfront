@@ -578,4 +578,10 @@ body {
   opacity: 0.75;
 }
 
+#post-content .pv-tts-btn .pv-tts-icon {
+  display: block;
+  color: #2b6cb0;
+  pointer-events: none;
+}
+
 

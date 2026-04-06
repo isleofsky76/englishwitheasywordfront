@@ -118,10 +118,13 @@ function pvStartEnglishTTS(text, btn) {
     }
 }
 
+/** 이모지 대신 SVG — 모바일 웹뷰·폰트에 따라 🔊가 깨지거나 터치 이슈와 섞일 수 있음 */
 function pvTtsButtonHtml(speakText) {
     const t = speakText.replace(/\s*🔊\s*$/u, '').trim();
     if (!t) return '';
-    return `<button type="button" class="pv-tts-btn" data-pv-tts="${pvEscapeAttr(t)}" aria-label="영어 읽기, 다시 누르면 멈춤" title="듣기 / 다시 누르면 멈춤">🔊</button>`;
+    const icon =
+        '<svg class="pv-tts-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>';
+    return `<button type="button" class="pv-tts-btn" data-pv-tts="${pvEscapeAttr(t)}" aria-label="영어 읽기, 다시 누르면 멈춤" title="듣기 / 다시 누르면 멈춤">${icon}</button>`;
 }
 
 /**
@@ -147,11 +150,8 @@ function attachPopularVocaWebTTS(container) {
         container.addEventListener('touchstart', warmVoices, { passive: true });
         container.addEventListener('pointerdown', warmVoices, { passive: true });
 
-        container.addEventListener('click', (e) => {
-            const btn = e.target.closest('.pv-tts-btn');
-            if (!btn || !container.contains(btn)) return;
-            e.preventDefault();
-            e.stopPropagation();
+        let pvTtsLastTouchTs = 0;
+        function runPvTtsFromUi(e, btn) {
             const raw = btn.getAttribute('data-pv-tts');
             if (!raw) return;
 
@@ -170,6 +170,29 @@ function attachPopularVocaWebTTS(container) {
             );
             btn.classList.add('pv-tts-playing');
             pvStartEnglishTTS(raw, btn);
+        }
+
+        // 모바일(iOS): 터치 후 늦게 오는 synthetic click은 사용자 제스처로 인정되지 않아 TTS가 무음일 수 있음 → touchend에서 즉시 speak
+        container.addEventListener(
+            'touchend',
+            (e) => {
+                const btn = e.target.closest('.pv-tts-btn');
+                if (!btn || !container.contains(btn)) return;
+                e.preventDefault();
+                e.stopPropagation();
+                pvTtsLastTouchTs = Date.now();
+                runPvTtsFromUi(e, btn);
+            },
+            { passive: false }
+        );
+
+        container.addEventListener('click', (e) => {
+            const btn = e.target.closest('.pv-tts-btn');
+            if (!btn || !container.contains(btn)) return;
+            if (Date.now() - pvTtsLastTouchTs < 500) return;
+            e.preventDefault();
+            e.stopPropagation();
+            runPvTtsFromUi(e, btn);
         });
     }
 
