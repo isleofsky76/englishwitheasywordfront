@@ -134,6 +134,15 @@ function pvTtsSlotHtml(speakText) {
     return `<span class="pv-tts-slot">${inner}</span>`;
 }
 
+/** 시드/HTML에 넣어둔 인라인 🔊·onclick 스팬 — 제거 후 브라우저 TTS 버튼 하나만 쓰기 */
+function pvStripLegacyInlineSpeakers(lineHtml) {
+    if (!lineHtml) return lineHtml;
+    return lineHtml
+        .replace(/<span\b[^>]*onclick\s*=[^>]*>[\s\S]*?<\/span>/gi, '')
+        .replace(/<span\b[^>]*>[\s\n]*🔊[\s\n]*<\/span>/gi, '')
+        .replace(/[\s\n]*🔊[\s\n]*(?=<br|<\/|$)/gi, '');
+}
+
 /**
  * 줄 끝의 마침표·물음표·느낌표 바로 뒤에 스피커(그 다음에 오던 닫는 태그는 그대로 유지).
  * 예: ...jiffy</span>. → ...jiffy</span>.[슬롯] / ...word.</span> → ...word.[슬롯]</span>
@@ -142,7 +151,7 @@ function pvAppendTtsInlineAfterEnglish(lineHtml, speak) {
     if (/pv-tts-btn|pv-tts-slot/i.test(lineHtml)) return lineHtml;
     const slot = pvTtsSlotHtml(speak);
     if (!slot) return lineHtml;
-    const s = lineHtml.trimEnd();
+    const s = pvStripLegacyInlineSpeakers(lineHtml).trimEnd();
     const endRe = /([.!?])((?:\s*<\/[a-zA-Z][a-zA-Z0-9]*\s*>\s*)*)$/;
     const m = s.match(endRe);
     if (m) {
