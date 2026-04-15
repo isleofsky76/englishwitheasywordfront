@@ -2,29 +2,27 @@
 
 ///////////////////------------------------------------------------------
 
-// API 베이스 URL 설정 (로컬/프로덕션 자동 전환)
-// URL 파라미터로 강제 설정 가능: ?api=local 또는 ?api=prod
-let API_BASE_URL;
+// API 베이스 URL: page30-api-config.js (PRODUCTION_API_BASE 단일 관리)
+// ?api=local | ?api=prod | ?apiBase=https://호스트 (임시 다른 백엔드)
 const urlParams = new URLSearchParams(window.location.search);
-const apiMode = urlParams.get('api'); // 'local' 또는 'prod'로 강제 설정 가능
+const apiMode = urlParams.get('api');
+const API_BASE_URL = typeof getPage30ApiBaseUrl === 'function'
+    ? getPage30ApiBaseUrl()
+    : window.PAGE30_PRODUCTION_API_BASE || 'https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app';
+console.log('📡 Word of the Day API_BASE_URL:', API_BASE_URL);
 
-if (apiMode === 'prod') {
-    // URL 파라미터로 프로덕션 강제 지정
-    API_BASE_URL = 'https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app';
-    console.log('🟢 Production 모드 (강제) - API_BASE_URL:', API_BASE_URL);
-} else if (apiMode === 'local') {
-    // URL 파라미터로 로컬 강제 지정
-    API_BASE_URL = `http://${window.location.hostname}:3000`;
-    console.log('🔵 Localhost 모드 (강제) - API_BASE_URL:', API_BASE_URL);
-} else if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-    // 자동 감지: 로컬 호스트면 로컬 API 사용
-    API_BASE_URL = `http://${window.location.hostname}:3000`;
-    console.log('🔵 Localhost 모드 (자동) - API_BASE_URL:', API_BASE_URL);
-    console.log('💡 프로덕션 API를 사용하려면 URL에 ?api=prod 를 추가하세요');
-} else {
-    // 자동 감지: 프로덕션 호스트면 프로덕션 API 사용
-    API_BASE_URL = 'https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app';
-    console.log('🟢 Production 모드 (자동) - API_BASE_URL:', API_BASE_URL);
+/** 네트워크 일시 실패·호스팅 콜드 스타트 대비: 1회만 재시도 */
+async function fetchWithRetry(url, init = {}) {
+    const req = { ...init, cache: 'no-store' };
+    try {
+        return await fetch(url, req);
+    } catch (e) {
+        const maybeNetwork =
+            e && e.name === 'TypeError' && String(e.message || '').toLowerCase().includes('fetch');
+        if (!maybeNetwork) throw e;
+        await new Promise((r) => setTimeout(r, 1000));
+        return await fetch(url, req);
+    }
 }
 
 // 성능 최적화: 캐시 및 상태 관리
@@ -946,19 +944,25 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             const url = `${API_BASE_URL}/wordofday`;
             console.log('📡 API 요청 URL:', url);
-            const response = await fetch(url);
+            const response = await fetchWithRetry(url);
             console.log('📥 응답 상태:', response.status, response.statusText);
             
-            // 503 에러인 경우 특별 처리
             if (response.status === 503) {
-                const errorData = await response.json();
-                console.log('❌ MongoDB 연결 오류:', errorData);
-                showError(list, '데이터베이스 연결 오류', 
-                    `${errorData.error || 'MongoDB 연결이 되지 않았습니다.'}<br><br>
-                    <strong>해결 방법:</strong><br>
-                    1. MongoDB 서비스가 실행 중인지 확인<br>
-                    2. backend/.env 파일의 MONGO_URI 설정 확인<br>
-                    3. 백엔드 서버를 재시작`);
+                let detail = '서버 또는 DB가 준비되지 않았습니다. (503)';
+                try {
+                    const ct = (response.headers.get('content-type') || '').toLowerCase();
+                    if (ct.includes('application/json')) {
+                        const errorData = await response.json();
+                        detail = errorData.error || detail;
+                        console.log('❌ 503 본문:', errorData);
+                    }
+                } catch (_) {
+                    /* 프록시가 HTML 503을 주면 JSON 파싱 실패 — 위 기본 문구 사용 */
+                }
+                showError(list, '데이터베이스·서버 연결 오류', 
+                    `${detail}<br><br>
+                    <strong>확인:</strong> Cloudtype 대시보드에서 컨테이너 실행·로그·<code>MONGO_URI</code>를 확인하고 재배포하세요.<br>
+                    <a href="${API_BASE_URL}/healthz" target="_blank" rel="noopener">서버 healthz 열기</a>`);
                 return;
             }
             
@@ -1008,17 +1012,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 stack: error.stack
             });
             
-            let errorMessage = `백엔드 서버(${API_BASE_URL})가 실행 중인지 확인해주세요.`;
-            
-            if (error.name === 'TypeError' && error.message.includes('fetch')) {
-                errorMessage += '<br><br><strong>가능한 원인:</strong><br>';
-                errorMessage += '1. 백엔드(Cloudtype 등)가 꺼져 있거나 503을 반환하는 경우 — 응답에 CORS 헤더가 없으면 브라우저는 "Failed to fetch"만 보여줍니다. 호스팅 대시보드에서 컨테이너·로그·환경변수(MongoDB URI 등)를 확인하세요.<br>';
-                errorMessage += '2. 로컬에서 테스트할 때는 URL에서 <code>?api=prod</code>를 빼거나 <code>?api=local</code>로 두고, 백엔드를 <code>http://127.0.0.1:3000</code>에서 실행하세요.<br>';
-                errorMessage += '3. CORS 설정 문제일 수 있습니다<br>';
-                errorMessage += '4. 네트워크·방화벽·VPN을 확인해주세요';
+            let errorMessage = `요청 URL: <code>${API_BASE_URL}/wordofday</code><br><br>`;
+            errorMessage += `<a href="${API_BASE_URL}/healthz" target="_blank" rel="noopener">healthz로 서버 응답 확인</a> · 페이지 새로고침을 한 번 더 해보세요.<br><br>`;
+
+            if (error.name === 'TypeError' && String(error.message || '').includes('fetch')) {
+                errorMessage += '<strong>이 메시지가 나오는 흔한 이유</strong><br>';
+                errorMessage += '1. Cloudtype 백엔드가 꺼져 있거나 503인데, 프록시 응답에 CORS 헤더가 없어 브라우저가 내용을 숨김 → <code>Failed to fetch</code>만 보임<br>';
+                errorMessage += '2. 배포한 <code>backend/index.js</code>가 최신인지, <code>MONGO_URI</code>가 서버에 설정됐는지 확인<br>';
+                errorMessage += '3. 로컬에서는 주소에서 <code>?api=prod</code>를 빼면 <code>http://127.0.0.1:3000</code>으로 붙습니다(로컬에서 <code>node index.js</code> 실행)<br>';
+                errorMessage += '4. 사이트 도메인이 CORS 허용 목록에 있는지(배포한 index.js의 CORS) 확인';
+            } else {
+                errorMessage += `<strong>에러:</strong> ${error.message}`;
             }
-            
-            errorMessage += `<br><br><strong>에러 메시지:</strong> ${error.message}`;
             
             showError(list, '게시글을 불러올 수 없습니다', errorMessage);
         }

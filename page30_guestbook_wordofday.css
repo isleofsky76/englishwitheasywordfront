@@ -2,8 +2,9 @@ body {
   font-family: 'Poppins', sans-serif;
   background-color: #f5f7fa !important;
   color: #222;
-  font-size: 0.875rem; /* 14px */
+  font-size: 0.9375rem; /* 15px – 목록·메타 가독성 */
   font-weight: 400;
+  line-height: 1.5;
   margin: 0 auto;
   padding: 0 !important;
   padding-top: 64px !important; /* PC: navbar 아래 첫 글이 가리지 않도록 */
@@ -164,12 +165,16 @@ form button:hover {
 }
 
 .guestbook-container {
-  margin-top: 12px; /* PC: navbar와 첫 글 사이 간격 */
+  margin-top: 16px; /* PC: navbar와 첫 글 사이 간격 */
   max-width: 1400px;
   margin-left: auto;
   margin-right: auto;
+  padding-left: max(16px, env(safe-area-inset-left));
+  padding-right: max(16px, env(safe-area-inset-right));
+  padding-bottom: 28px;
   background-color: #f0f3f5; /* Dark blue background color */
   position: relative;
+  box-sizing: border-box;
 }
 
 #write-post-button {
@@ -260,7 +265,7 @@ form button:hover {
 #write-post-container {
   max-width: 1400px;
   background-color: #f0f3f5 ; /* Dark blue background color */
-  padding: 20px;
+  padding: 24px 22px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
   margin-top: 20px;
@@ -282,8 +287,9 @@ form button:hover {
   min-height: 500px !important;
   max-height: none !important;
   resize: vertical !important;
-  font-size: 14px !important;
-  line-height: 1.65 !important;
+  font-size: 15px !important;
+  line-height: 1.75 !important;
+  padding: 14px 16px !important;
 }
 
 #write-post-container button {
@@ -384,20 +390,21 @@ th.actions {
 /* Mobile styles */
 @media (max-width: 767px) {
   body {
-    padding: 10px;
-    padding-top: 52px !important; /* navbar 바로 아래, 간격 최소화 */
+    padding: 12px max(12px, env(safe-area-inset-left)) 16px max(12px, env(safe-area-inset-right));
+    padding-top: 52px !important; /* navbar 바로 아래 */
     margin-top: 0 !important;
-    font-size: 10px; /* 더 작게 조정 */
+    font-size: 14px;
+    line-height: 1.5;
   }
 
   h1 {
-    font-size: 14px; /* 더 작게 조정 */
-    margin-bottom: 8px;
+    font-size: 16px;
+    margin-bottom: 10px;
   }
 
   #post-container {
     max-width: 100%;
-    padding: 8px;
+    padding: 12px;
     margin-top: 12px !important;
   }
 
@@ -406,58 +413,60 @@ th.actions {
   }
 
   #post-title {
-    font-size: 16px; /* 더 작게 조정 */
+    font-size: 17px;
   }
 
   #post-meta {
-    font-size: 8px; /* 더 작게 조정 */
+    font-size: 12px;
   }
 
   #post-content {
-    font-size: 10px; /* 더 작게 조정 */
+    font-size: 14px;
   }
 
   form {
-    max-width: 90%;
+    max-width: 100%;
     padding: 0;
     margin: 0 auto;
-    font-size: 10px; /* 더 작게 조정 */
+    font-size: 14px;
   }
 
   form input,
   form textarea {
-    padding: 4px;
-    margin: 4px 0;
-    font-size: 8px;
+    padding: 10px 12px;
+    margin: 8px 0;
+    font-size: 15px;
   }
 
   form button {
-    padding: 6px 8px;
-    margin: 4px 0;
-    font-size: 8px; /* 더 작게 조정 */
+    padding: 10px 12px;
+    margin: 8px 0;
+    font-size: 14px;
   }
 
   .guestbook-container {
-    max-width: 95%;
-    padding: 4px;
+    max-width: 100%;
+    padding-left: max(12px, env(safe-area-inset-left));
+    padding-right: max(12px, env(safe-area-inset-right));
+    padding-bottom: 20px;
     margin: 0 auto;
-    font-size: 8px; /* 더 작게 조정 */
+    font-size: 14px;
   }
 
   #write-post-container, .guestbook-container {
-    max-width: auto;
-    font-size: 8px; /* 더 작게 조정 */
+    max-width: 100%;
+    font-size: 14px;
   }
 
   table, th, td {
-    font-size: 8px; /* 더 작게 조정 */
-    padding: 4px;
+    font-size: 12px;
+    padding: 8px 6px;
   }
 
   .btn-danger, .btn-warning, .btn-danger2 {
-    padding: 3px 6px;
-    font-size: 8px; /* 더 작게 조정 */
-    margin: 1px;
+    padding: 6px 10px;
+    font-size: 12px;
+    margin: 2px;
   }
 
   #write-post-button {
@@ -492,7 +501,7 @@ th.actions {
 
 .guestbook-item {
   border-bottom: 1px solid #ddd;
-  padding: 12px 0 6px 0;
+  padding: 18px 4px 16px 4px;
   transition: background-color 0.2s ease;
 }
 
@@ -526,11 +535,11 @@ th.actions {
 }
 .item-meta {
   font-family: 'IBM Plex Sans', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
-  font-size: 0.78rem;
+  font-size: 0.82rem;
   font-weight: 400;
   color: #787c7e;
-  margin-top: 6px;
-  line-height: 1.25;
+  margin-top: 10px;
+  line-height: 1.45;
 }
 .item-meta .meta-author {
   display: inline-flex;
@@ -566,7 +575,7 @@ th.actions {
 }
 
 .guestbook-list {
-  margin-top: 0.5rem;
+  margin-top: 0.75rem;
   /* 성능 최적화: GPU 가속 */
   will-change: contents;
   transform: translateZ(0);

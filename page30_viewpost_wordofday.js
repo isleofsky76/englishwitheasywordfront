@@ -1,17 +1,9 @@
-// Word of the Day view post - uses /wordofday API and wordofday collection
-let API_BASE_URL;
+// Word of the Day view post - uses /wordofday API (베이스 URL은 page30-api-config.js)
 const urlParams = new URLSearchParams(window.location.search);
 const apiMode = urlParams.get('api');
-
-if (apiMode === 'prod') {
-    API_BASE_URL = 'https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app';
-} else if (apiMode === 'local') {
-    API_BASE_URL = `http://${window.location.hostname}:3000`;
-} else if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-    API_BASE_URL = `http://${window.location.hostname}:3000`;
-} else {
-    API_BASE_URL = 'https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app';
-}
+const API_BASE_URL = typeof getPage30ApiBaseUrl === 'function'
+    ? getPage30ApiBaseUrl()
+    : window.PAGE30_PRODUCTION_API_BASE || 'https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app';
 
 function escapeHtml(text) {
     if (!text) return '';
@@ -39,6 +31,38 @@ function sanitizeHtml(html) {
     return div.innerHTML;
 }
 
+function preserveLineBreaksInHtml(html) {
+    if (!html) return html;
+    const root = document.createElement('div');
+    root.innerHTML = html;
+
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+    const textNodes = [];
+    let current = walker.nextNode();
+    while (current) {
+        textNodes.push(current);
+        current = walker.nextNode();
+    }
+
+    textNodes.forEach((node) => {
+        const value = node.nodeValue;
+        if (!value || !value.includes('\n')) return;
+
+        const parentTag = node.parentElement ? node.parentElement.tagName : '';
+        if (parentTag === 'SCRIPT' || parentTag === 'STYLE') return;
+
+        const parts = value.split('\n');
+        const frag = document.createDocumentFragment();
+        parts.forEach((part, idx) => {
+            if (part) frag.appendChild(document.createTextNode(part));
+            if (idx < parts.length - 1) frag.appendChild(document.createElement('br'));
+        });
+        node.parentNode.replaceChild(frag, node);
+    });
+
+    return root.innerHTML;
+}
+
 function convertMediaLinks(text) {
     if (!text) return text;
     const hasHtml = /<[^>]+>/.test(text);
@@ -59,10 +83,12 @@ function convertMediaLinks(text) {
         }
         return `<a href="${url}" target="_blank" rel="noopener noreferrer">${url}</a>`;
     });
-    // 이미 HTML 구조가 있는 경우(이번 Word of the Day 카드처럼)는
-    // 줄바꿈을 <br>로 바꾸지 않아서 불필요한 공백이 생기지 않게 함
+    // HTML 포함 글도 텍스트 줄바꿈은 보존해야
+    // 작성창/DB에서 보인 개행이 라이브에서 붙지 않음
     if (!hasHtml) {
         result = result.replace(/\n/g, '<br>');
+    } else {
+        result = preserveLineBreaksInHtml(result);
     }
     return sanitizeHtml(result);
 }
