@@ -29,9 +29,9 @@ body {
   font-size: 0.75rem;
 }
 
-/* 본문 – 읽기 편한 줄·문단 간격 */
+/* 본문 – 줄·문단 간격 (과거 촘촘함 ↔ 최근 넓음 사이 중간) */
 #post-message {
-  line-height: 1.65;
+  line-height: 1.55;
   text-align: left;
 }
 
@@ -41,8 +41,8 @@ body {
 }
 
 #post-message p {
-  margin: 0.35em 0 0.65em 0;
-  line-height: 1.65;
+  margin: 0.2em 0 0.4em 0;
+  line-height: 1.55;
 }
 
 #post-message p:first-child {
@@ -75,7 +75,7 @@ body {
 /* 섹션 제목 – 예문 번호와 본문 사이 구분 */
 #post-message .wotd-example-heading {
   display: block;
-  margin: 0.65rem 0 0.35rem 0;
+  margin: 0.45rem 0 0.25rem 0;
   line-height: 1.35;
 }
 
@@ -86,8 +86,8 @@ body {
 /* 제목 바로 아래 예문 문장 */
 #post-message .wotd-example-heading + span {
   display: block;
-  margin-top: 0.15rem;
-  line-height: 1.55;
+  margin-top: 0.1rem;
+  line-height: 1.5;
 }
 
 /* ===== Word of the Day 전용 블록 ===== */
@@ -133,7 +133,7 @@ body {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 1.05rem;
+  gap: 0.9rem;
 }
 
 .wotd-label {
@@ -163,7 +163,7 @@ body {
   font-size: 2.2rem;
   font-weight: 800;
   letter-spacing: 0.02em;
-  margin: 0.25rem 0 0.5rem;
+  margin: 0.18rem 0 0.38rem;
   background: linear-gradient(120deg, #1d4ed8, #db2777);
   -webkit-background-clip: text;
   background-clip: text;
@@ -171,10 +171,10 @@ body {
 }
 
 .wotd-pos {
-  margin: 0.2rem 0 0.55rem;
+  margin: 0.15rem 0 0.45rem;
   font-size: 0.98rem;
   color: #374151;
-  line-height: 1.55;
+  line-height: 1.5;
 }
 
 .wotd-pos-tag {
@@ -203,14 +203,14 @@ body {
 }
 
 .wotd-examples {
-  margin-top: 0.5rem;
+  margin-top: 0.4rem;
   display: flex;
   flex-direction: column;
-  gap: 0.85rem;
+  gap: 0.6rem;
 }
 
 .wotd-example {
-  padding: 0.75rem 0.85rem 0.8rem;
+  padding: 0.55rem 0.72rem 0.62rem;
   border-radius: 12px;
   background: rgba(248, 250, 252, 0.9);
   border: 1px dashed rgba(148, 163, 184, 0.6);
@@ -219,7 +219,7 @@ body {
 .wotd-example-header {
   display: flex;
   justify-content: flex-start;
-  margin-bottom: 0.45rem;
+  margin-bottom: 0.32rem;
 }
 
 .wotd-example-badge {
@@ -244,26 +244,26 @@ body {
 }
 
 .wotd-example-en {
-  margin: 0 0 0.4rem;
+  margin: 0 0 0.28rem;
   font-size: 0.97rem;
   font-weight: 600;
   color: #111827;
-  line-height: 1.55;
+  line-height: 1.5;
 }
 
 .wotd-example-ko {
   margin: 0;
   font-size: 0.9rem;
   color: #4b5563;
-  line-height: 1.6;
+  line-height: 1.55;
 }
 
 /* 모바일 레이아웃 정리 */
 @media (max-width: 767px) {
   .wotd-card {
     flex-direction: column;
-    padding: 1.25rem 1.2rem;
-    gap: 1.15rem;
+    padding: 1.2rem 1.15rem;
+    gap: 0.95rem;
   }
 
   .wotd-image-wrap {
