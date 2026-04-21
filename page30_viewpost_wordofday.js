@@ -93,57 +93,141 @@ function convertMediaLinks(text) {
     return sanitizeHtml(result);
 }
 
-// 예문 한 줄 뒤에 개별 스피커 아이콘 추가
-function addInlineExampleSpeakers() {
-    const container = document.getElementById('post-message');
-    if (!container) return;
-    if (!('speechSynthesis' in window)) return;
+function wotdEscapeAttr(s) {
+    return String(s)
+        .replace(/&/g, '&amp;')
+        .replace(/"/g, '&quot;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+}
 
-    const spans = container.querySelectorAll('span[style*="padding-left"]');
-    spans.forEach((span) => {
-        const html = span.innerHTML || '';
-        const firstPart = html.split('<br')[0] || '';
-        if (!firstPart.trim()) return;
+function wotdStripTagsToText(html) {
+    const d = document.createElement('div');
+    d.innerHTML = html;
+    return (d.textContent || '').replace(/\s+/g, ' ').trim();
+}
 
-        const tmp = document.createElement('div');
-        tmp.innerHTML = firstPart;
-        const text = (tmp.textContent || '').trim();
-        if (!text) return;
+function wotdIsMostlyEnglish(text) {
+    const t = String(text || '').trim();
+    if (t.length < 8) return false;
+    if (/[가-힣]/.test(t)) return false;
+    const letters = t.replace(/[^a-zA-Z]/g, '');
+    if (letters.length < 6) return false;
+    const nonLatin = t.replace(/[a-zA-Z0-9\s.,;:'"!?\-—–…()[\]{}«»‹›\/\\\u2018\u2019\u201c\u201d]/g, '').length;
+    return letters.length / (letters.length + nonLatin + 1) > 0.6;
+}
 
-        // 이미 스피커가 붙어 있으면 중복 추가 방지
-        if (span.querySelector('.wotd-inline-speaker')) return;
+function wotdTtsButtonHtml(speakText) {
+    const t = String(speakText || '').trim();
+    if (!t) return '';
+    return `<button type="button" class="wotd-tts-btn" data-wotd-tts="${wotdEscapeAttr(t)}" aria-label="영어 읽기, 다시 누르면 멈춤" title="듣기 / 다시 누르면 멈춤" style="margin-left:6px;border:0;background:transparent;cursor:pointer;vertical-align:middle;color:#2f80ed;padding:0;">🔊</button>`;
+}
 
-        const btn = document.createElement('button');
-        btn.type = 'button';
-        btn.className = 'wotd-inline-speaker';
-        btn.textContent = '🔊';
-        btn.addEventListener('click', () => {
-            const synth = window.speechSynthesis;
-            if (!synth) return;
-            // 한 번 더 누르면 재생 중이면 멈춤
-            if (btn.dataset.speaking === 'true') {
-                synth.cancel();
-                btn.dataset.speaking = 'false';
+function wotdAppendTtsInlineAfterEnglish(lineHtml, speak) {
+    if (/wotd-tts-btn|wotd-inline-speaker/i.test(lineHtml)) return lineHtml;
+    const btn = wotdTtsButtonHtml(speak);
+    if (!btn) return lineHtml;
+    const s = lineHtml.trimEnd();
+    const endRe = /([.!?])((?:\s*<\/[a-zA-Z][a-zA-Z0-9]*\s*>\s*)*)$/;
+    const m = s.match(endRe);
+    if (m) {
+        const prefix = s.slice(0, s.length - m[0].length);
+        return prefix + m[1] + btn + m[2];
+    }
+    return s + btn;
+}
+
+function wotdStartEnglishTTS(text, btn) {
+    if (!text || !window.speechSynthesis) return;
+    try {
+        speechSynthesis.cancel();
+        const u = new SpeechSynthesisUtterance(text);
+        u.lang = 'en-US';
+        u.rate = 0.92;
+        u.volume = 1;
+        u.pitch = 1;
+        const voices = speechSynthesis.getVoices();
+        const en =
+            voices.find((v) => v.lang && /^en-US/i.test(v.lang)) ||
+            voices.find((v) => v.lang && /^en(-|$)/i.test(v.lang));
+        if (en) u.voice = en;
+        const done = () => {
+            if (btn) btn.classList.remove('wotd-tts-playing');
+        };
+        u.onend = done;
+        u.onerror = done;
+        speechSynthesis.speak(u);
+    } catch (e) {
+        if (btn) btn.classList.remove('wotd-tts-playing');
+        console.warn('WordOfDay TTS:', e);
+    }
+}
+
+function wotdBindTtsButtons(container) {
+    if (!container || !window.speechSynthesis) return;
+    container.querySelectorAll('.wotd-tts-btn').forEach((btn) => {
+        if (btn.dataset.wotdTtsListener === '1') return;
+        btn.dataset.wotdTtsListener = '1';
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const raw = btn.getAttribute('data-wotd-tts');
+            if (!raw) return;
+
+            const playing =
+                btn.classList.contains('wotd-tts-playing') &&
+                (speechSynthesis.speaking || speechSynthesis.pending);
+            if (playing) {
+                speechSynthesis.cancel();
+                btn.classList.remove('wotd-tts-playing');
                 return;
             }
-            synth.cancel();
-            const u = new SpeechSynthesisUtterance(text);
-            u.lang = 'en-US';
-            u.rate = 0.9;
-            u.pitch = 1.0;
-            u.onend = () => { btn.dataset.speaking = 'false'; };
-            u.onerror = () => { btn.dataset.speaking = 'false'; };
-            btn.dataset.speaking = 'true';
-            synth.speak(u);
+
+            speechSynthesis.cancel();
+            container.querySelectorAll('.wotd-tts-btn.wotd-tts-playing').forEach((b) =>
+                b.classList.remove('wotd-tts-playing')
+            );
+            btn.classList.add('wotd-tts-playing');
+            wotdStartEnglishTTS(raw, btn);
+        });
+    });
+}
+
+// 영어 줄 뒤에 개별 스피커 아이콘 추가 (Word of the Day 전용)
+function attachWordOfDayWebTTS() {
+    const container = document.getElementById('post-message');
+    if (!container || !window.speechSynthesis) return;
+    try {
+        speechSynthesis.getVoices();
+    } catch (_) {}
+
+    const nodes = container.querySelectorAll('p, div, span');
+    nodes.forEach((node) => {
+        if (node.getAttribute('data-wotd-tts') === '1') return;
+
+        const lines = (node.innerHTML || '').split(/<br\s*\/?>/i);
+        if (lines.length === 0) return;
+
+        let changed = false;
+        const newLines = lines.map((lineHtml) => {
+            if (/class\s*=\s*["'][^"']*(wotd-tts-btn|wotd-inline-speaker)/i.test(lineHtml)) return lineHtml;
+            const plain = wotdStripTagsToText(lineHtml);
+            if (!plain) return lineHtml;
+            if (!wotdIsMostlyEnglish(plain)) return lineHtml;
+            if (/^Source\b/i.test(plain) || /^https?:\/\//i.test(plain)) return lineHtml;
+            const speak = plain.replace(/\s*🔊\s*$/u, '').trim();
+            if (!speak) return lineHtml;
+            changed = true;
+            return wotdAppendTtsInlineAfterEnglish(lineHtml, speak);
         });
 
-        const firstBr = span.querySelector('br');
-        if (firstBr) {
-            span.insertBefore(btn, firstBr);
-        } else {
-            span.appendChild(btn);
+        if (changed) {
+            node.innerHTML = newLines.join('<br>');
         }
+        node.setAttribute('data-wotd-tts', '1');
     });
+
+    wotdBindTtsButtons(container);
 }
 
 function showLoading() {
@@ -309,8 +393,8 @@ async function loadPost() {
             <div id="post-content">
                 <div id="post-message">${convertedMessage || '<span style="color: #999;">내용이 없습니다.</span>'}</div>
             </div>`;
-        // 예문 한 줄 뒤에 개별 스피커 아이콘 추가
-        addInlineExampleSpeakers();
+        // 영어 줄 뒤에 개별 스피커 아이콘 추가
+        attachWordOfDayWebTTS();
 
         document.getElementById('backBtn').onclick = () => {
             window.location.href = `page30_guestbook_wordofday.html${apiMode ? '?api=' + apiMode : ''}`;
