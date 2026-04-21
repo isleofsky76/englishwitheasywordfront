@@ -38,8 +38,11 @@ function sanitizeHtml(html) {
     div.innerHTML = html;
     
     // 허용된 태그와 속성
-    const allowedTags = ['p', 'br', 'strong', 'b', 'em', 'i', 'u', 'span', 'div', 'a', 'img'];
-    const allowedAttributes = ['style', 'href', 'target', 'rel', 'src', 'alt', 'loading', 'decoding', 'onerror'];
+    const allowedTags = ['p', 'br', 'strong', 'b', 'em', 'i', 'u', 'span', 'div', 'a', 'img', 'button'];
+    const allowedAttributes = [
+        'style', 'href', 'target', 'rel', 'src', 'alt', 'loading', 'decoding', 'onerror',
+        'type', 'class', 'aria-label', 'title', 'data-vv-tts',
+    ];
     
     // 위험한 태그 제거
     const allElements = div.querySelectorAll('*');
@@ -62,6 +65,136 @@ function sanitizeHtml(html) {
     });
     
     return div.innerHTML;
+}
+
+/** Vocabulary View: Web Speech API(브라우저 TTS) */
+function vvEscapeAttr(s) {
+    return String(s)
+        .replace(/&/g, '&amp;')
+        .replace(/"/g, '&quot;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+}
+
+function vvStripTagsToText(html) {
+    const d = document.createElement('div');
+    d.innerHTML = html;
+    return (d.textContent || '').replace(/\s+/g, ' ').trim();
+}
+
+function vvIsMostlyEnglish(text) {
+    const t = String(text || '').trim();
+    if (t.length < 8) return false;
+    if (/[가-힣]/.test(t)) return false;
+    const letters = t.replace(/[^a-zA-Z]/g, '');
+    if (letters.length < 6) return false;
+    const nonLatin = t.replace(/[a-zA-Z0-9\s.,;:'"!?\-—–…()[\]{}«»‹›\/\\\u2018\u2019\u201c\u201d]/g, '').length;
+    return letters.length / (letters.length + nonLatin + 1) > 0.6;
+}
+
+function vvStartEnglishTTS(text, btn) {
+    if (!text || !window.speechSynthesis) return;
+    try {
+        speechSynthesis.cancel();
+        const u = new SpeechSynthesisUtterance(text);
+        u.lang = 'en-US';
+        u.rate = 0.92;
+        u.volume = 1;
+        u.pitch = 1;
+        const voices = speechSynthesis.getVoices();
+        const en =
+            voices.find((v) => v.lang && /^en-US/i.test(v.lang)) ||
+            voices.find((v) => v.lang && /^en(-|$)/i.test(v.lang));
+        if (en) u.voice = en;
+        const done = () => {
+            if (btn) btn.classList.remove('vv-tts-playing');
+        };
+        u.onend = done;
+        u.onerror = done;
+        speechSynthesis.speak(u);
+    } catch (e) {
+        if (btn) btn.classList.remove('vv-tts-playing');
+        console.warn('Vocabulary TTS:', e);
+    }
+}
+
+function vvTtsButtonHtml(speakText) {
+    const t = String(speakText || '').trim();
+    if (!t) return '';
+    const icon =
+        '<svg class="vv-tts-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>';
+    return `<button type="button" class="vv-tts-btn" data-vv-tts="${vvEscapeAttr(t)}" aria-label="영어 읽기, 다시 누르면 멈춤" title="듣기 / 다시 누르면 멈춤" style="margin-left:6px;border:0;background:transparent;cursor:pointer;vertical-align:middle;color:#2f80ed;padding:0;">${icon}</button>`;
+}
+
+function vvAppendTtsInlineAfterEnglish(lineHtml, speak) {
+    if (/vv-tts-btn/i.test(lineHtml)) return lineHtml;
+    const btn = vvTtsButtonHtml(speak);
+    if (!btn) return lineHtml;
+    const s = lineHtml.trimEnd();
+    const endRe = /([.!?])((?:\s*<\/[a-zA-Z][a-zA-Z0-9]*\s*>\s*)*)$/;
+    const m = s.match(endRe);
+    if (m) {
+        const prefix = s.slice(0, s.length - m[0].length);
+        return prefix + m[1] + btn + m[2];
+    }
+    return s + btn;
+}
+
+function vvBindTtsButtons(container) {
+    if (!container || !window.speechSynthesis) return;
+    container.querySelectorAll('.vv-tts-btn').forEach((btn) => {
+        if (btn.dataset.vvTtsListener === '1') return;
+        btn.dataset.vvTtsListener = '1';
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const raw = btn.getAttribute('data-vv-tts');
+            if (!raw) return;
+
+            const playing =
+                btn.classList.contains('vv-tts-playing') &&
+                (speechSynthesis.speaking || speechSynthesis.pending);
+            if (playing) {
+                speechSynthesis.cancel();
+                btn.classList.remove('vv-tts-playing');
+                return;
+            }
+
+            speechSynthesis.cancel();
+            container.querySelectorAll('.vv-tts-btn.vv-tts-playing').forEach((b) =>
+                b.classList.remove('vv-tts-playing')
+            );
+            btn.classList.add('vv-tts-playing');
+            vvStartEnglishTTS(raw, btn);
+        });
+    });
+}
+
+function attachVocabularyWebTTS(container) {
+    if (!container || !window.speechSynthesis) return;
+    try {
+        speechSynthesis.getVoices();
+    } catch (_) {}
+
+    const paragraphs = container.querySelectorAll('p');
+    paragraphs.forEach((p) => {
+        if (p.getAttribute('data-vv-tts') === '1') return;
+
+        const lines = p.innerHTML.split(/<br\s*\/?>/i);
+        const newLines = lines.map((lineHtml) => {
+            if (/class\s*=\s*["'][^"']*vv-tts-btn/i.test(lineHtml)) return lineHtml;
+            const plain = vvStripTagsToText(lineHtml);
+            if (!plain) return lineHtml;
+            if (!vvIsMostlyEnglish(plain)) return lineHtml;
+            if (/^Source\b/i.test(plain) || /^https?:\/\//i.test(plain)) return lineHtml;
+            return vvAppendTtsInlineAfterEnglish(lineHtml, plain);
+        });
+
+        p.innerHTML = newLines.join('<br>');
+        p.setAttribute('data-vv-tts', '1');
+    });
+
+    vvBindTtsButtons(container);
 }
 
 // 이미지/동영상 링크를 HTML로 변환하는 함수
@@ -350,6 +483,8 @@ async function loadPost() {
                 }
             });
         }
+        const postContent = document.getElementById('post-content');
+        if (postContent) attachVocabularyWebTTS(postContent);
 
         // 버튼 기능 연결
         document.getElementById('backBtn').onclick = () => {
