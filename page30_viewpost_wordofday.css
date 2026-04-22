@@ -31,7 +31,7 @@ body {
 
 /* 본문 – 줄·문단 간격 (과거 촘촘함 ↔ 최근 넓음 사이 중간) */
 #post-message {
-  line-height: 1.55;
+  line-height: 1.35;
   text-align: left;
 }
 
@@ -41,8 +41,8 @@ body {
 }
 
 #post-message p {
-  margin: 0.2em 0 0.4em 0;
-  line-height: 1.55;
+  margin: 0.1em 0 0.24em 0;
+  line-height: 1.35;
 }
 
 #post-message p:first-child {
@@ -54,7 +54,7 @@ body {
 }
 
 #post-message img {
-  margin: 0 0 0.5rem 0;
+  margin: 0 0 0.35rem 0;
 }
 
 /* 예문 한 줄 TTS 스피커 아이콘 */
@@ -75,8 +75,8 @@ body {
 /* 섹션 제목 – 예문 번호와 본문 사이 구분 */
 #post-message .wotd-example-heading {
   display: block;
-  margin: 0.45rem 0 0.25rem 0;
-  line-height: 1.35;
+  margin: 0.32rem 0 0.16rem 0;
+  line-height: 1.3;
 }
 
 #post-message .wotd-example-heading:first-child {
@@ -86,8 +86,8 @@ body {
 /* 제목 바로 아래 예문 문장 */
 #post-message .wotd-example-heading + span {
   display: block;
-  margin-top: 0.1rem;
-  line-height: 1.5;
+  margin-top: 0.05rem;
+  line-height: 1.35;
 }
 
 /* ===== Word of the Day 전용 블록 ===== */
