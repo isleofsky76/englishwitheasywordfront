@@ -82,6 +82,17 @@ function vvStripTagsToText(html) {
     return (d.textContent || '').replace(/\s+/g, ' ').trim();
 }
 
+function vvNormalizeSpeakText(text) {
+    let t = String(text || '').trim();
+    // leading keycap numbers/emojis: 1️⃣ 2️⃣ ...
+    t = t.replace(/^\s*[0-9#*]\uFE0F?\u20E3\s*/u, '');
+    // leading numbered list markers: 1. / 1) / (1)
+    t = t.replace(/^\s*(?:\(\d+\)|\d+[.)])\s*/, '');
+    // leading bullets/symbols
+    t = t.replace(/^[\s\-•·▪▫▶►★☆※]+\s*/, '');
+    return t.trim();
+}
+
 function vvIsMostlyEnglish(text) {
     const t = String(text || '').trim();
     if (t.length < 8) return false;
@@ -141,7 +152,7 @@ function vvAppendTtsInlineAfterEnglish(lineHtml, speak) {
 }
 
 function vvBindTtsButtons(container) {
-    if (!container || !window.speechSynthesis) return;
+    if (!container) return;
     container.querySelectorAll('.vv-tts-btn').forEach((btn) => {
         if (btn.dataset.vvTtsListener === '1') return;
         btn.dataset.vvTtsListener = '1';
@@ -150,6 +161,10 @@ function vvBindTtsButtons(container) {
             e.stopPropagation();
             const raw = btn.getAttribute('data-vv-tts');
             if (!raw) return;
+            if (!window.speechSynthesis) {
+                alert('현재 모바일 브라우저에서는 음성 읽기를 지원하지 않습니다.');
+                return;
+            }
 
             const playing =
                 btn.classList.contains('vv-tts-playing') &&
@@ -171,9 +186,9 @@ function vvBindTtsButtons(container) {
 }
 
 function attachVocabularyWebTTS(container) {
-    if (!container || !window.speechSynthesis) return;
+    if (!container) return;
     try {
-        speechSynthesis.getVoices();
+        if (window.speechSynthesis) speechSynthesis.getVoices();
     } catch (_) {}
 
     const paragraphs = container.querySelectorAll('p');
@@ -183,7 +198,7 @@ function attachVocabularyWebTTS(container) {
         const lines = p.innerHTML.split(/<br\s*\/?>/i);
         const newLines = lines.map((lineHtml) => {
             if (/class\s*=\s*["'][^"']*vv-tts-btn/i.test(lineHtml)) return lineHtml;
-            const plain = vvStripTagsToText(lineHtml);
+            const plain = vvNormalizeSpeakText(vvStripTagsToText(lineHtml));
             if (!plain) return lineHtml;
             if (!vvIsMostlyEnglish(plain)) return lineHtml;
             if (/^Source\b/i.test(plain) || /^https?:\/\//i.test(plain)) return lineHtml;
