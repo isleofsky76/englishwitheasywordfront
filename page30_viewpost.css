@@ -628,6 +628,23 @@ body {
   opacity: 0.95;
 }
 
+.nv-summary {
+  margin: 0 0 1.35rem;
+  padding: 1rem 1.15rem;
+  font-size: 0.94rem;
+  line-height: 1.7;
+  color: #1a365d;
+  background: linear-gradient(135deg, #ebf8ff 0%, #f7fafc 100%);
+  border-left: 4px solid #2b6cb0;
+  border-radius: 0 10px 10px 0;
+  box-shadow: 0 2px 8px rgba(43, 108, 176, 0.1);
+}
+
+.nv-summary strong {
+  color: #2c5282;
+  font-weight: 700;
+}
+
 .nv-section {
   margin-bottom: 1.75rem;
 }
@@ -667,6 +684,12 @@ body {
 .nv-sentence-2 { border-left-color: #38a169; background: linear-gradient(90deg, #f0fff4 0%, #fff 40%); }
 .nv-sentence-3 { border-left-color: #d69e2e; background: linear-gradient(90deg, #fffff0 0%, #fff 40%); }
 
+.nv-sentence-emoji {
+  margin: 0 0 0.5rem;
+  font-size: 1.35rem;
+  line-height: 1;
+}
+
 .nv-sentence-en {
   margin: 0 0 0.4rem;
   font-size: 1.02rem;
@@ -682,10 +705,14 @@ body {
   line-height: 1.5;
 }
 
-.nv-highlight {
-  background: linear-gradient(180deg, transparent 55%, #fef08a 55%);
-  padding: 0 0.15em;
-  border-radius: 2px;
+.nv-highlight,
+#post-message mark.nv-highlight {
+  background-color: #fef08a;
+  color: inherit;
+  padding: 0.1em 0.25em;
+  border-radius: 3px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
 }
 
 .nv-term-inline {
@@ -794,6 +821,15 @@ body {
 
 .nv-site-link {
   margin: 0.5rem 0 0;
+}
+
+.nv-video-label {
+  margin: 1rem 0 0.35rem;
+  font-weight: 700;
+  font-size: 0.8rem;
+  color: #2d3748;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .nv-empty {

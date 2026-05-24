@@ -311,6 +311,20 @@ function attachVocabularyWebTTS(container) {
     vvBindTtsButtons(container);
 }
 
+/** href/src 속성값·기존 &lt;a&gt; 태그 안의 URL은 변환하지 않음 (중첩 링크 깨짐 방지) */
+function shouldSkipUrlConversion(html, offset) {
+    const before = html.substring(0, offset);
+    const lastLt = before.lastIndexOf('<');
+    const lastGt = before.lastIndexOf('>');
+    // 아직 닫히지 않은 태그 안(속성 영역 포함)
+    if (lastLt > lastGt) return true;
+    const lastAOpen = before.lastIndexOf('<a');
+    const lastAClose = before.lastIndexOf('</a>');
+    // <a> … </a> 내부(본문·속성 모두)
+    if (lastAOpen > lastAClose) return true;
+    return false;
+}
+
 // 이미지/동영상 링크를 HTML로 변환하는 함수
 function convertMediaLinks(text) {
     if (!text) return text;
@@ -322,16 +336,12 @@ function convertMediaLinks(text) {
     const urlPattern = /(https?:\/\/[^\s<>"'\n\r()]+)/g;
     
     // HTML이 있으면 그대로 사용, 없으면 이스케이프
-    let result = hasHtml ? text : escapeHtml(text);
+    const sourceHtml = hasHtml ? text : escapeHtml(text);
+    let result = sourceHtml;
     
-    // URL을 찾아서 링크로 변환 (이미 링크 태그가 있는 경우는 건너뛰기)
-    result = result.replace(urlPattern, (url, offset) => {
-        // 이미 <a> 태그 안에 있는 URL은 건너뛰기
-        const beforeMatch = result.substring(0, offset);
-        const lastATagOpen = beforeMatch.lastIndexOf('<a');
-        const lastATagClose = beforeMatch.lastIndexOf('</a>');
-        // <a> 태그가 열려있고 닫히지 않았다면 이미 링크 안에 있는 것
-        if (lastATagOpen > lastATagClose) {
+    // URL을 찾아서 링크로 변환 (원본 문자열 기준 offset — replace 중간 변형과 무관)
+    result = sourceHtml.replace(urlPattern, (url, offset) => {
+        if (shouldSkipUrlConversion(sourceHtml, offset)) {
             return url;
         }
         // YouTube 링크 처리 (일반 동영상, Shorts, youtu.be 모두 포함)
