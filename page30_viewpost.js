@@ -311,99 +311,112 @@ function attachVocabularyWebTTS(container) {
     vvBindTtsButtons(container);
 }
 
-/** href/src 속성값·기존 &lt;a&gt; 태그 안의 URL은 변환하지 않음 (중첩 링크 깨짐 방지) */
-function shouldSkipUrlConversion(html, offset) {
-    const before = html.substring(0, offset);
-    const lastLt = before.lastIndexOf('<');
-    const lastGt = before.lastIndexOf('>');
-    // 아직 닫히지 않은 태그 안(속성 영역 포함)
-    if (lastLt > lastGt) return true;
-    const lastAOpen = before.lastIndexOf('<a');
-    const lastAClose = before.lastIndexOf('</a>');
-    // <a> … </a> 내부(본문·속성 모두)
-    if (lastAOpen > lastAClose) return true;
-    return false;
-}
+const NV_URL_IN_TEXT = /(https?:\/\/[^\s<>"'\n\r()]+)/g;
 
-// 이미지/동영상 링크를 HTML로 변환하는 함수
-function convertMediaLinks(text) {
-    if (!text) return text;
-    
-    // HTML이 포함되어 있는지 확인 (태그가 있는지)
-    const hasHtml = /<[^>]+>/.test(text);
-    
-    // URL 패턴 찾기 (더 정확한 패턴: 공백, 줄바꿈, 괄호, 따옴표 전까지)
-    const urlPattern = /(https?:\/\/[^\s<>"'\n\r()]+)/g;
-    
-    // HTML이 있으면 그대로 사용, 없으면 이스케이프
-    const sourceHtml = hasHtml ? text : escapeHtml(text);
-    let result = sourceHtml;
-    
-    // URL을 찾아서 링크로 변환 (원본 문자열 기준 offset — replace 중간 변형과 무관)
-    result = sourceHtml.replace(urlPattern, (url, offset) => {
-        if (shouldSkipUrlConversion(sourceHtml, offset)) {
-            return url;
-        }
-        // YouTube 링크 처리 (일반 동영상, Shorts, youtu.be 모두 포함)
-        const youtubeRegex = /(?:youtube\.com\/(?:watch\?v=|shorts\/)|youtu\.be\/)([a-zA-Z0-9_-]+)/;
-        const youtubeMatch = url.match(youtubeRegex);
-        if (youtubeMatch) {
-            const videoId = youtubeMatch[1];
-            const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
-            const youtubeUrl = `https://www.youtube.com/watch?v=${videoId}`;
-            return `<div class="video-preview-container" style="position: relative; max-width: 100%; margin: 10px 0; cursor: pointer; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); z-index: 1;">
+/** 단일 URL → 임베드/링크 HTML (href 속성 안에서는 호출하지 않음) */
+function buildMediaHtmlForUrl(url) {
+    const youtubeRegex = /(?:youtube\.com\/(?:watch\?v=|shorts\/)|youtu\.be\/)([a-zA-Z0-9_-]+)/;
+    const youtubeMatch = url.match(youtubeRegex);
+    if (youtubeMatch) {
+        const videoId = youtubeMatch[1];
+        const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+        const youtubeUrl = `https://www.youtube.com/watch?v=${videoId}`;
+        return `<div class="video-preview-container" style="position: relative; max-width: 100%; margin: 10px 0; cursor: pointer; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); z-index: 1;">
                 <a href="${youtubeUrl}" target="_blank" rel="noopener noreferrer" style="text-decoration: none; display: block; -webkit-tap-highlight-color: rgba(0, 0, 0, 0.3); touch-action: manipulation; position: relative; z-index: 10;">
                     <div class="video-thumbnail" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; background: #000;">
                         <img src="${thumbnailUrl}" alt="YouTube Video" loading="lazy" decoding="async" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="this.src='https://img.youtube.com/vi/${videoId}/hqdefault.jpg'">
-                        <div class="play-button" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 68px; height: 48px; background: rgba(23, 35, 34, 0.9); border-radius: 14px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.3s; pointer-events: none; z-index: 2;">
+                        <div class="play-button" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 68px; height: 48px; background: rgba(23, 35, 34, 0.9); border-radius: 14px; display: flex; align-items: center; justify-content: center; cursor: pointer; pointer-events: none; z-index: 2;">
                             <div style="width: 0; height: 0; border-left: 24px solid white; border-top: 14px solid transparent; border-bottom: 14px solid transparent; margin-left: 6px;"></div>
                         </div>
                     </div>
                 </a>
             </div>`;
-        }
-        
-        // Vimeo 링크 처리
-        const vimeoRegex = /vimeo\.com\/(\d+)/;
-        const vimeoMatch = url.match(vimeoRegex);
-        if (vimeoMatch) {
-            const videoId = vimeoMatch[1];
-            const vimeoUrl = `https://vimeo.com/${videoId}`;
-            return `<div class="video-preview-container" style="position: relative; max-width: 100%; margin: 10px 0; cursor: pointer; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); z-index: 1;">
-                <a href="${vimeoUrl}" target="_blank" rel="noopener noreferrer" style="text-decoration: none; display: block; -webkit-tap-highlight-color: rgba(0, 0, 0, 0.3); touch-action: manipulation; position: relative; z-index: 10;">
-                    <div class="video-thumbnail" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; background: #000; display: flex; align-items: center; justify-content: center;">
-                        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); pointer-events: none;"></div>
-                        <div class="play-button" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 68px; height: 48px; background: rgba(255, 255, 255, 0.9); border-radius: 14px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.3s; pointer-events: none; z-index: 2;">
-                            <div style="width: 0; height: 0; border-left: 20px solid #667eea; border-top: 12px solid transparent; border-bottom: 12px solid transparent; margin-left: 4px;"></div>
-                        </div>
-                        <div style="position: absolute; bottom: 10px; left: 10px; color: white; font-size: 14px; font-weight: 600; pointer-events: none;">Vimeo Video</div>
+    }
+
+    const vimeoRegex = /vimeo\.com\/(\d+)/;
+    const vimeoMatch = url.match(vimeoRegex);
+    if (vimeoMatch) {
+        const videoId = vimeoMatch[1];
+        const vimeoUrl = `https://vimeo.com/${videoId}`;
+        return `<div class="video-preview-container" style="position: relative; max-width: 100%; margin: 10px 0; cursor: pointer; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); z-index: 1;">
+                <a href="${vimeoUrl}" target="_blank" rel="noopener noreferrer" style="text-decoration: none; display: block;">
+                    <div class="video-thumbnail" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; background: #000;">
+                        <div style="position: absolute; inset: 0; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"></div>
+                        <div style="position: absolute; bottom: 10px; left: 10px; color: white; font-size: 14px; font-weight: 600;">Vimeo Video</div>
                     </div>
                 </a>
             </div>`;
+    }
+
+    if (url.startsWith('data:image/')) {
+        return `<img src="${url}" alt="Image" style="max-width: 100%; height: auto; border-radius: 8px; margin: 10px 0; display: block;">`;
+    }
+
+    const imageExtensions = /\.(jpg|jpeg|png|gif|webp|svg)(\?.*)?$/i;
+    if (imageExtensions.test(url)) {
+        return `<img src="${url}" alt="Image" loading="lazy" decoding="async" style="max-width: 100%; height: auto; border-radius: 8px; margin: 10px 0; display: block;" onerror="this.style.display='none';">`;
+    }
+
+    return `<a href="${url}" target="_blank" rel="noopener noreferrer" style="display: inline-block; padding: 4px 6px; margin: 2px;">${url}</a>`;
+}
+
+/** 텍스트 노드 안의 URL만 변환 (&lt;a href&gt; 속성은 건드리지 않음) */
+function convertUrlsInTextNode(textNode) {
+    const raw = textNode.nodeValue || '';
+    if (!/https?:\/\//.test(raw)) return;
+
+    const parent = textNode.parentElement;
+    if (!parent) return;
+    if (parent.closest('a')) return;
+
+    NV_URL_IN_TEXT.lastIndex = 0;
+    if (!NV_URL_IN_TEXT.test(raw)) return;
+    NV_URL_IN_TEXT.lastIndex = 0;
+
+    const frag = document.createDocumentFragment();
+    let lastIndex = 0;
+    let match;
+    while ((match = NV_URL_IN_TEXT.exec(raw)) !== null) {
+        if (match.index > lastIndex) {
+            frag.appendChild(document.createTextNode(raw.slice(lastIndex, match.index)));
         }
-        
-        // Base64 이미지 처리 (data:image로 시작)
-        if (url.startsWith('data:image/')) {
-            return `<img src="${url}" alt="Image" style="max-width: 100%; height: auto; border-radius: 8px; margin: 10px 0; display: block;">`;
-        }
-        
-        // 이미지 링크 처리 (지연 로딩 최적화)
-        const imageExtensions = /\.(jpg|jpeg|png|gif|webp|svg)(\?.*)?$/i;
-        if (imageExtensions.test(url)) {
-            return `<img src="${url}" alt="Image" loading="lazy" decoding="async" style="max-width: 100%; height: auto; border-radius: 8px; margin: 10px 0; display: block;" onerror="this.style.display='none';">`;
-        }
-        
-        // 일반 링크는 그대로 유지 (모바일 터치 최적화)
-        return `<a href="${url}" target="_blank" rel="noopener noreferrer" style="display: inline-block; padding: 4px 6px; margin: 2px; -webkit-tap-highlight-color: rgba(43, 108, 176, 0.3); touch-action: manipulation; cursor: pointer; position: relative; z-index: 10;">${url}</a>`;
-    });
-    
-    // 줄바꿈 처리 (sanitizeHtml 전에 처리)
+        const box = document.createElement('div');
+        box.innerHTML = buildMediaHtmlForUrl(match[1]);
+        while (box.firstChild) frag.appendChild(box.firstChild);
+        lastIndex = NV_URL_IN_TEXT.lastIndex;
+    }
+    if (lastIndex < raw.length) {
+        frag.appendChild(document.createTextNode(raw.slice(lastIndex)));
+    }
+    parent.replaceChild(frag, textNode);
+}
+
+function convertMediaLinksInHtmlDom(html) {
+    const root = document.createElement('div');
+    root.innerHTML = html;
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+    const textNodes = [];
+    let n;
+    while ((n = walker.nextNode())) textNodes.push(n);
+    textNodes.forEach(convertUrlsInTextNode);
+    return root.innerHTML;
+}
+
+// 이미지/동영상 링크를 HTML로 변환
+function convertMediaLinks(text) {
+    if (!text) return text;
+
+    const hasHtml = /<[^>]+>/.test(text);
+    let result;
+
+    if (hasHtml) {
+        result = convertMediaLinksInHtmlDom(text);
+    } else {
+        result = escapeHtml(text).replace(NV_URL_IN_TEXT, (url) => buildMediaHtmlForUrl(url));
+    }
+
     result = result.replace(/\n/g, '<br>');
-    
-    // 안전한 HTML만 허용 (이모지와 특수 문자는 유지, 링크도 유지)
-    result = sanitizeHtml(result);
-    
-    return result;
+    return sanitizeHtml(result);
 }
 
 // 로딩 상태 표시 함수

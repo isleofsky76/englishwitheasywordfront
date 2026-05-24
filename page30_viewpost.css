@@ -812,6 +812,23 @@ body {
   color: #1a365d;
 }
 
+.nv-source-link {
+  display: inline-block;
+  margin-top: 0.35rem;
+  padding: 0.45rem 0.85rem;
+  font-weight: 600;
+  color: #2b6cb0 !important;
+  background: #ebf8ff;
+  border-radius: 6px;
+  text-decoration: none !important;
+  border: 1px solid #90cdf4;
+}
+
+.nv-source-link:hover {
+  background: #bee3f8;
+  text-decoration: underline !important;
+}
+
 .nv-date {
   display: block;
   margin-top: 0.5rem;
