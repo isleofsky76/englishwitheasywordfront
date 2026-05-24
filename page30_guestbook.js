@@ -921,6 +921,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function loadMessages(forceRefresh = false) {
         const list = document.getElementById('guestbook-list');
+        if (list) list.setAttribute('aria-live', 'polite');
         
         // 캐시 확인 (강제 새로고침이 아닌 경우)
         if (!forceRefresh && cache.messages && cache.lastFetch) {
@@ -1071,9 +1072,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const views = entry.views || 0;
             const authorWithLogo = `<span class="meta-author"><img class="meta-author-logo" src="resources/logo.jpg" alt="News English Lab logo">${author}</span>`;
             const metaText = [authorWithLogo, datePart, timePart].filter(Boolean).join(' | ') + ` 조회 ${views}`;
+            const postTitle = escapeHtml(entry.title || '제목 없음');
             item.innerHTML = `
               <div class="item-title">
-                <a href="page30_viewpost.html?index=${originalIndex}${apiParam}">${escapeHtml(entry.title || '제목 없음')}</a>
+                <a href="page30_viewpost.html?index=${originalIndex}${apiParam}" title="${postTitle}">${postTitle}</a>
               </div>
               <div class="item-meta">${metaText}</div>`;
             fragment.appendChild(item);

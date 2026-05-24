@@ -31,40 +31,137 @@ function escapeHtml(text) {
     return div.innerHTML;
 }
 
-// 안전한 HTML 태그만 허용하는 함수
+// News Voca 시맨틱 HTML + 기본 서식 태그 허용
+const NV_ALLOWED_TAGS = [
+    'article', 'header', 'footer', 'section', 'nav', 'aside', 'main',
+    'h1', 'h2', 'h3', 'h4', 'p', 'br', 'hr',
+    'strong', 'b', 'em', 'i', 'u', 'mark', 'small', 'sub', 'sup', 'abbr', 'cite', 'q',
+    'ol', 'ul', 'li', 'dl', 'dt', 'dd',
+    'span', 'div', 'a', 'img', 'button', 'time', 'figure', 'figcaption', 'blockquote',
+];
+const NV_ALLOWED_ATTRS = [
+    'class', 'id', 'href', 'target', 'rel', 'src', 'alt', 'loading', 'decoding',
+    'datetime', 'role', 'aria-label', 'aria-hidden', 'aria-labelledby', 'title',
+    'itemscope', 'itemtype', 'itemprop', 'data-vv-tts',
+    'style', 'onerror',
+];
+
 function sanitizeHtml(html) {
     if (!html) return html;
     const div = document.createElement('div');
     div.innerHTML = html;
-    
-    // 허용된 태그와 속성
-    const allowedTags = ['p', 'br', 'strong', 'b', 'em', 'i', 'u', 'span', 'div', 'a', 'img', 'button'];
-    const allowedAttributes = [
-        'style', 'href', 'target', 'rel', 'src', 'alt', 'loading', 'decoding', 'onerror',
-        'type', 'class', 'aria-label', 'title', 'data-vv-tts',
-    ];
-    
-    // 위험한 태그 제거
+
     const allElements = div.querySelectorAll('*');
-    allElements.forEach(el => {
-        if (!allowedTags.includes(el.tagName.toLowerCase())) {
+    allElements.forEach((el) => {
+        const tag = el.tagName.toLowerCase();
+        if (!NV_ALLOWED_TAGS.includes(tag)) {
             el.replaceWith(el.textContent);
-        } else {
-            // 허용되지 않은 속성 제거
-            Array.from(el.attributes).forEach(attr => {
-                if (!allowedAttributes.includes(attr.name.toLowerCase())) {
-                    el.removeAttribute(attr.name);
-                }
-            });
-            // 스크립트 관련 속성 제거
-            if (el.onclick || el.onerror) {
-                el.removeAttribute('onclick');
-                el.removeAttribute('onerror');
-            }
+            return;
         }
+        Array.from(el.attributes).forEach((attr) => {
+            const name = attr.name.toLowerCase();
+            if (name.startsWith('on') && name !== 'onerror') {
+                el.removeAttribute(attr.name);
+                return;
+            }
+            if (!NV_ALLOWED_ATTRS.includes(name)) {
+                el.removeAttribute(attr.name);
+            }
+        });
     });
-    
+
     return div.innerHTML;
+}
+
+const NV_SITE_ORIGIN = 'https://englisheasystudy.com';
+
+function nvPlainText(html, maxLen = 160) {
+    const t = vvStripTagsToText(html || '');
+    if (t.length <= maxLen) return t;
+    return t.slice(0, maxLen - 1).trim() + '…';
+}
+
+function nvSetMeta(attr, value, useProperty = false) {
+    if (!value) return;
+    const key = useProperty ? 'property' : 'name';
+    let el = document.querySelector(`meta[${key}="${attr}"]`);
+    if (!el) {
+        el = document.createElement('meta');
+        el.setAttribute(key, attr);
+        document.head.appendChild(el);
+    }
+    el.setAttribute('content', value);
+}
+
+function nvSetCanonical(url) {
+    let link = document.querySelector('link[rel="canonical"]');
+    if (!link) {
+        link = document.createElement('link');
+        link.rel = 'canonical';
+        document.head.appendChild(link);
+    }
+    link.href = url;
+}
+
+function nvInjectArticleJsonLd(post, isoDate, description) {
+    const id = 'nv-article-jsonld';
+    document.getElementById(id)?.remove();
+    const script = document.createElement('script');
+    script.id = id;
+    script.type = 'application/ld+json';
+    const params = new URLSearchParams(window.location.search);
+    const index = params.get('index');
+    const pageUrl = index
+        ? `${NV_SITE_ORIGIN}/page30_viewpost.html?index=${index}`
+        : `${NV_SITE_ORIGIN}/page30_viewpost.html`;
+    script.textContent = JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'BlogPosting',
+        headline: post.title || 'News Voca',
+        description,
+        datePublished: isoDate || undefined,
+        author: {
+            '@type': 'Organization',
+            name: post.nickname || 'English Easy Study',
+        },
+        publisher: {
+            '@type': 'Organization',
+            name: 'English Easy Study',
+            url: NV_SITE_ORIGIN,
+        },
+        mainEntityOfPage: { '@type': 'WebPage', '@id': pageUrl },
+        inLanguage: ['ko', 'en'],
+        keywords: 'News Voca, CNN English, 뉴스 영어 어휘',
+    });
+    document.head.appendChild(script);
+}
+
+function updatePageSeo(post, formattedDate) {
+    const title = (post.title || 'News Voca').trim();
+    const desc = nvPlainText(post.message, 155);
+    const fullTitle = `${title} | News Voca · English Easy Study`;
+
+    document.title = fullTitle;
+    nvSetMeta('description', desc);
+    nvSetMeta('og:title', title, true);
+    nvSetMeta('og:description', desc, true);
+    nvSetMeta('twitter:title', title);
+    nvSetMeta('twitter:description', desc);
+
+    const params = new URLSearchParams(window.location.search);
+    const index = params.get('index');
+    const canonical = index
+        ? `${NV_SITE_ORIGIN}/page30_viewpost.html?index=${index}`
+        : `${NV_SITE_ORIGIN}/page30_viewpost.html`;
+    nvSetCanonical(canonical);
+    nvSetMeta('og:url', canonical, true);
+
+    let isoDate;
+    if (post.date) {
+        const d = new Date(post.date);
+        if (!isNaN(d.getTime())) isoDate = d.toISOString();
+    }
+    nvInjectArticleJsonLd(post, isoDate, desc);
 }
 
 /** Guestbook View: Web Speech API(브라우저 TTS) */
@@ -191,7 +288,9 @@ function attachVocabularyWebTTS(container) {
         if (window.speechSynthesis) speechSynthesis.getVoices();
     } catch (_) {}
 
-    const paragraphs = container.querySelectorAll('p');
+    const paragraphs = container.querySelectorAll(
+        'p, .nv-sentence-en, .nv-term, .nv-source-title'
+    );
     paragraphs.forEach((p) => {
         if (p.getAttribute('data-vv-tts') === '1') return;
 
@@ -465,16 +564,25 @@ async function loadPost() {
         console.log('변환된 메시지:', convertedMessage);
         
         const isAdmin = (post.nickname || '').toLowerCase() === 'admin';
-        const metaHtml = isAdmin ? '' : `<p id="post-meta">Author: ${escapeHtml(post.nickname || 'Anonymous')} | Date: ${formattedDate} | Views: ${post.views || 0}</p>`;
-        // HTML 구조 재생성
+        let isoMeta = '';
+        if (post.date) {
+            const dMeta = new Date(post.date);
+            if (!isNaN(dMeta.getTime())) isoMeta = dMeta.toISOString();
+        }
+        const metaHtml = isAdmin
+            ? `<p id="post-meta"><time datetime="${isoMeta}">${formattedDate}</time> · 조회 ${post.views || 0}</p>`
+            : `<p id="post-meta">Author: ${escapeHtml(post.nickname || 'Anonymous')} | <time datetime="${isoMeta}">${formattedDate}</time> | Views: ${post.views || 0}</p>`;
+
+        updatePageSeo(post, formattedDate);
+
         postContainer.innerHTML = `
-            <div id="post-header">
-                <h2 id="post-title">${escapeHtml(post.title || '제목 없음')}</h2>
+            <header id="post-header">
+                <h1 id="post-title">${escapeHtml(post.title || '제목 없음')}</h1>
                 ${metaHtml}
-            </div>
-            <div id="post-content">
-                <p id="post-message">${convertedMessage || '<span style="color: #999;">내용이 없습니다.</span>'}</p>
-            </div>
+            </header>
+            <article id="post-content">
+                <div id="post-message" class="post-message-body">${convertedMessage || '<p class="nv-empty">내용이 없습니다.</p>'}</div>
+            </article>
         `;
         
         // 게시글 내용 복사 시 HTML 태그 제거하고 순수 텍스트만 복사
