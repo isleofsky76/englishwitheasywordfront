@@ -299,7 +299,7 @@
 
   .gb-table tbody tr {
     display: grid;
-    grid-template-columns: auto 1fr auto auto;
+    grid-template-columns: auto 1fr auto;
     grid-template-rows: auto auto;
     column-gap: 4px;
     row-gap: 4px;
@@ -319,7 +319,7 @@
     vertical-align: middle;
   }
 
-  /* 번호 | (제목 + 메타) | likes | share */
+  /* 번호 | (제목 + 메타) | likes (모바일: 공유 버튼 숨김) */
   .gb-col-num {
     grid-column: 1;
     grid-row: 1 / 3;
@@ -371,6 +371,7 @@
     width: auto !important;
     min-width: 0 !important;
     padding: 0 !important;
+    transform: translateX(-5px);
   }
 
   .gb-like-wrap {
@@ -394,12 +395,7 @@
   }
 
   .gb-col-share {
-    grid-column: 4;
-    grid-row: 1;
-    display: block !important;
-    width: auto !important;
-    min-width: 0 !important;
-    padding: 0 !important;
+    display: none !important;
   }
 
   .gb-col-share .gb-share-group {
