@@ -19,15 +19,25 @@
         try {
             const date = new Date(dateStr);
             if (isNaN(date.getTime())) return '-';
+            const now = new Date();
             const y = date.getFullYear();
             const m = ('0' + (date.getMonth() + 1)).slice(-2);
             const d = ('0' + date.getDate()).slice(-2);
             const h = ('0' + date.getHours()).slice(-2);
             const min = ('0' + date.getMinutes()).slice(-2);
-            return `${y}.${m}.${d} ${h}:${min}`;
+            const isToday = y === now.getFullYear() &&
+                date.getMonth() === now.getMonth() &&
+                date.getDate() === now.getDate();
+            if (isToday) return h + ':' + min;
+            if (y === now.getFullYear()) return m + '/' + d;
+            return String(y);
         } catch {
             return '-';
         }
+    }
+
+    function isMobileView() {
+        return window.matchMedia('(max-width: 767px)').matches;
     }
 
     function hasUserLiked(entryId) {
@@ -123,6 +133,10 @@
                 '</tr>';
         }).join('');
 
+        const mobile = isMobileView();
+        const thDate = mobile ? '일자' : '작성일';
+        const thViews = mobile ? '조회' : '조회수';
+
         container.innerHTML =
             '<div class="gb-table-wrap">' +
             '<table class="gb-table">' +
@@ -130,8 +144,8 @@
             '<th class="col-num">번호</th>' +
             '<th class="col-title">제목</th>' +
             '<th class="col-author">작성자</th>' +
-            '<th class="col-date">작성일</th>' +
-            '<th class="col-views">조회수</th>' +
+            '<th class="col-date">' + thDate + '</th>' +
+            '<th class="col-views">' + thViews + '</th>' +
             '<th class="col-likes">Likes</th>' +
             '<th class="col-share">공유</th>' +
             '</tr></thead>' +

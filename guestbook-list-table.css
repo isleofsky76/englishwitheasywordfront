@@ -279,13 +279,9 @@
     font-size: 0.8rem;
   }
 
-  /* 모바일: 번호·제목·조회수만 표시 */
+  /* 모바일: 번호·제목·일자·조회·Likes (작성자·공유 숨김) */
   .gb-table th.col-author,
   .gb-table td.gb-col-author,
-  .gb-table th.col-date,
-  .gb-table td.gb-col-date,
-  .gb-table th.col-likes,
-  .gb-table td.gb-col-likes,
   .gb-table th.col-share,
   .gb-table td.gb-col-share {
     display: none;
@@ -293,20 +289,23 @@
 
   .gb-table th,
   .gb-table td {
-    padding: 8px 4px;
-    font-size: 0.78rem;
+    padding: 7px 2px;
+    font-size: 0.74rem;
   }
 
   .gb-col-title a,
   .gb-col-num,
+  .gb-col-date,
   .gb-col-views {
-    font-size: 0.78rem;
+    font-size: 0.74rem;
   }
 
   .gb-col-title {
     max-width: none;
     text-align: left !important;
-    padding-left: 6px !important;
+    padding-left: 4px !important;
+    padding-right: 2px !important;
+    overflow: hidden;
   }
 
   .gb-table th.col-title {
@@ -315,27 +314,78 @@
 
   .gb-title-cell {
     justify-content: flex-start;
+    min-width: 0;
   }
 
   .gb-col-title a {
     text-align: left;
   }
 
+  .gb-img-badge {
+    display: none;
+  }
+
   .gb-table th.col-num,
   .gb-col-num {
-    min-width: 40px;
-    width: 11%;
+    width: 9%;
+    min-width: 0;
     max-width: none;
+    padding-left: 4px;
+    padding-right: 2px;
+  }
+
+  .gb-table th.col-title,
+  .gb-col-title {
+    width: 38%;
+  }
+
+  .gb-table th.col-date,
+  .gb-col-date {
+    width: 14%;
+    min-width: 0;
+    font-size: 0.68rem;
+    color: #787c7e;
+    padding-left: 2px;
+    padding-right: 2px;
   }
 
   .gb-table th.col-views,
   .gb-col-views {
-    min-width: 44px;
-    width: 13%;
-    max-width: none;
+    width: 10%;
+    min-width: 0;
+    padding-left: 2px;
+    padding-right: 2px;
   }
 
-  .gb-table th.col-title {
-    width: auto;
+  .gb-table th.col-likes,
+  .gb-col-likes {
+    width: 16%;
+    min-width: 0;
+    padding-left: 2px;
+    padding-right: 4px;
+  }
+
+  .gb-like-wrap {
+    gap: 2px;
+  }
+
+  .gb-col-likes .gb-like-btn {
+    min-width: 22px;
+    width: 22px;
+    height: 22px;
+    padding: 0;
+    font-size: 0.62rem;
+    line-height: 1;
+  }
+
+  .gb-col-likes .gb-like-count {
+    min-width: 0.8em;
+    font-size: 0.7rem;
+  }
+
+  .gb-table th {
+    font-size: 0.68rem;
+    padding: 6px 2px;
+    letter-spacing: 0;
   }
 }
