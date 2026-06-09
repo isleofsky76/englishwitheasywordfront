@@ -1032,7 +1032,9 @@ document.addEventListener('DOMContentLoaded', () => {
     function renderMessages(messages, container) {
         renderGuestbookTable(container, messages, {
             postPage: 'word-of-the-day.html',
-            apiMode: apiMode
+            apiMode: apiMode,
+            board: 'wordofday',
+            apiBaseUrl: API_BASE_URL
         });
     }
 

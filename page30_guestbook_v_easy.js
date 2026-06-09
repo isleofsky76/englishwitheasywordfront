@@ -974,7 +974,9 @@ document.addEventListener('DOMContentLoaded', () => {
     function renderMessages(messages, container) {
         renderGuestbookTable(container, messages, {
             postPage: 'popular-voca.html',
-            apiMode: apiMode
+            apiMode: apiMode,
+            board: 'easy-voca',
+            apiBaseUrl: API_BASE_URL
         });
     }
 

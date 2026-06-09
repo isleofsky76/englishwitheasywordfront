@@ -1018,7 +1018,9 @@ document.addEventListener('DOMContentLoaded', () => {
     function renderMessages(messages, container) {
         renderGuestbookTable(container, messages, {
             postPage: 'english-synonym.html',
-            apiMode: apiMode
+            apiMode: apiMode,
+            board: 'vocabulary',
+            apiBaseUrl: API_BASE_URL
         });
     }
 
