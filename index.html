@@ -155,6 +155,7 @@
         }
         .index-preview-table {
             width: 100%;
+            table-layout: fixed;
             border-collapse: collapse;
             font-family: 'Poppins', sans-serif;
             font-size: 0.84rem;
@@ -169,6 +170,29 @@
             text-align: center;
             color: #333;
             border-bottom: 1px solid #e8ecf0;
+        }
+        .index-preview-table th.col-num,
+        .idx-col-num {
+            width: 14%;
+            min-width: 52px;
+            max-width: 58px;
+            white-space: nowrap;
+            padding-left: 8px;
+            padding-right: 8px;
+        }
+        .index-preview-table th.col-views,
+        .idx-col-views {
+            width: 18%;
+            min-width: 62px;
+            max-width: 68px;
+            white-space: nowrap;
+            padding-left: 6px;
+            padding-right: 6px;
+        }
+        .index-preview-table th.col-title,
+        .idx-col-title {
+            width: auto;
+            overflow: hidden;
         }
         .index-preview-table th.col-title {
             text-align: left;
@@ -188,12 +212,12 @@
             background: rgba(43, 108, 176, 0.05);
         }
         .idx-col-num {
-            width: 44px;
             color: #2b6cb0;
             font-weight: 600;
         }
         .idx-col-title {
             text-align: left !important;
+            max-width: 0;
         }
         .idx-col-title a {
             color: #333;
@@ -208,9 +232,9 @@
             text-decoration: underline;
         }
         .idx-col-views {
-            width: 56px;
             color: #666;
             font-size: 0.84rem;
+            white-space: nowrap;
         }
         .idx-empty-row td {
             text-align: center !important;
@@ -335,13 +359,13 @@
                 ? rows.join('')
                 : '<tr class="idx-empty-row"><td colspan="3">' + emptyMessage + '</td></tr>';
             return '<div class="index-preview-table-wrap"><table class="index-preview-table">' +
-                '<thead><tr><th>번호</th><th class="col-title">제목</th><th>조회수</th></tr></thead>' +
+                '<thead><tr><th class="col-num">번호</th><th class="col-title">제목</th><th class="col-views">조회수</th></tr></thead>' +
                 '<tbody>' + body + '</tbody></table></div>';
         }
 
         function buildPreviewRow(number, title, views, href) {
             var safeTitle = (title || '제목 없음').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-            if (safeTitle.length > 50) safeTitle = safeTitle.slice(0, 47) + '...';
+            if (safeTitle.length > 36) safeTitle = safeTitle.slice(0, 33) + '...';
             return '<tr><td class="idx-col-num">' + number + '</td>' +
                 '<td class="idx-col-title"><a href="' + href + '">' + safeTitle + '</a></td>' +
                 '<td class="idx-col-views">' + (views || 0) + '</td></tr>';
