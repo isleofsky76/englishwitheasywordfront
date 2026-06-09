@@ -146,6 +146,84 @@
             color: #4a90e2;
             text-decoration: underline;
         }
+        .index-preview-table-wrap {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            background: #fff;
+            border-radius: 6px;
+            border: 1px solid #e8ecf0;
+        }
+        .index-preview-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.84rem;
+        }
+        .index-preview-table thead {
+            background: #f8f9fb;
+        }
+        .index-preview-table th {
+            padding: 8px 10px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            text-align: center;
+            color: #333;
+            border-bottom: 1px solid #e8ecf0;
+        }
+        .index-preview-table th.col-title {
+            text-align: left;
+        }
+        .index-preview-table td {
+            padding: 8px 10px;
+            border-bottom: 1px solid #e8ecf0;
+            text-align: center;
+            vertical-align: middle;
+            color: #333;
+            font-size: 0.84rem;
+        }
+        .index-preview-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+        .index-preview-table tbody tr:hover {
+            background: rgba(43, 108, 176, 0.05);
+        }
+        .idx-col-num {
+            width: 44px;
+            color: #2b6cb0;
+            font-weight: 600;
+        }
+        .idx-col-title {
+            text-align: left !important;
+        }
+        .idx-col-title a {
+            color: #333;
+            text-decoration: none;
+            display: block;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .idx-col-title a:hover {
+            color: #4a90e2;
+            text-decoration: underline;
+        }
+        .idx-col-views {
+            width: 56px;
+            color: #666;
+            font-size: 0.84rem;
+        }
+        .idx-empty-row td {
+            text-align: center !important;
+            color: #888;
+            padding: 14px 10px !important;
+        }
+        @media (max-width: 600px) {
+            .index-preview-table th,
+            .index-preview-table td {
+                padding: 7px 8px;
+                font-size: 0.8rem;
+            }
+        }
         .resources-section {
             background: #fff;
             border-radius: 14px;
@@ -194,36 +272,28 @@
                 <h3>Word of the Day</h3>
                 <div class="preview-more"><a href="word-of-the-day-list.html?api=prod">전체보기 →</a></div>
             </div>
-            <ul class="preview-list" id="wordofday-preview-list">
-                <li><a href="word-of-the-day-list.html?api=prod">Word of the Day 로딩 중...</a></li>
-            </ul>
+            <div id="wordofday-preview-list"></div>
         </div>
         <div class="preview-section">
             <div class="preview-header">
                 <h3>News Voca</h3>
                 <div class="preview-more"><a href="news-voca-list.html">전체보기 →</a></div>
             </div>
-            <ul class="preview-list" id="news-voca-preview-list">
-                <li><a href="news-voca-list.html">뉴스 어휘 로딩 중...</a></li>
-            </ul>
+            <div id="news-voca-preview-list"></div>
         </div>
         <div class="preview-section">
             <div class="preview-header">
                 <h3>Synonym</h3>
                 <div class="preview-more"><a href="english-synonym-list.html">전체보기 →</a></div>
             </div>
-            <ul class="preview-list" id="synonym-preview-list">
-                <li><a href="english-synonym-list.html">유의어 로딩 중...</a></li>
-            </ul>
+            <div id="synonym-preview-list"></div>
         </div>
         <div class="preview-section">
             <div class="preview-header">
                 <h3>Popular Voca</h3>
                 <div class="preview-more"><a href="popular-voca-list.html">전체보기 →</a></div>
             </div>
-            <ul class="preview-list" id="easy-voca-preview-list">
-                <li><a href="popular-voca-list.html">Popular Voca 로딩 중...</a></li>
-            </ul>
+            <div id="easy-voca-preview-list"></div>
         </div>
         <div class="preview-section">
             <div class="preview-header">
@@ -260,6 +330,69 @@
         function navigateTo(page) {
             window.location.href = page;
         }
+        function buildPreviewTableHtml(rows, emptyMessage) {
+            var body = rows.length
+                ? rows.join('')
+                : '<tr class="idx-empty-row"><td colspan="3">' + emptyMessage + '</td></tr>';
+            return '<div class="index-preview-table-wrap"><table class="index-preview-table">' +
+                '<thead><tr><th>번호</th><th class="col-title">제목</th><th>조회수</th></tr></thead>' +
+                '<tbody>' + body + '</tbody></table></div>';
+        }
+
+        function buildPreviewRow(number, title, views, href) {
+            var safeTitle = (title || '제목 없음').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+            if (safeTitle.length > 50) safeTitle = safeTitle.slice(0, 47) + '...';
+            return '<tr><td class="idx-col-num">' + number + '</td>' +
+                '<td class="idx-col-title"><a href="' + href + '">' + safeTitle + '</a></td>' +
+                '<td class="idx-col-views">' + (views || 0) + '</td></tr>';
+        }
+
+        function getApiBase() {
+            var urlParams = new URLSearchParams(window.location.search);
+            var apiMode = urlParams.get('api');
+            if (apiMode === 'prod') {
+                return 'https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app';
+            }
+            if (apiMode === 'local') {
+                return 'http://' + window.location.hostname + ':3000';
+            }
+            if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                return 'http://' + window.location.hostname + ':3000';
+            }
+            return 'https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app';
+        }
+
+        function parseEntries(data) {
+            if (Array.isArray(data)) return data;
+            if (data && data.entries) return data.entries;
+            if (data && data.data) return Array.isArray(data.data) ? data.data : [];
+            return [];
+        }
+
+        function renderPreviewList(container, entries, postPage, apiMode, emptyMessage) {
+            var total = entries.length;
+            var reversed = entries.slice().reverse();
+            var preview = reversed.slice(0, 5);
+            var apiParam = apiMode ? '&api=' + apiMode : '';
+            if (preview.length === 0) {
+                container.innerHTML = buildPreviewTableHtml([], emptyMessage);
+                return;
+            }
+            var rows = preview.map(function(entry, idx) {
+                var origIdx = total - 1 - idx;
+                var number = total - idx;
+                var href = postPage + '?index=' + origIdx + apiParam;
+                return buildPreviewRow(number, entry.title, entry.views, href);
+            });
+            container.innerHTML = buildPreviewTableHtml(rows, '');
+        }
+
+        var loadingTableHtml = buildPreviewTableHtml([], '로딩 중...');
+        ['wordofday-preview-list', 'news-voca-preview-list', 'synonym-preview-list', 'easy-voca-preview-list'].forEach(function(id) {
+            var el = document.getElementById(id);
+            if (el) el.innerHTML = loadingTableHtml;
+        });
+
         let lastScrollTop = 0;
         const navbar = document.getElementById('navbar');
         window.addEventListener('scroll', function() {
@@ -272,226 +405,100 @@
             lastScrollTop = scrollTop;
         });
 
-        // News Voca 실제 데이터 로드 (API와 동일한 베이스 URL 사용)
+        // News Voca 실제 데이터 로드
         (function loadNewsVocaPreview() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const apiMode = urlParams.get('api');
-            let apiBase;
-            if (apiMode === 'prod') {
-                apiBase = 'https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app';
-            } else if (apiMode === 'local') {
-                apiBase = 'http://' + window.location.hostname + ':3000';
-            } else if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-                apiBase = 'http://' + window.location.hostname + ':3000';
-            } else {
-                apiBase = 'https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app';
-            }
-
-            const listEl = document.getElementById('news-voca-preview-list');
+            var urlParams = new URLSearchParams(window.location.search);
+            var apiMode = urlParams.get('api');
+            var listEl = document.getElementById('news-voca-preview-list');
             if (!listEl) return;
 
-            const fallbackNews = '<li><a href="news-voca-list.html">뉴스 어휘 리스트</a></li><li><a href="news-voca-list.html">최신 기사 기반 단어 학습</a></li><li><a href="news-voca-list.html">WSJ · CBS 뉴스 어휘</a></li><li><a href="news-voca-list.html">뉴스 영어 표현 정리</a></li><li><a href="news-voca-list.html">토픽별 뉴스 단어</a></li>';
-            var newsTimeoutId = setTimeout(function() { listEl.innerHTML = fallbackNews; }, 8000);
+            var fallbackHtml = buildPreviewTableHtml([], '<a href="news-voca-list.html">뉴스 어휘 보기</a>');
+            var newsTimeoutId = setTimeout(function() { listEl.innerHTML = fallbackHtml; }, 8000);
 
-            fetch(apiBase + '/guestbook')
+            fetch(getApiBase() + '/guestbook')
                 .then(function(r) {
                     if (!r.ok) throw new Error('HTTP ' + r.status);
                     return r.json();
                 })
                 .then(function(data) {
                     clearTimeout(newsTimeoutId);
-                    let entries = [];
-                    if (Array.isArray(data)) entries = data;
-                    else if (data.entries) entries = data.entries;
-                    else if (data.data) entries = Array.isArray(data.data) ? data.data : [];
-
-                    const reversed = entries.slice().reverse();
-                    const preview = reversed.slice(0, 5);
-                    const total = entries.length;
-
-                    if (preview.length === 0) {
-                        listEl.innerHTML = '<li><a href="news-voca-list.html">게시글이 없습니다.</a></li>';
-                        return;
-                    }
-
-                    const apiParam = apiMode ? '&api=' + apiMode : '';
-                    listEl.innerHTML = preview.map(function(entry, idx) {
-                        var origIdx = total - 1 - idx;
-                        var title = (entry.title || '제목 없음').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-                        if (title.length > 45) title = title.slice(0, 42) + '...';
-                        return '<li><a href="news-voca.html?index=' + origIdx + apiParam + '">' + title + '</a></li>';
-                    }).join('');
+                    renderPreviewList(listEl, parseEntries(data), 'news-voca.html', apiMode, '게시글이 없습니다.');
                 })
                 .catch(function() {
                     clearTimeout(newsTimeoutId);
-                    listEl.innerHTML = fallbackNews;
+                    listEl.innerHTML = fallbackHtml;
                 });
         })();
 
         // Synonym (유의어) 실제 데이터 로드
         (function loadSynonymPreview() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const apiMode = urlParams.get('api');
-            let apiBase;
-            if (apiMode === 'prod') {
-                apiBase = 'https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app';
-            } else if (apiMode === 'local') {
-                apiBase = 'http://' + window.location.hostname + ':3000';
-            } else if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-                apiBase = 'http://' + window.location.hostname + ':3000';
-            } else {
-                apiBase = 'https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app';
-            }
-
-            const listEl = document.getElementById('synonym-preview-list');
+            var urlParams = new URLSearchParams(window.location.search);
+            var apiMode = urlParams.get('api');
+            var listEl = document.getElementById('synonym-preview-list');
             if (!listEl) return;
 
-            const fallbackSyn = '<li><a href="english-synonym-list.html">유의어 연습</a></li><li><a href="english-synonym-list.html">동의어 퀴즈</a></li><li><a href="english-synonym-list.html">유의어 카드 학습</a></li><li><a href="english-synonym-list.html">문맥별 유의어</a></li><li><a href="english-synonym-list.html">유의어 복습</a></li>';
-            var synTimeoutId = setTimeout(function() { listEl.innerHTML = fallbackSyn; }, 8000);
+            var fallbackHtml = buildPreviewTableHtml([], '<a href="english-synonym-list.html">유의어 보기</a>');
+            var synTimeoutId = setTimeout(function() { listEl.innerHTML = fallbackHtml; }, 8000);
 
-            fetch(apiBase + '/vocabulary')
+            fetch(getApiBase() + '/vocabulary')
                 .then(function(r) {
                     if (!r.ok) throw new Error('HTTP ' + r.status);
                     return r.json();
                 })
                 .then(function(data) {
                     clearTimeout(synTimeoutId);
-                    let entries = [];
-                    if (Array.isArray(data)) entries = data;
-                    else if (data.entries) entries = data.entries;
-                    else if (data.data) entries = Array.isArray(data.data) ? data.data : [];
-
-                    const reversed = entries.slice().reverse();
-                    const preview = reversed.slice(0, 5);
-                    const total = entries.length;
-
-                    if (preview.length === 0) {
-                        listEl.innerHTML = '<li><a href="english-synonym-list.html">게시글이 없습니다.</a></li>';
-                        return;
-                    }
-
-                    const apiParam = apiMode ? '&api=' + apiMode : '';
-                    listEl.innerHTML = preview.map(function(entry, idx) {
-                        var origIdx = total - 1 - idx;
-                        var title = (entry.title || '제목 없음').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-                        if (title.length > 45) title = title.slice(0, 42) + '...';
-                        return '<li><a href="english-synonym.html?index=' + origIdx + apiParam + '">' + title + '</a></li>';
-                    }).join('');
+                    renderPreviewList(listEl, parseEntries(data), 'english-synonym.html', apiMode, '게시글이 없습니다.');
                 })
                 .catch(function() {
                     clearTimeout(synTimeoutId);
-                    listEl.innerHTML = fallbackSyn;
+                    listEl.innerHTML = fallbackHtml;
                 });
         })();
 
-        // Popular Voca: /easy-voca API, popular-voca-list / popular-voca
+        // Popular Voca
         (function loadEasyVocaPreview() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const apiMode = urlParams.get('api');
-            let apiBase;
-            if (apiMode === 'prod') {
-                apiBase = 'https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app';
-            } else if (apiMode === 'local') {
-                apiBase = 'http://' + window.location.hostname + ':3000';
-            } else if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-                apiBase = 'http://' + window.location.hostname + ':3000';
-            } else {
-                apiBase = 'https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app';
-            }
-
-            const listEl = document.getElementById('easy-voca-preview-list');
+            var urlParams = new URLSearchParams(window.location.search);
+            var apiMode = urlParams.get('api');
+            var listEl = document.getElementById('easy-voca-preview-list');
             if (!listEl) return;
 
-            const fallbackEasy = '<li><a href="popular-voca-list.html">Popular Voca 보기</a></li>';
-            var easyTimeoutId = setTimeout(function() { listEl.innerHTML = fallbackEasy; }, 8000);
+            var fallbackHtml = buildPreviewTableHtml([], '<a href="popular-voca-list.html">Popular Voca 보기</a>');
+            var easyTimeoutId = setTimeout(function() { listEl.innerHTML = fallbackHtml; }, 8000);
 
-            fetch(apiBase + '/easy-voca')
+            fetch(getApiBase() + '/easy-voca')
                 .then(function(r) {
                     if (!r.ok) throw new Error('HTTP ' + r.status);
                     return r.json();
                 })
                 .then(function(data) {
                     clearTimeout(easyTimeoutId);
-                    let entries = [];
-                    if (Array.isArray(data)) entries = data;
-                    else if (data.entries) entries = data.entries;
-                    else if (data.data) entries = Array.isArray(data.data) ? data.data : [];
-
-                    const reversed = entries.slice().reverse();
-                    const preview = reversed.slice(0, 5);
-                    const total = entries.length;
-
-                    if (preview.length === 0) {
-                        listEl.innerHTML = '<li><a href="popular-voca-list.html">게시글이 없습니다.</a></li>';
-                        return;
-                    }
-
-                    const apiParam = apiMode ? '&api=' + apiMode : '';
-                    listEl.innerHTML = preview.map(function(entry, idx) {
-                        var origIdx = total - 1 - idx;
-                        var title = (entry.title || '제목 없음').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-                        if (title.length > 45) title = title.slice(0, 42) + '...';
-                        return '<li><a href="popular-voca.html?index=' + origIdx + apiParam + '">' + title + '</a></li>';
-                    }).join('');
+                    renderPreviewList(listEl, parseEntries(data), 'popular-voca.html', apiMode, '게시글이 없습니다.');
                 })
                 .catch(function() {
                     clearTimeout(easyTimeoutId);
-                    listEl.innerHTML = '<li><a href="popular-voca-list.html">Popular Voca 로딩 실패</a></li>';
+                    listEl.innerHTML = fallbackHtml;
                 });
         })();
 
-        // Word of the Day: /wordofday API, word-of-the-day-list / word-of-the-day
+        // Word of the Day
         (function loadWordOfDayPreview() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const apiMode = urlParams.get('api');
-            let apiBase;
-            if (apiMode === 'prod') {
-                apiBase = 'https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app';
-            } else if (apiMode === 'local') {
-                apiBase = 'http://' + window.location.hostname + ':3000';
-            } else if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-                apiBase = 'http://' + window.location.hostname + ':3000';
-            } else {
-                apiBase = 'https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app';
-            }
-
-            const listEl = document.getElementById('wordofday-preview-list');
+            var urlParams = new URLSearchParams(window.location.search);
+            var apiMode = urlParams.get('api');
+            var listEl = document.getElementById('wordofday-preview-list');
             if (!listEl) return;
 
-            const apiParam = apiMode ? '&api=' + apiMode : (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1' ? '&api=prod' : '');
-            const fallbackHtml = '<li><a href="word-of-the-day-list.html?api=prod">Word of the Day 보기</a></li>';
+            var effectiveApiMode = apiMode || (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1' ? 'prod' : null);
+            var fallbackHtml = buildPreviewTableHtml([], '<a href="word-of-the-day-list.html?api=prod">Word of the Day 보기</a>');
+            var timeoutId = setTimeout(function() { listEl.innerHTML = fallbackHtml; }, 8000);
 
-            var timeoutId = setTimeout(function() {
-                listEl.innerHTML = fallbackHtml;
-            }, 8000);
-
-            fetch(apiBase + '/wordofday')
+            fetch(getApiBase() + '/wordofday')
                 .then(function(r) {
                     if (!r.ok) throw new Error('HTTP ' + r.status);
                     return r.json();
                 })
                 .then(function(data) {
                     clearTimeout(timeoutId);
-                    var entries = [];
-                    if (Array.isArray(data)) entries = data;
-                    else if (data && data.entries) entries = data.entries;
-                    else if (data && data.data) entries = Array.isArray(data.data) ? data.data : [];
-
-                    var reversed = entries.slice().reverse();
-                    var preview = reversed.slice(0, 5);
-                    var total = entries.length;
-
-                    if (preview.length === 0) {
-                        listEl.innerHTML = '<li><a href="word-of-the-day-list.html?api=prod">게시글이 없습니다.</a></li>';
-                        return;
-                    }
-
-                    listEl.innerHTML = preview.map(function(entry, idx) {
-                        var origIdx = total - 1 - idx;
-                        var title = (entry.title || '제목 없음').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-                        if (title.length > 45) title = title.slice(0, 42) + '...';
-                        return '<li><a href="word-of-the-day.html?index=' + origIdx + apiParam + '">' + title + '</a></li>';
-                    }).join('');
+                    renderPreviewList(listEl, parseEntries(data), 'word-of-the-day.html', effectiveApiMode, '게시글이 없습니다.');
                 })
                 .catch(function() {
                     clearTimeout(timeoutId);
