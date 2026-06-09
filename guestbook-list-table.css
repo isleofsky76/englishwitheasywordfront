@@ -103,7 +103,7 @@
   text-decoration: none;
   font-weight: 400;
   font-family: 'Poppins', 'Noto Sans KR', sans-serif;
-  font-size: calc(1em + 0.5px);
+  font-size: calc(1em + 0.7px);
   line-height: 1.4;
   flex: 1;
   min-width: 0;
@@ -300,7 +300,7 @@
   }
 
   .gb-col-title a {
-    font-size: calc(0.74rem + 0.5px);
+    font-size: calc(0.74rem + 0.7px);
   }
 
   .gb-col-title {
