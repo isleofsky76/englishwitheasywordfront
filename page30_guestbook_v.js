@@ -1016,71 +1016,10 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // 메시지 렌더링 함수 (성능 최적화: DocumentFragment 사용)
     function renderMessages(messages, container) {
-        console.log('🎨 renderMessages 호출됨, messages:', messages);
-        
-        if (!messages || !messages.entries || messages.entries.length === 0) {
-            container.innerHTML = '<div class="guestbook-item" style="text-align: center; padding: 20px; color: #666;">게시글이 없습니다.</div>';
-            return;
-        }
-        
-        // DocumentFragment를 사용하여 DOM 조작 최적화
-        const fragment = document.createDocumentFragment();
-        const total = messages.entries.length;
-        const reversedEntries = [...messages.entries].reverse();
-        
-        console.log(`📝 총 ${total}개의 게시글 렌더링 중...`);
-        
-        reversedEntries.forEach((entry, idx) => {
-            const item = document.createElement('div');
-            item.className = 'guestbook-item';
-            const number = total - idx;
-            // 원본 배열의 인덱스 계산 (역순이므로)
-            const originalIndex = total > 0 ? total - 1 - idx : 0;
-            
-            // 인덱스 유효성 검사
-            if (originalIndex < 0 || originalIndex >= total) {
-                console.error(`⚠️ 잘못된 인덱스 계산: originalIndex=${originalIndex}, total=${total}, idx=${idx}`);
-                return; // 이 항목은 건너뛰기
-            }
-            
-            // 날짜 포맷팅: "yyyy.mm.dd", "hh:mm" 분리
-            let datePart = '';
-            let timePart = '';
-            if (entry.date) {
-                try {
-                    const date = new Date(entry.date);
-                    if (!isNaN(date.getTime())) {
-                        const year = date.getFullYear();
-                        const month = ('0' + (date.getMonth() + 1)).slice(-2);
-                        const day = ('0' + date.getDate()).slice(-2);
-                        const hours = ('0' + date.getHours()).slice(-2);
-                        const minutes = ('0' + date.getMinutes()).slice(-2);
-                        datePart = `${year}.${month}.${day}`;
-                        timePart = `${hours}:${minutes}`;
-                    }
-                } catch (e) {
-                    console.error('날짜 파싱 오류:', e, entry.date);
-                }
-            }
-            
-            // API 파라미터 유지
-            const apiParam = apiMode ? `&api=${apiMode}` : '';
-            const author = escapeHtml(entry.nickname || '익명');
-            const views = entry.views || 0;
-            const authorWithLogo = `<span class="meta-author"><img class="meta-author-logo" src="resources/logo.jpg" alt="News English Lab logo">${author}</span>`;
-            const metaText = [authorWithLogo, datePart, timePart].filter(Boolean).join(' | ') + ` 조회 ${views}`;
-            item.innerHTML = `
-              <div class="item-title">
-                <a href="page30_viewpost_v.html?index=${originalIndex}${apiParam}">${escapeHtml(entry.title || '제목 없음')}</a>
-              </div>
-              <div class="item-meta">${metaText}</div>`;
-            fragment.appendChild(item);
+        renderGuestbookTable(container, messages, {
+            postPage: 'english-synonym.html',
+            apiMode: apiMode
         });
-        
-        // 한 번에 DOM에 추가 (리플로우 최소화)
-        container.innerHTML = '';
-        container.appendChild(fragment);
-        console.log('✅ 게시글 렌더링 완료');
     }
 
     window.deletePost = async function (id) {
