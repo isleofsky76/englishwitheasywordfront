@@ -99,10 +99,12 @@
 }
 
 .gb-col-title a {
-  color: #1a1a1b;
+  color: #333;
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 400;
+  font-family: 'Poppins', 'Noto Sans KR', sans-serif;
   font-size: inherit;
+  line-height: 1.4;
   flex: 1;
   min-width: 0;
   max-width: 100%;
@@ -126,7 +128,7 @@
 }
 
 .gb-col-title a:hover {
-  color: #2b6cb0;
+  color: #4a90e2;
   text-decoration: underline;
 }
 
