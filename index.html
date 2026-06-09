@@ -189,13 +189,16 @@
             padding-left: 6px;
             padding-right: 6px;
         }
-        .index-preview-table th.col-title,
+        .index-preview-table th.col-title {
+            width: auto;
+            overflow: hidden;
+            text-align: center;
+        }
         .idx-col-title {
             width: auto;
             overflow: hidden;
-        }
-        .index-preview-table th.col-title {
-            text-align: left;
+            text-align: left !important;
+            padding-left: 8px;
         }
         .index-preview-table td {
             padding: 8px 10px;
@@ -215,17 +218,15 @@
             color: #2b6cb0;
             font-weight: 600;
         }
-        .idx-col-title {
-            text-align: left !important;
-            max-width: 0;
-        }
         .idx-col-title a {
             color: #333;
             text-decoration: none;
             display: block;
+            max-width: 100%;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
+            text-align: left;
         }
         .idx-col-title a:hover {
             color: #4a90e2;
@@ -246,6 +247,16 @@
             .index-preview-table td {
                 padding: 7px 8px;
                 font-size: 0.8rem;
+            }
+            .index-preview-table th.col-title {
+                text-align: center;
+            }
+            .idx-col-title {
+                text-align: left !important;
+                padding-left: 6px;
+            }
+            .idx-col-title a {
+                text-align: left;
             }
         }
         .resources-section {
