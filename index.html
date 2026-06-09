@@ -53,8 +53,8 @@
         .main-content {
             margin-top: 90px;
             margin-bottom: 30px;
-            padding-left: 0;
-            padding-right: 0;
+            padding-left: 1.25rem;
+            padding-right: 1.25rem;
         }
         .intro-text {
             background: white;
@@ -75,7 +75,7 @@
             color: #333;
             font-size: 0.84rem; /* 0.8rem 에서 약 5% 상향 */
             font-family: 'Poppins', sans-serif;
-            padding-left: 14px;
+            padding-left: 0;
         }
         .preview-section {
             background: #fff;
@@ -194,6 +194,8 @@
         @media (max-width: 600px) {
             .main-content {
                 margin-top: 70px;
+                padding-left: max(16px, env(safe-area-inset-left, 0px));
+                padding-right: max(16px, env(safe-area-inset-right, 0px));
             }
             .intro-text {
                 padding: 1.2rem 0 1rem 0;
