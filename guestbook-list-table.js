@@ -289,13 +289,15 @@
 
         window._guestbookTableActionsInit = true;
 
-        document.addEventListener('click', function (e) {
+        function handleLikeClick(e) {
 
             const likeBtn = e.target.closest('.gb-like-btn');
 
             if (!likeBtn || likeBtn.disabled) return;
 
             e.preventDefault();
+
+            e.stopPropagation();
 
 
 
@@ -375,7 +377,23 @@
 
                 });
 
-        });
+        }
+
+        document.addEventListener('click', handleLikeClick);
+
+        document.addEventListener('touchend', function (e) {
+
+            const likeBtn = e.target.closest('.gb-like-btn');
+
+            if (!likeBtn || likeBtn.disabled) return;
+
+            e.preventDefault();
+
+            e.stopPropagation();
+
+            handleLikeClick(e);
+
+        }, { passive: false });
 
     }
 

@@ -363,6 +363,8 @@
     overflow: hidden;
     text-overflow: ellipsis;
     display: block;
+    position: relative;
+    z-index: 1;
   }
 
   .gb-col-likes {
@@ -371,21 +373,29 @@
     width: auto !important;
     min-width: 0 !important;
     padding: 0 !important;
+    position: relative;
+    z-index: 3;
     transform: translateX(-5px);
   }
 
   .gb-like-wrap {
     gap: 3px;
     justify-content: flex-end;
+    position: relative;
+    z-index: 3;
   }
 
   .gb-col-likes .gb-like-btn {
-    min-width: 26px;
-    width: 26px;
-    height: 26px;
+    min-width: 40px;
+    width: 40px;
+    height: 40px;
     padding: 0;
-    font-size: 0.7rem;
+    font-size: 0.85rem;
     line-height: 1;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    position: relative;
+    z-index: 4;
   }
 
   .gb-col-likes .gb-like-count {
@@ -430,8 +440,10 @@
   /* 개별 열 숨김 */
   .gb-col-author,
   .gb-col-date,
-  .gb-col-views {
+  .gb-col-views,
+  .gb-col-share {
     display: none !important;
+    pointer-events: none !important;
   }
 
   .gb-img-badge {
