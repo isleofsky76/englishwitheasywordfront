@@ -109,13 +109,15 @@
             border-bottom: 1px solid #f0f0f0;
         }
         .preview-section h3 {
-            font-size: 0.93rem;
+            font-size: 15px;
             font-weight: 500;
             color: #1a1a1a;
             margin: 0;
             line-height: 1.4;
             letter-spacing: -0.03em;
             -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
         }
         .preview-more {
             font-size: 0.75rem;
@@ -138,15 +140,21 @@
             border-bottom: none;
         }
         .preview-list li a {
-            color: #333;
+            color: #222;
             text-decoration: none;
             display: flex;
             align-items: baseline;
             gap: 0.45rem;
             overflow: hidden;
         }
-        .preview-list li > a:not(:has(.preview-title)) {
-            font-size: calc(1em - 1.3px);
+        .preview-list li > a:not(:has(.preview-title)),
+        .preview-title {
+            font-size: 13px;
+            font-weight: 500;
+            color: #222;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
         }
         .preview-num {
             flex-shrink: 0;
@@ -162,7 +170,6 @@
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
-            font-size: calc(1em - 1.3px);
         }
         .preview-list li a:hover {
             color: #2b6cb0;
@@ -226,7 +233,7 @@
                 padding: 0.75rem 0 0.4rem;
             }
             .preview-section h3 {
-                font-size: 0.91rem;
+                font-size: 14px;
                 font-weight: 500;
             }
         }

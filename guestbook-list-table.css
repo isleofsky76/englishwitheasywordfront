@@ -99,12 +99,15 @@
 }
 
 .gb-col-title a {
-  color: #333;
+  color: #222;
   text-decoration: none;
-  font-weight: 400;
-  font-family: 'Poppins', 'Noto Sans KR', sans-serif;
-  font-size: calc(1em + 0.7px);
+  font-weight: 500;
+  font-family: 'Noto Sans KR', 'Poppins', sans-serif;
+  font-size: 14px;
   line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
   flex: 1;
   min-width: 0;
   max-width: 100%;
@@ -300,7 +303,7 @@
   }
 
   .gb-col-title a {
-    font-size: calc(0.74rem + 0.7px);
+    font-size: 13px;
   }
 
   .gb-col-title {
