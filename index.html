@@ -145,6 +145,9 @@
             gap: 0.45rem;
             overflow: hidden;
         }
+        .preview-list li > a:not(:has(.preview-title)) {
+            font-size: calc(1em + 2px);
+        }
         .preview-num {
             flex-shrink: 0;
             min-width: 1.1rem;
@@ -159,6 +162,7 @@
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
+            font-size: calc(1em + 2px);
         }
         .preview-list li a:hover {
             color: #2b6cb0;
