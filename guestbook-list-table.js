@@ -127,11 +127,11 @@
             '<div class="gb-table-wrap">' +
             '<table class="gb-table">' +
             '<thead><tr>' +
-            '<th>번호</th>' +
+            '<th class="col-num">번호</th>' +
             '<th class="col-title">제목</th>' +
             '<th>작성자</th>' +
             '<th>작성일</th>' +
-            '<th>조회수</th>' +
+            '<th class="col-views">조회수</th>' +
             '<th>Likes</th>' +
             '<th>공유</th>' +
             '</tr></thead>' +
