@@ -1,0 +1,142 @@
+/**
+ * 제목·목록 텍스트 선명도 — index.html 및 연결 페이지 공통
+ * Noto Sans KR + 정수 px + font-smoothing
+ */
+
+body {
+  font-family: 'Noto Sans KR', 'Poppins', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+.navbar-brand {
+  font-family: 'Noto Sans KR', 'Poppins', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* index.html — 목록 제목 */
+.preview-title,
+.preview-list li > a:not(:has(.preview-title)) {
+  font-size: 13px;
+  font-weight: 500;
+  color: #222;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+.preview-section h3 {
+  font-size: 15px;
+  font-weight: 500;
+  color: #1a1a1a;
+  letter-spacing: -0.03em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+@media (max-width: 600px) {
+  .preview-section h3 {
+    font-size: 14px;
+  }
+}
+
+/* list 페이지 — guestbook-list-table 보강 */
+.gb-col-title a {
+  color: #222;
+  font-weight: 500;
+  font-family: 'Noto Sans KR', 'Poppins', sans-serif;
+  font-size: 14px;
+  line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* 글 상세 — 게시글 제목 */
+#post-title {
+  font-family: 'Noto Sans KR', 'Poppins', sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: #1a1a1a;
+  letter-spacing: -0.03em;
+  line-height: 1.35;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* 글 상세 — 하단 다른 글 목록 */
+.other-posts-title {
+  font-family: 'Noto Sans KR', 'Poppins', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: #1a1a1a;
+  letter-spacing: -0.03em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+.other-posts-list li a {
+  font-size: 14px;
+  font-weight: 500;
+  color: #222;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* learning-site.html */
+.learning-site-page .preview-section h3 {
+  font-size: 15px;
+  font-weight: 500;
+  color: #1a1a1a;
+  letter-spacing: -0.03em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+.learning-site-page .preview-list li a {
+  font-size: 14px;
+  font-weight: 500;
+  color: #222;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+@media (max-width: 767px) {
+  .gb-col-title a {
+    font-size: 13px;
+  }
+
+  #post-title {
+    font-size: 17px;
+  }
+
+  .learning-site-page .preview-section h3 {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  #post-title {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  #post-title {
+    font-size: 18px;
+  }
+}
+
+@media (min-width: 1200px) {
+  #post-title {
+    font-size: 19px;
+  }
+}
