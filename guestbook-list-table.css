@@ -77,9 +77,9 @@
   padding-right: 8px;
 }
 
-.gb-col-num {
-  color: #2b6cb0;
-  font-weight: 600;
+.gb-table td.gb-col-num {
+  color: #1a56db !important;
+  font-weight: 700;
   font-size: inherit;
 }
 
@@ -145,8 +145,9 @@
   white-space: nowrap;
 }
 
-.gb-col-views {
-  color: #666;
+.gb-table td.gb-col-views {
+  color: #c53030 !important;
+  font-weight: 600;
   font-size: inherit;
   white-space: nowrap;
 }
