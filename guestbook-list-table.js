@@ -129,11 +129,11 @@
             '<thead><tr>' +
             '<th class="col-num">번호</th>' +
             '<th class="col-title">제목</th>' +
-            '<th>작성자</th>' +
-            '<th>작성일</th>' +
+            '<th class="col-author">작성자</th>' +
+            '<th class="col-date">작성일</th>' +
             '<th class="col-views">조회수</th>' +
-            '<th>Likes</th>' +
-            '<th>공유</th>' +
+            '<th class="col-likes">Likes</th>' +
+            '<th class="col-share">공유</th>' +
             '</tr></thead>' +
             '<tbody>' + rows + '</tbody>' +
             '</table></div>';

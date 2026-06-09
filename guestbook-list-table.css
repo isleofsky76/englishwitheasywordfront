@@ -251,31 +251,44 @@
   .gb-table-wrap {
     margin: 0 6px;
     border-radius: 6px;
+    overflow-x: visible;
   }
 
   .gb-table {
-    min-width: 640px;
+    min-width: 0;
+    width: 100%;
+    table-layout: fixed;
     font-size: 0.8rem;
+  }
+
+  /* 모바일: 번호·제목·조회수만 표시 */
+  .gb-table th.col-author,
+  .gb-table td.gb-col-author,
+  .gb-table th.col-date,
+  .gb-table td.gb-col-date,
+  .gb-table th.col-likes,
+  .gb-table td.gb-col-likes,
+  .gb-table th.col-share,
+  .gb-table td.gb-col-share {
+    display: none;
   }
 
   .gb-table th,
   .gb-table td {
-    padding: 8px 6px;
-    font-size: 0.8rem;
+    padding: 8px 4px;
+    font-size: 0.78rem;
   }
 
   .gb-col-title a,
   .gb-col-num,
-  .gb-col-author,
-  .gb-col-date,
   .gb-col-views {
-    font-size: 0.8rem;
+    font-size: 0.78rem;
   }
 
   .gb-col-title {
-    max-width: 140px;
+    max-width: none;
     text-align: left !important;
-    padding-left: 8px !important;
+    padding-left: 6px !important;
   }
 
   .gb-table th.col-title {
@@ -292,15 +305,19 @@
 
   .gb-table th.col-num,
   .gb-col-num {
-    min-width: 54px;
-    width: 54px;
-    max-width: 54px;
+    min-width: 40px;
+    width: 11%;
+    max-width: none;
   }
 
   .gb-table th.col-views,
   .gb-col-views {
-    min-width: 64px;
-    width: 64px;
-    max-width: 64px;
+    min-width: 44px;
+    width: 13%;
+    max-width: none;
+  }
+
+  .gb-table th.col-title {
+    width: auto;
   }
 }
