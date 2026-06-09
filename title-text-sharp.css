@@ -16,47 +16,15 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* index·연결 페이지 — 목록 제목 (긴 제목 말줄임, 조회수 항상 표시) */
-.preview-list li a {
-  display: flex;
-  align-items: baseline;
-  gap: 0.45rem;
-  overflow: hidden;
-}
-
-.preview-title-wrap {
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  align-items: baseline;
-  gap: 4px;
-  overflow: hidden;
-}
-
+/* index.html — 목록 제목 */
 .preview-title,
-.preview-list li > a:not(:has(.preview-title-wrap)) {
+.preview-list li > a:not(:has(.preview-title)) {
   font-size: 13px;
   font-weight: 500;
   color: #222;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-}
-
-.preview-title {
-  flex: 1;
-  min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.preview-views {
-  flex-shrink: 0;
-  color: #e05a00;
-  font-weight: 500;
-  font-size: 12px;
-  white-space: nowrap;
 }
 
 .preview-section h3 {

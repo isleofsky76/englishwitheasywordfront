@@ -155,8 +155,30 @@
             font-size: 0.82rem;
             text-align: right;
         }
+        .preview-list li > a:not(:has(.preview-title)),
+        .preview-title {
+            font-size: 13px;
+            font-weight: 500;
+            color: #222;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+        }
+        .preview-title {
+            flex: 1;
+            min-width: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
         .preview-list li a:hover {
             color: #2b6cb0;
+        }
+        .preview-views {
+            color: #e05a00;
+            font-weight: 500;
+            font-size: 0.8rem;
+            margin-left: 4px;
         }
         .preview-list li.preview-empty {
             text-align: center;
@@ -216,7 +238,7 @@
             }
         }
     </style>
-    <link rel="stylesheet" href="title-text-sharp.css?v=20260610">
+    <link rel="stylesheet" href="title-text-sharp.css?v=20260612">
     <script src="homepage_eventlistener.js"></script>
 </head>
 <body>
@@ -302,8 +324,7 @@
             var safeTitle = (title || '제목 없음').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
             var viewsHtml = views ? '<span class="preview-views">[' + views + ']</span>' : '';
             return '<li><a href="' + href + '"><span class="preview-num">' + number + '</span>' +
-                '<span class="preview-title-wrap"><span class="preview-title">' + safeTitle + '</span>' +
-                viewsHtml + '</span></a></li>';
+                '<span class="preview-title">' + safeTitle + viewsHtml + '</span></a></li>';
         }
 
         function getApiBase() {
