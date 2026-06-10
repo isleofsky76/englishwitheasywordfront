@@ -146,6 +146,10 @@
 
         const apiParam = apiMode ? '&api=' + apiMode : '';
 
+        const hideViewsAndLikes = options.hideViewsAndLikes === true;
+
+        const colCount = hideViewsAndLikes ? 6 : 7;
+
 
 
         window._gbTableLikeConfig = {
@@ -160,11 +164,13 @@
 
         if (!messages || !messages.entries || messages.entries.length === 0) {
 
+            const emptyClass = hideViewsAndLikes ? ' gb-no-stats' : '';
+
             container.innerHTML =
 
-                '<div class="gb-table-wrap"><table class="gb-table"><tbody>' +
+                '<div class="gb-table-wrap' + emptyClass + '"><table class="gb-table' + emptyClass + '"><tbody>' +
 
-                '<tr class="gb-empty-row"><td colspan="8">게시글이 없습니다.</td></tr>' +
+                '<tr class="gb-empty-row"><td colspan="' + colCount + '">게시글이 없습니다.</td></tr>' +
 
                 '</tbody></table></div>';
 
@@ -196,49 +202,54 @@
 
             const dateStr = formatDate(entry.date);
 
-            const views = entry.views || 0;
-
             const entryId = String(entry._id || ('idx-' + originalIndex));
-
-            const canLike = isValidObjectId(entryId);
-
-            const liked = canLike && hasUserLiked(entryId);
-
-            const likeCount = getLikeDisplayCount(entry.likes);
 
             const postUrl = new URL(postPage + '?index=' + originalIndex + apiParam, window.location.href).href;
 
-
-
-            const likeBtnClass = 'gb-action-btn gb-like-btn' + (liked ? ' is-active' : '');
-
-            const likeDisabled = (liked || !canLike) ? ' disabled' : '';
-
-            const likeTitle = !canLike ? '좋아요 불가' : (liked ? '이미 좋아요를 눌렀습니다' : '좋아요 (한 번만 가능)');
-
             const imageBadge = entryHasImage(entry) ? IMAGE_BADGE_HTML : '';
 
+            const views = entry.views || 0;
 
+            const metaMobile =
+                '<span class="gb-meta-part gb-meta-author">' + author + '</span>' +
+                '<span class="gb-meta-sep" aria-hidden="true">|</span>' +
+                '<span class="gb-meta-part gb-meta-date">' + dateStr + '</span>' +
+                '<span class="gb-meta-sep" aria-hidden="true">|</span>' +
+                '<span class="gb-meta-part">조회수 <span class="gb-meta-views">' + views + '</span></span>';
 
-            const metaMobile = author + ' | ' + dateStr + ' | 조회수 <span class="gb-meta-views">' + views + '</span>';
+            let statsCells = '<td class="gb-col-views">' + views + '</td>';
+
+            if (!hideViewsAndLikes) {
+                const canLike = isValidObjectId(entryId);
+                const liked = canLike && hasUserLiked(entryId);
+                const likeCount = getLikeDisplayCount(entry.likes);
+                const likeBtnClass = 'gb-action-btn gb-like-btn' + (liked ? ' is-active' : '');
+                const likeDisabled = (liked || !canLike) ? ' disabled' : '';
+                const likeTitle = !canLike ? '좋아요 불가' : (liked ? '이미 좋아요를 눌렀습니다' : '좋아요 (한 번만 가능)');
+
+                statsCells +=
+                    '<td class="gb-col-likes">' +
+                    '<span class="gb-like-wrap">' +
+                    '<button type="button" class="' + likeBtnClass + '" data-gb-like="' + escapeAttr(entryId) + '" title="' + escapeAttr(likeTitle) + '"' + likeDisabled + '>👍</button>' +
+                    '<span class="gb-like-count">' + likeCount + '</span>' +
+                    '</span>' +
+                    '</td>';
+            }
 
             return '<tr data-gb-entry="' + escapeAttr(entryId) + '">' +
                 '<td class="gb-col-num">' + number + '</td>' +
-                '<td class="gb-col-title"><span class="gb-title-cell">' +
+                '<td class="gb-col-title">' +
+                '<div class="gb-title-stack">' +
+                '<span class="gb-title-cell">' +
                 '<a href="' + postPage + '?index=' + originalIndex + apiParam + '" title="' + title + '">' + title + '</a>' +
                 imageBadge +
-                '</span></td>' +
+                '</span>' +
+                '<div class="gb-col-meta-mobile">' + metaMobile + '</div>' +
+                '</div></td>' +
                 '<td class="gb-col-author">' + author + '</td>' +
                 '<td class="gb-col-date">' + dateStr + '</td>' +
-                '<td class="gb-col-views">' + views + '</td>' +
-                '<td class="gb-col-likes">' +
-                '<span class="gb-like-wrap">' +
-                '<button type="button" class="' + likeBtnClass + '" data-gb-like="' + escapeAttr(entryId) + '" title="' + escapeAttr(likeTitle) + '"' + likeDisabled + '>👍</button>' +
-                '<span class="gb-like-count">' + likeCount + '</span>' +
-                '</span>' +
-                '</td>' +
+                statsCells +
                 '<td class="gb-col-share">' + buildShareLinks(postUrl, rawTitle) + '</td>' +
-                '<td class="gb-col-meta-mobile">' + metaMobile + '</td>' +
                 '</tr>';
 
         }).join('');
@@ -249,15 +260,17 @@
 
         const thDate = mobile ? '일자' : '작성일';
 
-        const thViews = '조회수';
+        const statsHeaders =
+            '<th class="col-views">조회수</th>' +
+            (hideViewsAndLikes ? '' : '<th class="col-likes">Likes</th>');
 
-
+        const noStatsClass = hideViewsAndLikes ? ' gb-no-stats' : '';
 
         container.innerHTML =
 
-            '<div class="gb-table-wrap">' +
+            '<div class="gb-table-wrap' + noStatsClass + '">' +
 
-            '<table class="gb-table">' +
+            '<table class="gb-table' + noStatsClass + '">' +
 
             '<thead><tr>' +
 
@@ -269,9 +282,7 @@
 
             '<th class="col-date">' + thDate + '</th>' +
 
-            '<th class="col-views">' + thViews + '</th>' +
-
-            '<th class="col-likes">Likes</th>' +
+            statsHeaders +
 
             '<th class="col-share">공유</th>' +
 

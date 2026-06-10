@@ -27,7 +27,8 @@
     <!-- 캐시 무시를 위한 버전 쿼리 -->
     <link rel="stylesheet" href="page30_viewpost_wordofday.css?v=20260415c">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="title-text-sharp.css?v=20260609">
+    <link rel="stylesheet" href="title-text-sharp.css?v=20260610">
+    <link rel="stylesheet" href="viewpost-like.css?v=20260625">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -46,44 +47,9 @@
             <p id="post-message"></p>
         </div>
     </div>
-    <div class="viewpost-actions mt-4" id="viewpost-actions">
-        <button class="btn btn-warning me-2" id="editBtn">Edit</button>
-        <button class="btn btn-danger me-2" id="deleteBtn">Delete</button>
-        <button class="btn btn-secondary" id="backBtn">Back</button>
-    </div>
-    <div id="edit-post-container" style="display: none;">
-        <div class="edit-form-wrapper">
-            <h3 class="mb-3 text-warning">Edit Message</h3>
-            <form id="edit-guestbook-form">
-                <input type="hidden" id="edit-id">
-                <div class="row g-2">
-                    <div class="col-md-6">
-                        <input type="text" id="edit-title" class="form-control" placeholder="Title" required>
-                    </div>
-                    <div class="col-md-6">
-                        <input type="text" id="edit-nickname" class="form-control" placeholder="Nickname" required>
-                    </div>
-                </div>
-                <div class="mt-2">
-                    <textarea id="edit-message" class="form-control" placeholder="Message" rows="6" required></textarea>
-                </div>
-                <div class="row g-2 mt-2">
-                    <div class="col-md-6">
-                        <input type="password" id="edit-password" class="form-control" placeholder="Password" required>
-                    </div>
-                    <div class="col-md-6 d-flex align-items-center">
-                        <input type="checkbox" id="edit-isSecret" class="form-check-input me-2">
-                        <label for="edit-isSecret" class="form-check-label">Secret</label>
-                    </div>
-                </div>
-                <div class="mt-3 d-flex gap-2">
-                    <button type="submit" class="btn btn-warning flex-fill">Update</button>
-                    <button type="button" class="btn btn-secondary" id="cancelEditBtn">Cancel</button>
-                </div>
-            </form>
-        </div>
-    </div>
     <script src="page30-api-config.js"></script>
-    <script src="page30_viewpost_wordofday.js?v=20260415b"></script>
+    <script src="viewpost-meta.js?v=20260626"></script>
+    <script src="viewpost-like.js?v=20260625"></script>
+    <script src="page30_viewpost_wordofday.js?v=20260626"></script>
 </body>
 </html>

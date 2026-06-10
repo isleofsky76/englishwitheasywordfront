@@ -258,6 +258,11 @@
   color: #888;
 }
 
+/* 좋아요 숨김 목록 (조회수는 유지) */
+.gb-no-stats.gb-table {
+  min-width: 640px;
+}
+
 /* 모바일 전용 — 2줄 카드형 (thead 숨김, 메타 줄) */
 .gb-col-meta-mobile {
   display: none;
@@ -269,12 +274,14 @@
     width: 100% !important;
     padding-left: 0 !important;
     padding-right: 0 !important;
+    font-size: 14px !important;
     background-color: #fff !important;
   }
 
   .guestbook-list {
     margin-left: 0;
     margin-right: 0;
+    margin-top: 0.35rem;
   }
 
   .gb-table-wrap {
@@ -285,27 +292,36 @@
     background: #fff;
   }
 
+  /* page30_guestbook*.css 의 table/td 전역 규칙과 분리 */
+  .guestbook-list .gb-table-wrap .gb-table,
+  .guestbook-list .gb-table-wrap .gb-table td,
+  .guestbook-list .gb-table-wrap .gb-table th {
+    font-size: inherit !important;
+    padding: 0 !important;
+    border: none;
+    line-height: 1.05 !important;
+  }
+
   .gb-table {
     min-width: 0;
     width: 100%;
     border-collapse: collapse;
-    font-size: 0.8rem;
+    font-size: 0.8125rem;
+    font-family: 'Noto Sans KR', 'IBM Plex Sans', sans-serif;
   }
 
-  /* 테이블 헤더(번호·제목·일자·조회·Likes) 숨김 */
   .gb-table thead {
     display: none;
   }
 
   .gb-table tbody tr {
     display: grid;
-    grid-template-columns: auto 1fr auto;
-    grid-template-rows: auto auto;
-    column-gap: 4px;
-    row-gap: 4px;
+    grid-template-columns: min-content minmax(0, 1fr) auto;
+    grid-template-rows: auto;
+    column-gap: 8px;
     align-items: center;
-    padding: 10px 16px;
-    border-bottom: 1px solid #f5f5f5;
+    padding: 11px 16px;
+    border-bottom: 1px solid #f0f0f0;
   }
 
   .gb-table tbody tr:hover {
@@ -314,25 +330,25 @@
 
   .gb-table tbody td {
     border-bottom: none;
-    padding: 0;
+    padding: 0 !important;
     text-align: left;
-    vertical-align: middle;
+    vertical-align: top;
   }
 
-  /* 번호 | (제목 + 메타) | likes (모바일: 공유 버튼 숨김) */
+  /* 번호 | (제목 + 메타) | likes */
   .gb-col-num {
     grid-column: 1;
-    grid-row: 1 / 3;
+    grid-row: 1;
     align-self: center;
     justify-self: center;
     width: auto !important;
-    min-width: 1.25rem !important;
+    min-width: 1.35rem !important;
     max-width: none !important;
-    padding: 0 6px 0 0 !important;
+    padding: 0 2px 0 0 !important;
     color: #1a56db !important;
     font-weight: 600;
-    font-size: 13px;
-    line-height: 1.4;
+    font-size: 13px !important;
+    line-height: 1.05;
     text-align: center;
   }
 
@@ -348,23 +364,43 @@
     max-width: none !important;
     padding: 0 !important;
     overflow: hidden;
+    line-height: 1.05 !important;
+    margin: 0 !important;
+    align-self: center;
+  }
+
+  .gb-title-stack {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 8px;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
   }
 
   .gb-title-cell {
     display: block;
     min-width: 0;
+    line-height: 1.05 !important;
+    margin: 0;
+    padding: 0;
   }
 
   .gb-col-title a {
-    font-size: 13px;
+    font-size: 14px !important;
     font-weight: 500;
-    color: #222;
+    color: #222 !important;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     display: block;
     position: relative;
     z-index: 1;
+    line-height: 1.05 !important;
+    letter-spacing: -0.02em;
+    padding: 0;
+    margin: 0;
   }
 
   .gb-col-likes {
@@ -376,6 +412,8 @@
     position: relative;
     z-index: 3;
     transform: translateX(-5px);
+    align-self: center;
+    margin: 0;
   }
 
   .gb-like-wrap {
@@ -422,22 +460,43 @@
     line-height: 1;
   }
 
-  /* 2줄: 작성자 | 날짜 | 조회수 (제목 아래, 번호 오른쪽 열) */
+  /* 작성자 | 날짜 | 조회수 — 제목 바로 아래 (제목 셀 내부) */
   .gb-col-meta-mobile {
-    display: block !important;
-    grid-column: 2;
-    grid-row: 2;
+    display: flex !important;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 0;
     width: 100%;
-    margin: 0;
+    margin: 0 !important;
     padding: 0 !important;
-    font-size: 11px;
+    font-size: 12px !important;
     font-weight: 400;
-    color: #999;
-    line-height: 1.35;
+    color: #888 !important;
+    line-height: 1.15 !important;
     letter-spacing: -0.01em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
-  /* 개별 열 숨김 */
+  .gb-col-meta-mobile .gb-meta-part,
+  .gb-col-meta-mobile .gb-meta-sep,
+  .gb-col-meta-mobile .gb-meta-views {
+    line-height: 1.15 !important;
+    font-size: inherit;
+  }
+
+  .gb-col-meta-mobile .gb-meta-sep {
+    margin: 0 4px;
+    color: #c8c8c8;
+    font-weight: 400;
+  }
+
+  .gb-col-meta-mobile .gb-meta-views {
+    color: #1a56db;
+    font-weight: 600;
+  }
+
   .gb-col-author,
   .gb-col-date,
   .gb-col-views,
@@ -454,5 +513,9 @@
     display: block !important;
     width: 100%;
     padding: 24px 16px !important;
+  }
+
+  .gb-no-stats .gb-table tbody tr {
+    grid-template-columns: min-content minmax(0, 1fr);
   }
 }
