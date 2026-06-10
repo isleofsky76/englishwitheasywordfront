@@ -11,35 +11,39 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dongle&family=Nanum+Gothic&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="0styles.css">
+    <link rel="stylesheet" href="page46_onewordperday.css">
 </head>
 <body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+     <!-- Navbar -->
+     <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Vocabulary/단어장</a>
             <a class="navbar-brand" href="https://englisheasystudy.com/">Home</a>
         </div>
-    </nav><br><br>
-    <div class="wrapper">
-        <div class="content">
-          <div id="word-container">
-            <p id="word-korean"></p>
-            <p id="word-english"></p>
-            <p id="word-pronunciation"></p><br>
-          </div>
-          <ul id="example-list"></ul>
-          <div class="buttons-container">
-            <button id="pronounce-1">발음</button>
-            <button id="pronounce-5">5번 재생</button>
-            <button id="pronounce-10">10번 재생</button>
-            <button id="stop-pronouncing">멈추기</button>
-            <button id="next-word">다음 단어</button>
-            <button id="auto-play">자동 재생</button>
-          </div>
+    </nav>
+    <div class="container">
+        <div class="word-container">
+            <p id="word-korean">경제성장</p>
+            <p id="word-english">Economic Growth</p>
+            <p id="word-pronunciation">[ɪˌkɑːnəmɪk ɡroʊθ]</p>
         </div>
-      </div>
-    
-  <script src="0script.js"></script>
+        <div class="buttons-container">
+            <button onclick="pronounceWord(1)">발음</button>
+            <button onclick="pronounceWord(5)">5번 재생</button>
+            <button onclick="pronounceWord(10)">10번 재생</button>
+            <button onclick="stopPronouncing()">멈추기</button>
+            <button onclick="nextWord()">다음 단어</button>
+            <button onclick="autoPlay()">자동 재생</button>
+        </div>
+        <p>버튼을 누르고 1~2초 후 재생됩니다</p>
+    </div>
+    <!-- 단어 목록을 표시할 섹션 -->
+    <div class="container">
+        <h2>전체 단어 목록</h2>
+        <ul id="word-list">
+            <!-- JavaScript를 통해 단어 목록이 여기에 추가됩니다. -->
+        </ul>
+    </div>
+    <script src="page46_onewordperday.js"></script>
 </body>
 </html>

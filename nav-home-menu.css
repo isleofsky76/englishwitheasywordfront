@@ -1,0 +1,40 @@
+.nav-home-menu-slot {
+  display: flex;
+  align-items: center;
+}
+
+.nav-home-dropdown .navbar-brand.dropdown-toggle {
+  color: #fff !important;
+  padding: 0.22rem 0;
+  font-size: 0.96rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.nav-home-dropdown .dropdown-toggle::after {
+  margin-left: 0.35em;
+  vertical-align: 0.15em;
+}
+
+.nav-home-dropdown-menu {
+  min-width: 11rem;
+  margin-top: 0.35rem;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+  padding: 0.35rem 0;
+}
+
+.nav-home-dropdown-menu .dropdown-item {
+  font-family: 'Noto Sans KR', 'Poppins', sans-serif;
+  font-size: 0.9rem;
+  padding: 0.45rem 1rem;
+  color: #222;
+}
+
+.nav-home-dropdown-menu .dropdown-item:hover,
+.nav-home-dropdown-menu .dropdown-item:focus {
+  background-color: #eef4fc;
+  color: #2b6cb0;
+}

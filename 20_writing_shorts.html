@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>20_writing_shorts</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Nanum+Gothic&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="20_writing_shorts.css">
+  <script src="20_writing_shorts.js" defer></script>
+</head>
+<body>
+  <img id="corner-logo" src="resources/bg.jpeg" alt="">
+  <main class="wrapper">
+    <section class="content">
+      <header class="page-header">
+        <h1 id="page-title"></h1>
+      </header>
+
+      <div class="writing-main">
+        <div class="writing-section writing-section--example">
+          <span class="syn-section-badge" aria-hidden="true">예문</span>
+          <p id="example-ko" class="example-ko"></p>
+        </div>
+
+        <div class="writing-section writing-section--phrases">
+          <span class="syn-section-badge" aria-hidden="true">주요 단어</span>
+          <div id="phrase-list" class="phrase-list" aria-live="polite"></div>
+        </div>
+
+        <div class="writing-section writing-section--full-en">
+          <span class="syn-section-badge" aria-hidden="true">영작</span>
+          <p id="full-en" class="full-en hidden-full-en"></p>
+        </div>
+      </div>
+
+      <div class="controls">
+        <span id="sentence-progress" class="sentence-progress" aria-live="polite"></span>
+        <button id="autoplay-btn" type="button">auto play</button>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
