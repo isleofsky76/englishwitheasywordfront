@@ -172,19 +172,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const writeModalElement = document.getElementById('write-post-modal');
     const writeModal = new bootstrap.Modal(writeModalElement);
     
-    document.getElementById('write-post-button').addEventListener('click', () => {
-        // 게시판 목록 숨기기
-        guestbookList.style.display = 'none';
-        
-        // Bootstrap 모달 열기
-        writeModal.show();
-        document.getElementById('edit-post-container').style.display = 'none';
-        
-        // 모바일에서 모달이 상단에 보이도록 스크롤
-        setTimeout(() => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }, 300); // 모달 애니메이션 후 스크롤
-    });
+    const writePostButton = document.getElementById('write-post-button');
+    if (writePostButton) {
+        writePostButton.addEventListener('click', () => {
+            guestbookList.style.display = 'none';
+            writeModal.show();
+            document.getElementById('edit-post-container').style.display = 'none';
+            setTimeout(() => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }, 300);
+        });
+    }
     
     // 모달이 닫힐 때 게시판 목록 다시 보이기
     writeModalElement.addEventListener('hidden.bs.modal', () => {
@@ -1020,7 +1018,8 @@ document.addEventListener('DOMContentLoaded', () => {
             postPage: 'news-voca.html',
             apiMode: apiMode,
             board: 'guestbook',
-            apiBaseUrl: API_BASE_URL
+            apiBaseUrl: API_BASE_URL,
+            hideViewsAndLikes: true
         });
     }
 

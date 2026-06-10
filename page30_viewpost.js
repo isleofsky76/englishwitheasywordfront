@@ -112,8 +112,8 @@ function nvInjectArticleJsonLd(post, isoDate, description) {
     const params = new URLSearchParams(window.location.search);
     const index = params.get('index');
     const pageUrl = index
-        ? `${NV_SITE_ORIGIN}/page30_viewpost.html?index=${index}`
-        : `${NV_SITE_ORIGIN}/page30_viewpost.html`;
+        ? `${NV_SITE_ORIGIN}/news-voca.html?index=${index}`
+        : `${NV_SITE_ORIGIN}/news-voca.html`;
     script.textContent = JSON.stringify({
         '@context': 'https://schema.org',
         '@type': 'BlogPosting',
@@ -151,8 +151,8 @@ function updatePageSeo(post, formattedDate) {
     const params = new URLSearchParams(window.location.search);
     const index = params.get('index');
     const canonical = index
-        ? `${NV_SITE_ORIGIN}/page30_viewpost.html?index=${index}`
-        : `${NV_SITE_ORIGIN}/page30_viewpost.html`;
+        ? `${NV_SITE_ORIGIN}/news-voca.html?index=${index}`
+        : `${NV_SITE_ORIGIN}/news-voca.html`;
     nvSetCanonical(canonical);
     nvSetMeta('og:url', canonical, true);
 
@@ -440,7 +440,7 @@ function showError(message, details = '') {
         <div style="text-align: center; padding: 30px; color: #d32f2f; background-color: #ffebee; border-radius: 8px; margin: 20px;">
             <p style="font-size: 1.2em; font-weight: bold; margin-bottom: 10px;">⚠️ ${message}</p>
             ${details ? `<p style="font-size: 0.9em; color: #666; margin-top: 10px;">${details}</p>` : ''}
-            <button class="btn btn-primary mt-3" onclick="window.location.href='page30_guestbook.html${apiParam}'">목록으로 돌아가기</button>
+            <button class="btn btn-primary mt-3" onclick="window.location.href='news-voca-list.html${apiParam}'">목록으로 돌아가기</button>
         </div>
     `;
 }
@@ -630,7 +630,7 @@ async function loadPost() {
         // 버튼 기능 연결
         document.getElementById('backBtn').onclick = () => {
             const apiParam = apiMode ? `?api=${apiMode}` : '';
-            window.location.href = `page30_guestbook.html${apiParam}`;
+            window.location.href = `news-voca-list.html${apiParam}`;
         };
         
         document.getElementById('editBtn').onclick = async () => {
@@ -743,7 +743,7 @@ async function loadPost() {
                 if (response.ok) {
                     alert('게시글이 삭제되었습니다.');
                     const apiParam = apiMode ? `?api=${apiMode}` : '';
-                    window.location.href = `page30_guestbook.html${apiParam}`;
+                    window.location.href = `news-voca-list.html${apiParam}`;
                 } else {
                     const errorData = await response.json();
                     alert(`오류: ${errorData.error || '게시글 삭제에 실패했습니다.'}`);

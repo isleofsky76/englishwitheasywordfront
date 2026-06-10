@@ -244,7 +244,7 @@ function showError(message, details = '') {
         <div style="text-align: center; padding: 30px; color: #d32f2f; background-color: #ffebee; border-radius: 8px; margin: 20px;">
             <p style="font-size: 1.2em; font-weight: bold;">⚠️ ${message}</p>
             ${details ? `<p style="font-size: 0.9em; color: #666;">${details}</p>` : ''}
-            <button class="btn btn-primary mt-3" onclick="window.location.href='page30_guestbook_wordofday.html${apiParam}'">목록으로 돌아가기</button>
+            <button class="btn btn-primary mt-3" onclick="window.location.href='word-of-the-day-list.html${apiParam}'">목록으로 돌아가기</button>
         </div>`;
 }
 
@@ -294,16 +294,10 @@ async function loadPost() {
             }
         } catch (_) {}
 
-        let formattedDate = 'Date not available';
-        if (post.date) {
-            const d = new Date(post.date);
-            if (!isNaN(d.getTime())) {
-                formattedDate = `${d.getFullYear()}.${('0' + (d.getMonth() + 1)).slice(-2)}.${('0' + d.getDate()).slice(-2)}  ${('0' + d.getHours()).slice(-2)}:${('0' + d.getMinutes()).slice(-2)}`;
-            }
-        }
         const convertedMessage = convertMediaLinks(post.message || '');
-        const isAdmin = (post.nickname || '').toLowerCase() === 'admin';
-        const metaHtml = isAdmin ? '' : `<p id="post-meta">Author: ${escapeHtml(post.nickname || 'Anonymous')} | Date: ${formattedDate} | Views: ${post.views || 0}</p>`;
+        const metaHtml = typeof buildPostMetaHtml === 'function'
+            ? buildPostMetaHtml(post)
+            : '';
         // SEO / 공유용 메타 태그 동적 설정
         try {
             const plainText = (post.message || '').replace(/<[^>]+>/g, ' ');
@@ -396,100 +390,14 @@ async function loadPost() {
         // 영어 줄 뒤에 개별 스피커 아이콘 추가
         attachWordOfDayWebTTS();
 
-        document.getElementById('backBtn').onclick = () => {
-            window.location.href = `page30_guestbook_wordofday.html${apiMode ? '?api=' + apiMode : ''}`;
-        };
-
-        document.getElementById('editBtn').onclick = async () => {
-            const password = prompt('비밀번호를 입력하세요:');
-            if (!password) return;
-            try {
-                const res = await fetch(`${API_BASE_URL}/wordofday-viewpost`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ id: post._id, password })
-                });
-                if (res.ok) {
-                    const data = await res.json();
-                    const entry = data.entry;
-                    document.getElementById('edit-id').value = entry._id;
-                    document.getElementById('edit-title').value = entry.title;
-                    document.getElementById('edit-message').value = entry.message;
-                    document.getElementById('edit-nickname').value = entry.nickname;
-                    document.getElementById('edit-isSecret').checked = entry.isSecret;
-                    document.getElementById('post-container').style.display = 'none';
-                    document.getElementById('viewpost-actions').style.display = 'none';
-                    document.getElementById('edit-post-container').style.display = 'block';
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                } else {
-                    const err = await res.json();
-                    alert(`오류: ${err.error || '게시글을 불러올 수 없습니다.'}`);
-                }
-            } catch (e) {
-                alert('네트워크 오류가 발생했습니다.');
-            }
-        };
-
-        document.getElementById('edit-guestbook-form').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const btn = e.target.querySelector('button[type="submit"]');
-            btn.disabled = true;
-            btn.textContent = '수정 중...';
-            try {
-                const res = await fetch(`${API_BASE_URL}/wordofday-updatepost`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        id: document.getElementById('edit-id').value,
-                        password: document.getElementById('edit-password').value,
-                        title: document.getElementById('edit-title').value.trim(),
-                        message: document.getElementById('edit-message').value.trim(),
-                        nickname: document.getElementById('edit-nickname').value.trim(),
-                        isSecret: document.getElementById('edit-isSecret').checked
-                    })
-                });
-                if (res.ok) {
-                    const apiParam = apiMode ? `&api=${apiMode}` : '';
-                    window.location.href = `${window.location.pathname}?index=${window.currentIndex}${apiParam}`;
-                } else {
-                    const err = await res.json();
-                    alert(`오류: ${err.error || '수정에 실패했습니다.'}`);
-                    btn.textContent = 'Update';
-                }
-            } catch (_) {
-                alert('네트워크 오류');
-                btn.textContent = 'Update';
-            }
-            btn.disabled = false;
-        });
-
-        document.getElementById('cancelEditBtn').onclick = () => {
-            document.getElementById('edit-post-container').style.display = 'none';
-            document.getElementById('post-container').style.display = 'block';
-            document.getElementById('viewpost-actions').style.display = 'flex';
-            document.getElementById('edit-guestbook-form').reset();
-        };
-
-        document.getElementById('deleteBtn').onclick = async () => {
-            const password = prompt('비밀번호를 입력하세요:');
-            if (!password || !confirm('정말 삭제하시겠습니까?')) return;
-            try {
-                const res = await fetch(`${API_BASE_URL}/wordofday-deletepost`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ id: post._id, password })
-                });
-                if (res.ok) {
-                    alert('삭제되었습니다.');
-                    window.location.href = `page30_guestbook_wordofday.html${apiMode ? '?api=' + apiMode : ''}`;
-                } else {
-                    const err = await res.json();
-                    alert(`오류: ${err.error || '삭제에 실패했습니다.'}`);
-                }
-            } catch (_) {
-                alert('네트워크 오류');
-            }
-        };
+        if (typeof initViewpostLike === 'function') {
+            initViewpostLike({
+                entryId: post._id,
+                likes: post.likes,
+                apiBaseUrl: API_BASE_URL,
+                board: 'wordofday'
+            });
+        }
     } catch (error) {
         showError('게시글을 불러올 수 없습니다', error.message);
     }

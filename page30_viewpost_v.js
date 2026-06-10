@@ -296,7 +296,7 @@ function showLoading() {
 }
 
 // 에러 메시지 표시 함수
-function showError(message, details = '', listPage = 'page30_guestbook_v.html') {
+function showError(message, details = '', listPage = 'english-synonym-list.html') {
     const postContainer = document.getElementById('post-container');
     const apiParam = apiMode ? `?api=${apiMode}` : '';
     const listUrl = listPage + apiParam;
@@ -317,7 +317,7 @@ async function loadPost() {
         showError(
             '게시글을 찾을 수 없습니다',
             '주소에 글 번호(index)가 없습니다. 글 목록에서 제목을 클릭하면 해당 글이 열립니다.',
-            'page30_guestbook_v.html'
+            'english-synonym-list.html'
         );
         return;
     }
@@ -412,50 +412,14 @@ async function loadPost() {
         // 게시글 표시 - HTML 구조를 다시 생성
         const postContainer = document.getElementById('post-container');
         
-        let postDate;
-        let formattedDate = 'Date not available';
-        
-        if (post.date) {
-            try {
-                postDate = new Date(post.date);
-                console.log('📅 파싱된 날짜:', postDate);
-                // 유효한 날짜인지 확인
-                if (isNaN(postDate.getTime())) {
-                    console.warn('유효하지 않은 날짜:', post.date);
-                    formattedDate = 'Date not available';
-                } else {
-                    // 형식: "2025.12.29  17:00" (날짜와 시간 사이 공백 2개)
-                    const year = postDate.getFullYear();
-                    const month = ('0' + (postDate.getMonth() + 1)).slice(-2);
-                    const day = ('0' + postDate.getDate()).slice(-2);
-                    const hours = ('0' + postDate.getHours()).slice(-2);
-                    const minutes = ('0' + postDate.getMinutes()).slice(-2);
-                    formattedDate = `${year}.${month}.${day}  ${hours}:${minutes}`;
-                    console.log('📅 포맷된 날짜:', formattedDate);
-                }
-            } catch (e) {
-                console.error('날짜 파싱 오류:', e, post.date);
-                formattedDate = 'Date not available';
-            }
-        } else {
-            console.warn('게시글에 날짜 정보가 없습니다:', post);
-            // 날짜가 없으면 현재 시간 사용 (임시)
-            const now = new Date();
-            const year = now.getFullYear();
-            const month = ('0' + (now.getMonth() + 1)).slice(-2);
-            const day = ('0' + now.getDate()).slice(-2);
-            const hours = ('0' + now.getHours()).slice(-2);
-            const minutes = ('0' + now.getMinutes()).slice(-2);
-            formattedDate = `${year}.${month}.${day}  ${hours}:${minutes}`;
-        }
-
         // 이미지/동영상 링크 변환하여 표시
         const convertedMessage = convertMediaLinks(post.message || '');
         console.log('원본 메시지:', post.message);
         console.log('변환된 메시지:', convertedMessage);
-        
-        const isAdmin = (post.nickname || '').toLowerCase() === 'admin';
-        const metaHtml = isAdmin ? '' : `<p id="post-meta">Author: ${escapeHtml(post.nickname || 'Anonymous')} | Date: ${formattedDate} | Views: ${post.views || 0}</p>`;
+
+        const metaHtml = typeof buildPostMetaHtml === 'function'
+            ? buildPostMetaHtml(post)
+            : '';
         // HTML 구조 재생성
         postContainer.innerHTML = `
             <div id="post-header">
@@ -486,132 +450,14 @@ async function loadPost() {
         const postContent = document.getElementById('post-content');
         if (postContent) attachVocabularyWebTTS(postContent);
 
-        // 버튼 기능 연결
-        document.getElementById('backBtn').onclick = () => {
-            const apiParam = apiMode ? `?api=${apiMode}` : '';
-            window.location.href = `page30_guestbook_v.html${apiParam}`;
-        };
-        
-        document.getElementById('editBtn').onclick = async () => {
-            const password = prompt('비밀번호를 입력하세요:');
-            if (!password) return;
-            
-            try {
-                const response = await fetch(`${API_BASE_URL}/vocabulary/viewpost`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ id: post._id, password })
-                });
-                if (response.ok) {
-                    const data = await response.json();
-                    const entry = data.entry;
-                    
-                    // 수정 폼에 데이터 채우기
-                    document.getElementById('edit-id').value = entry._id;
-                    document.getElementById('edit-title').value = entry.title;
-                    document.getElementById('edit-message').value = entry.message;
-                    document.getElementById('edit-nickname').value = entry.nickname;
-                    document.getElementById('edit-isSecret').checked = entry.isSecret;
-                    
-                    // 게시글 컨테이너 숨기고 수정 폼 표시
-                    document.getElementById('post-container').style.display = 'none';
-                    document.getElementById('viewpost-actions').style.display = 'none';
-                    document.getElementById('edit-post-container').style.display = 'block';
-                    
-                    // 페이지 상단으로 스크롤 (수정 폼이 전체 화면을 차지하므로)
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                } else {
-                    const errorData = await response.json();
-                    alert(`오류: ${errorData.error || '게시글을 불러올 수 없습니다.'}`);
-                }
-            } catch (error) {
-                console.error('Error while fetching post for edit:', error);
-                alert('네트워크 오류가 발생했습니다. 다시 시도해주세요.');
-            }
-        };
-        
-        // 수정 폼 제출 처리
-        document.getElementById('edit-guestbook-form').addEventListener('submit', async (event) => {
-            event.preventDefault();
-            const form = event.target;
-            const submitButton = form.querySelector('button[type="submit"]');
-            const originalButtonText = submitButton.textContent;
-            
-            // 로딩 상태 표시
-            submitButton.disabled = true;
-            submitButton.textContent = '수정 중...';
-            
-            const id = document.getElementById('edit-id').value;
-            const title = document.getElementById('edit-title').value.trim();
-            const message = document.getElementById('edit-message').value.trim();
-            const nickname = document.getElementById('edit-nickname').value.trim();
-            const password = document.getElementById('edit-password').value;
-            const isSecret = document.getElementById('edit-isSecret').checked;
-
-            try {
-                const response = await fetch(`${API_BASE_URL}/vocabulary/updatepost`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ id, password, title, message, nickname, isSecret })
-                });
-
-                if (response.ok) {
-                    // 수정 완료 후 페이지 새로고침
-                    const apiParam = apiMode ? `&api=${apiMode}` : '';
-                    window.location.href = `${window.location.pathname}?index=${window.currentIndex}${apiParam}`;
-                } else {
-                    const errorData = await response.json();
-                    alert(`오류: ${errorData.error || '게시글 수정에 실패했습니다.'}`);
-                    submitButton.textContent = originalButtonText;
-                }
-            } catch (error) {
-                console.error('Error while updating guestbook entry:', error);
-                alert('네트워크 오류가 발생했습니다. 다시 시도해주세요.');
-                submitButton.textContent = originalButtonText;
-            } finally {
-                submitButton.disabled = false;
-            }
-        });
-        
-        // Cancel 버튼 처리
-        document.getElementById('cancelEditBtn').onclick = () => {
-            document.getElementById('edit-post-container').style.display = 'none';
-            document.getElementById('post-container').style.display = 'block';
-            document.getElementById('viewpost-actions').style.display = 'flex';
-            document.getElementById('edit-guestbook-form').reset();
-        };
-        
-        document.getElementById('deleteBtn').onclick = async () => {
-            const password = prompt('비밀번호를 입력하세요:');
-            if (!password) return;
-            
-            if (!confirm('정말로 이 게시글을 삭제하시겠습니까?')) return;
-            
-            try {
-                const response = await fetch(`${API_BASE_URL}/vocabulary/deletepost`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ id: post._id, password })
-                });
-                if (response.ok) {
-                    alert('게시글이 삭제되었습니다.');
-                    const apiParam = apiMode ? `?api=${apiMode}` : '';
-                    window.location.href = `page30_guestbook_v.html${apiParam}`;
-                } else {
-                    const errorData = await response.json();
-                    alert(`오류: ${errorData.error || '게시글 삭제에 실패했습니다.'}`);
-                }
-            } catch (error) {
-                console.error('Error while deleting post:', error);
-                alert('네트워크 오류가 발생했습니다. 다시 시도해주세요.');
-            }
-        };
+        if (typeof initViewpostLike === 'function') {
+            initViewpostLike({
+                entryId: post._id,
+                likes: post.likes,
+                apiBaseUrl: API_BASE_URL,
+                board: 'vocabulary'
+            });
+        }
 
     } catch (error) {
         console.error('❌ Error while loading post:', error);

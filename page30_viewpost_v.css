@@ -83,10 +83,26 @@ body {
 }
 
 #post-meta {
-  color: #666;
-  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0;
+  margin: 0;
+  color: #888;
+  font-size: 0.82rem;
   font-weight: 400;
-  line-height: 1.5;
+  line-height: 1.4;
+}
+
+#post-meta .post-meta-sep {
+  margin: 0 6px;
+  color: #c8c8c8;
+  font-weight: 400;
+}
+
+#post-meta .post-meta-views-num {
+  color: #1a56db;
+  font-weight: 600;
 }
 
 /* 게시글 내용 */
