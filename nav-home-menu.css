@@ -3,14 +3,23 @@
   align-items: center;
   flex: 0 0 auto;
   margin-left: auto;
+  position: relative;
+  overflow: visible;
 }
 
-/* navbar 한 줄: 제목은 줄이고 Home은 항상 오른쪽 고정 */
+.nav-home-dropdown {
+  position: relative;
+  overflow: visible;
+}
+
+/* navbar 한 줄: 제목만 줄임. overflow:hidden 금지 → Home 드롭다운이 아래로 펼쳐짐 */
 .navbar.fixed-top {
   left: 0;
   right: 0;
   width: 100%;
   max-width: 100%;
+  overflow: visible;
+  z-index: 1030;
 }
 
 .navbar .container-fluid {
@@ -20,7 +29,7 @@
   justify-content: space-between;
   gap: 0.5rem;
   max-width: 100%;
-  overflow-x: hidden;
+  overflow: visible;
   box-sizing: border-box;
 }
 
@@ -56,6 +65,7 @@
   border: 1px solid rgba(0, 0, 0, 0.08);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
   padding: 0.35rem 0;
+  z-index: 1050;
 }
 
 .nav-home-dropdown-menu .dropdown-item {
@@ -71,7 +81,7 @@
   color: #2b6cb0;
 }
 
-/* 모바일: 가로 스크롤 제거, Home 항상 보이게 */
+/* 모바일: 페이지 가로 스크롤만 막고 navbar 드롭다운은 아래로 표시 */
 @media (max-width: 767px) {
   html,
   body {
@@ -80,7 +90,7 @@
   }
 
   .navbar.fixed-top {
-    overflow-x: hidden;
+    overflow: visible;
     max-width: 100%;
     width: 100%;
   }
@@ -91,6 +101,7 @@
     width: 100% !important;
     max-width: 100% !important;
     flex-wrap: nowrap !important;
+    overflow: visible !important;
   }
 
   .navbar .container-fluid > .navbar-brand:first-of-type {
@@ -102,11 +113,19 @@
   .nav-home-menu-slot {
     margin-left: auto !important;
     flex-shrink: 0;
+    overflow: visible;
   }
 
   .nav-home-dropdown .navbar-brand.dropdown-toggle {
     font-size: 0.88rem;
     padding: 0.22rem 0.1rem;
+  }
+
+  .nav-home-dropdown-menu {
+    position: absolute;
+    right: 0;
+    left: auto;
+    z-index: 1050;
   }
 }
 

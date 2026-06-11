@@ -7,7 +7,7 @@
         '<div class="dropdown nav-home-dropdown">' +
         '<a class="navbar-brand dropdown-toggle" href="#" role="button" id="navHomeMenuToggle" ' +
         'data-bs-toggle="dropdown" aria-expanded="false">Home</a>' +
-        '<ul class="dropdown-menu dropdown-menu-end nav-home-dropdown-menu" aria-labelledby="navHomeMenuToggle">' +
+        '<ul class="dropdown-menu dropdown-menu-end nav-home-dropdown-menu" data-bs-popper-config=\'{"strategy":"fixed"}\' aria-labelledby="navHomeMenuToggle">' +
         '<li><a class="dropdown-item" href="index.html">처음으로</a></li>' +
         '<li><a class="dropdown-item" href="word-of-the-day-list.html">오늘의 단어</a></li>' +
         '<li><a class="dropdown-item" href="news-voca-list.html">뉴스 어휘</a></li>' +
