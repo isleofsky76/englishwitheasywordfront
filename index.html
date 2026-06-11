@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" href="resources/eng.png" type="image/png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>단어 영어로 표현 사전 영단어 Effective English Study Tips and Resources | English Easy Study 영어 무료 공부 여행 혼자 학원 영어공부혼자하기 성인 adult 영어학습지</title>
     <meta name="description" content="Discover effective English study tips, grammar guides, vocabulary lists, and resources to enhance your language learning. Join English Easy Study today!">
@@ -36,32 +37,6 @@
         }
         * {
             font-family: 'Noto Sans KR', 'Poppins', sans-serif;
-        }
-        :root {
-            --navbar-height: 51px;
-        }
-        .navbar {
-            background-color: #2b6cb0 !important;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-            min-height: var(--navbar-height);
-            padding-top: 0.36rem;
-            padding-bottom: 0.36rem;
-            overflow: visible;
-            z-index: 1030;
-        }
-        .navbar .container-fluid {
-            align-items: center;
-        }
-        .navbar-brand {
-            font-family: 'Noto Sans KR', sans-serif;
-            font-weight: 600;
-            font-size: 1.05rem;
-            color: #fff !important;
-            letter-spacing: -0.02em;
-            line-height: 1.3;
-            padding: 0.15rem 0;
-            margin: 0;
-            -webkit-font-smoothing: antialiased;
         }
         .main-content {
             margin-top: calc(var(--navbar-height) + 28px);
@@ -216,13 +191,6 @@
             font-family: 'Poppins', sans-serif;
         }
         @media (max-width: 600px) {
-            :root {
-                --navbar-height: 47px;
-            }
-            .navbar-brand {
-                font-size: 1rem;
-                font-weight: 600;
-            }
             .main-content {
                 margin-top: calc(var(--navbar-height) + 20px);
                 padding-left: max(16px, env(safe-area-inset-left, 0px));
@@ -241,7 +209,12 @@
         }
     </style>
     <link rel="stylesheet" href="title-text-sharp.css?v=20260612">
+    <link rel="stylesheet" href="navbar-unified.css?v=20260612c">
+    <link rel="stylesheet" href="weather-banner.css?v=20260612g">
+    <link rel="stylesheet" href="world-clock.css?v=20260612g">
     <script src="homepage_eventlistener.js"></script>
+    <script src="weather-banner.js?v=20260612e" defer></script>
+    <script src="world-clock.js?v=20260612g" defer></script>
 </head>
 <body>
     <nav id="navbar" class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
@@ -279,6 +252,13 @@
                 <div class="preview-more"><a href="popular-voca-list.html">더보기 &gt;</a></div>
             </div>
             <div id="easy-voca-preview-list"></div>
+        </div>
+        <div class="preview-section">
+            <div class="preview-header">
+                <h3>Pros & Cons</h3>
+                <div class="preview-more"><a href="pros-cons-list.html">더보기 &gt;</a></div>
+            </div>
+            <div id="pros-cons-preview-list"></div>
         </div>
         <div class="preview-section">
             <div class="preview-header">
@@ -369,21 +349,9 @@
         }
 
         var loadingListHtml = buildPreviewListHtml([], '로딩 중...');
-        ['wordofday-preview-list', 'news-voca-preview-list', 'synonym-preview-list', 'easy-voca-preview-list'].forEach(function(id) {
+        ['wordofday-preview-list', 'news-voca-preview-list', 'synonym-preview-list', 'easy-voca-preview-list', 'pros-cons-preview-list'].forEach(function(id) {
             var el = document.getElementById(id);
             if (el) el.innerHTML = loadingListHtml;
-        });
-
-        let lastScrollTop = 0;
-        const navbar = document.getElementById('navbar');
-        window.addEventListener('scroll', function() {
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            if (scrollTop > lastScrollTop) {
-                navbar.style.top = 'calc(-1 * var(--navbar-height))';
-            } else {
-                navbar.style.top = '0';
-            }
-            lastScrollTop = scrollTop;
         });
 
         // News Voca 실제 데이터 로드
@@ -457,6 +425,31 @@
                 })
                 .catch(function() {
                     clearTimeout(easyTimeoutId);
+                    listEl.innerHTML = fallbackHtml;
+                });
+        })();
+
+        // Pros & Cons
+        (function loadProsConsPreview() {
+            var urlParams = new URLSearchParams(window.location.search);
+            var apiMode = urlParams.get('api');
+            var listEl = document.getElementById('pros-cons-preview-list');
+            if (!listEl) return;
+
+            var fallbackHtml = buildPreviewListHtml([], '<a href="pros-cons-list.html">Pros & Cons 보기</a>');
+            var timeoutId = setTimeout(function() { listEl.innerHTML = fallbackHtml; }, 8000);
+
+            fetch(getApiBase() + '/pros-cons')
+                .then(function(r) {
+                    if (!r.ok) throw new Error('HTTP ' + r.status);
+                    return r.json();
+                })
+                .then(function(data) {
+                    clearTimeout(timeoutId);
+                    renderPreviewList(listEl, parseEntries(data), 'pros-cons.html', apiMode, '게시글이 없습니다.');
+                })
+                .catch(function() {
+                    clearTimeout(timeoutId);
                     listEl.innerHTML = fallbackHtml;
                 });
         })();
