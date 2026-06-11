@@ -63,22 +63,20 @@
       : '';
 
     return (
-      '<p class="pros-cons-item">' +
+      '<div class="pros-cons-item">' +
       '<span class="pros-cons-num">' + (idx + 1) + '.</span>' +
-      '<span class="pros-cons-body">' +
       '<span class="pros-cons-en-line">' +
       '<span class="pros-cons-en">' + escapeHtml(row.en) + '</span>' +
       ttsButtonHtml(row.en) +
       '</span>' +
       koHtml +
-      '</span>' +
-      '</p>'
+      '</div>'
     );
   }
 
   function itemsHtml(list) {
     if (!list.length) {
-      return '<p class="pros-cons-item"><em>항목 없음</em></p>';
+      return '<div class="pros-cons-item"><em>항목 없음</em></div>';
     }
     return list.map(function (item, idx) {
       return itemHtml(item, idx);
