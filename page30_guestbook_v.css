@@ -7,7 +7,7 @@ body {
   margin: 0 auto;
   padding: 0 !important;
   padding-top: 64px !important; /* PC: navbar 아래 첫 글이 가리지 않도록 */
-  width: 100vw !important;
+  width: 100% !important;
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -384,10 +384,14 @@ th.actions {
 /* Mobile styles */
 @media (max-width: 767px) {
   body {
-    padding: 10px;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    padding-bottom: 10px;
     padding-top: 52px !important; /* navbar 바로 아래, 간격 최소화 */
     margin-top: 0 !important;
     font-size: 10px; /* 더 작게 조정 */
+    overflow-x: hidden;
+    max-width: 100%;
   }
 
   h1 {
@@ -633,8 +637,8 @@ th.actions {
 #post-container,
 #post-content,
 #post-message {
-  width: 100vw !important;
-  max-width: 100vw !important;
+  width: 100% !important;
+  max-width: 100% !important;
   margin: 0 !important;
   padding: 0 !important;
   box-sizing: border-box;
