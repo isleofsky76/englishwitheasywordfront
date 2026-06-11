@@ -66,10 +66,12 @@
       '<p class="pros-cons-item">' +
       '<span class="pros-cons-num">' + (idx + 1) + '.</span>' +
       '<span class="pros-cons-body">' +
+      '<span class="pros-cons-en-line">' +
       '<span class="pros-cons-en">' + escapeHtml(row.en) + '</span>' +
+      ttsButtonHtml(row.en) +
+      '</span>' +
       koHtml +
       '</span>' +
-      ttsButtonHtml(row.en) +
       '</p>'
     );
   }
@@ -95,12 +97,47 @@
     );
   }
 
-  function buildProsConsMessage(pros, cons) {
-    return JSON.stringify({
+  function buildProsConsMessage(pros, cons, footer) {
+    var payload = {
       type: 'pros-cons',
       pros: (pros || []).map(normalizeItem),
       cons: (cons || []).map(normalizeItem)
-    });
+    };
+    if (footer) payload.footer = String(footer).trim();
+    return JSON.stringify(payload);
+  }
+
+  function parseProsConsPayload(message) {
+    var trimmed = String(message || '').trim();
+    if (!trimmed || trimmed.charAt(0) !== '{') return { data: null, extra: '' };
+
+    try {
+      return { data: JSON.parse(trimmed), extra: '' };
+    } catch (e1) {
+      var end = trimmed.lastIndexOf('}');
+      if (end <= 0) return { data: null, extra: trimmed };
+
+      try {
+        return {
+          data: JSON.parse(trimmed.slice(0, end + 1)),
+          extra: trimmed.slice(end + 1).trim()
+        };
+      } catch (e2) {
+        return { data: null, extra: trimmed };
+      }
+    }
+  }
+
+  function footerHtml(data, extra) {
+    if (data && data.footer) {
+      return (
+        '<p class="pros-cons-footer">' + escapeHtml(data.footer) + '</p>'
+      );
+    }
+    if (extra && extra.indexOf('pros-cons-wrap') === -1) {
+      return extra;
+    }
+    return '';
   }
 
   function renderProsConsMessage(message) {
@@ -108,19 +145,20 @@
     var trimmed = String(message).trim();
 
     if (trimmed.charAt(0) === '{') {
-      try {
-        var data = JSON.parse(trimmed);
-        if (data && data.type === 'pros-cons') {
-          return buildProsConsTableHtml(data.pros, data.cons);
-        }
-      } catch (e) { /* fall through */ }
+      var parsed = parseProsConsPayload(trimmed);
+      if (parsed.data && parsed.data.type === 'pros-cons') {
+        return (
+          buildProsConsTableHtml(parsed.data.pros, parsed.data.cons) +
+          footerHtml(parsed.data, parsed.extra)
+        );
+      }
     }
 
     if (trimmed.indexOf('pros-cons-wrap') !== -1) {
       return trimmed;
     }
 
-    return trimmed;
+    return '<pre class="pros-cons-raw">' + escapeHtml(trimmed) + '</pre>';
   }
 
   global.buildProsConsTableHtml = buildProsConsTableHtml;

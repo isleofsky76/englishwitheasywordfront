@@ -39,6 +39,14 @@
   gap: 0.2rem;
 }
 
+.pros-cons-en-line {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.15rem 0.25rem;
+  max-width: 100%;
+}
+
 .pros-cons-en {
   color: #1a1a1a;
 }
@@ -49,7 +57,24 @@
   line-height: 1.55;
 }
 
-.pros-cons-item .pv-tts-slot {
+.pros-cons-en-line .pv-tts-slot {
   flex-shrink: 0;
-  margin-left: 0.1rem;
+  line-height: 1;
+}
+
+.pros-cons-footer {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #666;
+  text-align: left;
+}
+
+.pros-cons-raw {
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-size: 0.85rem;
+  color: #444;
+  background: #f8f9fa;
+  padding: 1rem;
+  border-radius: 8px;
 }
