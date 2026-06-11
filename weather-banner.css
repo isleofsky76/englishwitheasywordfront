@@ -1,0 +1,114 @@
+:root {
+  --weather-banner-height: 34px;
+  --site-bar-side-padding: max(1rem, env(safe-area-inset-left));
+  --site-bar-icon-width: 1.1rem;
+  --site-bar-icon-gap: 0.45rem;
+}
+
+.weather-banner {
+  position: fixed;
+  top: var(--navbar-height);
+  left: 0;
+  right: 0;
+  z-index: 1029;
+  height: var(--weather-banner-height);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 var(--site-bar-side-padding);
+  box-sizing: border-box;
+  background: linear-gradient(90deg, #e8f2fc 0%, #f0f6ff 50%, #e8f2fc 100%);
+  border-bottom: 1px solid rgba(43, 108, 176, 0.12);
+  color: #1e4a72;
+  font-family: 'Noto Sans KR', 'Poppins', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 500;
+  line-height: 1.2;
+  transition: top 0.28s ease;
+}
+
+html.nav-home-open .weather-banner {
+  top: var(--navbar-height) !important;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.weather-banner--clickable {
+  cursor: pointer;
+}
+
+.weather-banner--clickable:hover {
+  background: linear-gradient(90deg, #dceaf8 0%, #e6efff 50%, #dceaf8 100%);
+}
+
+.weather-banner__link {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: 100%;
+  color: inherit;
+  text-decoration: none;
+}
+
+.weather-banner__link:focus-visible {
+  outline: 2px solid #2b6cb0;
+  outline-offset: -2px;
+}
+
+.weather-banner__inner {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--site-bar-icon-gap);
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.weather-banner__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: var(--site-bar-icon-width);
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.weather-banner__text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.weather-banner__en {
+  color: #4a6f8f;
+  font-weight: 400;
+}
+
+.weather-banner--error {
+  background: #f5f5f5;
+  color: #666;
+}
+
+html.has-weather-banner:not(.page-with-main-content) body {
+  padding-top: calc(var(--navbar-height) + var(--weather-banner-height)) !important;
+}
+
+html.has-weather-banner.page-with-main-content .main-content {
+  margin-top: calc(var(--navbar-height) + var(--weather-banner-height) + 28px) !important;
+}
+
+@media (max-width: 600px) {
+  :root {
+    --weather-banner-height: 32px;
+  }
+
+  .weather-banner {
+    font-size: 0.78rem;
+  }
+
+  html.has-weather-banner.page-with-main-content .main-content {
+    margin-top: calc(var(--navbar-height) + var(--weather-banner-height) + 20px) !important;
+  }
+}

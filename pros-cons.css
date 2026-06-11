@@ -1,0 +1,55 @@
+/* Pros & Cons — 세로 번호 목록 */
+.pros-cons-wrap {
+  margin: 1rem 0 1.25rem;
+}
+
+.pros-cons-block + .pros-cons-block {
+  margin-top: 1.35rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid #e8ecf0;
+}
+
+.pros-cons-item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 0.15rem 0.35rem;
+  margin: 0 0 0.75rem;
+  font-size: 0.92rem;
+  line-height: 1.65;
+  color: #222;
+}
+
+.pros-cons-item:last-child {
+  margin-bottom: 0;
+}
+
+.pros-cons-num {
+  flex-shrink: 0;
+  font-weight: 600;
+  color: #1a1a1a;
+  line-height: 1.65;
+}
+
+.pros-cons-body {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.pros-cons-en {
+  color: #1a1a1a;
+}
+
+.pros-cons-ko {
+  color: #5c6b7a;
+  font-size: 0.88em;
+  line-height: 1.55;
+}
+
+.pros-cons-item .pv-tts-slot {
+  flex-shrink: 0;
+  margin-left: 0.1rem;
+}

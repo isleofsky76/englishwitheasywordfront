@@ -1,0 +1,136 @@
+:root {
+  --world-clock-height: 30px;
+  --site-top-bars-height: calc(var(--weather-banner-height) + var(--world-clock-height));
+  --site-header-total: calc(var(--navbar-height) + var(--site-top-bars-height));
+}
+
+.world-clock-bar {
+  position: fixed;
+  top: calc(var(--navbar-height) + var(--weather-banner-height));
+  left: 0;
+  right: 0;
+  z-index: 1028;
+  height: var(--world-clock-height);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 var(--site-bar-side-padding, max(1rem, env(safe-area-inset-left)));
+  box-sizing: border-box;
+  background: #f7f9fc;
+  border-bottom: 1px solid rgba(43, 108, 176, 0.1);
+  color: #1e4a72;
+  font-family: 'Noto Sans KR', 'Poppins', sans-serif;
+  font-size: 0.76rem;
+  font-weight: 500;
+  line-height: 1.2;
+  overflow: hidden;
+  transition: top 0.28s ease;
+}
+
+html.nav-home-open .world-clock-bar {
+  top: calc(var(--navbar-height) + var(--weather-banner-height)) !important;
+}
+
+.world-clock-bar__list {
+  display: flex;
+  align-items: center;
+  gap: var(--site-bar-icon-gap, 0.45rem);
+  line-height: 1;
+}
+
+.world-clock-bar__prefix {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--site-bar-icon-gap, 0.45rem);
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.world-clock-bar__label {
+  color: #4a6f8f;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1;
+}
+
+.world-clock-bar__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: var(--site-bar-icon-width, 1.1rem);
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.world-clock-bar__slot {
+  display: inline-flex;
+  align-items: center;
+  color: #1e4a72;
+  line-height: 1;
+  opacity: 1;
+  transition: opacity 0.45s ease;
+}
+
+.world-clock-bar__entry {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  line-height: 1;
+}
+
+.world-clock-bar__city-wrap {
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+}
+
+.world-clock-bar__slot.is-fading {
+  opacity: 0;
+}
+
+.world-clock-bar__city {
+  color: #2b6cb0;
+  font-weight: 600;
+}
+
+.world-clock-bar__time {
+  display: inline-flex;
+  align-items: center;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+html.has-world-clock.has-weather-banner:not(.page-with-main-content) body {
+  padding-top: calc(var(--navbar-height) + var(--site-top-bars-height)) !important;
+}
+
+html.has-world-clock.has-weather-banner.page-with-main-content .main-content {
+  margin-top: calc(var(--navbar-height) + var(--site-top-bars-height) + 28px) !important;
+}
+
+html.has-weather-banner:not(.has-world-clock):not(.page-with-main-content) body {
+  padding-top: calc(var(--navbar-height) + var(--weather-banner-height)) !important;
+}
+
+html.has-weather-banner:not(.has-world-clock).page-with-main-content .main-content {
+  margin-top: calc(var(--navbar-height) + var(--weather-banner-height) + 28px) !important;
+}
+
+@media (max-width: 600px) {
+  :root {
+    --world-clock-height: 28px;
+  }
+
+  .world-clock-bar {
+    font-size: 0.72rem;
+  }
+
+  .world-clock-bar__list {
+    gap: 0.35rem;
+  }
+
+  html.has-world-clock.has-weather-banner.page-with-main-content .main-content {
+    margin-top: calc(var(--navbar-height) + var(--site-top-bars-height) + 20px) !important;
+  }
+}

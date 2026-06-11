@@ -1,309 +1,156 @@
 .nav-home-menu-slot {
-
   display: flex;
-
   align-items: center;
-
   flex: 0 0 auto;
-
   margin-left: auto;
-
   position: relative;
-
   overflow: visible;
-
 }
-
-
 
 .nav-home-dropdown {
-
   position: relative;
-
   overflow: visible;
-
 }
-
-
 
 /* navbar 한 줄: 제목만 줄임. overflow:hidden 금지 → Home 드롭다운이 아래로 펼쳐짐 */
-
 .navbar.fixed-top {
-
   left: 0;
-
   right: 0;
-
   width: 100%;
-
   max-width: 100%;
-
   overflow: visible;
-
   z-index: 1030;
-
 }
-
-
 
 .navbar .container-fluid,
-
 .navbar .container {
-
   display: flex;
-
   flex-wrap: nowrap;
-
   align-items: center;
-
   justify-content: space-between;
-
   gap: 0.5rem;
-
   max-width: 100%;
-
   overflow: visible;
-
   box-sizing: border-box;
-
 }
-
-
 
 .navbar .container-fluid > .navbar-brand:first-of-type,
-
 .navbar .container > .navbar-brand:first-of-type {
-
   flex: 1 1 auto;
-
   min-width: 0;
-
   overflow: hidden;
-
   text-overflow: ellipsis;
-
   white-space: nowrap;
-
   margin-right: 0.25rem;
-
 }
-
-
 
 .nav-home-dropdown .nav-home-toggle,
-
 .nav-home-dropdown .navbar-brand.dropdown-toggle {
-
   color: #fff !important;
-
-  padding: 0.15rem 0.1rem;
-
-  font-size: 1.05rem;
-
+  padding: 0.22rem 0.1rem;
+  font-size: 0.96rem;
   font-weight: 600;
-
   font-family: inherit;
-
   text-decoration: none;
-
   cursor: pointer;
-
   white-space: nowrap;
-
   flex-shrink: 0;
-
   border: none;
-
   background: transparent;
-
   line-height: inherit;
-
   -webkit-tap-highlight-color: transparent;
-
   touch-action: manipulation;
-
 }
-
-
 
 .nav-home-dropdown .dropdown-toggle::after {
-
   margin-left: 0.35em;
-
   vertical-align: 0.15em;
-
 }
-
-
 
 .nav-home-dropdown-menu {
-
   min-width: 11rem;
-
   margin-top: 0.35rem;
-
   border-radius: 8px;
-
   border: 1px solid rgba(0, 0, 0, 0.08);
-
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
-
   padding: 0.35rem 0;
-
   z-index: 1050;
-
 }
-
-
 
 .nav-home-dropdown-menu .dropdown-item {
-
   font-family: 'Noto Sans KR', 'Poppins', sans-serif;
-
   font-size: 0.9rem;
-
   padding: 0.45rem 1rem;
-
   color: #222;
-
 }
-
-
 
 .nav-home-dropdown-menu .dropdown-item:hover,
-
 .nav-home-dropdown-menu .dropdown-item:focus {
-
   background-color: #eef4fc;
-
   color: #2b6cb0;
-
 }
-
-
 
 html.nav-home-open .navbar.fixed-top {
-
   top: 0 !important;
-
 }
-
-
 
 /* 모바일: 페이지 가로 스크롤만 막고 navbar 드롭다운은 아래로 표시 */
-
 @media (max-width: 767px) {
-
   html,
-
   body {
-
     overflow-x: hidden;
-
     max-width: 100%;
-
   }
-
-
 
   .navbar.fixed-top {
-
     overflow: visible;
-
     max-width: 100%;
-
     width: 100%;
-
   }
-
-
 
   .navbar .container-fluid,
-
   .navbar .container {
-
     padding-left: max(10px, env(safe-area-inset-left)) !important;
-
     padding-right: max(10px, env(safe-area-inset-right)) !important;
-
     width: 100% !important;
-
     max-width: 100% !important;
-
     flex-wrap: nowrap !important;
-
     overflow: visible !important;
-
   }
-
-
 
   .navbar .container-fluid > .navbar-brand:first-of-type,
-
   .navbar .container > .navbar-brand:first-of-type {
-
+    font-size: 0.88rem;
     max-width: calc(100% - 4.5rem);
-
     padding-left: 0 !important;
-
   }
-
-
 
   .nav-home-menu-slot {
-
     margin-left: auto !important;
-
     flex-shrink: 0;
-
     overflow: visible;
-
   }
-
-
 
   .nav-home-dropdown .nav-home-toggle,
-
   .nav-home-dropdown .navbar-brand.dropdown-toggle {
-
-    font-size: 1rem;
-
-    padding: 0.15rem 0.1rem;
-
+    font-size: 0.88rem;
+    padding: 0.22rem 0.1rem;
     min-height: 44px;
-
     min-width: 44px;
-
     display: inline-flex;
-
     align-items: center;
-
     justify-content: center;
-
   }
-
-
 
   .nav-home-dropdown-menu {
-
     position: absolute;
-
     right: 0;
-
     left: auto;
-
     z-index: 1050;
-
   }
-
-
 
   .nav-home-dropdown-menu.show {
-
     display: block;
-
   }
-
 }
-
-
+
