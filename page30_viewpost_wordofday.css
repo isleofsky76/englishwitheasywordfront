@@ -276,13 +276,13 @@ body {
     font-size: 1.8rem;
   }
 
-  /* Word of the Day 상단 히어로 이미지: 모바일에서 가로에 맞춰 1:1 정사각형 */
+  /* Word of the Day 상단 히어로 이미지: PC와 동일하게 비율 유지 (잘림 방지) */
   #post-message .wotd-hero-image,
   #post-message img.wotd-hero-image {
     width: 100%;
-    aspect-ratio: 1 / 1;
-    object-fit: cover;
+    max-width: 100%;
     height: auto;
+    object-fit: contain;
   }
 }
 
