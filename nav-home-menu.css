@@ -1,40 +1,101 @@
-.nav-home-menu-slot {
-  display: flex;
-  align-items: center;
-}
-
-.nav-home-dropdown .navbar-brand.dropdown-toggle {
-  color: #fff !important;
-  padding: 0.22rem 0;
-  font-size: 0.96rem;
-  font-weight: 600;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.nav-home-dropdown .dropdown-toggle::after {
-  margin-left: 0.35em;
-  vertical-align: 0.15em;
-}
-
-.nav-home-dropdown-menu {
-  min-width: 11rem;
-  margin-top: 0.35rem;
-  border-radius: 8px;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
-  padding: 0.35rem 0;
-}
-
-.nav-home-dropdown-menu .dropdown-item {
-  font-family: 'Noto Sans KR', 'Poppins', sans-serif;
-  font-size: 0.9rem;
-  padding: 0.45rem 1rem;
-  color: #222;
-}
-
-.nav-home-dropdown-menu .dropdown-item:hover,
-.nav-home-dropdown-menu .dropdown-item:focus {
-  background-color: #eef4fc;
-  color: #2b6cb0;
-}
+.nav-home-menu-slot {
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+  margin-left: auto;
+}
+
+/* navbar 한 줄: 제목은 줄이고 Home은 항상 오른쪽 고정 */
+.navbar .container-fluid {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.navbar .container-fluid > .navbar-brand:first-of-type {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-right: 0.25rem;
+}
+
+.nav-home-dropdown .navbar-brand.dropdown-toggle {
+  color: #fff !important;
+  padding: 0.22rem 0;
+  font-size: 0.96rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.nav-home-dropdown .dropdown-toggle::after {
+  margin-left: 0.35em;
+  vertical-align: 0.15em;
+}
+
+.nav-home-dropdown-menu {
+  min-width: 11rem;
+  margin-top: 0.35rem;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+  padding: 0.35rem 0;
+}
+
+.nav-home-dropdown-menu .dropdown-item {
+  font-family: 'Noto Sans KR', 'Poppins', sans-serif;
+  font-size: 0.9rem;
+  padding: 0.45rem 1rem;
+  color: #222;
+}
+
+.nav-home-dropdown-menu .dropdown-item:hover,
+.nav-home-dropdown-menu .dropdown-item:focus {
+  background-color: #eef4fc;
+  color: #2b6cb0;
+}
+
+/* 모바일: 가로 스크롤 제거, Home 항상 보이게 */
+@media (max-width: 767px) {
+  html,
+  body {
+    overflow-x: hidden;
+    max-width: 100%;
+  }
+
+  .navbar.fixed-top {
+    overflow-x: hidden;
+    max-width: 100%;
+  }
+
+  .navbar .container-fluid {
+    padding-left: max(10px, env(safe-area-inset-left)) !important;
+    padding-right: max(10px, env(safe-area-inset-right)) !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .navbar .container-fluid > .navbar-brand:first-of-type {
+    font-size: 0.88rem;
+    max-width: calc(100% - 4.5rem);
+  }
+
+  .nav-home-menu-slot {
+    margin-left: auto !important;
+    flex-shrink: 0;
+  }
+
+  .nav-home-dropdown .navbar-brand.dropdown-toggle {
+    font-size: 0.88rem;
+    padding: 0.22rem 0.1rem;
+  }
+}
+
