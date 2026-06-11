@@ -627,6 +627,15 @@ async function loadPost() {
         const postContent = document.getElementById('post-content');
         if (postContent) attachVocabularyWebTTS(postContent);
 
+        if (typeof initViewpostLike === 'function') {
+            initViewpostLike({
+                entryId: post._id,
+                likes: post.likes,
+                apiBaseUrl: API_BASE_URL,
+                board: 'guestbook'
+            });
+        }
+
     } catch (error) {
         console.error('❌ Error while loading post:', error);
         showError('게시글을 불러올 수 없습니다', 
