@@ -288,7 +288,8 @@
     margin: 0;
     border-radius: 0;
     box-shadow: none;
-    overflow-x: visible;
+    overflow-x: hidden;
+    max-width: 100%;
     background: #fff;
   }
 
@@ -302,8 +303,16 @@
     line-height: 1.05 !important;
   }
 
+  /* gb-no-stats(인기어휘·오늘의단어 등) PC용 min-width가 모바일 가로 스크롤 유발 */
+  .guestbook-list .gb-table-wrap .gb-no-stats.gb-table,
+  .guestbook-list .gb-table-wrap .gb-table {
+    min-width: 0 !important;
+    width: 100%;
+    max-width: 100%;
+  }
+
   .gb-table {
-    min-width: 0;
+    min-width: 0 !important;
     width: 100%;
     border-collapse: collapse;
     font-size: 0.8125rem;
