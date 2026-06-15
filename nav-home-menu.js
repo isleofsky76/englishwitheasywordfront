@@ -13,6 +13,7 @@
         '<li><a class="dropdown-item" href="news-voca-list.html">뉴스 어휘</a></li>' +
         '<li><a class="dropdown-item" href="popular-voca-list.html">인기 어휘</a></li>' +
         '<li><a class="dropdown-item" href="english-synonym-list.html">유의어</a></li>' +
+        '<li><a class="dropdown-item" href="photo-english-list.html">포토영어</a></li>' +
         '<li><a class="dropdown-item" href="pros-cons-list.html">Pros & Cons</a></li>' +
         '<li><a class="dropdown-item" href="learning-site.html">학습 사이트</a></li>' +
         '</ul></div>';
