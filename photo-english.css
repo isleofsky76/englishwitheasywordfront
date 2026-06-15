@@ -1,0 +1,27 @@
+/* 포토영어 — 이미지 중심 단어 카드 */
+.photo-english-card img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  display: block;
+  margin: 0 0 0.75rem;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+}
+
+.photo-english-card .pe-word {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #1e40af;
+}
+
+.photo-english-card .pe-ko {
+  color: #334155;
+  line-height: 1.55;
+}
+
+.photo-english-card .pe-example {
+  margin-top: 0.65rem;
+  padding-left: 0.35rem;
+  border-left: 3px solid #93c5fd;
+  line-height: 1.5;
+}
