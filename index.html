@@ -210,6 +210,7 @@
     </style>
     <link rel="stylesheet" href="title-text-sharp.css?v=20260612">
     <link rel="stylesheet" href="navbar-unified.css?v=20260612c">
+    <link rel="stylesheet" href="nav-home-menu.css?v=20260616">
     <link rel="stylesheet" href="weather-banner.css?v=20260612g">
     <link rel="stylesheet" href="world-clock.css?v=20260612g">
     <script src="homepage_eventlistener.js"></script>
@@ -217,9 +218,10 @@
     <script src="world-clock.js?v=20260612g" defer></script>
 </head>
 <body>
-    <nav id="navbar" class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+    <nav id="navbar" class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" aria-label="주 메뉴">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">뉴스 영어 랩</a>
+            <a class="navbar-brand" href="index.html">뉴스 영어 랩</a>
+            <div data-nav-home-menu class="nav-home-menu-slot ms-auto"></div>
         </div>
     </nav>
     <div class="container main-content">
@@ -297,6 +299,8 @@
             <p>Thank you for being here. For any questions, email us at <a href="mailto:everydayalittlehelp@gmail.com" style="color: #4a90e2; text-decoration: underline;">everydayalittlehelp@gmail.com</a>. You can also enjoy our content on <a href="http://www.youtube.com/@istudyeng" style="color: #ff0000; text-decoration: underline;">YouTube</a>.</p>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="nav-home-menu.js?v=20260616"></script>
     <script>
         function navigateTo(page) {
             window.location.href = page;
