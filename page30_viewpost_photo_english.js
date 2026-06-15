@@ -244,7 +244,7 @@ function showError(message, details = '') {
         <div style="text-align: center; padding: 30px; color: #d32f2f; background-color: #ffebee; border-radius: 8px; margin: 20px;">
             <p style="font-size: 1.2em; font-weight: bold;">⚠️ ${message}</p>
             ${details ? `<p style="font-size: 0.9em; color: #666;">${details}</p>` : ''}
-            <button class="btn btn-primary mt-3" onclick="window.location.href='word-of-the-day-list.html${apiParam}'">목록으로 돌아가기</button>
+            <button class="btn btn-primary mt-3" onclick="window.location.href='photo-english-list.html${apiParam}'">목록으로 돌아가기</button>
         </div>`;
 }
 
