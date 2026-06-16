@@ -1,4 +1,4 @@
-/* 랭킹 뉴스 — 메모장 텍스트 스타일 */
+/* 랭킹 뉴스 — 메모장 + 타이포 강조 */
 
 .ranking-news-list-intro {
   margin: 0 0 0.75rem;
@@ -11,60 +11,191 @@
   max-width: 42rem;
   margin: 0 auto;
   font-size: 0.95rem;
-  color: #222;
+  color: #334155;
   word-wrap: break-word;
 }
 
-#post-message .rn-text-body p {
-  margin: 0 0 0.75rem;
-  line-height: 1.75;
+/* 본문 문단 */
+#post-message .rn-body {
+  margin: 0 0 0.8rem;
+  line-height: 1.78;
+  color: #475569;
 }
 
+/* 섹션 제목 (TOP 20 등) */
 #post-message .rn-rank-heading {
-  margin: 0.85rem 0 0.4rem;
-  font-weight: 600;
-  line-height: 1.5;
-  color: #111;
+  margin: 1rem 0 0.55rem;
+  padding-bottom: 0.35rem;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.45;
+  color: #0f172a;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+/* 순위 목록 */
+#post-message .rn-rank-list {
+  margin: 0.25rem 0 1rem;
+  padding: 0.35rem 0;
 }
 
 #post-message .rn-rank-line {
+  display: grid;
+  grid-template-columns: 2rem 1fr auto;
+  gap: 0.5rem 0.75rem;
+  align-items: baseline;
   margin: 0;
-  padding: 0.12rem 0;
-  line-height: 1.45;
+  padding: 0.32rem 0.45rem;
+  line-height: 1.4;
+  font-size: 0.92rem;
+  border-radius: 6px;
+}
+
+#post-message .rn-rank-line:nth-child(even) {
+  background: #f8fafc;
+}
+
+/* 순위 번호 */
+#post-message .rn-col-num {
+  font-weight: 800;
+  font-size: 0.88rem;
+  color: #64748b;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#post-message .rn-rank-gold .rn-col-num {
+  color: #b45309;
+  font-size: 0.95rem;
+}
+
+#post-message .rn-rank-silver .rn-col-num {
+  color: #475569;
   font-size: 0.93rem;
-  letter-spacing: -0.01em;
 }
 
+#post-message .rn-rank-bronze .rn-col-num {
+  color: #9a3412;
+  font-size: 0.92rem;
+}
+
+/* 국가·제목 */
+#post-message .rn-col-name {
+  min-width: 0;
+}
+
+#post-message .rn-name-en {
+  font-weight: 700;
+  color: #1e293b;
+}
+
+#post-message .rn-name-ko {
+  margin-left: 0.3em;
+  font-weight: 500;
+  font-size: 0.88em;
+  color: #64748b;
+}
+
+#post-message .rn-rank-gold .rn-name-en {
+  color: #92400e;
+}
+
+#post-message .rn-rank-silver .rn-name-en {
+  color: #334155;
+}
+
+#post-message .rn-rank-bronze .rn-name-en {
+  color: #7c2d12;
+}
+
+/* 점수 */
+#post-message .rn-col-score {
+  font-weight: 700;
+  font-size: 0.9rem;
+  font-variant-numeric: tabular-nums;
+  color: #1d4ed8;
+  white-space: nowrap;
+}
+
+#post-message .rn-rank-gold .rn-col-score {
+  color: #b45309;
+}
+
+#post-message .rn-rank-silver .rn-col-score {
+  color: #475569;
+}
+
+#post-message .rn-rank-bronze .rn-col-score {
+  color: #c2410c;
+}
+
+#post-message .rn-rank-line.rn-rank-gold {
+  background: linear-gradient(90deg, #fffbeb 0%, #fff 70%);
+}
+
+#post-message .rn-rank-line.rn-rank-silver {
+  background: linear-gradient(90deg, #f8fafc 0%, #fff 70%);
+}
+
+#post-message .rn-rank-line.rn-rank-bronze {
+  background: linear-gradient(90deg, #fff7ed 0%, #fff 70%);
+}
+
+/* 노란 형광펜 */
 #post-message .rn-hl {
-  background: #fff3a3;
-  color: inherit;
-  padding: 0 0.12em;
-  font-weight: inherit;
+  background: #fef08a;
+  color: #713f12;
+  padding: 0 0.15em;
+  font-weight: 700;
+  border-radius: 2px;
 }
 
+/* 출처 */
 #post-message .rn-source-block {
   margin-top: 1.25rem;
-  padding-top: 0.5rem;
-  border-top: 1px solid #e8e8e8;
-  font-size: 0.9rem;
-  color: #555;
+  padding-top: 0.65rem;
+  border-top: 1px solid #e2e8f0;
+  font-size: 0.88rem;
+  color: #64748b;
   line-height: 1.65;
 }
 
 #post-message .rn-source-label {
-  margin: 0 0 0.35rem;
-  font-weight: 600;
-  color: #333;
+  margin: 0 0 0.3rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #94a3b8;
 }
 
 #post-message .rn-source-text {
   margin: 0;
+  color: #64748b;
 }
 
 #post-message .rn-text a {
   color: #2563eb;
+  font-weight: 500;
   text-decoration: underline;
   text-underline-offset: 2px;
+}
+
+#post-message .rn-text a:hover {
+  color: #1d4ed8;
+}
+
+/* 변동 아이콘 (구 글 호환) */
+#post-message .rn-change {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.15rem;
+  vertical-align: middle;
+}
+
+#post-message .rn-change-img {
+  width: 14px;
+  height: 14px;
 }
 
 @media (max-width: 767px) {
@@ -73,7 +204,15 @@
   }
 
   #post-message .rn-rank-line {
-    font-size: 0.9rem;
-    line-height: 1.48;
+    grid-template-columns: 1.75rem 1fr auto;
+    gap: 0.35rem 0.5rem;
+    padding: 0.28rem 0.35rem;
+    font-size: 0.88rem;
+  }
+
+  #post-message .rn-name-ko {
+    display: block;
+    margin-left: 0;
+    margin-top: 0.1rem;
   }
 }
