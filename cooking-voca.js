@@ -298,19 +298,6 @@ function vvAppendTtsInlineAfterEnglish(lineHtml, speak) {
     return s + btn;
 }
 
-function vvInsertTtsBeforeFirstLink(lineHtml, speak) {
-    if (/vv-tts-btn/i.test(lineHtml)) return lineHtml;
-    const btn = vvTtsButtonHtml(speak);
-    if (!btn) return lineHtml;
-
-    const linkStart = lineHtml.search(/<a\b/i);
-    if (linkStart === -1) return vvAppendTtsInlineAfterEnglish(lineHtml, speak);
-
-    const before = lineHtml.slice(0, linkStart).trimEnd();
-    const after = lineHtml.slice(linkStart);
-    return `${before} ${btn} ${after}`.trim();
-}
-
 function vvBindTtsButtons(container) {
     if (!container) return;
     container.querySelectorAll('.vv-tts-btn').forEach((btn) => {
@@ -362,17 +349,9 @@ function attachVocabularyWebTTS(container) {
             if (/class\s*=\s*["'][^"']*vv-tts-btn/i.test(lineHtml)) return lineHtml;
             const plain = vvNormalizeSpeakText(vvStripTagsToText(lineHtml));
             if (!plain) return lineHtml;
+            if (p.classList && p.classList.contains('cv-source-text')) return lineHtml;
             if (!vvIsMostlyEnglish(plain)) return lineHtml;
             if (/^Source\b/i.test(plain) || /^https?:\/\//i.test(plain)) return lineHtml;
-
-            if (p.classList && p.classList.contains('cv-source-text')) {
-                const speakWithoutUrl = vvNormalizeSpeakText(
-                    plain.replace(/https?:\/\/\S+/gi, '').trim()
-                );
-                const speakText = speakWithoutUrl || plain;
-                return vvInsertTtsBeforeFirstLink(lineHtml, speakText);
-            }
-
             return vvAppendTtsInlineAfterEnglish(lineHtml, plain);
         });
 
@@ -535,6 +514,10 @@ function fixLegacyCookingVocaLayout(html) {
         // 노트 영역은 본문 마지막(출처 직전)으로 고정한다.
         // 기존 데이터에서 상단에 끼어들어 보이는 문제를 프론트에서 보정.
         body.appendChild(notesWrap);
+
+        // 예문 섹션은 카드의 맨 아래로 고정한다.
+        const examples = article.querySelector('.cv-examples');
+        if (examples) article.appendChild(examples);
     });
 
     return root.innerHTML;
