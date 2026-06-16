@@ -507,6 +507,7 @@ function fixLegacyCookingVocaLayout(html) {
             if (en) word.appendChild(en);
             if (meta) word.appendChild(meta);
             if (ko) word.appendChild(ko);
+            if (main && !main.children.length) main.remove();
         });
 
         const notesWrap = article.querySelector('.cv-notes');

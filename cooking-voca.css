@@ -22,13 +22,15 @@
 }
 
 #post-message .cv-word {
-  display: grid;
-  grid-template-rows: auto auto auto;
-  gap: 0.2rem;
-  padding: 0.45rem 0.65rem;
-  background: #fffaf3;
-  border: 1px solid #f0e4d4;
-  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.16rem;
+  padding: 0.52rem 0.72rem;
+  background: #fffdf9;
+  border: 1px solid #eadfce;
+  border-radius: 9px;
+  box-shadow: 0 1px 2px rgba(92, 73, 48, 0.05);
 }
 
 #post-message .cv-word-main {
@@ -40,20 +42,25 @@
   line-height: 1.35;
 }
 
+#post-message .cv-word > * {
+  margin: 0;
+  background: transparent !important;
+}
+
 #post-message .cv-en {
   display: inline-flex;
   align-items: center;
-  gap: 0.18rem;
+  gap: 0.24rem;
   font-weight: 700;
-  color: #8b4513;
-  font-size: 1rem;
+  color: #6f3f17;
+  font-size: 1.03rem;
   letter-spacing: -0.01em;
-  line-height: 1.35;
+  line-height: 1.3;
 }
 
 #post-message .cv-ko {
-  font-size: 0.86rem;
-  color: #5a4632;
+  font-size: 0.9rem;
+  color: #4f3d2a;
   line-height: 1.4;
 }
 
@@ -61,28 +68,28 @@
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
-  gap: 0.25rem 0.4rem;
+  gap: 0.22rem 0.32rem;
   margin: 0;
   padding: 0;
-  font-size: 0.82rem;
+  font-size: 0.84rem;
   line-height: 1.3;
 }
 
 #post-message .cv-pron {
-  color: #5f8a5f;
+  color: #355c7a;
   font-weight: 600;
   letter-spacing: -0.01em;
 }
 
 #post-message .cv-pron + .cv-ipa::before {
-  content: '·';
-  margin-right: 0.35rem;
-  color: #d0d8de;
-  font-weight: 400;
+  content: '|';
+  margin-right: 0.34rem;
+  color: #aab6c3;
+  font-weight: 500;
 }
 
 #post-message .cv-ipa {
-  color: #6e7f8f;
+  color: #4f657a;
   font-family: 'IBM Plex Sans', 'Noto Sans KR', sans-serif;
   letter-spacing: 0.01em;
 }
@@ -201,19 +208,19 @@
   }
 
   #post-message .cv-word {
-    padding: 0.42rem 0.55rem;
-    gap: 0.08rem;
+    padding: 0.48rem 0.58rem;
+    gap: 0.12rem;
   }
 
   #post-message .cv-en {
-    font-size: 0.96rem;
+    font-size: 0.98rem;
   }
 
   #post-message .cv-ko {
-    font-size: 0.84rem;
+    font-size: 0.87rem;
   }
 
   #post-message .cv-word-meta {
-    font-size: 0.8rem;
+    font-size: 0.82rem;
   }
 }
