@@ -1,12 +1,5 @@
 /* 랭킹 뉴스 — 메모장 + 타이포 강조 */
 
-.ranking-news-list-intro {
-  margin: 0 0 0.75rem;
-  font-size: 0.9rem;
-  line-height: 1.6;
-  color: #444;
-}
-
 #post-message .rn-text {
   max-width: 42rem;
   margin: 0 auto;
