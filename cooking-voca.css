@@ -82,10 +82,8 @@
 }
 
 #post-message .cv-pron + .cv-ipa::before {
-  content: '|';
-  margin-right: 0.34rem;
-  color: #aab6c3;
-  font-weight: 500;
+  content: '';
+  margin-right: 0;
 }
 
 #post-message .cv-ipa {

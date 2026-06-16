@@ -464,9 +464,8 @@ function convertMediaLinks(text) {
         result = convertMediaLinksInHtmlDom(text);
     } else {
         result = escapeHtml(text).replace(NV_URL_IN_TEXT, (url) => buildMediaHtmlForUrl(url));
+        result = result.replace(/\n/g, '<br>');
     }
-
-    result = result.replace(/\n/g, '<br>');
     return sanitizeHtml(result);
 }
 
