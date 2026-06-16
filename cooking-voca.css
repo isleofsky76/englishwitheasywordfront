@@ -1,0 +1,149 @@
+/* 요리 어휘 — 심플 카드 */
+
+#post-message .cv-text {
+  max-width: 36rem;
+  margin: 0 auto;
+  font-size: 0.95rem;
+  color: #4a4036;
+  line-height: 1.6;
+}
+
+#post-message .cv-intro {
+  margin: 0 0 1rem;
+  color: #6b5d4f;
+  font-size: 0.92rem;
+}
+
+#post-message .cv-words {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  margin-bottom: 1rem;
+}
+
+#post-message .cv-word {
+  padding: 0.55rem 0.7rem;
+  background: #fffaf3;
+  border: 1px solid #f0e4d4;
+  border-radius: 8px;
+}
+
+#post-message .cv-word-main {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.35rem 0.5rem;
+  margin-bottom: 0.2rem;
+}
+
+#post-message .cv-en {
+  font-weight: 700;
+  color: #8b4513;
+  font-size: 1rem;
+}
+
+#post-message .cv-ko {
+  font-size: 0.88rem;
+  color: #9a7b5a;
+}
+
+#post-message .cv-word-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.75rem;
+  font-size: 0.86rem;
+}
+
+#post-message .cv-pron {
+  color: #6b8e6b;
+  font-weight: 500;
+}
+
+#post-message .cv-ipa {
+  color: #7a8a9a;
+  font-family: 'IBM Plex Sans', 'Noto Sans KR', sans-serif;
+}
+
+#post-message .cv-notes {
+  margin: 0.5rem 0 1rem;
+}
+
+#post-message .cv-note {
+  margin: 0;
+  padding: 0.45rem 0.6rem;
+  font-size: 0.85rem;
+  color: #8a6d4b;
+  background: #fef9ef;
+  border-left: 3px solid #e8c98a;
+  border-radius: 0 6px 6px 0;
+}
+
+#post-message .cv-examples {
+  margin-top: 1.25rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid #f0e4d4;
+}
+
+#post-message .cv-examples-title {
+  margin: 0 0 0.65rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #8b4513;
+  letter-spacing: 0.02em;
+}
+
+#post-message .cv-example {
+  margin-bottom: 0.75rem;
+  padding: 0.6rem 0.75rem;
+  background: #f5f9f5;
+  border-radius: 8px;
+  border: 1px solid #dce8dc;
+}
+
+#post-message .cv-ex-en {
+  margin: 0 0 0.25rem;
+  font-weight: 600;
+  color: #3d5c3d;
+}
+
+#post-message .cv-ex-ko {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #6b7a6b;
+}
+
+#post-message .cv-source {
+  margin-top: 1.25rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid #f0e4d4;
+  font-size: 0.85rem;
+  color: #9a8a7a;
+}
+
+#post-message .cv-source-label {
+  margin: 0 0 0.25rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #b0a090;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+#post-message .cv-source-text {
+  margin: 0;
+}
+
+@media (max-width: 767px) {
+  #post-message .cv-text {
+    font-size: 0.92rem;
+  }
+
+  #post-message .cv-word {
+    padding: 0.5rem 0.6rem;
+  }
+
+  #post-message .cv-ko {
+    display: block;
+    width: 100%;
+  }
+}
