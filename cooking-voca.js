@@ -339,7 +339,7 @@ function attachVocabularyWebTTS(container) {
     } catch (_) {}
 
     const paragraphs = container.querySelectorAll(
-        'p, .nv-sentence-en, .nv-term, .nv-source-title'
+        'p, .nv-sentence-en, .nv-term, .nv-source-title, .cv-en'
     );
     paragraphs.forEach((p) => {
         if (p.getAttribute('data-vv-tts') === '1') return;
@@ -489,8 +489,32 @@ function fixLegacyCookingVocaLayout(html) {
 
     root.querySelectorAll('.cv-text').forEach((article) => {
         const body = article.querySelector('.cv-body');
+        if (!body) return;
+
+        // 단어 카드 구조를 영어 -> 발음/발음기호 -> 뜻 순서로 통일
+        body.querySelectorAll('.cv-word').forEach((word) => {
+            const en = word.querySelector('.cv-en');
+            const ko = word.querySelector('.cv-ko');
+            const meta = word.querySelector('.cv-word-meta');
+            const main = word.querySelector('.cv-word-main');
+
+            if (main) {
+                const koInMain = main.querySelector(':scope > .cv-ko');
+                if (koInMain) main.removeChild(koInMain);
+                if (en && en.parentElement === main) main.removeChild(en);
+            }
+
+            if (en) word.appendChild(en);
+            if (meta) word.appendChild(meta);
+            if (ko) word.appendChild(ko);
+        });
+
         const notesWrap = article.querySelector('.cv-notes');
-        if (!body || !notesWrap) return;
+        if (!notesWrap) {
+            const examplesOnly = article.querySelector('.cv-examples');
+            if (examplesOnly) article.appendChild(examplesOnly);
+            return;
+        }
 
         const notes = Array.from(notesWrap.querySelectorAll('.cv-note'));
         if (!notes.length) return;
