@@ -1,4 +1,4 @@
-/* 랭킹 뉴스 — 메모장/워드 스타일 (노란 형광펜만) */
+/* 랭킹 뉴스 — 메모장 텍스트 스타일 */
 
 .ranking-news-list-intro {
   margin: 0 0 0.75rem;
@@ -7,44 +7,73 @@
   color: #444;
 }
 
-#post-message .rn-memo {
+#post-message .rn-text {
   max-width: 42rem;
   margin: 0 auto;
   font-size: 0.95rem;
-  line-height: 1.8;
   color: #222;
   word-wrap: break-word;
 }
 
-#post-message .rn-memo p {
-  margin: 0 0 0.65rem;
+#post-message .rn-text-body p {
+  margin: 0 0 0.75rem;
+  line-height: 1.75;
 }
 
-#post-message .rn-memo p:last-child {
-  margin-bottom: 0;
+#post-message .rn-rank-heading {
+  margin: 0.85rem 0 0.4rem;
+  font-weight: 600;
+  line-height: 1.5;
+  color: #111;
+}
+
+#post-message .rn-rank-line {
+  margin: 0;
+  padding: 0.12rem 0;
+  line-height: 1.45;
+  font-size: 0.93rem;
+  letter-spacing: -0.01em;
 }
 
 #post-message .rn-hl {
   background: #fff3a3;
   color: inherit;
   padding: 0 0.12em;
-  border-radius: 0;
   font-weight: inherit;
 }
 
-#post-message .rn-memo a {
+#post-message .rn-source-block {
+  margin-top: 1.25rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid #e8e8e8;
+  font-size: 0.9rem;
+  color: #555;
+  line-height: 1.65;
+}
+
+#post-message .rn-source-label {
+  margin: 0 0 0.35rem;
+  font-weight: 600;
+  color: #333;
+}
+
+#post-message .rn-source-text {
+  margin: 0;
+}
+
+#post-message .rn-text a {
   color: #2563eb;
   text-decoration: underline;
   text-underline-offset: 2px;
 }
 
-#post-message .rn-memo a:hover {
-  color: #1d4ed8;
-}
-
 @media (max-width: 767px) {
-  #post-message .rn-memo {
+  #post-message .rn-text {
     font-size: 0.92rem;
-    line-height: 1.75;
+  }
+
+  #post-message .rn-rank-line {
+    font-size: 0.9rem;
+    line-height: 1.48;
   }
 }
