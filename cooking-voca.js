@@ -298,6 +298,19 @@ function vvAppendTtsInlineAfterEnglish(lineHtml, speak) {
     return s + btn;
 }
 
+function vvInsertTtsBeforeFirstLink(lineHtml, speak) {
+    if (/vv-tts-btn/i.test(lineHtml)) return lineHtml;
+    const btn = vvTtsButtonHtml(speak);
+    if (!btn) return lineHtml;
+
+    const linkStart = lineHtml.search(/<a\b/i);
+    if (linkStart === -1) return vvAppendTtsInlineAfterEnglish(lineHtml, speak);
+
+    const before = lineHtml.slice(0, linkStart).trimEnd();
+    const after = lineHtml.slice(linkStart);
+    return `${before} ${btn} ${after}`.trim();
+}
+
 function vvBindTtsButtons(container) {
     if (!container) return;
     container.querySelectorAll('.vv-tts-btn').forEach((btn) => {
@@ -351,6 +364,15 @@ function attachVocabularyWebTTS(container) {
             if (!plain) return lineHtml;
             if (!vvIsMostlyEnglish(plain)) return lineHtml;
             if (/^Source\b/i.test(plain) || /^https?:\/\//i.test(plain)) return lineHtml;
+
+            if (p.classList && p.classList.contains('cv-source-text')) {
+                const speakWithoutUrl = vvNormalizeSpeakText(
+                    plain.replace(/https?:\/\/\S+/gi, '').trim()
+                );
+                const speakText = speakWithoutUrl || plain;
+                return vvInsertTtsBeforeFirstLink(lineHtml, speakText);
+            }
+
             return vvAppendTtsInlineAfterEnglish(lineHtml, plain);
         });
 
@@ -467,6 +489,55 @@ function convertMediaLinks(text) {
 
     result = result.replace(/\n/g, '<br>');
     return sanitizeHtml(result);
+}
+
+function isLikelyKoreanTranslation(text) {
+    const t = String(text || '').trim();
+    if (!t) return false;
+    if (!/[가-힣]/.test(t)) return false;
+    const latin = (t.match(/[A-Za-z]/g) || []).length;
+    const hangul = (t.match(/[가-힣]/g) || []).length;
+    return hangul > 0 && latin <= Math.max(3, Math.floor(hangul * 0.2));
+}
+
+// 레거시 데이터 보정:
+// 과거 데이터에서 번역 문단(.cv-intro)이 상단으로 올라간 경우,
+// 각 노트(.cv-note) 바로 아래로 이동시켜 표시 순서를 복원한다.
+function fixLegacyCookingVocaLayout(html) {
+    if (!html || !/cv-text|cv-notes|cv-note/.test(html)) return html;
+    const root = document.createElement('div');
+    root.innerHTML = html;
+
+    root.querySelectorAll('.cv-text').forEach((article) => {
+        const body = article.querySelector('.cv-body');
+        const notesWrap = article.querySelector('.cv-notes');
+        if (!body || !notesWrap) return;
+
+        const notes = Array.from(notesWrap.querySelectorAll('.cv-note'));
+        if (!notes.length) return;
+
+        const introCandidates = Array.from(body.querySelectorAll(':scope > .cv-intro'))
+            .filter((p) => isLikelyKoreanTranslation(p.textContent));
+        if (!introCandidates.length) return;
+
+        const pairCount = Math.min(notes.length, introCandidates.length);
+        const selectedTranslations = introCandidates.slice(-pairCount);
+
+        for (let i = 0; i < pairCount; i++) {
+            const note = notes[i];
+            const ko = selectedTranslations[i];
+            if (!note || !ko) continue;
+            ko.classList.remove('cv-intro');
+            ko.classList.add('cv-note-ko');
+            note.insertAdjacentElement('afterend', ko);
+        }
+
+        // 노트 영역은 본문 마지막(출처 직전)으로 고정한다.
+        // 기존 데이터에서 상단에 끼어들어 보이는 문제를 프론트에서 보정.
+        body.appendChild(notesWrap);
+    });
+
+    return root.innerHTML;
 }
 
 // 로딩 상태 표시 함수
@@ -632,7 +703,7 @@ async function loadPost() {
         }
 
         // 이미지/동영상 링크 변환하여 표시
-        const convertedMessage = convertMediaLinks(post.message || '');
+        const convertedMessage = fixLegacyCookingVocaLayout(convertMediaLinks(post.message || ''));
         console.log('원본 메시지:', post.message);
         console.log('변환된 메시지:', convertedMessage);
         

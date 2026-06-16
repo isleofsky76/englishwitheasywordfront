@@ -65,7 +65,9 @@
 }
 
 #post-message .cv-notes {
-  margin: 0.5rem 0 1rem;
+  margin: 1.1rem 0 0.9rem;
+  padding-top: 0.6rem;
+  border-top: 1px dashed #eadcc9;
 }
 
 #post-message .cv-note {
@@ -76,6 +78,22 @@
   background: #fef9ef;
   border-left: 3px solid #e8c98a;
   border-radius: 0 6px 6px 0;
+}
+
+#post-message .cv-note-block {
+  margin: 0 0 0.55rem;
+}
+
+#post-message .cv-note-block:last-child {
+  margin-bottom: 0;
+}
+
+#post-message .cv-note-ko {
+  margin: 0.2rem 0 0.55rem 0.35rem;
+  padding: 0 0.25rem;
+  font-size: 0.88rem;
+  color: #6f6252;
+  line-height: 1.55;
 }
 
 #post-message .cv-examples {
