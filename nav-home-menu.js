@@ -22,7 +22,7 @@
 
         { href: 'popular-voca-list.html', label: '인기 어휘', pages: ['popular-voca-list.html', 'popular-voca.html'] },
 
-        { href: 'cooking-voca-list.html', label: '요리 어휘', pages: ['cooking-voca-list.html', 'cooking-voca.html'] },
+        { href: 'cooking-voca-list.html', label: '요리 영어', pages: ['cooking-voca-list.html', 'cooking-voca.html'] },
 
         { href: 'english-synonym-list.html', label: '유의어', pages: ['english-synonym-list.html', 'english-synonym.html'] },
 
