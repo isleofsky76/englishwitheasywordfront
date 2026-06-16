@@ -74,7 +74,10 @@
   border: 1px solid rgba(0, 0, 0, 0.08);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
   padding: 0.35rem 0;
-  z-index: 1050;
+  z-index: 1100;
+  max-height: min(80vh, 360px);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .nav-home-dropdown-menu .dropdown-item {
@@ -88,6 +91,19 @@
 .nav-home-dropdown-menu .dropdown-item:focus {
   background-color: #eef4fc;
   color: #2b6cb0;
+}
+
+.nav-home-dropdown-menu .dropdown-item.active {
+  background-color: #dbeafe;
+  color: #1d4ed8;
+  font-weight: 600;
+}
+
+/* guestbook/포토영어 페이지 navbar 스타일 충돌 시 드롭다운 잘림 방지 */
+.navbar.fixed-top .container-fluid,
+.nav-home-menu-slot,
+.nav-home-dropdown {
+  overflow: visible !important;
 }
 
 html.nav-home-open .navbar.fixed-top {
@@ -146,7 +162,7 @@ html.nav-home-open .navbar.fixed-top {
     position: absolute;
     right: 0;
     left: auto;
-    z-index: 1050;
+    z-index: 1100;
   }
 
   .nav-home-dropdown-menu.show {

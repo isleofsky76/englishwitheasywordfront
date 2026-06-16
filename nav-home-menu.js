@@ -1,68 +1,195 @@
 /**
+
  * Navbar Home — 학습 메뉴 드롭다운
+
  * [data-nav-home-menu] 슬롯에 메뉴 삽입 (Bootstrap 5 필요)
+
  */
+
 (function () {
-    var MENU_HTML =
-        '<div class="dropdown nav-home-dropdown">' +
-        '<button type="button" class="nav-home-toggle dropdown-toggle" ' +
-        'data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">Home</button>' +
-        '<ul class="dropdown-menu dropdown-menu-end nav-home-dropdown-menu" aria-labelledby="navHomeMenuToggle">' +
-        '<li><a class="dropdown-item" href="index.html">처음으로</a></li>' +
-        '<li><a class="dropdown-item" href="word-of-the-day-list.html">오늘의 단어</a></li>' +
-        '<li><a class="dropdown-item" href="news-voca-list.html">뉴스 어휘</a></li>' +
-        '<li><a class="dropdown-item" href="popular-voca-list.html">인기 어휘</a></li>' +
-        '<li><a class="dropdown-item" href="english-synonym-list.html">유의어</a></li>' +
-        '<li><a class="dropdown-item" href="photo-english-list.html">포토영어</a></li>' +
-        '<li><a class="dropdown-item" href="pros-cons-list.html">Pros & Cons</a></li>' +
-        '<li><a class="dropdown-item" href="learning-site.html">학습 사이트</a></li>' +
-        '</ul></div>';
+
+    var NAV_HOME_MENU_VERSION = '20260616b';
+
+
+
+    var MENU_ITEMS = [
+
+        { href: 'index.html', label: '처음으로', pages: ['index.html', ''] },
+
+        { href: 'word-of-the-day-list.html', label: '오늘의 단어', pages: ['word-of-the-day-list.html', 'word-of-the-day.html'] },
+
+        { href: 'news-voca-list.html', label: '뉴스 어휘', pages: ['news-voca-list.html', 'news-voca.html'] },
+
+        { href: 'popular-voca-list.html', label: '인기 어휘', pages: ['popular-voca-list.html', 'popular-voca.html'] },
+
+        { href: 'english-synonym-list.html', label: '유의어', pages: ['english-synonym-list.html', 'english-synonym.html'] },
+
+        { href: 'ranking-news-list.html', label: '랭킹 뉴스', pages: ['ranking-news-list.html', 'ranking-news.html'] },
+
+        { href: 'photo-english-list.html', label: '포토영어', pages: ['photo-english-list.html', 'photo-english.html'] },
+
+        { href: 'pros-cons-list.html', label: 'Pros & Cons', pages: ['pros-cons-list.html', 'pros-cons.html'] },
+
+        { href: 'learning-site.html', label: '학습 사이트', pages: ['learning-site.html'] }
+
+    ];
+
+
+
+    function currentPageName() {
+
+        var path = window.location.pathname || '';
+
+        var page = path.split('/').pop() || 'index.html';
+
+        if (page === '' || page === '/') return 'index.html';
+
+        return page.split('?')[0];
+
+    }
+
+
+
+    function isActiveItem(item, page) {
+
+        return item.pages.indexOf(page) !== -1;
+
+    }
+
+
+
+    function buildMenuHtml() {
+
+        var page = currentPageName();
+
+        var itemsHtml = MENU_ITEMS.map(function (item) {
+
+            var active = isActiveItem(item, page);
+
+            var cls = 'dropdown-item' + (active ? ' active' : '');
+
+            var aria = active ? ' aria-current="page"' : '';
+
+            return '<li><a class="' + cls + '" href="' + item.href + '"' + aria + '>' + item.label + '</a></li>';
+
+        }).join('');
+
+
+
+        return (
+
+            '<div class="dropdown nav-home-dropdown">' +
+
+            '<button type="button" class="nav-home-toggle dropdown-toggle" ' +
+
+            'data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">Home</button>' +
+
+            '<ul class="dropdown-menu dropdown-menu-end nav-home-dropdown-menu" aria-labelledby="navHomeMenuToggle">' +
+
+            itemsHtml +
+
+            '</ul></div>'
+
+        );
+
+    }
+
+
 
     function pinNavbarWhileOpen() {
+
         document.addEventListener('show.bs.dropdown', function (e) {
+
             if (!e.target || !e.target.closest('.nav-home-dropdown')) return;
+
             document.documentElement.classList.add('nav-home-open');
+
             var nav = document.querySelector('.navbar.fixed-top');
+
             if (nav) nav.style.top = '0';
+
         });
+
         document.addEventListener('hidden.bs.dropdown', function (e) {
+
             if (!e.target || !e.target.closest('.nav-home-dropdown')) return;
+
             document.documentElement.classList.remove('nav-home-open');
+
         });
+
     }
+
+
 
     function initToggle(toggle, menu, index) {
+
         var toggleId = 'navHomeMenuToggle-' + index;
+
         toggle.id = toggleId;
+
         menu.setAttribute('aria-labelledby', toggleId);
 
+
+
         function createDropdown() {
+
             if (!window.bootstrap || !bootstrap.Dropdown) {
+
                 setTimeout(createDropdown, 30);
+
                 return;
+
             }
+
             bootstrap.Dropdown.getOrCreateInstance(toggle, {
+
                 popperConfig: { strategy: 'fixed' }
+
             });
+
         }
+
         createDropdown();
+
     }
 
+
+
     function injectNavHomeMenu() {
+
         document.querySelectorAll('[data-nav-home-menu]').forEach(function (slot, index) {
-            slot.innerHTML = MENU_HTML;
+
+            slot.innerHTML = buildMenuHtml();
+
+            slot.setAttribute('data-nav-home-version', NAV_HOME_MENU_VERSION);
+
             var toggle = slot.querySelector('.nav-home-toggle');
+
             var menu = slot.querySelector('.dropdown-menu');
+
             if (toggle && menu) initToggle(toggle, menu, index);
+
         });
+
     }
+
+
 
     pinNavbarWhileOpen();
 
+
+
     if (document.readyState === 'loading') {
+
         document.addEventListener('DOMContentLoaded', injectNavHomeMenu);
+
     } else {
+
         injectNavHomeMenu();
+
     }
+
 })();
+
 

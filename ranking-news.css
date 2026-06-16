@@ -1,0 +1,115 @@
+/* 랭킹 뉴스 — 목록·본문 보조 스타일 */
+
+.ranking-news-list-intro {
+  margin: 0 0 0.75rem;
+  padding: 0.65rem 0.85rem;
+  font-size: 0.84rem;
+  line-height: 1.5;
+  color: #475569;
+  background: #f8fafc;
+  border-left: 3px solid #e11d48;
+  border-radius: 0 8px 8px 0;
+}
+
+/* 본문 랭킹 카드 (nv-article 안에서 사용) */
+.rn-rankings {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.rn-rank-item {
+  margin: 0;
+  padding: 0.75rem 0.9rem;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06);
+}
+
+.rn-rank-item-1 {
+  border-left: 4px solid #e11d48;
+  background: linear-gradient(90deg, #fff1f2 0%, #fff 45%);
+}
+
+.rn-rank-item-2 {
+  border-left: 4px solid #f97316;
+  background: linear-gradient(90deg, #fff7ed 0%, #fff 45%);
+}
+
+.rn-rank-item-3 {
+  border-left: 4px solid #eab308;
+  background: linear-gradient(90deg, #fefce8 0%, #fff 45%);
+}
+
+.rn-rank-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.6rem;
+  height: 1.6rem;
+  margin-right: 0.45rem;
+  padding: 0 0.35rem;
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: #fff;
+  background: #64748b;
+  border-radius: 999px;
+  vertical-align: middle;
+}
+
+.rn-rank-item-1 .rn-rank-num { background: #e11d48; }
+.rn-rank-item-2 .rn-rank-num { background: #f97316; }
+.rn-rank-item-3 .rn-rank-num { background: #eab308; color: #422006; }
+
+.rn-rank-title {
+  margin: 0 0 0.35rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #0f172a;
+  line-height: 1.4;
+}
+
+.rn-rank-en {
+  margin: 0 0 0.25rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #1e40af;
+  line-height: 1.45;
+}
+
+.rn-rank-ko {
+  margin: 0;
+  font-size: 0.84rem;
+  color: #475569;
+  line-height: 1.5;
+}
+
+.rn-section-title {
+  margin: 1.5rem 0 0.75rem;
+  padding-bottom: 0.35rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #be123c;
+  border-bottom: 2px solid #fecdd3;
+}
+
+#post-message .rn-rankings {
+  padding-left: 0;
+}
+
+@media (max-width: 767px) {
+  #post-message .rn-rank-item {
+    padding: 0.65rem 0.75rem;
+  }
+  .rn-rank-title {
+    font-size: 0.9rem;
+  }
+  .rn-rank-en,
+  .rn-rank-ko {
+    font-size: 0.82rem;
+  }
+}
