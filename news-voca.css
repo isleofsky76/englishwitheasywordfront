@@ -1,0 +1,230 @@
+/* 뉴스 어휘 — cooking-voca(cv-*)와 동일 구조, nv-* 네임스페이스 */
+
+#post-message .nv-text {
+  max-width: 36rem;
+  margin: 0 auto;
+  font-size: 0.95rem;
+  color: #2c3440;
+  line-height: 1.6;
+}
+
+#post-message .nv-intro {
+  margin: 0 0 1rem;
+  color: #4a5568;
+  font-size: 0.92rem;
+}
+
+#post-message .nv-words {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-bottom: 1rem;
+}
+
+#post-message .nv-word {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.16rem;
+  padding: 0.52rem 0.72rem;
+  background: #f8fafc;
+  border: 1px solid #d8e2ef;
+  border-radius: 9px;
+  box-shadow: 0 1px 2px rgba(30, 58, 95, 0.05);
+}
+
+#post-message .nv-word-main {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.2rem 0.35rem;
+  margin: 0;
+  line-height: 1.35;
+}
+
+#post-message .nv-word > * {
+  margin: 0;
+  background: transparent !important;
+}
+
+#post-message .nv-en {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.24rem;
+  font-weight: 700;
+  color: #1e3a5f;
+  font-size: 1.03rem;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+}
+
+#post-message .nv-ko {
+  font-size: 0.9rem;
+  color: #2f2418;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+#post-message .nv-word-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.22rem 0.32rem;
+  margin: 0;
+  padding: 0;
+  font-size: 0.84rem;
+  line-height: 1.3;
+}
+
+#post-message .nv-pron {
+  color: #355c7a;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+#post-message .nv-ipa {
+  color: #4f657a;
+  font-family: 'IBM Plex Sans', 'Noto Sans KR', sans-serif;
+  letter-spacing: 0.01em;
+}
+
+#post-message .nv-notes {
+  margin: 1.1rem 0 0.9rem;
+  padding-top: 0.6rem;
+  border-top: 1px dashed #d0dce8;
+}
+
+#post-message .nv-note {
+  margin: 0;
+  padding: 0.45rem 0.6rem;
+  font-size: 0.85rem;
+  color: #4a6278;
+  background: #f0f6fc;
+  border-left: 3px solid #7eb8e8;
+  border-radius: 0 6px 6px 0;
+}
+
+#post-message .nv-note-block {
+  margin: 0 0 0.55rem;
+}
+
+#post-message .nv-note-block:last-child {
+  margin-bottom: 0;
+}
+
+#post-message .nv-note-ko {
+  margin: 0.2rem 0 0.55rem 0.35rem;
+  padding: 0 0.25rem;
+  font-size: 0.88rem;
+  color: #3f4f5f;
+  line-height: 1.55;
+}
+
+#post-message .nv-examples {
+  margin-top: 1.3rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid #e2eaf2;
+  counter-reset: nv-example;
+}
+
+#post-message .nv-examples-title {
+  margin: 0 0 0.75rem;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #1e4a7a;
+  letter-spacing: 0.02em;
+}
+
+#post-message .nv-example {
+  position: relative;
+  margin-bottom: 0.65rem;
+  padding: 0.65rem 0.8rem 0.62rem 2.2rem;
+  background: #f4f8fc;
+  border-radius: 10px;
+  border: 1px solid #d4e3f0;
+}
+
+#post-message .nv-example::before {
+  counter-increment: nv-example;
+  content: counter(nv-example);
+  position: absolute;
+  left: 0.65rem;
+  top: 0.68rem;
+  width: 1.15rem;
+  height: 1.15rem;
+  border-radius: 999px;
+  background: #d6e8f8;
+  color: #1e4a7a;
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1.15rem;
+  text-align: center;
+}
+
+#post-message .nv-ex-en {
+  margin: 0 0 0.24rem;
+  font-weight: 650;
+  color: #1e3a5f;
+  line-height: 1.45;
+}
+
+#post-message .nv-ex-ko {
+  margin: 0;
+  font-size: 0.88rem;
+  color: #3f4f5f;
+  line-height: 1.5;
+}
+
+#post-message .nv-source {
+  margin-top: 1.25rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid #e2eaf2;
+  font-size: 0.85rem;
+  color: #7a8a9a;
+}
+
+#post-message .nv-source-label {
+  margin: 0 0 0.25rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #9aa8b8;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+#post-message .nv-source-text {
+  margin: 0 0 0.35rem;
+}
+
+#post-message .nv-source-link {
+  color: #2563eb;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+#post-message .nv-source-link:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 767px) {
+  #post-message .nv-text {
+    font-size: 0.92rem;
+  }
+
+  #post-message .nv-word {
+    padding: 0.48rem 0.58rem;
+    gap: 0.12rem;
+  }
+
+  #post-message .nv-en {
+    font-size: 0.98rem;
+  }
+
+  #post-message .nv-ko {
+    font-size: 0.87rem;
+  }
+
+  #post-message .nv-word-meta {
+    font-size: 0.82rem;
+  }
+}
