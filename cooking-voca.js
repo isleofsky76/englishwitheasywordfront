@@ -488,7 +488,10 @@ function fixLegacyCookingVocaLayout(html) {
 
     root.querySelectorAll('.cv-text').forEach((article) => {
         const body = article.querySelector('.cv-body');
+        const source = article.querySelector('.cv-source');
         if (!body) return;
+
+        if (source) article.insertBefore(source, body);
 
         // 단어 카드 구조를 영어 -> 발음/발음기호 -> 뜻 순서로 통일
         body.querySelectorAll('.cv-word').forEach((word) => {
