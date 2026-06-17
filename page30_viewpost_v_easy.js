@@ -222,10 +222,18 @@ function attachPopularVocaWebTTS(container) {
             if (/class\s*=\s*["'][^"']*pv-tts-btn/i.test(lineHtml)) return lineHtml;
             const plain = pvStripTagsToText(lineHtml);
             if (!plain) return lineHtml;
+            if (/^\s*[\(（]/.test(plain)) return lineHtml;
 
             const num = plain.match(/^\s*(\d+)\)\s*(.+)$/);
             if (num && pvIsMostlyEnglish(num[2])) {
                 const speak = num[2].trim().replace(/\s*🔊\s*$/u, '');
+                return pvAppendTtsInlineAfterEnglish(lineHtml, speak);
+            }
+
+            // 대화 예문: Customer: / Clerk: 등 (번호 없는 화자 줄, span 하이라이트 포함)
+            const dialogue = plain.match(/^\s*([A-Za-z][A-Za-z\s]{0,40}):\s*(.+)$/);
+            if (dialogue && pvIsMostlyEnglish(dialogue[2])) {
+                const speak = dialogue[2].trim().replace(/\s*🔊\s*$/u, '');
                 return pvAppendTtsInlineAfterEnglish(lineHtml, speak);
             }
 
