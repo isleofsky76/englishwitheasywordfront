@@ -37,11 +37,13 @@ const NV_ALLOWED_TAGS = [
     'h1', 'h2', 'h3', 'h4', 'p', 'br', 'hr',
     'strong', 'b', 'em', 'i', 'u', 'mark', 'small', 'sub', 'sup', 'abbr', 'cite', 'q',
     'ol', 'ul', 'li', 'dl', 'dt', 'dd',
+    'table', 'thead', 'tbody', 'tr', 'th', 'td', 'caption',
     'span', 'div', 'a', 'img', 'button', 'time', 'figure', 'figcaption', 'blockquote',
 ];
 const NV_ALLOWED_ATTRS = [
     'class', 'id', 'href', 'target', 'rel', 'src', 'alt', 'loading', 'decoding',
     'datetime', 'role', 'aria-label', 'aria-hidden', 'aria-labelledby', 'title',
+    'scope', 'colspan', 'rowspan', 'lang',
     'itemscope', 'itemtype', 'itemprop', 'data-vv-tts',
     'style', 'onerror',
 ];
@@ -103,6 +105,45 @@ function nvSetCanonical(url) {
     link.href = url;
 }
 
+function nvParseRankingItemList(html) {
+    const div = document.createElement('div');
+    div.innerHTML = html || '';
+    const rankLines = div.querySelectorAll('.rn-rank-line');
+    if (rankLines.length) {
+        return {
+            '@type': 'ItemList',
+            numberOfItems: rankLines.length,
+            itemListElement: Array.from(rankLines).map((el, i) => {
+                const t = (el.textContent || '').trim();
+                const m = t.match(/^(\d+)\s*[\.\|]\s*(.+)/);
+                return {
+                    '@type': 'ListItem',
+                    position: m ? parseInt(m[1], 10) : i + 1,
+                    name: m ? m[2] : t,
+                };
+            }),
+        };
+    }
+    const rows = div.querySelectorAll('.rn-rank-table tbody tr');
+    if (!rows.length) return null;
+    return {
+        '@type': 'ItemList',
+        numberOfItems: rows.length,
+        itemListElement: Array.from(rows).map((tr, i) => {
+            const rank = tr.querySelector('.rn-col-rank')?.textContent?.trim() || String(i + 1);
+            const cells = tr.querySelectorAll('.rn-col-cell');
+            const name = cells[0]?.textContent?.trim() || '';
+            const desc = cells.length > 1 ? cells[cells.length - 1]?.textContent?.trim() : '';
+            return {
+                '@type': 'ListItem',
+                position: parseInt(rank, 10) || i + 1,
+                name,
+                description: desc,
+            };
+        }),
+    };
+}
+
 function nvInjectArticleJsonLd(post, isoDate, description) {
     const id = 'nv-article-jsonld';
     document.getElementById(id)?.remove();
@@ -114,12 +155,14 @@ function nvInjectArticleJsonLd(post, isoDate, description) {
     const pageUrl = index
         ? `${NV_SITE_ORIGIN}/ranking-news.html?index=${index}`
         : `${NV_SITE_ORIGIN}/ranking-news.html`;
-    script.textContent = JSON.stringify({
+    const itemList = nvParseRankingItemList(post.message);
+    const payload = {
         '@context': 'https://schema.org',
-        '@type': 'BlogPosting',
-        headline: post.title || 'Ranking News',
+        '@type': 'Article',
+        headline: post.title || 'FIFA Ranking News',
         description,
         datePublished: isoDate || undefined,
+        dateModified: isoDate || undefined,
         author: {
             '@type': 'Organization',
             name: post.nickname || 'English Easy Study',
@@ -131,8 +174,15 @@ function nvInjectArticleJsonLd(post, isoDate, description) {
         },
         mainEntityOfPage: { '@type': 'WebPage', '@id': pageUrl },
         inLanguage: ['ko', 'en'],
-        keywords: 'Ranking News, CNN English, 뉴스 영어 어휘',
-    });
+        keywords: 'FIFA ranking, FIFA 남자 랭킹, FIFA world ranking, 축구 국가대표 랭킹, FIFA TOP 20',
+        about: {
+            '@type': 'Thing',
+            name: 'FIFA/Coca-Cola Men\'s World Ranking',
+            sameAs: 'https://inside.fifa.com/fifa-world-ranking/men',
+        },
+    };
+    if (itemList) payload.mainEntity = itemList;
+    script.textContent = JSON.stringify(payload);
     document.head.appendChild(script);
 }
 
@@ -586,15 +636,9 @@ async function loadPost() {
         console.log('원본 메시지:', post.message);
         console.log('변환된 메시지:', convertedMessage);
         
-        const isAdmin = (post.nickname || '').toLowerCase() === 'admin';
-        let isoMeta = '';
-        if (post.date) {
-            const dMeta = new Date(post.date);
-            if (!isNaN(dMeta.getTime())) isoMeta = dMeta.toISOString();
-        }
-        const metaHtml = isAdmin
-            ? `<p id="post-meta"><time datetime="${isoMeta}">${formattedDate}</time> · 조회 ${post.views || 0}</p>`
-            : `<p id="post-meta">Author: ${escapeHtml(post.nickname || 'Anonymous')} | <time datetime="${isoMeta}">${formattedDate}</time> | Views: ${post.views || 0}</p>`;
+        const metaHtml = typeof buildPostMetaHtml === 'function'
+            ? buildPostMetaHtml(post)
+            : `<p id="post-meta">조회 ${post.views || 0} · 추천수 ${parseInt(post.likes, 10) || 0}</p>`;
 
         updatePageSeo(post, formattedDate);
 
