@@ -89,6 +89,16 @@ body {
   line-height: 1.5;
 }
 
+#post-meta .post-meta-views-num {
+  color: #1a56db;
+  font-weight: 600;
+}
+
+#post-meta .post-meta-likes-num {
+  color: #1a4480;
+  font-weight: 600;
+}
+
 /* 글 아래 다른 글 목록 */
 .other-posts-section {
   max-width: 900px;
@@ -315,6 +325,42 @@ body {
   #post-message img {
     margin: 16px 0;
     border-radius: 6px;
+  }
+
+  #post-message .nv-vocab {
+    margin: 1.35rem 0 1.1rem;
+    padding: 0.9rem 0.95rem 1rem;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #faf5ff 0%, #fff 55%);
+    border: 1px solid #e9d8fd;
+    box-shadow: 0 2px 10px rgba(107, 70, 193, 0.1);
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  #post-message h3.nv-vocab-title {
+    margin: 0 0 0.65rem;
+    padding-bottom: 0.35rem;
+    font-size: 0.84rem;
+    line-height: 1.35;
+    color: #553c9a;
+    border-bottom: 2px solid #d6bcfa;
+  }
+
+  #post-message .nv-vocab-list {
+    padding-left: 0;
+    margin-bottom: 0;
+  }
+
+  #post-message .nv-vocab-list .nv-vocab-item {
+    padding: 0.5rem 0.7rem;
+    font-size: 0.82rem;
+    border-left-width: 3px;
+  }
+
+  #post-message .nv-vocab-item strong {
+    font-size: 0.86rem;
   }
 
   .viewpost-actions {
@@ -796,7 +842,8 @@ body {
   box-shadow: 0 2px 12px rgba(107, 70, 193, 0.08);
 }
 
-.nv-vocab-title {
+.nv-vocab-title,
+#post-message h3.nv-vocab-title {
   margin: 0 0 0.75rem;
   padding-bottom: 0.4rem;
   font-size: 0.88rem;
@@ -804,9 +851,11 @@ body {
   color: #553c9a;
   border-bottom: 2px solid #d6bcfa;
   letter-spacing: 0.03em;
+  line-height: 1.4;
 }
 
-.nv-vocab-list {
+.nv-vocab-list,
+#post-message .nv-vocab-list {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -815,7 +864,8 @@ body {
   gap: 0.5rem;
 }
 
-.nv-vocab-item {
+.nv-vocab-item,
+#post-message .nv-vocab-list .nv-vocab-item {
   margin: 0;
   padding: 0.55rem 0.75rem;
   font-size: 0.86rem;
@@ -824,12 +874,26 @@ body {
   background: rgba(255, 255, 255, 0.9);
   border-radius: 8px;
   border-left: 3px solid #9f7aea;
+  list-style: none;
 }
 
-.nv-vocab-item strong {
+.nv-vocab-item strong,
+#post-message .nv-vocab-item strong {
   font-size: 0.9rem;
   font-weight: 700;
   color: #44337a;
+}
+
+#post-message .nv-vocab {
+  margin: 1.75rem 0 1.35rem;
+  padding: 1rem 1.15rem 1.1rem;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #faf5ff 0%, #fff 55%);
+  border: 1px solid #e9d8fd;
+  box-shadow: 0 2px 12px rgba(107, 70, 193, 0.08);
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
 }
 
 .nv-source {
@@ -910,14 +974,5 @@ body {
   }
   .nv-sentence-en {
     font-size: 0.95rem;
-  }
-  .nv-vocab-title {
-    font-size: 0.84rem;
-  }
-  .nv-vocab-item {
-    font-size: 0.82rem;
-  }
-  .nv-vocab-item strong {
-    font-size: 0.86rem;
   }
 }

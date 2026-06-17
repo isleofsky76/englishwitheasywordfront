@@ -68,6 +68,8 @@
             btn.classList.add('is-active');
             btn.disabled = true;
             if (countEl) countEl.textContent = likes;
+            const metaLikesEl = document.querySelector('#post-meta .post-meta-likes-num');
+            if (metaLikesEl) metaLikesEl.textContent = likes;
         }
 
         btn.addEventListener('click', function () {

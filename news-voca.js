@@ -717,15 +717,9 @@ async function loadPost() {
         console.log('원본 메시지:', post.message);
         console.log('변환된 메시지:', convertedMessage);
         
-        const isAdmin = (post.nickname || '').toLowerCase() === 'admin';
-        let isoMeta = '';
-        if (post.date) {
-            const dMeta = new Date(post.date);
-            if (!isNaN(dMeta.getTime())) isoMeta = dMeta.toISOString();
-        }
-        const metaHtml = isAdmin
-            ? `<p id="post-meta"><time datetime="${isoMeta}">${formattedDate}</time> · 조회 ${post.views || 0}</p>`
-            : `<p id="post-meta">Author: ${escapeHtml(post.nickname || 'Anonymous')} | <time datetime="${isoMeta}">${formattedDate}</time> | Views: ${post.views || 0}</p>`;
+        const metaHtml = typeof buildPostMetaHtml === 'function'
+            ? buildPostMetaHtml(post)
+            : `<p id="post-meta">조회 ${post.views || 0} · 추천수 ${parseInt(post.likes, 10) || 0}</p>`;
 
         updatePageSeo(post, formattedDate);
 

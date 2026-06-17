@@ -26,6 +26,7 @@ if (apiMode === 'prod') {
     API_BASE_URL = 'https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app';
     console.log('🟢 Production 모드 (자동) - API_BASE_URL:', API_BASE_URL);
 }
+console.log('page30_guestbook_v.js v20260629');
 
 // 성능 최적화: 캐시 및 상태 관리
 const cache = {
@@ -151,43 +152,51 @@ function showError(container, message, details = '') {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    // 기본적으로 모든 form 숨기기
-    document.getElementById('write-post-container').style.display = 'none';
-    document.getElementById('edit-post-container').style.display = 'none';
-    // 모달은 기본적으로 숨김 상태 (Bootstrap이 자동 처리)
+    const writePostContainer = document.getElementById('write-post-container');
+    const editPostContainer = document.getElementById('edit-post-container');
+    if (writePostContainer) writePostContainer.style.display = 'none';
+    if (editPostContainer) editPostContainer.style.display = 'none';
 
-    // URL 파라미터 확인
     const params = new URLSearchParams(window.location.search);
-    if (params.get('edit') === 'true') {
-        document.getElementById('edit-id').value = params.get('id');
-        document.getElementById('edit-title').value = decodeURIComponent(params.get('title'));
-        document.getElementById('edit-message').value = decodeURIComponent(params.get('message'));
-        document.getElementById('edit-nickname').value = decodeURIComponent(params.get('nickname'));
-        document.getElementById('edit-isSecret').checked = params.get('isSecret') === 'true';
-        
-        document.getElementById('edit-post-container').style.display = 'block';
+    if (params.get('edit') === 'true' && editPostContainer) {
+        const editId = document.getElementById('edit-id');
+        const editTitle = document.getElementById('edit-title');
+        const editMessage = document.getElementById('edit-message');
+        const editNickname = document.getElementById('edit-nickname');
+        const editIsSecret = document.getElementById('edit-isSecret');
+        if (editId) editId.value = params.get('id');
+        if (editTitle) editTitle.value = decodeURIComponent(params.get('title'));
+        if (editMessage) editMessage.value = decodeURIComponent(params.get('message'));
+        if (editNickname) editNickname.value = decodeURIComponent(params.get('nickname'));
+        if (editIsSecret) editIsSecret.checked = params.get('isSecret') === 'true';
+        editPostContainer.style.display = 'block';
     }
 
     const guestbookList = document.getElementById('guestbook-list');
+    loadMessages();
+
     const writeModalElement = document.getElementById('write-post-modal');
-    const writeModal = new bootstrap.Modal(writeModalElement);
-    
+    const writeModal = writeModalElement && window.bootstrap
+        ? bootstrap.Modal.getOrCreateInstance(writeModalElement)
+        : null;
+
     const writePostButton = document.getElementById('write-post-button');
-    if (writePostButton) {
+    if (writePostButton && writeModal && guestbookList) {
         writePostButton.addEventListener('click', () => {
             guestbookList.style.display = 'none';
             writeModal.show();
-            document.getElementById('edit-post-container').style.display = 'none';
+            if (editPostContainer) editPostContainer.style.display = 'none';
             setTimeout(() => {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }, 300);
         });
     }
-    
-    // 모달이 닫힐 때 게시판 목록 다시 보이기
-    writeModalElement.addEventListener('hidden.bs.modal', () => {
-        guestbookList.style.display = 'block';
-    });
+
+    if (writeModalElement && guestbookList) {
+        writeModalElement.addEventListener('hidden.bs.modal', () => {
+            guestbookList.style.display = 'block';
+        });
+    }
     
     // 텍스트 에디터 기능 추가
     const messageEditor = document.getElementById('message');
@@ -628,7 +637,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     } // 이미지 업로드가 있는 경우에만 처리하는 블록 종료
 
-    document.getElementById('guestbook-form').addEventListener('submit', async (event) => {
+    const guestbookForm = document.getElementById('guestbook-form');
+    if (guestbookForm) guestbookForm.addEventListener('submit', async (event) => {
         event.preventDefault();
         const form = event.target;
         const submitButton = form.querySelector('button[type="submit"]');
@@ -754,7 +764,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    document.getElementById('edit-guestbook-form').addEventListener('submit', async (event) => {
+    const editGuestbookForm = document.getElementById('edit-guestbook-form');
+    if (editGuestbookForm) editGuestbookForm.addEventListener('submit', async (event) => {
         event.preventDefault();
         const form = event.target;
         const submitButton = form.querySelector('button[type="submit"]');
@@ -1121,9 +1132,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // 초기 로드
-    loadMessages();
-    
     // 페이지 가시성 변경 시 캐시 무효화 (다른 탭에서 돌아왔을 때)
     document.addEventListener('visibilitychange', () => {
         if (!document.hidden && cache.lastFetch) {
