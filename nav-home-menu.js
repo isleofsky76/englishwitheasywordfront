@@ -24,6 +24,8 @@
 
         { href: 'cooking-voca-list.html', label: '요리 영어', pages: ['cooking-voca-list.html', 'cooking-voca.html'] },
 
+        { href: 'culture-voca-list.html', label: '컬쳐 어휘', pages: ['culture-voca-list.html', 'culture-voca.html'] },
+
         { href: 'english-synonym-list.html', label: '유의어', pages: ['english-synonym-list.html', 'english-synonym.html'] },
 
         { href: 'ranking-news-list.html', label: '랭킹 뉴스', pages: ['ranking-news-list.html', 'ranking-news.html'] },
