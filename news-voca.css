@@ -30,6 +30,22 @@
 
 
 
+#post-message .nv-hl {
+
+  background: #fef08a;
+
+  color: #713f12;
+
+  padding: 0 0.15em;
+
+  font-weight: 700;
+
+  border-radius: 2px;
+
+}
+
+
+
 #post-message .nv-words {
 
   display: flex;
@@ -354,15 +370,29 @@
 
 #post-message .nv-source {
 
-  margin-top: 1.25rem;
+  margin: 0;
 
-  padding-top: 0.6rem;
+  padding: 1rem 1.1rem;
 
-  border-top: 1px solid #e5e7eb;
+  border-top: none;
+
+  border-radius: 10px;
+
+  background: #f7fafc;
+
+  border: 1px dashed #cbd5e0;
 
   font-size: 0.85rem;
 
   color: #6b7280;
+
+}
+
+
+
+#post-message .nv-text > .nv-source + .nv-body {
+
+  padding-top: 1.5rem;
 
 }
 
@@ -389,6 +419,15 @@
 #post-message .nv-source-text {
 
   margin: 0 0 0.35rem;
+
+}
+
+
+
+#post-message .nv-source-link-wrap,
+#post-message .nv-source > p:last-child {
+
+  margin: 0;
 
 }
 

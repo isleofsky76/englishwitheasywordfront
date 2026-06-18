@@ -90,13 +90,13 @@ body {
 }
 
 #post-meta .post-meta-views-num {
-  color: #1a56db;
-  font-weight: 600;
+  color: inherit;
+  font-weight: inherit;
 }
 
 #post-meta .post-meta-likes-num {
-  color: #1a4480;
-  font-weight: 600;
+  color: inherit;
+  font-weight: inherit;
 }
 
 /* 글 아래 다른 글 목록 */
