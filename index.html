@@ -352,6 +352,15 @@
                 </div>
                 <div id="easy-voca-preview-list" role="region" aria-label="인기 어휘 목록"></div>
             </article>
+
+            <!-- Situational English -->
+            <article class="preview-section">
+                <div class="preview-header">
+                    <h2>상황 영어</h2>
+                    <div class="preview-more"><a href="situational-english-list.html">더보기 &gt;</a></div>
+                </div>
+                <div id="situational-english-preview-list" role="region" aria-label="상황 영어 목록"></div>
+            </article>
             
             <!-- Cooking Voca -->
             <article class="preview-section">
@@ -489,7 +498,7 @@
         }
 
         var loadingListHtml = buildPreviewListHtml([], '로딩 중...');
-        ['wordofday-preview-list', 'news-voca-preview-list', 'synonym-preview-list', 'easy-voca-preview-list', 'cooking-voca-preview-list', 'culture-voca-preview-list', 'ranking-news-preview-list', 'photo-english-preview-list', 'pros-cons-preview-list'].forEach(function(id) {
+        ['wordofday-preview-list', 'news-voca-preview-list', 'synonym-preview-list', 'easy-voca-preview-list', 'situational-english-preview-list', 'cooking-voca-preview-list', 'culture-voca-preview-list', 'ranking-news-preview-list', 'photo-english-preview-list', 'pros-cons-preview-list'].forEach(function(id) {
             var el = document.getElementById(id);
             if (el) el.innerHTML = loadingListHtml;
         });
@@ -565,6 +574,31 @@
                 })
                 .catch(function() {
                     clearTimeout(easyTimeoutId);
+                    listEl.innerHTML = fallbackHtml;
+                });
+        })();
+
+        // Situational English
+        (function loadSituationalEnglishPreview() {
+            var urlParams = new URLSearchParams(window.location.search);
+            var apiMode = urlParams.get('api');
+            var listEl = document.getElementById('situational-english-preview-list');
+            if (!listEl) return;
+
+            var fallbackHtml = buildPreviewListHtml([], '<a href="situational-english-list.html">상황 영어 보기</a>');
+            var timeoutId = setTimeout(function() { listEl.innerHTML = fallbackHtml; }, 8000);
+
+            fetch(getApiBase() + '/situational-english')
+                .then(function(r) {
+                    if (!r.ok) throw new Error('HTTP ' + r.status);
+                    return r.json();
+                })
+                .then(function(data) {
+                    clearTimeout(timeoutId);
+                    renderPreviewList(listEl, parseEntries(data), 'situational-english.html', apiMode, '게시글이 없습니다.');
+                })
+                .catch(function() {
+                    clearTimeout(timeoutId);
                     listEl.innerHTML = fallbackHtml;
                 });
         })();
