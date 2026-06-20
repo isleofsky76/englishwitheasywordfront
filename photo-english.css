@@ -1,13 +1,90 @@
-/* 포토영어 — 이미지 중심 단어 카드 */
-.photo-english-card img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 10px;
-  display: block;
-  margin: 0 0 0.75rem;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+/* 포토영어 — 이미지 상단 + 번호 영·한 문장 */
+
+.photo-english-card {
+  margin: 0;
 }
 
+/* 이미지: 맨 위, 아래 여백 최소 */
+.photo-english-card .pe-hero {
+  margin: 0 0 0.5rem;
+  padding: 0;
+}
+
+.photo-english-card .pe-hero-img,
+.photo-english-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0;
+  border-radius: 10px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+}
+
+/* 문장 목록: 사진 바로 아래 */
+.photo-english-card .pe-sentences {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: pe-sentence;
+}
+
+.photo-english-card .pe-sentence {
+  display: grid;
+  grid-template-columns: 1.75rem 1fr;
+  column-gap: 0.45rem;
+  align-items: start;
+  margin: 0;
+  padding: 0.62rem 0;
+  border-bottom: 1px solid #eef2f7;
+  counter-increment: pe-sentence;
+}
+
+.photo-english-card .pe-sentence:first-child {
+  padding-top: 0.15rem;
+}
+
+.photo-english-card .pe-sentence:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.photo-english-card .pe-sentence::before {
+  content: counter(pe-sentence);
+  font-weight: 700;
+  font-size: 0.88rem;
+  color: #1e40af;
+  line-height: 1.55;
+  padding-top: 0.08rem;
+}
+
+.photo-english-card .pe-text {
+  min-width: 0;
+}
+
+.photo-english-card .pe-en {
+  margin: 0;
+  font-size: 0.94rem;
+  line-height: 1.55;
+  color: #1e293b;
+  font-weight: 500;
+}
+
+.photo-english-card .pe-ko-line {
+  margin: 0.22rem 0 0;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: #64748b;
+}
+
+.photo-english-card .pe-ai-note {
+  margin: 0.75rem 0 0;
+  padding: 0;
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: #94a3b8;
+}
+
+/* 구형 단어 카드 (기존 글 호환) */
 .photo-english-card .pe-word {
   font-size: 1.15rem;
   font-weight: 700;
@@ -26,18 +103,41 @@
   line-height: 1.55;
 }
 
-.photo-english-card .pe-desc {
+/* 글 상세 — 사진·문장 간격 */
+#post-message .photo-english-card {
   margin: 0;
-  padding-left: 1.25rem;
-  font-size: 0.95rem;
-  line-height: 1.65;
-  color: #334155;
 }
 
-.photo-english-card .pe-desc li {
-  margin-bottom: 0.55rem;
+#post-message .photo-english-card .pe-hero {
+  margin: 0 0 0.45rem;
 }
 
-.photo-english-card .pe-desc li:last-child {
-  margin-bottom: 0;
+#post-message .photo-english-card .pe-hero-img {
+  margin: 0;
+}
+
+#post-message .photo-english-card .pe-sentences {
+  margin-top: 0;
+}
+
+#post-message .photo-english-card .pe-en,
+#post-message .photo-english-card .pe-ko-line {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+@media (max-width: 480px) {
+  .photo-english-card .pe-sentence {
+    grid-template-columns: 1.5rem 1fr;
+    column-gap: 0.35rem;
+    padding: 0.55rem 0;
+  }
+
+  .photo-english-card .pe-en {
+    font-size: 0.92rem;
+  }
+
+  .photo-english-card .pe-ko-line {
+    font-size: 0.86rem;
+  }
 }

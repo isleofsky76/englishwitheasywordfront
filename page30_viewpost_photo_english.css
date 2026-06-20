@@ -57,6 +57,28 @@ body {
   margin: 0 0 0.35rem 0;
 }
 
+#post-message .photo-english-card .pe-hero-img {
+  margin: 0;
+}
+
+#post-message .photo-english-card .pe-hero {
+  margin: 0 0 0.45rem;
+}
+
+#post-message .photo-english-card .pe-sentences {
+  margin-top: 0;
+}
+
+#post-message .photo-english-card p.pe-en,
+#post-message .photo-english-card p.pe-ko-line {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+#post-message .photo-english-card p.pe-ko-line {
+  margin-top: 0.22rem;
+}
+
 /* 예문 한 줄 TTS 스피커 아이콘 */
 .wotd-inline-speaker {
   border: none;
