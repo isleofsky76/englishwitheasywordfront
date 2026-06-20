@@ -2,17 +2,22 @@
 
 .photo-english-card {
   margin: 0;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 /* 이미지: 맨 위, 아래 여백 최소 */
 .photo-english-card .pe-hero {
-  margin: 0 0 0.5rem;
+  margin: 0 0 0.45rem;
   padding: 0;
+  width: 100%;
 }
 
 .photo-english-card .pe-hero-img,
 .photo-english-card img {
   width: 100%;
+  max-width: 100%;
   height: auto;
   display: block;
   margin: 0;
@@ -20,60 +25,68 @@
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
 }
 
-/* 문장 목록: 사진 바로 아래 */
+/* 문장 목록: 사진 바로 아래, 가로 전체 너비 */
 .photo-english-card .pe-sentences {
   margin: 0;
-  padding: 0;
-  list-style: none;
-  counter-reset: pe-sentence;
+  padding: 0 0 0 1.65rem;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  list-style: decimal;
+  list-style-position: outside;
 }
 
 .photo-english-card .pe-sentence {
-  display: grid;
-  grid-template-columns: 1.75rem 1fr;
-  column-gap: 0.45rem;
-  align-items: start;
-  margin: 0;
-  padding: 0.62rem 0;
+  display: list-item;
+  width: 100%;
+  margin: 0 0 0.55rem;
+  padding: 0.55rem 0;
   border-bottom: 1px solid #eef2f7;
-  counter-increment: pe-sentence;
-}
-
-.photo-english-card .pe-sentence:first-child {
-  padding-top: 0.15rem;
+  line-height: 1.55;
 }
 
 .photo-english-card .pe-sentence:last-child {
+  margin-bottom: 0;
   border-bottom: none;
   padding-bottom: 0;
 }
 
-.photo-english-card .pe-sentence::before {
-  content: counter(pe-sentence);
+.photo-english-card .pe-sentence::marker {
   font-weight: 700;
-  font-size: 0.88rem;
   color: #1e40af;
-  line-height: 1.55;
-  padding-top: 0.08rem;
+  font-size: 0.92rem;
 }
 
 .photo-english-card .pe-text {
+  display: block;
+  width: 100%;
+  max-width: 100%;
   min-width: 0;
 }
 
 .photo-english-card .pe-en {
+  display: block;
+  width: 100%;
   margin: 0;
   font-size: 0.94rem;
   line-height: 1.55;
   color: #1e293b;
   font-weight: 500;
+  white-space: normal;
+  word-break: keep-all;
+  overflow-wrap: break-word;
 }
 
 .photo-english-card .pe-ko-line {
+  display: block;
+  width: 100%;
   margin: 0.22rem 0 0;
   font-size: 0.88rem;
   line-height: 1.5;
   color: #64748b;
+  white-space: normal;
+  word-break: keep-all;
+  overflow-wrap: break-word;
 }
 
 .photo-english-card .pe-ai-note {
@@ -106,10 +119,11 @@
 /* 글 상세 — 사진·문장 간격 */
 #post-message .photo-english-card {
   margin: 0;
+  width: 100%;
 }
 
 #post-message .photo-english-card .pe-hero {
-  margin: 0 0 0.45rem;
+  margin: 0 0 0.4rem;
 }
 
 #post-message .photo-english-card .pe-hero-img {
@@ -118,6 +132,7 @@
 
 #post-message .photo-english-card .pe-sentences {
   margin-top: 0;
+  width: 100%;
 }
 
 #post-message .photo-english-card .pe-en,
@@ -127,10 +142,8 @@
 }
 
 @media (max-width: 480px) {
-  .photo-english-card .pe-sentence {
-    grid-template-columns: 1.5rem 1fr;
-    column-gap: 0.35rem;
-    padding: 0.55rem 0;
+  .photo-english-card .pe-sentences {
+    padding-left: 1.45rem;
   }
 
   .photo-english-card .pe-en {

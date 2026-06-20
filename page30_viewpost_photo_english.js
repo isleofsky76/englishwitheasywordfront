@@ -193,6 +193,31 @@ function wotdBindTtsButtons(container) {
     });
 }
 
+function wotdApplyTtsToNode(node) {
+    if (!node || node.getAttribute('data-wotd-tts') === '1') return;
+
+    const lines = (node.innerHTML || '').split(/<br\s*\/?>/i);
+    if (lines.length === 0) return;
+
+    let changed = false;
+    const newLines = lines.map((lineHtml) => {
+        if (/class\s*=\s*["'][^"']*(wotd-tts-btn|wotd-inline-speaker)/i.test(lineHtml)) return lineHtml;
+        const plain = wotdStripTagsToText(lineHtml);
+        if (!plain) return lineHtml;
+        if (!wotdIsMostlyEnglish(plain)) return lineHtml;
+        if (/^Source\b/i.test(plain) || /^https?:\/\//i.test(plain)) return lineHtml;
+        const speak = plain.replace(/\s*🔊\s*$/u, '').trim();
+        if (!speak) return lineHtml;
+        changed = true;
+        return wotdAppendTtsInlineAfterEnglish(lineHtml, speak);
+    });
+
+    if (changed) {
+        node.innerHTML = newLines.join('<br>');
+    }
+    node.setAttribute('data-wotd-tts', '1');
+}
+
 // 영어 줄 뒤에 개별 스피커 아이콘 추가 (포토영어 전용)
 function attachPhotoEnglishWebTTS() {
     const container = document.getElementById('post-message');
@@ -201,31 +226,15 @@ function attachPhotoEnglishWebTTS() {
         speechSynthesis.getVoices();
     } catch (_) {}
 
-    const nodes = container.querySelectorAll('p, div, span');
-    nodes.forEach((node) => {
-        if (node.getAttribute('data-wotd-tts') === '1') return;
-
-        const lines = (node.innerHTML || '').split(/<br\s*\/?>/i);
-        if (lines.length === 0) return;
-
-        let changed = false;
-        const newLines = lines.map((lineHtml) => {
-            if (/class\s*=\s*["'][^"']*(wotd-tts-btn|wotd-inline-speaker)/i.test(lineHtml)) return lineHtml;
-            const plain = wotdStripTagsToText(lineHtml);
-            if (!plain) return lineHtml;
-            if (!wotdIsMostlyEnglish(plain)) return lineHtml;
-            if (/^Source\b/i.test(plain) || /^https?:\/\//i.test(plain)) return lineHtml;
-            const speak = plain.replace(/\s*🔊\s*$/u, '').trim();
-            if (!speak) return lineHtml;
-            changed = true;
-            return wotdAppendTtsInlineAfterEnglish(lineHtml, speak);
+    const photoEnLines = container.querySelectorAll('.photo-english-card .pe-en');
+    if (photoEnLines.length) {
+        photoEnLines.forEach(wotdApplyTtsToNode);
+    } else {
+        container.querySelectorAll('p, div, span').forEach((node) => {
+            if (node.closest('.photo-english-card')) return;
+            wotdApplyTtsToNode(node);
         });
-
-        if (changed) {
-            node.innerHTML = newLines.join('<br>');
-        }
-        node.setAttribute('data-wotd-tts', '1');
-    });
+    }
 
     wotdBindTtsButtons(container);
 }

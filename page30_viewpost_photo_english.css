@@ -79,6 +79,21 @@ body {
   margin-top: 0.22rem;
 }
 
+/* 포토영어 묘사형 — 가로 본문 (grid 대신 list + block) */
+#post-message .photo-english-card .pe-sentence {
+  display: list-item;
+  width: 100%;
+}
+
+#post-message .photo-english-card .pe-text,
+#post-message .photo-english-card .pe-en,
+#post-message .photo-english-card .pe-ko-line {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  white-space: normal;
+}
+
 /* 예문 한 줄 TTS 스피커 아이콘 */
 .wotd-inline-speaker {
   border: none;
