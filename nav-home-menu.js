@@ -8,7 +8,7 @@
 
 (function () {
 
-    var NAV_HOME_MENU_VERSION = '20260616b';
+    var NAV_HOME_MENU_VERSION = '20260620a';
 
 
 
@@ -21,6 +21,8 @@
         { href: 'news-voca-list.html', label: '뉴스 어휘', pages: ['news-voca-list.html', 'news-voca.html'] },
 
         { href: 'popular-voca-list.html', label: '인기 어휘', pages: ['popular-voca-list.html', 'popular-voca.html'] },
+
+        { href: 'situational-english-list.html', label: '상황 영어', pages: ['situational-english-list.html', 'situational-english.html'] },
 
         { href: 'cooking-voca-list.html', label: '요리 영어', pages: ['cooking-voca-list.html', 'cooking-voca.html'] },
 
