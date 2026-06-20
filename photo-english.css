@@ -20,8 +20,24 @@
 }
 
 .photo-english-card .pe-example {
-  margin-top: 0.65rem;
-  padding-left: 0.35rem;
+  margin-top: 0.75rem;
+  padding: 0.4rem 0 0.4rem 0.9rem;
   border-left: 3px solid #93c5fd;
-  line-height: 1.5;
+  line-height: 1.55;
+}
+
+.photo-english-card .pe-desc {
+  margin: 0;
+  padding-left: 1.25rem;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: #334155;
+}
+
+.photo-english-card .pe-desc li {
+  margin-bottom: 0.55rem;
+}
+
+.photo-english-card .pe-desc li:last-child {
+  margin-bottom: 0;
 }
