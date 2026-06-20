@@ -79,13 +79,24 @@ body {
   margin-top: 0.22rem;
 }
 
-/* 포토영어 묘사형 — 가로 본문 (grid 대신 list + block) */
+/* 포토영어 묘사형 — 번호 | 영·한 (flex) */
 #post-message .photo-english-card .pe-sentence {
-  display: list-item;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
   width: 100%;
 }
 
-#post-message .photo-english-card .pe-text,
+#post-message .photo-english-card .pe-num {
+  flex: 0 0 1.55rem;
+  line-height: 1.55;
+}
+
+#post-message .photo-english-card .pe-text {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
 #post-message .photo-english-card .pe-en,
 #post-message .photo-english-card .pe-ko-line {
   display: block;

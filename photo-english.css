@@ -1,4 +1,4 @@
-/* 포토영어 — 이미지 상단 + 번호 영·한 문장 */
+/* 포토영어 — 이미지 상단 + 번호·영·한 문장 */
 
 .photo-english-card {
   margin: 0;
@@ -7,7 +7,6 @@
   box-sizing: border-box;
 }
 
-/* 이미지: 맨 위, 아래 여백 최소 */
 .photo-english-card .pe-hero {
   margin: 0 0 0.45rem;
   padding: 0;
@@ -25,48 +24,53 @@
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
 }
 
-/* 문장 목록: 사진 바로 아래, 가로 전체 너비 */
+/* 번호 | 영어·한글 — flex 2열 */
 .photo-english-card .pe-sentences {
   margin: 0;
-  padding: 0 0 0 1.65rem;
+  padding: 0;
   width: 100%;
-  max-width: 100%;
-  box-sizing: border-box;
-  list-style: decimal;
-  list-style-position: outside;
+  list-style: none;
 }
 
 .photo-english-card .pe-sentence {
-  display: list-item;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 0.4rem;
   width: 100%;
-  margin: 0 0 0.55rem;
-  padding: 0.55rem 0;
+  margin: 0;
+  padding: 0.58rem 0;
   border-bottom: 1px solid #eef2f7;
-  line-height: 1.55;
+  box-sizing: border-box;
 }
 
 .photo-english-card .pe-sentence:last-child {
-  margin-bottom: 0;
   border-bottom: none;
   padding-bottom: 0;
 }
 
-.photo-english-card .pe-sentence::marker {
+.photo-english-card .pe-sentence:first-child {
+  padding-top: 0.12rem;
+}
+
+.photo-english-card .pe-num {
+  flex: 0 0 1.55rem;
   font-weight: 700;
-  color: #1e40af;
   font-size: 0.92rem;
+  color: #1e40af;
+  line-height: 1.55;
+  text-align: right;
+  white-space: nowrap;
 }
 
 .photo-english-card .pe-text {
-  display: block;
-  width: 100%;
-  max-width: 100%;
+  flex: 1 1 0;
   min-width: 0;
+  width: auto;
 }
 
 .photo-english-card .pe-en {
   display: block;
-  width: 100%;
   margin: 0;
   font-size: 0.94rem;
   line-height: 1.55;
@@ -79,7 +83,6 @@
 
 .photo-english-card .pe-ko-line {
   display: block;
-  width: 100%;
   margin: 0.22rem 0 0;
   font-size: 0.88rem;
   line-height: 1.5;
@@ -116,7 +119,6 @@
   line-height: 1.55;
 }
 
-/* 글 상세 — 사진·문장 간격 */
 #post-message .photo-english-card {
   margin: 0;
   width: 100%;
@@ -135,15 +137,32 @@
   width: 100%;
 }
 
+#post-message .photo-english-card .pe-sentence {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  width: 100%;
+}
+
+#post-message .photo-english-card .pe-text {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
 #post-message .photo-english-card .pe-en,
 #post-message .photo-english-card .pe-ko-line {
+  display: block;
+  width: 100%;
+  max-width: 100%;
   margin-left: 0;
   margin-right: 0;
+  white-space: normal;
 }
 
 @media (max-width: 480px) {
-  .photo-english-card .pe-sentences {
-    padding-left: 1.45rem;
+  .photo-english-card .pe-num {
+    flex-basis: 1.35rem;
+    font-size: 0.9rem;
   }
 
   .photo-english-card .pe-en {
