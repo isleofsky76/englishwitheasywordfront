@@ -1,4 +1,4 @@
-/* 포토영어 — 이미지 상단 + 번호·영·한 문장 */
+/* 포토영어 — 이미지 상단 + 영·한 문장 (번호 없음) */
 
 .photo-english-card {
   margin: 0;
@@ -24,19 +24,13 @@
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
 }
 
-/* 번호 | 영어·한글 — flex 2열 */
 .photo-english-card .pe-sentences {
   margin: 0;
   padding: 0;
   width: 100%;
-  list-style: none;
 }
 
 .photo-english-card .pe-sentence {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  gap: 0.4rem;
   width: 100%;
   margin: 0;
   padding: 0.58rem 0;
@@ -50,27 +44,12 @@
 }
 
 .photo-english-card .pe-sentence:first-child {
-  padding-top: 0.12rem;
-}
-
-.photo-english-card .pe-num {
-  flex: 0 0 1.55rem;
-  font-weight: 700;
-  font-size: 0.92rem;
-  color: #1e40af;
-  line-height: 1.55;
-  text-align: right;
-  white-space: nowrap;
-}
-
-.photo-english-card .pe-text {
-  flex: 1 1 0;
-  min-width: 0;
-  width: auto;
+  padding-top: 0.1rem;
 }
 
 .photo-english-card .pe-en {
   display: block;
+  width: 100%;
   margin: 0;
   font-size: 0.94rem;
   line-height: 1.55;
@@ -83,6 +62,7 @@
 
 .photo-english-card .pe-ko-line {
   display: block;
+  width: 100%;
   margin: 0.22rem 0 0;
   font-size: 0.88rem;
   line-height: 1.5;
@@ -137,18 +117,6 @@
   width: 100%;
 }
 
-#post-message .photo-english-card .pe-sentence {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  width: 100%;
-}
-
-#post-message .photo-english-card .pe-text {
-  flex: 1 1 0;
-  min-width: 0;
-}
-
 #post-message .photo-english-card .pe-en,
 #post-message .photo-english-card .pe-ko-line {
   display: block;
@@ -160,11 +128,6 @@
 }
 
 @media (max-width: 480px) {
-  .photo-english-card .pe-num {
-    flex-basis: 1.35rem;
-    font-size: 0.9rem;
-  }
-
   .photo-english-card .pe-en {
     font-size: 0.92rem;
   }

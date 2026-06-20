@@ -79,22 +79,10 @@ body {
   margin-top: 0.22rem;
 }
 
-/* 포토영어 묘사형 — 번호 | 영·한 (flex) */
+/* 포토영어 묘사형 — 영·한 블록 (번호 없음) */
 #post-message .photo-english-card .pe-sentence {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
+  display: block;
   width: 100%;
-}
-
-#post-message .photo-english-card .pe-num {
-  flex: 0 0 1.55rem;
-  line-height: 1.55;
-}
-
-#post-message .photo-english-card .pe-text {
-  flex: 1 1 0;
-  min-width: 0;
 }
 
 #post-message .photo-english-card .pe-en,
