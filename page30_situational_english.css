@@ -1,25 +1,25 @@
-/* 상황 영어 — teal 테마 (popular-voca #357abd 와 구분) */
+/* 상황 영어 — teal 네비 + 요리 어휘(cooking-voca) 베이지 본문 톤 */
 :root {
   --se-primary: #0f766e;
   --se-primary-dark: #0d5c56;
   --se-primary-light: #ccfbf1;
   --se-accent: #14b8a6;
-  --se-text: #4a5568;
-  --se-text-muted: #8b9aab;
-  --se-bg: #f0fdfa;
-  --se-border: #99f6e4;
-  /* 본문 — 순수 검정 대신 부드러운 슬레이트·틸 톤 */
-  --se-ko: #5a6570;
-  --se-en: #6b7c8a;
-  --se-sent: #5f717c;
-  --se-sep: #b0bcc8;
-  --se-sec-bg: #eaf5f2;
-  --se-sec-text: #3d6b64;
-  --se-sec-border: #8ec4b8;
+  /* 본문 — 베이지 배경, 한글 갈색, 영어 검정 */
+  --se-text: #4a4036;
+  --se-text-muted: #9a8a7a;
+  --se-page-bg: #faf6f0;
+  --se-card-bg: #fffdf9;
+  --se-card-border: #eadfce;
+  --se-ko: #6f4e37;
+  --se-en: #1a1a1a;
+  --se-sep: #b0a090;
+  --se-sec-bg: #fef9ef;
+  --se-sec-text: #8b4513;
+  --se-sec-border: #e8c98a;
 }
 
 .se-page {
-  background-color: #f5f7fa;
+  background-color: var(--se-page-bg);
 }
 
 .se-navbar {
@@ -59,6 +59,7 @@
 /* 글 보기 페이지 */
 .se-page #post-container {
   border-top: 3px solid var(--se-accent);
+  background: var(--se-card-bg);
 }
 
 .se-page #post-title {
@@ -67,38 +68,71 @@
 
 .se-page #post-message {
   color: var(--se-text);
-  line-height: 1.8;
+  line-height: 1.65;
   -webkit-font-smoothing: antialiased;
+}
+
+.se-page #post-message .se-text {
+  max-width: 36rem;
+  margin: 0 auto;
+}
+
+.se-page #post-message .se-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-top: 0.55rem;
+}
+
+.se-page #post-message .se-item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.2rem 0.35rem;
+  padding: 0.52rem 0.72rem;
+  background: var(--se-card-bg) !important;
+  border: 1px solid var(--se-card-border) !important;
+  border-radius: 9px;
+  box-shadow: 0 1px 2px rgba(92, 73, 48, 0.05);
 }
 
 .se-page #post-message .se-ko,
 .se-page #post-message .se-item > span:first-child:not(.se-sep):not(.se-en) {
   color: var(--se-ko) !important;
-  font-weight: 400;
+  font-weight: 600;
   letter-spacing: -0.01em;
 }
 
 .se-page #post-message .se-en {
   color: var(--se-en) !important;
-  font-weight: 400;
+  font-weight: 600;
+  letter-spacing: -0.01em;
 }
 
-.se-page #post-message .se-item .se-sep {
+.se-page #post-message .se-item .se-sep,
+.se-page #post-message span:has(+ .se-en) {
   color: var(--se-sep) !important;
 }
 
+.se-page #post-message .se-sec-title,
 .se-page #post-message strong {
+  display: block;
+  padding: 0.45em 0.65em;
+  margin-bottom: 0;
   background: var(--se-sec-bg) !important;
-  border-left-color: var(--se-sec-border) !important;
+  border-left: 3px solid var(--se-sec-border) !important;
+  border-radius: 6px;
   color: var(--se-sec-text) !important;
+  font-size: 0.95rem;
+  font-weight: 700;
 }
 
 .se-page #post-content .pv-tts-btn {
-  color: #6b8f9a;
+  color: #8a6d4b;
 }
 
 .se-page #post-content .pv-tts-btn.pv-tts-playing {
-  color: var(--se-primary);
+  color: var(--se-sec-text);
 }
 
 .se-page .btn-primary {
@@ -115,20 +149,13 @@
   color: var(--se-primary) !important;
 }
 
-/* 항목: 데스크톱 — 한글 : 영어 가로 */
-.se-page #post-message .se-item {
-  display: inline;
-}
-
-/* 모바일 — 한글 위, 영어+스피커 아래 한 줄 */
+/* 모바일 — 한글 위, 영어+스피커 아래 */
 @media (max-width: 767px) {
   .se-page #post-message .se-item {
-    display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 0.15em;
-    width: 100%;
-    margin-bottom: 0.35em;
+    gap: 0.16rem;
+    padding: 0.48rem 0.58rem;
   }
 
   .se-page #post-message .se-item .se-sep,
@@ -139,6 +166,7 @@
   .se-page #post-message .se-ko,
   .se-page #post-message .se-item > span:first-child {
     display: block;
+    font-size: 0.92rem;
   }
 
   .se-page #post-message .se-en {
@@ -147,6 +175,7 @@
     flex-wrap: wrap;
     gap: 0.15em;
     max-width: 100%;
+    font-size: 0.98rem;
   }
 
   .se-page #post-message .pv-tts-slot {
