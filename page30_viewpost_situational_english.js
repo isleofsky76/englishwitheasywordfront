@@ -23,6 +23,14 @@ if (apiMode === 'prod') {
     console.log('🟢 Production 모드 (자동) - API_BASE_URL:', API_BASE_URL);
 }
 
+window.VIEWPOST_SEO = {
+    boardPath: 'situational-english',
+    boardLabel: 'Situational English',
+    fallbackHtml: 'situational-english.html',
+    listPath: '/situational-english',
+    bySlugPath: '/situational-english/by-slug',
+};
+
 // HTML 이스케이프 헬퍼 함수 (전역)
 function escapeHtml(text) {
     if (!text) return '';
@@ -41,7 +49,7 @@ function sanitizeHtml(html) {
     const allowedTags = ['p', 'br', 'strong', 'b', 'em', 'i', 'u', 'span', 'div', 'a', 'img', 'button'];
     const allowedAttributes = [
         'style', 'href', 'target', 'rel', 'src', 'alt', 'loading', 'decoding', 'onerror',
-        'type', 'class', 'aria-label', 'title', 'data-pv-tts',
+        'type', 'class', 'aria-label', 'title', 'data-pv-tts', 'data-se-tts',
     ];
     
     // 위험한 태그 제거
@@ -255,6 +263,34 @@ function attachPopularVocaWebTTS(container) {
     bindPopularVocaTtsButtons(container);
 }
 
+/** 상황 영어: 한글 : 영어 줄 — 영어(data-se-tts) 바로 뒤 스피커 */
+function attachSituationalEnglishWebTTS(container) {
+    if (!container) return;
+    if (!window.speechSynthesis) {
+        console.warn('상황 영어: 이 브라우저는 Web Speech API(speechSynthesis)를 지원하지 않아 발음 버튼을 쓸 수 없습니다.');
+        return;
+    }
+    try {
+        speechSynthesis.getVoices();
+    } catch (_) {}
+
+    container.querySelectorAll('[data-se-tts]').forEach((el) => {
+        const next = el.nextElementSibling;
+        if (next && next.classList && next.classList.contains('pv-tts-slot')) return;
+        const speak = el.getAttribute('data-se-tts');
+        if (!speak) return;
+        const slot = pvTtsSlotHtml(speak);
+        if (!slot) return;
+        if (/[.!?]$/.test(speak.trim())) {
+            el.outerHTML = pvAppendTtsInlineAfterEnglish(el.outerHTML, speak);
+        } else {
+            el.insertAdjacentHTML('afterend', slot);
+        }
+    });
+
+    bindPopularVocaTtsButtons(container);
+}
+
 /** 라이브 등에서 앞부분이 잘려 나온 깨진 링크 복구 (URL">기사 보기, ">예문 영상 보기 등) */
 var POPULAR_VOCA_WSJ_URL = 'https://www.wsj.com/lifestyle/alarm-clocks-that-shock-you-make-you-do-math-and-take-your-money-9189327a';
 var POPULAR_VOCA_YOUTUBE_URL = 'https://www.youtube.com/shorts/E6at-MOLI_M';
@@ -392,79 +428,28 @@ function showError(message, details = '', listPage = 'situational-english-list.h
 }
 
 async function loadPost() {
-    const params = new URLSearchParams(window.location.search);
-    const index = params.get('index');
-
-    if (!index) {
-        showError(
-            '게시글을 찾을 수 없습니다',
-            '주소에 글 번호(index)가 없습니다. 글 목록에서 제목을 클릭하면 해당 글이 열립니다.',
-            'situational-english-list.html'
-        );
-        return;
-    }
-
-    // 로딩 상태 표시
     showLoading();
 
     try {
-        const url = `${API_BASE_URL}/situational-english`;
-        console.log('📡 API 요청 URL:', url);
-        const response = await fetch(url);
-        console.log('📥 응답 상태:', response.status, response.statusText);
-
-        if (!response.ok) {
-            if (response.status === 503) {
-                const errorData = await response.json();
-                showError('데이터베이스 연결 오류', 
-                    `${errorData.error || 'MongoDB 연결이 되지 않았습니다.'}<br><br>
-                    <strong>해결 방법:</strong><br>
-                    1. MongoDB 서비스가 실행 중인지 확인<br>
-                    2. backend/.env 파일의 MONGO_URI 설정 확인<br>
-                    3. 백엔드 서버를 재시작`);
-                return;
-            }
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const messages = await response.json();
-        console.log('📦 응답 데이터:', messages);
-
-        // API 응답 형식 확인 및 정규화
-        let entries = [];
-        if (Array.isArray(messages)) {
-            entries = messages;
-        } else if (messages.entries && Array.isArray(messages.entries)) {
-            entries = messages.entries;
-        } else if (messages.data && Array.isArray(messages.data)) {
-            entries = messages.data;
-        } else {
-            console.error('⚠️ 예상치 못한 응답 형식:', messages);
-            showError('게시글을 불러올 수 없습니다', '서버 응답 형식이 올바르지 않습니다.');
+        if (!window.ViewpostSeo) {
+            showError('게시글을 불러올 수 없습니다', 'viewpost-seo.js 가 필요합니다.', 'situational-english-list.html');
             return;
         }
-
-        const indexNum = parseInt(index, 10);
-        if (isNaN(indexNum)) {
-            showError('게시글을 찾을 수 없습니다', `잘못된 인덱스 파라미터입니다: "${index}". 목록으로 돌아가주세요.`);
+        const result = await window.ViewpostSeo.fetchPostBySlugOrIndex(API_BASE_URL, window.VIEWPOST_SEO);
+        if (result.error === 'missing-param') {
+            showError('게시글을 찾을 수 없습니다', 'slug 또는 index가 없습니다.', 'situational-english-list.html');
             return;
         }
-        
-        if (indexNum < 0 || indexNum >= entries.length) {
-            showError('게시글을 찾을 수 없습니다', `인덱스 ${indexNum}에 해당하는 게시글이 없습니다. (총 ${entries.length}개)`);
+        if (result.error === 'slug-not-found') {
+            showError('게시글을 찾을 수 없습니다', `slug "${result.slug}" 글이 없습니다.`, 'situational-english-list.html');
             return;
         }
-
-        // 목록에서 전달된 index는 원본 배열 기준이므로 직접 사용
-        // 목록에서는 역순으로 표시하지만, index는 total - 1 - idx로 계산되어 원본 배열의 인덱스입니다
-        const post = entries[indexNum];
-        
-        if (!post) {
-            showError('게시글을 찾을 수 없습니다', `인덱스 ${indexNum}에 해당하는 게시글이 없습니다.`);
+        if (result.error) {
+            showError('게시글을 불러올 수 없습니다', String(result.error), 'situational-english-list.html');
             return;
         }
-        
-        console.log(`📌 인덱스 ${indexNum}로 게시글 찾기 (총 ${entries.length}개)`);
+        const post = result.post;
+        window.ViewpostSeo.updatePageSeo(post, window.VIEWPOST_SEO);
 
         // 조회수 증가 API 호출
         try {
@@ -531,7 +516,7 @@ async function loadPost() {
                 }
             });
             const postContent = document.getElementById('post-content');
-            if (postContent) attachPopularVocaWebTTS(postContent);
+            if (postContent) attachSituationalEnglishWebTTS(postContent);
         }
 
         if (typeof initViewpostLike === 'function') {

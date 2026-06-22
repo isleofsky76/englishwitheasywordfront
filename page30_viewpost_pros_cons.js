@@ -12,6 +12,14 @@ if (apiMode === 'prod') {
   API_BASE_URL = 'https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app';
 }
 
+window.VIEWPOST_SEO = {
+  boardPath: 'pros-cons',
+  boardLabel: 'Pros & Cons',
+  fallbackHtml: 'pros-cons.html',
+  listPath: '/pros-cons',
+  bySlugPath: '/pros-cons/by-slug',
+};
+
 function escapeHtml(text) {
   if (!text) return '';
   const div = document.createElement('div');
@@ -105,47 +113,31 @@ function attachProsConsTTS(container) {
 }
 
 async function loadPost() {
-  const params = new URLSearchParams(window.location.search);
-  const index = params.get('index');
-
-  if (!index) {
-    showError(
-      '게시글을 찾을 수 없습니다',
-      '주소에 글 번호(index)가 없습니다. 글 목록에서 제목을 클릭하면 해당 글이 열립니다.'
-    );
-    return;
-  }
-
   showLoading();
 
   try {
-    const response = await fetch(`${API_BASE_URL}/pros-cons`);
-    if (!response.ok) {
-      if (response.status === 503) {
-        const errorData = await response.json();
-        showError('데이터베이스 연결 오류', errorData.error || 'MongoDB 연결이 되지 않았습니다.');
-        return;
-      }
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
+    const result = window.ViewpostSeo
+      ? await window.ViewpostSeo.fetchPostBySlugOrIndex(API_BASE_URL, window.VIEWPOST_SEO)
+      : null;
 
-    const entries = normalizeEntries(await response.json());
-    if (!entries) {
-      showError('게시글을 불러올 수 없습니다', '서버 응답 형식이 올바르지 않습니다.');
+    if (!window.ViewpostSeo) {
+      showError('게시글을 불러올 수 없습니다', 'viewpost-seo.js 가 필요합니다.');
+      return;
+    }
+    if (result.error === 'missing-param') {
+      showError('게시글을 찾을 수 없습니다', 'slug 또는 index 파라미터가 없습니다.');
+      return;
+    }
+    if (result.error === 'slug-not-found') {
+      showError('게시글을 찾을 수 없습니다', `slug "${result.slug}"에 해당하는 글이 없습니다.`);
+      return;
+    }
+    if (result.error) {
+      showError('게시글을 불러올 수 없습니다', String(result.error));
       return;
     }
 
-    const indexNum = parseInt(index, 10);
-    if (isNaN(indexNum) || indexNum < 0 || indexNum >= entries.length) {
-      showError('게시글을 찾을 수 없습니다', `인덱스 ${index}에 해당하는 게시글이 없습니다.`);
-      return;
-    }
-
-    const post = entries[indexNum];
-    if (!post) {
-      showError('게시글을 찾을 수 없습니다');
-      return;
-    }
+    const post = result.post;
 
     try {
       const viewResponse = await fetch(`${API_BASE_URL}/pros-cons/${post._id}/view`, {
@@ -161,6 +153,8 @@ async function loadPost() {
     } catch (viewError) {
       console.warn('조회수 증가 실패 (무시):', viewError);
     }
+
+    window.ViewpostSeo.updatePageSeo(post, window.VIEWPOST_SEO);
 
     const renderFn = typeof renderProsConsMessage === 'function'
       ? renderProsConsMessage

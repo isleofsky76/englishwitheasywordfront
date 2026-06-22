@@ -1,81 +1,161 @@
-/* Pros & Cons — 세로 번호 목록 (PC·모바일 공통) */
-.pros-cons-wrap {
-  margin: 1rem 0 1.25rem;
-}
-
-.pros-cons-block + .pros-cons-block {
-  margin-top: 1.35rem;
-  padding-top: 1.1rem;
-  border-top: 1px solid #e8ecf0;
-}
-
-/* 1열: 번호 | 2열: 영어+스피커 / 한글 */
-#post-message .pros-cons-item {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  column-gap: 0.35em;
-  row-gap: 0.15rem;
-  align-items: start;
-  margin: 0 0 0.75rem;
-  font-size: 0.92rem;
-  line-height: 1.65;
-  color: #222;
-}
-
-#post-message .pros-cons-item:last-child {
-  margin-bottom: 0;
-}
-
-#post-message .pros-cons-num {
-  grid-column: 1;
-  grid-row: 1;
-  font-weight: 600;
-  color: #1a1a1a;
-  line-height: 1.65;
-  white-space: nowrap;
-}
-
-#post-message .pros-cons-en-line {
-  grid-column: 2;
-  grid-row: 1;
-  min-width: 0;
-}
-
-#post-message .pros-cons-en {
-  display: inline;
-  color: #1a1a1a;
-}
-
-#post-message .pros-cons-en-line .pv-tts-slot {
-  display: inline;
-  white-space: nowrap;
-  vertical-align: middle;
-  margin-left: 0.12em;
-}
-
-#post-message .pros-cons-ko {
-  grid-column: 2;
-  grid-row: 2;
-  display: block;
-  color: #5c6b7a;
-  font-size: 0.88em;
-  line-height: 1.55;
-}
-
-.pros-cons-footer {
-  margin-top: 1rem;
-  font-size: 0.9rem;
-  color: #666;
-  text-align: left;
-}
-
-.pros-cons-raw {
-  white-space: pre-wrap;
-  word-break: break-word;
-  font-size: 0.85rem;
-  color: #444;
-  background: #f8f9fa;
-  padding: 1rem;
-  border-radius: 8px;
-}
-
+/* Pros & Cons — 세로 번호 목록 (PC·모바일 공통) */
+
+.pros-cons-wrap {
+
+  margin: 1rem 0 1.25rem;
+
+}
+
+
+
+.pros-cons-block + .pros-cons-block {
+
+  margin-top: 1.35rem;
+
+  padding-top: 1.1rem;
+
+  border-top: 1px solid #e8ecf0;
+
+}
+
+
+
+/* 1열: 번호 | 2열: 영어+스피커 / 한글 */
+
+#post-message .pros-cons-item {
+
+  display: grid;
+
+  grid-template-columns: auto 1fr;
+
+  column-gap: 0.35em;
+
+  row-gap: 0.15rem;
+
+  align-items: start;
+
+  margin: 0 0 0.75rem;
+
+  font-size: 0.92rem;
+
+  line-height: 1.65;
+
+  color: #222;
+
+}
+
+
+
+#post-message .pros-cons-item:last-child {
+
+  margin-bottom: 0;
+
+}
+
+
+
+#post-message .pros-cons-num {
+
+  grid-column: 1;
+
+  grid-row: 1;
+
+  font-weight: 600;
+
+  color: #1a1a1a;
+
+  line-height: 1.65;
+
+  white-space: nowrap;
+
+}
+
+
+
+#post-message .pros-cons-en-line {
+
+  grid-column: 2;
+
+  grid-row: 1;
+
+  min-width: 0;
+
+}
+
+
+
+#post-message .pros-cons-en {
+
+  display: inline;
+
+  color: #1a1a1a;
+
+}
+
+
+
+#post-message .pros-cons-en-line .pv-tts-slot {
+
+  display: inline;
+
+  white-space: nowrap;
+
+  vertical-align: middle;
+
+  margin-left: 0.12em;
+
+}
+
+
+
+#post-message .pros-cons-ko {
+
+  grid-column: 2;
+
+  grid-row: 2;
+
+  display: block;
+
+  color: #5c6b7a;
+
+  font-size: 0.88em;
+
+  line-height: 1.55;
+
+}
+
+
+
+.pros-cons-footer {
+
+  margin-top: 1rem;
+
+  font-size: 0.9rem;
+
+  color: #666;
+
+  text-align: left;
+
+}
+
+
+
+.pros-cons-raw {
+
+  white-space: pre-wrap;
+
+  word-break: break-word;
+
+  font-size: 0.85rem;
+
+  color: #444;
+
+  background: #f8f9fa;
+
+  padding: 1rem;
+
+  border-radius: 8px;
+
+}
+
+
