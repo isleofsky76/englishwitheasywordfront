@@ -191,14 +191,14 @@
 }
 
 .gb-meta-views {
-  color: #1a56db;
-  font-weight: 600;
+  color: inherit;
+  font-weight: inherit;
 }
 
 .gb-meta-likes,
 .gb-stat-likes {
-  color: #1a4480;
-  font-weight: 600;
+  color: inherit;
+  font-weight: inherit;
 }
 
 .gb-stat-sep {
@@ -208,8 +208,8 @@
 }
 
 .gb-stat-views {
-  color: #1a56db;
-  font-weight: 600;
+  color: inherit;
+  font-weight: inherit;
 }
 
 .gb-col-likes,
@@ -530,13 +530,13 @@
   }
 
   .gb-title-meta .gb-meta-views {
-    color: #1a56db;
-    font-weight: 600;
+    color: inherit;
+    font-weight: inherit;
   }
 
   .gb-title-meta .gb-meta-likes {
-    color: #1a4480;
-    font-weight: 600;
+    color: inherit;
+    font-weight: inherit;
   }
 
   /* 작성자 | 날짜 | 조회 — 제목 바로 아래 (likes 버튼 목록) */
@@ -573,13 +573,13 @@
   }
 
   .gb-col-meta-mobile .gb-meta-views {
-    color: #1a56db;
-    font-weight: 600;
+    color: inherit;
+    font-weight: inherit;
   }
 
   .gb-col-meta-mobile .gb-meta-likes {
-    color: #1a4480;
-    font-weight: 600;
+    color: inherit;
+    font-weight: inherit;
   }
 
   .gb-col-author,

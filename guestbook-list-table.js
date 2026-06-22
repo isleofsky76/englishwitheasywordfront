@@ -159,22 +159,8 @@
 
 
     function buildPostHref(entry, originalIndex, postPage, apiParam) {
-        const boardPaths = {
-            'news-voca.html': 'news-voca',
-            'cooking-voca.html': 'cooking-voca',
-            'culture-voca.html': 'culture-voca',
-            'ranking-news.html': 'ranking-news',
-            'english-synonym.html': 'english-synonym',
-            'popular-voca.html': 'popular-voca',
-            'situational-english.html': 'situational-english',
-            'pros-cons.html': 'pros-cons',
-            'word-of-the-day.html': 'word-of-the-day',
-            'photo-english.html': 'photo-english',
-        };
-        const base = boardPaths[postPage];
-        if (entry && entry.slug && base) {
-            const q = apiParam ? '?' + apiParam.slice(1) : '';
-            return base + '/' + encodeURIComponent(entry.slug) + '/' + q;
+        if (entry && entry.slug) {
+            return postPage + '?slug=' + encodeURIComponent(entry.slug) + apiParam;
         }
         return postPage + '?index=' + originalIndex + apiParam;
     }
