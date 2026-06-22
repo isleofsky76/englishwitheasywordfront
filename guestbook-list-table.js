@@ -158,6 +158,27 @@
 
 
 
+    function buildPostHref(entry, originalIndex, postPage, apiParam) {
+        const boardPaths = {
+            'news-voca.html': 'news-voca',
+            'cooking-voca.html': 'cooking-voca',
+            'culture-voca.html': 'culture-voca',
+            'ranking-news.html': 'ranking-news',
+            'english-synonym.html': 'english-synonym',
+            'popular-voca.html': 'popular-voca',
+            'situational-english.html': 'situational-english',
+            'pros-cons.html': 'pros-cons',
+            'word-of-the-day.html': 'word-of-the-day',
+            'photo-english.html': 'photo-english',
+        };
+        const base = boardPaths[postPage];
+        if (entry && entry.slug && base) {
+            const q = apiParam ? '?' + apiParam.slice(1) : '';
+            return base + '/' + encodeURIComponent(entry.slug) + '/' + q;
+        }
+        return postPage + '?index=' + originalIndex + apiParam;
+    }
+
     window.renderGuestbookTable = function (container, messages, options) {
 
         if (!container) return;
@@ -231,7 +252,8 @@
 
             const entryId = String(entry._id || ('idx-' + originalIndex));
 
-            const postUrl = new URL(postPage + '?index=' + originalIndex + apiParam, window.location.href).href;
+            const postHref = buildPostHref(entry, originalIndex, postPage, apiParam);
+            const postUrl = new URL(postHref, window.location.href).href;
 
             const imageBadge = entryHasImage(entry) ? IMAGE_BADGE_HTML : '';
 
@@ -283,7 +305,7 @@
                 '<td class="gb-col-title">' +
                 '<div class="gb-title-stack">' +
                 '<span class="gb-title-cell">' +
-                '<a href="' + postPage + '?index=' + originalIndex + apiParam + '" title="' + title + '">' + title + '</a>' +
+                '<a href="' + postHref + '" title="' + title + '">' + title + '</a>' +
                 imageBadge +
                 '</span>' +
                 metaUnderTitle +
