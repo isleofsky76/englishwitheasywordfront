@@ -9,13 +9,13 @@
   --se-bg: #f0fdfa;
   --se-border: #99f6e4;
   /* 본문 — 순수 검정 대신 부드러운 슬레이트·틸 톤 */
-  --se-ko: #3d4852;
-  --se-en: #5a6d78;
-  --se-sent: #4a6670;
-  --se-sep: #a8b5c4;
+  --se-ko: #5a6570;
+  --se-en: #6b7c8a;
+  --se-sent: #5f717c;
+  --se-sep: #b0bcc8;
   --se-sec-bg: #eaf5f2;
-  --se-sec-text: #2f5f59;
-  --se-sec-border: #7ab8ad;
+  --se-sec-text: #3d6b64;
+  --se-sec-border: #8ec4b8;
 }
 
 .se-page {
@@ -71,14 +71,16 @@
   -webkit-font-smoothing: antialiased;
 }
 
-.se-page #post-message .se-ko {
+.se-page #post-message .se-ko,
+.se-page #post-message .se-item > span:first-child:not(.se-sep):not(.se-en) {
   color: var(--se-ko) !important;
-  font-weight: 500;
+  font-weight: 400;
+  letter-spacing: -0.01em;
 }
 
 .se-page #post-message .se-en {
   color: var(--se-en) !important;
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .se-page #post-message .se-item .se-sep {
