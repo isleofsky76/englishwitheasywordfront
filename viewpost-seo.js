@@ -68,10 +68,9 @@
     }
 
     function postPageUrl(post, cfg, index) {
-        const boardPath = resolveBoardPath(cfg);
         const fallback = (cfg && cfg.fallbackHtml) || 'news-voca.html';
-        if (post && post.slug && boardPath) {
-            return SITE_ORIGIN + '/' + boardPath + '/' + post.slug;
+        if (post && post.slug) {
+            return SITE_ORIGIN + '/' + fallback + '?slug=' + encodeURIComponent(post.slug);
         }
         const idx = index != null ? index : new URLSearchParams(window.location.search).get('index');
         if (idx != null && idx !== '') {

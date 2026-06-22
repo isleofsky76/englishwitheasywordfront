@@ -199,7 +199,7 @@ function nvResolveSlug() {
 function nvPostPageUrl(post, index) {
     if (window.ViewpostSeo) return window.ViewpostSeo.postPageUrl(post, window.VIEWPOST_SEO, index);
     if (post && post.slug) {
-        return `${NV_SITE_ORIGIN}/news-voca/${post.slug}`;
+        return `${NV_SITE_ORIGIN}/news-voca.html?slug=${encodeURIComponent(post.slug)}`;
     }
     const idx = index ?? new URLSearchParams(window.location.search).get('index');
     if (idx != null && idx !== '') {
