@@ -77,6 +77,14 @@ function sanitizeHtml(html) {
 
 const NV_SITE_ORIGIN = 'https://englisheasystudy.com';
 
+window.VIEWPOST_SEO = {
+    boardPath: 'culture-voca',
+    boardLabel: 'Culture Voca',
+    fallbackHtml: 'culture-voca.html',
+    listPath: '/culture-voca',
+    bySlugPath: '/culture-voca/by-slug',
+};
+
 function nvPlainText(html, maxLen = 160) {
     const t = vvStripTagsToText(html || '');
     if (t.length <= maxLen) return t;
@@ -145,6 +153,7 @@ function nvParseRankingItemList(html) {
 }
 
 function nvInjectArticleJsonLd(post, isoDate, description) {
+    if (window.ViewpostSeo) return;
     const id = 'nv-article-jsonld';
     document.getElementById(id)?.remove();
     const script = document.createElement('script');
@@ -186,6 +195,10 @@ function nvInjectArticleJsonLd(post, isoDate, description) {
 }
 
 function updatePageSeo(post, formattedDate) {
+    if (window.ViewpostSeo) {
+        window.ViewpostSeo.updatePageSeo(post, window.VIEWPOST_SEO);
+        return;
+    }
     const title = (post.title || 'Culture Voca').trim();
     const desc = nvPlainText(post.message, 155);
     const fullTitle = `${title} | 컬쳐 어휘 · English Easy Study`;
@@ -514,7 +527,10 @@ function fixLegacyCultureVocaLayout(html) {
         const notesWrap = article.querySelector('.clv-notes');
         if (!notesWrap) {
             const examplesOnly = article.querySelector('.clv-examples');
-            if (examplesOnly) article.appendChild(examplesOnly);
+            if (examplesOnly) {
+                mergeSplitCultureVocaExamples(examplesOnly);
+                article.appendChild(examplesOnly);
+            }
             return;
         }
 
@@ -543,10 +559,38 @@ function fixLegacyCultureVocaLayout(html) {
 
         // 예문 섹션은 카드의 맨 아래로 고정한다.
         const examples = article.querySelector('.clv-examples');
-        if (examples) article.appendChild(examples);
+        if (examples) {
+            mergeSplitCultureVocaExamples(examples);
+            article.appendChild(examples);
+        }
     });
 
     return root.innerHTML;
+}
+
+function mergeSplitCultureVocaExamples(section) {
+    if (!section) return;
+    const examples = Array.from(section.querySelectorAll(':scope > .clv-example'));
+    for (let i = 0; i < examples.length - 1; i++) {
+        const cur = examples[i];
+        const next = examples[i + 1];
+        const enText = (cur.querySelector('.clv-ex-en')?.textContent || '').trim();
+        const koText = (cur.querySelector('.clv-ex-ko')?.textContent || '').trim();
+        const nextEnText = (next.querySelector('.clv-ex-en')?.textContent || '').trim();
+        const nextKoText = (next.querySelector('.clv-ex-ko')?.textContent || '').trim();
+        if (!enText || koText || nextKoText || !isLikelyKoreanTranslation(nextEnText)) continue;
+
+        let koEl = cur.querySelector('.clv-ex-ko');
+        if (!koEl) {
+            koEl = document.createElement('p');
+            koEl.className = 'clv-ex-ko';
+            cur.appendChild(koEl);
+        }
+        koEl.textContent = nextEnText;
+        next.remove();
+        examples.splice(i + 1, 1);
+        i -= 1;
+    }
 }
 
 // 로딩 상태 표시 함수
@@ -577,17 +621,33 @@ function showError(message, details = '') {
 
 async function loadPost() {
     const params = new URLSearchParams(window.location.search);
+    const slug = window.ViewpostSeo
+        ? window.ViewpostSeo.resolveSlug(window.VIEWPOST_SEO)
+        : (document.body?.dataset?.nvSlug || params.get('slug') || '');
     const index = params.get('index');
 
-    if (!index) {
-        showError('게시글을 찾을 수 없습니다', 'index 파라미터가 없습니다.');
+    if (!slug && !index) {
+        showError('게시글을 찾을 수 없습니다', 'slug 또는 index 파라미터가 없습니다.');
         return;
     }
 
-    // 로딩 상태 표시
     showLoading();
 
     try {
+        let post = null;
+
+        if (slug) {
+            const slugUrl = `${API_BASE_URL}/culture-voca/by-slug/${encodeURIComponent(slug)}`;
+            const slugRes = await fetch(slugUrl);
+            if (slugRes.ok) {
+                post = (await slugRes.json()).entry;
+            } else if (!index) {
+                showError('게시글을 찾을 수 없습니다', `slug "${slug}"에 해당하는 글이 없습니다.`);
+                return;
+            }
+        }
+
+        if (!post) {
         const url = `${API_BASE_URL}/culture-voca`;
         console.log('📡 API 요청 URL:', url);
         const response = await fetch(url);
@@ -637,7 +697,7 @@ async function loadPost() {
 
         // 목록에서 전달된 index는 원본 배열 기준이므로 직접 사용
         // 목록에서는 역순으로 표시하지만, index는 total - 1 - idx로 계산되어 원본 배열의 인덱스입니다
-        const post = entries[indexNum];
+        post = entries[indexNum];
         
         if (!post) {
             showError('게시글을 찾을 수 없습니다', `인덱스 ${indexNum}에 해당하는 게시글이 없습니다.`);
@@ -645,6 +705,10 @@ async function loadPost() {
         }
         
         console.log(`📌 인덱스 ${indexNum}로 게시글 찾기 (총 ${entries.length}개)`);
+        window.currentIndex = indexNum;
+        }
+
+        if (slug) console.log(`📌 slug "${slug}"로 게시글 로드`);
 
         // 조회수 증가 API 호출
         try {
@@ -716,15 +780,9 @@ async function loadPost() {
         console.log('원본 메시지:', post.message);
         console.log('변환된 메시지:', convertedMessage);
         
-        const isAdmin = (post.nickname || '').toLowerCase() === 'admin';
-        let isoMeta = '';
-        if (post.date) {
-            const dMeta = new Date(post.date);
-            if (!isNaN(dMeta.getTime())) isoMeta = dMeta.toISOString();
-        }
-        const metaHtml = isAdmin
-            ? `<p id="post-meta"><time datetime="${isoMeta}">${formattedDate}</time> · 조회 ${post.views || 0}</p>`
-            : `<p id="post-meta">Author: ${escapeHtml(post.nickname || 'Anonymous')} | <time datetime="${isoMeta}">${formattedDate}</time> | Views: ${post.views || 0}</p>`;
+        const metaHtml = typeof buildPostMetaHtml === 'function'
+            ? buildPostMetaHtml(post)
+            : `<p id="post-meta">조회 ${post.views || 0} · 추천수 ${parseInt(post.likes, 10) || 0}</p>`;
 
         updatePageSeo(post, formattedDate);
 

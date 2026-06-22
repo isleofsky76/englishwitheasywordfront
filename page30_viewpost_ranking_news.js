@@ -77,6 +77,14 @@ function sanitizeHtml(html) {
 
 const NV_SITE_ORIGIN = 'https://englisheasystudy.com';
 
+window.VIEWPOST_SEO = {
+    boardPath: 'ranking-news',
+    boardLabel: 'Ranking News',
+    fallbackHtml: 'ranking-news.html',
+    listPath: '/ranking-news',
+    bySlugPath: '/ranking-news/by-slug',
+};
+
 function nvPlainText(html, maxLen = 160) {
     const t = vvStripTagsToText(html || '');
     if (t.length <= maxLen) return t;
@@ -145,6 +153,7 @@ function nvParseRankingItemList(html) {
 }
 
 function nvInjectArticleJsonLd(post, isoDate, description) {
+    if (window.ViewpostSeo) return;
     const id = 'nv-article-jsonld';
     document.getElementById(id)?.remove();
     const script = document.createElement('script');
@@ -187,6 +196,10 @@ function nvInjectArticleJsonLd(post, isoDate, description) {
 }
 
 function updatePageSeo(post, formattedDate) {
+    if (window.ViewpostSeo) {
+        window.ViewpostSeo.updatePageSeo(post, window.VIEWPOST_SEO);
+        return;
+    }
     const title = (post.title || 'Ranking News').trim();
     const desc = nvPlainText(post.message, 155);
     const fullTitle = `${title} | Ranking News · English Easy Study`;
@@ -497,17 +510,33 @@ function showError(message, details = '') {
 
 async function loadPost() {
     const params = new URLSearchParams(window.location.search);
+    const slug = window.ViewpostSeo
+        ? window.ViewpostSeo.resolveSlug(window.VIEWPOST_SEO)
+        : (document.body?.dataset?.nvSlug || params.get('slug') || '');
     const index = params.get('index');
 
-    if (!index) {
-        showError('게시글을 찾을 수 없습니다', 'index 파라미터가 없습니다.');
+    if (!slug && !index) {
+        showError('게시글을 찾을 수 없습니다', 'slug 또는 index 파라미터가 없습니다.');
         return;
     }
 
-    // 로딩 상태 표시
     showLoading();
 
     try {
+        let post = null;
+
+        if (slug) {
+            const slugUrl = `${API_BASE_URL}/ranking-news/by-slug/${encodeURIComponent(slug)}`;
+            const slugRes = await fetch(slugUrl);
+            if (slugRes.ok) {
+                post = (await slugRes.json()).entry;
+            } else if (!index) {
+                showError('게시글을 찾을 수 없습니다', `slug "${slug}"에 해당하는 글이 없습니다.`);
+                return;
+            }
+        }
+
+        if (!post) {
         const url = `${API_BASE_URL}/ranking-news`;
         console.log('📡 API 요청 URL:', url);
         const response = await fetch(url);
@@ -557,7 +586,7 @@ async function loadPost() {
 
         // 목록에서 전달된 index는 원본 배열 기준이므로 직접 사용
         // 목록에서는 역순으로 표시하지만, index는 total - 1 - idx로 계산되어 원본 배열의 인덱스입니다
-        const post = entries[indexNum];
+        post = entries[indexNum];
         
         if (!post) {
             showError('게시글을 찾을 수 없습니다', `인덱스 ${indexNum}에 해당하는 게시글이 없습니다.`);
@@ -565,6 +594,10 @@ async function loadPost() {
         }
         
         console.log(`📌 인덱스 ${indexNum}로 게시글 찾기 (총 ${entries.length}개)`);
+        window.currentIndex = indexNum;
+        }
+
+        if (slug) console.log(`📌 slug "${slug}"로 게시글 로드`);
 
         // 조회수 증가 API 호출
         try {

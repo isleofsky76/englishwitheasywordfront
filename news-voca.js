@@ -77,6 +77,14 @@ function sanitizeHtml(html) {
 
 const NV_SITE_ORIGIN = 'https://englisheasystudy.com';
 
+window.VIEWPOST_SEO = {
+    boardPath: 'news-voca',
+    boardLabel: 'News Voca',
+    fallbackHtml: 'news-voca.html',
+    listPath: '/guestbook',
+    bySlugPath: '/guestbook/by-slug',
+};
+
 function nvPlainText(html, maxLen = 160) {
     const t = vvStripTagsToText(html || '');
     if (t.length <= maxLen) return t;
@@ -145,27 +153,25 @@ function nvParseRankingItemList(html) {
 }
 
 function nvInjectArticleJsonLd(post, isoDate, description) {
+    if (window.ViewpostSeo) return;
     const id = 'nv-article-jsonld';
     document.getElementById(id)?.remove();
     const script = document.createElement('script');
     script.id = id;
     script.type = 'application/ld+json';
-    const params = new URLSearchParams(window.location.search);
-    const index = params.get('index');
-    const pageUrl = index
-        ? `${NV_SITE_ORIGIN}/guestbook.html?index=${index}`
-        : `${NV_SITE_ORIGIN}/guestbook.html`;
+    const pageUrl = nvPostPageUrl(post);
+    const headline = (post.title || 'News Voca').replace(/^\[AP\]\s*/, '').trim();
     const itemList = nvParseRankingItemList(post.message);
     const payload = {
         '@context': 'https://schema.org',
         '@type': 'Article',
-        headline: post.title || 'FIFA News Voca',
+        headline,
         description,
         datePublished: isoDate || undefined,
         dateModified: isoDate || undefined,
         author: {
             '@type': 'Organization',
-            name: post.nickname || 'English Easy Study',
+            name: 'English Easy Study',
         },
         publisher: {
             '@type': 'Organization',
@@ -174,21 +180,41 @@ function nvInjectArticleJsonLd(post, isoDate, description) {
         },
         mainEntityOfPage: { '@type': 'WebPage', '@id': pageUrl },
         inLanguage: ['ko', 'en'],
-        keywords: 'CNN news, 뉴스 영어, News Voca, 영어 어휘, CNN vocabulary',
-        about: {
-            '@type': 'Thing',
-            name: 'CNN News',
-            sameAs: 'https://edition.cnn.com/',
-        },
     };
     if (itemList) payload.mainEntity = itemList;
     script.textContent = JSON.stringify(payload);
     document.head.appendChild(script);
 }
 
+function nvResolveSlug() {
+    if (window.ViewpostSeo) return window.ViewpostSeo.resolveSlug(window.VIEWPOST_SEO);
+    const bodySlug = document.body?.dataset?.nvSlug;
+    if (bodySlug) return bodySlug;
+    const pathMatch = window.location.pathname.match(/\/news-voca\/([^/]+)\/?$/);
+    if (pathMatch) return decodeURIComponent(pathMatch[1]);
+    const params = new URLSearchParams(window.location.search);
+    return params.get('slug') || '';
+}
+
+function nvPostPageUrl(post, index) {
+    if (window.ViewpostSeo) return window.ViewpostSeo.postPageUrl(post, window.VIEWPOST_SEO, index);
+    if (post && post.slug) {
+        return `${NV_SITE_ORIGIN}/news-voca/${post.slug}`;
+    }
+    const idx = index ?? new URLSearchParams(window.location.search).get('index');
+    if (idx != null && idx !== '') {
+        return `${NV_SITE_ORIGIN}/news-voca.html?index=${idx}`;
+    }
+    return `${NV_SITE_ORIGIN}/news-voca.html`;
+}
+
 function updatePageSeo(post, formattedDate) {
+    if (window.ViewpostSeo) {
+        window.ViewpostSeo.updatePageSeo(post, window.VIEWPOST_SEO);
+        return;
+    }
     const title = (post.title || 'News Voca').trim();
-    const desc = nvPlainText(post.message, 155);
+    const desc = (post.metaDescription || '').trim() || nvPlainText(post.message, 155);
     const fullTitle = `${title} | News Voca · English Easy Study`;
 
     document.title = fullTitle;
@@ -198,11 +224,7 @@ function updatePageSeo(post, formattedDate) {
     nvSetMeta('twitter:title', title);
     nvSetMeta('twitter:description', desc);
 
-    const params = new URLSearchParams(window.location.search);
-    const index = params.get('index');
-    const canonical = index
-        ? `${NV_SITE_ORIGIN}/guestbook.html?index=${index}`
-        : `${NV_SITE_ORIGIN}/guestbook.html`;
+    const canonical = nvPostPageUrl(post);
     nvSetCanonical(canonical);
     nvSetMeta('og:url', canonical, true);
 
@@ -578,10 +600,11 @@ function showError(message, details = '') {
 
 async function loadPost() {
     const params = new URLSearchParams(window.location.search);
+    const slug = nvResolveSlug();
     const index = params.get('index');
 
-    if (!index) {
-        showError('게시글을 찾을 수 없습니다', 'index 파라미터가 없습니다.');
+    if (!slug && !index) {
+        showError('게시글을 찾을 수 없습니다', 'slug 또는 index 파라미터가 없습니다.');
         return;
     }
 
@@ -589,6 +612,22 @@ async function loadPost() {
     showLoading();
 
     try {
+        let post = null;
+
+        if (slug) {
+            const slugUrl = `${API_BASE_URL}/guestbook/by-slug/${encodeURIComponent(slug)}`;
+            console.log('📡 slug API 요청:', slugUrl);
+            const slugRes = await fetch(slugUrl);
+            if (slugRes.ok) {
+                const slugData = await slugRes.json();
+                post = slugData.entry;
+            } else if (!index) {
+                showError('게시글을 찾을 수 없습니다', `slug "${slug}"에 해당하는 글이 없습니다.`);
+                return;
+            }
+        }
+
+        if (!post) {
         const url = `${API_BASE_URL}/guestbook`;
         console.log('📡 API 요청 URL:', url);
         const response = await fetch(url);
@@ -636,9 +675,7 @@ async function loadPost() {
             return;
         }
 
-        // 목록에서 전달된 index는 원본 배열 기준이므로 직접 사용
-        // 목록에서는 역순으로 표시하지만, index는 total - 1 - idx로 계산되어 원본 배열의 인덱스입니다
-        const post = entries[indexNum];
+        post = entries[indexNum];
         
         if (!post) {
             showError('게시글을 찾을 수 없습니다', `인덱스 ${indexNum}에 해당하는 게시글이 없습니다.`);
@@ -646,6 +683,12 @@ async function loadPost() {
         }
         
         console.log(`📌 인덱스 ${indexNum}로 게시글 찾기 (총 ${entries.length}개)`);
+        window.currentIndex = indexNum;
+        }
+
+        if (slug) {
+            console.log(`📌 slug "${slug}"로 게시글 로드`);
+        }
 
         // 조회수 증가 API 호출
         try {

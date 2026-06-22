@@ -1,4 +1,4 @@
-/* 컬쳐 어휘 — 심플 카드 + 상단 이미지 */
+/* 컬쳐 어휘 — 심플 카드 */
 
 #post-message .clv-text {
   max-width: 36rem;
@@ -6,21 +6,6 @@
   font-size: 0.95rem;
   color: #3a3548;
   line-height: 1.6;
-}
-
-#post-message .clv-hero {
-  margin: 0 0 1.1rem;
-  padding: 0;
-}
-
-#post-message .clv-hero-image {
-  display: block;
-  width: 100%;
-  max-width: 100%;
-  height: auto;
-  border-radius: 10px;
-  object-fit: cover;
-  box-shadow: 0 2px 10px rgba(58, 48, 88, 0.12);
 }
 
 #post-message .clv-intro {
