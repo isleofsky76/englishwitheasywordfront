@@ -4,10 +4,18 @@
   --se-primary-dark: #0d5c56;
   --se-primary-light: #ccfbf1;
   --se-accent: #14b8a6;
-  --se-text: #334155;
-  --se-text-muted: #64748b;
+  --se-text: #4a5568;
+  --se-text-muted: #8b9aab;
   --se-bg: #f0fdfa;
   --se-border: #99f6e4;
+  /* 본문 — 순수 검정 대신 부드러운 슬레이트·틸 톤 */
+  --se-ko: #3d4852;
+  --se-en: #5a6d78;
+  --se-sent: #4a6670;
+  --se-sep: #a8b5c4;
+  --se-sec-bg: #eaf5f2;
+  --se-sec-text: #2f5f59;
+  --se-sec-border: #7ab8ad;
 }
 
 .se-page {
@@ -41,7 +49,7 @@
 }
 
 .se-page .guestbook-container .item-title a {
-  color: #134e4a;
+  color: var(--se-sec-text);
 }
 
 .se-page .guestbook-container .item-title a:hover {
@@ -54,11 +62,41 @@
 }
 
 .se-page #post-title {
-  color: var(--se-primary-dark);
+  color: var(--se-sec-text);
 }
 
 .se-page #post-message {
   color: var(--se-text);
+  line-height: 1.8;
+  -webkit-font-smoothing: antialiased;
+}
+
+.se-page #post-message .se-ko {
+  color: var(--se-ko) !important;
+  font-weight: 500;
+}
+
+.se-page #post-message .se-en {
+  color: var(--se-en) !important;
+  font-weight: 500;
+}
+
+.se-page #post-message .se-item .se-sep {
+  color: var(--se-sep) !important;
+}
+
+.se-page #post-message strong {
+  background: var(--se-sec-bg) !important;
+  border-left-color: var(--se-sec-border) !important;
+  color: var(--se-sec-text) !important;
+}
+
+.se-page #post-content .pv-tts-btn {
+  color: #6b8f9a;
+}
+
+.se-page #post-content .pv-tts-btn.pv-tts-playing {
+  color: var(--se-primary);
 }
 
 .se-page .btn-primary {
