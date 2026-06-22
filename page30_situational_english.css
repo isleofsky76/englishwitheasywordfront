@@ -74,3 +74,33 @@
 .se-page .spinner-border.text-primary {
   color: var(--se-primary) !important;
 }
+
+/* 항목: 데스크톱 — 한글 : 영어 가로 */
+.se-page #post-message .se-item {
+  display: inline;
+}
+
+/* 모바일 — 한글 위, 영어 아래 */
+@media (max-width: 767px) {
+  .se-page #post-message .se-item {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 0.35em;
+    vertical-align: top;
+  }
+
+  .se-page #post-message .se-item .se-sep,
+  .se-page #post-message span:has(+ .se-en) {
+    display: none;
+  }
+
+  .se-page #post-message .se-en {
+    display: block;
+    margin-top: 0.15em;
+  }
+
+  .se-page #post-message .pv-tts-slot {
+    display: inline;
+    vertical-align: middle;
+  }
+}
