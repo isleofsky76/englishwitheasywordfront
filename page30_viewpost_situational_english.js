@@ -275,16 +275,22 @@ function attachSituationalEnglishWebTTS(container) {
     } catch (_) {}
 
     container.querySelectorAll('[data-se-tts]').forEach((el) => {
-        const next = el.nextElementSibling;
-        if (next && next.classList && next.classList.contains('pv-tts-slot')) return;
         const speak = el.getAttribute('data-se-tts');
         if (!speak) return;
         const slot = pvTtsSlotHtml(speak);
         if (!slot) return;
+
+        const inside = el.querySelector('.pv-tts-slot');
+        const after = el.nextElementSibling;
+        if (inside || (after && after.classList && after.classList.contains('pv-tts-slot'))) {
+            if (after && after.classList.contains('pv-tts-slot')) el.appendChild(after);
+            return;
+        }
+
         if (/[.!?]$/.test(speak.trim())) {
             el.outerHTML = pvAppendTtsInlineAfterEnglish(el.outerHTML, speak);
         } else {
-            el.insertAdjacentHTML('afterend', slot);
+            el.insertAdjacentHTML('beforeend', slot);
         }
     });
 

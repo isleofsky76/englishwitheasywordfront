@@ -80,13 +80,15 @@
   display: inline;
 }
 
-/* 모바일 — 한글 위, 영어 아래 */
+/* 모바일 — 한글 위, 영어+스피커 아래 한 줄 */
 @media (max-width: 767px) {
   .se-page #post-message .se-item {
-    display: inline-block;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.15em;
     width: 100%;
     margin-bottom: 0.35em;
-    vertical-align: top;
   }
 
   .se-page #post-message .se-item .se-sep,
@@ -94,13 +96,22 @@
     display: none;
   }
 
-  .se-page #post-message .se-en {
+  .se-page #post-message .se-ko,
+  .se-page #post-message .se-item > span:first-child {
     display: block;
-    margin-top: 0.15em;
+  }
+
+  .se-page #post-message .se-en {
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.15em;
+    max-width: 100%;
   }
 
   .se-page #post-message .pv-tts-slot {
-    display: inline;
+    display: inline-flex;
+    flex-shrink: 0;
     vertical-align: middle;
   }
 }
