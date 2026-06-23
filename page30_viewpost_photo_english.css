@@ -86,8 +86,17 @@ body {
   margin: 0 0 0.35rem 0;
 }
 
-#post-message .photo-english-card .pe-hero-img {
+#post-message .photo-english-card p.pe-hero {
   margin: 0;
+  padding: 0;
+}
+
+#post-message .photo-english-card .pe-hero-img,
+#post-message .photo-english-card .wotd-hero-image {
+  margin: 0 0 0.15rem 0;
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
 }
 
 #post-message .photo-english-card .pe-hero {
@@ -348,9 +357,11 @@ body {
     font-size: 1.8rem;
   }
 
-  /* Word of the Day 상단 히어로 이미지: 모바일에서 가로에 맞춰 1:1 정사각형 */
+  /* Word of the Day·포토영어 공통 히어로 이미지: 모바일 1:1 정사각형 */
   #post-message .wotd-hero-image,
-  #post-message img.wotd-hero-image {
+  #post-message img.wotd-hero-image,
+  #post-message .photo-english-card .pe-hero-img,
+  #post-message .photo-english-card .pe-hero img {
     width: 100%;
     aspect-ratio: 1 / 1;
     object-fit: cover;

@@ -14,7 +14,18 @@
 }
 
 .photo-english-card .pe-hero-img,
-.photo-english-card img {
+.photo-english-card .pe-hero img,
+.photo-english-card .wotd-hero-image {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 0 0.15rem 0;
+  border-radius: 8px;
+}
+
+/* 구형 단어 카드 등 히어로 외 이미지 */
+.photo-english-card img:not(.pe-hero-img) {
   width: 100%;
   max-width: 100%;
   height: auto;
@@ -116,13 +127,30 @@
   width: 100%;
 }
 
-#post-message .photo-english-card .pe-hero-img {
-  margin: 0;
+#post-message .photo-english-card .pe-hero-img,
+#post-message .photo-english-card .wotd-hero-image {
+  margin: 0 0 0.15rem 0;
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
 }
 
 #post-message .photo-english-card .pe-en,
 #post-message .photo-english-card .pe-ko-line {
   line-height: 1.05;
+}
+
+@media (max-width: 767px) {
+  .photo-english-card .pe-hero-img,
+  .photo-english-card .pe-hero img,
+  .photo-english-card .wotd-hero-image,
+  #post-message .photo-english-card .pe-hero-img,
+  #post-message .photo-english-card .wotd-hero-image {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    height: auto;
+  }
 }
 
 @media (max-width: 480px) {
