@@ -5,6 +5,14 @@ const API_BASE_URL = typeof getPage30ApiBaseUrl === 'function'
     ? getPage30ApiBaseUrl()
     : window.PAGE30_PRODUCTION_API_BASE || 'https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app';
 
+window.VIEWPOST_SEO = {
+    boardPath: 'photo-english',
+    boardLabel: 'Photo English',
+    fallbackHtml: 'photo-english.html',
+    listPath: '/photo-english',
+    bySlugPath: '/photo-english/by-slug',
+};
+
 function escapeHtml(text) {
     if (!text) return '';
     const div = document.createElement('div');
@@ -258,42 +266,23 @@ function showError(message, details = '') {
 }
 
 async function loadPost() {
-    const indexParam = new URLSearchParams(window.location.search).get('index');
     showLoading();
     try {
-        const response = await fetch(`${API_BASE_URL}/photo-english`);
-        if (!response.ok) {
-            if (response.status === 503) {
-                let detail = '서버 또는 DB가 준비되지 않았습니다. (503)';
-                try {
-                    const ct = response.headers.get('content-type') || '';
-                    if (ct.includes('application/json')) {
-                        const errorData = await response.json();
-                        detail = errorData.error || detail;
-                    }
-                } catch (_) {
-                    /* 프록시 503 HTML 등 JSON이 아니면 위 기본 문구 사용 */
-                }
-                showError('데이터베이스 연결 오류', detail);
-                return;
-            }
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const messages = await response.json();
-        let entries = Array.isArray(messages) ? messages : (messages.entries || messages.data || []);
-
-        // index 파라미터가 없으면 최신 글(0번)로 기본 설정
-        const fallbackIndex = 0;
-        const indexNum = indexParam == null || indexParam === ''
-            ? fallbackIndex
-            : parseInt(indexParam, 10);
-
-        if (isNaN(indexNum) || indexNum < 0 || indexNum >= entries.length) {
-            showError('게시글을 찾을 수 없습니다', `인덱스 ${indexParam ?? fallbackIndex}에 해당하는 게시글이 없습니다.`);
+        if (!window.ViewpostSeo) {
+            showError('게시글을 불러올 수 없습니다', 'viewpost-seo.js 가 필요합니다.');
             return;
         }
-        const post = entries[indexNum];
-        window.currentIndex = indexNum;
+        const result = await window.ViewpostSeo.fetchPostBySlugOrIndex(
+            API_BASE_URL,
+            window.VIEWPOST_SEO,
+            { defaultIndex: 0 }
+        );
+        if (result.error) {
+            showError('게시글을 찾을 수 없습니다', String(result.error));
+            return;
+        }
+        const post = result.post;
+        if (result.index != null) window.currentIndex = result.index;
 
         try {
             const viewResponse = await fetch(`${API_BASE_URL}/photo-english/${post._id}/view`, { method: 'POST', headers: { 'Content-Type': 'application/json' } });
@@ -303,90 +292,12 @@ async function loadPost() {
             }
         } catch (_) {}
 
+        window.ViewpostSeo.updatePageSeo(post, window.VIEWPOST_SEO);
+
         const convertedMessage = convertMediaLinks(post.message || '');
         const metaHtml = typeof buildPostMetaHtml === 'function'
             ? buildPostMetaHtml(post)
             : '';
-        // SEO / 공유용 메타 태그 동적 설정
-        try {
-            const plainText = (post.message || '').replace(/<[^>]+>/g, ' ');
-            const shortSnippet = plainText.trim().slice(0, 140);
-            const baseTitle = '포토영어';
-            const pageTitle = post.title ? `${post.title} | ${baseTitle}` : baseTitle;
-            document.title = pageTitle;
-
-            const indexForUrl = indexParam == null || indexParam === '' ? fallbackIndex : indexParam;
-            const canonicalUrl = `${window.location.origin}${window.location.pathname}?index=${indexForUrl}`;
-
-            const ensureMeta = (selector, creator) => {
-                let el = document.querySelector(selector);
-                if (!el) {
-                    el = creator();
-                    document.head.appendChild(el);
-                }
-                return el;
-            };
-
-            // description
-            ensureMeta('meta[name="description"]', () => {
-                const m = document.createElement('meta');
-                m.name = 'description';
-                return m;
-            }).setAttribute('content', shortSnippet || `${post.title || '포토영어'} - English vocabulary example and explanation.`);
-
-            // canonical
-            ensureMeta('link[rel="canonical"]', () => {
-                const l = document.createElement('link');
-                l.rel = 'canonical';
-                return l;
-            }).setAttribute('href', canonicalUrl);
-
-            // Open Graph
-            ensureMeta('meta[property="og:title"]', () => {
-                const m = document.createElement('meta');
-                m.setAttribute('property', 'og:title');
-                return m;
-            }).setAttribute('content', pageTitle);
-
-            ensureMeta('meta[property="og:description"]', () => {
-                const m = document.createElement('meta');
-                m.setAttribute('property', 'og:description');
-                return m;
-            }).setAttribute('content', shortSnippet || `${post.title || '포토영어'} - English vocabulary example and explanation.`);
-
-            ensureMeta('meta[property="og:url"]', () => {
-                const m = document.createElement('meta');
-                m.setAttribute('property', 'og:url');
-                return m;
-            }).setAttribute('content', canonicalUrl);
-
-            ensureMeta('meta[property="og:type"]', () => {
-                const m = document.createElement('meta');
-                m.setAttribute('property', 'og:type');
-                return m;
-            }).setAttribute('content', 'article');
-
-            // Twitter Card
-            ensureMeta('meta[name="twitter:card"]', () => {
-                const m = document.createElement('meta');
-                m.name = 'twitter:card';
-                return m;
-            }).setAttribute('content', 'summary_large_image');
-
-            ensureMeta('meta[name="twitter:title"]', () => {
-                const m = document.createElement('meta');
-                m.name = 'twitter:title';
-                return m;
-            }).setAttribute('content', pageTitle);
-
-            ensureMeta('meta[name="twitter:description"]', () => {
-                const m = document.createElement('meta');
-                m.name = 'twitter:description';
-                return m;
-            }).setAttribute('content', shortSnippet || `${post.title || '포토영어'} - English vocabulary example and explanation.`);
-        } catch (e) {
-            console.warn('SEO meta update failed:', e);
-        }
 
         document.getElementById('post-container').innerHTML = `
             <div id="post-header">
