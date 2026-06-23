@@ -76,7 +76,15 @@ body {
 }
 
 #post-message .photo-english-card p.pe-ko-line {
-  margin-top: 0.22rem;
+  margin-top: 0.1rem;
+}
+
+#post-message .photo-english-card .pe-en {
+  line-height: 1.3;
+}
+
+#post-message .photo-english-card .pe-ko-line {
+  line-height: 1.28;
 }
 
 /* 포토영어 묘사형 — 영·한 블록 (번호 없음) */
