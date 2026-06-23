@@ -36,26 +36,33 @@
 }
 
 .photo-english-card .pe-sentences {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
   margin: 0;
   padding: 0;
   width: 100%;
 }
 
+/* cooking-voca .cv-word 톤 — 베이지 카드 */
 .photo-english-card .pe-sentence {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.16rem;
   width: 100%;
   margin: 0;
-  padding: 0.18rem 0;
-  border-bottom: 1px solid #eef2f7;
+  padding: 0.52rem 0.72rem;
+  background: #fffdf9;
+  border: 1px solid #eadfce;
+  border-radius: 9px;
+  box-shadow: 0 1px 2px rgba(92, 73, 48, 0.05);
   box-sizing: border-box;
 }
 
-.photo-english-card .pe-sentence:last-child {
-  border-bottom: none;
-  padding-bottom: 0;
-}
-
-.photo-english-card .pe-sentence:first-child {
-  padding-top: 0;
+.photo-english-card .pe-sentence > * {
+  margin: 0;
+  background: transparent !important;
 }
 
 .photo-english-card .pe-en {
@@ -63,10 +70,11 @@
   width: 100%;
   margin: 0;
   padding: 0;
-  font-size: 0.94rem;
-  line-height: 1.05;
-  color: #1e293b;
-  font-weight: 500;
+  font-size: 1.03rem;
+  line-height: 1.3;
+  color: #6f3f17;
+  font-weight: 700;
+  letter-spacing: -0.01em;
   white-space: normal;
   word-break: keep-all;
   overflow-wrap: break-word;
@@ -77,9 +85,10 @@
   width: 100%;
   margin: 0;
   padding: 0;
-  font-size: 0.88rem;
-  line-height: 1.05;
-  color: #64748b;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  color: #2f2418;
+  font-weight: 600;
   white-space: normal;
   word-break: keep-all;
   overflow-wrap: break-word;
@@ -137,7 +146,7 @@
 
 #post-message .photo-english-card .pe-en,
 #post-message .photo-english-card .pe-ko-line {
-  line-height: 1.05;
+  line-height: inherit;
 }
 
 @media (max-width: 767px) {
@@ -154,11 +163,16 @@
 }
 
 @media (max-width: 480px) {
+  .photo-english-card .pe-sentence {
+    padding: 0.48rem 0.58rem;
+    gap: 0.12rem;
+  }
+
   .photo-english-card .pe-en {
-    font-size: 0.92rem;
+    font-size: 0.98rem;
   }
 
   .photo-english-card .pe-ko-line {
-    font-size: 0.86rem;
+    font-size: 0.87rem;
   }
 }
