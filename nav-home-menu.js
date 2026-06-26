@@ -8,7 +8,7 @@
 
 (function () {
 
-    var NAV_HOME_MENU_VERSION = '20260620a';
+    var NAV_HOME_MENU_VERSION = '20260626b';
 
 
 
@@ -36,7 +36,7 @@
 
         { href: 'pros-cons-list.html', label: 'Pros & Cons', pages: ['pros-cons-list.html', 'pros-cons.html'] },
 
-        { href: 'learning-site.html', label: '학습 사이트', pages: ['learning-site.html'] }
+        { href: 'english-directory.html', label: '학습 사이트 디렉터리', pages: ['english-directory.html'] }
 
     ];
 
