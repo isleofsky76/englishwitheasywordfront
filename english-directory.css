@@ -1,7 +1,8 @@
 :root {
   --bg: #fff;
   --page: #fff;
-  --card: #fff;
+  --card: #f0e8dc;
+  --card-border: #d8cbb8;
   --title: #111;
   --body: #333;
   --muted: #888;
@@ -9,7 +10,7 @@
   --accent-soft: #4a90e2;
   --border: #f0f0f0;
   --border-strong: #e0e4e8;
-  --shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  --shadow: 0 1px 4px rgba(60, 50, 40, 0.06);
   --radius: 10px;
   --gap: 1rem;
   --max-width: 1100px;
@@ -109,14 +110,19 @@ body.english-directory-page {
 }
 
 .dir-card {
-  background: var(--card);
-  border: 1px solid var(--border);
+  background-color: #f0e8dc;
+  border: 1px solid #d8cbb8;
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   padding: 1.1rem 1.15rem;
   display: flex;
   flex-direction: column;
   gap: 0.55rem;
+}
+
+.dir-card:hover {
+  background-color: #e8dece;
+  border-color: #cfc0ab;
 }
 
 .dir-card-title {

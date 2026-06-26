@@ -20,7 +20,6 @@
 
   var SITES = [
   // News
-   { name: 'AllSides', category: 'News', level: 'Intermediate–Advanced', type: 'News / Perspectives', url: 'https://www.allsides.com/unbiased-balanced-news', desc: '좌·중·우 성향 언론을 균형 있게 모은 뉴스. 같은 이슈의 다양한 관점과 영어 표현을 비교하며 읽을 수 있습니다.' },
   { name: 'BBC News', category: 'News', level: 'Intermediate–Advanced', type: 'News / Text / Video', url: 'https://www.bbc.com/news', desc: '영국 BBC의 글로벌 뉴스. 명확한 문장과 다양한 주제로 읽기·청취 연습에 좋습니다.' },
   { name: 'CNN', category: 'News', level: 'Intermediate–Advanced', type: 'News / Text / Video', url: 'https://www.cnn.com/', desc: '미국 중심의 국제 뉴스. 속보부터 심층 분석까지 실시간 영어 뉴스를 접할 수 있습니다.' },
   { name: 'Reuters', category: 'News', level: 'Advanced', type: 'News / Text', url: 'https://www.reuters.com/', desc: '전 세계 통신사 뉴스. 간결하고 객관적인 문체로 고급 독해에 적합합니다.' },
@@ -33,6 +32,7 @@
   { name: 'The Washington Post', category: 'News', level: 'Advanced', type: 'News / Politics', url: 'https://www.washingtonpost.com/', desc: '미국 정치·사회 뉴스 중심. 정치 영어와 분석 문체 학습에 유용합니다.' },
   { name: 'Sky News', category: 'News', level: 'Intermediate', type: 'News / Video', url: 'https://news.sky.com/', desc: '영국 스카이 뉴스. 영국식 발음과 표현으로 뉴스 영어를 들을 수 있습니다.' },
   { name: 'France 24 English', category: 'News', level: 'Intermediate', type: 'News / Video', url: 'https://www.france24.com/en/', desc: '유럽 시각의 영어 뉴스. 국제 이슈를 영어로 접하는 데 도움이 됩니다.' },
+  { name: 'AllSides', category: 'News', level: 'Intermediate–Advanced', type: 'News / Perspectives', url: 'https://www.allsides.com/unbiased-balanced-news', desc: '좌·중·우 성향 언론을 균형 있게 모은 뉴스. 같은 이슈의 다양한 관점과 영어 표현을 비교하며 읽을 수 있습니다.' },
 
   // Business
   { name: 'CNBC', category: 'Business', level: 'Intermediate–Advanced', type: 'Business / Video / News', url: 'https://www.cnbc.com/', desc: '미국 경제·주식 뉴스. 비즈니스 영어와 경제 용어를 함께 익힐 수 있습니다.' },
@@ -139,6 +139,21 @@
   { name: 'BBC Learning English (YouTube)', category: 'YouTube / Broadcasters', level: 'Beginner–Intermediate', type: 'YouTube / Learning', url: 'https://www.youtube.com/@bbclearningenglish', desc: 'BBC 학습 영어 공식 채널. 문법·발음·표현 강의 영상을 무료로 봅니다.' },
   { name: '60 Minutes (YouTube)', category: 'YouTube / Broadcasters', level: 'Intermediate–Advanced', type: 'YouTube / Magazine', url: 'https://www.youtube.com/@60minutes', desc: 'CBS 60 Minutes 공식 채널. 심층 인터뷰와 탐사 보도 영어를 들을 수 있습니다.' },
   { name: 'Reuters (YouTube)', category: 'YouTube / Broadcasters', level: 'Intermediate–Advanced', type: 'YouTube / News', url: 'https://www.youtube.com/@Reuters', desc: '로이터 통신 유튜브. 짧은 국제 뉴스 클립으로 뉴스 영어를 연습합니다.' },
+  { name: 'Wall Street Journal (YouTube)', category: 'YouTube / Broadcasters', level: 'Advanced', type: 'YouTube / Business', url: 'https://www.youtube.com/@WSJ', desc: 'WSJ 공식 유튜브. 경제·금융 뉴스와 인터뷰로 비즈니스 영어를 들을 수 있습니다.' },
+  { name: 'Business Insider (YouTube)', category: 'YouTube / Broadcasters', level: 'Intermediate', type: 'YouTube / Business', url: 'https://www.youtube.com/@businessinsider', desc: '비즈니스 인사이더 유튜브. 기업·경제·라이프스타일 영상으로 쉬운 비즈니스 영어를 접합니다.' },
+  { name: 'CNBC (YouTube)', category: 'YouTube / Broadcasters', level: 'Intermediate–Advanced', type: 'YouTube / Business', url: 'https://www.youtube.com/@CNBC', desc: 'CNBC 공식 유튜브. 주식·시장·기업 뉴스 영상으로 금융 영어를 연습합니다.' },
+  { name: 'Bloomberg (YouTube)', category: 'YouTube / Broadcasters', level: 'Advanced', type: 'YouTube / Business', url: 'https://www.youtube.com/@bloomberg', desc: '블룸버그 유튜브. 글로벌 금융·경제 속보와 분석 영상으로 전문 비즈니스 영어를 들을 수 있습니다.' },
+  { name: 'Financial Times (YouTube)', category: 'YouTube / Broadcasters', level: 'Advanced', type: 'YouTube / Business', url: 'https://www.youtube.com/@FinancialTimes', desc: '파이낸셜 타임스 유튜브. 영국식 비즈니스·국제 뉴스 영상으로 고급 영어를 학습합니다.' },
+  { name: 'Forbes (YouTube)', category: 'YouTube / Broadcasters', level: 'Intermediate–Advanced', type: 'YouTube / Business', url: 'https://www.youtube.com/@Forbes', desc: '포브스 유튜브. 기업가·리더 인터뷰와 비즈니스 트렌드 영상으로 영어를 익힙니다.' },
+  { name: 'The Economist (YouTube)', category: 'YouTube / Broadcasters', level: 'Advanced', type: 'YouTube / Business', url: 'https://www.youtube.com/@TheEconomist', desc: '이코노미스트 유튜브. 국제 경제·정치 분석 영상으로 고급 영어와 시사 감각을 키웁니다.' },
+  { name: 'The New York Times (YouTube)', category: 'YouTube / Broadcasters', level: 'Advanced', type: 'YouTube / News', url: 'https://www.youtube.com/@nytimes', desc: '뉴욕타임스 유튜브. 심층 보도·다큐·시사 영상으로 고급 뉴스 영어를 들을 수 있습니다.' },
+  { name: 'The Washington Post (YouTube)', category: 'YouTube / Broadcasters', level: 'Advanced', type: 'YouTube / News', url: 'https://www.youtube.com/@washingtonpost', desc: '워싱턴포스트 유튜브. 미국 정치·사회 뉴스 영상으로 정치 영어 표현을 학습합니다.' },
+  { name: 'NPR (YouTube)', category: 'YouTube / Broadcasters', level: 'Intermediate', type: 'YouTube / News', url: 'https://www.youtube.com/@NPR', desc: 'NPR 공식 유튜브. 라디오 뉴스·팟캐스트 영상으로 자연스러운 미국 영어를 연습합니다.' },
+  { name: 'Associated Press (YouTube)', category: 'YouTube / Broadcasters', level: 'Intermediate–Advanced', type: 'YouTube / News', url: 'https://www.youtube.com/@AssociatedPress', desc: 'AP통신 유튜브. 짧고 정확한 국제 뉴스 클립으로 뉴스 영어 표현을 익힙니다.' },
+  { name: 'Politico (YouTube)', category: 'YouTube / Broadcasters', level: 'Advanced', type: 'YouTube / Politics', url: 'https://www.youtube.com/@politico', desc: '폴리티코 유튜브. 미국 정치 뉴스·인터뷰 영상으로 정치·정책 영어를 들을 수 있습니다.' },
+  { name: 'TechCrunch (YouTube)', category: 'YouTube / Broadcasters', level: 'Intermediate', type: 'YouTube / Tech', url: 'https://www.youtube.com/@techcrunch', desc: '테크크런치 유튜브. 스타트업·테크 뉴스 영상으로 실리콘밸리 영어를 접합니다.' },
+  { name: 'The Verge (YouTube)', category: 'YouTube / Broadcasters', level: 'Intermediate', type: 'YouTube / Tech', url: 'https://www.youtube.com/@TheVerge', desc: '더 버지 유튜브. 테크 제품 리뷰·뉴스 영상으로 일상적인 테크 영어를 학습합니다.' },
+  { name: 'ESPN (YouTube)', category: 'YouTube / Broadcasters', level: 'Intermediate', type: 'YouTube / Sports', url: 'https://www.youtube.com/@ESPN', desc: 'ESPN 공식 유튜브. 스포츠 하이라이트·해설 영상으로 스포츠 영어를 들을 수 있습니다.' },
 
   // Documentary
   { name: 'PBS NOVA', category: 'Documentary', level: 'Intermediate–Advanced', type: 'Documentary / Science', url: 'https://www.pbs.org/wgbh/nova/', desc: 'PBS 과학 다큐멘터리. 과학 주제의 명확한 영어 내레이션을 들을 수 있습니다.' },

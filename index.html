@@ -322,6 +322,14 @@
     <main class="container main-content">
         <!-- Hero Section -->
         <section class="preview-section" aria-label="영어 학습 섹션">
+            <!-- Best Views -->
+            <article class="preview-section">
+                <div class="preview-header">
+                    <h2>Best 조회수</h2>
+                </div>
+                <div id="best-views-preview-list" role="region" aria-label="조회수 Best 목록"></div>
+            </article>
+
             <!-- Recent Updates -->
             <article class="preview-section">
                 <div class="preview-header">
@@ -501,6 +509,64 @@
                 safeLabel + ' | ' + safeTitle + viewsHtml + '</span></a></li>';
         }
 
+        function buildBestPreviewRow(number, label, title, views, href) {
+            var safeLabel = (label || '').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+            var safeTitle = (title || '제목 없음').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+            var viewsHtml = views ? '<span class="preview-views">[' + views + ']</span>' : '';
+            return '<li><a href="' + href + '"><span class="preview-num">' + number + '</span>' +
+                '<span class="preview-title">' + safeLabel + ' | ' + safeTitle + viewsHtml + '</span></a></li>';
+        }
+
+        function getPreviewBoards(apiMode) {
+            var isProdHost = window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1';
+            var wordofdayApiMode = apiMode || (isProdHost ? 'prod' : null);
+            return [
+                { path: '/wordofday', page: 'word-of-the-day.html', label: '오늘의 단어', apiMode: wordofdayApiMode },
+                { path: '/guestbook', page: 'news-voca.html', label: '뉴스 어휘' },
+                { path: '/vocabulary', page: 'english-synonym.html', label: '유의어' },
+                { path: '/easy-voca', page: 'popular-voca.html', label: '인기 어휘' },
+                { path: '/situational-english', page: 'situational-english.html', label: '상황 영어' },
+                { path: '/cooking-voca', page: 'cooking-voca.html', label: '요리 영어' },
+                { path: '/culture-voca', page: 'culture-voca.html', label: '컬쳐 어휘' },
+                { path: '/ranking-news', page: 'ranking-news.html', label: '랭킹 뉴스' },
+                { path: '/photo-english', page: 'photo-english.html', label: '포토 영어' },
+                { path: '/pros-cons', page: 'pros-cons.html', label: 'Pros & Cons' }
+            ];
+        }
+
+        function fetchAllPreviewEntries(apiBase, boards, apiMode) {
+            return Promise.allSettled(boards.map(function(board) {
+                return fetch(apiBase + board.path)
+                    .then(function(r) {
+                        if (!r.ok) throw new Error('HTTP ' + r.status);
+                        return r.json();
+                    })
+                    .then(function(data) {
+                        return { board: board, entries: parseEntries(data) };
+                    });
+            })).then(function(results) {
+                var combined = [];
+                results.forEach(function(result) {
+                    if (result.status !== 'fulfilled') return;
+                    var board = result.value.board;
+                    var entries = result.value.entries;
+                    var boardApiMode = board.apiMode !== undefined ? board.apiMode : apiMode;
+                    var apiParam = boardApiMode ? '&api=' + boardApiMode : '';
+                    entries.forEach(function(entry, index) {
+                        combined.push({
+                            label: board.label,
+                            title: entry.title,
+                            views: entry.views || 0,
+                            date: entry.date,
+                            href: board.page + '?index=' + index + apiParam,
+                            sortTime: parseEntrySortTime(entry, index)
+                        });
+                    });
+                });
+                return combined;
+            });
+        }
+
         function parseEntrySortTime(entry, index) {
             if (entry && entry.date) {
                 var time = new Date(entry.date).getTime();
@@ -550,7 +616,7 @@
         }
 
         var loadingListHtml = buildPreviewListHtml([], '로딩 중...');
-        ['recent-updates-preview-list', 'wordofday-preview-list', 'news-voca-preview-list', 'synonym-preview-list', 'easy-voca-preview-list', 'situational-english-preview-list', 'cooking-voca-preview-list', 'culture-voca-preview-list', 'ranking-news-preview-list', 'photo-english-preview-list', 'pros-cons-preview-list', 'english-directory-preview-list'].forEach(function(id) {
+        ['best-views-preview-list', 'recent-updates-preview-list', 'wordofday-preview-list', 'news-voca-preview-list', 'synonym-preview-list', 'easy-voca-preview-list', 'situational-english-preview-list', 'cooking-voca-preview-list', 'culture-voca-preview-list', 'ranking-news-preview-list', 'photo-english-preview-list', 'pros-cons-preview-list', 'english-directory-preview-list'].forEach(function(id) {
             var el = document.getElementById(id);
             if (el) el.innerHTML = loadingListHtml;
         });
@@ -806,6 +872,42 @@
                 });
         })();
 
+        // Best Views (all boards, by views)
+        (function loadBestViewsPreview() {
+            var listEl = document.getElementById('best-views-preview-list');
+            if (!listEl) return;
+
+            var urlParams = new URLSearchParams(window.location.search);
+            var apiMode = urlParams.get('api');
+            var apiBase = getApiBase();
+            var boards = getPreviewBoards(apiMode);
+            var fallbackHtml = buildPreviewListHtml([], '인기 글을 불러올 수 없습니다.');
+            var timeoutId = setTimeout(function() { listEl.innerHTML = fallbackHtml; }, 10000);
+
+            fetchAllPreviewEntries(apiBase, boards, apiMode).then(function(combined) {
+                clearTimeout(timeoutId);
+                combined.sort(function(a, b) {
+                    var viewDiff = (b.views || 0) - (a.views || 0);
+                    if (viewDiff !== 0) return viewDiff;
+                    return b.sortTime - a.sortTime;
+                });
+
+                var preview = combined.slice(0, 8);
+                if (!preview.length) {
+                    listEl.innerHTML = buildPreviewListHtml([], '게시글이 없습니다.');
+                    return;
+                }
+
+                var rows = preview.map(function(item, idx) {
+                    return buildBestPreviewRow(idx + 1, item.label, item.title, item.views, item.href);
+                });
+                listEl.innerHTML = buildPreviewListHtml(rows, '');
+            }).catch(function() {
+                clearTimeout(timeoutId);
+                listEl.innerHTML = fallbackHtml;
+            });
+        })();
+
         // Recent Updates (all boards)
         (function loadRecentUpdatesPreview() {
             var listEl = document.getElementById('recent-updates-preview-list');
@@ -813,54 +915,13 @@
 
             var urlParams = new URLSearchParams(window.location.search);
             var apiMode = urlParams.get('api');
-            var isProdHost = window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1';
-            var wordofdayApiMode = apiMode || (isProdHost ? 'prod' : null);
             var apiBase = getApiBase();
-            var boards = [
-                { path: '/wordofday', page: 'word-of-the-day.html', label: '오늘의 단어', apiMode: wordofdayApiMode },
-                { path: '/guestbook', page: 'news-voca.html', label: '뉴스 어휘' },
-                { path: '/vocabulary', page: 'english-synonym.html', label: '유의어' },
-                { path: '/easy-voca', page: 'popular-voca.html', label: '인기 어휘' },
-                { path: '/situational-english', page: 'situational-english.html', label: '상황 영어' },
-                { path: '/cooking-voca', page: 'cooking-voca.html', label: '요리 영어' },
-                { path: '/culture-voca', page: 'culture-voca.html', label: '컬쳐 어휘' },
-                { path: '/ranking-news', page: 'ranking-news.html', label: '랭킹 뉴스' },
-                { path: '/photo-english', page: 'photo-english.html', label: '포토 영어' },
-                { path: '/pros-cons', page: 'pros-cons.html', label: 'Pros & Cons' }
-            ];
+            var boards = getPreviewBoards(apiMode);
             var fallbackHtml = buildPreviewListHtml([], '최신 글을 불러올 수 없습니다.');
             var timeoutId = setTimeout(function() { listEl.innerHTML = fallbackHtml; }, 10000);
 
-            Promise.allSettled(boards.map(function(board) {
-                return fetch(apiBase + board.path)
-                    .then(function(r) {
-                        if (!r.ok) throw new Error('HTTP ' + r.status);
-                        return r.json();
-                    })
-                    .then(function(data) {
-                        return { board: board, entries: parseEntries(data) };
-                    });
-            })).then(function(results) {
+            fetchAllPreviewEntries(apiBase, boards, apiMode).then(function(combined) {
                 clearTimeout(timeoutId);
-                var combined = [];
-                results.forEach(function(result) {
-                    if (result.status !== 'fulfilled') return;
-                    var board = result.value.board;
-                    var entries = result.value.entries;
-                    var boardApiMode = board.apiMode !== undefined ? board.apiMode : apiMode;
-                    var apiParam = boardApiMode ? '&api=' + boardApiMode : '';
-                    entries.forEach(function(entry, index) {
-                        combined.push({
-                            label: board.label,
-                            title: entry.title,
-                            views: entry.views,
-                            date: entry.date,
-                            href: board.page + '?index=' + index + apiParam,
-                            sortTime: parseEntrySortTime(entry, index)
-                        });
-                    });
-                });
-
                 combined.sort(function(a, b) {
                     if (b.sortTime !== a.sortTime) return b.sortTime - a.sortTime;
                     return 0;
