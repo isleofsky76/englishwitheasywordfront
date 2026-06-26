@@ -99,6 +99,32 @@
   font-weight: 600;
 }
 
+.nav-home-dropdown-menu .nav-home-section-link {
+  font-size: 15px;
+  font-weight: 800;
+  color: #111;
+  letter-spacing: -0.03em;
+  padding: 0.55rem 1rem 0.4rem;
+  line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+}
+
+.nav-home-dropdown-menu .nav-home-section-link:hover,
+.nav-home-dropdown-menu .nav-home-section-link:focus {
+  background-color: #f8fafc;
+  color: #111;
+}
+
+.nav-home-dropdown-menu .nav-home-section-link.active {
+  background-color: #eef4fc;
+  color: #1d4ed8;
+}
+
+.nav-home-section-divider {
+  margin: 0.25rem 0.75rem;
+  opacity: 0.12;
+}
+
 /* guestbook/포토영어 페이지 navbar 스타일 충돌 시 드롭다운 잘림 방지 */
 .navbar.fixed-top .container-fluid,
 .nav-home-menu-slot,

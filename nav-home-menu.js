@@ -8,7 +8,12 @@
 
 (function () {
 
-    var NAV_HOME_MENU_VERSION = '20260626d';
+    var NAV_HOME_MENU_VERSION = '20260626e';
+
+    var HOME_SECTION_LINKS = [
+        { href: 'index.html#home-best', label: 'Best 조회수', hash: 'home-best' },
+        { href: 'index.html#home-recent', label: '최신 업데이트', hash: 'home-recent' }
+    ];
 
 
 
@@ -64,9 +69,24 @@
 
 
 
+    function buildHomeSectionLinksHtml(page) {
+        var hash = (window.location.hash || '').replace(/^#/, '');
+        return HOME_SECTION_LINKS.map(function (item) {
+            var onIndex = page === 'index.html' || page === '';
+            var active = onIndex && hash === item.hash;
+            var cls = 'dropdown-item nav-home-section-link' + (active ? ' active' : '');
+            var aria = active ? ' aria-current="true"' : '';
+            return '<li><a class="' + cls + '" href="' + item.href + '"' + aria + '>' + item.label + '</a></li>';
+        }).join('');
+    }
+
+
+
     function buildMenuHtml() {
 
         var page = currentPageName();
+
+        var sectionLinksHtml = buildHomeSectionLinksHtml(page);
 
         var itemsHtml = MENU_ITEMS.map(function (item) {
 
@@ -91,6 +111,9 @@
             'data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">Home</button>' +
 
             '<ul class="dropdown-menu dropdown-menu-end nav-home-dropdown-menu" aria-labelledby="navHomeMenuToggle">' +
+
+            sectionLinksHtml +
+            '<li><hr class="dropdown-divider nav-home-section-divider"></li>' +
 
             itemsHtml +
 

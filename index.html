@@ -207,6 +207,10 @@
             color: #2b6cb0;
             text-decoration: none;
         }
+        #home-best,
+        #home-recent {
+            scroll-margin-top: calc(var(--navbar-height, 56px) + 20px);
+        }
         .resources-section {
             background: #fff;
             border-radius: 14px;
@@ -247,7 +251,7 @@
     <!-- External Stylesheets -->
     <link rel="stylesheet" href="title-text-sharp.css?v=20260612">
     <link rel="stylesheet" href="navbar-unified.css?v=20260612c">
-    <link rel="stylesheet" href="nav-home-menu.css?v=20260626d">
+    <link rel="stylesheet" href="nav-home-menu.css?v=20260626e">
     <link rel="stylesheet" href="weather-banner.css?v=20260612g">
     <link rel="stylesheet" href="world-clock.css?v=20260612g">
     
@@ -323,7 +327,7 @@
         <!-- Hero Section -->
         <section class="preview-section" aria-label="영어 학습 섹션">
             <!-- Best Views -->
-            <article class="preview-section">
+            <article class="preview-section" id="home-best">
                 <div class="preview-header">
                     <h2>Best 조회수</h2>
                 </div>
@@ -331,7 +335,7 @@
             </article>
 
             <!-- Recent Updates -->
-            <article class="preview-section">
+            <article class="preview-section" id="home-recent">
                 <div class="preview-header">
                     <h2>최신 업데이트</h2>
                 </div>
@@ -468,7 +472,7 @@
 
     <!-- Bootstrap Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="nav-home-menu.js?v=20260626d"></script>
+    <script src="nav-home-menu.js?v=20260626e"></script>
     <script src="home-board-preview.js?v=20260626"></script>
     <script src="english-directory.js" defer></script>
     
