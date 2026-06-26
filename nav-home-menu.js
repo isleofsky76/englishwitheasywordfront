@@ -8,7 +8,7 @@
 
 (function () {
 
-    var NAV_HOME_MENU_VERSION = '20260626b';
+    var NAV_HOME_MENU_VERSION = '20260626c';
 
 
 
@@ -92,6 +92,17 @@
 
             '<ul class="dropdown-menu dropdown-menu-end nav-home-dropdown-menu" aria-labelledby="navHomeMenuToggle">' +
 
+            '<li class="nav-home-preview-section">' +
+            '<div class="nav-home-preview-heading">Best 조회수</div>' +
+            '<div class="nav-home-preview-list" data-nav-home-best data-list-class="nav-home-preview-items"></div>' +
+            '</li>' +
+            '<li><hr class="dropdown-divider nav-home-preview-divider"></li>' +
+            '<li class="nav-home-preview-section">' +
+            '<div class="nav-home-preview-heading">최신 업데이트</div>' +
+            '<div class="nav-home-preview-list" data-nav-home-recent data-list-class="nav-home-preview-items"></div>' +
+            '</li>' +
+            '<li><hr class="dropdown-divider nav-home-preview-divider"></li>' +
+
             itemsHtml +
 
             '</ul></div>'
@@ -162,6 +173,53 @@
 
 
 
+    function loadNavHomePreviews(slot) {
+        var bestEl = slot.querySelector('[data-nav-home-best]');
+        var recentEl = slot.querySelector('[data-nav-home-recent]');
+        if (!bestEl && !recentEl) return;
+
+        function render() {
+            if (!window.HomeBoardPreview) return;
+            window.HomeBoardPreview.loadNavPreviews(bestEl, recentEl, 5);
+        }
+
+        if (window.HomeBoardPreview) {
+            render();
+            return;
+        }
+
+        var script = document.querySelector('script[data-home-board-preview]');
+        if (!script) {
+            script = document.createElement('script');
+            script.src = 'home-board-preview.js?v=20260626';
+            script.setAttribute('data-home-board-preview', '1');
+            script.onload = render;
+            script.onerror = function () {
+                var failHtml = '<ul class="nav-home-preview-items"><li class="preview-empty">불러올 수 없습니다.</li></ul>';
+                if (bestEl) bestEl.innerHTML = failHtml;
+                if (recentEl) recentEl.innerHTML = failHtml;
+            };
+            document.head.appendChild(script);
+        } else if (window.HomeBoardPreview) {
+            render();
+        } else {
+            script.addEventListener('load', render);
+        }
+    }
+
+    function initNavHomePreviewsLazy(slot) {
+        if (slot.getAttribute('data-nav-preview-bound') === '1') return;
+        slot.setAttribute('data-nav-preview-bound', '1');
+        var dropdown = slot.querySelector('.nav-home-dropdown');
+        if (!dropdown) return;
+        dropdown.addEventListener('show.bs.dropdown', function onFirstOpen() {
+            dropdown.removeEventListener('show.bs.dropdown', onFirstOpen);
+            loadNavHomePreviews(slot);
+        });
+    }
+
+
+
     function injectNavHomeMenu() {
 
         document.querySelectorAll('[data-nav-home-menu]').forEach(function (slot, index) {
@@ -175,6 +233,8 @@
             var menu = slot.querySelector('.dropdown-menu');
 
             if (toggle && menu) initToggle(toggle, menu, index);
+
+            initNavHomePreviewsLazy(slot);
 
         });
 
