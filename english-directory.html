@@ -13,8 +13,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="title-text-sharp.css?v=20260612">
   <link rel="stylesheet" href="navbar-unified.css?v=20260612c">
-  <link rel="stylesheet" href="nav-home-menu.css?v=20260616">
-  <link rel="stylesheet" href="english-directory.css?v=20260626">
+  <link rel="stylesheet" href="nav-home-menu.css?v=20260626e">
+  <link rel="stylesheet" href="english-directory.css?v=20260627e">
   <script src="english-directory.js" defer></script>
 </head>
 <body class="english-directory-page">
@@ -31,12 +31,19 @@
       <p>영어 뉴스·방송·잡지·학습 사이트를 주제별로 빠르게 찾아보세요.</p>
     </header>
 
-    <div class="dir-filters" data-dir-filters aria-label="Category filters"></div>
+    <div class="dir-filters" id="dir-menu" data-dir-filters aria-label="Category filters"></div>
     <p class="dir-count" data-dir-count aria-live="polite"></p>
     <div data-dir-content></div>
+
+    <footer class="dir-footer">
+      <p>혹시 오류가 있으면 <a href="mailto:everydayalittlehelp@gmail.com">everydayalittlehelp@gmail.com</a>으로 알려주시면 감사하겠습니다.</p>
+      <p class="dir-back-menu-wrap">
+        <a href="#dir-menu" class="dir-back-menu-btn">↑ 메뉴로 돌아가기</a>
+      </p>
+    </footer>
   </main>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="nav-home-menu.js?v=20260618"></script>
+  <script src="nav-home-menu.js?v=20260626e"></script>
 </body>
 </html>

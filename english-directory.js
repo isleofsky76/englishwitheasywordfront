@@ -15,7 +15,8 @@
   'Documentary',
   'English Learning',
   'Podcasts',
-  'Kids / Easy English'
+  'Kids / Easy English',
+  'Literature'
 ];
 
   var SITES = [
@@ -182,6 +183,8 @@
   { name: 'News in Levels', category: 'English Learning', level: 'Beginner–Intermediate', type: 'Learning / News', url: 'https://www.newsinlevels.com/', desc: '같은 뉴스를 3단계 난이도로 제공. 단계별 뉴스 영어 학습에 좋습니다.' },
   { name: 'Randall\'s ESL Cyber Listening Lab', category: 'English Learning', level: 'Beginner–Advanced', type: 'Learning / Listening', url: 'https://www.esl-lab.com/', desc: '체계적인 듣기 연습. 퀴즈와 함께 리스닝 실력을 키웁니다.' },
   { name: 'Purdue OWL', category: 'English Learning', level: 'Intermediate–Advanced', type: 'Learning / Writing', url: 'https://owl.purdue.edu/owl/purdue_owl.html', desc: '학술 영어 쓰기 가이드. 에세이·논문 작성 영어를 배웁니다.' },
+  { name: 'Write & Improve', category: 'English Learning', level: 'Beginner–Advanced', type: 'Learning / Writing', url: 'https://writeandimprove.com/', desc: '케임브리지 글쓰기 연습. 영어 작문을 제출하면 AI 피드백으로 실력을 키웁니다.' },
+  { name: 'EnglishClub', category: 'English Learning', level: 'Beginner–Intermediate', type: 'Learning / Grammar / Vocabulary', url: 'https://www.englishclub.com/', desc: '문법·어휘·발음·뉴스 종합 학습 사이트. 초·중급 기초 다지기에 좋습니다.' },
 
   // Podcasts
   { name: 'BBC Global News Podcast', category: 'Podcasts', level: 'Intermediate', type: 'Podcast / News', url: 'https://www.bbc.co.uk/programmes/p02nq0gn', desc: 'BBC 글로벌 뉴스 팟캐스트. 매일 30분 뉴스 영어 청취에 좋습니다.' },
@@ -194,6 +197,8 @@
     { name: 'The English We Speak (BBC)', category: 'Podcasts', level: 'Beginner–Intermediate', type: 'Podcast / Idioms', url: 'https://www.bbc.co.uk/learningenglish/english/features/the-english-we-speak', desc: '짧은 관용표현 팟캐스트. 실생활 영어 표현을 빠르게 익힙니다.' },
   { name: 'Podcast in English', category: 'Podcasts', level: 'Beginner–Advanced', type: 'Podcast / Learning', url: 'https://www.podcastsinenglish.com/', desc: '레벨별 영어 팟캐스트. 단계에 맞는 청취 연습이 가능합니다.' },
   { name: 'Culips ESL Podcast', category: 'Podcasts', level: 'Intermediate–Advanced', type: 'Podcast / Learning', url: 'https://esl.culips.com/', desc: '캐나다 영어 학습 팟캐스트. 자연스러운 회화 표현을 배웁니다.' },
+  { name: 'This American Life', category: 'Podcasts', level: 'Intermediate–Advanced', type: 'Podcast / Stories', url: 'https://www.thisamericanlife.org/', desc: '미국 일상·인물 스토리 팟캐스트. 자연스러운 미국 영어 내레이션으로 청취 실력을 키웁니다.' },
+  { name: 'The New Yorker: Fiction Podcast', category: 'Podcasts', level: 'Advanced', type: 'Podcast / Literature', url: 'https://www.newyorker.com/podcast/fiction', desc: '뉴요커 단편 소설 낭독 팟캐스트. 문학 영어와 스토리텔링을 들으며 고급 독해·청취를 연습합니다.' },
 
   // Kids / Easy English
   { name: 'British Council LearnEnglish Kids', category: 'Kids / Easy English', level: 'Beginner', type: 'Kids / Games / Stories', url: 'https://learnenglishkids.britishcouncil.org/', desc: '어린이 영어 학습. 게임·동화·노래로 기초 영어를 재미있게 배웁니다.' },
@@ -205,7 +210,23 @@
   { name: 'Dream English', category: 'Kids / Easy English', level: 'Beginner', type: 'Kids / Songs', url: 'https://www.dreamenglish.com/', desc: '어린이 영어 노래. 동요로 기초 단어와 표현을 쉽게 외웁니다.' },
   { name: 'Simple English Wikipedia', category: 'Kids / Easy English', level: 'Beginner–Intermediate', type: 'Easy English / Reference', url: 'https://simple.wikipedia.org/', desc: '쉬운 영어 위키백과. 짧은 문장으로 다양한 주제를 읽을 수 있습니다.' },
   { name: 'Dogo News', category: 'Kids / Easy English', level: 'Beginner–Intermediate', type: 'Kids / News', url: 'https://www.dogonews.com/', desc: '어린이·청소년 뉴스. 쉬운 영어로 시사를 읽으며 어휘를 늘립니다.' },
-  { name: 'English Central', category: 'Kids / Easy English', level: 'Beginner–Intermediate', type: 'Learning / Video', url: 'https://www.englishcentral.com/', desc: '영상 기반 영어 학습. 따라 말하기로 발음과 리스닝을 연습합니다.' }
+  { name: 'English Central', category: 'Kids / Easy English', level: 'Beginner–Intermediate', type: 'Learning / Video', url: 'https://www.englishcentral.com/', desc: '영상 기반 영어 학습. 따라 말하기로 발음과 리스닝을 연습합니다.' },
+
+  // Literature
+  { name: 'Project Gutenberg', category: 'Literature', level: 'Intermediate–Advanced', type: 'Literature / Classics', url: 'https://www.gutenberg.org/', desc: '저작권 만료 고전 문학 전자책. 디킨스·오스틴·마크 트웨인 등 원서를 무료로 읽을 수 있습니다.' },
+  { name: 'American Literature', category: 'Literature', level: 'Intermediate–Advanced', type: 'American Literature / Short Stories', url: 'https://americanliterature.com/', desc: '미국 단편·고전 문학 모음. 포·호손·헤밍웨이 등 미국 작가 원문을 단계적으로 읽기 좋습니다.' },
+  { name: 'Poetry Foundation', category: 'Literature', level: 'Intermediate–Advanced', type: 'Poetry / American', url: 'https://www.poetryfoundation.org/', desc: '미국 시 문학 아카이브. 시 텍스트·낭독·작가 소개로 영어 시 독해와 감상을 익힙니다.' },
+  { name: 'Academy of American Poets', category: 'Literature', level: 'Intermediate–Advanced', type: 'Poetry / American', url: 'https://poets.org/', desc: '미국 시인 협회 공식 사이트. 현대·고전 미국 시와 시인 인터뷰로 문학 영어를 접합니다.' },
+  { name: 'The Paris Review', category: 'Literature', level: 'Advanced', type: 'Literature / Fiction / Interviews', url: 'https://www.theparisreview.org/', desc: '세계적 문학 매거진. 작가 인터뷰·소설·시로 고급 문학 영어와 글쓰기 감각을 키웁니다.' },
+  { name: 'Read.gov', category: 'Literature', level: 'Intermediate', type: 'American Literature / Classics', url: 'https://read.gov/', desc: '미국 의회도서관 고전 읽기 사이트. 미국 아동·청소년·고전 문학 원서를 읽을 수 있습니다.' },
+  { name: 'Representative Poetry Online', category: 'Literature', level: 'Advanced', type: 'British Poetry', url: 'https://rpo.library.utoronto.ca/', desc: '토론토대 영국 시 데이터베이스. 영국·아일랜드 시 선집으로 학술적 시 독해에 적합합니다.' },
+  { name: 'The Literature Network', category: 'Literature', level: 'Intermediate–Advanced', type: 'Literature / Classics', url: 'https://www.online-literature.com/', desc: '영미 고전 작가별 소설·단편·전기. 작가 연대표와 함께 문학 원문을 체계적으로 읽습니다.' },
+  { name: 'Poetry Out Loud', category: 'Literature', level: 'Intermediate', type: 'Poetry / American / Audio', url: 'https://www.poetryoutloud.org/', desc: '미국 시 낭송 대회 공식 사이트. 유명 미국 시 영상·텍스트로 시를 들으며 영어 발음을 연습합니다.' },
+  { name: 'LibriVox', category: 'Literature', level: 'Intermediate–Advanced', type: 'Literature / Audiobooks', url: 'https://librivox.org/', desc: '고전 문학 무료 오디오북. 원서를 읽으며 듣기로 영미 문학 영어를 함께 익힙니다.' },
+  { name: 'CommonLit', category: 'Literature', level: 'Beginner–Advanced', type: 'Literature / Leveled Reading', url: 'https://www.commonlit.org/', desc: '난이도별 짧은 글과 질문. 영어 학습자가 문학·비문학 텍스트를 단계적으로 읽기 좋습니다.' },
+  { name: 'Folger Shakespeare Library', category: 'Literature', level: 'Intermediate–Advanced', type: 'British Literature / Shakespeare', url: 'https://www.folger.edu/explore/shakespeares-works/', desc: '셰익스피어 작품 원문·해설·교육 자료. 영미 문학의 기초가 되는 고전 영어를 배웁니다.' },
+  { name: 'Standard Ebooks', category: 'Literature', level: 'Intermediate–Advanced', type: 'Literature / Classics', url: 'https://standardebooks.org/', desc: '가독성 좋게 편집한 고전 전자책. 프로젝트 구텐베르크보다 읽기 편한 영미 고전 원서를 제공합니다.' },
+  { name: 'Granta', category: 'Literature', level: 'Advanced', type: 'Literature / Fiction / Magazine', url: 'https://granta.com/', desc: '영국 문학 매거진. 현대 소설·에세이·회고로 고급 문학 영어와 글쓰기 감각을 익힙니다.' }
 ];
 
   function escapeHtml(str) {
@@ -235,7 +256,8 @@
     { title: 'Documentary · BBC Earth, PBS NOVA, Nat Geo', href: 'english-directory.html#cat-documentary' },
     { title: 'English Learning · BBC Learning English, VOA, Breaking News English', href: 'english-directory.html#cat-english-learning' },
     { title: 'Podcasts · BBC 6 Minute English, NPR Up First', href: 'english-directory.html#cat-podcasts' },
-    { title: 'Kids / Easy English · Starfall, PBS Kids, Simple Wikipedia', href: 'english-directory.html#cat-kids-easy-english' }
+    { title: 'Kids / Easy English · Starfall, PBS Kids, Simple Wikipedia', href: 'english-directory.html#cat-kids-easy-english' },
+    { title: 'Literature · Gutenberg, American Literature, Poetry Foundation', href: 'english-directory.html#cat-literature' }
   ];
 
   function buildPreviewListRow(number, title, href) {

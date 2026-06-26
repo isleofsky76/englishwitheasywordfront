@@ -16,6 +16,10 @@
   --max-width: 1100px;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 *,
 *::before,
 *::after {
@@ -30,6 +34,10 @@ body.english-directory-page {
   color: #222;
   line-height: 1.55;
   -webkit-font-smoothing: antialiased;
+}
+
+#dir-menu {
+  scroll-margin-top: calc(var(--navbar-height, 56px) + 16px);
 }
 
 .dir-page {
@@ -190,4 +198,57 @@ body.english-directory-page {
     padding-left: max(16px, env(safe-area-inset-left, 0px));
     padding-right: max(16px, env(safe-area-inset-right, 0px));
   }
+}
+
+.dir-footer {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  text-align: center;
+}
+
+.dir-footer p {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.dir-footer a {
+  color: var(--accent-soft);
+  text-decoration: underline;
+}
+
+.dir-footer a:hover {
+  color: var(--accent);
+}
+
+.dir-back-menu-wrap {
+  margin: 2.5rem 0 0;
+  padding-top: 0.75rem;
+}
+
+.dir-back-menu-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0.5rem 1.1rem;
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: #fff !important;
+  text-decoration: none !important;
+  background: var(--accent-soft);
+  border-radius: 999px;
+  box-shadow: var(--shadow);
+  transition: background 0.15s, transform 0.15s;
+}
+
+.dir-back-menu-btn:hover {
+  background: var(--accent);
+  color: #fff !important;
+}
+
+.dir-back-menu-btn:active {
+  transform: scale(0.98);
 }
