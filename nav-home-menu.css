@@ -68,14 +68,14 @@
 }
 
 .nav-home-dropdown-menu {
-  min-width: min(92vw, 22rem);
+  min-width: 11rem;
   margin-top: 0.35rem;
   border-radius: 8px;
   border: 1px solid rgba(0, 0, 0, 0.08);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
   padding: 0.35rem 0;
   z-index: 1100;
-  max-height: min(85vh, 520px);
+  max-height: min(80vh, 360px);
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 }
@@ -97,84 +97,6 @@
   background-color: #dbeafe;
   color: #1d4ed8;
   font-weight: 600;
-}
-
-.nav-home-preview-section {
-  list-style: none;
-  padding: 0.15rem 0.75rem 0.35rem;
-}
-
-.nav-home-preview-heading {
-  font-size: 0.78rem;
-  font-weight: 700;
-  color: #111;
-  letter-spacing: -0.02em;
-  margin-bottom: 0.25rem;
-}
-
-.nav-home-preview-list {
-  margin: 0;
-}
-
-.nav-home-preview-items {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.nav-home-preview-items li {
-  padding: 0.28rem 0;
-  border-bottom: 1px solid #f3f4f6;
-  font-size: 0.78rem;
-  line-height: 1.35;
-}
-
-.nav-home-preview-items li:last-child {
-  border-bottom: none;
-}
-
-.nav-home-preview-items li a {
-  display: block;
-  color: #222;
-  text-decoration: none;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.nav-home-preview-items li a:hover {
-  color: #2b6cb0;
-}
-
-.nav-home-preview-items .preview-num {
-  display: inline-block;
-  min-width: 1rem;
-  margin-right: 0.25rem;
-  color: #888;
-  font-weight: 500;
-}
-
-.nav-home-preview-items .preview-date {
-  color: #888;
-  font-size: 0.74rem;
-}
-
-.nav-home-preview-items .preview-views {
-  color: #e05a00;
-  font-size: 0.74rem;
-  margin-left: 2px;
-}
-
-.nav-home-preview-items .preview-empty {
-  color: #999;
-  font-size: 0.76rem;
-  padding: 0.2rem 0;
-  white-space: normal;
-}
-
-.nav-home-preview-divider {
-  margin: 0.35rem 0.75rem;
-  opacity: 0.12;
 }
 
 /* guestbook/포토영어 페이지 navbar 스타일 충돌 시 드롭다운 잘림 방지 */
