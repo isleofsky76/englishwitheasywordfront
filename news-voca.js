@@ -500,20 +500,35 @@ function isLikelyKoreanTranslation(text) {
     return hangul > 0 && latin <= Math.max(3, Math.floor(hangul * 0.2));
 }
 
-// 레거시 데이터 보정:
-// 과거 데이터에서 번역 문단(.nv-intro)이 상단으로 올라간 경우,
-// 각 노트(.nv-note) 바로 아래로 이동시켜 표시 순서를 복원한다.
+/** 표시 순서: 출처 → 예문 → 본문(소개·단어) */
+function enforceNewsVocaSectionOrder(article) {
+    const body = article.querySelector('.nv-body');
+    if (!body) return;
+
+    const source = article.querySelector(':scope > .nv-source, .nv-source');
+    let examples = article.querySelector(':scope > .nv-examples');
+    const examplesInBody = body.querySelector('.nv-examples');
+    if (!examples && examplesInBody) {
+        examples = examplesInBody;
+        examplesInBody.remove();
+    } else if (examplesInBody && examplesInBody !== examples) {
+        examplesInBody.remove();
+    }
+
+    for (const el of [source, examples, body]) {
+        if (el) article.appendChild(el);
+    }
+}
+
+// 레거시 데이터 보정 + 섹션 순서 통일
 function fixLegacyNewsVocaLayout(html) {
-    if (!html || !/nv-text|nv-notes|nv-note/.test(html)) return html;
+    if (!html || !/nv-text/.test(html)) return html;
     const root = document.createElement('div');
     root.innerHTML = html;
 
     root.querySelectorAll('.nv-text').forEach((article) => {
         const body = article.querySelector('.nv-body');
-        const source = article.querySelector('.nv-source');
         if (!body) return;
-
-        if (source) article.insertBefore(source, body);
 
         // 단어 카드 구조를 영어 -> 발음/발음기호 -> 뜻 순서로 통일
         body.querySelectorAll('.nv-word').forEach((word) => {
@@ -535,38 +550,29 @@ function fixLegacyNewsVocaLayout(html) {
         });
 
         const notesWrap = article.querySelector('.nv-notes');
-        if (!notesWrap) {
-            const examplesOnly = article.querySelector('.nv-examples');
-            if (examplesOnly) article.appendChild(examplesOnly);
-            return;
+        if (notesWrap) {
+            const notes = Array.from(notesWrap.querySelectorAll('.nv-note'));
+            const introCandidates = Array.from(body.querySelectorAll(':scope > .nv-intro'))
+                .filter((p) => isLikelyKoreanTranslation(p.textContent));
+
+            if (notes.length && introCandidates.length) {
+                const pairCount = Math.min(notes.length, introCandidates.length);
+                const selectedTranslations = introCandidates.slice(-pairCount);
+
+                for (let i = 0; i < pairCount; i++) {
+                    const note = notes[i];
+                    const ko = selectedTranslations[i];
+                    if (!note || !ko) continue;
+                    ko.classList.remove('nv-intro');
+                    ko.classList.add('nv-note-ko');
+                    note.insertAdjacentElement('afterend', ko);
+                }
+            }
+
+            body.appendChild(notesWrap);
         }
 
-        const notes = Array.from(notesWrap.querySelectorAll('.nv-note'));
-        if (!notes.length) return;
-
-        const introCandidates = Array.from(body.querySelectorAll(':scope > .nv-intro'))
-            .filter((p) => isLikelyKoreanTranslation(p.textContent));
-        if (!introCandidates.length) return;
-
-        const pairCount = Math.min(notes.length, introCandidates.length);
-        const selectedTranslations = introCandidates.slice(-pairCount);
-
-        for (let i = 0; i < pairCount; i++) {
-            const note = notes[i];
-            const ko = selectedTranslations[i];
-            if (!note || !ko) continue;
-            ko.classList.remove('nv-intro');
-            ko.classList.add('nv-note-ko');
-            note.insertAdjacentElement('afterend', ko);
-        }
-
-        // 노트 영역은 본문 마지막(출처 직전)으로 고정한다.
-        // 기존 데이터에서 상단에 끼어들어 보이는 문제를 프론트에서 보정.
-        body.appendChild(notesWrap);
-
-        // 예문 섹션은 카드의 맨 아래로 고정한다.
-        const examples = article.querySelector('.nv-examples');
-        if (examples) article.appendChild(examples);
+        enforceNewsVocaSectionOrder(article);
     });
 
     return root.innerHTML;
