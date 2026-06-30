@@ -66,6 +66,59 @@
   color: var(--se-sec-text);
 }
 
+/* 섹션 제목 칩 네비 */
+.se-page .se-section-nav {
+  position: sticky;
+  top: var(--navbar-height, 51px);
+  z-index: 90;
+  margin: 0 0 0.85rem;
+  padding: 0.65rem 0 0.75rem;
+  background: var(--se-card-bg);
+  border-bottom: 1px solid #e6e0d6;
+}
+
+.se-page .se-section-nav-inner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  max-width: 36rem;
+  margin: 0 auto;
+  padding: 0 0.25rem;
+}
+
+.se-page .se-section-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0.38rem 0.9rem;
+  font-family: 'Noto Sans KR', 'Poppins', sans-serif;
+  font-size: 0.84rem;
+  font-weight: 500;
+  line-height: 1.3;
+  color: #4a4a4a;
+  background: #fff;
+  border: 1px solid #d4d4d4;
+  border-radius: 999px;
+  cursor: pointer;
+  white-space: nowrap;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+}
+
+.se-page .se-section-chip:hover {
+  border-color: var(--se-primary);
+  color: var(--se-primary);
+}
+
+.se-page .se-section-chip.is-active {
+  color: var(--se-primary);
+  border-color: var(--se-primary);
+  background: var(--se-primary-light);
+  font-weight: 600;
+}
+
 .se-page #post-message {
   color: var(--se-text);
   line-height: 1.65;
@@ -123,6 +176,7 @@
   color: var(--se-sec-text) !important;
   font-size: 0.95rem;
   font-weight: 700;
+  scroll-margin-top: calc(var(--navbar-height, 51px) + 4.5rem);
 }
 
 .se-page #post-content .pv-tts-btn {
@@ -149,6 +203,11 @@
 
 /* 모바일 — 짧은 항목: 한 줄 / 긴 항목: 한글 위, 영어+스피커 아래 */
 @media (max-width: 767px) {
+  .se-page .se-section-chip {
+    font-size: 0.8rem;
+    padding: 0.34rem 0.75rem;
+  }
+
   .se-page #post-message .se-item.se-item-compact {
     flex-direction: row;
     flex-wrap: wrap;

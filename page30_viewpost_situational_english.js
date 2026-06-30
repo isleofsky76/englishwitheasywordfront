@@ -263,6 +263,113 @@ function attachPopularVocaWebTTS(container) {
     bindPopularVocaTtsButtons(container);
 }
 
+/** 상황 영어: 섹션 제목 칩 네비 (본문 상단) */
+function buildSeSectionNav(postContent) {
+    if (!postContent) return;
+    const messageEl = postContent.querySelector('#post-message');
+    if (!messageEl) return;
+
+    const sections = messageEl.querySelectorAll('strong.se-sec-title');
+    if (!sections.length) return;
+
+    sections.forEach((el, i) => {
+        if (!el.id) el.id = `se-sec-${i}`;
+    });
+
+    postContent.querySelector('#se-section-nav')?.remove();
+
+    const nav = document.createElement('nav');
+    nav.id = 'se-section-nav';
+    nav.className = 'se-section-nav';
+    nav.setAttribute('aria-label', '섹션 바로가기');
+
+    const inner = document.createElement('div');
+    inner.className = 'se-section-nav-inner';
+
+    const chips = [{ label: '전체', target: '' }];
+    sections.forEach((el) => {
+        chips.push({ label: el.textContent.trim(), target: el.id });
+    });
+
+    chips.forEach((chip, idx) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'se-section-chip' + (idx === 0 ? ' is-active' : '');
+        btn.textContent = chip.label;
+        btn.dataset.target = chip.target;
+        inner.appendChild(btn);
+    });
+
+    nav.appendChild(inner);
+    postContent.insertBefore(nav, messageEl);
+
+    const setActive = (targetId) => {
+        inner.querySelectorAll('.se-section-chip').forEach((c) => {
+            c.classList.toggle('is-active', c.dataset.target === targetId);
+        });
+    };
+
+    inner.addEventListener('click', (e) => {
+        const chip = e.target.closest('.se-section-chip');
+        if (!chip) return;
+        const targetId = chip.dataset.target || '';
+        setActive(targetId);
+        if (!targetId) {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            return;
+        }
+        const target = document.getElementById(targetId);
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+
+    if ('IntersectionObserver' in window) {
+        const navOffset = 72;
+        const visible = new Map();
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    visible.set(entry.target.id, entry.isIntersecting ? entry.intersectionRatio : 0);
+                });
+                if (window.scrollY < 80) {
+                    setActive('');
+                    return;
+                }
+                let bestId = '';
+                let bestRatio = 0;
+                sections.forEach((sec) => {
+                    const ratio = visible.get(sec.id) || 0;
+                    if (ratio > bestRatio) {
+                        bestRatio = ratio;
+                        bestId = sec.id;
+                    }
+                });
+                if (bestId) setActive(bestId);
+            },
+            { rootMargin: `-${navOffset}px 0px -55% 0px`, threshold: [0, 0.1, 0.25, 0.5, 0.75, 1] },
+        );
+        sections.forEach((sec) => observer.observe(sec));
+    }
+}
+
+/** 상황 영어: 모바일에서 짧은 항목은 한 줄, 긴 항목은 세로 배치 */
+function applySituationalEnglishLayoutClasses(container) {
+    if (!container) return;
+    container.querySelectorAll('.se-item').forEach((item) => {
+        if (item.classList.contains('se-item-stack') || item.classList.contains('se-item-compact')) return;
+        const koEl = item.querySelector('.se-ko');
+        const enEl = item.querySelector('.se-en');
+        const ko = koEl ? koEl.textContent.trim() : '';
+        const en = enEl ? (enEl.getAttribute('data-se-tts') || enEl.textContent).trim() : '';
+        const isStack =
+            /[.?!]/.test(en) ||
+            en.length > 35 ||
+            ko.length > 14 ||
+            en.length > 26 ||
+            ko.length + en.length > 34;
+        item.classList.add(isStack ? 'se-item-stack' : 'se-item-compact');
+    });
+}
+
 /** 상황 영어: 한글 : 영어 줄 — 영어(data-se-tts) 바로 뒤 스피커 */
 function attachSituationalEnglishWebTTS(container) {
     if (!container) return;
@@ -522,7 +629,11 @@ async function loadPost() {
                 }
             });
             const postContent = document.getElementById('post-content');
-            if (postContent) attachSituationalEnglishWebTTS(postContent);
+            if (postContent) {
+                applySituationalEnglishLayoutClasses(postContent);
+                attachSituationalEnglishWebTTS(postContent);
+                buildSeSectionNav(postContent);
+            }
         }
 
         if (typeof initViewpostLike === 'function') {
