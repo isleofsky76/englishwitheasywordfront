@@ -264,6 +264,32 @@ function attachPopularVocaWebTTS(container) {
 }
 
 /** 상황 영어: 섹션 제목 칩 네비 (본문 상단) */
+function getSeScrollOffset() {
+    const navbar = document.querySelector('.se-page .se-navbar, .se-navbar');
+    const sectionNav = document.getElementById('se-section-nav');
+    const navH = navbar ? navbar.offsetHeight : 51;
+    const stickyH = sectionNav ? sectionNav.offsetHeight : 0;
+    return navH + stickyH + 10;
+}
+
+function scrollToSeTop() {
+    const anchor = document.getElementById('post-header') || document.getElementById('post-container');
+    if (!anchor) {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+    }
+    const navbar = document.querySelector('.se-page .se-navbar, .se-navbar');
+    const navH = navbar ? navbar.offsetHeight : 51;
+    const y = anchor.getBoundingClientRect().top + window.scrollY - navH - 6;
+    window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+}
+
+function scrollToSeSection(target) {
+    if (!target) return;
+    const y = target.getBoundingClientRect().top + window.scrollY - getSeScrollOffset();
+    window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+}
+
 function buildSeSectionNav(postContent) {
     if (!postContent) return;
     const messageEl = postContent.querySelector('#post-message');
@@ -283,23 +309,29 @@ function buildSeSectionNav(postContent) {
     nav.className = 'se-section-nav';
     nav.setAttribute('aria-label', '섹션 바로가기');
 
+    const backBtn = document.createElement('button');
+    backBtn.type = 'button';
+    backBtn.className = 'se-back-top';
+    backBtn.textContent = '처음으로';
+    backBtn.setAttribute('aria-label', '글 맨 위로 이동');
+    backBtn.addEventListener('click', () => {
+        inner.querySelectorAll('.se-section-chip').forEach((c) => c.classList.remove('is-active'));
+        scrollToSeTop();
+    });
+
     const inner = document.createElement('div');
     inner.className = 'se-section-nav-inner';
 
-    const chips = [{ label: '전체', target: '' }];
-    sections.forEach((el) => {
-        chips.push({ label: el.textContent.trim(), target: el.id });
-    });
-
-    chips.forEach((chip, idx) => {
+    sections.forEach((el, idx) => {
         const btn = document.createElement('button');
         btn.type = 'button';
         btn.className = 'se-section-chip' + (idx === 0 ? ' is-active' : '');
-        btn.textContent = chip.label;
-        btn.dataset.target = chip.target;
+        btn.textContent = el.textContent.trim();
+        btn.dataset.target = el.id;
         inner.appendChild(btn);
     });
 
+    nav.appendChild(backBtn);
     nav.appendChild(inner);
     postContent.insertBefore(nav, messageEl);
 
@@ -312,26 +344,25 @@ function buildSeSectionNav(postContent) {
     inner.addEventListener('click', (e) => {
         const chip = e.target.closest('.se-section-chip');
         if (!chip) return;
-        const targetId = chip.dataset.target || '';
+        const targetId = chip.dataset.target;
+        if (!targetId) return;
         setActive(targetId);
-        if (!targetId) {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            return;
-        }
-        const target = document.getElementById(targetId);
-        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        scrollToSeSection(document.getElementById(targetId));
     });
 
     if ('IntersectionObserver' in window) {
-        const navOffset = 72;
         const visible = new Map();
         const observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach((entry) => {
                     visible.set(entry.target.id, entry.isIntersecting ? entry.intersectionRatio : 0);
                 });
-                if (window.scrollY < 80) {
-                    setActive('');
+                const header = document.getElementById('post-header');
+                const headerBottom = header
+                    ? header.getBoundingClientRect().bottom
+                    : getSeScrollOffset();
+                if (headerBottom > getSeScrollOffset()) {
+                    inner.querySelectorAll('.se-section-chip').forEach((c) => c.classList.remove('is-active'));
                     return;
                 }
                 let bestId = '';
@@ -345,7 +376,10 @@ function buildSeSectionNav(postContent) {
                 });
                 if (bestId) setActive(bestId);
             },
-            { rootMargin: `-${navOffset}px 0px -55% 0px`, threshold: [0, 0.1, 0.25, 0.5, 0.75, 1] },
+            {
+                rootMargin: `-${getSeScrollOffset()}px 0px -55% 0px`,
+                threshold: [0, 0.1, 0.25, 0.5, 0.75, 1],
+            },
         );
         sections.forEach((sec) => observer.observe(sec));
     }
