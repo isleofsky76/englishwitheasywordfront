@@ -147,22 +147,41 @@
   color: var(--se-primary) !important;
 }
 
-/* 모바일 — 한글 위, 영어+스피커 아래 */
+/* 모바일 — 짧은 항목: 한 줄 / 긴 항목: 한글 위, 영어+스피커 아래 */
 @media (max-width: 767px) {
-  .se-page #post-message .se-item {
+  .se-page #post-message .se-item.se-item-compact {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.1rem 0.2rem;
+    padding: 0.08rem 0;
+  }
+
+  .se-page #post-message .se-item.se-item-compact .se-ko,
+  .se-page #post-message .se-item.se-item-compact > span:first-child:not(.se-sep):not(.se-en) {
+    display: inline;
+    font-size: 0.92rem;
+  }
+
+  .se-page #post-message .se-item.se-item-compact .se-sep,
+  .se-page #post-message .se-item.se-item-compact span:has(+ .se-en) {
+    display: inline;
+  }
+
+  .se-page #post-message .se-item.se-item-stack {
     flex-direction: column;
     align-items: flex-start;
     gap: 0.06rem;
     padding: 0.08rem 0;
   }
 
-  .se-page #post-message .se-item .se-sep,
-  .se-page #post-message span:has(+ .se-en) {
+  .se-page #post-message .se-item.se-item-stack .se-sep,
+  .se-page #post-message .se-item.se-item-stack span:has(+ .se-en) {
     display: none;
   }
 
-  .se-page #post-message .se-ko,
-  .se-page #post-message .se-item > span:first-child {
+  .se-page #post-message .se-item.se-item-stack .se-ko,
+  .se-page #post-message .se-item.se-item-stack > span:first-child:not(.se-sep):not(.se-en) {
     display: block;
     font-size: 0.92rem;
   }
