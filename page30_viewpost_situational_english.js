@@ -290,6 +290,23 @@ function scrollToSeSection(target) {
     window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
 }
 
+function buildSeBackTopButton(postContent) {
+    document.getElementById('se-back-top')?.remove();
+
+    const inner = postContent?.querySelector('.se-section-nav-inner');
+    const backBtn = document.createElement('button');
+    backBtn.type = 'button';
+    backBtn.id = 'se-back-top';
+    backBtn.className = 'se-back-top';
+    backBtn.textContent = '처음으로';
+    backBtn.setAttribute('aria-label', '글 맨 위로 이동');
+    backBtn.addEventListener('click', () => {
+        if (inner) inner.querySelectorAll('.se-section-chip').forEach((c) => c.classList.remove('is-active'));
+        scrollToSeTop();
+    });
+    document.body.appendChild(backBtn);
+}
+
 function buildSeSectionNav(postContent) {
     if (!postContent) return;
     const messageEl = postContent.querySelector('#post-message');
@@ -309,16 +326,6 @@ function buildSeSectionNav(postContent) {
     nav.className = 'se-section-nav';
     nav.setAttribute('aria-label', '섹션 바로가기');
 
-    const backBtn = document.createElement('button');
-    backBtn.type = 'button';
-    backBtn.className = 'se-back-top';
-    backBtn.textContent = '처음으로';
-    backBtn.setAttribute('aria-label', '글 맨 위로 이동');
-    backBtn.addEventListener('click', () => {
-        inner.querySelectorAll('.se-section-chip').forEach((c) => c.classList.remove('is-active'));
-        scrollToSeTop();
-    });
-
     const inner = document.createElement('div');
     inner.className = 'se-section-nav-inner';
 
@@ -331,7 +338,6 @@ function buildSeSectionNav(postContent) {
         inner.appendChild(btn);
     });
 
-    nav.appendChild(backBtn);
     nav.appendChild(inner);
     postContent.insertBefore(nav, messageEl);
 
@@ -667,6 +673,7 @@ async function loadPost() {
                 applySituationalEnglishLayoutClasses(postContent);
                 attachSituationalEnglishWebTTS(postContent);
                 buildSeSectionNav(postContent);
+                buildSeBackTopButton(postContent);
             }
         }
 
