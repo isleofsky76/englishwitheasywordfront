@@ -82,6 +82,7 @@
   flex-direction: column;
   gap: 0.1rem;
   margin-top: 0.35rem;
+  padding-left: 10px;
 }
 
 .se-page #post-message .se-item {
