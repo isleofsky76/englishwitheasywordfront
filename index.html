@@ -472,8 +472,9 @@
 
     <!-- Bootstrap Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="viewpost-seo.js?v=20260702"></script>
     <script src="nav-home-menu.js?v=20260626e"></script>
-    <script src="home-board-preview.js?v=20260626"></script>
+    <script src="home-board-preview.js?v=20260702"></script>
     <script src="english-directory.js" defer></script>
     
     <script>
@@ -516,7 +517,35 @@
             return [];
         }
 
-        function renderPreviewList(container, entries, postPage, apiMode, emptyMessage) {
+        var BOARD_POST_PATHS = {
+            'news-voca.html': 'news-voca',
+            'word-of-the-day.html': 'word-of-the-day',
+            'english-synonym.html': 'english-synonym',
+            'popular-voca.html': 'popular-voca',
+            'situational-english.html': 'situational-english',
+            'cooking-voca.html': 'cooking-voca',
+            'culture-voca.html': 'culture-voca',
+            'ranking-news.html': 'ranking-news',
+            'photo-english.html': 'photo-english',
+            'pros-cons.html': 'pros-cons'
+        };
+
+        function buildPreviewHref(entry, postPage, origIdx, apiParam, postPath) {
+            if (window.ViewpostSeo && window.ViewpostSeo.buildListPostHref) {
+                return window.ViewpostSeo.buildListPostHref(entry, postPage, origIdx, apiParam, postPath);
+            }
+            var slug = entry && String(entry.slug || '').trim();
+            var path = postPath || BOARD_POST_PATHS[postPage] || null;
+            if (slug && path) {
+                var href = path + '/' + encodeURIComponent(slug) + '/';
+                if (apiParam) href += '?' + String(apiParam).replace(/^&/, '');
+                return href;
+            }
+            if (slug) return postPage + '?slug=' + encodeURIComponent(slug) + apiParam;
+            return postPage + '?index=' + origIdx + apiParam;
+        }
+
+        function renderPreviewList(container, entries, postPage, apiMode, emptyMessage, postPath) {
             var total = entries.length;
             var reversed = entries.slice().reverse();
             var preview = reversed.slice(0, 5);
@@ -528,7 +557,7 @@
             var rows = preview.map(function(entry, idx) {
                 var origIdx = total - 1 - idx;
                 var number = total - idx;
-                var href = postPage + '?index=' + origIdx + apiParam;
+                var href = buildPreviewHref(entry, postPage, origIdx, apiParam, postPath);
                 return buildPreviewRow(number, entry.title, entry.views, href);
             });
             container.innerHTML = buildPreviewListHtml(rows, '');

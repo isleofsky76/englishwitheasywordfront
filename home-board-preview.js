@@ -42,20 +42,34 @@
     return index;
   }
 
+  function buildEntryHref(board, entry, index, apiParam) {
+    if (window.ViewpostSeo && window.ViewpostSeo.buildListPostHref) {
+      return window.ViewpostSeo.buildListPostHref(entry, board.page, index, apiParam, board.postPath);
+    }
+    var slug = entry && String(entry.slug || '').trim();
+    if (slug && board.postPath) {
+      var href = board.postPath + '/' + encodeURIComponent(slug) + '/';
+      if (apiParam) href += '?' + String(apiParam).replace(/^&/, '');
+      return href;
+    }
+    if (slug) return board.page + '?slug=' + encodeURIComponent(slug) + apiParam;
+    return board.page + '?index=' + index + apiParam;
+  }
+
   function getPreviewBoards(apiMode) {
     var isProdHost = window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1';
     var wordofdayApiMode = apiMode || (isProdHost ? 'prod' : null);
     return [
-      { path: '/wordofday', page: 'word-of-the-day.html', label: '오늘의 단어', apiMode: wordofdayApiMode },
-      { path: '/guestbook', page: 'news-voca.html', label: '뉴스 어휘' },
-      { path: '/vocabulary', page: 'english-synonym.html', label: '유의어' },
-      { path: '/easy-voca', page: 'popular-voca.html', label: '인기 어휘' },
-      { path: '/situational-english', page: 'situational-english.html', label: '상황 영어' },
-      { path: '/cooking-voca', page: 'cooking-voca.html', label: '요리 영어' },
-      { path: '/culture-voca', page: 'culture-voca.html', label: '컬쳐 어휘' },
-      { path: '/ranking-news', page: 'ranking-news.html', label: '랭킹 뉴스' },
-      { path: '/photo-english', page: 'photo-english.html', label: '포토 영어' },
-      { path: '/pros-cons', page: 'pros-cons.html', label: 'Pros & Cons' }
+      { path: '/wordofday', page: 'word-of-the-day.html', postPath: 'word-of-the-day', label: '오늘의 단어', apiMode: wordofdayApiMode },
+      { path: '/guestbook', page: 'news-voca.html', postPath: 'news-voca', label: '뉴스 어휘' },
+      { path: '/vocabulary', page: 'english-synonym.html', postPath: 'english-synonym', label: '유의어' },
+      { path: '/easy-voca', page: 'popular-voca.html', postPath: 'popular-voca', label: '인기 어휘' },
+      { path: '/situational-english', page: 'situational-english.html', postPath: 'situational-english', label: '상황 영어' },
+      { path: '/cooking-voca', page: 'cooking-voca.html', postPath: 'cooking-voca', label: '요리 영어' },
+      { path: '/culture-voca', page: 'culture-voca.html', postPath: 'culture-voca', label: '컬쳐 어휘' },
+      { path: '/ranking-news', page: 'ranking-news.html', postPath: 'ranking-news', label: '랭킹 뉴스' },
+      { path: '/photo-english', page: 'photo-english.html', postPath: 'photo-english', label: '포토 영어' },
+      { path: '/pros-cons', page: 'pros-cons.html', postPath: 'pros-cons', label: 'Pros & Cons' }
     ];
   }
 
@@ -83,7 +97,7 @@
             title: entry.title,
             views: entry.views || 0,
             date: entry.date,
-            href: board.page + '?index=' + index + apiParam,
+            href: buildEntryHref(board, entry, index, apiParam),
             sortTime: parseEntrySortTime(entry, index)
           });
         });

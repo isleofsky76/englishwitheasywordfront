@@ -67,8 +67,26 @@
         return new URLSearchParams(window.location.search).get('slug') || '';
     }
 
+    function buildListPostHref(entry, postPage, index, apiParam, postPath) {
+        const slug = entry && String(entry.slug || '').trim();
+        const path = postPath || BOARD_PATHS[postPage] || null;
+        if (slug && path) {
+            let href = path + '/' + encodeURIComponent(slug) + '/';
+            if (apiParam) href += '?' + String(apiParam).replace(/^&/, '');
+            return href;
+        }
+        if (slug) {
+            return postPage + '?slug=' + encodeURIComponent(slug) + apiParam;
+        }
+        return postPage + '?index=' + index + apiParam;
+    }
+
     function postPageUrl(post, cfg, index) {
         const fallback = (cfg && cfg.fallbackHtml) || 'news-voca.html';
+        const boardPath = resolveBoardPath(cfg);
+        if (post && post.slug && boardPath) {
+            return SITE_ORIGIN + '/' + boardPath + '/' + encodeURIComponent(post.slug) + '/';
+        }
         if (post && post.slug) {
             return SITE_ORIGIN + '/' + fallback + '?slug=' + encodeURIComponent(post.slug);
         }
@@ -196,6 +214,7 @@
         resolveSlug: resolveSlug,
         resolveBoardPath: resolveBoardPath,
         postPageUrl: postPageUrl,
+        buildListPostHref: buildListPostHref,
         updatePageSeo: updatePageSeo,
         fetchPostBySlugOrIndex: fetchPostBySlugOrIndex,
         plainText: plainText,

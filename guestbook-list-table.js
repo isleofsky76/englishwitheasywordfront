@@ -8,6 +8,27 @@
 
 (function () {
 
+    const BOARD_POST_PATHS = {
+        'news-voca.html': 'news-voca',
+        'cooking-voca.html': 'cooking-voca',
+        'culture-voca.html': 'culture-voca',
+        'ranking-news.html': 'ranking-news',
+        'english-synonym.html': 'english-synonym',
+        'popular-voca.html': 'popular-voca',
+        'situational-english.html': 'situational-english',
+        'pros-cons.html': 'pros-cons',
+        'word-of-the-day.html': 'word-of-the-day',
+        'photo-english.html': 'photo-english',
+    };
+
+    function resolvePostPath(postPage, explicit) {
+        if (explicit) return explicit;
+        if (window.ViewpostSeo && window.ViewpostSeo.BOARD_PATHS) {
+            return window.ViewpostSeo.BOARD_PATHS[postPage] || null;
+        }
+        return BOARD_POST_PATHS[postPage] || null;
+    }
+
     function escapeHtml(text) {
 
         if (!text) return '';
@@ -158,7 +179,15 @@
 
 
 
-    function buildPostHref(entry, originalIndex, postPage, apiParam) {
+    function buildPostHref(entry, originalIndex, postPage, apiParam, postPath) {
+        if (window.ViewpostSeo && window.ViewpostSeo.buildListPostHref) {
+            return window.ViewpostSeo.buildListPostHref(entry, postPage, originalIndex, apiParam, postPath);
+        }
+        if (entry && entry.slug && postPath) {
+            let href = postPath + '/' + encodeURIComponent(entry.slug) + '/';
+            if (apiParam) href += '?' + String(apiParam).replace(/^&/, '');
+            return href;
+        }
         if (entry && entry.slug) {
             return postPage + '?slug=' + encodeURIComponent(entry.slug) + apiParam;
         }
@@ -174,6 +203,7 @@
         options = options || {};
 
         const postPage = options.postPage || 'news-voca.html';
+        const postPath = resolvePostPath(postPage, options.postPath);
 
         const apiMode = options.apiMode || null;
 
@@ -238,7 +268,7 @@
 
             const entryId = String(entry._id || ('idx-' + originalIndex));
 
-            const postHref = buildPostHref(entry, originalIndex, postPage, apiParam);
+            const postHref = buildPostHref(entry, originalIndex, postPage, apiParam, postPath);
             const postUrl = new URL(postHref, window.location.href).href;
 
             const imageBadge = entryHasImage(entry) ? IMAGE_BADGE_HTML : '';
