@@ -114,7 +114,7 @@
 
   margin: 0;
 
-  padding: 0 0 1rem;
+  padding: 0 0 1.1rem;
 
   border: none;
 
@@ -123,6 +123,16 @@
   background: transparent;
 
   box-shadow: none;
+
+}
+
+
+
+#post-message .nv-word-section + .nv-word-section {
+
+  margin-top: 0.7rem;
+
+  padding-top: 0.2rem;
 
 }
 
@@ -1156,7 +1166,15 @@
 
   #post-message .nv-word-section {
 
-    padding-bottom: 1.15rem;
+    padding-bottom: 1.2rem;
+
+  }
+
+
+
+  #post-message .nv-word-section + .nv-word-section {
+
+    margin-top: 0.85rem;
 
   }
 
@@ -1204,7 +1222,15 @@
 
   #post-message .nv-word-section {
 
-    padding-bottom: 0.9rem;
+    padding-bottom: 1rem;
+
+  }
+
+
+
+  #post-message .nv-word-section + .nv-word-section {
+
+    margin-top: 0.6rem;
 
   }
 
