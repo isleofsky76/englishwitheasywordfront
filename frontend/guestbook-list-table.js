@@ -44,6 +44,32 @@
         }
     }
 
+    function formatDateTime(dateStr) {
+        if (!dateStr) return '-';
+        try {
+            const date = new Date(dateStr);
+            if (isNaN(date.getTime())) return '-';
+            const y = date.getFullYear();
+            const m = ('0' + (date.getMonth() + 1)).slice(-2);
+            const d = ('0' + date.getDate()).slice(-2);
+            const h = ('0' + date.getHours()).slice(-2);
+            const min = ('0' + date.getMinutes()).slice(-2);
+            return y + '.' + m + '.' + d + '  ' + h + ':' + min;
+        } catch {
+            return '-';
+        }
+    }
+
+    function buildTitleMetaLine(dateTimeStr, views, likeCount) {
+        return '<div class="gb-title-meta">' +
+            '<time class="gb-meta-date">' + escapeHtml(dateTimeStr) + '</time>' +
+            '<span class="gb-meta-sep" aria-hidden="true"> · </span>' +
+            '<span class="gb-meta-part">조회 <span class="gb-meta-views">' + views + '</span></span>' +
+            '<span class="gb-meta-sep" aria-hidden="true"> · </span>' +
+            '<span class="gb-meta-part">추천수 <span class="gb-meta-likes">' + likeCount + '</span></span>' +
+            '</div>';
+    }
+
 
 
     function isMobileView() {
@@ -132,6 +158,16 @@
 
 
 
+    function buildPostHref(entry, originalIndex, postPage, apiParam, postPath) {
+        if (entry && entry.slug && postPath) {
+            return postPath + '/' + encodeURIComponent(entry.slug) + '/' + apiParam;
+        }
+        if (entry && entry.slug) {
+            return postPage + '?slug=' + encodeURIComponent(entry.slug) + apiParam;
+        }
+        return postPage + '?index=' + originalIndex + apiParam;
+    }
+
     window.renderGuestbookTable = function (container, messages, options) {
 
         if (!container) return;
@@ -141,10 +177,15 @@
         options = options || {};
 
         const postPage = options.postPage || 'news-voca.html';
+        const postPath = options.postPath || null;
 
         const apiMode = options.apiMode || null;
 
         const apiParam = apiMode ? '&api=' + apiMode : '';
+
+        const hideViewsAndLikes = options.hideViewsAndLikes === true;
+
+        const colCount = hideViewsAndLikes ? 4 : 7;
 
 
 
@@ -160,11 +201,13 @@
 
         if (!messages || !messages.entries || messages.entries.length === 0) {
 
+            const emptyClass = hideViewsAndLikes ? ' gb-no-stats' : '';
+
             container.innerHTML =
 
-                '<div class="gb-table-wrap"><table class="gb-table"><tbody>' +
+                '<div class="gb-table-wrap' + emptyClass + '"><table class="gb-table' + emptyClass + '"><tbody>' +
 
-                '<tr class="gb-empty-row"><td colspan="8">게시글이 없습니다.</td></tr>' +
+                '<tr class="gb-empty-row"><td colspan="' + colCount + '">게시글이 없습니다.</td></tr>' +
 
                 '</tbody></table></div>';
 
@@ -195,50 +238,72 @@
             const author = escapeHtml(entry.nickname || '익명');
 
             const dateStr = formatDate(entry.date);
-
-            const views = entry.views || 0;
+            const dateTimeStr = formatDateTime(entry.date);
 
             const entryId = String(entry._id || ('idx-' + originalIndex));
 
-            const canLike = isValidObjectId(entryId);
-
-            const liked = canLike && hasUserLiked(entryId);
-
-            const likeCount = getLikeDisplayCount(entry.likes);
-
-            const postUrl = new URL(postPage + '?index=' + originalIndex + apiParam, window.location.href).href;
-
-
-
-            const likeBtnClass = 'gb-action-btn gb-like-btn' + (liked ? ' is-active' : '');
-
-            const likeDisabled = (liked || !canLike) ? ' disabled' : '';
-
-            const likeTitle = !canLike ? '좋아요 불가' : (liked ? '이미 좋아요를 눌렀습니다' : '좋아요 (한 번만 가능)');
+            const postHref = buildPostHref(entry, originalIndex, postPage, apiParam, postPath);
+            const postUrl = new URL(postHref, window.location.href).href;
 
             const imageBadge = entryHasImage(entry) ? IMAGE_BADGE_HTML : '';
 
+            const views = entry.views || 0;
+            const likeCount = getLikeDisplayCount(entry.likes);
 
+            const titleMetaLine = hideViewsAndLikes
+                ? buildTitleMetaLine(dateTimeStr, views, likeCount)
+                : '';
 
-            const metaMobile = author + ' | ' + dateStr + ' | 조회수 <span class="gb-meta-views">' + views + '</span>';
+            const metaMobile =
+                '<span class="gb-meta-part gb-meta-author">' + author + '</span>' +
+                '<span class="gb-meta-sep" aria-hidden="true">|</span>' +
+                '<span class="gb-meta-part gb-meta-date">' + dateStr + '</span>' +
+                '<span class="gb-meta-sep" aria-hidden="true">|</span>' +
+                '<span class="gb-meta-part">조회 <span class="gb-meta-views">' + views + '</span></span>' +
+                '<span class="gb-meta-sep" aria-hidden="true">|</span>' +
+                '<span class="gb-meta-part">추천수 <span class="gb-meta-likes">' + likeCount + '</span></span>';
+
+            let statsCells = '';
+            if (!hideViewsAndLikes) {
+                statsCells = '<td class="gb-col-views">' + views + '</td>';
+            }
+
+            if (!hideViewsAndLikes) {
+                const canLike = isValidObjectId(entryId);
+                const liked = canLike && hasUserLiked(entryId);
+                const likeBtnClass = 'gb-action-btn gb-like-btn' + (liked ? ' is-active' : '');
+                const likeDisabled = (liked || !canLike) ? ' disabled' : '';
+                const likeTitle = !canLike ? '좋아요 불가' : (liked ? '이미 좋아요를 눌렀습니다' : '좋아요 (한 번만 가능)');
+
+                statsCells +=
+                    '<td class="gb-col-likes">' +
+                    '<span class="gb-like-wrap">' +
+                    '<button type="button" class="' + likeBtnClass + '" data-gb-like="' + escapeAttr(entryId) + '" title="' + escapeAttr(likeTitle) + '"' + likeDisabled + '>👍</button>' +
+                    '<span class="gb-like-count">' + likeCount + '</span>' +
+                    '</span>' +
+                    '</td>';
+            }
+
+            const metaUnderTitle = hideViewsAndLikes
+                ? titleMetaLine
+                : '<div class="gb-col-meta-mobile">' + metaMobile + '</div>';
+
+            const dateCell = hideViewsAndLikes ? '' : '<td class="gb-col-date">' + dateStr + '</td>';
 
             return '<tr data-gb-entry="' + escapeAttr(entryId) + '">' +
                 '<td class="gb-col-num">' + number + '</td>' +
-                '<td class="gb-col-title"><span class="gb-title-cell">' +
-                '<a href="' + postPage + '?index=' + originalIndex + apiParam + '" title="' + title + '">' + title + '</a>' +
+                '<td class="gb-col-title">' +
+                '<div class="gb-title-stack">' +
+                '<span class="gb-title-cell">' +
+                '<a href="' + postHref + '" title="' + title + '">' + title + '</a>' +
                 imageBadge +
-                '</span></td>' +
-                '<td class="gb-col-author">' + author + '</td>' +
-                '<td class="gb-col-date">' + dateStr + '</td>' +
-                '<td class="gb-col-views">' + views + '</td>' +
-                '<td class="gb-col-likes">' +
-                '<span class="gb-like-wrap">' +
-                '<button type="button" class="' + likeBtnClass + '" data-gb-like="' + escapeAttr(entryId) + '" title="' + escapeAttr(likeTitle) + '"' + likeDisabled + '>👍</button>' +
-                '<span class="gb-like-count">' + likeCount + '</span>' +
                 '</span>' +
-                '</td>' +
+                metaUnderTitle +
+                '</div></td>' +
+                '<td class="gb-col-author">' + author + '</td>' +
+                dateCell +
+                statsCells +
                 '<td class="gb-col-share">' + buildShareLinks(postUrl, rawTitle) + '</td>' +
-                '<td class="gb-col-meta-mobile">' + metaMobile + '</td>' +
                 '</tr>';
 
         }).join('');
@@ -249,15 +314,20 @@
 
         const thDate = mobile ? '일자' : '작성일';
 
-        const thViews = '조회수';
+        const statsHeaders = hideViewsAndLikes
+            ? ''
+            : '<th class="col-views">조회수</th>' +
+              '<th class="col-likes">Likes</th>';
 
+        const dateHeader = hideViewsAndLikes ? '' : '<th class="col-date">' + thDate + '</th>';
 
+        const noStatsClass = hideViewsAndLikes ? ' gb-no-stats' : '';
 
         container.innerHTML =
 
-            '<div class="gb-table-wrap">' +
+            '<div class="gb-table-wrap' + noStatsClass + '">' +
 
-            '<table class="gb-table">' +
+            '<table class="gb-table' + noStatsClass + '">' +
 
             '<thead><tr>' +
 
@@ -267,11 +337,9 @@
 
             '<th class="col-author">작성자</th>' +
 
-            '<th class="col-date">' + thDate + '</th>' +
+            dateHeader +
 
-            '<th class="col-views">' + thViews + '</th>' +
-
-            '<th class="col-likes">Likes</th>' +
+            statsHeaders +
 
             '<th class="col-share">공유</th>' +
 
@@ -289,13 +357,15 @@
 
         window._guestbookTableActionsInit = true;
 
-        document.addEventListener('click', function (e) {
+        function handleLikeClick(e) {
 
             const likeBtn = e.target.closest('.gb-like-btn');
 
             if (!likeBtn || likeBtn.disabled) return;
 
             e.preventDefault();
+
+            e.stopPropagation();
 
 
 
@@ -360,8 +430,10 @@
                     likeBtn.title = '이미 좋아요를 눌렀습니다';
 
                     const countEl = likeBtn.closest('tr') && likeBtn.closest('tr').querySelector('.gb-like-count');
-
                     if (countEl) countEl.textContent = likes;
+
+                    const metaLikesEl = likeBtn.closest('tr') && likeBtn.closest('tr').querySelector('.gb-meta-likes');
+                    if (metaLikesEl) metaLikesEl.textContent = likes;
 
                 })
 
@@ -375,7 +447,23 @@
 
                 });
 
-        });
+        }
+
+        document.addEventListener('click', handleLikeClick);
+
+        document.addEventListener('touchend', function (e) {
+
+            const likeBtn = e.target.closest('.gb-like-btn');
+
+            if (!likeBtn || likeBtn.disabled) return;
+
+            e.preventDefault();
+
+            e.stopPropagation();
+
+            handleLikeClick(e);
+
+        }, { passive: false });
 
     }
 
