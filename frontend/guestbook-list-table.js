@@ -159,11 +159,19 @@
 
 
     function buildPostHref(entry, originalIndex, postPage, apiParam, postPath) {
-        if (entry && entry.slug && postPath) {
-            return postPath + '/' + encodeURIComponent(entry.slug) + '/' + apiParam;
+        const slug = entry && String(entry.slug || '').trim();
+        if (slug && postPage === 'popular-voca.html') {
+            let href = 'popular-voca/' + encodeURIComponent(slug) + '/';
+            if (apiParam) href += '?' + String(apiParam).replace(/^&/, '');
+            return href;
         }
-        if (entry && entry.slug) {
-            return postPage + '?slug=' + encodeURIComponent(entry.slug) + apiParam;
+        if (slug && postPath) {
+            let href = postPath + '/' + encodeURIComponent(slug) + '/';
+            if (apiParam) href += '?' + String(apiParam).replace(/^&/, '');
+            return href;
+        }
+        if (slug) {
+            return postPage + '?slug=' + encodeURIComponent(slug) + apiParam;
         }
         return postPage + '?index=' + originalIndex + apiParam;
     }

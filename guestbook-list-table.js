@@ -8,27 +8,6 @@
 
 (function () {
 
-    const BOARD_POST_PATHS = {
-        'news-voca.html': 'news-voca',
-        'cooking-voca.html': 'cooking-voca',
-        'culture-voca.html': 'culture-voca',
-        'ranking-news.html': 'ranking-news',
-        'english-synonym.html': 'english-synonym',
-        'popular-voca.html': 'popular-voca',
-        'situational-english.html': 'situational-english',
-        'pros-cons.html': 'pros-cons',
-        'word-of-the-day.html': 'word-of-the-day',
-        'photo-english.html': 'photo-english',
-    };
-
-    function resolvePostPath(postPage, explicit) {
-        if (explicit) return explicit;
-        if (window.ViewpostSeo && window.ViewpostSeo.BOARD_PATHS) {
-            return window.ViewpostSeo.BOARD_PATHS[postPage] || null;
-        }
-        return BOARD_POST_PATHS[postPage] || null;
-    }
-
     function escapeHtml(text) {
 
         if (!text) return '';
@@ -179,17 +158,15 @@
 
 
 
-    function buildPostHref(entry, originalIndex, postPage, apiParam, postPath) {
-        if (window.ViewpostSeo && window.ViewpostSeo.buildListPostHref) {
-            return window.ViewpostSeo.buildListPostHref(entry, postPage, originalIndex, apiParam, postPath);
-        }
-        if (entry && entry.slug && postPath) {
-            let href = postPath + '/' + encodeURIComponent(entry.slug) + '/';
+    function buildPostHref(entry, originalIndex, postPage, apiParam) {
+        const slug = entry && String(entry.slug || '').trim();
+        if (slug && postPage === 'popular-voca.html') {
+            let href = 'popular-voca/' + encodeURIComponent(slug) + '/';
             if (apiParam) href += '?' + String(apiParam).replace(/^&/, '');
             return href;
         }
-        if (entry && entry.slug) {
-            return postPage + '?slug=' + encodeURIComponent(entry.slug) + apiParam;
+        if (slug) {
+            return postPage + '?slug=' + encodeURIComponent(slug) + apiParam;
         }
         return postPage + '?index=' + originalIndex + apiParam;
     }
@@ -203,7 +180,6 @@
         options = options || {};
 
         const postPage = options.postPage || 'news-voca.html';
-        const postPath = resolvePostPath(postPage, options.postPath);
 
         const apiMode = options.apiMode || null;
 
@@ -268,7 +244,7 @@
 
             const entryId = String(entry._id || ('idx-' + originalIndex));
 
-            const postHref = buildPostHref(entry, originalIndex, postPage, apiParam, postPath);
+            const postHref = buildPostHref(entry, originalIndex, postPage, apiParam);
             const postUrl = new URL(postHref, window.location.href).href;
 
             const imageBadge = entryHasImage(entry) ? IMAGE_BADGE_HTML : '';
