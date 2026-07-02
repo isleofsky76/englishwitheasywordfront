@@ -500,22 +500,14 @@ function isLikelyKoreanTranslation(text) {
     return hangul > 0 && latin <= Math.max(3, Math.floor(hangul * 0.2));
 }
 
-/** 표시 순서: 출처 → 예문 → 본문(소개·단어) */
+/** 표시 순서: 출처 → 기사 배경 → 단어 블록 → 유튜브 */
 function enforceNewsVocaSectionOrder(article) {
-    const body = article.querySelector('.nv-body');
-    if (!body) return;
-
     const source = article.querySelector(':scope > .nv-source, .nv-source');
-    let examples = article.querySelector(':scope > .nv-examples');
-    const examplesInBody = body.querySelector('.nv-examples');
-    if (!examples && examplesInBody) {
-        examples = examplesInBody;
-        examplesInBody.remove();
-    } else if (examplesInBody && examplesInBody !== examples) {
-        examplesInBody.remove();
-    }
+    const lead = article.querySelector(':scope > .nv-lead, .nv-lead');
+    const body = article.querySelector(':scope > .nv-body, .nv-body');
+    const youtube = article.querySelector(':scope > .nv-youtube, .nv-youtube');
 
-    for (const el of [source, examples, body]) {
+    for (const el of [source, lead, body, youtube]) {
         if (el) article.appendChild(el);
     }
 }
@@ -527,11 +519,7 @@ function fixLegacyNewsVocaLayout(html) {
     root.innerHTML = html;
 
     root.querySelectorAll('.nv-text').forEach((article) => {
-        const body = article.querySelector('.nv-body');
-        if (!body) return;
-
-        // 단어 카드 구조를 영어 -> 발음/발음기호 -> 뜻 순서로 통일
-        body.querySelectorAll('.nv-word').forEach((word) => {
+        article.querySelectorAll('.nv-word-section .nv-word, .nv-block .nv-word').forEach((word) => {
             const en = word.querySelector('.nv-en');
             const ko = word.querySelector('.nv-ko');
             const meta = word.querySelector('.nv-word-meta');
@@ -548,29 +536,6 @@ function fixLegacyNewsVocaLayout(html) {
             if (ko) word.appendChild(ko);
             if (main && !main.children.length) main.remove();
         });
-
-        const notesWrap = article.querySelector('.nv-notes');
-        if (notesWrap) {
-            const notes = Array.from(notesWrap.querySelectorAll('.nv-note'));
-            const introCandidates = Array.from(body.querySelectorAll(':scope > .nv-intro'))
-                .filter((p) => isLikelyKoreanTranslation(p.textContent));
-
-            if (notes.length && introCandidates.length) {
-                const pairCount = Math.min(notes.length, introCandidates.length);
-                const selectedTranslations = introCandidates.slice(-pairCount);
-
-                for (let i = 0; i < pairCount; i++) {
-                    const note = notes[i];
-                    const ko = selectedTranslations[i];
-                    if (!note || !ko) continue;
-                    ko.classList.remove('nv-intro');
-                    ko.classList.add('nv-note-ko');
-                    note.insertAdjacentElement('afterend', ko);
-                }
-            }
-
-            body.appendChild(notesWrap);
-        }
 
         enforceNewsVocaSectionOrder(article);
     });
