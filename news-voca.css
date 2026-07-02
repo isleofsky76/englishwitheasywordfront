@@ -505,6 +505,226 @@
 
 
 
+#post-message .nv-youtube {
+
+  margin-top: 1.5rem;
+
+  padding: 0;
+
+  border: none;
+
+  background: transparent;
+
+  width: 100%;
+
+  box-sizing: border-box;
+
+}
+
+
+
+#post-message .nv-youtube-heading {
+
+  margin: 0 0 0.55rem;
+
+  font-size: 0.92rem;
+
+  font-weight: 700;
+
+  color: #dc2626;
+
+  letter-spacing: 0.01em;
+
+}
+
+
+
+#post-message .nv-summary {
+
+  margin-top: 1rem;
+
+  padding: 0.85rem 1rem;
+
+  border-radius: 10px;
+
+  background: #f9fafb;
+
+  border: 1px solid #e5e7eb;
+
+  box-sizing: border-box;
+
+}
+
+
+
+#post-message .nv-summary-text {
+
+  margin: 0;
+
+  font-size: 0.9rem;
+
+  color: #4b5563;
+
+  line-height: 1.6;
+
+}
+
+
+
+#post-message .nv-summary-text + .nv-summary-text {
+
+  margin-top: 0.5rem;
+
+}
+
+
+
+#post-message .nv-youtube-card {
+
+  display: block;
+
+  width: 100%;
+
+  margin: 0;
+
+  padding: 0;
+
+  text-decoration: none;
+
+  color: inherit;
+
+  border-bottom: none;
+
+  box-sizing: border-box;
+
+}
+
+
+
+#post-message .nv-youtube-card:hover {
+
+  text-decoration: none;
+
+  border-bottom: none;
+
+  background: transparent;
+
+}
+
+
+
+#post-message .nv-youtube-card:active {
+
+  background: transparent;
+
+  border-radius: 0;
+
+}
+
+
+
+#post-message .nv-youtube-thumb {
+
+  position: relative;
+
+  display: block;
+
+  width: 100%;
+
+  border-radius: 10px;
+
+  overflow: hidden;
+
+  aspect-ratio: 16 / 9;
+
+  background: #111;
+
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.14);
+
+  box-sizing: border-box;
+
+}
+
+
+
+#post-message .nv-youtube-img {
+
+  width: 100%;
+
+  height: 100%;
+
+  object-fit: cover;
+
+  display: block;
+
+  margin: 0;
+
+  padding: 0;
+
+  border-radius: 0;
+
+  box-shadow: none;
+
+  transition: transform 0.2s ease;
+
+}
+
+
+
+#post-message .nv-youtube-card:hover .nv-youtube-img {
+
+  transform: scale(1.02);
+
+}
+
+
+
+#post-message .nv-youtube-play {
+
+  position: absolute;
+
+  top: 50%;
+
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  pointer-events: none;
+
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.35));
+
+  transition: transform 0.2s ease;
+
+}
+
+
+
+#post-message .nv-youtube-icon {
+
+  display: block;
+
+  width: 68px;
+
+  height: auto;
+
+}
+
+
+
+#post-message .nv-youtube-card:hover .nv-youtube-play {
+
+  transform: translate(-50%, -50%) scale(1.08);
+
+}
+
+
+
 @media (max-width: 767px) {
 
   #post-message .nv-text {
