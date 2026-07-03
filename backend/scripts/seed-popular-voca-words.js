@@ -57,6 +57,7 @@ const pvP = (html, style = ST.p) => `<p style="${style}">${html}</p>`;
 const pvEx = (en, ko) =>
   `<span style="color:${C.textEn};font-weight:500;">${en}</span> <span style="color:${C.textMuted};font-size:0.92em;">(${ko})</span>`;
 const pvLines = (...items) => items.join('<br><br>');
+const pvLinesTight = (...items) => items.filter(Boolean).join('<br>');
 const pvDivider = `<div style="height:1px;background:${C.border};margin:0.55em 0;"></div>`;
 const pvHero = (alt) =>
   `<p style="margin:0;padding:0;"><img src="${IMG_URL}" alt="${alt}" loading="lazy" class="wotd-hero-image" style="max-width:100%;height:auto;border-radius:8px;display:block;margin:0 0 0.35rem 0;"></p>`;
@@ -67,14 +68,14 @@ const pvHero = (alt) =>
 // node scripts/seed-popular-voca-words.js
 
 // cd c:\langchain
-// git add popular-voca/crocodile-tears/ sitemap.xml backend/scripts/seed-popular-voca-words.js frontend/resources/crocodile_tears.jpg
-// git commit -m "Add popular voca: crocodile tears"
+// git add popular-voca/blurt-out/ sitemap.xml backend/scripts/seed-popular-voca-words.js frontend/resources/blurt_out.jpg
+// git commit -m "Add popular voca: blurt out"
 // git push
 // 글 상단 히어로 이미지 — frontend/resources/ 에 파일 배치
 
-const IMG_URL = '/resources/haste_makes_waste.jpg';
+const IMG_URL = '/resources/blurt_out.jpg';
 
-const password = 'seed_password_haste_makes_waste';
+const password = 'seed_password_blurt_out';
 
 function makeSlug(text) {
 return String(text || '')
@@ -88,37 +89,35 @@ return String(text || '')
 
 const posts = [
 {
-title: '급할수록 돌아가세요 영어로?',
-slug: makeSlug('haste makes waste'),
-metaDescription: '급할수록 돌아가세요는 영어로 Haste makes waste. 상황별 예문으로 자연스럽게 익히는 popular voca 표현입니다.',
+title: '무심코 말하다 영어로?',
+slug: makeSlug('blurt out'),
+metaDescription: '무심코 말하다는 영어로 blurt out. slip out, let slip 같은 표현과 함께 상황별 예문으로 자연스럽게 익히는 popular voca 표현입니다.',
 message: `<div style="${ST.wrap}">
-${pvHero('haste makes waste')}
-${pvP('Haste makes waste.', ST.title)}
-${pvP('안녕하세요! 오늘은 너무 서두르면 오히려 실수하거나 일을 망칠 때 쓰는 표현을 알아보겠습니다.<br><br>' + pvKwB('ko', '급할수록 돌아가세요') + '와 가장 가까운 영어 표현은 ' + pvKwB('en', 'Haste makes waste') + '입니다', ST.body)}
-${pvP(pvB('급할수록 돌아가세요'), ST.sec)}
+${pvHero('blurt out')}
+${pvP('I blurted it out.', ST.title)}
+${pvP('안녕하세요! 오늘은 생각하지 않고 갑자기 말하거나, 말하면 안 되는 것을 무심코 말할 때 쓰는 표현을 알아보겠습니다.<br><br>가장 자연스러운 표현은 ' + pvKwB('en', 'blurt out') + '입니다', ST.body)}
+${pvP(pvB('무심코 말하다'), ST.sec)}
 ${pvP(pvLines(
-pvEx('Haste makes waste.', '급할수록 돌아가세요.'),
-pvEx('Don’t rush it.', '서두르지 마세요.'),
-pvEx('Take your time.', '천천히 하세요.'),
-pvEx('Slow down and do it right.', '천천히 제대로 하세요.'),
-pvEx('If you rush, you will make mistakes.', '서두르면 실수하게 될 거예요.')
+pvEx('I blurted it out.', '내가 그걸 무심코 말해 버렸어요.'),
+pvEx('He blurted out the answer.', '그는 답을 불쑥 말해 버렸어요.'),
+pvEx('She blurted out the secret.', '그녀는 비밀을 무심코 말해 버렸어요.'),
+pvEx('It just slipped out.', '그냥 말이 새어 나왔어요.'),
+pvEx('I did not mean to say that.', '그렇게 말하려던 건 아니었어요.'),
+pvEx('He let the secret slip.', '그는 비밀을 무심코 흘렸어요.')
 ), ST.body)}
 
 ${pvP(pvB('대화 예시'), ST.sec)}
-${pvP(pvLines(
-pvEx('A: I need to finish this quickly.', 'A: 이거 빨리 끝내야 해.'),
-pvEx('B: Haste makes waste.', 'B: 급할수록 돌아가야 해.'),
-pvEx('A: But I am running out of time.', 'A: 하지만 시간이 부족해.'),
-pvEx('B: Then slow down and do it right.', 'B: 그럼 더 천천히 제대로 해.'),
-'<br>',
-pvEx('A: I made another mistake.', 'A: 또 실수했어.'),
-pvEx('B: Don’t rush it. Haste makes waste.', 'B: 서두르지 마. 급할수록 돌아가야 해.')
+${pvP(pvLinesTight(
+pvEx('A: Did you tell her about the surprise party?', 'A: 너 그녀에게 깜짝 파티 얘기했어?'),
+pvEx('B: I am sorry. It just slipped out.', 'B: 미안해. 그냥 말이 새어 나왔어.'),
+pvEx('A: Why did you say that in the meeting?', 'A: 회의에서 왜 그 말을 했어?'),
+pvEx('B: I did not mean to. I just blurted it out.', 'B: 일부러 그런 건 아니야. 그냥 무심코 말해 버렸어.')
 ), ST.body)}
 
 ${pvP(pvB('참고'), ST.sec)}
-${pvP('haste는 “서두름, 성급함”이라는 뜻이고, waste는 “낭비, 헛수고”라는 뜻입니다. Haste makes waste는 직역하면 “성급함은 낭비를 만든다”는 뜻입니다. 즉, 너무 급하게 하려고 하면 실수가 생기고 결국 시간과 노력을 더 낭비하게 된다는 의미입니다.<br><br>비슷한 표현으로 More haste, less speed도 있지만, 일상 학습용 표현으로는 Haste makes waste가 더 간단하고 기억하기 좋습니다.', ST.body)}
+${pvP('blurt out은 “생각할 틈 없이 불쑥 말하다”라는 뜻입니다. 갑자기 감정적으로 말하거나, 말하면 안 되는 내용을 실수로 말할 때 자주 씁니다.<br><br>slip out은 말이 “미끄러져 나가듯이” 나왔다는 느낌입니다. 그래서 It just slipped out.은 “그냥 말이 새어 나왔어”라는 뜻입니다.<br><br>let slip은 비밀이나 정보를 실수로 흘리다는 뜻입니다. 예를 들어 let the secret slip은 “비밀을 무심코 흘리다”라는 의미입니다.', ST.body)}
 
-${pvP('💡 ' + pvB('한 줄 요약!') + ' ' + pvKw('ko', '급할수록 돌아가세요') + '는 영어로 ' + pvKw('en', 'Haste makes waste') + '라고 하면 자연스럽습니다.', ST.tip)}
+${pvP('💡 ' + pvB('한 줄 요약!') + ' ' + pvKw('ko', '무심코 말하다') + '는 영어로 ' + pvKw('en', 'blurt out') + '이라고 하고, ' + pvKw('ko', '말이 새어 나오다') + '는 ' + pvKw('en', 'slip out') + '으로 표현할 수 있습니다.', ST.tip)}
 
 </div>`,
 
@@ -127,7 +126,6 @@ password,
 
 },
 ];
-
 
 
 // https://www.chosun.com/site/data/html_dir/2015/01/22/2015012200141.html 조선일보
