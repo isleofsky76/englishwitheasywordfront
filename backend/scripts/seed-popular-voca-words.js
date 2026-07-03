@@ -73,9 +73,9 @@ const pvHero = (alt) =>
 // git push
 // 글 상단 히어로 이미지 — frontend/resources/ 에 파일 배치
 
-const IMG_URL = '/resources/blurt_out.jpg';
+const IMG_URL = '/resources/true_colours.jpg';
 
-const password = 'seed_password_blurt_out';
+const password = 'seed_password_true_colours';
 
 function makeSlug(text) {
 return String(text || '')
@@ -89,35 +89,35 @@ return String(text || '')
 
 const posts = [
 {
-title: '무심코 말하다 영어로?',
-slug: makeSlug('blurt out'),
-metaDescription: '무심코 말하다는 영어로 blurt out. slip out, let slip 같은 표현과 함께 상황별 예문으로 자연스럽게 익히는 popular voca 표현입니다.',
+title: '본색을 드러내다 영어로?',
+slug: makeSlug('true colours'),
+metaDescription: '본색을 드러내다는 영어로 show one’s true colours. 상황별 예문과 유례로 자연스럽게 익히는 popular voca 표현입니다.',
 message: `<div style="${ST.wrap}">
-${pvHero('blurt out')}
-${pvP('I blurted it out.', ST.title)}
-${pvP('안녕하세요! 오늘은 생각하지 않고 갑자기 말하거나, 말하면 안 되는 것을 무심코 말할 때 쓰는 표현을 알아보겠습니다.<br><br>가장 자연스러운 표현은 ' + pvKwB('en', 'blurt out') + '입니다', ST.body)}
-${pvP(pvB('무심코 말하다'), ST.sec)}
+${pvHero('true colours')}
+${pvP('He showed his true colours.', ST.title)}
+${pvP('안녕하세요! 오늘은 누군가 겉으로 보이던 모습과 달리 진짜 성격이나 속마음을 드러낼 때 쓰는 표현을 알아보겠습니다.<br><br>가장 자연스러운 표현은 ' + pvKwB('en', 'show one’s true colours') + '입니다', ST.body)}
+${pvP(pvB('본색을 드러내다'), ST.sec)}
 ${pvP(pvLines(
-pvEx('I blurted it out.', '내가 그걸 무심코 말해 버렸어요.'),
-pvEx('He blurted out the answer.', '그는 답을 불쑥 말해 버렸어요.'),
-pvEx('She blurted out the secret.', '그녀는 비밀을 무심코 말해 버렸어요.'),
-pvEx('It just slipped out.', '그냥 말이 새어 나왔어요.'),
-pvEx('I did not mean to say that.', '그렇게 말하려던 건 아니었어요.'),
-pvEx('He let the secret slip.', '그는 비밀을 무심코 흘렸어요.')
+pvEx('He showed his true colours.', '그는 본색을 드러냈어요.'),
+pvEx('She finally showed her true colours.', '그녀는 마침내 본색을 드러냈어요.'),
+pvEx('People show their true colours under pressure.', '사람들은 압박을 받을 때 본색을 드러내요.'),
+pvEx('His true colours came out.', '그의 본색이 드러났어요.'),
+pvEx('Now I can see your true colours.', '이제 네 본모습을 알겠어요.')
 ), ST.body)}
 
 ${pvP(pvB('대화 예시'), ST.sec)}
-${pvP(pvLinesTight(
-pvEx('A: Did you tell her about the surprise party?', 'A: 너 그녀에게 깜짝 파티 얘기했어?'),
-pvEx('B: I am sorry. It just slipped out.', 'B: 미안해. 그냥 말이 새어 나왔어.'),
-pvEx('A: Why did you say that in the meeting?', 'A: 회의에서 왜 그 말을 했어?'),
-pvEx('B: I did not mean to. I just blurted it out.', 'B: 일부러 그런 건 아니야. 그냥 무심코 말해 버렸어.')
+${pvP(pvLines(
+pvEx('A: I thought he was a nice person.', 'A: 나는 그가 좋은 사람인 줄 알았어.'),
+pvEx('B: Me too, but he showed his true colours.', 'B: 나도 그랬어. 그런데 그는 본색을 드러냈어.'),
+'<br>',
+pvEx('A: She was kind when she needed help.', 'A: 그녀는 도움이 필요할 때는 친절했어.'),
+pvEx('B: Right. Now her true colours are coming out.', 'B: 맞아. 이제 그녀의 본색이 드러나고 있어.')
 ), ST.body)}
 
-${pvP(pvB('참고'), ST.sec)}
-${pvP('blurt out은 “생각할 틈 없이 불쑥 말하다”라는 뜻입니다. 갑자기 감정적으로 말하거나, 말하면 안 되는 내용을 실수로 말할 때 자주 씁니다.<br><br>slip out은 말이 “미끄러져 나가듯이” 나왔다는 느낌입니다. 그래서 It just slipped out.은 “그냥 말이 새어 나왔어”라는 뜻입니다.<br><br>let slip은 비밀이나 정보를 실수로 흘리다는 뜻입니다. 예를 들어 let the secret slip은 “비밀을 무심코 흘리다”라는 의미입니다.', ST.body)}
+${pvP(pvB('유래'), ST.sec)}
+${pvP('true colours는 직역하면 “진짜 색깔”이라는 뜻입니다. 이 표현은 배나 군대가 자신이 속한 나라나 집단을 나타내기 위해 깃발이나 색깔을 사용하던 데서 나온 표현으로 알려져 있습니다. 겉으로 다른 깃발이나 색을 보이다가, 나중에 진짜 깃발을 드러내면 그 정체가 밝혀지는 것처럼 쓰였습니다.<br><br>그래서 show one’s true colours는 원래 “진짜 색깔을 보여 주다”라는 뜻에서, 지금은 사람의 숨겨진 성격, 속마음, 본모습이 드러난다는 의미로 쓰입니다.<br><br>영국식 영어에서는 colours처럼 u를 넣고, 미국식 영어에서는 colors라고 씁니다. 따라서 true colours는 영국식 표기, true colors는 미국식 표기입니다.', ST.body)}
 
-${pvP('💡 ' + pvB('한 줄 요약!') + ' ' + pvKw('ko', '무심코 말하다') + '는 영어로 ' + pvKw('en', 'blurt out') + '이라고 하고, ' + pvKw('ko', '말이 새어 나오다') + '는 ' + pvKw('en', 'slip out') + '으로 표현할 수 있습니다.', ST.tip)}
+${pvP('💡 ' + pvB('한 줄 요약!') + ' ' + pvKw('ko', '본색을 드러내다') + '는 영어로 ' + pvKw('en', 'show one’s true colours') + '라고 하면 자연스럽습니다.', ST.tip)}
 
 </div>`,
 
