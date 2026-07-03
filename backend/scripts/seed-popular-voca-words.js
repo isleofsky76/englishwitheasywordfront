@@ -72,9 +72,9 @@ const pvHero = (alt) =>
 // git push
 // 글 상단 히어로 이미지 — frontend/resources/ 에 파일 배치
 
-const IMG_URL = '/resources/crocodile_tears.jpg';
+const IMG_URL = '/resources/haste_makes_waste.jpg';
 
-const password = 'seed_password_crocodile_tears';
+const password = 'seed_password_haste_makes_waste';
 
 function makeSlug(text) {
 return String(text || '')
@@ -88,38 +88,37 @@ return String(text || '')
 
 const posts = [
 {
-title: '가식적인 눈물을 흘리다 영어로?',
-slug: makeSlug('crocodile tears'),
-metaDescription: '가식적인 눈물을 흘리다는 영어로 shed crocodile tears. 상황별 예문으로 자연스럽게 익히는 popular voca 표현입니다.',
+title: '급할수록 돌아가세요 영어로?',
+slug: makeSlug('haste makes waste'),
+metaDescription: '급할수록 돌아가세요는 영어로 Haste makes waste. 상황별 예문으로 자연스럽게 익히는 popular voca 표현입니다.',
 message: `<div style="${ST.wrap}">
-${pvHero('crocodile tears')}
-${pvP('He shed crocodile tears.', ST.title)}
-${pvP('안녕하세요! 오늘은 진심으로 슬퍼하는 것이 아니라 일부러 슬픈 척하며 ' + pvKwB('ko', '가식적인 눈물을 흘리다') + '라고 말할 때 쓰는 표현을 알아보겠습니다.<br><br>가장 자연스러운 표현은 ' + pvKwB('en', 'shed crocodile tears') + '입니다', ST.body)}
-${pvP(pvB('가식적인 눈물을 흘리다'), ST.sec)}
+${pvHero('haste makes waste')}
+${pvP('Haste makes waste.', ST.title)}
+${pvP('안녕하세요! 오늘은 너무 서두르면 오히려 실수하거나 일을 망칠 때 쓰는 표현을 알아보겠습니다.<br><br>' + pvKwB('ko', '급할수록 돌아가세요') + '와 가장 가까운 영어 표현은 ' + pvKwB('en', 'Haste makes waste') + '입니다', ST.body)}
+${pvP(pvB('급할수록 돌아가세요'), ST.sec)}
 ${pvP(pvLines(
-pvEx('He shed crocodile tears.', '그는 가식적인 눈물을 흘렸습니다.'),
-pvEx('She was shedding crocodile tears.', '그녀는 가식적인 눈물을 흘리고 있었어요.'),
-pvEx('Don’t shed crocodile tears.', '가식적인 눈물 흘리지 마세요.'),
-pvEx('His apology sounded like crocodile tears.', '그의 사과는 가식적인 눈물처럼 들렸어요.'),
-pvEx('The politician shed crocodile tears in front of the cameras.', '그 정치인은 카메라 앞에서 가식적인 눈물을 흘렸어요.')
+pvEx('Haste makes waste.', '급할수록 돌아가세요.'),
+pvEx('Don’t rush it.', '서두르지 마세요.'),
+pvEx('Take your time.', '천천히 하세요.'),
+pvEx('Slow down and do it right.', '천천히 제대로 하세요.'),
+pvEx('If you rush, you will make mistakes.', '서두르면 실수하게 될 거예요.')
 ), ST.body)}
 
 ${pvP(pvB('대화 예시'), ST.sec)}
 ${pvP(pvLines(
-pvEx('A: He looked really sorry.', 'A: 그는 정말 미안해 보였어.'),
-pvEx('B: I don’t think so. He shed crocodile tears.', 'B: 난 그렇게 생각 안 해. 그는 가식적인 눈물을 흘렸어.'),
+pvEx('A: I need to finish this quickly.', 'A: 이거 빨리 끝내야 해.'),
+pvEx('B: Haste makes waste.', 'B: 급할수록 돌아가야 해.'),
+pvEx('A: But I am running out of time.', 'A: 하지만 시간이 부족해.'),
+pvEx('B: Then slow down and do it right.', 'B: 그럼 더 천천히 제대로 해.'),
 '<br>',
-pvEx('A: Did she really regret what she did?', 'A: 그녀가 정말 자기가 한 일을 후회했을까?'),
-pvEx('B: No, those were just crocodile tears.', 'B: 아니, 그건 그냥 가식적인 눈물이었어.')
+pvEx('A: I made another mistake.', 'A: 또 실수했어.'),
+pvEx('B: Don’t rush it. Haste makes waste.', 'B: 서두르지 마. 급할수록 돌아가야 해.')
 ), ST.body)}
 
 ${pvP(pvB('참고'), ST.sec)}
-${pvP('crocodile tears는 직역하면 “악어의 눈물”입니다. 이 표현은 겉으로는 슬퍼 보이지만 실제로는 진심이 아닌 눈물, 즉 “가식적인 눈물”을 뜻합니다. shed는 “흘리다”라는 뜻이라서 shed crocodile tears는 “가식적인 눈물을 흘리다”라는 의미가 됩니다.', ST.body)}
+${pvP('haste는 “서두름, 성급함”이라는 뜻이고, waste는 “낭비, 헛수고”라는 뜻입니다. Haste makes waste는 직역하면 “성급함은 낭비를 만든다”는 뜻입니다. 즉, 너무 급하게 하려고 하면 실수가 생기고 결국 시간과 노력을 더 낭비하게 된다는 의미입니다.<br><br>비슷한 표현으로 More haste, less speed도 있지만, 일상 학습용 표현으로는 Haste makes waste가 더 간단하고 기억하기 좋습니다.', ST.body)}
 
-${pvP(pvB('유래'), ST.sec)}
-${pvP('옛날 사람들은 악어가 먹이를 잡아먹으면서 눈물을 흘린다고 믿었어요. 마치 자기가 잡아먹은 대상을 불쌍히 여기는 것처럼요. 하지만 실제로는 슬퍼서 우는 게 아니라, 턱 근육을 움직일 때 눈물샘이 자극되면서 생기는 생리적인 현상일 뿐입니다.<br><br>이 모습에서 유래해 겉으로는 슬퍼 보이지만 진심이 아닌 거짓 눈물을 ' + pvKwB('en', 'crocodile tears') + '라고 부르게 되었습니다.', ST.body)}
-
-${pvP('💡 ' + pvB('한 줄 요약!') + ' ' + pvKw('ko', '가식적인 눈물을 흘리다') + '는 영어로 ' + pvKw('en', 'shed crocodile tears') + '라고 하면 자연스럽습니다.', ST.tip)}
+${pvP('💡 ' + pvB('한 줄 요약!') + ' ' + pvKw('ko', '급할수록 돌아가세요') + '는 영어로 ' + pvKw('en', 'Haste makes waste') + '라고 하면 자연스럽습니다.', ST.tip)}
 
 </div>`,
 
@@ -128,7 +127,6 @@ password,
 
 },
 ];
-
 
 
 
