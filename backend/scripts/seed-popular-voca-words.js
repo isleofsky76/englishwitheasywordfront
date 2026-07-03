@@ -73,9 +73,9 @@ const pvHero = (alt) =>
 // git push
 // 글 상단 히어로 이미지 — frontend/resources/ 에 파일 배치
 
-const IMG_URL = '/resources/true_colours.jpg';
+const IMG_URL = '/resources/dont_fall_for_it.jpg';
 
-const password = 'seed_password_true_colours';
+const password = 'seed_password_dont_fall_for_it';
 
 function makeSlug(text) {
 return String(text || '')
@@ -89,35 +89,37 @@ return String(text || '')
 
 const posts = [
 {
-title: '본색을 드러내다 영어로?',
-slug: makeSlug('true colours'),
-metaDescription: '본색을 드러내다는 영어로 show one’s true colours. 상황별 예문과 유례로 자연스럽게 익히는 popular voca 표현입니다.',
+title: '속지 마세요 영어로?',
+slug: makeSlug('dont fall for it'),
+metaDescription: '속지 마세요는 영어로 Don’t fall for it 또는 Don’t be fooled. 상황별 예문과 유례로 자연스럽게 익히는 popular voca 표현입니다.',
 message: `<div style="${ST.wrap}">
-${pvHero('true colours')}
-${pvP('He showed his true colours.', ST.title)}
-${pvP('안녕하세요! 오늘은 누군가 겉으로 보이던 모습과 달리 진짜 성격이나 속마음을 드러낼 때 쓰는 표현을 알아보겠습니다.<br><br>가장 자연스러운 표현은 ' + pvKwB('en', 'show one’s true colours') + '입니다', ST.body)}
-${pvP(pvB('본색을 드러내다'), ST.sec)}
+${pvHero('don’t fall for it')}
+${pvP('Don’t fall for it.', ST.title)}
+${pvP('안녕하세요! 오늘은 누군가의 말, 광고, 사기, 거짓말에 속지 말라고 할 때 쓰는 표현을 알아보겠습니다.<br><br>가장 자연스러운 표현은 ' + pvKwB('en', 'Don’t fall for it') + '입니다. 더 직접적으로는 ' + pvKwB('en', 'Don’t be fooled') + '라고도 말할 수 있습니다', ST.body)}
+${pvP(pvB('속지 마세요'), ST.sec)}
 ${pvP(pvLines(
-pvEx('He showed his true colours.', '그는 본색을 드러냈어요.'),
-pvEx('She finally showed her true colours.', '그녀는 마침내 본색을 드러냈어요.'),
-pvEx('People show their true colours under pressure.', '사람들은 압박을 받을 때 본색을 드러내요.'),
-pvEx('His true colours came out.', '그의 본색이 드러났어요.'),
-pvEx('Now I can see your true colours.', '이제 네 본모습을 알겠어요.')
+pvEx('Don’t fall for it.', '그거에 속지 마세요.'),
+pvEx('Don’t be fooled.', '속지 마세요.'),
+pvEx('I almost fell for it.', '나도 거의 속을 뻔했어요.'),
+pvEx('She fell for his lies.', '그녀는 그의 거짓말에 속았어요.'),
+pvEx('Don’t fall for that trick.', '그런 속임수에 넘어가지 마세요.'),
+pvEx('Many people were fooled by the fake ad.', '많은 사람들이 그 가짜 광고에 속았어요.')
 ), ST.body)}
 
 ${pvP(pvB('대화 예시'), ST.sec)}
 ${pvP(pvLines(
-pvEx('A: I thought he was a nice person.', 'A: 나는 그가 좋은 사람인 줄 알았어.'),
-pvEx('B: Me too, but he showed his true colours.', 'B: 나도 그랬어. 그런데 그는 본색을 드러냈어.'),
-'<br>',
-pvEx('A: She was kind when she needed help.', 'A: 그녀는 도움이 필요할 때는 친절했어.'),
-pvEx('B: Right. Now her true colours are coming out.', 'B: 맞아. 이제 그녀의 본색이 드러나고 있어.')
+pvEx('A: This message says I won a free phone.', 'A: 이 메시지에 내가 무료 휴대폰에 당첨됐다고 나와.'),
+pvEx('B: Don’t fall for it.', 'B: 그거에 속지 마.'),
+pvEx('A: But it looks real.', 'A: 그런데 진짜처럼 보여.'),
+pvEx('B: Don’t be fooled. It is probably a scam.', 'B: 속지 마. 아마 사기일 거야.'),
+pvEx('A: He said he could double my money.', 'A: 그가 내 돈을 두 배로 만들어 줄 수 있다고 했어.'),
+pvEx('B: Don’t fall for that trick.', 'B: 그런 속임수에 넘어가지 마.')
 ), ST.body)}
 
-${pvP(pvB('유래'), ST.sec)}
-${pvP('true colours는 직역하면 “진짜 색깔”이라는 뜻입니다. 이 표현은 배나 군대가 자신이 속한 나라나 집단을 나타내기 위해 깃발이나 색깔을 사용하던 데서 나온 표현으로 알려져 있습니다. 겉으로 다른 깃발이나 색을 보이다가, 나중에 진짜 깃발을 드러내면 그 정체가 밝혀지는 것처럼 쓰였습니다.<br><br>그래서 show one’s true colours는 원래 “진짜 색깔을 보여 주다”라는 뜻에서, 지금은 사람의 숨겨진 성격, 속마음, 본모습이 드러난다는 의미로 쓰입니다.<br><br>영국식 영어에서는 colours처럼 u를 넣고, 미국식 영어에서는 colors라고 씁니다. 따라서 true colours는 영국식 표기, true colors는 미국식 표기입니다.', ST.body)}
+${pvP(pvB('유례'), ST.sec)}
+${pvP('fall for는 원래 “무언가에 빠지다”라는 느낌을 가진 표현입니다. fall은 “떨어지다, 빠지다”라는 뜻이고, for는 대상이나 이유를 나타냅니다. 그래서 fall for someone은 “누군가에게 빠지다, 반하다”라는 뜻이 되고, fall for a lie나 fall for a trick은 “거짓말이나 속임수에 빠지다”, 즉 “속다”라는 뜻이 됩니다.<br><br>Don’t fall for it.은 직역하면 “그것에 빠지지 마세요”이지만, 실제 의미는 “그 말에 넘어가지 마세요 / 속지 마세요”입니다. Don’t be fooled.는 fool이 “속이다”라는 뜻이기 때문에 “속지 마세요”를 더 직접적으로 말하는 표현입니다.', ST.body)}
 
-${pvP('💡 ' + pvB('한 줄 요약!') + ' ' + pvKw('ko', '본색을 드러내다') + '는 영어로 ' + pvKw('en', 'show one’s true colours') + '라고 하면 자연스럽습니다.', ST.tip)}
+${pvP('💡 ' + pvB('한 줄 요약!') + ' ' + pvKw('ko', '속지 마세요') + '는 영어로 ' + pvKw('en', 'Don’t fall for it') + '이라고 하면 자연스럽고, 더 직접적으로는 ' + pvKw('en', 'Don’t be fooled') + '라고 말할 수 있습니다.', ST.tip)}
 
 </div>`,
 
