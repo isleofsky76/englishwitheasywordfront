@@ -9,66 +9,66 @@ import { uploadNewsVoca } from './news-voca-format.js';
 // ========== 여기만 수정 ==========
 
 const article = {
-  title: '[CNN] 폴 펠로시 뺑소니 사고 연루 | 캘리포니아 와인 산지 교통사고와 경범죄 혐의',
-  slug: 'paul-pelosi-hit-and-run-california-cnn',
+  title: '[CNN] 월드컵 심판은 어떻게 뽑힐까? | 결승전 심판이 되기까지의 긴 여정',
+  slug: 'world-cup-referee-selection-final-cnn',
   metaDescription:
-  '낸시 펠로시 전 하원의장의 남편 폴 펠로시가 캘리포니아 나파카운티에서 주차된 차량을 들이받은 뒤 현장을 떠난 사고에 연루됐습니다. 이 글에서는 misdemeanor, octogenarian, restitution 세 가지 핵심 영어 단어를 예문과 구문별 번역으로 정리합니다.',
-  password: 'password_seed_paul_pelosi_hit_and_run_california_cnn',
-  datePublished: '2026-07-04',
+  '월드컵 심판들은 수년간의 평가, 체력 테스트, 국제대회 경험, 경기 운영 능력을 거쳐 선발됩니다. 이 글에서는 grueling, contingent, scrutiny 세 가지 핵심 영어 단어를 예문과 구문별 번역으로 정리합니다.',
+  password: 'password_seed_world_cup_referee_selection_final_cnn',
+  datePublished: '2026-07-03',
   
   intro: [
-  '기사는 낸시 펠로시 전 하원의장의 남편 폴 펠로시가 캘리포니아 나파카운티에서 주차된 차량을 들이받은 뒤 현장을 떠난 사고에 연루됐고, 당국이 경범죄 혐의를 권고했다는 내용을 다룹니다.',
+  '기사는 월드컵 심판들이 체력 테스트, 국제대회 경험, 경기 평가, 개인적 희생을 거쳐 선발되며, 결승전 심판이 되기까지 엄청난 압박과 책임을 감당해야 한다는 내용을 다룹니다.',
   ],
   
   words: [
   {
-  title: '중요 단어 1. misdemeanor',
-  word: { en: 'misdemeanor', ko: '경범죄, 비교적 가벼운 범죄', pron: '미스디미너' },
+  title: '중요 단어 1. grueling',
+  word: { en: 'grueling', ko: '몹시 힘든, 고된', pron: '그루얼링' },
   example: {
-  en: 'Authorities recommended a misdemeanor charge after the hit-and-run incident.',
-  ko: '당국은 그 뺑소니 사고 이후 경범죄 혐의를 권고했습니다.',
+  en: 'World Cup referees go through a grueling selection process before reaching the tournament.',
+  ko: '월드컵 심판들은 대회에 도달하기 전 몹시 힘든 선발 과정을 거칩니다.',
   },
   phrases: [
-  { en: 'Authorities', ko: '당국은' },
-  { en: 'recommended', ko: '권고했습니다' },
-  { en: 'a misdemeanor charge', ko: '경범죄 혐의를' },
-  { en: 'after the hit-and-run incident', ko: '그 뺑소니 사고 이후에' },
+  { en: 'World Cup referees', ko: '월드컵 심판들은' },
+  { en: 'go through', ko: '거칩니다' },
+  { en: 'a grueling selection process', ko: '몹시 힘든 선발 과정을' },
+  { en: 'before reaching', ko: '도달하기 전에' },
+  { en: 'the tournament', ko: '그 대회에' },
   ],
   },
   {
-  title: '중요 단어 2. octogenarian',
-  word: { en: 'octogenarian', ko: '80대 노인, 80대인 사람', pron: '악터저네리언' },
+  title: '중요 단어 2. contingent',
+  word: { en: 'contingent', ko: '대표단, 파견단, 특정 집단', pron: '컨틴전트' },
   example: {
-  en: 'The octogenarian told officers that he knew he had hit something.',
-  ko: '그 80대 남성은 경찰관들에게 자신이 무언가를 쳤다는 것은 알고 있었다고 말했습니다.',
+  en: 'The referee contingent is the largest in World Cup history.',
+  ko: '그 심판단은 월드컵 역사상 가장 큰 규모입니다.',
   },
   phrases: [
-  { en: 'The octogenarian', ko: '그 80대 남성은' },
-  { en: 'told officers', ko: '경찰관들에게 말했습니다' },
-  { en: 'that he knew', ko: '자신이 알고 있었다고' },
-  { en: 'he had hit something', ko: '무언가를 쳤다는 것을' },
+  { en: 'The referee contingent', ko: '그 심판단은' },
+  { en: 'is', ko: '~입니다' },
+  { en: 'the largest', ko: '가장 큰 규모' },
+  { en: 'in World Cup history', ko: '월드컵 역사상' },
   ],
   },
   {
-  title: '중요 단어 3. restitution',
-  word: { en: 'restitution', ko: '배상, 피해 보상', pron: '레스티튜션' },
+  title: '중요 단어 3. scrutiny',
+  word: { en: 'scrutiny', ko: '정밀한 조사, 엄격한 감시', pron: '스크루터니' },
   example: {
-  en: 'He was previously ordered to pay victim restitution after a DUI case.',
-  ko: '그는 이전 음주운전 사건 이후 피해자 배상금을 내라는 명령을 받은 적이 있습니다.',
+  en: 'VAR has put referees’ decisions under sharper scrutiny.',
+  ko: 'VAR은 심판들의 판정을 더 엄격한 감시 아래 놓이게 했습니다.',
   },
   phrases: [
-  { en: 'He', ko: '그는' },
-  { en: 'was previously ordered', ko: '이전에 명령을 받았습니다' },
-  { en: 'to pay', ko: '지불하라는' },
-  { en: 'victim restitution', ko: '피해자 배상금을' },
-  { en: 'after a DUI case', ko: '음주운전 사건 이후에' },
+  { en: 'VAR', ko: 'VAR은' },
+  { en: 'has put', ko: '놓이게 했습니다' },
+  { en: 'referees’ decisions', ko: '심판들의 판정을' },
+  { en: 'under sharper scrutiny', ko: '더 엄격한 감시 아래에' },
   ],
   },
   ],
   
   source: {
-  text: 'CNN | Paul Pelosi involved in hit and run in California and could face charges, authorities say | By Associated Press',
-  url: 'https://edition.cnn.com/2026/07/04/politics/paul-pelosi-hit-and-run',
+  text: 'CNN | What it takes to be chosen as a World Cup referee – and how to ref the final | By Reagan Yip',
+  url: 'https://edition.cnn.com/2026/07/03/sport/world-cup-referee-how-to-become-one?iid=cnn_buildContentRecirc_end_recirc&recs_exp=up-next-article-end&tenant_id=related.en',
   },
   
   };
