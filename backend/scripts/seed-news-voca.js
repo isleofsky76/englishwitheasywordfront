@@ -9,76 +9,74 @@ import { uploadNewsVoca } from './news-voca-format.js';
 // ========== 여기만 수정 ==========
 
 const article = {
-  title: '[WSJ] 돌이킬 수 없다 - 유럽과 미국의 결별에 얽힌 내막',
-  slug: 'europe-rupture-with-america-flattery-diplomacy-wsj',
+  title: '[WSJ] 전기차 배터리 수명이 예상보다 오래간다 | EV 구매 불안과 배터리 내구성',
+  slug: 'ev-batteries-defying-expectations-long-lasting-wsj',
   metaDescription:
-  '유럽 정상들이 트럼프 행정부의 관세, 그린란드 위협, NATO 압박 속에서 미국과의 관계를 다시 고민하고 있습니다. 이 글에서는 placate, pithy, splinter 세 가지 핵심 영어 단어를 예문과 구문별 번역으로 정리합니다.',
-  password: 'password_seed_europe_rupture_with_america_flattery_diplomacy_wsj',
-  datePublished: '2026-07-05',
+  '최신 전기차 배터리가 수십만 마일을 달린 뒤에도 예상보다 신뢰성과 수명을 잘 유지하고 있다는 분석이 나왔습니다. 이 글에서는 reliable, steer clear, regulation 세 가지 핵심 영어 표현을 예문과 구문별 번역으로 정리합니다.',
+  password: 'password_seed_ev_batteries_defying_expectations_long_lasting_wsj',
+  datePublished: '2026-07-04',
   
   intro: [
-  '기사는 유럽 정상들이 트럼프 행정부의 관세, 그린란드 위협, NATO 방위비 압박을 겪으며 미국에 대한 의존을 줄이고 독자적인 안보·기술·외교 전략을 모색하게 됐다는 내용을 다룹니다.',
+  '기사는 최신 전기차 배터리가 업계 예상보다 오래가고 신뢰성도 높다는 데이터가 나오고 있지만, 소비자들은 여전히 배터리 교체 비용을 걱정해 전기차 구매를 망설이고 있다는 내용을 다룹니다.',
   ],
   
   words: [
   {
-  title: '중요 단어 1. placate',
-  word: { en: 'placate', ko: '달래다, 진정시키다', pron: '플러케이트' },
+  title: '중요 단어 1. reliable',
+  word: { en: 'reliable', ko: '신뢰할 수 있는, 믿을 만한', pron: '릴라이어블' },
   example: {
-  en: 'For a year, America’s closest allies had tried to placate Trump with a mix of flattery and concessions on mutual-defense and trade issues, hoping to buy time.',
-  ko: '1년 동안 미국의 가장 가까운 동맹국들은 시간을 벌기를 바라며, 상호 방위 및 무역 문제에서 아첨과 양보를 섞어 트럼프를 달래려고 노력해 왔습니다.',
+  en: 'Modern electric-vehicle batteries are proving exceptionally reliable and long-lasting, performing better than many in the auto industry expected.',
+  ko: '현대적인 전기차 배터리는 매우 신뢰할 수 있고 오래 지속된다는 것을 입증하고 있으며, 자동차 업계의 많은 이들이 예상했던 것보다 더 나은 성능을 보여주고 있습니다.',
   },
   phrases: [
-  { en: 'For a year', ko: '1년 동안' },
-  { en: 'America’s closest allies', ko: '미국의 가장 가까운 동맹국들은' },
-  { en: 'had tried to placate Trump', ko: '트럼프를 달래려고 노력해 왔습니다' },
-  { en: 'with a mix of flattery and concessions', ko: '아첨과 양보를 섞어서' },
-  { en: 'on mutual-defense and trade issues', ko: '상호 방위 및 무역 문제에서' },
-  { en: 'hoping to buy time', ko: '시간을 벌기를 바라며' },
+  { en: 'Modern electric-vehicle batteries', ko: '현대적인 전기차 배터리는' },
+  { en: 'are proving', ko: '입증하고 있습니다' },
+  { en: 'exceptionally reliable and long-lasting', ko: '매우 신뢰할 수 있고 오래 지속된다는 것을' },
+  { en: 'performing better', ko: '더 나은 성능을 보여주며' },
+  { en: 'than many in the auto industry expected', ko: '자동차 업계의 많은 이들이 예상했던 것보다' },
   ],
   },
   {
-  title: '중요 단어 2. pithy',
-  word: { en: 'pithy', ko: '간결하면서 핵심을 찌르는', pron: '피씨' },
+  title: '중요 표현 2. steer clear',
+  word: { en: 'steer clear', ko: '피하다, 가까이하지 않다', pron: '스티어 클리어' },
   example: {
-  en: 'Over lunch, Rutte offered a pithy proposal that would become his go-to strategy: Give Trump a win.',
-  ko: '점심 식사를 하며 뤼터는 자신의 핵심 전략이 될 간결한 제안을 내놓았습니다. 트럼프에게 승리를 안겨주라는 것이었습니다.',
+  en: 'Potential new car buyers’ fear of having to pay for a battery replacement is the number one reason they choose to steer clear of EVs.',
+  ko: '잠재적인 신차 구매자들이 배터리 교체 비용을 지불해야 할지도 모른다는 두려움은 그들이 전기차를 피하기로 선택하는 가장 큰 이유입니다.',
   },
   phrases: [
-  { en: 'Over lunch', ko: '점심 식사를 하며' },
-  { en: 'Rutte', ko: '뤼터는' },
-  { en: 'offered', ko: '내놓았습니다' },
-  { en: 'a pithy proposal', ko: '간결한 제안을' },
-  { en: 'that would become', ko: '~이 될' },
-  { en: 'his go-to strategy', ko: '그의 핵심 전략이' },
-  { en: 'Give Trump a win', ko: '트럼프에게 승리를 안겨주라는 것' },
+  { en: 'Potential new car buyers’ fear', ko: '잠재적인 신차 구매자들의 두려움은' },
+  { en: 'of having to pay', ko: '지불해야 할지도 모른다는' },
+  { en: 'for a battery replacement', ko: '배터리 교체 비용을' },
+  { en: 'is the number one reason', ko: '가장 큰 이유입니다' },
+  { en: 'they choose', ko: '그들이 선택하는' },
+  { en: 'to steer clear of EVs', ko: '전기차를 피하기로' },
   ],
   },
   {
-  title: '중요 단어 3. splinter',
-  word: { en: 'splinter', ko: '갈라지다, 분열되다', pron: '스플린터' },
+  title: '중요 단어 3. regulation',
+  word: { en: 'regulation', ko: '조절, 규제, 관리', pron: '레귤레이션' },
   example: {
-  en: 'The fragile consensus on flattery was starting to splinter, a trend captured by Britain’s MI6.',
-  ko: '아첨을 둘러싼 취약한 합의는 분열되기 시작했고, 영국 비밀정보부 MI6도 이러한 흐름을 포착했습니다.',
+  en: 'Improvements in car batteries’ chemical contents, battery-management systems and thermal regulation have been the difference in making batteries last longer and cost less.',
+  ko: '자동차 배터리의 화학 성분, 배터리 관리 시스템, 열 관리의 개선이 배터리를 더 오래 지속되게 하고 비용을 낮추는 차이를 만들어냈습니다.',
   },
   phrases: [
-  { en: 'The fragile consensus', ko: '취약한 합의는' },
-  { en: 'on flattery', ko: '아첨을 둘러싼' },
-  { en: 'was starting to splinter', ko: '분열되기 시작했습니다' },
-  { en: 'a trend', ko: '그 흐름은' },
-  { en: 'captured by Britain’s MI6', ko: '영국 MI6에 의해 포착된' },
+  { en: 'Improvements', ko: '개선은' },
+  { en: 'in car batteries’ chemical contents', ko: '자동차 배터리의 화학 성분에서의' },
+  { en: 'battery-management systems', ko: '배터리 관리 시스템에서의' },
+  { en: 'and thermal regulation', ko: '그리고 열 관리에서의' },
+  { en: 'have been the difference', ko: '차이를 만들어냈습니다' },
+  { en: 'in making batteries last longer and cost less', ko: '배터리를 더 오래 지속되게 하고 비용을 낮추는 데' },
   ],
   },
   ],
   
   source: {
-  text: 'WSJ | ‘There Is No Going Back’: The Inside Story of Europe’s Rupture With America | By Joe Parkinson, Drew Hinshaw and Daniel Michaels',
-  url: 'https://www.wsj.com/world/europe/european-rupture-with-america-e3a9bb3c?mod=hp_lead_pos1',
+  text: 'WSJ | EV Batteries Are Defying Expectations After Hundreds of Thousands of Miles | By Ellie Davis',
+  url: 'https://www.wsj.com/business/autos/ev-batteries-are-defying-expectations-after-hundreds-of-thousands-of-miles-8579de13?mod=hp_trendingnow_article_pos1',
   },
   
-  youtube: 'https://youtube.com/shorts/SXaeW4wfkCc',
+  youtube: 'https://youtube.com/shorts/Pt2-uG7gBEo',
   };
-
 
 
 // =================================
