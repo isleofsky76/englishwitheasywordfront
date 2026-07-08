@@ -9,72 +9,74 @@ import { uploadNewsVoca } from './news-voca-format.js';
 // ========== 여기만 수정 ==========
 
 const article = {
-  title: '[BBC] 프랑스 사람들이 창문에 분필을 칠하는 이유 | 폭염을 막는 저기술 냉방법',
-  slug: 'french-painting-windows-with-chalk-to-beat-heat-bbc',
+  title: '[WSJ] 돌이킬 수 없다 - 유럽과 미국의 결별에 얽힌 내막',
+  slug: 'europe-rupture-with-america-flattery-diplomacy-wsj',
   metaDescription:
-  '프랑스에서 기록적인 폭염이 이어지자 사람들이 창문에 분필 가루를 칠해 열을 반사하는 저기술 냉방법을 사용하고 있습니다. 이 글에서는 sweep, coating, radiation 세 가지 핵심 영어 단어를 예문과 구문별 번역으로 정리합니다.',
-  password: 'password_seed_french_painting_windows_with_chalk_to_beat_heat_bbc',
-  datePublished: '2026-06-26',
+  '유럽 정상들이 트럼프 행정부의 관세, 그린란드 위협, NATO 압박 속에서 미국과의 관계를 다시 고민하고 있습니다. 이 글에서는 placate, pithy, splinter 세 가지 핵심 영어 단어를 예문과 구문별 번역으로 정리합니다.',
+  password: 'password_seed_europe_rupture_with_america_flattery_diplomacy_wsj',
+  datePublished: '2026-07-05',
   
   intro: [
-  '기사는 프랑스에서 기록적인 폭염이 이어지면서 사람들이 물에 섞은 분필 가루를 창문에 칠해 빛은 일부 들이고 열은 반사하는 저렴한 냉방 방법을 활용하고 있다는 내용을 다룹니다.',
+  '기사는 유럽 정상들이 트럼프 행정부의 관세, 그린란드 위협, NATO 방위비 압박을 겪으며 미국에 대한 의존을 줄이고 독자적인 안보·기술·외교 전략을 모색하게 됐다는 내용을 다룹니다.',
   ],
   
   words: [
   {
-  title: '중요 단어 1. sweep',
-  word: { en: 'sweep', ko: '휩쓸다, 빠르게 퍼지다', pron: '스윕' },
+  title: '중요 단어 1. placate',
+  word: { en: 'placate', ko: '달래다, 진정시키다', pron: '플러케이트' },
   example: {
-  en: 'As record-breaking heat sweeps over France, some shops are running out of crushed chalk.',
-  ko: '기록적인 폭염이 프랑스를 휩쓸면서, 일부 상점들은 분필 가루가 바닥나고 있습니다.',
+  en: 'For a year, America’s closest allies had tried to placate Trump with a mix of flattery and concessions on mutual-defense and trade issues, hoping to buy time.',
+  ko: '1년 동안 미국의 가장 가까운 동맹국들은 시간을 벌기를 바라며, 상호 방위 및 무역 문제에서 아첨과 양보를 섞어 트럼프를 달래려고 노력해 왔습니다.',
   },
   phrases: [
-  { en: 'As record-breaking heat', ko: '기록적인 폭염이' },
-  { en: 'sweeps over France', ko: '프랑스를 휩쓸면서' },
-  { en: 'some shops', ko: '일부 상점들은' },
-  { en: 'are running out of', ko: '바닥나고 있습니다' },
-  { en: 'crushed chalk', ko: '분필 가루가' },
+  { en: 'For a year', ko: '1년 동안' },
+  { en: 'America’s closest allies', ko: '미국의 가장 가까운 동맹국들은' },
+  { en: 'had tried to placate Trump', ko: '트럼프를 달래려고 노력해 왔습니다' },
+  { en: 'with a mix of flattery and concessions', ko: '아첨과 양보를 섞어서' },
+  { en: 'on mutual-defense and trade issues', ko: '상호 방위 및 무역 문제에서' },
+  { en: 'hoping to buy time', ko: '시간을 벌기를 바라며' },
   ],
   },
   {
-  title: '중요 단어 2. coating',
-  word: { en: 'coating', ko: '코팅, 얇게 덮은 막', pron: '코팅' },
+  title: '중요 단어 2. pithy',
+  word: { en: 'pithy', ko: '간결하면서 핵심을 찌르는', pron: '피씨' },
   example: {
-  en: 'Mixed with water, then painted on glass, the result is a milky, whitish coating that lets in some light but reflects the heat.',
-  ko: '물과 섞은 뒤 유리에 칠하면, 그 결과물은 약간의 빛은 들여보내지만 열은 반사하는 우윳빛의 희끄무레한 코팅이 됩니다.',
+  en: 'Over lunch, Rutte offered a pithy proposal that would become his go-to strategy: Give Trump a win.',
+  ko: '점심 식사를 하며 뤼터는 자신의 핵심 전략이 될 간결한 제안을 내놓았습니다. 트럼프에게 승리를 안겨주라는 것이었습니다.',
   },
   phrases: [
-  { en: 'Mixed with water', ko: '물과 섞인 뒤' },
-  { en: 'then painted on glass', ko: '그다음 유리에 칠해지면' },
-  { en: 'the result is', ko: '그 결과물은 ~입니다' },
-  { en: 'a milky, whitish coating', ko: '우윳빛의 희끄무레한 코팅' },
-  { en: 'that lets in some light', ko: '약간의 빛은 들여보내지만' },
-  { en: 'but reflects the heat', ko: '열은 반사하는' },
+  { en: 'Over lunch', ko: '점심 식사를 하며' },
+  { en: 'Rutte', ko: '뤼터는' },
+  { en: 'offered', ko: '내놓았습니다' },
+  { en: 'a pithy proposal', ko: '간결한 제안을' },
+  { en: 'that would become', ko: '~이 될' },
+  { en: 'his go-to strategy', ko: '그의 핵심 전략이' },
+  { en: 'Give Trump a win', ko: '트럼프에게 승리를 안겨주라는 것' },
   ],
   },
   {
-  title: '중요 단어 3. radiation',
-  word: { en: 'radiation', ko: '복사, 방사선, 방사 에너지', pron: '레이디에이션' },
+  title: '중요 단어 3. splinter',
+  word: { en: 'splinter', ko: '갈라지다, 분열되다', pron: '스플린터' },
   example: {
-  en: 'Calcium carbonate is not only highly reflective but also resistant to solar radiation.',
-  ko: '탄산칼슘은 반사율이 매우 높을 뿐만 아니라 태양 복사에도 강합니다.',
+  en: 'The fragile consensus on flattery was starting to splinter, a trend captured by Britain’s MI6.',
+  ko: '아첨을 둘러싼 취약한 합의는 분열되기 시작했고, 영국 비밀정보부 MI6도 이러한 흐름을 포착했습니다.',
   },
   phrases: [
-  { en: 'Calcium carbonate', ko: '탄산칼슘은' },
-  { en: 'is not only', ko: '~일 뿐만 아니라' },
-  { en: 'highly reflective', ko: '반사율이 매우 높고' },
-  { en: 'but also resistant', ko: '또한 강합니다' },
-  { en: 'to solar radiation', ko: '태양 복사에' },
+  { en: 'The fragile consensus', ko: '취약한 합의는' },
+  { en: 'on flattery', ko: '아첨을 둘러싼' },
+  { en: 'was starting to splinter', ko: '분열되기 시작했습니다' },
+  { en: 'a trend', ko: '그 흐름은' },
+  { en: 'captured by Britain’s MI6', ko: '영국 MI6에 의해 포착된' },
   ],
   },
   ],
   
   source: {
-  text: 'BBC | Why the French are painting their windows with chalk to beat the heat | By Sophie Hardach',
-  url: 'https://www.bbc.com/future/article/20260625-why-the-french-are-painting-chalk-on-their-windows',
+  text: 'WSJ | ‘There Is No Going Back’: The Inside Story of Europe’s Rupture With America | By Joe Parkinson, Drew Hinshaw and Daniel Michaels',
+  url: 'https://www.wsj.com/world/europe/european-rupture-with-america-e3a9bb3c?mod=hp_lead_pos1',
   },
   
-  youtube: 'https://youtube.com/shorts/L8_o42iBetE',
+  youtube: 'https://youtube.com/shorts/SXaeW4wfkCc',
   };
 
 
