@@ -9,69 +9,76 @@ import { uploadNewsVoca } from './news-voca-format.js';
 // ========== 여기만 수정 ==========
 
 const article = {
-  title: '[CNN] 월드컵 심판은 어떻게 뽑힐까? | 결승전 심판이 되기까지의 긴 여정',
-  slug: 'world-cup-referee-selection-final-cnn',
+  title: '[WSJ] 원유 공급 과잉이 이란의 협상력을 약화시키다',
+  slug: 'oil-glut-weakens-iran-hand-hormuz-talks-wsj',
   metaDescription:
-  '월드컵 심판들은 수년간의 평가, 체력 테스트, 국제대회 경험, 경기 운영 능력을 거쳐 선발됩니다. 이 글에서는 grueling, contingent, scrutiny 세 가지 핵심 영어 단어를 예문과 구문별 번역으로 정리합니다.',
-  password: 'password_seed_world_cup_referee_selection_final_cnn',
-  datePublished: '2026-07-03',
+  '원유 가격이 하락하고 호르무즈 해협 유조선 통항이 회복되면서 각국이 석유 비축분을 다시 채울 기회가 생기고 있습니다. 이 글에서는 storage, restock, traffic 세 가지 핵심 영어 단어를 예문과 구문별 번역으로 정리합니다.',
+  password: 'password_seed_oil_glut_weakens_iran_hand_hormuz_talks_wsj',
+  datePublished: '2026-07-05',
   
   intro: [
-  '기사는 월드컵 심판들이 체력 테스트, 국제대회 경험, 경기 평가, 개인적 희생을 거쳐 선발되며, 결승전 심판이 되기까지 엄청난 압박과 책임을 감당해야 한다는 내용을 다룹니다.',
+  '기사는 원유 공급이 늘고 가격이 하락하면서 각국이 석유 비축분을 다시 채울 수 있게 되었고, 그 결과 호르무즈 해협을 이용한 이란의 협상력이 약해질 수 있다는 내용을 다룹니다.',
   ],
   
   words: [
   {
-  title: '중요 단어 1. grueling',
-  word: { en: 'grueling', ko: '몹시 힘든, 고된', pron: '그루얼링' },
+  title: '중요 단어 1. storage',
+  word: { en: 'storage', ko: '저장, 비축, 보관', pron: '스토리지' },
   example: {
-  en: 'World Cup referees go through a grueling selection process before reaching the tournament.',
-  ko: '월드컵 심판들은 대회에 도달하기 전 몹시 힘든 선발 과정을 거칩니다.',
+  en: 'The amount of oil in storage around the world is playing a central role in the U.S.-Iran power dynamics.',
+  ko: '전 세계의 석유 비축량은 미국과 이란 간의 권력 역학 관계에서 핵심적인 역할을 하고 있습니다.',
   },
   phrases: [
-  { en: 'World Cup referees', ko: '월드컵 심판들은' },
-  { en: 'go through', ko: '거칩니다' },
-  { en: 'a grueling selection process', ko: '몹시 힘든 선발 과정을' },
-  { en: 'before reaching', ko: '도달하기 전에' },
-  { en: 'the tournament', ko: '그 대회에' },
+  { en: 'The amount of oil', ko: '석유의 양은' },
+  { en: 'in storage', ko: '비축되어 있는' },
+  { en: 'around the world', ko: '전 세계에' },
+  { en: 'is playing', ko: '하고 있습니다' },
+  { en: 'a central role', ko: '핵심적인 역할을' },
+  { en: 'in the U.S.-Iran power dynamics', ko: '미국과 이란 간의 권력 역학 관계에서' },
   ],
   },
   {
-  title: '중요 단어 2. contingent',
-  word: { en: 'contingent', ko: '대표단, 파견단, 특정 집단', pron: '컨틴전트' },
+  title: '중요 단어 2. restock',
+  word: { en: 'restock', ko: '다시 채우다, 재비축하다', pron: '리스탁' },
   example: {
-  en: 'The referee contingent is the largest in World Cup history.',
-  ko: '그 심판단은 월드컵 역사상 가장 큰 규모입니다.',
+  en: 'The faster countries restock their buffers of crude, the weaker Iran’s ability to threaten the world economy by holding the Strait of Hormuz hostage.',
+  ko: '각국이 원유 비축분을 더 빨리 채워 넣을수록, 호르무즈 해협을 볼모로 세계 경제를 위협하는 이란의 능력은 더 약해집니다.',
   },
   phrases: [
-  { en: 'The referee contingent', ko: '그 심판단은' },
-  { en: 'is', ko: '~입니다' },
-  { en: 'the largest', ko: '가장 큰 규모' },
-  { en: 'in World Cup history', ko: '월드컵 역사상' },
+  { en: 'The faster countries restock', ko: '각국이 더 빨리 다시 채워 넣을수록' },
+  { en: 'their buffers of crude', ko: '자국의 원유 비축분을' },
+  { en: 'the weaker', ko: '더 약해집니다' },
+  { en: 'Iran’s ability', ko: '이란의 능력은' },
+  { en: 'to threaten the world economy', ko: '세계 경제를 위협하는' },
+  { en: 'by holding the Strait of Hormuz hostage', ko: '호르무즈 해협을 볼모로 잡음으로써' },
   ],
   },
   {
-  title: '중요 단어 3. scrutiny',
-  word: { en: 'scrutiny', ko: '정밀한 조사, 엄격한 감시', pron: '스크루터니' },
+  title: '중요 단어 3. traffic',
+  word: { en: 'traffic', ko: '통행량, 통항량, 교통량', pron: '트래픽' },
   example: {
-  en: 'VAR has put referees’ decisions under sharper scrutiny.',
-  ko: 'VAR은 심판들의 판정을 더 엄격한 감시 아래 놓이게 했습니다.',
+  en: 'Tanker traffic out of the Strait of Hormuz has entered a new normal, which is less than before the war, but enough to relieve pressure.',
+  ko: '호르무즈 해협을 빠져나가는 유조선 통항량은 새로운 정상화 단계에 접어들었으며, 이는 전쟁 전보다는 적지만 시장의 압박을 완화하기에는 충분한 수준입니다.',
   },
   phrases: [
-  { en: 'VAR', ko: 'VAR은' },
-  { en: 'has put', ko: '놓이게 했습니다' },
-  { en: 'referees’ decisions', ko: '심판들의 판정을' },
-  { en: 'under sharper scrutiny', ko: '더 엄격한 감시 아래에' },
+  { en: 'Tanker traffic', ko: '유조선 통항량은' },
+  { en: 'out of the Strait of Hormuz', ko: '호르무즈 해협을 빠져나가는' },
+  { en: 'has entered', ko: '접어들었습니다' },
+  { en: 'a new normal', ko: '새로운 정상화 단계에' },
+  { en: 'which is less than before the war', ko: '그것은 전쟁 전보다 적지만' },
+  { en: 'but enough to relieve pressure', ko: '압박을 완화하기에는 충분합니다' },
   ],
   },
   ],
-  
   source: {
-  text: 'CNN | What it takes to be chosen as a World Cup referee – and how to ref the final | By Reagan Yip',
-  url: 'https://edition.cnn.com/2026/07/03/sport/world-cup-referee-how-to-become-one?iid=cnn_buildContentRecirc_end_recirc&recs_exp=up-next-article-end&tenant_id=related.en',
+  text: 'WSJ | A Sudden Glut of Oil Threatens to Weaken Iran’s Hand in Talks | By Rebecca Feng and Georgi Kantchev',
+  url: 'https://www.wsj.com/finance/commodities-futures/a-sudden-glut-of-oil-threatens-to-weaken-irans-hand-in-talks-adfcf7c0',
   },
   
-  };
+  youtube: 'https://youtube.com/shorts/y2BiZYvX2TU',
+};
+
+
 
 
 // =================================
