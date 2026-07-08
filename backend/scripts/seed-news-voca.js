@@ -9,75 +9,73 @@ import { uploadNewsVoca } from './news-voca-format.js';
 // ========== 여기만 수정 ==========
 
 const article = {
-  title: '[WSJ] 원유 공급 과잉이 이란의 협상력을 약화시키다',
-  slug: 'oil-glut-weakens-iran-hand-hormuz-talks-wsj',
+  title: '[BBC] 프랑스 사람들이 창문에 분필을 칠하는 이유 | 폭염을 막는 저기술 냉방법',
+  slug: 'french-painting-windows-with-chalk-to-beat-heat-bbc',
   metaDescription:
-  '원유 가격이 하락하고 호르무즈 해협 유조선 통항이 회복되면서 각국이 석유 비축분을 다시 채울 기회가 생기고 있습니다. 이 글에서는 storage, restock, traffic 세 가지 핵심 영어 단어를 예문과 구문별 번역으로 정리합니다.',
-  password: 'password_seed_oil_glut_weakens_iran_hand_hormuz_talks_wsj',
-  datePublished: '2026-07-05',
+  '프랑스에서 기록적인 폭염이 이어지자 사람들이 창문에 분필 가루를 칠해 열을 반사하는 저기술 냉방법을 사용하고 있습니다. 이 글에서는 sweep, coating, radiation 세 가지 핵심 영어 단어를 예문과 구문별 번역으로 정리합니다.',
+  password: 'password_seed_french_painting_windows_with_chalk_to_beat_heat_bbc',
+  datePublished: '2026-06-26',
   
   intro: [
-  '기사는 원유 공급이 늘고 가격이 하락하면서 각국이 석유 비축분을 다시 채울 수 있게 되었고, 그 결과 호르무즈 해협을 이용한 이란의 협상력이 약해질 수 있다는 내용을 다룹니다.',
+  '기사는 프랑스에서 기록적인 폭염이 이어지면서 사람들이 물에 섞은 분필 가루를 창문에 칠해 빛은 일부 들이고 열은 반사하는 저렴한 냉방 방법을 활용하고 있다는 내용을 다룹니다.',
   ],
   
   words: [
   {
-  title: '중요 단어 1. storage',
-  word: { en: 'storage', ko: '저장, 비축, 보관', pron: '스토리지' },
+  title: '중요 단어 1. sweep',
+  word: { en: 'sweep', ko: '휩쓸다, 빠르게 퍼지다', pron: '스윕' },
   example: {
-  en: 'The amount of oil in storage around the world is playing a central role in the U.S.-Iran power dynamics.',
-  ko: '전 세계의 석유 비축량은 미국과 이란 간의 권력 역학 관계에서 핵심적인 역할을 하고 있습니다.',
+  en: 'As record-breaking heat sweeps over France, some shops are running out of crushed chalk.',
+  ko: '기록적인 폭염이 프랑스를 휩쓸면서, 일부 상점들은 분필 가루가 바닥나고 있습니다.',
   },
   phrases: [
-  { en: 'The amount of oil', ko: '석유의 양은' },
-  { en: 'in storage', ko: '비축되어 있는' },
-  { en: 'around the world', ko: '전 세계에' },
-  { en: 'is playing', ko: '하고 있습니다' },
-  { en: 'a central role', ko: '핵심적인 역할을' },
-  { en: 'in the U.S.-Iran power dynamics', ko: '미국과 이란 간의 권력 역학 관계에서' },
+  { en: 'As record-breaking heat', ko: '기록적인 폭염이' },
+  { en: 'sweeps over France', ko: '프랑스를 휩쓸면서' },
+  { en: 'some shops', ko: '일부 상점들은' },
+  { en: 'are running out of', ko: '바닥나고 있습니다' },
+  { en: 'crushed chalk', ko: '분필 가루가' },
   ],
   },
   {
-  title: '중요 단어 2. restock',
-  word: { en: 'restock', ko: '다시 채우다, 재비축하다', pron: '리스탁' },
+  title: '중요 단어 2. coating',
+  word: { en: 'coating', ko: '코팅, 얇게 덮은 막', pron: '코팅' },
   example: {
-  en: 'The faster countries restock their buffers of crude, the weaker Iran’s ability to threaten the world economy by holding the Strait of Hormuz hostage.',
-  ko: '각국이 원유 비축분을 더 빨리 채워 넣을수록, 호르무즈 해협을 볼모로 세계 경제를 위협하는 이란의 능력은 더 약해집니다.',
+  en: 'Mixed with water, then painted on glass, the result is a milky, whitish coating that lets in some light but reflects the heat.',
+  ko: '물과 섞은 뒤 유리에 칠하면, 그 결과물은 약간의 빛은 들여보내지만 열은 반사하는 우윳빛의 희끄무레한 코팅이 됩니다.',
   },
   phrases: [
-  { en: 'The faster countries restock', ko: '각국이 더 빨리 다시 채워 넣을수록' },
-  { en: 'their buffers of crude', ko: '자국의 원유 비축분을' },
-  { en: 'the weaker', ko: '더 약해집니다' },
-  { en: 'Iran’s ability', ko: '이란의 능력은' },
-  { en: 'to threaten the world economy', ko: '세계 경제를 위협하는' },
-  { en: 'by holding the Strait of Hormuz hostage', ko: '호르무즈 해협을 볼모로 잡음으로써' },
+  { en: 'Mixed with water', ko: '물과 섞인 뒤' },
+  { en: 'then painted on glass', ko: '그다음 유리에 칠해지면' },
+  { en: 'the result is', ko: '그 결과물은 ~입니다' },
+  { en: 'a milky, whitish coating', ko: '우윳빛의 희끄무레한 코팅' },
+  { en: 'that lets in some light', ko: '약간의 빛은 들여보내지만' },
+  { en: 'but reflects the heat', ko: '열은 반사하는' },
   ],
   },
   {
-  title: '중요 단어 3. traffic',
-  word: { en: 'traffic', ko: '통행량, 통항량, 교통량', pron: '트래픽' },
+  title: '중요 단어 3. radiation',
+  word: { en: 'radiation', ko: '복사, 방사선, 방사 에너지', pron: '레이디에이션' },
   example: {
-  en: 'Tanker traffic out of the Strait of Hormuz has entered a new normal, which is less than before the war, but enough to relieve pressure.',
-  ko: '호르무즈 해협을 빠져나가는 유조선 통항량은 새로운 정상화 단계에 접어들었으며, 이는 전쟁 전보다는 적지만 시장의 압박을 완화하기에는 충분한 수준입니다.',
+  en: 'Calcium carbonate is not only highly reflective but also resistant to solar radiation.',
+  ko: '탄산칼슘은 반사율이 매우 높을 뿐만 아니라 태양 복사에도 강합니다.',
   },
   phrases: [
-  { en: 'Tanker traffic', ko: '유조선 통항량은' },
-  { en: 'out of the Strait of Hormuz', ko: '호르무즈 해협을 빠져나가는' },
-  { en: 'has entered', ko: '접어들었습니다' },
-  { en: 'a new normal', ko: '새로운 정상화 단계에' },
-  { en: 'which is less than before the war', ko: '그것은 전쟁 전보다 적지만' },
-  { en: 'but enough to relieve pressure', ko: '압박을 완화하기에는 충분합니다' },
+  { en: 'Calcium carbonate', ko: '탄산칼슘은' },
+  { en: 'is not only', ko: '~일 뿐만 아니라' },
+  { en: 'highly reflective', ko: '반사율이 매우 높고' },
+  { en: 'but also resistant', ko: '또한 강합니다' },
+  { en: 'to solar radiation', ko: '태양 복사에' },
   ],
   },
   ],
+  
   source: {
-  text: 'WSJ | A Sudden Glut of Oil Threatens to Weaken Iran’s Hand in Talks | By Rebecca Feng and Georgi Kantchev',
-  url: 'https://www.wsj.com/finance/commodities-futures/a-sudden-glut-of-oil-threatens-to-weaken-irans-hand-in-talks-adfcf7c0',
+  text: 'BBC | Why the French are painting their windows with chalk to beat the heat | By Sophie Hardach',
+  url: 'https://www.bbc.com/future/article/20260625-why-the-french-are-painting-chalk-on-their-windows',
   },
   
-  youtube: 'https://youtube.com/shorts/y2BiZYvX2TU',
-};
-
+  youtube: 'https://youtube.com/shorts/L8_o42iBetE',
+  };
 
 
 
