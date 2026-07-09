@@ -8,77 +8,74 @@ import { uploadNewsVoca } from './news-voca-format.js';
 
 // ========== 여기만 수정 ==========
 const article = {
-  title: '[WSJ] 연준이 더 높은 금리를 경고한 이유 | 관세·유가·AI 붐과 인플레이션 압력',
-  slug: 'fed-officials-risks-higher-rates-inflation-wsj',
+  title: '[WSJ] 메시가 페널티킥에 약한 이유 | 천재성을 제한하는 단 한 번의 터치',
+  slug: 'messi-penalty-kicks-argentina-world-cup-wsj',
   metaDescription:
-  '연준 관계자들이 노동시장, 관세, 유가, AI 붐이 인플레이션에 미칠 위험을 지적하며 더 높은 금리가 필요할 수 있다고 경고했습니다. 이 글에서는 dilemma, instinct, imprint 세 가지 핵심 영어 단어를 예문과 구문별 번역으로 정리합니다.',
-  password: 'password_seed_fed_officials_risks_higher_rates_inflation_wsj',
-  datePublished: '2026-07-09',
+  '리오넬 메시는 역사상 최고의 축구 선수로 평가받지만, 페널티킥에서는 드리블과 방향 전환, 섬세한 터치 같은 장점이 제한됩니다. 이 글에서는 strip, blur, deceive 세 가지 핵심 영어 단어를 예문과 구문별 번역으로 정리합니다.',
+  password: 'password_seed_messi_penalty_kicks_argentina_world_cup_wsj',
+  datePublished: '2026-07-08',
   
   intro: [
-  '기사는 노동시장이 인플레이션을 뚜렷하게 낮추지 못하는 가운데, 관세와 유가, AI 붐이 겹치며 물가와 임금 결정 방식에 더 오래 남는 영향을 줄 수 있다는 연준의 우려를 다룹니다.',
+  '기사는 리오넬 메시가 축구 역사상 최고의 선수로 평가받지만, 페널티킥 상황에서는 드리블, 방향 전환, 섬세한 터치 같은 장점이 사라지기 때문에 상대적으로 덜 위협적으로 보일 수 있다는 내용을 다룹니다.',
   ],
   
   words: [
   {
-  title: '중요 단어 1. dilemma',
-  word: { en: 'dilemma', ko: '딜레마, 어려운 선택 상황', pron: '딜레마' },
+  title: '중요 단어 1. strip',
+  word: { en: 'strip', ko: '빼앗다, 벗겨 내다, 제거하다', pron: '스트립' },
   example: {
-  en: "The Fed faces a dilemma: While the labor market isn't an obvious source of inflationary pressure, it's also not clearly helping to pull inflation down.",
-  ko: '연준은 딜레마에 직면해 있습니다. 노동 시장이 물가 상승 압력의 명백한 원인은 아니지만, 그것이 인플레이션을 끌어내리는 데 확실하게 기여하고 있는 것도 아닙니다.',
+  en: 'The very exercise of the penalty kick strips away many parts of the game where Messi usually flexes his genius.',
+  ko: '페널티킥이라는 바로 그 행위 자체는 메시가 평소 자신의 천재성을 발휘하는 경기의 많은 요소를 빼앗아 버립니다.',
   },
   phrases: [
-  { en: 'The Fed', ko: '연준은' },
-  { en: 'faces a dilemma', ko: '딜레마에 직면해 있습니다' },
-  { en: "While the labor market isn't", ko: '노동 시장이 ~은 아니지만' },
-  { en: 'an obvious source of inflationary pressure', ko: '물가 상승 압력의 명백한 원인' },
-  { en: "it's also not clearly helping", ko: '그것이 또한 확실하게 기여하고 있는 것도 아닙니다' },
-  { en: 'to pull inflation down', ko: '인플레이션을 끌어내리는 데' },
+  { en: 'The very exercise', ko: '바로 그 행위 자체는' },
+  { en: 'of the penalty kick', ko: '페널티킥이라는' },
+  { en: 'strips away', ko: '빼앗아 버립니다' },
+  { en: 'many parts of the game', ko: '경기의 많은 요소를' },
+  { en: 'where Messi usually flexes his genius', ko: '메시가 평소 자신의 천재성을 발휘하는' },
   ],
   },
   {
-  title: '중요 단어 2. instinct',
-  word: { en: 'instinct', ko: '본능, 직감, 습성', pron: '인스팅트' },
+  title: '중요 단어 2. blur',
+  word: { en: 'blur', ko: '흐릿한 움직임, 흐릿한 형체', pron: '블러' },
   example: {
-  en: 'Tariffs, then oil, and now the AI boom have hit in overlapping waves, each testing the central-bank instinct to look past a one-time price jump.',
-  ko: '관세, 그다음 유가, 그리고 이제는 AI 붐이 겹겹이 밀려오는 파도처럼 타격을 주면서, 일시적인 물가 상승을 간과하려는 중앙은행의 본능을 각각 시험하고 있습니다.',
+  en: "There's no dribbling here, no sudden change of direction, or blur of delicate touches.",
+  ko: '여기에는 드리블도 없고, 갑작스러운 방향 전환도 없으며, 섬세한 터치로 인한 흐릿한 움직임도 없습니다.',
   },
   phrases: [
-  { en: 'Tariffs, then oil, and now the AI boom', ko: '관세, 그다음 유가, 그리고 이제는 AI 붐이' },
-  { en: 'have hit', ko: '타격을 주고 있습니다' },
-  { en: 'in overlapping waves', ko: '겹겹이 밀려오는 파도처럼' },
-  { en: 'each testing', ko: '각각 시험하면서' },
-  { en: 'the central-bank instinct', ko: '중앙은행의 본능을' },
-  { en: 'to look past a one-time price jump', ko: '일시적인 물가 상승을 간과하려는' },
+  { en: "There's no dribbling here", ko: '여기에는 드리블도 없습니다' },
+  { en: 'no sudden change of direction', ko: '갑작스러운 방향 전환도 없습니다' },
+  { en: 'or blur', ko: '또는 흐릿한 움직임도 없습니다' },
+  { en: 'of delicate touches', ko: '섬세한 터치로 인한' },
   ],
   },
   {
-  title: '중요 단어 3. imprint',
-  word: { en: 'imprint', ko: '흔적, 영향, 각인', pron: '임프린트' },
+  title: '중요 단어 3. deceive',
+  word: { en: 'deceive', ko: '속이다, 기만하다', pron: '디시브' },
   example: {
-  en: 'They are raising concerns that, stacked together, they leave a more lasting imprint on how households and businesses set wages and prices.',
-  ko: '그것들은 한데 쌓이면 가계와 기업이 임금과 가격을 책정하는 방식에 더 지속적인 영향을 미칠 수 있다는 우려를 키우고 있습니다.',
+  en: 'Messi still has a wide array of tricks available to deceive the goalkeeper, but he is distinctly less terrifying when all he can do is touch the ball one time.',
+  ko: '메시에게는 골키퍼를 속이는 데 이용할 수 있는 매우 다양한 기술들이 여전히 있지만, 그가 할 수 있는 전부가 공을 한 번 터치하는 것일 때 그는 확실히 덜 위협적입니다.',
   },
   phrases: [
-  { en: 'They', ko: '그것들은' },
-  { en: 'are raising concerns', ko: '우려를 키우고 있습니다' },
-  { en: 'that, stacked together', ko: '한데 쌓이면' },
-  { en: 'they leave', ko: '그것들이 남긴다는' },
-  { en: 'a more lasting imprint', ko: '더 지속적인 영향을' },
-  { en: 'on how households and businesses set wages and prices', ko: '가계와 기업이 임금과 가격을 책정하는 방식에' },
+  { en: 'Messi still has', ko: '메시에게는 여전히 있습니다' },
+  { en: 'a wide array of tricks', ko: '매우 다양한 기술들이' },
+  { en: 'available to deceive the goalkeeper', ko: '골키퍼를 속이는 데 이용할 수 있는' },
+  { en: 'but he is distinctly less terrifying', ko: '하지만 그는 확실히 덜 위협적입니다' },
+  { en: 'when all he can do', ko: '그가 할 수 있는 전부가' },
+  { en: 'is touch the ball one time', ko: '공을 한 번 터치하는 것일 때' },
   ],
   },
   ],
   
   source: {
-  text: 'WSJ | Fed Officials Flagged Risks That Would Warrant Higher Rates',
-  url: 'https://www.wsj.com/economy/central-banking/fed-officials-flagged-risks-that-would-warrant-higher-rates-6f584cba?mod=lead_feature_below_a_pos3',
+  text: 'WSJ | Lionel Messi Is the Greatest Player Ever. Why Is He So Bad at Penalty Kicks?',
+  url: 'https://www.wsj.com/sports/soccer/messi-penalty-kicks-argentina-world-cup-9e29a4aa?mod=hp_listb_pos2',
   },
-  
-  youtube: 'https://youtube.com/shorts/T88YmzKltv4',
+
+  youtube: 'https://youtube.com/shorts/9KxY7BNiWKw',
   };
 
-  
+
 // =================================
 
 uploadNewsVoca(article, API_BASE)
