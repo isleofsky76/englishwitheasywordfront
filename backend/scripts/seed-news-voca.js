@@ -8,74 +8,73 @@ import { uploadNewsVoca } from './news-voca-format.js';
 
 // ========== 여기만 수정 ==========
 const article = {
-  title: '[WSJ] 동물이 먼저인 갈라파고스 제도 | 이구아나 때문에 멈추는 공항버스',
-  slug: 'galapagos-islands-animals-come-first-wsj',
+  title: '[WSJ] 영국 시골을 탈출한 카피바라 | 삼바를 찾는 지역 주민들',
+  slug: 'capybara-on-the-lam-english-countryside-wsj',
   metaDescription:
-  '갈라파고스 제도에서는 토착 동물을 보호하기 위해 교통과 일상 운영까지 조정됩니다. 이 글에서는 companion, incident, endemic 세 가지 핵심 영어 단어를 예문과 구문별 번역으로 정리합니다.',
-  password: 'password_seed_galapagos_islands_animals_come_first_wsj',
-  datePublished: '2026-07-13',
+  '영국 햄프셔의 동물원에서 카피바라 삼바가 탈출하면서 지역 주민, 드론 조종사, 학생들까지 수색에 참여하고 있습니다. 이 글에서는 shimmy, loose, dragnet 세 가지 핵심 영어 단어를 예문과 구문별 번역으로 정리합니다.',
+  password: 'password_seed_capybara_on_the_lam_english_countryside_wsj',
+  datePublished: '2026-07-14',
   
   intro: [
-  '기사는 갈라파고스 제도에서 토착 동물을 보호하기 위해 공항버스 운행까지 조정될 정도로 동물 보호가 일상과 교통 시스템에 깊이 반영되어 있다는 내용을 다룹니다.',
+  '기사는 영국 햄프셔의 마웰 동물원에서 어린 카피바라 삼바가 울타리 틈으로 탈출한 뒤, 지역 주민들과 드론 조종사, 학교, 공항까지 수색에 참여하며 화제가 되고 있다는 내용을 다룹니다.',
   ],
   
   words: [
   {
-  title: '중요 단어 1. companion',
-  word: { en: 'companion', ko: '동반자, 함께 가는 사람', pron: '컴패니언' },
+  title: '중요 단어 1. shimmy',
+  word: { en: 'shimmy', ko: '몸을 흔들며 움직이다, 비집고 빠져나가다', pron: '쉬미' },
   example: {
-  en: 'Approaching our hotel’s front desk while on the Galápagos island of Santa Cruz, my travel companion Gidon Ofek and I received some painful news: we needed to leave for our 9 am flight a full three hours early.',
-  ko: '갈라파고스 제도 산타크루즈 섬에서 호텔 프런트 데스크에 다가갔을 때, 제 여행 동반자인 기돈 오펙과 저는 다소 고통스러운 소식을 들었습니다. 오전 9시 비행기를 타려면 무려 세 시간이나 일찍 떠나야 한다는 것이었습니다.',
+  en: 'Her name was Samba, and she was a 9-month-old capybara who five days earlier had shimmied out of a small gap in her fence at the local Marwell Zoo.',
+  ko: '그녀의 이름은 삼바였고, 그녀는 생후 9개월 된 카피바라였으며, 닷새 전 지역의 마웰 동물원에서 울타리에 난 작은 틈으로 몸을 흔들어 빠져나갔습니다.',
   },
   phrases: [
-  { en: 'Approaching our hotel’s front desk', ko: '호텔 프런트 데스크에 다가갔을 때' },
-  { en: 'while on the Galápagos island of Santa Cruz', ko: '갈라파고스 제도 산타크루즈 섬에 있는 동안' },
-  { en: 'my travel companion Gidon Ofek and I', ko: '제 여행 동반자인 기돈 오펙과 저는' },
-  { en: 'received some painful news', ko: '다소 고통스러운 소식을 들었습니다' },
-  { en: 'we needed to leave', ko: '우리가 떠나야 한다는 것이었습니다' },
-  { en: 'for our 9 am flight', ko: '오전 9시 비행기를 위해' },
-  { en: 'a full three hours early', ko: '무려 세 시간이나 일찍' },
+  { en: 'Her name was Samba', ko: '그녀의 이름은 삼바였습니다' },
+  { en: 'and she was a 9-month-old capybara', ko: '그리고 그녀는 생후 9개월 된 카피바라였습니다' },
+  { en: 'who five days earlier', ko: '닷새 전에' },
+  { en: 'had shimmied out of', ko: '몸을 흔들어 빠져나갔던' },
+  { en: 'a small gap', ko: '작은 틈으로' },
+  { en: 'in her fence', ko: '그녀의 울타리에 난' },
+  { en: 'at the local Marwell Zoo', ko: '지역의 마웰 동물원에서' },
   ],
   },
   {
-  title: '중요 단어 2. incident',
-  word: { en: 'incident', ko: '사건, 사고', pron: '인시던트' },
+  title: '중요 단어 2. loose',
+  word: { en: 'loose', ko: '풀려난, 잡히지 않은, 자유롭게 돌아다니는', pron: '루스' },
   example: {
-  en: 'The receptionist gently explained the delay: There was one less bus running due to an incident involving a run-over iguana.',
-  ko: '접수 담당자는 지연 이유를 부드럽게 설명했습니다. 차에 치인 이구아나와 관련된 사고 때문에 운행하는 버스가 한 대 줄었다는 것이었습니다.',
+  en: 'While zookeepers immediately found and recaptured Tango, Samba is still on the loose.',
+  ko: '동물원 사육사들이 탱고를 즉시 찾아 다시 붙잡았지만, 삼바는 아직 잡히지 않고 돌아다니고 있습니다.',
   },
   phrases: [
-  { en: 'The receptionist', ko: '접수 담당자는' },
-  { en: 'gently explained', ko: '부드럽게 설명했습니다' },
-  { en: 'the delay', ko: '지연 이유를' },
-  { en: 'There was one less bus running', ko: '운행하는 버스가 한 대 줄었습니다' },
-  { en: 'due to an incident', ko: '한 사고 때문에' },
-  { en: 'involving a run-over iguana', ko: '차에 치인 이구아나와 관련된' },
+  { en: 'While zookeepers', ko: '동물원 사육사들이 ~했지만' },
+  { en: 'immediately found', ko: '즉시 찾아냈고' },
+  { en: 'and recaptured Tango', ko: '탱고를 다시 붙잡았지만' },
+  { en: 'Samba is still', ko: '삼바는 아직도 ~입니다' },
+  { en: 'on the loose', ko: '잡히지 않고 돌아다니는 상태입니다' },
   ],
   },
   {
-  title: '중요 단어 3. endemic',
-  word: { en: 'endemic', ko: '특정 지역 고유의, 토착의', pron: '엔데믹' },
+  title: '중요 단어 3. dragnet',
+  word: { en: 'dragnet', ko: '대대적인 수색망, 포위 수사망', pron: '드래그넷' },
   example: {
-  en: 'Under the islands’ penal code, a single fender-bender with an endemic animal can carry severe consequences.',
-  ko: '이 섬들의 형법에 따르면, 토착 동물과 단 한 번의 가벼운 접촉 사고만 내도 심각한 결과를 초래할 수 있습니다.',
+  en: 'Paddick and her children, Sid and Minnie, are among thousands of Hampshire residents caught up in the dragnet.',
+  ko: '패딕과 그녀의 아이들인 시드와 미니는 그 수색망에 휘말린 수천 명의 햄프셔 주민들 가운데 있습니다.',
   },
   phrases: [
-  { en: 'Under the islands’ penal code', ko: '이 섬들의 형법에 따르면' },
-  { en: 'a single fender-bender', ko: '단 한 번의 가벼운 접촉 사고도' },
-  { en: 'with an endemic animal', ko: '토착 동물과의' },
-  { en: 'can carry', ko: '초래할 수 있습니다' },
-  { en: 'severe consequences', ko: '심각한 결과를' },
+  { en: 'Paddick and her children', ko: '패딕과 그녀의 아이들은' },
+  { en: 'Sid and Minnie', ko: '시드와 미니인' },
+  { en: 'are among thousands of Hampshire residents', ko: '수천 명의 햄프셔 주민들 가운데 있습니다' },
+  { en: 'caught up in', ko: '휘말린' },
+  { en: 'the dragnet', ko: '그 대대적인 수색망에' },
   ],
   },
   ],
   
   source: {
-  text: 'WSJ | The Islands Where Animals Always Come First | By Jenna Belhumeur',
-  url: 'https://www.wsj.com/lifestyle/travel/galapagos-islands-animals-constitution-ecuador-2e2be959',
+  text: 'WSJ | A Capybara Is on the Lam in the English Countryside, and Locals Are Going Wild | By Julia Amann',
+  url: 'https://www.wsj.com/world/uk/a-capybara-is-on-the-lam-in-the-english-countryside-and-locals-are-going-wild-51da31e2',
   },
   
-  youtube: 'https://youtube.com/shorts/dVlmAFLq2og',
+  youtube: 'https://youtube.com/shorts/AYPfBGqY2as',
   };
 
 // =================================
