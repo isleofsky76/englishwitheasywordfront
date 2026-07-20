@@ -55,6 +55,14 @@ export const BOARD_SEO = {
     jsVersion: '20260622a',
     listHtml: 'popular-voca-list.html',
   },
+  'word-of-the-day': {
+    label: 'Word of the Day',
+    cssFile: 'page30_viewpost_wordofday.css',
+    cssVersion: '20260611a',
+    jsFile: 'page30_viewpost_wordofday.js',
+    jsVersion: '20260720c',
+    listHtml: 'word-of-the-day-list.html',
+  },
 };
 
 export function toIsoDateOnly(d = new Date()) {
@@ -351,10 +359,18 @@ export function updateSitemap(slugEntries) {
 
 export function applySeoAfterUpload(boardPath, config) {
   if (!config.slug || !config.metaDescription) return null;
+  const seoPath = BOARD_SEO[boardPath]
+    ? writeSeoPage(boardPath, {
+        title: config.title,
+        slug: config.slug,
+        metaDescription: config.metaDescription,
+        datePublished: config.datePublished || toIsoDateOnly(),
+      })
+    : null;
   const sitemapPath = updateSitemap({
     boardPath,
     slug: config.slug,
     lastmod: config.datePublished || toIsoDateOnly(),
   });
-  return { sitemapPath, url: sitemapUrlForSlug(boardPath, config.slug) };
+  return { sitemapPath, seoPath, url: sitemapUrlForSlug(boardPath, config.slug) };
 }
