@@ -60,7 +60,7 @@
     var isProdHost = window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1';
     var wordofdayApiMode = apiMode || (isProdHost ? 'prod' : null);
     return [
-      { path: '/wordofday', page: 'word-of-the-day.html', postPath: 'word-of-the-day', label: '오늘의 단어', apiMode: wordofdayApiMode },
+      { path: '/wordofday', page: 'word-of-the-day.html', postPath: 'word-of-the-day', label: '오늘의 단어장', apiMode: wordofdayApiMode },
       { path: '/guestbook', page: 'news-voca.html', postPath: 'news-voca', label: '뉴스 어휘' },
       { path: '/vocabulary', page: 'english-synonym.html', postPath: 'english-synonym', label: '유의어' },
       { path: '/easy-voca', page: 'popular-voca.html', postPath: 'popular-voca', label: '인기 어휘' },
