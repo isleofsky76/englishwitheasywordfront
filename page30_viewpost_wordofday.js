@@ -225,7 +225,12 @@ function attachWordOfDayWebTTS() {
             if (!plain) return lineHtml;
             if (!wotdIsMostlyEnglish(plain)) return lineHtml;
             if (/^Source\b/i.test(plain) || /^https?:\/\//i.test(plain)) return lineHtml;
-            const speak = plain.replace(/\s*🔊\s*$/u, '').trim();
+            // 이모지·스피커 아이콘은 TTS에서 제외 (worm 등으로 읽히는 문제 방지)
+            const speak = plain
+                .replace(/\s*🔊\s*$/u, '')
+                .replace(/\p{Extended_Pictographic}/gu, '')
+                .replace(/\s+/g, ' ')
+                .trim();
             if (!speak) return lineHtml;
             changed = true;
             return wotdAppendTtsInlineAfterEnglish(lineHtml, speak);
