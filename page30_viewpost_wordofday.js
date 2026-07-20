@@ -224,7 +224,7 @@ function attachWordOfDayWebTTS() {
             const plain = wotdStripTagsToText(lineHtml);
             if (!plain) return lineHtml;
             if (!wotdIsMostlyEnglish(plain)) return lineHtml;
-            if (/^Source\b/i.test(plain) || /^https?:\/\//i.test(plain)) return lineHtml;
+            if (/^Source\b/i.test(plain) || /^출처\b/.test(plain) || /^WSJ\s*\|/i.test(plain) || /^https?:\/\//i.test(plain)) return lineHtml;
             // 이모지·스피커 아이콘은 TTS에서 제외 (worm 등으로 읽히는 문제 방지)
             const speak = plain
                 .replace(/\s*🔊\s*$/u, '')
