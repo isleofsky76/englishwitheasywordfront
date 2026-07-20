@@ -24,12 +24,13 @@ function sanitizeHtml(html) {
     if (!html) return html;
     const div = document.createElement('div');
     div.innerHTML = html;
-    const allowedTags = ['p', 'br', 'strong', 'b', 'em', 'i', 'u', 'span', 'div', 'a', 'img'];
+    const allowedTags = ['p', 'br', 'strong', 'b', 'em', 'i', 'u', 'span', 'div', 'a', 'img', 'article', 'section', 'h2', 'h3', 'ul', 'ol', 'li', 'footer'];
     // Word of the Day 전용 카드(wotd-card 등)를 위해 class 속성 허용
     const allowedAttributes = ['class', 'style', 'href', 'target', 'rel', 'src', 'alt', 'loading', 'decoding', 'onerror'];
     div.querySelectorAll('*').forEach(el => {
         if (!allowedTags.includes(el.tagName.toLowerCase())) {
-            el.replaceWith(el.textContent);
+            // 태그 제거해도 자식 HTML은 유지 (textContent로 통째로 평탄화하지 않음)
+            el.replaceWith(...el.childNodes);
         } else {
             Array.from(el.attributes).forEach(attr => {
                 if (!allowedAttributes.includes(attr.name.toLowerCase())) el.removeAttribute(attr.name);
@@ -74,7 +75,8 @@ function preserveLineBreaksInHtml(html) {
 function convertMediaLinks(text) {
     if (!text) return text;
     const hasHtml = /<[^>]+>/.test(text);
-    const urlPattern = /(https?:\/\/[^\s<>"'\n\r()]+)/g;
+    // 속성값(href/src 등) 안의 URL은 건드리지 않음 — 본문 텍스트 URL만 변환
+    const urlPattern = /(?<![=("'"])(https?:\/\/[^\s<>"'\n\r()]+)/g;
     let result = hasHtml ? text : escapeHtml(text);
     result = result.replace(urlPattern, (url) => {
         const youtubeRegex = /(?:youtube\.com\/(?:watch\?v=|shorts\/)|youtu\.be\/)([a-zA-Z0-9_-]+)/;
