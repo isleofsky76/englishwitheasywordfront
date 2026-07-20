@@ -345,10 +345,10 @@
             <!-- Word of the Day -->
             <article class="preview-section">
                 <div class="preview-header">
-                    <h2>오늘의 단어</h2>
+                    <h2>오늘의 단어장</h2>
                     <div class="preview-more"><a href="word-of-the-day-list.html?api=prod">더보기 &gt;</a></div>
                 </div>
-                <div id="wordofday-preview-list" role="region" aria-label="오늘의 단어 목록"></div>
+                <div id="wordofday-preview-list" role="region" aria-label="오늘의 단어장 목록"></div>
             </article>
             
             <!-- News Vocabulary -->
@@ -802,7 +802,7 @@
             if (!listEl) return;
 
             var effectiveApiMode = apiMode || (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1' ? 'prod' : null);
-            var fallbackHtml = buildPreviewListHtml([], '<a href="word-of-the-day-list.html?api=prod">오늘의 단어 보기</a>');
+            var fallbackHtml = buildPreviewListHtml([], '<a href="word-of-the-day-list.html?api=prod">오늘의 단어장 보기</a>');
             var timeoutId = setTimeout(function() { listEl.innerHTML = fallbackHtml; }, 8000);
 
             fetch(getApiBase() + '/wordofday')
