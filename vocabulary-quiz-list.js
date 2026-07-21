@@ -19,8 +19,10 @@
       var response = await fetch(API_BASE_URL + "/vocabulary-quiz", { cache: "no-store" });
       if (!response.ok) throw new Error("HTTP " + response.status);
       var data = await response.json();
-      var entries = Array.isArray(data) ? data : data.entries || [];
-      renderGuestbookTable(list, entries, {
+      var messages = Array.isArray(data)
+        ? { entries: data }
+        : { entries: data.entries || [] };
+      renderGuestbookTable(list, messages, {
         postPage: "vocabulary-quiz.html",
         apiMode: apiMode,
         board: "vocabulary-quiz",
