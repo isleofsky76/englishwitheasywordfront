@@ -36,29 +36,6 @@ body {
   font-size: 0.9rem;
 }
 
-.quiz-toc {
-  margin-bottom: 30px;
-  padding: 18px 20px;
-  border: 1px solid var(--quiz-border);
-  background: #fafcfb;
-}
-
-.quiz-toc h2 {
-  margin: 0 0 10px;
-  font-size: 1.05rem;
-  font-weight: 800;
-}
-
-.quiz-toc ol {
-  margin: 0;
-  padding-left: 22px;
-}
-
-.quiz-toc a {
-  color: var(--quiz-green);
-  text-decoration: none;
-}
-
 .quiz-entry {
   scroll-margin-top: calc(var(--navbar-height, 56px) + 24px);
 }
@@ -137,10 +114,21 @@ body {
   margin-bottom: 0;
 }
 
-.quiz-answer,
+.quiz-answer-label,
 .quiz-word-meaning {
   color: var(--quiz-green);
   font-weight: 800;
+}
+
+.quiz-answer-label {
+  margin-bottom: 2px !important;
+}
+
+.quiz-loading,
+.quiz-empty,
+.quiz-error {
+  padding: 24px 0;
+  color: var(--quiz-muted);
 }
 
 .quiz-example-en {

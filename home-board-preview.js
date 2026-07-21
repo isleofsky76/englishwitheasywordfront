@@ -43,6 +43,9 @@
   }
 
   function buildEntryHref(board, entry, index, apiParam) {
+    if (board.page === 'vocabulary-quiz.html' && entry?.slug) {
+      return 'vocabulary-quiz.html#' + encodeURIComponent(entry.slug);
+    }
     if (entry && entry.href) return String(entry.href);
     if (window.ViewpostSeo && window.ViewpostSeo.buildListPostHref) {
       return window.ViewpostSeo.buildListPostHref(entry, board.page, index, apiParam, board.postPath);
@@ -63,7 +66,7 @@
     return [
       { path: '/wordofday', page: 'word-of-the-day.html', postPath: 'word-of-the-day', label: '오늘의 단어장', apiMode: wordofdayApiMode },
       { path: '/guestbook', page: 'news-voca.html', postPath: 'news-voca', label: '뉴스 어휘' },
-      { page: 'vocabulary-quiz.html', label: '영어 단어 퀴즈', entries: window.VOCABULARY_QUIZ_ENTRIES || [] },
+      { path: '/vocabulary-quiz', page: 'vocabulary-quiz.html', label: '영어 단어 퀴즈' },
       { path: '/vocabulary', page: 'english-synonym.html', postPath: 'english-synonym', label: '유의어' },
       { path: '/easy-voca', page: 'popular-voca.html', postPath: 'popular-voca', label: '인기 어휘' },
       { path: '/situational-english', page: 'situational-english.html', postPath: 'situational-english', label: '상황 영어' },
@@ -77,9 +80,6 @@
 
   function fetchAllPreviewEntries(apiBase, boards, apiMode) {
     return Promise.allSettled(boards.map(function (board) {
-      if (Array.isArray(board.entries)) {
-        return Promise.resolve({ board: board, entries: board.entries });
-      }
       return fetch(apiBase + board.path)
         .then(function (r) {
           if (!r.ok) throw new Error('HTTP ' + r.status);
