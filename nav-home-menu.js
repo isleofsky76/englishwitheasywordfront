@@ -8,7 +8,7 @@
 
 (function () {
 
-    var NAV_HOME_MENU_VERSION = '20260721b';
+    var NAV_HOME_MENU_VERSION = '20260721c';
 
     // SEO slug 페이지(/word-of-the-day/slug/ 등)에서도 동작하도록 루트 절대 경로 사용
     var HOME_SECTION_LINKS = [
@@ -26,7 +26,7 @@
 
         { href: '/news-voca-list.html', label: '뉴스 어휘', pages: ['news-voca-list.html', 'news-voca.html'] },
 
-        { href: '/vocabulary-quiz.html', label: '영어 단어 퀴즈', pages: ['vocabulary-quiz.html'] },
+        { href: '/vocabulary-quiz-list.html', label: '영어 단어 퀴즈', pages: ['vocabulary-quiz-list.html', 'vocabulary-quiz.html'] },
 
         { href: '/popular-voca-list.html', label: '인기 어휘', pages: ['popular-voca-list.html', 'popular-voca.html'] },
 

@@ -44,7 +44,7 @@
 
   function buildEntryHref(board, entry, index, apiParam) {
     if (board.page === 'vocabulary-quiz.html' && entry?.slug) {
-      return 'vocabulary-quiz.html#' + encodeURIComponent(entry.slug);
+      return 'vocabulary-quiz.html?slug=' + encodeURIComponent(entry.slug);
     }
     if (entry && entry.href) return String(entry.href);
     if (window.ViewpostSeo && window.ViewpostSeo.buildListPostHref) {

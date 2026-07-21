@@ -364,7 +364,7 @@
             <article class="preview-section">
                 <div class="preview-header">
                     <h2>영어 단어 퀴즈</h2>
-                    <div class="preview-more"><a href="vocabulary-quiz.html">더보기 &gt;</a></div>
+                    <div class="preview-more"><a href="vocabulary-quiz-list.html">더보기 &gt;</a></div>
                 </div>
                 <div id="vocabulary-quiz-preview-list" role="region" aria-label="영어 단어 퀴즈 목록"></div>
             </article>
@@ -482,8 +482,8 @@
     <!-- Bootstrap Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="viewpost-seo.js?v=20260702"></script>
-    <script src="nav-home-menu.js?v=20260721b"></script>
-    <script src="home-board-preview.js?v=20260721d"></script>
+    <script src="nav-home-menu.js?v=20260721c"></script>
+    <script src="home-board-preview.js?v=20260721e"></script>
     <script src="english-directory.js" defer></script>
     
     <script>
@@ -541,7 +541,7 @@
 
         function buildPreviewHref(entry, postPage, origIdx, apiParam, postPath) {
             if (postPage === 'vocabulary-quiz.html' && entry && entry.slug) {
-                return 'vocabulary-quiz.html#' + encodeURIComponent(entry.slug);
+                return 'vocabulary-quiz.html?slug=' + encodeURIComponent(entry.slug);
             }
             if (entry && entry.href) return String(entry.href);
             if (window.ViewpostSeo && window.ViewpostSeo.buildListPostHref) {
@@ -620,7 +620,7 @@
                     renderPreviewList(listEl, parseEntries(data), 'vocabulary-quiz.html', null, '등록된 퀴즈가 없습니다.');
                 })
                 .catch(function() {
-                    listEl.innerHTML = buildPreviewListHtml([], '<a href="vocabulary-quiz.html">영어 단어 퀴즈 보기</a>');
+                    listEl.innerHTML = buildPreviewListHtml([], '<a href="vocabulary-quiz-list.html">영어 단어 퀴즈 보기</a>');
                 });
         })();
 
