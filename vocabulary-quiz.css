@@ -1,0 +1,179 @@
+:root {
+  --quiz-green: #2f6f55;
+  --quiz-green-soft: #eef7f2;
+  --quiz-border: #dbe7e0;
+  --quiz-text: #1f2933;
+  --quiz-muted: #66736c;
+}
+
+body {
+  font-family: "Noto Sans KR", "Poppins", sans-serif;
+  color: var(--quiz-text);
+  background: #fff;
+}
+
+.vocabulary-quiz-main {
+  width: min(760px, calc(100% - 32px));
+  margin: calc(var(--navbar-height, 56px) + 28px) auto 60px;
+}
+
+.vocabulary-quiz-header {
+  margin-bottom: 24px;
+  padding-bottom: 18px;
+  border-bottom: 2px solid var(--quiz-green);
+}
+
+.vocabulary-quiz-header h1 {
+  margin: 0 0 8px;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 800;
+}
+
+.vocabulary-quiz-header p,
+.quiz-entry-date {
+  margin: 0;
+  color: var(--quiz-muted);
+  font-size: 0.9rem;
+}
+
+.quiz-toc {
+  margin-bottom: 30px;
+  padding: 18px 20px;
+  border: 1px solid var(--quiz-border);
+  background: #fafcfb;
+}
+
+.quiz-toc h2 {
+  margin: 0 0 10px;
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+
+.quiz-toc ol {
+  margin: 0;
+  padding-left: 22px;
+}
+
+.quiz-toc a {
+  color: var(--quiz-green);
+  text-decoration: none;
+}
+
+.quiz-entry {
+  scroll-margin-top: calc(var(--navbar-height, 56px) + 24px);
+}
+
+.quiz-entry-title {
+  margin: 0 0 6px;
+  font-size: 1.35rem;
+  font-weight: 800;
+}
+
+.quiz-entry-date {
+  margin-bottom: 20px;
+}
+
+.vocabulary-quiz-card {
+  margin-bottom: 18px;
+  padding: 20px;
+  border: 1px solid var(--quiz-border);
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 4px 16px rgba(23, 53, 41, 0.06);
+}
+
+.quiz-question {
+  margin: 0 0 14px;
+  font-size: 1.05rem;
+  font-weight: 800;
+  line-height: 1.55;
+}
+
+.quiz-choice-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0 0 16px;
+  padding: 0;
+  list-style: none;
+}
+
+.quiz-choice {
+  padding: 10px 12px;
+  border: 1px solid #e3e9e5;
+  border-radius: 8px;
+  background: #f8faf9;
+  font-family: "Poppins", sans-serif;
+  font-size: 0.92rem;
+}
+
+.quiz-answer-details {
+  border-top: 1px solid var(--quiz-border);
+}
+
+.quiz-answer-toggle {
+  padding: 14px 2px 0;
+  color: var(--quiz-green);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.quiz-answer-details[open] .quiz-answer-toggle {
+  margin-bottom: 14px;
+}
+
+.quiz-answer-content {
+  padding: 16px;
+  border-radius: 9px;
+  background: var(--quiz-green-soft);
+}
+
+.quiz-answer-content p {
+  margin: 0 0 10px;
+  line-height: 1.7;
+}
+
+.quiz-answer-content p:last-child {
+  margin-bottom: 0;
+}
+
+.quiz-answer,
+.quiz-word-meaning {
+  color: var(--quiz-green);
+  font-weight: 800;
+}
+
+.quiz-example-en {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+}
+
+.quiz-example-ko {
+  color: #4d5953;
+}
+
+.quiz-source {
+  margin-top: 24px;
+  color: var(--quiz-muted);
+  font-size: 0.88rem;
+}
+
+.quiz-source a {
+  color: #c4302b;
+  font-weight: 700;
+}
+
+@media (max-width: 520px) {
+  .vocabulary-quiz-main {
+    width: min(100% - 24px, 760px);
+    margin-top: calc(var(--navbar-height, 56px) + 20px);
+  }
+
+  .vocabulary-quiz-card {
+    padding: 16px;
+  }
+
+  .quiz-choice-list {
+    grid-template-columns: 1fr;
+  }
+}

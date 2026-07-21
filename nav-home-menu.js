@@ -8,40 +8,43 @@
 
 (function () {
 
-    var NAV_HOME_MENU_VERSION = '20260626e';
+    var NAV_HOME_MENU_VERSION = '20260721b';
 
+    // SEO slug 페이지(/word-of-the-day/slug/ 등)에서도 동작하도록 루트 절대 경로 사용
     var HOME_SECTION_LINKS = [
-        { href: 'index.html#home-best', label: 'Best 조회수', hash: 'home-best' },
-        { href: 'index.html#home-recent', label: '최신 업데이트', hash: 'home-recent' }
+        { href: '/index.html#home-best', label: 'Best 조회수', hash: 'home-best' },
+        { href: '/index.html#home-recent', label: '최신 업데이트', hash: 'home-recent' }
     ];
 
 
 
     var MENU_ITEMS = [
 
-        { href: 'index.html', label: '처음으로', pages: ['index.html', ''] },
+        { href: '/index.html', label: '처음으로', pages: ['index.html', ''] },
 
-        { href: 'word-of-the-day-list.html', label: '오늘의 단어', pages: ['word-of-the-day-list.html', 'word-of-the-day.html'] },
+        { href: '/word-of-the-day-list.html', label: '오늘의 단어장', pages: ['word-of-the-day-list.html', 'word-of-the-day.html'] },
 
-        { href: 'news-voca-list.html', label: '뉴스 어휘', pages: ['news-voca-list.html', 'news-voca.html'] },
+        { href: '/news-voca-list.html', label: '뉴스 어휘', pages: ['news-voca-list.html', 'news-voca.html'] },
 
-        { href: 'popular-voca-list.html', label: '인기 어휘', pages: ['popular-voca-list.html', 'popular-voca.html'] },
+        { href: '/vocabulary-quiz.html', label: '영어 단어 퀴즈', pages: ['vocabulary-quiz.html'] },
 
-        { href: 'situational-english-list.html', label: '상황 영어', pages: ['situational-english-list.html', 'situational-english.html'] },
+        { href: '/popular-voca-list.html', label: '인기 어휘', pages: ['popular-voca-list.html', 'popular-voca.html'] },
 
-        { href: 'cooking-voca-list.html', label: '요리 영어', pages: ['cooking-voca-list.html', 'cooking-voca.html'] },
+        { href: '/situational-english-list.html', label: '상황 영어', pages: ['situational-english-list.html', 'situational-english.html'] },
 
-        { href: 'culture-voca-list.html', label: '컬쳐 어휘', pages: ['culture-voca-list.html', 'culture-voca.html'] },
+        { href: '/cooking-voca-list.html', label: '요리 영어', pages: ['cooking-voca-list.html', 'cooking-voca.html'] },
 
-        { href: 'english-synonym-list.html', label: '유의어', pages: ['english-synonym-list.html', 'english-synonym.html'] },
+        { href: '/culture-voca-list.html', label: '컬쳐 어휘', pages: ['culture-voca-list.html', 'culture-voca.html'] },
 
-        { href: 'ranking-news-list.html', label: '랭킹 뉴스', pages: ['ranking-news-list.html', 'ranking-news.html'] },
+        { href: '/english-synonym-list.html', label: '유의어', pages: ['english-synonym-list.html', 'english-synonym.html'] },
 
-        { href: 'photo-english-list.html', label: '포토영어', pages: ['photo-english-list.html', 'photo-english.html'] },
+        { href: '/ranking-news-list.html', label: '랭킹 뉴스', pages: ['ranking-news-list.html', 'ranking-news.html'] },
 
-        { href: 'pros-cons-list.html', label: 'Pros & Cons', pages: ['pros-cons-list.html', 'pros-cons.html'] },
+        { href: '/photo-english-list.html', label: '포토영어', pages: ['photo-english-list.html', 'photo-english.html'] },
 
-        { href: 'english-directory.html', label: '학습 사이트 디렉터리', pages: ['english-directory.html'] }
+        { href: '/pros-cons-list.html', label: 'Pros & Cons', pages: ['pros-cons-list.html', 'pros-cons.html'] },
+
+        { href: '/english-directory.html', label: '학습 사이트 디렉터리', pages: ['english-directory.html'] }
 
     ];
 

@@ -360,6 +360,15 @@
                 <div id="news-voca-preview-list" role="region" aria-label="뉴스 어휘 목록"></div>
             </article>
             
+            <!-- Vocabulary Quiz -->
+            <article class="preview-section">
+                <div class="preview-header">
+                    <h2>영어 단어 퀴즈</h2>
+                    <div class="preview-more"><a href="vocabulary-quiz.html">더보기 &gt;</a></div>
+                </div>
+                <div id="vocabulary-quiz-preview-list" role="region" aria-label="영어 단어 퀴즈 목록"></div>
+            </article>
+            
             <!-- Synonyms -->
             <article class="preview-section">
                 <div class="preview-header">
@@ -473,8 +482,9 @@
     <!-- Bootstrap Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="viewpost-seo.js?v=20260702"></script>
-    <script src="nav-home-menu.js?v=20260720a"></script>
-    <script src="home-board-preview.js?v=20260720b"></script>
+    <script src="nav-home-menu.js?v=20260721b"></script>
+    <script src="vocabulary-quiz-data.js?v=20260721a"></script>
+    <script src="home-board-preview.js?v=20260721c"></script>
     <script src="english-directory.js" defer></script>
     
     <script>
@@ -531,6 +541,7 @@
         };
 
         function buildPreviewHref(entry, postPage, origIdx, apiParam, postPath) {
+            if (entry && entry.href) return String(entry.href);
             if (window.ViewpostSeo && window.ViewpostSeo.buildListPostHref) {
                 return window.ViewpostSeo.buildListPostHref(entry, postPage, origIdx, apiParam, postPath);
             }
@@ -564,7 +575,7 @@
         }
 
         var loadingListHtml = buildPreviewListHtml([], '로딩 중...');
-        ['best-views-preview-list', 'recent-updates-preview-list', 'wordofday-preview-list', 'news-voca-preview-list', 'synonym-preview-list', 'easy-voca-preview-list', 'situational-english-preview-list', 'cooking-voca-preview-list', 'culture-voca-preview-list', 'ranking-news-preview-list', 'photo-english-preview-list', 'pros-cons-preview-list', 'english-directory-preview-list'].forEach(function(id) {
+        ['best-views-preview-list', 'recent-updates-preview-list', 'wordofday-preview-list', 'news-voca-preview-list', 'vocabulary-quiz-preview-list', 'synonym-preview-list', 'easy-voca-preview-list', 'situational-english-preview-list', 'cooking-voca-preview-list', 'culture-voca-preview-list', 'ranking-news-preview-list', 'photo-english-preview-list', 'pros-cons-preview-list', 'english-directory-preview-list'].forEach(function(id) {
             var el = document.getElementById(id);
             if (el) el.innerHTML = loadingListHtml;
         });
@@ -592,6 +603,14 @@
                     clearTimeout(newsTimeoutId);
                     listEl.innerHTML = fallbackHtml;
                 });
+        })();
+
+        // Vocabulary Quiz
+        (function loadVocabularyQuizPreview() {
+            var listEl = document.getElementById('vocabulary-quiz-preview-list');
+            if (!listEl) return;
+            var entries = Array.isArray(window.VOCABULARY_QUIZ_ENTRIES) ? window.VOCABULARY_QUIZ_ENTRIES : [];
+            renderPreviewList(listEl, entries, 'vocabulary-quiz.html', null, '등록된 퀴즈가 없습니다.');
         })();
 
         // Synonym

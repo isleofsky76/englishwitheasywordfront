@@ -159,7 +159,7 @@ export function buildSeoPageHtml(boardPath, config) {
     <script src="../../viewpost-meta.js?v=20260627"></script>
     <script src="../../viewpost-like.js?v=20260627"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../../nav-home-menu.js?v=20260618"></script>
+    <script src="../../nav-home-menu.js?v=20260720a"></script>
     <script src="../../${board.jsFile}?v=${board.jsVersion}"></script>
     <script src="../../weather-banner.js?v=20260612e" defer></script>
     <script src="../../world-clock.js?v=20260612g" defer></script>
@@ -194,7 +194,7 @@ const BOARD_HTML = {
 /** API 경로 → sitemap boardPath (slug 있는 글만 수집) */
 export const BOARD_API_ENDPOINTS = [
   { apiPath: '/guestbook', boardPath: 'news-voca', label: '뉴스 어휘' },
-  { apiPath: '/wordofday', boardPath: 'word-of-the-day', label: '오늘의 단어' },
+  { apiPath: '/wordofday', boardPath: 'word-of-the-day', label: '오늘의 단어장' },
   { apiPath: '/photo-english', boardPath: 'photo-english', label: '사진 영어' },
   { apiPath: '/ranking-news', boardPath: 'ranking-news', label: '랭킹 뉴스' },
   { apiPath: '/cooking-voca', boardPath: 'cooking-voca', label: '요리 어휘' },
@@ -240,6 +240,7 @@ const SITEMAP_STATIC_URLS = [
   { loc: `${SITE_ORIGIN}/pros-cons-list.html`, priority: '0.8' },
   { loc: `${SITE_ORIGIN}/word-of-the-day-list.html`, priority: '0.8' },
   { loc: `${SITE_ORIGIN}/photo-english-list.html`, priority: '0.8' },
+  { loc: `${SITE_ORIGIN}/vocabulary-quiz.html`, priority: '0.8' },
 ];
 
 function entryLastmod(entry) {
