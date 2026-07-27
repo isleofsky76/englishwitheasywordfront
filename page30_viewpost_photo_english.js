@@ -526,22 +526,22 @@ function peParsePhotoCard(card) {
 function peBuildLessonHtml(data, title) {
     const captionKo = String(title || '').split('|')[0].trim() || '사진으로 배우는 영어';
     const focus = data.sentences.slice(0, 3);
-    const rest = data.sentences.slice(3);
     const sourceSentences = focus.length ? focus : data.sentences;
     const hiddenVerbs = pePickHiddenVerbsPerSentence(sourceSentences);
     const keywords = pePickKeywords(sourceSentences, 6);
     const vocab = keywords.map(peVocabMeta);
 
-    const sentenceCards = focus.map((s, idx) => {
-        const badgeClass = PE_BADGE_CLASS[idx] || PE_BADGE_CLASS[2];
-        const enHtml = peRenderSentenceWithBlanks(s.en, hiddenVerbs[idx], idx);
+    const sentenceCards = data.sentences.map((s, idx) => {
+        const isInteractive = idx < focus.length;
+        const badgeClass = idx < PE_BADGE_CLASS.length ? PE_BADGE_CLASS[idx] : PE_BADGE_CLASS[2];
+        const enHtml = isInteractive ? peRenderSentenceWithBlanks(s.en, hiddenVerbs[idx], idx) : escapeHtml(s.en);
         return (
             '<article class="pe-scard">' +
               '<div class="pe-scard-top">' +
                 '<span class="pe-badge ' + badgeClass + '">Sentence ' + (idx + 1) + '</span>' +
                 '<button type="button" class="pe-tts-btn" data-pe-tts="' + wotdEscapeAttr(s.en) + '" aria-label="문장 읽기">🔊</button>' +
               '</div>' +
-              '<p class="pe-en pe-en--interactive">' + enHtml + '</p>' +
+              '<p class="pe-en' + (isInteractive ? ' pe-en--interactive' : '') + '">' + enHtml + '</p>' +
               '<p class="pe-ko-line">' + escapeHtml(s.ko) + '</p>' +
             '</article>'
         );
@@ -581,21 +581,6 @@ function peBuildLessonHtml(data, title) {
         });
     });
 
-    const restHtml = rest.length
-        ? ('<section class="pe-more-sentences">' +
-            '<h3 class="pe-section-title">더 많은 문장</h3>' +
-            rest.map((s) => (
-              '<article class="pe-scard pe-scard--plain">' +
-                '<div class="pe-scard-top">' +
-                  '<button type="button" class="pe-tts-btn" data-pe-tts="' + wotdEscapeAttr(s.en) + '" aria-label="문장 읽기">🔊</button>' +
-                '</div>' +
-                '<p class="pe-en">' + escapeHtml(s.en) + '</p>' +
-                '<p class="pe-ko-line">' + escapeHtml(s.ko) + '</p>' +
-              '</article>'
-            )).join('') +
-          '</section>')
-        : '';
-
     return {
         html: (
             '<div class="pe-lesson" data-pe-lesson>' +
@@ -609,10 +594,6 @@ function peBuildLessonHtml(data, title) {
                 '</aside>' +
                 '<div class="pe-sentence-stack">' + sentenceCards + '</div>' +
               '</div>' +
-              '<section class="pe-vocab-section">' +
-                '<h3 class="pe-section-title"><span class="pe-section-icon" aria-hidden="true">📚</span> 주요 단어</h3>' +
-                '<div class="pe-vocab-grid">' + vocabCards + '</div>' +
-              '</section>' +
               '<section class="pe-quiz-section" data-pe-quiz hidden>' +
                 '<h3 class="pe-quiz-title">🎯 빠른 복습 (Quick Quiz)</h3>' +
                 '<div class="pe-quiz-card">' +
@@ -623,7 +604,10 @@ function peBuildLessonHtml(data, title) {
                 '</div>' +
                 '<button type="button" class="pe-quiz-next" data-pe-quiz-next disabled>다음 문제로 → (점수 +10 XP)</button>' +
               '</section>' +
-              restHtml +
+              '<section class="pe-vocab-section">' +
+                '<h3 class="pe-section-title"><span class="pe-section-icon" aria-hidden="true">📚</span> 주요 단어</h3>' +
+                '<div class="pe-vocab-grid">' + vocabCards + '</div>' +
+              '</section>' +
               (data.aiNote ? '<p class="pe-ai-note">' + escapeHtml(data.aiNote) + '</p>' : '') +
             '</div>'
         ),
