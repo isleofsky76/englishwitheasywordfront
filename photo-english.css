@@ -1,4 +1,24 @@
-/* 포토영어 — 이미지 상단 + 영·한 문장 (번호 없음) */
+/* 포토영어 2.0 — 인터랙티브 레슨 (이미지 + 문장 + 단어 + 퀴즈) */
+
+:root {
+  --pe-bg: #F5F5F4;
+  --pe-surface: #FFFFFF;
+  --pe-text: #2C2C2A;
+  --pe-muted: #888780;
+  --pe-border: #E8E6DC;
+  --pe-accent: #378ADD;
+  --pe-accent-bg: #E6F1FB;
+  --pe-accent-text: #185FA5;
+  --pe-warn-bg: #FAEEDA;
+  --pe-warn-text: #854F0B;
+  --pe-success-bg: #EAF3DE;
+  --pe-success-text: #3B6D11;
+  --pe-quiz-bg: #EAF3DE;
+  --pe-quiz-border: #C5D9A8;
+  --pe-quiz-btn: #3B6D11;
+  --pe-radius: 14px;
+  --pe-shadow: 0 2px 10px rgba(44, 44, 42, 0.06);
+}
 
 .photo-english-card {
   margin: 0;
@@ -7,94 +27,450 @@
   box-sizing: border-box;
 }
 
-.photo-english-card .pe-hero {
-  margin: 0;
-  padding: 0;
-  width: 100%;
+.photo-english-card--interactive {
+  background: transparent;
 }
 
-.photo-english-card .pe-hero-img,
-.photo-english-card .pe-hero img,
-.photo-english-card .wotd-hero-image {
-  width: 100%;
-  max-width: 100%;
-  height: auto;
-  display: block;
-  margin: 0 0 0.15rem 0;
-  border-radius: 8px;
-}
-
-/* 구형 단어 카드 등 히어로 외 이미지 */
-.photo-english-card img:not(.pe-hero-img) {
-  width: 100%;
-  max-width: 100%;
-  height: auto;
-  display: block;
-  margin: 0;
-  border-radius: 10px;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
-}
-
-.photo-english-card .pe-sentences {
-  display: flex;
-  flex-direction: column;
+/* XP */
+.pe-xp-bar {
+  display: inline-flex;
+  align-items: center;
   gap: 0.35rem;
-  margin: 0;
-  padding: 0;
-  width: 100%;
+  margin: 0 0 0.85rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  background: var(--pe-warn-bg);
+  color: var(--pe-warn-text);
+  font-size: 13px;
+  font-weight: 600;
 }
 
-/* cooking-voca .cv-word 톤 — 베이지 카드 */
-.photo-english-card .pe-sentence {
+/* Main grid */
+.pe-lesson-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  align-items: start;
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 900px) {
+  .pe-lesson-grid {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    gap: 1.15rem;
+  }
+}
+
+.pe-image-card {
+  background: var(--pe-surface);
+  border: 1px solid var(--pe-border);
+  border-radius: var(--pe-radius);
+  box-shadow: var(--pe-shadow);
+  padding: 0.85rem;
+  overflow: hidden;
+}
+
+.pe-image-card .pe-hero-img,
+.pe-image-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 10px;
+  object-fit: cover;
+  aspect-ratio: 4 / 3;
+  background: #E8F0FE;
+}
+
+.pe-image-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 4 / 3;
+  border-radius: 10px;
+  background: #E8F0FE;
+  font-size: 2.5rem;
+  color: #9AA0A6;
+}
+
+.pe-caption {
+  margin: 0.75rem 0 0.15rem;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--pe-text);
+  line-height: 1.4;
+}
+
+.pe-sentence-stack {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 0.16rem;
-  width: 100%;
-  margin: 0;
-  padding: 0.52rem 0.72rem;
-  background: #fffdf9;
-  border: 1px solid #eadfce;
-  border-radius: 9px;
-  box-shadow: 0 1px 2px rgba(92, 73, 48, 0.05);
-  box-sizing: border-box;
+  gap: 0.75rem;
 }
 
-.photo-english-card .pe-sentence > * {
-  margin: 0;
-  background: transparent !important;
+.pe-scard {
+  background: var(--pe-surface);
+  border: 1px solid var(--pe-border);
+  border-radius: var(--pe-radius);
+  box-shadow: var(--pe-shadow);
+  padding: 0.95rem 1.05rem;
 }
 
-.photo-english-card .pe-en {
-  display: block;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  font-size: 1.03rem;
-  line-height: 1.3;
-  color: #6f3f17;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  white-space: normal;
-  word-break: keep-all;
-  overflow-wrap: break-word;
+.pe-scard-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.55rem;
 }
 
-.photo-english-card .pe-ko-line {
-  display: block;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  font-size: 0.9rem;
-  line-height: 1.4;
-  color: #2f2418;
+.pe-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.22rem 0.6rem;
+  border-radius: 8px;
+  font-size: 11px;
   font-weight: 600;
-  white-space: normal;
-  word-break: keep-all;
-  overflow-wrap: break-word;
+  line-height: 1.2;
 }
 
-.photo-english-card .pe-ai-note {
+.pe-badge--1 {
+  background: var(--pe-accent-bg);
+  color: var(--pe-accent-text);
+}
+
+.pe-badge--2 {
+  background: var(--pe-warn-bg);
+  color: var(--pe-warn-text);
+}
+
+.pe-badge--3 {
+  background: var(--pe-success-bg);
+  color: var(--pe-success-text);
+}
+
+.pe-en {
+  margin: 0 0 0.35rem;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--pe-text);
+  line-height: 1.55;
+  letter-spacing: -0.01em;
+}
+
+.pe-ko-line {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--pe-muted);
+  line-height: 1.5;
+}
+
+.pe-tts-btn {
+  border: 0;
+  background: transparent;
+  color: var(--pe-accent);
+  cursor: pointer;
+  font-size: 1rem;
+  line-height: 1;
+  padding: 0.15rem 0.25rem;
+  border-radius: 6px;
+}
+
+.pe-tts-btn:hover,
+.pe-tts-btn.is-playing {
+  background: var(--pe-accent-bg);
+}
+
+/* Interactive blanks in sentences — 점선 1개만, 문자 밑줄(____) 없음 */
+.pe-blank {
+  display: inline-block;
+  min-width: 4.8em;
+  min-height: 1.2em;
+  margin: 0 2px;
+  padding: 0 6px 1px;
+  border: 0;
+  border-bottom: 2px dashed var(--pe-accent);
+  background: rgba(55, 138, 221, 0.08);
+  color: var(--pe-accent-text);
+  font: inherit;
+  font-weight: 700;
+  line-height: 1.35;
+  cursor: pointer;
+  border-radius: 4px 4px 0 0;
+  vertical-align: baseline;
+  text-decoration: none !important;
+  box-shadow: none;
+}
+
+.pe-blank:hover {
+  background: rgba(55, 138, 221, 0.16);
+}
+
+.pe-blank.is-revealed {
+  min-width: 0;
+  border-bottom: 2px solid #3B6D11;
+  background: var(--pe-success-bg);
+  color: var(--pe-success-text);
+  cursor: default;
+}
+
+/* Vocabulary */
+.pe-section-title {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0 0 0.75rem;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--pe-text);
+}
+
+.pe-section-icon {
+  font-size: 1.1rem;
+}
+
+.pe-vocab-section {
+  margin: 0 0 1.35rem;
+}
+
+.pe-vocab-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.55rem;
+}
+
+@media (min-width: 560px) {
+  .pe-vocab-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.pe-vocab-card {
+  background: var(--pe-surface);
+  border: 1px solid var(--pe-border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.pe-vocab-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.75rem 0.9rem;
+  cursor: pointer;
+  list-style: none;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--pe-text);
+}
+
+.pe-vocab-summary::-webkit-details-marker {
+  display: none;
+}
+
+.pe-vocab-chevron {
+  color: #B4B2A9;
+  font-size: 12px;
+  transition: transform 0.2s ease;
+}
+
+.pe-vocab-card[open] .pe-vocab-chevron {
+  transform: rotate(180deg);
+}
+
+.pe-vocab-body {
+  padding: 0 0.9rem 0.85rem;
+  border-top: 1px solid #F1F0EA;
+  animation: peVocabIn 0.2s ease;
+}
+
+@keyframes peVocabIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.pe-vocab-ipa-row {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin: 0.55rem 0 0.35rem;
+}
+
+.pe-vocab-ipa {
+  font-size: 13px;
+  color: var(--pe-muted);
+}
+
+.pe-vocab-meaning {
+  margin: 0 0 0.25rem;
+  font-size: 13px;
+  color: var(--pe-text);
+  font-weight: 500;
+}
+
+.pe-vocab-example {
+  margin: 0;
+  font-size: 12px;
+  color: var(--pe-muted);
+  line-height: 1.45;
+}
+
+/* Quiz */
+.pe-quiz-section {
+  margin: 0 0 1.5rem;
+  padding: 1rem 1.05rem 1.05rem;
+  background: var(--pe-quiz-bg);
+  border: 1px solid var(--pe-quiz-border);
+  border-radius: var(--pe-radius);
+}
+
+.pe-quiz-title {
+  margin: 0 0 0.75rem;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--pe-success-text);
+}
+
+.pe-quiz-card {
+  background: var(--pe-surface);
+  border-radius: 10px;
+  padding: 0.95rem 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.pe-quiz-guide {
+  margin: 0 0 0.55rem;
+  font-size: 13px;
+  color: var(--pe-muted);
+}
+
+.pe-quiz-prompt {
+  margin: 0 0 0.85rem;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--pe-text);
+  line-height: 1.5;
+}
+
+.pe-quiz-blank {
+  display: inline-block;
+  min-width: 5em;
+  min-height: 1.2em;
+  padding: 0 6px 1px;
+  border: 0;
+  border-bottom: 2px dashed var(--pe-accent);
+  background: rgba(55, 138, 221, 0.08);
+  color: var(--pe-success-text);
+  font-weight: 700;
+  text-align: center;
+  border-radius: 4px 4px 0 0;
+  vertical-align: baseline;
+  text-decoration: none !important;
+}
+
+.pe-quiz-blank.is-filled {
+  min-width: 0;
+  border-bottom: 2px solid #3B6D11;
+  background: var(--pe-success-bg);
+  color: var(--pe-success-text);
+  padding: 0 6px 1px;
+}
+
+.pe-quiz-choices {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.pe-choice {
+  min-height: 36px;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid var(--pe-border);
+  background: #fff;
+  color: var(--pe-text);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.pe-choice:hover:not(:disabled) {
+  border-color: #c9c6ba;
+  background: #FAFAF8;
+}
+
+.pe-choice.is-correct {
+  background: var(--pe-success-bg);
+  border-color: #B7D18A;
+  color: var(--pe-success-text);
+}
+
+.pe-choice.is-wrong {
+  background: #FCEBEB;
+  border-color: #F0B8B8;
+  color: #A32D2D;
+}
+
+.pe-choice:disabled {
+  cursor: default;
+  opacity: 0.95;
+}
+
+.pe-quiz-feedback {
+  margin: 0.65rem 0 0;
+  min-height: 1.2em;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--pe-muted);
+}
+
+.pe-quiz-feedback.is-correct {
+  color: var(--pe-success-text);
+}
+
+.pe-quiz-feedback.is-wrong {
+  color: #A32D2D;
+}
+
+.pe-quiz-next {
+  width: 100%;
+  min-height: 46px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--pe-quiz-btn);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, opacity 0.15s;
+}
+
+.pe-quiz-next:hover:not(:disabled) {
+  background: #325f0f;
+}
+
+.pe-quiz-next:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* More sentences */
+.pe-more-sentences {
+  margin: 0 0 1rem;
+}
+
+.pe-more-sentences .pe-scard {
+  margin-bottom: 0.55rem;
+}
+
+.pe-scard--plain .pe-scard-top {
+  justify-content: flex-end;
+  margin-bottom: 0.35rem;
+}
+
+.pe-ai-note {
   margin: 0.75rem 0 0;
   padding: 0;
   font-size: 0.78rem;
@@ -102,77 +478,77 @@
   color: #94a3b8;
 }
 
-/* 구형 단어 카드 (기존 글 호환) */
-.photo-english-card .pe-word {
-  font-size: 1.15rem;
-  font-weight: 700;
-  color: #1e40af;
-}
-
-.photo-english-card .pe-ko {
-  color: #334155;
-  line-height: 1.55;
-}
-
-.photo-english-card .pe-example {
-  margin-top: 0.75rem;
-  padding: 0.4rem 0 0.4rem 0.9rem;
-  border-left: 3px solid #93c5fd;
-  line-height: 1.55;
-}
-
-#post-message .photo-english-card {
+/* Legacy fallback (non-interactive posts without pe-sentence structure still rare) */
+.photo-english-card:not(.photo-english-card--interactive) .pe-hero {
   margin: 0;
+  padding: 0;
   width: 100%;
 }
 
-#post-message .photo-english-card .pe-hero {
-  margin: 0;
-}
-
-#post-message .photo-english-card .pe-sentences {
-  margin-top: 0;
-  padding-top: 0;
+.photo-english-card:not(.photo-english-card--interactive) .pe-hero-img,
+.photo-english-card:not(.photo-english-card--interactive) .pe-hero img,
+.photo-english-card:not(.photo-english-card--interactive) .wotd-hero-image {
   width: 100%;
-}
-
-#post-message .photo-english-card .pe-hero-img,
-#post-message .photo-english-card .wotd-hero-image {
-  margin: 0 0 0.15rem 0;
   max-width: 100%;
   height: auto;
+  display: block;
+  margin: 0 0 0.15rem 0;
   border-radius: 8px;
 }
 
-#post-message .photo-english-card .pe-en,
-#post-message .photo-english-card .pe-ko-line {
-  line-height: inherit;
+.photo-english-card:not(.photo-english-card--interactive) .pe-sentences {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin: 0;
+  padding: 0;
+}
+
+.photo-english-card:not(.photo-english-card--interactive) .pe-sentence {
+  display: flex;
+  flex-direction: column;
+  gap: 0.16rem;
+  padding: 0.52rem 0.72rem;
+  background: #fffdf9;
+  border: 1px solid #eadfce;
+  border-radius: 9px;
 }
 
 @media (max-width: 767px) {
-  .photo-english-card .pe-hero-img,
-  .photo-english-card .pe-hero img,
-  .photo-english-card .wotd-hero-image,
-  #post-message .photo-english-card .pe-hero-img,
-  #post-message .photo-english-card .wotd-hero-image {
-    width: 100%;
+  .pe-image-card .pe-hero-img,
+  .pe-image-card img {
     aspect-ratio: 1 / 1;
-    object-fit: cover;
-    height: auto;
+  }
+
+  .pe-en {
+    font-size: 15px;
+  }
+
+  .pe-quiz-choices {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
   }
 }
 
-@media (max-width: 480px) {
-  .photo-english-card .pe-sentence {
-    padding: 0.48rem 0.58rem;
-    gap: 0.12rem;
-  }
+/* Override legacy viewpost beige styles for interactive lesson */
+#post-message .photo-english-card--interactive .pe-en {
+  color: var(--pe-text);
+  font-weight: 700;
+  line-height: 1.55;
+}
 
-  .photo-english-card .pe-en {
-    font-size: 0.98rem;
-  }
+#post-message .photo-english-card--interactive .pe-ko-line {
+  color: var(--pe-muted);
+  font-weight: 400;
+  line-height: 1.5;
+}
 
-  .photo-english-card .pe-ko-line {
-    font-size: 0.87rem;
-  }
+body:has(.photo-english-card--interactive) {
+  background: #F5F5F4;
+}
+
+#post-container:has(.photo-english-card--interactive) {
+  background: #FBFBFA;
+  box-shadow: 0 8px 24px rgba(44, 44, 42, 0.06);
+  border: 1px solid var(--pe-border);
 }
