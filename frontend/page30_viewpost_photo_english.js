@@ -388,27 +388,6 @@ function peLemma(word) {
     return w;
 }
 
-function peVocabMeta(word) {
-    const lemma = peLemma(word);
-    const hit = PE_VOCAB_DICT[lemma] || PE_VOCAB_DICT[String(word || '').toLowerCase()];
-    if (hit) {
-        return {
-            word: lemma,
-            display: lemma,
-            ipa: hit.ipa,
-            meaning: hit.meaning,
-            example: hit.example
-        };
-    }
-    return {
-        word: lemma,
-        display: lemma,
-        ipa: '',
-        meaning: '이 문장에서 사용된 핵심 단어입니다.',
-        example: ''
-    };
-}
-
 function pePickKeywords(sentences, limit) {
     const counts = {};
     const order = [];
@@ -583,7 +562,6 @@ function peBuildLessonHtml(data, title) {
     const allSentences = data.sentences;
     const hiddenVerbs = pePickHiddenVerbsPerSentence(allSentences);
     const keywords = pePickKeywords(allSentences, 6);
-    const vocab = keywords.map(peVocabMeta);
 
     const sentenceCards = allSentences.map((s, idx) => {
         const badgeClass = PE_BADGE_CLASS[idx % PE_BADGE_CLASS.length];
@@ -601,23 +579,6 @@ function peBuildLessonHtml(data, title) {
             '</article>'
         );
     }).join('');
-
-    const vocabCards = vocab.map((v) => (
-        '<details class="pe-vocab-card" data-pe-vocab="' + wotdEscapeAttr(v.word) + '">' +
-          '<summary class="pe-vocab-summary">' +
-            '<span class="pe-vocab-word">' + escapeHtml(v.display) + '</span>' +
-            '<span class="pe-vocab-chevron" aria-hidden="true">▾</span>' +
-          '</summary>' +
-          '<div class="pe-vocab-body">' +
-            '<div class="pe-vocab-ipa-row">' +
-              (v.ipa ? '<span class="pe-vocab-ipa">' + escapeHtml(v.ipa) + '</span>' : '') +
-              '<button type="button" class="pe-tts-btn" data-pe-tts="' + wotdEscapeAttr(v.display) + '" aria-label="단어 발음">🔊 발음</button>' +
-            '</div>' +
-            '<p class="pe-vocab-meaning">' + escapeHtml(v.meaning) + '</p>' +
-            (v.example ? '<p class="pe-vocab-example">' + escapeHtml(v.example) + '</p>' : '') +
-          '</div>' +
-        '</details>'
-    )).join('');
 
     const quizBank = [];
     (hiddenVerbs || []).forEach((h) => {
@@ -667,10 +628,6 @@ function peBuildLessonHtml(data, title) {
                     '<button type="button" class="pe-quiz-next" data-pe-quiz-next>다음 문제로 →</button>' +
                   '</span>' +
                 '</div>' +
-              '</section>' +
-              '<section class="pe-vocab-section">' +
-                '<h3 class="pe-section-title"><span class="pe-section-icon" aria-hidden="true">📚</span> 주요 단어</h3>' +
-                '<div class="pe-vocab-grid">' + vocabCards + '</div>' +
               '</section>' +
               (data.aiNote ? '<p class="pe-ai-note">' + escapeHtml(data.aiNote) + '</p>' : '') +
             '</div>'
