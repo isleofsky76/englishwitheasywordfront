@@ -101,6 +101,7 @@
             label: board.label,
             title: entry.title,
             views: entry.views || 0,
+            likes: entry.likes || 0,
             date: entry.date,
             href: buildEntryHref(board, entry, index, apiParam),
             sortTime: parseEntrySortTime(entry, index)
@@ -149,22 +150,67 @@
     return y + '.' + m + '.' + day;
   }
 
-  function buildRecentPreviewRow(dateStr, label, title, views, href) {
+  var LABEL_STYLE = {
+    '오늘의 단어장': { badge: 'preview-badge--wordofday', accent: 'preview-accent--wordofday' },
+    '뉴스 어휘': { badge: 'preview-badge--news', accent: 'preview-accent--news' },
+    '영어 단어 퀴즈': { badge: 'preview-badge--quiz', accent: 'preview-accent--quiz' },
+    '유의어': { badge: 'preview-badge--synonym', accent: 'preview-accent--synonym' },
+    '인기 어휘': { badge: 'preview-badge--popular', accent: 'preview-accent--popular' },
+    '상황 영어': { badge: 'preview-badge--situational', accent: 'preview-accent--situational' },
+    '요리 영어': { badge: 'preview-badge--cooking', accent: 'preview-accent--cooking' },
+    '컬쳐 어휘': { badge: 'preview-badge--culture', accent: 'preview-accent--culture' },
+    '랭킹 뉴스': { badge: 'preview-badge--ranking', accent: 'preview-accent--ranking' },
+    '포토 영어': { badge: 'preview-badge--photo', accent: 'preview-accent--photo' },
+    'Pros & Cons': { badge: 'preview-badge--proscons', accent: 'preview-accent--proscons' }
+  };
+
+  function styleForLabel(label) {
+    return LABEL_STYLE[label] || { badge: 'preview-badge--default', accent: 'preview-accent--news' };
+  }
+
+  function formatViewsHtml(views, likes) {
+    var viewCount = Number(views) || 0;
+    var likeCount = parseInt(likes, 10) || 0;
+    var viewsPart = viewCount
+      ? '<span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> ' + viewCount + ' 조회</span>'
+      : '<span class="preview-views preview-views--empty"><span class="preview-views-icon" aria-hidden="true">👁</span> 조회 없음</span>';
+    return '<span class="preview-meta-stats">' + viewsPart +
+      '<span class="preview-sep preview-sep--stats" aria-hidden="true"> · </span>' +
+      '<span class="preview-likes">' + likeCount + ' 추천</span></span>';
+  }
+
+  function buildRecentPreviewRow(dateStr, label, title, views, href, isNew, likes) {
+    var style = styleForLabel(label);
     var safeDate = formatPreviewDate(dateStr);
     var safeLabel = escapeHtml(label);
     var safeTitle = escapeHtml(title || '제목 없음');
-    var viewsHtml = views ? '<span class="preview-views">[' + views + ']</span>' : '';
-    return '<li><a href="' + href + '">' +
-      '<span class="preview-title"><span class="preview-date">' + safeDate + '</span> | ' +
-      safeLabel + ' | ' + safeTitle + viewsHtml + '</span></a></li>';
+    var newHtml = isNew ? '<span class="preview-new">NEW</span>' : '';
+    return '<li class="preview-card preview-card--recent ' + style.accent + '"><a href="' + href + '">' +
+      '<span class="preview-body">' +
+        '<span class="preview-meta">' + newHtml +
+          '<span class="preview-date">' + safeDate + '</span>' +
+          '<span class="preview-badge ' + style.badge + '">' + safeLabel + '</span>' +
+        '</span>' +
+        '<span class="preview-title">' + safeTitle + '</span>' +
+        formatViewsHtml(views, likes) +
+      '</span>' +
+      '<span class="preview-arrow" aria-hidden="true">›</span>' +
+      '</a></li>';
   }
 
-  function buildBestPreviewRow(number, label, title, views, href) {
+  function buildBestPreviewRow(number, label, title, views, href, likes) {
+    var style = styleForLabel(label);
     var safeLabel = escapeHtml(label);
     var safeTitle = escapeHtml(title || '제목 없음');
-    var viewsHtml = views ? '<span class="preview-views">[' + views + ']</span>' : '';
-    return '<li><a href="' + href + '"><span class="preview-num">' + number + '</span>' +
-      '<span class="preview-title">' + safeLabel + ' | ' + safeTitle + viewsHtml + '</span></a></li>';
+    return '<li class="preview-card"><a href="' + href + '">' +
+      '<span class="preview-num">' + number + '</span>' +
+      '<span class="preview-body">' +
+        '<span class="preview-badge ' + style.badge + '">' + safeLabel + '</span>' +
+        '<span class="preview-title">' + safeTitle + '</span>' +
+        formatViewsHtml(views, likes) +
+      '</span>' +
+      '<span class="preview-arrow" aria-hidden="true">›</span>' +
+      '</a></li>';
   }
 
   function loadBest(listEl, limit) {
@@ -188,7 +234,7 @@
         return;
       }
       var rows = preview.map(function (item, idx) {
-        return buildBestPreviewRow(idx + 1, item.label, item.title, item.views, item.href);
+        return buildBestPreviewRow(idx + 1, item.label, item.title, item.views, item.href, item.likes);
       });
       listEl.innerHTML = buildPreviewListHtml(rows, '', listEl.getAttribute('data-list-class'));
     }).catch(function () {
@@ -216,8 +262,8 @@
         listEl.innerHTML = buildPreviewListHtml([], '게시글이 없습니다.', listClass);
         return;
       }
-      var rows = preview.map(function (item) {
-        return buildRecentPreviewRow(item.date, item.label, item.title, item.views, item.href);
+      var rows = preview.map(function (item, idx) {
+        return buildRecentPreviewRow(item.date, item.label, item.title, item.views, item.href, idx < 2, item.likes);
       });
       listEl.innerHTML = buildPreviewListHtml(rows, '', listClass);
     }).catch(function () {

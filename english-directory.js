@@ -262,9 +262,12 @@
 
   function buildPreviewListRow(number, title, href) {
     return (
-      '<li><a href="' + escapeHtml(href) + '">' +
+      '<li class="preview-card"><a href="' + escapeHtml(href) + '">' +
         '<span class="preview-num">' + number + '</span>' +
-        '<span class="preview-title">' + escapeHtml(title) + '</span>' +
+        '<span class="preview-body">' +
+          '<span class="preview-title">' + escapeHtml(title) + '</span>' +
+        '</span>' +
+        '<span class="preview-arrow" aria-hidden="true">›</span>' +
       '</a></li>'
     );
   }

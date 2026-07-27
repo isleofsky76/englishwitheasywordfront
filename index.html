@@ -58,10 +58,23 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6108574897789788" crossorigin="anonymous"></script>
     
     <style>
+        :root {
+            --bg-warning: #FAEEDA;
+            --text-warning: #854F0B;
+            --bg-accent: #E6F1FB;
+            --text-accent: #185FA5;
+            --bg-success: #EAF3DE;
+            --text-success: #3B6D11;
+            --fill-accent: #378ADD;
+            --surface-2: #FFFFFF;
+            --text-primary: #2C2C2A;
+            --text-secondary: #888780;
+            --border-soft: #E8E6DC;
+        }
         body {
             font-family: 'Noto Sans KR', 'Poppins', sans-serif;
-            background: #fff;
-            color: #222;
+            background: #F5F4F0;
+            color: var(--text-primary);
         }
         * {
             font-family: 'Noto Sans KR', 'Poppins', sans-serif;
@@ -94,117 +107,312 @@
             padding-left: 0;
         }
         .preview-section {
-            background: #fff;
+            background: transparent;
             border: none;
-            border-top: 1px solid #f0f0f0;
+            border-top: none;
             box-shadow: none;
-            padding: 0.85rem 0 0.5rem;
-            margin-bottom: 0;
+            padding: 1.75rem 0 1rem;
+            margin-bottom: 0.35rem;
             text-align: left;
         }
         .preview-section:first-of-type {
-            border-top: none;
+            padding-top: 0.85rem;
         }
         .preview-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 0.35rem;
-            padding-bottom: 0.45rem;
-            border-bottom: 1px solid #f0f0f0;
+            margin-bottom: 0.75rem;
+            padding-bottom: 0;
+            border-bottom: none;
         }
         .preview-section h2,
         .preview-section h3 {
-            font-size: 15px;
-            font-weight: 800;
-            color: #111;
+            display: flex;
+            align-items: center;
+            gap: 0.45rem;
+            font-size: 18px;
+            font-weight: 500;
+            color: var(--text-primary);
             margin: 0;
-            line-height: 1.4;
-            letter-spacing: -0.03em;
+            line-height: 1.35;
+            letter-spacing: -0.02em;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             text-rendering: optimizeLegibility;
         }
+        .preview-header-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 18px;
+            line-height: 1;
+        }
+        .preview-header-icon--clock {
+            width: 1.5rem;
+            height: 1.5rem;
+            border-radius: 50%;
+            background: var(--bg-accent);
+            color: var(--text-accent);
+            font-size: 14px;
+        }
+        .preview-header-icon--book {
+            color: var(--text-accent);
+            font-size: 18px;
+        }
         .preview-more {
-            font-size: 0.75rem;
-            color: #888;
+            font-size: 12px;
+            font-weight: 400;
+            color: var(--text-secondary);
             flex-shrink: 0;
         }
         .preview-list {
             list-style: none;
             padding: 0;
             margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.55rem;
         }
-        .preview-list li {
-            padding: 0.42rem 0;
+        .preview-list li,
+        .preview-card {
+            padding: 0;
             font-size: 0.84rem;
             line-height: 1.45;
-            color: #333;
-            border-bottom: 1px solid #f5f5f5;
+            color: var(--text-primary);
+            border: 1px solid var(--border-soft);
+            border-radius: 12px;
+            background: var(--surface-2);
+            overflow: hidden;
+            transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
         }
         .preview-list li:last-child {
-            border-bottom: none;
+            border-bottom: 1px solid var(--border-soft);
         }
         .preview-list li a {
-            color: #222;
+            color: var(--text-primary);
             text-decoration: none;
             display: flex;
-            align-items: baseline;
-            gap: 0.45rem;
+            align-items: center;
+            gap: 0.7rem;
+            padding: 0.72rem 0.8rem;
             overflow: hidden;
+            min-width: 0;
+        }
+        .preview-card--recent {
+            border-left: 4px solid var(--fill-accent);
+        }
+        .preview-card--recent.preview-accent--wordofday,
+        .preview-card--recent.preview-accent--proscons,
+        .preview-card--recent.preview-accent--cooking,
+        .preview-card--recent.preview-accent--ranking {
+            border-left-color: #D4A574;
+        }
+        .preview-card--recent.preview-accent--quiz,
+        .preview-card--recent.preview-accent--news,
+        .preview-card--recent.preview-accent--synonym,
+        .preview-card--recent.preview-accent--situational,
+        .preview-card--recent.preview-accent--culture,
+        .preview-card--recent.preview-accent--photo {
+            border-left-color: var(--fill-accent);
+        }
+        .preview-card--recent.preview-accent--popular {
+            border-left-color: #8FB86A;
         }
         .preview-num {
             flex-shrink: 0;
-            min-width: 1.1rem;
-            color: #888;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 2.2rem;
+            height: 2.2rem;
+            padding: 0 0.4rem;
+            border-radius: 8px;
+            background: var(--bg-accent);
+            color: var(--text-accent);
             font-weight: 500;
-            font-size: 0.78rem;
-            text-align: right;
+            font-size: 14px;
+            text-align: center;
+            line-height: 1;
+        }
+        .preview-body {
+            flex: 1;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.28rem;
+        }
+        .preview-meta {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.35rem;
+        }
+        .preview-new {
+            display: inline-flex;
+            align-items: center;
+            padding: 3px 8px;
+            border-radius: 999px;
+            background: var(--bg-success);
+            color: var(--text-success);
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            line-height: 1.2;
+        }
+        .preview-badge {
+            display: inline-flex;
+            align-items: center;
+            width: fit-content;
+            max-width: 100%;
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 500;
+            line-height: 1.25;
+            color: var(--text-accent);
+            background: var(--bg-accent);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .preview-badge--wordofday,
+        .preview-badge--proscons,
+        .preview-badge--cooking,
+        .preview-badge--ranking {
+            background: var(--bg-warning);
+            color: var(--text-warning);
+        }
+        .preview-badge--news,
+        .preview-badge--quiz,
+        .preview-badge--synonym,
+        .preview-badge--situational,
+        .preview-badge--culture,
+        .preview-badge--photo,
+        .preview-badge--default,
+        .preview-badge--source,
+        .preview-badge--wsj,
+        .preview-badge--cnn,
+        .preview-badge--bbc {
+            background: var(--bg-accent);
+            color: var(--text-accent);
+        }
+        .preview-badge--popular {
+            background: var(--bg-success);
+            color: var(--text-success);
         }
         .preview-date {
-            color: #888;
-            font-size: 0.78rem;
-            font-weight: 500;
+            color: var(--text-secondary);
+            font-size: 12px;
+            font-weight: 400;
         }
         .preview-list li > a:not(:has(.preview-title)),
         .preview-title {
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 500;
-            color: #222;
+            color: var(--text-primary);
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             text-rendering: optimizeLegibility;
         }
         .preview-title {
-            flex: 1;
             min-width: 0;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
         }
-        .preview-list li a:hover {
-            color: #2b6cb0;
+        .preview-title .preview-date,
+        .preview-title .preview-source,
+        .preview-title .preview-sep {
+            color: var(--text-secondary);
+            font-size: 12px;
+            font-weight: 400;
+        }
+        .preview-title .preview-title-text {
+            color: var(--text-primary);
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .preview-title .preview-sep {
+            margin: 0 0.1rem;
         }
         .preview-views {
-            color: #e05a00;
-            font-weight: 500;
-            font-size: 0.8rem;
-            margin-left: 4px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.28rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+            font-size: 12px;
+            margin-left: 0;
+        }
+        .preview-meta-stats {
+            display: inline-flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0;
+            color: var(--text-secondary);
+            font-size: 12px;
+            font-weight: 400;
+        }
+        .preview-likes {
+            color: var(--text-secondary);
+            font-size: 12px;
+            font-weight: 400;
+        }
+        .preview-meta-stats .preview-sep {
+            color: var(--text-secondary);
+            font-size: 12px;
+            font-weight: 400;
+        }
+        .preview-meta-stats .preview-sep--stats {
+            margin: 0 0.45em;
+            letter-spacing: 0.08em;
+        }
+        .preview-views-icon {
+            font-size: 12px;
+            line-height: 1;
+            opacity: 0.85;
+        }
+        .preview-arrow {
+            flex-shrink: 0;
+            color: #C5C2B8;
+            font-size: 18px;
+            font-weight: 400;
+            line-height: 1;
+            transition: color 0.15s ease, transform 0.15s ease;
+        }
+        .preview-list li a:hover {
+            color: inherit;
+            background: #FAFAF7;
+        }
+        .preview-list li:hover {
+            border-color: #D9D6CC;
+            box-shadow: 0 2px 8px rgba(44, 44, 42, 0.05);
+        }
+        .preview-list li a:hover .preview-arrow {
+            color: var(--text-secondary);
+            transform: translateX(2px);
+        }
+        .preview-list li a:hover .preview-title {
+            color: var(--text-accent);
         }
         .preview-list li.preview-empty {
             text-align: center;
-            color: #999;
+            color: var(--text-secondary);
             font-size: 0.82rem;
-            padding: 0.75rem 0;
-            border-bottom: none;
+            padding: 0.85rem 0.75rem;
+            border: 1px dashed var(--border-soft);
+            background: #FAFAF7;
+            box-shadow: none;
         }
         .preview-more a {
-            color: #888;
+            color: var(--text-secondary);
             font-weight: 400;
             text-decoration: none;
         }
         .preview-more a:hover {
-            color: #2b6cb0;
+            color: var(--text-accent);
             text-decoration: none;
         }
         #home-best,
@@ -238,18 +446,18 @@
                 padding: 1.2rem 0 1rem 0;
             }
             .preview-section {
-                padding: 0.75rem 0 0.4rem;
+                padding: 1.45rem 0 0.85rem;
             }
             .preview-section h2,
             .preview-section h3 {
-                font-size: 14px;
+                font-size: 17px;
                 font-weight: 500;
             }
         }
     </style>
     
     <!-- External Stylesheets -->
-    <link rel="stylesheet" href="title-text-sharp.css?v=20260612">
+    <link rel="stylesheet" href="title-text-sharp.css?v=20260727c">
     <link rel="stylesheet" href="navbar-unified.css?v=20260612c">
     <link rel="stylesheet" href="nav-home-menu.css?v=20260626e">
     <link rel="stylesheet" href="weather-banner.css?v=20260612g">
@@ -329,7 +537,7 @@
             <!-- Best Views -->
             <article class="preview-section" id="home-best">
                 <div class="preview-header">
-                    <h2>Best 조회수</h2>
+                    <h2><span class="preview-header-icon" aria-hidden="true">🔥</span>Best 조회수</h2>
                 </div>
                 <div id="best-views-preview-list" role="region" aria-label="조회수 Best 목록"></div>
             </article>
@@ -337,7 +545,7 @@
             <!-- Recent Updates -->
             <article class="preview-section" id="home-recent">
                 <div class="preview-header">
-                    <h2>최신 업데이트</h2>
+                    <h2><span class="preview-header-icon preview-header-icon--clock" aria-hidden="true">🕒</span>최신 업데이트</h2>
                 </div>
                 <div id="recent-updates-preview-list" role="region" aria-label="최신 업데이트 목록"></div>
             </article>
@@ -345,7 +553,7 @@
             <!-- Word of the Day -->
             <article class="preview-section">
                 <div class="preview-header">
-                    <h2>오늘의 단어장</h2>
+                    <h2><span class="preview-header-icon preview-header-icon--book" aria-hidden="true">📖</span>오늘의 단어장</h2>
                     <div class="preview-more"><a href="word-of-the-day-list.html?api=prod">더보기 &gt;</a></div>
                 </div>
                 <div id="wordofday-preview-list" role="region" aria-label="오늘의 단어장 목록"></div>
@@ -354,7 +562,7 @@
             <!-- News Vocabulary -->
             <article class="preview-section">
                 <div class="preview-header">
-                    <h2>뉴스 어휘</h2>
+                    <h2><span class="preview-header-icon" aria-hidden="true">📰</span>뉴스 어휘</h2>
                     <div class="preview-more"><a href="news-voca-list.html">더보기 &gt;</a></div>
                 </div>
                 <div id="news-voca-preview-list" role="region" aria-label="뉴스 어휘 목록"></div>
@@ -363,7 +571,7 @@
             <!-- Vocabulary Quiz -->
             <article class="preview-section">
                 <div class="preview-header">
-                    <h2>영어 단어 퀴즈</h2>
+                    <h2><span class="preview-header-icon" aria-hidden="true">🧩</span>영어 단어 퀴즈</h2>
                     <div class="preview-more"><a href="vocabulary-quiz-list.html">더보기 &gt;</a></div>
                 </div>
                 <div id="vocabulary-quiz-preview-list" role="region" aria-label="영어 단어 퀴즈 목록"></div>
@@ -372,7 +580,7 @@
             <!-- Synonyms -->
             <article class="preview-section">
                 <div class="preview-header">
-                    <h2>유의어</h2>
+                    <h2><span class="preview-header-icon" aria-hidden="true">🔁</span>유의어</h2>
                     <div class="preview-more"><a href="english-synonym-list.html">더보기 &gt;</a></div>
                 </div>
                 <div id="synonym-preview-list" role="region" aria-label="유의어 목록"></div>
@@ -381,7 +589,7 @@
             <!-- Popular Vocabulary -->
             <article class="preview-section">
                 <div class="preview-header">
-                    <h2>인기 어휘</h2>
+                    <h2><span class="preview-header-icon" aria-hidden="true">⭐</span>인기 어휘</h2>
                     <div class="preview-more"><a href="popular-voca-list.html">더보기 &gt;</a></div>
                 </div>
                 <div id="easy-voca-preview-list" role="region" aria-label="인기 어휘 목록"></div>
@@ -390,7 +598,7 @@
             <!-- Situational English -->
             <article class="preview-section">
                 <div class="preview-header">
-                    <h2>상황 영어</h2>
+                    <h2><span class="preview-header-icon" aria-hidden="true">💬</span>상황 영어</h2>
                     <div class="preview-more"><a href="situational-english-list.html">더보기 &gt;</a></div>
                 </div>
                 <div id="situational-english-preview-list" role="region" aria-label="상황 영어 목록"></div>
@@ -399,7 +607,7 @@
             <!-- Cooking Voca -->
             <article class="preview-section">
                 <div class="preview-header">
-                    <h2>요리 영어</h2>
+                    <h2><span class="preview-header-icon" aria-hidden="true">🍳</span>요리 영어</h2>
                     <div class="preview-more"><a href="cooking-voca-list.html">더보기 &gt;</a></div>
                 </div>
                 <div id="cooking-voca-preview-list" role="region" aria-label="요리 영어 목록"></div>
@@ -408,7 +616,7 @@
             <!-- Culture Voca -->
             <article class="preview-section">
                 <div class="preview-header">
-                    <h2>컬쳐 어휘</h2>
+                    <h2><span class="preview-header-icon" aria-hidden="true">🎭</span>컬쳐 어휘</h2>
                     <div class="preview-more"><a href="culture-voca-list.html">더보기 &gt;</a></div>
                 </div>
                 <div id="culture-voca-preview-list" role="region" aria-label="컬쳐 어휘 목록"></div>
@@ -417,7 +625,7 @@
             <!-- Ranking News -->
             <article class="preview-section">
                 <div class="preview-header">
-                    <h2>랭킹 뉴스</h2>
+                    <h2><span class="preview-header-icon" aria-hidden="true">📈</span>랭킹 뉴스</h2>
                     <div class="preview-more"><a href="ranking-news-list.html">더보기 &gt;</a></div>
                 </div>
                 <div id="ranking-news-preview-list" role="region" aria-label="랭킹 뉴스 목록"></div>
@@ -426,7 +634,7 @@
             <!-- Photo English -->
             <article class="preview-section">
                 <div class="preview-header">
-                    <h2>포토 영어</h2>
+                    <h2><span class="preview-header-icon" aria-hidden="true">📷</span>포토 영어</h2>
                     <div class="preview-more"><a href="photo-english-list.html">더보기 &gt;</a></div>
                 </div>
                 <div id="photo-english-preview-list" role="region" aria-label="포토 영어 목록"></div>
@@ -435,7 +643,7 @@
             <!-- Pros & Cons -->
             <article class="preview-section">
                 <div class="preview-header">
-                    <h2>Pros & Cons</h2>
+                    <h2><span class="preview-header-icon" aria-hidden="true">⚖️</span>Pros & Cons</h2>
                     <div class="preview-more"><a href="pros-cons-list.html">더보기 &gt;</a></div>
                 </div>
                 <div id="pros-cons-preview-list" role="region" aria-label="Pros & Cons 목록"></div>
@@ -444,7 +652,7 @@
             <!-- English Link Directory -->
             <article class="preview-section">
                 <div class="preview-header">
-                    <h2>영어 학습 사이트 디렉터리</h2>
+                    <h2><span class="preview-header-icon" aria-hidden="true">🔗</span>영어 학습 사이트 디렉터리</h2>
                     <div class="preview-more"><a href="english-directory.html">더보기 &gt;</a></div>
                 </div>
                 <div id="english-directory-preview-list" role="region" aria-label="영어 학습 사이트 디렉터리 목록"></div>
@@ -483,7 +691,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="viewpost-seo.js?v=20260702"></script>
     <script src="nav-home-menu.js?v=20260721c"></script>
-    <script src="home-board-preview.js?v=20260721e"></script>
+    <script src="home-board-preview.js?v=20260727c"></script>
     <script src="english-directory.js" defer></script>
     
     <script>
@@ -497,11 +705,53 @@
             return '<ul class="preview-list">' + rows.join('') + '</ul>';
         }
 
-        function buildPreviewRow(number, title, views, href) {
-            var safeTitle = (title || '제목 없음').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-            var viewsHtml = views ? '<span class="preview-views">[' + views + ']</span>' : '';
-            return '<li><a href="' + href + '"><span class="preview-num">' + number + '</span>' +
-                '<span class="preview-title">' + safeTitle + viewsHtml + '</span></a></li>';
+        function formatBoardPreviewDate(dateStr) {
+            if (!dateStr) return '';
+            var d = new Date(dateStr);
+            if (isNaN(d.getTime())) return '';
+            var y = d.getFullYear();
+            var m = ('0' + (d.getMonth() + 1)).slice(-2);
+            var day = ('0' + d.getDate()).slice(-2);
+            return y + '.' + m + '.' + day;
+        }
+
+        function formatMetaStatsHtml(views, likes) {
+            var viewCount = Number(views) || 0;
+            var likeCount = parseInt(likes, 10) || 0;
+            var viewsPart = viewCount
+                ? '<span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> ' + viewCount + ' 조회</span>'
+                : '<span class="preview-views preview-views--empty"><span class="preview-views-icon" aria-hidden="true">👁</span> 조회 없음</span>';
+            return '<span class="preview-meta-stats">' + viewsPart +
+                '<span class="preview-sep preview-sep--stats" aria-hidden="true"> · </span>' +
+                '<span class="preview-likes">' + likeCount + ' 추천</span></span>';
+        }
+
+        function buildPreviewRow(number, title, views, href, dateStr, likes) {
+            var rawTitle = String(title || '제목 없음');
+            var sourceMatch = rawTitle.match(/^\[([^\]]+)\]\s*(.*)$/);
+            var source = sourceMatch ? sourceMatch[1].trim() : '';
+            var mainTitle = sourceMatch ? (sourceMatch[2] || '').trim() : rawTitle;
+            if (!mainTitle) mainTitle = '제목 없음';
+            var safeTitle = mainTitle.replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+            var safeSource = source.replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+            var dateLabel = formatBoardPreviewDate(dateStr);
+            var titleParts = [];
+            if (dateLabel) {
+                titleParts.push('<span class="preview-date">' + dateLabel + '</span>');
+            }
+            if (safeSource) {
+                titleParts.push('<span class="preview-source">' + safeSource + '</span>');
+            }
+            titleParts.push('<span class="preview-title-text">' + safeTitle + '</span>');
+            var titleHtml = titleParts.join('<span class="preview-sep" aria-hidden="true"> | </span>');
+            return '<li class="preview-card"><a href="' + href + '">' +
+                '<span class="preview-num">' + number + '</span>' +
+                '<span class="preview-body">' +
+                    '<span class="preview-title">' + titleHtml + '</span>' +
+                    formatMetaStatsHtml(views, likes) +
+                '</span>' +
+                '<span class="preview-arrow" aria-hidden="true">›</span>' +
+                '</a></li>';
         }
 
         function getApiBase() {
@@ -571,7 +821,7 @@
                 var origIdx = total - 1 - idx;
                 var number = total - idx;
                 var href = buildPreviewHref(entry, postPage, origIdx, apiParam, postPath);
-                return buildPreviewRow(number, entry.title, entry.views, href);
+                return buildPreviewRow(number, entry.title, entry.views, href, entry.date, entry.likes);
             });
             container.innerHTML = buildPreviewListHtml(rows, '');
         }

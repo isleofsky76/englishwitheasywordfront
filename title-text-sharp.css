@@ -19,27 +19,29 @@ body {
 /* index.html — 목록 제목 */
 .preview-title,
 .preview-list li > a:not(:has(.preview-title)) {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500;
-  color: #222;
+  color: #2C2C2A;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
 }
 
+.preview-section h2,
 .preview-section h3 {
-  font-size: 15px;
+  font-size: 18px;
   font-weight: 500;
-  color: #1a1a1a;
-  letter-spacing: -0.03em;
+  color: #2C2C2A;
+  letter-spacing: -0.02em;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
 }
 
 @media (max-width: 600px) {
+  .preview-section h2,
   .preview-section h3 {
-    font-size: 14px;
+    font-size: 17px;
   }
 }
 
