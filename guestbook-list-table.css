@@ -1,325 +1,273 @@
-/* 게시판 목록 — 테이블 레이아웃 */
+/* 게시판 목록 — 카드 레이아웃 */
+:root {
+  --gb-bg-warning: #FAEEDA;
+  --gb-text-warning: #854F0B;
+  --gb-bg-accent: #E6F1FB;
+  --gb-text-accent: #185FA5;
+  --gb-bg-success: #EAF3DE;
+  --gb-text-success: #3B6D11;
+  --gb-fill-accent: #378ADD;
+  --gb-surface: #FFFFFF;
+  --gb-text-primary: #2C2C2A;
+  --gb-text-secondary: #888780;
+  --gb-border: #E8E6DC;
+  --gb-page-bg: #FBFBFA;
+}
+
 .guestbook-list {
   margin-top: 0.5rem;
 }
 
-.gb-table-wrap {
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
-  margin: 0 12px;
-}
-
-.gb-table {
-  width: 100%;
-  min-width: 720px;
-  border-collapse: collapse;
-  font-family: 'IBM Plex Sans', 'Noto Sans KR', 'Poppins', sans-serif;
-  font-size: 0.84rem;
-}
-
-.gb-table thead {
-  background: #fff;
-}
-
-.gb-table th {
-  padding: 11px 8px;
-  font-weight: 700;
-  font-size: 0.8rem;
-  text-align: center;
-  white-space: nowrap;
-  background-color: #f8f9fb !important;
-  color: #333 !important;
-  border-bottom: 1px solid #e8ecf0;
-  letter-spacing: 0.02em;
-}
-
-.gb-table th.col-title {
-  text-align: center;
-}
-
-.gb-table td {
-  padding: 10px 8px;
-  border-bottom: 1px solid #e8ecf0;
-  text-align: center;
-  vertical-align: middle;
-  color: #333;
-  font-size: 0.84rem;
-}
-
-.gb-table tbody tr:hover {
-  background: rgba(43, 108, 176, 0.06);
-}
-
-.gb-table tbody tr:last-child td {
-  border-bottom: none;
-}
-
-.gb-table th.col-num,
-.gb-col-num {
-  min-width: 58px;
-  width: 58px;
-  max-width: 58px;
-  white-space: nowrap;
-  padding-left: 10px;
-  padding-right: 10px;
-}
-
-.gb-table th.col-views,
-.gb-col-views {
-  min-width: 78px;
-  width: 78px;
-  max-width: 88px;
-  white-space: nowrap;
-  padding-left: 8px;
-  padding-right: 8px;
-}
-
-.gb-table td.gb-col-num {
-  color: #1a56db !important;
-  font-weight: 700;
-  font-size: inherit;
-}
-
-.gb-col-title {
-  text-align: left !important;
-  padding-left: 10px !important;
-  max-width: 320px;
-  overflow: hidden;
-}
-
-.gb-title-cell {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 5px;
-  min-width: 0;
-  width: 100%;
-}
-
-.gb-title-stack {
+.gb-card-list {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 0.28rem;
-  min-width: 0;
-  width: 100%;
+  gap: 0.7rem;
+  margin: 0 12px 12px;
+  padding: 0;
 }
 
-.gb-title-meta {
-  display: block;
-  font-size: 0.78rem;
-  font-weight: 400;
-  color: #888;
-  line-height: 1.35;
-  white-space: nowrap;
+.gb-card {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  background: var(--gb-surface);
+  border: 1px solid var(--gb-border);
+  border-left: 4px solid var(--gb-fill-accent);
+  border-radius: 12px;
   overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 100%;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
-.gb-title-meta .gb-meta-sep {
-  margin: 0 1px;
-  color: #c8c8c8;
-  font-weight: 400;
+.gb-card--new {
+  border-left-color: #8FB86A;
 }
 
-.gb-title-meta .gb-meta-date {
-  color: #888;
-  font-weight: 400;
+.gb-card:hover {
+  border-color: #D9D6CC;
+  box-shadow: 0 2px 10px rgba(44, 44, 42, 0.06);
 }
 
-.gb-col-title a {
-  color: #222;
-  text-decoration: none;
-  font-weight: 500;
-  font-family: 'Noto Sans KR', 'Poppins', sans-serif;
+.gb-card--empty {
+  display: block;
+  padding: 2rem 1rem;
+  text-align: center;
+  color: var(--gb-text-secondary);
+  border-left-color: var(--gb-border);
   font-size: 14px;
-  line-height: 1.4;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
+  font-weight: 400;
+}
+
+.gb-card-link {
   flex: 1;
   min-width: 0;
-  max-width: 100%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 0.7rem 0.85rem 0.85rem;
+  text-decoration: none;
+  color: inherit;
 }
 
-.gb-img-badge {
+.gb-card-num {
   flex-shrink: 0;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  background: var(--gb-bg-accent);
+  color: var(--gb-text-accent);
+  font-size: 16px;
+  font-weight: 500;
   line-height: 1;
-  cursor: default;
 }
 
-.gb-img-icon {
+.gb-card--new .gb-card-num {
+  background: var(--gb-bg-success);
+  color: var(--gb-text-success);
+}
+
+.gb-card-body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.28rem;
+}
+
+.gb-card-badges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.gb-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.25;
+  background: var(--gb-bg-accent);
+  color: var(--gb-text-accent);
+}
+
+.gb-badge--new {
+  background: var(--gb-bg-accent);
+  color: var(--gb-text-accent);
+}
+
+.gb-badge--wsj,
+.gb-badge--source {
+  background: var(--gb-bg-warning);
+  color: var(--gb-text-warning);
+}
+
+.gb-badge--cnn {
+  background: #FCEBEB;
+  color: #A32D2D;
+}
+
+.gb-badge--bbc {
+  background: #F1F1F0;
+  color: #2C2C2A;
+}
+
+.gb-card-title {
   display: block;
-  flex-shrink: 0;
-}
-
-.gb-col-title a:hover {
-  color: #4a90e2;
-  text-decoration: underline;
-}
-
-.gb-col-author {
-  color: #5a5e61;
-  font-size: inherit;
-  max-width: 100px;
+  min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--gb-text-primary);
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-.gb-col-date {
-  color: #787c7e;
-  font-size: inherit;
-  white-space: nowrap;
+.gb-card-link:hover .gb-card-title {
+  color: var(--gb-text-accent);
 }
 
-.gb-table td.gb-col-views {
-  color: #1a56db !important;
-  font-weight: 600;
-  font-size: inherit;
-  white-space: nowrap;
+.gb-card-title .gb-img-badge {
+  display: inline-flex;
+  vertical-align: -2px;
+  margin-left: 4px;
 }
 
-.gb-meta-views {
-  color: inherit;
-  font-weight: inherit;
-}
-
-.gb-meta-likes,
-.gb-stat-likes {
-  color: inherit;
-  font-weight: inherit;
-}
-
-.gb-stat-sep {
-  color: #c8c8c8;
-  margin: 0 3px;
+.gb-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.55rem 0.85rem;
+  color: var(--gb-text-secondary);
+  font-size: 12px;
   font-weight: 400;
+  line-height: 1.3;
 }
 
-.gb-stat-views {
-  color: inherit;
-  font-weight: inherit;
-}
-
-.gb-col-likes,
-.gb-col-share {
+.gb-meta-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.28rem;
   white-space: nowrap;
+}
+
+.gb-meta-icon {
+  font-size: 12px;
+  line-height: 1;
+  opacity: 0.9;
+}
+
+.gb-card-actions {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 0.55rem 0.65rem 0.55rem 0;
+}
+
+.gb-card-arrow {
+  color: #C5C2B8;
+  font-size: 20px;
+  line-height: 1;
+  transition: color 0.15s ease, transform 0.15s ease;
+}
+
+.gb-card:hover .gb-card-arrow {
+  color: var(--gb-text-secondary);
+  transform: translateX(2px);
 }
 
 .gb-like-wrap {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  gap: 6px;
-}
-
-.gb-col-likes .gb-like-count {
-  display: inline-block;
-  min-width: 1.4em;
-  font-weight: 700;
-  font-size: 0.85rem;
-  color: #1a4480;
-  line-height: 1;
-}
-
-.gb-like-btn.is-active,
-.gb-like-btn:disabled {
-  background: #2b6cb0;
-  border-color: #2b6cb0;
-  color: #fff;
-  cursor: default;
-  opacity: 1;
-}
-
-.gb-like-btn:disabled:hover {
-  background: #2b6cb0;
-  border-color: #2b6cb0;
-  color: #fff;
-}
-
-.gb-share-group {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.gb-share-x,
-.gb-share-email {
-  text-decoration: none;
-  min-width: 28px;
-  padding: 0 6px;
-  font-weight: 600;
-}
-
-.gb-share-x:hover {
-  background: #000;
-  border-color: #000;
-  color: #fff;
-}
-
-.gb-share-email:hover {
-  background: #2b6cb0;
-  border-color: #2b6cb0;
-  color: #fff;
+  gap: 3px;
 }
 
 .gb-action-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 32px;
+  width: 28px;
   height: 28px;
-  padding: 0 8px;
-  border: 1px solid #d0d7de;
-  border-radius: 4px;
-  background: #f6f8fa;
-  color: #444;
-  font-size: 0.72rem;
+  border: 1px solid var(--gb-border);
+  border-radius: 6px;
+  background: #fff;
+  color: #555;
+  font-size: 0.78rem;
+  text-decoration: none;
   cursor: pointer;
-  transition: background 0.15s, border-color 0.15s;
+  padding: 0;
+  line-height: 1;
 }
 
 .gb-action-btn:hover {
-  background: #e8f0fe;
-  border-color: #2b6cb0;
-  color: #2b6cb0;
+  border-color: #c8c4b8;
+  background: #fafaf7;
 }
 
-.gb-action-btn.is-active {
+.gb-like-btn.is-active,
+.gb-like-btn:disabled.is-active {
   background: #2b6cb0;
   border-color: #2b6cb0;
   color: #fff;
 }
 
-.gb-empty-row td {
-  text-align: center !important;
-  padding: 32px 16px !important;
-  color: #888;
+.gb-like-btn:disabled {
+  opacity: 0.7;
+  cursor: default;
 }
 
-/* 좋아요 숨김 목록 — 조회·추천은 제목 아래 메타 줄 */
-.gb-no-stats.gb-table {
-  min-width: 520px;
+.gb-like-count {
+  font-size: 11px;
+  color: var(--gb-text-secondary);
+  min-width: 0.9rem;
+  text-align: left;
 }
 
-.gb-no-stats .gb-col-title {
-  max-width: none;
-}
-
-/* 모바일 전용 — 2줄 카드형 (thead 숨김, 메타 줄) */
-.gb-col-meta-mobile {
+.gb-share-group {
   display: none;
+  flex-direction: column;
+  gap: 4px;
+}
+
+@media (min-width: 768px) {
+  .gb-share-group {
+    display: flex;
+  }
+
+  .gb-card-list {
+    margin: 0 16px 16px;
+  }
 }
 
 @media (max-width: 767px) {
@@ -328,279 +276,46 @@
     width: 100% !important;
     padding-left: 0 !important;
     padding-right: 0 !important;
-    font-size: 14px !important;
-    background-color: #fff !important;
+    background-color: var(--gb-page-bg) !important;
   }
 
   .guestbook-list {
-    margin-left: 0;
-    margin-right: 0;
     margin-top: 0.35rem;
   }
 
-  .gb-table-wrap {
-    margin: 0;
-    border-radius: 0;
-    box-shadow: none;
-    overflow-x: hidden;
-    max-width: 100%;
-    background: #fff;
+  .gb-card-list {
+    margin: 0 10px 12px;
+    gap: 0.6rem;
   }
 
-  /* page30_guestbook*.css 의 table/td 전역 규칙과 분리 */
-  .guestbook-list .gb-table-wrap .gb-table,
-  .guestbook-list .gb-table-wrap .gb-table td,
-  .guestbook-list .gb-table-wrap .gb-table th {
-    font-size: inherit !important;
-    padding: 0 !important;
-    border: none;
-    line-height: 1.05 !important;
+  .gb-card-link {
+    padding: 0.75rem 0.45rem 0.75rem 0.7rem;
+    gap: 0.6rem;
   }
 
-  /* gb-no-stats(인기어휘·오늘의단어 등) PC용 min-width가 모바일 가로 스크롤 유발 */
-  .guestbook-list .gb-table-wrap .gb-no-stats.gb-table,
-  .guestbook-list .gb-table-wrap .gb-table {
-    min-width: 0 !important;
-    width: 100%;
-    max-width: 100%;
+  .gb-card-num {
+    width: 44px;
+    height: 44px;
+    font-size: 15px;
   }
 
-  .gb-table {
-    min-width: 0 !important;
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.8125rem;
-    font-family: 'Noto Sans KR', 'IBM Plex Sans', sans-serif;
+  .gb-card-title {
+    font-size: 15px;
   }
 
-  .gb-table thead {
-    display: none;
+  .gb-card-meta {
+    gap: 0.4rem 0.65rem;
   }
 
-  .gb-table tbody tr {
-    display: grid;
-    grid-template-columns: min-content minmax(0, 1fr) auto;
-    grid-template-rows: auto;
-    column-gap: 8px;
-    align-items: center;
-    padding: 11px 16px;
-    border-bottom: 1px solid #f0f0f0;
+  .gb-card-actions {
+    padding-right: 0.45rem;
   }
+}
 
-  .gb-table tbody tr:hover {
-    background: rgba(43, 108, 176, 0.04);
-  }
-
-  .gb-table tbody td {
-    border-bottom: none;
-    padding: 0 !important;
-    text-align: left;
-    vertical-align: top;
-  }
-
-  /* 번호 | (제목 + 메타) | likes */
-  .gb-col-num {
-    grid-column: 1;
-    grid-row: 1;
-    align-self: center;
-    justify-self: center;
-    width: auto !important;
-    min-width: 1.35rem !important;
-    max-width: none !important;
-    padding: 0 2px 0 0 !important;
-    color: #1a56db !important;
-    font-weight: 600;
-    font-size: 13px !important;
-    line-height: 1.05;
-    text-align: center;
-  }
-
-  .gb-col-num::after {
-    content: none;
-  }
-
-  .gb-col-title {
-    grid-column: 2;
-    grid-row: 1;
-    min-width: 0;
-    width: auto !important;
-    max-width: none !important;
-    padding: 0 !important;
-    overflow: hidden;
-    line-height: 1.05 !important;
-    margin: 0 !important;
-    align-self: center;
-  }
-
-  .gb-title-stack {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 8px;
-    min-width: 0;
-    margin: 0;
-    padding: 0;
-  }
-
-  .gb-title-cell {
-    display: block;
-    min-width: 0;
-    line-height: 1.05 !important;
-    margin: 0;
-    padding: 0;
-  }
-
-  .gb-col-title a {
-    font-size: 14px !important;
-    font-weight: 500;
-    color: #222 !important;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: block;
-    position: relative;
-    z-index: 1;
-    line-height: 1.05 !important;
-    letter-spacing: -0.02em;
-    padding: 0;
-    margin: 0;
-  }
-
-  .gb-col-likes {
-    grid-column: 3;
-    grid-row: 1;
-    width: auto !important;
-    min-width: 0 !important;
-    padding: 0 !important;
-    position: relative;
-    z-index: 3;
-    transform: translateX(-5px);
-    align-self: center;
-    margin: 0;
-  }
-
-  .gb-like-wrap {
-    gap: 3px;
-    justify-content: flex-end;
-    position: relative;
-    z-index: 3;
-  }
-
-  .gb-col-likes .gb-like-btn {
-    min-width: 40px;
-    width: 40px;
-    height: 40px;
-    padding: 0;
-    font-size: 0.85rem;
-    line-height: 1;
-    touch-action: manipulation;
-    -webkit-tap-highlight-color: transparent;
-    position: relative;
-    z-index: 4;
-  }
-
-  .gb-col-likes .gb-like-count {
-    min-width: 0.8em;
-    font-size: 11px;
-    color: #1a4480;
-  }
-
-  .gb-col-share {
-    display: none !important;
-  }
-
-  .gb-col-share .gb-share-group {
-    gap: 2px;
-    flex-wrap: nowrap;
-  }
-
-  .gb-col-share .gb-action-btn {
-    min-width: 26px;
-    width: 26px;
-    height: 26px;
-    padding: 0;
-    font-size: 0.68rem;
-    line-height: 1;
-  }
-
-  .gb-title-meta {
-    font-size: 12px !important;
-    line-height: 1.2 !important;
-    margin-top: 2px;
-  }
-
-  .gb-title-meta .gb-meta-views {
-    color: inherit;
-    font-weight: inherit;
-  }
-
-  .gb-title-meta .gb-meta-likes {
-    color: inherit;
-    font-weight: inherit;
-  }
-
-  /* 작성자 | 날짜 | 조회 — 제목 바로 아래 (likes 버튼 목록) */
-  .gb-col-meta-mobile {
-    display: flex !important;
-    align-items: center;
-    flex-wrap: nowrap;
-    gap: 0;
-    width: 100%;
-    margin: 0 !important;
-    padding: 0 !important;
-    font-size: 12px !important;
-    font-weight: 400;
-    color: #888 !important;
-    line-height: 1.15 !important;
-    letter-spacing: -0.01em;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .gb-col-meta-mobile .gb-meta-part,
-  .gb-col-meta-mobile .gb-meta-sep,
-  .gb-col-meta-mobile .gb-meta-views,
-  .gb-col-meta-mobile .gb-meta-likes {
-    line-height: 1.15 !important;
-    font-size: inherit;
-  }
-
-  .gb-col-meta-mobile .gb-meta-sep {
-    margin: 0 4px;
-    color: #c8c8c8;
-    font-weight: 400;
-  }
-
-  .gb-col-meta-mobile .gb-meta-views {
-    color: inherit;
-    font-weight: inherit;
-  }
-
-  .gb-col-meta-mobile .gb-meta-likes {
-    color: inherit;
-    font-weight: inherit;
-  }
-
-  .gb-col-author,
-  .gb-col-date,
-  .gb-col-views,
-  .gb-col-share {
-    display: none !important;
-    pointer-events: none !important;
-  }
-
-  .gb-img-badge {
-    display: none;
-  }
-
-  .gb-empty-row td {
-    display: block !important;
-    width: 100%;
-    padding: 24px 16px !important;
-  }
-
-  .gb-no-stats .gb-table tbody tr {
-    grid-template-columns: min-content minmax(0, 1fr);
-  }
+/* 구형 테이블 클래스 잔여 호환 (빈 화면 방지) */
+.gb-table-wrap,
+.gb-table,
+.gb-col-meta-mobile,
+.gb-title-meta {
+  /* no-op leftovers intentionally unused by card renderer */
 }
