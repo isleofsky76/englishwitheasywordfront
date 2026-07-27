@@ -24,9 +24,9 @@ function sanitizeHtml(html) {
     if (!html) return html;
     const div = document.createElement('div');
     div.innerHTML = html;
-    const allowedTags = ['p', 'br', 'strong', 'b', 'em', 'i', 'u', 'span', 'div', 'a', 'img', 'article', 'section', 'h2', 'h3', 'ul', 'ol', 'li', 'footer'];
+    const allowedTags = ['p', 'br', 'strong', 'b', 'em', 'i', 'u', 'span', 'div', 'a', 'img', 'article', 'section', 'h2', 'h3', 'ul', 'ol', 'li', 'footer', 'button', 'header'];
     // Word of the Day 전용 카드(wotd-card 등)를 위해 class 속성 허용
-    const allowedAttributes = ['class', 'style', 'href', 'target', 'rel', 'src', 'alt', 'loading', 'decoding', 'onerror'];
+    const allowedAttributes = ['class', 'style', 'href', 'target', 'rel', 'src', 'alt', 'loading', 'decoding', 'onerror', 'type', 'aria-label', 'title', 'data-wotd-tts', 'aria-hidden'];
     div.querySelectorAll('*').forEach(el => {
         if (!allowedTags.includes(el.tagName.toLowerCase())) {
             // 태그 제거해도 자식 HTML은 유지 (textContent로 통째로 평탄화하지 않음)
@@ -175,7 +175,7 @@ function wotdStartEnglishTTS(text, btn) {
 
 function wotdBindTtsButtons(container) {
     if (!container || !window.speechSynthesis) return;
-    container.querySelectorAll('.wotd-tts-btn').forEach((btn) => {
+    container.querySelectorAll('.wotd-tts-btn, .wotd-word-card[data-wotd-tts]').forEach((btn) => {
         if (btn.dataset.wotdTtsListener === '1') return;
         btn.dataset.wotdTtsListener = '1';
         btn.addEventListener('click', (e) => {
@@ -194,7 +194,7 @@ function wotdBindTtsButtons(container) {
             }
 
             speechSynthesis.cancel();
-            container.querySelectorAll('.wotd-tts-btn.wotd-tts-playing').forEach((b) =>
+            container.querySelectorAll('.wotd-tts-playing').forEach((b) =>
                 b.classList.remove('wotd-tts-playing')
             );
             btn.classList.add('wotd-tts-playing');
@@ -203,7 +203,212 @@ function wotdBindTtsButtons(container) {
     });
 }
 
-// 영어 줄 뒤에 개별 스피커 아이콘 추가 (Word of the Day 전용)
+function wotdFormatPublishDate(dateStr) {
+    if (!dateStr) return '';
+    const d = new Date(dateStr);
+    if (isNaN(d.getTime())) return '';
+    const y = d.getFullYear();
+    const m = ('0' + (d.getMonth() + 1)).slice(-2);
+    const day = ('0' + d.getDate()).slice(-2);
+    return y + '.' + m + '.' + day;
+}
+
+function wotdParseWordLine(text) {
+    const raw = String(text || '').replace(/\s+/g, ' ').trim();
+    if (!raw) return null;
+    const parts = raw.split('|').map((s) => s.trim()).filter(Boolean);
+    if (parts.length < 4) return null;
+    const ipaIdx = parts.findIndex((p) => /^\/.+\/$/.test(p));
+    if (ipaIdx < 1 || ipaIdx >= parts.length - 1) return null;
+    const head = parts.slice(0, ipaIdx - 1).join(' | ') || parts[0];
+    const pron = parts[ipaIdx - 1];
+    const ipa = parts[ipaIdx];
+    const ko = parts.slice(ipaIdx + 1).join(' | ');
+    const emojiMatch = head.match(/^(\p{Extended_Pictographic}(?:\uFE0F)?(?:\u200D\p{Extended_Pictographic}(?:\uFE0F)?)*)\s*(.+)$/u);
+    const emoji = emojiMatch ? emojiMatch[1] : '';
+    const en = (emojiMatch ? emojiMatch[2] : head).trim();
+    if (!en || !/[A-Za-z]/.test(en) || !ko) return null;
+    return { emoji: emoji || '📝', en, pron, ipa, ko };
+}
+
+function wotdBuildWordCardsHtml(words) {
+    const cards = words.map((w) => {
+        return '<button type="button" class="wotd-word-card" data-wotd-tts="' + wotdEscapeAttr(w.en) + '" aria-label="' + wotdEscapeAttr(w.en + ' 발음 듣기') + '">' +
+            '<span class="wotd-word-card-top">' +
+            '<span class="wotd-word-emoji" aria-hidden="true">' + w.emoji + '</span>' +
+            '<span class="wotd-word-pron-wrap"><span class="wotd-word-pron-label">발음</span> ' +
+            '<span class="wotd-word-ipa">' + escapeHtml(w.ipa) + '</span></span>' +
+            '</span>' +
+            '<span class="wotd-word-en">' + escapeHtml(w.en) + '</span>' +
+            '<span class="wotd-word-ko">' + escapeHtml(w.ko) + '</span>' +
+            '</button>';
+    }).join('');
+    return '<section class="wotd-words-section">' +
+        '<header class="wotd-words-header">' +
+        '<h3 class="wotd-words-title"><span aria-hidden="true">📘</span> 오늘의 단어</h3>' +
+        '<span class="wotd-words-count">' + words.length + '개 단어</span>' +
+        '</header>' +
+        '<div class="wotd-words-grid">' + cards + '</div>' +
+        '<div class="wotd-listen-banner">' +
+        '<span class="wotd-listen-icon" aria-hidden="true">🎧</span>' +
+        '<div class="wotd-listen-text">' +
+        '<strong>단어 발음 듣기</strong>' +
+        '<p>각 카드를 클릭하면 원어민 발음을 들을 수 있습니다</p>' +
+        '</div></div></section>';
+}
+
+function wotdGuessSourceName(text, href) {
+    const t = String(text || '');
+    if (/wall street journal|\bwsj\b/i.test(t) || /wsj\.com/i.test(href || '')) return 'Wall Street Journal';
+    if (/\bcnn\b/i.test(t) || /cnn\.com/i.test(href || '')) return 'CNN';
+    if (/\bbbc\b/i.test(t) || /bbc\./i.test(href || '')) return 'BBC';
+    const m = t.match(/([A-Za-z][A-Za-z0-9 .&'-]{2,40})\s*\|/);
+    if (m) return m[1].trim();
+    return '원문 기사';
+}
+
+function wotdBuildMoreAndInfoHtml({ youtubeUrl, sourceName, sourceUrl, publishDate, aiNote }) {
+    const ytHref = youtubeUrl || '';
+    const srcHref = sourceUrl || '';
+    const srcLabel = sourceName || '원문 기사';
+    const more = '<section class="wotd-more-section">' +
+        '<h3 class="wotd-more-title"><span aria-hidden="true">🔗</span> 더 보기</h3>' +
+        '<div class="wotd-more-grid">' +
+        (ytHref
+            ? '<a class="wotd-more-card" href="' + wotdEscapeAttr(ytHref) + '" target="_blank" rel="noopener noreferrer">' +
+              '<span class="wotd-more-main"><span class="wotd-more-icon" aria-hidden="true">📺</span> 유튜브 영상 보기</span></a>'
+            : '') +
+        (srcHref
+            ? '<a class="wotd-more-card" href="' + wotdEscapeAttr(srcHref) + '" target="_blank" rel="noopener noreferrer">' +
+              '<span class="wotd-more-main"><span class="wotd-more-icon" aria-hidden="true">📰</span> 원문 기사 바로 가기</span></a>'
+            : '') +
+        '</div></section>';
+
+    const info = aiNote
+        ? ('<aside class="wotd-info-banner">' +
+            '<span class="wotd-info-icon" aria-hidden="true">ℹ</span>' +
+            '<div class="wotd-info-text">' +
+            '<p>' + escapeHtml(aiNote) + '</p>' +
+            '</div></aside>')
+        : '';
+    return more + info;
+}
+
+function enhanceWordOfDayLayout(post) {
+    const container = document.getElementById('post-message');
+    if (!container || container.querySelector('.wotd-words-grid')) return;
+
+    const root = container.firstElementChild && container.firstElementChild.tagName === 'DIV'
+        ? container.firstElementChild
+        : container;
+
+    const wordItems = [];
+    const removeNodes = [];
+    let youtubeUrl = '';
+    let sourceUrl = '';
+    let sourceName = '';
+    let aiNote = '이 콘텐츠는 AI 음성과 이미지를 사용했습니다.';
+    let sawWordsHeading = false;
+
+    Array.from(root.querySelectorAll('p, a, .video-preview-container')).forEach((node) => {
+        if (node.matches && node.matches('.video-preview-container')) {
+            const a = node.querySelector('a[href]');
+            if (a && /youtu(\.be|be\.com)/i.test(a.href)) {
+                youtubeUrl = a.href;
+                removeNodes.push(node);
+            }
+            return;
+        }
+        if (node.tagName === 'A') {
+            const href = node.getAttribute('href') || '';
+            if (/youtu(\.be|be\.com)/i.test(href)) youtubeUrl = youtubeUrl || href;
+            else if (/^https?:\/\//i.test(href) && !/englisheasystudy\.com/i.test(href)) {
+                sourceUrl = sourceUrl || href;
+                sourceName = sourceName || wotdGuessSourceName(node.textContent, href);
+            }
+            return;
+        }
+
+        const text = (node.textContent || '').replace(/\s+/g, ' ').trim();
+        if (!text) return;
+
+        if (/^오늘의\s*단어$/.test(text)) {
+            sawWordsHeading = true;
+            removeNodes.push(node);
+            return;
+        }
+        if (/유튜브/.test(text) && text.length < 20) {
+            removeNodes.push(node);
+            return;
+        }
+        if (/AI\s*음성/.test(text)) {
+            aiNote = '이 콘텐츠는 AI 음성과 이미지를 사용했습니다.';
+            removeNodes.push(node);
+            return;
+        }
+        if (/^출처/.test(text)) {
+            sourceName = sourceName || wotdGuessSourceName(text, sourceUrl);
+            removeNodes.push(node);
+            return;
+        }
+        if (/^https?:\/\//i.test(text)) {
+            if (/youtu(\.be|be\.com)/i.test(text)) youtubeUrl = youtubeUrl || text;
+            else sourceUrl = sourceUrl || text;
+            removeNodes.push(node);
+            return;
+        }
+
+        const parsed = wotdParseWordLine(text);
+        if (parsed) {
+            wordItems.push(parsed);
+            removeNodes.push(node);
+        }
+    });
+
+    // source box wrapper cleanup
+    Array.from(root.querySelectorAll('div')).forEach((div) => {
+        const t = (div.textContent || '').trim();
+        if (/^출처/.test(t) || (sourceUrl && t.indexOf(sourceUrl) !== -1 && t.length < 400)) {
+            const link = div.querySelector('a[href]');
+            if (link && !/youtu/i.test(link.href)) {
+                sourceUrl = sourceUrl || link.href;
+                sourceName = sourceName || wotdGuessSourceName(div.textContent, link.href);
+            }
+            if (div !== root) removeNodes.push(div);
+        }
+    });
+
+    if (!wordItems.length) return;
+
+    removeNodes.forEach((n) => {
+        if (n && n.parentNode) n.parentNode.removeChild(n);
+    });
+
+    // remove leftover "오늘의 단어"/youtube headings if any empty wrappers
+    Array.from(root.querySelectorAll('p')).forEach((p) => {
+        const t = (p.textContent || '').replace(/\s+/g, ' ').trim();
+        if (!t || /^오늘의\s*단어$/.test(t) || (/유튜브/.test(t) && t.length < 20)) {
+            p.remove();
+        }
+    });
+
+    const publishDate = wotdFormatPublishDate(post && (post.datePublished || post.date));
+    const enhanced = wotdBuildWordCardsHtml(wordItems) +
+        wotdBuildMoreAndInfoHtml({
+            youtubeUrl,
+            sourceName,
+            sourceUrl,
+            publishDate,
+            aiNote
+        });
+
+    const wrap = document.createElement('div');
+    wrap.innerHTML = enhanced;
+    while (wrap.firstChild) root.appendChild(wrap.firstChild);
+
+    wotdBindTtsButtons(container);
+}
+
 function attachWordOfDayWebTTS() {
     const container = document.getElementById('post-message');
     if (!container || !window.speechSynthesis) return;
@@ -211,9 +416,16 @@ function attachWordOfDayWebTTS() {
         speechSynthesis.getVoices();
     } catch (_) {}
 
+    // 새 카드 UI가 있으면 카드 TTS만 사용
+    if (container.querySelector('.wotd-word-card')) {
+        wotdBindTtsButtons(container);
+        return;
+    }
+
     const nodes = container.querySelectorAll('p, div, span');
     nodes.forEach((node) => {
         if (node.getAttribute('data-wotd-tts') === '1') return;
+        if (node.closest && node.closest('.wotd-word-card, .wotd-more-section, .wotd-info-banner')) return;
 
         const lines = (node.innerHTML || '').split(/<br\s*\/?>/i);
         if (lines.length === 0) return;
@@ -225,7 +437,6 @@ function attachWordOfDayWebTTS() {
             if (!plain) return lineHtml;
             if (!wotdIsMostlyEnglish(plain)) return lineHtml;
             if (/^Source\b/i.test(plain) || /^출처\b/.test(plain) || /^WSJ\s*\|/i.test(plain) || /^https?:\/\//i.test(plain)) return lineHtml;
-            // 이모지·스피커 아이콘은 TTS에서 제외 (worm 등으로 읽히는 문제 방지)
             const speak = plain
                 .replace(/\s*🔊\s*$/u, '')
                 .replace(/\p{Extended_Pictographic}/gu, '')
@@ -305,6 +516,7 @@ async function loadPost() {
             <div id="post-content">
                 <div id="post-message">${convertedMessage || '<span style="color: #999;">내용이 없습니다.</span>'}</div>
             </div>`;
+        enhanceWordOfDayLayout(post);
         // 영어 줄 뒤에 개별 스피커 아이콘 추가
         attachWordOfDayWebTTS();
 
