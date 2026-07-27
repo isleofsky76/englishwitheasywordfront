@@ -237,12 +237,108 @@
       .replace(/"/g, '&quot;');
   }
 
+  var CATEGORY_ICON = {
+    'News': '📰',
+    'Business': '💼',
+    'Tech': '💻',
+    'Politics': '🏛️',
+    'Science': '🔬',
+    'Culture': '🎭',
+    'Magazines': '📄',
+    'Broadcasting': '📺',
+    'Sports': '🏅',
+    'YouTube / Broadcasters': '▶️',
+    'Documentary': '🎬',
+    'English Learning': '📚',
+    'Podcasts': '🎧',
+    'Kids / Easy English': '🧸',
+    'Literature': '📖'
+  };
+
+  function inferCountry(site) {
+    var blob = ((site.name || '') + ' ' + (site.url || '')).toLowerCase();
+    if (/bbc\.|theguardian|sky\.|ft\.com|economist|theregister|granta|bbc\.co\.uk|skysports|newscientist/.test(blob)) {
+      return { flag: '🇬🇧', label: 'UK' };
+    }
+    if (/france24|aljazeera|reuters\.com|dw\.com|euronews/.test(blob)) {
+      return { flag: '🌍', label: 'World' };
+    }
+    if (/cnn\.|nytimes|washingtonpost|npr\.|pbs\.|voanews|abcnews|cbsnews|nbcnews|espn|forbes|bloomberg|cnbc|wsj|usa.?today|politico|thehill|axios|nasa\.|smithsonian|nationalgeographic|ted\.com|starfall|pbskids|gutenberg|poetryfoundation|poets\.org|commonlit|librivox|standardebooks|americanliterature|read\.gov|folger|allside|apnews|marketwatch|investopedia|harvard|businessinsider|techcrunch|theverge|wired|arstechnica|engadget|cnet|gizmodo|tomshardware|scientificamerican|nature\.com|sciencedaily|livescience|phys\.org|theatlantic|vox\.com|pitchfork|rollingstone|artnet|lithub|time\.com|newsweek|rd\.com|vanityfair|si\.com|bleacherreport|englishcentral|storylineonline|funenglishgames|dreamenglish|simple\.wikipedia|dogonews|hbr\.org|foreignpolicy|cfr\.org|newyorker|parisreview|poetryoutloud/.test(blob)) {
+      return { flag: '🇺🇸', label: 'USA' };
+    }
+    if (/utoronto|canada/.test(blob)) {
+      return { flag: '🇨🇦', label: 'Canada' };
+    }
+    return { flag: '🌐', label: 'Global' };
+  }
+
+  function levelMeta(level) {
+    var raw = String(level || '');
+    var lower = raw.toLowerCase();
+    var cls = 'dir-badge--level-mid';
+    var label = raw;
+
+    if (/^beginner$/.test(lower) || /^beginner[–-]intermediate$/.test(lower)) {
+      cls = 'dir-badge--level-easy';
+      label = lower.indexOf('intermediate') >= 0 ? '초급~중급' : '초급';
+    } else if (/^intermediate$/.test(lower)) {
+      cls = 'dir-badge--level-easy';
+      label = '중급';
+    } else if (/intermediate[–-]advanced/.test(lower) || /beginner[–-]advanced/.test(lower)) {
+      cls = 'dir-badge--level-mid';
+      label = /beginner/.test(lower) ? '초급~고급' : '중급~고급';
+    } else if (/^advanced$/.test(lower)) {
+      cls = 'dir-badge--level-hard';
+      label = '고급';
+    }
+
+    return { cls: cls, label: label };
+  }
+
+  function typeBadges(typeStr) {
+    var t = String(typeStr || '');
+    var badges = [];
+    if (/video|tv|streaming|youtube|talks|film/i.test(t)) badges.push({ icon: '📺', label: '영상' });
+    if (/podcast/i.test(t)) badges.push({ icon: '🎧', label: '팟캐스트' });
+    else if (/audio|radio|listen/i.test(t)) badges.push({ icon: '🎧', label: '청취' });
+    if (/news|article|text|analysis|opinion|photo/i.test(t)) badges.push({ icon: '📰', label: '기사' });
+    if (/magazine|essay|literature|poetry|fiction|classics|reference/i.test(t)) badges.push({ icon: '📄', label: '읽기' });
+    if (/learning|kids|games|phonics|stories/i.test(t) && !badges.length) {
+      badges.push({ icon: '📚', label: '학습' });
+    }
+    if (!badges.length) badges.push({ icon: '🔗', label: '링크' });
+
+    var seen = {};
+    return badges.filter(function (b) {
+      if (seen[b.label]) return false;
+      seen[b.label] = true;
+      return true;
+    }).slice(0, 3);
+  }
+
   function buildCard(site) {
+    var country = inferCountry(site);
+    var level = levelMeta(site.level);
+    var types = typeBadges(site.type);
+    var catIcon = CATEGORY_ICON[site.category] || '🔗';
+
+    var typeHtml = types.map(function (t) {
+      return '<span class="dir-badge dir-badge--type">' + t.icon + ' ' + escapeHtml(t.label) + '</span>';
+    }).join('');
+
     return (
       '<article class="dir-card" data-category="' + escapeHtml(site.category) + '">' +
+        '<div class="dir-card-top">' +
+          '<span class="dir-card-icon" aria-hidden="true">' + catIcon + '</span>' +
+          '<span class="dir-badge dir-badge--country">' + country.flag + ' ' + escapeHtml(country.label) + '</span>' +
+        '</div>' +
         '<h3 class="dir-card-title">' + escapeHtml(site.name) + '</h3>' +
+        '<div class="dir-card-badges">' +
+          '<span class="dir-badge ' + level.cls + '">' + escapeHtml(level.label) + '</span>' +
+          typeHtml +
+        '</div>' +
         '<p class="dir-card-desc">' + escapeHtml(site.desc) + '</p>' +
-        '<a class="dir-card-link" href="' + escapeHtml(site.url) + '" target="_blank" rel="noopener noreferrer">Visit site</a>' +
+        '<a class="dir-card-link" href="' + escapeHtml(site.url) + '" target="_blank" rel="noopener noreferrer">방문하기</a>' +
       '</article>'
     );
   }
@@ -288,7 +384,7 @@
 
     function renderFilters() {
       if (!filtersEl) return;
-      var buttons = ['<button type="button" class="dir-filter-btn is-active" data-cat="all">All</button>'];
+      var buttons = ['<button type="button" class="dir-filter-btn is-active" data-cat="all">전체</button>'];
       CATEGORIES.forEach(function (cat) {
         buttons.push(
           '<button type="button" class="dir-filter-btn" data-cat="' + escapeHtml(cat) + '">' + escapeHtml(cat) + '</button>'
@@ -302,7 +398,7 @@
       var filtered = getFilteredSites();
 
       if (countEl) {
-        countEl.textContent = filtered.length + ' site' + (filtered.length === 1 ? '' : 's');
+        countEl.textContent = '총 ' + filtered.length + '개 사이트';
       }
 
       if (!filtered.length) {
@@ -364,10 +460,41 @@
     renderPreview: renderPreview
   };
 
+  function injectSitesJsonLd() {
+    if (!document.querySelector('[data-english-directory]')) return;
+    if (document.getElementById('dir-sites-jsonld')) return;
+
+    var items = SITES.slice(0, 40).map(function (site, idx) {
+      return {
+        '@type': 'ListItem',
+        position: idx + 1,
+        name: site.name,
+        url: site.url,
+        description: site.desc
+      };
+    });
+
+    var data = {
+      '@context': 'https://schema.org',
+      '@type': 'ItemList',
+      name: '추천 영어 학습 사이트',
+      description: '영어 뉴스·방송·학습용으로 선별한 외부 사이트 목록',
+      numberOfItems: SITES.length,
+      itemListElement: items
+    };
+
+    var script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.id = 'dir-sites-jsonld';
+    script.textContent = JSON.stringify(data);
+    document.head.appendChild(script);
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
     var pageRoot = document.querySelector('[data-english-directory]');
     if (pageRoot) {
       renderDirectory(pageRoot);
+      injectSitesJsonLd();
     }
 
     var previewRoot = document.getElementById('english-directory-preview-list');
