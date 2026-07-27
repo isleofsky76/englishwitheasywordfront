@@ -70,10 +70,11 @@
             --text-primary: #2C2C2A;
             --text-secondary: #888780;
             --border-soft: #E8E6DC;
+            --page-bg: #FBFBFA;
         }
         body {
             font-family: 'Noto Sans KR', 'Poppins', sans-serif;
-            background: #F5F4F0;
+            background: var(--page-bg);
             color: var(--text-primary);
         }
         * {
@@ -322,7 +323,6 @@
             text-overflow: ellipsis;
             white-space: nowrap;
         }
-        .preview-title .preview-date,
         .preview-title .preview-source,
         .preview-title .preview-sep {
             color: var(--text-secondary);
@@ -336,6 +336,11 @@
         }
         .preview-title .preview-sep {
             margin: 0 0.1rem;
+        }
+        .preview-meta-stats .preview-date {
+            color: var(--text-secondary);
+            font-size: 12px;
+            font-weight: 400;
         }
         .preview-views {
             display: inline-flex;
@@ -691,7 +696,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="viewpost-seo.js?v=20260702"></script>
     <script src="nav-home-menu.js?v=20260721c"></script>
-    <script src="home-board-preview.js?v=20260727c"></script>
+    <script src="home-board-preview.js?v=20260727d"></script>
     <script src="english-directory.js" defer></script>
     
     <script>
@@ -705,25 +710,29 @@
             return '<ul class="preview-list">' + rows.join('') + '</ul>';
         }
 
-        function formatBoardPreviewDate(dateStr) {
+        function formatBoardPreviewDateTime(dateStr) {
             if (!dateStr) return '';
             var d = new Date(dateStr);
             if (isNaN(d.getTime())) return '';
             var y = d.getFullYear();
             var m = ('0' + (d.getMonth() + 1)).slice(-2);
             var day = ('0' + d.getDate()).slice(-2);
-            return y + '.' + m + '.' + day;
+            var h = ('0' + d.getHours()).slice(-2);
+            var min = ('0' + d.getMinutes()).slice(-2);
+            return y + '.' + m + '.' + day + ' ' + h + ':' + min;
         }
 
-        function formatMetaStatsHtml(views, likes) {
+        function formatMetaStatsHtml(views, likes, dateStr) {
             var viewCount = Number(views) || 0;
             var likeCount = parseInt(likes, 10) || 0;
-            var viewsPart = viewCount
-                ? '<span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> ' + viewCount + ' 조회</span>'
-                : '<span class="preview-views preview-views--empty"><span class="preview-views-icon" aria-hidden="true">👁</span> 조회 없음</span>';
-            return '<span class="preview-meta-stats">' + viewsPart +
-                '<span class="preview-sep preview-sep--stats" aria-hidden="true"> · </span>' +
-                '<span class="preview-likes">' + likeCount + ' 추천</span></span>';
+            var dateLabel = formatBoardPreviewDateTime(dateStr);
+            var parts = [];
+            if (dateLabel) {
+                parts.push('<span class="preview-date">' + dateLabel + '</span>');
+            }
+            parts.push('<span class="preview-views">' + (viewCount ? (viewCount + ' 조회') : '조회 없음') + '</span>');
+            parts.push('<span class="preview-likes">' + likeCount + ' 추천</span>');
+            return '<span class="preview-meta-stats">' + parts.join('<span class="preview-sep preview-sep--stats" aria-hidden="true">  </span>') + '</span>';
         }
 
         function buildPreviewRow(number, title, views, href, dateStr, likes) {
@@ -734,11 +743,7 @@
             if (!mainTitle) mainTitle = '제목 없음';
             var safeTitle = mainTitle.replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
             var safeSource = source.replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-            var dateLabel = formatBoardPreviewDate(dateStr);
             var titleParts = [];
-            if (dateLabel) {
-                titleParts.push('<span class="preview-date">' + dateLabel + '</span>');
-            }
             if (safeSource) {
                 titleParts.push('<span class="preview-source">' + safeSource + '</span>');
             }
@@ -748,7 +753,7 @@
                 '<span class="preview-num">' + number + '</span>' +
                 '<span class="preview-body">' +
                     '<span class="preview-title">' + titleHtml + '</span>' +
-                    formatMetaStatsHtml(views, likes) +
+                    formatMetaStatsHtml(views, likes, dateStr) +
                 '</span>' +
                 '<span class="preview-arrow" aria-hidden="true">›</span>' +
                 '</a></li>';

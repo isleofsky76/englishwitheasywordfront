@@ -168,37 +168,49 @@
     return LABEL_STYLE[label] || { badge: 'preview-badge--default', accent: 'preview-accent--news' };
   }
 
-  function formatViewsHtml(views, likes) {
+  function formatPreviewDateTime(dateStr) {
+    if (!dateStr) return '';
+    var d = new Date(dateStr);
+    if (isNaN(d.getTime())) return '';
+    var y = d.getFullYear();
+    var m = ('0' + (d.getMonth() + 1)).slice(-2);
+    var day = ('0' + d.getDate()).slice(-2);
+    var h = ('0' + d.getHours()).slice(-2);
+    var min = ('0' + d.getMinutes()).slice(-2);
+    return y + '.' + m + '.' + day + ' ' + h + ':' + min;
+  }
+
+  function formatViewsHtml(views, likes, dateStr) {
     var viewCount = Number(views) || 0;
     var likeCount = parseInt(likes, 10) || 0;
-    var viewsPart = viewCount
-      ? '<span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> ' + viewCount + ' 조회</span>'
-      : '<span class="preview-views preview-views--empty"><span class="preview-views-icon" aria-hidden="true">👁</span> 조회 없음</span>';
-    return '<span class="preview-meta-stats">' + viewsPart +
-      '<span class="preview-sep preview-sep--stats" aria-hidden="true"> · </span>' +
-      '<span class="preview-likes">' + likeCount + ' 추천</span></span>';
+    var dateLabel = formatPreviewDateTime(dateStr);
+    var parts = [];
+    if (dateLabel) {
+      parts.push('<span class="preview-date">' + dateLabel + '</span>');
+    }
+    parts.push('<span class="preview-views">' + (viewCount ? (viewCount + ' 조회') : '조회 없음') + '</span>');
+    parts.push('<span class="preview-likes">' + likeCount + ' 추천</span>');
+    return '<span class="preview-meta-stats">' + parts.join('<span class="preview-sep preview-sep--stats" aria-hidden="true">  </span>') + '</span>';
   }
 
   function buildRecentPreviewRow(dateStr, label, title, views, href, isNew, likes) {
     var style = styleForLabel(label);
-    var safeDate = formatPreviewDate(dateStr);
     var safeLabel = escapeHtml(label);
     var safeTitle = escapeHtml(title || '제목 없음');
     var newHtml = isNew ? '<span class="preview-new">NEW</span>' : '';
     return '<li class="preview-card preview-card--recent ' + style.accent + '"><a href="' + href + '">' +
       '<span class="preview-body">' +
         '<span class="preview-meta">' + newHtml +
-          '<span class="preview-date">' + safeDate + '</span>' +
           '<span class="preview-badge ' + style.badge + '">' + safeLabel + '</span>' +
         '</span>' +
         '<span class="preview-title">' + safeTitle + '</span>' +
-        formatViewsHtml(views, likes) +
+        formatViewsHtml(views, likes, dateStr) +
       '</span>' +
       '<span class="preview-arrow" aria-hidden="true">›</span>' +
       '</a></li>';
   }
 
-  function buildBestPreviewRow(number, label, title, views, href, likes) {
+  function buildBestPreviewRow(number, label, title, views, href, likes, dateStr) {
     var style = styleForLabel(label);
     var safeLabel = escapeHtml(label);
     var safeTitle = escapeHtml(title || '제목 없음');
@@ -207,7 +219,7 @@
       '<span class="preview-body">' +
         '<span class="preview-badge ' + style.badge + '">' + safeLabel + '</span>' +
         '<span class="preview-title">' + safeTitle + '</span>' +
-        formatViewsHtml(views, likes) +
+        formatViewsHtml(views, likes, dateStr) +
       '</span>' +
       '<span class="preview-arrow" aria-hidden="true">›</span>' +
       '</a></li>';
@@ -234,7 +246,7 @@
         return;
       }
       var rows = preview.map(function (item, idx) {
-        return buildBestPreviewRow(idx + 1, item.label, item.title, item.views, item.href, item.likes);
+        return buildBestPreviewRow(idx + 1, item.label, item.title, item.views, item.href, item.likes, item.date);
       });
       listEl.innerHTML = buildPreviewListHtml(rows, '', listEl.getAttribute('data-list-class'));
     }).catch(function () {
