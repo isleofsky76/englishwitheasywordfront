@@ -74,10 +74,11 @@
 .pe-image-card img {
   width: 100%;
   height: auto;
+  max-height: none;
   display: block;
   border-radius: 10px;
-  object-fit: cover;
-  aspect-ratio: 4 / 3;
+  object-fit: contain;
+  aspect-ratio: auto;
   background: #E8F0FE;
 }
 
@@ -651,6 +652,8 @@
   width: 100%;
   max-width: 100%;
   height: auto;
+  aspect-ratio: auto;
+  object-fit: contain;
   display: block;
   margin: 0 0 0.15rem 0;
   border-radius: 8px;
@@ -677,7 +680,10 @@
 @media (max-width: 767px) {
   .pe-image-card .pe-hero-img,
   .pe-image-card img {
-    aspect-ratio: 1 / 1;
+    width: 100%;
+    height: auto;
+    aspect-ratio: auto;
+    object-fit: contain;
   }
 
   .pe-en {
