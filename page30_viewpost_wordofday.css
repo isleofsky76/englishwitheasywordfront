@@ -286,12 +286,22 @@ body {
   }
 
   /* Word of the Day 상단 히어로 이미지: 모바일에서 가로에 맞춰 1:1 정사각형 */
-  #post-message .wotd-hero-image,
-  #post-message img.wotd-hero-image {
+  #post-message .wotd-hero-image:not(.pe-hero-img),
+  #post-message img.wotd-hero-image:not(.pe-hero-img) {
     width: 100%;
     aspect-ratio: 1 / 1;
     object-fit: cover;
     height: auto;
+  }
+
+  /* 포토영어 히어로: 원본 비율 유지 (잘림 방지) */
+  #post-message .photo-english-card .wotd-hero-image,
+  #post-message .photo-english-card .pe-hero-img,
+  #post-message .pe-image-card .pe-hero-img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: auto;
+    object-fit: contain;
   }
 }
 
