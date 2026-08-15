@@ -215,6 +215,7 @@
 }
 
 .site-primary-nav .nav-more-toggle {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -227,6 +228,34 @@
   cursor: pointer;
   color: #fff;
   border-radius: 8px;
+}
+
+.site-primary-nav .nav-more-toggle::after {
+  content: '더보기';
+  position: absolute;
+  right: calc(100% + 6px);
+  top: 50%;
+  transform: translateY(-50%);
+  white-space: nowrap;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: #fff;
+  background: rgba(12, 24, 44, 0.88);
+  padding: 0.22rem 0.5rem;
+  border-radius: 6px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.12s ease;
+}
+
+.site-primary-nav .nav-more-toggle:hover::after,
+.site-primary-nav .nav-more-toggle:focus-visible::after {
+  opacity: 1;
+}
+
+.site-primary-nav .nav-more.is-open .nav-more-toggle::after {
+  opacity: 0;
 }
 
 .site-primary-nav .nav-more-toggle:hover,
