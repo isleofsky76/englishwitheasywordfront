@@ -46,78 +46,81 @@ function buildSynonymMessage({ words, youtube }) {
 }
 
 
-
-const fomentSet = [
+const contradictionSet = [
   {
-  en: 'foment',
-  pron: '포멘트',
-  ipa: '/foʊˈment/',
-  meaning: '부추기다, 조장하다',
-  short: '조장하다',
-  enExample: 'Their purpose is to foment distrust in America.',
-  koExample: '그들의 목적은 미국에 대한 불신을 부추기는 것입니다.'
+  en: 'contradiction',
+  pron: '칸트러딕션',
+  ipa: '/ˌkɑːntrəˈdɪkʃən/',
+  meaning: '모순, 상충',
+  short: '모순',
+  enExample: 'There is a contradiction between the two sets of figures.',
+  koExample: '두 수치 세트 사이에는 모순이 있다.'
   },
   {
-  en: 'incite',
-  pron: '인사이트',
-  ipa: '/ɪnˈsaɪt/',
-  meaning: '선동하다, 부추기다',
-  short: '선동하다',
-  enExample: 'Menacing slogans and banners that could incite violence.',
-  koExample: '폭력을 선동할 수 있는 위협적인 표어와 깃발.'
+  en: 'incongruity',
+  pron: '인컨그루어티',
+  ipa: '/ˌɪnkənˈɡruːəti/',
+  meaning: '부조화, 불일치',
+  short: '부조화',
+  enExample: 'There are several reasons for the incongruity.',
+  koExample: '그 부조화에는 여러 가지 이유가 있다.'
   },
   {
-  en: 'instigate',
-  pron: '인스티게이트',
-  ipa: '/ˈɪnstɪɡeɪt/',
-  meaning: '착수하게 하다, 부추기다, 선동하다',
-  short: '선동하다',
-  enExample: 'They should not be used as a pretext to instigate a trade war.',
-  koExample: '그것들이 무역 전쟁을 일으키는 구실로 사용되어서는 안 됩니다.'
+  en: 'oxymoron',
+  pron: '악시모론',
+  ipa: '/ˌɑːksɪˈmɔːrɑːn/',
+  meaning: '모순어법, 모순된 표현',
+  short: '모순어법',
+  enExample: 'Mindset means reconciling John Maynard Keynes\'s social model and Joseph Schumpeter\'s creative destruction. This is not an oxymoron.',
+  koExample: '마인드셋은 존 메이너드 케인즈의 사회 모델과 조셉 슘페터의 창조적 파괴를 조화시키는 것을 의미한다. 이것은 모순어법이 아니다.'
   },
   {
-  en: 'goad',
-  pron: '고우드',
-  ipa: '/ɡoʊd/',
-  meaning: '부추기다, 몰아붙이다',
-  short: '부추기다',
-  enExample: 'She goaded her teammates into giving their absolute best.',
-  koExample: '그녀는 팀원들을 몰아붙여 최선을 다하게 만들었습니다.'
+  en: 'hyperbole',
+  pron: '하이퍼벌리',
+  ipa: '/haɪˈpɜːrbəli/',
+  meaning: '과장, 과장법',
+  short: '과장',
+  enExample: 'HUD dismissed that claim as \'an exercise in rhetoric, speculation, and dramatic hyperbole, not law.\'',
+  koExample: '주택도시개발부는 그 주장을 \'수사학, 추측, 극적인 과장의 연습일 뿐 법이 아니다\'고 일축했다.'
   },
   {
-  en: 'galvanize',
-  pron: '갤버나이즈',
-  ipa: '/ˈɡælvənaɪz/',
-  meaning: '고무하다, 행동하도록 자극하다',
-  short: '고무하다',
-  enExample: 'He asserts that we all know the power of Art, its power to galvanize, stimulate, rouse, exhilarate, soothe and enlighten.',
-  koExample: '그는 미술의 힘, 즉 자극하고, 고무하고, 흥분시키고, 위로하고, 계몽하는 힘을 우리 모두가 안다고 주장합니다.'
+  en: 'euphemism',
+  pron: '유퍼미즘',
+  ipa: '/ˈjuːfəmɪzəm/',
+  meaning: '완곡어법, 완곡한 표현',
+  short: '완곡어법',
+  enExample: 'If Orwell were writing today, he would find plenty of euphemisms to complain about.',
+  koExample: '오웰이 오늘날 글을 쓰고 있다면 불평할 완곡한 표현이 많이 있을 것이다.'
   },
   {
-  en: 'provoke',
-  pron: '프로보우크',
-  ipa: '/prəˈvoʊk/',
-  meaning: '유발하다, 촉발하다',
-  short: '촉발하다',
-  enExample: 'Such measures tend to provoke faculty resistance.',
-  koExample: '그러한 조치는 교수진의 저항을 촉발하는 경향이 있습니다.'
+  en: 'analogy',
+  pron: '어낼러지',
+  ipa: '/əˈnælədʒi/',
+  meaning: '비유, 유추',
+  short: '비유',
+  enExample: 'A swimming pool might be a reasonable analogy for the money supply.',
+  koExample: '수영장은 통화 공급에 대한 합리적인 비유가 될 수 있다.'
   }
   ];
 
   const posts = [
   {
-  title: 'foment 부추기다 유의어 정리',
-  slug: 'foment-synonyms',
+  title: 'contradiction 모순 연관 단어 정리',
+  slug: 'contradiction-related-words',
   metaDescription:
-  'foment(조장하다), incite(선동하다), instigate(부추기다), goad(몰아붙이다), galvanize(고무하다), provoke(촉발하다) 뜻·발음·예문을 정리한 유의어 학습입니다.',
+  'contradiction(모순), incongruity(부조화), oxymoron(모순어법), hyperbole(과장), euphemism(완곡어법), analogy(비유) 뜻·발음·예문을 정리한 연관 어휘 학습입니다.',
   message: buildSynonymMessage({
-  words: fomentSet,
-  youtube: 'https://youtube.com/shorts/cwh2b_h0ggM'
+  words: contradictionSet,
+  youtube: 'https://youtube.com/shorts/DgnZ_E_IXog'
   }),
   nickname: 'admin',
-  password: 'seed_synonym_foment-synonyms'
+  password: 'seed_synonym_contradiction-related-words'
   }
   ];
+
+
+
+  
 
 async function seed() {
   console.log('Synonym 글 추가 중...', API_BASE);
