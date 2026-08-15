@@ -4,8 +4,8 @@
  * nav-home-menu.js 가 로드함
  */
 (function () {
-    var VERSION = '20260815s';
-  var PRIMARY_NAV_COUNT = 6;
+    var VERSION = '20260815t';
+  var PRIMARY_NAV_COUNT = 5;
   var NAV_ITEMS = [
     { href: 'index.html', label: '홈', tone: 'home', pages: ['index.html', ''] },
     { href: 'word-of-the-day-list.html', label: '오늘의 단어', tone: 'wotd', pages: ['word-of-the-day-list.html', 'word-of-the-day.html'] },
