@@ -228,12 +228,12 @@ function vvAttachPlayAll(container) {
     const wrap = document.createElement('p');
     wrap.className = 'vv-tts-all-wrap';
     wrap.innerHTML =
-        '<button type="button" class="vv-tts-all-btn" aria-label="영어 예문 모두 듣기, 다시 누르면 멈춤" title="모두 듣기 / 다시 누르면 멈춤" style="display:inline-flex;align-items:center;gap:6px;margin:16px 0 0;border:1px solid #2f80ed;background:#eef5fd;color:#1d4f91;cursor:pointer;border-radius:999px;padding:6px 12px;font-size:14px;font-weight:600;line-height:1.2;">' +
+        '<button type="button" class="vv-tts-all-btn" aria-label="영어 예문 모두 듣기, 다시 누르면 멈춤" title="모두 듣기 / 다시 누르면 멈춤" style="display:inline-flex;align-items:center;gap:6px;margin:0 0 16px;border:1px solid #2f80ed;background:#eef5fd;color:#1d4f91;cursor:pointer;border-radius:999px;padding:6px 12px;font-size:14px;font-weight:600;line-height:1.2;">' +
         icon +
         ' 영어 예문 모두 듣기</button>';
     const msg = container.querySelector('#post-message');
-    if (msg && msg.parentNode) msg.parentNode.appendChild(wrap);
-    else container.appendChild(wrap);
+    if (msg && msg.parentNode) msg.parentNode.insertBefore(wrap, msg);
+    else container.insertBefore(wrap, container.firstChild);
 
     const allBtn = wrap.querySelector('.vv-tts-all-btn');
     allBtn.addEventListener('click', (e) => {
