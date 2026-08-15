@@ -4,7 +4,7 @@
  * nav-home-menu.js 가 로드함
  */
 (function () {
-    var VERSION = '20260815v';
+    var VERSION = '20260816a';
   var PRIMARY_NAV_COUNT = 5;
   var NAV_ITEMS = [
     { href: 'index.html', label: '홈', tone: 'home', pages: ['index.html', ''] },
@@ -19,6 +19,7 @@
     { href: 'ranking-news-list.html', label: '랭킹 뉴스', tone: 'rank', pages: ['ranking-news-list.html', 'ranking-news.html'] },
     { href: 'photo-english-list.html', label: '포토영어', tone: 'photo', pages: ['photo-english-list.html', 'photo-english.html'] },
     { href: 'pros-cons-list.html', label: 'Pros & Cons', tone: 'pros', pages: ['pros-cons-list.html', 'pros-cons.html'] },
+    { href: 'english-opinions-list.html', label: '오피니언', tone: 'opine', pages: ['english-opinions-list.html', 'english-opinions.html'] },
     { href: 'english-directory.html', label: '학습 사이트', tone: 'dir', pages: ['english-directory.html'] }
   ];
 
@@ -49,6 +50,7 @@
         'culture-voca': 'culture-voca.html',
         'ranking-news': 'ranking-news.html',
         'photo-english': 'photo-english.html',
+        'english-opinions': 'english-opinions.html',
         'vocabulary-quiz': 'vocabulary-quiz.html'
       };
       return map[folder] || 'index.html';

@@ -11,11 +11,13 @@
         'culture-voca.html': 'culture-voca',
         'ranking-news.html': 'ranking-news',
         'english-synonym.html': 'english-synonym',
+        'english-opinions.html': 'english-opinions',
         'popular-voca.html': 'popular-voca',
         'situational-english.html': 'situational-english',
         'pros-cons.html': 'pros-cons',
         'word-of-the-day.html': 'word-of-the-day',
         'photo-english.html': 'photo-english',
+        'vocabulary-quiz.html': 'vocabulary-quiz',
     };
 
     function plainText(html, maxLen) {

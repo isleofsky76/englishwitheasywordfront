@@ -68,6 +68,7 @@
       { path: '/guestbook', page: 'news-voca.html', postPath: 'news-voca', label: '뉴스 어휘' },
       { path: '/vocabulary-quiz', page: 'vocabulary-quiz.html', label: '영어 단어 퀴즈' },
       { path: '/vocabulary', page: 'english-synonym.html', postPath: 'english-synonym', label: '유의어' },
+      { path: '/opinions', page: 'english-opinions.html', postPath: 'english-opinions', label: '오피니언' },
       { path: '/easy-voca', page: 'popular-voca.html', postPath: 'popular-voca', label: '인기 어휘' },
       { path: '/situational-english', page: 'situational-english.html', postPath: 'situational-english', label: '상황 영어' },
       { path: '/cooking-voca', page: 'cooking-voca.html', postPath: 'cooking-voca', label: '요리 영어' },

@@ -50,6 +50,8 @@
 
         { href: 'pros-cons-list.html', label: 'Pros & Cons', pages: ['pros-cons-list.html', 'pros-cons.html'] },
 
+        { href: 'english-opinions-list.html', label: '오피니언', pages: ['english-opinions-list.html', 'english-opinions.html'] },
+
         { href: 'english-directory.html', label: '학습 사이트 디렉터리', pages: ['english-directory.html'] }
 
     ];
@@ -235,7 +237,7 @@
         document.documentElement.classList.add('has-site-masthead');
         if (document.querySelector('script[src*="site-masthead.js"]')) return;
         var s = document.createElement('script');
-        s.src = base + 'site-masthead.js?v=20260815v';
+        s.src = base + 'site-masthead.js?v=20260816a';
         document.head.appendChild(s);
     }
 
