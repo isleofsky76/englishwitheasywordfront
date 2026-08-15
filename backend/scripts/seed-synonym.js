@@ -47,81 +47,77 @@ function buildSynonymMessage({ words, youtube }) {
 
 
 
-
-const coalesceSet = [
+const fortitudeSet = [
   {
-  en: 'coalesce',
-  pron: '코얼레스',
-  ipa: '/ˌkoʊəˈles/',
-  meaning: '합치다, 합체하다',
-  short: '합치다',
-  enExample: 'Viral trends coalesce around certain titles.',
-  koExample: '바이럴 트렌드는 특정 제목들 주위에 모여든다.'
+  en: 'fortitude',
+  pron: '포터튜드',
+  ipa: '/ˈfɔːrtɪtuːd/',
+  meaning: '불굴의 용기, 강인함',
+  short: '불굴의 용기',
+  enExample: 'He will need fortitude for the brawls to come, against Conservative leader Pierre Poilievre and Mr Trump.',
+  koExample: '보수당 지도자 피에르 폴리에브르와 트럼프에 대항하기 위해 그는 다가올 싸움에 필요한 불굴의 용기가 필요할 것이다.'
   },
   {
-  en: 'amalgamate',
-  pron: '어맬거메이트',
-  ipa: '/əˈmælɡəmeɪt/',
-  meaning: '합병하다, 통합하다',
-  short: '통합하다',
-  enExample: 'Something similar might help amalgamate knowledge from the AI labs, research groups and foreign bodies such as AISI.',
-  koExample: '유사한 것이 AI 랩, 연구 그룹 및 AISI 같은 외부 기관의 지식을 통합하는 데 도움이 될 수 있다.'
+  en: 'perseverance',
+  pron: '퍼서비어런스',
+  ipa: '/ˌpɜːrsəˈvɪrəns/',
+  meaning: '인내, 끈기',
+  short: '인내',
+  enExample: 'They showed great perseverance in the face of difficulty.',
+  koExample: '그들은 어려움 앞에서 위대한 인내심을 보여주었다.'
   },
   {
-  en: 'fuse',
-  pron: '퓨즈',
-  ipa: '/fjuːz/',
-  meaning: '융합하다, 결합되다',
-  short: '융합하다',
-  enExample: 'Sometimes mitochondria fuse together into large interconnected networks.',
-  koExample: '때로 미토콘드리아는 함께 융합하여 크고 상호연결된 네트워크를 형성한다.'
+  en: 'stalwart',
+  pron: '스톨워트',
+  ipa: '/ˈstɔːlwərt/',
+  meaning: '충실한, 굳건한',
+  short: '굳건한',
+  enExample: 'Many ordinary Israelis revere Mr Trump as their country\'s stalwart friend.',
+  koExample: '많은 이스라엘 국민들은 트럼프를 자신들 나라의 굳건한 친구로 숭배한다.'
   },
   {
-  en: 'merge',
-  pron: '머지',
-  ipa: '/mɜːrdʒ/',
-  meaning: '합병하다, 합쳐지다',
-  short: '합병하다',
-  enExample: 'The banks are set to merge next year.',
-  koExample: '그 은행들은 내년에 합병할 예정이다.'
+  en: 'formidable',
+  pron: '포미더블',
+  ipa: '/ˈfɔːrmɪdəbəl/',
+  meaning: '만만치 않은, 엄청난',
+  short: '만만치 않은',
+  enExample: 'Absorbing this labour force is a formidable economic challenge.',
+  koExample: '이 노동력을 흡수하는 것은 엄청난 경제적 과제이다.'
   },
   {
-  en: 'coalition',
-  pron: '코얼리션',
-  ipa: '/ˌkoʊəˈlɪʃən/',
-  meaning: '연합, 연립',
-  short: '연합',
-  enExample: 'Three of the six global soccer confederations formalized their coalition by signing an open letter that called for change at the top of FIFA.',
-  koExample: '전 세계 6개 축구 연맹 중 3개가 FIFA 최고층의 변화를 요구하는 공개 편지에 서명하여 연합을 공식화했다.'
+  en: 'homage',
+  pron: '하미지',
+  ipa: '/ˈhɑːmɪdʒ/',
+  meaning: '경의, 찬사',
+  short: '경의',
+  enExample: 'The state\'s inability to remove such open homage to illegal organisations made public its weakness.',
+  koExample: '국가가 불법 조직에 대한 이러한 공개적인 경의를 제거하지 못한 것은 그들의 약점을 드러냈다.'
   },
   {
-  en: 'blend',
-  pron: '블렌드',
-  ipa: '/blend/',
-  meaning: '섞이다, 조화를 이루다',
-  short: '섞이다',
-  enExample: 'We must all blend together and get mixed up after a while.',
-  koExample: '우리는 모두 함께 어우러지고 시간이 지나면 섞여야 한다.'
+  en: 'grit',
+  pron: '그릿',
+  ipa: '/ɡrɪt/',
+  meaning: '투지, 끈기, 강인함',
+  short: '투지',
+  enExample: 'We have the grit and the sisu to chart the path ahead.',
+  koExample: '우리는 앞으로의 길을 개척할 투지와 강인함을 가지고 있다.'
   }
   ];
 
   const posts = [
   {
-  title: 'coalesce 합치다 유의어 정리',
-  slug: 'coalesce-synonyms',
+  title: 'fortitude 불굴의 용기 연관 단어 정리',
+  slug: 'fortitude-related-words',
   metaDescription:
-  'coalesce(합치다), amalgamate(통합하다), fuse(융합하다), merge(합병하다), coalition(연합), blend(섞이다) 뜻·발음·예문을 정리한 유의어 학습입니다.',
+  'fortitude(불굴의 용기), perseverance(인내), stalwart(굳건한), formidable(만만치 않은), homage(경의), grit(투지) 뜻·발음·예문을 정리한 연관 어휘 학습입니다.',
   message: buildSynonymMessage({
-  words: coalesceSet,
-  youtube: 'https://youtube.com/shorts/baedHLPW8zE'
+  words: fortitudeSet,
+  youtube: 'https://youtube.com/shorts/N3uIDgXIEj4'
   }),
   nickname: 'admin',
-  password: 'seed_synonym_coalesce-synonyms'
+  password: 'seed_synonym_fortitude-related-words'
   }
   ];
-
-
-
 
 
 
