@@ -4,20 +4,20 @@
  * nav-home-menu.js 가 로드함
  */
 (function () {
-    var VERSION = '20260816a';
+    var VERSION = '20260816b';
   var PRIMARY_NAV_COUNT = 5;
   var NAV_ITEMS = [
     { href: 'index.html', label: '홈', tone: 'home', pages: ['index.html', ''] },
     { href: 'english-synonym-list.html', label: '연관단어', tone: 'syn', pages: ['english-synonym-list.html', 'english-synonym.html'] },
-    { href: 'news-voca-list.html', label: '뉴스 어휘', tone: 'news', pages: ['news-voca-list.html', 'news-voca.html'] },
-    { href: 'vocabulary-quiz.html', label: '단어 퀴즈', tone: 'quiz', pages: ['vocabulary-quiz.html', 'vocabulary-quiz-list.html'] },
+    { href: 'news-voca-list.html', label: '국제', tone: 'news', pages: ['news-voca-list.html', 'news-voca.html'] },
+    { href: 'vocabulary-quiz.html', label: '퀴즈', tone: 'quiz', pages: ['vocabulary-quiz.html', 'vocabulary-quiz-list.html'] },
     { href: 'popular-voca-list.html', label: '인기 어휘', tone: 'popular', pages: ['popular-voca-list.html', 'popular-voca.html'] },
-    { href: 'word-of-the-day-list.html', label: '오늘의 단어', tone: 'wotd', pages: ['word-of-the-day-list.html', 'word-of-the-day.html'] },
-    { href: 'situational-english-list.html', label: '상황 영어', tone: 'sit', pages: ['situational-english-list.html', 'situational-english.html'] },
-    { href: 'cooking-voca-list.html', label: '요리 영어', tone: 'cook', pages: ['cooking-voca-list.html', 'cooking-voca.html'] },
-    { href: 'culture-voca-list.html', label: '컬쳐 어휘', tone: 'culture', pages: ['culture-voca-list.html', 'culture-voca.html'] },
-    { href: 'ranking-news-list.html', label: '랭킹 뉴스', tone: 'rank', pages: ['ranking-news-list.html', 'ranking-news.html'] },
-    { href: 'photo-english-list.html', label: '포토영어', tone: 'photo', pages: ['photo-english-list.html', 'photo-english.html'] },
+    { href: 'word-of-the-day-list.html', label: '단어장', tone: 'wotd', pages: ['word-of-the-day-list.html', 'word-of-the-day.html'] },
+    { href: 'situational-english-list.html', label: '상황', tone: 'sit', pages: ['situational-english-list.html', 'situational-english.html'] },
+    { href: 'cooking-voca-list.html', label: '요리', tone: 'cook', pages: ['cooking-voca-list.html', 'cooking-voca.html'] },
+    { href: 'culture-voca-list.html', label: '컬쳐', tone: 'culture', pages: ['culture-voca-list.html', 'culture-voca.html'] },
+    { href: 'ranking-news-list.html', label: '랭킹', tone: 'rank', pages: ['ranking-news-list.html', 'ranking-news.html'] },
+    { href: 'photo-english-list.html', label: '포토', tone: 'photo', pages: ['photo-english-list.html', 'photo-english.html'] },
     { href: 'pros-cons-list.html', label: 'Pros & Cons', tone: 'pros', pages: ['pros-cons-list.html', 'pros-cons.html'] },
     { href: 'english-opinions-list.html', label: '오피니언', tone: 'opine', pages: ['english-opinions-list.html', 'english-opinions.html'] },
     { href: 'english-directory.html', label: '학습 사이트', tone: 'dir', pages: ['english-directory.html'] }

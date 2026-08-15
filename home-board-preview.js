@@ -64,17 +64,17 @@
     var isProdHost = window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1';
     var wordofdayApiMode = apiMode || (isProdHost ? 'prod' : null);
     return [
-      { path: '/wordofday', page: 'word-of-the-day.html', postPath: 'word-of-the-day', label: '오늘의 단어장', apiMode: wordofdayApiMode },
-      { path: '/guestbook', page: 'news-voca.html', postPath: 'news-voca', label: '뉴스 어휘' },
-      { path: '/vocabulary-quiz', page: 'vocabulary-quiz.html', label: '영어 단어 퀴즈' },
+      { path: '/wordofday', page: 'word-of-the-day.html', postPath: 'word-of-the-day', label: '단어장', apiMode: wordofdayApiMode },
+      { path: '/guestbook', page: 'news-voca.html', postPath: 'news-voca', label: '국제' },
+      { path: '/vocabulary-quiz', page: 'vocabulary-quiz.html', label: '퀴즈' },
       { path: '/vocabulary', page: 'english-synonym.html', postPath: 'english-synonym', label: '유의어' },
       { path: '/opinions', page: 'english-opinions.html', postPath: 'english-opinions', label: '오피니언' },
       { path: '/easy-voca', page: 'popular-voca.html', postPath: 'popular-voca', label: '인기 어휘' },
-      { path: '/situational-english', page: 'situational-english.html', postPath: 'situational-english', label: '상황 영어' },
-      { path: '/cooking-voca', page: 'cooking-voca.html', postPath: 'cooking-voca', label: '요리 영어' },
-      { path: '/culture-voca', page: 'culture-voca.html', postPath: 'culture-voca', label: '컬쳐 어휘' },
-      { path: '/ranking-news', page: 'ranking-news.html', postPath: 'ranking-news', label: '랭킹 뉴스' },
-      { path: '/photo-english', page: 'photo-english.html', postPath: 'photo-english', label: '포토 영어' },
+      { path: '/situational-english', page: 'situational-english.html', postPath: 'situational-english', label: '상황' },
+      { path: '/cooking-voca', page: 'cooking-voca.html', postPath: 'cooking-voca', label: '요리' },
+      { path: '/culture-voca', page: 'culture-voca.html', postPath: 'culture-voca', label: '컬쳐' },
+      { path: '/ranking-news', page: 'ranking-news.html', postPath: 'ranking-news', label: '랭킹' },
+      { path: '/photo-english', page: 'photo-english.html', postPath: 'photo-english', label: '포토' },
       { path: '/pros-cons', page: 'pros-cons.html', postPath: 'pros-cons', label: 'Pros & Cons' }
     ];
   }
@@ -153,16 +153,17 @@
   }
 
   var LABEL_STYLE = {
-    '오늘의 단어장': { badge: 'preview-badge--wordofday', accent: 'preview-accent--wordofday' },
-    '뉴스 어휘': { badge: 'preview-badge--news', accent: 'preview-accent--news' },
-    '영어 단어 퀴즈': { badge: 'preview-badge--quiz', accent: 'preview-accent--quiz' },
+    '단어장': { badge: 'preview-badge--wordofday', accent: 'preview-accent--wordofday' },
+    '국제': { badge: 'preview-badge--news', accent: 'preview-accent--news' },
+    '퀴즈': { badge: 'preview-badge--quiz', accent: 'preview-accent--quiz' },
     '유의어': { badge: 'preview-badge--synonym', accent: 'preview-accent--synonym' },
+    '연관단어': { badge: 'preview-badge--synonym', accent: 'preview-accent--synonym' },
     '인기 어휘': { badge: 'preview-badge--popular', accent: 'preview-accent--popular' },
-    '상황 영어': { badge: 'preview-badge--situational', accent: 'preview-accent--situational' },
-    '요리 영어': { badge: 'preview-badge--cooking', accent: 'preview-accent--cooking' },
-    '컬쳐 어휘': { badge: 'preview-badge--culture', accent: 'preview-accent--culture' },
-    '랭킹 뉴스': { badge: 'preview-badge--ranking', accent: 'preview-accent--ranking' },
-    '포토 영어': { badge: 'preview-badge--photo', accent: 'preview-accent--photo' },
+    '상황': { badge: 'preview-badge--situational', accent: 'preview-accent--situational' },
+    '요리': { badge: 'preview-badge--cooking', accent: 'preview-accent--cooking' },
+    '컬쳐': { badge: 'preview-badge--culture', accent: 'preview-accent--culture' },
+    '랭킹': { badge: 'preview-badge--ranking', accent: 'preview-accent--ranking' },
+    '포토': { badge: 'preview-badge--photo', accent: 'preview-accent--photo' },
     'Pros & Cons': { badge: 'preview-badge--proscons', accent: 'preview-accent--proscons' }
   };
 
