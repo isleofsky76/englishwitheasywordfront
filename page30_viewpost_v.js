@@ -100,6 +100,24 @@ function vvIsMostlyEnglish(text) {
     return letters.length / (letters.length + nonLatin + 1) > 0.6;
 }
 
+function vvPickEnglishVoice() {
+    const voices = speechSynthesis.getVoices();
+    return (
+        voices.find((v) => v.lang && /^en-US/i.test(v.lang)) ||
+        voices.find((v) => v.lang && /^en(-|$)/i.test(v.lang)) ||
+        null
+    );
+}
+
+function vvStopTtsQueue(container) {
+    if (container) container._vvAllToken = (container._vvAllToken || 0) + 1;
+    if (container) {
+        const allBtn = container.querySelector('.vv-tts-all-btn');
+        if (allBtn) allBtn.classList.remove('vv-tts-playing');
+    }
+    if (window.speechSynthesis) speechSynthesis.cancel();
+}
+
 function vvStartEnglishTTS(text, btn) {
     if (!text || !window.speechSynthesis) return;
     try {
@@ -109,10 +127,7 @@ function vvStartEnglishTTS(text, btn) {
         u.rate = 0.92;
         u.volume = 1;
         u.pitch = 1;
-        const voices = speechSynthesis.getVoices();
-        const en =
-            voices.find((v) => v.lang && /^en-US/i.test(v.lang)) ||
-            voices.find((v) => v.lang && /^en(-|$)/i.test(v.lang));
+        const en = vvPickEnglishVoice();
         if (en) u.voice = en;
         const done = () => {
             if (btn) btn.classList.remove('vv-tts-playing');
@@ -162,16 +177,12 @@ function vvBindTtsButtons(container) {
             const playing =
                 btn.classList.contains('vv-tts-playing') &&
                 (speechSynthesis.speaking || speechSynthesis.pending);
-            if (playing) {
-                speechSynthesis.cancel();
-                btn.classList.remove('vv-tts-playing');
-                return;
-            }
-
-            speechSynthesis.cancel();
+            vvStopTtsQueue(container);
             container.querySelectorAll('.vv-tts-btn.vv-tts-playing').forEach((b) =>
                 b.classList.remove('vv-tts-playing')
             );
+            if (playing) return;
+
             btn.classList.add('vv-tts-playing');
             vvStartEnglishTTS(raw, btn);
         });
@@ -203,6 +214,73 @@ function attachVocabularyWebTTS(container) {
     });
 
     vvBindTtsButtons(container);
+    vvAttachPlayAll(container);
+}
+
+function vvAttachPlayAll(container) {
+    if (!container || !window.speechSynthesis) return;
+    if (container.querySelector('.vv-tts-all-btn')) return;
+    const sentenceBtns = Array.from(container.querySelectorAll('.vv-tts-btn:not(.vv-tts-all-btn)'));
+    if (sentenceBtns.length < 2) return;
+
+    const icon =
+        '<svg class="vv-tts-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>';
+    const wrap = document.createElement('p');
+    wrap.className = 'vv-tts-all-wrap';
+    wrap.innerHTML =
+        '<button type="button" class="vv-tts-all-btn" aria-label="영어 예문 모두 듣기, 다시 누르면 멈춤" title="모두 듣기 / 다시 누르면 멈춤" style="display:inline-flex;align-items:center;gap:6px;margin:16px 0 0;border:1px solid #2f80ed;background:#eef5fd;color:#1d4f91;cursor:pointer;border-radius:999px;padding:6px 12px;font-size:14px;font-weight:600;line-height:1.2;">' +
+        icon +
+        ' 영어 예문 모두 듣기</button>';
+    const msg = container.querySelector('#post-message');
+    if (msg && msg.parentNode) msg.parentNode.appendChild(wrap);
+    else container.appendChild(wrap);
+
+    const allBtn = wrap.querySelector('.vv-tts-all-btn');
+    allBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const playing =
+            allBtn.classList.contains('vv-tts-playing') &&
+            (speechSynthesis.speaking || speechSynthesis.pending);
+        vvStopTtsQueue(container);
+        container.querySelectorAll('.vv-tts-btn.vv-tts-playing').forEach((b) =>
+            b.classList.remove('vv-tts-playing')
+        );
+        if (playing) return;
+
+        const texts = Array.from(container.querySelectorAll('.vv-tts-btn:not(.vv-tts-all-btn)'))
+            .map((b) => b.getAttribute('data-vv-tts'))
+            .filter(Boolean);
+        if (!texts.length) return;
+
+        allBtn.classList.add('vv-tts-playing');
+        const my = container._vvAllToken;
+        let i = 0;
+        const playNext = () => {
+            if (container._vvAllToken !== my) return;
+            if (i >= texts.length) {
+                allBtn.classList.remove('vv-tts-playing');
+                return;
+            }
+            const u = new SpeechSynthesisUtterance(texts[i]);
+            i += 1;
+            u.lang = 'en-US';
+            u.rate = 0.92;
+            u.volume = 1;
+            u.pitch = 1;
+            const en = vvPickEnglishVoice();
+            if (en) u.voice = en;
+            u.onend = () => {
+                if (container._vvAllToken !== my) return;
+                setTimeout(playNext, 420);
+            };
+            u.onerror = () => {
+                if (container._vvAllToken === my) playNext();
+            };
+            speechSynthesis.speak(u);
+        };
+        playNext();
+    });
 }
 
 // 이미지/동영상 링크를 HTML로 변환하는 함수
