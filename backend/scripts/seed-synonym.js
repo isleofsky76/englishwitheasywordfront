@@ -47,70 +47,77 @@ function buildSynonymMessage({ words, youtube }) {
 
 
 
-
-const invincibleSet = [
+const imbueSet = [
   {
-  en: 'indomitable',
-  pron: '인다머터블',
-  ipa: '/ɪnˈdɑːmɪtəbəl/',
-  meaning: '불굴의, 꺾이지 않는',
-  short: '불굴의',
-  enExample: 'The indomitable frontier spirit that drives America.',
-  koExample: '미국을 움직이는 불굴의 개척 정신.'
+  en: 'imbue',
+  pron: '임뷰',
+  ipa: '/ɪmˈbjuː/',
+  meaning: '불어넣다, 스며들게 하다',
+  short: '불어넣다',
+  enExample: 'His most impressive talent is his ability to imbue staff with a sense of mission.',
+  koExample: '그의 가장 인상적인 재능은 직원들에게 사명감을 불어넣는 능력이다.'
   },
   {
-  en: 'invincible',
-  pron: '인빈서블',
-  ipa: '/ɪnˈvɪnsəbəl/',
-  meaning: '천하무적의, 아무도 꺾을 수 없는',
-  short: '천하무적의',
-  enExample: 'The traditional friendship between China and North Korea is always invincible.',
-  koExample: '중국과 북한 사이의 전통적인 우정은 언제나 무적이다.'
+  en: 'infuse',
+  pron: '인퓨즈',
+  ipa: '/ɪnˈfjuːz/',
+  meaning: '스며들게 하다, 가득 채우다',
+  short: '스며들게 하다',
+  enExample: 'Politics infuses all aspects of our lives.',
+  koExample: '정치는 우리 삶의 모든 측면에 스며든다.'
   },
   {
-  en: 'impregnable',
-  pron: '임프레그너블',
-  ipa: '/ɪmˈpreɡnəbəl/',
-  meaning: '난공불락의, 뚫을 수 없는',
-  short: '난공불락의',
-  enExample: 'The fortress was impregnable.',
-  koExample: '그 요새는 난공불락이었다.'
+  en: 'immerse',
+  pron: '이머스',
+  ipa: '/ɪˈmɜːrs/',
+  meaning: '몰입시키다, 푹 빠지게 하다',
+  short: '몰입시키다',
+  enExample: 'It will immerse you in the action, put you in the arena or the stadium.',
+  koExample: '그것은 당신을 현장 속에 완전히 몰입시키고 경기장 한가운데 있는 듯하게 만들 것이다.'
   },
   {
-  en: 'inexorable',
-  pron: '이넥서러블',
-  ipa: '/ɪnˈeksərəbəl/',
-  meaning: '멈출 수 없는, 거침없는',
-  short: '멈출 수 없는',
-  enExample: 'The never-married rate began an inexorable rise, quadrupling to 25% by 2020.',
-  koExample: '평생 미혼율은 멈출 수 없는 상승을 시작했고, 2020년까지 25%로 네 배가 됐다.'
+  en: 'instill',
+  pron: '인스틸',
+  ipa: '/ɪnˈstɪl/',
+  meaning: '심어주다, 주입하다',
+  short: '심어주다',
+  enExample: 'At the very least, the president of the United States should instill hope in young children.',
+  koExample: '최소한, 미국 대통령은 어린아이들에게 희망을 심어줘야 한다.'
   },
   {
-  en: 'unassailable',
-  pron: '어너세일러블',
-  ipa: '/ˌʌnəˈseɪləbəl/',
-  meaning: '난공불락의, 흔들 수 없는',
-  short: '흔들 수 없는',
-  enExample: 'The party now has an unassailable lead.',
-  koExample: '그 정당은 이제 따라잡기 힘든 확고한 선두를 가지고 있다.'
+  en: 'impart',
+  pron: '임파트',
+  ipa: '/ɪmˈpɑːrt/',
+  meaning: '전하다, 나누어 주다',
+  short: '전하다',
+  enExample: 'You can impart some practical, real-world knowledge on this subject.',
+  koExample: '당신은 이 주제에 관해 실용적인 현실 세계의 지식을 전할 수 있다.'
+  },
+  {
+  en: 'indoctrinate',
+  pron: '인닥트러네이트',
+  ipa: '/ɪnˈdɑːktrəneɪt/',
+  meaning: '주입시키다, 세뇌하다',
+  short: '세뇌하다',
+  enExample: 'The key to success is to indoctrinate people with the right attitudes to speed at a very early age.',
+  koExample: '성공의 핵심은 아주 어린 나이에 사람들에게 속도에 대한 올바른 태도를 주입하는 것이다.'
   }
   ];
-  
+
   const posts = [
   {
-  title: 'indomitable 불굴의 연관 단어 정리',
-  slug: 'indomitable-related-words',
+  title: 'imbue 불어넣다 유의어 정리',
+  slug: 'imbue-synonyms',
   metaDescription:
-  'indomitable(불굴의), invincible(천하무적), impregnable(난공불락), inexorable(멈출 수 없는), unassailable(흔들 수 없는) 뜻·발음·예문을 정리한 유의어 학습입니다.',
+  'imbue(불어넣다), infuse(스며들게 하다), immerse(몰입시키다), instill(심어주다), impart(전하다), indoctrinate(주입시키다·세뇌하다) 뜻·발음·예문을 정리한 유의어 학습입니다.',
   message: buildSynonymMessage({
-  words: invincibleSet,
-  youtube: 'https://youtube.com/shorts/TVwodMKmkSQ'
+  words: imbueSet,
+  youtube: 'https://youtube.com/shorts/ArJFVz0QUI8'
   }),
   nickname: 'admin',
-  password: 'seed_synonym_indomitable-related-words'
+  password: 'seed_synonym_imbue-synonyms'
   }
   ];
-
 
 async function seed() {
   console.log('Synonym 글 추가 중...', API_BASE);
