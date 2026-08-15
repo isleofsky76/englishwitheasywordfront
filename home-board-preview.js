@@ -67,7 +67,7 @@
       { path: '/wordofday', page: 'word-of-the-day.html', postPath: 'word-of-the-day', label: '단어장', apiMode: wordofdayApiMode },
       { path: '/guestbook', page: 'news-voca.html', postPath: 'news-voca', label: '국제' },
       { path: '/vocabulary-quiz', page: 'vocabulary-quiz.html', label: '퀴즈' },
-      { path: '/vocabulary', page: 'english-synonym.html', postPath: 'english-synonym', label: '유의어' },
+      { path: '/vocabulary', page: 'english-synonym.html', postPath: 'english-synonym', label: '연관단어' },
       { path: '/opinions', page: 'english-opinions.html', postPath: 'english-opinions', label: '오피니언' },
       { path: '/easy-voca', page: 'popular-voca.html', postPath: 'popular-voca', label: '인기 어휘' },
       { path: '/situational-english', page: 'situational-english.html', postPath: 'situational-english', label: '상황' },
