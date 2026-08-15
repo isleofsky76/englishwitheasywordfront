@@ -150,6 +150,27 @@ body {
   display: block;
 }
 
+#post-message .video-preview-container {
+  margin: 8px 0 0;
+  line-height: 0;
+}
+
+#post-message .video-preview-container > a {
+  display: block;
+  padding: 0;
+  margin: 0;
+  border-bottom: none;
+  line-height: 0;
+}
+
+#post-message .video-preview-container img {
+  margin: 0;
+  height: 100%;
+  max-width: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
 /* Base64 이미지도 표시되도록 */
 #post-message img[src^="data:image"] {
   max-width: 100%;
