@@ -122,7 +122,7 @@ const opinionSet = [
 
 const posts = [
   {
-    title: 'raucous 소란스러운 연관 단어 정리',
+    title: 'Theodore Roosevelt',
     slug: 'raucous-related-words',
     metaDescription:
       'raucous(소란스러운), exuberant(활기 넘치는), jubilant(환희에 찬), mar(망치다), distraught(몹시 심란한), retrograde(퇴보적인), conspicuous(눈에 띄는), gallantry(용맹) 뜻·발음·예문을 정리한 오피니언 어휘 학습입니다.',
