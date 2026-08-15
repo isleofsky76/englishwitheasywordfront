@@ -94,28 +94,7 @@
   }
 
   function syncHeaderScroll() {
-    var navbar = document.getElementById('navbar');
-    var weather = document.getElementById('weather-banner');
-    var clock = document.getElementById('world-clock-bar');
-
-    var lastScrollTop = 0;
-    window.addEventListener('scroll', function () {
-      if (document.documentElement.classList.contains('nav-home-open')) {
-        showSiteHeader(navbar, weather, clock);
-        return;
-      }
-
-      var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      var hiding = scrollTop > lastScrollTop && scrollTop > 10;
-
-      if (hiding) {
-        hideSiteHeader(navbar, weather, clock);
-      } else {
-        showSiteHeader(navbar, weather, clock);
-      }
-
-      lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
-    }, { passive: true });
+    /* 헤더는 모든 페이지에서 항상 고정 */
   }
 
   function createWorldClock() {

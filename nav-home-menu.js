@@ -8,43 +8,49 @@
 
 (function () {
 
-    var NAV_HOME_MENU_VERSION = '20260721c';
+    var NAV_HOME_MENU_VERSION = '20260815a';
 
-    // SEO slug 페이지(/word-of-the-day/slug/ 등)에서도 동작하도록 루트 절대 경로 사용
+    var PRIMARY_BAR_HREFS = {
+        'index.html': true,
+        'word-of-the-day-list.html': true,
+        'vocabulary-quiz.html': true,
+        'english-synonym-list.html': true
+    };
+
     var HOME_SECTION_LINKS = [
-        { href: '/index.html#home-best', label: 'Best 조회수', hash: 'home-best' },
-        { href: '/index.html#home-recent', label: '최신 업데이트', hash: 'home-recent' }
+        { href: 'index.html#home-best', label: 'Best 조회수', hash: 'home-best' },
+        { href: 'index.html#home-recent', label: '최신 업데이트', hash: 'home-recent' }
     ];
 
 
 
     var MENU_ITEMS = [
 
-        { href: '/index.html', label: '처음으로', pages: ['index.html', ''] },
+        { href: 'index.html', label: '처음으로', pages: ['index.html', ''] },
 
-        { href: '/word-of-the-day-list.html', label: '오늘의 단어장', pages: ['word-of-the-day-list.html', 'word-of-the-day.html'] },
+        { href: 'word-of-the-day-list.html', label: '오늘의 단어장', pages: ['word-of-the-day-list.html', 'word-of-the-day.html'] },
 
-        { href: '/news-voca-list.html', label: '뉴스 어휘', pages: ['news-voca-list.html', 'news-voca.html'] },
+        { href: 'news-voca-list.html', label: '뉴스 어휘', pages: ['news-voca-list.html', 'news-voca.html'] },
 
-        { href: '/vocabulary-quiz-list.html', label: '영어 단어 퀴즈', pages: ['vocabulary-quiz-list.html', 'vocabulary-quiz.html'] },
+        { href: 'vocabulary-quiz.html', label: '영어 단어 퀴즈', pages: ['vocabulary-quiz.html'] },
 
-        { href: '/popular-voca-list.html', label: '인기 어휘', pages: ['popular-voca-list.html', 'popular-voca.html'] },
+        { href: 'popular-voca-list.html', label: '인기 어휘', pages: ['popular-voca-list.html', 'popular-voca.html'] },
 
-        { href: '/situational-english-list.html', label: '상황 영어', pages: ['situational-english-list.html', 'situational-english.html'] },
+        { href: 'situational-english-list.html', label: '상황 영어', pages: ['situational-english-list.html', 'situational-english.html'] },
 
-        { href: '/cooking-voca-list.html', label: '요리 영어', pages: ['cooking-voca-list.html', 'cooking-voca.html'] },
+        { href: 'cooking-voca-list.html', label: '요리 영어', pages: ['cooking-voca-list.html', 'cooking-voca.html'] },
 
-        { href: '/culture-voca-list.html', label: '컬쳐 어휘', pages: ['culture-voca-list.html', 'culture-voca.html'] },
+        { href: 'culture-voca-list.html', label: '컬쳐 어휘', pages: ['culture-voca-list.html', 'culture-voca.html'] },
 
-        { href: '/english-synonym-list.html', label: '유의어', pages: ['english-synonym-list.html', 'english-synonym.html'] },
+        { href: 'english-synonym-list.html', label: '유의어', pages: ['english-synonym-list.html', 'english-synonym.html'] },
 
-        { href: '/ranking-news-list.html', label: '랭킹 뉴스', pages: ['ranking-news-list.html', 'ranking-news.html'] },
+        { href: 'ranking-news-list.html', label: '랭킹 뉴스', pages: ['ranking-news-list.html', 'ranking-news.html'] },
 
-        { href: '/photo-english-list.html', label: '포토영어', pages: ['photo-english-list.html', 'photo-english.html'] },
+        { href: 'photo-english-list.html', label: '포토영어', pages: ['photo-english-list.html', 'photo-english.html'] },
 
-        { href: '/pros-cons-list.html', label: 'Pros & Cons', pages: ['pros-cons-list.html', 'pros-cons.html'] },
+        { href: 'pros-cons-list.html', label: 'Pros & Cons', pages: ['pros-cons-list.html', 'pros-cons.html'] },
 
-        { href: '/english-directory.html', label: '학습 사이트 디렉터리', pages: ['english-directory.html'] }
+        { href: 'english-directory.html', label: '학습 사이트 디렉터리', pages: ['english-directory.html'] }
 
     ];
 
@@ -85,13 +91,15 @@
 
 
 
-    function buildMenuHtml() {
+    function buildMenuHtml(isBar) {
 
         var page = currentPageName();
 
         var sectionLinksHtml = buildHomeSectionLinksHtml(page);
 
         var itemsHtml = MENU_ITEMS.map(function (item) {
+
+            if (isBar && PRIMARY_BAR_HREFS[item.href]) return '';
 
             var active = isActiveItem(item, page);
 
@@ -105,13 +113,15 @@
 
 
 
+        var toggleLabel = isBar ? '더보기' : 'Home';
+
         return (
 
             '<div class="dropdown nav-home-dropdown">' +
 
             '<button type="button" class="nav-home-toggle dropdown-toggle" ' +
 
-            'data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">Home</button>' +
+            'data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">' + toggleLabel + '</button>' +
 
             '<ul class="dropdown-menu dropdown-menu-end nav-home-dropdown-menu" aria-labelledby="navHomeMenuToggle">' +
 
@@ -192,7 +202,9 @@
 
         document.querySelectorAll('[data-nav-home-menu]').forEach(function (slot, index) {
 
-            slot.innerHTML = buildMenuHtml();
+            var isBar = String(slot.getAttribute('data-nav-home-menu') || '') === 'bar';
+
+            slot.innerHTML = buildMenuHtml(isBar);
 
             slot.setAttribute('data-nav-home-version', NAV_HOME_MENU_VERSION);
 
@@ -210,16 +222,26 @@
 
     pinNavbarWhileOpen();
 
-
+    function loadSiteMasthead() {
+        var scripts = document.querySelectorAll('script[src]');
+        var base = '';
+        for (var i = 0; i < scripts.length; i += 1) {
+            var src = scripts[i].getAttribute('src') || '';
+            if (src.indexOf('nav-home-menu.js') !== -1) {
+                base = src.replace(/[^/]+$/, '');
+                break;
+            }
+        }
+        if (document.querySelector('script[src*="site-masthead.js"]')) return;
+        var s = document.createElement('script');
+        s.src = base + 'site-masthead.js?v=20260815f';
+        document.head.appendChild(s);
+    }
 
     if (document.readyState === 'loading') {
-
-        document.addEventListener('DOMContentLoaded', injectNavHomeMenu);
-
+        document.addEventListener('DOMContentLoaded', loadSiteMasthead);
     } else {
-
-        injectNavHomeMenu();
-
+        loadSiteMasthead();
     }
 
 })();

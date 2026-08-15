@@ -100,6 +100,7 @@
           combined.push({
             label: board.label,
             title: entry.title,
+            slug: entry && entry.slug ? String(entry.slug) : '',
             views: entry.views || 0,
             likes: entry.likes || 0,
             date: entry.date,
@@ -193,12 +194,13 @@
     return '<span class="preview-meta-stats">' + parts.join('<span class="preview-sep preview-sep--stats" aria-hidden="true">  </span>') + '</span>';
   }
 
-  function buildRecentPreviewRow(dateStr, label, title, views, href, isNew, likes) {
+  function buildRecentPreviewRow(number, dateStr, label, title, views, href, isNew, likes) {
     var style = styleForLabel(label);
     var safeLabel = escapeHtml(label);
     var safeTitle = escapeHtml(title || '제목 없음');
     var newHtml = isNew ? '<span class="preview-new">NEW</span>' : '';
-    return '<li class="preview-card preview-card--recent ' + style.accent + '"><a href="' + href + '">' +
+    return '<li class="preview-card preview-card--recent"><a href="' + href + '">' +
+      '<span class="preview-num">' + number + '</span>' +
       '<span class="preview-body">' +
         '<span class="preview-meta">' + newHtml +
           '<span class="preview-badge ' + style.badge + '">' + safeLabel + '</span>' +
@@ -275,7 +277,7 @@
         return;
       }
       var rows = preview.map(function (item, idx) {
-        return buildRecentPreviewRow(item.date, item.label, item.title, item.views, item.href, idx < 2, item.likes);
+        return buildRecentPreviewRow(idx + 1, item.date, item.label, item.title, item.views, item.href, idx < 2, item.likes);
       });
       listEl.innerHTML = buildPreviewListHtml(rows, '', listClass);
     }).catch(function () {
@@ -289,10 +291,47 @@
     loadRecent(recentEl, limit);
   }
 
+  function escapeRegex(str) {
+    return String(str || '').replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  }
+
+  function scoreSearchItem(item, q) {
+    var title = String(item.title || '').toLowerCase();
+    if (!q || !title) return 0;
+    if (title === q) return 100;
+    if (title.indexOf(q) === 0) return 85;
+    try {
+      if (new RegExp('\\b' + escapeRegex(q) + '\\b', 'i').test(title)) return 75;
+    } catch (e) { /* ignore */ }
+    if (title.indexOf(q) !== -1) return 55;
+    return 0;
+  }
+
+  function search(query, limit) {
+    var q = String(query || '').trim().toLowerCase();
+    var max = Number(limit);
+    if (!Number.isFinite(max) || max <= 0) max = 0;
+    if (!q) return Promise.resolve([]);
+    return fetchCombined().then(function (combined) {
+      var ranked = combined
+        .map(function (item) {
+          return { item: item, score: scoreSearchItem(item, q) };
+        })
+        .filter(function (row) { return row.score > 0; })
+        .sort(function (a, b) {
+          if (b.score !== a.score) return b.score - a.score;
+          return (b.item.views || 0) - (a.item.views || 0);
+        })
+        .map(function (row) { return row.item; });
+      return max ? ranked.slice(0, max) : ranked;
+    });
+  }
+
   window.HomeBoardPreview = {
     loadBest: loadBest,
     loadRecent: loadRecent,
     loadNavPreviews: loadNavPreviews,
-    buildPreviewListHtml: buildPreviewListHtml
+    buildPreviewListHtml: buildPreviewListHtml,
+    search: search
   };
 })();

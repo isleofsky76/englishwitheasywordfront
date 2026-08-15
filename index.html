@@ -71,7 +71,211 @@
             --text-secondary: #888780;
             --border-soft: #E8E6DC;
             --page-bg: #FBFBFA;
+            --navbar-height: 102px;
         }
+        .site-masthead.navbar.fixed-top {
+            height: auto !important;
+            min-height: 0 !important;
+            max-height: none !important;
+            flex-direction: column;
+            align-items: stretch;
+            justify-content: flex-start;
+            padding: 0 !important;
+        }
+        .site-masthead-brand {
+            text-align: center;
+            padding: 0.55rem 1rem 0.2rem;
+            border-bottom: none;
+        }
+        .site-masthead-brand a {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #fff !important;
+            text-decoration: none;
+            line-height: 1.25;
+        }
+        .site-title-ko {
+            font-size: 1.18rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+        }
+        .site-title-en {
+            font-family: 'Poppins', 'Noto Sans KR', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 500;
+            opacity: 0.92;
+            margin-top: 0.12rem;
+        }
+        .site-masthead-search {
+            position: relative;
+            padding: 0.28rem 1rem 0.42rem;
+            z-index: 1040;
+        }
+        .site-search-form {
+            display: flex;
+            align-items: center;
+            max-width: 28rem;
+            margin: 0 auto;
+            gap: 0.4rem;
+        }
+        .site-search-input {
+            flex: 1;
+            min-width: 0;
+            height: 2.05rem;
+            border: none;
+            border-radius: 999px;
+            padding: 0 0.95rem;
+            font-size: 0.88rem;
+            color: #1e3a5f;
+            background: #fff;
+            outline: none;
+        }
+        .site-search-input::placeholder {
+            color: #7a93ab;
+        }
+        .site-search-submit {
+            flex-shrink: 0;
+            height: 2.05rem;
+            border: none;
+            border-radius: 999px;
+            padding: 0 0.9rem;
+            font-size: 0.84rem;
+            font-weight: 600;
+            color: #fff;
+            background: rgba(255, 255, 255, 0.22);
+            cursor: pointer;
+        }
+        .site-search-submit:hover {
+            background: rgba(255, 255, 255, 0.32);
+        }
+        .site-search-results {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: min(28rem, calc(100% - 2rem));
+            margin: 0.3rem 0 0;
+            padding: 0.25rem 0;
+            list-style: none;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 10px 28px rgba(15, 40, 70, 0.2);
+            max-height: min(58vh, 22rem);
+            overflow-y: auto;
+            z-index: 1100;
+        }
+        .site-search-results[hidden] {
+            display: none;
+        }
+        .site-search-results a {
+            display: flex;
+            flex-direction: column;
+            gap: 0.12rem;
+            padding: 0.5rem 0.85rem;
+            text-decoration: none;
+            color: #1f2937;
+        }
+        .site-search-results a:hover,
+        .site-search-results a.is-active {
+            background: #eef4fc;
+        }
+        .site-search-results .site-search-label {
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: #2b6cb0;
+        }
+        .site-search-results .site-search-title {
+            font-size: 0.86rem;
+            line-height: 1.35;
+            letter-spacing: -0.02em;
+        }
+        .site-search-empty {
+            padding: 0.7rem 0.85rem;
+            font-size: 0.84rem;
+            color: #667;
+        }
+        #site-search-page[hidden],
+        #home-previews[hidden] {
+            display: none !important;
+        }
+        .site-search-page-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.55rem;
+        }
+        .site-search-page-list li a {
+            display: block;
+            padding: 0.85rem 0.95rem;
+            border: 1px solid var(--border-soft);
+            border-radius: 12px;
+            background: var(--surface-2);
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            line-height: 1.45;
+            letter-spacing: -0.02em;
+        }
+        .site-search-page-list li a:hover {
+            border-color: #c5d7ee;
+            box-shadow: 0 2px 8px rgba(43, 108, 176, 0.08);
+        }
+        .site-masthead .container-fluid {
+            justify-content: center;
+            flex-wrap: wrap !important;
+            gap: 0;
+            height: auto !important;
+            min-height: 0;
+            padding-top: 0.12rem !important;
+            padding-bottom: 0.2rem !important;
+            background: transparent !important;
+            box-shadow: none;
+        }
+        .site-primary-nav {
+            display: flex;
+            flex: 1 1 100%;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            gap: 0.05rem 0.15rem;
+        }
+        .site-primary-nav .nav-link {
+            font-size: 0.84rem;
+            font-weight: 600;
+            white-space: nowrap;
+            padding: 0.32rem 0.42rem !important;
+            letter-spacing: -0.03em;
+            text-decoration: none;
+        }
+        .site-primary-nav .nav-link:hover,
+        .site-primary-nav .nav-link:focus {
+            opacity: 0.88;
+        }
+        .site-primary-nav .nav-link.active {
+            text-decoration: underline;
+            text-underline-offset: 0.28em;
+        }
+        .nav-tone-home { color: #dce3ff !important; }
+        .nav-tone-wotd { color: #ffc4ae !important; }
+        .nav-tone-news { color: #9fecc0 !important; }
+        .nav-tone-quiz { color: #d4ee9a !important; }
+        .nav-tone-popular { color: #ffd56a !important; }
+        .nav-tone-sit { color: #e0ccff !important; }
+        .nav-tone-cook { color: #ffc08a !important; }
+        .nav-tone-culture { color: #ffb6d9 !important; }
+        .nav-tone-syn { color: #8ef0e8 !important; }
+        .nav-tone-rank { color: #ffb0b0 !important; }
+        .nav-tone-photo { color: #9ed4ff !important; }
+        .nav-tone-pros { color: #d7dee8 !important; }
+        .nav-tone-dir { color: #b8d8ff !important; }
         body {
             font-family: 'Noto Sans KR', 'Poppins', sans-serif;
             background: var(--page-bg);
@@ -85,6 +289,95 @@
             margin-bottom: 30px;
             padding-left: 1.25rem;
             padding-right: 1.25rem;
+        }
+        .yt-billboard {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            width: 100%;
+            max-width: 970px;
+            height: 250px;
+            margin: 0 auto 1.35rem;
+            padding: 1rem 1.25rem;
+            box-sizing: border-box;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2b0a0a 48%, #111 100%);
+            color: #fff;
+            text-decoration: none;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16);
+            overflow: hidden;
+        }
+        .yt-billboard:hover {
+            color: #fff;
+            filter: brightness(1.06);
+        }
+        .yt-billboard__icon {
+            flex-shrink: 0;
+            width: 72px;
+            height: 52px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #ff0000;
+            border-radius: 14px;
+            box-shadow: 0 6px 16px rgba(255, 0, 0, 0.35);
+        }
+        .yt-billboard__icon svg {
+            width: 28px;
+            height: 28px;
+            display: block;
+            margin-left: 3px;
+        }
+        .yt-billboard__copy {
+            display: flex;
+            flex-direction: column;
+            gap: 0.18rem;
+            min-width: 0;
+        }
+        .yt-billboard__kicker {
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            color: #ffb4b4;
+        }
+        .yt-billboard__title {
+            font-size: 1.28rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            line-height: 1.25;
+        }
+        .yt-billboard__handle {
+            font-family: 'Poppins', 'Noto Sans KR', sans-serif;
+            font-size: 0.92rem;
+            font-weight: 500;
+            color: #ececec;
+        }
+        @media (max-width: 600px) {
+            .yt-billboard {
+                height: 100px;
+                gap: 0.7rem;
+                padding: 0.7rem 0.9rem;
+                border-radius: 12px;
+            }
+            .yt-billboard__icon {
+                width: 52px;
+                height: 38px;
+                border-radius: 10px;
+            }
+            .yt-billboard__icon svg {
+                width: 18px;
+                height: 18px;
+            }
+            .yt-billboard__title {
+                font-size: 0.98rem;
+            }
+            .yt-billboard__handle {
+                font-size: 0.78rem;
+            }
+            .yt-billboard__kicker {
+                font-size: 0.68rem;
+            }
         }
         .intro-text {
             background: white;
@@ -142,26 +435,6 @@
             -moz-osx-font-smoothing: grayscale;
             text-rendering: optimizeLegibility;
         }
-        .preview-header-icon {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            font-size: 18px;
-            line-height: 1;
-        }
-        .preview-header-icon--clock {
-            width: 1.5rem;
-            height: 1.5rem;
-            border-radius: 50%;
-            background: var(--bg-accent);
-            color: var(--text-accent);
-            font-size: 14px;
-        }
-        .preview-header-icon--book {
-            color: var(--text-accent);
-            font-size: 18px;
-        }
         .preview-more {
             font-size: 12px;
             font-weight: 400;
@@ -200,26 +473,6 @@
             padding: 0.72rem 0.8rem;
             overflow: hidden;
             min-width: 0;
-        }
-        .preview-card--recent {
-            border-left: 4px solid var(--fill-accent);
-        }
-        .preview-card--recent.preview-accent--wordofday,
-        .preview-card--recent.preview-accent--proscons,
-        .preview-card--recent.preview-accent--cooking,
-        .preview-card--recent.preview-accent--ranking {
-            border-left-color: #D4A574;
-        }
-        .preview-card--recent.preview-accent--quiz,
-        .preview-card--recent.preview-accent--news,
-        .preview-card--recent.preview-accent--synonym,
-        .preview-card--recent.preview-accent--situational,
-        .preview-card--recent.preview-accent--culture,
-        .preview-card--recent.preview-accent--photo {
-            border-left-color: var(--fill-accent);
-        }
-        .preview-card--recent.preview-accent--popular {
-            border-left-color: #8FB86A;
         }
         .preview-num {
             flex-shrink: 0;
@@ -442,6 +695,19 @@
             font-family: 'Poppins', sans-serif;
         }
         @media (max-width: 600px) {
+            :root {
+                --navbar-height: 96px;
+            }
+            .site-title-ko {
+                font-size: 1.08rem;
+            }
+            .site-title-en {
+                font-size: 0.72rem;
+            }
+            .site-primary-nav .nav-link {
+                font-size: 0.78rem;
+                padding: 0.26rem 0.32rem !important;
+            }
             .main-content {
                 margin-top: calc(var(--navbar-height) + 20px);
                 padding-left: max(16px, env(safe-area-inset-left, 0px));
@@ -464,9 +730,29 @@
     <!-- External Stylesheets -->
     <link rel="stylesheet" href="title-text-sharp.css?v=20260727c">
     <link rel="stylesheet" href="navbar-unified.css?v=20260612c">
-    <link rel="stylesheet" href="nav-home-menu.css?v=20260626e">
+    <link rel="stylesheet" href="nav-home-menu.css?v=20260815a">
     <link rel="stylesheet" href="weather-banner.css?v=20260612g">
     <link rel="stylesheet" href="world-clock.css?v=20260612g">
+    <style>
+        /* navbar-unified / nav-home-menu 이후에 덮어씀 */
+        :root {
+            --navbar-height: 168px;
+        }
+        .site-masthead.navbar,
+        .site-masthead.navbar.bg-primary,
+        .site-masthead.navbar.fixed-top {
+            background-color: #1e4e8c !important;
+        }
+        .site-masthead .container-fluid {
+            flex-wrap: wrap !important;
+            background: transparent !important;
+        }
+        @media (max-width: 600px) {
+            :root {
+                --navbar-height: 188px;
+            }
+        }
+    </style>
     
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
@@ -529,36 +815,69 @@
     <script src="world-clock.js?v=20260612g" defer></script>
 </head>
 <body>
-    <nav id="navbar" class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" aria-label="주 메뉴">
+    <script>
+        (function () {
+            function syncNavbarHeight() {
+                var nav = document.getElementById('navbar');
+                if (!nav) return;
+                var h = Math.ceil(nav.getBoundingClientRect().height);
+                if (h > 0) {
+                    document.documentElement.style.setProperty('--navbar-height', h + 'px');
+                }
+            }
+            function syncSoon() {
+                syncNavbarHeight();
+                requestAnimationFrame(syncNavbarHeight);
+            }
+            window.addEventListener('resize', syncSoon);
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', syncSoon);
+            } else {
+                syncSoon();
+            }
+            window.addEventListener('load', syncSoon);
+        })();
+    </script>
+    <nav id="navbar" class="navbar navbar-expand navbar-dark bg-primary fixed-top site-masthead" aria-label="주 메뉴">
+        <div class="site-masthead-brand">
+            <a href="index.html">
+                <span class="site-title-ko">시사 영단어</span>
+                <span class="site-title-en">(News English Lab)</span>
+            </a>
+        </div>
+        <div class="site-masthead-search">
+            <form class="site-search-form" id="site-search-form" role="search" action="index.html" method="get">
+                <input class="site-search-input" id="site-search-input" type="search" name="q" placeholder="단어·제목 검색" autocomplete="off" enterkeyhint="search">
+                <button class="site-search-submit" type="submit">검색</button>
+            </form>
+            <ul class="site-search-results" id="site-search-results" hidden></ul>
+        </div>
         <div class="container-fluid">
-            <a class="navbar-brand" href="index.html">뉴스 영어 랩</a>
-            <div data-nav-home-menu class="nav-home-menu-slot ms-auto"></div>
+            <ul class="navbar-nav site-primary-nav">
+                <li class="nav-item"><a class="nav-link nav-tone-home active" href="index.html" aria-current="page">홈</a></li>
+                <li class="nav-item"><a class="nav-link nav-tone-wotd" href="word-of-the-day-list.html">오늘의 단어</a></li>
+                <li class="nav-item"><a class="nav-link nav-tone-news" href="news-voca-list.html">뉴스 어휘</a></li>
+                <li class="nav-item"><a class="nav-link nav-tone-quiz" href="vocabulary-quiz.html">단어 퀴즈</a></li>
+                <li class="nav-item"><a class="nav-link nav-tone-popular" href="popular-voca-list.html">인기 어휘</a></li>
+                <li class="nav-item"><a class="nav-link nav-tone-sit" href="situational-english-list.html">상황 영어</a></li>
+                <li class="nav-item"><a class="nav-link nav-tone-cook" href="cooking-voca-list.html">요리 영어</a></li>
+                <li class="nav-item"><a class="nav-link nav-tone-culture" href="culture-voca-list.html">컬쳐 어휘</a></li>
+                <li class="nav-item"><a class="nav-link nav-tone-syn" href="english-synonym-list.html">유의어</a></li>
+                <li class="nav-item"><a class="nav-link nav-tone-rank" href="ranking-news-list.html">랭킹 뉴스</a></li>
+                <li class="nav-item"><a class="nav-link nav-tone-photo" href="photo-english-list.html">포토영어</a></li>
+                <li class="nav-item"><a class="nav-link nav-tone-pros" href="pros-cons-list.html">Pros &amp; Cons</a></li>
+                <li class="nav-item"><a class="nav-link nav-tone-dir" href="english-directory.html">학습 사이트</a></li>
+            </ul>
         </div>
     </nav>
     
     <main class="container main-content">
         <!-- Hero Section -->
-        <section class="preview-section" aria-label="영어 학습 섹션">
-            <!-- Best Views -->
-            <article class="preview-section" id="home-best">
-                <div class="preview-header">
-                    <h2><span class="preview-header-icon" aria-hidden="true">🔥</span>Best 조회수</h2>
-                </div>
-                <div id="best-views-preview-list" role="region" aria-label="조회수 Best 목록"></div>
-            </article>
-
-            <!-- Recent Updates -->
-            <article class="preview-section" id="home-recent">
-                <div class="preview-header">
-                    <h2><span class="preview-header-icon preview-header-icon--clock" aria-hidden="true">🕒</span>최신 업데이트</h2>
-                </div>
-                <div id="recent-updates-preview-list" role="region" aria-label="최신 업데이트 목록"></div>
-            </article>
-
+        <section class="preview-section" id="home-previews" aria-label="영어 학습 섹션">
             <!-- Word of the Day -->
             <article class="preview-section">
                 <div class="preview-header">
-                    <h2><span class="preview-header-icon preview-header-icon--book" aria-hidden="true">📖</span>오늘의 단어장</h2>
+                    <h2>오늘의 단어장</h2>
                     <div class="preview-more"><a href="word-of-the-day-list.html?api=prod">더보기 &gt;</a></div>
                 </div>
                 <div id="wordofday-preview-list" role="region" aria-label="오늘의 단어장 목록"></div>
@@ -567,7 +886,7 @@
             <!-- News Vocabulary -->
             <article class="preview-section">
                 <div class="preview-header">
-                    <h2><span class="preview-header-icon" aria-hidden="true">📰</span>뉴스 어휘</h2>
+                    <h2>뉴스 어휘</h2>
                     <div class="preview-more"><a href="news-voca-list.html">더보기 &gt;</a></div>
                 </div>
                 <div id="news-voca-preview-list" role="region" aria-label="뉴스 어휘 목록"></div>
@@ -576,7 +895,7 @@
             <!-- Vocabulary Quiz -->
             <article class="preview-section">
                 <div class="preview-header">
-                    <h2><span class="preview-header-icon" aria-hidden="true">🧩</span>영어 단어 퀴즈</h2>
+                    <h2>영어 단어 퀴즈</h2>
                     <div class="preview-more"><a href="vocabulary-quiz-list.html">더보기 &gt;</a></div>
                 </div>
                 <div id="vocabulary-quiz-preview-list" role="region" aria-label="영어 단어 퀴즈 목록"></div>
@@ -585,7 +904,7 @@
             <!-- Synonyms -->
             <article class="preview-section">
                 <div class="preview-header">
-                    <h2><span class="preview-header-icon" aria-hidden="true">🔁</span>유의어</h2>
+                    <h2>유의어</h2>
                     <div class="preview-more"><a href="english-synonym-list.html">더보기 &gt;</a></div>
                 </div>
                 <div id="synonym-preview-list" role="region" aria-label="유의어 목록"></div>
@@ -594,7 +913,7 @@
             <!-- Popular Vocabulary -->
             <article class="preview-section">
                 <div class="preview-header">
-                    <h2><span class="preview-header-icon" aria-hidden="true">⭐</span>인기 어휘</h2>
+                    <h2>인기 어휘</h2>
                     <div class="preview-more"><a href="popular-voca-list.html">더보기 &gt;</a></div>
                 </div>
                 <div id="easy-voca-preview-list" role="region" aria-label="인기 어휘 목록"></div>
@@ -603,7 +922,7 @@
             <!-- Situational English -->
             <article class="preview-section">
                 <div class="preview-header">
-                    <h2><span class="preview-header-icon" aria-hidden="true">💬</span>상황 영어</h2>
+                    <h2>상황 영어</h2>
                     <div class="preview-more"><a href="situational-english-list.html">더보기 &gt;</a></div>
                 </div>
                 <div id="situational-english-preview-list" role="region" aria-label="상황 영어 목록"></div>
@@ -612,7 +931,7 @@
             <!-- Cooking Voca -->
             <article class="preview-section">
                 <div class="preview-header">
-                    <h2><span class="preview-header-icon" aria-hidden="true">🍳</span>요리 영어</h2>
+                    <h2>요리 영어</h2>
                     <div class="preview-more"><a href="cooking-voca-list.html">더보기 &gt;</a></div>
                 </div>
                 <div id="cooking-voca-preview-list" role="region" aria-label="요리 영어 목록"></div>
@@ -621,7 +940,7 @@
             <!-- Culture Voca -->
             <article class="preview-section">
                 <div class="preview-header">
-                    <h2><span class="preview-header-icon" aria-hidden="true">🎭</span>컬쳐 어휘</h2>
+                    <h2>컬쳐 어휘</h2>
                     <div class="preview-more"><a href="culture-voca-list.html">더보기 &gt;</a></div>
                 </div>
                 <div id="culture-voca-preview-list" role="region" aria-label="컬쳐 어휘 목록"></div>
@@ -630,7 +949,7 @@
             <!-- Ranking News -->
             <article class="preview-section">
                 <div class="preview-header">
-                    <h2><span class="preview-header-icon" aria-hidden="true">📈</span>랭킹 뉴스</h2>
+                    <h2>랭킹 뉴스</h2>
                     <div class="preview-more"><a href="ranking-news-list.html">더보기 &gt;</a></div>
                 </div>
                 <div id="ranking-news-preview-list" role="region" aria-label="랭킹 뉴스 목록"></div>
@@ -639,7 +958,7 @@
             <!-- Photo English -->
             <article class="preview-section">
                 <div class="preview-header">
-                    <h2><span class="preview-header-icon" aria-hidden="true">📷</span>포토 영어</h2>
+                    <h2>포토 영어</h2>
                     <div class="preview-more"><a href="photo-english-list.html">더보기 &gt;</a></div>
                 </div>
                 <div id="photo-english-preview-list" role="region" aria-label="포토 영어 목록"></div>
@@ -648,7 +967,7 @@
             <!-- Pros & Cons -->
             <article class="preview-section">
                 <div class="preview-header">
-                    <h2><span class="preview-header-icon" aria-hidden="true">⚖️</span>Pros & Cons</h2>
+                    <h2>Pros & Cons</h2>
                     <div class="preview-more"><a href="pros-cons-list.html">더보기 &gt;</a></div>
                 </div>
                 <div id="pros-cons-preview-list" role="region" aria-label="Pros & Cons 목록"></div>
@@ -657,10 +976,26 @@
             <!-- English Link Directory -->
             <article class="preview-section">
                 <div class="preview-header">
-                    <h2><span class="preview-header-icon" aria-hidden="true">🔗</span>영어 학습 사이트 디렉터리</h2>
+                    <h2>영어 학습 사이트 디렉터리</h2>
                     <div class="preview-more"><a href="english-directory.html">더보기 &gt;</a></div>
                 </div>
                 <div id="english-directory-preview-list" role="region" aria-label="영어 학습 사이트 디렉터리 목록"></div>
+            </article>
+
+            <!-- Best Views -->
+            <article class="preview-section" id="home-best">
+                <div class="preview-header">
+                    <h2>Best 조회수</h2>
+                </div>
+                <div id="best-views-preview-list" role="region" aria-label="조회수 Best 목록"></div>
+            </article>
+
+            <!-- Recent Updates -->
+            <article class="preview-section" id="home-recent">
+                <div class="preview-header">
+                    <h2>최신 업데이트</h2>
+                </div>
+                <div id="recent-updates-preview-list" role="region" aria-label="최신 업데이트 목록"></div>
             </article>
 
             <!-- Learning Sites (replaced by 영어 학습 사이트 디렉터리)
@@ -680,6 +1015,12 @@
             </article>
             -->
         </section>
+
+        <section id="site-search-page" hidden>
+            <article class="preview-section">
+                <div id="site-search-page-list" role="region" aria-label="검색 결과"></div>
+            </article>
+        </section>
         
            <!-- Footer Text -->
     <section class="intro-text">
@@ -695,8 +1036,9 @@
     <!-- Bootstrap Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="viewpost-seo.js?v=20260702"></script>
-    <script src="nav-home-menu.js?v=20260721c"></script>
-    <script src="home-board-preview.js?v=20260727d"></script>
+    <script src="nav-home-menu.js?v=20260815e"></script>
+    <script src="site-masthead.js?v=20260815f"></script>
+    <script src="home-board-preview.js?v=20260815d"></script>
     <script src="english-directory.js" defer></script>
     
     <script>
