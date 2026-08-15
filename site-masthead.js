@@ -4,7 +4,8 @@
  * nav-home-menu.js 가 로드함
  */
 (function () {
-    var VERSION = '20260815i';
+    var VERSION = '20260815r';
+  var PRIMARY_NAV_COUNT = 6;
   var NAV_ITEMS = [
     { href: 'index.html', label: '홈', tone: 'home', pages: ['index.html', ''] },
     { href: 'word-of-the-day-list.html', label: '오늘의 단어', tone: 'wotd', pages: ['word-of-the-day-list.html', 'word-of-the-day.html'] },
@@ -112,13 +113,33 @@
     }
   }
 
+  function navItemHtml(base, page, item) {
+    var active = isActive(item, page);
+    var cls = 'nav-link nav-tone-' + item.tone + (active ? ' active' : '');
+    var aria = active ? ' aria-current="page"' : '';
+    return '<a class="' + cls + '" href="' + base + item.href + '"' + aria + '>' + item.label + '</a>';
+  }
+
   function buildNavHtml(base, page) {
-    return NAV_ITEMS.map(function (item) {
-      var active = isActive(item, page);
-      var cls = 'nav-link nav-tone-' + item.tone + (active ? ' active' : '');
-      var aria = active ? ' aria-current="page"' : '';
-      return '<li class="nav-item"><a class="' + cls + '" href="' + base + item.href + '"' + aria + '>' + item.label + '</a></li>';
+    var primary = NAV_ITEMS.slice(0, PRIMARY_NAV_COUNT);
+    var extra = NAV_ITEMS.slice(PRIMARY_NAV_COUNT);
+    var html = primary.map(function (item) {
+      return '<li class="nav-item">' + navItemHtml(base, page, item) + '</li>';
     }).join('');
+    if (!extra.length) return html;
+    var extraActive = extra.some(function (item) { return isActive(item, page); });
+    html +=
+      '<li class="nav-item nav-more' + (extraActive ? ' has-active' : '') + '">' +
+        '<button type="button" class="nav-more-toggle" aria-expanded="false" aria-haspopup="true" aria-label="더보기">' +
+          '<span class="nav-more-icon" aria-hidden="true"><span></span><span></span><span></span></span>' +
+        '</button>' +
+        '<ul class="nav-more-menu" hidden>' +
+          extra.map(function (item) {
+            return '<li>' + navItemHtml(base, page, item) + '</li>';
+          }).join('') +
+        '</ul>' +
+      '</li>';
+    return html;
   }
 
   function mastheadHtml(base, page) {
@@ -291,14 +312,42 @@
     }
   }
 
+  function bindMoreMenu(nav) {
+    var more = nav.querySelector('.nav-more');
+    if (!more || more.dataset.bound === '1') return;
+    more.dataset.bound = '1';
+    var toggle = more.querySelector('.nav-more-toggle');
+    var menu = more.querySelector('.nav-more-menu');
+    if (!toggle || !menu) return;
+
+    function setOpen(open) {
+      more.classList.toggle('is-open', open);
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      menu.hidden = !open;
+    }
+
+    toggle.addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      setOpen(menu.hidden);
+    });
+
+    document.addEventListener('click', function (e) {
+      if (!more.contains(e.target)) setOpen(false);
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') setOpen(false);
+    });
+  }
+
   function mountNavbar(base) {
     var nav = document.querySelector('.navbar.fixed-top');
     if (!nav) return;
     if (!nav.id) nav.id = 'navbar';
     nav.classList.add('site-masthead', 'navbar-expand');
-    if (!nav.querySelector('.site-masthead-brand')) {
-      nav.innerHTML = mastheadHtml(base, currentPageKey());
-    }
+    nav.innerHTML = mastheadHtml(base, currentPageKey());
+    bindMoreMenu(nav);
     syncNavbarHeight();
     window.addEventListener('resize', syncNavbarHeight);
     window.addEventListener('load', syncNavbarHeight);
