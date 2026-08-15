@@ -46,78 +46,92 @@ function buildSynonymMessage({ words, youtube }) {
 }
 
 
-
-const imbueSet = [
+const glibSet = [
   {
-  en: 'imbue',
-  pron: '임뷰',
-  ipa: '/ɪmˈbjuː/',
-  meaning: '불어넣다, 스며들게 하다',
-  short: '불어넣다',
-  enExample: 'His most impressive talent is his ability to imbue staff with a sense of mission.',
-  koExample: '그의 가장 인상적인 재능은 직원들에게 사명감을 불어넣는 능력이다.'
+  en: 'glib',
+  pron: '글립',
+  ipa: '/ɡlɪb/',
+  meaning: '말만 번지르르한, 피상적으로 그럴듯한',
+  short: '말만 번지르르한',
+  enExample: 'This is rather glib.',
+  koExample: '이것은 상당히 말만 번지르르하다.'
   },
   {
-  en: 'infuse',
-  pron: '인퓨즈',
-  ipa: '/ɪnˈfjuːz/',
-  meaning: '스며들게 하다, 가득 채우다',
-  short: '스며들게 하다',
-  enExample: 'Politics infuses all aspects of our lives.',
-  koExample: '정치는 우리 삶의 모든 측면에 스며든다.'
+  en: 'gregarious',
+  pron: '그리게리어스',
+  ipa: '/ɡrɪˈɡeriəs/',
+  meaning: '사교적인, 사람들과 어울리기 좋아하는',
+  short: '사교적인',
+  enExample: 'A gregarious person has a 50% better chance of surviving than a lonely one.',
+  koExample: '사교적인 사람은 외로운 사람보다 생존 확률이 50% 더 높다.'
   },
   {
-  en: 'immerse',
-  pron: '이머스',
-  ipa: '/ɪˈmɜːrs/',
-  meaning: '몰입시키다, 푹 빠지게 하다',
-  short: '몰입시키다',
-  enExample: 'It will immerse you in the action, put you in the arena or the stadium.',
-  koExample: '그것은 당신을 현장 속에 완전히 몰입시키고 경기장 한가운데 있는 듯하게 만들 것이다.'
+  en: 'garrulous',
+  pron: '개럴러스',
+  ipa: '/ˈɡærələs/',
+  meaning: '수다스러운, 말이 많은',
+  short: '수다스러운',
+  enExample: 'The crowd grew garrulous before the speaker arrived.',
+  koExample: '연사가 도착하기 전에 군중이 수다스러워졌다.'
   },
   {
-  en: 'instill',
-  pron: '인스틸',
-  ipa: '/ɪnˈstɪl/',
-  meaning: '심어주다, 주입하다',
-  short: '심어주다',
-  enExample: 'At the very least, the president of the United States should instill hope in young children.',
-  koExample: '최소한, 미국 대통령은 어린아이들에게 희망을 심어줘야 한다.'
+  en: 'laconic',
+  pron: '러카닉',
+  ipa: '/ləˈkɑːnɪk/',
+  meaning: '말수가 적은, 간결한',
+  short: '말수가 적은',
+  enExample: 'True to form, the artist was playfully laconic at the show\'s press conference.',
+  koExample: '평소처럼 그 예술가는 전시 기자회견에서 재미있게 말수가 적었다.'
   },
   {
-  en: 'impart',
-  pron: '임파트',
-  ipa: '/ɪmˈpɑːrt/',
-  meaning: '전하다, 나누어 주다',
-  short: '전하다',
-  enExample: 'You can impart some practical, real-world knowledge on this subject.',
-  koExample: '당신은 이 주제에 관해 실용적인 현실 세계의 지식을 전할 수 있다.'
+  en: 'facile',
+  pron: '패설',
+  ipa: '/ˈfæsəl/',
+  meaning: '피상적인, 지나치게 손쉬운',
+  short: '피상적인',
+  enExample: 'Slick, facile and overproduced.',
+  koExample: '매끄럽지만 피상적이고 과도하게 제작되었다.'
   },
   {
-  en: 'indoctrinate',
-  pron: '인닥트러네이트',
-  ipa: '/ɪnˈdɑːktrəneɪt/',
-  meaning: '주입시키다, 세뇌하다',
-  short: '세뇌하다',
-  enExample: 'The key to success is to indoctrinate people with the right attitudes to speed at a very early age.',
-  koExample: '성공의 핵심은 아주 어린 나이에 사람들에게 속도에 대한 올바른 태도를 주입하는 것이다.'
+  en: 'gratuitous',
+  pron: '그러투어터스',
+  ipa: '/ɡrəˈtuːətəs/',
+  meaning: '불필요한, 쓸데없이 과도한',
+  short: '불필요한',
+  enExample: 'Gratuitous violence on television.',
+  koExample: '텔레비전의 불필요한 폭력.'
+  },
+  {
+  en: 'goad',
+  pron: '고우드',
+  ipa: '/ɡoʊd/',
+  meaning: '부추기다, 도발하다',
+  short: '부추기다',
+  enExample: 'They accused such allies as Saudi Arabia of trying to goad America into fighting Iran on the Arab world\'s behalf.',
+  koExample: '그들은 사우디아라비아와 같은 동맹국들이 아랍 세계를 대신해 미국을 이란과의 전쟁으로 부추기려 했다고 비난했다.'
   }
   ];
 
   const posts = [
   {
-  title: 'imbue 불어넣다 유의어 정리',
-  slug: 'imbue-synonyms',
+  title: 'glib 말만 번지르르한 연관 단어 정리',
+  slug: 'glib-related-words',
   metaDescription:
-  'imbue(불어넣다), infuse(스며들게 하다), immerse(몰입시키다), instill(심어주다), impart(전하다), indoctrinate(주입시키다·세뇌하다) 뜻·발음·예문을 정리한 유의어 학습입니다.',
+  'glib(말만 번지르르한), gregarious(사교적인), garrulous(수다스러운), laconic(말수가 적은), facile(피상적인), gratuitous(불필요한), goad(부추기다) 뜻·발음·예문을 정리한 연관 어휘 학습입니다.',
   message: buildSynonymMessage({
-  words: imbueSet,
-  youtube: 'https://youtube.com/shorts/ArJFVz0QUI8'
+  words: glibSet,
+  youtube: 'https://youtube.com/shorts/lL6H4OptGDE'
   }),
   nickname: 'admin',
-  password: 'seed_synonym_imbue-synonyms'
+  password: 'seed_synonym_glib-related-words'
   }
   ];
+
+
+
+
+
+
 
 async function seed() {
   console.log('Synonym 글 추가 중...', API_BASE);
