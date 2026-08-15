@@ -46,69 +46,78 @@ function buildSynonymMessage({ words, youtube }) {
 }
 
 
-const lungeSet = [
+
+const fomentSet = [
   {
-  en: 'lunge',
-  pron: '런지',
-  ipa: '/lʌndʒ/',
-  meaning: '갑자기 치닫다, 돌진하다',
-  short: '돌진하다',
-  enExample: 'He now professes to lunge from exhilaration to terror within a single day.',
-  koExample: '그는 이제 하루 안에 흥분에서 공포로 급격히 달려든다고 고백합니다.'
+  en: 'foment',
+  pron: '포멘트',
+  ipa: '/foʊˈment/',
+  meaning: '부추기다, 조장하다',
+  short: '조장하다',
+  enExample: 'Their purpose is to foment distrust in America.',
+  koExample: '그들의 목적은 미국에 대한 불신을 부추기는 것입니다.'
   },
   {
-  en: 'thrust',
-  pron: '쓰러스트',
-  ipa: '/θrʌst/',
-  meaning: '억지로 …시키다, 거칠게 밀다',
-  short: '떠맡기다',
-  enExample: 'The education ministry has been thrust upon a man already responsible for renewable energy.',
-  koExample: '교육부가 이미 재생에너지를 담당하고 있는 한 남자에게 떠맡겨졌습니다.'
+  en: 'incite',
+  pron: '인사이트',
+  ipa: '/ɪnˈsaɪt/',
+  meaning: '선동하다, 부추기다',
+  short: '선동하다',
+  enExample: 'Menacing slogans and banners that could incite violence.',
+  koExample: '폭력을 선동할 수 있는 위협적인 표어와 깃발.'
   },
   {
-  en: 'pounce',
-  pron: '파운스',
-  ipa: '/paʊns/',
-  meaning: '달려들다, 즉각 덮치다',
-  short: '달려들다',
-  enExample: 'Twitchy censors are quick to pounce on works that fail to promote "positive energy".',
-  koExample: '초조한 검열관들은 "긍정적 에너지"를 홍보하지 못하는 작품에 즉각 덮쳐듭니다.'
+  en: 'instigate',
+  pron: '인스티게이트',
+  ipa: '/ˈɪnstɪɡeɪt/',
+  meaning: '착수하게 하다, 부추기다, 선동하다',
+  short: '선동하다',
+  enExample: 'They should not be used as a pretext to instigate a trade war.',
+  koExample: '그것들이 무역 전쟁을 일으키는 구실로 사용되어서는 안 됩니다.'
   },
   {
-  en: 'lurch',
-  pron: '러치',
-  ipa: '/lɜːrtʃ/',
-  meaning: '급격한 변화, 갑작스러운 쏠림',
-  short: '급격한 쏠림',
-  enExample: 'Rightward lurch.',
-  koExample: '오른쪽으로의 급격한 쏠림.'
+  en: 'goad',
+  pron: '고우드',
+  ipa: '/ɡoʊd/',
+  meaning: '부추기다, 몰아붙이다',
+  short: '부추기다',
+  enExample: 'She goaded her teammates into giving their absolute best.',
+  koExample: '그녀는 팀원들을 몰아붙여 최선을 다하게 만들었습니다.'
   },
   {
-  en: 'nudge',
-  pron: '너지',
-  ipa: '/nʌdʒ/',
-  meaning: '살짝 유도하다, 부추기다',
-  short: '살짝 유도하다',
-  enExample: 'Nudge people into doing everything from saving to donating.',
-  koExample: '사람들을 저축부터 기부까지 모든 것을 하도록 살짝 유도하다.'
+  en: 'galvanize',
+  pron: '갤버나이즈',
+  ipa: '/ˈɡælvənaɪz/',
+  meaning: '고무하다, 행동하도록 자극하다',
+  short: '고무하다',
+  enExample: 'He asserts that we all know the power of Art, its power to galvanize, stimulate, rouse, exhilarate, soothe and enlighten.',
+  koExample: '그는 미술의 힘, 즉 자극하고, 고무하고, 흥분시키고, 위로하고, 계몽하는 힘을 우리 모두가 안다고 주장합니다.'
+  },
+  {
+  en: 'provoke',
+  pron: '프로보우크',
+  ipa: '/prəˈvoʊk/',
+  meaning: '유발하다, 촉발하다',
+  short: '촉발하다',
+  enExample: 'Such measures tend to provoke faculty resistance.',
+  koExample: '그러한 조치는 교수진의 저항을 촉발하는 경향이 있습니다.'
   }
   ];
 
   const posts = [
   {
-  title: 'lunge 돌진하다 연관 단어 정리',
-  slug: 'lunge-related-words',
+  title: 'foment 부추기다 유의어 정리',
+  slug: 'foment-synonyms',
   metaDescription:
-  'lunge(돌진하다), thrust(떠맡기다·밀다), pounce(달려들다), lurch(급격한 쏠림), nudge(살짝 유도하다) 뜻·발음·예문을 정리한 연관 어휘 학습입니다.',
+  'foment(조장하다), incite(선동하다), instigate(부추기다), goad(몰아붙이다), galvanize(고무하다), provoke(촉발하다) 뜻·발음·예문을 정리한 유의어 학습입니다.',
   message: buildSynonymMessage({
-  words: lungeSet,
-  youtube: 'https://youtube.com/shorts/xGfOus3ULcg'
+  words: fomentSet,
+  youtube: 'https://youtube.com/shorts/cwh2b_h0ggM'
   }),
   nickname: 'admin',
-  password: 'seed_synonym_lunge-related-words'
+  password: 'seed_synonym_foment-synonyms'
   }
   ];
-
 
 async function seed() {
   console.log('Synonym 글 추가 중...', API_BASE);
