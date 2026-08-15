@@ -46,79 +46,68 @@ function buildSynonymMessage({ words, youtube }) {
 }
 
 
-
-const fortitudeSet = [
+const lungeSet = [
   {
-  en: 'fortitude',
-  pron: '포터튜드',
-  ipa: '/ˈfɔːrtɪtuːd/',
-  meaning: '불굴의 용기, 강인함',
-  short: '불굴의 용기',
-  enExample: 'He will need fortitude for the brawls to come, against Conservative leader Pierre Poilievre and Mr Trump.',
-  koExample: '보수당 지도자 피에르 폴리에브르와 트럼프에 대항하기 위해 그는 다가올 싸움에 필요한 불굴의 용기가 필요할 것이다.'
+  en: 'lunge',
+  pron: '런지',
+  ipa: '/lʌndʒ/',
+  meaning: '갑자기 치닫다, 돌진하다',
+  short: '돌진하다',
+  enExample: 'He now professes to lunge from exhilaration to terror within a single day.',
+  koExample: '그는 이제 하루 안에 흥분에서 공포로 급격히 달려든다고 고백합니다.'
   },
   {
-  en: 'perseverance',
-  pron: '퍼서비어런스',
-  ipa: '/ˌpɜːrsəˈvɪrəns/',
-  meaning: '인내, 끈기',
-  short: '인내',
-  enExample: 'They showed great perseverance in the face of difficulty.',
-  koExample: '그들은 어려움 앞에서 위대한 인내심을 보여주었다.'
+  en: 'thrust',
+  pron: '쓰러스트',
+  ipa: '/θrʌst/',
+  meaning: '억지로 …시키다, 거칠게 밀다',
+  short: '떠맡기다',
+  enExample: 'The education ministry has been thrust upon a man already responsible for renewable energy.',
+  koExample: '교육부가 이미 재생에너지를 담당하고 있는 한 남자에게 떠맡겨졌습니다.'
   },
   {
-  en: 'stalwart',
-  pron: '스톨워트',
-  ipa: '/ˈstɔːlwərt/',
-  meaning: '충실한, 굳건한',
-  short: '굳건한',
-  enExample: 'Many ordinary Israelis revere Mr Trump as their country\'s stalwart friend.',
-  koExample: '많은 이스라엘 국민들은 트럼프를 자신들 나라의 굳건한 친구로 숭배한다.'
+  en: 'pounce',
+  pron: '파운스',
+  ipa: '/paʊns/',
+  meaning: '달려들다, 즉각 덮치다',
+  short: '달려들다',
+  enExample: 'Twitchy censors are quick to pounce on works that fail to promote "positive energy".',
+  koExample: '초조한 검열관들은 "긍정적 에너지"를 홍보하지 못하는 작품에 즉각 덮쳐듭니다.'
   },
   {
-  en: 'formidable',
-  pron: '포미더블',
-  ipa: '/ˈfɔːrmɪdəbəl/',
-  meaning: '만만치 않은, 엄청난',
-  short: '만만치 않은',
-  enExample: 'Absorbing this labour force is a formidable economic challenge.',
-  koExample: '이 노동력을 흡수하는 것은 엄청난 경제적 과제이다.'
+  en: 'lurch',
+  pron: '러치',
+  ipa: '/lɜːrtʃ/',
+  meaning: '급격한 변화, 갑작스러운 쏠림',
+  short: '급격한 쏠림',
+  enExample: 'Rightward lurch.',
+  koExample: '오른쪽으로의 급격한 쏠림.'
   },
   {
-  en: 'homage',
-  pron: '하미지',
-  ipa: '/ˈhɑːmɪdʒ/',
-  meaning: '경의, 찬사',
-  short: '경의',
-  enExample: 'The state\'s inability to remove such open homage to illegal organisations made public its weakness.',
-  koExample: '국가가 불법 조직에 대한 이러한 공개적인 경의를 제거하지 못한 것은 그들의 약점을 드러냈다.'
-  },
-  {
-  en: 'grit',
-  pron: '그릿',
-  ipa: '/ɡrɪt/',
-  meaning: '투지, 끈기, 강인함',
-  short: '투지',
-  enExample: 'We have the grit and the sisu to chart the path ahead.',
-  koExample: '우리는 앞으로의 길을 개척할 투지와 강인함을 가지고 있다.'
+  en: 'nudge',
+  pron: '너지',
+  ipa: '/nʌdʒ/',
+  meaning: '살짝 유도하다, 부추기다',
+  short: '살짝 유도하다',
+  enExample: 'Nudge people into doing everything from saving to donating.',
+  koExample: '사람들을 저축부터 기부까지 모든 것을 하도록 살짝 유도하다.'
   }
   ];
 
   const posts = [
   {
-  title: 'fortitude 불굴의 용기 연관 단어 정리',
-  slug: 'fortitude-related-words',
+  title: 'lunge 돌진하다 연관 단어 정리',
+  slug: 'lunge-related-words',
   metaDescription:
-  'fortitude(불굴의 용기), perseverance(인내), stalwart(굳건한), formidable(만만치 않은), homage(경의), grit(투지) 뜻·발음·예문을 정리한 연관 어휘 학습입니다.',
+  'lunge(돌진하다), thrust(떠맡기다·밀다), pounce(달려들다), lurch(급격한 쏠림), nudge(살짝 유도하다) 뜻·발음·예문을 정리한 연관 어휘 학습입니다.',
   message: buildSynonymMessage({
-  words: fortitudeSet,
-  youtube: 'https://youtube.com/shorts/N3uIDgXIEj4'
+  words: lungeSet,
+  youtube: 'https://youtube.com/shorts/xGfOus3ULcg'
   }),
   nickname: 'admin',
-  password: 'seed_synonym_fortitude-related-words'
+  password: 'seed_synonym_lunge-related-words'
   }
   ];
-
 
 
 async function seed() {
