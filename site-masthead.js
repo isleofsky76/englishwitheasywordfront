@@ -162,7 +162,7 @@
     bar.innerHTML =
       '<span class="yt-billboard__inner">' +
         '<span class="yt-billboard__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5.5v13l12-6.5z"/></svg></span>' +
-        '<span class="yt-billboard__title">YouTube 시사 영단어 영상으로 공부하기</span>' +
+        '<span class="yt-billboard__title">YouTube로 공부하기</span>' +
         '<span class="yt-billboard__handle">@istudyeng</span>' +
       '</span>';
     var clock = document.getElementById('world-clock-bar');
