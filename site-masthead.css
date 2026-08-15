@@ -6,6 +6,10 @@
 .site-masthead.navbar,
 .site-masthead.navbar.bg-primary,
 .site-masthead.navbar.fixed-top {
+  position: relative !important;
+  top: auto !important;
+  left: auto !important;
+  right: auto !important;
   background-color: #1e4e8c !important;
   height: auto !important;
   min-height: 0 !important;
@@ -54,10 +58,13 @@
 }
 
 .site-masthead .site-search-form {
-  display: flex;
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
   align-items: center;
-  width: 100%;
-  max-width: 420px;
+  justify-content: center;
+  width: auto;
+  max-width: 340px;
   height: 36px;
   margin: 0 auto;
   gap: 8px;
@@ -67,7 +74,8 @@
 .site-masthead .site-search-input,
 .site-masthead .site-search-input[type="search"] {
   flex: 1 1 auto;
-  width: 100%;
+  width: auto !important;
+  max-width: 248px;
   min-width: 0;
   height: 36px !important;
   min-height: 36px !important;
@@ -93,8 +101,12 @@
 }
 
 .site-masthead .site-search-submit {
-  flex: 0 0 auto;
-  width: auto;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto !important;
+  width: auto !important;
+  min-width: 58px;
   height: 36px !important;
   min-height: 36px !important;
   margin: 0 !important;
@@ -104,21 +116,22 @@
   font-size: 14px !important;
   font-weight: 600;
   line-height: 1;
-  color: #fff;
-  background: rgba(255, 255, 255, 0.22);
+  white-space: nowrap;
+  color: #fff !important;
+  background: #4b5563 !important;
   cursor: pointer;
   box-sizing: border-box !important;
 }
 
 .site-masthead .site-search-submit:hover {
-  background: rgba(255, 255, 255, 0.32);
+  background: #374151 !important;
 }
 
 .site-search-results {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  width: min(420px, calc(100% - 2rem));
+  width: min(340px, calc(100% - 2rem));
   margin: 0.3rem 0 0;
   padding: 0.25rem 0;
   list-style: none;
@@ -210,17 +223,19 @@
 .nav-tone-dir { color: #b8d8ff !important; }
 
 #yt-billboard-bar {
-  position: fixed;
-  top: calc(var(--navbar-height) + var(--weather-banner-height, 34px) + var(--world-clock-height, 30px));
-  left: 0;
-  right: 0;
-  z-index: 1027;
-  height: var(--yt-billboard-height);
+  position: relative;
+  top: auto;
+  left: auto;
+  right: auto;
+  z-index: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 1rem;
+  min-height: 64px;
+  margin: 10px 12px 14px;
+  padding: 0.7rem 1rem;
   box-sizing: border-box;
+  border-radius: 14px;
   background: linear-gradient(135deg, #1a1a1a 0%, #2b0a0a 48%, #111 100%);
   color: #fff;
   text-decoration: none;
@@ -270,19 +285,7 @@
   opacity: 0.9;
 }
 
-html.has-yt-billboard.has-world-clock.has-weather-banner:not(.page-with-main-content) body {
-  padding-top: calc(var(--navbar-height) + var(--site-top-bars-height, 64px) + var(--yt-billboard-height)) !important;
-}
-
-html.has-yt-billboard.has-world-clock.has-weather-banner.page-with-main-content .main-content {
-  margin-top: calc(var(--navbar-height) + var(--site-top-bars-height, 64px) + var(--yt-billboard-height) + 28px) !important;
-}
-
 @media (max-width: 600px) {
-  :root {
-    --yt-billboard-height: 72px;
-  }
-
   .site-title-ko {
     font-size: 1.08rem;
   }
@@ -292,11 +295,73 @@ html.has-yt-billboard.has-world-clock.has-weather-banner.page-with-main-content 
     padding: 0.26rem 0.32rem !important;
   }
 
+  #yt-billboard-bar {
+    min-height: 56px;
+    margin: 8px 10px 12px;
+    padding: 0.55rem 0.85rem;
+  }
+
   #yt-billboard-bar .yt-billboard__title {
     font-size: 0.82rem;
   }
+}
 
-  html.has-yt-billboard.has-world-clock.has-weather-banner.page-with-main-content .main-content {
-    margin-top: calc(var(--navbar-height) + var(--site-top-bars-height, 60px) + var(--yt-billboard-height) + 20px) !important;
+/* 고정 헤더 해제: 스크롤하면 제목·검색·메뉴·날씨·시간·YouTube가 함께 올라감 */
+html.has-site-masthead .navbar.fixed-top,
+html.has-site-masthead .site-masthead.navbar.fixed-top {
+  position: relative !important;
+  top: auto !important;
+  left: auto !important;
+  right: auto !important;
+}
+
+html.has-site-masthead .weather-banner,
+html.has-site-masthead .world-clock-bar {
+  position: relative !important;
+  top: auto !important;
+  left: auto !important;
+  right: auto !important;
+  z-index: 1;
+  width: 100%;
+}
+
+html.has-site-masthead body,
+html.has-site-masthead.has-weather-banner body,
+html.has-site-masthead.has-weather-banner:not(.page-with-main-content) body,
+html.has-site-masthead.has-world-clock.has-weather-banner body,
+html.has-site-masthead.has-world-clock.has-weather-banner:not(.page-with-main-content) body,
+html.has-site-masthead.has-yt-billboard.has-world-clock.has-weather-banner:not(.page-with-main-content) body {
+  padding-top: 0 !important;
+}
+
+html.has-site-masthead .main-content,
+html.has-site-masthead.has-weather-banner.page-with-main-content .main-content,
+html.has-site-masthead.has-world-clock.has-weather-banner.page-with-main-content .main-content,
+html.has-site-masthead.has-yt-billboard.has-world-clock.has-weather-banner.page-with-main-content .main-content {
+  margin-top: 20px !important;
+}
+
+html.has-site-masthead .dir-page {
+  padding-top: 28px !important;
+}
+
+html.has-site-masthead .vocabulary-quiz-main {
+  margin-top: 28px !important;
+}
+
+html.has-site-masthead .se-page .se-section-nav {
+  top: 0;
+}
+
+@media (max-width: 600px) {
+  html.has-site-masthead .main-content,
+  html.has-site-masthead.has-weather-banner.page-with-main-content .main-content,
+  html.has-site-masthead.has-world-clock.has-weather-banner.page-with-main-content .main-content,
+  html.has-site-masthead.has-yt-billboard.has-world-clock.has-weather-banner.page-with-main-content .main-content {
+    margin-top: 16px !important;
+  }
+
+  html.has-site-masthead .vocabulary-quiz-main {
+    margin-top: 20px !important;
   }
 }

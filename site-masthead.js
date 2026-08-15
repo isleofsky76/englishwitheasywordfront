@@ -1,9 +1,10 @@
 /**
- * 전 페이지 공통 고정 헤더 (제목 · 검색 · 메뉴 · YouTube)
+ * 전 페이지 공통 헤더 (제목 · 검색 · 메뉴 · 날씨 · 시간 · YouTube)
+ * 문서 흐름에 두어 스크롤하면 자연스럽게 사라짐
  * nav-home-menu.js 가 로드함
  */
 (function () {
-    var VERSION = '20260815f';
+    var VERSION = '20260815i';
   var NAV_ITEMS = [
     { href: 'index.html', label: '홈', tone: 'home', pages: ['index.html', ''] },
     { href: 'word-of-the-day-list.html', label: '오늘의 단어', tone: 'wotd', pages: ['word-of-the-day-list.html', 'word-of-the-day.html'] },
@@ -305,6 +306,7 @@
   }
 
   function mount() {
+    document.documentElement.classList.add('has-site-masthead');
     var base = assetBase();
     ensureCss(base);
     ensureWeather(base);

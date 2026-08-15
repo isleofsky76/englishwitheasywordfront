@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" class="has-site-masthead">
 <head>
     <meta charset="UTF-8">
     <link rel="icon" href="resources/eng.png" type="image/png">
@@ -114,14 +114,20 @@
             z-index: 1040;
         }
         .site-search-form {
-            display: flex;
+            display: flex !important;
+            flex-direction: row !important;
+            flex-wrap: nowrap !important;
             align-items: center;
-            max-width: 28rem;
+            justify-content: center;
+            width: auto;
+            max-width: 340px;
             margin: 0 auto;
-            gap: 0.4rem;
+            gap: 8px;
         }
         .site-search-input {
-            flex: 1;
+            flex: 1 1 auto;
+            width: auto;
+            max-width: 248px;
             min-width: 0;
             height: 2.05rem;
             border: none;
@@ -136,7 +142,12 @@
             color: #7a93ab;
         }
         .site-search-submit {
-            flex-shrink: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex: 0 0 auto;
+            white-space: nowrap;
+            min-width: 58px;
             height: 2.05rem;
             border: none;
             border-radius: 999px;
@@ -144,17 +155,17 @@
             font-size: 0.84rem;
             font-weight: 600;
             color: #fff;
-            background: rgba(255, 255, 255, 0.22);
+            background: #4b5563;
             cursor: pointer;
         }
         .site-search-submit:hover {
-            background: rgba(255, 255, 255, 0.32);
+            background: #374151;
         }
         .site-search-results {
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
-            width: min(28rem, calc(100% - 2rem));
+            width: min(340px, calc(100% - 2rem));
             margin: 0.3rem 0 0;
             padding: 0.25rem 0;
             list-style: none;
@@ -285,7 +296,7 @@
             font-family: 'Noto Sans KR', 'Poppins', sans-serif;
         }
         .main-content {
-            margin-top: calc(var(--navbar-height) + 28px);
+            margin-top: 20px;
             margin-bottom: 30px;
             padding-left: 1.25rem;
             padding-right: 1.25rem;
@@ -709,7 +720,7 @@
                 padding: 0.26rem 0.32rem !important;
             }
             .main-content {
-                margin-top: calc(var(--navbar-height) + 20px);
+                margin-top: 16px;
                 padding-left: max(16px, env(safe-area-inset-left, 0px));
                 padding-right: max(16px, env(safe-area-inset-right, 0px));
             }
@@ -733,6 +744,7 @@
     <link rel="stylesheet" href="nav-home-menu.css?v=20260815a">
     <link rel="stylesheet" href="weather-banner.css?v=20260612g">
     <link rel="stylesheet" href="world-clock.css?v=20260612g">
+    <link rel="stylesheet" href="site-masthead.css?v=20260815i">
     <style>
         /* navbar-unified / nav-home-menu 이후에 덮어씀 */
         :root {
@@ -1037,7 +1049,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="viewpost-seo.js?v=20260702"></script>
     <script src="nav-home-menu.js?v=20260815e"></script>
-    <script src="site-masthead.js?v=20260815f"></script>
+    <script src="site-masthead.js?v=20260815i"></script>
     <script src="home-board-preview.js?v=20260815d"></script>
     <script src="english-directory.js" defer></script>
     
