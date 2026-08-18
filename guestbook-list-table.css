@@ -18,6 +18,99 @@
   margin-top: 0.5rem;
 }
 
+/* =========================
+   table layout (요청사항 반영)
+   ========================= */
+.gb-table-wrap {
+  margin-top: 0.5rem;
+  overflow-x: auto;
+}
+
+.gb-list-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-size: 14px;
+}
+
+.gb-th {
+  padding: 10px 8px;
+  border-bottom: 1px solid #e5e7eb;
+  background: #fafafa;
+  color: #111827;
+  font-weight: 600;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.gb-td {
+  padding: 10px 8px;
+  border-bottom: 1px solid #f1f1f1;
+  vertical-align: top;
+  color: #111827;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.gb-table-row:hover .gb-td {
+  background: #fcfcff;
+}
+
+.gb-td-num {
+  width: 70px;
+  font-variant-numeric: tabular-nums;
+  color: #6b7280;
+}
+
+.gb-td-views,
+.gb-td-likes {
+  width: 110px;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  color: #111827;
+}
+
+.gb-td-date {
+  width: 160px;
+  color: #4b5563;
+}
+
+.gb-td-nickname {
+  width: 140px;
+  color: #4b5563;
+}
+
+.gb-title-link {
+  color: #111827;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.gb-title-link:hover {
+  color: #185FA5;
+  text-decoration: underline;
+}
+
+.gb-title-source {
+  color: #4b5563;
+  font-weight: 700;
+  margin-right: 0.25rem;
+}
+
+.gb-title-sep {
+  color: #9ca3af;
+  margin-right: 0.25rem;
+}
+
+.gb-table-empty {
+  padding: 1.2rem 1rem;
+  color: #6b7280;
+  text-align: center;
+  border: 1px dashed #e5e7eb;
+  border-radius: 12px;
+  background: #fafafa;
+}
+
 .gb-card-list {
   display: flex;
   flex-direction: column;

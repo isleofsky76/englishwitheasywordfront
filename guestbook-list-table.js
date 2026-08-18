@@ -135,13 +135,13 @@
 
     if (!messages || !messages.entries || !messages.entries.length) {
       container.innerHTML =
-        '<div class="gb-card-list"><div class="gb-card gb-card--empty">게시글이 없습니다.</div></div>';
+        '<div class="gb-table-empty">게시글이 없습니다.</div>';
       return;
     }
 
     var total = messages.entries.length;
     var reversedEntries = messages.entries.slice().reverse();
-    var cards = reversedEntries.map(function (entry, idx) {
+    var rows = reversedEntries.map(function (entry, idx) {
       var originalIndex = total > 0 ? total - 1 - idx : 0;
       if (originalIndex < 0 || originalIndex >= total) return '';
 
@@ -153,55 +153,52 @@
       var dateTimeStr = formatDateTime(entry.date);
       var entryId = String(entry._id || ('idx-' + originalIndex));
       var postHref = buildPostHref(entry, originalIndex, postPage, apiParam, postPath);
-      var postUrl = new URL(postHref, window.location.href).href;
-      var imageBadge = entryHasImage(entry) ? IMAGE_BADGE_HTML : '';
+
+      var nickname = entry.nickname || '';
+      var safeNickname = escapeHtml(nickname);
+
       var views = entry.views || 0;
       var likeCount = getLikeDisplayCount(entry.likes);
-      var isNew = idx < 2;
-      var cardClass = 'gb-card' + (isNew ? ' gb-card--new' : '');
 
-      var badgesHtml = '<div class="gb-card-badges">';
-      if (isNew) badgesHtml += '<span class="gb-badge gb-badge--new">NEW</span>';
+      var titleCell = safeTitle;
       if (safeSource) {
-        badgesHtml += '<span class="gb-badge ' + sourceBadgeClass(parts.source) + '">' + safeSource + '</span>';
-      }
-      badgesHtml += '</div>';
-
-      var likeHtml = '';
-      if (!hideViewsAndLikes) {
-        var canLike = isValidObjectId(entryId);
-        var liked = canLike && hasUserLiked(entryId);
-        var likeBtnClass = 'gb-action-btn gb-like-btn' + (liked ? ' is-active' : '');
-        var likeDisabled = (liked || !canLike) ? ' disabled' : '';
-        var likeTitle = !canLike ? '좋아요 불가' : (liked ? '이미 좋아요를 눌렀습니다' : '좋아요 (한 번만 가능)');
-        likeHtml =
-          '<span class="gb-like-wrap">' +
-          '<button type="button" class="' + likeBtnClass + '" data-gb-like="' + escapeAttr(entryId) + '" title="' + escapeAttr(likeTitle) + '"' + likeDisabled + '>👍</button>' +
-          '<span class="gb-like-count">' + likeCount + '</span>' +
-          '</span>';
+        titleCell =
+          '<span class="gb-title-source">' + safeSource + '</span>' +
+          '<span class="gb-title-sep" aria-hidden="true"> | </span>' +
+          safeTitle;
       }
 
-      var actionsHtml =
-        '<div class="gb-card-actions">' +
-        likeHtml +
-        buildShareLinks(postUrl, rawTitle) +
-        '<span class="gb-card-arrow" aria-hidden="true">›</span>' +
-        '</div>';
+      var showViews = hideViewsAndLikes ? '-' : views;
+      var showLikes = hideViewsAndLikes ? '-' : likeCount;
 
-      return '<article class="' + cardClass + '" data-gb-entry="' + escapeAttr(entryId) + '">' +
-        '<a class="gb-card-link" href="' + postHref + '" title="' + escapeAttr(parts.title) + '">' +
-        '<span class="gb-card-num">' + number + '</span>' +
-        '<span class="gb-card-body">' +
-        badgesHtml +
-        '<span class="gb-card-title">' + safeTitle + imageBadge + '</span>' +
-        buildCardMeta(dateTimeStr, views, likeCount) +
-        '</span>' +
-        '</a>' +
-        actionsHtml +
-        '</article>';
+      return '<tr class="gb-table-row" data-gb-entry="' + escapeAttr(entryId) + '">' +
+        '<td class="gb-td gb-td-num">' + number + '</td>' +
+        '<td class="gb-td gb-td-title">' +
+          '<a class="gb-title-link" href="' + postHref + '" title="' + escapeAttr(parts.title) + '">' + titleCell + '</a>' +
+        '</td>' +
+        '<td class="gb-td gb-td-nickname">' + safeNickname + '</td>' +
+        '<td class="gb-td gb-td-date">' + escapeHtml(dateTimeStr) + '</td>' +
+        '<td class="gb-td gb-td-views">' + showViews + '</td>' +
+        '<td class="gb-td gb-td-likes">' + showLikes + '</td>' +
+        '</tr>';
     }).join('');
 
-    container.innerHTML = '<div class="gb-card-list">' + cards + '</div>';
+    container.innerHTML =
+      '<div class="gb-table-wrap">' +
+        '<table class="gb-list-table" role="table" aria-label="게시글 목록">' +
+          '<thead>' +
+            '<tr>' +
+              '<th class="gb-th gb-th-num">번호</th>' +
+              '<th class="gb-th gb-th-title">제목</th>' +
+              '<th class="gb-th gb-th-nickname">닉네임</th>' +
+              '<th class="gb-th gb-th-date">날짜</th>' +
+              '<th class="gb-th gb-th-views">조회수</th>' +
+              '<th class="gb-th gb-th-likes">추천수</th>' +
+            '</tr>' +
+          '</thead>' +
+          '<tbody>' + rows + '</tbody>' +
+        '</table>' +
+      '</div>';
   };
 
   if (!window._guestbookTableActionsInit) {

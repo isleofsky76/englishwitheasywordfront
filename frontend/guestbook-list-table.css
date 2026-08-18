@@ -1,0 +1,414 @@
+/* 게시판 목록 — 카드 레이아웃 */
+:root {
+  --gb-bg-warning: #FAEEDA;
+  --gb-text-warning: #854F0B;
+  --gb-bg-accent: #E6F1FB;
+  --gb-text-accent: #185FA5;
+  --gb-bg-success: #EAF3DE;
+  --gb-text-success: #3B6D11;
+  --gb-fill-accent: #378ADD;
+  --gb-surface: #FFFFFF;
+  --gb-text-primary: #2C2C2A;
+  --gb-text-secondary: #888780;
+  --gb-border: #E8E6DC;
+  --gb-page-bg: #FBFBFA;
+}
+
+.guestbook-list {
+  margin-top: 0.5rem;
+}
+
+/* =========================
+   table layout (요청사항 반영)
+   ========================= */
+.gb-table-wrap {
+  margin-top: 0.5rem;
+  overflow-x: auto;
+}
+
+.gb-list-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-size: 14px;
+}
+
+.gb-th {
+  padding: 10px 8px;
+  border-bottom: 1px solid #e5e7eb;
+  background: #fafafa;
+  color: #111827;
+  font-weight: 600;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.gb-td {
+  padding: 10px 8px;
+  border-bottom: 1px solid #f1f1f1;
+  vertical-align: top;
+  color: #111827;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.gb-table-row:hover .gb-td {
+  background: #fcfcff;
+}
+
+.gb-td-num {
+  width: 70px;
+  font-variant-numeric: tabular-nums;
+  color: #6b7280;
+}
+
+.gb-td-views,
+.gb-td-likes {
+  width: 110px;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  color: #111827;
+}
+
+.gb-td-date {
+  width: 160px;
+  color: #4b5563;
+}
+
+.gb-td-nickname {
+  width: 140px;
+  color: #4b5563;
+}
+
+.gb-title-link {
+  color: #111827;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.gb-title-link:hover {
+  color: #185FA5;
+  text-decoration: underline;
+}
+
+.gb-title-source {
+  color: #4b5563;
+  font-weight: 700;
+  margin-right: 0.25rem;
+}
+
+.gb-title-sep {
+  color: #9ca3af;
+  margin-right: 0.25rem;
+}
+
+.gb-table-empty {
+  padding: 1.2rem 1rem;
+  color: #6b7280;
+  text-align: center;
+  border: 1px dashed #e5e7eb;
+  border-radius: 12px;
+  background: #fafafa;
+}
+
+.gb-card-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  margin: 0 12px 12px;
+  padding: 0;
+}
+
+.gb-card {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  background: var(--gb-surface);
+  border: 1px solid var(--gb-border);
+  border-left: 4px solid var(--gb-fill-accent);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.gb-card--new {
+  border-left-color: #8FB86A;
+}
+
+.gb-card:hover {
+  border-color: #D9D6CC;
+  box-shadow: 0 2px 10px rgba(44, 44, 42, 0.06);
+}
+
+.gb-card--empty {
+  display: block;
+  padding: 2rem 1rem;
+  text-align: center;
+  color: var(--gb-text-secondary);
+  border-left-color: var(--gb-border);
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.gb-card-link {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 0.7rem 0.85rem 0.85rem;
+  text-decoration: none;
+  color: inherit;
+}
+
+.gb-card-num {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  background: var(--gb-bg-accent);
+  color: var(--gb-text-accent);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.gb-card--new .gb-card-num {
+  background: var(--gb-bg-success);
+  color: var(--gb-text-success);
+}
+
+.gb-card-body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.28rem;
+}
+
+.gb-card-badges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.gb-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.25;
+  background: var(--gb-bg-accent);
+  color: var(--gb-text-accent);
+}
+
+.gb-badge--new {
+  background: var(--gb-bg-accent);
+  color: var(--gb-text-accent);
+}
+
+.gb-badge--wsj,
+.gb-badge--source {
+  background: var(--gb-bg-warning);
+  color: var(--gb-text-warning);
+}
+
+.gb-badge--cnn {
+  background: #FCEBEB;
+  color: #A32D2D;
+}
+
+.gb-badge--bbc {
+  background: #F1F1F0;
+  color: #2C2C2A;
+}
+
+.gb-card-title {
+  display: block;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--gb-text-primary);
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.gb-card-link:hover .gb-card-title {
+  color: var(--gb-text-accent);
+}
+
+.gb-card-title .gb-img-badge {
+  display: inline-flex;
+  vertical-align: -2px;
+  margin-left: 4px;
+}
+
+.gb-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.55rem 0.85rem;
+  color: var(--gb-text-secondary);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.3;
+}
+
+.gb-meta-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.28rem;
+  white-space: nowrap;
+}
+
+.gb-meta-icon {
+  font-size: 12px;
+  line-height: 1;
+  opacity: 0.9;
+}
+
+.gb-card-actions {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 0.55rem 0.65rem 0.55rem 0;
+}
+
+.gb-card-arrow {
+  color: #C5C2B8;
+  font-size: 20px;
+  line-height: 1;
+  transition: color 0.15s ease, transform 0.15s ease;
+}
+
+.gb-card:hover .gb-card-arrow {
+  color: var(--gb-text-secondary);
+  transform: translateX(2px);
+}
+
+.gb-like-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.gb-action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--gb-border);
+  border-radius: 6px;
+  background: #fff;
+  color: #555;
+  font-size: 0.78rem;
+  text-decoration: none;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+}
+
+.gb-action-btn:hover {
+  border-color: #c8c4b8;
+  background: #fafaf7;
+}
+
+.gb-like-btn.is-active,
+.gb-like-btn:disabled.is-active {
+  background: #2b6cb0;
+  border-color: #2b6cb0;
+  color: #fff;
+}
+
+.gb-like-btn:disabled {
+  opacity: 0.7;
+  cursor: default;
+}
+
+.gb-like-count {
+  font-size: 11px;
+  color: var(--gb-text-secondary);
+  min-width: 0.9rem;
+  text-align: left;
+}
+
+.gb-share-group {
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+}
+
+@media (min-width: 768px) {
+  .gb-share-group {
+    display: flex;
+  }
+
+  .gb-card-list {
+    margin: 0 16px 16px;
+  }
+}
+
+@media (max-width: 767px) {
+  .guestbook-container {
+    max-width: 100% !important;
+    width: 100% !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    background-color: var(--gb-page-bg) !important;
+  }
+
+  .guestbook-list {
+    margin-top: 0.35rem;
+  }
+
+  .gb-card-list {
+    margin: 0 10px 12px;
+    gap: 0.6rem;
+  }
+
+  .gb-card-link {
+    padding: 0.75rem 0.45rem 0.75rem 0.7rem;
+    gap: 0.6rem;
+  }
+
+  .gb-card-num {
+    width: 44px;
+    height: 44px;
+    font-size: 15px;
+  }
+
+  .gb-card-title {
+    font-size: 15px;
+  }
+
+  .gb-card-meta {
+    gap: 0.4rem 0.65rem;
+  }
+
+  .gb-card-actions {
+    padding-right: 0.45rem;
+  }
+}
+
+/* 구형 테이블 클래스 잔여 호환 (빈 화면 방지) */
+.gb-table-wrap,
+.gb-table,
+.gb-col-meta-mobile,
+.gb-title-meta {
+  /* no-op leftovers intentionally unused by card renderer */
+}
