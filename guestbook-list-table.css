@@ -238,11 +238,23 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    font-size: 15px;
-    font-weight: 600;
-    color: #111827;
-    line-height: 1.5;
+    font-size: 16px;
+    font-weight: 500;
+    color: #374151;
+    line-height: 1.55;
     max-width: 100%;
+  }
+
+  .gb-title-link .gb-title-source {
+    font-size: 16px;
+    font-weight: 600;
+    color: #4b5563;
+  }
+
+  .gb-title-link .gb-title-sep {
+    font-size: 16px;
+    font-weight: 600;
+    color: #9ca3af;
   }
 
   .gb-title-link .gb-title-source,
@@ -251,13 +263,9 @@
     white-space: nowrap;
   }
 
-  /* 모바일 번호 (제목 앞에) */
+  /* 모바일에서는 번호 숨김 */
   .gb-mobile-num {
-    display: inline;
-    color: #6b7280;
-    font-weight: 500;
-    margin-right: 2px;
-    font-size: 14px;
+    display: none !important;
   }
 
   /* 날짜 / 조회수 / 추천수 줄 */
