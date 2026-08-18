@@ -175,7 +175,7 @@
 }
 
 /* -------------------------
-   Mobile: "제목" + "아이디 | 날짜 | 조회 | 추천수"
+   Mobile: 테이블 없이 "제목" 아래에 "날짜 조회수 추천수" 표시
    ------------------------- */
 @media (max-width: 640px) {
   .gb-table-wrap {
@@ -194,8 +194,23 @@
 
   .gb-list-table tbody tr {
     display: block;
-    border-bottom: 1px solid #e5e7eb;
-    padding: 8px 0;
+    position: relative;
+    padding: 0;
+    border-bottom: none;
+  }
+
+  /* 항목 구분선(--- 느낌) */
+  .gb-list-table tbody tr::after {
+    content: '';
+    position: absolute;
+    left: 14px;
+    right: 14px;
+    bottom: 0;
+    border-bottom: 1px dashed #e5e7eb;
+  }
+
+  .gb-list-table tbody tr:last-child::after {
+    display: none;
   }
 
   .gb-td {
@@ -206,7 +221,7 @@
 
   .gb-td-title {
     display: block;
-    padding: 10px 14px;
+    padding: 10px 14px 12px;
     text-align: left;
     white-space: normal;
     word-break: break-word;
@@ -219,7 +234,7 @@
 
   .gb-mobile-meta {
     display: block;
-    margin-top: 6px;
+    margin-top: 4px;
     font-size: 13px;
     color: #4b5563;
     white-space: normal;
