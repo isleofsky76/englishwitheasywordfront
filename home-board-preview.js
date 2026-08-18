@@ -173,27 +173,6 @@
     return LABEL_STYLE[label] || { badge: 'preview-badge--default', accent: 'preview-accent--news' };
   }
 
-  function formatPreviewDateTime(dateStr) {
-    if (!dateStr) return '';
-    var d = new Date(dateStr);
-    if (isNaN(d.getTime())) return '';
-    var y = d.getFullYear();
-    var m = ('0' + (d.getMonth() + 1)).slice(-2);
-    var day = ('0' + d.getDate()).slice(-2);
-    var h = ('0' + d.getHours()).slice(-2);
-    var min = ('0' + d.getMinutes()).slice(-2);
-    return y + '.' + m + '.' + day + ' ' + h + ':' + min;
-  }
-
-  function formatViewsHtml(views, likes) {
-    var viewCount = Number(views) || 0;
-    var likeCount = parseInt(likes, 10) || 0;
-    var parts = [];
-    parts.push('<span class="preview-views">' + (viewCount ? (viewCount + ' 조회') : '조회 없음') + '</span>');
-    parts.push('<span class="preview-likes">' + likeCount + ' 추천</span>');
-    return '<span class="preview-meta-stats">' + parts.join('<span class="preview-sep preview-sep--stats" aria-hidden="true"> </span>') + '</span>';
-  }
-
   function buildPreviewTitleHtml(title, fallbackLabel) {
     var rawTitle = String(title || '제목 없음');
     var sourceMatch = rawTitle.match(/^\[([^\]]+)\]\s*(.*)$/);
@@ -218,7 +197,6 @@
       '<span class="preview-body">' +
         (newHtml ? '<span class="preview-meta">' + newHtml + '</span>' : '') +
         '<span class="preview-title">' + titleHtml + '</span>' +
-        formatViewsHtml(views, likes) +
       '</span>' +
       '<span class="preview-arrow" aria-hidden="true">›</span>' +
       '</a></li>';
@@ -229,7 +207,6 @@
     return '<li class="preview-card"><a href="' + href + '">' +
       '<span class="preview-body">' +
         '<span class="preview-title">' + titleHtml + '</span>' +
-        formatViewsHtml(views, likes) +
       '</span>' +
       '<span class="preview-arrow" aria-hidden="true">›</span>' +
       '</a></li>';
