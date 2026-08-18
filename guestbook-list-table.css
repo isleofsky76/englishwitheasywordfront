@@ -231,6 +231,8 @@
     text-align: left;
     white-space: normal;
     word-break: break-word;
+    overflow-wrap: anywhere;
+    max-width: 100%;
   }
 
   .gb-title-link {
@@ -240,6 +242,15 @@
     font-weight: 600;
     color: #111827;
     line-height: 1.5;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  .gb-title-link .gb-title-source,
+  .gb-title-link .gb-title-sep,
+  .gb-title-link .gb-mobile-num {
+    white-space: normal;
   }
 
   /* 모바일 번호 (제목 앞에) */
@@ -266,6 +277,10 @@
   .gb-mobile-meta-date {
     display: inline;
     color: #9ca3af;
+  }
+
+  .gb-mobile-meta-date::before {
+    content: '📅 ';
   }
 
   .gb-mobile-meta-stat {
