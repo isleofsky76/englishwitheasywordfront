@@ -173,6 +173,47 @@
     return LABEL_STYLE[label] || { badge: 'preview-badge--default', accent: 'preview-accent--news' };
   }
 
+  function formatMetaStatsHtml(views, likes) {
+    var viewCount = Number(views) || 0;
+    var likeCount = parseInt(likes, 10) || 0;
+    return '<span class="preview-meta-stats preview-meta-stats--hidden">' +
+      '<span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> ' + viewCount + '</span>' +
+      '<span class="preview-sep preview-sep--stats" aria-hidden="true"> </span>' +
+      '<span class="preview-likes">👍 ' + likeCount + '</span>' +
+      '</span>';
+  }
+
+  function applyPreviewStatsVisibility(root) {
+    var scope = root && root.querySelectorAll ? root : document;
+    var cards = scope.querySelectorAll ? scope.querySelectorAll('.preview-list .preview-card a') : [];
+    cards.forEach(function (link) {
+      var body = link.querySelector('.preview-body');
+      var title = link.querySelector('.preview-title');
+      var stats = link.querySelector('.preview-meta-stats');
+      if (!body || !title || !stats) return;
+
+      stats.classList.add('preview-meta-stats--hidden');
+
+      var prevFlex = title.style.flex;
+      var prevMaxWidth = title.style.maxWidth;
+      title.style.flex = '0 0 auto';
+      title.style.maxWidth = 'none';
+      var titleNatural = title.scrollWidth;
+      title.style.flex = prevFlex;
+      title.style.maxWidth = prevMaxWidth;
+
+      stats.classList.remove('preview-meta-stats--hidden');
+      var statsWidth = stats.offsetWidth;
+      stats.classList.add('preview-meta-stats--hidden');
+
+      var meta = link.querySelector('.preview-meta');
+      var metaWidth = meta ? meta.offsetWidth + 6 : 0;
+      if (titleNatural + statsWidth + metaWidth + 8 <= body.clientWidth) {
+        stats.classList.remove('preview-meta-stats--hidden');
+      }
+    });
+  }
+
   function buildPreviewTitleHtml(title, fallbackLabel) {
     var rawTitle = String(title || '제목 없음');
     var sourceMatch = rawTitle.match(/^\[([^\]]+)\]\s*(.*)$/);
@@ -197,6 +238,7 @@
       '<span class="preview-body">' +
         (newHtml ? '<span class="preview-meta">' + newHtml + '</span>' : '') +
         '<span class="preview-title">' + titleHtml + '</span>' +
+        formatMetaStatsHtml(views, likes) +
       '</span>' +
       '<span class="preview-arrow" aria-hidden="true">›</span>' +
       '</a></li>';
@@ -207,6 +249,7 @@
     return '<li class="preview-card"><a href="' + href + '">' +
       '<span class="preview-body">' +
         '<span class="preview-title">' + titleHtml + '</span>' +
+        formatMetaStatsHtml(views, likes) +
       '</span>' +
       '<span class="preview-arrow" aria-hidden="true">›</span>' +
       '</a></li>';
@@ -236,6 +279,7 @@
         return buildBestPreviewRow(item.label, item.title, item.views, item.href, item.likes, item.date);
       });
       listEl.innerHTML = buildPreviewListHtml(rows, '', listEl.getAttribute('data-list-class'));
+      applyPreviewStatsVisibility(listEl);
     }).catch(function () {
       clearTimeout(timeoutId);
       listEl.innerHTML = fallbackHtml;
@@ -265,6 +309,7 @@
         return buildRecentPreviewRow(item.date, item.label, item.title, item.views, item.href, idx < 2, item.likes);
       });
       listEl.innerHTML = buildPreviewListHtml(rows, '', listClass);
+      applyPreviewStatsVisibility(listEl);
     }).catch(function () {
       clearTimeout(timeoutId);
       listEl.innerHTML = fallbackHtml;
@@ -317,6 +362,15 @@
     loadRecent: loadRecent,
     loadNavPreviews: loadNavPreviews,
     buildPreviewListHtml: buildPreviewListHtml,
+    applyPreviewStatsVisibility: applyPreviewStatsVisibility,
     search: search
   };
+
+  var statsResizeTimer = null;
+  window.addEventListener('resize', function () {
+    if (statsResizeTimer) clearTimeout(statsResizeTimer);
+    statsResizeTimer = setTimeout(function () {
+      applyPreviewStatsVisibility(document);
+    }, 120);
+  });
 })();

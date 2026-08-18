@@ -19,7 +19,7 @@ body {
 /* index.html — 목록 제목 */
 .preview-title,
 .preview-list li > a:not(:has(.preview-title)) {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 500;
   color: #374151;
   -webkit-font-smoothing: antialiased;
@@ -28,20 +28,20 @@ body {
 }
 
 .preview-title .preview-source {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
   color: #4b5563;
 }
 
 .preview-title .preview-title-text {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 500;
   color: #374151;
 }
 
 .preview-section h2,
 .preview-section h3 {
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 700;
   color: #111827;
   letter-spacing: -0.02em;
@@ -59,27 +59,7 @@ body {
 
   .preview-title .preview-title-text,
   .preview-title .preview-source {
-    font-size: 18px;
-  }
-
-  .preview-list li a,
-  .preview-body,
-  .preview-title {
-    max-width: 100%;
-    min-width: 0;
-  }
-
-  .preview-title {
-    display: block;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
-  .preview-title .preview-source,
-  .preview-title .preview-sep,
-  .preview-title .preview-title-text {
-    display: inline;
+    font-size: 16px;
   }
 }
 

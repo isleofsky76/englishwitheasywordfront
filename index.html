@@ -447,7 +447,7 @@
             display: flex;
             align-items: center;
             gap: 0.45rem;
-            font-size: 22px;
+            font-size: 20px;
             font-weight: 700;
             color: #111827;
             margin: 0;
@@ -588,7 +588,7 @@
         }
         .preview-list li > a:not(:has(.preview-title)),
         .preview-title {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 500;
             color: #374151;
             line-height: 1.55;
@@ -606,13 +606,13 @@
         .preview-title .preview-source,
         .preview-title .preview-sep {
             color: #4b5563;
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 600;
             line-height: 1.55;
         }
         .preview-title .preview-title-text {
             color: #374151;
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 500;
             line-height: 1.55;
         }
@@ -639,11 +639,14 @@
             flex-shrink: 0;
             flex-wrap: nowrap;
             gap: 0;
-            margin-left: 0.35rem;
+            margin-left: 0.45rem;
             color: var(--text-secondary);
             font-size: 12px;
             font-weight: 400;
             white-space: nowrap;
+        }
+        .preview-meta-stats--hidden {
+            display: none !important;
         }
         .preview-likes {
             color: var(--text-secondary);
@@ -750,16 +753,17 @@
             }
             .preview-title .preview-title-text,
             .preview-title .preview-source {
-                font-size: 18px;
+                font-size: 16px;
             }
             .preview-list li a,
-            .preview-body,
-            .preview-title {
+            .preview-body {
                 max-width: 100%;
                 min-width: 0;
             }
             .preview-title {
-                display: block;
+                flex: 1 1 auto;
+                min-width: 0;
+                max-width: 100%;
                 overflow: hidden;
                 text-overflow: ellipsis;
                 white-space: nowrap;
@@ -773,7 +777,7 @@
     </style>
     
     <!-- External Stylesheets -->
-    <link rel="stylesheet" href="title-text-sharp.css?v=20260818h">
+    <link rel="stylesheet" href="title-text-sharp.css?v=20260818i">
     <link rel="stylesheet" href="navbar-unified.css?v=20260612c">
     <link rel="stylesheet" href="nav-home-menu.css?v=20260815a">
     <link rel="stylesheet" href="weather-banner.css?v=20260612g">
@@ -1100,7 +1104,7 @@
     <script src="viewpost-seo.js?v=20260702"></script>
     <script src="nav-home-menu.js?v=20260818a"></script>
     <script src="site-masthead.js?v=20260818d"></script>
-    <script src="home-board-preview.js?v=20260818d"></script>
+    <script src="home-board-preview.js?v=20260818e"></script>
     <script src="english-directory.js" defer></script>
     
     <script>
@@ -1112,6 +1116,16 @@
                 return '<ul class="preview-list"><li class="preview-empty">' + emptyMessage + '</li></ul>';
             }
             return '<ul class="preview-list">' + rows.join('') + '</ul>';
+        }
+
+        function formatMetaStatsHtml(views, likes) {
+            var viewCount = Number(views) || 0;
+            var likeCount = parseInt(likes, 10) || 0;
+            return '<span class="preview-meta-stats preview-meta-stats--hidden">' +
+                '<span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> ' + viewCount + '</span>' +
+                '<span class="preview-sep preview-sep--stats" aria-hidden="true"> </span>' +
+                '<span class="preview-likes">👍 ' + likeCount + '</span>' +
+                '</span>';
         }
 
         function buildPreviewRow(title, views, href, dateStr, likes) {
@@ -1132,6 +1146,7 @@
             return '<li class="preview-card"><a href="' + href + '">' +
                 '<span class="preview-body">' +
                     '<span class="preview-title">' + titleHtml + '</span>' +
+                    formatMetaStatsHtml(views, likes) +
                 '</span>' +
                 '<span class="preview-arrow" aria-hidden="true">›</span>' +
                 '</a></li>';
@@ -1208,6 +1223,9 @@
                 return buildPreviewRow(entry.title, entry.views, href, entry.date, entry.likes);
             });
             container.innerHTML = buildPreviewListHtml(rows, '');
+            if (window.HomeBoardPreview && window.HomeBoardPreview.applyPreviewStatsVisibility) {
+                window.HomeBoardPreview.applyPreviewStatsVisibility(container);
+            }
         }
 
         var loadingListHtml = buildPreviewListHtml([], '로딩 중...');
