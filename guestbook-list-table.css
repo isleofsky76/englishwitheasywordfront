@@ -268,7 +268,7 @@
     display: none !important;
   }
 
-  /* 날짜 / 조회수 / 추천수 줄 */
+  /* 작성자 / 날짜 / 조회수 / 추천수 줄 */
   .gb-mobile-meta {
     display: flex;
     flex-wrap: wrap;
@@ -280,13 +280,14 @@
     align-items: center;
   }
 
+  .gb-mobile-meta-author {
+    display: inline;
+    color: #6b7280;
+  }
+
   .gb-mobile-meta-date {
     display: inline;
     color: #9ca3af;
-  }
-
-  .gb-mobile-meta-date::before {
-    content: '📅 ';
   }
 
   .gb-mobile-meta-stat {

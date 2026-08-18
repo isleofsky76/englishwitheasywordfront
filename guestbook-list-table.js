@@ -181,6 +181,7 @@
             titleCell +
           '</a>' +
           '<div class="gb-mobile-meta">' +
+            '<span class="gb-mobile-meta-author">' + (safeNickname || '-') + '</span>' +
             '<span class="gb-mobile-meta-date">' + escapeHtml(dateTimeStr) + '</span>' +
             '<span class="gb-mobile-meta-stat">👁 ' + escapeHtml(String(showViews)) + '</span>' +
             '<span class="gb-mobile-meta-stat">👍 ' + escapeHtml(String(showLikes)) + '</span>' +
