@@ -29,25 +29,32 @@
 .gb-list-table {
   width: 100%;
   border-collapse: collapse;
-  table-layout: fixed;
+  table-layout: auto;
   font-size: 14px;
 }
 
 .gb-th {
-  padding: 10px 8px;
-  border-bottom: 1px solid #e5e7eb;
+  padding: 10px 12px;
+  border-bottom: 2px solid #e5e7eb;
   background: #fafafa;
   color: #111827;
   font-weight: 600;
-  text-align: left;
+  text-align: center;
   white-space: nowrap;
 }
 
+.gb-th.gb-th-title {
+  text-align: left;
+  padding-left: 16px;
+}
+
 .gb-td {
-  padding: 10px 8px;
+  padding: 10px 12px;
   border-bottom: 1px solid #f1f1f1;
-  vertical-align: top;
+  vertical-align: middle;
   color: #111827;
+  text-align: center;
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -57,27 +64,33 @@
 }
 
 .gb-td-num {
-  width: 70px;
+  width: 56px;
   font-variant-numeric: tabular-nums;
   color: #6b7280;
 }
 
 .gb-td-views,
 .gb-td-likes {
-  width: 110px;
+  width: 72px;
   font-variant-numeric: tabular-nums;
-  text-align: right;
   color: #111827;
 }
 
 .gb-td-date {
-  width: 160px;
+  width: 140px;
   color: #4b5563;
 }
 
 .gb-td-nickname {
-  width: 140px;
+  width: 90px;
   color: #4b5563;
+}
+
+.gb-td-title {
+  text-align: left;
+  padding-left: 16px;
+  white-space: normal;
+  word-break: break-word;
 }
 
 .gb-title-link {
