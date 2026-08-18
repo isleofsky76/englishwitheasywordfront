@@ -124,7 +124,9 @@
     var postPath = options.postPath || null;
     var apiMode = options.apiMode || null;
     var apiParam = apiMode ? '&api=' + apiMode : '';
-    var hideViewsAndLikes = options.hideViewsAndLikes === true;
+    // 목록(더보기) 테이블은 조회수/추천수를 기본으로 보여준다.
+    // 과거 일부 페이지에서 hideViewsAndLikes 옵션을 넣었더라도, 테이블 UI가 항상 숫자를 표시하도록 무시한다.
+    var hideViewsAndLikes = false;
 
     if (options.apiBaseUrl) {
       window._gbTableLikeConfig = {

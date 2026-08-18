@@ -1049,7 +1049,7 @@ document.addEventListener('DOMContentLoaded', () => {
             apiMode: apiMode,
             board: 'guestbook',
             apiBaseUrl: API_BASE_URL,
-            hideViewsAndLikes: true
+            hideViewsAndLikes: false
         });
     }
 
