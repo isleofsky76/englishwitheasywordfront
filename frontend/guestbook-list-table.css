@@ -194,7 +194,7 @@
 
 @media (max-width: 640px) {
   .gb-table-wrap {
-    overflow-x: visible;
+    overflow-x: hidden;
   }
 
   .gb-list-table {
@@ -229,28 +229,26 @@
     display: block;
     padding: 4px 14px 0;
     text-align: left;
-    white-space: normal;
-    word-break: break-word;
-    overflow-wrap: anywhere;
     max-width: 100%;
+    overflow: hidden;
   }
 
   .gb-title-link {
     display: block;
-    white-space: normal;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     font-size: 15px;
     font-weight: 600;
     color: #111827;
     line-height: 1.5;
     max-width: 100%;
-    overflow-wrap: anywhere;
-    word-break: break-word;
   }
 
   .gb-title-link .gb-title-source,
   .gb-title-link .gb-title-sep,
   .gb-title-link .gb-mobile-num {
-    white-space: normal;
+    white-space: nowrap;
   }
 
   /* 모바일 번호 (제목 앞에) */

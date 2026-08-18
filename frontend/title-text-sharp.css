@@ -61,6 +61,26 @@ body {
   .preview-title .preview-source {
     font-size: 18px;
   }
+
+  .preview-list li a,
+  .preview-body,
+  .preview-title {
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .preview-title {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .preview-title .preview-source,
+  .preview-title .preview-sep,
+  .preview-title .preview-title-text {
+    display: inline;
+  }
 }
 
 /* list 페이지 — guestbook-list-table 보강 */

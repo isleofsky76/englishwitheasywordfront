@@ -750,11 +750,28 @@
             .preview-title .preview-source {
                 font-size: 18px;
             }
+            .preview-list li a,
+            .preview-body,
+            .preview-title {
+                max-width: 100%;
+                min-width: 0;
+            }
+            .preview-title {
+                display: block;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+            .preview-title .preview-source,
+            .preview-title .preview-sep,
+            .preview-title .preview-title-text {
+                display: inline;
+            }
         }
     </style>
     
     <!-- External Stylesheets -->
-    <link rel="stylesheet" href="title-text-sharp.css?v=20260818g">
+    <link rel="stylesheet" href="title-text-sharp.css?v=20260818h">
     <link rel="stylesheet" href="navbar-unified.css?v=20260612c">
     <link rel="stylesheet" href="nav-home-menu.css?v=20260815a">
     <link rel="stylesheet" href="weather-banner.css?v=20260612g">
