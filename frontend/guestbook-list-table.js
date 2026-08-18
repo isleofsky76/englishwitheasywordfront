@@ -174,6 +174,12 @@
         '<td class="gb-td gb-td-num">' + number + '</td>' +
         '<td class="gb-td gb-td-title">' +
           '<a class="gb-title-link" href="' + postHref + '" title="' + escapeAttr(parts.title) + '">' + titleCell + '</a>' +
+          '<span class="gb-mobile-meta">' +
+            safeNickname + ' | ' +
+            escapeHtml(dateTimeStr) + ' | ' +
+            escapeHtml(String(showViews)) + ' | ' +
+            escapeHtml(String(showLikes)) +
+          '</span>' +
         '</td>' +
         '<td class="gb-td gb-td-nickname">' + safeNickname + '</td>' +
         '<td class="gb-td gb-td-date">' + escapeHtml(dateTimeStr) + '</td>' +

@@ -174,6 +174,59 @@
   color: inherit;
 }
 
+/* -------------------------
+   Mobile: "제목" + "아이디 | 날짜 | 조회 | 추천수"
+   ------------------------- */
+@media (max-width: 640px) {
+  .gb-table-wrap {
+    overflow-x: visible;
+  }
+
+  .gb-list-table {
+    table-layout: auto;
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+
+  .gb-list-table thead {
+    display: none;
+  }
+
+  .gb-list-table tbody tr {
+    display: block;
+    border-bottom: 1px solid #e5e7eb;
+    padding: 8px 0;
+  }
+
+  .gb-td {
+    display: none;
+    padding: 0;
+    border-bottom: none;
+  }
+
+  .gb-td-title {
+    display: block;
+    padding: 10px 14px;
+    text-align: left;
+    white-space: normal;
+    word-break: break-word;
+  }
+
+  .gb-title-link {
+    display: inline;
+    white-space: normal;
+  }
+
+  .gb-mobile-meta {
+    display: block;
+    margin-top: 6px;
+    font-size: 13px;
+    color: #4b5563;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+}
+
 .gb-card-num {
   flex-shrink: 0;
   display: inline-flex;
