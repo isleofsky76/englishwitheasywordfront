@@ -19,7 +19,7 @@ body {
 /* index.html — 목록 제목 */
 .preview-title,
 .preview-list li > a:not(:has(.preview-title)) {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 500;
   color: #374151;
   -webkit-font-smoothing: antialiased;
@@ -34,7 +34,7 @@ body {
 }
 
 .preview-title .preview-title-text {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 500;
   color: #374151;
 }
@@ -57,12 +57,9 @@ body {
     font-weight: 700;
   }
 
-  .preview-title .preview-title-text {
-    font-size: 15px;
-  }
-
+  .preview-title .preview-title-text,
   .preview-title .preview-source {
-    font-size: 17px;
+    font-size: 18px;
   }
 }
 
