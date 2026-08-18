@@ -195,36 +195,44 @@
     }
     parts.push('<span class="preview-views">' + (viewCount ? (viewCount + ' 조회') : '조회 없음') + '</span>');
     parts.push('<span class="preview-likes">' + likeCount + ' 추천</span>');
-    return '<span class="preview-meta-stats">' + parts.join('<span class="preview-sep preview-sep--stats" aria-hidden="true">  </span>') + '</span>';
+    return '<span class="preview-meta-stats">' + parts.join('<span class="preview-sep preview-sep--stats" aria-hidden="true"> </span>') + '</span>';
   }
 
-  function buildRecentPreviewRow(number, dateStr, label, title, views, href, isNew, likes) {
-    var style = styleForLabel(label);
-    var safeLabel = escapeHtml(label);
-    var safeTitle = escapeHtml(title || '제목 없음');
+  function buildPreviewTitleHtml(title, fallbackLabel) {
+    var rawTitle = String(title || '제목 없음');
+    var sourceMatch = rawTitle.match(/^\[([^\]]+)\]\s*(.*)$/);
+    var source = sourceMatch ? sourceMatch[1].trim() : String(fallbackLabel || '').trim();
+    var mainTitle = sourceMatch ? (sourceMatch[2] || '').trim() : rawTitle;
+    if (!mainTitle) mainTitle = '제목 없음';
+    var safeTitle = escapeHtml(mainTitle);
+    var safeSource = escapeHtml(source);
+    var titleParts = [];
+    if (safeSource) {
+      titleParts.push('<span class="preview-source">' + safeSource + '</span>');
+      titleParts.push('<span class="preview-sep" aria-hidden="true"> | </span>');
+    }
+    titleParts.push('<span class="preview-title-text">' + safeTitle + '</span>');
+    return titleParts.join('');
+  }
+
+  function buildRecentPreviewRow(dateStr, label, title, views, href, isNew, likes) {
+    var titleHtml = buildPreviewTitleHtml(title, label);
     var newHtml = isNew ? '<span class="preview-new">NEW</span>' : '';
     return '<li class="preview-card preview-card--recent"><a href="' + href + '">' +
-      '<span class="preview-num">' + number + '</span>' +
       '<span class="preview-body">' +
-        '<span class="preview-meta">' + newHtml +
-          '<span class="preview-badge ' + style.badge + '">' + safeLabel + '</span>' +
-        '</span>' +
-        '<span class="preview-title">' + safeTitle + '</span>' +
+        (newHtml ? '<span class="preview-meta">' + newHtml + '</span>' : '') +
+        '<span class="preview-title">' + titleHtml + '</span>' +
         formatViewsHtml(views, likes, dateStr) +
       '</span>' +
       '<span class="preview-arrow" aria-hidden="true">›</span>' +
       '</a></li>';
   }
 
-  function buildBestPreviewRow(number, label, title, views, href, likes, dateStr) {
-    var style = styleForLabel(label);
-    var safeLabel = escapeHtml(label);
-    var safeTitle = escapeHtml(title || '제목 없음');
+  function buildBestPreviewRow(label, title, views, href, likes, dateStr) {
+    var titleHtml = buildPreviewTitleHtml(title, label);
     return '<li class="preview-card"><a href="' + href + '">' +
-      '<span class="preview-num">' + number + '</span>' +
       '<span class="preview-body">' +
-        '<span class="preview-badge ' + style.badge + '">' + safeLabel + '</span>' +
-        '<span class="preview-title">' + safeTitle + '</span>' +
+        '<span class="preview-title">' + titleHtml + '</span>' +
         formatViewsHtml(views, likes, dateStr) +
       '</span>' +
       '<span class="preview-arrow" aria-hidden="true">›</span>' +
@@ -251,8 +259,8 @@
         listEl.innerHTML = buildPreviewListHtml([], '게시글이 없습니다.', listEl.getAttribute('data-list-class'));
         return;
       }
-      var rows = preview.map(function (item, idx) {
-        return buildBestPreviewRow(idx + 1, item.label, item.title, item.views, item.href, item.likes, item.date);
+      var rows = preview.map(function (item) {
+        return buildBestPreviewRow(item.label, item.title, item.views, item.href, item.likes, item.date);
       });
       listEl.innerHTML = buildPreviewListHtml(rows, '', listEl.getAttribute('data-list-class'));
     }).catch(function () {
@@ -281,7 +289,7 @@
         return;
       }
       var rows = preview.map(function (item, idx) {
-        return buildRecentPreviewRow(idx + 1, item.date, item.label, item.title, item.views, item.href, idx < 2, item.likes);
+        return buildRecentPreviewRow(item.date, item.label, item.title, item.views, item.href, idx < 2, item.likes);
       });
       listEl.innerHTML = buildPreviewListHtml(rows, '', listClass);
     }).catch(function () {

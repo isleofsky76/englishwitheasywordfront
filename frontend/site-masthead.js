@@ -4,7 +4,7 @@
  * nav-home-menu.js 가 로드함
  */
 (function () {
-    var VERSION = '20260818a';
+    var VERSION = '20260818b';
   var PRIMARY_NAV_COUNT = 6;
   var NAV_ITEMS = [
     { href: 'index.html', label: '홈', tone: 'home', pages: ['index.html', ''] },
