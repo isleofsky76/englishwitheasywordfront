@@ -227,7 +227,7 @@
   /* 제목 td만 표시 */
   .gb-td-title {
     display: block;
-    padding: 4px 14px 0;
+    padding: 4px 14px 10px;
     text-align: left;
     max-width: 100%;
     overflow: hidden;
@@ -268,13 +268,13 @@
     display: none !important;
   }
 
-  /* 작성자 / 날짜 / 조회수 / 추천수 줄 */
+  /* 작성자 / 날짜 / 조회수 / 추천수 줄 — 제목과 같은 시작점 */
   .gb-mobile-meta {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
     margin-top: 5px;
-    padding: 0 14px;
+    padding: 0;
     font-size: 12px;
     color: #6b7280;
     align-items: center;
