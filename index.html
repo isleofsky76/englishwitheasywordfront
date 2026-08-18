@@ -276,13 +276,14 @@
         }
         .nav-tone-home { color: #dce3ff !important; }
         .nav-tone-wotd { color: #ffc4ae !important; }
+        .nav-tone-syn { color: #8ef0e8 !important; }
+        .nav-tone-defense { color: #d4e07a !important; }
         .nav-tone-news { color: #9fecc0 !important; }
         .nav-tone-quiz { color: #d4ee9a !important; }
         .nav-tone-popular { color: #ffd56a !important; }
         .nav-tone-sit { color: #e0ccff !important; }
         .nav-tone-cook { color: #ffc08a !important; }
         .nav-tone-culture { color: #ffb6d9 !important; }
-        .nav-tone-syn { color: #8ef0e8 !important; }
         .nav-tone-rank { color: #ffb0b0 !important; }
         .nav-tone-photo { color: #9ed4ff !important; }
         .nav-tone-pros { color: #d7dee8 !important; }
@@ -550,6 +551,7 @@
             color: var(--text-warning);
         }
         .preview-badge--news,
+        .preview-badge--defense,
         .preview-badge--quiz,
         .preview-badge--synonym,
         .preview-badge--situational,
@@ -868,10 +870,10 @@
             <ul class="navbar-nav site-primary-nav">
                 <li class="nav-item"><a class="nav-link nav-tone-home active" href="index.html" aria-current="page">홈</a></li>
                 <li class="nav-item"><a class="nav-link nav-tone-syn" href="english-synonym-list.html">연관단어</a></li>
+                <li class="nav-item"><a class="nav-link nav-tone-defense" href="defense-news-list.html">국방뉴스</a></li>
                 <li class="nav-item"><a class="nav-link nav-tone-news" href="news-voca-list.html">국제</a></li>
                 <li class="nav-item"><a class="nav-link nav-tone-culture" href="culture-voca-list.html">컬쳐</a></li>
                 <li class="nav-item"><a class="nav-link nav-tone-opine" href="english-opinions-list.html">오피니언</a></li>
-                <li class="nav-item"><a class="nav-link nav-tone-wotd" href="word-of-the-day-list.html">단어장</a></li>
                 <li class="nav-item nav-more">
                     <button type="button" class="nav-more-toggle" aria-expanded="false" aria-haspopup="true" aria-label="더보기">
                         <span class="nav-more-icon" aria-hidden="true"><span></span><span></span><span></span></span>
@@ -891,6 +893,15 @@
                     <div class="preview-more"><a href="english-synonym-list.html">더보기 &gt;</a></div>
                 </div>
                 <div id="synonym-preview-list" role="region" aria-label="연관단어 목록"></div>
+            </article>
+
+            <!-- Defense News -->
+            <article class="preview-section">
+                <div class="preview-header">
+                    <h2>국방뉴스</h2>
+                    <div class="preview-more"><a href="defense-news-list.html">더보기 &gt;</a></div>
+                </div>
+                <div id="defense-news-preview-list" role="region" aria-label="국방뉴스 목록"></div>
             </article>
 
             <!-- News Vocabulary -->
@@ -1055,9 +1066,9 @@
     <!-- Bootstrap Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="viewpost-seo.js?v=20260702"></script>
-    <script src="nav-home-menu.js?v=20260816d"></script>
-    <script src="site-masthead.js?v=20260816d"></script>
-    <script src="home-board-preview.js?v=20260816d"></script>
+    <script src="nav-home-menu.js?v=20260818a"></script>
+    <script src="site-masthead.js?v=20260818a"></script>
+    <script src="home-board-preview.js?v=20260818a"></script>
     <script src="english-directory.js" defer></script>
     
     <script>
@@ -1146,6 +1157,7 @@
             'news-voca.html': 'news-voca',
             'word-of-the-day.html': 'word-of-the-day',
             'english-synonym.html': 'english-synonym',
+            'defense-news.html': 'defense-news',
             'english-opinions.html': 'english-opinions',
             'popular-voca.html': 'popular-voca',
             'situational-english.html': 'situational-english',
@@ -1194,7 +1206,7 @@
         }
 
         var loadingListHtml = buildPreviewListHtml([], '로딩 중...');
-        ['best-views-preview-list', 'recent-updates-preview-list', 'wordofday-preview-list', 'news-voca-preview-list', 'vocabulary-quiz-preview-list', 'synonym-preview-list', 'easy-voca-preview-list', 'situational-english-preview-list', 'cooking-voca-preview-list', 'culture-voca-preview-list', 'ranking-news-preview-list', 'photo-english-preview-list', 'pros-cons-preview-list', 'english-directory-preview-list'].forEach(function(id) {
+        ['best-views-preview-list', 'recent-updates-preview-list', 'wordofday-preview-list', 'news-voca-preview-list', 'defense-news-preview-list', 'vocabulary-quiz-preview-list', 'synonym-preview-list', 'easy-voca-preview-list', 'situational-english-preview-list', 'cooking-voca-preview-list', 'culture-voca-preview-list', 'ranking-news-preview-list', 'photo-english-preview-list', 'pros-cons-preview-list', 'english-directory-preview-list'].forEach(function(id) {
             var el = document.getElementById(id);
             if (el) el.innerHTML = loadingListHtml;
         });
@@ -1220,6 +1232,31 @@
                 })
                 .catch(function() {
                     clearTimeout(newsTimeoutId);
+                    listEl.innerHTML = fallbackHtml;
+                });
+        })();
+
+        // Defense News
+        (function loadDefenseNewsPreview() {
+            var urlParams = new URLSearchParams(window.location.search);
+            var apiMode = urlParams.get('api');
+            var listEl = document.getElementById('defense-news-preview-list');
+            if (!listEl) return;
+
+            var fallbackHtml = buildPreviewListHtml([], '<a href="defense-news-list.html">국방뉴스 보기</a>');
+            var timeoutId = setTimeout(function() { listEl.innerHTML = fallbackHtml; }, 8000);
+
+            fetch(getApiBase() + '/defense-news')
+                .then(function(r) {
+                    if (!r.ok) throw new Error('HTTP ' + r.status);
+                    return r.json();
+                })
+                .then(function(data) {
+                    clearTimeout(timeoutId);
+                    renderPreviewList(listEl, parseEntries(data), 'defense-news.html', apiMode, '게시글이 없습니다.');
+                })
+                .catch(function() {
+                    clearTimeout(timeoutId);
                     listEl.innerHTML = fallbackHtml;
                 });
         })();

@@ -7,15 +7,18 @@
 
     const BOARD_PATHS = {
         'news-voca.html': 'news-voca',
+        'defense-news.html': 'defense-news',
         'cooking-voca.html': 'cooking-voca',
         'culture-voca.html': 'culture-voca',
         'ranking-news.html': 'ranking-news',
         'english-synonym.html': 'english-synonym',
+        'english-opinions.html': 'english-opinions',
         'popular-voca.html': 'popular-voca',
         'situational-english.html': 'situational-english',
         'pros-cons.html': 'pros-cons',
         'word-of-the-day.html': 'word-of-the-day',
         'photo-english.html': 'photo-english',
+        'vocabulary-quiz.html': 'vocabulary-quiz',
     };
 
     function plainText(html, maxLen) {
@@ -65,6 +68,20 @@
             if (m) return decodeURIComponent(m[1]);
         }
         return new URLSearchParams(window.location.search).get('slug') || '';
+    }
+
+    function buildListPostHref(entry, postPage, index, apiParam, postPath) {
+        const slug = entry && String(entry.slug || '').trim();
+        const path = postPath || BOARD_PATHS[postPage] || null;
+        if (slug && path) {
+            let href = path + '/' + encodeURIComponent(slug) + '/';
+            if (apiParam) href += '?' + String(apiParam).replace(/^&/, '');
+            return href;
+        }
+        if (slug) {
+            return postPage + '?slug=' + encodeURIComponent(slug) + apiParam;
+        }
+        return postPage + '?index=' + index + apiParam;
     }
 
     function postPageUrl(post, cfg, index) {
@@ -200,6 +217,7 @@
         resolveSlug: resolveSlug,
         resolveBoardPath: resolveBoardPath,
         postPageUrl: postPageUrl,
+        buildListPostHref: buildListPostHref,
         updatePageSeo: updatePageSeo,
         fetchPostBySlugOrIndex: fetchPostBySlugOrIndex,
         plainText: plainText,

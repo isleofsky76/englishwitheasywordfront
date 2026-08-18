@@ -66,6 +66,7 @@
     return [
       { path: '/wordofday', page: 'word-of-the-day.html', postPath: 'word-of-the-day', label: '단어장', apiMode: wordofdayApiMode },
       { path: '/guestbook', page: 'news-voca.html', postPath: 'news-voca', label: '국제' },
+      { path: '/defense-news', page: 'defense-news.html', postPath: 'defense-news', label: '국방뉴스' },
       { path: '/vocabulary-quiz', page: 'vocabulary-quiz.html', label: '퀴즈' },
       { path: '/vocabulary', page: 'english-synonym.html', postPath: 'english-synonym', label: '연관단어' },
       { path: '/opinions', page: 'english-opinions.html', postPath: 'english-opinions', label: '오피니언' },
@@ -155,6 +156,7 @@
   var LABEL_STYLE = {
     '단어장': { badge: 'preview-badge--wordofday', accent: 'preview-accent--wordofday' },
     '국제': { badge: 'preview-badge--news', accent: 'preview-accent--news' },
+    '국방뉴스': { badge: 'preview-badge--defense', accent: 'preview-accent--defense' },
     '퀴즈': { badge: 'preview-badge--quiz', accent: 'preview-accent--quiz' },
     '유의어': { badge: 'preview-badge--synonym', accent: 'preview-accent--synonym' },
     '연관단어': { badge: 'preview-badge--synonym', accent: 'preview-accent--synonym' },

@@ -7,6 +7,7 @@
 
     const BOARD_PATHS = {
         'news-voca.html': 'news-voca',
+        'defense-news.html': 'defense-news',
         'cooking-voca.html': 'cooking-voca',
         'culture-voca.html': 'culture-voca',
         'ranking-news.html': 'ranking-news',

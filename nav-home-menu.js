@@ -8,7 +8,7 @@
 
 (function () {
 
-    var NAV_HOME_MENU_VERSION = '20260815a';
+    var NAV_HOME_MENU_VERSION = '20260818a';
 
     var PRIMARY_BAR_HREFS = {
         'index.html': true,
@@ -30,6 +30,10 @@
 
         { href: 'word-of-the-day-list.html', label: '단어장', pages: ['word-of-the-day-list.html', 'word-of-the-day.html'] },
 
+        { href: 'english-synonym-list.html', label: '유의어', pages: ['english-synonym-list.html', 'english-synonym.html'] },
+
+        { href: 'defense-news-list.html', label: '국방뉴스', pages: ['defense-news-list.html', 'defense-news.html'] },
+
         { href: 'news-voca-list.html', label: '국제', pages: ['news-voca-list.html', 'news-voca.html'] },
 
         { href: 'vocabulary-quiz.html', label: '퀴즈', pages: ['vocabulary-quiz.html'] },
@@ -41,8 +45,6 @@
         { href: 'cooking-voca-list.html', label: '요리', pages: ['cooking-voca-list.html', 'cooking-voca.html'] },
 
         { href: 'culture-voca-list.html', label: '컬쳐', pages: ['culture-voca-list.html', 'culture-voca.html'] },
-
-        { href: 'english-synonym-list.html', label: '유의어', pages: ['english-synonym-list.html', 'english-synonym.html'] },
 
         { href: 'ranking-news-list.html', label: '랭킹', pages: ['ranking-news-list.html', 'ranking-news.html'] },
 
@@ -237,7 +239,7 @@
         document.documentElement.classList.add('has-site-masthead');
         if (document.querySelector('script[src*="site-masthead.js"]')) return;
         var s = document.createElement('script');
-        s.src = base + 'site-masthead.js?v=20260816d';
+        s.src = base + 'site-masthead.js?v=20260818a';
         document.head.appendChild(s);
     }
 
