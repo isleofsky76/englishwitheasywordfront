@@ -185,17 +185,13 @@
     return y + '.' + m + '.' + day + ' ' + h + ':' + min;
   }
 
-  function formatViewsHtml(views, likes, dateStr) {
+  function formatViewsHtml(views, likes) {
     var viewCount = Number(views) || 0;
     var likeCount = parseInt(likes, 10) || 0;
-    var dateLabel = formatPreviewDateTime(dateStr);
     var parts = [];
-    if (dateLabel) {
-      parts.push('<span class="preview-date">' + dateLabel + '</span>');
-    }
     parts.push('<span class="preview-views">' + (viewCount ? (viewCount + ' 조회') : '조회 없음') + '</span>');
     parts.push('<span class="preview-likes">' + likeCount + ' 추천</span>');
-    return '<span class="preview-meta-stats">' + parts.join('<span class="preview-sep preview-sep--stats" aria-hidden="true">  </span>') + '</span>';
+    return '<span class="preview-meta-stats">' + parts.join('<span class="preview-sep preview-sep--stats" aria-hidden="true"> </span>') + '</span>';
   }
 
   function buildPreviewTitleHtml(title, fallbackLabel) {
@@ -222,7 +218,7 @@
       '<span class="preview-body">' +
         (newHtml ? '<span class="preview-meta">' + newHtml + '</span>' : '') +
         '<span class="preview-title">' + titleHtml + '</span>' +
-        formatViewsHtml(views, likes, dateStr) +
+        formatViewsHtml(views, likes) +
       '</span>' +
       '<span class="preview-arrow" aria-hidden="true">›</span>' +
       '</a></li>';
@@ -233,7 +229,7 @@
     return '<li class="preview-card"><a href="' + href + '">' +
       '<span class="preview-body">' +
         '<span class="preview-title">' + titleHtml + '</span>' +
-        formatViewsHtml(views, likes, dateStr) +
+        formatViewsHtml(views, likes) +
       '</span>' +
       '<span class="preview-arrow" aria-hidden="true">›</span>' +
       '</a></li>';

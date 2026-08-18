@@ -516,7 +516,9 @@
             display: flex;
             flex-direction: row;
             align-items: center;
-            gap: 0.65rem;
+            gap: 0.35rem;
+            overflow: hidden;
+            white-space: nowrap;
         }
         .preview-meta {
             display: inline-flex;
@@ -592,7 +594,7 @@
             text-rendering: optimizeLegibility;
         }
         .preview-title {
-            flex: 1 1 auto;
+            flex: 0 1 auto;
             min-width: 0;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -632,6 +634,7 @@
             flex-shrink: 0;
             flex-wrap: nowrap;
             gap: 0;
+            margin-left: 0.35rem;
             color: var(--text-secondary);
             font-size: 12px;
             font-weight: 400;
@@ -1054,8 +1057,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="viewpost-seo.js?v=20260702"></script>
     <script src="nav-home-menu.js?v=20260815e"></script>
-    <script src="site-masthead.js?v=20260818b"></script>
-    <script src="home-board-preview.js?v=20260818b"></script>
+    <script src="site-masthead.js?v=20260818c"></script>
+    <script src="home-board-preview.js?v=20260818c"></script>
     <script src="english-directory.js" defer></script>
     
     <script>
@@ -1081,17 +1084,13 @@
             return y + '.' + m + '.' + day + ' ' + h + ':' + min;
         }
 
-        function formatMetaStatsHtml(views, likes, dateStr) {
+        function formatMetaStatsHtml(views, likes) {
             var viewCount = Number(views) || 0;
             var likeCount = parseInt(likes, 10) || 0;
-            var dateLabel = formatBoardPreviewDateTime(dateStr);
             var parts = [];
-            if (dateLabel) {
-                parts.push('<span class="preview-date">' + dateLabel + '</span>');
-            }
             parts.push('<span class="preview-views">' + (viewCount ? (viewCount + ' 조회') : '조회 없음') + '</span>');
             parts.push('<span class="preview-likes">' + likeCount + ' 추천</span>');
-            return '<span class="preview-meta-stats">' + parts.join('<span class="preview-sep preview-sep--stats" aria-hidden="true">  </span>') + '</span>';
+            return '<span class="preview-meta-stats">' + parts.join('<span class="preview-sep preview-sep--stats" aria-hidden="true"> </span>') + '</span>';
         }
 
         function buildPreviewRow(title, views, href, dateStr, likes) {
@@ -1112,7 +1111,7 @@
             return '<li class="preview-card"><a href="' + href + '">' +
                 '<span class="preview-body">' +
                     '<span class="preview-title">' + titleHtml + '</span>' +
-                    formatMetaStatsHtml(views, likes, dateStr) +
+                    formatMetaStatsHtml(views, likes) +
                 '</span>' +
                 '<span class="preview-arrow" aria-hidden="true">›</span>' +
                 '</a></li>';
