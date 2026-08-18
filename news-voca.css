@@ -282,6 +282,28 @@
 
 
 
+#post-message .nv-word-section.nv-narrative {
+
+  margin-bottom: 1.1rem;
+
+}
+
+
+
+#post-message .nv-narrative-text {
+
+  margin: 0;
+
+  font-size: 0.92rem;
+
+  color: #374151;
+
+  line-height: 1.72;
+
+}
+
+
+
 #post-message .nv-phrase-list {
 
   list-style: none;
@@ -366,15 +388,15 @@
 
 #post-message .nv-hl {
 
-  background: #fef08a;
+  background: none;
 
-  color: #713f12;
+  color: #1d4ed8;
 
-  padding: 0 0.15em;
+  padding: 0;
 
   font-weight: 700;
 
-  border-radius: 2px;
+  border-radius: 0;
 
 }
 
