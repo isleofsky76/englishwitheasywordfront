@@ -174,12 +174,15 @@
       return '<tr class="gb-table-row" data-gb-entry="' + escapeAttr(entryId) + '">' +
         '<td class="gb-td gb-td-num">' + number + '</td>' +
         '<td class="gb-td gb-td-title">' +
-          '<a class="gb-title-link" href="' + postHref + '" title="' + escapeAttr(parts.title) + '">' + titleCell + '</a>' +
-          '<span class="gb-mobile-meta">' +
-            escapeHtml(dateTimeStr) + '   ' +
-            escapeHtml(String(showViews)) + '   ' +
-            escapeHtml(String(showLikes)) + '.' +
-          '</span>' +
+          '<a class="gb-title-link" href="' + postHref + '" title="' + escapeAttr(parts.title) + '">' +
+            '<span class="gb-mobile-num">' + number + '. </span>' +
+            titleCell +
+          '</a>' +
+          '<div class="gb-mobile-meta">' +
+            '<span class="gb-mobile-meta-date">' + escapeHtml(dateTimeStr) + '</span>' +
+            '<span class="gb-mobile-meta-stat">👁 ' + escapeHtml(String(showViews)) + '</span>' +
+            '<span class="gb-mobile-meta-stat">👍 ' + escapeHtml(String(showLikes)) + '</span>' +
+          '</div>' +
         '</td>' +
         '<td class="gb-td gb-td-nickname">' + safeNickname + '</td>' +
         '<td class="gb-td gb-td-date">' + escapeHtml(dateTimeStr) + '</td>' +

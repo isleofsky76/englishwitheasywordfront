@@ -175,8 +175,23 @@
 }
 
 /* -------------------------
-   Mobile: 테이블 없이 "제목" 아래에 "날짜 조회수 추천수" 표시
+   Mobile: 번호. 제목 / 날짜 조회수 추천수 리스트 형태
    ------------------------- */
+
+/* 데스크톱에서는 gb-mobile-num 숨김 */
+.gb-mobile-num {
+  display: none;
+}
+
+.gb-mobile-meta {
+  display: none;
+}
+
+.gb-mobile-meta-date,
+.gb-mobile-meta-stat {
+  display: none;
+}
+
 @media (max-width: 640px) {
   .gb-table-wrap {
     overflow-x: visible;
@@ -184,61 +199,78 @@
 
   .gb-list-table {
     table-layout: auto;
-    border-collapse: separate;
-    border-spacing: 0;
+    border-collapse: collapse;
   }
 
   .gb-list-table thead {
     display: none;
   }
 
+  /* 각 행을 블록으로 */
   .gb-list-table tbody tr {
     display: block;
-    position: relative;
-    padding: 0;
+    border-bottom: 1px solid #e5e7eb;
+    padding: 8px 0 10px;
+  }
+
+  .gb-list-table tbody tr:last-child {
     border-bottom: none;
   }
 
-  /* 항목 구분선(--- 느낌) */
-  .gb-list-table tbody tr::after {
-    content: '';
-    position: absolute;
-    left: 14px;
-    right: 14px;
-    bottom: 0;
-    border-bottom: 1px dashed #e5e7eb;
-  }
-
-  .gb-list-table tbody tr:last-child::after {
-    display: none;
-  }
-
+  /* 모든 td 숨김 */
   .gb-td {
     display: none;
     padding: 0;
-    border-bottom: none;
+    border: none;
   }
 
+  /* 제목 td만 표시 */
   .gb-td-title {
     display: block;
-    padding: 10px 14px 12px;
+    padding: 4px 14px 0;
     text-align: left;
     white-space: normal;
     word-break: break-word;
   }
 
   .gb-title-link {
-    display: inline;
+    display: block;
     white-space: normal;
+    font-size: 15px;
+    font-weight: 600;
+    color: #111827;
+    line-height: 1.5;
   }
 
+  /* 모바일 번호 (제목 앞에) */
+  .gb-mobile-num {
+    display: inline;
+    color: #6b7280;
+    font-weight: 500;
+    margin-right: 2px;
+    font-size: 14px;
+  }
+
+  /* 날짜 / 조회수 / 추천수 줄 */
   .gb-mobile-meta {
-    display: block;
-    margin-top: 4px;
-    font-size: 13px;
-    color: #4b5563;
-    white-space: normal;
-    overflow-wrap: anywhere;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 5px;
+    padding: 0 14px;
+    font-size: 12px;
+    color: #6b7280;
+    align-items: center;
+  }
+
+  .gb-mobile-meta-date {
+    display: inline;
+    color: #9ca3af;
+  }
+
+  .gb-mobile-meta-stat {
+    display: inline;
+    color: #6b7280;
   }
 }
 
