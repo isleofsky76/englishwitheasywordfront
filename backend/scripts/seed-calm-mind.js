@@ -7,15 +7,17 @@ import { API_BASE } from './loadEnv.js';
 import { applySeoAfterUpload, toIsoDateOnly } from './voca-seo.js';
 
 // ========== 여기만 수정 ==========
+// ========== 여기만 수정 ==========
+// ========== 여기만 수정 ==========
 const article = {
-  title: '정치적인 이념으로 갈등이 일어날 때 어떻게 해결할까요? | 법륜 스님 즉문 즉설 ',
-  slug: 'different-views-not-wrong',
+  title: '에티켓을 안 지키는 사람을 어떻게 대해야 할까요? | 법륜 스님 즉문즉설',
+  slug: 'rules-purpose-not-anger',
   metaDescription:
-    '법륜스님 즉문즉설을 듣고 정리한 글. 생각이 달라도 상대가 틀린 것은 아니며, 친구는 정치적 동지가 아니라 편안하게 만나는 관계라는 마음 다스림 메모입니다.',
-  password: 'seed_calm_mind_different-views-not-wrong',
+    '법륜스님 즉문즉설을 듣고 정리한 글. 규칙은 사람들 사이의 충돌과 불편을 줄이기 위해 만들어진 것이며, 잘못은 바로잡되 화·짜증·미움·원망에 빠지지 않는 태도를 정리한 마음 다스림 메모입니다.',
+  password: 'seed_calm_mind_rules-purpose-not-anger',
   nickname: 'admin',
   datePublished: '2026-08-21',
-  message: `<div class="cm-source-box"><p><strong>출처</strong> — 이 글은 법륜스님 즉문즉설 영상 내용을 근거로, 기억하고 싶은 말을 <strong>개인 목적</strong>으로 남긴 것입니다.</p><p><a class="cm-yt-link" href="https://www.youtube.com/watch?v=Mr32mAYlcVI" target="_blank" rel="noopener noreferrer">📺 법륜스님 즉문즉설 바로가기</a></p></div><p>내 생각과 다르다고 해서 <span class="cm-hl cm-hl--paint">상대가 틀린 것은 아니다.</span></p><p>“쟤는 저렇게 생각하는구나” 하고 받아들이면 <u class="cm-underline">불편함이 줄어든다.</u></p><p>대한민국 5천만 명 중에는 <span class="cm-hl cm-hl--marker">정치·종교적으로 온갖 견해</span>를 가진 사람이 있다.</p><p>친구는 <strong>정치적인 뜻을 같이하는 동지</strong>가 아니다.</p><p>친구끼리도 <span class="cm-hl cm-hl--ink">정치적 이념과 종교적 믿음</span>은 다를 수 있다.</p><p>자기 신념을 바꿀 필요는 없고, <span class="cm-hl cm-hl--box">자기 신념은 지키면 된다.</span></p><p>동시에 <span class="cm-hl cm-hl--wave">남의 신념도 존중</span>해야 한다.</p><p>자기 생각을 남에게 강요할 필요도 없고, <span class="cm-hl cm-hl--box-round">남의 생각을 강요받을 필요도 없다.</span></p><p>친구를 만났을 때 정치를 앞세우면 친구 관계는 사라지고 <span class="cm-hl cm-hl--oval-slant">정치적 대립만 남는다.</span></p><p>결국 친구는 <span class="cm-hl cm-hl--dash">친구로 편안하게 만나면 된다.</span></p><p class="cm-disclaimer"><strong>Disclaimer</strong><br>저작권에 문제가 될 경우 게시글을 삭제하겠습니다.<br>메일 주소: <a href="mailto:everydayalittlehelp@gmail.com">everydayalittlehelp@gmail.com</a></p>`,
+  message: `<div class="cm-source-box"><p><strong>출처</strong> — 이 글은 법륜스님 즉문즉설 영상 내용을 근거로, 기억하고 싶은 말을 <strong>개인 목적</strong>으로 남긴 것입니다.</p><p><a class="cm-yt-link" href="https://www.youtube.com/watch?v=Z1qb8SaZ_YY" target="_blank" rel="noopener noreferrer">📺 법륜스님 즉문즉설 바로가기</a></p></div><p>규칙은 처음부터 존재한 절대적인 것이 아니라, <span class="cm-hl cm-hl--paint">사람들 사이의 충돌과 불편을 줄이기 위해 필요에 따라 만들어진 것이다.</span> 교통신호도 차량이 많아지면서 사고를 막기 위해 생겨난 규칙이다.</p><p>규칙은 지키는 것이 기본이지만, <u class="cm-underline">규칙 자체보다 그것을 만든 목적을 이해하는 것이 중요하다.</u> 위급한 환자를 병원에 데려가는 상황처럼 더 중요한 목적이 있다면 예외가 생길 수도 있다.</p><p>누군가 규칙을 어겼다고 해서 곧바로 화를 내거나 <span class="cm-hl cm-hl--marker">그 사람을 나쁜 사람이라고 단정해서는 안 된다.</span> 교통법규를 어긴 사람에게도 우리가 알지 못하는 특별한 사정이 있을 수 있기 때문이다.</p><p>그렇다고 화를 내지 않는 것이 <strong>잘못을 그냥 내버려두라는 뜻은 아니다.</strong> 다른 사람에게 피해를 주는 행동이라면 신고하거나 지적해서 개선하도록 할 필요가 있다.</p><p>에티켓과 관습은 절대적인 기준이 아니라 <span class="cm-hl cm-hl--ink">문화와 환경에 따라 달라질 수 있다.</span> 법당에 신발을 신고 들어온 서양인도 무례해서가 아니라 그곳의 관습을 몰랐을 수 있다.</p><p>상대가 규칙이나 관습을 모른다면 비난하기보다 <span class="cm-hl cm-hl--box">그곳의 규칙을 알려주고 이해하도록 하는 것이 적절하다.</span> 잘못된 행동을 바로잡는 것과 상대를 미워하는 것은 다른 문제다.</p><p>부처님의 가르침은 잘못을 못 본 척하라는 것이 아니라, <span class="cm-hl cm-hl--wave">잘못을 바로잡는 과정에서 화·짜증·미움·원망에 빠지지 말라는 것</span>이다.</p><p>스님은 이를 <span class="cm-hl cm-hl--box-round">수행과 교화로 구분</span>한다. 내가 화를 내지 않고 내 마음을 살피는 것은 수행이고, 상대가 잘못된 행동을 개선하도록 돕는 것은 <span class="cm-hl cm-hl--dash">교화이다.</span></p><p class="cm-disclaimer"><strong>Disclaimer</strong><br>저작권에 문제가 될 경우 게시글을 삭제하겠습니다.<br>메일 주소: <a href="mailto:everydayalittlehelp@gmail.com">everydayalittlehelp@gmail.com</a></p>`,
 };
 // ===============================
 
