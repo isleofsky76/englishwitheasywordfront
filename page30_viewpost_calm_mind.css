@@ -748,5 +748,47 @@ body {
   text-decoration: underline;
 }
 
+#post-message.cm-blog .cm-source-box {
+  margin: 0 0 1.35rem;
+  padding: 0.9rem 1rem;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: #334155;
+}
+
+#post-message.cm-blog .cm-source-box p {
+  margin: 0 0 0.55rem;
+}
+
+#post-message.cm-blog .cm-source-box p:last-child {
+  margin-bottom: 0;
+}
+
+#post-message.cm-blog .cm-yt-link {
+  color: #dc2626;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+#post-message.cm-blog .cm-yt-link:hover {
+  text-decoration: underline;
+}
+
+#post-message.cm-blog .cm-disclaimer {
+  margin-top: 0.65rem !important;
+  padding-top: 0.65rem;
+  border-top: 1px dashed #cbd5e1;
+  font-size: 0.88rem;
+  color: #64748b;
+}
+
+#post-message.cm-blog .cm-disclaimer a {
+  color: #2563eb;
+  word-break: break-all;
+}
+
 
 

@@ -298,11 +298,13 @@ function convertMediaLinks(text) {
     
     // URL을 찾아서 링크로 변환 (이미 링크 태그가 있는 경우는 건너뛰기)
     result = result.replace(urlPattern, (url, offset) => {
-        // 이미 <a> 태그 안에 있는 URL은 건너뛰기
+        // 이미 HTML 태그/속성(href 등) 안에 있는 URL은 건너뛰기
         const beforeMatch = result.substring(0, offset);
+        if (/<[^>]*$/.test(beforeMatch)) {
+            return url;
+        }
         const lastATagOpen = beforeMatch.lastIndexOf('<a');
         const lastATagClose = beforeMatch.lastIndexOf('</a>');
-        // <a> 태그가 열려있고 닫히지 않았다면 이미 링크 안에 있는 것
         if (lastATagOpen > lastATagClose) {
             return url;
         }

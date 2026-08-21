@@ -75,9 +75,9 @@ export const BOARD_SEO = {
   'calm-mind': {
     label: '마음 다스리는 글',
     cssFile: 'page30_viewpost_calm_mind.css',
-    cssVersion: '20260821b',
+    cssVersion: '20260821c',
     jsFile: 'page30_viewpost_calm_mind.js',
-    jsVersion: '20260821b',
+    jsVersion: '20260821c',
     listHtml: 'calm-mind-list.html',
   },
   'popular-voca': {
