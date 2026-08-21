@@ -378,7 +378,7 @@ function buildYoutubeHtml(youtubeUrl) {
 
   const watchUrl = `https://www.youtube.com/watch?v=${videoId}`;
   return `<footer class="nv-youtube nv-youtube--link">
-  <p class="nv-youtube-text">유튜브 보기 · <a class="nv-youtube-link" href="${escapeHtml(watchUrl)}" rel="noopener noreferrer" target="_blank">${escapeHtml(watchUrl)}</a></p>
+  <p class="nv-youtube-text"><a class="nv-youtube-link" href="${escapeHtml(watchUrl)}" rel="noopener noreferrer" target="_blank"><span aria-hidden="true">📺</span> 유튜브 보기</a></p>
 </footer>`;
 }
 
