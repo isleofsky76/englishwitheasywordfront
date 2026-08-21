@@ -15,24 +15,7 @@ const article = {
   password: 'seed_calm_mind_different-views-not-wrong',
   nickname: 'admin',
   datePublished: '2026-08-21',
-  message: `<div class="cm-source-box">
-<p><strong>📺 유튜브 출처</strong></p>
-<p>이 글은 아래 유튜브 영상 내용을 근거로, 기억하고 싶은 말을 <strong>개인 목적</strong>으로 남긴 것입니다.</p>
-<p><a class="cm-yt-link" href="https://www.youtube.com/watch?v=Mr32mAYlcVI" rel="noopener noreferrer" target="_blank">유튜브 보기</a></p>
-<p class="cm-disclaimer"><strong>Disclaimer</strong><br>
-저작권에 문제가 될 경우 게시글을 삭제하겠습니다.<br>
-메일 주소: <a href="mailto:everydayalittlehelp@gmail.com">everydayalittlehelp@gmail.com</a></p>
-</div>
-<p>내 생각과 다르다고 해서 <span class="cm-hl cm-hl--paint">상대가 틀린 것은 아니다.</span></p>
-<p>“쟤는 저렇게 생각하는구나” 하고 받아들이면 <u class="cm-underline">불편함이 줄어든다.</u></p>
-<p>대한민국 5천만 명 중에는 <span class="cm-hl cm-hl--marker">정치·종교적으로 온갖 견해</span>를 가진 사람이 있다.</p>
-<p>친구는 <strong>정치적인 뜻을 같이하는 동지</strong>가 아니다.</p>
-<p>친구끼리도 <span class="cm-hl cm-hl--ink">정치적 이념과 종교적 믿음</span>은 다를 수 있다.</p>
-<p>자기 신념을 바꿀 필요는 없고, <span class="cm-hl cm-hl--box">자기 신념은 지키면 된다.</span></p>
-<p>동시에 <span class="cm-hl cm-hl--wave">남의 신념도 존중</span>해야 한다.</p>
-<p>자기 생각을 남에게 강요할 필요도 없고, <span class="cm-hl cm-hl--box-round">남의 생각을 강요받을 필요도 없다.</span></p>
-<p>친구를 만났을 때 정치를 앞세우면 친구 관계는 사라지고 <span class="cm-hl cm-hl--oval-slant">정치적 대립만 남는다.</span></p>
-<p>결국 친구는 <span class="cm-hl cm-hl--dash">친구로 편안하게 만나면 된다.</span></p>`,
+  message: `<div class="cm-source-box"><p><strong>출처</strong> — 이 글은 법륜스님 즉문즉설 영상 내용을 근거로, 기억하고 싶은 말을 <strong>개인 목적</strong>으로 남긴 것입니다.</p><p><a class="cm-yt-link" href="https://www.youtube.com/watch?v=Mr32mAYlcVI" target="_blank" rel="noopener noreferrer">📺 법륜스님 즉문즉설 바로가기</a></p></div><p>내 생각과 다르다고 해서 <span class="cm-hl cm-hl--paint">상대가 틀린 것은 아니다.</span></p><p>“쟤는 저렇게 생각하는구나” 하고 받아들이면 <u class="cm-underline">불편함이 줄어든다.</u></p><p>대한민국 5천만 명 중에는 <span class="cm-hl cm-hl--marker">정치·종교적으로 온갖 견해</span>를 가진 사람이 있다.</p><p>친구는 <strong>정치적인 뜻을 같이하는 동지</strong>가 아니다.</p><p>친구끼리도 <span class="cm-hl cm-hl--ink">정치적 이념과 종교적 믿음</span>은 다를 수 있다.</p><p>자기 신념을 바꿀 필요는 없고, <span class="cm-hl cm-hl--box">자기 신념은 지키면 된다.</span></p><p>동시에 <span class="cm-hl cm-hl--wave">남의 신념도 존중</span>해야 한다.</p><p>자기 생각을 남에게 강요할 필요도 없고, <span class="cm-hl cm-hl--box-round">남의 생각을 강요받을 필요도 없다.</span></p><p>친구를 만났을 때 정치를 앞세우면 친구 관계는 사라지고 <span class="cm-hl cm-hl--oval-slant">정치적 대립만 남는다.</span></p><p>결국 친구는 <span class="cm-hl cm-hl--dash">친구로 편안하게 만나면 된다.</span></p><p class="cm-disclaimer"><strong>Disclaimer</strong><br>저작권에 문제가 될 경우 게시글을 삭제하겠습니다.<br>메일 주소: <a href="mailto:everydayalittlehelp@gmail.com">everydayalittlehelp@gmail.com</a></p>`,
 };
 // ===============================
 

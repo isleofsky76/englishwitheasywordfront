@@ -284,31 +284,10 @@ function vvAttachPlayAll(container) {
 }
 
 // 이미지/동영상 링크를 HTML로 변환하는 함수
-function convertMediaLinks(text) {
+function convertUrlsInPlainText(text) {
     if (!text) return text;
-    
-    // HTML이 포함되어 있는지 확인 (태그가 있는지)
-    const hasHtml = /<[^>]+>/.test(text);
-    
-    // URL 패턴 찾기 (더 정확한 패턴: 공백, 줄바꿈, 괄호, 따옴표 전까지)
     const urlPattern = /(https?:\/\/[^\s<>"'\n\r()]+)/g;
-    
-    // HTML이 있으면 그대로 사용, 없으면 이스케이프
-    let result = hasHtml ? text : escapeHtml(text);
-    
-    // URL을 찾아서 링크로 변환 (이미 링크 태그가 있는 경우는 건너뛰기)
-    result = result.replace(urlPattern, (url, offset) => {
-        // 이미 HTML 태그/속성(href 등) 안에 있는 URL은 건너뛰기
-        const beforeMatch = result.substring(0, offset);
-        if (/<[^>]*$/.test(beforeMatch)) {
-            return url;
-        }
-        const lastATagOpen = beforeMatch.lastIndexOf('<a');
-        const lastATagClose = beforeMatch.lastIndexOf('</a>');
-        if (lastATagOpen > lastATagClose) {
-            return url;
-        }
-        // YouTube 링크 처리 (일반 동영상, Shorts, youtu.be 모두 포함)
+    return text.replace(urlPattern, (url) => {
         const youtubeRegex = /(?:youtube\.com\/(?:watch\?v=|shorts\/)|youtu\.be\/)([a-zA-Z0-9_-]+)/;
         const youtubeMatch = url.match(youtubeRegex);
         if (youtubeMatch) {
@@ -326,8 +305,7 @@ function convertMediaLinks(text) {
                 </a>
             </div>`;
         }
-        
-        // Vimeo 링크 처리
+
         const vimeoRegex = /vimeo\.com\/(\d+)/;
         const vimeoMatch = url.match(vimeoRegex);
         if (vimeoMatch) {
@@ -345,28 +323,36 @@ function convertMediaLinks(text) {
                 </a>
             </div>`;
         }
-        
-        // Base64 이미지 처리 (data:image로 시작)
+
         if (url.startsWith('data:image/')) {
             return `<img src="${url}" alt="Image" style="max-width: 100%; height: auto; border-radius: 8px; margin: 10px 0; display: block;">`;
         }
-        
-        // 이미지 링크 처리 (지연 로딩 최적화)
+
         const imageExtensions = /\.(jpg|jpeg|png|gif|webp|svg)(\?.*)?$/i;
         if (imageExtensions.test(url)) {
             return `<img src="${url}" alt="Image" loading="lazy" decoding="async" style="max-width: 100%; height: auto; border-radius: 8px; margin: 10px 0; display: block;" onerror="this.style.display='none';">`;
         }
-        
-        // 일반 링크는 그대로 유지 (모바일 터치 최적화)
+
         return `<a href="${url}" target="_blank" rel="noopener noreferrer" style="display: inline-block; padding: 4px 6px; margin: 2px; -webkit-tap-highlight-color: rgba(43, 108, 176, 0.3); touch-action: manipulation; cursor: pointer; position: relative; z-index: 10;">${url}</a>`;
     });
-    
-    // 줄바꿈 처리 (sanitizeHtml 전에 처리)
-    result = result.replace(/\n/g, '<br>');
-    
-    // 안전한 HTML만 허용 (이모지와 특수 문자는 유지, 링크도 유지)
+}
+
+function convertMediaLinks(text) {
+    if (!text) return text;
+
+    const hasHtml = /<[^>]+>/.test(text);
+    let result = hasHtml ? text : escapeHtml(text);
+
+    // HTML 태그(속성) 안 URL은 건드리지 않고, 텍스트 노드만 변환
+    result = result.replace(/(<[^>]+>)|([^<]+)/g, (whole, tag, textNode) => {
+        if (tag) return tag;
+        return convertUrlsInPlainText(textNode);
+    });
+
+    // 태그 밖 줄바꿈만 <br>로 (태그 내부 개행은 이미 태그 조각에 포함)
+    result = result.replace(/([^>])\n/g, '$1<br>');
+
     result = sanitizeHtml(result);
-    
     return result;
 }
 
