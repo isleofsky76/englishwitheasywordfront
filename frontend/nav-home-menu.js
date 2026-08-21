@@ -8,13 +8,14 @@
 
 (function () {
 
-    var NAV_HOME_MENU_VERSION = '20260818a';
+    var NAV_HOME_MENU_VERSION = '20260821f';
 
     var PRIMARY_BAR_HREFS = {
         'index.html': true,
         'word-of-the-day-list.html': true,
         'vocabulary-quiz.html': true,
-        'english-synonym-list.html': true
+        'english-synonym-list.html': true,
+        'calm-mind-list.html': true
     };
 
     var HOME_SECTION_LINKS = [
@@ -53,6 +54,8 @@
         { href: 'pros-cons-list.html', label: 'Pros & Cons', pages: ['pros-cons-list.html', 'pros-cons.html'] },
 
         { href: 'english-opinions-list.html', label: '오피니언', pages: ['english-opinions-list.html', 'english-opinions.html'] },
+
+        { href: 'calm-mind-list.html', label: '마음 다스리는 글', pages: ['calm-mind-list.html', 'calm-mind.html'] },
 
         { href: 'english-directory.html', label: '학습 사이트 디렉터리', pages: ['english-directory.html'] }
 

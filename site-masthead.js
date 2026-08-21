@@ -4,8 +4,8 @@
  * nav-home-menu.js 가 로드함
  */
 (function () {
-    var VERSION = '20260818d';
-  var PRIMARY_NAV_COUNT = 6;
+    var VERSION = '20260821f';
+  var PRIMARY_NAV_COUNT = 7;
   var NAV_ITEMS = [
     { href: 'index.html', label: '홈', tone: 'home', pages: ['index.html', ''] },
     { href: 'english-synonym-list.html', label: '연관단어', tone: 'syn', pages: ['english-synonym-list.html', 'english-synonym.html'] },
@@ -13,6 +13,7 @@
     { href: 'news-voca-list.html', label: '국제', tone: 'news', pages: ['news-voca-list.html', 'news-voca.html'] },
     { href: 'culture-voca-list.html', label: '컬쳐', tone: 'culture', pages: ['culture-voca-list.html', 'culture-voca.html'] },
     { href: 'english-opinions-list.html', label: '오피니언', tone: 'opine', pages: ['english-opinions-list.html', 'english-opinions.html'] },
+    { href: 'calm-mind-list.html', label: '마음글', tone: 'calm', pages: ['calm-mind-list.html', 'calm-mind.html'] },
     { href: 'word-of-the-day-list.html', label: '단어장', tone: 'wotd', pages: ['word-of-the-day-list.html', 'word-of-the-day.html'] },
     { href: 'vocabulary-quiz.html', label: '퀴즈', tone: 'quiz', pages: ['vocabulary-quiz.html', 'vocabulary-quiz-list.html'] },
     { href: 'popular-voca-list.html', label: '인기 어휘', tone: 'popular', pages: ['popular-voca-list.html', 'popular-voca.html'] },
@@ -53,6 +54,7 @@
         'ranking-news': 'ranking-news.html',
         'photo-english': 'photo-english.html',
         'english-opinions': 'english-opinions.html',
+        'calm-mind': 'calm-mind.html',
         'vocabulary-quiz': 'vocabulary-quiz.html'
       };
       return map[folder] || 'index.html';

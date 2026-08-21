@@ -8,13 +8,14 @@
 
 (function () {
 
-    var NAV_HOME_MENU_VERSION = '20260818a';
+    var NAV_HOME_MENU_VERSION = '20260821f';
 
     var PRIMARY_BAR_HREFS = {
         'index.html': true,
         'word-of-the-day-list.html': true,
         'vocabulary-quiz.html': true,
-        'english-synonym-list.html': true
+        'english-synonym-list.html': true,
+        'calm-mind-list.html': true
     };
 
     var HOME_SECTION_LINKS = [
