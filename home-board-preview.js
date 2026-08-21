@@ -70,6 +70,7 @@
       { path: '/vocabulary-quiz', page: 'vocabulary-quiz.html', label: '퀴즈' },
       { path: '/vocabulary', page: 'english-synonym.html', postPath: 'english-synonym', label: '연관단어' },
       { path: '/opinions', page: 'english-opinions.html', postPath: 'english-opinions', label: '오피니언' },
+      { path: '/calm-mind', page: 'calm-mind.html', postPath: 'calm-mind', label: '마음 다스리는 글' },
       { path: '/easy-voca', page: 'popular-voca.html', postPath: 'popular-voca', label: '인기 어휘' },
       { path: '/situational-english', page: 'situational-english.html', postPath: 'situational-english', label: '상황' },
       { path: '/cooking-voca', page: 'cooking-voca.html', postPath: 'cooking-voca', label: '요리' },

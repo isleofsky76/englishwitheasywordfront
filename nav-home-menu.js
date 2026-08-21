@@ -54,6 +54,8 @@
 
         { href: 'english-opinions-list.html', label: '오피니언', pages: ['english-opinions-list.html', 'english-opinions.html'] },
 
+        { href: 'calm-mind-list.html', label: '마음 다스리는 글', pages: ['calm-mind-list.html', 'calm-mind.html'] },
+
         { href: 'english-directory.html', label: '학습 사이트 디렉터리', pages: ['english-directory.html'] }
 
     ];

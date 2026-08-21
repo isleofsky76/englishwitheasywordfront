@@ -13,6 +13,7 @@
         'ranking-news.html': 'ranking-news',
         'english-synonym.html': 'english-synonym',
         'english-opinions.html': 'english-opinions',
+        'calm-mind.html': 'calm-mind',
         'popular-voca.html': 'popular-voca',
         'situational-english.html': 'situational-english',
         'pros-cons.html': 'pros-cons',

@@ -910,6 +910,7 @@
                 <li class="nav-item"><a class="nav-link nav-tone-news" href="news-voca-list.html">국제</a></li>
                 <li class="nav-item"><a class="nav-link nav-tone-culture" href="culture-voca-list.html">컬쳐</a></li>
                 <li class="nav-item"><a class="nav-link nav-tone-opine" href="english-opinions-list.html">오피니언</a></li>
+                <li class="nav-item"><a class="nav-link nav-tone-calm" href="calm-mind-list.html">마음 다스리는 글</a></li>
                 <li class="nav-item nav-more">
                     <button type="button" class="nav-more-toggle" aria-expanded="false" aria-haspopup="true" aria-label="더보기">
                         <span class="nav-more-icon" aria-hidden="true"><span></span><span></span><span></span></span>
@@ -965,6 +966,15 @@
                     <div class="preview-more"><a href="english-opinions-list.html">더보기 &gt;</a></div>
                 </div>
                 <div id="opinions-preview-list" role="region" aria-label="오피니언 목록"></div>
+            </article>
+
+            <!-- Calm Mind -->
+            <article class="preview-section">
+                <div class="preview-header">
+                    <h2>마음 다스리는 글</h2>
+                    <div class="preview-more"><a href="calm-mind-list.html">더보기 &gt;</a></div>
+                </div>
+                <div id="calm-mind-preview-list" role="region" aria-label="마음 다스리는 글 목록"></div>
             </article>
 
             <!-- Word of the Day -->
@@ -1180,6 +1190,7 @@
             'english-synonym.html': 'english-synonym',
             'defense-news.html': 'defense-news',
             'english-opinions.html': 'english-opinions',
+            'calm-mind.html': 'calm-mind',
             'popular-voca.html': 'popular-voca',
             'situational-english.html': 'situational-english',
             'cooking-voca.html': 'cooking-voca',
@@ -1347,6 +1358,31 @@
                 })
                 .catch(function() {
                     clearTimeout(opTimeoutId);
+                    listEl.innerHTML = fallbackHtml;
+                });
+        })();
+
+        // Calm Mind
+        (function loadCalmMindPreview() {
+            var urlParams = new URLSearchParams(window.location.search);
+            var apiMode = urlParams.get('api');
+            var listEl = document.getElementById('calm-mind-preview-list');
+            if (!listEl) return;
+
+            var fallbackHtml = buildPreviewListHtml([], '<a href="calm-mind-list.html">마음 다스리는 글 보기</a>');
+            var calmTimeoutId = setTimeout(function() { listEl.innerHTML = fallbackHtml; }, 8000);
+
+            fetch(getApiBase() + '/calm-mind')
+                .then(function(r) {
+                    if (!r.ok) throw new Error('HTTP ' + r.status);
+                    return r.json();
+                })
+                .then(function(data) {
+                    clearTimeout(calmTimeoutId);
+                    renderPreviewList(listEl, parseEntries(data), 'calm-mind.html', apiMode, '게시글이 없습니다.');
+                })
+                .catch(function() {
+                    clearTimeout(calmTimeoutId);
                     listEl.innerHTML = fallbackHtml;
                 });
         })();
