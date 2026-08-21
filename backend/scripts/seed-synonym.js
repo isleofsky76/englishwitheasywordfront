@@ -23,7 +23,7 @@ const article = {
     {
       title: '1. stalemate',
       narrative:
-        'stalemate는 **교착상태**, 더 이상 어느 쪽도 진전하지 못하는 상황이라는 뜻입니다. /ˈsteɪlmeɪt/ (스테일메이트). *"Just like in the first world war we have reached the level of technology that puts us into a stalemate," he says.* — **we have reached** 우리는 도달했다 **the level of technology** 그러한 기술 수준이 **puts us into a stalemate** 우리를 교착상태에 빠뜨리는...',
+        'stalemate는 **교착상태**, 즉 어느 쪽도 더 이상 진전하지 못하고 맞서 있는 상황을 뜻합니다. /ˈsteɪlmeɪt/ (스테일메이트). *"Just like in the First World War, we have reached the level of technology that puts us into a stalemate," he says.* — **Just like in the First World War** 제1차 세계대전 때와 마찬가지로 **we have reached** 우리는 도달했다 **the level of technology** 그러한 기술 수준에 **that puts us into a stalemate** 우리를 교착상태에 빠뜨리는.',
     },
     {
       title: '2. stagnant',
