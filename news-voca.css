@@ -383,8 +383,9 @@
 }
 
 #post-message .nv-quote {
-  font-style: italic;
-  color: #374151;
+  font-style: normal;
+  font-weight: 700;
+  color: #1f2937;
   background: transparent;
 }
 
