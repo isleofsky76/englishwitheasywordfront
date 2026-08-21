@@ -131,6 +131,10 @@
   overflow-wrap: anywhere;
 }
 
+#post-message .nv-narrative-text + .nv-narrative-text {
+  margin-top: 0.85rem;
+}
+
 #post-message .nv-section-rule {
   margin: 1.15rem 0 0.85rem;
   border: 0;

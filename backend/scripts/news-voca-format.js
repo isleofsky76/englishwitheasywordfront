@@ -414,11 +414,21 @@ function buildPhrasesHtml(phrases) {
 
 function buildWordSectionHtml(section) {
   const title = section?.title || '';
-  const narrative = String(section?.narrative ?? '').trim();
-  if (narrative) {
+  const rawNarrative = section?.narrative;
+  const narrativeLines = Array.isArray(rawNarrative)
+    ? rawNarrative.map((t) => String(t ?? '').trim()).filter(Boolean)
+    : String(rawNarrative ?? '')
+        .split(/\n+/)
+        .map((t) => t.trim())
+        .filter(Boolean);
+
+  if (narrativeLines.length) {
+    const paras = narrativeLines
+      .map((t) => `<p class="nv-narrative-text">${parseInline(t)}</p>`)
+      .join('\n');
     return `<section class="nv-word-section nv-narrative">
   <h2 class="nv-section-title">${escapeHtml(title)}</h2>
-  <p class="nv-narrative-text">${parseInline(narrative)}</p>
+  ${paras}
   <hr class="nv-section-rule" />
 </section>`;
   }

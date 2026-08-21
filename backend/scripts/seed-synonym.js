@@ -22,33 +22,51 @@ const article = {
   words: [
     {
       title: '1. stalemate',
-      narrative:
-        'stalemate는 **교착상태**, 즉 어느 쪽도 더 이상 진전하지 못하고 맞서 있는 상황을 뜻합니다. /ˈsteɪlmeɪt/ (스테일메이트). *"Just like in the First World War, we have reached the level of technology that puts us into a stalemate," he says.* — **Just like in the First World War** 제1차 세계대전 때와 마찬가지로 **we have reached** 우리는 도달했다 **the level of technology** 그러한 기술 수준에 **that puts us into a stalemate** 우리를 교착상태에 빠뜨리는.',
+      narrative: [
+        'stalemate는 **교착상태**, 즉 어느 쪽도 더 이상 진전하지 못하고 맞서 있는 상황을 뜻합니다. /ˈsteɪlmeɪt/ (스테일메이트).',
+        '*"Just like in the First World War, we have reached the level of technology that puts us into a stalemate," he says.*',
+        '**Just like in the First World War** 제1차 세계대전 때와 마찬가지로 **we have reached** 우리는 도달했다 **the level of technology** 그러한 기술 수준에 **that puts us into a stalemate** 우리를 교착상태에 빠뜨리는.',
+      ],
     },
     {
       title: '2. stagnant',
-      narrative:
-        'stagnant는 **정체된**, **발전이나 변화가 없는**이라는 뜻입니다. /ˈstæɡnənt/ (스태그넌트). *The front line in Ukraine really hasn\'t changed very much. It\'s still very stagnant.* — **The front line in Ukraine** 우크라이나 전선은 **hasn\'t changed very much** 크게 변하지 않았고 **still very stagnant** 여전히 매우 정체되어 있다.',
+      narrative: [
+        'stagnant는 **정체된**, **발전이나 변화가 없는**이라는 뜻입니다. /ˈstæɡnənt/ (스태그넌트).',
+        '*The front line in Ukraine really hasn\'t changed very much. It\'s still very stagnant.*',
+        '**The front line in Ukraine** 우크라이나 전선은 **hasn\'t changed very much** 크게 변하지 않았고 **still very stagnant** 여전히 매우 정체되어 있다.',
+      ],
     },
     {
       title: '3. deadlock',
-      narrative:
-        'deadlock은 **완전한 교착상태**, 서로 대립해 움직일 수 없는 상황이라는 뜻입니다. /ˈdedlɑːk/ (데드락). *The deadlock has heavily disrupted traffic in the waterway.* — **The deadlock** 그 교착상태가 **traffic in the waterway** 수로의 통행을 **has heavily disrupted** 크게 방해했다.',
+      narrative: [
+        'deadlock은 **완전한 교착상태**, 서로 대립해 움직일 수 없는 상황이라는 뜻입니다. /ˈdedlɑːk/ (데드락).',
+        '*The deadlock has heavily disrupted traffic in the waterway.*',
+        '**The deadlock** 그 교착상태가 **traffic in the waterway** 수로의 통행을 **has heavily disrupted** 크게 방해했다.',
+      ],
     },
     {
       title: '4. impasse',
-      narrative:
-        'impasse는 **교착 상태**, **막다른 상황**이라는 뜻입니다. /ˈɪmpæs/ (임패스). 특히 협상이나 외교 문제가 해결되지 못하고 막혀 있을 때 자주 쓰입니다. *From impasse in Iran to still-unresolved conflicts in Gaza and Lebanon, a trend is clear.* — **impasse in Iran** 이란의 교착상태부터 **still-unresolved conflicts** 여전히 해결되지 않은 분쟁까지 이어지는 가운데 **a trend is clear** 하나의 흐름이 분명하다.',
+      narrative: [
+        'impasse는 **교착 상태**, **막다른 상황**이라는 뜻입니다. /ˈɪmpæs/ (임패스). 특히 협상이나 외교 문제가 해결되지 못하고 막혀 있을 때 자주 쓰입니다.',
+        '*From impasse in Iran to still-unresolved conflicts in Gaza and Lebanon, a trend is clear.*',
+        '**impasse in Iran** 이란의 교착상태부터 **still-unresolved conflicts** 여전히 해결되지 않은 분쟁까지 이어지는 가운데 **a trend is clear** 하나의 흐름이 분명하다.',
+      ],
     },
     {
       title: '5. gridlock',
-      narrative:
-        'gridlock은 원래 **도로의 극심한 교통 정체**를 뜻하지만 정치에서는 **정치적 교착상태**라는 의미로도 매우 자주 쓰입니다. /ˈɡrɪdlɑːk/ (그리드락). *Congress is in gridlock.* — **Congress** 의회가 **is in gridlock** 교착상태에 빠져 있다는 의미.',
+      narrative: [
+        'gridlock은 원래 **도로의 극심한 교통 정체**를 뜻하지만 정치에서는 **정치적 교착상태**라는 의미로도 매우 자주 쓰입니다. /ˈɡrɪdlɑːk/ (그리드락).',
+        '*Congress is in gridlock.*',
+        '**Congress** 의회가 **is in gridlock** 교착상태에 빠져 있다는 의미.',
+      ],
     },
     {
       title: '6. standstill',
-      narrative:
-        'standstill은 **정지**, **완전한 중단**이라는 뜻입니다. /ˈstændstɪl/ (스탠드스틸). *It would not take many defections to bring Mr Trump\'s agenda to a standstill.* — **not take many defections** 많은 이탈이 필요하지 않고 **bring Mr Trump\'s agenda** 트럼프의 의제를 **to a standstill** 완전히 멈추게 할 수 있다.',
+      narrative: [
+        'standstill은 **정지**, **완전한 중단**이라는 뜻입니다. /ˈstændstɪl/ (스탠드스틸).',
+        '*It would not take many defections to bring Mr Trump\'s agenda to a standstill.*',
+        '**not take many defections** 많은 이탈이 필요하지 않고 **bring Mr Trump\'s agenda** 트럼프의 의제를 **to a standstill** 완전히 멈추게 할 수 있다.',
+      ],
     },
   ],
 
