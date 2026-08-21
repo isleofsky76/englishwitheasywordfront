@@ -39,39 +39,44 @@ function escapeHtml(text) {
     return div.innerHTML;
 }
 
-// 안전한 HTML 태그만 허용하는 함수
+// 안전한 HTML 태그만 허용 (nv 블로그 마크업 포함)
+const VV_ALLOWED_TAGS = [
+    'article', 'header', 'footer', 'section', 'nav', 'aside', 'main',
+    'h1', 'h2', 'h3', 'h4', 'p', 'br', 'hr',
+    'strong', 'b', 'em', 'i', 'u', 'mark', 'small', 'sub', 'sup', 'abbr', 'cite', 'q',
+    'ol', 'ul', 'li', 'dl', 'dt', 'dd',
+    'span', 'div', 'a', 'img', 'button', 'time', 'figure', 'figcaption', 'blockquote', 'svg', 'path',
+];
+const VV_ALLOWED_ATTRS = [
+    'style', 'href', 'target', 'rel', 'src', 'alt', 'loading', 'decoding', 'onerror',
+    'type', 'class', 'id', 'aria-label', 'aria-hidden', 'title', 'data-vv-tts',
+    'role', 'width', 'height', 'viewBox', 'fill', 'focusable',
+];
+
 function sanitizeHtml(html) {
     if (!html) return html;
     const div = document.createElement('div');
     div.innerHTML = html;
-    
-    // 허용된 태그와 속성
-    const allowedTags = ['p', 'br', 'strong', 'b', 'em', 'i', 'u', 'span', 'div', 'a', 'img', 'button'];
-    const allowedAttributes = [
-        'style', 'href', 'target', 'rel', 'src', 'alt', 'loading', 'decoding', 'onerror',
-        'type', 'class', 'aria-label', 'title', 'data-vv-tts',
-    ];
-    
-    // 위험한 태그 제거
+
     const allElements = div.querySelectorAll('*');
-    allElements.forEach(el => {
-        if (!allowedTags.includes(el.tagName.toLowerCase())) {
+    allElements.forEach((el) => {
+        const tag = el.tagName.toLowerCase();
+        if (!VV_ALLOWED_TAGS.includes(tag)) {
             el.replaceWith(el.textContent);
-        } else {
-            // 허용되지 않은 속성 제거
-            Array.from(el.attributes).forEach(attr => {
-                if (!allowedAttributes.includes(attr.name.toLowerCase())) {
-                    el.removeAttribute(attr.name);
-                }
-            });
-            // 스크립트 관련 속성 제거
-            if (el.onclick || el.onerror) {
-                el.removeAttribute('onclick');
-                el.removeAttribute('onerror');
-            }
+            return;
         }
+        Array.from(el.attributes).forEach((attr) => {
+            const name = attr.name.toLowerCase();
+            if (name.startsWith('on') && name !== 'onerror') {
+                el.removeAttribute(attr.name);
+                return;
+            }
+            if (!VV_ALLOWED_ATTRS.includes(name)) {
+                el.removeAttribute(attr.name);
+            }
+        });
     });
-    
+
     return div.innerHTML;
 }
 
@@ -286,17 +291,18 @@ function vvAttachPlayAll(container) {
 // 이미지/동영상 링크를 HTML로 변환하는 함수
 function convertMediaLinks(text) {
     if (!text) return text;
-    
-    // HTML이 포함되어 있는지 확인 (태그가 있는지)
-    const hasHtml = /<[^>]+>/.test(text);
+
+    // 이미 HTML이면 URL 정규식 치환 금지(href/src 속성이 깨짐) — sanitize만
+    if (/<[^>]+>/.test(text)) {
+        return sanitizeHtml(text);
+    }
+
+    let result = escapeHtml(text);
     
     // URL 패턴 찾기 (더 정확한 패턴: 공백, 줄바꿈, 괄호, 따옴표 전까지)
     const urlPattern = /(https?:\/\/[^\s<>"'\n\r()]+)/g;
     
-    // HTML이 있으면 그대로 사용, 없으면 이스케이프
-    let result = hasHtml ? text : escapeHtml(text);
-    
-    // URL을 찾아서 링크로 변환 (이미 링크 태그가 있는 경우는 건너뛰기)
+    // URL을 찾아서 링크로 변환
     result = result.replace(urlPattern, (url, offset) => {
         // 이미 <a> 태그 안에 있는 URL은 건너뛰기
         const beforeMatch = result.substring(0, offset);
@@ -462,7 +468,7 @@ async function loadPost() {
                 ${metaHtml}
             </div>
             <div id="post-content">
-                <p id="post-message">${convertedMessage || '<span style="color: #999;">내용이 없습니다.</span>'}</p>
+                <div id="post-message" class="post-message-body">${convertedMessage || '<span style="color: #999;">내용이 없습니다.</span>'}</div>
             </div>
         `;
         

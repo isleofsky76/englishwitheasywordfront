@@ -55,41 +55,23 @@
 
 
 #post-message .nv-lead {
-
-  margin: 0;
-
-  padding: 0.75rem 0.85rem;
-
-  border-radius: 9px;
-
-  background: var(--nv-card-bg, #fffdf9);
-
-  border: 1px solid var(--nv-card-border, #eadfce);
-
-  box-shadow: var(--nv-card-shadow, 0 1px 2px rgba(92, 73, 48, 0.05));
-
+  margin: 0 0 1.25rem;
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
 }
-
-
 
 #post-message .nv-lead-text {
-
   margin: 0;
-
-  font-size: 0.9rem;
-
-  color: #4b5563;
-
-  line-height: 1.65;
-
+  font-size: 1rem;
+  color: #374151;
+  line-height: 1.85;
 }
 
-
-
 #post-message .nv-lead-text + .nv-lead-text {
-
-  margin-top: 0.5rem;
-
+  margin-top: 0.75rem;
 }
 
 
@@ -111,67 +93,56 @@
 
 
 #post-message .nv-word-section {
-
   margin: 0;
-
-  padding: 0 0 1.1rem;
-
+  padding: 0 0 0.35rem;
   border: none;
-
-  border-bottom: 1px solid #e5e7eb;
-
+  border-bottom: none;
   background: transparent;
-
   box-shadow: none;
-
 }
-
-
 
 #post-message .nv-word-section + .nv-word-section {
-
-  margin-top: 0.7rem;
-
-  padding-top: 0.2rem;
-
+  margin-top: 0.35rem;
+  padding-top: 0.15rem;
 }
-
-
 
 #post-message .nv-word-section:last-child {
-
   padding-bottom: 0;
-
   border-bottom: none;
-
 }
-
-
 
 #post-message .nv-word-section .nv-section-title {
-
-  margin: 0 0 0.5rem;
-
-  padding-bottom: 0.35rem;
-
-  font-size: 0.98rem;
-
+  margin: 0 0 0.55rem;
+  padding-bottom: 0;
+  font-size: 1.05rem;
   font-weight: 700;
-
-  color: #1a365d;
-
-  border-bottom: 2px solid #bee3f8;
-
-  line-height: 1.4;
-
+  color: #111827;
+  border-bottom: none;
+  line-height: 1.45;
 }
 
+#post-message .nv-narrative-text {
+  margin: 0;
+  font-size: 1rem;
+  color: #1f2937;
+  line-height: 1.9;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
 
+#post-message .nv-section-rule {
+  margin: 1.15rem 0 0.85rem;
+  border: 0;
+  border-top: 1px solid #d1d5db;
+  opacity: 1;
+}
+
+#post-message .nv-word-section:last-child .nv-section-rule {
+  display: none;
+}
 
 #post-message .nv-body > .nv-word-section:first-child .nv-section-title {
-
   margin-top: 0;
-
 }
 
 
@@ -282,28 +253,6 @@
 
 
 
-#post-message .nv-word-section.nv-narrative {
-
-  margin-bottom: 1.1rem;
-
-}
-
-
-
-#post-message .nv-narrative-text {
-
-  margin: 0;
-
-  font-size: 0.92rem;
-
-  color: #374151;
-
-  line-height: 1.72;
-
-}
-
-
-
 #post-message .nv-phrase-list {
 
   list-style: none;
@@ -387,17 +336,55 @@
 
 
 #post-message .nv-hl {
-
-  background: none;
-
-  color: #1d4ed8;
-
-  padding: 0;
-
+  color: #1a1a1a;
   font-weight: 700;
+  font-style: normal;
+  padding: 0.08em 0.22em;
+  border-radius: 3px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  background: #ffe566;
+}
 
-  border-radius: 0;
+/* 노란 형광펜 — 솔리드 */
+#post-message .nv-hl--paint {
+  background: #ffe566;
+  box-shadow: inset 0 -0.08em 0 rgba(230, 170, 20, 0.35);
+}
 
+/* 연한 마커 + 밑줄 */
+#post-message .nv-hl--marker {
+  background: rgba(255, 229, 102, 0.72);
+  border-bottom: 2.5px solid #f0b429;
+  border-radius: 2px;
+  padding-bottom: 0.02em;
+}
+
+/* 물결 밑줄 + 옅은 노란 배경 */
+#post-message .nv-hl--wave {
+  background: rgba(255, 241, 160, 0.88);
+  border-radius: 2px;
+  text-decoration-line: underline;
+  text-decoration-style: wavy;
+  text-decoration-color: #e8a317;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 0.18em;
+}
+
+/* 잉크 타원 테두리 + 노란 배경 */
+#post-message .nv-hl--ink {
+  position: relative;
+  background: rgba(255, 230, 100, 0.7);
+  border: 1.5px solid #d97706;
+  border-radius: 999px;
+  padding: 0.06em 0.28em 0.1em;
+  box-shadow: none;
+}
+
+#post-message .nv-quote {
+  font-style: italic;
+  color: #374151;
+  background: transparent;
 }
 
 
@@ -876,35 +863,39 @@
 
 
 #post-message .nv-youtube {
-
-  margin: 0;
-
-  padding: 0;
-
+  margin: 1.4rem 0 0;
+  padding: 0.95rem 0 0;
   border: none;
-
+  border-top: 1px solid #d1d5db;
   background: transparent;
-
   width: 100%;
-
   box-sizing: border-box;
-
 }
 
-
-
 #post-message .nv-youtube-heading {
-
   margin: 0 0 0.55rem;
-
   font-size: 0.92rem;
-
   font-weight: 700;
-
   color: #dc2626;
-
   letter-spacing: 0.01em;
+}
 
+#post-message .nv-youtube--link .nv-youtube-text {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: #374151;
+}
+
+#post-message .nv-youtube--link .nv-youtube-link {
+  color: #1d4ed8;
+  text-decoration: underline;
+  text-underline-offset: 0.12em;
+  word-break: break-all;
+}
+
+#post-message .nv-youtube--link .nv-youtube-link:hover {
+  color: #1e40af;
 }
 
 

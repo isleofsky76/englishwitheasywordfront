@@ -23,24 +23,74 @@ function escapeHtml(text) {
     .replace(/"/g, '&quot;');
 }
 
+const NV_HL_VARIANTS = ['nv-hl--paint', 'nv-hl--marker', 'nv-hl--wave', 'nv-hl--ink'];
+
 function parseInline(text) {
   const src = String(text ?? '');
   let out = '';
   let i = 0;
+  let hlIndex = 0;
+
+  const pushHighlight = (inner) => {
+    const variant = NV_HL_VARIANTS[hlIndex % NV_HL_VARIANTS.length];
+    hlIndex += 1;
+    out += `<mark class="nv-hl ${variant}">${escapeHtml(inner)}</mark>`;
+  };
+
   while (i < src.length) {
-    const open = src.indexOf('**', i);
-    if (open === -1) {
+    const boldOpen = src.indexOf('**', i);
+    const italicOpen = (() => {
+      let j = i;
+      while (j < src.length) {
+        const at = src.indexOf('*', j);
+        if (at === -1) return -1;
+        // skip ** bold markers
+        if (src[at + 1] === '*') {
+          j = at + 2;
+          continue;
+        }
+        return at;
+      }
+      return -1;
+    })();
+
+    let nextType = null;
+    let nextAt = -1;
+    if (boldOpen !== -1 && (italicOpen === -1 || boldOpen <= italicOpen)) {
+      nextType = 'bold';
+      nextAt = boldOpen;
+    } else if (italicOpen !== -1) {
+      nextType = 'italic';
+      nextAt = italicOpen;
+    }
+
+    if (nextAt === -1) {
       out += escapeHtml(src.slice(i));
       break;
     }
-    out += escapeHtml(src.slice(i, open));
-    const close = src.indexOf('**', open + 2);
-    if (close === -1) {
-      out += escapeHtml(src.slice(open));
-      break;
+
+    out += escapeHtml(src.slice(i, nextAt));
+
+    if (nextType === 'bold') {
+      const close = src.indexOf('**', nextAt + 2);
+      if (close === -1) {
+        out += escapeHtml(src.slice(nextAt));
+        break;
+      }
+      pushHighlight(src.slice(nextAt + 2, close));
+      i = close + 2;
+      continue;
     }
-    out += `<span class="nv-hl">${escapeHtml(src.slice(open + 2, close))}</span>`;
-    i = close + 2;
+
+    // single *italic*
+    const close = src.indexOf('*', nextAt + 1);
+    if (close === -1 || src[close + 1] === '*') {
+      out += escapeHtml(src.slice(nextAt, nextAt + 1));
+      i = nextAt + 1;
+      continue;
+    }
+    out += `<em class="nv-quote">${escapeHtml(src.slice(nextAt + 1, close))}</em>`;
+    i = close + 1;
   }
   return out;
 }
@@ -327,18 +377,8 @@ function buildYoutubeHtml(youtubeUrl) {
   if (!videoId) return '';
 
   const watchUrl = `https://www.youtube.com/watch?v=${videoId}`;
-  const thumbUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
-
-  return `<footer class="nv-youtube">
-  <p class="nv-youtube-heading">📺 유튜브 보기</p>
-  <a class="nv-youtube-card" href="${escapeHtml(watchUrl)}" rel="noopener noreferrer" target="_blank" aria-label="유튜브 보기" title="유튜브 보기">
-    <span class="nv-youtube-thumb">
-      <img class="nv-youtube-img" src="${escapeHtml(thumbUrl)}" alt="유튜브 영상" loading="lazy" decoding="async">
-      <span class="nv-youtube-play" aria-hidden="true">
-        <svg class="nv-youtube-icon" viewBox="0 0 68 48" width="68" height="48" focusable="false"><path fill="#f00" d="M66.52 7.74a8.3 8.3 0 0 0-5.86-5.9C55.79 1 34 1 34 1S12.21 1 7.34 1.84a8.3 8.3 0 0 0-5.86 5.9A86.6 86.6 0 0 0 0 24a86.6 86.6 0 0 0 1.48 16.26 8.3 8.3 0 0 0 5.86 5.9C12.21 47 34 47 34 47s21.79 0 26.66-1.84a8.3 8.3 0 0 0 5.86-5.9A86.6 86.6 0 0 0 68 24a86.6 86.6 0 0 0-1.48-16.26z"/><path fill="#fff" d="M45 24 27 14v20"/></svg>
-      </span>
-    </span>
-  </a>
+  return `<footer class="nv-youtube nv-youtube--link">
+  <p class="nv-youtube-text">유튜브 보기 · <a class="nv-youtube-link" href="${escapeHtml(watchUrl)}" rel="noopener noreferrer" target="_blank">${escapeHtml(watchUrl)}</a></p>
 </footer>`;
 }
 
@@ -379,6 +419,7 @@ function buildWordSectionHtml(section) {
     return `<section class="nv-word-section nv-narrative">
   <h2 class="nv-section-title">${escapeHtml(title)}</h2>
   <p class="nv-narrative-text">${parseInline(narrative)}</p>
+  <hr class="nv-section-rule" />
 </section>`;
   }
 
@@ -525,7 +566,7 @@ export function buildNewsVocaSeoPageHtml(config) {
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../page30_viewpost.css?v=20260702e">
-    <link rel="stylesheet" href="../../news-voca.css?v=20260702k">
+    <link rel="stylesheet" href="../../news-voca.css?v=20260821blog">
     <link rel="stylesheet" href="../../title-text-sharp.css?v=20260610">
     <link rel="stylesheet" href="../../viewpost-like.css?v=20260625">
     <link rel="stylesheet" href="../../nav-home-menu.css?v=20260617">

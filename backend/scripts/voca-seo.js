@@ -18,7 +18,7 @@ export const BOARD_SEO = {
   'news-voca': {
     label: 'News Voca',
     cssFile: 'news-voca.css',
-    cssVersion: '20260622a',
+    cssVersion: '20260821blog',
     jsFile: 'news-voca.js',
     jsVersion: '20260622a',
     listHtml: 'news-voca-list.html',
@@ -39,6 +39,14 @@ export const BOARD_SEO = {
     jsVersion: '20260622a',
     listHtml: 'culture-voca-list.html',
   },
+  'defense-news': {
+    label: '국방뉴스',
+    cssFile: 'news-voca.css',
+    cssVersion: '20260821blog',
+    jsFile: 'defense-news.js',
+    jsVersion: '20260818a',
+    listHtml: 'defense-news-list.html',
+  },
   'ranking-news': {
     label: 'Ranking News',
     cssFile: 'ranking-news.css',
@@ -46,6 +54,23 @@ export const BOARD_SEO = {
     jsFile: 'page30_viewpost_ranking_news.js',
     jsVersion: '20260622a',
     listHtml: 'ranking-news-list.html',
+  },
+  'english-synonym': {
+    label: '유의어',
+    cssFile: 'page30_viewpost_v.css',
+    cssVersion: '20260821blog',
+    jsFile: 'page30_viewpost_v.js',
+    jsVersion: '20260821blog',
+    listHtml: 'english-synonym-list.html',
+    extraCss: [{ file: 'news-voca.css', version: '20260821blog' }],
+  },
+  'english-opinions': {
+    label: '오피니언',
+    cssFile: 'page30_viewpost_opinions.css',
+    cssVersion: '20260816a',
+    jsFile: 'page30_viewpost_opinions.js',
+    jsVersion: '20260816a',
+    listHtml: 'english-opinions-list.html',
   },
   'popular-voca': {
     label: 'Popular Voca',
@@ -62,6 +87,24 @@ export const BOARD_SEO = {
     jsFile: 'page30_viewpost_wordofday.js',
     jsVersion: '20260720c',
     listHtml: 'word-of-the-day-list.html',
+  },
+  'photo-english': {
+    label: '포토영어',
+    cssFile: 'page30_viewpost_photo_english.css',
+    cssVersion: '20260727r',
+    jsFile: 'page30_viewpost_photo_english.js',
+    jsVersion: '20260727r',
+    listHtml: 'photo-english-list.html',
+    extraCss: [{ file: 'photo-english.css', version: '20260727r' }],
+  },
+  'vocabulary-quiz': {
+    label: '영어 단어 퀴즈',
+    cssFile: 'vocabulary-quiz.css',
+    cssVersion: '20260721a',
+    jsFile: 'vocabulary-quiz.js',
+    jsVersion: '20260722a',
+    listHtml: 'vocabulary-quiz-list.html',
+    pageKind: 'quiz',
   },
 };
 
@@ -94,20 +137,8 @@ export function buildArticleJsonLd({ title, slug, boardPath, metaDescription, da
   };
 }
 
-export function buildSeoPageHtml(boardPath, config) {
-  const board = BOARD_SEO[boardPath];
-  if (!board) throw new Error(`Unknown boardPath: ${boardPath}`);
-
-  const { title, slug, metaDescription } = config;
-  const pageUrl = `${SITE_ORIGIN}/${boardPath}/${slug}`;
-  const datePublished = config.datePublished || toIsoDateOnly();
-  const docTitle = `${title} | ${board.label} · English Easy Study`;
-  const jsonLd = buildArticleJsonLd({ title, slug, boardPath, metaDescription, datePublished });
-
-  return `<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
+function buildSeoHead({ docTitle, title, slug, boardPath, metaDescription, pageUrl, jsonLd }) {
+  return `    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${escapeHtml(docTitle)}</title>
     <meta name="description" content="${escapeHtml(metaDescription)}">
@@ -125,12 +156,73 @@ export function buildSeoPageHtml(boardPath, config) {
     <meta name="twitter:description" content="${escapeHtml(metaDescription)}">
     <meta name="google-adsense-account" content="ca-pub-6108574897789788">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6108574897789788" crossorigin="anonymous"></script>
-    <script type="application/ld+json">${JSON.stringify(jsonLd)}</script>
+    <script type="application/ld+json">${JSON.stringify(jsonLd)}</script>`;
+}
+
+function buildQuizSeoPageHtml(boardPath, board, config) {
+  const { title, slug, metaDescription } = config;
+  const pageUrl = `${SITE_ORIGIN}/${boardPath}/${slug}/`;
+  const datePublished = config.datePublished || toIsoDateOnly();
+  const docTitle = `${title} | ${board.label} · English Easy Study`;
+  const jsonLd = buildArticleJsonLd({ title, slug, boardPath, metaDescription, datePublished });
+  const head = buildSeoHead({ docTitle, title, slug, boardPath, metaDescription, pageUrl, jsonLd });
+
+  return `<!DOCTYPE html>
+<html lang="ko">
+<head>
+${head}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../navbar-unified.css?v=20260612c">
+    <link rel="stylesheet" href="../../nav-home-menu.css?v=20260626e">
+    <link rel="stylesheet" href="../../${board.cssFile}?v=${board.cssVersion}">
+</head>
+<body data-nv-slug="${escapeHtml(slug)}" data-nv-board="${escapeHtml(boardPath)}">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" aria-label="주 메뉴">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="../../${board.listHtml}">${escapeHtml(board.label)}</a>
+            <div data-nav-home-menu class="nav-home-menu-slot ms-auto"></div>
+        </div>
+    </nav>
+    <main class="vocabulary-quiz-main">
+        <div id="vocabulary-quiz-entries"></div>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../nav-home-menu.js?v=20260721c"></script>
+    <script src="../../page30-api-config.js?v=20260721"></script>
+    <script src="../../${board.jsFile}?v=${board.jsVersion}"></script>
+</body>
+</html>
+`;
+}
+
+export function buildSeoPageHtml(boardPath, config) {
+  const board = BOARD_SEO[boardPath];
+  if (!board) throw new Error(`Unknown boardPath: ${boardPath}`);
+
+  if (board.pageKind === 'quiz') {
+    return buildQuizSeoPageHtml(boardPath, board, config);
+  }
+
+  const { title, slug, metaDescription } = config;
+  const pageUrl = `${SITE_ORIGIN}/${boardPath}/${slug}`;
+  const datePublished = config.datePublished || toIsoDateOnly();
+  const docTitle = `${title} | ${board.label} · English Easy Study`;
+  const jsonLd = buildArticleJsonLd({ title, slug, boardPath, metaDescription, datePublished });
+  const head = buildSeoHead({ docTitle, title, slug, boardPath, metaDescription, pageUrl, jsonLd });
+
+  return `<!DOCTYPE html>
+<html lang="ko">
+<head>
+${head}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../page30_viewpost.css?v=20260628">
     <link rel="stylesheet" href="../../${board.cssFile}?v=${board.cssVersion}">
+${(board.extraCss || []).map((c) => `    <link rel="stylesheet" href="../../${c.file}?v=${c.version}">`).join('\n')}
     <link rel="stylesheet" href="../../title-text-sharp.css?v=20260610">
     <link rel="stylesheet" href="../../viewpost-like.css?v=20260625">
     <link rel="stylesheet" href="../../nav-home-menu.css?v=20260617">
@@ -182,13 +274,16 @@ const BOARD_HTML = {
   'news-voca': 'news-voca.html',
   'cooking-voca': 'cooking-voca.html',
   'culture-voca': 'culture-voca.html',
+  'defense-news': 'defense-news.html',
   'ranking-news': 'ranking-news.html',
   'english-synonym': 'english-synonym.html',
+  'english-opinions': 'english-opinions.html',
   'popular-voca': 'popular-voca.html',
   'situational-english': 'situational-english.html',
   'pros-cons': 'pros-cons.html',
   'word-of-the-day': 'word-of-the-day.html',
   'photo-english': 'photo-english.html',
+  'vocabulary-quiz': 'vocabulary-quiz.html',
 };
 
 /** API 경로 → sitemap boardPath (slug 있는 글만 수집) */
@@ -199,10 +294,13 @@ export const BOARD_API_ENDPOINTS = [
   { apiPath: '/ranking-news', boardPath: 'ranking-news', label: '랭킹 뉴스' },
   { apiPath: '/cooking-voca', boardPath: 'cooking-voca', label: '요리 어휘' },
   { apiPath: '/culture-voca', boardPath: 'culture-voca', label: '컬쳐 어휘' },
+  { apiPath: '/defense-news', boardPath: 'defense-news', label: '국방뉴스' },
   { apiPath: '/vocabulary', boardPath: 'english-synonym', label: '유의어' },
+  { apiPath: '/opinions', boardPath: 'english-opinions', label: '오피니언' },
   { apiPath: '/easy-voca', boardPath: 'popular-voca', label: '인기 어휘' },
   { apiPath: '/situational-english', boardPath: 'situational-english', label: '상황별 영어' },
   { apiPath: '/pros-cons', boardPath: 'pros-cons', label: '장단점' },
+  { apiPath: '/vocabulary-quiz', boardPath: 'vocabulary-quiz', label: '영어 단어 퀴즈' },
 ];
 
 /** slug별 고유 canonical이 있는 정적 SEO 경로 (/board/slug/) */
@@ -210,13 +308,16 @@ const BOARD_SITEMAP_PATH = new Set([
   'news-voca',
   'cooking-voca',
   'culture-voca',
+  'defense-news',
   'ranking-news',
   'english-synonym',
+  'english-opinions',
   'popular-voca',
   'situational-english',
   'pros-cons',
   'word-of-the-day',
   'photo-english',
+  'vocabulary-quiz',
 ]);
 
 export function sitemapUrlForSlug(boardPath, slug) {
@@ -233,14 +334,16 @@ const SITEMAP_STATIC_URLS = [
   { loc: `${SITE_ORIGIN}/news-voca-list.html`, priority: '0.9' },
   { loc: `${SITE_ORIGIN}/cooking-voca-list.html`, priority: '0.8' },
   { loc: `${SITE_ORIGIN}/culture-voca-list.html`, priority: '0.8' },
+  { loc: `${SITE_ORIGIN}/defense-news-list.html`, priority: '0.9' },
   { loc: `${SITE_ORIGIN}/ranking-news-list.html`, priority: '0.8' },
   { loc: `${SITE_ORIGIN}/english-synonym-list.html`, priority: '0.8' },
+  { loc: `${SITE_ORIGIN}/english-opinions-list.html`, priority: '0.8' },
   { loc: `${SITE_ORIGIN}/popular-voca-list.html`, priority: '0.8' },
   { loc: `${SITE_ORIGIN}/situational-english-list.html`, priority: '0.8' },
   { loc: `${SITE_ORIGIN}/pros-cons-list.html`, priority: '0.8' },
   { loc: `${SITE_ORIGIN}/word-of-the-day-list.html`, priority: '0.8' },
   { loc: `${SITE_ORIGIN}/photo-english-list.html`, priority: '0.8' },
-  { loc: `${SITE_ORIGIN}/vocabulary-quiz.html`, priority: '0.8' },
+  { loc: `${SITE_ORIGIN}/vocabulary-quiz-list.html`, priority: '0.8' },
 ];
 
 function entryLastmod(entry) {
