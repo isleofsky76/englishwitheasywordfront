@@ -33,7 +33,7 @@ const article = {
 
   datePublished: '2026-08-28',
 
-  message: `<div class="cm-source-box"><p><strong>출처</strong> — 이 글은 법륜스님 즉문즉설 영상 내용을 근거로, 기억하고 싶은 말을 <strong>개인 목적</strong>으로 남긴 것입니다.</p></div>
+  message: `<div class="cm-source-box"><p><strong>출처</strong> — 이 글은 법륜스님 즉문즉설 영상 내용을 근거로, 기억하고 싶은 말을 <strong>개인 목적</strong>으로 남긴 것입니다.</p><p><a class="cm-yt-link" href="유튜브주소" target="_blank" rel="noopener noreferrer">📺 법륜스님 즉문즉설 바로가기</a></p></div>
 
 <p><strong>질문자는 24살 군 전역 후 예전에는 많이 힘들고 우울했던 시기가 있었지만, 법륜스님 말씀을 들으면서 삶을 긍정적으로 보게 되었습니다.</strong></p>
 
