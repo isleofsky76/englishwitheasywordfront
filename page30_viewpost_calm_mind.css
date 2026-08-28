@@ -684,15 +684,6 @@ body {
   padding: 0.06em 0.28em 0.1em;
 }
 
-#post-message.cm-blog .cm-hl--oval-slant {
-  display: inline-block;
-  background: rgba(255, 236, 120, 0.72);
-  border: 1.6px solid #c2410c;
-  border-radius: 50% / 60%;
-  padding: 0.1em 0.38em 0.14em;
-  transform: rotate(-4deg) skewX(-8deg);
-}
-
 #post-message.cm-blog .cm-hl--box {
   display: inline-block;
   background: rgba(255, 241, 160, 0.75);
