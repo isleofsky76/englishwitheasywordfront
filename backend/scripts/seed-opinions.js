@@ -52,7 +52,7 @@ function buildRelatedLinksHtml(youtube, source) {
   }
   if (source) {
     lines.push(
-      `<p><a href="${escapeHtmlAttr(source)}" target="_blank" rel="noopener noreferrer">📰 신문 보기</a></p>`
+      `<p><a href="${escapeHtmlAttr(source)}" target="_blank" rel="noopener noreferrer">📰 기사 출처</a></p>`
     );
   }
   if (!lines.length) return '';
