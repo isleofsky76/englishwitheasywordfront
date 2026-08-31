@@ -907,6 +907,40 @@
 
 }
 
+#post-message .nv-source--link {
+  margin: 0.35rem 0 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  font-size: 0.95rem;
+  color: #374151;
+}
+
+#post-message .nv-source--link .nv-source-text {
+  margin: 0;
+  line-height: 1.7;
+}
+
+#post-message .nv-source--link .nv-source-link {
+  display: inline;
+  margin: 0;
+  padding: 0;
+  color: #2563eb;
+  font-weight: 600;
+  text-decoration: none;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+#post-message .nv-source--link .nv-source-link:hover {
+  background: transparent;
+  border: none;
+  text-decoration: underline;
+  text-underline-offset: 0.12em;
+}
+
 
 
 #post-message .nv-youtube {

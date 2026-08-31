@@ -366,18 +366,11 @@ function formatWordHtml(en, ko, pron, ipa) {
 }
 
 function buildSourceHtml(sourceText, sourceUrl) {
-  const text = String(sourceText ?? '').trim();
   const url = String(sourceUrl ?? '').trim();
-  if (!text && !url) return '';
+  if (!url) return '';
 
-  const linkHtml = url
-    ? `<p class="nv-source-link-wrap"><a class="nv-source-link" href="${escapeHtml(url)}" rel="noopener noreferrer" target="_blank">기사 원문 보기</a></p>`
-    : '';
-
-  return `<footer class="nv-source">
-  <p class="nv-source-label">출처</p>
-  <p class="nv-source-text">${escapeHtml(text)}</p>
-  ${linkHtml}
+  return `<footer class="nv-source nv-source--link">
+  <p class="nv-source-text"><a class="nv-source-link" href="${escapeHtml(url)}" rel="noopener noreferrer" target="_blank"><span aria-hidden="true">📰</span> 기사 보기</a></p>
 </footer>`;
 }
 
