@@ -12,95 +12,173 @@ import { uploadShortsBgImage } from './shorts-bg-image-format.js';
 
 // ========== 여기만 수정 ==========
 
-const article = {
-  title: '런던 도심 거리와 신문 가판대 · London city street and newsstand',
+// ========== 여기만 수정 ==========
 
-  slug: 'london-city-street-newsstand',
+const article = {
+  title: '스페인 포도원 테라스 · Spanish vineyard terrace',
+
+  slug: 'spanish-vineyard-terrace',
 
   metaDescription:
-    '빨간 2층 버스와 고전적인 석조 건축물, 노천 카페와 신문 가판대가 어우러진 런던 도심의 흐린 아침 풍경을 담은 쇼츠용 배경 이미지입니다.',
+    '중세풍 돌담과 포도원이 펼쳐진 스페인 시골 마을의 야외 테라스 풍경. 여행자와 현지인들이 한적한 분위기 속에서 대화하고 쉬는 모습을 담은 쇼츠용 배경 이미지입니다.',
 
-  password: 'seed_shorts_london-city-street-newsstand',
+  password: 'seed_shorts_spanish-vineyard-terrace',
 
   datePublished: '2026-08-31',
 
-  /** GitHub: resources/london-street.jpg (send_photo와 동일) — frontend/resources/에 두어도 push 시 resources/로 복사 */
-  image: '/resources/london-street.jpg',
+  /** GitHub: resources/spain.jpg (send_photo와 동일) — frontend/resources/에 두어도 push 시 resources/로 복사 */
+  image: '/resources/spain.jpg',
 
   sections: [
     {
       heading: '전체적인 분위기 (Overall Scene)',
 
-      body: `런던 도심 거리 : London city street
+      body: `포도원 : vineyard (vineyard /ˈvɪnjərd/ 명사 포도원)
 
-빨간 2층 버스 : red double-decker bus
+언덕 : hill
 
-자갈길 도로 : cobblestone road 
+자갈 포장길 : cobblestone path
 
-고전적인 석조 건축물 : classic stone architecture 
+풍경 / 경치 : scenery
 
-흐린 아침 풍경 : overcast morning scene (overcast /ˈoʊvərkæst/ 형용사 흐린)
+시골 : countryside
 
-영국 특유의 분위기 : quintessential British vibe (quintessential /ˌkwɪntɪˈsenʃəl/ 형용사 전형적인·본질적인)
+분위기 : ambiance (ambiance /ˈæmbiəns/ (장소 등의) 분위기)
 
-출근길과 일상의 조화 : blend of commute and daily life 
+중세의 : medieval 
 
-거리의 가판대 : street kiosk`,
+울퉁불퉁한 : uneven
+
+햇살이 드는 : sunlit
+
+목가적인 / 소박한 : rustic (rustic /ˈrʌstɪk/ 형용사 시골풍의·소박한)
+
+평온한 / 한적한 : tranquil 
+
+펼쳐지다 : unfold
+
+그림자를 드리우다 : cast a shadow
+
+둘러싸다 / 감싸다 : surround`,
     },
 
     {
-      heading: '좌측 거리 및 카페 풍경 (Left Side: Street & Cafe Scene)',
+      heading: '좌측 전경 (Left Foreground)',
 
-      body: `팔짱을 끼고 걷다 : walk arm in arm
+      body: `탁자 / 테이블 : table
 
-코트 차림 : dressed in coats
 
-가죽 토트백 : leather tote bag 
 
-노천 테이블 : outdoor table
+의자 : chair
 
-흰색 테이블보 : white tablecloth
+셔츠 : shirt
 
-신문을 펼쳐 읽다 : read an unfolded newspaper (unfolded /ʌnˈfoʊldɪd/ 형용사 펼쳐진)
+음료 : beverage (
 
-커피잔을 들다 : hold a coffee cup
+덩굴 식물 : ivy (ivy /ˈaɪvi/ 명사 담쟁이덩굴)
 
-꽃병 장식 : floral centerpiece (floral /ˈflɔːrəl/ 형용사 꽃의·꽃무늬의)
+화분 : pot
 
-우아한 옷차림 : elegant outfit`,
+허브 : herb
+
+둥근 : round
+
+나무로 된 : wooden
+
+엮은 : woven (woven /ˈwoʊvən/ 형용사 엮어서 만든)
+
+소매를 걷어 올린 : with rolled-up sleeves
+
+차가운 음료 : iced beverage
+
+앉다 : sit
+
+대화하다 / 담소하다 : converse (converse /kənˈvɜːrs/ 동사 격식 (~와) 대화[이야기]를 나누다)
+
+팔을 기대다 / 괴다 : rest one’s arm
+
+마주보다 : face each other
+
+자라다 : grow`,
     },
 
     {
-      heading: '중앙 및 배경 풍경 (Center & Background Scene)',
+      heading: '중앙 풍경 (Center Scene)',
 
-      body: `웨이터 / 서버 : waiter / server
+      body: `직원 / 서빙원 : server
+
+앞치마 : apron 
+
+주문 : order
+
+수첩 : notepad
+
+등산객 / 여행자 : hiker
+
+배낭 : backpack
+
+메뉴판 : menu
+
+야외의 : outdoor
+
+주의 깊은 : attentive 
+
+바깥쪽의 : exterior 
 
 주문을 받다 : take an order
 
-정장 차림의 직장인들 : office workers in business suits
+주문을 적다 : write down an order
 
-아침 식사 모임 : breakfast gathering
+배낭을 메다 : carry a backpack
 
-검은색 철제 펜스 : black wrought-iron fence 
+메뉴를 둘러보다 : browse the menu 
 
-건물 모퉁이 : street corner, building corner`,
+기다리다 : wait`,
     },
 
     {
-      heading: '우측 신문 가판대 풍경 (Right Side: Newsstand Scene)',
+      heading: '우측 전경 (Right Foreground)',
 
-      body: `신문 및 잡지 가판대 : newspaper and magazine kiosk
+      body: `신문 : newspaper
 
-진열된 간행물 : displayed publications 
+담배 : cigarette
 
-신문을 훑어보다 : skim through a newspaper (skim /skɪm/ 동사 훑어보다)
+재떨이 : ashtray
 
-크로스백을 메다 : wear a crossbody bag 
+잔 / 글라스 : glass
 
-신문을 고르다 : select a newspaper`,
+와인 : wine
+
+핸드백 : purse
+
+자전거 : bicycle
+
+돌담 : stone wall
+
+고전적인 / 빈티지의 : vintage 
+
+가죽의 : leather
+
+따뜻한 : warm
+
+중년의 : middle-aged
+
+여유로운 : relaxing
+
+들다 / 잡다 : hold
+
+조금씩 마시다 : sip (sip /sɪp/ 동사 조금씩 마시다)
+
+담배를 피우다 : smoke a cigarette
+
+기대어 놓다 : prop against (prop /prɑːp/ 동사 기대어 세워 놓다)
+
+쉬다 : relax`,
     },
   ],
 };
+
+// ========== 여기만 수정 ==========
 
 // ========== 여기만 수정 ==========
 
