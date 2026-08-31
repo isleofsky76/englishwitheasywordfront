@@ -35,28 +35,31 @@
 /* 상세 본문 */
 .sbgi-post-body,
 #post-message.sbgi-post-body {
-  max-width: 28rem;
+  max-width: 42rem;
   width: 100%;
   margin: 0 auto;
+  padding: 0 0.75rem;
   box-sizing: border-box;
 }
 
 #post-message .sbgi-image-wrap {
   position: relative;
   width: 100%;
+  max-width: 22.5rem; /* PC: 쇼츠 비율 미리보기 (~360px) */
   margin: 0.75rem auto 1rem;
   border-radius: 14px;
   overflow: hidden;
   background: #111827;
   box-shadow: 0 8px 24px rgba(15, 23, 42, 0.12);
-  aspect-ratio: 9 / 16;
 }
 
 #post-message .sbgi-image-wrap img {
   display: block;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
+  max-height: min(72vh, 640px);
+  object-fit: contain;
+  object-position: center;
 }
 
 #post-message .sbgi-scenes {
@@ -84,6 +87,7 @@
   border: 1px solid var(--sbgi-border);
   border-radius: 10px;
   text-align: left;
+  white-space: pre-line;
 }
 
 #post-message .sbgi-caption {
@@ -105,7 +109,16 @@
   border-radius: 8px;
 }
 
-#post-message img {
+#post-message .sbgi-ai-note {
+  margin: 1.1rem 0 0;
+  padding: 0;
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: var(--sbgi-muted);
+  text-align: center;
+}
+
+#post-message img:not(.sbgi-image-wrap img) {
   max-width: 100%;
   height: auto;
   border-radius: 10px;
@@ -127,7 +140,15 @@
   .sbgi-post-body,
   #post-message.sbgi-post-body {
     max-width: 100%;
-    padding: 0 0.25rem;
+    padding: 0 0.5rem;
+  }
+
+  #post-message .sbgi-image-wrap {
+    max-width: min(88vw, 20rem); /* 모바일: 화면에 맞춘 쇼츠 폭 */
+  }
+
+  #post-message .sbgi-image-wrap img {
+    max-height: min(58vh, 520px);
   }
 
   #guestbook-list .sbgi-card-thumb {
