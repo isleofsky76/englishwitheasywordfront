@@ -203,21 +203,21 @@ const opinionSet = [
 
 const posts = [
   {
-    title: '스미스소니언은 어떻게 미국의 큰 줄거리(본질적 이야기)를 놓쳐버렸는가?',
-    slug: 'purge-related-words',
+    title: 'When Your Friends All Turn 70',
+    slug: 'low-key-related-words',
     metaDescription:
-      'purge(제거하다), inheritance(유산), pejorative(경멸적인), downplay(경시하다), favor(지지하다), acknowledgement(인정), foundational(근간이 되는), bend one’s knee to(굴복하다), patriarchal(가부장적인), plaything(놀잇감), whitewash(은폐하다) 뜻·발음·예문을 정리한 오피니언 어휘 학습입니다.',
+      'low-key(소박한), decibel(소음 정도), ritualistic(의례적인), license(자유), divulge(털어놓다), holy grail(최고의 조건), grudge(앙금), gratuitous(불필요한), archivist(기록 보관자), unfold(전개되다), meander(느긋하게 나아가다), marbles(온전한 정신) 뜻·발음·예문을 정리한 오피니언 어휘 학습입니다.',
+    source:
+      'https://www.wsj.com/opinion/when-your-friends-all-turn-70-ff4daff4?mod=hp_opin_pos_6',
     message: buildOpinionMessage({
       words: opinionSet,
-      youtube: 'https://www.youtube.com/watch?v=7HHhzNGQDZo&list=PLA-OHa20ZsGA&index=2',
-      source:
-        'https://www.wsj.com/opinion/when-your-friends-all-turn-70-ff4daff4?mod=hp_opin_pos_6',
+      youtube:
+        'https://www.youtube.com/watch?v=7HHhzNGQDZo&list=PLA-OHa20ZsGA&index=2'
     }),
     nickname: 'admin',
-    password: 'seed_opinions_purge-related-words'
+    password: 'seed_opinions_low-key-related-words'
   }
 ];
-
 
 
 async function seed() {
