@@ -8,114 +8,108 @@ import { uploadDefenseNews } from './defense-news-format.js';
 
 // ========== 여기만 수정 ==========
 
-const article = {
-  title:
-    '[WSJ 국제영어] 영국 해군 드론·중국 부품 논란 | underscore · compromise · probe 어휘',
+// ========== 여기만 수정 ==========
 
-  slug: 'underscore-related-words',
+const article = {
+  title: '미국의 조선 능력 부족은 해군에 걸림돌이 된다. | prowess · eclipse · hamper · intertwine',
+
+  slug: 'bulwark-related-words',
 
   metaDescription:
-    'underscore(강조하다), compromise(손상시키다), probe(조사), provenance(출처), scour(샅샅이 찾다), ubiquitous(어디에나 존재하는) 등 드론·군사 공급망 관련 시사 어휘 10개를 정리합니다.',
+    'bulwark(보루), prowess(뛰어난 능력), eclipse(능가하다), hamper(방해하다), intertwine(밀접하게 얽히다), commonality(공통점), complementary(상호 보완적인)의 뜻과 뉴스 예문을 정리합니다.',
 
-  password: 'password_seed_underscore_related_words',
+  password: 'seed_defense_bulwark-related-words',
 
   datePublished: '2026-08-31',
 
   intro: [
-    '군사 장비와 드론의 **공급망·부품 출처·중국 의존 문제**를 다룬 WSJ 기사에서 사용된 시사 어휘를 예문과 함께 정리합니다.',
+    '미국·중국·유럽의 **상업 조선업과 해군력의 관계**를 다룬 기사에서 사용된 국방·조선 관련 시사 어휘를 예문과 함께 정리합니다.',
   ],
 
   words: [
     {
-      title: '1. underscore',
+      title: '1. bulwark',
       narrative: [
-        'underscore(ˌʌndərˈskɔːr / 언더스코어)는 **강조하다**, **부각하다**라는 뜻입니다.',
-        '*The finding underscores worries about military supply chains.*',
-        '**The finding** 그 발견은 / **underscores worries** 우려를 강조한다 / **about military supply chains** 군사 공급망에 대한.',
+        'bulwark(ˈbʊlwərk / 불워크)는 **보루**, **방벽**, **요새**라는 뜻입니다.',
+
+        '*“The floating bulwark of our island” is how William Blackstone, an 18th-century British politician, described the Royal Navy.*',
+
+        '**“The floating bulwark of our island”** “우리 섬의 떠다니는 보루”는 / **is how William Blackstone described the Royal Navy** 윌리엄 블랙스톤이 영국 해군을 묘사한 표현이다 / **an 18th-century British politician** 그는 18세기 영국 정치인이었다.',
       ],
     },
+
     {
-      title: '2. compromise',
+      title: '2. prowess',
       narrative: [
-        'compromise(ˈkɑːmprəmaɪz / 캄프러마이즈)는 **손상시키다**, **위태롭게 하다**라는 뜻입니다.',
-        '*No evidence of being accessed, compromised or transmitted externally.*',
-        '**No evidence** 증거가 없다 / **of being accessed** 접근되거나 / **compromised** 손상되거나 / **or transmitted externally** 외부로 전송된.',
+        'prowess(ˈpraʊəs / 프라우어스)는 **뛰어난 능력**, **탁월한 실력**이라는 뜻입니다.',
+
+        '*America’s lack of commercial-shipbuilding prowess has proved costly for its navy, whose shipyards have been unable to deliver vessels on time and on budget.*',
+
+        '**America’s lack of commercial-shipbuilding prowess** 미국의 상업 조선 능력 부족은 / **has proved costly for its navy** 미 해군에 큰 대가를 치르게 했다 / **whose shipyards have been unable to deliver vessels** 해군 조선소들은 함정을 인도하지 못하고 있다 / **on time and on budget** 제때 그리고 정해진 예산에 맞춰.',
       ],
     },
+
     {
-      title: '3. probe',
+      title: '3. eclipse',
       narrative: [
-        'probe(proʊb / 프로브)는 **조사**, **철저한 수사**라는 뜻입니다.',
-        '*In the U.S., a congressional probe previously found that Chinese cargo cranes...*',
-        '**In the U.S.** 미국에서 / **a congressional probe** 의회 조사는 / **previously found** 이전에 발견했다 / **that Chinese cargo cranes...** 중국 화물 크레인이…라는 것을.',
+        'eclipse(ɪˈklɪps / 이클립스)는 **능가하다**, **빛을 잃게 하다**, **추월하다**라는 뜻입니다.',
+
+        '*After the second world war Europe’s world-leading shipyards were eclipsed first by Japan, using cheap steel and labour along with new manufacturing methods, then by South Korea.*',
+
+        '**After the second world war** 2차 세계대전 이후 / **Europe’s world-leading shipyards were eclipsed first by Japan** 유럽의 세계적인 조선소들은 일본에 먼저 추월당했고 / **using cheap steel and labour along with new manufacturing methods** 일본은 값싼 철강과 노동력, 새로운 제조 방식을 활용했다 / **then by South Korea** 이후에는 한국에 추월당했다.',
       ],
     },
+
     {
-      title: '4. provenance',
+      title: '4. hamper',
       narrative: [
-        'provenance(ˈprɑːvənəns / 프라버넌스)는 **출처**, **기원**, **유래**라는 뜻입니다.',
-        '*Establishing the provenance of tiny components in the drone sector is challenging.*',
-        '**Establishing the provenance** 출처를 파악하는 것은 / **of tiny components** 작은 부품의 / **in the drone sector** 드론 분야에서 / **is challenging** 어렵다.',
+        'hamper(ˈhæmpər / 햄퍼)는 **방해하다**, **저해하다**라는 뜻입니다.',
+
+        '*America’s commercial-shipbuilding industry, by contrast, barely registers, hampering the ability of its navy to keep pace.*',
+
+        '**America’s commercial-shipbuilding industry, by contrast** 반면 미국의 상업 조선업은 / **barely registers** 거의 존재감이 없으며 / **hampering the ability of its navy** 미 해군의 능력을 저해하고 있다 / **to keep pace** 경쟁 속도를 따라갈 수 있는.',
       ],
     },
+
     {
-      title: '5. scour',
+      title: '5. intertwine',
       narrative: [
-        'scour(ˈskaʊər / 스카우어)는 **샅샅이 뒤지다**, **찾아다니다**라는 뜻입니다.',
-        '*Scour the world for new stockpiles.*',
-        '**Scour the world** 세계 곳곳을 샅샅이 찾아다니다 / **for new stockpiles** 새로운 비축량을 찾기 위해.',
+        'intertwine(ˌɪntərˈtwaɪn / 인터트와인)은 **밀접하게 얽히다**, **서로 연결되다**라는 뜻입니다.',
+
+        '*Matthew Funaiole of the Centre for Strategic and International Studies, a think-tank in Washington, explains that China’s commercial-shipbuilding industry is “closely intertwined” with its navy.*',
+
+        '**Matthew Funaiole of the Centre for Strategic and International Studies** 전략국제문제연구소의 매슈 푸나이올은 / **a think-tank in Washington** 워싱턴에 있는 싱크탱크인 / **explains that China’s commercial-shipbuilding industry** 중국의 상업 조선업이 / **is “closely intertwined” with its navy** 중국 해군과 “밀접하게 얽혀 있다”고 설명한다.',
       ],
     },
+
     {
-      title: '6. ubiquitous',
+      title: '6. commonality',
       narrative: [
-        'ubiquitous(juːˈbɪkwɪtəs / 유비쿼터스)는 **어디에나 존재하는**, **아주 흔한**이라는 뜻입니다.',
-        '*Drones and parts from China remain ubiquitous.*',
-        '**Drones and parts from China** 중국산 드론과 부품은 / **remain ubiquitous** 여전히 어디에나 존재한다.',
+        'commonality(ˌkɑːməˈnæləti / 카머낼러티)는 **공통점**, **공통성**이라는 뜻입니다.',
+
+        '*The underlying “platform” across vessels has many commonalities, points out Marzio Forlini of Bain, a consultancy.*',
+
+        '**The underlying “platform” across vessels** 여러 선박에 공통으로 적용되는 기본 “플랫폼”에는 / **has many commonalities** 많은 공통점이 있다고 / **points out Marzio Forlini of Bain** 베인의 마르지오 포를리니가 지적한다 / **a consultancy** 베인은 컨설팅회사이다.',
       ],
     },
+
     {
-      title: '7. root',
+      title: '7. complementary',
       narrative: [
-        'root(ruːt / 루트)는 **뿌리내리다**, **기반을 두다**라는 뜻입니다.',
-        '*Arx has now rooted its supply chain in Europe.*',
-        '**Arx** Arx는 / **has now rooted its supply chain** 이제 공급망을 뿌리내렸다 / **in Europe** 유럽에.',
-      ],
-    },
-    {
-      title: '8. install',
-      narrative: [
-        'install(ɪnˈstɔːl / 인스톨)은 **설치하다**, **장착하다**라는 뜻입니다.',
-        '*Cameras installed on British naval drones sent data to an internet address in China.*',
-        '**Cameras installed on British naval drones** 영국 해군 드론에 설치된 카메라는 / **sent data** 데이터를 전송했다 / **to an internet address** 인터넷 주소로 / **in China** 중국에 있는.',
-      ],
-    },
-    {
-      title: '9. wean off',
-      narrative: [
-        'wean off(wiːn ɔːf / 윈 오프)는 **의존에서 벗어나게 하다**, **서서히 끊다**라는 뜻입니다.',
-        '*Defense companies have spent around a decade trying to wean themselves off Chinese components.*',
-        '**Defense companies** 방위산업체들은 / **have spent around a decade** 약 10년을 보냈다 / **trying to wean themselves off** 의존에서 벗어나려고 노력하면서 / **Chinese components** 중국산 부품에 대한.',
-      ],
-    },
-    {
-      title: '10. trace',
-      narrative: [
-        'trace(treɪs / 트레이스)는 **추적하다**, **출처를 밝혀내다**라는 뜻입니다.',
-        '*It is really, really hard to trace where the stuff comes from.*',
-        '**It is really, really hard** 정말로 매우 어렵다 / **to trace** 추적하는 것은 / **where the stuff comes from** 그 물건이 어디에서 오는지를.',
+        'complementary(ˌkɑːmpləˈmentəri / 캄플러멘터리)는 **상호 보완적인**, **서로 보충하는**이라는 뜻입니다.',
+
+        '*Pierroberto Folgiero, boss of Fincantieri, Europe’s biggest shipbuilder, agrees that the two industries are highly complementary, pointing to manufacturing skills, the availability of shipyards and overlapping supply chains.*',
+
+        '**Pierroberto Folgiero, boss of Fincantieri** 핀칸티에리의 CEO 피에로베르토 폴지에로는 / **Europe’s biggest shipbuilder** 핀칸티에리는 유럽 최대 조선업체이며 / **agrees that the two industries are highly complementary** 두 산업이 매우 상호 보완적이라고 본다 / **pointing to manufacturing skills** 제조 기술과 / **the availability of shipyards** 조선소의 가용성 / **and overlapping supply chains** 그리고 서로 겹치는 공급망을 근거로.',
       ],
     },
   ],
 
-  source: {
-    text: 'The Wall Street Journal | U.K. Discovers Component in Its Naval Drones Sent Signals to China',
-    url: 'https://www.wsj.com/world/uk-discovers-component-in-its-naval-drones-sent-signals-to-china',
-  },
-
   youtube:
-    'https://www.youtube.com/watch?v=NaJFLTZNYjQ&list=PLSlq2Lkls6sY&index=3',
+    'https://www.youtube.com/watch?v=LRXVMotNybA&list=PLSlq2Lkls6sY&index=2',
 };
+
+// ===============================
 // ===============================
 
 uploadDefenseNews(article, API_BASE)
