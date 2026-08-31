@@ -10,171 +10,194 @@ import { uploadDefenseNews } from './defense-news-format.js';
 
 // ========== 여기만 수정 ==========
 
-const article = {
-  title: '우크라이나가 러시아를 상대로 공중전을 대폭 강화하는 이유는?  | indebted · tactical · stagnant · onslaught',
+// ========== 여기만 수정 ==========
 
-  slug: 'household-name-related-words',
+const article = {
+  title: 'destroyer 구축함 연관 단어 정리 | adrift · casualty · morale · consequential',
+
+  slug: 'destroyer-related-words',
 
   metaDescription:
-    'household name(누구나 아는 유명한 이름), indebted(부채가 있는), fragile(취약한), tactical(전술적인), stagnant(정체된), onslaught(맹공격) 등 러시아 전쟁 관련 시사 어휘를 정리합니다.',
+    'destroyer(구축함), adrift(표류하는), strain(부담), casualty(뜻하지 않은 사고), galley(선박의 주방), morale(사기), consequential(중대한) 등 미 해군 관련 시사 어휘를 정리합니다.',
 
-  password: 'seed_defense_household-name-related-words',
+  password: 'seed_defense_destroyer-related-words',
 
   datePublished: '2026-08-31',
 
   intro: [
-    '우크라이나가 러시아를 상대로 공중전을 대폭 강화하는 이유라는 제목의 WSJ 기사에 나온 어휘들입니다.',
+    '미 해군 구축함의 표류 사고와 장기 파병, 승조원들의 근무 환경을 다룬 기사에서 사용된 국방·해군 관련 시사 어휘를 정리합니다.',
+
+    '**Source:** The Guardian. All rights belong to the original creator.',
   ],
 
   words: [
     {
-      title: '1. household name',
+      title: '1. destroyer',
       narrative: [
-        'household name(ˌhaʊshoʊld ˈneɪm / 하우스홀드 네임)은 **누구나 아는 유명한 이름**이라는 뜻입니다.',
+        'destroyer(dɪˈstrɔɪər / 디스트로이어)는 **구축함**이라는 뜻입니다.',
 
-        '*Wildberries is one of Russia’s most important household names.*',
+        '*A US guided-missile destroyer.*',
 
-        '**Wildberries is** Wildberries는 / **one of Russia’s most important household names** 러시아에서 가장 중요하고 누구나 아는 이름 중 하나이다.',
+        '**A US guided-missile destroyer** 미국의 유도미사일 구축함.',
       ],
     },
 
     {
-      title: '2. indebted',
+      title: '2. adrift',
       narrative: [
-        'indebted(ɪnˈdetɪd / 인데티드)는 **부채가 있는**, **빚을 진**이라는 뜻입니다.',
+        'adrift(əˈdrɪft / 어드리프트)는 **표류하는**, **동력을 잃고 떠도는**이라는 뜻입니다.',
 
-        '*It’s actually incredibly indebted to Russian state banks.*',
+        '*Reportedly spent four days adrift.*',
 
-        '**It’s actually incredibly indebted** 그것은 실제로 엄청난 빚을 지고 있다 / **to Russian state banks** 러시아 국영은행들에.',
+        '**Reportedly spent** 보도에 따르면 보냈다 / **four days adrift** 표류한 채 나흘을.',
       ],
     },
 
     {
-      title: '3. fragile',
+      title: '3. strain',
       narrative: [
-        'fragile(ˈfrædʒəl / 프래절)은 **취약한**, **불안정한**이라는 뜻입니다.',
+        'strain(streɪn / 스트레인)은 **부담**, **압박**이라는 뜻입니다.',
 
-        '*The Russian banking system which is already quite fragile.*',
+        '*Furthering concerns about strain being placed on deployed military members.*',
 
-        '**The Russian banking system** 러시아 은행 시스템은 / **which is already quite fragile** 이미 상당히 취약하다.',
+        '**Furthering concerns** 우려를 더욱 키우며 / **about strain being placed** 부담이 가해지는 것에 대한 / **on deployed military members** 파병된 군인들에게.',
       ],
     },
 
     {
-      title: '4. perception',
+      title: '4. casualty',
       narrative: [
-        'perception(pərˈsepʃən / 퍼셉션)은 **인식**, **관점**이라는 뜻입니다.',
+        'casualty(ˈkæʒuəlti / 캐주얼티)는 **뜻하지 않은 사고**, **사상자**라는 뜻입니다.',
 
-        '*Shifting Russians’ perceptions of the war.*',
+        '*An engineering casualty involving its generators.*',
 
-        '**Shifting** 바꾸는 것 / **Russians’ perceptions of the war** 전쟁에 대한 러시아인들의 인식을.',
+        '**An engineering casualty** 기관 설비 사고 / **involving its generators** 발전기와 관련된.',
       ],
     },
 
     {
-      title: '5. tactical',
+      title: '5. galley',
       narrative: [
-        'tactical(ˈtæktɪkəl / 택티컬)은 **전술적인**이라는 뜻입니다.',
+        'galley(ˈɡæli / 갤리)는 **선박의 주방**이라는 뜻입니다.',
 
-        '*Wildberries is selling tactical gear, night vision goggles, helmets.*',
+        '*That loss of power meant sailors were without galley services, toilets and air conditioning.*',
 
-        '**Wildberries is selling** Wildberries는 판매하고 있다 / **tactical gear** 전술 장비와 / **night vision goggles, helmets** 야간투시경, 헬멧을.',
+        '**That loss of power meant** 그 전력 상실은 의미했다 / **sailors were without galley services** 선원들이 주방 서비스를 이용하지 못하고 / **toilets and air conditioning** 화장실과 냉방 시설도 이용하지 못했다는 것을.',
       ],
     },
 
     {
-      title: '6. distribution',
+      title: '6. grit',
       narrative: [
-        'distribution(ˌdɪstrɪˈbjuːʃən / 디스트리뷰션)은 **분포**라는 뜻입니다.',
-
-        '*Its distribution of warehouses around the country.*',
-
-        '**Its distribution of warehouses** 그것의 창고 분포 / **around the country** 전국에 걸친.',
+        'grit(ɡrɪt / 그릿)은 **투지**, **끈기**라는 뜻입니다.',
       ],
     },
 
     {
-      title: '7. bring home',
+      title: '7. account',
       narrative: [
-        'bring home(brɪŋ hoʊm / 브링 홈)은 **실감하게 하다**, **절실히 깨닫게 하다**라는 뜻입니다.',
+        'account(əˈkaʊnt / 어카운트)는 **기사**, **설명**, **진술**, **보도 내용**이라는 뜻입니다.',
 
-        '*Really brings home the war to many people.*',
+        '*Hegseth has rejected the accounts, calling them “completely misrepresented”.*',
 
-        '**Really brings home the war** 전쟁을 실제로 실감하게 한다 / **to many people** 많은 사람에게.',
+        '**Hegseth has rejected the accounts** 헤그세스는 해당 보도 내용을 부인했다 / **calling them “completely misrepresented”** 그것이 “완전히 잘못 전달됐다”고 말하며.',
       ],
     },
 
     {
-      title: '8. shelter',
+      title: '8. stretch',
       narrative: [
-        'shelter(ˈʃeltər / 셸터)는 **보호하다**라는 뜻입니다.',
-
-        '*Whereas up to now, they’ve been very sheltered from the war in a lot of ways.*',
-
-        '**Whereas up to now** 반면 지금까지 / **they’ve been very sheltered from the war** 그들은 전쟁으로부터 크게 보호받아 왔다 / **in a lot of ways** 여러 면에서.',
+        'stretch(stretʃ / 스트레치)는 **잡아 늘이다**, **잡아당기다**라는 뜻입니다.',
       ],
     },
 
     {
-      title: '9. stagnant',
+      title: '9. relieve',
       narrative: [
-        'stagnant(ˈstæɡnənt / 스태그넌트)는 **정체된**, **변화가 거의 없는**이라는 뜻입니다.',
+        'relieve(rɪˈliːv / 릴리브)는 **교대하다**, **부담을 덜어주다**라는 뜻입니다.',
 
-        '*The front line... It’s still very stagnant.*',
+        '*To relieve the USS Abraham Lincoln.*',
 
-        '**The front line** 최전선은… / **It’s still very stagnant** 여전히 매우 정체되어 있다.',
+        '**To relieve** 교대하기 위해 / **the USS Abraham Lincoln** USS 에이브러햄 링컨함을.',
       ],
     },
 
     {
-      title: '10. crunch',
+      title: '10. deployment',
       narrative: [
-        'crunch(krʌntʃ / 크런치)는 **심각한 부족**, **압박**이라는 뜻입니다.',
+        'deployment(dɪˈplɔɪmənt / 디플로이먼트)는 **파병**, **배치**라는 뜻입니다.',
 
-        '*Feel a certain crunch when it comes to manpower.*',
+        '*Extended deployments.*',
 
-        '**Feel a certain crunch** 어느 정도의 심각한 부족을 느끼다 / **when it comes to manpower** 병력 문제에 있어서는.',
+        '**Extended deployments** 연장된 파병.',
       ],
     },
 
     {
-      title: '11. onslaught',
+      title: '11. recount',
       narrative: [
-        'onslaught(ˈɑːnslɔːt / 온슬로트)는 **맹공격**, **맹습**이라는 뜻입니다.',
+        'recount(rɪˈkaʊnt / 리카운트)는 **자세히 이야기하다**라는 뜻입니다.',
 
-        '*Protect themselves from the onslaught of Ukrainian drones.*',
+        '*A retired admiral who recounted being on ships for “much longer”.*',
 
-        '**Protect themselves** 자신들을 보호하다 / **from the onslaught of Ukrainian drones** 우크라이나 드론의 맹공격으로부터.',
+        '**A retired admiral** 한 퇴역 제독은 / **who recounted being on ships** 함정에 있었다고 자세히 이야기했다 / **for “much longer”** “훨씬 더 오랫동안”.',
       ],
     },
 
     {
-      title: '12. jury-rig',
+      title: '12. morale',
       narrative: [
-        'jury-rig(ˈdʒʊri rɪɡ / 주리 리그)는 **임시방편으로 만들다**, **임시로 설치하다**라는 뜻입니다.',
+        'morale(məˈræl / 머랠)는 **사기**, **의욕**이라는 뜻입니다.',
 
-        '*Some have tried to jury-rig their own air defense systems.*',
+        '*Poor morale.*',
 
-        '**Some have tried** 일부는 시도했다 / **to jury-rig** 임시방편으로 만드는 것을 / **their own air defense systems** 자체 방공 시스템을.',
+        '**Poor morale** 저하된 사기.',
       ],
     },
 
     {
-      title: '13. rally around',
+      title: '13. austere',
       narrative: [
-        'rally around(ˈræli əˈraʊnd / 랠리 어라운드)는 **~을 중심으로 결집하다**, **단결하다**라는 뜻입니다.',
+        'austere(ɔːˈstɪr / 오스티어)는 **금욕적인**, **내핍 생활을 하는**이라는 뜻입니다.',
 
-        '*What it has to lose is getting Russians to rally around Putin.*',
+        '*Austere conditions.*',
 
-        '**What it has to lose is** 그것이 잃을 수 있는 것은 / **getting Russians to rally around Putin** 러시아인들이 푸틴을 중심으로 결집하게 하는 것이다.',
+        '**Austere conditions** 열악하고 엄격한 생활 환경.',
+      ],
+    },
+
+    {
+      title: '14. ideation',
+      narrative: [
+        'ideation(ˌaɪdiˈeɪʃən / 아이디에이션)은 **관념 작용**, **상상하기**라는 뜻입니다.',
+      ],
+    },
+
+    {
+      title: '15. consequential',
+      narrative: [
+        'consequential(ˌkɑːnsəˈkwenʃəl / 칸서퀜셜)은 **중대한**이라는 뜻입니다.',
+
+        '*History will record this deployment as one of the most consequential of the modern era.*',
+
+        '**History will record this deployment** 역사는 이번 파병을 기록할 것이다 / **as one of the most consequential** 가장 중대한 사례 중 하나로 / **of the modern era** 현대의.',
+      ],
+    },
+
+    {
+      title: '16. stressor',
+      narrative: [
+        'stressor(ˈstresər / 스트레서)는 **스트레스 요인**, **압박 요인**이라는 뜻입니다.',
       ],
     },
   ],
 
-  youtube: 'https://www.youtube.com/watch?v=YRkonl-h41U',
-};
+  source:
+    'https://www.theguardian.com/us-news/2026/aug/17/us-navy-destroyer-south-china-sea',
 
-// ===============================
+  youtube:
+    'https://www.youtube.com/watch?v=ICkppDs5-CE&list=PLSlq2Lkls6sY&index=7',
+};
 
 // ===============================
 
