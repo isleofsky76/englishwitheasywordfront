@@ -11,7 +11,7 @@ import { uploadDefenseNews } from './defense-news-format.js';
 // ========== 여기만 수정 ==========
 
 const article = {
-  title: '미국의 조선 능력 부족은 해군에 걸림돌이 된다. | prowess · eclipse · hamper · intertwine',
+  title: '[WSJ 국제영어] 미국의 조선 능력 부족은 해군에 걸림돌이 된다. | prowess · eclipse · hamper · intertwine',
 
   slug: 'bulwark-related-words',
 
