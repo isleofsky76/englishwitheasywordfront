@@ -52,7 +52,7 @@ function buildRelatedLinksHtml(youtube, source) {
   }
   if (source) {
     lines.push(
-      `<p><a href="${escapeHtmlAttr(source)}" target="_blank" rel="noopener noreferrer">📰 기사 출처</a></p>`
+      `<p><a href="${escapeHtmlAttr(source)}" target="_blank" rel="noopener noreferrer">📰 신문 보기</a></p>`
     );
   }
   if (!lines.length) return '';
@@ -207,12 +207,12 @@ const posts = [
     slug: 'low-key-related-words',
     metaDescription:
       'low-key(소박한), decibel(소음 정도), ritualistic(의례적인), license(자유), divulge(털어놓다), holy grail(최고의 조건), grudge(앙금), gratuitous(불필요한), archivist(기록 보관자), unfold(전개되다), meander(느긋하게 나아가다), marbles(온전한 정신) 뜻·발음·예문을 정리한 오피니언 어휘 학습입니다.',
-    source:
-      'https://www.wsj.com/opinion/when-your-friends-all-turn-70-ff4daff4?mod=hp_opin_pos_6',
     message: buildOpinionMessage({
       words: opinionSet,
       youtube:
-        'https://www.youtube.com/watch?v=7HHhzNGQDZo&list=PLA-OHa20ZsGA&index=2'
+        'https://www.youtube.com/watch?v=7HHhzNGQDZo&list=PLA-OHa20ZsGA&index=2',
+      source:
+        'https://www.wsj.com/opinion/when-your-friends-all-turn-70-ff4daff4?mod=hp_opin_pos_6',
     }),
     nickname: 'admin',
     password: 'seed_opinions_low-key-related-words'
