@@ -8,229 +8,173 @@ import { uploadDefenseNews } from './defense-news-format.js';
 
 // ========== 여기만 수정 ==========
 
-const article = {
-  title: '요격 미사일이 떨어지면 어떻게 될까요? | deplete · attritional · proliferation · formidable',
+// ========== 여기만 수정 ==========
 
-  slug: 'vulnerable-related-words',
+const article = {
+  title: '우크라이나가 러시아를 상대로 공중전을 대폭 강화하는 이유는?  | indebted · tactical · stagnant · onslaught',
+
+  slug: 'household-name-related-words',
 
   metaDescription:
-    'vulnerable(취약한), boast(성과를 내세우다), plight(곤경), deplete(고갈시키다), attritional(소모전의), proliferation(확산), formidable(만만치 않은) 등 국방 관련 시사 어휘를 정리합니다.',
+    'household name(누구나 아는 유명한 이름), indebted(부채가 있는), fragile(취약한), tactical(전술적인), stagnant(정체된), onslaught(맹공격) 등 러시아 전쟁 관련 시사 어휘를 정리합니다.',
 
-  password: 'seed_defense_vulnerable-related-words',
+  password: 'seed_defense_household-name-related-words',
 
   datePublished: '2026-08-31',
 
   intro: [
-    '요격 미사일이 떨어지면 어떻게 될까요? Economist 기사에 나온 어휘들입니다.',
-
+    '우크라이나가 러시아를 상대로 공중전을 대폭 강화하는 이유라는 제목의 WSJ 기사에 나온 어휘들입니다.',
   ],
 
   words: [
     {
-      title: '1. vulnerable',
+      title: '1. household name',
       narrative: [
-        'vulnerable(ˈvʌlnərəbəl / 벌너러블)은 **취약한**, **공격받기 쉬운**이라는 뜻입니다.',
+        'household name(ˌhaʊshoʊld ˈneɪm / 하우스홀드 네임)은 **누구나 아는 유명한 이름**이라는 뜻입니다.',
 
-        '*Military bases become vulnerable, and even major powers may be forced to limit military operations.*',
+        '*Wildberries is one of Russia’s most important household names.*',
 
-        '**Military bases become vulnerable** 군사기지가 취약해지고 / **and even major powers may be forced** 심지어 강대국들도 어쩔 수 없이 / **to limit military operations** 군사작전을 제한해야 할 수 있다.',
+        '**Wildberries is** Wildberries는 / **one of Russia’s most important household names** 러시아에서 가장 중요하고 누구나 아는 이름 중 하나이다.',
       ],
     },
 
     {
-      title: '2. boast',
+      title: '2. indebted',
       narrative: [
-        'boast(boʊst / 보우스트)는 **자랑하다**, **성과를 내세우다**라는 뜻입니다.',
+        'indebted(ɪnˈdetɪd / 인데티드)는 **부채가 있는**, **빚을 진**이라는 뜻입니다.',
 
-        '*In March Ukraine boasted of intercepting about 70% of ballistic missiles.*',
+        '*It’s actually incredibly indebted to Russian state banks.*',
 
-        '**In March** 3월에 / **Ukraine boasted of intercepting** 우크라이나는 요격했다고 성과를 내세웠다 / **about 70% of ballistic missiles** 탄도미사일의 약 70%를.',
+        '**It’s actually incredibly indebted** 그것은 실제로 엄청난 빚을 지고 있다 / **to Russian state banks** 러시아 국영은행들에.',
       ],
     },
 
     {
-      title: '3. plight',
+      title: '3. fragile',
       narrative: [
-        'plight(plaɪt / 플라이트)는 **곤경**, **어려운 처지**라는 뜻입니다.',
+        'fragile(ˈfrædʒəl / 프래절)은 **취약한**, **불안정한**이라는 뜻입니다.',
+
+        '*The Russian banking system which is already quite fragile.*',
+
+        '**The Russian banking system** 러시아 은행 시스템은 / **which is already quite fragile** 이미 상당히 취약하다.',
       ],
     },
 
     {
-      title: '4. divert',
+      title: '4. perception',
       narrative: [
-        'divert(daɪˈvɜːrt / 다이버트)는 **다른 곳으로 돌리다**, **전용하다**라는 뜻입니다.',
+        'perception(pərˈsepʃən / 퍼셉션)은 **인식**, **관점**이라는 뜻입니다.',
 
-        '*Divert them to other missions.*',
+        '*Shifting Russians’ perceptions of the war.*',
 
-        '**Divert them** 그것들을 돌리다 / **to other missions** 다른 임무로.',
+        '**Shifting** 바꾸는 것 / **Russians’ perceptions of the war** 전쟁에 대한 러시아인들의 인식을.',
       ],
     },
 
     {
-      title: '5. deplete',
+      title: '5. tactical',
       narrative: [
-        'deplete(dɪˈpliːt / 디플리트)는 **고갈시키다**, **소진하다**라는 뜻입니다.',
+        'tactical(ˈtæktɪkəl / 택티컬)은 **전술적인**이라는 뜻입니다.',
 
-        '*Depleted its stocks.*',
+        '*Wildberries is selling tactical gear, night vision goggles, helmets.*',
 
-        '**Depleted** 소진했다 / **its stocks** 보유 비축량을.',
+        '**Wildberries is selling** Wildberries는 판매하고 있다 / **tactical gear** 전술 장비와 / **night vision goggles, helmets** 야간투시경, 헬멧을.',
       ],
     },
 
     {
-      title: '6. attritional',
+      title: '6. distribution',
       narrative: [
-        'attritional(əˈtrɪʃənəl / 어트리셔널)은 **소모전의**라는 뜻입니다.',
+        'distribution(ˌdɪstrɪˈbjuːʃən / 디스트리뷰션)은 **분포**라는 뜻입니다.',
 
-        '*Attritional wars.*',
+        '*Its distribution of warehouses around the country.*',
 
-        '**Attritional wars** 소모전들.',
+        '**Its distribution of warehouses** 그것의 창고 분포 / **around the country** 전국에 걸친.',
       ],
     },
 
     {
-      title: '7. proximate',
+      title: '7. bring home',
       narrative: [
-        'proximate(ˈprɑːksɪmət / 프락서밋)은 **가장 가까운**이라는 뜻입니다.',
+        'bring home(brɪŋ hoʊm / 브링 홈)은 **실감하게 하다**, **절실히 깨닫게 하다**라는 뜻입니다.',
 
-        '*Proximate cause.*',
+        '*Really brings home the war to many people.*',
 
-        '**Proximate cause** 가장 가까운 원인.',
+        '**Really brings home the war** 전쟁을 실제로 실감하게 한다 / **to many people** 많은 사람에게.',
       ],
     },
 
     {
-      title: '8. prodigious',
+      title: '8. shelter',
       narrative: [
-        'prodigious(prəˈdɪdʒəs / 프러디저스)는 **막대한**, **엄청난**이라는 뜻입니다.',
+        'shelter(ˈʃeltər / 셸터)는 **보호하다**라는 뜻입니다.',
 
-        '*Prodigious use.*',
+        '*Whereas up to now, they’ve been very sheltered from the war in a lot of ways.*',
 
-        '**Prodigious use** 막대한 사용.',
+        '**Whereas up to now** 반면 지금까지 / **they’ve been very sheltered from the war** 그들은 전쟁으로부터 크게 보호받아 왔다 / **in a lot of ways** 여러 면에서.',
       ],
     },
 
     {
-      title: '9. hasten',
+      title: '9. stagnant',
       narrative: [
-        'hasten(ˈheɪsən / 헤이슨)은 **앞당기다**, **재촉하다**라는 뜻입니다.',
+        'stagnant(ˈstæɡnənt / 스태그넌트)는 **정체된**, **변화가 거의 없는**이라는 뜻입니다.',
 
-        '*Hastened a reckoning.*',
+        '*The front line... It’s still very stagnant.*',
 
-        '**Hastened** 앞당겼다 / **a reckoning** 현실을 직시해야 하는 순간을.',
+        '**The front line** 최전선은… / **It’s still very stagnant** 여전히 매우 정체되어 있다.',
       ],
     },
 
     {
-      title: '10. proliferation',
+      title: '10. crunch',
       narrative: [
-        'proliferation(prəˌlɪfəˈreɪʃən / 프럴리퍼레이션)은 **확산**이라는 뜻입니다.',
+        'crunch(krʌntʃ / 크런치)는 **심각한 부족**, **압박**이라는 뜻입니다.',
 
-        '*Global proliferation.*',
+        '*Feel a certain crunch when it comes to manpower.*',
 
-        '**Global proliferation** 전 세계적인 확산.',
+        '**Feel a certain crunch** 어느 정도의 심각한 부족을 느끼다 / **when it comes to manpower** 병력 문제에 있어서는.',
       ],
     },
 
     {
-      title: '11. complacency',
+      title: '11. onslaught',
       narrative: [
-        'complacency(kəmˈpleɪsənsi / 컴플레이선시)는 **안일함**이라는 뜻입니다.',
+        'onslaught(ˈɑːnslɔːt / 온슬로트)는 **맹공격**, **맹습**이라는 뜻입니다.',
+
+        '*Protect themselves from the onslaught of Ukrainian drones.*',
+
+        '**Protect themselves** 자신들을 보호하다 / **from the onslaught of Ukrainian drones** 우크라이나 드론의 맹공격으로부터.',
       ],
     },
 
     {
-      title: '12. gargantuan',
+      title: '12. jury-rig',
       narrative: [
-        'gargantuan(ɡɑːrˈɡæntʃuən / 가갠추언)은 **엄청나게 거대한**이라는 뜻입니다.',
+        'jury-rig(ˈdʒʊri rɪɡ / 주리 리그)는 **임시방편으로 만들다**, **임시로 설치하다**라는 뜻입니다.',
 
-        '*Gargantuan $1.5trn defence-budget.*',
+        '*Some have tried to jury-rig their own air defense systems.*',
 
-        '**Gargantuan** 엄청나게 거대한 / **$1.5trn defence-budget** 1조 5천억 달러 규모의 국방예산.',
+        '**Some have tried** 일부는 시도했다 / **to jury-rig** 임시방편으로 만드는 것을 / **their own air defense systems** 자체 방공 시스템을.',
       ],
     },
 
     {
-      title: '13. hitch',
+      title: '13. rally around',
       narrative: [
-        'hitch(hɪtʃ / 히치)는 **문제점**, **예상치 못한 장애**라는 뜻입니다.',
+        'rally around(ˈræli əˈraʊnd / 랠리 어라운드)는 **~을 중심으로 결집하다**, **단결하다**라는 뜻입니다.',
 
-        '*The hitch is...*',
+        '*What it has to lose is getting Russians to rally around Putin.*',
 
-        '**The hitch is** 문제는…',
-      ],
-    },
-
-    {
-      title: '14. improvise',
-      narrative: [
-        'improvise(ˈɪmprəvaɪz / 임프러바이즈)는 **즉석에서 만들어내다**라는 뜻입니다.',
-
-        '*Improvised a system.*',
-
-        '**Improvised** 즉석에서 만들었다 / **a system** 하나의 체계를.',
-      ],
-    },
-
-    {
-      title: '15. upstage',
-      narrative: [
-        'upstage(ˌʌpˈsteɪdʒ / 업스테이지)는 **능가하다**, **존재감을 빼앗다**라는 뜻입니다.',
-
-        '*Being upstaged by.*',
-
-        '**Being upstaged by** ~에 의해 능가당하는 것.',
-      ],
-    },
-
-    {
-      title: '16. nimble',
-      narrative: [
-        'nimble(ˈnɪmbəl / 님블)은 **민첩한**, **빠르게 대응하는**이라는 뜻입니다.',
-
-        '*Nimble defence.*',
-
-        '**Nimble defence** 민첩한 방어.',
-      ],
-    },
-
-    {
-      title: '17. upstart',
-      narrative: [
-        'upstart(ˈʌpstɑːrt / 업스타트)는 **신생의**라는 뜻입니다.',
-
-        '*Upstart firms.*',
-
-        '**Upstart firms** 신생 기업들.',
-      ],
-    },
-
-    {
-      title: '18. abound',
-      narrative: [
-        'abound(əˈbaʊnd / 어바운드)는 **많이 존재하다**, **풍부하다**라는 뜻입니다.',
-
-        '*Sceptics abound.*',
-
-        '**Sceptics** 회의론자들이 / **abound** 많이 존재한다.',
-      ],
-    },
-
-    {
-      title: '19. formidable',
-      narrative: [
-        'formidable(ˈfɔːrmɪdəbəl / 포미더블)은 **만만치 않은**이라는 뜻입니다.',
+        '**What it has to lose is** 그것이 잃을 수 있는 것은 / **getting Russians to rally around Putin** 러시아인들이 푸틴을 중심으로 결집하게 하는 것이다.',
       ],
     },
   ],
 
-  source: {
-    url: 'https://www.economist.com/international/2026/08/18/what-happens-when-interceptor-missiles-run-out',
-  },
-
-  youtube:
-    'https://www.youtube.com/watch?v=A8Vot6kHG_0&list=PLSlq2Lkls6sY&index=5',
+  youtube: 'https://www.youtube.com/watch?v=YRkonl-h41U',
 };
+
+// ===============================
 
 // ===============================
 
