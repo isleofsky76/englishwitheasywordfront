@@ -149,7 +149,7 @@
 @media (max-width: 576px) {
   .sbgi-page {
     --sbgi-image-max-w: min(94vw, 24rem); /* 모바일 거의 전폭 */
-    --sbgi-image-max-h: min(78vh, 720px);
+    --sbgi-image-max-h: min(93.6vh, 864px); /* 78vh·720px 대비 +20% */
   }
 
   .sbgi-post-body,
