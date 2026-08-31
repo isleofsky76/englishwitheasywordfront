@@ -8,10 +8,8 @@ import { uploadDefenseNews } from './defense-news-format.js';
 
 // ========== 여기만 수정 ==========
 
-// ========== 여기만 수정 ==========
-
 const article = {
-  title: '[WSJ 국제영어] 미국의 조선 능력 부족은 해군에 걸림돌이 된다. | prowess · eclipse · hamper · intertwine',
+  title: '[Economist 국제영어] 미국의 조선 능력 부족은 해군에 걸림돌이 된다. | prowess · eclipse · hamper · intertwine',
 
   slug: 'bulwark-related-words',
 
@@ -107,9 +105,13 @@ const article = {
 
   youtube:
     'https://www.youtube.com/watch?v=LRXVMotNybA&list=PLSlq2Lkls6sY&index=2',
+
+  source: {
+    text: "The Economist | America's lack of shipbuilding prowess is a problem for its navy",
+    url: 'https://www.economist.com/business/2026/08/06/americas-lack-of-shipbuilding-prowess-is-a-problem-for-its-navy',
+  },
 };
 
-// ===============================
 // ===============================
 
 uploadDefenseNews(article, API_BASE)
