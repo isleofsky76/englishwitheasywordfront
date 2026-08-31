@@ -10,207 +10,233 @@ import { uploadDefenseNews } from './defense-news-format.js';
 
 // ========== 여기만 수정 ==========
 
-const article = {
-  title: '[BBC 국제영어] | 트럼프 대통령 주한미군 훈련 축소 cite · deployment · armistice · defuse',
+// ========== 여기만 수정 ==========
 
-  slug: 'substantially-related-words',
+const article = {
+  title: 'vulnerable 취약한 연관 단어 정리 | deplete · attritional · proliferation · formidable',
+
+  slug: 'vulnerable-related-words',
 
   metaDescription:
-    'substantially(상당히), cite(이유로 들다), hostile(적대적인), deployment(병력 배치), condemn(규탄하다), armistice(정전협정), defuse(긴장을 완화하다) 등 한미 연합훈련 관련 시사 어휘를 정리합니다.',
+    'vulnerable(취약한), boast(성과를 내세우다), plight(곤경), deplete(고갈시키다), attritional(소모전의), proliferation(확산), formidable(만만치 않은) 등 국방 관련 시사 어휘를 정리합니다.',
 
-  password: 'seed_defense_substantially-related-words',
+  password: 'seed_defense_vulnerable-related-words',
 
   datePublished: '2026-08-31',
 
   intro: [
-    '트럼프 대통령의 **한미 연합군사훈련 축소 방침과 북한·이란 전쟁·한미동맹 문제**를 다룬 BBC 기사에서 사용된 국방·외교 어휘를 정리합니다.',
+    '요격미사일 부족과 군사작전, 방위산업을 다룬 기사에서 사용된 국방 관련 시사 어휘를 정리합니다.',
 
-    '**Source:** BBC, *Trump says US to scale back South Korea military drills after it stayed out of Iran war* — Brandon Drenon and Jake Kwon, 2026/08/17. All rights belong to the original creator.',
+    '**Source:** The Economist, *What happens when interceptor missiles run out?* All rights belong to the original creator.',
   ],
 
   words: [
     {
-      title: '1. substantially',
+      title: '1. vulnerable',
       narrative: [
-        'substantially(səbˈstænʃəli / 섭스탠셜리)는 **상당히**, **크게**라는 뜻입니다.',
+        'vulnerable(ˈvʌlnərəbəl / 벌너러블)은 **취약한**, **공격받기 쉬운**이라는 뜻입니다.',
 
-        '*Substantially reduce joint military exercises.*',
+        '*Military bases become vulnerable, and even major powers may be forced to limit military operations.*',
 
-        '**Substantially reduce** 상당히 줄이다 / **joint military exercises** 연합군사훈련을.',
+        '**Military bases become vulnerable** 군사기지가 취약해지고 / **and even major powers may be forced** 심지어 강대국들도 어쩔 수 없이 / **to limit military operations** 군사작전을 제한해야 할 수 있다.',
       ],
     },
 
     {
-      title: '2. cite',
+      title: '2. boast',
       narrative: [
-        'cite(saɪt / 사잇)는 **이유로 들다**, **사례를 제시하다**, **인용하다**라는 뜻입니다.',
+        'boast(boʊst / 보우스트)는 **자랑하다**, **성과를 내세우다**라는 뜻입니다.',
 
-        '*Citing his very good relationship with North Korea’s leader Kim Jong Un.*',
+        '*In March Ukraine boasted of intercepting about 70% of ballistic missiles.*',
 
-        '**Citing** 이유로 들며 / **his very good relationship** 자신의 매우 좋은 관계를 / **with North Korea’s leader Kim Jong Un** 북한 지도자 김정은과의.',
+        '**In March** 3월에 / **Ukraine boasted of intercepting** 우크라이나는 요격했다고 성과를 내세웠다 / **about 70% of ballistic missiles** 탄도미사일의 약 70%를.',
       ],
     },
 
     {
-      title: '3. inappropriate',
+      title: '3. plight',
       narrative: [
-        'inappropriate(ˌɪnəˈproʊpriət / 이너프로프리엇)는 **부적절한**, **상황에 맞지 않는**이라는 뜻입니다.',
-
-        '*These exercises send a signal that is totally inappropriate and hostile.*',
-
-        '**These exercises** 이러한 훈련은 / **send a signal** 신호를 보낸다 / **that is totally inappropriate and hostile** 완전히 부적절하고 적대적인.',
+        'plight(plaɪt / 플라이트)는 **곤경**, **어려운 처지**라는 뜻입니다.',
       ],
     },
 
     {
-      title: '4. hostile',
+      title: '4. divert',
       narrative: [
-        'hostile(ˈhɑːstəl / 하스틀)은 **적대적인**, **적의가 있는**이라는 뜻입니다.',
+        'divert(daɪˈvɜːrt / 다이버트)는 **다른 곳으로 돌리다**, **전용하다**라는 뜻입니다.',
 
-        '*A hostile military action escalates regional tensions.*',
+        '*Divert them to other missions.*',
 
-        '**A hostile military action** 적대적인 군사 행동은 / **escalates** 고조시킨다 / **regional tensions** 지역의 긴장을.',
+        '**Divert them** 그것들을 돌리다 / **to other missions** 다른 임무로.',
       ],
     },
 
     {
-      title: '5. deployment',
+      title: '5. deplete',
       narrative: [
-        'deployment(dɪˈplɔɪmənt / 디플로이먼트)는 **배치**, **전개**, **병력 파견**이라는 뜻입니다.',
+        'deplete(dɪˈpliːt / 디플리트)는 **고갈시키다**, **소진하다**라는 뜻입니다.',
 
-        '*Deployment of troops to aid Russia’s war against Ukraine.*',
+        '*Depleted its stocks.*',
 
-        '**Deployment of troops** 병력 배치 / **to aid Russia’s war** 러시아의 전쟁을 지원하기 위한 / **against Ukraine** 우크라이나에 대한.',
+        '**Depleted** 소진했다 / **its stocks** 보유 비축량을.',
       ],
     },
 
     {
-      title: '6. condemn',
+      title: '6. attritional',
       narrative: [
-        'condemn(kənˈdem / 컨뎀)은 **강력히 비난하다**, **규탄하다**라는 뜻입니다.',
+        'attritional(əˈtrɪʃənəl / 어트리셔널)은 **소모전의**라는 뜻입니다.',
 
-        '*Condemned the joint military drills.*',
+        '*Attritional wars.*',
 
-        '**Condemned** 규탄했다 / **the joint military drills** 연합군사훈련을.',
+        '**Attritional wars** 소모전들.',
       ],
     },
 
     {
-      title: '7. rehearsal',
+      title: '7. proximate',
       narrative: [
-        'rehearsal(rɪˈhɜːrsəl / 리허설)은 **예행연습**, **리허설**이라는 뜻입니다.',
+        'proximate(ˈprɑːksɪmət / 프락서밋)은 **가장 가까운**이라는 뜻입니다.',
 
-        '*As a rehearsal for an aggressive war.*',
+        '*Proximate cause.*',
 
-        '**As a rehearsal** 예행연습으로서 / **for an aggressive war** 침략 전쟁을 위한.',
+        '**Proximate cause** 가장 가까운 원인.',
       ],
     },
 
     {
-      title: '8. diplomacy',
+      title: '8. prodigious',
       narrative: [
-        'diplomacy(dɪˈploʊməsi / 디플로머시)는 **외교**, **외교술**이라는 뜻입니다.',
+        'prodigious(prəˈdɪdʒəs / 프러디저스)는 **막대한**, **엄청난**이라는 뜻입니다.',
 
-        '*Kim’s high-profile diplomacy with Trump.*',
+        '*Prodigious use.*',
 
-        '**Kim’s high-profile diplomacy** 김정은의 고위급 외교 / **with Trump** 트럼프와의.',
+        '**Prodigious use** 막대한 사용.',
       ],
     },
 
     {
-      title: '9. hesitance',
+      title: '9. hasten',
       narrative: [
-        'hesitance(ˈhezɪtəns / 헤지턴스)는 **망설임**, **주저함**이라는 뜻입니다.',
+        'hasten(ˈheɪsən / 헤이슨)은 **앞당기다**, **재촉하다**라는 뜻입니다.',
 
-        '*Displeasure with other allies for their hesitance to get involved in the conflict.*',
+        '*Hastened a reckoning.*',
 
-        '**Displeasure with other allies** 다른 동맹국들에 대한 불만 / **for their hesitance** 그들이 주저한다는 이유로 / **to get involved in the conflict** 분쟁에 개입하기를.',
+        '**Hastened** 앞당겼다 / **a reckoning** 현실을 직시해야 하는 순간을.',
       ],
     },
 
     {
-      title: '10. precedent',
+      title: '10. proliferation',
       narrative: [
-        'precedent(ˈpresɪdənt / 프레서던트)는 **선례**, **전례**라는 뜻입니다.',
+        'proliferation(prəˌlɪfəˈreɪʃən / 프럴리퍼레이션)은 **확산**이라는 뜻입니다.',
 
-        '*Trump’s move to downsize joint military exercises with South Korea is not without precedent.*',
+        '*Global proliferation.*',
 
-        '**Trump’s move** 트럼프의 움직임은 / **to downsize joint military exercises with South Korea** 한국과의 연합군사훈련을 축소하려는 / **is not without precedent** 선례가 없는 것은 아니다.',
+        '**Global proliferation** 전 세계적인 확산.',
       ],
     },
 
     {
-      title: '11. suspend',
+      title: '11. complacency',
       narrative: [
-        'suspend(səˈspend / 서스펜드)는 **중단하다**, **일시 정지하다**라는 뜻입니다.',
-
-        '*He suspended the exercises entirely in 2018.*',
-
-        '**He suspended** 그는 중단했다 / **the exercises entirely** 훈련을 완전히 / **in 2018** 2018년에.',
+        'complacency(kəmˈpleɪsənsi / 컴플레이선시)는 **안일함**이라는 뜻입니다.',
       ],
     },
 
     {
-      title: '12. provocative',
+      title: '12. gargantuan',
       narrative: [
-        'provocative(prəˈvɑːkətɪv / 프러바커티브)는 **도발적인**, **화를 유발하는**이라는 뜻입니다.',
+        'gargantuan(ɡɑːrˈɡæntʃuən / 가갠추언)은 **엄청나게 거대한**이라는 뜻입니다.',
 
-        '*At the time that the annual drills were provocative.*',
+        '*Gargantuan $1.5trn defence-budget.*',
 
-        '**At the time** 당시 / **that the annual drills were provocative** 연례 군사훈련이 도발적이었다고.',
+        '**Gargantuan** 엄청나게 거대한 / **$1.5trn defence-budget** 1조 5천억 달러 규모의 국방예산.',
       ],
     },
 
     {
-      title: '13. armistice',
+      title: '13. hitch',
       narrative: [
-        'armistice(ˈɑːrmɪstɪs / 아머스티스)는 **정전**, **휴전협정**이라는 뜻입니다.',
+        'hitch(hɪtʃ / 히치)는 **문제점**, **예상치 못한 장애**라는 뜻입니다.',
 
-        '*The war is still active since an armistice was signed in 1953.*',
+        '*The hitch is...*',
 
-        '**The war is still active** 전쟁은 여전히 끝나지 않은 상태다 / **since an armistice was signed** 정전협정이 체결된 이후에도 / **in 1953** 1953년에.',
+        '**The hitch is** 문제는…',
       ],
     },
 
     {
-      title: '14. station',
+      title: '14. improvise',
       narrative: [
-        'station(ˈsteɪʃən / 스테이션)은 군인이나 장비를 **배치하다**, **주둔시키다**라는 뜻입니다.',
+        'improvise(ˈɪmprəvaɪz / 임프러바이즈)는 **즉석에서 만들어내다**라는 뜻입니다.',
 
-        '*Troops stationed in Korea maintain readiness.*',
+        '*Improvised a system.*',
 
-        '**Troops stationed in Korea** 한국에 주둔한 병력은 / **maintain readiness** 대비 태세를 유지한다.',
+        '**Improvised** 즉석에서 만들었다 / **a system** 하나의 체계를.',
       ],
     },
 
     {
-      title: '15. defuse',
+      title: '15. upstage',
       narrative: [
-        'defuse(ˌdiːˈfjuːz / 디퓨즈)는 **긴장을 완화하다**, **위기를 진정시키다**라는 뜻입니다.',
+        'upstage(ˌʌpˈsteɪdʒ / 업스테이지)는 **능가하다**, **존재감을 빼앗다**라는 뜻입니다.',
 
-        '*Seoul has tried to defuse the tension this year.*',
+        '*Being upstaged by.*',
 
-        '**Seoul has tried** 한국 정부는 노력해 왔다 / **to defuse the tension** 긴장을 완화하려고 / **this year** 올해.',
+        '**Being upstaged by** ~에 의해 능가당하는 것.',
       ],
     },
 
     {
-      title: '16. commit',
+      title: '16. nimble',
       narrative: [
-        'commit(kəˈmɪt / 커밋)은 **약속하다**, **자금을 투입하기로 하다**라는 뜻입니다.',
+        'nimble(ˈnɪmbəl / 님블)은 **민첩한**, **빠르게 대응하는**이라는 뜻입니다.',
 
-        '*Committing $350bn to investing in the US.*',
+        '*Nimble defence.*',
 
-        '**Committing $350bn** 3,500억 달러를 투입하기로 약속하며 / **to investing in the US** 미국에 투자하는 데.',
+        '**Nimble defence** 민첩한 방어.',
+      ],
+    },
+
+    {
+      title: '17. upstart',
+      narrative: [
+        'upstart(ˈʌpstɑːrt / 업스타트)는 **신생의**라는 뜻입니다.',
+
+        '*Upstart firms.*',
+
+        '**Upstart firms** 신생 기업들.',
+      ],
+    },
+
+    {
+      title: '18. abound',
+      narrative: [
+        'abound(əˈbaʊnd / 어바운드)는 **많이 존재하다**, **풍부하다**라는 뜻입니다.',
+
+        '*Sceptics abound.*',
+
+        '**Sceptics** 회의론자들이 / **abound** 많이 존재한다.',
+      ],
+    },
+
+    {
+      title: '19. formidable',
+      narrative: [
+        'formidable(ˈfɔːrmɪdəbəl / 포미더블)은 **만만치 않은**이라는 뜻입니다.',
       ],
     },
   ],
 
-  source: 'https://www.bbc.com/news/articles/cx2lll7zvn0o',
+  source:
+    'https://www.economist.com/international/2026/08/18/what-happens-when-interceptor-missiles-run-out',
 
   youtube:
-    'https://www.youtube.com/watch?v=QMJAbMxz-ic&list=PLSlq2Lkls6sY&index=4',
+    'https://www.youtube.com/watch?v=A8Vot6kHG_0&list=PLSlq2Lkls6sY&index=5',
 };
+
+// ===============================
 
 // ===============================
 
