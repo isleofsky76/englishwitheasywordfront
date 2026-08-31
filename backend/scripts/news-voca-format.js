@@ -365,7 +365,7 @@ function buildRelatedLinksHtml(youtubeUrl, sourceUrl) {
   const url = String(sourceUrl ?? '').trim();
   if (url) {
     lines.push(
-      `<p class="nv-related-link-line"><a class="nv-related-link nv-related-link--article" href="${escapeHtml(url)}" rel="noopener noreferrer" target="_blank"><span aria-hidden="true">📰</span> 기사 보기</a></p>`
+      `<p class="nv-related-link-line"><a class="nv-related-link nv-related-link--article" href="${escapeHtml(url)}" rel="noopener noreferrer" target="_blank"><span aria-hidden="true">📰</span> 신문보기</a></p>`
     );
   }
   if (!lines.length) return '';
@@ -474,12 +474,20 @@ function buildWordSectionHtml(section) {
 
 function resolveArticleData(config) {
   if (Array.isArray(config.words) && config.words.length) {
-    const source = config.source || {};
+    let sourceText = '';
+    let sourceUrl = config.sourceUrl || '';
+    const rawSource = config.source;
+    if (typeof rawSource === 'string') {
+      sourceUrl = rawSource.trim();
+    } else if (rawSource && typeof rawSource === 'object') {
+      sourceText = rawSource.text || '';
+      sourceUrl = rawSource.url || sourceUrl;
+    }
     return {
       intro: config.intro || [],
       sections: config.words,
-      sourceText: source.text || '',
-      sourceUrl: source.url || config.sourceUrl || '',
+      sourceText,
+      sourceUrl,
       youtubeUrl: config.youtube || config.youtubeUrl || '',
     };
   }

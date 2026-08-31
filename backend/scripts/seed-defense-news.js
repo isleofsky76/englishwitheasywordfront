@@ -8,10 +8,6 @@ import { uploadDefenseNews } from './defense-news-format.js';
 
 // ========== 여기만 수정 ==========
 
-// ========== 여기만 수정 ==========
-
-// ========== 여기만 수정 ==========
-
 const article = {
   title: '요격 미사일이 떨어지면 어떻게 될까요? | deplete · attritional · proliferation · formidable',
 
@@ -228,16 +224,13 @@ const article = {
     },
   ],
 
-  source:
-    'https://www.economist.com/international/2026/08/18/what-happens-when-interceptor-missiles-run-out',
+  source: {
+    url: 'https://www.economist.com/international/2026/08/18/what-happens-when-interceptor-missiles-run-out',
+  },
 
   youtube:
     'https://www.youtube.com/watch?v=A8Vot6kHG_0&list=PLSlq2Lkls6sY&index=5',
 };
-
-// ===============================
-
-// ===============================
 
 // ===============================
 
