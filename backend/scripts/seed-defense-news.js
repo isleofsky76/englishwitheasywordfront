@@ -13,7 +13,7 @@ import { uploadDefenseNews } from './defense-news-format.js';
 // ========== 여기만 수정 ==========
 
 const article = {
-  title: 'destroyer 구축함 연관 단어 정리 | adrift · casualty · morale · consequential',
+  title: '미 해군 군함 동력상실 후 표류 | adrift · casualty · morale · consequential',
 
   slug: 'destroyer-related-words',
 
