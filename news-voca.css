@@ -34,6 +34,8 @@
 
 
 
+#post-message .nv-text > .nv-related-links,
+
 #post-message .nv-text > .nv-source,
 
 #post-message .nv-text > .nv-lead,
@@ -56,19 +58,20 @@
 
 #post-message .nv-lead {
   margin: 0 0 1.25rem;
-  padding: 0.85rem 1rem;
-  border-radius: 10px;
-  background: #f5f0e6;
-  border: 1px solid #e8dfd0;
+  padding: 0.75rem 0.9rem;
+  border-radius: 8px;
+  background: #fafaf8;
+  border: 1px solid #eceae6;
   box-shadow: none;
   box-sizing: border-box;
 }
 
 #post-message .nv-lead-text {
   margin: 0;
-  font-size: 1rem;
-  color: #374151;
-  line-height: 1.85;
+  font-size: 0.98rem;
+  color: #4b5563;
+  line-height: 1.8;
+  font-weight: 400;
 }
 
 #post-message .nv-lead-text + .nv-lead-text {
@@ -115,18 +118,19 @@
 #post-message .nv-word-section .nv-section-title {
   margin: 0 0 0.55rem;
   padding-bottom: 0;
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: #111827;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1f2937;
   border-bottom: none;
-  line-height: 1.45;
+  line-height: 1.5;
 }
 
 #post-message .nv-narrative-text {
   margin: 0;
-  font-size: 1rem;
-  color: #1f2937;
-  line-height: 1.9;
+  font-size: 0.98rem;
+  color: #4b5563;
+  line-height: 1.82;
+  font-weight: 400;
   word-break: keep-all;
   overflow-wrap: anywhere;
 }
@@ -136,9 +140,9 @@
 }
 
 #post-message .nv-section-rule {
-  margin: 1.15rem 0 0.85rem;
+  margin: 1rem 0 0.75rem;
   border: 0;
-  border-top: 1px solid #d1d5db;
+  border-top: 1px solid #ececec;
   opacity: 1;
 }
 
@@ -341,96 +345,43 @@
 
 
 #post-message .nv-hl {
-  color: #1a1a1a;
-  font-weight: 700;
+  color: inherit;
+  font-weight: 600;
   font-style: normal;
-  padding: 0.08em 0.22em;
-  border-radius: 3px;
+  padding: 0.04em 0.1em;
+  border-radius: 2px;
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
-  background: #ffe566;
-}
-
-/* 노란 형광펜 — 솔리드 */
-#post-message .nv-hl--paint {
-  background: #ffe566;
-  box-shadow: inset 0 -0.08em 0 rgba(230, 170, 20, 0.35);
-}
-
-/* 연한 마커 + 밑줄 */
-#post-message .nv-hl--marker {
-  background: rgba(255, 229, 102, 0.72);
-  border-bottom: 2.5px solid #f0b429;
-  border-radius: 2px;
-  padding-bottom: 0.02em;
-}
-
-/* 물결 밑줄 + 옅은 노란 배경 */
-#post-message .nv-hl--wave {
-  background: rgba(255, 241, 160, 0.88);
-  border-radius: 2px;
-  text-decoration-line: underline;
-  text-decoration-style: wavy;
-  text-decoration-color: #e8a317;
-  text-decoration-thickness: 1.5px;
-  text-underline-offset: 0.18em;
-}
-
-/* 잉크 타원 테두리 + 노란 배경 */
-#post-message .nv-hl--ink {
-  position: relative;
-  background: rgba(255, 230, 100, 0.7);
-  border: 1.5px solid #d97706;
-  border-radius: 999px;
-  padding: 0.06em 0.28em 0.1em;
+  background: rgba(255, 244, 200, 0.32);
+  border: none;
   box-shadow: none;
+  text-decoration: none;
+  transform: none;
 }
 
-/* 비스듬한 타원 */
-#post-message .nv-hl--oval-slant {
-  display: inline-block;
-  background: rgba(255, 236, 120, 0.72);
-  border: 1.6px solid #c2410c;
-  border-radius: 50% / 60%;
-  padding: 0.1em 0.38em 0.14em;
-  transform: rotate(-4deg) skewX(-8deg);
-  box-shadow: none;
-}
-
-/* 네모 박스 */
-#post-message .nv-hl--box {
-  display: inline-block;
-  background: rgba(255, 241, 160, 0.75);
-  border: 1.6px solid #b45309;
-  border-radius: 0;
-  padding: 0.06em 0.22em;
-  box-shadow: none;
-}
-
-/* 둥근 네모 */
-#post-message .nv-hl--box-round {
-  display: inline-block;
-  background: rgba(255, 229, 102, 0.7);
-  border: 1.6px solid #ca8a04;
-  border-radius: 0.45em;
-  padding: 0.06em 0.26em;
-  box-shadow: none;
-}
-
-/* 점선 네모 */
+#post-message .nv-hl--soft,
+#post-message .nv-hl--paint,
+#post-message .nv-hl--marker,
+#post-message .nv-hl--wave,
+#post-message .nv-hl--ink,
+#post-message .nv-hl--oval-slant,
+#post-message .nv-hl--box,
+#post-message .nv-hl--box-round,
 #post-message .nv-hl--dash {
-  display: inline-block;
-  background: rgba(255, 248, 200, 0.85);
-  border: 1.6px dashed #d97706;
-  border-radius: 0.2em;
-  padding: 0.06em 0.24em;
+  background: rgba(255, 244, 200, 0.32);
+  border: none;
+  border-bottom: none;
+  border-radius: 2px;
   box-shadow: none;
+  text-decoration: none;
+  transform: none;
+  padding: 0.04em 0.1em;
 }
 
 #post-message .nv-quote {
   font-style: normal;
-  font-weight: 700;
-  color: #1f2937;
+  font-weight: 500;
+  color: #4b5563;
   background: transparent;
 }
 
@@ -937,6 +888,51 @@
 #post-message .nv-source--link .nv-source-link:hover {
   background: transparent;
   border: none;
+  text-decoration: underline;
+  text-underline-offset: 0.12em;
+}
+
+
+
+#post-message .nv-related-links {
+  margin: 1.4rem 0 0;
+  padding: 0.95rem 0 0;
+  border: none;
+  border-top: 1px solid #d1d5db;
+  background: transparent;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+#post-message .nv-related-link-line {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.85;
+  color: #374151;
+}
+
+#post-message .nv-related-link-line + .nv-related-link-line {
+  margin-top: 0.15rem;
+}
+
+#post-message .nv-related-link {
+  display: inline;
+  font-weight: 600;
+  text-decoration: none;
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+
+#post-message .nv-related-link--youtube {
+  color: #dc2626;
+}
+
+#post-message .nv-related-link--article {
+  color: #2563eb;
+}
+
+#post-message .nv-related-link:hover {
   text-decoration: underline;
   text-underline-offset: 0.12em;
 }

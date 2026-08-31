@@ -23,27 +23,15 @@ function escapeHtml(text) {
     .replace(/"/g, '&quot;');
 }
 
-const NV_HL_VARIANTS = [
-  'nv-hl--paint',
-  'nv-hl--marker',
-  'nv-hl--wave',
-  'nv-hl--ink',
-  'nv-hl--oval-slant',
-  'nv-hl--box',
-  'nv-hl--box-round',
-  'nv-hl--dash',
-];
+const NV_HL_CLASS = 'nv-hl--soft';
 
 function parseInline(text) {
   const src = String(text ?? '');
   let out = '';
   let i = 0;
-  let hlIndex = 0;
 
   const pushHighlight = (inner) => {
-    const variant = NV_HL_VARIANTS[hlIndex % NV_HL_VARIANTS.length];
-    hlIndex += 1;
-    out += `<mark class="nv-hl ${variant}">${escapeHtml(inner)}</mark>`;
+    out += `<mark class="nv-hl ${NV_HL_CLASS}">${escapeHtml(inner)}</mark>`;
   };
 
   while (i < src.length) {
@@ -365,23 +353,31 @@ function formatWordHtml(en, ko, pron, ipa) {
 </div>`;
 }
 
-function buildSourceHtml(sourceText, sourceUrl) {
+function buildRelatedLinksHtml(youtubeUrl, sourceUrl) {
+  const lines = [];
+  const videoId = extractYoutubeVideoId(youtubeUrl);
+  if (videoId) {
+    const watchUrl = `https://www.youtube.com/watch?v=${videoId}`;
+    lines.push(
+      `<p class="nv-related-link-line"><a class="nv-related-link nv-related-link--youtube" href="${escapeHtml(watchUrl)}" rel="noopener noreferrer" target="_blank"><span aria-hidden="true">📺</span> 유튜브 보기</a></p>`
+    );
+  }
   const url = String(sourceUrl ?? '').trim();
-  if (!url) return '';
+  if (url) {
+    lines.push(
+      `<p class="nv-related-link-line"><a class="nv-related-link nv-related-link--article" href="${escapeHtml(url)}" rel="noopener noreferrer" target="_blank"><span aria-hidden="true">📰</span> 기사 보기</a></p>`
+    );
+  }
+  if (!lines.length) return '';
+  return `<footer class="nv-related-links">\n${lines.join('\n')}\n</footer>`;
+}
 
-  return `<footer class="nv-source nv-source--link">
-  <p class="nv-source-text"><a class="nv-source-link" href="${escapeHtml(url)}" rel="noopener noreferrer" target="_blank"><span aria-hidden="true">📰</span> 기사 보기</a></p>
-</footer>`;
+function buildSourceHtml(sourceText, sourceUrl) {
+  return buildRelatedLinksHtml('', sourceUrl);
 }
 
 function buildYoutubeHtml(youtubeUrl) {
-  const videoId = extractYoutubeVideoId(youtubeUrl);
-  if (!videoId) return '';
-
-  const watchUrl = `https://www.youtube.com/watch?v=${videoId}`;
-  return `<footer class="nv-youtube nv-youtube--link">
-  <p class="nv-youtube-text"><a class="nv-youtube-link" href="${escapeHtml(watchUrl)}" rel="noopener noreferrer" target="_blank"><span aria-hidden="true">📺</span> 유튜브 보기</a></p>
-</footer>`;
+  return buildRelatedLinksHtml(youtubeUrl, '');
 }
 
 function buildLeadHtml(intro) {
@@ -522,26 +518,26 @@ function buildArticleJsonLd({ title, slug, metaDescription, datePublished }) {
 export function buildNewsVocaMessage(config) {
   const { intro, sections, sourceText, sourceUrl, youtubeUrl } = resolveArticleData(config);
 
-  const sourceHtml = buildSourceHtml(sourceText, config.sourceUrl || sourceUrl);
+  const relatedLinksHtml = buildRelatedLinksHtml(
+    config.youtube || config.youtubeUrl || youtubeUrl,
+    config.sourceUrl || sourceUrl || config.source?.url
+  );
   const leadHtml = buildLeadHtml(intro);
   const sectionsHtml = sections.map(buildWordSectionHtml).join('\n');
   const bodyHtml = sectionsHtml ? `<div class="nv-body">\n${sectionsHtml}\n</div>` : '';
-  const youtubeHtml = buildYoutubeHtml(config.youtube || config.youtubeUrl || youtubeUrl);
 
   if (config.sourceAtEnd) {
     return `<article class="nv-text">
 ${leadHtml}
 ${bodyHtml}
-${youtubeHtml}
-${sourceHtml}
+${relatedLinksHtml}
 </article>`;
   }
 
   return `<article class="nv-text">
-${sourceHtml}
 ${leadHtml}
 ${bodyHtml}
-${youtubeHtml}
+${relatedLinksHtml}
 </article>`;
 }
 
