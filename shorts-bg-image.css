@@ -6,6 +6,9 @@
   --sbgi-border: #e5e7eb;
   --sbgi-text: #374151;
   --sbgi-muted: #6b7280;
+  /* 쇼츠 이미지 — 원본 비율 유지, 화면별 최대 크기 */
+  --sbgi-image-max-w: min(100%, 26.25rem); /* ~420px */
+  --sbgi-image-max-h: min(84vh, 780px);
 }
 
 .sbgi-list-intro {
@@ -45,7 +48,7 @@
 #post-message .sbgi-image-wrap {
   position: relative;
   width: 100%;
-  max-width: 22.5rem; /* PC: 쇼츠 비율 미리보기 (~360px) */
+  max-width: var(--sbgi-image-max-w);
   margin: 0.75rem auto 1rem;
   border-radius: 14px;
   overflow: hidden;
@@ -57,7 +60,7 @@
   display: block;
   width: 100%;
   height: auto;
-  max-height: min(72vh, 640px);
+  max-height: var(--sbgi-image-max-h);
   object-fit: contain;
   object-position: center;
 }
@@ -136,19 +139,23 @@
   border-bottom-color: #5b21b6;
 }
 
+@media (min-width: 992px) {
+  .sbgi-page {
+    --sbgi-image-max-w: min(100%, 28rem); /* PC 큰 화면 ~448px */
+    --sbgi-image-max-h: min(88vh, 820px);
+  }
+}
+
 @media (max-width: 576px) {
+  .sbgi-page {
+    --sbgi-image-max-w: min(94vw, 24rem); /* 모바일 거의 전폭 */
+    --sbgi-image-max-h: min(78vh, 720px);
+  }
+
   .sbgi-post-body,
   #post-message.sbgi-post-body {
     max-width: 100%;
     padding: 0 0.5rem;
-  }
-
-  #post-message .sbgi-image-wrap {
-    max-width: min(88vw, 20rem); /* 모바일: 화면에 맞춘 쇼츠 폭 */
-  }
-
-  #post-message .sbgi-image-wrap img {
-    max-height: min(58vh, 520px);
   }
 
   #guestbook-list .sbgi-card-thumb {
