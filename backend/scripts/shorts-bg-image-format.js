@@ -63,7 +63,8 @@ export function buildShortsBgImageMessage(config) {
 </div>
 <div class="sbgi-scenes">
 ${bodyHtml}
-</div>`;
+</div>
+<p class="sbgi-ai-note">*Google Gemini로 생성된 글과 이미지입니다. 관리자 리뷰 후에 게시 되었습니다.</p>`;
 }
 
 async function parseApiJson(res, label) {
