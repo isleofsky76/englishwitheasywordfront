@@ -10,68 +10,99 @@ import { uploadShortsBgImage } from './shorts-bg-image-format.js';
 
 // ========== 여기만 수정 ==========
 
-const article = {
-  title: '지중해 해변 골목 · Mediterranean beach alley',
+// ========== 여기만 수정 ==========
 
-  slug: 'mediterranean-beach-alley',
+const article = {
+  title: '런던 도심 거리와 신문 가판대 · London city street and newsstand',
+
+  slug: 'london-city-street-newsstand',
 
   metaDescription:
-    '남유럽·지중해 연안 마을 풍의 햇살 가득한 골목길과 해변 배경. 노천 카페, 가판대, 에메랄드빛 바다가 어우러진 쇼츠용 배경 이미지입니다.',
+    '빨간 2층 버스와 고전적인 석조 건축물, 노천 카페와 신문 가판대가 어우러진 런던 도심의 흐린 아침 풍경을 담은 쇼츠용 배경 이미지입니다.',
 
-  password: 'seed_shorts_mediterranean-beach-alley',
+  password: 'seed_shorts_london-city-street-newsstand',
 
   datePublished: '2026-08-31',
 
-  /** GitHub: resources/beach.jpg (send_photo 와 동일) — frontend/resources/ 에 두어도 push 시 resources/ 로 복사 */
-  image: '/resources/beach.jpg',
+  /** GitHub: resources/london-street.jpg (send_photo와 동일) — frontend/resources/에 두어도 push 시 resources/로 복사 */
+  image: '/resources/london-street.jpg',
 
   sections: [
     {
       heading: '전체적인 분위기 (Overall Scene)',
-      body: `남유럽 : Southern Europe
-지중해 연안 마을 : Mediterranean seaside town
-햇살이 쏟아지는 : sun-drenched
-좁은 골목길 : narrow alley
-자갈길 : cobblestone street
-고풍스러운 석조 건물 : historic stone buildings
-반짝이는 바다 : sparkling sea
-모래사장 : sandy beach
-시원하게 펼쳐지다 : open up to a stunning view
-따스한 황금빛 노을 : warm golden glow`,
+
+      body: `런던 도심 거리 : London city street
+
+빨간 2층 버스 : red double-decker bus
+
+자갈길 도로 : cobblestone road 
+
+고전적인 석조 건축물 : classic stone architecture 
+
+흐린 아침 풍경 : overcast morning scene (overcast /ˈoʊvərkæst/ 형용사 흐린)
+
+영국 특유의 분위기 : quintessential British vibe (quintessential /ˌkwɪntɪˈsenʃəl/ 형용사 전형적인·본질적인)
+
+출근길과 일상의 조화 : blend of commute and daily life 
+
+거리의 가판대 : street kiosk`,
     },
+
     {
-      heading: '좌측 카페 풍경 (Left Side: Cafe Scene)',
-      body: `노천카페 : open-air cafe
-원형 테이블 : round tables
-느긋한 오후 : leisurely afternoon
-노트북으로 작업하다 : work on a laptop
-커피를 홀짝이다 : sip coffee
-즐겁게 담소하다 : chat lively
-벽걸이 조명 : wall-mounted lantern
-고즈넉한 유럽 정취 : classic European charm`,
+      heading: '좌측 거리 및 카페 풍경 (Left Side: Street & Cafe Scene)',
+
+      body: `팔짱을 끼고 걷다 : walk arm in arm
+
+코트 차림 : dressed in coats
+
+가죽 토트백 : leather tote bag 
+
+노천 테이블 : outdoor table
+
+흰색 테이블보 : white tablecloth
+
+신문을 펼쳐 읽다 : read an unfolded newspaper (unfolded /ʌnˈfoʊldɪd/ 형용사 펼쳐진)
+
+커피잔을 들다 : hold a coffee cup
+
+꽃병 장식 : floral centerpiece (floral /ˈflɔːrəl/ 형용사 꽃의·꽃무늬의)
+
+우아한 옷차림 : elegant outfit`,
     },
+
     {
-      heading: '우측 가판대 풍경 (Right Side: Newsstand)',
-      body: `잡지와 신문 : magazines and newspapers
-가판대 : newsstand / kiosk
-단발머리 : bob haircut
-테이크아웃 컵 : takeout cup
-생각에 잠긴 채 서 있다 : stand thoughtfully
-노신사 : elderly gentleman
-신문을 펼쳐 든 채 : holding an unfolded newspaper
-시선을 던지다 : cast a glance`,
+      heading: '중앙 및 배경 풍경 (Center & Background Scene)',
+
+      body: `웨이터 / 서버 : waiter / server
+
+주문을 받다 : take an order
+
+정장 차림의 직장인들 : office workers in business suits
+
+아침 식사 모임 : breakfast gathering
+
+검은색 철제 펜스 : black wrought-iron fence 
+
+건물 모퉁이 : street corner, building corner`,
     },
+
     {
-      heading: '배경 및 해변 (Background & Beach)',
-      body: `해변가 : beachfront
-여름 옷차림 : summer outfits
-맨발로 모래사장을 거닐다 : stroll barefoot on the sand
-에메랄드빛 바다 : turquoise sea
-돛단배 : sailboats
-유유히 떠 있다 : drift peacefully`,
+      heading: '우측 신문 가판대 풍경 (Right Side: Newsstand Scene)',
+
+      body: `신문 및 잡지 가판대 : newspaper and magazine kiosk
+
+진열된 간행물 : displayed publications 
+
+신문을 훑어보다 : skim through a newspaper (skim /skɪm/ 동사 훑어보다)
+
+크로스백을 메다 : wear a crossbody bag 
+
+신문을 고르다 : select a newspaper`,
     },
   ],
 };
+
+// ========== 여기만 수정 ==========
 
 // ========== 여기만 수정 ==========
 
