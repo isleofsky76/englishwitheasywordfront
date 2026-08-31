@@ -13,7 +13,7 @@ import { uploadDefenseNews } from './defense-news-format.js';
 // ========== 여기만 수정 ==========
 
 const article = {
-  title: 'vulnerable 취약한 연관 단어 정리 | deplete · attritional · proliferation · formidable',
+  title: '요격 미사일이 떨어지면 어떻게 될까요? | deplete · attritional · proliferation · formidable',
 
   slug: 'vulnerable-related-words',
 
@@ -25,7 +25,7 @@ const article = {
   datePublished: '2026-08-31',
 
   intro: [
-    '요격미사일 부족과 군사작전, 방위산업을 다룬 기사에서 사용된 국방 관련 시사 어휘를 정리합니다.',
+    '요격 미사일이 떨어지면 어떻게 될까요? Economist 기사에 나온 어휘들입니다.',
 
     '**Source:** The Economist, *What happens when interceptor missiles run out?* All rights belong to the original creator.',
   ],
