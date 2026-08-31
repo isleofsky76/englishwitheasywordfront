@@ -8,109 +8,211 @@ import { uploadDefenseNews } from './defense-news-format.js';
 
 // ========== 여기만 수정 ==========
 
-const article = {
-  title: '[Economist 국제영어] 미국의 조선 능력 부족은 해군에 걸림돌이 된다. | prowess · eclipse · hamper · intertwine',
+// ========== 여기만 수정 ==========
 
-  slug: 'bulwark-related-words',
+const article = {
+  title: '[BBC 국제영어] | 트럼프 대통령 주한미군 훈련 축소 cite · deployment · armistice · defuse',
+
+  slug: 'substantially-related-words',
 
   metaDescription:
-    'bulwark(보루), prowess(뛰어난 능력), eclipse(능가하다), hamper(방해하다), intertwine(밀접하게 얽히다), commonality(공통점), complementary(상호 보완적인)의 뜻과 뉴스 예문을 정리합니다.',
+    'substantially(상당히), cite(이유로 들다), hostile(적대적인), deployment(병력 배치), condemn(규탄하다), armistice(정전협정), defuse(긴장을 완화하다) 등 한미 연합훈련 관련 시사 어휘를 정리합니다.',
 
-  password: 'seed_defense_bulwark-related-words',
+  password: 'seed_defense_substantially-related-words',
 
   datePublished: '2026-08-31',
 
   intro: [
-    '미국·중국·유럽의 **상업 조선업과 해군력의 관계**를 다룬 기사에서 사용된 국방·조선 관련 시사 어휘를 예문과 함께 정리합니다.',
+    '트럼프 대통령의 **한미 연합군사훈련 축소 방침과 북한·이란 전쟁·한미동맹 문제**를 다룬 BBC 기사에서 사용된 국방·외교 어휘를 정리합니다.',
+
+    '**Source:** BBC, *Trump says US to scale back South Korea military drills after it stayed out of Iran war* — Brandon Drenon and Jake Kwon, 2026/08/17. All rights belong to the original creator.',
   ],
 
   words: [
     {
-      title: '1. bulwark',
+      title: '1. substantially',
       narrative: [
-        'bulwark(ˈbʊlwərk / 불워크)는 **보루**, **방벽**, **요새**라는 뜻입니다.',
+        'substantially(səbˈstænʃəli / 섭스탠셜리)는 **상당히**, **크게**라는 뜻입니다.',
 
-        '*“The floating bulwark of our island” is how William Blackstone, an 18th-century British politician, described the Royal Navy.*',
+        '*Substantially reduce joint military exercises.*',
 
-        '**“The floating bulwark of our island”** “우리 섬의 떠다니는 보루”는 / **is how William Blackstone described the Royal Navy** 윌리엄 블랙스톤이 영국 해군을 묘사한 표현이다 / **an 18th-century British politician** 그는 18세기 영국 정치인이었다.',
+        '**Substantially reduce** 상당히 줄이다 / **joint military exercises** 연합군사훈련을.',
       ],
     },
 
     {
-      title: '2. prowess',
+      title: '2. cite',
       narrative: [
-        'prowess(ˈpraʊəs / 프라우어스)는 **뛰어난 능력**, **탁월한 실력**이라는 뜻입니다.',
+        'cite(saɪt / 사잇)는 **이유로 들다**, **사례를 제시하다**, **인용하다**라는 뜻입니다.',
 
-        '*America’s lack of commercial-shipbuilding prowess has proved costly for its navy, whose shipyards have been unable to deliver vessels on time and on budget.*',
+        '*Citing his very good relationship with North Korea’s leader Kim Jong Un.*',
 
-        '**America’s lack of commercial-shipbuilding prowess** 미국의 상업 조선 능력 부족은 / **has proved costly for its navy** 미 해군에 큰 대가를 치르게 했다 / **whose shipyards have been unable to deliver vessels** 해군 조선소들은 함정을 인도하지 못하고 있다 / **on time and on budget** 제때 그리고 정해진 예산에 맞춰.',
+        '**Citing** 이유로 들며 / **his very good relationship** 자신의 매우 좋은 관계를 / **with North Korea’s leader Kim Jong Un** 북한 지도자 김정은과의.',
       ],
     },
 
     {
-      title: '3. eclipse',
+      title: '3. inappropriate',
       narrative: [
-        'eclipse(ɪˈklɪps / 이클립스)는 **능가하다**, **빛을 잃게 하다**, **추월하다**라는 뜻입니다.',
+        'inappropriate(ˌɪnəˈproʊpriət / 이너프로프리엇)는 **부적절한**, **상황에 맞지 않는**이라는 뜻입니다.',
 
-        '*After the second world war Europe’s world-leading shipyards were eclipsed first by Japan, using cheap steel and labour along with new manufacturing methods, then by South Korea.*',
+        '*These exercises send a signal that is totally inappropriate and hostile.*',
 
-        '**After the second world war** 2차 세계대전 이후 / **Europe’s world-leading shipyards were eclipsed first by Japan** 유럽의 세계적인 조선소들은 일본에 먼저 추월당했고 / **using cheap steel and labour along with new manufacturing methods** 일본은 값싼 철강과 노동력, 새로운 제조 방식을 활용했다 / **then by South Korea** 이후에는 한국에 추월당했다.',
+        '**These exercises** 이러한 훈련은 / **send a signal** 신호를 보낸다 / **that is totally inappropriate and hostile** 완전히 부적절하고 적대적인.',
       ],
     },
 
     {
-      title: '4. hamper',
+      title: '4. hostile',
       narrative: [
-        'hamper(ˈhæmpər / 햄퍼)는 **방해하다**, **저해하다**라는 뜻입니다.',
+        'hostile(ˈhɑːstəl / 하스틀)은 **적대적인**, **적의가 있는**이라는 뜻입니다.',
 
-        '*America’s commercial-shipbuilding industry, by contrast, barely registers, hampering the ability of its navy to keep pace.*',
+        '*A hostile military action escalates regional tensions.*',
 
-        '**America’s commercial-shipbuilding industry, by contrast** 반면 미국의 상업 조선업은 / **barely registers** 거의 존재감이 없으며 / **hampering the ability of its navy** 미 해군의 능력을 저해하고 있다 / **to keep pace** 경쟁 속도를 따라갈 수 있는.',
+        '**A hostile military action** 적대적인 군사 행동은 / **escalates** 고조시킨다 / **regional tensions** 지역의 긴장을.',
       ],
     },
 
     {
-      title: '5. intertwine',
+      title: '5. deployment',
       narrative: [
-        'intertwine(ˌɪntərˈtwaɪn / 인터트와인)은 **밀접하게 얽히다**, **서로 연결되다**라는 뜻입니다.',
+        'deployment(dɪˈplɔɪmənt / 디플로이먼트)는 **배치**, **전개**, **병력 파견**이라는 뜻입니다.',
 
-        '*Matthew Funaiole of the Centre for Strategic and International Studies, a think-tank in Washington, explains that China’s commercial-shipbuilding industry is “closely intertwined” with its navy.*',
+        '*Deployment of troops to aid Russia’s war against Ukraine.*',
 
-        '**Matthew Funaiole of the Centre for Strategic and International Studies** 전략국제문제연구소의 매슈 푸나이올은 / **a think-tank in Washington** 워싱턴에 있는 싱크탱크인 / **explains that China’s commercial-shipbuilding industry** 중국의 상업 조선업이 / **is “closely intertwined” with its navy** 중국 해군과 “밀접하게 얽혀 있다”고 설명한다.',
+        '**Deployment of troops** 병력 배치 / **to aid Russia’s war** 러시아의 전쟁을 지원하기 위한 / **against Ukraine** 우크라이나에 대한.',
       ],
     },
 
     {
-      title: '6. commonality',
+      title: '6. condemn',
       narrative: [
-        'commonality(ˌkɑːməˈnæləti / 카머낼러티)는 **공통점**, **공통성**이라는 뜻입니다.',
+        'condemn(kənˈdem / 컨뎀)은 **강력히 비난하다**, **규탄하다**라는 뜻입니다.',
 
-        '*The underlying “platform” across vessels has many commonalities, points out Marzio Forlini of Bain, a consultancy.*',
+        '*Condemned the joint military drills.*',
 
-        '**The underlying “platform” across vessels** 여러 선박에 공통으로 적용되는 기본 “플랫폼”에는 / **has many commonalities** 많은 공통점이 있다고 / **points out Marzio Forlini of Bain** 베인의 마르지오 포를리니가 지적한다 / **a consultancy** 베인은 컨설팅회사이다.',
+        '**Condemned** 규탄했다 / **the joint military drills** 연합군사훈련을.',
       ],
     },
 
     {
-      title: '7. complementary',
+      title: '7. rehearsal',
       narrative: [
-        'complementary(ˌkɑːmpləˈmentəri / 캄플러멘터리)는 **상호 보완적인**, **서로 보충하는**이라는 뜻입니다.',
+        'rehearsal(rɪˈhɜːrsəl / 리허설)은 **예행연습**, **리허설**이라는 뜻입니다.',
 
-        '*Pierroberto Folgiero, boss of Fincantieri, Europe’s biggest shipbuilder, agrees that the two industries are highly complementary, pointing to manufacturing skills, the availability of shipyards and overlapping supply chains.*',
+        '*As a rehearsal for an aggressive war.*',
 
-        '**Pierroberto Folgiero, boss of Fincantieri** 핀칸티에리의 CEO 피에로베르토 폴지에로는 / **Europe’s biggest shipbuilder** 핀칸티에리는 유럽 최대 조선업체이며 / **agrees that the two industries are highly complementary** 두 산업이 매우 상호 보완적이라고 본다 / **pointing to manufacturing skills** 제조 기술과 / **the availability of shipyards** 조선소의 가용성 / **and overlapping supply chains** 그리고 서로 겹치는 공급망을 근거로.',
+        '**As a rehearsal** 예행연습으로서 / **for an aggressive war** 침략 전쟁을 위한.',
+      ],
+    },
+
+    {
+      title: '8. diplomacy',
+      narrative: [
+        'diplomacy(dɪˈploʊməsi / 디플로머시)는 **외교**, **외교술**이라는 뜻입니다.',
+
+        '*Kim’s high-profile diplomacy with Trump.*',
+
+        '**Kim’s high-profile diplomacy** 김정은의 고위급 외교 / **with Trump** 트럼프와의.',
+      ],
+    },
+
+    {
+      title: '9. hesitance',
+      narrative: [
+        'hesitance(ˈhezɪtəns / 헤지턴스)는 **망설임**, **주저함**이라는 뜻입니다.',
+
+        '*Displeasure with other allies for their hesitance to get involved in the conflict.*',
+
+        '**Displeasure with other allies** 다른 동맹국들에 대한 불만 / **for their hesitance** 그들이 주저한다는 이유로 / **to get involved in the conflict** 분쟁에 개입하기를.',
+      ],
+    },
+
+    {
+      title: '10. precedent',
+      narrative: [
+        'precedent(ˈpresɪdənt / 프레서던트)는 **선례**, **전례**라는 뜻입니다.',
+
+        '*Trump’s move to downsize joint military exercises with South Korea is not without precedent.*',
+
+        '**Trump’s move** 트럼프의 움직임은 / **to downsize joint military exercises with South Korea** 한국과의 연합군사훈련을 축소하려는 / **is not without precedent** 선례가 없는 것은 아니다.',
+      ],
+    },
+
+    {
+      title: '11. suspend',
+      narrative: [
+        'suspend(səˈspend / 서스펜드)는 **중단하다**, **일시 정지하다**라는 뜻입니다.',
+
+        '*He suspended the exercises entirely in 2018.*',
+
+        '**He suspended** 그는 중단했다 / **the exercises entirely** 훈련을 완전히 / **in 2018** 2018년에.',
+      ],
+    },
+
+    {
+      title: '12. provocative',
+      narrative: [
+        'provocative(prəˈvɑːkətɪv / 프러바커티브)는 **도발적인**, **화를 유발하는**이라는 뜻입니다.',
+
+        '*At the time that the annual drills were provocative.*',
+
+        '**At the time** 당시 / **that the annual drills were provocative** 연례 군사훈련이 도발적이었다고.',
+      ],
+    },
+
+    {
+      title: '13. armistice',
+      narrative: [
+        'armistice(ˈɑːrmɪstɪs / 아머스티스)는 **정전**, **휴전협정**이라는 뜻입니다.',
+
+        '*The war is still active since an armistice was signed in 1953.*',
+
+        '**The war is still active** 전쟁은 여전히 끝나지 않은 상태다 / **since an armistice was signed** 정전협정이 체결된 이후에도 / **in 1953** 1953년에.',
+      ],
+    },
+
+    {
+      title: '14. station',
+      narrative: [
+        'station(ˈsteɪʃən / 스테이션)은 군인이나 장비를 **배치하다**, **주둔시키다**라는 뜻입니다.',
+
+        '*Troops stationed in Korea maintain readiness.*',
+
+        '**Troops stationed in Korea** 한국에 주둔한 병력은 / **maintain readiness** 대비 태세를 유지한다.',
+      ],
+    },
+
+    {
+      title: '15. defuse',
+      narrative: [
+        'defuse(ˌdiːˈfjuːz / 디퓨즈)는 **긴장을 완화하다**, **위기를 진정시키다**라는 뜻입니다.',
+
+        '*Seoul has tried to defuse the tension this year.*',
+
+        '**Seoul has tried** 한국 정부는 노력해 왔다 / **to defuse the tension** 긴장을 완화하려고 / **this year** 올해.',
+      ],
+    },
+
+    {
+      title: '16. commit',
+      narrative: [
+        'commit(kəˈmɪt / 커밋)은 **약속하다**, **자금을 투입하기로 하다**라는 뜻입니다.',
+
+        '*Committing $350bn to investing in the US.*',
+
+        '**Committing $350bn** 3,500억 달러를 투입하기로 약속하며 / **to investing in the US** 미국에 투자하는 데.',
       ],
     },
   ],
 
-  youtube:
-    'https://www.youtube.com/watch?v=LRXVMotNybA&list=PLSlq2Lkls6sY&index=2',
+  source: 'https://www.bbc.com/news/articles/cx2lll7zvn0o',
 
-  source: {
-    text: "The Economist | America's lack of shipbuilding prowess is a problem for its navy",
-    url: 'https://www.economist.com/business/2026/08/06/americas-lack-of-shipbuilding-prowess-is-a-problem-for-its-navy',
-  },
+  youtube:
+    'https://www.youtube.com/watch?v=QMJAbMxz-ic&list=PLSlq2Lkls6sY&index=4',
 };
+
+// ===============================
 
 // ===============================
 
