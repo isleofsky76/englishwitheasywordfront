@@ -8,63 +8,83 @@ import { uploadSynonym } from './synonym-format.js';
 
 // ========== 여기만 수정 ==========
 // ========== 여기만 수정 ==========
+
 const article = {
-  title: 'crooked 비뚤어진 연관 단어 정리 | wonky · askew · lopsided',
-  slug: 'crooked-related-words',
+  title: 'junta 군사정권 연관 단어 정리 | cabal · calumny · melee · insurgency',
+
+  slug: 'junta-related-words',
+
   metaDescription:
-    'crooked(구부러진·비뚤어진), wonky(비뚤어진·고르지 않은), askew(한쪽으로 기울어진), lopsided(한쪽으로 치우친), uneven(고르지 않은) 뜻·발음·예문을 정리한 연관 어휘 학습입니다.',
-  password: 'seed_synonym_crooked-related-words',
-  datePublished: '2026-08-21',
+    'junta(군사정권·군부 집단), cabal(비밀 파벌), calumny(중상모략), melee(난투극·혼전), insurgency(무장 반란)의 뜻·발음·예문을 정리한 시사 연관 어휘 학습입니다.',
+
+  password: 'seed_synonym_junta-related-words',
+
+  datePublished: '2026-08-31',
 
   intro: [
-    '모양이나 방향이 **곧지 않거나 균형이 맞지 않을 때** 쓸 수 있는 표현을 묶어 봤습니다. crooked를 중심으로 wonky, askew, lopsided, uneven이 각각 어떤 상황에서 쓰이는지 예문과 함께 정리합니다.',
+    '정치권력과 사회적 충돌을 다룬 뉴스에서 자주 접할 수 있는 표현을 묶어 봤습니다. **군부 집단과 비밀 권력 세력부터 중상모략, 난투극, 무장 반란까지** junta를 중심으로 관련 시사 어휘를 예문과 함께 정리합니다.',
   ],
 
   words: [
     {
-      title: '1. crooked',
+      title: '1. junta',
       narrative: [
-        'crooked는 **구부러진**, **비뚤어진**이라는 뜻입니다. /ˈkrʊkɪd/ (크루키드). 직선이어야 할 것이 휘거나 바르지 않은 모양을 나타낼 때 자주 쓰입니다.',
-        '*Straight trees have crooked roots.*',
-        '**Straight trees** 곧게 자란 나무도 **have crooked roots** 구불구불한 뿌리를 가지고 있다.',
+        'junta는 **군사정권**, **권력을 장악한 군부 집단**이라는 뜻입니다. /ˈhʊntə/ (훈타). 군사 쿠데타 등을 통해 정부를 장악하고 국가를 통치하는 군 지도자 집단을 가리킵니다.',
+
+        '*A military junta is consolidating power in Iran.*',
+
+        '**A military junta** 군부 집단이 **is consolidating power** 권력을 공고히 하고 있다 **in Iran** 이란에서.',
       ],
     },
+
     {
-      title: '2. wonky',
+      title: '2. cabal',
       narrative: [
-        'wonky는 **비뚤어진**, **고르지 않은**, 또는 제대로 균형이 잡히지 않은 상태를 뜻합니다. /ˈwɑːŋki/ (웡키). 일상적인 영국 영어에서 모양이나 상태가 조금 이상하거나 삐뚤어졌을 때 자주 쓰입니다.',
-        '*My teeth are wonky, discoloured and gappy.*',
-        '**My teeth** 내 치아는 **are wonky** 삐뚤어져 있고 **discoloured and gappy** 변색돼 있으며 사이도 벌어져 있다.',
+        'cabal은 **비밀 파벌**, **소수 권력 집단**이라는 뜻입니다. /kəˈbɑːl/ (커발). 정치권이나 조직 내부에서 자신들의 이익을 위해 비밀리에 영향력을 행사하는 소수 집단을 가리킬 때 주로 쓰입니다.',
+
+        "*If Labour's northern faction is to have more success than the London cabal, it will need to be more inclusive.*",
+
+        "**If Labour's northern faction is to have more success** 노동당의 북부 파벌이 더 성공하려면 **than the London cabal** 런던의 비밀스러운 소수 권력 집단보다 **it will need to be more inclusive** 더 포용적이어야 한다.",
       ],
     },
+
     {
-      title: '3. askew',
+      title: '3. calumny',
       narrative: [
-        'askew는 **비뚤어진**, **한쪽으로 기울어진**이라는 뜻입니다. /əˈskjuː/ (어스큐). 물건이 제 위치에서 살짝 돌아가거나 비스듬하게 놓인 모습을 표현할 때 잘 쓰입니다.',
-        '*Her hat was slightly askew.*',
-        '**Her hat** 그녀의 모자는 **was slightly askew** 약간 한쪽으로 비뚤어져 있었다.',
+        'calumny는 **중상모략**, **악의적인 비방**이라는 뜻입니다. /ˈkæləmni/ (캘럼니). 다른 사람의 명예를 훼손하기 위해 고의로 퍼뜨리는 거짓 주장이나 비난을 나타내는 격식 있는 표현입니다.',
+
+        '*Mr Sarkozy denounced the allegations against him and Eric Woerth as calumny and lies.*',
+
+        '**Mr Sarkozy denounced** 사르코지는 비난했다 **the allegations against him and Eric Woerth** 자신과 에리크 뵈르트에 대한 의혹을 **as calumny and lies** 중상모략과 거짓말이라고.',
       ],
     },
+
     {
-      title: '4. lopsided',
+      title: '4. melee',
       narrative: [
-        'lopsided는 **한쪽으로 치우친**, **불균형한**이라는 뜻입니다. /ˌlɑːpˈsaɪdɪd/ (랍사이디드). 물리적인 모양뿐 아니라 의견·보도·경쟁 등이 한쪽에 지나치게 치우친 경우에도 자주 쓰입니다.',
-        '*The article presents a somewhat lopsided view of events.*',
-        '**The article** 그 기사는 **presents** 제시한다 **a somewhat lopsided view of events** 사건을 다소 한쪽으로 치우친 시각에서.',
+        'melee는 **난투극**, **혼전**, **뒤엉킨 소동**이라는 뜻입니다. /ˈmeɪleɪ/ (메일레이). 여러 사람이 한꺼번에 뒤엉켜 싸우거나 혼란스러운 상황이 벌어졌을 때 사용합니다.',
+
+        "*The melee was a hot topic at Monday night's city council meeting.*",
+
+        '**The melee** 그 난투극은 **was a hot topic** 뜨거운 화제가 됐다 **at Monday night’s city council meeting** 월요일 밤 시의회 회의에서.',
       ],
     },
+
     {
-      title: '5. uneven',
+      title: '5. insurgency',
       narrative: [
-        'uneven은 **고르지 않은**, **울퉁불퉁한**, **균일하지 않은**이라는 뜻입니다. /ʌnˈiːvən/ (언이븐). 표면의 높낮이가 일정하지 않거나 수준·분포 등이 균등하지 않을 때 폭넓게 사용됩니다.',
-        '*The floor felt uneven under his feet.*',
-        '**The floor** 바닥이 **felt uneven** 고르지 않게 느껴졌다 **under his feet** 그의 발밑에서.',
+        'insurgency는 **반란**, **무장 반정부 활동**이라는 뜻입니다. /ɪnˈsɜːrdʒənsi/ (인서전시). 무장 세력이 기존 정부나 통치 권력에 맞서 지속적으로 벌이는 조직적인 저항 활동을 가리킵니다.',
+
+        "*Their insurgency, now estimated to affect 40% of the country's districts, has in some places become an insurrection.*",
+
+        '**Their insurgency** 그들의 무장 반란은 **now estimated to affect 40% of the country’s districts** 현재 전국 지역의 40%에 영향을 미치는 것으로 추정되며 **has in some places become an insurrection** 일부 지역에서는 본격적인 봉기로 발전했다.',
       ],
     },
   ],
 
-  youtube: 'https://www.youtube.com/watch?v=yeKSvY9r_4c&list=PLepVNyM8dwWg&index=2',
+  youtube: 'https://www.youtube.com/shorts/QuPTE5oO5RE',
 };
+
 // ===============================
 
 uploadSynonym(article, API_BASE)
