@@ -3,6 +3,7 @@
 
   var cachedCombined = null;
   var cachePromise = null;
+  var boardEntriesCache = {};
 
   function escapeHtml(str) {
     return String(str || '')
@@ -70,6 +71,7 @@
       { path: '/vocabulary-quiz', page: 'vocabulary-quiz.html', label: '퀴즈' },
       { path: '/vocabulary', page: 'english-synonym.html', postPath: 'english-synonym', label: '연관단어' },
       { path: '/opinions', page: 'english-opinions.html', postPath: 'english-opinions', label: '오피니언' },
+      { path: '/shorts-bg-image', page: 'shorts-bg-image.html', postPath: 'shorts-bg-image', label: '신문읽는 이미지' },
       { path: '/calm-mind', page: 'calm-mind.html', postPath: 'calm-mind', label: '마음 다스리는 글' },
       { path: '/easy-voca', page: 'popular-voca.html', postPath: 'popular-voca', label: '인기 어휘' },
       { path: '/situational-english', page: 'situational-english.html', postPath: 'situational-english', label: '상황' },
@@ -89,7 +91,9 @@
           return r.json();
         })
         .then(function (data) {
-          return { board: board, entries: parseEntries(data) };
+          var entries = parseEntries(data);
+          boardEntriesCache[board.path] = entries;
+          return { board: board, entries: entries };
         });
     })).then(function (results) {
       var combined = [];
@@ -131,9 +135,26 @@
       })
       .catch(function (err) {
         cachePromise = null;
+        boardEntriesCache = {};
         throw err;
       });
     return cachePromise;
+  }
+
+  function fetchBoardEntries(apiPath) {
+    return fetchCombined().then(function () {
+      return boardEntriesCache[apiPath] || [];
+    });
+  }
+
+  function buildSkeletonListHtml(count, listClass) {
+    var n = count || 3;
+    var cls = listClass || 'preview-list';
+    var items = '';
+    for (var i = 0; i < n; i++) {
+      items += '<li class="preview-skeleton" aria-hidden="true"><span class="preview-skeleton-line"></span></li>';
+    }
+    return '<ul class="' + cls + ' preview-list--skeleton">' + items + '</ul>';
   }
 
   function buildPreviewListHtml(rows, emptyMessage, listClass) {
@@ -204,7 +225,13 @@
       title.style.maxWidth = prevMaxWidth;
 
       stats.classList.remove('preview-meta-stats--hidden');
+      stats.style.visibility = 'hidden';
+      stats.style.position = 'absolute';
+      stats.style.pointerEvents = 'none';
       var statsWidth = stats.offsetWidth;
+      stats.style.visibility = '';
+      stats.style.position = '';
+      stats.style.pointerEvents = '';
       stats.classList.add('preview-meta-stats--hidden');
 
       var meta = link.querySelector('.preview-meta');
@@ -259,8 +286,9 @@
   function loadBest(listEl, limit) {
     if (!listEl) return;
     var max = limit || 8;
-    var loadingHtml = buildPreviewListHtml([], '로딩 중...', listEl.getAttribute('data-list-class'));
-    listEl.innerHTML = loadingHtml;
+    if (!listEl.querySelector('.preview-list')) {
+      listEl.innerHTML = buildSkeletonListHtml(3, listEl.getAttribute('data-list-class'));
+    }
     var fallbackHtml = buildPreviewListHtml([], '인기 글을 불러올 수 없습니다.', listEl.getAttribute('data-list-class'));
     var timeoutId = setTimeout(function () { listEl.innerHTML = fallbackHtml; }, 10000);
 
@@ -291,7 +319,9 @@
     if (!listEl) return;
     var max = limit || 8;
     var listClass = listEl.getAttribute('data-list-class');
-    listEl.innerHTML = buildPreviewListHtml([], '로딩 중...', listClass);
+    if (!listEl.querySelector('.preview-list')) {
+      listEl.innerHTML = buildSkeletonListHtml(3, listClass);
+    }
     var fallbackHtml = buildPreviewListHtml([], '최신 글을 불러올 수 없습니다.', listClass);
     var timeoutId = setTimeout(function () { listEl.innerHTML = fallbackHtml; }, 10000);
 
@@ -363,9 +393,15 @@
     loadRecent: loadRecent,
     loadNavPreviews: loadNavPreviews,
     buildPreviewListHtml: buildPreviewListHtml,
+    buildSkeletonListHtml: buildSkeletonListHtml,
+    fetchBoardEntries: fetchBoardEntries,
     applyPreviewStatsVisibility: applyPreviewStatsVisibility,
     search: search
   };
+
+  if (document.getElementById('home-previews')) {
+    fetchCombined();
+  }
 
   var statsResizeTimer = null;
   window.addEventListener('resize', function () {

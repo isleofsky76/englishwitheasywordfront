@@ -323,8 +323,16 @@
 .nav-tone-photo { color: #9ed4ff !important; }
 .nav-tone-pros { color: #d7dee8 !important; }
 .nav-tone-opine { color: #f3c77a !important; }
+.nav-tone-sbgi { color: #c4b5fd !important; }
 .nav-tone-calm { color: #a8e6cf !important; }
 .nav-tone-dir { color: #b8d8ff !important; }
+
+#yt-billboard-slot.yt-billboard-slot {
+  min-height: 64px;
+  margin: 10px 12px 14px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #1a1a1a 0%, #2b0a0a 48%, #111 100%);
+}
 
 #yt-billboard-bar {
   position: relative;

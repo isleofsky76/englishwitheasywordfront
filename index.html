@@ -691,6 +691,33 @@
             background: transparent;
             box-shadow: none;
         }
+        .preview-list--skeleton {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .preview-list--skeleton .preview-skeleton {
+            padding: 0.5rem 0;
+        }
+        .preview-skeleton-line {
+            display: block;
+            height: 0.82rem;
+            max-width: 92%;
+            border-radius: 6px;
+            background: linear-gradient(90deg, #e8e8e8 0%, #f4f4f4 50%, #e8e8e8 100%);
+            background-size: 200% 100%;
+            animation: preview-skeleton-shimmer 1.3s ease-in-out infinite;
+        }
+        .preview-list--skeleton .preview-skeleton:nth-child(2) .preview-skeleton-line {
+            max-width: 78%;
+        }
+        .preview-list--skeleton .preview-skeleton:nth-child(3) .preview-skeleton-line {
+            max-width: 64%;
+        }
+        @keyframes preview-skeleton-shimmer {
+            0% { background-position: 100% 0; }
+            100% { background-position: -100% 0; }
+        }
         .preview-more a {
             color: var(--text-secondary);
             font-weight: 400;
@@ -782,7 +809,7 @@
     <link rel="stylesheet" href="nav-home-menu.css?v=20260815a">
     <link rel="stylesheet" href="weather-banner.css?v=20260612g">
     <link rel="stylesheet" href="world-clock.css?v=20260612g">
-    <link rel="stylesheet" href="site-masthead.css?v=20260816b">
+    <link rel="stylesheet" href="site-masthead.css?v=20260831a">
     <style>
         /* navbar-unified / nav-home-menu 이후에 덮어씀 */
         :root {
@@ -910,6 +937,7 @@
                 <li class="nav-item"><a class="nav-link nav-tone-news" href="news-voca-list.html">국제</a></li>
                 <li class="nav-item"><a class="nav-link nav-tone-culture" href="culture-voca-list.html">컬쳐</a></li>
                 <li class="nav-item"><a class="nav-link nav-tone-opine" href="english-opinions-list.html">오피니언</a></li>
+                <li class="nav-item"><a class="nav-link nav-tone-sbgi" href="shorts-bg-image-list.html">신문읽는 이미지</a></li>
                 <li class="nav-item"><a class="nav-link nav-tone-calm" href="calm-mind-list.html">마음글</a></li>
                 <li class="nav-item nav-more">
                     <button type="button" class="nav-more-toggle" aria-expanded="false" aria-haspopup="true" aria-label="더보기">
@@ -919,6 +947,7 @@
             </ul>
         </div>
     </nav>
+    <div id="yt-billboard-slot" class="yt-billboard-slot" aria-hidden="true"></div>
     
     <main class="container main-content">
         <!-- Hero Section -->
@@ -966,6 +995,15 @@
                     <div class="preview-more"><a href="english-opinions-list.html">더보기 &gt;</a></div>
                 </div>
                 <div id="opinions-preview-list" role="region" aria-label="오피니언 목록"></div>
+            </article>
+
+            <!-- Shorts background / newspaper reading image -->
+            <article class="preview-section">
+                <div class="preview-header">
+                    <h2>신문읽는 이미지</h2>
+                    <div class="preview-more"><a href="shorts-bg-image-list.html">더보기 &gt;</a></div>
+                </div>
+                <div id="shorts-bg-image-preview-list" role="region" aria-label="신문읽는 이미지 목록"></div>
             </article>
 
             <!-- Calm Mind -->
@@ -1113,8 +1151,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="viewpost-seo.js?v=20260702"></script>
     <script src="nav-home-menu.js?v=20260821f"></script>
-    <script src="site-masthead.js?v=20260821f"></script>
-    <script src="home-board-preview.js?v=20260818e"></script>
+    <script src="site-masthead.js?v=20260831a"></script>
+    <script src="home-board-preview.js?v=20260831a"></script>
     <script src="english-directory.js" defer></script>
     
     <script>
@@ -1239,361 +1277,79 @@
             }
         }
 
-        var loadingListHtml = buildPreviewListHtml([], '로딩 중...');
-        ['best-views-preview-list', 'recent-updates-preview-list', 'wordofday-preview-list', 'news-voca-preview-list', 'defense-news-preview-list', 'vocabulary-quiz-preview-list', 'synonym-preview-list', 'easy-voca-preview-list', 'situational-english-preview-list', 'cooking-voca-preview-list', 'culture-voca-preview-list', 'ranking-news-preview-list', 'photo-english-preview-list', 'pros-cons-preview-list', 'english-directory-preview-list'].forEach(function(id) {
+        function buildSkeletonListHtml(count) {
+            if (window.HomeBoardPreview && HomeBoardPreview.buildSkeletonListHtml) {
+                return HomeBoardPreview.buildSkeletonListHtml(count || 3);
+            }
+            return '<ul class="preview-list preview-list--skeleton"><li class="preview-skeleton" aria-hidden="true"><span class="preview-skeleton-line"></span></li></ul>';
+        }
+
+        function loadSectionPreview(config) {
+            var listEl = document.getElementById(config.listId);
+            if (!listEl) return;
+            var urlParams = new URLSearchParams(window.location.search);
+            var apiMode = config.apiMode !== undefined ? config.apiMode : urlParams.get('api');
+            if (config.wordofdayApi) {
+                apiMode = apiMode || (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1' ? 'prod' : null);
+            }
+            var fallbackHtml = buildPreviewListHtml([], config.fallbackLink);
+            var timeoutMs = config.timeoutMs === undefined ? 8000 : config.timeoutMs;
+            var timeoutId = timeoutMs > 0 ? setTimeout(function() { listEl.innerHTML = fallbackHtml; }, timeoutMs) : null;
+
+            function finish(entries) {
+                if (timeoutId) clearTimeout(timeoutId);
+                renderPreviewList(listEl, entries, config.postPage, apiMode, config.emptyMessage, config.postPath);
+            }
+
+            function fail() {
+                if (timeoutId) clearTimeout(timeoutId);
+                listEl.innerHTML = fallbackHtml;
+            }
+
+            if (window.HomeBoardPreview && HomeBoardPreview.fetchBoardEntries) {
+                HomeBoardPreview.fetchBoardEntries(config.apiPath).then(finish).catch(fail);
+                return;
+            }
+
+            fetch(getApiBase() + config.apiPath)
+                .then(function(r) {
+                    if (!r.ok) throw new Error('HTTP ' + r.status);
+                    return r.json();
+                })
+                .then(function(data) { finish(parseEntries(data)); })
+                .catch(fail);
+        }
+
+        var previewSkeletonHtml = buildSkeletonListHtml(3);
+        ['best-views-preview-list', 'recent-updates-preview-list', 'wordofday-preview-list', 'news-voca-preview-list', 'defense-news-preview-list', 'vocabulary-quiz-preview-list', 'synonym-preview-list', 'easy-voca-preview-list', 'situational-english-preview-list', 'cooking-voca-preview-list', 'culture-voca-preview-list', 'ranking-news-preview-list', 'photo-english-preview-list', 'pros-cons-preview-list', 'opinions-preview-list', 'shorts-bg-image-preview-list', 'calm-mind-preview-list'].forEach(function(id) {
             var el = document.getElementById(id);
-            if (el) el.innerHTML = loadingListHtml;
+            if (el) el.innerHTML = previewSkeletonHtml;
         });
 
-        // News Voca
-        (function loadNewsVocaPreview() {
-            var urlParams = new URLSearchParams(window.location.search);
-            var apiMode = urlParams.get('api');
-            var listEl = document.getElementById('news-voca-preview-list');
-            if (!listEl) return;
+        var HOME_PREVIEW_SECTIONS = [
+            { listId: 'synonym-preview-list', apiPath: '/vocabulary', postPage: 'english-synonym.html', emptyMessage: '게시글이 없습니다.', fallbackLink: '<a href="english-synonym-list.html">연관단어 보기</a>' },
+            { listId: 'defense-news-preview-list', apiPath: '/defense-news', postPage: 'defense-news.html', postPath: 'defense-news', emptyMessage: '게시글이 없습니다.', fallbackLink: '<a href="defense-news-list.html">국방뉴스 보기</a>' },
+            { listId: 'news-voca-preview-list', apiPath: '/guestbook', postPage: 'news-voca.html', emptyMessage: '게시글이 없습니다.', fallbackLink: '<a href="news-voca-list.html">뉴스 어휘 보기</a>' },
+            { listId: 'culture-voca-preview-list', apiPath: '/culture-voca', postPage: 'culture-voca.html', emptyMessage: '게시글이 없습니다.', fallbackLink: '<a href="culture-voca-list.html">컬쳐 어휘 보기</a>' },
+            { listId: 'opinions-preview-list', apiPath: '/opinions', postPage: 'english-opinions.html', postPath: 'english-opinions', emptyMessage: '게시글이 없습니다.', fallbackLink: '<a href="english-opinions-list.html">오피니언 보기</a>' },
+            { listId: 'shorts-bg-image-preview-list', apiPath: '/shorts-bg-image', postPage: 'shorts-bg-image.html', postPath: 'shorts-bg-image', emptyMessage: '게시글이 없습니다.', fallbackLink: '<a href="shorts-bg-image-list.html">신문읽는 이미지 보기</a>' },
+            { listId: 'calm-mind-preview-list', apiPath: '/calm-mind', postPage: 'calm-mind.html', postPath: 'calm-mind', emptyMessage: '게시글이 없습니다.', fallbackLink: '<a href="calm-mind-list.html">마음 다스리는 글 보기</a>' },
+            { listId: 'vocabulary-quiz-preview-list', apiPath: '/vocabulary-quiz', postPage: 'vocabulary-quiz.html', emptyMessage: '등록된 퀴즈가 없습니다.', fallbackLink: '<a href="vocabulary-quiz-list.html">영어 단어 퀴즈 보기</a>', timeoutMs: 0 },
+            { listId: 'easy-voca-preview-list', apiPath: '/easy-voca', postPage: 'popular-voca.html', emptyMessage: '게시글이 없습니다.', fallbackLink: '<a href="popular-voca-list.html">인기 어휘 보기</a>' },
+            { listId: 'situational-english-preview-list', apiPath: '/situational-english', postPage: 'situational-english.html', emptyMessage: '게시글이 없습니다.', fallbackLink: '<a href="situational-english-list.html">상황 영어 보기</a>' },
+            { listId: 'ranking-news-preview-list', apiPath: '/ranking-news', postPage: 'ranking-news.html', emptyMessage: '게시글이 없습니다.', fallbackLink: '<a href="ranking-news-list.html">랭킹 뉴스 보기</a>' },
+            { listId: 'cooking-voca-preview-list', apiPath: '/cooking-voca', postPage: 'cooking-voca.html', emptyMessage: '게시글이 없습니다.', fallbackLink: '<a href="cooking-voca-list.html">요리 영어 보기</a>' },
+            { listId: 'photo-english-preview-list', apiPath: '/photo-english', postPage: 'photo-english.html', emptyMessage: '게시글이 없습니다.', fallbackLink: '<a href="photo-english-list.html">포토 영어 보기</a>' },
+            { listId: 'pros-cons-preview-list', apiPath: '/pros-cons', postPage: 'pros-cons.html', emptyMessage: '게시글이 없습니다.', fallbackLink: '<a href="pros-cons-list.html">Pros & Cons 보기</a>' },
+            { listId: 'wordofday-preview-list', apiPath: '/wordofday', postPage: 'word-of-the-day.html', emptyMessage: '게시글이 없습니다.', fallbackLink: '<a href="word-of-the-day-list.html?api=prod">오늘의 단어장 보기</a>', wordofdayApi: true }
+        ];
 
-            var fallbackHtml = buildPreviewListHtml([], '<a href="news-voca-list.html">뉴스 어휘 보기</a>');
-            var newsTimeoutId = setTimeout(function() { listEl.innerHTML = fallbackHtml; }, 8000);
+        HOME_PREVIEW_SECTIONS.forEach(loadSectionPreview);
 
-            fetch(getApiBase() + '/guestbook')
-                .then(function(r) {
-                    if (!r.ok) throw new Error('HTTP ' + r.status);
-                    return r.json();
-                })
-                .then(function(data) {
-                    clearTimeout(newsTimeoutId);
-                    renderPreviewList(listEl, parseEntries(data), 'news-voca.html', apiMode, '게시글이 없습니다.');
-                })
-                .catch(function() {
-                    clearTimeout(newsTimeoutId);
-                    listEl.innerHTML = fallbackHtml;
-                });
-        })();
-
-        // Defense News
-        (function loadDefenseNewsPreview() {
-            var urlParams = new URLSearchParams(window.location.search);
-            var apiMode = urlParams.get('api');
-            var listEl = document.getElementById('defense-news-preview-list');
-            if (!listEl) return;
-
-            var fallbackHtml = buildPreviewListHtml([], '<a href="defense-news-list.html">국방뉴스 보기</a>');
-            var timeoutId = setTimeout(function() { listEl.innerHTML = fallbackHtml; }, 8000);
-
-            fetch(getApiBase() + '/defense-news')
-                .then(function(r) {
-                    if (!r.ok) throw new Error('HTTP ' + r.status);
-                    return r.json();
-                })
-                .then(function(data) {
-                    clearTimeout(timeoutId);
-                    renderPreviewList(listEl, parseEntries(data), 'defense-news.html', apiMode, '게시글이 없습니다.');
-                })
-                .catch(function() {
-                    clearTimeout(timeoutId);
-                    listEl.innerHTML = fallbackHtml;
-                });
-        })();
-
-        // Vocabulary Quiz
-        (function loadVocabularyQuizPreview() {
-            var listEl = document.getElementById('vocabulary-quiz-preview-list');
-            if (!listEl) return;
-            fetch(getApiBase() + '/vocabulary-quiz')
-                .then(function(r) {
-                    if (!r.ok) throw new Error('HTTP ' + r.status);
-                    return r.json();
-                })
-                .then(function(data) {
-                    renderPreviewList(listEl, parseEntries(data), 'vocabulary-quiz.html', null, '등록된 퀴즈가 없습니다.');
-                })
-                .catch(function() {
-                    listEl.innerHTML = buildPreviewListHtml([], '<a href="vocabulary-quiz-list.html">영어 단어 퀴즈 보기</a>');
-                });
-        })();
-
-        // Synonym
-        (function loadSynonymPreview() {
-            var urlParams = new URLSearchParams(window.location.search);
-            var apiMode = urlParams.get('api');
-            var listEl = document.getElementById('synonym-preview-list');
-            if (!listEl) return;
-
-            var fallbackHtml = buildPreviewListHtml([], '<a href="english-synonym-list.html">연관단어 보기</a>');
-            var synTimeoutId = setTimeout(function() { listEl.innerHTML = fallbackHtml; }, 8000);
-
-            fetch(getApiBase() + '/vocabulary')
-                .then(function(r) {
-                    if (!r.ok) throw new Error('HTTP ' + r.status);
-                    return r.json();
-                })
-                .then(function(data) {
-                    clearTimeout(synTimeoutId);
-                    renderPreviewList(listEl, parseEntries(data), 'english-synonym.html', apiMode, '게시글이 없습니다.');
-                })
-                .catch(function() {
-                    clearTimeout(synTimeoutId);
-                    listEl.innerHTML = fallbackHtml;
-                });
-        })();
-
-        // Opinions
-        (function loadOpinionsPreview() {
-            var urlParams = new URLSearchParams(window.location.search);
-            var apiMode = urlParams.get('api');
-            var listEl = document.getElementById('opinions-preview-list');
-            if (!listEl) return;
-
-            var fallbackHtml = buildPreviewListHtml([], '<a href="english-opinions-list.html">오피니언 보기</a>');
-            var opTimeoutId = setTimeout(function() { listEl.innerHTML = fallbackHtml; }, 8000);
-
-            fetch(getApiBase() + '/opinions')
-                .then(function(r) {
-                    if (!r.ok) throw new Error('HTTP ' + r.status);
-                    return r.json();
-                })
-                .then(function(data) {
-                    clearTimeout(opTimeoutId);
-                    renderPreviewList(listEl, parseEntries(data), 'english-opinions.html', apiMode, '게시글이 없습니다.');
-                })
-                .catch(function() {
-                    clearTimeout(opTimeoutId);
-                    listEl.innerHTML = fallbackHtml;
-                });
-        })();
-
-        // Calm Mind
-        (function loadCalmMindPreview() {
-            var urlParams = new URLSearchParams(window.location.search);
-            var apiMode = urlParams.get('api');
-            var listEl = document.getElementById('calm-mind-preview-list');
-            if (!listEl) return;
-
-            var fallbackHtml = buildPreviewListHtml([], '<a href="calm-mind-list.html">마음 다스리는 글 보기</a>');
-            var calmTimeoutId = setTimeout(function() { listEl.innerHTML = fallbackHtml; }, 8000);
-
-            fetch(getApiBase() + '/calm-mind')
-                .then(function(r) {
-                    if (!r.ok) throw new Error('HTTP ' + r.status);
-                    return r.json();
-                })
-                .then(function(data) {
-                    clearTimeout(calmTimeoutId);
-                    renderPreviewList(listEl, parseEntries(data), 'calm-mind.html', apiMode, '게시글이 없습니다.');
-                })
-                .catch(function() {
-                    clearTimeout(calmTimeoutId);
-                    listEl.innerHTML = fallbackHtml;
-                });
-        })();
-
-        // Popular Voca
-        (function loadEasyVocaPreview() {
-            var urlParams = new URLSearchParams(window.location.search);
-            var apiMode = urlParams.get('api');
-            var listEl = document.getElementById('easy-voca-preview-list');
-            if (!listEl) return;
-
-            var fallbackHtml = buildPreviewListHtml([], '<a href="popular-voca-list.html">인기 어휘 보기</a>');
-            var easyTimeoutId = setTimeout(function() { listEl.innerHTML = fallbackHtml; }, 8000);
-
-            fetch(getApiBase() + '/easy-voca')
-                .then(function(r) {
-                    if (!r.ok) throw new Error('HTTP ' + r.status);
-                    return r.json();
-                })
-                .then(function(data) {
-                    clearTimeout(easyTimeoutId);
-                    renderPreviewList(listEl, parseEntries(data), 'popular-voca.html', apiMode, '게시글이 없습니다.');
-                })
-                .catch(function() {
-                    clearTimeout(easyTimeoutId);
-                    listEl.innerHTML = fallbackHtml;
-                });
-        })();
-
-        // Situational English
-        (function loadSituationalEnglishPreview() {
-            var urlParams = new URLSearchParams(window.location.search);
-            var apiMode = urlParams.get('api');
-            var listEl = document.getElementById('situational-english-preview-list');
-            if (!listEl) return;
-
-            var fallbackHtml = buildPreviewListHtml([], '<a href="situational-english-list.html">상황 영어 보기</a>');
-            var timeoutId = setTimeout(function() { listEl.innerHTML = fallbackHtml; }, 8000);
-
-            fetch(getApiBase() + '/situational-english')
-                .then(function(r) {
-                    if (!r.ok) throw new Error('HTTP ' + r.status);
-                    return r.json();
-                })
-                .then(function(data) {
-                    clearTimeout(timeoutId);
-                    renderPreviewList(listEl, parseEntries(data), 'situational-english.html', apiMode, '게시글이 없습니다.');
-                })
-                .catch(function() {
-                    clearTimeout(timeoutId);
-                    listEl.innerHTML = fallbackHtml;
-                });
-        })();
-
-        // Ranking News
-        (function loadRankingNewsPreview() {
-            var urlParams = new URLSearchParams(window.location.search);
-            var apiMode = urlParams.get('api');
-            var listEl = document.getElementById('ranking-news-preview-list');
-            if (!listEl) return;
-
-            var fallbackHtml = buildPreviewListHtml([], '<a href="ranking-news-list.html">랭킹 뉴스 보기</a>');
-            var timeoutId = setTimeout(function() { listEl.innerHTML = fallbackHtml; }, 8000);
-
-            fetch(getApiBase() + '/ranking-news')
-                .then(function(r) {
-                    if (!r.ok) throw new Error('HTTP ' + r.status);
-                    return r.json();
-                })
-                .then(function(data) {
-                    clearTimeout(timeoutId);
-                    renderPreviewList(listEl, parseEntries(data), 'ranking-news.html', apiMode, '게시글이 없습니다.');
-                })
-                .catch(function() {
-                    clearTimeout(timeoutId);
-                    listEl.innerHTML = fallbackHtml;
-                });
-        })();
-
-        // Cooking Voca
-        (function loadCookingVocaPreview() {
-            var urlParams = new URLSearchParams(window.location.search);
-            var apiMode = urlParams.get('api');
-            var listEl = document.getElementById('cooking-voca-preview-list');
-            if (!listEl) return;
-
-            var fallbackHtml = buildPreviewListHtml([], '<a href="cooking-voca-list.html">요리 영어 보기</a>');
-            var timeoutId = setTimeout(function() { listEl.innerHTML = fallbackHtml; }, 8000);
-
-            fetch(getApiBase() + '/cooking-voca')
-                .then(function(r) {
-                    if (!r.ok) throw new Error('HTTP ' + r.status);
-                    return r.json();
-                })
-                .then(function(data) {
-                    clearTimeout(timeoutId);
-                    renderPreviewList(listEl, parseEntries(data), 'cooking-voca.html', apiMode, '게시글이 없습니다.');
-                })
-                .catch(function() {
-                    clearTimeout(timeoutId);
-                    listEl.innerHTML = fallbackHtml;
-                });
-        })();
-
-        // Culture Voca
-        (function loadCultureVocaPreview() {
-            var urlParams = new URLSearchParams(window.location.search);
-            var apiMode = urlParams.get('api');
-            var listEl = document.getElementById('culture-voca-preview-list');
-            if (!listEl) return;
-
-            var fallbackHtml = buildPreviewListHtml([], '<a href="culture-voca-list.html">컬쳐 어휘 보기</a>');
-            var timeoutId = setTimeout(function() { listEl.innerHTML = fallbackHtml; }, 8000);
-
-            fetch(getApiBase() + '/culture-voca')
-                .then(function(r) {
-                    if (!r.ok) throw new Error('HTTP ' + r.status);
-                    return r.json();
-                })
-                .then(function(data) {
-                    clearTimeout(timeoutId);
-                    renderPreviewList(listEl, parseEntries(data), 'culture-voca.html', apiMode, '게시글이 없습니다.');
-                })
-                .catch(function() {
-                    clearTimeout(timeoutId);
-                    listEl.innerHTML = fallbackHtml;
-                });
-        })();
-
-        // Photo English
-        (function loadPhotoEnglishPreview() {
-            var urlParams = new URLSearchParams(window.location.search);
-            var apiMode = urlParams.get('api');
-            var listEl = document.getElementById('photo-english-preview-list');
-            if (!listEl) return;
-
-            var fallbackHtml = buildPreviewListHtml([], '<a href="photo-english-list.html">포토 영어 보기</a>');
-            var timeoutId = setTimeout(function() { listEl.innerHTML = fallbackHtml; }, 8000);
-
-            fetch(getApiBase() + '/photo-english')
-                .then(function(r) {
-                    if (!r.ok) throw new Error('HTTP ' + r.status);
-                    return r.json();
-                })
-                .then(function(data) {
-                    clearTimeout(timeoutId);
-                    renderPreviewList(listEl, parseEntries(data), 'photo-english.html', apiMode, '게시글이 없습니다.');
-                })
-                .catch(function() {
-                    clearTimeout(timeoutId);
-                    listEl.innerHTML = fallbackHtml;
-                });
-        })();
-
-        // Pros & Cons
-        (function loadProsConsPreview() {
-            var urlParams = new URLSearchParams(window.location.search);
-            var apiMode = urlParams.get('api');
-            var listEl = document.getElementById('pros-cons-preview-list');
-            if (!listEl) return;
-
-            var fallbackHtml = buildPreviewListHtml([], '<a href="pros-cons-list.html">Pros & Cons 보기</a>');
-            var timeoutId = setTimeout(function() { listEl.innerHTML = fallbackHtml; }, 8000);
-
-            fetch(getApiBase() + '/pros-cons')
-                .then(function(r) {
-                    if (!r.ok) throw new Error('HTTP ' + r.status);
-                    return r.json();
-                })
-                .then(function(data) {
-                    clearTimeout(timeoutId);
-                    renderPreviewList(listEl, parseEntries(data), 'pros-cons.html', apiMode, '게시글이 없습니다.');
-                })
-                .catch(function() {
-                    clearTimeout(timeoutId);
-                    listEl.innerHTML = fallbackHtml;
-                });
-        })();
-
-        // Word of the Day
-        (function loadWordOfDayPreview() {
-            var urlParams = new URLSearchParams(window.location.search);
-            var apiMode = urlParams.get('api');
-            var listEl = document.getElementById('wordofday-preview-list');
-            if (!listEl) return;
-
-            var effectiveApiMode = apiMode || (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1' ? 'prod' : null);
-            var fallbackHtml = buildPreviewListHtml([], '<a href="word-of-the-day-list.html?api=prod">오늘의 단어장 보기</a>');
-            var timeoutId = setTimeout(function() { listEl.innerHTML = fallbackHtml; }, 8000);
-
-            fetch(getApiBase() + '/wordofday')
-                .then(function(r) {
-                    if (!r.ok) throw new Error('HTTP ' + r.status);
-                    return r.json();
-                })
-                .then(function(data) {
-                    clearTimeout(timeoutId);
-                    renderPreviewList(listEl, parseEntries(data), 'word-of-the-day.html', effectiveApiMode, '게시글이 없습니다.');
-                })
-                .catch(function() {
-                    clearTimeout(timeoutId);
-                    listEl.innerHTML = fallbackHtml;
-                });
-        })();
-
-        // Best Views & Recent Updates (all boards)
-        (function loadHomeBoardPreviews() {
-            if (!window.HomeBoardPreview) return;
+        if (window.HomeBoardPreview) {
             HomeBoardPreview.loadBest(document.getElementById('best-views-preview-list'), 8);
             HomeBoardPreview.loadRecent(document.getElementById('recent-updates-preview-list'), 8);
-        })();
+        }
     </script>
 </body>
 </html>

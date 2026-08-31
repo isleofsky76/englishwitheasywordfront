@@ -13,6 +13,7 @@
     { href: 'news-voca-list.html', label: '국제', tone: 'news', pages: ['news-voca-list.html', 'news-voca.html'] },
     { href: 'culture-voca-list.html', label: '컬쳐', tone: 'culture', pages: ['culture-voca-list.html', 'culture-voca.html'] },
     { href: 'english-opinions-list.html', label: '오피니언', tone: 'opine', pages: ['english-opinions-list.html', 'english-opinions.html'] },
+    { href: 'shorts-bg-image-list.html', label: '신문읽는 이미지', tone: 'sbgi', pages: ['shorts-bg-image-list.html', 'shorts-bg-image.html'] },
     { href: 'calm-mind-list.html', label: '마음글', tone: 'calm', pages: ['calm-mind-list.html', 'calm-mind.html'] },
     { href: 'word-of-the-day-list.html', label: '단어장', tone: 'wotd', pages: ['word-of-the-day-list.html', 'word-of-the-day.html'] },
     { href: 'vocabulary-quiz.html', label: '퀴즈', tone: 'quiz', pages: ['vocabulary-quiz.html', 'vocabulary-quiz-list.html'] },
@@ -54,6 +55,7 @@
         'ranking-news': 'ranking-news.html',
         'photo-english': 'photo-english.html',
         'english-opinions': 'english-opinions.html',
+        'shorts-bg-image': 'shorts-bg-image.html',
         'calm-mind': 'calm-mind.html',
         'vocabulary-quiz': 'vocabulary-quiz.html'
       };
@@ -192,6 +194,12 @@
         '<span class="yt-billboard__title">YouTube로 공부하기</span>' +
         '<span class="yt-billboard__handle">@istudyeng</span>' +
       '</span>';
+    var slot = document.getElementById('yt-billboard-slot');
+    if (slot) {
+      slot.replaceWith(bar);
+      document.documentElement.classList.add('has-yt-billboard');
+      return;
+    }
     var clock = document.getElementById('world-clock-bar');
     var weather = document.getElementById('weather-banner');
     var nav = document.querySelector('.navbar.fixed-top');
@@ -352,6 +360,14 @@
     if (!nav) return;
     if (!nav.id) nav.id = 'navbar';
     nav.classList.add('site-masthead', 'navbar-expand');
+    if (nav.querySelector('.site-masthead-brand') && nav.querySelector('#site-search-form')) {
+      bindMoreMenu(nav);
+      syncNavbarHeight();
+      window.addEventListener('resize', syncNavbarHeight);
+      window.addEventListener('load', syncNavbarHeight);
+      requestAnimationFrame(syncNavbarHeight);
+      return;
+    }
     nav.innerHTML = mastheadHtml(base, currentPageKey());
     bindMoreMenu(nav);
     syncNavbarHeight();
@@ -371,7 +387,7 @@
       initSearch(base);
     });
     setTimeout(function () {
-      injectYoutubeBar();
+      if (!document.getElementById('yt-billboard-bar')) injectYoutubeBar();
       syncNavbarHeight();
     }, 400);
   }
