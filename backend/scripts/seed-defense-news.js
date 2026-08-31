@@ -27,7 +27,7 @@ const article = {
   intro: [
     '미 해군 구축함의 표류 사고와 장기 파병, 승조원들의 근무 환경을 다룬 기사에서 사용된 국방·해군 관련 시사 어휘를 정리합니다.',
 
-    '**Source:** The Guardian. All rights belong to the original creator.',
+ 
   ],
 
   words: [
