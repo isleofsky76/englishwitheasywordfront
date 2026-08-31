@@ -69,7 +69,7 @@ export const BOARD_SEO = {
     cssFile: 'page30_viewpost_opinions.css',
     cssVersion: '20260816a',
     jsFile: 'page30_viewpost_opinions.js',
-    jsVersion: '20260816a',
+    jsVersion: '20260831a',
     listHtml: 'english-opinions-list.html',
   },
   'calm-mind': {

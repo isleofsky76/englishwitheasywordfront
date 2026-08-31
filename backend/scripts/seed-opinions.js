@@ -37,20 +37,26 @@ ${bits.join(',\n')}
 </p>`;
 }
 
+function escapeHtmlAttr(value) {
+  return String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/"/g, '&quot;');
+}
+
 function buildRelatedLinksHtml(youtube, source) {
   const lines = [];
   if (youtube) {
     lines.push(
-      `<p class="nv-related-link-line"><a class="nv-related-link nv-related-link--youtube" href="${youtube}" rel="noopener noreferrer" target="_blank"><span aria-hidden="true">📺</span> 유튜브 보기</a></p>`
+      `<p><a href="${escapeHtmlAttr(youtube)}" target="_blank" rel="noopener noreferrer">📺 유튜브 보기</a></p>`
     );
   }
   if (source) {
     lines.push(
-      `<p class="nv-related-link-line"><a class="nv-related-link nv-related-link--article" href="${source}" rel="noopener noreferrer" target="_blank"><span aria-hidden="true">📰</span> 신문보기</a></p>`
+      `<p><a href="${escapeHtmlAttr(source)}" target="_blank" rel="noopener noreferrer">📰 신문 보기</a></p>`
     );
   }
   if (!lines.length) return '';
-  return `<footer class="nv-related-links">\n${lines.join('\n')}\n</footer>`;
+  return `<div>\n${lines.join('\n')}\n</div>`;
 }
 
 function buildOpinionMessage({ words, youtube, source }) {
