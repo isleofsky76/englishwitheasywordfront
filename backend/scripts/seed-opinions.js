@@ -68,154 +68,154 @@ function buildOpinionMessage({ words, youtube, source }) {
 
 const opinionSet = [
   {
-    en: 'low-key',
-    pron: '로우키',
-    ipa: '/ˌloʊ ˈkiː/',
-    meaning: '절제된, 소박한, 요란하지 않은',
-    short: '소박한',
+    en: 'uniquely',
+    pron: '유니클리',
+    ipa: '/juˈniːkli/',
+    meaning: '독특하게, 유례없이, 고유하게',
+    short: '독특하게',
     enExample:
-      'These are low-key affairs in someone’s home or a restaurant, not fancy parties or far-flung cruises.',
+      'We have abandoned the uniquely American idea that you must earn what you get.',
     koExample:
-      '이 모임들은(affairs) 화려한 파티나(fancy parties) 멀리 떠나는 크루즈 여행이 아니라(far-flung cruises), 누군가의 집이나 식당에서 갖는 소박하고 차분한 자리입니다(low-key affairs).'
+      '우리는 자신이 얻는 것은 노력으로 획득해야 한다는(you must earn what you get) 미국 특유의 사고방식을(the uniquely American idea) 저버렸습니다(have abandoned).'
   },
   {
-    en: 'decibel',
-    pron: '데서벨',
-    ipa: '/ˈdesɪbel/',
-    meaning: '데시벨, 소음의 정도',
-    short: '소음 정도',
+    en: 'immigrate',
+    pron: '이미그레이트',
+    ipa: '/ˈɪmɪɡreɪt/',
+    meaning: '이주해 오다, 이민 오다',
+    short: '이민 오다',
     enExample:
-      'We gather in sixes and eights for dinner at places chosen more for their decibels than their desserts.',
+      'They had immigrated to become Americans—that was the whole point.',
     koExample:
-      '우리는 여섯 명이나 여덟 명씩 모여(gather in sixes and eights) 저녁을 먹는데, 디저트보다는(their desserts) 소음 정도를 더 고려해(for their decibels) 고른 장소에서 만납니다.'
+      '그들은 미국인이 되기 위해(to become Americans) 이민을 왔고(had immigrated), 그것이 바로 핵심이었습니다(that was the whole point).'
   },
   {
-    en: 'ritualistic',
-    pron: '리추얼리스틱',
-    ipa: '/ˌrɪtʃuəˈlɪstɪk/',
-    meaning: '의식적인, 의례적인, 정해진 절차를 따르는',
-    short: '의례적인',
+    en: 'scramble',
+    pron: '스크램블',
+    ipa: '/ˈskræmbəl/',
+    meaning: '고군분투하다, 필사적으로 애쓰다',
+    short: '고군분투하다',
     enExample:
-      'Seating is more ritualistic than a state dinner.',
+      'My father came back from war and scrambled to find work.',
     koExample:
-      '자리 배치는(Seating) 국빈 만찬보다(a state dinner) 더 의례적이고 정해진 절차를 따릅니다(more ritualistic).'
+      '아버지는 전쟁에서 돌아와(came back from war) 일자리를 구하려고(to find work) 필사적으로 애쓰셨습니다(scrambled).'
   },
   {
-    en: 'license',
-    pron: '라이선스',
-    ipa: '/ˈlaɪsəns/',
-    meaning: '자유, 파격, 허가',
-    short: '자유',
+    en: 'obligation',
+    pron: '아블리게이션',
+    ipa: '/ˌɑːblɪˈɡeɪʃən/',
+    meaning: '의무, 책임',
+    short: '의무',
     enExample:
-      'Because we are turning 70 and have license to let loose, we order a single dessert with six forks.',
+      'You reached for it, you used it, and you honored the obligation.',
     koExample:
-      '우리는 이제 일흔 살이 되었고(are turning 70) 긴장을 풀고 마음껏 즐길 자유가 있으므로(have license to let loose), 디저트 하나를 시켜(a single dessert) 포크 여섯 개로 나누어 먹습니다(with six forks).'
+      '기회를 향해 손을 뻗고(reached for it), 그 기회를 활용하며(used it), 그에 따른 의무와 책임을 다해야 했습니다(honored the obligation).'
   },
   {
-    en: 'divulge',
-    pron: '디벌지',
-    ipa: '/daɪˈvʌldʒ/',
-    meaning: '비밀이나 사적인 정보를 털어놓다, 밝히다',
-    short: '털어놓다',
+    en: 'affluent',
+    pron: '애플루언트',
+    ipa: '/ˈæfluənt/',
+    meaning: '부유한, 풍족한',
+    short: '부유한',
     enExample:
-      'Downsizing and condo strategies are divulged.',
+      'Most of my colleagues grew up with educated parents, affluent households and connections.',
     koExample:
-      '집의 규모를 줄이는 방법과(Downsizing) 콘도 장만 전략이(condo strategies) 서로 공유되고 공개됩니다(are divulged).'
+      '내 동료들 대부분은(Most of my colleagues) 교육받은 부모와(educated parents), 부유한 집안(affluent households), 든든한 인맥 속에서(connections) 자랐습니다(grew up).'
   },
   {
-    en: 'holy grail',
-    pron: '홀리 그레일',
-    ipa: '/ˌhoʊli ˈɡreɪl/',
-    meaning: '성배, 모두가 간절히 바라는 것',
-    short: '최고의 조건',
+    en: 'entitlement',
+    pron: '인타이틀먼트',
+    ipa: '/ɪnˈtaɪtəlmənt/',
+    meaning: '공식적인 권리, 당연히 누려야 한다는 권리의식',
+    short: '권리의식',
     enExample:
-      'First-floor master bedrooms are the holy grail in hilly Pittsburgh.',
+      'The difference shapes whether you see success as an entitlement or as yours to create.',
     koExample:
-      '언덕이 많은 피츠버그에서는(hilly Pittsburgh) 1층에 있는 안방이(First-floor master bedrooms) 모두가 간절히 바라는 최고의 조건입니다(the holy grail).'
+      '그 차이는(The difference) 성공을 당연히 누려야 할 권리로 보는지(see success as an entitlement), 아니면 스스로 만들어야 할 것으로 보는지(as yours to create)에 대한 시각을 결정합니다(shapes).'
   },
   {
-    en: 'grudge',
-    pron: '그러지',
-    ipa: '/ɡrʌdʒ/',
-    meaning: '원한, 앙금, 유감',
-    short: '앙금',
+    en: 'catastrophic',
+    pron: '캐터스트로픽',
+    ipa: '/ˌkætəˈstrɑːfɪk/',
+    meaning: '파멸적인, 비극적인, 대재앙의',
+    short: '재앙적인',
     enExample:
-      'Our hard drives being full, we can vaguely remember that we had some grudge but not what it was about or who it was against.',
+      'My generation—the baby boomers—made a catastrophic mistake.',
     koExample:
-      '우리 머릿속의 하드 드라이브가 꽉 차서(Our hard drives being full), 예전에 어떤 앙금이 있었다는 것은(had some grudge) 어렴풋이 기억하지만(vaguely remember), 그것이 무슨 일 때문이었는지(what it was about), 누구를 향한 것이었는지는(who it was against) 기억하지 못합니다.'
+      '우리 세대, 즉 베이비부머들은(My generation—the baby boomers) 치명적이고 재앙적인 실수를 저질렀습니다(made a catastrophic mistake).'
   },
   {
-    en: 'gratuitous',
-    pron: '그러투어터스',
-    ipa: '/ɡrəˈtuːɪtəs/',
-    meaning: '불필요한, 쓸데없는, 이유 없이 과한',
-    short: '불필요한',
+    en: 'deprive',
+    pron: '디프라이브',
+    ipa: '/dɪˈpraɪv/',
+    meaning: '박탈하다, 빼앗다',
+    short: '박탈하다',
     enExample:
-      'I see why parents would name their kid A$AP Rocky, but did they really need the dollar sign? Seems gratuitous.',
+      'But in freeing them of the need to struggle, we deprived them of something essential.',
     koExample:
-      '부모가 아이 이름을 에이셉 라키라고 짓는 이유는 알겠지만(name their kid A$AP Rocky), 정말 달러 기호까지 필요했을까요(need the dollar sign)? 불필요하고 과해 보입니다(Seems gratuitous).'
+      '그러나 아이들에게 고군분투해야 할 필요성을 없애줌으로써(in freeing them of the need to struggle), 우리는 아이들에게서 본질적으로 중요한 무언가를(something essential) 빼앗았습니다(deprived them of).'
   },
   {
-    en: 'archivist',
-    pron: '아커비스트',
-    ipa: '/ˈɑːrkɪvɪst/',
-    meaning: '기록 보관 담당자, 기록 관리 전문가',
-    short: '기록 보관자',
+    en: 'grievance',
+    pron: '그리번스',
+    ipa: '/ˈɡriːvəns/',
+    meaning: '불만, 고충, 피해의식',
+    short: '불만',
     enExample:
-      'A trained art conservator, she is the unofficial archivist for our grade-school class.',
+      'They’re about grievance, redistribution and the conviction that your own failures are the result of someone else’s success.',
     koExample:
-      '전문 교육을 받은 미술품 복원가인 그녀는(A trained art conservator) 우리 초등학교 동창들의(our grade-school class) 비공식 기록 보관자입니다(the unofficial archivist).'
+      '그 운동들은 불만과 피해의식(grievance), 재분배(redistribution), 그리고 자신의 실패가 타인의 성공 때문에 생겼다는 확신(the conviction that your own failures are the result of someone else’s success)에 기반합니다.'
   },
   {
-    en: 'unfold',
-    pron: '언폴드',
-    ipa: '/ʌnˈfoʊld/',
-    meaning: '전개되다, 펼쳐지다, 밝혀지다',
-    short: '전개되다',
+    en: 'rigged',
+    pron: '리그드',
+    ipa: '/rɪɡd/',
+    meaning: '조작된, 부정하게 꾸며진, 불공정한',
+    short: '조작된',
     enExample:
-      'Without hesitation, I named everyone but stopped short as I realized that we now knew how many of their life stories unfolded.',
+      'The system is rigged, the deck is stacked, someone else has too much.',
     koExample:
-      '나는 망설임 없이(Without hesitation) 모두의 이름을 댔지만(named everyone), 이제는 그들의 인생 이야기가 어떻게 펼쳐졌는지(how their life stories unfolded) 많이 알고 있다는 사실을 깨닫고(as I realized) 순간 말을 멈췄습니다(stopped short).'
+      '시스템은 조작되어 불공정하고(The system is rigged), 판은 애초에 불리하게 짜여 있으며(the deck is stacked), 다른 누군가는 너무 많은 것을 가졌다는 식입니다(someone else has too much).'
   },
   {
-    en: 'meander',
-    pron: '미앤더',
-    ipa: '/miˈændər/',
-    meaning: '느긋하게 나아가다, 거닐다, 구불구불 이어지다',
-    short: '느긋하게 나아가다',
+    en: 'condescension',
+    pron: '칸디센션',
+    ipa: '/ˌkɑːndɪˈsenʃən/',
+    meaning: '오만, 잘난 체함, 은혜를 베푸는 듯한 태도',
+    short: '오만',
     enExample:
-      'To paraphrase Monty Python, we’re not dead yet, but as we meander through our 70-year events the birth class of ’56 is mainly happy to have made it this far, leading productive and meaningful lives and remembering those whose lives were cut short.',
+      'It is condescension packaged as solidarity.',
     koExample:
-      '몬티 파이튼의 말을 바꾸어 표현하자면(To paraphrase Monty Python), 우리는 아직 죽지 않았습니다(we’re not dead yet). 칠순 행사들을 느긋하게 하나씩 치러가면서(meander through our 70-year events), 1956년생 동기들은(the birth class of ’56) 생산적이고 의미 있는 삶을 살아왔으며(leading productive and meaningful lives), 일찍 생을 마감한 친구들을 기억하면서(remembering those whose lives were cut short) 지금까지 살아온 것을 기쁘게 여깁니다(happy to have made it this far).'
+      '그것은 연대라는 이름으로 포장된(packaged as solidarity) 오만하고 우월감 어린 태도입니다(condescension).'
   },
   {
-    en: 'marbles',
-    pron: '마블즈',
-    ipa: '/ˈmɑːrbəlz/',
-    meaning: '이성, 분별력, 온전한 정신',
-    short: '온전한 정신',
+    en: 'incidental',
+    pron: '인시덴털',
+    ipa: '/ˌɪnsɪˈdentəl/',
+    meaning: '부수적인, 우연적인, 곁다리의',
+    short: '부수적인',
     enExample:
-      'The Hebrew blessing on a birthday is that you should live to 120 (Moses’ age when he died in good shape with all of his marbles).',
+      'But what came out of that hardship—the self-reliance, the drive, the refusal to accept helplessness—wasn’t incidental to who they were.',
     koExample:
-      '유대인의 생일 축복은(The Hebrew blessing on a birthday) 120세까지 살라는 것입니다(you should live to 120). 이는 모세가 건강한 몸과(in good shape) 온전한 정신을 유지한 채(with all of his marbles) 세상을 떠났을 때의 나이입니다(Moses’ age when he died).'
+      '하지만 그 고난에서 생겨난 것들(what came out of that hardship), 즉 자립심과(self-reliance) 추진력(the drive), 무력감을 받아들이지 않는 태도(the refusal to accept helplessness)는 그들이 어떤 사람이 되었는지를 규정하는 데 부수적인 요소가 아니었습니다(wasn’t incidental to who they were).'
   }
 ];
 
 const posts = [
   {
-    title: '친구들이 모두 칠순(70세)이 될 때',
-    slug: 'low-key-related-words',
+    title: '셀카 세대는 베이비부머 세대가 저지른 실수다',
+    slug: 'uniquely-related-words',
     metaDescription:
-      'low-key(소박한), decibel(소음 정도), ritualistic(의례적인), license(자유), divulge(털어놓다), holy grail(최고의 조건), grudge(앙금), gratuitous(불필요한), archivist(기록 보관자), unfold(전개되다), meander(느긋하게 나아가다), marbles(온전한 정신) 뜻·발음·예문을 정리한 오피니언 어휘 학습입니다.',
+      'uniquely(독특하게), immigrate(이민 오다), scramble(고군분투하다), obligation(의무), affluent(부유한), entitlement(권리의식), catastrophic(재앙적인), deprive(박탈하다), grievance(불만), rigged(조작된), condescension(오만), incidental(부수적인) 뜻·발음·예문을 정리한 오피니언 어휘 학습입니다.',
     message: buildOpinionMessage({
       words: opinionSet,
       youtube:
-        'https://www.youtube.com/watch?v=7HHhzNGQDZo&list=PLA-OHa20ZsGA&index=2',
+        'https://www.youtube.com/watch?v=-7t8B_2QEhk&list=PLA-OHa20ZsGA&index=3',
       source:
-        'https://www.wsj.com/opinion/when-your-friends-all-turn-70-ff4daff4?mod=hp_opin_pos_6',
+        'https://www.wsj.com/opinion/the-selfie-generation-is-the-baby-boomers-mistake-4b75d1d1?mod=opinion_trendingnow_article_pos4'
     }),
     nickname: 'admin',
-    password: 'seed_opinions_low-key-related-words'
+    password: 'seed_opinions_uniquely-related-words'
   }
 ];
 
