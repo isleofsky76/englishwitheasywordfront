@@ -203,7 +203,7 @@ const opinionSet = [
 
 const posts = [
   {
-    title: 'When Your Friends All Turn 70',
+    title: '친구들이 모두 칠순(70세)이 될 때',
     slug: 'low-key-related-words',
     metaDescription:
       'low-key(소박한), decibel(소음 정도), ritualistic(의례적인), license(자유), divulge(털어놓다), holy grail(최고의 조건), grudge(앙금), gratuitous(불필요한), archivist(기록 보관자), unfold(전개되다), meander(느긋하게 나아가다), marbles(온전한 정신) 뜻·발음·예문을 정리한 오피니언 어휘 학습입니다.',
