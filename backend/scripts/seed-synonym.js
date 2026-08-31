@@ -8,63 +8,62 @@ import { uploadSynonym } from './synonym-format.js';
 
 // ========== 여기만 수정 ==========
 // ========== 여기만 수정 ==========
-// ========== 여기만 수정 ==========
 const article = {
-  title: 'impetuous 충동적인 연관 단어 정리 | impudent · insolent · impertinent',
-  slug: 'impetuous-related-words',
+  title: 'crooked 비뚤어진 연관 단어 정리 | wonky · askew · lopsided',
+  slug: 'crooked-related-words',
   metaDescription:
-    'impetuous(충동적인·성급한), impudent(뻔뻔한·건방진), insolent(오만불손한·무례한), impertinent(버릇없는·주제넘은), presumptuous(주제넘은·지나치게 나서는) 뜻·발음·예문을 정리한 연관 어휘 학습입니다.',
-  password: 'seed_synonym_impetuous-related-words',
+    'crooked(구부러진·비뚤어진), wonky(비뚤어진·고르지 않은), askew(한쪽으로 기울어진), lopsided(한쪽으로 치우친), uneven(고르지 않은) 뜻·발음·예문을 정리한 연관 어휘 학습입니다.',
+  password: 'seed_synonym_crooked-related-words',
   datePublished: '2026-08-21',
 
   intro: [
-    '행동이 **성급하거나**, 태도가 **뻔뻔하고 무례하거나**, 자신의 권한을 넘어 **주제넘게 행동할 때** 쓰이는 고급 표현을 묶어 봤습니다. impetuous를 시작으로 impudent, insolent, impertinent, presumptuous의 의미와 뉘앙스를 예문과 함께 정리합니다.',
+    '모양이나 방향이 **곧지 않거나 균형이 맞지 않을 때** 쓸 수 있는 표현을 묶어 봤습니다. crooked를 중심으로 wonky, askew, lopsided, uneven이 각각 어떤 상황에서 쓰이는지 예문과 함께 정리합니다.',
   ],
 
   words: [
     {
-      title: '1. impetuous',
+      title: '1. crooked',
       narrative: [
-        'impetuous는 **충동적인**, **성급한**이라는 뜻입니다. /ɪmˈpetʃuəs/ (임페추어스). 충분히 생각하지 않고 감정이나 순간적인 충동에 따라 빠르게 행동하거나 결정하는 모습을 나타냅니다.',
-        '*The boss\'s insecurity can lead to a series of impetuous decisions.*',
-        '**The boss\'s insecurity** 상사의 불안감은 **can lead to** 이어질 수 있다 **a series of impetuous decisions** 일련의 충동적인 결정으로.',
+        'crooked는 **구부러진**, **비뚤어진**이라는 뜻입니다. /ˈkrʊkɪd/ (크루키드). 직선이어야 할 것이 휘거나 바르지 않은 모양을 나타낼 때 자주 쓰입니다.',
+        '*Straight trees have crooked roots.*',
+        '**Straight trees** 곧게 자란 나무도 **have crooked roots** 구불구불한 뿌리를 가지고 있다.',
       ],
     },
     {
-      title: '2. impudent',
+      title: '2. wonky',
       narrative: [
-        'impudent는 **뻔뻔한**, **건방진**이라는 뜻입니다. /ˈɪmpjədənt/ (임퓨던트). 상대에 대한 존중이 부족하면서도 부끄러워하거나 거리끼는 기색 없이 무례하게 행동하는 태도를 나타냅니다.',
-        '*Ms Kim called the president impudent and a flunky beggar.*',
-        '**Ms Kim** 김 씨는 **called the president** 대통령을 불렀다 **impudent and a flunky beggar** 뻔뻔하고 비굴한 아첨꾼 거지라고.',
+        'wonky는 **비뚤어진**, **고르지 않은**, 또는 제대로 균형이 잡히지 않은 상태를 뜻합니다. /ˈwɑːŋki/ (웡키). 일상적인 영국 영어에서 모양이나 상태가 조금 이상하거나 삐뚤어졌을 때 자주 쓰입니다.',
+        '*My teeth are wonky, discoloured and gappy.*',
+        '**My teeth** 내 치아는 **are wonky** 삐뚤어져 있고 **discoloured and gappy** 변색돼 있으며 사이도 벌어져 있다.',
       ],
     },
     {
-      title: '3. insolent',
+      title: '3. askew',
       narrative: [
-        'insolent는 **오만불손한**, **무례한**이라는 뜻입니다. /ˈɪnsələnt/ (인설런트). 권위자나 다른 사람을 존중하지 않고 거만하거나 무례하게 행동하는 태도에 주로 사용됩니다.',
-        '*A child was treated as insolent and lazy for falling asleep in class.*',
-        '**A child** 한 아이는 **was treated as insolent and lazy** 오만불손하고 게으른 아이로 취급받았다 **for falling asleep in class** 수업 중 잠이 들었다는 이유로.',
+        'askew는 **비뚤어진**, **한쪽으로 기울어진**이라는 뜻입니다. /əˈskjuː/ (어스큐). 물건이 제 위치에서 살짝 돌아가거나 비스듬하게 놓인 모습을 표현할 때 잘 쓰입니다.',
+        '*Her hat was slightly askew.*',
+        '**Her hat** 그녀의 모자는 **was slightly askew** 약간 한쪽으로 비뚤어져 있었다.',
       ],
     },
     {
-      title: '4. impertinent',
+      title: '4. lopsided',
       narrative: [
-        'impertinent는 **버릇없는**, **주제넘은**, **무례하게 참견하는**이라는 뜻입니다. /ɪmˈpɜːrtənənt/ (임퍼티넌트). 상대방의 영역이나 권한을 넘어서는 질문이나 발언이 무례하다고 느껴질 때 자주 쓰입니다.',
-        '*China expects the UN to praise its economy, not ask impertinent questions about repression.*',
-        '**China expects the UN** 중국은 UN이 그러기를 기대한다 **to praise its economy** 자국 경제를 칭찬하고 **not ask impertinent questions about repression** 억압에 대해 주제넘은 질문을 하지 않기를.',
+        'lopsided는 **한쪽으로 치우친**, **불균형한**이라는 뜻입니다. /ˌlɑːpˈsaɪdɪd/ (랍사이디드). 물리적인 모양뿐 아니라 의견·보도·경쟁 등이 한쪽에 지나치게 치우친 경우에도 자주 쓰입니다.',
+        '*The article presents a somewhat lopsided view of events.*',
+        '**The article** 그 기사는 **presents** 제시한다 **a somewhat lopsided view of events** 사건을 다소 한쪽으로 치우친 시각에서.',
       ],
     },
     {
-      title: '5. presumptuous',
+      title: '5. uneven',
       narrative: [
-        'presumptuous는 **주제넘은**, **지나치게 나서는**이라는 뜻입니다. /prɪˈzʌmptʃuəs/ (프리점프추어스). 자신에게 그런 권한이나 자격이 있다고 지나치게 당연시하며 행동하는 태도를 나타냅니다.',
-        '*It was presumptuous of him to make the decision without asking anyone.*',
-        '**It was presumptuous of him** 그것은 그의 주제넘은 행동이었다 **to make the decision** 결정을 내린 것은 **without asking anyone** 누구에게도 묻지 않고.',
+        'uneven은 **고르지 않은**, **울퉁불퉁한**, **균일하지 않은**이라는 뜻입니다. /ʌnˈiːvən/ (언이븐). 표면의 높낮이가 일정하지 않거나 수준·분포 등이 균등하지 않을 때 폭넓게 사용됩니다.',
+        '*The floor felt uneven under his feet.*',
+        '**The floor** 바닥이 **felt uneven** 고르지 않게 느껴졌다 **under his feet** 그의 발밑에서.',
       ],
     },
   ],
 
-  youtube: '',
+  youtube: 'https://www.youtube.com/watch?v=yeKSvY9r_4c&list=PLepVNyM8dwWg&index=2',
 };
 // ===============================
 

@@ -386,6 +386,47 @@
   box-shadow: none;
 }
 
+/* 비스듬한 타원 */
+#post-message .nv-hl--oval-slant {
+  display: inline-block;
+  background: rgba(255, 236, 120, 0.72);
+  border: 1.6px solid #c2410c;
+  border-radius: 50% / 60%;
+  padding: 0.1em 0.38em 0.14em;
+  transform: rotate(-4deg) skewX(-8deg);
+  box-shadow: none;
+}
+
+/* 네모 박스 */
+#post-message .nv-hl--box {
+  display: inline-block;
+  background: rgba(255, 241, 160, 0.75);
+  border: 1.6px solid #b45309;
+  border-radius: 0;
+  padding: 0.06em 0.22em;
+  box-shadow: none;
+}
+
+/* 둥근 네모 */
+#post-message .nv-hl--box-round {
+  display: inline-block;
+  background: rgba(255, 229, 102, 0.7);
+  border: 1.6px solid #ca8a04;
+  border-radius: 0.45em;
+  padding: 0.06em 0.26em;
+  box-shadow: none;
+}
+
+/* 점선 네모 */
+#post-message .nv-hl--dash {
+  display: inline-block;
+  background: rgba(255, 248, 200, 0.85);
+  border: 1.6px dashed #d97706;
+  border-radius: 0.2em;
+  padding: 0.06em 0.24em;
+  box-shadow: none;
+}
+
 #post-message .nv-quote {
   font-style: normal;
   font-weight: 700;

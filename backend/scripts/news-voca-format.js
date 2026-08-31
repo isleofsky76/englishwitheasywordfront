@@ -23,7 +23,16 @@ function escapeHtml(text) {
     .replace(/"/g, '&quot;');
 }
 
-const NV_HL_VARIANTS = ['nv-hl--paint', 'nv-hl--marker', 'nv-hl--wave', 'nv-hl--ink'];
+const NV_HL_VARIANTS = [
+  'nv-hl--paint',
+  'nv-hl--marker',
+  'nv-hl--wave',
+  'nv-hl--ink',
+  'nv-hl--oval-slant',
+  'nv-hl--box',
+  'nv-hl--box-round',
+  'nv-hl--dash',
+];
 
 function parseInline(text) {
   const src = String(text ?? '');
