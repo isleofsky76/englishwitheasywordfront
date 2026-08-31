@@ -37,12 +37,26 @@ ${bits.join(',\n')}
 </p>`;
 }
 
-function buildOpinionMessage({ words, youtube }) {
+function buildRelatedLinksHtml(youtube, source) {
+  const lines = [];
+  if (youtube) {
+    lines.push(
+      `<p class="nv-related-link-line"><a class="nv-related-link nv-related-link--youtube" href="${youtube}" rel="noopener noreferrer" target="_blank"><span aria-hidden="true">📺</span> 유튜브 보기</a></p>`
+    );
+  }
+  if (source) {
+    lines.push(
+      `<p class="nv-related-link-line"><a class="nv-related-link nv-related-link--article" href="${source}" rel="noopener noreferrer" target="_blank"><span aria-hidden="true">📰</span> 신문보기</a></p>`
+    );
+  }
+  if (!lines.length) return '';
+  return `<footer class="nv-related-links">\n${lines.join('\n')}\n</footer>`;
+}
+
+function buildOpinionMessage({ words, youtube, source }) {
   const body = words.map(wordHtml).join('\n\n');
-  const yt = youtube
-    ? `\n<p><strong>유튜브로 보기</strong><br>${youtube}</p>`
-    : '';
-  return `\n${body}\n\n${summaryHtml(words)}${yt}\n`;
+  const links = buildRelatedLinksHtml(youtube, source);
+  return `\n${body}\n\n${summaryHtml(words)}${links ? `\n${links}` : ''}\n`;
 }
 
 
@@ -124,7 +138,9 @@ const posts = [
       'purge(제거하다), inheritance(유산), pejorative(경멸적인), downplay(경시하다), favor(지지하다), acknowledgement(인정), foundational(근간이 되는), bend one’s knee to(굴복하다), patriarchal(가부장적인), plaything(놀잇감), whitewash(은폐하다) 뜻·발음·예문을 정리한 오피니언 어휘 학습입니다.',
     message: buildOpinionMessage({
       words: opinionSet,
-      youtube: 'https://www.youtube.com/watch?v=Z4euF9AFW9E&list=PLA-OHa20ZsGA'
+      youtube: 'https://www.youtube.com/watch?v=Z4euF9AFW9E&list=PLA-OHa20ZsGA',
+      source:
+        'https://www.wsj.com/opinion/how-the-smithsonian-lost-americas-plot-622709db?mod=opinion_trendingnow_article_pos2',
     }),
     nickname: 'admin',
     password: 'seed_opinions_purge-related-words'
