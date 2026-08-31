@@ -14,96 +14,88 @@ import { uploadShortsBgImage } from './shorts-bg-image-format.js';
 
 // ========== 여기만 수정 ==========
 
+// ========== 여기만 수정 ==========
+
 const article = {
-  title: '스페인 포도원 테라스 · Spanish vineyard terrace',
-  slug: 'spanish-vineyard-terrace',
+  title: '도심 거리 카페와 신문 가판대 · Urban street cafe and newsstand',
+  slug: 'urban-street-cafe-newsstand',
   metaDescription:
-    '중세풍 돌담과 포도원이 펼쳐진 스페인 시골 마을의 야외 테라스 풍경. 여행자와 현지인들이 한적한 분위기 속에서 대화하고 쉬는 모습을 담은 쇼츠용 배경 이미지입니다.',
-  password: 'seed_shorts_spanish-vineyard-terrace',
+    '신문 가판대와 노천카페, 자전거와 택시가 어우러진 활기차고 여유로운 도심 거리의 일상을 담은 쇼츠용 배경 이미지입니다.',
+  password: 'seed_shorts_urban-street-cafe-newsstand',
   datePublished: '2026-08-31',
 
-  /** GitHub: resources/spain.jpg (send_photo와 동일) — frontend/resources/에 두어도 push 시 resources/로 복사 */
-  image: '/resources/spain.jpg',
+  /** GitHub: resources/street_cafe.jpg (send_photo와 동일) — frontend/resources/에 두어도 push 시 resources/로 복사 */
+  image: '/resources/street_cafe.jpg',
 
   sections: [
     {
       heading: '전체적인 분위기 (Overall Scene)',
-      body: `포도원 : vineyard (vineyard /ˈvɪnjərd/ 명사 포도원)
-언덕 : hill
-자갈 포장길 : cobblestone path
-풍경 / 경치 : scenery
-시골 : countryside
-분위기 : ambiance (ambiance /ˈæmbiəns/ (장소 등의) 분위기)
-중세의 : medieval
-울퉁불퉁한 : uneven
-햇살이 드는 : sunlit
-목가적인 / 소박한 : rustic (rustic /ˈrʌstɪk/ 형용사 시골풍의·소박한)
-평온한 / 한적한 : tranquil
-펼쳐지다 : unfold
-그림자를 드리우다 : cast a shadow
-둘러싸다 / 감싸다 : surround`,
+      body: `거리 : street
+(창이나 문 위의) 차양, 비[해] 가리개 : awning
+자갈길 : cobblestone road
+택시 : taxi
+건물 : building
+일상 : daily life
+풍경 : scenery
+도심의 : urban
+활기찬 : lively
+전통적인 : traditional
+여유로운 : relaxed
+따뜻한 : warm
+지나가다 : pass
+머무르다 : stay
+교차하다 : intersect`,
     },
     {
-      heading: '좌측 전경 (Left Foreground)',
-      body: `탁자 / 테이블 : table
-의자 : chair
-셔츠 : shirt
-음료 : beverage 
-덩굴 식물 : ivy (ivy /ˈaɪvi/ 명사 담쟁이덩굴)
-화분 : pot
-허브 : herb
-둥근 : round
+      heading: '좌측 가판대 풍경 (Left Foreground & Kiosk)',
+      body: `가판대 : kiosk / newsstand
+신문 : newspaper
+잡지 : magazine
+부츠 : boots
+가방 : bag
+스툴 / 의자 : stool
+펼쳐진 : unfolded
+진열된 : displayed
+단정한 : neat
 나무로 된 : wooden
-엮은 : woven (woven /ˈwoʊvən/ 형용사 엮어서 만든)
-소매를 걷어 올린 : with rolled-up sleeves
-차가운 음료 : iced beverage
+읽다 : read
+훑어보다 : browse
 앉다 : sit
-대화하다 / 담소하다 : converse (converse /kənˈvɜːrs/ 동사 격식 (~와) 대화[이야기]를 나누다)
-팔을 기대다 / 괴다 : rest one’s arm
-마주보다 : face each other
-자라다 : grow`,
-    },
-    {
-      heading: '중앙 풍경 (Center Scene)',
-      body: `직원 / 서빙원 : server
-앞치마 : apron
-주문 : order
-수첩 : notepad
-등산객 / 여행자 : hiker
-배낭 : backpack
-메뉴판 : menu
-야외의 : outdoor
-주의 깊은 : attentive
-바깥쪽의 : exterior
-주문을 받다 : take an order
-주문을 적다 : write down an order
-배낭을 메다 : carry a backpack
-메뉴를 둘러보다 : browse the menu
 기다리다 : wait`,
     },
     {
-      heading: '우측 전경 (Right Foreground)',
-      body: `신문 : newspaper
-담배 : cigarette
-재떨이 : ashtray
-잔 / 글라스 : glass
-와인 : wine
-핸드백 : purse
-자전거 : bicycle
-돌담 : stone wall
-고전적인 / 빈티지의 : vintage
-가죽의 : leather
-따뜻한 : warm
-중년의 : middle-aged
-여유로운 : relaxing
-들다 / 잡다 : hold
-조금씩 마시다 : sip (sip /sɪp/ 동사 조금씩 마시다)
-담배를 피우다 : smoke a cigarette
-기대어 놓다 : prop against (prop /prɑːp/ 동사 기대어 세워 놓다)
-쉬다 : relax`,
+      heading: '중앙 카페 및 도로 풍경 (Center Scene & Street)',
+      body: `자전거 : bicycle
+바구니 : basket
+카페 : cafe
+출입구 : entrance
+보도 : sidewalk
+차도 : roadway
+줄무늬의 : striped
+짧은 : short
+타다 : ride
+페달을 밟다 : pedal
+서다 : stand
+대화하다 : talk`,
+    },
+    {
+      heading: '우측 계단 풍경 (Right Foreground)',
+      body: `계단 : steps / stairs
+모퉁이 : corner
+커피잔 : coffee cup
+스마트폰 : smartphone
+걸터앉은 : perched
+캐주얼한 : casual
+친근한 : friendly
+걸터앉다 : perch
+미소 짓다 : smile
+들다 : hold
+바라보다 : gaze`,
     },
   ],
 };
+
+// ========== 여기만 수정 ==========
 
 // ========== 여기만 수정 ==========
 
