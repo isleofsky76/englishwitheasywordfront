@@ -45,93 +45,89 @@ function buildOpinionMessage({ words, youtube }) {
   return `\n${body}\n\n${summaryHtml(words)}${yt}\n`;
 }
 
+
 const opinionSet = [
   {
-    en: 'raucous',
-    pron: '로커스',
-    ipa: '/ˈrɔːkəs/',
-    meaning: '소란스러운, 떠들썩한',
-    short: '소란스러운',
-    enExample: 'The atmosphere at his home was wild, fun, and raucous.',
-    koExample: '그의 집 분위기는 난장판 같고, 신나고, 시끄러웠습니다.'
+    en: 'purge',
+    pron: '퍼지',
+    ipa: '/pɜːrdʒ/',
+    meaning: '제거하다, 숙청하다',
+    short: '제거하다',
+    enExample:
+      'One of the better causes of the second Trump Administration is its effort to purge the progressive political takeover of America’s national cultural institutions.',
+    koExample:
+      '2기 트럼프 행정부의 더 나은 명분 중 하나는(causes) 미국의 국립 문화 기관들을(national cultural institutions) 진보 세력이 정치적으로 장악한 것을(progressive political takeover) 제거하려는(purge) 노력입니다.'
+  },
+  
+  {
+    en: 'pejorative',
+    pron: '퍼조러티브',
+    ipa: '/pɪˈdʒɔːrətɪv/',
+    meaning: '경멸적인, 비난투의',
+    short: '경멸적인',
+    enExample:
+      'Nationalism? That’s a needlessly pejorative edge. How about patriotism?',
+    koExample:
+      '민족주의라고요(Nationalism)? 그것은 불필요하게(needlessly) 경멸적이고 비난조의 뉘앙스입니다(pejorative edge). 애국심은 어떤가요(patriotism)?'
   },
   {
-    en: 'exuberant',
-    pron: '이그주버런트',
-    ipa: '/ɪɡˈzuːbərənt/',
-    meaning: '활기 넘치는, 생기가 넘치는',
-    short: '활기 넘치는',
-    enExample: 'As an exuberant father, he was full of energy and loved nature.',
-    koExample: '활기 넘치는 아버지로서 그는 에너지가 넘쳤고 자연을 사랑했습니다.'
+    en: 'favor',
+    pron: '페이버',
+    ipa: '/ˈfeɪvər/',
+    meaning: '지지하다, 선호하다',
+    short: '지지하다',
+    enExample:
+      'Speaking at Brown University in 2016, the report says, Smithsonian Under Secretary for Museums and Culture Kevin Gover said he favors replacing Columbus Day with Indigenous Peoples’ Day, because Christopher Columbus was a “slaver” and “killer.”',
+    koExample:
+      '보고서에 따르면(the report says), 케빈 고버 스미스소니언 박물관·문화 담당 차관은 2016년 브라운대학교 연설에서(Speaking at Brown University) 크리스토퍼 콜럼버스가 노예상이자 살인자였기 때문에(a “slaver” and “killer”) 콜럼버스의 날을 원주민의 날로 대체하는 것을(replacing Columbus Day with Indigenous Peoples’ Day) 지지한다고(favors) 말했습니다.'
   },
   {
-    en: 'jubilant',
-    pron: '주벌런트',
-    ipa: '/ˈdʒuːbɪlənt/',
-    meaning: '환희에 찬, 크게 기뻐하는',
-    short: '환희에 찬',
-    enExample: 'The telegram that arrived at his home was jubilant and happy.',
-    koExample: '그의 집에 도착한 전보는 환희에 차 있고 기쁜 내용이었습니다.'
+    en: 'plaything',
+    pron: '플레이씽',
+    ipa: '/ˈpleɪθɪŋ/',
+    meaning: '장난감, 놀잇감, 마음대로 이용하는 대상',
+    short: '놀잇감',
+    enExample:
+      'It isn’t the plaything of today’s dominant progressive academics.',
+    koExample:
+      '그곳은 오늘날 주류를 이루는 진보 학자들의(today’s dominant progressive academics) 전유물이나 놀잇감이 아닙니다(isn’t the plaything of).'
   },
   {
-    en: 'mar',
-    pron: '마르',
-    ipa: '/mɑːr/',
-    meaning: '망치다, 손상시키다',
-    short: '망치다',
-    enExample: 'Sadly, the joyful event was soon marred by bad news.',
-    koExample: '안타깝게도 그 즐거운 행사는 나쁜 소식으로 곧 망쳐졌습니다.'
+    en: 'whitewash',
+    pron: '화이트워시',
+    ipa: '/ˈwaɪtwɑːʃ/',
+    meaning: '잘못을 은폐하다, 미화하다, 눈가림하다',
+    short: '은폐하다',
+    enExample:
+      'The Trump Administration’s suggestion that the museum offer a less biased approach to American history isn’t an attempt to whitewash the country’s complexity or its difficult chapters.',
+    koExample:
+      '박물관이 미국 역사를 덜 편향된 방식으로 다루어야 한다는(a less biased approach) 트럼프 행정부의 제안은 국가의 복잡성이나 어두운 역사를(the country’s complexity or its difficult chapters) 은폐하거나 미화하려는 시도가 아닙니다(isn’t an attempt to whitewash).'
   },
   {
-    en: 'distraught',
-    pron: '디스트롯',
-    ipa: '/dɪˈstrɔːt/',
-    meaning: '몹시 심란한, 극도의 불안·슬픔에 빠진',
-    short: '몹시 심란한',
-    enExample: 'Feeling deeply distraught, he decided to alter his future plans.',
-    koExample: '몹시 심란함을 느낀 그는 자신의 미래 계획을 바꾸기로 결정했습니다.'
-  },
-  {
-    en: 'retrograde',
-    pron: '레트러그레이드',
-    ipa: '/ˈretrəɡreɪd/',
-    meaning: '퇴보적인, 진보에 역행하는',
-    short: '퇴보적인',
-    enExample: 'He viewed their civilization as retrograde rather than advanced.',
-    koExample: '그는 그들의 문명을 발전된 것이 아니라 퇴보적인 것으로 보았습니다.'
-  },
-  {
-    en: 'conspicuous',
-    pron: '컨스피큐어스',
-    ipa: '/kənˈspɪkjuəs/',
-    meaning: '눈에 띄는, 두드러진',
-    short: '눈에 띄는',
-    enExample: 'Roosevelt was one of the few conspicuous heroes of the war.',
-    koExample: '루스벨트는 그 전쟁에서 몇 안 되는 눈에 띄는 영웅 중 한 명이었습니다.'
-  },
-  {
-    en: 'gallantry',
-    pron: '갤런트리',
-    ipa: '/ˈɡæləntri/',
-    meaning: '용맹, 용기와 명예를 동반한 행동',
-    short: '용맹',
-    enExample: 'The public highly praised Roosevelt for his gallantry in battle.',
-    koExample: '대중은 전투에서 보여준 루스벨트의 용맹함을 높이 평가했습니다.'
+    en: 'whitewash',
+    pron: '화이트워시',
+    ipa: '/ˈwaɪtwɑːʃ/',
+    meaning: '눈가림, 은폐, 미화',
+    short: '눈가림',
+    enExample:
+      'That’s not a whitewash of America’s complicated history. It’s an embrace of it.',
+    koExample:
+      '그것은 미국의 복잡한 역사를(America’s complicated history) 눈가림하거나 은폐하는 것이 아닙니다(not a whitewash). 오히려 그 역사를 온전히 받아들이는 것입니다(an embrace of it).'
   }
 ];
 
 const posts = [
   {
-    title: 'Theodore Roosevelt',
-    slug: 'raucous-related-words',
+    title: '스미스소니언은 어떻게 미국의 큰 줄거리(본질적 이야기)를 놓쳐버렸는가?',
+    slug: 'purge-related-words',
     metaDescription:
-      'raucous(소란스러운), exuberant(활기 넘치는), jubilant(환희에 찬), mar(망치다), distraught(몹시 심란한), retrograde(퇴보적인), conspicuous(눈에 띄는), gallantry(용맹) 뜻·발음·예문을 정리한 오피니언 어휘 학습입니다.',
+      'purge(제거하다), inheritance(유산), pejorative(경멸적인), downplay(경시하다), favor(지지하다), acknowledgement(인정), foundational(근간이 되는), bend one’s knee to(굴복하다), patriarchal(가부장적인), plaything(놀잇감), whitewash(은폐하다) 뜻·발음·예문을 정리한 오피니언 어휘 학습입니다.',
     message: buildOpinionMessage({
       words: opinionSet,
-      youtube: 'https://www.youtube.com/watch?v=7vNOLEyGggo&list=PLA-OHa20ZsGA&index=8'
+      youtube: 'https://www.youtube.com/watch?v=Z4euF9AFW9E&list=PLA-OHa20ZsGA'
     }),
     nickname: 'admin',
-    password: 'seed_opinions_raucous-related-words'
+    password: 'seed_opinions_purge-related-words'
   }
 ];
 
