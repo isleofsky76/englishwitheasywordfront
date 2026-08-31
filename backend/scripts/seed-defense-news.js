@@ -27,7 +27,6 @@ const article = {
   intro: [
     '요격 미사일이 떨어지면 어떻게 될까요? Economist 기사에 나온 어휘들입니다.',
 
-    '**Source:** The Economist, *What happens when interceptor missiles run out?* All rights belong to the original creator.',
   ],
 
   words: [
