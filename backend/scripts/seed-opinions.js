@@ -68,71 +68,136 @@ function buildOpinionMessage({ words, youtube, source }) {
 
 const opinionSet = [
   {
-    en: 'purge',
-    pron: '퍼지',
-    ipa: '/pɜːrdʒ/',
-    meaning: '제거하다, 숙청하다',
-    short: '제거하다',
+    en: 'low-key',
+    pron: '로우키',
+    ipa: '/ˌloʊ ˈkiː/',
+    meaning: '절제된, 소박한, 요란하지 않은',
+    short: '소박한',
     enExample:
-      'One of the better causes of the second Trump Administration is its effort to purge the progressive political takeover of America’s national cultural institutions.',
+      'These are low-key affairs in someone’s home or a restaurant, not fancy parties or far-flung cruises.',
     koExample:
-      '2기 트럼프 행정부의 더 나은 명분 중 하나는(causes) 미국의 국립 문화 기관들을(national cultural institutions) 진보 세력이 정치적으로 장악한 것을(progressive political takeover) 제거하려는(purge) 노력입니다.'
-  },
-  
-  {
-    en: 'pejorative',
-    pron: '퍼조러티브',
-    ipa: '/pɪˈdʒɔːrətɪv/',
-    meaning: '경멸적인, 비난투의',
-    short: '경멸적인',
-    enExample:
-      'Nationalism? That’s a needlessly pejorative edge. How about patriotism?',
-    koExample:
-      '민족주의라고요(Nationalism)? 그것은 불필요하게(needlessly) 경멸적이고 비난조의 뉘앙스입니다(pejorative edge). 애국심은 어떤가요(patriotism)?'
+      '이 모임들은(affairs) 화려한 파티나(fancy parties) 멀리 떠나는 크루즈 여행이 아니라(far-flung cruises), 누군가의 집이나 식당에서 갖는 소박하고 차분한 자리입니다(low-key affairs).'
   },
   {
-    en: 'favor',
-    pron: '페이버',
-    ipa: '/ˈfeɪvər/',
-    meaning: '지지하다, 선호하다',
-    short: '지지하다',
+    en: 'decibel',
+    pron: '데서벨',
+    ipa: '/ˈdesɪbel/',
+    meaning: '데시벨, 소음의 정도',
+    short: '소음 정도',
     enExample:
-      'Speaking at Brown University in 2016, the report says, Smithsonian Under Secretary for Museums and Culture Kevin Gover said he favors replacing Columbus Day with Indigenous Peoples’ Day, because Christopher Columbus was a “slaver” and “killer.”',
+      'We gather in sixes and eights for dinner at places chosen more for their decibels than their desserts.',
     koExample:
-      '보고서에 따르면(the report says), 케빈 고버 스미스소니언 박물관·문화 담당 차관은 2016년 브라운대학교 연설에서(Speaking at Brown University) 크리스토퍼 콜럼버스가 노예상이자 살인자였기 때문에(a “slaver” and “killer”) 콜럼버스의 날을 원주민의 날로 대체하는 것을(replacing Columbus Day with Indigenous Peoples’ Day) 지지한다고(favors) 말했습니다.'
+      '우리는 여섯 명이나 여덟 명씩 모여(gather in sixes and eights) 저녁을 먹는데, 디저트보다는(their desserts) 소음 정도를 더 고려해(for their decibels) 고른 장소에서 만납니다.'
   },
   {
-    en: 'plaything',
-    pron: '플레이씽',
-    ipa: '/ˈpleɪθɪŋ/',
-    meaning: '장난감, 놀잇감, 마음대로 이용하는 대상',
-    short: '놀잇감',
+    en: 'ritualistic',
+    pron: '리추얼리스틱',
+    ipa: '/ˌrɪtʃuəˈlɪstɪk/',
+    meaning: '의식적인, 의례적인, 정해진 절차를 따르는',
+    short: '의례적인',
     enExample:
-      'It isn’t the plaything of today’s dominant progressive academics.',
+      'Seating is more ritualistic than a state dinner.',
     koExample:
-      '그곳은 오늘날 주류를 이루는 진보 학자들의(today’s dominant progressive academics) 전유물이나 놀잇감이 아닙니다(isn’t the plaything of).'
+      '자리 배치는(Seating) 국빈 만찬보다(a state dinner) 더 의례적이고 정해진 절차를 따릅니다(more ritualistic).'
   },
   {
-    en: 'whitewash',
-    pron: '화이트워시',
-    ipa: '/ˈwaɪtwɑːʃ/',
-    meaning: '잘못을 은폐하다, 미화하다, 눈가림하다',
-    short: '은폐하다',
+    en: 'license',
+    pron: '라이선스',
+    ipa: '/ˈlaɪsəns/',
+    meaning: '자유, 파격, 허가',
+    short: '자유',
     enExample:
-      'The Trump Administration’s suggestion that the museum offer a less biased approach to American history isn’t an attempt to whitewash the country’s complexity or its difficult chapters.',
+      'Because we are turning 70 and have license to let loose, we order a single dessert with six forks.',
     koExample:
-      '박물관이 미국 역사를 덜 편향된 방식으로 다루어야 한다는(a less biased approach) 트럼프 행정부의 제안은 국가의 복잡성이나 어두운 역사를(the country’s complexity or its difficult chapters) 은폐하거나 미화하려는 시도가 아닙니다(isn’t an attempt to whitewash).'
+      '우리는 이제 일흔 살이 되었고(are turning 70) 긴장을 풀고 마음껏 즐길 자유가 있으므로(have license to let loose), 디저트 하나를 시켜(a single dessert) 포크 여섯 개로 나누어 먹습니다(with six forks).'
   },
   {
-    en: 'whitewash',
-    pron: '화이트워시',
-    ipa: '/ˈwaɪtwɑːʃ/',
-    meaning: '눈가림, 은폐, 미화',
-    short: '눈가림',
+    en: 'divulge',
+    pron: '디벌지',
+    ipa: '/daɪˈvʌldʒ/',
+    meaning: '비밀이나 사적인 정보를 털어놓다, 밝히다',
+    short: '털어놓다',
     enExample:
-      'That’s not a whitewash of America’s complicated history. It’s an embrace of it.',
+      'Downsizing and condo strategies are divulged.',
     koExample:
-      '그것은 미국의 복잡한 역사를(America’s complicated history) 눈가림하거나 은폐하는 것이 아닙니다(not a whitewash). 오히려 그 역사를 온전히 받아들이는 것입니다(an embrace of it).'
+      '집의 규모를 줄이는 방법과(Downsizing) 콘도 장만 전략이(condo strategies) 서로 공유되고 공개됩니다(are divulged).'
+  },
+  {
+    en: 'holy grail',
+    pron: '홀리 그레일',
+    ipa: '/ˌhoʊli ˈɡreɪl/',
+    meaning: '성배, 모두가 간절히 바라는 것',
+    short: '최고의 조건',
+    enExample:
+      'First-floor master bedrooms are the holy grail in hilly Pittsburgh.',
+    koExample:
+      '언덕이 많은 피츠버그에서는(hilly Pittsburgh) 1층에 있는 안방이(First-floor master bedrooms) 모두가 간절히 바라는 최고의 조건입니다(the holy grail).'
+  },
+  {
+    en: 'grudge',
+    pron: '그러지',
+    ipa: '/ɡrʌdʒ/',
+    meaning: '원한, 앙금, 유감',
+    short: '앙금',
+    enExample:
+      'Our hard drives being full, we can vaguely remember that we had some grudge but not what it was about or who it was against.',
+    koExample:
+      '우리 머릿속의 하드 드라이브가 꽉 차서(Our hard drives being full), 예전에 어떤 앙금이 있었다는 것은(had some grudge) 어렴풋이 기억하지만(vaguely remember), 그것이 무슨 일 때문이었는지(what it was about), 누구를 향한 것이었는지는(who it was against) 기억하지 못합니다.'
+  },
+  {
+    en: 'gratuitous',
+    pron: '그러투어터스',
+    ipa: '/ɡrəˈtuːɪtəs/',
+    meaning: '불필요한, 쓸데없는, 이유 없이 과한',
+    short: '불필요한',
+    enExample:
+      'I see why parents would name their kid A$AP Rocky, but did they really need the dollar sign? Seems gratuitous.',
+    koExample:
+      '부모가 아이 이름을 에이셉 라키라고 짓는 이유는 알겠지만(name their kid A$AP Rocky), 정말 달러 기호까지 필요했을까요(need the dollar sign)? 불필요하고 과해 보입니다(Seems gratuitous).'
+  },
+  {
+    en: 'archivist',
+    pron: '아커비스트',
+    ipa: '/ˈɑːrkɪvɪst/',
+    meaning: '기록 보관 담당자, 기록 관리 전문가',
+    short: '기록 보관자',
+    enExample:
+      'A trained art conservator, she is the unofficial archivist for our grade-school class.',
+    koExample:
+      '전문 교육을 받은 미술품 복원가인 그녀는(A trained art conservator) 우리 초등학교 동창들의(our grade-school class) 비공식 기록 보관자입니다(the unofficial archivist).'
+  },
+  {
+    en: 'unfold',
+    pron: '언폴드',
+    ipa: '/ʌnˈfoʊld/',
+    meaning: '전개되다, 펼쳐지다, 밝혀지다',
+    short: '전개되다',
+    enExample:
+      'Without hesitation, I named everyone but stopped short as I realized that we now knew how many of their life stories unfolded.',
+    koExample:
+      '나는 망설임 없이(Without hesitation) 모두의 이름을 댔지만(named everyone), 이제는 그들의 인생 이야기가 어떻게 펼쳐졌는지(how their life stories unfolded) 많이 알고 있다는 사실을 깨닫고(as I realized) 순간 말을 멈췄습니다(stopped short).'
+  },
+  {
+    en: 'meander',
+    pron: '미앤더',
+    ipa: '/miˈændər/',
+    meaning: '느긋하게 나아가다, 거닐다, 구불구불 이어지다',
+    short: '느긋하게 나아가다',
+    enExample:
+      'To paraphrase Monty Python, we’re not dead yet, but as we meander through our 70-year events the birth class of ’56 is mainly happy to have made it this far, leading productive and meaningful lives and remembering those whose lives were cut short.',
+    koExample:
+      '몬티 파이튼의 말을 바꾸어 표현하자면(To paraphrase Monty Python), 우리는 아직 죽지 않았습니다(we’re not dead yet). 칠순 행사들을 느긋하게 하나씩 치러가면서(meander through our 70-year events), 1956년생 동기들은(the birth class of ’56) 생산적이고 의미 있는 삶을 살아왔으며(leading productive and meaningful lives), 일찍 생을 마감한 친구들을 기억하면서(remembering those whose lives were cut short) 지금까지 살아온 것을 기쁘게 여깁니다(happy to have made it this far).'
+  },
+  {
+    en: 'marbles',
+    pron: '마블즈',
+    ipa: '/ˈmɑːrbəlz/',
+    meaning: '이성, 분별력, 온전한 정신',
+    short: '온전한 정신',
+    enExample:
+      'The Hebrew blessing on a birthday is that you should live to 120 (Moses’ age when he died in good shape with all of his marbles).',
+    koExample:
+      '유대인의 생일 축복은(The Hebrew blessing on a birthday) 120세까지 살라는 것입니다(you should live to 120). 이는 모세가 건강한 몸과(in good shape) 온전한 정신을 유지한 채(with all of his marbles) 세상을 떠났을 때의 나이입니다(Moses’ age when he died).'
   }
 ];
 
@@ -144,14 +209,16 @@ const posts = [
       'purge(제거하다), inheritance(유산), pejorative(경멸적인), downplay(경시하다), favor(지지하다), acknowledgement(인정), foundational(근간이 되는), bend one’s knee to(굴복하다), patriarchal(가부장적인), plaything(놀잇감), whitewash(은폐하다) 뜻·발음·예문을 정리한 오피니언 어휘 학습입니다.',
     message: buildOpinionMessage({
       words: opinionSet,
-      youtube: 'https://www.youtube.com/watch?v=Z4euF9AFW9E&list=PLA-OHa20ZsGA',
+      youtube: 'https://www.youtube.com/watch?v=7HHhzNGQDZo&list=PLA-OHa20ZsGA&index=2',
       source:
-        'https://www.wsj.com/opinion/how-the-smithsonian-lost-americas-plot-622709db?mod=opinion_trendingnow_article_pos2',
+        'https://www.wsj.com/opinion/when-your-friends-all-turn-70-ff4daff4?mod=hp_opin_pos_6',
     }),
     nickname: 'admin',
     password: 'seed_opinions_purge-related-words'
   }
 ];
+
+
 
 async function seed() {
   console.log('Opinions 글 추가 중...', API_BASE);
