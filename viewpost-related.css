@@ -1,0 +1,92 @@
+.viewpost-related-row {
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px dashed #d0d7de;
+  text-align: left;
+}
+
+.viewpost-related-heading {
+  margin: 0 0 14px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #2b6cb0;
+  line-height: 1.4;
+}
+
+.viewpost-related-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.viewpost-related-item {
+  margin: 0;
+  padding: 0;
+  border-bottom: 1px solid #e8edf2;
+}
+
+.viewpost-related-item:last-child {
+  border-bottom: none;
+}
+
+.viewpost-related-link {
+  display: block;
+  padding: 12px 4px;
+  color: #333;
+  text-decoration: none;
+  font-size: 0.98rem;
+  line-height: 1.5;
+  transition: color 0.15s ease;
+}
+
+.viewpost-related-link:hover,
+.viewpost-related-link:focus {
+  color: #2b6cb0;
+  text-decoration: underline;
+}
+
+.viewpost-related-more {
+  margin: 16px 0 0;
+  text-align: center;
+}
+
+.viewpost-related-more-link {
+  display: inline-block;
+  padding: 8px 14px;
+  border: 1px solid #c5d4e8;
+  border-radius: 999px;
+  color: #2b6cb0;
+  font-size: 0.92rem;
+  font-weight: 500;
+  text-decoration: none;
+  background: #f7faff;
+}
+
+.viewpost-related-more-link:hover,
+.viewpost-related-more-link:focus {
+  background: #edf4ff;
+  text-decoration: none;
+}
+
+.viewpost-related-loading {
+  margin: 0;
+  text-align: center;
+  color: #888;
+  font-size: 0.92rem;
+}
+
+@media (max-width: 767px) {
+  .viewpost-related-row {
+    margin-top: 24px;
+    padding-top: 20px;
+  }
+
+  .viewpost-related-heading {
+    font-size: 1rem;
+  }
+
+  .viewpost-related-link {
+    padding: 11px 2px;
+    font-size: 0.95rem;
+  }
+}

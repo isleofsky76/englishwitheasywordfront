@@ -11,6 +11,47 @@
         return localStorage.getItem('gb-like-' + entryId) === '1';
     }
 
+    function resolveRelatedScriptSrc() {
+        const likeScript = document.querySelector('script[src*="viewpost-like"]');
+        if (likeScript && likeScript.src) {
+            return likeScript.src.replace(/viewpost-like[^/]*\.js(\?.*)?$/, 'viewpost-related.js?v=20260903a');
+        }
+        return '/viewpost-related.js?v=20260903a';
+    }
+
+    function loadRelatedPosts(options) {
+        const board = String((options && options.board) || '').trim();
+        if (board !== 'calm-mind') return;
+
+        function run() {
+            if (typeof window.initViewpostRelated === 'function') {
+                window.initViewpostRelated(options);
+            }
+        }
+
+        if (typeof window.initViewpostRelated === 'function') {
+            run();
+            return;
+        }
+
+        if (document.querySelector('script[data-viewpost-related]')) {
+            document.addEventListener('viewpost-related-ready', function onReady() {
+                document.removeEventListener('viewpost-related-ready', onReady);
+                run();
+            });
+            return;
+        }
+
+        const script = document.createElement('script');
+        script.src = resolveRelatedScriptSrc();
+        script.dataset.viewpostRelated = '1';
+        script.onload = run;
+        script.onerror = function () {
+            console.error('viewpost-related.js 로드 실패');
+        };
+        document.body.appendChild(script);
+    }
+
     function mountLikeBox() {
         const postContainer = document.getElementById('post-container');
         if (!postContainer) return null;
@@ -58,6 +99,8 @@
             '<span class="vp-like-label">추천</span>' +
             '<strong class="vp-like-count">' + count + '</strong>' +
             '</button>';
+
+        loadRelatedPosts({ apiBaseUrl: apiBase, board: board });
 
         const btn = container.querySelector('.vp-like-btn');
         const countEl = container.querySelector('.vp-like-count');
