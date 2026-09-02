@@ -14,14 +14,15 @@
     function resolveRelatedScriptSrc() {
         const likeScript = document.querySelector('script[src*="viewpost-like"]');
         if (likeScript && likeScript.src) {
-            return likeScript.src.replace(/viewpost-like[^/]*\.js(\?.*)?$/, 'viewpost-related.js?v=20260903a');
+            return likeScript.src.replace(/viewpost-like[^/]*\.js(\?.*)?$/, 'viewpost-related.js?v=20260903b');
         }
-        return '/viewpost-related.js?v=20260903a';
+        return '/viewpost-related.js?v=20260903b';
     }
 
     function loadRelatedPosts(options) {
         const board = String((options && options.board) || '').trim();
-        if (board !== 'calm-mind') return;
+        const seoBoard = document.body && document.body.dataset.nvBoard;
+        if (!board && !seoBoard) return;
 
         function run() {
             if (typeof window.initViewpostRelated === 'function') {
