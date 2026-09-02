@@ -14,9 +14,9 @@
     function resolveRelatedScriptSrc() {
         const likeScript = document.querySelector('script[src*="viewpost-like"]');
         if (likeScript && likeScript.src) {
-            return likeScript.src.replace(/viewpost-like[^/]*\.js(\?.*)?$/, 'viewpost-related.js?v=20260903b');
+            return likeScript.src.replace(/viewpost-like[^/]*\.js(\?.*)?$/, 'viewpost-related.js?v=20260903c');
         }
-        return '/viewpost-related.js?v=20260903b';
+        return '/viewpost-related.js?v=20260903c';
     }
 
     function loadRelatedPosts(options) {

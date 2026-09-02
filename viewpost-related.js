@@ -6,7 +6,7 @@
  */
 (function () {
     var DEFAULT_LIMIT = 5;
-    var CACHE_VERSION = '20260903b';
+    var CACHE_VERSION = '20260903c';
 
     var BOARD_ROWS = [
         {
