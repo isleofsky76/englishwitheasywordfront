@@ -20,7 +20,7 @@ export const BOARD_SEO = {
     cssFile: 'news-voca.css',
     cssVersion: '20260831f',
     jsFile: 'news-voca.js',
-    jsVersion: '20260622a',
+    jsVersion: '20260903d',
     listHtml: 'news-voca-list.html',
   },
   'cooking-voca': {
@@ -28,7 +28,7 @@ export const BOARD_SEO = {
     cssFile: 'cooking-voca.css',
     cssVersion: '20260622a',
     jsFile: 'cooking-voca.js',
-    jsVersion: '20260622a',
+    jsVersion: '20260903d',
     listHtml: 'cooking-voca-list.html',
   },
   'culture-voca': {
@@ -36,7 +36,7 @@ export const BOARD_SEO = {
     cssFile: 'culture-voca.css',
     cssVersion: '20260622a',
     jsFile: 'culture-voca.js',
-    jsVersion: '20260622a',
+    jsVersion: '20260903d',
     listHtml: 'culture-voca-list.html',
   },
   'defense-news': {
@@ -44,7 +44,7 @@ export const BOARD_SEO = {
     cssFile: 'news-voca.css',
     cssVersion: '20260831f',
     jsFile: 'defense-news.js',
-    jsVersion: '20260818a',
+    jsVersion: '20260903d',
     listHtml: 'defense-news-list.html',
   },
   'shorts-bg-image': {
@@ -52,7 +52,7 @@ export const BOARD_SEO = {
     cssFile: 'shorts-bg-image.css',
     cssVersion: '20260831d',
     jsFile: 'shorts-bg-image.js',
-    jsVersion: '20260831a',
+    jsVersion: '20260903d',
     listHtml: 'shorts-bg-image-list.html',
   },
   'ranking-news': {
@@ -60,7 +60,7 @@ export const BOARD_SEO = {
     cssFile: 'ranking-news.css',
     cssVersion: '20260622a',
     jsFile: 'page30_viewpost_ranking_news.js',
-    jsVersion: '20260622a',
+    jsVersion: '20260903d',
     listHtml: 'ranking-news-list.html',
   },
   'english-synonym': {
@@ -68,7 +68,7 @@ export const BOARD_SEO = {
     cssFile: 'page30_viewpost_v.css',
     cssVersion: '20260831f',
     jsFile: 'page30_viewpost_v.js',
-    jsVersion: '20260821blog',
+    jsVersion: '20260903d',
     listHtml: 'english-synonym-list.html',
     extraCss: [{ file: 'news-voca.css', version: '20260821blog' }],
   },
@@ -77,7 +77,7 @@ export const BOARD_SEO = {
     cssFile: 'page30_viewpost_opinions.css',
     cssVersion: '20260816a',
     jsFile: 'page30_viewpost_opinions.js',
-    jsVersion: '20260831a',
+    jsVersion: '20260903d',
     listHtml: 'english-opinions-list.html',
   },
   'calm-mind': {
@@ -85,7 +85,7 @@ export const BOARD_SEO = {
     cssFile: 'page30_viewpost_calm_mind.css',
     cssVersion: '20260828a',
     jsFile: 'page30_viewpost_calm_mind.js',
-    jsVersion: '20260821d',
+    jsVersion: '20260903d',
     listHtml: 'calm-mind-list.html',
   },
   'popular-voca': {
@@ -93,7 +93,7 @@ export const BOARD_SEO = {
     cssFile: 'page30_viewpost_v.css',
     cssVersion: '20260628',
     jsFile: 'page30_viewpost_v_easy.js',
-    jsVersion: '20260622a',
+    jsVersion: '20260903d',
     listHtml: 'popular-voca-list.html',
   },
   'word-of-the-day': {
@@ -101,7 +101,7 @@ export const BOARD_SEO = {
     cssFile: 'page30_viewpost_wordofday.css',
     cssVersion: '20260611a',
     jsFile: 'page30_viewpost_wordofday.js',
-    jsVersion: '20260720c',
+    jsVersion: '20260903d',
     listHtml: 'word-of-the-day-list.html',
   },
   'photo-english': {
@@ -109,7 +109,7 @@ export const BOARD_SEO = {
     cssFile: 'page30_viewpost_photo_english.css',
     cssVersion: '20260727r',
     jsFile: 'page30_viewpost_photo_english.js',
-    jsVersion: '20260727r',
+    jsVersion: '20260903d',
     listHtml: 'photo-english-list.html',
     extraCss: [{ file: 'photo-english.css', version: '20260727r' }],
   },
@@ -265,7 +265,7 @@ ${(board.extraCss || []).map((c) => `    <link rel="stylesheet" href="../../${c.
     <script src="../../page30-api-config.js"></script>
     <script src="../../viewpost-seo.js?v=20260622a"></script>
     <script src="../../viewpost-meta.js?v=20260627"></script>
-    <script src="../../viewpost-like.js?v=20260903b"></script>
+    <script src="../../viewpost-like.js?v=20260903d"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../../nav-home-menu.js?v=20260720a"></script>
     <script src="../../${board.jsFile}?v=${board.jsVersion}"></script>

@@ -81,9 +81,9 @@ function convertMediaLinks(text) {
         const youtubeMatch = url.match(youtubeRegex);
         if (youtubeMatch) {
             const videoId = youtubeMatch[1];
-            const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+            const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
             const youtubeUrl = `https://www.youtube.com/watch?v=${videoId}`;
-            return `<div class="video-preview-container" style="position: relative; max-width: 100%; margin: 10px 0; cursor: pointer; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1);"><a href="${youtubeUrl}" target="_blank" rel="noopener noreferrer" style="text-decoration: none; display: block;"><div class="video-thumbnail" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; background: #000;"><img src="${thumbnailUrl}" alt="YouTube Video" loading="lazy" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;" onerror="this.src='https://img.youtube.com/vi/${videoId}/hqdefault.jpg'"></div></a></div>`;
+            return `<div class="video-preview-container" style="position: relative; max-width: 100%; margin: 10px 0; cursor: pointer; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1);"><a href="${youtubeUrl}" target="_blank" rel="noopener noreferrer" style="text-decoration: none; display: block;"><div class="video-thumbnail" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; background: #000;"><img src="${thumbnailUrl}" alt="YouTube Video" loading="eager" fetchpriority="high" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;" onload="var p=this.nextElementSibling;if(p)p.style.opacity='1'" onerror="this.onerror=null;this.src='https://img.youtube.com/vi/${videoId}/mqdefault.jpg';var p=this.nextElementSibling;if(p)p.style.opacity='1'"></div></a></div>`;
         }
         const imageExtensions = /\.(jpg|jpeg|png|gif|webp|svg)(\?.*)?$/i;
         if (imageExtensions.test(url)) {
@@ -887,9 +887,13 @@ function enhancePhotoEnglishLesson(post) {
 
 function showLoading() {
     document.getElementById('post-container').innerHTML = `
-        <div style="text-align: center; padding: 40px;">
-            <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;"></div>
-            <p style="margin-top: 15px; color: #666;">게시글을 불러오는 중...</p>
+        <div class="vp-skeleton" aria-hidden="true" style="padding: 8px 0 24px;">
+            <div style="height: 22px; width: 72%; max-width: 420px; border-radius: 6px; background: #e8edf2; margin-bottom: 14px;"></div>
+            <div style="height: 12px; width: 40%; max-width: 180px; border-radius: 6px; background: #eef2f6; margin-bottom: 28px;"></div>
+            <div style="height: 12px; width: 100%; border-radius: 6px; background: #eef2f6; margin-bottom: 10px;"></div>
+            <div style="height: 12px; width: 96%; border-radius: 6px; background: #eef2f6; margin-bottom: 10px;"></div>
+            <div style="height: 12px; width: 88%; border-radius: 6px; background: #eef2f6; margin-bottom: 10px;"></div>
+            <div style="height: 12px; width: 92%; border-radius: 6px; background: #eef2f6;"></div>
         </div>`;
 }
 

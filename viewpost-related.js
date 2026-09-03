@@ -6,7 +6,7 @@
  */
 (function () {
     var DEFAULT_LIMIT = 5;
-    var CACHE_VERSION = '20260903c';
+    var CACHE_VERSION = '20260903d';
 
     var BOARD_ROWS = [
         {
@@ -248,8 +248,8 @@
         if (!row) return;
 
         ensureStylesheet();
-        row.hidden = false;
-        row.innerHTML = '<p class="viewpost-related-loading">다른 글 불러오는 중…</p>';
+        row.hidden = true;
+        row.innerHTML = '';
 
         fetch(apiBase + boardConfig.listPath, { headers: { Accept: 'application/json' } })
             .then(function (res) {

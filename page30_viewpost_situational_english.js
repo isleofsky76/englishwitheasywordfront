@@ -557,11 +557,13 @@ function convertMediaLinks(text) {
 function showLoading() {
     const postContainer = document.getElementById('post-container');
     postContainer.innerHTML = `
-        <div style="text-align: center; padding: 40px;">
-            <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;">
-                <span class="visually-hidden">Loading...</span>
-            </div>
-            <p style="margin-top: 15px; color: #666;">게시글을 불러오는 중...</p>
+        <div class="vp-skeleton" aria-hidden="true" style="padding: 8px 0 24px;">
+            <div style="height: 22px; width: 72%; max-width: 420px; border-radius: 6px; background: #e8edf2; margin-bottom: 14px;"></div>
+            <div style="height: 12px; width: 40%; max-width: 180px; border-radius: 6px; background: #eef2f6; margin-bottom: 28px;"></div>
+            <div style="height: 12px; width: 100%; border-radius: 6px; background: #eef2f6; margin-bottom: 10px;"></div>
+            <div style="height: 12px; width: 96%; border-radius: 6px; background: #eef2f6; margin-bottom: 10px;"></div>
+            <div style="height: 12px; width: 88%; border-radius: 6px; background: #eef2f6; margin-bottom: 10px;"></div>
+            <div style="height: 12px; width: 92%; border-radius: 6px; background: #eef2f6;"></div>
         </div>
     `;
 }
