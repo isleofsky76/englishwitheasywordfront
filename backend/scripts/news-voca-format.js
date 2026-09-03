@@ -410,6 +410,19 @@ function buildPhrasesHtml(phrases) {
 </div>`;
 }
 
+function narrativeLineClass(line) {
+  const t = String(line ?? '').trim();
+  // whole-line italic quote: *...*
+  if (/^\*[^*\n][\s\S]*\*$/.test(t) && !t.startsWith('**')) {
+    return 'nv-narrative-text nv-narrative-quote';
+  }
+  // phrase gloss: **English** 한글
+  if (t.startsWith('**')) {
+    return 'nv-narrative-text nv-narrative-gloss';
+  }
+  return 'nv-narrative-text nv-narrative-def';
+}
+
 function buildWordSectionHtml(section) {
   const title = section?.title || '';
   const rawNarrative = section?.narrative;
@@ -422,7 +435,7 @@ function buildWordSectionHtml(section) {
 
   if (narrativeLines.length) {
     const paras = narrativeLines
-      .map((t) => `<p class="nv-narrative-text">${parseInline(t)}</p>`)
+      .map((t) => `<p class="${narrativeLineClass(t)}">${parseInline(t)}</p>`)
       .join('\n');
     return `<section class="nv-word-section nv-narrative">
   <h2 class="nv-section-title">${escapeHtml(title)}</h2>

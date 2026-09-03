@@ -66,11 +66,11 @@ export const BOARD_SEO = {
   'english-synonym': {
     label: '유의어',
     cssFile: 'page30_viewpost_v.css',
-    cssVersion: '20260831f',
+    cssVersion: '20260903e',
     jsFile: 'page30_viewpost_v.js',
     jsVersion: '20260903d',
     listHtml: 'english-synonym-list.html',
-    extraCss: [{ file: 'news-voca.css', version: '20260821blog' }],
+    extraCss: [{ file: 'news-voca.css', version: '20260903e' }],
   },
   'english-opinions': {
     label: '오피니언',

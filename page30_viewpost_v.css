@@ -122,14 +122,17 @@ body {
   margin: 0;
   padding: 0;
   color: #333;
+  font-family: 'Noto Sans KR', 'Poppins', sans-serif;
   font-size: 0.95rem;
   font-weight: 400;
   line-height: 1.75;
   white-space: normal;
+  word-break: keep-all;
   word-wrap: break-word;
   overflow-wrap: break-word;
   max-height: none;
   overflow: visible;
+  -webkit-font-smoothing: antialiased;
 }
 
 #post-message p {
@@ -138,6 +141,66 @@ body {
 
 #post-message p:last-child {
   margin-bottom: 0;
+}
+
+/* calm-mind 스타일: 유의어 서술형 한글 가독성 */
+#post-message .nv-narrative {
+  font-family: 'Noto Sans KR', 'Poppins', sans-serif;
+  color: #333;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+#post-message .nv-narrative-text {
+  margin: 0;
+  font-size: 0.98rem;
+  color: #333;
+  line-height: 1.75;
+  font-weight: 400;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+#post-message .nv-narrative-text + .nv-narrative-text {
+  margin-top: 0.7rem;
+}
+
+#post-message .nv-narrative-def {
+  font-size: 1rem;
+  line-height: 1.75;
+  color: #333;
+}
+
+#post-message .nv-narrative-quote {
+  margin-top: 0.85rem !important;
+  margin-bottom: 0.15rem;
+  padding: 0.6rem 0.8rem;
+  border-radius: 8px;
+  background: #f7f9fc;
+  color: #374151;
+  font-size: 0.98rem;
+  line-height: 1.7;
+}
+
+#post-message .nv-narrative-gloss {
+  margin-top: 0.28rem !important;
+  padding-left: 0.1rem;
+  font-size: 0.96rem;
+  line-height: 1.7;
+  color: #333;
+}
+
+#post-message .nv-narrative-quote + .nv-narrative-gloss {
+  margin-top: 0.45rem !important;
+}
+
+#post-message .nv-narrative-gloss + .nv-narrative-gloss {
+  margin-top: 0.22rem !important;
+}
+
+#post-message .nv-narrative .nv-hl {
+  font-weight: 700;
+  color: #222;
 }
 
 /* 이미지/비디오 스타일 */
