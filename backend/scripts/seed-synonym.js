@@ -8,59 +8,59 @@ import { uploadSynonym } from './synonym-format.js';
 
 // ========== 여기만 수정 ==========
 const article = {
-  title: '불굴의, 천하무적의와 난공불락의',
+  title: '용납하다, 참다와 허용하다',
 
-  slug: 'indomitable-related-words',
+  slug: 'brook-related-words',
 
   metaDescription:
-    'indomitable, invincible, impregnable, inexorable, unassailable 뜻·발음 유의어 모음.',
+    'brook, tolerate, abide, stomach, countenance 뜻·발음 유의어 모음.',
 
-  password: 'seed_synonym_indomitable-related-words',
+  password: 'seed_synonym_brook-related-words',
 
   datePublished: '2026-09-05',
 
   intro: [
-    '쉽게 꺾이지 않거나 무너뜨리기 어렵고, 멈추기 힘든 상태를 나타내는 단어들을 모아 봤습니다.',
+    '어떤 행동이나 상황을 용납하거나 참고 견디고, 규칙을 따르거나 허용할 때 쓰이는 단어들을 모아 봤습니다.',
   ],
 
   words: [
     {
-      title: '1. 불굴의·꺾이지 않는',
+      title: '1. 용납하다·참다',
       narrative: [
-        '**indomitable**(ɪnˈdɑːmɪtəbəl / 인다머터블)',
+        '**brook**(brʊk / 브룩)',
       ],
     },
 
     {
-      title: '2. 천하무적의·아무도 꺾을 수 없는',
+      title: '2. 용인하다·참다',
       narrative: [
-        '**invincible**(ɪnˈvɪnsəbəl / 인빈서블)',
+        '**tolerate**(ˈtɑːləreɪt / 탈러레이트)',
       ],
     },
 
     {
-      title: '3. 난공불락의·뚫을 수 없는',
+      title: '3. 준수하다·따르다',
       narrative: [
-        '**impregnable**(ɪmˈpreɡnəbəl / 임프레그너블)',
+        '**abide**(əˈbaɪd / 어바이드)',
       ],
     },
 
     {
-      title: '4. 멈출 수 없는·거침없는',
+      title: '4. 참다·견디다',
       narrative: [
-        '**inexorable**(ɪnˈeksərəbəl / 이넥서러블)',
+        '**stomach**(ˈstʌmək / 스터먹)',
       ],
     },
 
     {
-      title: '5. 난공불락의·흔들 수 없는',
+      title: '5. 찬성하다·허용하다',
       narrative: [
-        '**unassailable**(ˌʌnəˈseɪləbəl / 어너세일러블)',
+        '**countenance**(ˈkaʊntənəns / 카운터넌스)',
       ],
     },
   ],
 
-  youtube: 'https://youtube.com/shorts/TVwodMKmkSQ',
+  youtube: 'https://youtube.com/shorts/FqxeoDF7lbU',
 };
 // ===============================
 
