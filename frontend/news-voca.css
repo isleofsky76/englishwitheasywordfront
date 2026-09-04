@@ -985,34 +985,41 @@
 }
 
 #post-message .vv-tts-btn {
-  display: inline-flex !important;
-  align-items: center;
-  justify-content: center;
-  margin-left: 6px;
-  margin-right: 2px;
-  padding: 0 2px;
-  border: 0;
-  border-radius: 6px;
-  background: transparent;
+  display: inline !important;
+  align-items: unset;
+  justify-content: unset;
+  margin: 0 0 0 4px;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  outline: none !important;
   color: inherit;
   cursor: pointer;
-  vertical-align: middle;
+  vertical-align: baseline;
   line-height: 1;
-  font-size: 1.05rem;
+  font-size: 1rem;
+  appearance: none;
+  -webkit-appearance: none;
 }
 
-#post-message .vv-tts-btn:hover {
-  background: #eff6ff;
-}
-
+#post-message .vv-tts-btn:hover,
+#post-message .vv-tts-btn:focus,
+#post-message .vv-tts-btn:active,
 #post-message .vv-tts-btn.vv-tts-playing {
-  background: #fee2e2;
+  background: transparent !important;
+  background-color: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  outline: none !important;
 }
 
 #post-message .vv-tts-label {
-  display: inline-block;
+  display: inline;
   line-height: 1;
-  font-size: 1.05rem;
+  font-size: 1rem;
 }
 
 #post-message .vv-tts-all-btn {
@@ -1020,15 +1027,16 @@
   align-items: center;
   gap: 6px;
   margin: 0 0 16px;
-  border: 1px solid #2f80ed;
-  background: #eef5fd;
+  border: 0;
+  background: transparent;
   color: #1d4f91;
   cursor: pointer;
-  border-radius: 999px;
-  padding: 6px 12px;
+  border-radius: 0;
+  padding: 0;
   font-size: 14px;
   font-weight: 600;
   line-height: 1.2;
+  box-shadow: none;
 }
 
 #post-message .nv-yt-thumb {

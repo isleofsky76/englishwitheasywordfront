@@ -190,7 +190,7 @@ function vvStartEnglishTTS(text, btn) {
 function vvTtsButtonHtml(speakText) {
     const t = String(speakText || '').trim();
     if (!t) return '';
-    return `<button type="button" class="vv-tts-btn" data-vv-tts="${vvEscapeAttr(t)}" aria-label="영어 읽기, 다시 누르면 멈춤" title="듣기 / 다시 누르면 멈춤"><span class="vv-tts-label" aria-hidden="true">🔊</span></button>`;
+    return `<button type="button" class="vv-tts-btn" data-vv-tts="${vvEscapeAttr(t)}" aria-label="영어 읽기, 다시 누르면 멈춤" title="듣기 / 다시 누르면 멈춤" style="margin-left:4px;padding:0;border:0;background:transparent;box-shadow:none;line-height:1;cursor:pointer;vertical-align:baseline;">🔊</button>`;
 }
 
 function vvAppendTtsInlineAfterEnglish(lineHtml, speak) {

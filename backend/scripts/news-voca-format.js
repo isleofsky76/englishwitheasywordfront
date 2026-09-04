@@ -444,7 +444,7 @@ function extractLeadingEnglishWordFromNarrative(line) {
 function buildWordSpeakButtonHtml(word) {
   const w = String(word || '').trim();
   if (!w) return '';
-  return `<button type="button" class="vv-tts-btn" data-vv-tts="${escapeHtml(w)}" aria-label="${escapeHtml(w)} 영어 발음 듣기" title="발음 듣기"><span class="vv-tts-label" aria-hidden="true">🔊</span></button>`;
+  return `<button type="button" class="vv-tts-btn" data-vv-tts="${escapeHtml(w)}" aria-label="${escapeHtml(w)} 영어 발음 듣기" title="발음 듣기" style="margin-left:4px;padding:0;border:0;background:transparent;box-shadow:none;line-height:1;cursor:pointer;vertical-align:baseline;">🔊</button>`;
 }
 
 /** **word**(발음) — 뜻 줄에 스피커 버튼을 HTML로 직접 삽입 (클라이언트 의존 제거) */
