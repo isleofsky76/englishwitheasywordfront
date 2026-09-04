@@ -9,110 +9,65 @@ import { uploadDefenseNews } from './defense-news-format.js';
 // ========== 여기만 수정 ==========
 
 const article = {
-  title: '트럼프의 한미 연합군사훈련 축소 방침과 북한·이란 전쟁',
+  title: '미국의 조선 능력 부족은 해군에 걸림돌이 된다',
 
-  slug: 'trump-korea-military-drills-related-words',
+  slug: 'bulwark-related-words',
 
   metaDescription:
-    'BBC 기사에서 추출한 국방·외교 표현. substantially, deployment, rehearsal, diplomacy, precedent, armistice, defuse 등.',
+    'Economist 기사에서 추출한 국방·조선 관련 표현. bulwark, prowess, eclipse, hamper, intertwine, commonality, complementary 등.',
 
-  password: 'seed_defense_trump-korea-military-drills-related-words',
+  password: 'seed_defense_bulwark-related-words',
 
-  datePublished: '2026-09-04',
+  datePublished: '2026-08-31',
 
   intro: [
-    '트럼프 대통령의 한미 연합군사훈련 축소 방침과 북한·이란 전쟁·한미동맹 문제를 다룬 BBC 기사에서 사용된 국방·외교 어휘를 정리합니다.',
+    '미국·중국·유럽의 상업 조선업과 해군력의 관계를 다룬 Economist 기사에서 사용된 국방·조선 관련 시사 어휘를 정리합니다.',
   ],
 
   words: [
     {
       narrative: [
-        '1. 한미 연합군사훈련을 상당히(**substantially**) 줄인다.',
+        '1. 영국 해군은 한때 섬나라를 지키는 떠다니는 보루(**bulwark**)로 묘사됐다.',
       ],
     },
     {
       narrative: [
-        '2. 북한 지도자 김정은과의 매우 좋은 관계를 이유로 들었다(**cite**).',
+        '2. 미국의 상업 조선 분야에서의 뛰어난 능력(**prowess**) 부족은 미 해군에 큰 비용을 초래했다.',
       ],
     },
     {
       narrative: [
-        '3. 이러한 훈련이 완전히 부적절한(**inappropriate**) 신호를 보낸다고 말했다.',
+        '3. 유럽의 세계적인 조선소들은 먼저 일본에, 이후 한국에 추월당했다(**eclipse**).',
       ],
     },
     {
       narrative: [
-        '4. 이러한 훈련이 적대적인(**hostile**) 신호를 보낸다고 비판했다.',
+        '4. 미국의 미약한 상업 조선업은 미 해군이 경쟁 속도를 따라가는 능력을 저해하고 있다(**hamper**).',
       ],
     },
     {
       narrative: [
-        '5. 러시아의 우크라이나 전쟁을 지원하기 위한 병력 배치(**deployment**)이다.',
+        '5. 중국의 상업 조선업은 중국 해군과 밀접하게 얽혀 있다(**intertwine**).',
       ],
     },
     {
       narrative: [
-        '6. 북한은 한미 연합군사훈련을 강력히 규탄했다(**condemn**).',
+        '6. 여러 선박에 적용되는 기본 플랫폼에는 많은 공통점(**commonality**)이 있다.',
       ],
     },
     {
       narrative: [
-        '7. 북한은 연합군사훈련을 침략 전쟁을 위한 예행연습(**rehearsal**)으로 본다.',
-      ],
-    },
-    {
-      narrative: [
-        '8. 김정은의 트럼프 대통령과의 고위급 외교(**diplomacy**)가 다시 주목받고 있다.',
-      ],
-    },
-    {
-      narrative: [
-        '9. 트럼프 대통령은 다른 동맹국들이 분쟁에 개입하기를 주저한 것(**hesitance**)에 불만을 나타냈다.',
-      ],
-    },
-    {
-      narrative: [
-        '10. 한미 연합군사훈련을 축소하려는 움직임은 선례(**precedent**)가 없는 것은 아니다.',
-      ],
-    },
-    {
-      narrative: [
-        '11. 트럼프 대통령은 2018년 연합군사훈련을 완전히 중단했다(**suspend**).',
-      ],
-    },
-    {
-      narrative: [
-        '12. 당시 트럼프 대통령은 연례 군사훈련이 도발적(**provocative**)이라고 평가했다.',
-      ],
-    },
-    {
-      narrative: [
-        '13. 한국전쟁은 1953년 정전협정(**armistice**)이 체결됐지만 공식적인 평화협정으로 끝난 것은 아니다.',
-      ],
-    },
-    {
-      narrative: [
-        '14. 한국에 주둔한(**station**) 미군 병력은 대비 태세를 유지하고 있다.',
-      ],
-    },
-    {
-      narrative: [
-        '15. 한국 정부는 올해 긴장을 완화하려고 노력해 왔다(**defuse**).',
-      ],
-    },
-    {
-      narrative: [
-        '16. 한국은 미국에 3,500억 달러를 투자하기로 약속했다(**commit**).',
+        '7. 상업 조선업과 군함 건조 산업은 제조 기술·조선소·공급망 측면에서 매우 상호 보완적이다(**complementary**).',
       ],
     },
   ],
 
   source: {
-    text: 'BBC | Trump says US to scale back South Korea military drills after it stayed out of Iran war | Brandon Drenon and Jake Kwon',
-    url: 'https://www.bbc.com/news/articles/cx2lll7zvn0o',
+    text: 'The Economist | America’s lack of shipbuilding prowess is a problem for its navy',
+    url: 'https://www.economist.com/business/2026/08/06/americas-lack-of-shipbuilding-prowess-is-a-problem-for-its-navy',
   },
 
-  youtube: 'https://www.youtube.com/watch?v=QMJAbMxz-ic',
+  youtube: 'https://www.youtube.com/watch?v=LRXVMotNybA',
 };
 
 // ===============================
