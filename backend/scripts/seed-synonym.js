@@ -7,68 +7,67 @@ import { API_BASE } from './loadEnv.js';
 import { uploadSynonym } from './synonym-format.js';
 
 // ========== 여기만 수정 ==========
-
 const article = {
-  title: '무뚝뚝한, 직설적인과 까칠한',
+  title: '합치다, 통합하다와 융합하다',
 
-  slug: 'brusque-related-words',
+  slug: 'coalesce-related-words',
 
   metaDescription:
-    'brusque, gruff, blunt, cantankerous, spiky, matter-of-fact 뜻·발음 유의어 모음.',
+    'coalesce, amalgamate, fuse, merge, coalition, blend 뜻·발음 유의어 모음.',
 
-  password: 'seed_synonym_brusque-related-words',
+  password: 'seed_synonym_coalesce-related-words',
 
   datePublished: '2026-09-05',
 
   intro: [
-    '무뚝뚝하고 퉁명스러운 말투부터 직설적이거나 괴팍하고 까칠한 태도까지 사람의 말투와 성격을 나타내는 단어들을 모아 봤습니다.',
+    '여러 요소가 하나로 합쳐지거나 통합되고, 서로 섞이거나 연합하는 상황에서 쓰이는 단어들을 모아 봤습니다.',
   ],
 
   words: [
     {
-      title: '1. 무뚝뚝한·퉁명스러운',
+      title: '1. 합치다·합체하다',
       narrative: [
-        '**brusque**(brʌsk / 브러스크)',
+        '**coalesce**(ˌkoʊəˈles / 코얼레스)',
       ],
     },
 
     {
-      title: '2. 거친·퉁명스러운',
+      title: '2. 합병하다·통합하다',
       narrative: [
-        '**gruff**(ɡrʌf / 그러프)',
+        '**amalgamate**(əˈmælɡəmeɪt / 어맬거메이트)',
       ],
     },
 
     {
-      title: '3. 직설적인·퉁명스러운',
+      title: '3. 융합하다·결합되다',
       narrative: [
-        '**blunt**(blʌnt / 블런트)',
+        '**fuse**(fjuːz / 퓨즈)',
       ],
     },
 
     {
-      title: '4. 성미가 고약한·괴팍한',
+      title: '4. 합병하다·합쳐지다',
       narrative: [
-        '**cantankerous**(kænˈtæŋkərəs / 캔탱커러스)',
+        '**merge**(mɜːrdʒ / 머지)',
       ],
     },
 
     {
-      title: '5. 까칠한·날카로운',
+      title: '5. 연합·연립',
       narrative: [
-        '**spiky**(ˈspaɪki / 스파이키)',
+        '**coalition**(ˌkoʊəˈlɪʃən / 코얼리션)',
       ],
     },
 
     {
-      title: '6. 담담한·사무적인',
+      title: '6. 섞이다·조화를 이루다',
       narrative: [
-        '**matter-of-fact**(ˌmætər əv ˈfækt / 매터 어브 팩트)',
+        '**blend**(blend / 블렌드)',
       ],
     },
   ],
 
-  youtube: 'https://www.youtube.com/watch?v=_rmid16JetI',
+  youtube: 'https://youtube.com/shorts/baedHLPW8zE',
 };
 // ===============================
 
