@@ -8,59 +8,73 @@ import { uploadSynonym } from './synonym-format.js';
 
 // ========== 여기만 수정 ==========
 const article = {
-  title: '용납하다, 참다와 허용하다',
+  title: '약탈하다, 훔치다와 횡령하다',
 
-  slug: 'brook-related-words',
+  slug: 'ransack-related-words',
 
   metaDescription:
-    'brook, tolerate, abide, stomach, countenance 뜻·발음 유의어 모음.',
+    'ransack, pillage, pilfer, purloin, embezzle, loot, burglarize 뜻·발음 유의어 모음.',
 
-  password: 'seed_synonym_brook-related-words',
+  password: 'seed_synonym_ransack-related-words',
 
   datePublished: '2026-09-05',
 
   intro: [
-    '어떤 행동이나 상황을 용납하거나 참고 견디고, 규칙을 따르거나 허용할 때 쓰이는 단어들을 모아 봤습니다.',
+    '물건을 마구 뒤지거나 약탈하고, 몰래 훔치거나 횡령하는 상황에서 쓰이는 단어들을 모아 봤습니다.',
   ],
 
   words: [
     {
-      title: '1. 용납하다·참다',
+      title: '1. 마구 뒤지다·난장판으로 만들다',
       narrative: [
-        '**brook**(brʊk / 브룩)',
+        '**ransack**(ˈrænˌsæk / 랜색)',
       ],
     },
 
     {
-      title: '2. 용인하다·참다',
+      title: '2. 조직적으로 약탈하다',
       narrative: [
-        '**tolerate**(ˈtɑːləreɪt / 탈러레이트)',
+        '**pillage**(ˈpɪlɪdʒ / 필리지)',
       ],
     },
 
     {
-      title: '3. 준수하다·따르다',
+      title: '3. 슬쩍슬쩍 훔치다',
       narrative: [
-        '**abide**(əˈbaɪd / 어바이드)',
+        '**pilfer**(ˈpɪlfər / 필퍼)',
       ],
     },
 
     {
-      title: '4. 참다·견디다',
+      title: '4. 교묘하게 훔치다',
       narrative: [
-        '**stomach**(ˈstʌmək / 스터먹)',
+        '**purloin**(pərˈlɔɪn / 펄로인)',
       ],
     },
 
     {
-      title: '5. 찬성하다·허용하다',
+      title: '5. 횡령하다',
       narrative: [
-        '**countenance**(ˈkaʊntənəns / 카운터넌스)',
+        '**embezzle**(ɪmˈbezəl / 임베즐)',
+      ],
+    },
+
+    {
+      title: '6. 폭동·혼란 속에서 약탈하다',
+      narrative: [
+        '**loot**(luːt / 루트)',
+      ],
+    },
+
+    {
+      title: '7. 빈집을 털다',
+      narrative: [
+        '**burglarize**(ˈbɜːrɡləraɪz / 벌글러라이즈)',
       ],
     },
   ],
 
-  youtube: 'https://youtube.com/shorts/FqxeoDF7lbU',
+  youtube: 'https://www.youtube.com/watch?v=VrTOygCp4C4',
 };
 // ===============================
 
