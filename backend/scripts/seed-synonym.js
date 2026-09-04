@@ -9,64 +9,61 @@ import { uploadSynonym } from './synonym-format.js';
 // ========== 여기만 수정 ==========
 
 
-
 const article = {
-  title: '구부러진, 비뚤어진과 고르지 않은',
+  title: '군사정권, 비밀 파벌과 무장 반란',
 
-  slug: 'crooked-related-words',
+  slug: 'junta-related-words',
 
   metaDescription:
-    'crooked, wonky, askew, lopsided, uneven 뜻·발음 유의어 모음.',
+    'junta, cabal, calumny, melee, insurgency 뜻·발음 유의어 모음.',
 
-  password: 'seed_synonym_crooked-related-words',
+  password: 'seed_synonym_junta-related-words',
 
   datePublished: '2026-09-05',
 
   intro: [
-    '모양이나 방향이 곧지 않거나 한쪽으로 치우치고 고르지 않을 때 쓰이는 단어들을 모아 봤습니다.',
+    '군사정권과 비밀 권력 집단부터 중상모략, 난투극, 무장 반란까지 정치·분쟁 기사에서 자주 만나는 단어들을 모아 봤습니다.',
   ],
 
   words: [
     {
-      title: '1. 구부러진·비뚤어진',
+      title: '1. 군사정권·군부 집단',
       narrative: [
-        '**crooked**(ˈkrʊkɪd / 크루키드)',
+        '**junta**(ˈhʊntə / 훈타) ',
       ],
     },
 
     {
-      title: '2. 비뚤어진·고르지 않은',
+      title: '2. 비밀 파벌·권력 집단',
       narrative: [
-        '**wonky**(ˈwɑːŋki / 웡키)',
+        '**cabal**(kəˈbɑːl / 커발)',
       ],
     },
 
     {
-      title: '3. 비뚤어진·한쪽으로 기울어진',
+      title: '3. 중상모략·악의적인 비방',
       narrative: [
-        '**askew**(əˈskjuː / 어스큐)',
+        '**calumny**(ˈkæləmni / 캘럼니)',
       ],
     },
 
     {
-      title: '4. 한쪽으로 치우친·불균형한',
+      title: '4. 난투극·혼전',
       narrative: [
-        '**lopsided**(ˌlɑːpˈsaɪdɪd / 랍사이디드)',
+        '**melee**(ˈmeɪleɪ / 메일레이',
       ],
     },
 
     {
-      title: '5. 고르지 않은·울퉁불퉁한',
+      title: '5. 반란·무장 반정부 활동',
       narrative: [
-        '**uneven**(ʌnˈiːvən / 언이븐)',
+        '**insurgency**(ɪnˈsɜːrdʒənsi / 인서전시) ',
       ],
     },
   ],
 
-  youtube: 'https://www.youtube.com/watch?v=yeKSvY9r_4c',
+  youtube: 'https://www.youtube.com/watch?v=QuPTE5oO5RE',
 };
-
-
 // ===============================
 
 uploadSynonym(article, API_BASE)
