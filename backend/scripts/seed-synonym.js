@@ -8,61 +8,67 @@ import { uploadSynonym } from './synonym-format.js';
 
 // ========== 여기만 수정 ==========
 
-
 const article = {
-  title: '군사정권, 비밀 파벌과 무장 반란',
+  title: '무뚝뚝한, 직설적인과 까칠한',
 
-  slug: 'junta-related-words',
+  slug: 'brusque-related-words',
 
   metaDescription:
-    'junta, cabal, calumny, melee, insurgency 뜻·발음 유의어 모음.',
+    'brusque, gruff, blunt, cantankerous, spiky, matter-of-fact 뜻·발음 유의어 모음.',
 
-  password: 'seed_synonym_junta-related-words',
+  password: 'seed_synonym_brusque-related-words',
 
   datePublished: '2026-09-05',
 
   intro: [
-    '군사정권과 비밀 권력 집단부터 중상모략, 난투극, 무장 반란까지 정치·분쟁 기사에서 자주 만나는 단어들을 모아 봤습니다.',
+    '무뚝뚝하고 퉁명스러운 말투부터 직설적이거나 괴팍하고 까칠한 태도까지 사람의 말투와 성격을 나타내는 단어들을 모아 봤습니다.',
   ],
 
   words: [
     {
-      title: '1. 군사정권·군부 집단',
+      title: '1. 무뚝뚝한·퉁명스러운',
       narrative: [
-        '**junta**(ˈhʊntə / 훈타) ',
+        '**brusque**(brʌsk / 브러스크)',
       ],
     },
 
     {
-      title: '2. 비밀 파벌·권력 집단',
+      title: '2. 거친·퉁명스러운',
       narrative: [
-        '**cabal**(kəˈbɑːl / 커발)',
+        '**gruff**(ɡrʌf / 그러프)',
       ],
     },
 
     {
-      title: '3. 중상모략·악의적인 비방',
+      title: '3. 직설적인·퉁명스러운',
       narrative: [
-        '**calumny**(ˈkæləmni / 캘럼니)',
+        '**blunt**(blʌnt / 블런트)',
       ],
     },
 
     {
-      title: '4. 난투극·혼전',
+      title: '4. 성미가 고약한·괴팍한',
       narrative: [
-        '**melee**(ˈmeɪleɪ / 메일레이',
+        '**cantankerous**(kænˈtæŋkərəs / 캔탱커러스)',
       ],
     },
 
     {
-      title: '5. 반란·무장 반정부 활동',
+      title: '5. 까칠한·날카로운',
       narrative: [
-        '**insurgency**(ɪnˈsɜːrdʒənsi / 인서전시) ',
+        '**spiky**(ˈspaɪki / 스파이키)',
+      ],
+    },
+
+    {
+      title: '6. 담담한·사무적인',
+      narrative: [
+        '**matter-of-fact**(ˌmætər əv ˈfækt / 매터 어브 팩트)',
       ],
     },
   ],
 
-  youtube: 'https://www.youtube.com/watch?v=QuPTE5oO5RE',
+  youtube: 'https://www.youtube.com/watch?v=_rmid16JetI',
 };
 // ===============================
 
