@@ -7,91 +7,95 @@ import { API_BASE } from './loadEnv.js';
 import { uploadSynonym } from './synonym-format.js';
 
 // ========== 여기만 수정 ==========
-// ========== 여기만 수정 ==========
 
 const article = {
-  title: 'crooked 연관단어 모음 : wonky, askew, lopsided, uneven',
+  title: 'robust 연관단어 모음 : sturdy · solid · resilient · powerful · vigorous',
 
-  slug: 'crooked-related-words',
+  slug: 'robust-related-words',
 
   metaDescription:
-    'crooked 연관단어 모음. wonky, askew, lopsided, uneven 뜻·발음·예문.',
+    'robust와 비슷한 영어 단어. sturdy, solid, durable, resilient, powerful, vigorous, muscular, rigid 뜻과 뉘앙스를 담백하게 정리합니다.',
 
-  password: 'seed_synonym_crooked-related-words',
+  password: 'seed_synonym_robust-related-words',
 
-  datePublished: '2026-08-31',
+  datePublished: '2026-09-05',
 
   intro: [
-    'crooked 연관단어: wonky, askew, lopsided, uneven',
+    '무언가를 **단단하고**, **오래가며**, **힘 있게** 말할 때 자주 나오는 단어들을 모아 봤습니다. 뜻은 비슷해도 쓰이는 장면이 조금씩 다릅니다.',
   ],
 
   words: [
     {
-      title: '1. crooked',
+      title: '1. 견고한·튼튼한',
       narrative: [
-        'crooked(ˈkrʊkɪd / 크루키드)는 **구부러진**, **비뚤어진**',
-
-        '*Straight trees have crooked roots.*',
-
-        '**Straight trees** 곧게 자란 나무도',
-        '**have crooked roots** 구불구불한 뿌리를 가지고 있다.',
+        '**robust** — 탄탄한, 견고한',
+        '**sturdy** — 튼튼한, 견고한',
+        '**solid** — 견조한, 탄탄한',
+        '**durable** — 내구성이 강한',
+        '**rugged** — 거친 환경에도 견디는',
+        '**hardwearing** — 쉽게 닳지 않는, 내구성 강한',
       ],
     },
 
     {
-      title: '2. wonky',
+      title: '2. 회복력·지속성',
       narrative: [
-        'wonky(ˈwɑːŋki / 웡키)는 **비뚤어진**, **고르지 않은**',
-
-        '*My teeth are wonky, discoloured and gappy.*',
-
-        '**My teeth** 내 치아는',
-        '**are wonky** 삐뚤어져 있고',
-        '**discoloured and gappy** 변색돼 있으며 사이도 벌어져 있다.',
+        '**resilient** — 회복력이 강한',
+        '**resistant** — 저항력이 있는',
+        '**enduring** — 오래 지속되는',
+        '**persistent** — 끈질기게 지속되는',
       ],
     },
 
     {
-      title: '3. askew',
+      title: '3. 강력한·영향력 있는',
       narrative: [
-        'askew(əˈskjuː / 어스큐)는 **비뚤어진**, **한쪽으로 기울어진**',
-
-        '*Her hat was slightly askew.*',
-
-        '**Her hat** 그녀의 모자는',
-        '**was slightly askew** 약간 한쪽으로 비뚤어져 있었다.',
+        '**strong** — 강한',
+        '**powerful** — 강력한, 영향력 있는',
+        '**potent** — 강력한, 효과가 강한',
+        '**mighty** — 막강한',
+        '**forceful** — 강력한, 힘 있는',
       ],
     },
 
     {
-      title: '4. lopsided',
+      title: '4. 활기찬·건강한',
       narrative: [
-        'lopsided(ˌlɑːpˈsaɪdɪd / 랍사이디드)는 **한쪽으로 치우친**, **불균형한**',
-
-        '*The article presents a somewhat lopsided view of events.*',
-
-        '**The article** 그 기사는',
-        '**presents** 제시한다',
-        '**a somewhat lopsided view of events** 사건을 다소 한쪽으로 치우친 시각에서.',
+        '**vigorous** — 활발한, 활기찬',
+        '**energetic** — 활기찬, 에너지 넘치는',
+        '**healthy** — 건전한, 건강한',
+        '**hearty** — 원기 왕성한, 푸짐한',
+        '**vibrant** — 활기 넘치는',
+        '**lively** — 활발한, 생기 있는',
       ],
     },
 
     {
-      title: '5. uneven',
+      title: '5. 건장한·육체적으로 튼튼한',
       narrative: [
-        'uneven(ʌnˈiːvən / 언이븐)은 **고르지 않은**, **울퉁불퉁한**',
+        '**muscular** — 근육질의, 강력한',
+        '**brawny** — 근육이 우람한',
+        '**burly** — 몸집이 크고 건장한',
+        '**beefy** — 두툼하고 튼튼한, 건장한',
+        '**strapping** — 키 크고 건장한',
+        '**well-built** — 체격이 좋은',
+      ],
+    },
 
-        '*The floor felt uneven under his feet.*',
-
-        '**The floor** 바닥이',
-        '**felt uneven** 고르지 않게 느껴졌다',
-        '**under his feet** 그의 발밑에서.',
+    {
+      title: '6. 경직된·완강한·빡빡한',
+      narrative: [
+        '**rigid** — 경직된, 융통성 없는',
+        '**stiff** — 강한, 치열한 / 뻣뻣한',
+        '**unyielding** — 완강한, 굽히지 않는',
+        '**tight** — 빠듯한, 여유가 없는',
       ],
     },
   ],
 
-  youtube: 'https://www.youtube.com/watch?v=yeKSvY9r_4c',
+  youtube: 'https://www.youtube.com/watch?v=eyR2w5rPvvg',
 };
+
 // ===============================
 
 uploadSynonym(article, API_BASE)

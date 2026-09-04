@@ -68,8 +68,7 @@ export const BOARD_SEO = {
     cssFile: 'page30_viewpost_v.css',
     cssVersion: '20260903e',
     jsFile: 'page30_viewpost_v.js',
-    jsVersion: '20260903d',
-    listHtml: 'english-synonym-list.html',
+    jsVersion: '20260905tts',
     extraCss: [{ file: 'news-voca.css', version: '20260903e' }],
   },
   'english-opinions': {
