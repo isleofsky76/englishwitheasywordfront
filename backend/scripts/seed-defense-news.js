@@ -11,14 +11,14 @@ import { uploadDefenseNews } from './defense-news-format.js';
 const article = {
   title: '영국 해군 드론·중국 부품 논란',
 
-  slug: 'underscore-related-words',
+  slug: 'uk-naval-drone-china-components',
 
   metaDescription:
     'WSJ 기사에서 추출한 국방·공급망 관련 표현. underscore, compromise, probe, provenance, scour, ubiquitous, wean off, trace 등.',
 
-  password: 'seed_defense_underscore-related-words',
+  password: 'seed_defense_uk-naval-drone-china-components',
 
-  datePublished: '2026-08-31',
+  datePublished: '2026-09-04',
 
   intro: [
     '군사 장비와 드론의 공급망·부품 출처·중국 의존 문제를 다룬 WSJ 기사에서 사용된 시사 어휘를 정리합니다.',
