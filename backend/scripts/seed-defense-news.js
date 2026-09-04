@@ -27,7 +27,7 @@ const article = {
   words: [
     {
       narrative: [
-        '1. 한미 연합군사훈련을 상당히 줄인다(**substantially**).',
+        '1. 한미 연합군사훈련을 상당히(**substantially**) 줄인다.',
       ],
     },
     {
