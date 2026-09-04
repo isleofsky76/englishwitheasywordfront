@@ -56,7 +56,7 @@ const article = {
     {
       title: '5. 살짝 유도하다·부추기다',
       narrative: [
-        '**nudge**(nʌdʒ / 너지) — 살짝 유도하다, 부추기다',
+        '**nudge**(nʌdʒ / 너지)',
       ],
     },
   ],
