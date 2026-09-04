@@ -8,66 +8,59 @@ import { uploadSynonym } from './synonym-format.js';
 
 // ========== 여기만 수정 ==========
 const article = {
-  title: '불어넣다, 스며들게 하다와 심어주다',
+  title: '불굴의, 천하무적의와 난공불락의',
 
-  slug: 'imbue-related-words',
+  slug: 'indomitable-related-words',
 
   metaDescription:
-    'imbue, infuse, immerse, instill, impart, indoctrinate 뜻·발음 유의어 모음.',
+    'indomitable, invincible, impregnable, inexorable, unassailable 뜻·발음 유의어 모음.',
 
-  password: 'seed_synonym_imbue-related-words',
+  password: 'seed_synonym_indomitable-related-words',
 
   datePublished: '2026-09-05',
 
   intro: [
-    '감정이나 생각, 지식, 태도 등을 사람이나 대상에 불어넣거나 스며들게 할 때 쓰이는 단어들을 모아 봤습니다.',
+    '쉽게 꺾이지 않거나 무너뜨리기 어렵고, 멈추기 힘든 상태를 나타내는 단어들을 모아 봤습니다.',
   ],
 
   words: [
     {
-      title: '1. 불어넣다·스며들게 하다',
+      title: '1. 불굴의·꺾이지 않는',
       narrative: [
-        '**imbue**(ɪmˈbjuː / 임뷰)',
+        '**indomitable**(ɪnˈdɑːmɪtəbəl / 인다머터블)',
       ],
     },
 
     {
-      title: '2. 스며들게 하다·가득 채우다',
+      title: '2. 천하무적의·아무도 꺾을 수 없는',
       narrative: [
-        '**infuse**(ɪnˈfjuːz / 인퓨즈)',
+        '**invincible**(ɪnˈvɪnsəbəl / 인빈서블)',
       ],
     },
 
     {
-      title: '3. 몰입시키다·푹 빠지게 하다',
+      title: '3. 난공불락의·뚫을 수 없는',
       narrative: [
-        '**immerse**(ɪˈmɜːrs / 이머스)',
+        '**impregnable**(ɪmˈpreɡnəbəl / 임프레그너블)',
       ],
     },
 
     {
-      title: '4. 심어주다·주입하다',
+      title: '4. 멈출 수 없는·거침없는',
       narrative: [
-        '**instill**(ɪnˈstɪl / 인스틸)',
+        '**inexorable**(ɪnˈeksərəbəl / 이넥서러블)',
       ],
     },
 
     {
-      title: '5. 전하다·나누어 주다',
+      title: '5. 난공불락의·흔들 수 없는',
       narrative: [
-        '**impart**(ɪmˈpɑːrt / 임파트)',
-      ],
-    },
-
-    {
-      title: '6. 주입시키다·세뇌하다',
-      narrative: [
-        '**indoctrinate**(ɪnˈdɑːktrəneɪt / 인닥트러네이트)',
+        '**unassailable**(ˌʌnəˈseɪləbəl / 어너세일러블)',
       ],
     },
   ],
 
-  youtube: 'https://youtube.com/shorts/ArJFVz0QUI8',
+  youtube: 'https://youtube.com/shorts/TVwodMKmkSQ',
 };
 // ===============================
 
