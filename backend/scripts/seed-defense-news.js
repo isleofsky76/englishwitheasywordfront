@@ -9,65 +9,80 @@ import { uploadDefenseNews } from './defense-news-format.js';
 // ========== 여기만 수정 ==========
 
 const article = {
-  title: '미국의 조선 능력 부족은 해군에 걸림돌이 된다',
+  title: '영국 해군 드론·중국 부품 논란',
 
-  slug: 'bulwark-related-words',
+  slug: 'underscore-related-words',
 
   metaDescription:
-    'Economist 기사에서 추출한 국방·조선 관련 표현. bulwark, prowess, eclipse, hamper, intertwine, commonality, complementary 등.',
+    'WSJ 기사에서 추출한 국방·공급망 관련 표현. underscore, compromise, probe, provenance, scour, ubiquitous, wean off, trace 등.',
 
-  password: 'seed_defense_bulwark-related-words',
+  password: 'seed_defense_underscore-related-words',
 
   datePublished: '2026-08-31',
 
   intro: [
-    '미국·중국·유럽의 상업 조선업과 해군력의 관계를 다룬 Economist 기사에서 사용된 국방·조선 관련 시사 어휘를 정리합니다.',
+    '군사 장비와 드론의 공급망·부품 출처·중국 의존 문제를 다룬 WSJ 기사에서 사용된 시사 어휘를 정리합니다.',
   ],
 
   words: [
     {
       narrative: [
-        '1. 영국 해군은 한때 섬나라를 지키는 떠다니는 보루(**bulwark**)로 묘사됐다.',
+        '1. 영국 해군 드론에 사용된 부품에서 중국과의 연결 가능성이 발견되면서, 군사 장비 공급망에 대한 우려가 더욱 부각됐다(**underscore**).',
       ],
     },
     {
       narrative: [
-        '2. 미국의 상업 조선 분야에서의 뛰어난 능력(**prowess**) 부족은 미 해군에 큰 비용을 초래했다.',
+        '2. 조사 결과 해당 장비의 데이터가 외부에서 접근되거나 보안이 손상된(**compromise**) 증거는 발견되지 않았다.',
       ],
     },
     {
       narrative: [
-        '3. 유럽의 세계적인 조선소들은 먼저 일본에, 이후 한국에 추월당했다(**were eclipsed**).',
+        '3. 미국에서도 과거 중국산 화물 크레인과 관련해 의회 차원의 조사(**probe**)가 진행된 바 있다.',
       ],
     },
     {
       narrative: [
-        '4. 미국의 미약한 상업 조선업은 미 해군이 경쟁 속도를 따라가는 능력을 저해하고 있다(**hampering the ability**).',
+        '4. 드론에는 수많은 소형 전자부품이 들어가기 때문에 각각의 부품이 어디에서 만들어졌는지 출처를 확인하는 일(**provenance**)이 쉽지 않다. cf. 기원, 출처, 유래 (=origin)',
       ],
     },
     {
       narrative: [
-        '5. 중국의 상업 조선업은 중국 해군과 밀접하게 얽혀 있다(**“closely intertwined” with its navy**).',
+        '5. 각국과 방위산업체들은 중국산 부품을 대체할 새로운 공급처와 비축 물량을 찾기 위해 세계 곳곳을 샅샅이 뒤지고 있다(**scour**).',
       ],
     },
     {
       narrative: [
-        '6. 여러 선박에 적용되는 기본 플랫폼에는 많은 공통점(**has many commonalities**)이 있다.',
+        '6. 중국산 드론과 전자부품은 글로벌 시장 전반에 너무 널리 퍼져 있어 여전히 거의 어디에서나(**ubiquitous**) 발견된다.',
       ],
     },
     {
       narrative: [
-        '7. 상업 조선업과 군함 건조 산업은 제조 기술·조선소·공급망 측면에서 매우 상호 보완적이다(**are highly complementary**).',
+        '7. 독일 방산기업 Arx는 중국 의존도를 낮추기 위해 공급망의 기반을 유럽에 두기 시작했다(**root**). cf. 뿌리를 내리다, 뿌리 내리게 하다',
+      ],
+    },
+    {
+      narrative: [
+        '8. 영국 해군 드론에 장착된(**installed**) 카메라가 중국에 있는 인터넷 주소로 데이터를 전송한 사실이 발견되면서 논란이 커졌다.',
+      ],
+    },
+    {
+      narrative: [
+        '9. 서방 방위산업체들은 약 10년 동안 중국산 전자부품에 대한 의존에서 벗어나기 위해 노력해 왔다(**wean off**). cf. wean somebody off/from something ~가 ~을 끊게[그만두게] 하다',
+      ],
+    },
+    {
+      narrative: [
+        '10. 드론에 들어가는 부품이 여러 국가와 공급업체를 거치기 때문에 실제로 어디에서 생산됐는지 추적하는 것(**trace**)은 매우 어렵다. cf. 추적하다, (추적하여) 찾아내다 (=track down)',
       ],
     },
   ],
 
   source: {
-    text: 'The Economist | America’s lack of shipbuilding prowess is a problem for its navy',
-    url: 'https://www.economist.com/business/2026/08/06/americas-lack-of-shipbuilding-prowess-is-a-problem-for-its-navy',
+    text: 'The Wall Street Journal | U.K. Discovers Component in Its Naval Drones Sent Signals to China',
+    url: 'https://www.wsj.com/world/uk/u-k-discovers-component-in-its-naval-drones-sent-signals-to-china-6ae60578',
   },
 
-  youtube: 'https://www.youtube.com/watch?v=LRXVMotNybA',
+  youtube: 'https://www.youtube.com/watch?v=NaJFLTZNYjQ',
 };
 
 // ===============================
