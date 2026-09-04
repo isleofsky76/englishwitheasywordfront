@@ -109,7 +109,7 @@ const article = {
     },
   ],
 
-  youtube: 'https://www.youtube.com/watch?v=YRkonl-h41U',
+  youtube: 'https://www.youtube.com/watch?v=Cvqe9DvPVKo&list=PLSlq2Lkls6sY&index=6',
 };
 
 // ===============================
