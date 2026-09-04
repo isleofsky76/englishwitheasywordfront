@@ -9,80 +9,70 @@ import { uploadDefenseNews } from './defense-news-format.js';
 // ========== 여기만 수정 ==========
 
 const article = {
-  title: '영국 해군 드론·중국 부품 논란',
+  title: '미 국방부 1200억 달러 무기 계약',
 
-  slug: 'uk-naval-drone-china-components',
+  slug: 'pentagon-120-billion-patriot-missiles-vocabulary',
 
   metaDescription:
-    'WSJ 기사에서 추출한 국방·공급망 관련 표현. underscore, compromise, probe, provenance, scour, ubiquitous, wean off, trace 등.',
+    'WSJ 기사에서 추출한 국방·예산 관련 표현. covert, thwart, skepticism, subject to, appropriation, earmark, value, weaponry 등.',
 
-  password: 'seed_defense_uk-naval-drone-china-components',
+  password: 'seed_defense_pentagon-120-billion-patriot-missiles-vocabulary',
 
-  datePublished: '2026-09-04',
+  datePublished: '2026-08-31',
 
   intro: [
-    '군사 장비와 드론의 공급망·부품 출처·중국 의존 문제를 다룬 WSJ 기사에서 사용된 시사 어휘를 정리합니다.',
+    '미 국방부가 패트리엇 미사일과 잠수함 등 대규모 무기 조달에 1200억 달러 이상을 투입하기로 한 WSJ 기사에서 사용된 국방·예산 관련 시사 어휘를 정리합니다.',
   ],
 
   words: [
     {
       narrative: [
-        '1. 영국 해군 드론에 사용된 부품에서 중국과의 연결 가능성이 발견되면서, 군사 장비 공급망에 대한 우려가 더욱 부각됐다(**underscore**).',
+        '1. 잠수함은 추적이 어렵고 지휘관들이 은밀한(covert) 공격을 감행할 수 있게 해주기 때문에 미군에게 매우 중요.',
       ],
     },
     {
       narrative: [
-        '2. 조사 결과 해당 장비의 데이터가 외부에서 접근되거나 보안이 손상된(**compromise**) 증거는 발견되지 않았다.',
+        '2. 더 큰 탄약으로 탄도 미사일도 방해/저지할(**thwart**) 수 있음.',
       ],
     },
     {
       narrative: [
-        '3. 미국에서도 과거 중국산 화물 크레인과 관련해 의회 차원의 조사(**probe**)가 진행된 바 있다.',
+        '3. 민주당과 일부 공화당 의원들은 대규모 국방 계약과 관련해 회의적인 태도(**skepticism**)를 나타냈다.',
       ],
     },
     {
       narrative: [
-        '4. 드론에는 수많은 소형 전자부품이 들어가기 때문에 각각의 부품이 어디에서 만들어졌는지 출처를 확인하는 일(**provenance**)이 쉽지 않다. cf. 기원, 출처, 유래 (=origin)',
+        '4. 패트리어트 및 사드(THAAD) 미사일에 대한 최근 계약은 최종 조건에 관한 추가 협상을 거쳐야 하는(**subject to further talks**) 미확정 계약.',
       ],
     },
     {
       narrative: [
-        '5. 각국과 방위산업체들은 중국산 부품을 대체할 새로운 공급처와 비축 물량을 찾기 위해 세계 곳곳을 샅샅이 뒤지고 있다(**scour**).',
+        '5. 또한 해당 계약들은 의회의 완전한 예산 승인(**appropriation**)을 받지 못했습니다.',
       ],
     },
     {
       narrative: [
-        '6. 중국산 드론과 전자부품은 글로벌 시장 전반에 너무 널리 퍼져 있어 여전히 거의 어디에서나(**ubiquitous**) 발견된다.',
+        '6. 미 국방부는 패트리엇 미사일과 잠수함 등 무기 조달을 위해 계약업체에 1200억 달러 이상을 특정 용도로 배정했다(**earmark**).',
       ],
     },
     {
       narrative: [
-        '7. 독일 방산기업 Arx는 중국 의존도를 낮추기 위해 공급망의 기반을 유럽에 두기 시작했다(**root**). cf. 뿌리를 내리다, 뿌리 내리게 하다',
+        '7. 록히드마틴과 체결하는 패트리엇 미사일 계약의 규모는 현재 약 590억 달러로 평가되고 있다(**value**).',
       ],
     },
     {
       narrative: [
-        '8. 영국 해군 드론에 장착된(**installed**) 카메라가 중국에 있는 인터넷 주소로 데이터를 전송한 사실이 발견되면서 논란이 커졌다.',
-      ],
-    },
-    {
-      narrative: [
-        '9. 서방 방위산업체들은 약 10년 동안 중국산 전자부품에 대한 의존에서 벗어나기 위해 노력해 왔다(**wean off**). cf. wean somebody off/from something ~가 ~을 끊게[그만두게] 하다',
-      ],
-    },
-    {
-      narrative: [
-        '10. 드론에 들어가는 부품이 여러 국가와 공급업체를 거치기 때문에 실제로 어디에서 생산됐는지 추적하는 것(**trace**)은 매우 어렵다. cf. 추적하다, (추적하여) 찾아내다 (=track down)',
+        '8. 국방부는 장기간에 걸쳐 미사일과 각종 무기류(**weaponry**)를 안정적으로 공급받기 위해 연간 구매 방식을 확대하고 있다.',
       ],
     },
   ],
 
   source: {
-    text: 'The Wall Street Journal | U.K. Discovers Component in Its Naval Drones Sent Signals to China',
-    url: 'https://www.wsj.com/world/uk/u-k-discovers-component-in-its-naval-drones-sent-signals-to-china-6ae60578',
+    text: 'The Wall Street Journal | Pentagon Commits Over $120 Billion for Patriot Missiles, Submarines | By Drew FitzGerald and Marcus Weisgerber',
+    url: 'https://www.wsj.com/politics/national-security/pentagon-widens-patriot-missile-order-to-nearly-59-billion-b3da2e01',
   },
 
-  youtube: 'https://www.youtube.com/watch?v=NaJFLTZNYjQ',
+  youtube: 'https://www.youtube.com/watch?v=5HvLP-bF3Oc',
 };
 
 // ===============================
