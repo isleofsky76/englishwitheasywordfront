@@ -8,66 +8,66 @@ import { uploadSynonym } from './synonym-format.js';
 
 // ========== 여기만 수정 ==========
 const article = {
-  title: '모순, 부조화와 비유 표현',
+  title: '교착상태, 정체와 완전한 중단',
 
-  slug: 'contradiction-related-words',
+  slug: 'stalemate-related-words',
 
   metaDescription:
-    'contradiction, incongruity, oxymoron, hyperbole, euphemism, analogy 뜻·발음 유의어 모음.',
+    'stalemate, stagnant, deadlock, impasse, gridlock, standstill 뜻·발음 유의어 모음.',
 
-  password: 'seed_synonym_contradiction-related-words',
+  password: 'seed_synonym_stalemate-related-words',
 
   datePublished: '2026-09-05',
 
   intro: [
-    '모순과 부조화부터 과장, 완곡어법, 비유까지 글과 기사에서 자주 쓰이는 표현들을 모아 봤습니다.',
+    '전쟁과 정치, 협상, 교통처럼 상황이 더 이상 앞으로 나아가지 못할 때 자주 쓰이는 교착·정체 표현들을 모아 봤습니다.',
   ],
 
   words: [
     {
-      title: '1. 모순·상충',
+      title: '1. 교착상태',
       narrative: [
-        '**contradiction**(ˌkɑːntrəˈdɪkʃən / 칸트러딕션)',
+        '**stalemate**(ˈsteɪlmeɪt / 스테일메이트) — 교착상태',
       ],
     },
 
     {
-      title: '2. 부조화·불일치',
+      title: '2. 정체된·변화가 없는',
       narrative: [
-        '**incongruity**(ˌɪnkənˈɡruːəti / 인컨그루어티)',
+        '**stagnant**(ˈstæɡnənt / 스태그넌트) — 정체된, 변화가 없는',
       ],
     },
 
     {
-      title: '3. 모순된 표현',
+      title: '3. 완전한 교착상태',
       narrative: [
-        '**oxymoron**(ˌɑːksɪˈmɔːrɑːn / 악시모론)',
+        '**deadlock**(ˈdedlɑːk / 데드락) — 완전한 교착상태',
       ],
     },
 
     {
-      title: '4. 과장·과장법',
+      title: '4. 막다른 교착상태',
       narrative: [
-        '**hyperbole**(haɪˈpɜːrbəli / 하이퍼벌리)',
+        '**impasse**(ˈɪmpæs / 임패스) — 교착 상태, 막다른 상황',
       ],
     },
 
     {
-      title: '5. 완곡한 표현',
+      title: '5. 교통·정치적 교착',
       narrative: [
-        '**euphemism**(ˈjuːfəmɪzəm / 유퍼미즘)',
+        '**gridlock**(ˈɡrɪdlɑːk / 그리드락) — 교통 정체, 정치적 교착상태',
       ],
     },
 
     {
-      title: '6. 비유·유추',
+      title: '6. 정지·완전한 중단',
       narrative: [
-        '**analogy**(əˈnælədʒi / 어낼러지)',
+        '**standstill**(ˈstændstɪl / 스탠드스틸) — 정지, 완전한 중단',
       ],
     },
   ],
 
-  youtube: 'https://www.youtube.com/watch?v=DgnZ_E_IXog',
+  youtube: 'https://www.youtube.com/watch?v=RwPEjicRxCM',
 };
 // ===============================
 
