@@ -8,7 +8,7 @@ import { uploadSynonym } from './synonym-format.js';
 
 // ========== 여기만 수정 ==========
 const article = {
-  title: '약탈하다, 훔치다와 횡령하다',
+  title: 'Steal 말고 쓸 수 있는 영어 표현?',
 
   slug: 'ransack-related-words',
 
