@@ -9,91 +9,61 @@ import { uploadSynonym } from './synonym-format.js';
 // ========== 여기만 수정 ==========
 
 const article = {
-  title: '튼튼한, 원기 왕성한',
+  title: '말만 번지르르한, 수다스러운',
 
-  slug: 'robust-related-words',
+  slug: 'glib-related-words',
 
   metaDescription:
-    'robust와 비슷한 영어 단어. sturdy, solid, durable, resilient, powerful, vigorous, muscular, rigid 뜻과 뉘앙스를 담백하게 정리합니다.',
+    'glib, gregarious, garrulous, laconic, facile, gratuitous, goad 뜻을 짧게 묶은 유의어 모음.',
 
-  password: 'seed_synonym_robust-related-words',
+  password: 'seed_synonym_glib-related-words',
 
-  datePublished: '2026-09-05',
+  datePublished: '2026-08-16',
 
   intro: [
-    '무언가를 **단단하고**, **오래가며**, **힘 있게** 말할 때 자주 나오는 단어들을 모아 봤습니다. 뜻은 비슷해도 쓰이는 장면이 조금씩 다릅니다.',
+    '말투와 태도에서 자주 나오는 단어들을 모아 봤습니다.',
   ],
 
   words: [
     {
-      title: '1. 견고한·튼튼한',
+      title: '1. 말만 번지르르한·피상적인',
       narrative: [
-        '**robust** — 탄탄한, 견고한',
-        '**sturdy** — 튼튼한, 견고한',
-        '**solid** — 견조한, 탄탄한',
-        '**durable** — 내구성이 강한',
-        '**rugged** — 거친 환경에도 견디는',
-        '**hardwearing** — 쉽게 닳지 않는, 내구성 강한',
+        '**glib** — 말만 번지르르한, 피상적으로 그럴듯한',
+        '**facile** — 피상적인, 지나치게 손쉬운',
       ],
     },
 
     {
-      title: '2. 회복력·지속성',
+      title: '2. 사교적인·수다스러운',
       narrative: [
-        '**resilient** — 회복력이 강한',
-        '**resistant** — 저항력이 있는',
-        '**enduring** — 오래 지속되는',
-        '**persistent** — 끈질기게 지속되는',
+        '**gregarious** — 사교적인, 사람들과 어울리기 좋아하는',
+        '**garrulous** — 수다스러운, 말이 많은',
       ],
     },
 
     {
-      title: '3. 강력한·영향력 있는',
+      title: '3. 말수가 적은',
       narrative: [
-        '**strong** — 강한',
-        '**powerful** — 강력한, 영향력 있는',
-        '**potent** — 강력한, 효과가 강한',
-        '**mighty** — 막강한',
-        '**forceful** — 강력한, 힘 있는',
+        '**laconic** — 말수가 적은, 간결한',
       ],
     },
 
     {
-      title: '4. 활기찬·건강한',
+      title: '4. 불필요한·과도한',
       narrative: [
-        '**vigorous** — 활발한, 활기찬',
-        '**energetic** — 활기찬, 에너지 넘치는',
-        '**healthy** — 건전한, 건강한',
-        '**hearty** — 원기 왕성한, 푸짐한',
-        '**vibrant** — 활기 넘치는',
-        '**lively** — 활발한, 생기 있는',
+        '**gratuitous** — 불필요한, 쓸데없이 과도한',
       ],
     },
 
     {
-      title: '5. 건장한·육체적으로 튼튼한',
+      title: '5. 부추기다',
       narrative: [
-        '**muscular** — 근육질의, 강력한',
-        '**brawny** — 근육이 우람한',
-        '**burly** — 몸집이 크고 건장한',
-        '**beefy** — 두툼하고 튼튼한, 건장한',
-        '**strapping** — 키 크고 건장한',
-        '**well-built** — 체격이 좋은',
-      ],
-    },
-
-    {
-      title: '6. 경직된·완강한·빡빡한',
-      narrative: [
-        '**rigid** — 경직된, 융통성 없는',
-        '**stiff** — 강한, 치열한 / 뻣뻣한',
-        '**unyielding** — 완강한, 굽히지 않는',
-        '**tight** — 빠듯한, 여유가 없는',
+        '**goad** — 부추기다, 도발하다',
       ],
     },
   ],
 
-  youtube: 'https://www.youtube.com/watch?v=eyR2w5rPvvg',
+  youtube: 'https://www.youtube.com/watch?v=lL6H4OptGDE',
 };
 
 // ===============================
