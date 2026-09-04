@@ -8,66 +8,66 @@ import { uploadSynonym } from './synonym-format.js';
 
 // ========== 여기만 수정 ==========
 const article = {
-  title: '합치다, 통합하다와 융합하다',
+  title: '불어넣다, 스며들게 하다와 심어주다',
 
-  slug: 'coalesce-related-words',
+  slug: 'imbue-related-words',
 
   metaDescription:
-    'coalesce, amalgamate, fuse, merge, coalition, blend 뜻·발음 유의어 모음.',
+    'imbue, infuse, immerse, instill, impart, indoctrinate 뜻·발음 유의어 모음.',
 
-  password: 'seed_synonym_coalesce-related-words',
+  password: 'seed_synonym_imbue-related-words',
 
   datePublished: '2026-09-05',
 
   intro: [
-    '여러 요소가 하나로 합쳐지거나 통합되고, 서로 섞이거나 연합하는 상황에서 쓰이는 단어들을 모아 봤습니다.',
+    '감정이나 생각, 지식, 태도 등을 사람이나 대상에 불어넣거나 스며들게 할 때 쓰이는 단어들을 모아 봤습니다.',
   ],
 
   words: [
     {
-      title: '1. 합치다·합체하다',
+      title: '1. 불어넣다·스며들게 하다',
       narrative: [
-        '**coalesce**(ˌkoʊəˈles / 코얼레스)',
+        '**imbue**(ɪmˈbjuː / 임뷰)',
       ],
     },
 
     {
-      title: '2. 합병하다·통합하다',
+      title: '2. 스며들게 하다·가득 채우다',
       narrative: [
-        '**amalgamate**(əˈmælɡəmeɪt / 어맬거메이트)',
+        '**infuse**(ɪnˈfjuːz / 인퓨즈)',
       ],
     },
 
     {
-      title: '3. 융합하다·결합되다',
+      title: '3. 몰입시키다·푹 빠지게 하다',
       narrative: [
-        '**fuse**(fjuːz / 퓨즈)',
+        '**immerse**(ɪˈmɜːrs / 이머스)',
       ],
     },
 
     {
-      title: '4. 합병하다·합쳐지다',
+      title: '4. 심어주다·주입하다',
       narrative: [
-        '**merge**(mɜːrdʒ / 머지)',
+        '**instill**(ɪnˈstɪl / 인스틸)',
       ],
     },
 
     {
-      title: '5. 연합·연립',
+      title: '5. 전하다·나누어 주다',
       narrative: [
-        '**coalition**(ˌkoʊəˈlɪʃən / 코얼리션)',
+        '**impart**(ɪmˈpɑːrt / 임파트)',
       ],
     },
 
     {
-      title: '6. 섞이다·조화를 이루다',
+      title: '6. 주입시키다·세뇌하다',
       narrative: [
-        '**blend**(blend / 블렌드)',
+        '**indoctrinate**(ɪnˈdɑːktrəneɪt / 인닥트러네이트)',
       ],
     },
   ],
 
-  youtube: 'https://youtube.com/shorts/baedHLPW8zE',
+  youtube: 'https://youtube.com/shorts/ArJFVz0QUI8',
 };
 // ===============================
 
