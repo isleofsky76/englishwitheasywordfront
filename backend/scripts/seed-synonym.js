@@ -7,68 +7,67 @@ import { API_BASE } from './loadEnv.js';
 import { uploadSynonym } from './synonym-format.js';
 
 // ========== 여기만 수정 ==========
-
 const article = {
-  title: '부추기다, 선동하다와 촉발하다',
+  title: '모순, 부조화와 비유 표현',
 
-  slug: 'foment-related-words',
+  slug: 'contradiction-related-words',
 
   metaDescription:
-    'foment, incite, instigate, goad, galvanize, provoke 뜻·발음 유의어 모음.',
+    'contradiction, incongruity, oxymoron, hyperbole, euphemism, analogy 뜻·발음 유의어 모음.',
 
-  password: 'seed_synonym_foment-related-words',
+  password: 'seed_synonym_contradiction-related-words',
 
   datePublished: '2026-09-05',
 
   intro: [
-    '사람이나 상황을 자극해 어떤 행동이나 감정을 일으키는 표현들을 모아 봤습니다.',
+    '모순과 부조화부터 과장, 완곡어법, 비유까지 글과 기사에서 자주 쓰이는 표현들을 모아 봤습니다.',
   ],
 
   words: [
     {
-      title: '1. 부추기다·조장하다',
+      title: '1. 모순·상충',
       narrative: [
-        '**foment**(foʊˈment / 포멘트)',
+        '**contradiction**(ˌkɑːntrəˈdɪkʃən / 칸트러딕션)',
       ],
     },
 
     {
-      title: '2. 선동하다·부추기다',
+      title: '2. 부조화·불일치',
       narrative: [
-        '**incite**(ɪnˈsaɪt / 인사이트)',
+        '**incongruity**(ˌɪnkənˈɡruːəti / 인컨그루어티)',
       ],
     },
 
     {
-      title: '3. 일으키다·선동하다',
+      title: '3. 모순된 표현',
       narrative: [
-        '**instigate**(ˈɪnstɪɡeɪt / 인스티게이트)',
+        '**oxymoron**(ˌɑːksɪˈmɔːrɑːn / 악시모론)',
       ],
     },
 
     {
-      title: '4. 부추기다·몰아붙이다',
+      title: '4. 과장·과장법',
       narrative: [
-        '**goad**(ɡoʊd / 고우드)',
+        '**hyperbole**(haɪˈpɜːrbəli / 하이퍼벌리)',
       ],
     },
 
     {
-      title: '5. 고무하다·행동하도록 자극하다',
+      title: '5. 완곡한 표현',
       narrative: [
-        '**galvanize**(ˈɡælvənaɪz / 갤버나이즈)',
+        '**euphemism**(ˈjuːfəmɪzəm / 유퍼미즘)',
       ],
     },
 
     {
-      title: '6. 유발하다·촉발하다',
+      title: '6. 비유·유추',
       narrative: [
-        '**provoke**(prəˈvoʊk / 프로보우크)',
+        '**analogy**(əˈnælədʒi / 어낼러지)',
       ],
     },
   ],
 
-  youtube: 'https://www.youtube.com/watch?v=cwh2b_h0ggM',
+  youtube: 'https://www.youtube.com/watch?v=DgnZ_E_IXog',
 };
 // ===============================
 
