@@ -9,90 +9,125 @@ import { uploadDefenseNews } from './defense-news-format.js';
 // ========== 여기만 수정 ==========
 
 const article = {
-  title: '우크라이나가 러시아를 상대로 공중전을 대폭 강화하는 이유는?',
+  title: '요격 미사일이 떨어지면 어떻게 될까요?',
 
-  slug: 'household-name-related-words',
+  slug: 'vulnerable-related-words',
 
   metaDescription:
-    'WSJ 방송(https://www.youtube.com/watch?v=YRkonl-h41U)에서 추출한 표현. household name, indebted, fragile, tactical, stagnant, onslaught, jury-rig 등.',
+    'Economist 기사에서 추출한 표현. vulnerable, boast, deplete, attritional, proliferation, formidable 등.',
 
-  password: 'seed_defense_household-name-related-words',
+  password: 'seed_defense_vulnerable-related-words',
 
   datePublished: '2026-08-31',
 
   intro: [
-    '이 표현들은 WSJ 방송 "우크라이나가 러시아를 상대로 공중전을 대폭 강화하는 이유는?"에서 추출한 표현들입니다.',
+    '이 표현들은 Economist 기사 "요격 미사일이 떨어지면 어떻게 될까요?"에서 추출한 표현들입니다.',
   ],
 
   words: [
     {
       narrative: [
-        '1. Wildberries는 러시아에서 가장 중요한 유명 브랜드(**household name**) 중 하나이다.',
+        '1. 군사기지가 취약(**vulnerable**)해지고, 심지어 강대국들도 군사작전을 제한해야 할 수 있다.',
       ],
     },
     {
       narrative: [
-        '2. 그것은 실제로 러시아 국영은행에 엄청난 빚을 진(**indebted**) 상태이다.',
+        '2. 3월에 우크라이나는 탄도미사일의 약 70%를 요격했다고 성과를 내세웠다(**boast**).',
       ],
     },
     {
       narrative: [
-        '3. 러시아 은행 시스템은 이미 상당히 취약(**fragile**)하다.',
+        '3. 곤경(**plight**)에 처해 있다.',
       ],
     },
     {
       narrative: [
-        '4. 전쟁에 대한 러시아인들의 인식(**perception**)을 바꾼다.',
+        '4. 그것들을 다른 임무로 돌린다(**divert**).',
       ],
     },
     {
       narrative: [
-        '5. Wildberries는 전술(**tactical**) 장비, 야간투시경, 헬멧을 판매하고 있다.',
+        '5. 보유 비축량을 소진했다(**deplete**).',
       ],
     },
     {
       narrative: [
-        '6. 전국에 걸친 창고 분포(**distribution**)이다.',
+        '6. 소모전(**attritional**)이다.',
       ],
     },
     {
       narrative: [
-        '7. 많은 사람에게 전쟁을 실감하게(**bring home**) 한다.',
+        '7. 가장 가까운(**proximate**) 원인이다.',
       ],
     },
     {
       narrative: [
-        '8. 반면 지금까지 그들은 여러 면에서 전쟁으로부터 크게 보호(**shelter**)받아 왔다.',
+        '8. 막대한(**prodigious**) 사용이다.',
       ],
     },
     {
       narrative: [
-        '9. 최전선은 여전히 매우 정체(**stagnant**)되어 있다.',
+        '9. 현실을 직시해야 하는 순간을 앞당겼다(**hasten**).',
       ],
     },
     {
       narrative: [
-        '10. 병력 문제에 있어서는 어느 정도의 심각한 부족(**crunch**)을 느낀다.',
+        '10. 전 세계적인 확산(**proliferation**)이다.',
       ],
     },
     {
       narrative: [
-        '11. 우크라이나 드론의 맹공격(**onslaught**)으로부터 자신들을 보호한다.',
+        '11. 안일함(**complacency**)이 문제이다.',
       ],
     },
     {
       narrative: [
-        '12. 일부는 자체 방공 시스템을 임시방편으로 만든다(**jury-rig**).',
+        '12. 엄청나게 거대한(**gargantuan**) 1조 5천억 달러 규모의 국방예산이다.',
       ],
     },
     {
       narrative: [
-        '13. 그것이 잃을 수 있는 것은 러시아인들이 푸틴을 중심으로 결집(**rally around**)하게 하는 것이다.',
+        '13. 예상치 못한 문제(**hitch**)가 있다.',
+      ],
+    },
+    {
+      narrative: [
+        '14. 하나의 체계를 즉석에서 만들었다(**improvise**).',
+      ],
+    },
+    {
+      narrative: [
+        '15. 다른 것에 의해 능가당한다(**upstage**).',
+      ],
+    },
+    {
+      narrative: [
+        '16. 민첩한(**nimble**) 방어이다.',
+      ],
+    },
+    {
+      narrative: [
+        '17. 신생(**upstart**) 기업들이다.',
+      ],
+    },
+    {
+      narrative: [
+        '18. 회의론자들이 많이 존재한다(**abound**).',
+      ],
+    },
+    {
+      narrative: [
+        '19. 만만치 않은(**formidable**) 상대이다.',
       ],
     },
   ],
 
-  youtube: 'https://www.youtube.com/watch?v=Cvqe9DvPVKo&list=PLSlq2Lkls6sY&index=6',
+  source: {
+    text: 'The Economist',
+    url: 'https://www.economist.com/international/2026/08/18/what-happens-when-interceptor-missiles-run-out',
+  },
+
+  youtube: 'https://www.youtube.com/watch?v=A8Vot6kHG_0',
 };
 
 // ===============================
