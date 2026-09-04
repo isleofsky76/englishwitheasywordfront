@@ -13,190 +13,135 @@ import { uploadDefenseNews } from './defense-news-format.js';
 // ========== 여기만 수정 ==========
 
 const article = {
-  title: '미 해군 군함 동력상실 후 표류 | adrift · casualty · morale · consequential',
+  title: 'US navy destroyer adrift in South China Sea for four days after losing power',
 
   slug: 'destroyer-related-words',
 
   metaDescription:
-    'destroyer(구축함), adrift(표류하는), strain(부담), casualty(뜻하지 않은 사고), galley(선박의 주방), morale(사기), consequential(중대한) 등 미 해군 관련 시사 어휘를 정리합니다.',
+    'The Guardian 기사에서 추출한 표현. destroyer, adrift, engineering casualty, galley, deployment, morale, consequential 등.',
 
   password: 'seed_defense_destroyer-related-words',
 
   datePublished: '2026-08-31',
 
   intro: [
-    '미 해군 구축함의 표류 사고와 장기 파병, 승조원들의 근무 환경을 다룬 기사에서 사용된 국방·해군 관련 시사 어휘를 정리합니다.',
-
- 
+    '이 표현들은 더 가디언지의 "US navy destroyer adrift in South China Sea for four days after losing power"에서 추출한 표현들입니다.',
   ],
 
   words: [
     {
-      title: '1. destroyer',
+      title: '1',
       narrative: [
-        'destroyer(dɪˈstrɔɪər / 디스트로이어)는 **구축함**이라는 뜻입니다.',
-
-        '*A US guided-missile destroyer.*',
-
-        '**A US guided-missile destroyer** 미국의 유도미사일 구축함.',
+        '구축함(**destroyer**) USS Benfold가 남중국해에서 동력을 잃고 표류(**adrift**)했다.',
       ],
     },
-
     {
-      title: '2. adrift',
+      title: '2',
       narrative: [
-        'adrift(əˈdrɪft / 어드리프트)는 **표류하는**, **동력을 잃고 떠도는**이라는 뜻입니다.',
-
-        '*Reportedly spent four days adrift.*',
-
-        '**Reportedly spent** 보도에 따르면 보냈다 / **four days adrift** 표류한 채 나흘을.',
+        '기계 사고(**engineering casualty**)로 발전기가 고장 났다.',
       ],
     },
-
     {
-      title: '3. strain',
+      title: '3',
       narrative: [
-        'strain(streɪn / 스트레인)은 **부담**, **압박**이라는 뜻입니다.',
-
-        '*Furthering concerns about strain being placed on deployed military members.*',
-
-        '**Furthering concerns** 우려를 더욱 키우며 / **about strain being placed** 부담이 가해지는 것에 대한 / **on deployed military members** 파병된 군인들에게.',
+        '선원들은 선박 주방(**galley**) 서비스를 사용할 수 없었다.',
       ],
     },
-
     {
-      title: '4. casualty',
+      title: '4',
       narrative: [
-        'casualty(ˈkæʒuəlti / 캐주얼티)는 **뜻하지 않은 사고**, **사상자**라는 뜻입니다.',
-
-        '*An engineering casualty involving its generators.*',
-
-        '**An engineering casualty** 기관 설비 사고 / **involving its generators** 발전기와 관련된.',
+        '배가 견인(**towed**)되어 필리핀으로 옮겨졌다.',
       ],
     },
-
     {
-      title: '5. galley',
+      title: '5',
       narrative: [
-        'galley(ˈɡæli / 갤리)는 **선박의 주방**이라는 뜻입니다.',
-
-        '*That loss of power meant sailors were without galley services, toilets and air conditioning.*',
-
-        '**That loss of power meant** 그 전력 상실은 의미했다 / **sailors were without galley services** 선원들이 주방 서비스를 이용하지 못하고 / **toilets and air conditioning** 화장실과 냉방 시설도 이용하지 못했다는 것을.',
+        '2일 후 동력이 복구(**restored**)되었다.',
       ],
     },
-
     {
-      title: '6. grit',
+      title: '6',
       narrative: [
-        'grit(ɡrɪt / 그릿)은 **투지**, **끈기**라는 뜻입니다.',
+        '파병된 군인들에게 가해지는 부담(**strain being placed**)에 대한 우려가 높아지고 있다.',
       ],
     },
-
     {
-      title: '7. account',
+      title: '7',
       narrative: [
-        'account(əˈkaʊnt / 어카운트)는 **기사**, **설명**, **진술**, **보도 내용**이라는 뜻입니다.',
-
-        '*Hegseth has rejected the accounts, calling them “completely misrepresented”.*',
-
-        '**Hegseth has rejected the accounts** 헤그세스는 해당 보도 내용을 부인했다 / **calling them “completely misrepresented”** 그것이 “완전히 잘못 전달됐다”고 말하며.',
+        '선원들이 투지(**grit**)와 탄력성(**resilience**)을 보여주었다.',
       ],
     },
-
     {
-      title: '8. stretch',
+      title: '8',
       narrative: [
-        'stretch(stretʃ / 스트레치)는 **잡아 늘이다**, **잡아당기다**라는 뜻입니다.',
+        '장기 파병(**deployment**)은 선원들과 가족에게 상당한 부담을 준다.',
       ],
     },
-
     {
-      title: '9. relieve',
+      title: '9',
       narrative: [
-        'relieve(rɪˈliːv / 릴리브)는 **교대하다**, **부담을 덜어주다**라는 뜻입니다.',
-
-        '*To relieve the USS Abraham Lincoln.*',
-
-        '**To relieve** 교대하기 위해 / **the USS Abraham Lincoln** USS 에이브러햄 링컨함을.',
+        'USS Abraham Lincoln의 낮은 사기(**low morale**)가 문제가 되었다.',
       ],
     },
-
     {
-      title: '10. deployment',
+      title: '10',
       narrative: [
-        'deployment(dɪˈplɔɪmənt / 디플로이먼트)는 **파병**, **배치**라는 뜻입니다.',
-
-        '*Extended deployments.*',
-
-        '**Extended deployments** 연장된 파병.',
+        '보도(**accounts**)에 따르면 일부 선원들이 배에서 뛰어내리려 했다.',
       ],
     },
-
     {
-      title: '11. recount',
+      title: '11',
       narrative: [
-        'recount(rɪˈkaʊnt / 리카운트)는 **자세히 이야기하다**라는 뜻입니다.',
-
-        '*A retired admiral who recounted being on ships for “much longer”.*',
-
-        '**A retired admiral** 한 퇴역 제독은 / **who recounted being on ships** 함정에 있었다고 자세히 이야기했다 / **for “much longer”** “훨씬 더 오랫동안”.',
+        '국방장관은 이러한 보도가 완전히 잘못 표현되었다고 거부(**rejected**)했다.',
       ],
     },
-
     {
-      title: '12. morale',
+      title: '12',
       narrative: [
-        'morale(məˈræl / 머랠)는 **사기**, **의욕**이라는 뜻입니다.',
-
-        '*Poor morale.*',
-
-        '**Poor morale** 저하된 사기.',
+        '금욕적인 조건(**austere conditions**)에서 근무하는 선원들은 놀라운 일을 하고 있다.',
       ],
     },
-
     {
-      title: '13. austere',
+      title: '13',
       narrative: [
-        'austere(ɔːˈstɪr / 오스티어)는 **금욕적인**, **내핍 생활을 하는**이라는 뜻입니다.',
-
-        '*Austere conditions.*',
-
-        '**Austere conditions** 열악하고 엄격한 생활 환경.',
+        '자살 관념(**suicidal ideation**)이 증가했다는 보고는 없다.',
       ],
     },
-
     {
-      title: '14. ideation',
+      title: '14',
       narrative: [
-        'ideation(ˌaɪdiˈeɪʃən / 아이디에이션)은 **관념 작용**, **상상하기**라는 뜻입니다.',
+        '쿠퍼 제독은 이 파병(**deployment**)이 현대사에서 가장 중대한(**consequential**) 임무 중 하나라고 했다.',
       ],
     },
-
     {
-      title: '15. consequential',
+      title: '15',
       narrative: [
-        'consequential(ˌkɑːnsəˈkwenʃəl / 칸서퀜셜)은 **중대한**이라는 뜻입니다.',
-
-        '*History will record this deployment as one of the most consequential of the modern era.*',
-
-        '**History will record this deployment** 역사는 이번 파병을 기록할 것이다 / **as one of the most consequential** 가장 중대한 사례 중 하나로 / **of the modern era** 현대의.',
+        '트럼프는 한국과의 군사훈련을 대폭 축소(**substantially reduce**)하라고 지시했다.',
       ],
     },
-
     {
-      title: '16. stressor',
+      title: '16',
       narrative: [
-        'stressor(ˈstresər / 스트레서)는 **스트레스 요인**, **압박 요인**이라는 뜻입니다.',
+        '다른 배가 교대(**relieve**)하기 위해 중동으로 향하고 있다.',
+      ],
+    },
+    {
+      title: '17',
+      narrative: [
+        '은퇴한 해병은 더 오래 배에 탔다고 회상(**recounted**)했다.',
+      ],
+    },
+    {
+      title: '18',
+      narrative: [
+        '가족들은 선원 배치(**deployed**)에 대한 트럼프 행정부의 태도에 분노하고 있다.',
       ],
     },
   ],
 
-  source:
-    'https://www.theguardian.com/us-news/2026/aug/17/us-navy-destroyer-south-china-sea',
+  source: 'https://www.theguardian.com/us-news/2026/aug/17/us-navy-destroyer-south-china-sea',
 
-  youtube:
-    'https://www.youtube.com/watch?v=ICkppDs5-CE&list=PLSlq2Lkls6sY&index=7',
+  youtube: 'https://www.youtube.com/watch?v=ICkppDs5-CE',
 };
 
 // ===============================
