@@ -8,66 +8,59 @@ import { uploadSynonym } from './synonym-format.js';
 
 // ========== 여기만 수정 ==========
 const article = {
-  title: '교착상태, 정체와 완전한 중단',
+  title: '충동적인, 건방진과 주제넘은',
 
-  slug: 'stalemate-related-words',
+  slug: 'impetuous-related-words',
 
   metaDescription:
-    'stalemate, stagnant, deadlock, impasse, gridlock, standstill 뜻·발음 유의어 모음.',
+    'impetuous, impudent, insolent, impertinent, presumptuous 뜻·발음 유의어 모음.',
 
-  password: 'seed_synonym_stalemate-related-words',
+  password: 'seed_synonym_impetuous-related-words',
 
   datePublished: '2026-09-05',
 
   intro: [
-    '전쟁과 정치, 협상, 교통처럼 상황이 더 이상 앞으로 나아가지 못할 때 자주 쓰이는 교착·정체 표현들을 모아 봤습니다.',
+    '충동적이거나 성급한 행동부터, 건방지고 무례하거나 주제넘은 태도를 나타내는 단어들을 모아 봤습니다.',
   ],
 
   words: [
     {
-      title: '1. 교착상태',
+      title: '1. 충동적인·성급한',
       narrative: [
-        '**stalemate**(ˈsteɪlmeɪt / 스테일메이트)',
+        '**impetuous**(ɪmˈpetʃuəs / 임페추어스) ',
       ],
     },
 
     {
-      title: '2. 정체된·변화가 없는',
+      title: '2. 뻔뻔한·건방진',
       narrative: [
-        '**stagnant**(ˈstæɡnənt / 스태그넌트)',
+        '**impudent**(ˈɪmpjədənt / 임퓨던트)',
       ],
     },
 
     {
-      title: '3. 완전한 교착상태',
+      title: '3. 오만불손한·무례한',
       narrative: [
-        '**deadlock**(ˈdedlɑːk / 데드락)',
+        '**insolent**(ˈɪnsələnt / 인설런트) — 오만불손한, 무례한',
       ],
     },
 
     {
-      title: '4. 막다른 교착상태',
+      title: '4. 버릇없는·주제넘은',
       narrative: [
-        '**impasse**(ˈɪmpæs / 임패스)',
+        '**impertinent**(ɪmˈpɜːrtənənt / 임퍼티넌트)',
       ],
     },
 
     {
-      title: '5. 교통·정치적 교착',
+      title: '5. 주제넘은·지나치게 나서는',
       narrative: [
-        '**gridlock**(ˈɡrɪdlɑːk / 그리드락)',
-      ],
-    },
-
-    {
-      title: '6. 정지·완전한 중단',
-      narrative: [
-        '**standstill**(ˈstændstɪl / 스탠드스틸) ',
+        '**presumptuous**(prɪˈzʌmptʃuəs / 프리점프추어스)',
       ],
     },
   ],
 
-  youtube: 'https://www.youtube.com/watch?v=RwPEjicRxCM',
+  youtube: 'https://www.youtube.com/watch?v=GEbiEh38JTY',
 };
 // ===============================
 
