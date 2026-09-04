@@ -9,70 +9,45 @@ import { uploadDefenseNews } from './defense-news-format.js';
 // ========== 여기만 수정 ==========
 
 const article = {
-  title: '미 국방부 1200억 달러 무기 계약',
+  title: '미국 국방 예산을 감축하는 것',
 
-  slug: 'pentagon-120-billion-weapon-contract',
+  slug: 'defunding-us-military-related-words',
 
   metaDescription:
-    'WSJ 기사에서 추출한 국방·예산 관련 표현. covert, thwart, skepticism, subject to, appropriation, earmark, value, weaponry 등.',
+    'WSJ 사설에서 추출한 국방·예산 관련 표현. round, press leak, arsenal, dire straits, readiness, compound, defund 등.',
 
-  password: 'seed_defense_pentagon-120-billion-weapon-contract',
+  password: 'seed_defense_defunding-us-military-related-words',
 
   datePublished: '2026-09-04',
 
   intro: [
-    '미 국방부가 패트리엇 미사일과 잠수함 등 대규모 무기 조달에 1200억 달러 이상을 투입하기로 한 WSJ 기사에서 사용된 국방·예산 관련 시사 어휘를 정리합니다.',
+    '미국 군사력이 심각한 자금 부족 상태에 빠져 있음을 지적합니다. 트럼프 행정부가 추진하는 국방력 강화 계획이 의회의 자금 지원 부족으로 제대로 추진되지 못하고 있다는 내용입니다.',
   ],
 
   words: [
     {
       narrative: [
-        '1. 잠수함은 추적이 어렵고 지휘관들이 은밀한(covert) 공격을 감행할 수 있게 해주기 때문에 미군에게 매우 중요.',
+        '1. 또 한 차례(**round**)의 언론 유출 보도(**press leak**)가 나오면서, 미군의 무기 비축량(**arsenal**)이 심각한 곤경(**dire straits**)에 처해 있다는 경고가 제기됐다.',
       ],
     },
     {
       narrative: [
-        '2. 더 큰 탄약으로 탄도 미사일도 방해/저지할(**thwart**) 수 있음.',
+        '2. 중동에서 작전을 계속하면서 미군의 대비태세(**readiness**)에 드는 부담과 비용이 계속 누적되고 있다(**are compounding**).',
       ],
     },
     {
       narrative: [
-        '3. 민주당과 일부 공화당 의원들은 대규모 국방 계약과 관련해 회의적인 태도(**skepticism**)를 나타냈다.',
-      ],
-    },
-    {
-      narrative: [
-        '4. 패트리어트 및 사드(THAAD) 미사일에 대한 최근 계약은 최종 조건에 관한 추가 협상을 거쳐야 하는(**subject to further talks**) 미확정 계약.',
-      ],
-    },
-    {
-      narrative: [
-        '5. 또한 해당 계약들은 의회의 완전한 예산 승인(**appropriation**)을 받지 못했습니다.',
-      ],
-    },
-    {
-      narrative: [
-        '6. 미 국방부는 패트리엇 미사일과 잠수함 등 무기 조달을 위해 계약업체에 1200억 달러 이상을 특정 용도로 배정했다(**earmark**).',
-      ],
-    },
-    {
-      narrative: [
-        '7. 록히드마틴과 체결하는 패트리엇 미사일 계약의 규모는 현재 약 590억 달러로 평가되고 있다(**value**).',
-      ],
-    },
-    {
-      narrative: [
-        '8. 국방부는 장기간에 걸쳐 미사일과 각종 무기류(**weaponry**)를 안정적으로 공급받기 위해 연간 구매 방식을 확대하고 있다.',
+        '3. 현재의 흐름이 이어진다면(on present trend ) 의회가 사실상 미군에 대한 재정 지원(**defunding the military**)을 줄이고 있는 셈이다.',
       ],
     },
   ],
 
   source: {
-    text: 'The Wall Street Journal | Pentagon Commits Over $120 Billion for Patriot Missiles, Submarines | By Drew FitzGerald and Marcus Weisgerber',
-    url: 'https://www.wsj.com/politics/national-security/pentagon-widens-patriot-missile-order-to-nearly-59-billion-b3da2e01',
+    text: 'The Wall Street Journal | Defunding the U.S. Military | The Editorial Board',
+    url: 'https://www.wsj.com/opinion/u-s-military-funding-iran-middle-east-pentagon-ukraine-1b3460f1?mod=opinion_trendingnow_article_pos2',
   },
 
-  youtube: 'https://www.youtube.com/watch?v=5HvLP-bF3Oc',
+  youtube: 'https://www.youtube.com/shorts/_DQAJ2M39Vk',
 };
 
 // ===============================
