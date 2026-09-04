@@ -50,7 +50,7 @@ const VV_ALLOWED_TAGS = [
 const VV_ALLOWED_ATTRS = [
     'style', 'href', 'target', 'rel', 'src', 'alt', 'loading', 'decoding', 'onerror',
     'type', 'class', 'id', 'aria-label', 'aria-hidden', 'title', 'data-vv-tts',
-    'role', 'width', 'height', 'viewBox', 'fill', 'focusable',
+    'role', 'width', 'height', 'viewBox', 'viewbox', 'fill', 'focusable', 'd', 'xmlns',
 ];
 
 function sanitizeHtml(html) {
@@ -190,9 +190,7 @@ function vvStartEnglishTTS(text, btn) {
 function vvTtsButtonHtml(speakText) {
     const t = String(speakText || '').trim();
     if (!t) return '';
-    const icon =
-        '<svg class="vv-tts-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>';
-    return `<button type="button" class="vv-tts-btn" data-vv-tts="${vvEscapeAttr(t)}" aria-label="영어 읽기, 다시 누르면 멈춤" title="듣기 / 다시 누르면 멈춤" style="margin-left:6px;border:0;background:transparent;cursor:pointer;vertical-align:middle;color:#2f80ed;padding:0;">${icon}</button>`;
+    return `<button type="button" class="vv-tts-btn" data-vv-tts="${vvEscapeAttr(t)}" aria-label="영어 읽기, 다시 누르면 멈춤" title="듣기 / 다시 누르면 멈춤"><span class="vv-tts-label" aria-hidden="true">🔊</span></button>`;
 }
 
 function vvAppendTtsInlineAfterEnglish(lineHtml, speak) {
@@ -277,14 +275,11 @@ function vvAttachPlayAll(container) {
     const sentenceBtns = Array.from(container.querySelectorAll('.vv-tts-btn:not(.vv-tts-all-btn)'));
     if (sentenceBtns.length < 2) return;
 
-    const icon =
-        '<svg class="vv-tts-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>';
     const wrap = document.createElement('p');
     wrap.className = 'vv-tts-all-wrap';
     wrap.innerHTML =
-        '<button type="button" class="vv-tts-all-btn" aria-label="영어 단어 모두 듣기, 다시 누르면 멈춤" title="모두 듣기 / 다시 누르면 멈춤" style="display:inline-flex;align-items:center;gap:6px;margin:0 0 16px;border:1px solid #2f80ed;background:#eef5fd;color:#1d4f91;cursor:pointer;border-radius:999px;padding:6px 12px;font-size:14px;font-weight:600;line-height:1.2;">' +
-        icon +
-        ' 영어 단어 모두 듣기</button>';
+        '<button type="button" class="vv-tts-all-btn" aria-label="영어 단어 모두 듣기, 다시 누르면 멈춤" title="모두 듣기 / 다시 누르면 멈춤">' +
+        '<span class="vv-tts-label" aria-hidden="true">🔊</span> 영어 단어 모두 듣기</button>';
     const msg = container.querySelector('#post-message');
     if (msg && msg.parentNode) msg.parentNode.insertBefore(wrap, msg);
     else container.insertBefore(wrap, container.firstChild);
