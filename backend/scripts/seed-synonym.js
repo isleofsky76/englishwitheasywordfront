@@ -27,42 +27,42 @@ const article = {
     {
       title: '1. 교착상태',
       narrative: [
-        '**stalemate**(ˈsteɪlmeɪt / 스테일메이트) — 교착상태',
+        '**stalemate**(ˈsteɪlmeɪt / 스테일메이트)',
       ],
     },
 
     {
       title: '2. 정체된·변화가 없는',
       narrative: [
-        '**stagnant**(ˈstæɡnənt / 스태그넌트) — 정체된, 변화가 없는',
+        '**stagnant**(ˈstæɡnənt / 스태그넌트)',
       ],
     },
 
     {
       title: '3. 완전한 교착상태',
       narrative: [
-        '**deadlock**(ˈdedlɑːk / 데드락) — 완전한 교착상태',
+        '**deadlock**(ˈdedlɑːk / 데드락)',
       ],
     },
 
     {
       title: '4. 막다른 교착상태',
       narrative: [
-        '**impasse**(ˈɪmpæs / 임패스) — 교착 상태, 막다른 상황',
+        '**impasse**(ˈɪmpæs / 임패스)',
       ],
     },
 
     {
       title: '5. 교통·정치적 교착',
       narrative: [
-        '**gridlock**(ˈɡrɪdlɑːk / 그리드락) — 교통 정체, 정치적 교착상태',
+        '**gridlock**(ˈɡrɪdlɑːk / 그리드락)',
       ],
     },
 
     {
       title: '6. 정지·완전한 중단',
       narrative: [
-        '**standstill**(ˈstændstɪl / 스탠드스틸) — 정지, 완전한 중단',
+        '**standstill**(ˈstændstɪl / 스탠드스틸) ',
       ],
     },
   ],
