@@ -11,14 +11,14 @@ import { uploadDefenseNews } from './defense-news-format.js';
 const article = {
   title: '미 국방부 1200억 달러 무기 계약',
 
-  slug: 'pentagon-120-billion-patriot-missiles-vocabulary',
+  slug: 'pentagon-120-billion-weapon-contract',
 
   metaDescription:
     'WSJ 기사에서 추출한 국방·예산 관련 표현. covert, thwart, skepticism, subject to, appropriation, earmark, value, weaponry 등.',
 
-  password: 'seed_defense_pentagon-120-billion-patriot-missiles-vocabulary',
+  password: 'seed_defense_pentagon-120-billion-weapon-contract',
 
-  datePublished: '2026-08-31',
+  datePublished: '2026-09-04',
 
   intro: [
     '미 국방부가 패트리엇 미사일과 잠수함 등 대규모 무기 조달에 1200억 달러 이상을 투입하기로 한 WSJ 기사에서 사용된 국방·예산 관련 시사 어휘를 정리합니다.',
