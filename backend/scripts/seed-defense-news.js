@@ -9,125 +9,110 @@ import { uploadDefenseNews } from './defense-news-format.js';
 // ========== 여기만 수정 ==========
 
 const article = {
-  title: '요격 미사일이 떨어지면 어떻게 될까요?',
+  title: '트럼프의 한미 연합군사훈련 축소 방침과 북한·이란 전쟁',
 
-  slug: 'vulnerable-related-words',
+  slug: 'trump-korea-military-drills-related-words',
 
   metaDescription:
-    'Economist 기사에서 추출한 표현. vulnerable, boast, deplete, attritional, proliferation, formidable 등.',
+    'BBC 기사에서 추출한 국방·외교 표현. substantially, deployment, rehearsal, diplomacy, precedent, armistice, defuse 등.',
 
-  password: 'seed_defense_vulnerable-related-words',
+  password: 'seed_defense_trump-korea-military-drills-related-words',
 
-  datePublished: '2026-08-31',
+  datePublished: '2026-09-04',
 
   intro: [
-    '이 표현들은 Economist 기사 "요격 미사일이 떨어지면 어떻게 될까요?"에서 추출한 표현들입니다.',
+    '트럼프 대통령의 한미 연합군사훈련 축소 방침과 북한·이란 전쟁·한미동맹 문제를 다룬 BBC 기사에서 사용된 국방·외교 어휘를 정리합니다.',
   ],
 
   words: [
     {
       narrative: [
-        '1. 군사기지가 취약(**vulnerable**)해지고, 심지어 강대국들도 군사작전을 제한해야 할 수 있다.',
+        '1. 한미 연합군사훈련을 상당히 줄인다(**substantially**).',
       ],
     },
     {
       narrative: [
-        '2. 3월에 우크라이나는 탄도미사일의 약 70%를 요격했다고 성과를 내세웠다(**boast**).',
+        '2. 북한 지도자 김정은과의 매우 좋은 관계를 이유로 들었다(**cite**).',
       ],
     },
     {
       narrative: [
-        '3. 곤경(**plight**)에 처해 있다.',
+        '3. 이러한 훈련이 완전히 부적절한(**inappropriate**) 신호를 보낸다고 말했다.',
       ],
     },
     {
       narrative: [
-        '4. 그것들을 다른 임무로 돌린다(**divert**).',
+        '4. 이러한 훈련이 적대적인(**hostile**) 신호를 보낸다고 비판했다.',
       ],
     },
     {
       narrative: [
-        '5. 보유 비축량을 소진했다(**deplete**).',
+        '5. 러시아의 우크라이나 전쟁을 지원하기 위한 병력 배치(**deployment**)이다.',
       ],
     },
     {
       narrative: [
-        '6. 소모전(**attritional**)이다.',
+        '6. 북한은 한미 연합군사훈련을 강력히 규탄했다(**condemn**).',
       ],
     },
     {
       narrative: [
-        '7. 가장 가까운(**proximate**) 원인이다.',
+        '7. 북한은 연합군사훈련을 침략 전쟁을 위한 예행연습(**rehearsal**)으로 본다.',
       ],
     },
     {
       narrative: [
-        '8. 막대한(**prodigious**) 사용이다.',
+        '8. 김정은의 트럼프 대통령과의 고위급 외교(**diplomacy**)가 다시 주목받고 있다.',
       ],
     },
     {
       narrative: [
-        '9. 현실을 직시해야 하는 순간을 앞당겼다(**hasten**).',
+        '9. 트럼프 대통령은 다른 동맹국들이 분쟁에 개입하기를 주저한 것(**hesitance**)에 불만을 나타냈다.',
       ],
     },
     {
       narrative: [
-        '10. 전 세계적인 확산(**proliferation**)이다.',
+        '10. 한미 연합군사훈련을 축소하려는 움직임은 선례(**precedent**)가 없는 것은 아니다.',
       ],
     },
     {
       narrative: [
-        '11. 안일함(**complacency**)이 문제이다.',
+        '11. 트럼프 대통령은 2018년 연합군사훈련을 완전히 중단했다(**suspend**).',
       ],
     },
     {
       narrative: [
-        '12. 엄청나게 거대한(**gargantuan**) 1조 5천억 달러 규모의 국방예산이다.',
+        '12. 당시 트럼프 대통령은 연례 군사훈련이 도발적(**provocative**)이라고 평가했다.',
       ],
     },
     {
       narrative: [
-        '13. 예상치 못한 문제(**hitch**)가 있다.',
+        '13. 한국전쟁은 1953년 정전협정(**armistice**)이 체결됐지만 공식적인 평화협정으로 끝난 것은 아니다.',
       ],
     },
     {
       narrative: [
-        '14. 하나의 체계를 즉석에서 만들었다(**improvise**).',
+        '14. 한국에 주둔한(**station**) 미군 병력은 대비 태세를 유지하고 있다.',
       ],
     },
     {
       narrative: [
-        '15. 다른 것에 의해 능가당한다(**upstage**).',
+        '15. 한국 정부는 올해 긴장을 완화하려고 노력해 왔다(**defuse**).',
       ],
     },
     {
       narrative: [
-        '16. 민첩한(**nimble**) 방어이다.',
-      ],
-    },
-    {
-      narrative: [
-        '17. 신생(**upstart**) 기업들이다.',
-      ],
-    },
-    {
-      narrative: [
-        '18. 회의론자들이 많이 존재한다(**abound**).',
-      ],
-    },
-    {
-      narrative: [
-        '19. 만만치 않은(**formidable**) 상대이다.',
+        '16. 한국은 미국에 3,500억 달러를 투자하기로 약속했다(**commit**).',
       ],
     },
   ],
 
   source: {
-    text: 'The Economist',
-    url: 'https://www.economist.com/international/2026/08/18/what-happens-when-interceptor-missiles-run-out',
+    text: 'BBC | Trump says US to scale back South Korea military drills after it stayed out of Iran war | Brandon Drenon and Jake Kwon',
+    url: 'https://www.bbc.com/news/articles/cx2lll7zvn0o',
   },
 
-  youtube: 'https://www.youtube.com/watch?v=A8Vot6kHG_0',
+  youtube: 'https://www.youtube.com/watch?v=QMJAbMxz-ic',
 };
 
 // ===============================
