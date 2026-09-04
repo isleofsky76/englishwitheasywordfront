@@ -423,6 +423,11 @@ function narrativeLineClass(line) {
   return 'nv-narrative-text nv-narrative-def';
 }
 
+/** title이 "1" / "1." 처럼 번호만이면 문장과 같은 줄로 합침 (별도 h2 줄바꿈 방지) */
+function isBareNumberTitle(title) {
+  return /^\d+\.?$/.test(String(title || '').trim());
+}
+
 function buildWordSectionHtml(section) {
   const title = section?.title || '';
   const rawNarrative = section?.narrative;
@@ -434,12 +439,21 @@ function buildWordSectionHtml(section) {
         .filter(Boolean);
 
   if (narrativeLines.length) {
-    const paras = narrativeLines
+    const lines = [...narrativeLines];
+    let titleHtml = '';
+    if (isBareNumberTitle(title)) {
+      const num = String(title).trim().replace(/\.$/, '');
+      if (!/^\d+\.\s/.test(lines[0])) {
+        lines[0] = `${num}. ${lines[0]}`;
+      }
+    } else if (title) {
+      titleHtml = `<h2 class="nv-section-title">${escapeHtml(title)}</h2>\n  `;
+    }
+    const paras = lines
       .map((t) => `<p class="${narrativeLineClass(t)}">${parseInline(t)}</p>`)
       .join('\n');
     return `<section class="nv-word-section nv-narrative">
-  <h2 class="nv-section-title">${escapeHtml(title)}</h2>
-  ${paras}
+  ${titleHtml}${paras}
   <hr class="nv-section-rule" />
 </section>`;
   }
