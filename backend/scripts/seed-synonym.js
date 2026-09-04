@@ -28,28 +28,28 @@ const article = {
     {
       title: '1. 갑자기 치닫다·돌진하다',
       narrative: [
-        '**lunge**(lʌndʒ / 런지) — 갑자기 치닫다, 돌진하다',
+        '**lunge**(lʌndʒ / 런지) ',
       ],
     },
 
     {
       title: '2. 억지로 떠맡기다',
       narrative: [
-        '**thrust**(θrʌst / 쓰러스트) — 억지로 …시키다, 떠맡기다',
+        '**thrust**(θrʌst / 쓰러스트) ',
       ],
     },
 
     {
       title: '3. 달려들다·즉각 덮치다',
       narrative: [
-        '**pounce**(paʊns / 파운스) — 달려들다, 즉각 덮치다',
+        '**pounce**(paʊns / 파운스) ',
       ],
     },
 
     {
       title: '4. 급격한 변화·쏠림',
       narrative: [
-        '**lurch**(lɜːrtʃ / 러치) — 급격한 변화, 갑작스러운 쏠림',
+        '**lurch**(lɜːrtʃ / 러치) ',
       ],
     },
 
