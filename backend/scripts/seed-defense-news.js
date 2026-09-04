@@ -18,7 +18,7 @@ const article = {
   slug: 'household-name-related-words',
 
   metaDescription:
-    'WSJ 방송에서 추출한 표현. household name, indebted, fragile, tactical, stagnant, onslaught, jury-rig 등.',
+    'WSJ 방송(https://www.youtube.com/watch?v=YRkonl-h41U)에서 추출한 표현. household name, indebted, fragile, tactical, stagnant, onslaught, jury-rig 등.',
 
   password: 'seed_defense_household-name-related-words',
 
