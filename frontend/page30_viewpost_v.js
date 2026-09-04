@@ -128,6 +128,12 @@ function vvAppendTtsAfterLeadingWord(lineHtml, word) {
     const btn = vvTtsButtonHtml(word);
     if (!btn) return lineHtml;
     const w = vvEscapeRegExp(word);
+    // word(발음기호 / 한글발음) 바로 뒤에 스피커
+    const afterPron = new RegExp(
+        `(<mark[^>]*>\\s*${w}\\s*</mark>\\s*\\([^)]*\\))`,
+        'i'
+    );
+    if (afterPron.test(lineHtml)) return lineHtml.replace(afterPron, `$1${btn}`);
     const patterns = [
         new RegExp(`(<mark[^>]*>\\s*${w}\\s*</mark>)`, 'i'),
         new RegExp(`(<strong[^>]*>\\s*${w}\\s*</strong>)`, 'i'),

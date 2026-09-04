@@ -9,61 +9,60 @@ import { uploadSynonym } from './synonym-format.js';
 // ========== 여기만 수정 ==========
 
 const article = {
-  title: '말만 번지르르한, 수다스러운',
+  title: '불굴의 용기, 끈기와 강인함',
 
-  slug: 'glib-related-words',
+  slug: 'fortitude-related-words',
 
   metaDescription:
-    'glib, gregarious, garrulous, laconic, facile, gratuitous, goad 뜻을 짧게 묶은 유의어 모음.',
+    'fortitude, perseverance, stalwart, formidable, homage, grit 뜻·발음 유의어 모음.',
 
-  password: 'seed_synonym_glib-related-words',
+  password: 'seed_synonym_fortitude-related-words',
 
-  datePublished: '2026-08-16',
+  datePublished: '2026-09-03',
 
   intro: [
-    '말투와 태도에서 자주 나오는 단어들을 모아 봤습니다.',
+    '용기와 끈기, 강인함을 나타내는 표현과 함께 기사에서 자주 만나는 관련 단어들을 모아 봤습니다.',
   ],
 
   words: [
     {
-      title: '1. 말만 번지르르한·피상적인',
+      title: '1. 불굴의 용기·강인함',
       narrative: [
-        '**glib** — 말만 번지르르한, 피상적으로 그럴듯한',
-        '**facile** — 피상적인, 지나치게 손쉬운',
+        '**fortitude**(ˈfɔːrtɪtuːd / 포터튜드) — 불굴의 용기, 강인함',
+        '**grit**(ɡrɪt / 그릿) — 투지, 끈기, 강인함',
       ],
     },
 
     {
-      title: '2. 사교적인·수다스러운',
+      title: '2. 인내·끈기',
       narrative: [
-        '**gregarious** — 사교적인, 사람들과 어울리기 좋아하는',
-        '**garrulous** — 수다스러운, 말이 많은',
+        '**perseverance**(ˌpɜːrsəˈvɪrəns / 퍼서비어런스) — 인내, 끈기',
       ],
     },
 
     {
-      title: '3. 말수가 적은',
+      title: '3. 굳건한·충실한',
       narrative: [
-        '**laconic** — 말수가 적은, 간결한',
+        '**stalwart**(ˈstɔːlwərt / 스톨워트) — 충실한, 굳건한',
       ],
     },
 
     {
-      title: '4. 불필요한·과도한',
+      title: '4. 만만치 않은·강력한',
       narrative: [
-        '**gratuitous** — 불필요한, 쓸데없이 과도한',
+        '**formidable**(ˈfɔːrmɪdəbəl / 포미더블) — 만만치 않은, 엄청난',
       ],
     },
 
     {
-      title: '5. 부추기다',
+      title: '5. 경의·찬사',
       narrative: [
-        '**goad** — 부추기다, 도발하다',
+        '**homage**(ˈhɑːmɪdʒ / 하미지) — 경의, 찬사',
       ],
     },
   ],
 
-  youtube: 'https://www.youtube.com/watch?v=lL6H4OptGDE',
+  youtube: 'https://www.youtube.com/watch?v=N3uIDgXIEj4',
 };
 
 // ===============================

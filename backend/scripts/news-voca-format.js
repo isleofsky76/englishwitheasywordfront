@@ -358,8 +358,20 @@ function buildRelatedLinksHtml(youtubeUrl, sourceUrl) {
   const videoId = extractYoutubeVideoId(youtubeUrl);
   if (videoId) {
     const watchUrl = `https://www.youtube.com/watch?v=${videoId}`;
+    const thumbUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+    const thumbFallback = `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
     lines.push(
       `<p class="nv-related-link-line"><a class="nv-related-link nv-related-link--youtube" href="${escapeHtml(watchUrl)}" rel="noopener noreferrer" target="_blank"><span aria-hidden="true">📺</span> 유튜브 보기</a></p>`
+    );
+    lines.push(
+      `<div class="nv-yt-thumb">
+  <a class="nv-yt-thumb-link" href="${escapeHtml(watchUrl)}" rel="noopener noreferrer" target="_blank" aria-label="유튜브 영상 보기">
+    <span class="nv-yt-thumb-frame">
+      <img class="nv-yt-thumb-img" src="${escapeHtml(thumbUrl)}" alt="YouTube thumbnail" loading="eager" decoding="async" width="480" height="360" onerror="this.onerror=null;this.src='${escapeHtml(thumbFallback)}'">
+      <span class="nv-yt-thumb-play" aria-hidden="true"></span>
+    </span>
+  </a>
+</div>`
     );
   }
   const url = String(sourceUrl ?? '').trim();
