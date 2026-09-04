@@ -9,59 +9,66 @@ import { uploadSynonym } from './synonym-format.js';
 // ========== 여기만 수정 ==========
 
 const article = {
-  title: '돌진하다, 달려들다와 살짝 유도하다',
+  title: '부추기다, 선동하다와 촉발하다',
 
-  slug: 'lunge-related-words',
+  slug: 'foment-related-words',
 
   metaDescription:
-    'lunge, thrust, pounce, lurch, nudge 뜻·발음 유의어 모음.',
+    'foment, incite, instigate, goad, galvanize, provoke 뜻·발음 유의어 모음.',
 
-  password: 'seed_synonym_lunge-related-words',
+  password: 'seed_synonym_foment-related-words',
 
   datePublished: '2026-09-05',
 
   intro: [
-    '갑자기 움직이거나 달려드는 동작부터, 무언가를 떠맡기거나 살짝 유도하는 표현까지 함께 묶어 봤습니다.',
+    '사람이나 상황을 자극해 어떤 행동이나 감정을 일으키는 표현들을 모아 봤습니다.',
   ],
 
   words: [
     {
-      title: '1. 갑자기 치닫다·돌진하다',
+      title: '1. 부추기다·조장하다',
       narrative: [
-        '**lunge**(lʌndʒ / 런지) ',
+        '**foment**(foʊˈment / 포멘트)',
       ],
     },
 
     {
-      title: '2. 억지로 떠맡기다',
+      title: '2. 선동하다·부추기다',
       narrative: [
-        '**thrust**(θrʌst / 쓰러스트) ',
+        '**incite**(ɪnˈsaɪt / 인사이트)',
       ],
     },
 
     {
-      title: '3. 달려들다·즉각 덮치다',
+      title: '3. 일으키다·선동하다',
       narrative: [
-        '**pounce**(paʊns / 파운스) ',
+        '**instigate**(ˈɪnstɪɡeɪt / 인스티게이트)',
       ],
     },
 
     {
-      title: '4. 급격한 변화·쏠림',
+      title: '4. 부추기다·몰아붙이다',
       narrative: [
-        '**lurch**(lɜːrtʃ / 러치) ',
+        '**goad**(ɡoʊd / 고우드)',
       ],
     },
 
     {
-      title: '5. 살짝 유도하다·부추기다',
+      title: '5. 고무하다·행동하도록 자극하다',
       narrative: [
-        '**nudge**(nʌdʒ / 너지)',
+        '**galvanize**(ˈɡælvənaɪz / 갤버나이즈)',
+      ],
+    },
+
+    {
+      title: '6. 유발하다·촉발하다',
+      narrative: [
+        '**provoke**(prəˈvoʊk / 프로보우크)',
       ],
     },
   ],
 
-  youtube: 'https://www.youtube.com/watch?v=xGfOus3ULcg',
+  youtube: 'https://www.youtube.com/watch?v=cwh2b_h0ggM',
 };
 // ===============================
 
