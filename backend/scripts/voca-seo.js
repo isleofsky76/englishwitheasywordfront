@@ -18,7 +18,7 @@ export const BOARD_SEO = {
   'news-voca': {
     label: 'News Voca',
     cssFile: 'news-voca.css',
-    cssVersion: '20260905yt',
+    cssVersion: '20260905yt2',
     jsFile: 'news-voca.js',
     jsVersion: '20260903d',
     listHtml: 'news-voca-list.html',
@@ -42,8 +42,7 @@ export const BOARD_SEO = {
   'defense-news': {
     label: '국방뉴스',
     cssFile: 'news-voca.css',
-    cssVersion: '20260905yt',
-    jsFile: 'defense-news.js',
+    cssVersion: '20260905yt2',
     jsVersion: '20260903d',
     listHtml: 'defense-news-list.html',
   },
@@ -68,8 +67,11 @@ export const BOARD_SEO = {
     cssFile: 'page30_viewpost_v.css',
     cssVersion: '20260903e',
     jsFile: 'page30_viewpost_v.js',
-    jsVersion: '20260905tts2',
-    extraCss: [{ file: 'news-voca.css', version: '20260905yt' }],
+    jsVersion: '20260905tts3',
+    listHtml: 'english-synonym-list.html',
+    extraCss: [{ file: 'news-voca.css', version: '20260905yt2' }],
+  },
+  'english-opinions': {
     label: '오피니언',
     cssFile: 'page30_viewpost_opinions.css',
     cssVersion: '20260816a',

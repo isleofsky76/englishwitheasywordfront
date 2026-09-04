@@ -210,7 +210,7 @@ function vvAppendTtsInlineAfterEnglish(lineHtml, speak) {
 }
 
 function vvBindTtsButtons(container) {
-    if (!container || !window.speechSynthesis) return;
+    if (!container) return;
     container.querySelectorAll('.vv-tts-btn').forEach((btn) => {
         if (btn.dataset.vvTtsListener === '1') return;
         btn.dataset.vvTtsListener = '1';
@@ -219,6 +219,10 @@ function vvBindTtsButtons(container) {
             e.stopPropagation();
             const raw = btn.getAttribute('data-vv-tts');
             if (!raw) return;
+            if (!window.speechSynthesis) {
+                console.warn('Vocabulary TTS: speechSynthesis 미지원');
+                return;
+            }
 
             const playing =
                 btn.classList.contains('vv-tts-playing') &&
@@ -236,9 +240,9 @@ function vvBindTtsButtons(container) {
 }
 
 function attachVocabularyWebTTS(container) {
-    if (!container || !window.speechSynthesis) return;
+    if (!container) return;
     try {
-        speechSynthesis.getVoices();
+        if (window.speechSynthesis) speechSynthesis.getVoices();
     } catch (_) {}
 
     const paragraphs = container.querySelectorAll('p');
