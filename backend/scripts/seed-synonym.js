@@ -41,7 +41,7 @@ const article = {
     {
       title: '3. 오만불손한·무례한',
       narrative: [
-        '**insolent**(ˈɪnsələnt / 인설런트) — 오만불손한, 무례한',
+        '**insolent**(ˈɪnsələnt / 인설런트) ',
       ],
     },
 
