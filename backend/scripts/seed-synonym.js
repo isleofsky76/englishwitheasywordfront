@@ -9,7 +9,7 @@ import { uploadSynonym } from './synonym-format.js';
 // ========== 여기만 수정 ==========
 
 const article = {
-  title: 'robust 연관단어 모음 : sturdy · solid · resilient · powerful · vigorous',
+  title: '튼튼한, 원기 왕성한',
 
   slug: 'robust-related-words',
 
