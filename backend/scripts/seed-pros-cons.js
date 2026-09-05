@@ -43,7 +43,7 @@ message: buildProsConsMessage(
 { en: 'Giving copyright to machine-generated content may weaken the social value of authorship and original effort.', ko: '기계가 만든 콘텐츠에 저작권을 주면 저자성과 독창적 노력의 사회적 가치가 약해질 수 있다.' },
 { en: 'A better approach may be to protect only the human-edited parts, while leaving purely AI-generated output unprotected.', ko: '더 나은 방식은 인간이 편집하고 구성한 부분만 보호하고 순수 AI 생성물은 보호하지 않는 것일 수 있다.' }
 ],
-'※ 이 내용은 AI에 의해 작성되었습니다.\n※ 영어 어휘 학습 목적으로 작성되었습니다.\n※ 정치적 성향이나 재무적 의견에 대한 표현 또는 조언이 아닙니다. 🙂'
+'※ 본 내용은 AI에 의해 작성되었습니다.\n※ 영어 어휘 학습 목적으로 작성되었으며, 정치적 성향이나 재무적 의견에 대한 표현 또는 조언이 아닙니다. 🙂'
 ),
 nickname: 'Pros & Cons',
 password
