@@ -7,52 +7,51 @@ import { API_BASE } from './loadEnv.js';
 import { uploadNewsVoca } from './news-voca-format.js';
 
 // ========== 여기만 수정 ==========
-
 const article = {
-  title: '연준의 금리 경고',
+  title: '소매업체의 상품 줄이기',
 
-  slug: 'fed-officials-risks-higher-rates-inflation-wsj',
+  slug: 'retailers-ditch-variety-supply-chain-costs-tariffs-wsj',
 
   metaDescription:
-    'WSJ 기사에서 추출한 연준 금리와 인플레이션 관련 문장. faces a dilemma, inflationary pressure, overlapping waves, central-bank instinct, lasting imprint.',
+    'WSJ 기사에서 추출한 소매업체와 공급망 비용 관련 문장. abandoning certain product lines, grappling with product shortages, overstocks, new levies, surging fuel costs, weighed on margins.',
 
-  password: 'password_seed_fed_officials_risks_higher_rates_inflation_wsj',
+  password: 'password_seed_retailers_ditch_variety_supply_chain_costs_tariffs_wsj',
 
-  datePublished: '2026-07-09',
+  datePublished: '2026-09-01',
 
   intro: [
-    '연준이 인플레이션 압력과 금리 위험을 경고한 월스트리트 저널의 기사에서 추출한 문장입니다.',
+    '소매업체들이 공급망 비용과 관세 부담 때문에 상품 종류를 줄이고 있다는 월스트리트 저널의 기사에서 추출한 문장입니다.',
   ],
 
   words: [
     {
       narrative: [
-        '1. 연준은 딜레마에 직면해 있습니다(**The Fed faces a dilemma**). 노동 시장이 물가 상승 압력의 명백한 원인(**an obvious source of inflationary pressure**)은 아니지만, 인플레이션을 끌어내리는 데(**to pull inflation down**) 확실하게 기여하고 있는 것도 아닙니다.',
+        '1. 일부 소매업체들은 팬데믹 기간 동안 제품 부족 문제와 씨름한 뒤(**after grappling with product shortages**), 특정 제품군을 포기하기 시작했습니다(**began abandoning certain product lines**).',
       ],
     },
     {
       narrative: [
-        '2. 관세, 그다음 유가, 그리고 이제는 AI 붐이(**Tariffs, then oil, and now the AI boom**) 겹겹이 밀려오는 파도처럼 타격을 주고 있습니다(**have hit in overlapping waves**).',
+        '2. 그들은 제품 부족뿐 아니라 과잉재고 문제(**overstocks**)도 겪었습니다.',
       ],
     },
     {
       narrative: [
-        '3. 각각의 충격은 일시적인 물가 상승을 간과하려는(**to look past a one-time price jump**) 중앙은행의 본능(**the central-bank instinct**)을 시험하고 있습니다.',
+        '3. 이러한 움직임은 지난 18개월 동안 더 빨라졌습니다(**accelerated over the past 18 months**).',
       ],
     },
     {
       narrative: [
-        '4. 그것들은 한데 쌓이면(**stacked together**) 가계와 기업이 임금과 가격을 책정하는 방식에(**how households and businesses set wages and prices**) 더 지속적인 영향을 남길 수 있다는 우려를 키우고 있습니다(**leave a more lasting imprint**).',
+        '4. 새로운 부담금과 급등한 연료비, 불확실한 소비자 수요가(**new levies, surging fuel costs and uncertain consumer demand**) 수익성을 압박했기 때문입니다(**weighed on margins**).',
       ],
     },
   ],
 
   source: {
-    text: 'WSJ | Fed Officials Flagged Risks That Would Warrant Higher Rates',
-    url: 'https://www.wsj.com/economy/central-banking/fed-officials-flagged-risks-that-would-warrant-higher-rates-6f584cba?mod=lead_feature_below_a_pos3',
+    text: 'WSJ | Retailers Ditch Variety to Beat Supply-Chain Costs and Tariffs | By Liz Young',
+    url: 'https://www.wsj.com/logistics-report/retailers-ditch-variety-to-beat-supply-chain-costs-and-tariffs-c96f9d42',
   },
 
-  youtube: 'https://www.youtube.com/watch?v=T88YmzKltv4',
+  youtube: 'https://youtube.com/shorts/mkqMbG0k_e8',
 };
 // ===============================
 
