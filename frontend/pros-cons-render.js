@@ -135,7 +135,9 @@
   function footerHtml(data, extra) {
     if (data && data.footer) {
       return (
-        '<p class="pros-cons-footer">' + escapeHtml(data.footer) + '</p>'
+        '<p class="pros-cons-footer">' +
+        escapeHtml(data.footer).replace(/\n/g, '<br>') +
+        '</p>'
       );
     }
     if (extra && extra.indexOf('pros-cons-wrap') === -1) {
