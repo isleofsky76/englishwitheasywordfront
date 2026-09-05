@@ -89,8 +89,14 @@
 
     return (
       '<div class="pros-cons-wrap">' +
-      '<div class="pros-cons-block">' + itemsHtml(prosList) + '</div>' +
-      '<div class="pros-cons-block pros-cons-block--cons">' + itemsHtml(consList) + '</div>' +
+      '<div class="pros-cons-block">' +
+      '<h3 class="pros-cons-heading">Pros</h3>' +
+      itemsHtml(prosList) +
+      '</div>' +
+      '<div class="pros-cons-block pros-cons-block--cons">' +
+      '<h3 class="pros-cons-heading">Cons</h3>' +
+      itemsHtml(consList) +
+      '</div>' +
       '</div>'
     );
   }
