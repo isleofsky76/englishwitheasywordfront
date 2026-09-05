@@ -9,52 +9,51 @@ import { uploadNewsVoca } from './news-voca-format.js';
 // ========== 여기만 수정 ==========
 
 const article = {
-  title: '메시가 페널티킥에 약한 이유',
+  title: '연준의 금리 경고',
 
-  slug: 'messi-penalty-kicks-argentina-world-cup-wsj',
+  slug: 'fed-officials-risks-higher-rates-inflation-wsj',
 
   metaDescription:
-    'WSJ 기사에서 추출한 메시 페널티킥 관련 문장. strips away, flexes his genius, no dribbling, wide array of tricks, deceive the goalkeeper.',
+    'WSJ 기사에서 추출한 연준 금리와 인플레이션 관련 문장. faces a dilemma, inflationary pressure, overlapping waves, central-bank instinct, lasting imprint.',
 
-  password: 'password_seed_messi_penalty_kicks_argentina_world_cup_wsj',
+  password: 'password_seed_fed_officials_risks_higher_rates_inflation_wsj',
 
-  datePublished: '2026-07-08',
+  datePublished: '2026-07-09',
 
   intro: [
-    '메시가 페널티킥 상황에서 평소의 장점을 충분히 발휘하기 어렵다는 월스트리트 저널의 기사에서 추출한 문장입니다.',
+    '연준이 인플레이션 압력과 금리 위험을 경고한 월스트리트 저널의 기사에서 추출한 문장입니다.',
   ],
 
   words: [
     {
       narrative: [
-        '1. 페널티킥이라는 바로 그 행위 자체는(**The very exercise of the penalty kick**) 메시가 평소 자신의 천재성을 발휘하는(**where Messi usually flexes his genius**) 경기의 많은 요소를 빼앗아 버립니다(**strips away many parts of the game**).',
+        '1. 연준은 딜레마에 직면해 있습니다(**The Fed faces a dilemma**). 노동 시장이 물가 상승 압력의 명백한 원인(**an obvious source of inflationary pressure**)은 아니지만, 인플레이션을 끌어내리는 데(**to pull inflation down**) 확실하게 기여하고 있는 것도 아닙니다.',
       ],
     },
     {
       narrative: [
-        "2. 여기에는 드리블도 없고(**There's no dribbling here**), 갑작스러운 방향 전환도 없으며(**no sudden change of direction**), 섬세한 터치로 인한 흐릿한 움직임도 없습니다(**blur of delicate touches**).",
+        '2. 관세, 그다음 유가, 그리고 이제는 AI 붐이(**Tariffs, then oil, and now the AI boom**) 겹겹이 밀려오는 파도처럼 타격을 주고 있습니다(**have hit in overlapping waves**).',
       ],
     },
     {
       narrative: [
-        '3. 메시에게는 골키퍼를 속이는 데 이용할 수 있는 매우 다양한 기술들이 여전히 있습니다(**a wide array of tricks available to deceive the goalkeeper**).',
+        '3. 각각의 충격은 일시적인 물가 상승을 간과하려는(**to look past a one-time price jump**) 중앙은행의 본능(**the central-bank instinct**)을 시험하고 있습니다.',
       ],
     },
     {
       narrative: [
-        '4. 하지만 그가 할 수 있는 전부가 공을 한 번 터치하는 것일 때(**when all he can do is touch the ball one time**), 그는 확실히 덜 위협적입니다(**distinctly less terrifying**).',
+        '4. 그것들은 한데 쌓이면(**stacked together**) 가계와 기업이 임금과 가격을 책정하는 방식에(**how households and businesses set wages and prices**) 더 지속적인 영향을 남길 수 있다는 우려를 키우고 있습니다(**leave a more lasting imprint**).',
       ],
     },
   ],
 
   source: {
-    text: 'WSJ | Lionel Messi Is the Greatest Player Ever. Why Is He So Bad at Penalty Kicks?',
-    url: 'https://www.wsj.com/sports/soccer/messi-penalty-kicks-argentina-world-cup-9e29a4aa?mod=hp_listb_pos2',
+    text: 'WSJ | Fed Officials Flagged Risks That Would Warrant Higher Rates',
+    url: 'https://www.wsj.com/economy/central-banking/fed-officials-flagged-risks-that-would-warrant-higher-rates-6f584cba?mod=lead_feature_below_a_pos3',
   },
 
-  youtube: 'https://youtube.com/shorts/smRtivaoPDk',
+  youtube: 'https://www.youtube.com/watch?v=T88YmzKltv4',
 };
-
 // ===============================
 
 uploadNewsVoca(article, API_BASE)
