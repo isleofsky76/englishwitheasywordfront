@@ -9,7 +9,7 @@ import { uploadNewsVoca } from './news-voca-format.js';
 // ========== 여기만 수정 ==========
 
 const article = {
-  title: '[WSJ] 동물이 먼저인 갈라파고스 제도 | 이구아나 때문에 멈추는 공항버스',
+  title: '동물이 먼저인 갈라파고스 제도 ',
 
   slug: 'galapagos-islands-animals-come-first-wsj',
 
