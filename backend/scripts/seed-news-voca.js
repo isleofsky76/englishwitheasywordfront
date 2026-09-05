@@ -32,7 +32,7 @@ const article = {
     },
     {
       narrative: [
-        '2. 여기에는 드리블도 없고(**There\\'s no dribbling here**), 갑작스러운 방향 전환도 없으며(**no sudden change of direction**), 섬세한 터치로 인한 흐릿한 움직임도 없습니다(**blur of delicate touches**).',
+        "2. 여기에는 드리블도 없고(**There's no dribbling here**), 갑작스러운 방향 전환도 없으며(**no sudden change of direction**), 섬세한 터치로 인한 흐릿한 움직임도 없습니다(**blur of delicate touches**).",
       ],
     },
     {
