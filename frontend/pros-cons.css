@@ -116,6 +116,31 @@
 
 }
 
+#post-message .pv-tts-all-wrap {
+  margin: 0 0 0.85rem;
+}
+
+#post-message .pv-tts-all-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  border: 1px solid #2f80ed;
+  background: #eef5fd;
+  color: #1d4f91;
+  cursor: pointer;
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+#post-message .pv-tts-all-btn.pv-tts-playing {
+  background: #dcecff;
+  border-color: #1d4f91;
+}
+
 
 
 #post-message .pros-cons-ko {

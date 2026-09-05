@@ -61,6 +61,24 @@ function normalizeEntries(messages) {
   return null;
 }
 
+function pickEnglishVoice() {
+  const voices = speechSynthesis.getVoices();
+  return (
+    voices.find((v) => v.lang && /^en-US/i.test(v.lang)) ||
+    voices.find((v) => v.lang && /^en(-|$)/i.test(v.lang)) ||
+    null
+  );
+}
+
+function stopProsConsTtsQueue(container) {
+  if (container) container._pcAllToken = (container._pcAllToken || 0) + 1;
+  if (container) {
+    const allBtn = container.querySelector('.pv-tts-all-btn');
+    if (allBtn) allBtn.classList.remove('pv-tts-playing');
+  }
+  if (window.speechSynthesis) speechSynthesis.cancel();
+}
+
 function startEnglishTTS(text, btn) {
   if (!text || !window.speechSynthesis) return;
   try {
@@ -68,10 +86,7 @@ function startEnglishTTS(text, btn) {
     const u = new SpeechSynthesisUtterance(text);
     u.lang = 'en-US';
     u.rate = 0.92;
-    const voices = speechSynthesis.getVoices();
-    const en =
-      voices.find((v) => v.lang && /^en-US/i.test(v.lang)) ||
-      voices.find((v) => v.lang && /^en(-|$)/i.test(v.lang));
+    const en = pickEnglishVoice();
     if (en) u.voice = en;
     const done = () => { if (btn) btn.classList.remove('pv-tts-playing'); };
     u.onend = done;
@@ -82,11 +97,74 @@ function startEnglishTTS(text, btn) {
   }
 }
 
+function attachProsConsPlayAll(container) {
+  if (!container || !window.speechSynthesis) return;
+  if (container.querySelector('.pv-tts-all-btn')) return;
+  const sentenceBtns = Array.from(
+    container.querySelectorAll('.pv-tts-btn:not(.pv-tts-all-btn)')
+  );
+  if (sentenceBtns.length < 2) return;
+
+  const wrap = document.createElement('p');
+  wrap.className = 'pv-tts-all-wrap';
+  wrap.innerHTML =
+    '<button type="button" class="pv-tts-all-btn" aria-label="전체 듣기, 다시 누르면 멈춤" title="전체 듣기 / 다시 누르면 멈춤">' +
+    '<span class="pv-tts-label" aria-hidden="true">🔊</span> 전체 듣기</button>';
+  container.insertBefore(wrap, container.firstChild);
+
+  const allBtn = wrap.querySelector('.pv-tts-all-btn');
+  allBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const playing =
+      allBtn.classList.contains('pv-tts-playing') &&
+      (speechSynthesis.speaking || speechSynthesis.pending);
+    stopProsConsTtsQueue(container);
+    container.querySelectorAll('.pv-tts-btn.pv-tts-playing').forEach((b) =>
+      b.classList.remove('pv-tts-playing')
+    );
+    if (playing) return;
+
+    const texts = Array.from(
+      container.querySelectorAll('.pv-tts-btn:not(.pv-tts-all-btn)')
+    )
+      .map((b) => b.getAttribute('data-pv-tts'))
+      .filter(Boolean);
+    if (!texts.length) return;
+
+    allBtn.classList.add('pv-tts-playing');
+    const my = container._pcAllToken;
+    let i = 0;
+    const playNext = () => {
+      if (container._pcAllToken !== my) return;
+      if (i >= texts.length) {
+        allBtn.classList.remove('pv-tts-playing');
+        return;
+      }
+      const u = new SpeechSynthesisUtterance(texts[i]);
+      i += 1;
+      u.lang = 'en-US';
+      u.rate = 0.92;
+      const en = pickEnglishVoice();
+      if (en) u.voice = en;
+      u.onend = () => {
+        if (container._pcAllToken !== my) return;
+        setTimeout(playNext, 420);
+      };
+      u.onerror = () => {
+        if (container._pcAllToken === my) playNext();
+      };
+      speechSynthesis.speak(u);
+    };
+    playNext();
+  });
+}
+
 function attachProsConsTTS(container) {
   if (!container || !window.speechSynthesis) return;
   try { speechSynthesis.getVoices(); } catch (_) {}
 
-  container.querySelectorAll('.pv-tts-btn').forEach((btn) => {
+  container.querySelectorAll('.pv-tts-btn:not(.pv-tts-all-btn)').forEach((btn) => {
     if (btn.dataset.pcTtsBound === '1') return;
     btn.dataset.pcTtsBound = '1';
     btn.addEventListener('click', (e) => {
@@ -98,20 +176,18 @@ function attachProsConsTTS(container) {
       const playing =
         btn.classList.contains('pv-tts-playing') &&
         (speechSynthesis.speaking || speechSynthesis.pending);
-      if (playing) {
-        speechSynthesis.cancel();
-        btn.classList.remove('pv-tts-playing');
-        return;
-      }
-
-      speechSynthesis.cancel();
+      stopProsConsTtsQueue(container);
       container.querySelectorAll('.pv-tts-btn.pv-tts-playing').forEach((b) =>
         b.classList.remove('pv-tts-playing')
       );
+      if (playing) return;
+
       btn.classList.add('pv-tts-playing');
       startEnglishTTS(raw, btn);
     });
   });
+
+  attachProsConsPlayAll(container);
 }
 
 async function loadPost() {
