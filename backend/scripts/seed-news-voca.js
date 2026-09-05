@@ -9,50 +9,50 @@ import { uploadNewsVoca } from './news-voca-format.js';
 // ========== 여기만 수정 ==========
 
 const article = {
-  title: '이란 휴전 종료 선언',
+  title: '메시가 페널티킥에 약한 이유',
 
-  slug: 'trump-iran-ceasefire-over-naval-blockade-wsj',
+  slug: 'messi-penalty-kicks-argentina-world-cup-wsj',
 
   metaDescription:
-    'WSJ 기사에서 추출한 이란 휴전 종료 관련 문장. scum, vicious people, reimposing a naval blockade, ramp up economic pressure, full-blown war.',
+    'WSJ 기사에서 추출한 메시 페널티킥 관련 문장. strips away, flexes his genius, no dribbling, wide array of tricks, deceive the goalkeeper.',
 
-  password: 'password_seed_trump_iran_ceasefire_over_naval_blockade_wsj',
+  password: 'password_seed_messi_penalty_kicks_argentina_world_cup_wsj',
 
   datePublished: '2026-07-08',
 
   intro: [
-    '트럼프 대통령이 이란과의 휴전 종료와 해상 봉쇄 가능성을 언급한 월스트리트 저널의 기사에서 추출한 문장입니다.',
+    '메시가 페널티킥 상황에서 평소의 장점을 충분히 발휘하기 어렵다는 월스트리트 저널의 기사에서 추출한 문장입니다.',
   ],
 
   words: [
     {
       narrative: [
-        '1. 그는 이란의 지도자들을 “쓰레기”(**scum**), “거짓말쟁이들”(**liars**), 그리고 “잔인하고 폭력적인 사람들”(**vicious, violent people**)이라고 불렀습니다.',
+        '1. 페널티킥이라는 바로 그 행위 자체는(**The very exercise of the penalty kick**) 메시가 평소 자신의 천재성을 발휘하는(**where Messi usually flexes his genius**) 경기의 많은 요소를 빼앗아 버립니다(**strips away many parts of the game**).',
       ],
     },
     {
       narrative: [
-        '2. 트럼프는 경제적 압박을 강화하기 위해(**to ramp up economic pressure**) 이란에 대한 해상 봉쇄를 다시 도입하는 것(**reimposing a naval blockade on Iran**)을 고려하고 있다고 말했습니다.',
+        '2. 여기에는 드리블도 없고(**There\\'s no dribbling here**), 갑작스러운 방향 전환도 없으며(**no sudden change of direction**), 섬세한 터치로 인한 흐릿한 움직임도 없습니다(**blur of delicate touches**).',
       ],
     },
     {
       narrative: [
-        '3. 그는 전력 시설과 담수화 시설 같은 민간 기반 시설을 표적으로 삼을 가능성도 제기했습니다(**raised the prospect of targeting civilian infrastructure such as electricity and desalination plants**).',
+        '3. 메시에게는 골키퍼를 속이는 데 이용할 수 있는 매우 다양한 기술들이 여전히 있습니다(**a wide array of tricks available to deceive the goalkeeper**).',
       ],
     },
     {
       narrative: [
-        '4. 하지만 나중에 그는 전면전으로 다시 돌아갈 가능성(**a return to full-blown war**)은 낮다고 생각한다고 말했습니다.',
+        '4. 하지만 그가 할 수 있는 전부가 공을 한 번 터치하는 것일 때(**when all he can do is touch the ball one time**), 그는 확실히 덜 위협적입니다(**distinctly less terrifying**).',
       ],
     },
   ],
 
   source: {
-    text: 'WSJ | Trump Says Ceasefire With Iran Is Over After Latest Attacks | By Robbie Gramer, Brian Schwartz and Jared Malsin',
-    url: 'https://www.wsj.com/world/trump-says-ceasefire-with-iran-is-over-6cf9675e?mod=hp_trendingnow_article_pos3',
+    text: 'WSJ | Lionel Messi Is the Greatest Player Ever. Why Is He So Bad at Penalty Kicks?',
+    url: 'https://www.wsj.com/sports/soccer/messi-penalty-kicks-argentina-world-cup-9e29a4aa?mod=hp_listb_pos2',
   },
 
-  youtube: 'https://www.youtube.com/watch?v=9KxY7BNiWKw',
+  youtube: 'https://youtube.com/shorts/smRtivaoPDk',
 };
 
 // ===============================
