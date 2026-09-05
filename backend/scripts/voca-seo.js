@@ -89,7 +89,7 @@ export const BOARD_SEO = {
     listHtml: 'calm-mind-list.html',
   },
   'popular-voca': {
-    label: 'Popular Voca',
+    label: '이럴 땐 영어로?',
     cssFile: 'page30_viewpost_v.css',
     cssVersion: '20260628',
     jsFile: 'page30_viewpost_v_easy.js',
@@ -317,7 +317,7 @@ export const BOARD_API_ENDPOINTS = [
   { apiPath: '/vocabulary', boardPath: 'english-synonym', label: '유의어' },
   { apiPath: '/opinions', boardPath: 'english-opinions', label: '오피니언' },
   { apiPath: '/calm-mind', boardPath: 'calm-mind', label: '마음 다스리는 글' },
-  { apiPath: '/easy-voca', boardPath: 'popular-voca', label: '인기 어휘' },
+  { apiPath: '/easy-voca', boardPath: 'popular-voca', label: '이럴 땐 영어로?' },
   { apiPath: '/situational-english', boardPath: 'situational-english', label: '상황별 영어' },
   { apiPath: '/pros-cons', boardPath: 'pros-cons', label: '장단점' },
   { apiPath: '/vocabulary-quiz', boardPath: 'vocabulary-quiz', label: '영어 단어 퀴즈' },

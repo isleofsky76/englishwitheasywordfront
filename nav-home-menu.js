@@ -39,7 +39,7 @@
 
         { href: 'vocabulary-quiz.html', label: '퀴즈', pages: ['vocabulary-quiz.html'] },
 
-        { href: 'popular-voca-list.html', label: '인기 어휘', pages: ['popular-voca-list.html', 'popular-voca.html'] },
+        { href: 'popular-voca-list.html', label: '이럴 땐 영어로?', pages: ['popular-voca-list.html', 'popular-voca.html'] },
 
         { href: 'situational-english-list.html', label: '상황', pages: ['situational-english-list.html', 'situational-english.html'] },
 

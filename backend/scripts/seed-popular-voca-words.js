@@ -1,5 +1,5 @@
 /**
- * Popular Voca: 기존 글(본 스크립트 비밀번호로 쓴 것만) 삭제 후, 단어 설명 글 추가
+ * 이럴 땐 영어로?(popular-voca): 기존 글(본 스크립트 비밀번호로 쓴 것만) 삭제 후, 단어 설명 글 추가
  * 저장: /easy-voca API, popularvoca 컬렉션 (myDatabase)
  * 사용법: 백엔드 서버 실행 후 → node scripts/seed-popular-voca-words.js
  * 비밀번호: posts·password 상수와 동일 (이 스크립트 전용)
@@ -138,9 +138,9 @@ password,
 
 
 async function run() {
-  console.log('Popular Voca: 기존 글(본 스크립트 비밀번호 글만) 삭제 후 단어 설명 추가합니다.', base);
+  console.log('이럴 땐 영어로?: 기존 글(본 스크립트 비밀번호 글만) 삭제 후 단어 설명 추가합니다.', base);
 
-  // 1. Popular Voca 글 목록 조회 (/easy-voca)
+  // 1. 글 목록 조회 (/easy-voca)
   let list = [];
   try {
     const res = await fetch(`${base}/easy-voca`);
@@ -167,7 +167,7 @@ async function run() {
   }
   console.log(`기존 글 ${deleted}개 삭제됨.\n`);
 
-  // 3. Popular Voca 단어 설명 추가
+  // 3. 단어 설명 추가
   console.log('단어 설명 추가 중...');
   for (let i = 0; i < posts.length; i++) {
     try {

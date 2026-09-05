@@ -16,7 +16,7 @@
     { href: 'calm-mind-list.html', label: '마음글', tone: 'calm', pages: ['calm-mind-list.html', 'calm-mind.html'] },
     { href: 'word-of-the-day-list.html', label: '단어장', tone: 'wotd', pages: ['word-of-the-day-list.html', 'word-of-the-day.html'] },
     { href: 'vocabulary-quiz.html', label: '퀴즈', tone: 'quiz', pages: ['vocabulary-quiz.html', 'vocabulary-quiz-list.html'] },
-    { href: 'popular-voca-list.html', label: '인기 어휘', tone: 'popular', pages: ['popular-voca-list.html', 'popular-voca.html'] },
+    { href: 'popular-voca-list.html', label: '이럴 땐 영어로?', tone: 'popular', pages: ['popular-voca-list.html', 'popular-voca.html'] },
     { href: 'situational-english-list.html', label: '상황', tone: 'sit', pages: ['situational-english-list.html', 'situational-english.html'] },
     { href: 'cooking-voca-list.html', label: '요리', tone: 'cook', pages: ['cooking-voca-list.html', 'cooking-voca.html'] },
     { href: 'ranking-news-list.html', label: '랭킹', tone: 'rank', pages: ['ranking-news-list.html', 'ranking-news.html'] },

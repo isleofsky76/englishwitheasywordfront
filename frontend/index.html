@@ -906,7 +906,7 @@
                 <li class="nav-item"><a class="nav-link nav-tone-wotd" href="word-of-the-day-list.html">오늘의 단어</a></li>
                 <li class="nav-item"><a class="nav-link nav-tone-news" href="news-voca-list.html">뉴스 어휘</a></li>
                 <li class="nav-item"><a class="nav-link nav-tone-quiz" href="vocabulary-quiz.html">단어 퀴즈</a></li>
-                <li class="nav-item"><a class="nav-link nav-tone-popular" href="popular-voca-list.html">인기 어휘</a></li>
+                <li class="nav-item"><a class="nav-link nav-tone-popular" href="popular-voca-list.html">이럴 땐 영어로?</a></li>
                 <li class="nav-item"><a class="nav-link nav-tone-sit" href="situational-english-list.html">상황 영어</a></li>
                 <li class="nav-item"><a class="nav-link nav-tone-cook" href="cooking-voca-list.html">요리 영어</a></li>
                 <li class="nav-item"><a class="nav-link nav-tone-culture" href="culture-voca-list.html">컬쳐 어휘</a></li>
@@ -961,10 +961,10 @@
             <!-- Popular Vocabulary -->
             <article class="preview-section">
                 <div class="preview-header">
-                    <h2>인기 어휘</h2>
+                    <h2>이럴 땐 영어로?</h2>
                     <div class="preview-more"><a href="popular-voca-list.html">더보기 &gt;</a></div>
                 </div>
-                <div id="easy-voca-preview-list" role="region" aria-label="인기 어휘 목록"></div>
+                <div id="easy-voca-preview-list" role="region" aria-label="이럴 땐 영어로? 목록"></div>
             </article>
 
             <!-- Situational English -->
@@ -1084,9 +1084,9 @@
     <!-- Bootstrap Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="viewpost-seo.js?v=20260702"></script>
-    <script src="nav-home-menu.js?v=20260815e"></script>
+    <script src="nav-home-menu.js?v=20260905menu"></script>
     <script src="site-masthead.js?v=20260818d"></script>
-    <script src="home-board-preview.js?v=20260818e"></script>
+    <script src="home-board-preview.js?v=20260905menu"></script>
     <script src="english-directory.js" defer></script>
     
     <script>
@@ -1288,7 +1288,7 @@
             var listEl = document.getElementById('easy-voca-preview-list');
             if (!listEl) return;
 
-            var fallbackHtml = buildPreviewListHtml([], '<a href="popular-voca-list.html">인기 어휘 보기</a>');
+            var fallbackHtml = buildPreviewListHtml([], '<a href="popular-voca-list.html">이럴 땐 영어로? 보기</a>');
             var easyTimeoutId = setTimeout(function() { listEl.innerHTML = fallbackHtml; }, 8000);
 
             fetch(getApiBase() + '/easy-voca')
