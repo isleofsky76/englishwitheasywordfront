@@ -8,60 +8,60 @@ import { uploadNewsVoca } from './news-voca-format.js';
 
 // ========== 여기만 수정 ==========
 const article = {
-  title: '기내 난동 승객 제압',
+  title: '평범한 사업의 백만장자들',
 
-  slug: 'disruptive-passenger-duct-taped-emergency-landing-cnn',
+  slug: 'american-dream-minting-millionaires-main-street-wsj',
 
   metaDescription:
-    'CNN 기사에서 추출한 기내 난동 승객 관련 문장. disruptive passenger, restrained with flexible handcuffs, acting up again, belligerent, increasingly agitated, using profanity.',
+    'WSJ 기사에서 추출한 평범한 사업과 백만장자 관련 문장. beaver-themed paraphernalia, tactile Main Street industries, incremental innovation, competence nor grit, prerequisite, staggeringly high.',
 
-  password: 'password_seed_disruptive_passenger_duct_taped_emergency_landing_cnn',
+  password: 'password_seed_american_dream_minting_millionaires_main_street_wsj',
 
   datePublished: '2026-09-04',
 
   intro: [
-    '기내 난동 승객이 제압된 뒤 비행기가 비상 착륙했다는 CNN 기사에서 추출한 문장입니다.',
+    '평범한 지역 사업에서도 점진적 혁신과 끈기로 큰 부를 만들 수 있다는 월스트리트 저널의 기사에서 추출한 문장입니다.',
   ],
 
   words: [
     {
       narrative: [
-        '1. 난동 승객은 유연한 수갑으로 결박되었고(**was restrained with flexible handcuffs**), 좌석에 덕트테이프로 고정됐습니다(**duct-taped to a seat**).',
+        '1. 버키스 여행자 센터들은 바비큐와 화장실, 비버 테마의 용품들(**beaver-themed paraphernalia**)로 높이 평가받고 있습니다(**are revered for**).',
       ],
     },
     {
       narrative: [
-        '2. 그는 그 남성이 다시 말썽을 부리기 시작했기 때문에(**because the man started acting up again**) 서둘러 돌아와야 했습니다(**had to quickly return**).',
+        '2. 분석에 따르면(**According to our analysis**), 미국의 총 31조 달러 규모 민간 사업 자산 중 거의 절반은(**nearly half**) 촉각을 이용한 메인 스트리트 산업(**tactile, Main Street industries**)에 있습니다.',
       ],
     },
     {
       narrative: [
-        '3. 일등석에서 그들보다 두 줄 뒤에 있던 한 남성이(**A man two rows behind them in the first-class section**) 점점 공격적인 태도를 보이기 시작했습니다(**started to become belligerent**).',
+        '3. 경제 성장의 핵심인 변혁적 혁신과는 달리(**Unlike the transformational innovation central to economic growth**), 일상 속 백만장자들의 혁신은 대개 더 점진적입니다(**often more incremental**).',
       ],
     },
     {
       narrative: [
-        '4. 그 남성은 점점 더 흥분했고(**got increasingly agitated**), 옆 승객을 때리기 시작한 뒤(**started to hit the passenger next to him**) 말리려던 여성까지 폭행했습니다(**hit a woman who tried to intervene**).',
+        '4. 능력도 투지도(**Neither competence nor grit**) 은행 계좌처럼 안정적으로 물려줄 수는 없습니다(**can be passed down as reliably as a bank account**).',
       ],
     },
     {
       narrative: [
-        '5. 그는 폭력적으로 변하기 시작하고 있었고(**was starting to become abusive**), 욕설도 사용하기 시작했습니다(**started using profanity**).',
+        "5. 엘리트 학위는 막대한 부를 쌓기 위한 필수 전제 조건이 아닙니다(**aren't a prerequisite for building massive wealth**).",
       ],
     },
     {
       narrative: [
-        '6. 물리적으로 그의 움직임을 확실히 제한하긴 했지만(**Physically it lessened his ability to move for sure**), 문제 자체를 해결하지는 못했습니다(**it did not solve the issue**).',
+        '6. 그 고객들의 갱신율은 믿기 힘들 정도로 높아서(**was staggeringly high**), 반복적으로 발생하는 수익 기반을 보장했습니다(**ensuring a recurring base of revenue**).',
       ],
     },
   ],
 
   source: {
-    text: 'CNN | Disruptive passenger duct-taped to first-class seat as plane makes emergency landing | By Aaron Cooper and Taylor Galgano',
-    url: 'https://edition.cnn.com/2026/09/04/us/disruptive-passenger-duct-tape',
+    text: "WSJ | The American Dream Is Alive. And It's Minting Millionaires. | By Eric Zwick and Owen Zidar",
+    url: 'https://www.wsj.com/business/entrepreneurship/the-american-dream-is-alive-and-its-minting-millionaires-3903775b?mod=hp_featst_pos3',
   },
 
-  youtube: 'https://youtube.com/shorts/siyII6zf6SU',
+  youtube: 'https://youtube.com/shorts/IqhbzjgZ6C8',
 };
 // ===============================
 
