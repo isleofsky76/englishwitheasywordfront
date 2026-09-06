@@ -33,7 +33,7 @@ const article = {
     },
     {
       narrative: [
-        '2. 호르무즈 해협에서 이란에 대항하는 어떠한 한국의 개입도(**Any South Korean involvement**) 이란을 향한 침략과 전쟁에 직접적인 군사적 참여에 해당할 것이라고 했습니다(**would amount to direct military participation**) amount to something  = …와 마찬가지이다[…에 해당하다], (합계가) …에 이르다[달하다]',
+        '2. 호르무즈 해협에서 이란에 대항하는 어떠한 한국의 개입도(**Any South Korean involvement**) 이란을 향한 침략과 전쟁에 직접적인 군사적 참여에 해당할 것이라고 했습니다(**would amount to direct military participation**) cf. amount to something  = …와 마찬가지이다[…에 해당하다], (합계가) …에 이르다[달하다]',
       ],
     },
     {
