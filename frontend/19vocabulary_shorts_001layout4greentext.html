@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>layout4green — EN 폰트 스타일 비교</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@500;700&family=IBM+Plex+Sans:wght@500;700&family=Inter:wght@500;700;800&family=Lora:wght@500;700&family=Merriweather:wght@700&family=Montserrat:wght@600;700;800&family=Nunito:wght@700;800&family=Playfair+Display:wght@600;700&family=Poppins:wght@500;600;700;800&family=Roboto+Slab:wght@500;700&family=Source+Sans+3:wght@600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" crossorigin="anonymous">
+  <style>
+    @font-face {
+      font-family: 'NanumBarunPen';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumBarunpen.woff') format('woff');
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    :root {
+      --bg: #2F3543;
+      --ko: #FAFFFA;
+      --trans: #C8E6C9;
+      --en: #F5C842;
+      --title: #C5E070;
+      --pink: #ff9f8f;
+      --muted: rgba(239, 233, 225, 0.62);
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      background: var(--bg);
+      color: #EFE9E1;
+      font-family: 'Pretendard', sans-serif;
+    }
+
+    .page {
+      max-width: 560px;
+      margin: 0 auto;
+      padding: 16px 12px 48px;
+    }
+
+    .top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .top h1 {
+      margin: 0;
+      font-size: 1rem;
+      color: #F5EFE7;
+    }
+
+    .pager { display: flex; align-items: center; gap: 8px; }
+
+    .nav-btn {
+      width: 44px;
+      height: 44px;
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 10px;
+      background: rgba(0,0,0,.28);
+      color: #fff;
+      font-size: 22px;
+      cursor: pointer;
+    }
+
+    .nav-btn:hover { border-color: var(--en); color: var(--en); }
+    .nav-btn:disabled { opacity: 0.35; cursor: default; }
+
+    .page-indicator {
+      min-width: 72px;
+      text-align: center;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--pink);
+    }
+
+    .sample-label {
+      margin: 0 0 12px;
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    .sample-label strong { color: #ffe9a3; }
+    .sample-label .en-font-name {
+      display: inline-block;
+      margin-top: 4px;
+      padding: 3px 10px;
+      border-radius: 6px;
+      background: #ffe082;
+      color: #1a1a1a;
+      font-weight: 800;
+      font-size: 13px;
+    }
+
+    .stage {
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 14px;
+      background: rgba(0,0,0,.22);
+      padding: 18px 16px 20px;
+      min-height: 480px;
+    }
+
+    .title-main {
+      display: block;
+      text-align: center;
+      font-family: 'Pretendard', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(239, 233, 225, 0.72);
+      margin-bottom: 6px;
+    }
+
+    .title-sub {
+      margin: 0;
+      text-align: center;
+      font-family: 'Pretendard', sans-serif;
+      font-weight: 600;
+      font-size: 22px;
+      line-height: 1.28;
+      letter-spacing: -0.025em;
+      color: var(--title);
+    }
+
+    .title-meta {
+      text-align: center;
+      font-family: 'Pretendard', sans-serif;
+      font-size: 13px;
+      color: var(--trans);
+      margin: 6px 0 14px;
+    }
+
+    .progress-label {
+      display: block;
+      margin: 0 0 4px 4px;
+      font-family: 'NanumBarunPen', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--pink);
+    }
+
+    .progress-track {
+      height: 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.08);
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #ff7b6b, #ff9f8f);
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-right: 6px;
+    }
+
+    .progress-pct {
+      font-family: 'Poppins', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .word-block { margin-bottom: 16px; }
+
+    .word-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 2px 4px;
+      line-height: 1.2;
+    }
+
+    .num {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 800;
+      font-size: 17px;
+      color: var(--pink);
+    }
+
+    .ko {
+      font-family: 'NanumBarunPen', sans-serif;
+      font-weight: 800;
+      font-size: 28px;
+      color: var(--ko);
+      text-shadow: 0 0 10px rgba(200, 255, 230, .35);
+    }
+
+    .sep {
+      color: rgba(239, 233, 225, .45);
+      font-size: 22px;
+      margin: 0 0.12em;
+    }
+
+    /* EN 표제어 — JS에서 font-family 지정 */
+    .en {
+      font-weight: 700;
+      font-size: 30px;
+      letter-spacing: 0.01em;
+      color: var(--en);
+    }
+
+    .en.is-preview { letter-spacing: 0.04em; }
+
+    .stars {
+      margin: 4px 0 2px 6px;
+      font-size: 12px;
+    }
+
+    .pron {
+      margin-left: 6px;
+      font-family: 'NanumBarunPen', sans-serif;
+      font-size: 18px;
+      color: var(--pink);
+    }
+
+    .ipa {
+      font-weight: 500;
+      font-size: 14px;
+      margin-left: 0.25em;
+      color: var(--pink);
+      opacity: 0.95;
+    }
+
+    /* 예문 EN도 같은 EN 폰트 */
+    .cf {
+      margin: 8px 0 0 6px;
+      font-weight: 500;
+      font-size: 15px;
+      line-height: 1.45;
+      color: var(--en);
+    }
+
+    .cf-ko {
+      font-family: 'NanumBarunPen', sans-serif;
+      font-size: 13px;
+      color: var(--trans);
+    }
+
+    .mark {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-thickness: 1.25px;
+      text-decoration-color: var(--en);
+    }
+
+    .font-banner {
+      margin-bottom: 14px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      background: rgba(245, 200, 66, 0.12);
+      border: 1px solid rgba(245, 200, 66, 0.35);
+    }
+
+    .font-banner .name {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #ffe9a3;
+    }
+
+    .font-banner .desc {
+      margin-top: 4px;
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    .compare-note {
+      margin-top: 14px;
+      padding-top: 10px;
+      border-top: 1px dashed rgba(255,255,255,.12);
+      font-size: 0.75rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .keys {
+      margin-top: 10px;
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    .mini-grid {
+      display: grid;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .mini {
+      padding: 10px 12px;
+      border-radius: 8px;
+      background: rgba(0,0,0,.28);
+      border: 1px solid rgba(255,255,255,.08);
+    }
+
+    .mini .label {
+      font-size: 11px;
+      font-weight: 700;
+      color: #ffe9a3;
+      margin-bottom: 4px;
+    }
+
+    .mini .sample-en {
+      font-weight: 700;
+      font-size: 22px;
+      color: var(--en);
+    }
+
+    /* 마지막 페이지: 예문만 폰트 비교 */
+    .cf-only-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .cf-only-item {
+      padding: 12px 12px 10px;
+      border-radius: 10px;
+      background: rgba(0,0,0,.28);
+      border: 1px solid rgba(255,255,255,.1);
+    }
+
+    .cf-only-item .fname {
+      display: inline-block;
+      margin-bottom: 6px;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: #ffe082;
+      color: #1a1a1a;
+      font-family: 'Pretendard', sans-serif;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .cf-only-item .line {
+      font-weight: 500;
+      font-size: 15px;
+      line-height: 1.45;
+      color: var(--en);
+    }
+
+    .cf-only-item .line .ko {
+      font-family: 'NanumBarunPen', sans-serif !important;
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--trans);
+      text-shadow: none;
+    }
+
+    .cf-only-head {
+      margin: 0 0 12px;
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    .cf-only-head strong { color: #ffe9a3; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="top">
+      <h1>EN 폰트 스타일 비교</h1>
+      <div class="pager">
+        <button type="button" class="nav-btn" id="prev" aria-label="이전">←</button>
+        <span class="page-indicator" id="indicator">1 / 12</span>
+        <button type="button" class="nav-btn" id="next" aria-label="다음">→</button>
+      </div>
+    </div>
+    <p class="sample-label" id="sample-label"></p>
+    <div class="stage" id="stage" aria-live="polite"></div>
+    <p class="keys">← → · 1~13: 카드별 EN 폰트(나눔바른펜 포함) · <strong>마지막(14)</strong>: 예문만 전 폰트 비교</p>
+  </div>
+
+  <script>
+    /**
+     * 페이지마다 EN 폰트 스타일 다르게
+     * 표제어(.en) + 예문(.cf) + IPA 에 동일 적용
+     */
+    const EN_FONTS = [
+      {
+        id: "poppins",
+        name: "Poppins",
+        family: "'Poppins', sans-serif",
+        desc: "현재 layout4green 기본. 숏폼·영문 표제어에 선명",
+        weight: 700,
+        letter: "0.02em"
+      },
+      {
+        id: "montserrat",
+        name: "Montserrat",
+        family: "'Montserrat', sans-serif",
+        desc: "기하학적 산세리프. 헤드라인·표제어 강조",
+        weight: 700,
+        letter: "0.01em"
+      },
+      {
+        id: "inter",
+        name: "Inter",
+        family: "'Inter', sans-serif",
+        desc: "UI/본문형. 예문 가독성 좋음",
+        weight: 700,
+        letter: "0"
+      },
+      {
+        id: "source-sans",
+        name: "Source Sans 3",
+        family: "'Source Sans 3', sans-serif",
+        desc: "뉴스·기사 톤. 예문에 안정적",
+        weight: 700,
+        letter: "0"
+      },
+      {
+        id: "ibm-plex",
+        name: "IBM Plex Sans",
+        family: "'IBM Plex Sans', sans-serif",
+        desc: "약간 기술적·모던. 뉴스 앱 느낌",
+        weight: 700,
+        letter: "0"
+      },
+      {
+        id: "space-grotesk",
+        name: "Space Grotesk",
+        family: "'Space Grotesk', sans-serif",
+        desc: "개성 있는 산세리프. 숏폼 포인트",
+        weight: 700,
+        letter: "0.01em"
+      },
+      {
+        id: "dm-sans",
+        name: "DM Sans",
+        family: "'DM Sans', sans-serif",
+        desc: "둥글고 부드러운 현대 산세리프",
+        weight: 700,
+        letter: "0"
+      },
+      {
+        id: "nunito",
+        name: "Nunito",
+        family: "'Nunito', sans-serif",
+        desc: "라운드 산세리프. 친근·교육 콘텐츠",
+        weight: 800,
+        letter: "0"
+      },
+      {
+        id: "roboto-slab",
+        name: "Roboto Slab",
+        family: "'Roboto Slab', serif",
+        desc: "슬랩 세리프. 단어가 또렷하게 보임",
+        weight: 700,
+        letter: "0"
+      },
+      {
+        id: "lora",
+        name: "Lora",
+        family: "'Lora', serif",
+        desc: "세리프 본문형. 예문·기사 느낌",
+        weight: 700,
+        letter: "0"
+      },
+      {
+        id: "merriweather",
+        name: "Merriweather",
+        family: "'Merriweather', serif",
+        desc: "클래식 세리프. 뉴스 제목·표제어",
+        weight: 700,
+        letter: "0"
+      },
+      {
+        id: "playfair",
+        name: "Playfair Display",
+        family: "'Playfair Display', serif",
+        desc: "디스플레이 세리프. 고급·매거진",
+        weight: 700,
+        letter: "0"
+      },
+      {
+        id: "nanum-barunpen",
+        name: "NanumBarunPen",
+        family: "'NanumBarunPen', 'Pretendard', sans-serif",
+        desc: "나눔바른펜. KO 기본 · EN 예문에도 적용해 비교",
+        weight: 800,
+        letter: "0"
+      }
+    ];
+
+    const WORD = {
+      num: 1,
+      ko: "엄청난",
+      en: "staggering",
+      stars: 5,
+      pronunciation: "스태거링",
+      ipa: "/ˈstæɡərɪŋ/",
+      cfEn: "The amount of electricity required for AI training is <mark>staggering</mark>.",
+      cfKo: "AI 학습에 필요한 전력량은 엄청나다."
+    };
+
+    const WORD2 = {
+      num: 2,
+      ko: "견뎌내다",
+      en: "withstand",
+      stars: 5,
+      pronunciation: "위드스탠드",
+      ipa: "/wɪðˈstænd/",
+      cfEn: "a plant that could <mark>withstand</mark> climate change.",
+      cfKo: "기후변화를 견딜 수 있는 식물."
+    };
+
+    const CF_LINE_EN = "The amount of electricity required for AI training is <mark>staggering</mark>.";
+    const CF_LINE_KO = "AI 학습에 필요한 전력량은 엄청나다.";
+    const TOTAL_PAGES = EN_FONTS.length + 1; // 마지막 = 예문만 전 폰트 비교
+
+    let index = 0;
+
+    function styleEn(font) {
+      return `font-family:${font.family};font-weight:${font.weight};letter-spacing:${font.letter};`;
+    }
+
+    function starsHtml(n) {
+      return `<div class="stars">${"⭐".repeat(n)}</div>`;
+    }
+
+    function wordBlock(w, font, opts = {}) {
+      const preview = opts.preview
+        ? `<span class="en is-preview" style="${styleEn(font)}">${opts.preview}</span>`
+        : `<span class="en" style="${styleEn(font)}">${w.en}</span>`;
+      const cf = String(w.cfEn).replace(/<mark>(.*?)<\/mark>/g, '<span class="mark">$1</span>');
+      return `
+        <div class="word-block">
+          <div class="word-row">
+            <span class="num">${w.num}.</span>
+            <span class="ko">${w.ko}</span><span class="sep">:</span>${preview}
+          </div>
+          ${opts.hideStars ? "" : starsHtml(w.stars)}
+          ${opts.hidePron ? "" : `<div><span class="pron">|${w.pronunciation}|<span class="ipa" style="${styleEn(font)}">${w.ipa}</span></span></div>`}
+          ${opts.hideCf ? "" : `<div class="cf" style="${styleEn(font)}">${cf}<span class="cf-ko"> (${w.cfKo})</span></div>`}
+        </div>`;
+    }
+
+    function renderCfOnlyPage() {
+      const pageNum = TOTAL_PAGES;
+      document.getElementById("sample-label").innerHTML =
+        `<strong>${pageNum} / ${TOTAL_PAGES}</strong> · 예문만 폰트 비교<br>` +
+        `<span class="en-font-name">CF sentence · all fonts</span>`;
+
+      document.getElementById("indicator").textContent = `${pageNum} / ${TOTAL_PAGES}`;
+      document.getElementById("prev").disabled = false;
+      document.getElementById("next").disabled = true;
+
+      const cfHtml = CF_LINE_EN.replace(/<mark>(.*?)<\/mark>/g, '<span class="mark">$1</span>');
+      const items = EN_FONTS.map((font) => `
+        <div class="cf-only-item">
+          <span class="fname">${font.name}</span>
+          <div class="line" style="${styleEn(font)}">${cfHtml} <span class="ko">(${CF_LINE_KO})</span></div>
+        </div>
+      `).join("");
+
+      document.getElementById("stage").innerHTML = `
+        <p class="cf-only-head">
+          <strong>같은 예문</strong>만 폰트별로 비교합니다.<br>
+          EN은 각 폰트 · 괄호 한글은 <strong>NanumBarunPen</strong> 고정
+        </p>
+        <div class="cf-only-list">${items}</div>
+      `;
+    }
+
+    function renderFontCardPage(i) {
+      const font = EN_FONTS[i];
+      const pct = Math.round(((i + 1) / EN_FONTS.length) * 100);
+
+      document.getElementById("sample-label").innerHTML =
+        `<strong>${i + 1} / ${TOTAL_PAGES}</strong> · 영어 폰트<br>` +
+        `<span class="en-font-name">${font.name}</span>`;
+
+      document.getElementById("indicator").textContent = `${i + 1} / ${TOTAL_PAGES}`;
+      document.getElementById("prev").disabled = i <= 0;
+      document.getElementById("next").disabled = false;
+
+      document.getElementById("stage").innerHTML = `
+        <div class="font-banner">
+          <div class="name" style="${styleEn(font)}">${font.name}</div>
+          <div class="desc">${font.desc}<br>CSS: <code style="color:#F5C842">${font.family}</code></div>
+        </div>
+
+        <span class="title-main">신문기사에서 배우는 어휘</span>
+        <p class="title-sub">커피의 멸종을 막으려<br>애쓰는 괴짜 과학자</p>
+        <p class="title-meta">(The Economist | 2026/07/23)</p>
+
+        <span class="progress-label">진행도 ${i + 1}/${EN_FONTS.length}</span>
+        <div class="progress-track">
+          <div class="progress-fill" style="width:${pct}%">
+            <span class="progress-pct">${pct}%</span>
+          </div>
+        </div>
+
+        ${wordBlock(WORD, font)}
+
+        <div class="mini-grid">
+          <div class="mini">
+            <div class="label">EN preview · ${font.name}</div>
+            <div class="sample-en" style="${styleEn(font)}">sta_______</div>
+          </div>
+          <div class="mini">
+            <div class="label">긴 단어 · ${font.name}</div>
+            <div class="sample-en" style="${styleEn(font)};font-size:20px;">unprecedented · coffee-growing</div>
+          </div>
+        </div>
+
+        ${wordBlock(WORD2, font)}
+
+        <div class="compare-note">
+          · 노란 영어 = <strong>${font.name}</strong><br>
+          · 마지막 페이지에서 예문만 전 폰트 모아 비교 →
+        </div>
+      `;
+    }
+
+    function render(i) {
+      if (i >= EN_FONTS.length) {
+        renderCfOnlyPage();
+        return;
+      }
+      renderFontCardPage(i);
+    }
+
+    function go(delta) {
+      const next = Math.max(0, Math.min(TOTAL_PAGES - 1, index + delta));
+      if (next === index) return;
+      index = next;
+      render(index);
+    }
+
+    document.getElementById("prev").addEventListener("click", () => go(-1));
+    document.getElementById("next").addEventListener("click", () => go(1));
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowLeft") go(-1);
+      if (e.key === "ArrowRight") go(1);
+    });
+
+    render(0);
+  </script>
+</body>
+</html>

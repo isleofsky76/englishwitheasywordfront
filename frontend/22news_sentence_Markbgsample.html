@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>22news_sentence_Mark — 배경색 샘플 (9:16)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" crossorigin="anonymous">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
+            background: #111;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            overflow: hidden;
+        }
+
+        .page-hint {
+            font-size: 13px;
+            color: #888;
+            margin-bottom: 12px;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        .page-hint kbd {
+            display: inline-block;
+            padding: 1px 7px;
+            border-radius: 4px;
+            background: #222;
+            border: 1px solid #444;
+            font-size: 12px;
+            color: #ccc;
+        }
+
+        /* 9:16 쇼츠 프레임 + 좌우 버튼 */
+        .viewer-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .shorts-frame {
+            position: relative;
+            width: min(calc(100vw - 120px), 405px);
+            aspect-ratio: 9 / 16;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6);
+            border: 2px solid rgba(255, 255, 255, 0.08);
+            touch-action: pan-y;
+            user-select: none;
+            flex-shrink: 0;
+        }
+
+        .nav-btn {
+            flex-shrink: 0;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            font-size: 22px;
+            line-height: 1;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.15s, transform 0.15s;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .nav-btn:hover:not(:disabled) {
+            background: rgba(173, 255, 47, 0.25);
+            border-color: rgba(173, 255, 47, 0.5);
+            transform: scale(1.08);
+        }
+
+        .nav-btn:active:not(:disabled) {
+            transform: scale(0.95);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.25;
+            cursor: default;
+        }
+
+        .carousel-track {
+            display: flex;
+            height: 100%;
+            transition: transform 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+            will-change: transform;
+        }
+
+        .slide {
+            flex: 0 0 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            padding: 28px 22px 24px;
+            position: relative;
+        }
+
+        /* 쇼츠 UI 미리보기 */
+        .slide-badge {
+            align-self: flex-start;
+            font-size: 11px;
+            font-weight: 600;
+            color: #ADFF2F;
+            background: rgba(173, 255, 47, 0.12);
+            border: 1px solid rgba(173, 255, 47, 0.3);
+            padding: 3px 10px;
+            border-radius: 20px;
+            margin-bottom: 18px;
+        }
+
+        .slide-badge.ref {
+            color: #FFE566;
+            background: rgba(255, 229, 102, 0.12);
+            border-color: rgba(255, 229, 102, 0.3);
+        }
+
+        .slide-badge.fine {
+            color: #7df8df;
+            background: rgba(125, 248, 223, 0.1);
+            border-color: rgba(125, 248, 223, 0.28);
+        }
+
+        .slide-badge.yt {
+            color: #ff6b6b;
+            background: rgba(255, 107, 107, 0.12);
+            border-color: rgba(255, 107, 107, 0.3);
+        }
+
+        .slide-badge.mark {
+            color: #c4b5fd;
+            background: rgba(196, 181, 253, 0.12);
+            border-color: rgba(196, 181, 253, 0.3);
+        }
+
+        .slide-title-ko {
+            font-size: 13px;
+            font-weight: 600;
+            color: #B0BEC5;
+            text-align: center;
+            margin-bottom: 6px;
+        }
+
+        .slide-headline {
+            font-size: 22px;
+            font-weight: 600;
+            color: #ADFF2F;
+            text-align: center;
+            line-height: 1.35;
+            margin-bottom: 8px;
+            text-shadow: 0 1px 0 rgba(0, 0, 0, 0.35), 0 0 10px rgba(173, 255, 47, 0.22);
+        }
+
+        .slide-title-swatch {
+            display: block;
+            text-align: center;
+            margin-bottom: 28px;
+            font-family: 'Poppins', monospace;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            color: rgba(255, 255, 255, 0.45);
+        }
+
+        .slide-body {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 14px;
+            padding: 0 4px;
+        }
+
+        .preview-line-ko {
+            font-size: 17px;
+            color: #C8E6C9;
+            line-height: 1.55;
+        }
+
+        .preview-line-en {
+            font-family: 'Poppins', sans-serif;
+            font-size: 17px;
+            color: #FFE566;
+            line-height: 1.55;
+        }
+
+        .slide-meta {
+            margin-top: auto;
+            padding-top: 20px;
+            text-align: center;
+        }
+
+        .slide-hex {
+            font-family: 'Poppins', monospace;
+            font-size: 26px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            color: #fff;
+            text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
+            margin-bottom: 6px;
+        }
+
+        .slide-label {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.65);
+            margin-bottom: 4px;
+        }
+
+        .slide-counter {
+            font-size: 12px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        /* 하단 도트 + 다음 안내 */
+        .controls {
+            margin-top: 14px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .dots {
+            display: flex;
+            gap: 6px;
+        }
+
+        .dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #444;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .dot.active {
+            background: #ADFF2F;
+            transform: scale(1.25);
+        }
+
+        .tap-hint {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .tap-hint span {
+            color: #ADFF2F;
+            font-weight: 600;
+        }
+
+        .bottom-nav {
+            display: flex;
+            gap: 12px;
+            margin-top: 4px;
+        }
+
+        .bottom-nav .nav-btn-wide {
+            padding: 10px 22px;
+            width: auto;
+            height: auto;
+            border-radius: 24px;
+            font-size: 14px;
+            font-family: inherit;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <p class="page-hint">
+        9:16 쇼츠 미리보기 · 배경 + 녹색 제목(네온·파스텔) · 좌/우 클릭 또는 스와이프 · <kbd>←</kbd> <kbd>→</kbd>
+    </p>
+
+    <div class="viewer-row">
+        <button type="button" class="nav-btn" id="btn-prev" aria-label="이전 색">‹</button>
+
+        <div class="shorts-frame" id="shorts-frame">
+            <div class="carousel-track" id="carousel-track"></div>
+        </div>
+
+        <button type="button" class="nav-btn" id="btn-next" aria-label="다음 색">›</button>
+    </div>
+
+    <div class="controls">
+        <div class="dots" id="dots"></div>
+        <div class="bottom-nav">
+            <button type="button" class="nav-btn nav-btn-wide" id="btn-prev2">‹ 이전</button>
+            <button type="button" class="nav-btn nav-btn-wide" id="btn-next2">다음 ›</button>
+        </div>
+        <p class="tap-hint">좌우 버튼 · 스와이프 · <kbd style="background:#222;border:1px solid #444;padding:1px 6px;border-radius:4px;font-size:11px;">←</kbd> <kbd style="background:#222;border:1px solid #444;padding:1px 6px;border-radius:4px;font-size:11px;">→</kbd></p>
+    </div>
+
+    <script>
+        /* 녹색 제목 팔레트 — 네온 라임 + 파스텔·민트·세이지 등 */
+        const TITLE_GREENS = [
+            { hex: '#ADFF2F', label: '네온 라임', note: 'layout5green 기본' },
+            { hex: '#C8F560', label: '소프트 차트루즈', note: '밝은 연두' },
+            { hex: '#B8E986', label: '파스텔 라임', note: '부드러운 연두' },
+            { hex: '#A8E6CF', label: '민트 파스텔', note: '청록 민트' },
+            { hex: '#98D8C8', label: '세이지 민트', note: '차분한 민트' },
+            { hex: '#B5EAD7', label: '아이스 민트', note: '파스텔 민트' },
+            { hex: '#C7F0BD', label: '연한 사과녹', note: '파스텔 그린' },
+            { hex: '#D4F5A5', label: '연한 라임', note: '밝은 파스텔' },
+            { hex: '#9FE870', label: '선명한 연두', note: '중간 채도' },
+            { hex: '#7DDB6A', label: '잔디 그린', note: '선명 녹' },
+            { hex: '#6BCB77', label: '프레시 그린', note: '생기 있는 녹' },
+            { hex: '#88D498', label: '파스텔 잔디', note: '연한 녹' },
+            { hex: '#A0E7E5', label: '아쿠아 민트', note: '청록 파스텔' },
+            { hex: '#BEF7C2', label: '크림 민트', note: '아주 연한 녹' },
+            { hex: '#E2F0CB', label: '세이지 파스텔', note: '회록 파스텔' },
+            { hex: '#CAFFBF', label: '하이라이트 민트', note: '형광에 가까운 파스텔' },
+            { hex: '#BFFF00', label: '일렉트릭 라임', note: '강렬 네온' },
+            { hex: '#CCFF33', label: '시트러스 라임', note: '노란 기 있는 라임' },
+            { hex: '#90EE90', label: '라이트 그린', note: '클래식 연녹' },
+            { hex: '#98FB98', label: '페일 그린', note: '창백한 연녹' },
+            { hex: '#7CFC00', label: '론 그린', note: '잔디 네온' },
+            { hex: '#ADEBB3', label: '모스 파스텔', note: '이끼 톤 파스텔' },
+        ];
+
+        const SAMPLES = [
+            { hex: '#000308', label: '거의 검은 남색', note: '19diary .wrapper', ref: true },
+            { hex: '#02051d', label: '진한 남색', note: '19diary body', ref: true },
+            { hex: '#050a14', label: '심해 블랙 네이비', note: '#000308 ↔ #02051d' },
+            { hex: '#0a0f1a', label: '딥 미드나잇', note: '거의 검정 남색' },
+            { hex: '#0d1220', label: '미드나잇 네이비', note: '어두운 야간 톤' },
+            { hex: '#101828', label: '슬레이트 네이비', note: '청회색 섞인 남색' },
+            { hex: '#141d2c', label: '카드/박스 남색', note: '19diary word-box', ref: true },
+            { hex: '#1a2332', label: '소프트 다크 네이비', note: '본문 영역용' },
+            { hex: '#1e2a3d', label: '딥 블루 그레이', note: '밝은 남회색' },
+            { hex: '#242c39', label: '마진 영역 네이비', note: '19diary CSS · 기준색', ref: true },
+            { hex: '#2F3543', label: 'Mark 현재 배경', note: '22news_sentence_Mark 사용 중', mark: true },
+            { hex: '#465268', label: 'YouTube 쇼츠 배경', note: 'shorts/7wxzLioFJ-8 샘플링', yt: true },
+            /* #242c39 rgb(36,44,57) 주위 — 채널당 ±1 미세 조정 */
+            { hex: '#1f2734', label: '242c39 −5단계', note: 'rgb(31,39,52) 더 어두움', fine: true },
+            { hex: '#202835', label: '242c39 −4단계', note: 'rgb(32,40,53) 더 어두움', fine: true },
+            { hex: '#212936', label: '242c39 −3단계', note: 'rgb(33,41,54) 더 어두움', fine: true },
+            { hex: '#222a37', label: '242c39 −2단계', note: 'rgb(34,42,55) 더 어두움', fine: true },
+            { hex: '#232b38', label: '242c39 −1단계', note: 'rgb(35,43,56) 더 어두움', fine: true },
+            { hex: '#252d3a', label: '242c39 +1단계', note: 'rgb(37,45,58) 더 밝음', fine: true },
+            { hex: '#262e3b', label: '242c39 +2단계', note: 'rgb(38,46,59) 더 밝음', fine: true },
+            { hex: '#272f3c', label: '242c39 +3단계', note: 'rgb(39,47,60) 더 밝음', fine: true },
+            { hex: '#28303d', label: '242c39 +4단계', note: 'rgb(40,48,61) 더 밝음', fine: true },
+            { hex: '#29313e', label: '242c39 +5단계', note: 'rgb(41,49,62) 더 밝음', fine: true },
+        ];
+
+        let current = 0;
+        let touchStartX = 0;
+
+        const track = document.getElementById('carousel-track');
+        const dotsEl = document.getElementById('dots');
+        const btnPrev = document.getElementById('btn-prev');
+        const btnNext = document.getElementById('btn-next');
+        const btnPrev2 = document.getElementById('btn-prev2');
+        const btnNext2 = document.getElementById('btn-next2');
+        const frame = document.getElementById('shorts-frame');
+
+        SAMPLES.forEach((item, i) => {
+            const title = TITLE_GREENS[i % TITLE_GREENS.length];
+            const glow = title.hex.replace('#', '');
+            const r = parseInt(glow.slice(0, 2), 16);
+            const g = parseInt(glow.slice(2, 4), 16);
+            const b = parseInt(glow.slice(4, 6), 16);
+            const slide = document.createElement('div');
+            slide.className = 'slide';
+            slide.style.backgroundColor = item.hex;
+            slide.innerHTML = `
+                ${item.ref ? '<span class="slide-badge ref">19diary 원본</span>' : item.yt ? '<span class="slide-badge yt">YouTube 쇼츠</span>' : item.mark ? '<span class="slide-badge mark">Mark 현재</span>' : item.fine ? '<span class="slide-badge fine">242c39 미세</span>' : '<span class="slide-badge">BG SAMPLE</span>'}
+                <div class="slide-title-ko">뉴스 어휘</div>
+                <div class="slide-headline" style="color:${title.hex}; text-shadow:0 1px 0 rgba(0,0,0,0.35), 0 0 10px rgba(${r},${g},${b},0.28);">시험 시즌<br>사이버 공격</div>
+                <div class="slide-title-swatch" style="color:${title.hex};">제목 ${title.hex} · ${title.label}</div>
+                <div class="slide-body">
+                    <p class="preview-line-ko">해커들이 학교 서버에 침입해<br>시험 자료를 훔쳐 갔다.</p>
+                    <p class="preview-line-en">Hackers breached the school server<br>and stole exam materials.</p>
+                </div>
+                <div class="slide-meta">
+                    <div class="slide-hex">${item.hex}</div>
+                    <div class="slide-label">${item.label} · ${item.note}</div>
+                    <div class="slide-counter">${String(i + 1).padStart(2, '0')} / ${String(SAMPLES.length).padStart(2, '0')}</div>
+                </div>
+            `;
+            track.appendChild(slide);
+
+            const dot = document.createElement('button');
+            dot.className = 'dot' + (i === 0 ? ' active' : '');
+            dot.type = 'button';
+            dot.setAttribute('aria-label', `${i + 1}번 색`);
+            dot.addEventListener('click', () => goTo(i));
+            dotsEl.appendChild(dot);
+        });
+
+        function goTo(index) {
+            current = Math.max(0, Math.min(SAMPLES.length - 1, index));
+            track.style.transform = `translateX(-${current * 100}%)`;
+            dotsEl.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === current));
+            const atStart = current === 0;
+            const atEnd = current === SAMPLES.length - 1;
+            btnPrev.disabled = atStart;
+            btnNext.disabled = atEnd;
+            btnPrev2.disabled = atStart;
+            btnNext2.disabled = atEnd;
+        }
+
+        function next() { goTo(current + 1); }
+        function prev() { goTo(current - 1); }
+
+        btnPrev.addEventListener('click', prev);
+        btnNext.addEventListener('click', next);
+        btnPrev2.addEventListener('click', prev);
+        btnNext2.addEventListener('click', next);
+
+        frame.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].clientX;
+        }, { passive: true });
+
+        frame.addEventListener('touchend', (e) => {
+            const dx = e.changedTouches[0].clientX - touchStartX;
+            if (Math.abs(dx) < 40) return;
+            if (dx < 0) next();
+            else prev();
+        }, { passive: true });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') next();
+            if (e.key === 'ArrowLeft') prev();
+        });
+
+        goTo(0);
+    </script>
+</body>
+</html>

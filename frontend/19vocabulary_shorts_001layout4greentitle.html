@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>layout4green — 제목 녹색·근접색 샘플</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" crossorigin="anonymous">
+  <style>
+    :root {
+      --bg: #2F3543;
+      --title: #C5E070;
+      --muted: rgba(239, 233, 225, 0.62);
+      --trans: #C8E6C9;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      background: var(--bg);
+      color: #EFE9E1;
+      font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
+    }
+
+    .page {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 20px 16px 64px;
+    }
+
+    h1 {
+      margin: 0 0 6px;
+      font-size: 1.25rem;
+      color: #F5EFE7;
+    }
+
+    .lead {
+      margin: 0 0 18px;
+      font-size: 0.88rem;
+      line-height: 1.55;
+      color: var(--muted);
+    }
+
+    .lead code { color: #F5C842; }
+
+    h2 {
+      margin: 26px 0 10px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(255,255,255,.1);
+      font-size: 1rem;
+      color: #FFF8E1;
+    }
+
+    .hint {
+      margin: 0 0 12px;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .preview {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      margin-bottom: 18px;
+      padding: 18px 16px 16px;
+      border-radius: 12px;
+      background: rgba(0,0,0,.45);
+      border: 1px solid rgba(255,255,255,.14);
+      backdrop-filter: blur(8px);
+      text-align: center;
+    }
+
+    .preview-main {
+      margin: 0 0 6px;
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(239, 233, 225, 0.72);
+    }
+
+    .preview-title {
+      margin: 0;
+      font-family: 'Pretendard', sans-serif;
+      font-weight: 600;
+      font-size: 24px;
+      line-height: 1.28;
+      letter-spacing: -0.025em;
+      color: var(--title);
+      text-shadow:
+        0 1px 0 rgba(0, 0, 0, 0.35),
+        0 0 10px color-mix(in srgb, var(--title) 35%, transparent);
+    }
+
+    .preview-meta {
+      margin: 8px 0 0;
+      font-size: 13px;
+      color: var(--trans);
+    }
+
+    .preview-pick {
+      margin-top: 10px;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .preview-pick strong {
+      color: #ffe9a3;
+      font-family: ui-monospace, Consolas, monospace;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    @media (min-width: 560px) {
+      .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+
+    .swatch {
+      display: block;
+      width: 100%;
+      text-align: left;
+      padding: 0;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 10px;
+      background: rgba(0,0,0,.22);
+      color: inherit;
+      cursor: pointer;
+      overflow: hidden;
+      font: inherit;
+    }
+
+    .swatch:hover,
+    .swatch.is-on {
+      border-color: color-mix(in srgb, var(--sw) 70%, #fff);
+      box-shadow: 0 0 0 1px color-mix(in srgb, var(--sw) 45%, transparent);
+    }
+
+    .swatch.is-on {
+      outline: 2px solid color-mix(in srgb, var(--sw) 80%, #fff);
+      outline-offset: 1px;
+    }
+
+    .swatch-bar {
+      height: 36px;
+      background: var(--sw);
+    }
+
+    .swatch-body {
+      padding: 8px 10px 10px;
+    }
+
+    .swatch-id {
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: #ffe9a3;
+    }
+
+    .swatch-hex {
+      font-family: ui-monospace, Consolas, monospace;
+      font-size: 0.78rem;
+      color: #F5C842;
+      margin-top: 2px;
+    }
+
+    .swatch-name {
+      margin-top: 4px;
+      font-size: 0.72rem;
+      color: var(--muted);
+      line-height: 1.35;
+    }
+
+    .swatch-demo {
+      margin-top: 6px;
+      font-family: 'Pretendard', sans-serif;
+      font-weight: 600;
+      font-size: 15px;
+      line-height: 1.25;
+      color: var(--sw);
+      text-shadow: 0 1px 0 rgba(0,0,0,.35);
+    }
+
+    .css-box {
+      margin-top: 16px;
+      padding: 12px;
+      border-radius: 10px;
+      background: rgba(0,0,0,.3);
+      border: 1px solid rgba(255,255,255,.1);
+      font-family: ui-monospace, Consolas, monospace;
+      font-size: 12px;
+      line-height: 1.5;
+      color: rgba(239, 233, 225, 0.85);
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <h1>제목 색 — 녹색 · 아주 가까운 색</h1>
+    <p class="lead">
+      배경 <code>#2F3543</code> · 현재 제목 <code>#C5E070</code><br>
+      카드 클릭 → 위 미리보기 적용 · 파일: <code>19vocabulary_shorts_001layout4greentitle.html</code>
+    </p>
+
+    <div class="preview" id="preview">
+      <p class="preview-main">신문기사에서 배우는 어휘</p>
+      <p class="preview-title" id="preview-title">커피의 멸종을 막으려<br>애쓰는 괴짜 과학자</p>
+      <p class="preview-meta">(The Economist | 2026/07/23)</p>
+      <p class="preview-pick">선택: <strong id="pick-label">T0 · #C5E070</strong></p>
+    </div>
+
+    <h2>① 현재 · gmgreen 계열</h2>
+    <p class="hint">지금 쓰는 값과 예전 네온 라임</p>
+    <div class="grid" id="grid-core"></div>
+
+    <h2>② 소프트 라임 · 연두</h2>
+    <div class="grid" id="grid-lime"></div>
+
+    <h2>③ 차트레우스 · 옐로-그린</h2>
+    <div class="grid" id="grid-chart"></div>
+
+    <h2>④ 민트 · 세이지 (녹색에 아주 가까움)</h2>
+    <div class="grid" id="grid-mint"></div>
+
+    <h2>⑤ 포레스트 · 올리브 · 딥 그린</h2>
+    <div class="grid" id="grid-deep"></div>
+
+    <div class="css-box" id="css-box"></div>
+  </div>
+
+  <script>
+    const GROUPS = {
+      core: [
+        { id: "T0", hex: "#C5E070", name: "현재 소프트 라임 (layout4green)" },
+        { id: "T1", hex: "#adff2f", name: "gmgreen 네온 라임 (이전)" },
+        { id: "T2", hex: "#baff00", name: "gmgreen 리뷰 카운터 계열" },
+        { id: "T3", hex: "#e8ff9a", name: "아주 연한 라임 하이라이트" }
+      ],
+      lime: [
+        { id: "L1", hex: "#B8E986", name: "연두 파스텔" },
+        { id: "L2", hex: "#C6E85B", name: "밝은 라임" },
+        { id: "L3", hex: "#D4E157", name: "라임 옐로" },
+        { id: "L4", hex: "#AED581", name: "라이트 그린" },
+        { id: "L5", hex: "#9CCC65", name: "라이트 그린 진한" },
+        { id: "L6", hex: "#CDDC39", name: "라임" },
+        { id: "L7", hex: "#DCE775", name: "라임 라이트" },
+        { id: "L8", hex: "#E6EE9C", name: "연한 라임 크림" },
+        { id: "L9", hex: "#C5E1A5", name: "연두 민트 경계" }
+      ],
+      chart: [
+        { id: "C1", hex: "#DFFF00", name: "차트레우스" },
+        { id: "C2", hex: "#CCFF00", name: "일렉트릭 라임" },
+        { id: "C3", hex: "#B2FF59", name: "네온 연두" },
+        { id: "C4", hex: "#AEEA00", name: "라임 액센트" },
+        { id: "C5", hex: "#C0CA33", name: "머스타드 라임" },
+        { id: "C6", hex: "#AFB42B", name: "올리브 라임" },
+        { id: "C7", hex: "#F0F4C3", name: "거의 크림 라임" },
+        { id: "C8", hex: "#E6EE9C", name: "페일 차트레우스" },
+        { id: "C9", hex: "#EEFF41", name: "하이라이트 옐로-그린" }
+      ],
+      mint: [
+        { id: "M1", hex: "#A5D6A7", name: "라이트 민트 그린" },
+        { id: "M2", hex: "#81C784", name: "미디엄 민트" },
+        { id: "M3", hex: "#C8E6C9", name: "번역 민트 (근접)" },
+        { id: "M4", hex: "#B2DFDB", name: "민트 티얼" },
+        { id: "M5", hex: "#9FE8D8", name: "아쿠아 민트" },
+        { id: "M6", hex: "#80CBC4", name: "틸 민트" },
+        { id: "M7", hex: "#A7FFEB", name: "아쿠아 네온" },
+        { id: "M8", hex: "#B9F6CA", name: "민트 캔디" },
+        { id: "M9", hex: "#DCEDC8", name: "세이지 연한" }
+      ],
+      deep: [
+        { id: "D1", hex: "#8BC34A", name: "라이트 포레스트" },
+        { id: "D2", hex: "#7CB342", name: "잎 그린" },
+        { id: "D3", hex: "#689F38", name: "딥 리프" },
+        { id: "D4", hex: "#9E9D24", name: "올리브" },
+        { id: "D5", hex: "#827717", name: "딥 올리브" },
+        { id: "D6", hex: "#558B2F", name: "포레스트" },
+        { id: "D7", hex: "#33691E", name: "다크 포레스트 (어두움)" },
+        { id: "D8", hex: "#1B5E20", name: "딥 그린 (어두움)" },
+        { id: "D9", hex: "#4CAF50", name: "미디엄 그린" }
+      ]
+    };
+
+    let selected = GROUPS.core[0];
+
+    function hexToRgb(hex) {
+      const h = hex.replace("#", "");
+      const n = parseInt(h.length === 3 ? h.split("").map((c) => c + c).join("") : h, 16);
+      return { r: (n >> 16) & 255, g: (n >> 8) & 255, b: n & 255 };
+    }
+
+    function shadowFor(hex) {
+      const { r, g, b } = hexToRgb(hex);
+      return `0 1px 0 rgba(0, 0, 0, 0.35),\n    0 0 10px rgba(${r}, ${g}, ${b}, 0.22)`;
+    }
+
+    function apply(color) {
+      selected = color;
+      document.documentElement.style.setProperty("--title", color.hex);
+      document.getElementById("pick-label").textContent = `${color.id} · ${color.hex}`;
+      document.getElementById("css-box").textContent =
+        `/* layout4green.css */\n--color-title: ${color.hex};\n--shadow-title:\n    ${shadowFor(color.hex)};`;
+      document.querySelectorAll(".swatch").forEach((el) => {
+        el.classList.toggle("is-on", el.dataset.hex === color.hex);
+      });
+    }
+
+    function renderGrid(containerId, list) {
+      const root = document.getElementById(containerId);
+      root.innerHTML = list.map((c) => `
+        <button type="button" class="swatch" data-hex="${c.hex}" style="--sw:${c.hex}">
+          <div class="swatch-bar"></div>
+          <div class="swatch-body">
+            <div class="swatch-id">${c.id}</div>
+            <div class="swatch-hex">${c.hex}</div>
+            <div class="swatch-name">${c.name}</div>
+            <div class="swatch-demo">커피의 멸종을…</div>
+          </div>
+        </button>
+      `).join("");
+      root.querySelectorAll(".swatch").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const found = list.find((x) => x.hex === btn.dataset.hex);
+          if (found) apply(found);
+        });
+      });
+    }
+
+    renderGrid("grid-core", GROUPS.core);
+    renderGrid("grid-lime", GROUPS.lime);
+    renderGrid("grid-chart", GROUPS.chart);
+    renderGrid("grid-mint", GROUPS.mint);
+    renderGrid("grid-deep", GROUPS.deep);
+    apply(selected);
+  </script>
+</body>
+</html>

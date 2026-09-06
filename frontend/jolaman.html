@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Walking Person</title>
+    <link rel="stylesheet" href="jolaman.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>걸어가는 사람</h1>
+        
+        <!-- 걷는 사람 애니메이션 -->
+        <div class="walking-container">
+            <div id="walking-person" class="walking-person">
+                <div class="person-head"></div>
+                <div class="person-body"></div>
+                <div class="person-legs">
+                    <div class="leg left-leg"></div>
+                    <div class="leg right-leg"></div>
+                </div>
+            </div>
+        </div>
+        
+        <button id="start-walking" class="start-btn">걷기 시작</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const startBtn = document.getElementById('start-walking');
+            const walkingPerson = document.getElementById('walking-person');
+            
+            startBtn.addEventListener('click', () => {
+                // 버튼 비활성화
+                startBtn.disabled = true;
+                startBtn.textContent = '걷는 중...';
+                
+                // 걷는 애니메이션 시작
+                walkingPerson.classList.add('walking');
+                
+                // 8초 후 애니메이션 완료
+                setTimeout(() => {
+                    // 원래 위치로 리셋
+                    walkingPerson.classList.remove('walking');
+                    
+                    // 버튼 다시 활성화
+                    startBtn.disabled = false;
+                    startBtn.textContent = '걷기 시작';
+                }, 8000);
+            });
+        });
+    </script>
+</body>
+</html> 

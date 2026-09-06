@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>layout4green — 폰트·사이즈 추천</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" crossorigin="anonymous">
+  <style>
+    @font-face {
+      font-family: 'NanumBarunPen';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumBarunpen.woff') format('woff');
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
+    :root {
+      --bg: #2F3543;
+      --ko: #FAFFFA;
+      --trans: #C8E6C9;
+      --en: #F5C842;
+      --title: #C5E070;
+      --pink: #ff9f8f;
+      --muted: rgba(239, 233, 225, 0.62);
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      background: var(--bg);
+      color: #EFE9E1;
+      font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
+    }
+    .page { max-width: 720px; margin: 0 auto; padding: 22px 16px 64px; }
+    h1 { margin: 0 0 8px; font-size: 1.35rem; }
+    .lead { margin: 0 0 20px; color: var(--muted); font-size: 0.9rem; line-height: 1.55; }
+    .lead code { color: var(--en); }
+    h2 {
+      margin: 28px 0 10px;
+      font-size: 1rem;
+      color: #FFF8E1;
+      border-bottom: 1px solid rgba(255,255,255,.1);
+      padding-bottom: 8px;
+    }
+    .hint { margin: 0 0 12px; font-size: 0.8rem; color: var(--muted); }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.86rem;
+      margin-bottom: 8px;
+    }
+    th, td {
+      border: 1px solid rgba(255,255,255,.1);
+      padding: 9px 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th { background: rgba(0,0,0,.22); color: #ffe9a3; font-weight: 700; }
+    td code { color: var(--en); font-size: 0.92em; }
+    .rec { color: var(--title); font-weight: 700; }
+    .now { color: var(--pink); }
+    .card {
+      background: rgba(0,0,0,.2);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 10px;
+      padding: 14px;
+      margin-bottom: 12px;
+    }
+    .card.is-rec { border-color: rgba(197, 224, 112, .45); background: rgba(197, 224, 112, .06); }
+    .label {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    .label strong { color: #ffe9a3; }
+    .preview-title {
+      font-family: 'Pretendard', sans-serif;
+      font-weight: 600;
+      letter-spacing: -0.025em;
+      color: var(--title);
+      text-align: center;
+      line-height: 1.28;
+      margin: 0 0 6px;
+    }
+    .preview-meta {
+      font-family: 'Pretendard', sans-serif;
+      font-weight: 500;
+      color: var(--trans);
+      text-align: center;
+      margin: 0 0 14px;
+    }
+    .preview-word {
+      line-height: 1.15;
+      margin: 0 0 6px;
+    }
+    .preview-ko {
+      font-family: 'NanumBarunPen', 'Pretendard', sans-serif;
+      font-weight: 800;
+      color: var(--ko);
+      text-shadow: 0 0 10px rgba(200,255,230,.35);
+    }
+    .preview-en {
+      font-family: 'Poppins', 'Pretendard', sans-serif;
+      font-weight: 700;
+      color: var(--en);
+      letter-spacing: 0.02em;
+    }
+    .preview-num {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 800;
+      color: var(--pink);
+      margin-right: 0.25em;
+    }
+    .preview-stars {
+      font-size: 12px;
+      margin: 4px 0 2px 10px;
+    }
+    .preview-pron {
+      font-family: 'NanumBarunPen', 'Pretendard', sans-serif;
+      color: var(--pink);
+      margin-left: 10px;
+    }
+    .preview-ipa {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 500;
+      opacity: 0.95;
+    }
+    .preview-cf {
+      font-family: 'Pretendard', sans-serif;
+      font-weight: 500;
+      color: var(--en);
+      margin: 6px 0 0 10px;
+      line-height: 1.35;
+    }
+    .preview-cf-ko {
+      font-family: 'NanumBarunPen', 'Pretendard', sans-serif;
+      color: var(--trans);
+    }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    .chip {
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color: #fff;
+      border-radius: 999px;
+      padding: 6px 12px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .chip.is-on {
+      border-color: rgba(197, 224, 112, .55);
+      background: rgba(197, 224, 112, .14);
+      color: var(--title);
+      font-weight: 700;
+    }
+    .scale-note { font-size: 0.78rem; color: var(--muted); margin-top: 8px; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <h1>layout4green 폰트·사이즈 추천</h1>
+    <p class="lead">
+      배경 <code>#2F3543</code> 기준. 현재값과 추천값을 비교하고, 아래에서 세트별로 미리볼 수 있습니다.<br>
+      파일: <code>font.html</code> · 실제 적용은 <code>19vocabulary_shorts_001layout4green.css</code>
+    </p>
+
+    <h2>① 역할별 폰트 (권장 고정)</h2>
+    <table>
+      <thead>
+        <tr><th>역할</th><th>폰트</th><th>이유</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>제목 / 메타 / 예문 EN</td>
+          <td><code>Pretendard</code></td>
+          <td>뉴스·본문용. 눈 피로 적고 가독성 좋음</td>
+        </tr>
+        <tr>
+          <td>표제어 한글 · 번역</td>
+          <td><code>NanumBarunPen</code></td>
+          <td>손글씨 톤. KO 학습 포인트 강조</td>
+        </tr>
+        <tr>
+          <td>표제어 영어 · 번호 · IPA</td>
+          <td><code>Poppins</code></td>
+          <td>영문 폭 안정, 숏폼에 선명</td>
+        </tr>
+        <tr>
+          <td>카운터 숫자</td>
+          <td><code>Bebas Neue</code></td>
+          <td>큰 숫자 전용. 타이머 가독성</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>② 사이즈 추천 (모바일 숏폼 ~540px)</h2>
+    <p class="hint">단위 px. <span class="now">현재</span> / <span class="rec">추천</span></p>
+    <table>
+      <thead>
+        <tr><th>요소</th><th>현재</th><th>추천 A (균형)</th><th>추천 B (여유)</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>상단 라벨 (신문기사…)</td>
+          <td class="now">15</td>
+          <td class="rec">14–15</td>
+          <td>14</td>
+        </tr>
+        <tr>
+          <td>부제 (기사 제목)</td>
+          <td class="now">autofit ~32 (max 34)</td>
+          <td class="rec">max 30 / min 16</td>
+          <td>max 28</td>
+        </tr>
+        <tr>
+          <td>메타 (Economist…)</td>
+          <td class="now">~0.58em</td>
+          <td class="rec">15–16px 고정</td>
+          <td>14px</td>
+        </tr>
+        <tr>
+          <td>번호 1.</td>
+          <td class="now">calc(0.55em+1px) ≈ 21</td>
+          <td class="rec">18–20</td>
+          <td>17</td>
+        </tr>
+        <tr>
+          <td>한글 표제어</td>
+          <td class="now">calc(0.88×36+1.5) ≈ 33</td>
+          <td class="rec">30–32</td>
+          <td>28</td>
+        </tr>
+        <tr>
+          <td>영어 표제어</td>
+          <td class="now">37.5 (word-line)</td>
+          <td class="rec">32–34</td>
+          <td>30</td>
+        </tr>
+        <tr>
+          <td>별 ⭐</td>
+          <td class="now">12</td>
+          <td class="rec">12–13</td>
+          <td>11</td>
+        </tr>
+        <tr>
+          <td>발음 |…|</td>
+          <td class="now">~24.5 (26−1.5)</td>
+          <td class="rec">20–22</td>
+          <td>18</td>
+        </tr>
+        <tr>
+          <td>IPA /…/</td>
+          <td class="now">~0.82em of 발음</td>
+          <td class="rec">16–18</td>
+          <td>15</td>
+        </tr>
+        <tr>
+          <td>예문 EN</td>
+          <td class="now">calc(0.82em+4px)</td>
+          <td class="rec">17–18</td>
+          <td>16</td>
+        </tr>
+        <tr>
+          <td>예문 한글 번역</td>
+          <td class="now">예문−2.5px</td>
+          <td class="rec">15–16</td>
+          <td>14</td>
+        </tr>
+        <tr>
+          <td>진행도 라벨</td>
+          <td class="now">13</td>
+          <td class="rec">12–13</td>
+          <td>12</td>
+        </tr>
+        <tr>
+          <td>카운터 숫자</td>
+          <td class="now">28</td>
+          <td class="rec">24–26</td>
+          <td>22</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="hint">
+      <strong class="rec">추천 A</strong>가 기본 제안입니다. 지금보다 영·한글 표제어를 조금 내려 여백·발음·예문이 덜 답답해집니다.
+    </p>
+
+    <h2>③ 미리보기 (세트 전환)</h2>
+    <div class="chips" id="chips">
+      <button type="button" class="chip is-on" data-set="now">현재</button>
+      <button type="button" class="chip" data-set="a">추천 A</button>
+      <button type="button" class="chip" data-set="b">추천 B</button>
+    </div>
+    <p class="scale-note" id="scale-note">현재 세트</p>
+
+    <div class="card is-rec" id="preview">
+      <div class="label"><strong>미리보기</strong> · 취약한 : vulnerable</div>
+      <p class="preview-title" data-role="title">커피의 멸종을 막으려 애쓰는<br>괴짜 과학자</p>
+      <p class="preview-meta" data-role="meta">(The Economist | 2026/07/23)</p>
+      <div class="preview-word">
+        <span class="preview-num" data-role="num">1.</span>
+        <span class="preview-ko" data-role="ko">취약한</span>
+        <span style="color:rgba(239,233,225,.45)"> : </span>
+        <span class="preview-en" data-role="en">vulnerable</span>
+      </div>
+      <div class="preview-stars" data-role="stars">⭐⭐⭐⭐⭐</div>
+      <div>
+        <span class="preview-pron" data-role="pron">|벌너러블|
+          <span class="preview-ipa" data-role="ipa">/ˈvʌlnərəbl/</span>
+        </span>
+      </div>
+      <div class="preview-cf" data-role="cf">
+        It is also highly vulnerable to rising temperatures.
+        <span class="preview-cf-ko" data-role="cfko"> (기온 상승에 매우 취약하다.)</span>
+      </div>
+    </div>
+
+    <h2>④ 한 줄 결론</h2>
+    <div class="card">
+      <p style="margin:0;line-height:1.55;font-size:0.92rem;">
+        <strong class="rec">추천 A</strong> —
+        표제어 EN <code>33px</code> · KO <code>31px</code> · 발음 <code>21px</code> · IPA <code>17px</code> · 예문 <code>17px</code> · 번역 <code>15px</code>.<br>
+        폰트 조합은 지금처럼 <strong>Pretendard + NanumBarunPen + Poppins</strong> 유지가 가장 안정적입니다.
+      </p>
+    </div>
+  </div>
+
+  <script>
+    const SETS = {
+      now: {
+        label: "현재 (layout4green.css)",
+        title: 30, meta: 15, num: 21, ko: 33, en: 37.5, stars: 12, pron: 24.5, ipa: 20, cf: 18, cfko: 15.5
+      },
+      a: {
+        label: "추천 A — 균형 (권장)",
+        title: 28, meta: 15, num: 19, ko: 31, en: 33, stars: 12, pron: 21, ipa: 17, cf: 17, cfko: 15
+      },
+      b: {
+        label: "추천 B — 여유·눈 편함",
+        title: 26, meta: 14, num: 17, ko: 28, en: 30, stars: 11, pron: 18, ipa: 15, cf: 16, cfko: 14
+      }
+    };
+
+    function applySet(key) {
+      const s = SETS[key];
+      if (!s) return;
+      const map = {
+        title: s.title,
+        meta: s.meta,
+        num: s.num,
+        ko: s.ko,
+        en: s.en,
+        stars: s.stars,
+        pron: s.pron,
+        ipa: s.ipa,
+        cf: s.cf,
+        cfko: s.cfko
+      };
+      Object.entries(map).forEach(([role, px]) => {
+        document.querySelectorAll(`[data-role="${role}"]`).forEach((el) => {
+          el.style.fontSize = `${px}px`;
+        });
+      });
+      document.getElementById("scale-note").textContent = s.label;
+      document.querySelectorAll(".chip").forEach((btn) => {
+        btn.classList.toggle("is-on", btn.dataset.set === key);
+      });
+    }
+
+    document.getElementById("chips").addEventListener("click", (e) => {
+      const btn = e.target.closest(".chip");
+      if (!btn) return;
+      applySet(btn.dataset.set);
+    });
+
+    applySet("now");
+  </script>
+</body>
+</html>

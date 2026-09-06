@@ -201,7 +201,7 @@
     return '<span class="preview-meta-stats preview-meta-stats--hidden">' +
       '<span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> ' + viewCount + '</span>' +
       '<span class="preview-sep preview-sep--stats" aria-hidden="true"> </span>' +
-      '<span class="preview-likes">👍 ' + likeCount + '</span>' +
+      '<span class="preview-likes">❤️ ' + likeCount + '</span>' +
       '</span>';
   }
 

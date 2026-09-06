@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>쇼츠 제목 효과 샘플</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" crossorigin="anonymous">
+  <style>
+    :root {
+      --lime: #adff2f;
+      --orange: #ffb14a;
+      --stroke: 0 1px 0 #000, 1px 0 0 #000, 0 -1px 0 #000, -1px 0 0 #000,
+        1px 1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000,
+        0 2px 8px rgba(0, 0, 0, 0.55);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; min-height: 100%; }
+    body {
+      font-family: Pretendard, "Noto Sans KR", sans-serif;
+      background: #121214;
+      color: #efe9e1;
+      display: grid;
+      grid-template-columns: minmax(280px, 380px) 1fr;
+      gap: 28px;
+      padding: 28px;
+      align-items: start;
+    }
+
+    .panel h1 {
+      margin: 0 0 8px;
+      font-size: 22px;
+      letter-spacing: -0.03em;
+    }
+    .panel p.lead {
+      margin: 0 0 18px;
+      color: rgba(239, 233, 225, 0.68);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    .fx-list { display: grid; gap: 8px; }
+    .fx-btn {
+      text-align: left;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: #1c1c20;
+      color: inherit;
+      border-radius: 12px;
+      padding: 11px 12px;
+      cursor: pointer;
+      font: inherit;
+    }
+    .fx-btn strong { display: block; font-size: 14px; margin-bottom: 2px; }
+    .fx-btn span { display: block; font-size: 12px; color: rgba(239, 233, 225, 0.58); line-height: 1.4; }
+    .fx-btn.is-on {
+      border-color: var(--orange);
+      background: #2a2216;
+    }
+    .hint {
+      margin-top: 16px;
+      font-size: 12px;
+      color: rgba(239, 233, 225, 0.5);
+      line-height: 1.45;
+    }
+    .replay {
+      margin-top: 12px;
+      width: 100%;
+      border: 0;
+      border-radius: 10px;
+      padding: 10px;
+      background: #ff4840;
+      color: #fff;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .stage-wrap {
+      display: flex;
+      justify-content: center;
+    }
+    .phone {
+      width: min(390px, 100%);
+      aspect-ratio: 9 / 16;
+      border-radius: 28px;
+      overflow: hidden;
+      position: relative;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,0.35), rgba(0,0,0,0.55)),
+        #1a2230;
+      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.45);
+    }
+    .banner {
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(180deg, #ff5c54, #ff4840);
+      font-weight: 800;
+      font-size: 28px;
+      letter-spacing: -0.02em;
+    }
+    .title-box {
+      position: absolute;
+      left: 8%;
+      right: 8%;
+      top: 118px;
+      min-height: 96px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.18;
+      color: var(--lime);
+      text-shadow: var(--stroke);
+    }
+    .line { display: block; white-space: nowrap; }
+    .hl { color: var(--orange); }
+    .caret {
+      display: inline-block;
+      width: 2px;
+      height: 0.92em;
+      margin-left: 2px;
+      background: var(--lime);
+      vertical-align: -2px;
+      animation: blink 0.7s step-end infinite;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    .word {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(18px) scale(0.86);
+    }
+    .word.in {
+      opacity: 1;
+      transform: none;
+      transition: opacity 0.22s ease, transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .punch .l2 {
+      opacity: 0;
+      transform: scale(0.55);
+      filter: blur(6px);
+    }
+    .punch.show .l2 {
+      opacity: 1;
+      transform: none;
+      filter: none;
+      transition: 0.38s cubic-bezier(0.12, 1.2, 0.2, 1);
+    }
+    .punch.show .l2 .hl {
+      animation: punchFlash 0.55s ease;
+    }
+    @keyframes punchFlash {
+      0% { text-shadow: 0 0 0 transparent; transform: scale(1); }
+      35% { text-shadow: 0 0 22px rgba(255, 177, 74, 0.9); }
+      100% { text-shadow: var(--stroke); }
+    }
+
+    .wipe .line {
+      clip-path: inset(0 100% 0 0);
+    }
+    .wipe.go .line {
+      clip-path: inset(0 0 0 0);
+      transition: clip-path 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .wipe.go .l2 { transition-delay: 0.12s; }
+
+    .hook .big {
+      position: absolute;
+      font-size: 42px;
+      color: var(--orange);
+      opacity: 0;
+      transform: scale(1.35);
+    }
+    .hook .big.show {
+      opacity: 1;
+      transform: scale(1);
+      transition: 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .hook .full { opacity: 0; }
+    .hook.settle .big { opacity: 0; transition: 0.2s ease; }
+    .hook.settle .full {
+      opacity: 1;
+      animation: settleIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @keyframes settleIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: none; }
+    }
+
+    .paint .dim { opacity: 0.22; }
+    .paint.go .dim { opacity: 1; transition: opacity 0.45s ease; }
+    .paint .hl {
+      background-image: linear-gradient(var(--orange), var(--orange));
+      background-repeat: no-repeat;
+      background-size: 0% 100%;
+      color: var(--lime);
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+    .paint.go .hl {
+      color: transparent;
+      -webkit-text-fill-color: transparent;
+      background-size: 100% 100%;
+      transition: background-size 0.7s 0.25s ease;
+    }
+
+    .slam { opacity: 0; transform: scale(0.4); }
+    .slam.go {
+      opacity: 1;
+      transform: scale(1);
+      animation: slam 0.5s cubic-bezier(0.12, 1.4, 0.2, 1);
+    }
+    @keyframes slam {
+      0% { opacity: 0; transform: scale(0.35); filter: blur(8px); }
+      55% { opacity: 1; transform: scale(1.08); filter: blur(0); }
+      100% { transform: scale(1); }
+    }
+
+    @media (max-width: 860px) {
+      body { grid-template-columns: 1fr; }
+      .phone { width: min(360px, 92vw); }
+    }
+  </style>
+</head>
+<body>
+  <aside class="panel">
+    <h1>제목 효과 샘플</h1>
+    <p class="lead">쇼츠 스크롤을 멈추려면 “글자가 생긴다”보다, 0.4초 안에 호기심이 남아야 합니다. 이 제목은 대비가 강해서 펀치라인을 늦게 보여주는 쪽이 잘 맞습니다.</p>
+    <div class="fx-list" id="fx-list"></div>
+    <button class="replay" type="button" id="replay">다시 재생</button>
+    <p class="hint">추천 순서: 훅 한 단어 → 펀치라인 지연 → 단어 낙하. 타자 효과는 문장이 길어서, 너무 느리면 이미 지나갑니다.</p>
+  </aside>
+
+  <div class="stage-wrap">
+    <div class="phone">
+      <div class="banner">시사 영단어</div>
+      <div class="title-box" id="stage"></div>
+    </div>
+  </div>
+
+  <script>
+    const LINE1 = "푸틴의 전쟁 자금이 러시아에";
+    const LINE2 = "새로운 부를 창출하는 방식";
+    const WORDS1 = ["푸틴의", "전쟁", "자금이", "러시아에"];
+
+    const FX = [
+      {
+        id: "type",
+        name: "1. 타자 (글자씩)",
+        why: "빈 화면에서 글자가 생겨남. 다만 이 제목은 길어서 빠르게(35ms) 써야 함.",
+      },
+      {
+        id: "words",
+        name: "2. 단어 낙하",
+        why: "움직임이 커서 스크롤 중에도 눈에 들어옴. 리듬감이 좋음.",
+      },
+      {
+        id: "punch",
+        name: "3. 펀치라인 지연 ★",
+        why: "1줄만 먼저 보여 ‘방식’이 뭔지 궁금하게 만듦. 이 제목에 가장 잘 맞음.",
+      },
+      {
+        id: "wipe",
+        name: "4. 가림막 와이프",
+        why: "뉴스/특종 느낌. 읽히면서 열리는 속도가 안정적.",
+      },
+      {
+        id: "hook",
+        name: "5. 훅 단어 먼저 ★",
+        why: "0.3초에 ‘전쟁 자금’만 크게. 멈춘 뒤에 전체 제목이 붙음.",
+      },
+      {
+        id: "paint",
+        name: "6. 흐릿 → 주황 페인트",
+        why: "이미 있는 글자에 강조가 칠해짐. 핵심 구절을 기억시킴.",
+      },
+      {
+        id: "slam",
+        name: "7. 한 방에 슬램",
+        why: "가장 짧음. 스크롤 스톱은 되지만 호기심 여지는 적음.",
+      },
+    ];
+
+    const list = document.getElementById("fx-list");
+    const stage = document.getElementById("stage");
+    let current = "punch";
+    let timer = 0;
+
+    FX.forEach((fx) => {
+      const b = document.createElement("button");
+      b.className = "fx-btn" + (fx.id === current ? " is-on" : "");
+      b.type = "button";
+      b.innerHTML = `<strong>${fx.name}</strong><span>${fx.why}</span>`;
+      b.addEventListener("click", () => {
+        current = fx.id;
+        document.querySelectorAll(".fx-btn").forEach((el) => el.classList.toggle("is-on", el === b));
+        play();
+      });
+      list.appendChild(b);
+    });
+
+    document.getElementById("replay").addEventListener("click", play);
+
+    function clearTimers() {
+      window.clearTimeout(timer);
+      stage.replaceChildren();
+      stage.className = "title-box";
+    }
+
+    function later(ms, fn) {
+      timer = window.setTimeout(fn, ms);
+    }
+
+    function play() {
+      clearTimers();
+      const run = {
+        type, words, punch, wipe, hook, paint, slam,
+      }[current];
+      run();
+    }
+
+    function type() {
+      const l1 = document.createElement("span");
+      const l2 = document.createElement("span");
+      l1.className = "line";
+      l2.className = "line";
+      const caret = document.createElement("span");
+      caret.className = "caret";
+      stage.append(l1, l2);
+      l1.append(caret);
+      const chars1 = Array.from(LINE1);
+      const chars2 = Array.from(LINE2);
+      let i = 0;
+      const tick = () => {
+        if (i < chars1.length) {
+          caret.remove();
+          l1.append(chars1[i], caret);
+          i += 1;
+          later(32, tick);
+          return;
+        }
+        if (i === chars1.length) {
+          caret.remove();
+          l2.append(caret);
+          i += 1;
+          later(80, tick);
+          return;
+        }
+        const j = i - chars1.length - 1;
+        if (j < chars2.length) {
+          caret.remove();
+          const ch = document.createElement("span");
+          ch.className = "hl";
+          ch.textContent = chars2[j];
+          l2.append(ch, caret);
+          i += 1;
+          later(32, tick);
+          return;
+        }
+        caret.remove();
+      };
+      later(180, tick);
+    }
+
+    function words() {
+      const l1 = document.createElement("span");
+      const l2 = document.createElement("span");
+      l1.className = "line";
+      l2.className = "line";
+      WORDS1.forEach((w, idx) => {
+        const s = document.createElement("span");
+        s.className = "word";
+        s.textContent = (idx ? " " : "") + w;
+        l1.append(s);
+        later(90 + idx * 110, () => s.classList.add("in"));
+      });
+      const punch = document.createElement("span");
+      punch.className = "word hl";
+      punch.textContent = LINE2;
+      l2.append(punch);
+      later(90 + WORDS1.length * 110 + 80, () => punch.classList.add("in"));
+      stage.append(l1, l2);
+    }
+
+    function punch() {
+      stage.classList.add("punch");
+      const l1 = document.createElement("span");
+      const l2 = document.createElement("span");
+      l1.className = "line l1";
+      l2.className = "line l2";
+      l1.textContent = LINE1;
+      const hl = document.createElement("span");
+      hl.className = "hl";
+      hl.textContent = LINE2;
+      l2.append(hl);
+      stage.append(l1, l2);
+      later(420, () => stage.classList.add("show"));
+    }
+
+    function wipe() {
+      stage.classList.add("wipe");
+      const l1 = document.createElement("span");
+      const l2 = document.createElement("span");
+      l1.className = "line l1";
+      l2.className = "line l2";
+      l1.textContent = LINE1;
+      const hl = document.createElement("span");
+      hl.className = "hl";
+      hl.textContent = LINE2;
+      l2.append(hl);
+      stage.append(l1, l2);
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => stage.classList.add("go"));
+      });
+    }
+
+    function hook() {
+      stage.classList.add("hook");
+      const big = document.createElement("span");
+      big.className = "big";
+      big.textContent = "전쟁 자금";
+      const full = document.createElement("div");
+      full.className = "full";
+      full.innerHTML = `<span class="line">${LINE1}</span><span class="line"><span class="hl">${LINE2}</span></span>`;
+      stage.append(big, full);
+      later(80, () => big.classList.add("show"));
+      later(720, () => stage.classList.add("settle"));
+    }
+
+    function paint() {
+      stage.classList.add("paint");
+      stage.innerHTML = `<span class="line dim">${LINE1}</span><span class="line dim"><span class="hl">${LINE2}</span></span>`;
+      later(120, () => stage.classList.add("go"));
+    }
+
+    function slam() {
+      stage.classList.add("slam");
+      stage.innerHTML = `<span class="line">${LINE1}</span><span class="line"><span class="hl">${LINE2}</span></span>`;
+      later(60, () => stage.classList.add("go"));
+    }
+
+    play();
+  </script>
+</body>
+</html>

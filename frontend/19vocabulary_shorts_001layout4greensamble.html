@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>layout4green — 골드(EN) · 민트(KO) 색상 샘플</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Nanum+Gothic&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" crossorigin="anonymous">
+  <style>
+    @font-face {
+      font-family: 'NanumBarunPen';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumBarunpen.woff') format('woff');
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    :root {
+      --page-bg-color: #2F3543;
+      --ref-gold: #E0B585;
+      --ref-mint: #C8E6C9;
+      --color-ko-word: #FAFFFA;
+      --color-ko-trans: #C8E6C9;
+      --color-en-warm: #F5C842;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      background: var(--page-bg-color);
+      color: #EFE9E1;
+      font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
+    }
+
+    .sample-page {
+      max-width: 560px;
+      margin: 0 auto;
+      padding: 20px 16px 48px;
+    }
+
+    .sample-header {
+      margin-bottom: 28px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .sample-header h1 {
+      margin: 0 0 8px;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #F5EFE7;
+    }
+
+    .sample-header p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.55;
+      color: rgba(239, 233, 225, 0.72);
+    }
+
+    .sample-header code {
+      font-size: 0.82rem;
+      color: #E0B585;
+    }
+
+    .sample-section {
+      margin-bottom: 36px;
+    }
+
+    .sample-section h2 {
+      margin: 0 0 6px;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #FFF8E1;
+    }
+
+    .sample-section .hint {
+      margin: 0 0 14px;
+      font-size: 0.8rem;
+      color: rgba(239, 233, 225, 0.6);
+    }
+
+    .sample-card {
+      background: rgba(0, 0, 0, 0.18);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      padding: 14px 14px 12px;
+      margin-bottom: 12px;
+    }
+
+    .sample-label {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 10px;
+      font-size: 0.78rem;
+      color: rgba(239, 233, 225, 0.55);
+    }
+
+    .sample-label strong {
+      color: #ffe9a3;
+      font-weight: 700;
+      font-size: 0.85rem;
+    }
+
+    .sample-label code {
+      background: rgba(255, 255, 255, 0.06);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.76rem;
+    }
+
+    /* layout4green 카드 미리보기 */
+    .word-line {
+      font-size: clamp(26px, 7vw, 34px);
+      line-height: 1.15;
+      font-weight: 800;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+    }
+
+    .ko-text {
+      font-family: 'NanumBarunPen', 'Pretendard', 'Noto Sans KR', sans-serif;
+      font-size: calc(0.88 * 1em);
+      font-weight: 800;
+    }
+
+    .en-text {
+      font-family: 'Poppins', 'Pretendard', sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .stars-pron-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 0.35em 0.45em;
+      margin-top: 6px;
+      font-size: 22px;
+      font-family: 'NanumBarunPen', 'Pretendard', 'Noto Sans KR', sans-serif;
+    }
+
+    .star-row {
+      color: #ffd54f;
+      font-size: 0.78em;
+      letter-spacing: 0.08em;
+      margin-left: 10px;
+    }
+
+    .pron-text {
+      color: #e8a75a;
+      font-size: 0.85em;
+    }
+
+    .cf-note {
+      margin-top: 6px;
+      margin-left: 0;
+      padding-left: 10px;
+      font-size: 18px;
+      line-height: 1.35;
+      font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
+      font-weight: 500;
+      text-align: left;
+    }
+
+    .cf-ko-paren {
+      font-size: 0.92em;
+    }
+
+    .sample-card.is-final {
+      border-color: rgba(245, 200, 66, 0.45);
+      background: rgba(245, 200, 66, 0.06);
+    }
+
+    .pair-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    @media (min-width: 520px) {
+      .pair-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    /* progress bar 미리보기 */
+    .pb-demo {
+      margin-top: 4px;
+    }
+
+    .pb-label {
+      display: block;
+      margin: 0 0 6px 2px;
+      font-size: 13px;
+      font-weight: 700;
+      font-family: 'NanumBarunPen', 'Pretendard', 'Noto Sans KR', sans-serif;
+      letter-spacing: 0.02em;
+      text-shadow: 0 1px 0 rgba(0, 0, 0, 0.35);
+    }
+
+    .pb-track {
+      display: block;
+      position: relative;
+      width: 100%;
+      height: 6px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.14);
+      overflow: visible;
+    }
+
+    .pb-fill {
+      position: relative;
+      width: 68%;
+      height: 100%;
+      border-radius: inherit;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    .pb-pct {
+      padding: 0 6px 0 2px;
+      font-size: 8px;
+      font-weight: 800;
+      line-height: 1;
+      color: #fff7fb;
+      font-family: 'Poppins', 'Pretendard', sans-serif;
+      letter-spacing: 0.02em;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+      white-space: nowrap;
+    }
+
+    .pb-runner {
+      position: absolute;
+      right: -9px;
+      bottom: calc(100% + 2px);
+      font-size: 18px;
+      line-height: 1;
+      transform: scaleX(-1);
+      transform-origin: 50% 100%;
+    }
+
+    .pb-swatches {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    .pb-swatch {
+      width: 28px;
+      height: 18px;
+      border-radius: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+    }
+
+    .sample-card.is-current-pb {
+      border-color: rgba(255, 143, 171, 0.5);
+      background: rgba(255, 107, 157, 0.08);
+    }
+  </style>
+</head>
+<body>
+  <div class="sample-page">
+    <header class="sample-header">
+      <h1>layout4green 색상 샘플</h1>
+      <p>
+        배경 <code>#2F3543</code> (Markslow 동일) 위에서 비교합니다.<br>
+        <strong style="color:var(--color-en-warm)">확정:</strong>
+        KO 형광 흰색 <code>#FAFFFA</code> · EN G6 <code>#F5C842</code> · 번역 민트 <code>#C8E6C9</code>
+      </p>
+    </header>
+
+    <section class="sample-section" id="final-choice">
+      <h2>✓ 확정 조합 (layout4green 적용됨)</h2>
+      <p class="hint">G6 따뜻 옐로우 EN · 형광 흰 KO · 민트 한글 번역</p>
+      <div class="sample-card is-final" data-id="FINAL">
+        <div class="sample-label">
+          <strong>적용됨</strong>
+          KO <code>#FAFFFA</code> · EN <code>#F5C842</code> · 번역 <code>#C8E6C9</code>
+        </div>
+        <div class="word-line">
+          <span class="ko-text" style="color:var(--color-ko-word);text-shadow:0 1px 0 rgba(0,0,0,.45),0 0 10px rgba(200,255,230,.5),0 0 18px rgba(159,232,216,.22);">마지못해 동의하다</span>
+          <span style="color:rgba(239,233,225,.5);"> : </span>
+          <span class="en-text" style="color:var(--color-en-warm);text-shadow:0 1px 0 rgba(0,0,0,.35),0 0 10px rgba(245,200,66,.28);">acquiesce</span>
+        </div>
+        <div class="stars-pron-row">
+          <span class="star-row" style="color:var(--color-en-warm);">⭐⭐⭐⭐⭐</span>
+          <span class="pron-text" style="color:var(--color-en-warm);text-shadow:0 1px 0 rgba(0,0,0,.35),0 0 10px rgba(245,200,66,.28);">|애퀴에스| /ˌækwiˈes/</span>
+        </div>
+        <div class="cf-note" style="color:var(--color-en-warm);text-shadow:0 1px 0 rgba(0,0,0,.35),0 0 10px rgba(245,200,66,.28);">
+          He might acquiesce if he bought a round.
+          <span class="cf-ko-paren" style="color:var(--color-ko-trans);text-shadow:0 1px 0 rgba(0,0,0,.38),0 0 8px rgba(200,230,201,.2);"> (여러 사람 술을 샀다면 마지못해 팁을 줄 수도 있다.)</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== 민트 계열 (한글) — 영어/예문은 참고용 고정 골드 ========== -->
+    <section class="sample-section" id="mint-ko">
+      <h2>① 한글 — 민트 계열</h2>
+      <p class="hint">영어·예문은 참고용 <code>#E0B585</code> 고정 / 한글만 변경</p>
+
+      <div class="sample-card" data-id="M1">
+        <div class="sample-label"><strong>M1</strong> 클래식 민트 <code>#C8E6C9</code></div>
+        <div class="word-line">
+          <span class="ko-text" style="color:#C8E6C9;text-shadow:0 1px 0 rgba(0,0,0,.4),0 0 8px rgba(200,230,201,.2);">마지못해 동의하다</span>
+          <span style="color:rgba(239,233,225,.5);"> : </span>
+          <span class="en-text" style="color:#E0B585;text-shadow:0 1px 0 rgba(0,0,0,.35),0 0 8px rgba(224,181,133,.22);">acquiesce</span>
+        </div>
+      </div>
+
+      <div class="sample-card" data-id="M2">
+        <div class="sample-label"><strong>M2</strong> 소프트 민트 <code>#A5D6A7</code></div>
+        <div class="word-line">
+          <span class="ko-text" style="color:#A5D6A7;text-shadow:0 1px 0 rgba(0,0,0,.4),0 0 8px rgba(165,214,167,.18);">마지못해 동의하다</span>
+          <span style="color:rgba(239,233,225,.5);"> : </span>
+          <span class="en-text" style="color:#E0B585;">acquiesce</span>
+        </div>
+      </div>
+
+      <div class="sample-card" data-id="M3">
+        <div class="sample-label"><strong>M3</strong> 세이지 민트 <code>#B8E0C8</code></div>
+        <div class="word-line">
+          <span class="ko-text" style="color:#B8E0C8;text-shadow:0 1px 0 rgba(0,0,0,.38),0 0 8px rgba(184,224,200,.18);">마지못해 동의하다</span>
+          <span style="color:rgba(239,233,225,.5);"> : </span>
+          <span class="en-text" style="color:#E0B585;">acquiesce</span>
+        </div>
+      </div>
+
+      <div class="sample-card" data-id="M4">
+        <div class="sample-label"><strong>M4</strong> 딥 민트 <code>#7EC8A3</code></div>
+        <div class="word-line">
+          <span class="ko-text" style="color:#7EC8A3;text-shadow:0 1px 0 rgba(0,0,0,.45),0 0 6px rgba(126,200,163,.15);">마지못해 동의하다</span>
+          <span style="color:rgba(239,233,225,.5);"> : </span>
+          <span class="en-text" style="color:#E0B585;">acquiesce</span>
+        </div>
+      </div>
+
+      <div class="sample-card" data-id="M5">
+        <div class="sample-label"><strong>M5</strong> 틸 민트 <code>#9FE8D8</code></div>
+        <div class="word-line">
+          <span class="ko-text" style="color:#9FE8D8;text-shadow:0 1px 0 rgba(0,0,0,.38),0 0 10px rgba(159,232,216,.2);">마지못해 동의하다</span>
+          <span style="color:rgba(239,233,225,.5);"> : </span>
+          <span class="en-text" style="color:#E0B585;">acquiesce</span>
+        </div>
+      </div>
+
+      <div class="sample-card" data-id="M6">
+        <div class="sample-label"><strong>M6</strong> 웜 크림 민트 <code>#D4EDDA</code></div>
+        <div class="word-line">
+          <span class="ko-text" style="color:#D4EDDA;text-shadow:0 1px 0 rgba(0,0,0,.35),0 0 8px rgba(212,237,218,.15);">마지못해 동의하다</span>
+          <span style="color:rgba(239,233,225,.5);"> : </span>
+          <span class="en-text" style="color:#E0B585;">acquiesce</span>
+        </div>
+      </div>
+
+      <div class="sample-card" data-id="M7">
+        <div class="sample-label"><strong>M7</strong> 민트+화이트 믹스 <code>color-mix 88% #C8E6C9</code></div>
+        <div class="word-line">
+          <span class="ko-text" style="color:color-mix(in srgb, #C8E6C9 88%, #ffffff);text-shadow:0 1px 0 rgba(0,0,0,.38);">마지못해 동의하다</span>
+          <span style="color:rgba(239,233,225,.5);"> : </span>
+          <span class="en-text" style="color:#E0B585;">acquiesce</span>
+        </div>
+      </div>
+
+      <div class="sample-card" data-id="M8">
+        <div class="sample-label"><strong>M8</strong> 묵직 민트 <code>#8FBFA0</code></div>
+        <div class="word-line">
+          <span class="ko-text" style="color:#8FBFA0;text-shadow:0 1px 0 rgba(0,0,0,.48),0 0 6px rgba(143,191,160,.12);">마지못해 동의하다</span>
+          <span style="color:rgba(239,233,225,.5);"> : </span>
+          <span class="en-text" style="color:#E0B585;">acquiesce</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== 골드 계열 (영어 + 예문) — 한글은 참고용 고정 민트 ========== -->
+    <section class="sample-section" id="gold-en">
+      <h2>② 영어 · 예문 — 골드 계열</h2>
+      <p class="hint">한글은 참고용 <code>#C8E6C9</code> 고정 / 영어·예문만 변경</p>
+
+      <div class="sample-card" data-id="G1">
+        <div class="sample-label"><strong>G1</strong> 웜 골드 <code>#F2DC6E</code> (현재 layout4)</div>
+        <div class="word-line">
+          <span class="ko-text" style="color:#C8E6C9;">마지못해 동의하다</span>
+          <span style="color:rgba(239,233,225,.5);"> : </span>
+          <span class="en-text" style="color:#F2DC6E;text-shadow:0 1px 0 rgba(0,0,0,.35),0 0 10px rgba(242,220,110,.28);">acquiesce</span>
+        </div>
+        <div class="stars-pron-row"><span class="star-row">⭐⭐⭐⭐⭐</span><span class="pron-text">|애퀴에스| /ˌækwiˈes/</span></div>
+        <div class="cf-note" style="color:#F2DC6E;text-shadow:0 1px 0 rgba(0,0,0,.35),0 0 8px rgba(242,220,110,.2);">
+          He might acquiesce if he bought a round.
+          <span class="cf-ko-paren" style="color:#F2DC6E;opacity:.92;"> (여러 사람 술을 샀다면 마지못해 팁을 줄 수도 있다.)</span>
+        </div>
+      </div>
+
+      <div class="sample-card" data-id="G2">
+        <div class="sample-label"><strong>G2</strong> 소프트 앰버 <code>#E0B585</code> (Markslow)</div>
+        <div class="word-line">
+          <span class="ko-text" style="color:#C8E6C9;">마지못해 동의하다</span>
+          <span style="color:rgba(239,233,225,.5);"> : </span>
+          <span class="en-text" style="color:#E0B585;text-shadow:0 1px 0 rgba(0,0,0,.38),0 0 8px rgba(224,181,133,.22);">acquiesce</span>
+        </div>
+        <div class="stars-pron-row"><span class="star-row">⭐⭐⭐⭐⭐</span><span class="pron-text">|애퀴에스| /ˌækwiˈes/</span></div>
+        <div class="cf-note" style="color:#E0B585;">
+          He might acquiesce if he bought a round.
+          <span class="cf-ko-paren" style="opacity:.92;"> (여러 사람 술을 샀다면 마지못해 팁을 줄 수도 있다.)</span>
+        </div>
+      </div>
+
+      <div class="sample-card" data-id="G3">
+        <div class="sample-label"><strong>G3</strong> 묵직 앤틱 <code>#D4A853</code></div>
+        <div class="word-line">
+          <span class="ko-text" style="color:#C8E6C9;">마지못해 동의하다</span>
+          <span style="color:rgba(239,233,225,.5);"> : </span>
+          <span class="en-text" style="color:#D4A853;text-shadow:0 1px 0 rgba(0,0,0,.42),0 0 6px rgba(212,168,83,.18);">acquiesce</span>
+        </div>
+        <div class="stars-pron-row"><span class="star-row">⭐⭐⭐⭐⭐</span><span class="pron-text">|애퀴에스| /ˌækwiˈes/</span></div>
+        <div class="cf-note" style="color:#D4A853;">
+          He might acquiesce if he bought a round.
+          <span class="cf-ko-paren" style="opacity:.9;"> (여러 사람 술을 샀다면 마지못해 팁을 줄 수도 있다.)</span>
+        </div>
+      </div>
+
+      <div class="sample-card" data-id="G4">
+        <div class="sample-label"><strong>G4</strong> 브론즈 골드 <code>#C99A6E</code></div>
+        <div class="word-line">
+          <span class="ko-text" style="color:#C8E6C9;">마지못해 동의하다</span>
+          <span style="color:rgba(239,233,225,.5);"> : </span>
+          <span class="en-text" style="color:#C99A6E;text-shadow:0 1px 0 rgba(0,0,0,.45);">acquiesce</span>
+        </div>
+        <div class="stars-pron-row"><span class="star-row">⭐⭐⭐⭐⭐</span><span class="pron-text">|애퀴에스| /ˌækwiˈes/</span></div>
+        <div class="cf-note" style="color:#C99A6E;">
+          He might acquiesce if he bought a round.
+          <span class="cf-ko-paren" style="opacity:.88;"> (여러 사람 술을 샀다면 마지못해 팁을 줄 수도 있다.)</span>
+        </div>
+      </div>
+
+      <div class="sample-card" data-id="G5">
+        <div class="sample-label"><strong>G5</strong> 밝은 레몬 <code>#FFE566</code></div>
+        <div class="word-line">
+          <span class="ko-text" style="color:#C8E6C9;">마지못해 동의하다</span>
+          <span style="color:rgba(239,233,225,.5);"> : </span>
+          <span class="en-text" style="color:#FFE566;text-shadow:0 1px 0 rgba(0,0,0,.32),0 0 12px rgba(255,229,102,.3);">acquiesce</span>
+        </div>
+        <div class="stars-pron-row"><span class="star-row">⭐⭐⭐⭐⭐</span><span class="pron-text">|애퀴에스| /ˌækwiˈes/</span></div>
+        <div class="cf-note" style="color:#FFE566;">
+          He might acquiesce if he bought a round.
+          <span class="cf-ko-paren" style="opacity:.92;"> (여러 사람 술을 샀다면 마지못해 팁을 줄 수도 있다.)</span>
+        </div>
+      </div>
+
+      <div class="sample-card" data-id="G6">
+        <div class="sample-label"><strong>G6</strong> 따뜻 옐로우 <code>#F5C842</code></div>
+        <div class="word-line">
+          <span class="ko-text" style="color:#C8E6C9;">마지못해 동의하다</span>
+          <span style="color:rgba(239,233,225,.5);"> : </span>
+          <span class="en-text" style="color:#F5C842;text-shadow:0 1px 0 rgba(0,0,0,.35),0 0 10px rgba(245,200,66,.25);">acquiesce</span>
+        </div>
+        <div class="stars-pron-row"><span class="star-row">⭐⭐⭐⭐⭐</span><span class="pron-text">|애퀴에스| /ˌækwiˈes/</span></div>
+        <div class="cf-note" style="color:#F5C842;">
+          He might acquiesce if he bought a round.
+          <span class="cf-ko-paren" style="opacity:.92;"> (여러 사람 술을 샀다면 마지못해 팁을 줄 수도 있다.)</span>
+        </div>
+      </div>
+
+      <div class="sample-card" data-id="G7">
+        <div class="sample-label"><strong>G7</strong> 크림 골드 <code>#E8C872</code></div>
+        <div class="word-line">
+          <span class="ko-text" style="color:#C8E6C9;">마지못해 동의하다</span>
+          <span style="color:rgba(239,233,225,.5);"> : </span>
+          <span class="en-text" style="color:#E8C872;text-shadow:0 1px 0 rgba(0,0,0,.36),0 0 8px rgba(232,200,114,.2);">acquiesce</span>
+        </div>
+        <div class="stars-pron-row"><span class="star-row">⭐⭐⭐⭐⭐</span><span class="pron-text">|애퀴에스| /ˌækwiˈes/</span></div>
+        <div class="cf-note" style="color:#E8C872;">
+          He might acquiesce if he bought a round.
+          <span class="cf-ko-paren" style="opacity:.9;"> (여러 사람 술을 샀다면 마지못해 팁을 줄 수도 있다.)</span>
+        </div>
+      </div>
+
+      <div class="sample-card" data-id="G8">
+        <div class="sample-label"><strong>G8</strong> 허니 골드 <code>#FFD24D</code></div>
+        <div class="word-line">
+          <span class="ko-text" style="color:#C8E6C9;">마지못해 동의하다</span>
+          <span style="color:rgba(239,233,225,.5);"> : </span>
+          <span class="en-text" style="color:#FFD24D;text-shadow:0 1px 0 rgba(0,0,0,.34),0 0 10px rgba(255,210,77,.26);">acquiesce</span>
+        </div>
+        <div class="stars-pron-row"><span class="star-row">⭐⭐⭐⭐⭐</span><span class="pron-text">|애퀴에스| /ˌækwiˈes/</span></div>
+        <div class="cf-note" style="color:#FFD24D;">
+          He might acquiesce if he bought a round.
+          <span class="cf-ko-paren" style="opacity:.92;"> (여러 사람 술을 샀다면 마지못해 팁을 줄 수도 있다.)</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== 추천 조합 ========== -->
+    <section class="sample-section" id="pairs">
+      <h2>③ 추천 조합 (민트 KO + 골드 EN)</h2>
+      <p class="hint">따뜻하고 묵직한 느낌 위주로 맞춘 페어</p>
+
+      <div class="pair-grid">
+        <div class="sample-card" data-id="P1">
+          <div class="sample-label"><strong>P1</strong> M8 + G2</div>
+          <div class="word-line">
+            <span class="ko-text" style="color:#8FBFA0;">마지못해 동의하다</span>
+            <span style="color:rgba(239,233,225,.45);"> : </span>
+            <span class="en-text" style="color:#E0B585;">acquiesce</span>
+          </div>
+          <div class="cf-note" style="color:#E0B585;font-size:15px;padding-left:10px;margin-top:6px;">
+            He might acquiesce if he bought a round.
+            <span style="opacity:.88;"> (…마지못해 팁을 줄 수도.)</span>
+          </div>
+        </div>
+
+        <div class="sample-card" data-id="P2">
+          <div class="sample-label"><strong>P2</strong> M1 + G3</div>
+          <div class="word-line">
+            <span class="ko-text" style="color:#C8E6C9;">마지못해 동의하다</span>
+            <span style="color:rgba(239,233,225,.45);"> : </span>
+            <span class="en-text" style="color:#D4A853;">acquiesce</span>
+          </div>
+          <div class="cf-note" style="color:#D4A853;font-size:15px;padding-left:10px;margin-top:6px;">
+            He might acquiesce if he bought a round.
+            <span style="opacity:.88;"> (…마지못해 팁을 줄 수도.)</span>
+          </div>
+        </div>
+
+        <div class="sample-card" data-id="P3">
+          <div class="sample-label"><strong>P3</strong> M4 + G4</div>
+          <div class="word-line">
+            <span class="ko-text" style="color:#7EC8A3;">마지못해 동의하다</span>
+            <span style="color:rgba(239,233,225,.45);"> : </span>
+            <span class="en-text" style="color:#C99A6E;">acquiesce</span>
+          </div>
+          <div class="cf-note" style="color:#C99A6E;font-size:15px;padding-left:10px;margin-top:6px;">
+            He might acquiesce if he bought a round.
+            <span style="opacity:.85;"> (…마지못해 팁을 줄 수도.)</span>
+          </div>
+        </div>
+
+        <div class="sample-card" data-id="P4">
+          <div class="sample-label"><strong>P4</strong> M3 + G7</div>
+          <div class="word-line">
+            <span class="ko-text" style="color:#B8E0C8;">마지못해 동의하다</span>
+            <span style="color:rgba(239,233,225,.45);"> : </span>
+            <span class="en-text" style="color:#E8C872;">acquiesce</span>
+          </div>
+          <div class="cf-note" style="color:#E8C872;font-size:15px;padding-left:10px;margin-top:6px;">
+            He might acquiesce if he bought a round.
+            <span style="opacity:.88;"> (…마지못해 팁을 줄 수도.)</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== Progress bar 색상 (현재 핑크 주변) ========== -->
+    <section class="sample-section" id="progress-bar">
+      <h2>④ Progress bar — 현재 핑크 주변</h2>
+      <p class="hint">
+        현재: 라벨 <code>#ff8fab</code> · 채움 <code>#ff6b9d → #ff8fab</code> · %글자 <code>#fff7fb</code><br>
+        번호(B0~B8)로 알려주시면 layout4green에 반영합니다.
+      </p>
+
+      <div class="sample-card" data-id="B0">
+        <div class="sample-label">
+          <strong>B0</strong> 이전
+          <code>#ff6b9d → #ff8fab</code>
+          라벨 <code>#ff8fab</code>
+        </div>
+        <div class="pb-demo">
+          <span class="pb-label" style="color:#ff8fab;">진행도 3 / 5</span>
+          <span class="pb-track">
+            <span class="pb-fill" style="background:linear-gradient(90deg,#ff6b9d,#ff8fab);box-shadow:0 0 10px rgba(255,107,157,.45);">
+              <span class="pb-runner" aria-hidden="true">🛵</span>
+              <span class="pb-pct">68%</span>
+            </span>
+          </span>
+        </div>
+        <div class="pb-swatches">
+          <span class="pb-swatch" style="background:#ff6b9d;" title="#ff6b9d"></span>
+          <span class="pb-swatch" style="background:#ff8fab;" title="#ff8fab"></span>
+          <span class="pb-swatch" style="background:#fff7fb;" title="#fff7fb"></span>
+        </div>
+      </div>
+
+      <div class="sample-card" data-id="B1">
+        <div class="sample-label">
+          <strong>B1</strong> 소프트 로즈
+          <code>#ff7aa8 → #ff9fbb</code>
+          라벨 <code>#ff9fbb</code>
+        </div>
+        <div class="pb-demo">
+          <span class="pb-label" style="color:#ff9fbb;">진행도 3 / 5</span>
+          <span class="pb-track">
+            <span class="pb-fill" style="background:linear-gradient(90deg,#ff7aa8,#ff9fbb);box-shadow:0 0 10px rgba(255,122,168,.42);">
+              <span class="pb-runner" aria-hidden="true">🛵</span>
+              <span class="pb-pct">68%</span>
+            </span>
+          </span>
+        </div>
+        <div class="pb-swatches">
+          <span class="pb-swatch" style="background:#ff7aa8;"></span>
+          <span class="pb-swatch" style="background:#ff9fbb;"></span>
+        </div>
+      </div>
+
+      <div class="sample-card" data-id="B2">
+        <div class="sample-label">
+          <strong>B2</strong> 딥 코랄핑크
+          <code>#f0548a → #ff7a9e</code>
+          라벨 <code>#ff7a9e</code>
+        </div>
+        <div class="pb-demo">
+          <span class="pb-label" style="color:#ff7a9e;">진행도 3 / 5</span>
+          <span class="pb-track">
+            <span class="pb-fill" style="background:linear-gradient(90deg,#f0548a,#ff7a9e);box-shadow:0 0 10px rgba(240,84,138,.48);">
+              <span class="pb-runner" aria-hidden="true">🛵</span>
+              <span class="pb-pct">68%</span>
+            </span>
+          </span>
+        </div>
+        <div class="pb-swatches">
+          <span class="pb-swatch" style="background:#f0548a;"></span>
+          <span class="pb-swatch" style="background:#ff7a9e;"></span>
+        </div>
+      </div>
+
+      <div class="sample-card" data-id="B3">
+        <div class="sample-label">
+          <strong>B3</strong> 피치 핑크
+          <code>#ff6b85 → #ff9aa8</code>
+          라벨 <code>#ff9aa8</code>
+        </div>
+        <div class="pb-demo">
+          <span class="pb-label" style="color:#ff9aa8;">진행도 3 / 5</span>
+          <span class="pb-track">
+            <span class="pb-fill" style="background:linear-gradient(90deg,#ff6b85,#ff9aa8);box-shadow:0 0 10px rgba(255,107,133,.45);">
+              <span class="pb-runner" aria-hidden="true">🛵</span>
+              <span class="pb-pct">68%</span>
+            </span>
+          </span>
+        </div>
+        <div class="pb-swatches">
+          <span class="pb-swatch" style="background:#ff6b85;"></span>
+          <span class="pb-swatch" style="background:#ff9aa8;"></span>
+        </div>
+      </div>
+
+      <div class="sample-card" data-id="B4">
+        <div class="sample-label">
+          <strong>B4</strong> 라벤더 로즈
+          <code>#e86ba8 → #f2a0c4</code>
+          라벨 <code>#f2a0c4</code>
+        </div>
+        <div class="pb-demo">
+          <span class="pb-label" style="color:#f2a0c4;">진행도 3 / 5</span>
+          <span class="pb-track">
+            <span class="pb-fill" style="background:linear-gradient(90deg,#e86ba8,#f2a0c4);box-shadow:0 0 10px rgba(232,107,168,.42);">
+              <span class="pb-runner" aria-hidden="true">🛵</span>
+              <span class="pb-pct">68%</span>
+            </span>
+          </span>
+        </div>
+        <div class="pb-swatches">
+          <span class="pb-swatch" style="background:#e86ba8;"></span>
+          <span class="pb-swatch" style="background:#f2a0c4;"></span>
+        </div>
+      </div>
+
+      <div class="sample-card is-current-pb" data-id="B5">
+        <div class="sample-label">
+          <strong>B5</strong> 살몬 핑크 · 적용됨
+          <code>#ff7b6b → #ff9f8f</code>
+          라벨 <code>#ff9f8f</code>
+        </div>
+        <div class="pb-demo">
+          <span class="pb-label" style="color:#ff9f8f;">진행도 3 / 5</span>
+          <span class="pb-track">
+            <span class="pb-fill" style="background:linear-gradient(90deg,#ff7b6b,#ff9f8f);box-shadow:0 0 10px rgba(255,123,107,.42);">
+              <span class="pb-runner" aria-hidden="true">🛵</span>
+              <span class="pb-pct">68%</span>
+            </span>
+          </span>
+        </div>
+        <div class="pb-swatches">
+          <span class="pb-swatch" style="background:#ff7b6b;"></span>
+          <span class="pb-swatch" style="background:#ff9f8f;"></span>
+        </div>
+      </div>
+
+      <div class="sample-card" data-id="B6">
+        <div class="sample-label">
+          <strong>B6</strong> 핫 핑크
+          <code>#ff4d8d → #ff7eb3</code>
+          라벨 <code>#ff7eb3</code>
+        </div>
+        <div class="pb-demo">
+          <span class="pb-label" style="color:#ff7eb3;">진행도 3 / 5</span>
+          <span class="pb-track">
+            <span class="pb-fill" style="background:linear-gradient(90deg,#ff4d8d,#ff7eb3);box-shadow:0 0 10px rgba(255,77,141,.5);">
+              <span class="pb-runner" aria-hidden="true">🛵</span>
+              <span class="pb-pct">68%</span>
+            </span>
+          </span>
+        </div>
+        <div class="pb-swatches">
+          <span class="pb-swatch" style="background:#ff4d8d;"></span>
+          <span class="pb-swatch" style="background:#ff7eb3;"></span>
+        </div>
+      </div>
+
+      <div class="sample-card" data-id="B7">
+        <div class="sample-label">
+          <strong>B7</strong> 파스텔 핑크
+          <code>#f48fb1 → #f8bbd0</code>
+          라벨 <code>#f8bbd0</code>
+        </div>
+        <div class="pb-demo">
+          <span class="pb-label" style="color:#f8bbd0;">진행도 3 / 5</span>
+          <span class="pb-track">
+            <span class="pb-fill" style="background:linear-gradient(90deg,#f48fb1,#f8bbd0);box-shadow:0 0 10px rgba(244,143,177,.4);">
+              <span class="pb-runner" aria-hidden="true">🛵</span>
+              <span class="pb-pct">68%</span>
+            </span>
+          </span>
+        </div>
+        <div class="pb-swatches">
+          <span class="pb-swatch" style="background:#f48fb1;"></span>
+          <span class="pb-swatch" style="background:#f8bbd0;"></span>
+        </div>
+      </div>
+
+      <div class="sample-card" data-id="B8">
+        <div class="sample-label">
+          <strong>B8</strong> 로즈 + 골드 포인트
+          <code>#ff6b9d → #F5C842</code>
+          라벨 <code>#ff8fab</code>
+        </div>
+        <div class="pb-demo">
+          <span class="pb-label" style="color:#ff8fab;">진행도 3 / 5</span>
+          <span class="pb-track">
+            <span class="pb-fill" style="background:linear-gradient(90deg,#ff6b9d,#F5C842);box-shadow:0 0 10px rgba(255,107,157,.4);">
+              <span class="pb-runner" aria-hidden="true">🛵</span>
+              <span class="pb-pct">68%</span>
+            </span>
+          </span>
+        </div>
+        <div class="pb-swatches">
+          <span class="pb-swatch" style="background:#ff6b9d;"></span>
+          <span class="pb-swatch" style="background:#F5C842;"></span>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

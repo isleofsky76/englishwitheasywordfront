@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz</title>
+  <link rel="stylesheet" href="quiz.css">
+</head>
+<body>
+  <div class="quiz-app">
+    <h1 class="quiz-title" id="app-title">Quiz</h1>
+    <div class="quiz-card">
+      <!-- 1) 분류 선택 (첫 화면) -->
+      <div id="screen-categories" class="screen">
+        <p class="screen-label">Choose a topic</p>
+        <p class="screen-heading">Pick a category</p>
+        <div id="category-grid" class="category-grid"></div>
+      </div>
+
+      <!-- 2) 문제 -->
+      <div id="screen-quiz" class="screen is-hidden" aria-live="polite">
+        <p class="quiz-progress" id="quiz-progress"></p>
+        <div class="quiz-image-wrap" id="quiz-image-wrap"></div>
+
+        <div class="quiz-content-column">
+          <button type="button" id="btn-speak" class="quiz-speak-btn" aria-label="Read question aloud" title="Read question">🔊</button>
+          <div class="quiz-main-stack">
+            <p class="quiz-question" id="quiz-question"></p>
+            <p class="read-hint" id="read-hint">Tap the speaker to hear the question</p>
+            <div id="quiz-answer-zone" class="quiz-answer-zone">
+              <div class="options-grid" id="options-grid"></div>
+            </div>
+          </div>
+        </div>
+
+        <p id="feedback" class="feedback"></p>
+        <div class="action-row">
+          <button type="button" id="btn-next" class="action-btn primary" disabled>Next</button>
+          <button type="button" id="btn-retry" class="action-btn ghost" disabled>Try again</button>
+          <button type="button" id="btn-categories" class="action-btn ghost">Categories</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="quiz-data.js"></script>
+  <script src="quiz.js"></script>
+</body>
+</html>

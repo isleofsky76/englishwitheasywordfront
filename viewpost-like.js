@@ -96,7 +96,7 @@
         container.innerHTML =
             '<button type="button" class="vp-like-btn' + (liked ? ' is-active' : '') + '"' +
             ' aria-label="추천"' + ((liked || !canLike) ? ' disabled' : '') + '>' +
-            '<span class="vp-like-icon" aria-hidden="true">👍</span>' +
+            '<span class="vp-like-icon" aria-hidden="true">❤️</span>' +
             '<span class="vp-like-label">추천</span>' +
             '<strong class="vp-like-count">' + count + '</strong>' +
             '</button>';

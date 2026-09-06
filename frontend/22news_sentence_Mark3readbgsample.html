@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Mark3read — 배경색 샘플 (#262a33 기준)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="22news_sentence_Mark3read.css?v=11">
+    <link rel="preload" as="image" href="resources/news.jpg">
+    <style>
+        @font-face {
+            font-family: 'NanumBarunPen';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumBarunpen.woff') format('woff');
+            font-weight: normal;
+            font-display: swap;
+        }
+
+        * { box-sizing: border-box; }
+
+        body.bgsample-host {
+            font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
+            background: #111;
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            overflow: hidden;
+            height: auto;
+        }
+
+        body.bgsample-host .page-hint {
+            font-size: 13px;
+            color: #888;
+            margin: 0 0 12px;
+            text-align: center;
+            line-height: 1.55;
+            max-width: 520px;
+        }
+
+        body.bgsample-host .page-hint a {
+            color: #7df8df;
+            text-decoration: none;
+        }
+
+        body.bgsample-host .page-hint a:hover { text-decoration: underline; }
+
+        body.bgsample-host .page-hint kbd {
+            display: inline-block;
+            padding: 1px 7px;
+            border-radius: 4px;
+            background: #222;
+            border: 1px solid #444;
+            font-size: 12px;
+            color: #ccc;
+        }
+
+        .viewer-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .shorts-frame {
+            position: relative;
+            width: min(calc(100vw - 120px), 405px);
+            aspect-ratio: 9 / 16;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6);
+            border: 2px solid rgba(255, 255, 255, 0.08);
+            touch-action: pan-y;
+            user-select: none;
+            flex-shrink: 0;
+        }
+
+        .nav-btn {
+            flex-shrink: 0;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            font-size: 22px;
+            line-height: 1;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.15s, transform 0.15s;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .nav-btn:hover:not(:disabled) {
+            background: rgba(212, 255, 74, 0.22);
+            border-color: rgba(212, 255, 74, 0.45);
+            transform: scale(1.08);
+        }
+
+        .nav-btn:active:not(:disabled) { transform: scale(0.95); }
+        .nav-btn:disabled { opacity: 0.25; cursor: default; }
+
+        .carousel-track {
+            display: flex;
+            height: 100%;
+            transition: transform 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+            will-change: transform;
+        }
+
+        .slide {
+            flex: 0 0 100%;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Mark3read 미리보기 — 슬라이드 안에서 fixed 대신 absolute */
+        .slide-preview {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            --page-bg-color: #262a33;
+            --shorts-banner-h: 64px;
+            --shorts-w: 405px;
+            --progress-bar-pad-left: 10px;
+            --progress-bar-pad-right: 10px;
+            background-color: var(--page-bg-color) !important;
+            color: #EFE9E1;
+        }
+
+        .slide-preview .shorts-banner {
+            position: absolute !important;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 20;
+            width: 100% !important;
+            max-width: none !important;
+            margin: 0 !important;
+        }
+
+        .slide-preview #page-bg {
+            position: absolute !important;
+            left: 50% !important;
+            right: auto !important;
+            bottom: 0 !important;
+            top: auto !important;
+            z-index: 1;
+            width: 100% !important;
+            max-width: 100% !important;
+            height: clamp(110px, 22%, 150px) !important;
+            margin: 0 !important;
+            transform: translateX(-50%) !important;
+            filter: contrast(1.14) saturate(1.22);
+            clip-path: inset(0 3% 0 0);
+        }
+
+        .slide-preview .preview-scroll {
+            position: absolute;
+            top: var(--shorts-banner-h);
+            left: 0;
+            right: 0;
+            bottom: clamp(110px, 22%, 150px);
+            z-index: 5;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            padding: 0;
+        }
+
+        .slide-preview #vocab-title-wrap {
+            width: 100%;
+            margin-top: 5px;
+        }
+
+        .slide-preview #vocab-label {
+            display: none !important;
+        }
+
+        .slide-preview #progress-container {
+            width: calc(100% - var(--progress-bar-pad-left) - var(--progress-bar-pad-right)) !important;
+            max-width: calc(100% - var(--progress-bar-pad-left) - var(--progress-bar-pad-right)) !important;
+            margin-left: var(--progress-bar-pad-left) !important;
+            margin-right: var(--progress-bar-pad-right) !important;
+            margin-top: 8px !important;
+            align-self: stretch !important;
+        }
+
+        .slide-preview .word-box {
+            width: 100% !important;
+            text-align: left !important;
+            margin-top: 4px;
+        }
+
+        .slide-preview [id^="syn-example-"]:not([id^="syn-example-ko"]) {
+            margin-left: 10px !important;
+            padding-right: 12px !important;
+        }
+
+        .slide-info {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: clamp(110px, 22%, 150px);
+            z-index: 15;
+            padding: 8px 14px 10px;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.62), transparent);
+            text-align: center;
+            pointer-events: none;
+        }
+
+        .slide-hex {
+            font-family: 'Poppins', monospace;
+            font-size: 20px;
+            font-weight: 800;
+            letter-spacing: 0.06em;
+            color: #fff;
+            text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
+            margin-bottom: 2px;
+        }
+
+        .slide-rgb {
+            font-family: 'Poppins', monospace;
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.55);
+            margin-bottom: 2px;
+        }
+
+        .slide-label {
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.72);
+        }
+
+        .slide-counter {
+            margin-top: 3px;
+            font-size: 10px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.38);
+        }
+
+        .controls {
+            margin-top: 14px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .dots { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; max-width: 420px; }
+
+        .dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #444;
+            cursor: pointer;
+            border: none;
+            padding: 0;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .dot.active {
+            background: #d4ff4a;
+            transform: scale(1.25);
+        }
+
+        .bottom-nav { display: flex; gap: 12px; }
+
+        .bottom-nav .nav-btn-wide {
+            padding: 10px 22px;
+            width: auto;
+            height: auto;
+            border-radius: 24px;
+            font-size: 14px;
+            font-family: inherit;
+            font-weight: 600;
+        }
+
+        .jump-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            max-width: 420px;
+        }
+
+        .jump-btn {
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.06);
+            color: rgba(255, 255, 255, 0.82);
+        }
+
+        .jump-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .jump-btn--shorts {
+            border-color: rgba(212, 255, 74, 0.45);
+            background: rgba(212, 255, 74, 0.12);
+            color: #d4ff4a;
+        }
+
+        .jump-btn--comfort {
+            border-color: rgba(125, 248, 223, 0.4);
+            background: rgba(125, 248, 223, 0.1);
+            color: #7df8df;
+        }
+
+        .slide-rec {
+            display: inline-block;
+            margin-bottom: 6px;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+        }
+
+        .slide-rec--shorts {
+            color: #d4ff4a;
+            background: rgba(212, 255, 74, 0.16);
+            border: 1px solid rgba(212, 255, 74, 0.38);
+        }
+
+        .slide-rec--comfort {
+            color: #7df8df;
+            background: rgba(125, 248, 223, 0.12);
+            border: 1px solid rgba(125, 248, 223, 0.32);
+        }
+
+        .dot.dot--comfort { background: rgba(125, 248, 223, 0.55); }
+        .dot.dot--comfort.active { background: #7df8df; }
+        .dot.dot--shorts { background: rgba(212, 255, 74, 0.45); }
+        .dot.dot--shorts.active { background: #d4ff4a; }
+
+        .slide-apply-btn {
+            pointer-events: auto;
+            margin-top: 8px;
+            padding: 6px 14px;
+            border-radius: 18px;
+            border: 1px solid rgba(212, 255, 74, 0.45);
+            background: rgba(212, 255, 74, 0.14);
+            color: #d4ff4a;
+            font-size: 11px;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .slide-apply-btn:hover {
+            background: rgba(212, 255, 74, 0.24);
+        }
+
+        .slide-hex {
+            cursor: pointer;
+        }
+
+        .bg-toast {
+            position: fixed;
+            left: 50%;
+            bottom: 24px;
+            transform: translateX(-50%) translateY(12px);
+            z-index: 9999;
+            padding: 10px 18px;
+            border-radius: 12px;
+            background: rgba(18, 20, 26, 0.94);
+            border: 1px solid rgba(212, 255, 74, 0.35);
+            color: #f5f5f5;
+            font-size: 13px;
+            font-weight: 600;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.22s ease, transform 0.22s ease;
+        }
+
+        .bg-toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .jump-btn--apply {
+            border-color: rgba(255, 200, 100, 0.45);
+            background: rgba(255, 200, 100, 0.12);
+            color: #ffc864;
+        }
+
+        @media (max-width: 768px) {
+            .slide-preview {
+                --shorts-banner-h: 58px;
+            }
+        }
+    </style>
+</head>
+<body class="bgsample-host">
+    <p class="page-hint">
+        <strong>Mark3read</strong> 실제 화면과 동일 레이아웃 · 배경색만 좌/우로 비교<br>
+        추천: <strong style="color:#d4ff4a;">#262a33</strong> 쇼츠·색 예문 ·
+        <strong style="color:#7df8df;">#24282f</strong> · <strong style="color:#7df8df;">#232830</strong> ·
+        <strong style="color:#6fcf7a;">#004D13</strong> 장시간<br>
+        <a href="22news_sentence_Mark3read.html">Mark3read 본 페이지</a> · 좌하단 <strong>색 동그라미</strong> 클릭으로도 변경 · <kbd>←</kbd> <kbd>→</kbd>
+    </p>
+    <div class="bg-toast" id="bg-toast" role="status" aria-live="polite"></div>
+
+    <div class="viewer-row">
+        <button type="button" class="nav-btn" id="btn-prev" aria-label="이전 색">‹</button>
+        <div class="shorts-frame" id="shorts-frame">
+            <div class="carousel-track" id="carousel-track"></div>
+        </div>
+        <button type="button" class="nav-btn" id="btn-next" aria-label="다음 색">›</button>
+    </div>
+
+    <div class="controls">
+        <div class="dots" id="dots"></div>
+        <div class="bottom-nav">
+            <button type="button" class="nav-btn nav-btn-wide" id="btn-prev2">‹ 이전</button>
+            <button type="button" class="nav-btn nav-btn-wide" id="btn-next2">다음 ›</button>
+        </div>
+        <div class="jump-row">
+            <button type="button" class="jump-btn jump-btn--shorts" data-jump-hex="#262a33">쇼츠 · #262a33 (현재)</button>
+            <button type="button" class="jump-btn jump-btn--comfort" data-jump-hex="#24282f">장시간 A · #24282f</button>
+            <button type="button" class="jump-btn jump-btn--comfort" data-jump-hex="#232830">장시간 B · #232830</button>
+            <button type="button" class="jump-btn jump-btn--comfort" data-jump-hex="#004D13">장시간 그린 · #004D13</button>
+            <button type="button" class="jump-btn jump-btn--apply" id="btn-apply-current">이 색 Mark3read에 적용</button>
+        </div>
+    </div>
+
+    <script>
+        /* Mark3read words[0] + 렌더 상수 */
+        const WORD_ITEM = {
+            en: 'An Ominous Trend Known as the Debt Spiral',
+            example: 'By 2036, about two-thirds of our annual borrowing will be used to make interest payments on Treasury securities, an ominous trend known as the “debt spiral.”',
+            exampleSyntax: [
+                { text: 'By 2036', role: '2036년까지' },
+                { text: 'about two-thirds of our annual borrowing', role: '우리의 연간 차입금 약 3분의 2가' },
+                { text: 'will be used', role: '사용될 것입니다' },
+                { text: 'to make interest payments', role: '이자 지급을 하는 데' },
+                { text: 'on Treasury securities', role: '미국 국채에 대한' },
+                { text: 'an ominous trend', role: '불길한 추세입니다' },
+                { text: 'known as the “debt spiral”', role: '‘부채 스파이럴’로 알려진' },
+            ],
+            exampleWordGlosses: [
+                { en: 'borrowing', ko: '차입, 빌린 돈' },
+                { en: 'make interest payments', ko: '이자 지급을 하는 데' },
+                { en: ' treasury security', ko: '미국 국채' },
+                { en: 'ominous', ko: '불길한' },
+                { en: 'debt spiral', ko: '부채 소용돌이' },
+            ],
+        };
+
+        const EXAMPLE_SYNTAX_ORDER_COLORS = [
+            '#89CFF0', '#FFCC99', '#98D8AA', '#C5B4E3', '#FFB3BA', '#FFF3A3', '#FF9EC4',
+            '#A8C8FF', '#FFAAAA', '#D4EDAA', '#FFCB9A', '#E8B4F0', '#9BB8F0', '#7DD9C8',
+            '#F5E6B8', '#FFE4CC',
+        ];
+
+        const EXAMPLE_WORD_GLOSS_KO_COLOR = '#A8B6C4';
+        const VOCAB_HEADLINE_HTML =
+            '<span style="display:block;text-align:center;width:100%;transform:translateY(20px);">' +
+            '<span class="vocab-headline-main" style="color:#d4ff4a !important;font-family:\'Poppins\',\'Pretendard\',\'Noto Sans KR\',sans-serif !important;font-weight:700;font-size:29px !important;line-height:1.28;text-shadow:0 1px 0 rgba(0,0,0,0.92) !important;-webkit-text-stroke:0 !important;">미국의 급증하는<br>부채 위기</span>' +
+            '<br><span class="vocab-source title-meta" style="display:block;margin-top:3px;line-height:1.2;color:#ffe082 !important;font-family:\'Poppins\',\'Pretendard\',\'Noto Sans KR\',sans-serif !important;font-size:13px !important;font-weight:600;letter-spacing:0.02em;text-shadow:0 1px 0 rgba(0,0,0,0.88) !important;-webkit-text-stroke:0 !important;">(The Wall Street Journal | 2026.08.25)</span>' +
+            '</span>';
+
+        const PROGRESS_HTML =
+            '<span class="progress-wrap" aria-live="polite">' +
+            '<span class="progress-label" id="progress-label">진행도 0 / 1</span>' +
+            '<span class="progress-track" id="progress-bar-track">' +
+            '<span class="progress-fill" id="progress-fill" style="width:0%;">' +
+            '<span class="progress-runner" data-motion="scooter" aria-hidden="true">🛵</span>' +
+            '<span class="progress-pct" id="progress-pct">0%</span>' +
+            '</span></span></span>';
+
+        function hexToRgb(hex) {
+            const h = hex.replace('#', '');
+            return `rgb(${parseInt(h.slice(0, 2), 16)}, ${parseInt(h.slice(2, 4), 16)}, ${parseInt(h.slice(4, 6), 16)})`;
+        }
+
+        function escapeHtml(s) {
+            return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        }
+
+        function isKeywordForm(wordNorm, keyNorm) {
+            if (!keyNorm) return false;
+            if (wordNorm === keyNorm) return true;
+            const suf = /(?:ed|ing|es|s|er|est|ly)$/;
+            if (wordNorm.startsWith(keyNorm) && (wordNorm === keyNorm || suf.test(wordNorm.slice(keyNorm.length)))) return true;
+            if (keyNorm.endsWith('e') && (wordNorm === keyNorm.slice(0, -1) + 'ing' || wordNorm === keyNorm.slice(0, -1) + 'ed')) return true;
+            return false;
+        }
+
+        function isSyntaxSegmentWordForm(wordNorm, keyNorm) {
+            if (!keyNorm || !wordNorm) return false;
+            return isKeywordForm(wordNorm, keyNorm);
+        }
+
+        function findExampleSyntaxPhraseMatchIndices(words, glossEnPhrase, claimedIndices) {
+            const claimed = claimedIndices instanceof Set ? claimedIndices : new Set(claimedIndices || []);
+            const phraseWords = String(glossEnPhrase || '').trim().split(/\s+/).filter(Boolean);
+            if (!phraseWords.length) return new Set();
+            if (phraseWords.length === 1) {
+                const keyNorm = phraseWords[0].replace(/[^\w]/g, '').toLowerCase();
+                for (let i = 0; i < words.length; i++) {
+                    if (claimed.has(i)) continue;
+                    const wNorm = words[i].replace(/[^\w]/g, '').toLowerCase();
+                    if (isSyntaxSegmentWordForm(wNorm, keyNorm)) return new Set([i]);
+                }
+                return new Set();
+            }
+            const targetWords = phraseWords.map((w) => w.replace(/[^\w]/g, '').toLowerCase());
+            for (let i = 0; i <= words.length - phraseWords.length; i++) {
+                let ok = true;
+                for (let j = 0; j < phraseWords.length; j++) {
+                    if (claimed.has(i + j)) { ok = false; break; }
+                    const sw = words[i + j].replace(/[^\w]/g, '').toLowerCase();
+                    if (!isSyntaxSegmentWordForm(sw, targetWords[j])) { ok = false; break; }
+                }
+                if (!ok) continue;
+                const indices = new Set();
+                for (let j = 0; j < phraseWords.length; j++) indices.add(i + j);
+                return indices;
+            }
+            return new Set();
+        }
+
+        function assignSyntaxSegmentMatchesToWords(words, syntaxList) {
+            const segIndexByWord = new Array(words.length).fill(-1);
+            const roles = new Array(words.length).fill('other');
+            const claimed = new Set();
+            syntaxList.forEach((item, segIdx) => {
+                const text = String(item.text || '').trim();
+                if (!text) return;
+                const indices = findExampleSyntaxPhraseMatchIndices(words, text, claimed);
+                if (!indices.size) return;
+                const role = String(item.role || 'other').trim() || 'other';
+                indices.forEach((wi) => {
+                    segIndexByWord[wi] = segIdx;
+                    roles[wi] = role;
+                    claimed.add(wi);
+                });
+            });
+            return { segIndexByWord, roles };
+        }
+
+        function phraseFormMatches(segmentWords, targetWords) {
+            return segmentWords.every((sw, j) => sw === targetWords[j] || isKeywordForm(sw, targetWords[j]));
+        }
+
+        function collectGlossPhraseMatchIndicesInExampleWords(words, glossEnPhrase) {
+            const phraseWords = String(glossEnPhrase || '').trim().split(/\s+/).filter(Boolean);
+            const keywordIndices = new Set();
+            if (!phraseWords.length) return keywordIndices;
+            if (phraseWords.length === 1) {
+                const keyNorm = phraseWords[0].replace(/[^\w]/g, '').toLowerCase();
+                for (let i = 0; i < words.length; i++) {
+                    const wNorm = words[i].replace(/[^\w]/g, '').toLowerCase();
+                    if (isKeywordForm(wNorm, keyNorm)) { keywordIndices.add(i); break; }
+                }
+            } else {
+                const targetWords = phraseWords.map((w) => w.replace(/[^\w]/g, '').toLowerCase());
+                for (let i = 0; i <= words.length - phraseWords.length; i++) {
+                    const segmentWords = words.slice(i, i + phraseWords.length).map((w) => w.replace(/[^\w]/g, '').toLowerCase());
+                    if (phraseFormMatches(segmentWords, targetWords)) {
+                        for (let j = 0; j < phraseWords.length; j++) keywordIndices.add(i + j);
+                        break;
+                    }
+                }
+            }
+            return keywordIndices;
+        }
+
+        function collectExampleWordGlossAboveEntries(currentWord, exampleSentence) {
+            const words = String(exampleSentence || '').trim().split(/\s+/).filter(Boolean);
+            const list = Array.isArray(currentWord.exampleWordGlosses) ? currentWord.exampleWordGlosses : [];
+            const ranked = list
+                .map((g) => ({ en: String(g.en || '').trim(), ko: String(g.ko || '').trim(), pw: String(g.en || '').trim().split(/\s+/).length }))
+                .filter((g) => g.en && g.ko)
+                .sort((a, b) => b.pw - a.pw || b.en.length - a.en.length);
+            const claimed = new Set();
+            const entries = [];
+            for (const g of ranked) {
+                const indices = [...collectGlossPhraseMatchIndicesInExampleWords(words, g.en)].sort((a, b) => a - b);
+                if (!indices.length || indices.some((i) => claimed.has(i))) continue;
+                indices.forEach((i) => claimed.add(i));
+                entries.push({ start: indices[0], end: indices[indices.length - 1], en: g.en, ko: g.ko });
+            }
+            return entries.sort((a, b) => a.start - b.start);
+        }
+
+        function collectExampleKeywordIndices(words, phrasesForUnderline) {
+            const keywordIndices = new Set();
+            for (const phrase of phrasesForUnderline) {
+                const indices = collectGlossPhraseMatchIndicesInExampleWords(words, phrase);
+                indices.forEach((i) => keywordIndices.add(i));
+            }
+            return keywordIndices;
+        }
+
+        function buildExampleWordSpanHtmlWithSyntax(exampleSentence, roles, keywordIndices, orderColorIndices, glossAboveEntries) {
+            const words = exampleSentence.trim().split(/\s+/).filter(Boolean);
+            const glossByStart = new Map(glossAboveEntries.map((e) => [e.start, e]));
+            const resolveOrderColor = (idx) => EXAMPLE_SYNTAX_ORDER_COLORS[((idx % EXAMPLE_SYNTAX_ORDER_COLORS.length) + EXAMPLE_SYNTAX_ORDER_COLORS.length) % EXAMPLE_SYNTAX_ORDER_COLORS.length];
+            const buildWordSpan = (word, gi) => {
+                const segIdx = orderColorIndices[gi] ?? -1;
+                const color = segIdx < 0 ? '#E6C65A' : resolveOrderColor(segIdx);
+                const role = roles[gi] || 'other';
+                return `<span class="example-word syn-ex-role syn-ex-role--other" data-i="${gi}" data-syntax-seg="${segIdx}" style="color:${color} !important;">${escapeHtml(word)}</span>`;
+            };
+            const wrapGlossStack = (entry, innerHtml, colorCss) => {
+                const segIdx = orderColorIndices[entry.start] ?? -1;
+                const segAttr = segIdx >= 0 ? ` data-syntax-seg="${segIdx}"` : '';
+                return (
+                    `<span class="example-gloss-stack" data-gloss-en="${escapeHtml(entry.en)}"${segAttr} ` +
+                    `style="position:relative !important;display:inline-block !important;vertical-align:baseline !important;color:${colorCss} !important;line-height:inherit !important;">` +
+                    `<span class="example-gloss-stack-words" style="display:inline !important;">${innerHtml}</span>` +
+                    `<span class="example-gloss-above-ko" aria-hidden="true" style="opacity:0;">(${escapeHtml(entry.ko)})</span></span>`
+                );
+            };
+            const parts = [];
+            let i = 0;
+            while (i < words.length) {
+                const gloss = glossByStart.get(i);
+                if (gloss) {
+                    const end = Math.max(gloss.start, gloss.end);
+                    const segIdx = orderColorIndices[gloss.start] ?? -1;
+                    const glossColor = segIdx < 0 ? '#E6C65A' : resolveOrderColor(segIdx);
+                    const inner = words.slice(gloss.start, end + 1).map((w, j) => buildWordSpan(w, gloss.start + j)).join(' ');
+                    parts.push(wrapGlossStack(gloss, inner, glossColor));
+                    i = end + 1;
+                    continue;
+                }
+                if (keywordIndices.has(i)) {
+                    const start = i;
+                    while (i < words.length && keywordIndices.has(i) && !glossByStart.has(i)) i++;
+                    parts.push(`<span class="example-keyword-phrase">${words.slice(start, i).map((w, j) => buildWordSpan(w, start + j)).join(' ')}</span>`);
+                } else {
+                    parts.push(buildWordSpan(words[i], i));
+                    i++;
+                }
+            }
+            return parts.join(' ');
+        }
+
+        function wrapSynGlossExamplePhraseUnderline(exampleEl, keywordIndices) {
+            const sorted = [...keywordIndices].sort((a, b) => a - b);
+            const spans = sorted.map((idx) => exampleEl.querySelector(`.example-word[data-i="${idx}"]`)).filter(Boolean);
+            if (!spans.length || spans.some((s) => s.closest('.syn-gloss-example-phrase'))) return;
+            const rangeStart = spans[0];
+            const rangeEnd = spans[spans.length - 1];
+            const parent = rangeStart.parentNode;
+            if (!parent) return;
+            const phraseWrap = document.createElement('span');
+            phraseWrap.className = 'syn-gloss-example-phrase';
+            parent.insertBefore(phraseWrap, rangeStart);
+            let node = rangeStart;
+            while (node) {
+                phraseWrap.appendChild(node);
+                if (node === rangeEnd) break;
+                node = node.nextSibling;
+            }
+        }
+
+        function buildSynExampleHtml(wordItem) {
+            const exampleSentence = String(wordItem.example || '').trim();
+            const words = exampleSentence.split(/\s+/).filter(Boolean);
+            const syntaxList = wordItem.exampleSyntax || [];
+            const { roles, segIndexByWord } = assignSyntaxSegmentMatchesToWords(words, syntaxList);
+            const orderColorIndices = segIndexByWord.map((si) => (si < 0 ? -1 : si));
+            const phrasesForUnderline = (wordItem.exampleWordGlosses || []).map((g) => String(g.en || '').trim()).filter(Boolean).sort((a, b) => b.length - a.length);
+            const keywordIndices = collectExampleKeywordIndices(words, phrasesForUnderline);
+            const glossAboveEntries = collectExampleWordGlossAboveEntries(wordItem, exampleSentence);
+            return buildExampleWordSpanHtmlWithSyntax(exampleSentence, roles, keywordIndices, orderColorIndices, glossAboveEntries);
+        }
+
+        function applyDefaultGlossEnUnderlines(exampleEl, wordItem) {
+            const exampleSentence = String(wordItem.example || '').trim();
+            const words = exampleSentence.split(/\s+/).filter(Boolean);
+            for (const g of wordItem.exampleWordGlosses || []) {
+                const enTerm = String(g.en || '').trim();
+                if (!enTerm) continue;
+                const indices = collectGlossPhraseMatchIndicesInExampleWords(words, enTerm);
+                wrapSynGlossExamplePhraseUnderline(exampleEl, indices);
+            }
+        }
+
+        const EXAMPLE_HTML = buildSynExampleHtml(WORD_ITEM);
+
+        const SAMPLES = [
+            { hex: '#262a33', label: 'Mark3read 현재', note: '쇼츠·색 예문 — 적절하고 무난', current: true, rec: 'shorts' },
+            { hex: '#24282f', label: '장시간 A', note: '262a33 −2 · 살짝 어두움 · 장시간 눈 편함', rec: 'comfort' },
+            { hex: '#232830', label: '장시간 B', note: 'shorts-thumb 이전값 · 조금 더 어두움 · 장시간 눈 편함', rec: 'comfort' },
+            { hex: '#004D13', label: '장시간 그린', note: 'rgb(0,77,19) · 딥 포레스트 · 장시간 눈 편함', rec: 'comfort' },
+            { hex: '#003810', label: '그린 −', note: '004D13 계열 · 더 어두움', rec: 'comfort' },
+            { hex: '#005A18', label: '그린 +', note: '004D13 계열 · 살짝 밝음', rec: 'comfort' },
+            { hex: '#0A4018', label: '그린 차콜', note: '004D13 계열 · 차분한 녹회색', rec: 'comfort' },
+            { hex: '#1e2229', label: '262a33 −8', note: 'rgb(30,34,41) 더 어두움', fine: true },
+            { hex: '#20242b', label: '262a33 −6', note: 'rgb(32,36,43)', fine: true },
+            { hex: '#22262d', label: '262a33 −4', note: 'rgb(34,38,45)', fine: true },
+            { hex: '#272b34', label: '262a33 +1', note: 'rgb(39,43,52)', fine: true },
+            { hex: '#282c35', label: '262a33 +2', note: 'rgb(40,44,53)', fine: true },
+            { hex: '#292e37', label: '262a33 +4', note: 'rgb(41,46,55)', fine: true },
+            { hex: '#2b3039', label: '262a33 +6', note: 'rgb(43,48,57)', fine: true },
+            { hex: '#2d323b', label: '262a33 +8', note: 'rgb(45,50,59) 더 밝음', fine: true },
+            { hex: '#2F3543', label: 'Mark / Mark3read 이전', note: '구 PAGE_BG_COLOR', ref: true },
+            { hex: '#242c39', label: '19diary 마진', note: '비슷한 차콜 네이비', ref: true },
+            { hex: '#1a1e26', label: '더 깊은 차콜', note: '대비 강조용', fine: true },
+            { hex: '#303848', label: '살짝 블루 그레이', note: '청기 도는 변형', fine: true },
+        ];
+
+        const PAGE_BG_STORAGE_KEY = 'mark3read_page_bg_color';
+        let toastTimer = null;
+
+        function showBgToast(message) {
+            const el = document.getElementById('bg-toast');
+            if (!el) return;
+            el.textContent = message;
+            el.classList.add('show');
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => el.classList.remove('show'), 2600);
+        }
+
+        function applyMark3readBg(hex) {
+            const norm = String(hex || '').trim().toLowerCase();
+            if (!/^#[0-9a-f]{6}$/.test(norm)) return;
+            try {
+                localStorage.setItem(PAGE_BG_STORAGE_KEY, norm);
+            } catch (_) {}
+            showBgToast(`${norm.toUpperCase()} 적용됨 — Mark3read 새로고침`);
+        }
+
+        function getCurrentSampleHex() {
+            return SAMPLES[current]?.hex || '#262a33';
+        }
+
+        const REC_LABELS = {
+            shorts: '추천 · 쇼츠·색 예문',
+            comfort: '추천 · 장시간 눈 편함',
+        };
+
+        const CURRENT_INDEX = SAMPLES.findIndex((s) => s.current);
+        let current = CURRENT_INDEX >= 0 ? CURRENT_INDEX : 0;
+        let touchStartX = 0;
+
+        const track = document.getElementById('carousel-track');
+        const dotsEl = document.getElementById('dots');
+        const btnPrev = document.getElementById('btn-prev');
+        const btnNext = document.getElementById('btn-next');
+        const btnPrev2 = document.getElementById('btn-prev2');
+        const btnNext2 = document.getElementById('btn-next2');
+        const frame = document.getElementById('shorts-frame');
+
+        function findSampleIndexByHex(hex) {
+            const norm = String(hex || '').toLowerCase();
+            return SAMPLES.findIndex((s) => s.hex.toLowerCase() === norm);
+        }
+
+        SAMPLES.forEach((item, i) => {
+            const recHtml = item.rec
+                ? `<div class="slide-rec slide-rec--${item.rec}">${REC_LABELS[item.rec] || item.rec}</div>`
+                : '';
+            const slide = document.createElement('div');
+            slide.className = 'slide';
+            slide.innerHTML =
+                `<div class="slide-preview shorts-thumb shorts-layout" data-example-color-scheme="8" style="--page-bg-color:${item.hex};--page-bg-fallback:${item.hex};">` +
+                `<header class="shorts-banner" role="banner" aria-label="시사 영단어">` +
+                `<p class="shorts-banner__title"><span class="shorts-banner__part">시사</span><span class="shorts-banner__word">영단어</span></p>` +
+                `</header>` +
+                `<div id="page-bg" aria-hidden="true"></div>` +
+                `<div class="preview-scroll">` +
+                `<div id="vocab-title-wrap"><span id="vocab-label">뉴스 어휘</span><span id="vocab-headline">${VOCAB_HEADLINE_HTML}</span></div>` +
+                `<div id="progress-container">${PROGRESS_HTML}</div>` +
+                `<div class="word-box syn-triplet-only">` +
+                `<div id="syn-example-0" class="syn-triplet-section syn-triplet-section--example syn-example-content">${EXAMPLE_HTML}</div>` +
+                `</div></div>` +
+                `<div class="slide-info">` +
+                recHtml +
+                `<div class="slide-hex">${item.hex.toUpperCase()}</div>` +
+                `<div class="slide-rgb">${hexToRgb(item.hex)}</div>` +
+                `<div class="slide-label">${item.label} · ${item.note}</div>` +
+                `<button type="button" class="slide-apply-btn" data-apply-hex="${item.hex}">Mark3read에 적용</button>` +
+                `<div class="slide-counter">${String(i + 1).padStart(2, '0')} / ${String(SAMPLES.length).padStart(2, '0')}</div>` +
+                `</div></div>`;
+            track.appendChild(slide);
+
+            const exampleEl = slide.querySelector('#syn-example-0');
+            applyDefaultGlossEnUnderlines(exampleEl, WORD_ITEM);
+
+            slide.querySelector('.slide-hex')?.addEventListener('click', () => applyMark3readBg(item.hex));
+            slide.querySelector('.slide-apply-btn')?.addEventListener('click', (e) => {
+                e.stopPropagation();
+                applyMark3readBg(item.hex);
+            });
+
+            const dot = document.createElement('button');
+            dot.className = 'dot' + (item.rec ? ` dot--${item.rec}` : '') + (i === current ? ' active' : '');
+            dot.type = 'button';
+            dot.setAttribute('aria-label', `${item.hex} ${item.label}`);
+            dot.addEventListener('click', () => goTo(i));
+            dotsEl.appendChild(dot);
+        });
+
+        function goTo(index) {
+            current = Math.max(0, Math.min(SAMPLES.length - 1, index));
+            track.style.transform = `translateX(-${current * 100}%)`;
+            dotsEl.querySelectorAll('.dot').forEach((d, i) => {
+                d.classList.toggle('active', i === current);
+            });
+            const atStart = current === 0;
+            const atEnd = current === SAMPLES.length - 1;
+            btnPrev.disabled = atStart;
+            btnNext.disabled = atEnd;
+            btnPrev2.disabled = atStart;
+            btnNext2.disabled = atEnd;
+        }
+
+        function next() { goTo(current + 1); }
+        function prev() { goTo(current - 1); }
+
+        btnPrev.addEventListener('click', prev);
+        btnNext.addEventListener('click', next);
+        btnPrev2.addEventListener('click', prev);
+        btnNext2.addEventListener('click', next);
+
+        document.querySelectorAll('[data-jump-hex]').forEach((btn) => {
+            btn.addEventListener('click', () => {
+                const idx = findSampleIndexByHex(btn.getAttribute('data-jump-hex'));
+                if (idx >= 0) goTo(idx);
+            });
+        });
+
+        document.getElementById('btn-apply-current')?.addEventListener('click', () => {
+            applyMark3readBg(getCurrentSampleHex());
+        });
+
+        frame.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].clientX;
+        }, { passive: true });
+
+        frame.addEventListener('touchend', (e) => {
+            const dx = e.changedTouches[0].clientX - touchStartX;
+            if (Math.abs(dx) < 40) return;
+            if (dx < 0) next();
+            else prev();
+        }, { passive: true });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') next();
+            if (e.key === 'ArrowLeft') prev();
+        });
+
+        goTo(current);
+    </script>
+</body>
+</html>

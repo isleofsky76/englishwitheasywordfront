@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>19underline — 밑줄·마킹 가이드</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="19underline.css">
+  <script src="19underline.js" defer></script>
+</head>
+<body>
+  <div id="page-bg" aria-hidden="true"></div>
+
+  <main class="wrapper">
+    <header class="page-header">
+      <p class="eyebrow">19underline</p>
+      <h1>다양한 밑줄·마킹 방법</h1>
+      <p class="lead">cf 필드에 <code>&lt;mark1&gt;~&lt;mark12&gt;</code> 태그를 넣어 학습 단어를 시각적으로 강조합니다.</p>
+    </header>
+
+    <section class="panel" aria-labelledby="demo-heading">
+      <h2 id="demo-heading">🎯 마킹 타입 미리보기</h2>
+      <p class="panel-desc">동일한 예문에서 <strong>privileged</strong>만 마킹 타입을 바꿔 비교합니다.</p>
+      <div id="mark-gallery" class="mark-gallery"></div>
+    </section>
+
+    <section class="panel" aria-labelledby="html-heading">
+      <h2 id="html-heading">📄 HTML 사용법</h2>
+      <pre class="code-block"><code>&lt;p&gt;"That's &lt;mark1&gt;privileged&lt;/mark1&gt; information," Jobs shot back.&lt;/p&gt;</code></pre>
+      <div class="live-demo" id="html-live-demo"></div>
+    </section>
+
+    <section class="panel" aria-labelledby="react-heading">
+      <h2 id="react-heading">⚛️ React에서 사용하기</h2>
+      <pre class="code-block"><code>function VocabCard({ vocabData }) {
+  return (
+    &lt;p&gt;
+      {vocabData.cf.split('&lt;').map((part, i) =&gt; {
+        if (part.includes('mark')) {
+          const tag = part.match(/mark\d+/)[0];
+          const text = part.match(/&gt;(.*?)&lt;\/mark/)[1];
+          return React.createElement(tag, { key: i }, text);
+        }
+        return part;
+      })}
+    &lt;/p&gt;
+  );
+}</code></pre>
+    </section>
+
+    <section class="panel" aria-labelledby="js-heading">
+      <h2 id="js-heading">📄 JavaScript (동적 마킹)</h2>
+      <pre class="code-block"><code>function addMarking(text, word, markType) {
+  const regex = new RegExp(`\\b(${word})\\b`, 'gi');
+  return text.replace(regex, `&lt;${markType}&gt;$1&lt;/${markType}&gt;`);
+}
+
+const result = addMarking(
+  "That's privileged information,\" Jobs shot back.",
+  'privileged',
+  'mark2'  // 'mark1', 'mark3' … 등
+);</code></pre>
+      <div class="dynamic-demo">
+        <label class="field-label" for="mark-select">마킹 타입</label>
+        <select id="mark-select" aria-label="마킹 타입 선택"></select>
+        <p class="dynamic-result" id="dynamic-result" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <section class="panel" aria-labelledby="json-heading">
+      <h2 id="json-heading">💾 JSON 구조 &amp; cf 필드 예시</h2>
+      <pre class="code-block" id="json-sample"></pre>
+      <div id="json-cf-examples" class="json-cf-grid"></div>
+    </section>
+
+    <section class="panel guide-table-panel" aria-labelledby="guide-heading">
+      <h2 id="guide-heading">📋 마킹 타입 가이드</h2>
+      <div id="mark-guide-table" class="mark-guide-table"></div>
+    </section>
+  </main>
+</body>
+</html>
