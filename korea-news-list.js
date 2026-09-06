@@ -1040,6 +1040,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function renderMessages(messages, container) {
         renderGuestbookTable(container, messages, {
             postPage: 'korea-news.html',
+            postPath: 'korea-news',
             apiMode: apiMode,
             board: 'korea-news',
             apiBaseUrl: API_BASE_URL,
