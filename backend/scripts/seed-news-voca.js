@@ -36,7 +36,7 @@ const article = {
     },
     {
       narrative: [
-        '3. 판사는 배심원들이 만장일치 판단에 실패한 후(**after jurors failed to come to a unanimous decision**) 금요일 재판 무효를 선언했습니다(**declared a mistrial**).',
+        '3. 판사는 배심원들이 만장일치 판단에 실패한 후(**after jurors failed to come to a unanimous decision**) 금요일 심리 무효를 선언했습니다(**declared a mistrial**).',
       ],
     },
     {
