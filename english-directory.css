@@ -32,31 +32,36 @@ body.english-directory-page {
   scroll-margin-top: calc(var(--navbar-height, 56px) + 16px);
 }
 
+.dir-banner {
+  margin: 0;
+  margin-top: var(--navbar-height, 56px);
+  padding: 1.05rem 1.25rem;
+  background: #1e4e8c;
+  color: #fff;
+  text-align: center;
+}
+
+.dir-banner h1 {
+  margin: 0;
+  font-size: calc(1.25rem + 2px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.35;
+  color: #fff;
+}
+
 .dir-page {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: calc(var(--navbar-height, 56px) + 28px) 1.25rem 3rem;
+  padding: 1.15rem 1.25rem 3rem;
 }
 
-.dir-header {
-  margin-bottom: 1.1rem;
-  padding-bottom: 0.65rem;
-}
-
-.dir-header h1 {
-  margin: 0 0 0.35rem;
-  font-size: 22px;
-  font-weight: 500;
-  color: var(--text-primary);
-  letter-spacing: -0.02em;
-  line-height: 1.35;
-}
-
-.dir-header p {
-  margin: 0;
+.dir-lead {
+  margin: 0 0 1rem;
   font-size: 14px;
   font-weight: 400;
   color: var(--text-secondary);
+  line-height: 1.5;
 }
 
 .dir-filters {
@@ -102,7 +107,7 @@ body.english-directory-page {
 
 .dir-category-title {
   margin: 0 0 0.65rem;
-  font-size: 15px;
+  font-size: 17px;
   font-weight: 600;
   color: var(--text-primary);
   letter-spacing: -0.02em;
@@ -124,7 +129,7 @@ body.english-directory-page {
 
 .dir-note-line {
   margin: 0;
-  font-size: 15px;
+  font-size: 17px;
   font-weight: 500;
   color: var(--text-primary);
   line-height: 1.45;
@@ -215,12 +220,15 @@ body.english-directory-page {
 
 @media (max-width: 600px) {
   .dir-page {
-    padding-top: calc(var(--navbar-height, 56px) + 20px);
     padding-left: max(16px, env(safe-area-inset-left, 0px));
     padding-right: max(16px, env(safe-area-inset-right, 0px));
   }
 
-  .dir-header h1 {
-    font-size: 20px;
+  .dir-banner {
+    padding: 0.9rem 1rem;
+  }
+
+  .dir-banner h1 {
+    font-size: calc(1.1rem + 2px);
   }
 }

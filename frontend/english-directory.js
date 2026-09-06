@@ -21,7 +21,7 @@
 
   var SITES = [
   // News
-  { name: 'BBC News', category: 'News', level: 'Intermediate–Advanced', type: 'News / Text / Video', url: 'https://www.bbc.com/news', desc: '영국 BBC의 글로벌 뉴스. 명확한 문장과 다양한 주제로 읽기·청취 연습에 좋습니다.' },
+  { name: 'BBC News', category: 'News', level: 'Intermediate–Advanced', type: 'News / Text / Video', url: 'https://www.bbc.com/news', desc: '영국의 BBC의 글로벌 뉴스. 명확한 문장과 다양한 주제로 읽기·청취 연습에 좋습니다.' },
   { name: 'CNN', category: 'News', level: 'Intermediate–Advanced', type: 'News / Text / Video', url: 'https://www.cnn.com/', desc: '미국 중심의 국제 뉴스. 속보부터 심층 분석까지 실시간 영어 뉴스를 접할 수 있습니다.' },
   { name: 'Reuters', category: 'News', level: 'Advanced', type: 'News / Text', url: 'https://www.reuters.com/', desc: '전 세계 통신사 뉴스. 간결하고 객관적인 문체로 고급 독해에 적합합니다.' },
   { name: 'AP News', category: 'News', level: 'Intermediate–Advanced', type: 'News / Text / Photo', url: 'https://apnews.com/', desc: '미국 AP통신 뉴스. 짧고 정확한 기사로 뉴스 영어 표현을 익히기 좋습니다.' },
