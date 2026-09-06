@@ -195,12 +195,9 @@
 
       stats.classList.add('preview-meta-stats--hidden');
 
-      var prevFlex = title.style.flex;
       var prevMaxWidth = title.style.maxWidth;
-      title.style.flex = '0 0 auto';
       title.style.maxWidth = 'none';
       var titleNatural = title.scrollWidth;
-      title.style.flex = prevFlex;
       title.style.maxWidth = prevMaxWidth;
 
       stats.classList.remove('preview-meta-stats--hidden');
