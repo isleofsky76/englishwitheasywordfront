@@ -240,7 +240,7 @@ ${head}
     <link rel="stylesheet" href="../../${board.cssFile}?v=${board.cssVersion}">
 ${(board.extraCss || []).map((c) => `    <link rel="stylesheet" href="../../${c.file}?v=${c.version}">`).join('\n')}
     <link rel="stylesheet" href="../../title-text-sharp.css?v=20260610">
-    <link rel="stylesheet" href="../../viewpost-like.css?v=20260625">
+    <link rel="stylesheet" href="../../viewpost-like.css?v=20260906gray">
     <link rel="stylesheet" href="../../nav-home-menu.css?v=20260617">
     <link rel="stylesheet" href="../../navbar-unified.css?v=20260612c">
     <link rel="stylesheet" href="../../weather-banner.css?v=20260612g">
@@ -265,7 +265,7 @@ ${(board.extraCss || []).map((c) => `    <link rel="stylesheet" href="../../${c.
     <script src="../../page30-api-config.js"></script>
     <script src="../../viewpost-seo.js?v=20260622a"></script>
     <script src="../../viewpost-meta.js?v=20260627"></script>
-    <script src="../../viewpost-like.js?v=20260906heart"></script>
+    <script src="../../viewpost-like.js?v=20260906gray"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../../nav-home-menu.js?v=20260720a"></script>
     <script src="../../${board.jsFile}?v=${board.jsVersion}"></script>

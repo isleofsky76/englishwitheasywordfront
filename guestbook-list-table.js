@@ -111,7 +111,7 @@
       '<time class="gb-meta-date">' + escapeHtml(dateTimeStr) + '</time></span>' +
       '<span class="gb-meta-item"><span class="gb-meta-icon" aria-hidden="true">👁</span>' +
       '<span class="gb-meta-views">' + views + '</span> 조회</span>' +
-      '<span class="gb-meta-item"><span class="gb-meta-icon" aria-hidden="true">❤️</span>' +
+      '<span class="gb-meta-item"><span class="gb-meta-icon gb-like-icon" aria-hidden="true">♥</span>' +
       '<span class="gb-meta-likes">' + likeCount + '</span> 추천</span>' +
       '</div>';
   }
@@ -184,7 +184,7 @@
             '<span class="gb-mobile-meta-author">' + (safeNickname || '-') + '</span>' +
             '<span class="gb-mobile-meta-date">' + escapeHtml(dateTimeStr) + '</span>' +
             '<span class="gb-mobile-meta-stat">👁 ' + escapeHtml(String(showViews)) + '</span>' +
-            '<span class="gb-mobile-meta-stat">❤️ ' + escapeHtml(String(showLikes)) + '</span>' +
+            '<span class="gb-mobile-meta-stat"><span class="gb-like-icon" aria-hidden="true">♥</span> ' + escapeHtml(String(showLikes)) + '</span>' +
           '</div>' +
         '</td>' +
         '<td class="gb-td gb-td-nickname">' + safeNickname + '</td>' +

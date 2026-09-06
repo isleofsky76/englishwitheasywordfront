@@ -78,6 +78,16 @@
 .vp-like-icon {
   font-size: 1em;
   line-height: 1;
+  color: #888;
+  filter: grayscale(1);
+  opacity: 0.9;
+}
+
+.vp-like-btn.is-active .vp-like-icon,
+.vp-like-btn:disabled .vp-like-icon {
+  color: #357abd;
+  filter: none;
+  opacity: 1;
 }
 
 .vp-like-label {

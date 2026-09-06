@@ -648,9 +648,19 @@
             display: none !important;
         }
         .preview-likes {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.2rem;
             color: var(--text-secondary);
             font-size: 12px;
             font-weight: 400;
+        }
+        .preview-like-heart {
+            color: var(--text-secondary);
+            font-size: 12px;
+            line-height: 1;
+            opacity: 0.85;
+            filter: grayscale(1);
         }
         .preview-meta-stats .preview-sep {
             color: var(--text-secondary);
@@ -1087,7 +1097,7 @@
     <script src="viewpost-seo.js?v=20260702"></script>
     <script src="nav-home-menu.js?v=20260905menu"></script>
     <script src="site-masthead.js?v=20260818d"></script>
-    <script src="home-board-preview.js?v=20260906heart"></script>
+    <script src="home-board-preview.js?v=20260906gray"></script>
     <script src="english-directory.js" defer></script>
     
     <script>
@@ -1107,7 +1117,7 @@
             return '<span class="preview-meta-stats preview-meta-stats--hidden">' +
                 '<span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> ' + viewCount + '</span>' +
                 '<span class="preview-sep preview-sep--stats" aria-hidden="true"> </span>' +
-                '<span class="preview-likes">❤️ ' + likeCount + '</span>' +
+                '<span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> ' + likeCount + '</span>' +
                 '</span>';
         }
 
