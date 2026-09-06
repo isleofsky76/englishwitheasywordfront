@@ -10,6 +10,7 @@
     { href: 'index.html', label: '홈', tone: 'home', pages: ['index.html', ''] },
     { href: 'english-synonym-list.html', label: '연관단어', tone: 'syn', pages: ['english-synonym-list.html', 'english-synonym.html'] },
     { href: 'defense-news-list.html', label: '국방뉴스', tone: 'defense', pages: ['defense-news-list.html', 'defense-news.html'] },
+    { href: 'korea-news-list.html', label: '한국뉴스', tone: 'defense', pages: ['korea-news-list.html', 'korea-news.html'] },
     { href: 'news-voca-list.html', label: '국제', tone: 'news', pages: ['news-voca-list.html', 'news-voca.html'] },
     { href: 'culture-voca-list.html', label: '컬쳐', tone: 'culture', pages: ['culture-voca-list.html', 'culture-voca.html'] },
     { href: 'english-opinions-list.html', label: '오피니언', tone: 'opine', pages: ['english-opinions-list.html', 'english-opinions.html'] },
@@ -45,6 +46,7 @@
       var map = {
         'news-voca': 'news-voca.html',
         'defense-news': 'defense-news.html',
+        'korea-news': 'korea-news.html',
         'word-of-the-day': 'word-of-the-day.html',
         'popular-voca': 'popular-voca.html',
         'english-synonym': 'english-synonym.html',

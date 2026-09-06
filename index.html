@@ -981,6 +981,15 @@
                 <div id="defense-news-preview-list" role="region" aria-label="국방뉴스 목록"></div>
             </article>
 
+            <!-- Korea News (국방 / 국제) -->
+            <article class="preview-section">
+                <div class="preview-header">
+                    <h2>한국뉴스</h2>
+                    <div class="preview-more"><a href="korea-news-list.html">더보기 &gt;</a></div>
+                </div>
+                <div id="korea-news-preview-list" role="region" aria-label="한국뉴스 목록"></div>
+            </article>
+
             <!-- News Vocabulary -->
             <article class="preview-section">
                 <div class="preview-header">
@@ -1238,6 +1247,7 @@
             'word-of-the-day.html': 'word-of-the-day',
             'english-synonym.html': 'english-synonym',
             'defense-news.html': 'defense-news',
+            'korea-news.html': 'korea-news',
             'english-opinions.html': 'english-opinions',
             'calm-mind.html': 'calm-mind',
             'popular-voca.html': 'popular-voca',
@@ -1332,7 +1342,7 @@
         }
 
         var previewSkeletonHtml = buildSkeletonListHtml(3);
-        ['best-views-preview-list', 'recent-updates-preview-list', 'wordofday-preview-list', 'news-voca-preview-list', 'defense-news-preview-list', 'vocabulary-quiz-preview-list', 'synonym-preview-list', 'easy-voca-preview-list', 'situational-english-preview-list', 'cooking-voca-preview-list', 'culture-voca-preview-list', 'ranking-news-preview-list', 'photo-english-preview-list', 'pros-cons-preview-list', 'opinions-preview-list', 'shorts-bg-image-preview-list', 'calm-mind-preview-list'].forEach(function(id) {
+        ['best-views-preview-list', 'recent-updates-preview-list', 'wordofday-preview-list', 'news-voca-preview-list', 'defense-news-preview-list', 'korea-news-preview-list', 'vocabulary-quiz-preview-list', 'synonym-preview-list', 'easy-voca-preview-list', 'situational-english-preview-list', 'cooking-voca-preview-list', 'culture-voca-preview-list', 'ranking-news-preview-list', 'photo-english-preview-list', 'pros-cons-preview-list', 'opinions-preview-list', 'shorts-bg-image-preview-list', 'calm-mind-preview-list'].forEach(function(id) {
             var el = document.getElementById(id);
             if (el) el.innerHTML = previewSkeletonHtml;
         });
@@ -1340,6 +1350,7 @@
         var HOME_PREVIEW_SECTIONS = [
             { listId: 'synonym-preview-list', apiPath: '/vocabulary', postPage: 'english-synonym.html', emptyMessage: '게시글이 없습니다.', fallbackLink: '<a href="english-synonym-list.html">연관단어 보기</a>' },
             { listId: 'defense-news-preview-list', apiPath: '/defense-news', postPage: 'defense-news.html', postPath: 'defense-news', emptyMessage: '게시글이 없습니다.', fallbackLink: '<a href="defense-news-list.html">국방뉴스 보기</a>' },
+            { listId: 'korea-news-preview-list', apiPath: '/korea-news', postPage: 'korea-news.html', postPath: 'korea-news', emptyMessage: '게시글이 없습니다.', fallbackLink: '<a href="korea-news-list.html">한국뉴스 보기</a>' },
             { listId: 'news-voca-preview-list', apiPath: '/guestbook', postPage: 'news-voca.html', emptyMessage: '게시글이 없습니다.', fallbackLink: '<a href="news-voca-list.html">뉴스 어휘 보기</a>' },
             { listId: 'culture-voca-preview-list', apiPath: '/culture-voca', postPage: 'culture-voca.html', emptyMessage: '게시글이 없습니다.', fallbackLink: '<a href="culture-voca-list.html">컬쳐 어휘 보기</a>' },
             { listId: 'opinions-preview-list', apiPath: '/opinions', postPage: 'english-opinions.html', postPath: 'english-opinions', emptyMessage: '게시글이 없습니다.', fallbackLink: '<a href="english-opinions-list.html">오피니언 보기</a>' },

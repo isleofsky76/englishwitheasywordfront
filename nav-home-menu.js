@@ -34,6 +34,7 @@
         { href: 'english-synonym-list.html', label: '유의어', pages: ['english-synonym-list.html', 'english-synonym.html'] },
 
         { href: 'defense-news-list.html', label: '국방뉴스', pages: ['defense-news-list.html', 'defense-news.html'] },
+        { href: 'korea-news-list.html', label: '한국뉴스', pages: ['korea-news-list.html', 'korea-news.html'] },
 
         { href: 'news-voca-list.html', label: '국제', pages: ['news-voca-list.html', 'news-voca.html'] },
 

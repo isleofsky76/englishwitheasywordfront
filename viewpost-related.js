@@ -59,6 +59,13 @@
             listHtml: 'defense-news-list.html',
         },
         {
+            apiBoard: 'korea-news',
+            seoBoard: 'korea-news',
+            heading: '다른 한국뉴스',
+            listPath: '/korea-news',
+            listHtml: 'korea-news-list.html',
+        },
+        {
             apiBoard: 'shorts-bg-image',
             seoBoard: 'shorts-bg-image',
             heading: '다른 신문읽는 이미지',
