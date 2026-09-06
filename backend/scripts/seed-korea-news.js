@@ -10,78 +10,70 @@ import { uploadKoreaNews } from './korea-news-format.js';
 // ========== 여기만 수정 ==========
 
 const article = {
-  title: '한국 관광객 불만 사상 최고',
+  title: '서울세계불꽃축제',
 
-  slug: 'tourist-complaints-korea-record-high-travel-boom-koreatimes',
+  slug: 'seoul-fireworks-show-lights-up-skies-yonhap',
 
   metaDescription:
-    'The Korea Times 기사에서 추출한 한국 관광객 불만 관련 문장. complaints hit a record high, reckless taxi driving, overcharging, surpass, come up with measures, accommodations, account for.',
+    'Yonhap 기사에서 추출한 서울세계불꽃축제 관련 문장. annual fireworks show, cool early autumn night, lighting up the skies, spectators on hand, capped off the night, drawing oohs and aahs, traffic controls.',
 
-  password: 'password_seed_tourist_complaints_korea_record_high_travel_boom_koreatimes',
+  password: 'password_seed_seoul_fireworks_show_lights_up_skies_yonhap',
 
-  datePublished: '2026-09-06',
+  datePublished: '2026-09-05',
 
   intro: [
-    '한국의 관광객 불만이 여행 회복세 속에서 사상 최고치를 기록했다는 The Korea Times 기사에서 추출한 문장입니다.',
+    '서울세계불꽃축제가 선선한 초가을 밤 서울 하늘을 밝혔다 는 연합뉴스 기사에서 추출한 문장입니다.',
   ],
 
   words: [
     {
       narrative: [
-        '1. 한국의 관광객 불만(**complaints**)이 올해 사상 최고치를 기록했습니다(**hit a record high**).',
+        '1. 한국 최대 규모의 연례 불꽃놀이(**annual fireworks show**)가 선선한 초가을 밤(**cool early autumn night**) 서울 하늘을 밝혔습니다(**lighting up the skies**).',
       ],
     },
     {
       narrative: [
-        '2. 난폭한 택시 운전(**reckless taxi driving**)부터 쇼핑몰 바가지요금(**overcharging**)까지 다양한 문제가 제기됐습니다.',
+        '2. 올해 행사는 추석 연휴(**Chuseok fall harvest holiday**) 때문에 예년보다 약 3주 일찍 열렸습니다(**took place about three weeks earlier**).',
       ],
     },
     {
       narrative: [
-        '3. 올해 1월부터 7월까지 접수된 불만은 1,753건으로(**1,753 complaints were filed nationwide between January and July**), 이미 지난해 전체 1,744건을 넘어섰습니다(**surpassing the 1,744 cases reported last year**).',
+        '3. 서울세계불꽃축제에는 약 53만 명의 관람객(**spectators**)이 현장에 있었습니다(**on hand**).',
       ],
     },
     {
       narrative: [
-        '4. 관광 서비스 개선을 위한 대책을 마련해야 한다는 요구가 커지고 있습니다(**come up with measures to improve tourism services**).',
+        '4. 한국 팀은 마지막 약 20분간 공연하며(**with its show for the final 20 minutes**) 밤을 마무리했고(**capped off the night**), 관람객들의 감탄을 자아냈습니다(**drawing oohs and aahs**).',
       ],
     },
     {
       narrative: [
-        '5. 숙박 관련 불만(**accommodations**)이 가장 많았으며, 일방적 예약 취소(**one-sided reservation cancellations**)와 과도한 취소 수수료(**excessive cancellation fees**) 관련 사례가 500건이었습니다.',
+        '5. 약 6,800명의 인력이 동원돼(**were mobilized**) 인파를 관리하고(**manage crowds**) 비상 상황에 대응했습니다(**handle emergencies**).',
       ],
     },
     {
       narrative: [
-        '6. 택시기사가 미터기 사용을 거부하거나 난폭하게 운전하는 불만(**drive recklessly**)은 182건이었습니다.',
+        '6. 서울시는 관련 기관들과 함께(**with relevant agencies**) 안전본부를 설치해(**set up a safety headquarters**) 인파와 교통을 관리했습니다(**oversee crowds and traffic**).',
       ],
     },
     {
       narrative: [
-        '7. 외국인 관광객이 전체 불만의 84.3%를 차지했습니다(**account for 84.3 percent of all complaints**).',
+        '7. 현장 지휘센터(**operational command centers**)가 응급의료시설을 겸했고(**doubling as emergency medical stations**), 45척의 순찰선(**45 patrol boats**)이 투입됐습니다.',
       ],
     },
     {
       narrative: [
-        '8. 정부와 민간 부문 모두(**both the government and the private sector**) 관광객 만족도를 높이기 위해 노력해야 한다는 지적이 나왔습니다.',
-      ],
-    },
-    {
-      narrative: [
-        '9. 관광객과 관광산업이 성장하면서 불만과 부정적 지표(**negative indicators**)도 함께 증가했습니다.',
-      ],
-    },
-    {
-      narrative: [
-        '10. SNS에 공유된 부정적인 경험이 빠르게 확산돼 관광산업에 악영향을 미칠 수 있습니다(**hurt the tourism industry**).',
+        '8. 교통 통제가 시행됐고(**Traffic controls were also enforced**), 제한 구간의 24개 버스 노선이 일시적으로 우회됐습니다(**were temporarily rerouted**).',
       ],
     },
   ],
 
   source: {
-    text: 'The Korea Times | Tourist complaints in Korea hit record high amid travel boom | By Yonhap',
-    url: 'https://www.koreatimes.co.kr/southkorea/20260906/tourist-complaints-in-korea-hit-record-high-amid-travel-boom',
+    text: 'Yonhap | Fireworks show lights up Seoul skies',
+    url: 'https://en.yna.co.kr/view/AEN20260905000751315',
   },
+
+ 
 
 };
 
