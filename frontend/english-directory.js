@@ -237,24 +237,6 @@
       .replace(/"/g, '&quot;');
   }
 
-  var CATEGORY_ICON = {
-    'News': '📰',
-    'Business': '💼',
-    'Tech': '💻',
-    'Politics': '🏛️',
-    'Science': '🔬',
-    'Culture': '🎭',
-    'Magazines': '📄',
-    'Broadcasting': '📺',
-    'Sports': '🏅',
-    'YouTube / Broadcasters': '▶️',
-    'Documentary': '🎬',
-    'English Learning': '📚',
-    'Podcasts': '🎧',
-    'Kids / Easy English': '🧸',
-    'Literature': '📖'
-  };
-
   function inferCountry(site) {
     var blob = ((site.name || '') + ' ' + (site.url || '')).toLowerCase();
     if (/bbc\.|theguardian|sky\.|ft\.com|economist|theregister|granta|bbc\.co\.uk|skysports|newscientist/.test(blob)) {
@@ -272,73 +254,27 @@
     return { flag: '🌐', label: 'Global' };
   }
 
-  function levelMeta(level) {
-    var raw = String(level || '');
-    var lower = raw.toLowerCase();
-    var cls = 'dir-badge--level-mid';
-    var label = raw;
-
-    if (/^beginner$/.test(lower) || /^beginner[–-]intermediate$/.test(lower)) {
-      cls = 'dir-badge--level-easy';
-      label = lower.indexOf('intermediate') >= 0 ? '초급~중급' : '초급';
-    } else if (/^intermediate$/.test(lower)) {
-      cls = 'dir-badge--level-easy';
-      label = '중급';
-    } else if (/intermediate[–-]advanced/.test(lower) || /beginner[–-]advanced/.test(lower)) {
-      cls = 'dir-badge--level-mid';
-      label = /beginner/.test(lower) ? '초급~고급' : '중급~고급';
-    } else if (/^advanced$/.test(lower)) {
-      cls = 'dir-badge--level-hard';
-      label = '고급';
-    }
-
-    return { cls: cls, label: label };
-  }
-
-  function typeBadges(typeStr) {
-    var t = String(typeStr || '');
-    var badges = [];
-    if (/video|tv|streaming|youtube|talks|film/i.test(t)) badges.push({ icon: '📺', label: '영상' });
-    if (/podcast/i.test(t)) badges.push({ icon: '🎧', label: '팟캐스트' });
-    else if (/audio|radio|listen/i.test(t)) badges.push({ icon: '🎧', label: '청취' });
-    if (/news|article|text|analysis|opinion|photo/i.test(t)) badges.push({ icon: '📰', label: '기사' });
-    if (/magazine|essay|literature|poetry|fiction|classics|reference/i.test(t)) badges.push({ icon: '📄', label: '읽기' });
-    if (/learning|kids|games|phonics|stories/i.test(t) && !badges.length) {
-      badges.push({ icon: '📚', label: '학습' });
-    }
-    if (!badges.length) badges.push({ icon: '🔗', label: '링크' });
-
-    var seen = {};
-    return badges.filter(function (b) {
-      if (seen[b.label]) return false;
-      seen[b.label] = true;
-      return true;
-    }).slice(0, 3);
+  function shortNote(site) {
+    var desc = String(site.desc || '').trim();
+    if (!desc) return String(site.type || site.category || '').trim();
+    // 첫 문장만 짧게
+    var cut = desc.split(/[.。]/)[0].trim();
+    return cut || desc;
   }
 
   function buildCard(site) {
     var country = inferCountry(site);
-    var level = levelMeta(site.level);
-    var types = typeBadges(site.type);
-    var catIcon = CATEGORY_ICON[site.category] || '🔗';
-
-    var typeHtml = types.map(function (t) {
-      return '<span class="dir-badge dir-badge--type">' + t.icon + ' ' + escapeHtml(t.label) + '</span>';
-    }).join('');
+    var note = shortNote(site);
 
     return (
-      '<article class="dir-card" data-category="' + escapeHtml(site.category) + '">' +
-        '<div class="dir-card-top">' +
-          '<span class="dir-card-icon" aria-hidden="true">' + catIcon + '</span>' +
-          '<span class="dir-badge dir-badge--country">' + country.flag + ' ' + escapeHtml(country.label) + '</span>' +
-        '</div>' +
-        '<h3 class="dir-card-title">' + escapeHtml(site.name) + '</h3>' +
-        '<div class="dir-card-badges">' +
-          '<span class="dir-badge ' + level.cls + '">' + escapeHtml(level.label) + '</span>' +
-          typeHtml +
-        '</div>' +
-        '<p class="dir-card-desc">' + escapeHtml(site.desc) + '</p>' +
-        '<a class="dir-card-link" href="' + escapeHtml(site.url) + '" target="_blank" rel="noopener noreferrer">방문하기</a>' +
+      '<article class="dir-note" data-category="' + escapeHtml(site.category) + '">' +
+        '<p class="dir-note-line">' +
+          '<span class="dir-note-name">' + escapeHtml(site.name) + '</span>' +
+          '<span class="dir-note-flag" aria-label="' + escapeHtml(country.label) + '"> ' + country.flag + '</span>' +
+          ' ' +
+          '<a class="dir-note-visit" href="' + escapeHtml(site.url) + '" target="_blank" rel="noopener noreferrer">방문하기</a>' +
+        '</p>' +
+        '<p class="dir-note-desc">- ' + escapeHtml(note) + '</p>' +
       '</article>'
     );
   }
@@ -407,7 +343,7 @@
       }
 
       if (activeCategory !== 'all') {
-        contentEl.innerHTML = '<div class="dir-grid">' + filtered.map(buildCard).join('') + '</div>';
+        contentEl.innerHTML = '<div class="dir-notes">' + filtered.map(buildCard).join('') + '</div>';
         return;
       }
 
@@ -418,7 +354,7 @@
         html +=
           '<section class="dir-category" id="cat-' + cat.replace(/[^a-z0-9]+/gi, '-').toLowerCase() + '">' +
             '<h2 class="dir-category-title">' + escapeHtml(cat) + '</h2>' +
-            '<div class="dir-grid">' + catSites.map(buildCard).join('') + '</div>' +
+            '<div class="dir-notes">' + catSites.map(buildCard).join('') + '</div>' +
           '</section>';
       });
       contentEl.innerHTML = html;
