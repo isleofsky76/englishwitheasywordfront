@@ -36,15 +36,11 @@ const article = {
 
   message: `<div class="cm-source-box"><p><strong>출처</strong> — 이 글은 법륜스님 즉문즉설 영상 내용을 근거로, 기억하고 싶은 말을 <strong>개인 목적</strong>으로 남긴 것입니다.</p><p><a class="cm-yt-link" href="https://www.youtube.com/watch?v=XDTPFNUft74&t=4s" target="_blank" rel="noopener noreferrer">📺 법륜스님 즉문즉설 바로가기</a></p></div>
 
-<p><strong>고행이나 극단적인 결심이 답이 아니다</strong></p>
-
 <p><span class="cm-hl cm-hl--paint">고행이나 극단적인 결심이 답이 아니다.</span></p>
 
 <p>무언가를 억지로 결심하거나 고행하듯 밀어붙이면 오래가지 못하고(작심삼일), 뜻대로 안 될 때 자책과 자학으로 이어지기 쉽다.</p>
 
 <p>남의 멋진 모습(스님의 삶, 의사의 죽음, 화려한 결혼 등)을 보고 무작정 따라 하려는 것은 수행이 아니라 <span class="cm-hl cm-hl--marker">또 다른 '욕망'에 불과하다.</span></p>
-
-<p><strong>판단 없이 있는 그대로 '알아차리기'</strong></p>
 
 <p><span class="cm-hl cm-hl--box-round">판단 없이 있는 그대로 '알아차리기'(너 자신을 알라)가 중요하다.</span></p>
 
@@ -52,13 +48,11 @@ const article = {
 
 <p>의사가 환자를 치료하기 전 병을 먼저 진단하듯, 내가 어떤 상황에서 화를 내고 질투하는지 <span class="cm-hl cm-hl--box">제3자의 눈으로 자기 상태를 가만히 관찰하고 파악하는 것이 우선.</span></p>
 
-<p><strong>욕심내지 말고 '작은 것 하나만' 시도하기</strong></p>
+<p><span class="cm-hl cm-hl--marker">욕심내지 말고 '작은 것 하나만' 시도하기.</span></p>
 
 <p>모든 것을 한 번에 다 고치려 들면 실패할 수밖에 없다.</p>
 
-<p>개선하고 싶은 부분이 있다면 <span class="cm-hl cm-hl--marker">딱 한두 가지만 정해 가볍게 시도.</span></p>
-
-<p><strong>안 되는 것은 '그대로 수용하기'</strong></p>
+<p>개선하고 싶은 부분이 있다면 딱 한두 가지만 정해 가볍게 시도.</p>
 
 <p><span class="cm-hl cm-hl--oval-slant">안 되는 것은 '그대로 수용하기'(과보 받아들이기).</span></p>
 
