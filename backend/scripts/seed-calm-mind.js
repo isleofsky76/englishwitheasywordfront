@@ -9,65 +9,62 @@ import { applySeoAfterUpload, toIsoDateOnly } from './voca-seo.js';
 
 
 // ========== 여기만 수정 ==========
-// ========== 여기만 수정 ==========
-
-// ========== 여기만 수정 ==========
-
-// ========== 여기만 수정 ==========
-
+//cd c:\langchain\backend
+// node scripts/seed-calm-mind.js
+// cd c:\langchain
+// git pull origin main --no-edit
+// git add calm-mind/how-to-become-a-wise-adult/ sitemap.xml
+// git commit -m "Add calm mind: 지혜로운 어른이 되려면 | 법륜스님 즉문즉설"
+// git push origin main
 // ========== 여기만 수정 ==========
 
 // ========== 여기만 수정 ==========
 
 const article = {
-  title: '될 대로 되라며 살아도 될까요? | 법륜 스님 즉문즉설',
+  title: '고생을 많이 하면 정말 법륜스님처럼 현명해지나요? | 법륜스님 즉문즉설',
 
-  slug: 'do-your-best-without-clinging-to-results',
+  slug: 'does-suffering-make-you-wise',
 
   metaDescription:
-    '법륜스님 즉문즉설을 듣고 정리한 글. 될 대로 되라는 마음으로 살아도 되는지 고민하는 24살 청년에게, 최선을 다하되 결과에 연연하지 않는 삶의 태도를 설명한 내용을 담았습니다.',
+    '법륜스님 즉문즉설을 듣고 정리한 글. 고행이나 극단적인 결심보다 있는 그대로 알아차리고, 작은 것부터 가볍게 시도하며, 안 되는 것은 수용하는 태도에 관한 내용을 담았습니다.',
 
-  password: 'seed_calm_mind_do-your-best-without-clinging-to-results',
+  password: 'seed_wisdom_does-suffering-make-you-wise',
 
   nickname: 'admin',
 
-  datePublished: '2026-08-28',
+  datePublished: '2026-09-06',
 
-  message: `<div class="cm-source-box"><p><strong>출처</strong> — 이 글은 법륜스님 즉문즉설 영상 내용을 근거로, 기억하고 싶은 말을 <strong>개인 목적</strong>으로 남긴 것입니다.</p><p><a class="cm-yt-link" href="유튜브주소" target="_blank" rel="noopener noreferrer">📺 법륜스님 즉문즉설 바로가기</a></p></div>
+  message: `<div class="cm-source-box"><p><strong>출처</strong> — 이 글은 법륜스님 즉문즉설 영상 내용을 근거로, 기억하고 싶은 말을 <strong>개인 목적</strong>으로 남긴 것입니다.</p><p><a class="cm-yt-link" href="https://www.youtube.com/watch?v=XDTPFNUft74&t=4s" target="_blank" rel="noopener noreferrer">📺 법륜스님 즉문즉설 바로가기</a></p></div>
 
-<p><strong>질문자는 24살 군 전역 후 예전에는 많이 힘들고 우울했던 시기가 있었지만, 법륜스님 말씀을 들으면서 삶을 긍정적으로 보게 되었습니다.</strong></p>
+<p><strong>고행이나 극단적인 결심이 답이 아니다</strong></p>
 
-<p>그런데 요즘은 뭐든 <span class="cm-hl cm-hl--paint">“될 대로 되라”</span>는 식으로 너무 가볍게 생각하게 되었습니다.</p>
+<p><span class="cm-hl cm-hl--paint">고행이나 극단적인 결심이 답이 아니다.</span></p>
 
-<p>결혼도 해야 하고 미래도 준비해야 하는데, 이렇게 “될 대로 되라”는 식으로 살아도 되는지가 고민이었습니다.</p>
+<p>무언가를 억지로 결심하거나 고행하듯 밀어붙이면 오래가지 못하고(작심삼일), 뜻대로 안 될 때 자책과 자학으로 이어지기 쉽다.</p>
 
-<p>스님은 어떤 여인이 좋다면 그 여인에게 호의를 베풀 수 있다고 예를 들었습니다.</p>
+<p>남의 멋진 모습(스님의 삶, 의사의 죽음, 화려한 결혼 등)을 보고 무작정 따라 하려는 것은 수행이 아니라 <span class="cm-hl cm-hl--marker">또 다른 '욕망'에 불과하다.</span></p>
 
-<p>하지만 <span class="cm-hl cm-hl--marker">그 여인이 나를 좋아할지 안 좋아할지는 그 여인의 권리</span>입니다.</p>
+<p><strong>판단 없이 있는 그대로 '알아차리기'</strong></p>
 
-<p>내가 좋아한다고 해서 상대도 반드시 나를 좋아해야 한다고 강요할 수는 없습니다.</p>
+<p><span class="cm-hl cm-hl--box-round">판단 없이 있는 그대로 '알아차리기'(너 자신을 알라)가 중요하다.</span></p>
 
-<p>노력도 마찬가지입니다.</p>
+<p>즐겁거나 괴로운 감정, 좁은 마음, 화나 짜증이 일어날 때 “이러면 안 된다”, “왜 나는 이럴까” 하고 옳고 그름을 따지거나 자책하지 말 것.</p>
 
-<p><strong>노력은 하되 되고 안 되는 것은 하늘에 맡기는 것.</strong></p>
+<p>의사가 환자를 치료하기 전 병을 먼저 진단하듯, 내가 어떤 상황에서 화를 내고 질투하는지 <span class="cm-hl cm-hl--box">제3자의 눈으로 자기 상태를 가만히 관찰하고 파악하는 것이 우선.</span></p>
 
-<p>옛말로 표현하면 <span class="cm-hl cm-hl--box">“일은 사람이 도모하고 뜻은 하늘이 이룬다.”</span>는 것입니다.</p>
+<p><strong>욕심내지 말고 '작은 것 하나만' 시도하기</strong></p>
 
-<p>스님은 이것을 수행적 관점에서는 <u class="cm-underline">“최선을 다하되 결과에 연연하지 않는다.”</u>라고 표현했습니다.</p>
+<p>모든 것을 한 번에 다 고치려 들면 실패할 수밖에 없다.</p>
 
-<p>최선을 다하지 않으면 게으른 사람입니다.</p>
+<p>개선하고 싶은 부분이 있다면 <span class="cm-hl cm-hl--marker">딱 한두 가지만 정해 가볍게 시도.</span></p>
 
-<p>반대로 최선을 다하면서도 결과가 반드시 내가 원하는 대로 되어야 한다고 붙잡으면 집착하는 사람이 됩니다.</p>
+<p><strong>안 되는 것은 '그대로 수용하기'</strong></p>
 
-<p><span class="cm-hl cm-hl--oval-slant">내가 할 일은 다 하되, 그 결과가 반드시 내 의도대로 되어야 한다고 집착하지 않는 것.</span></p>
+<p><span class="cm-hl cm-hl--oval-slant">안 되는 것은 '그대로 수용하기'(과보 받아들이기).</span></p>
 
-<p>그러므로 “될 대로 되라”는 말은 아무것도 하지 않아도 된다는 뜻이 아닙니다.</p>
+<p>만약 노력해도 잘 고쳐지지 않는다면 자학하지 말고 “내 습(습관)의 뿌리가 깊구나” 하고 인정하면 된다.</p>
 
-<p>미래를 준비하고 할 수 있는 노력은 계속하되, 결과 때문에 안절부절하지 않는다는 뜻입니다.</p>
-
-<p><span class="cm-hl cm-hl--box-round"><strong>최선을 다하되 결과에 연연하지 않는다.</strong></span></p>
-
-<p>되면 다행이고, 안 되면 다시 되도록 노력하면 된다는 것이 스님의 말씀입니다.</p>
+<p><span class="cm-hl cm-hl--box-round"><strong>고칠 수 있는 것은 가볍게 고쳐보고, 안 되는 것은 있는 그대로 받아들이는 것(수용)이 진정한 마음의 평화로 가는 길이다.</strong></span></p>
 
 <p class="cm-disclaimer"><strong>Disclaimer</strong><br>저작권에 문제가 될 경우 게시글을 삭제하겠습니다.<br>메일 주소: <a href="mailto:everydayalittlehelp@gmail.com">everydayalittlehelp@gmail.com</a></p>`,
 };
