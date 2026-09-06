@@ -10,72 +10,54 @@ import { uploadKoreaNews } from './korea-news-format.js';
 // ========== 여기만 수정 ==========
 
 const article = {
-  title: '서울세계불꽃축제',
+  title: '이란의 한국 파병 경고',
 
-  slug: 'seoul-fireworks-show-lights-up-skies-yonhap',
+  slug: 'iran-warns-korea-hormuz-deployment-war-koreatimes',
 
   metaDescription:
-    'Yonhap 기사에서 추출한 서울세계불꽃축제 관련 문장. annual fireworks show, cool early autumn night, lighting up the skies, spectators on hand, capped off the night, drawing oohs and aahs, traffic controls.',
+    'The Korea Times 기사에서 추출한 이란의 한국 호르무즈 해협 배치 경고 관련 문장. senior Iranian official, warned against deploying military assets, the Strait of Hormuz, would amount to direct military participation, sacrifice its interests and reputation.',
 
-  password: 'password_seed_seoul_fireworks_show_lights_up_skies_yonhap',
+  password: 'password_seed_iran_warns_korea_hormuz_deployment_war_koreatimes',
 
-  datePublished: '2026-09-05',
+  datePublished: '2026-09-06',
 
   intro: [
-    '서울세계불꽃축제가 선선한 초가을 밤 서울 하늘을 밝혔다 는 연합뉴스 기사에서 추출한 문장입니다.',
+    '이란 고위 관리가 한국의 호르무즈 해협 군사 자산 배치 가능성에 경고했다는 The Korea Times 기사에서 추출한 문장입니다.',
   ],
 
   words: [
     {
       narrative: [
-        '1. 한국 최대 규모의 연례 불꽃놀이(**annual fireworks show**)가 선선한 초가을 밤(**cool early autumn night**) 서울 하늘을 밝혔습니다(**lighting up the skies**).',
+        '1. 한 고위 이란 관리(**senior Iranian official**)는 한국에 호르무즈 해협으로의 군사 자산 배치(**deploying military assets**)를 하지 말라고 경고했습니다(**has warned against**).',
       ],
     },
     {
       narrative: [
-        '2. 올해 행사는 추석 연휴(**Chuseok fall harvest holiday**) 때문에 예년보다 약 3주 일찍 열렸습니다(**took place about three weeks earlier**).',
+        '2. 호르무즈 해협에서 이란에 대항하는 어떠한 한국의 개입도(**Any South Korean involvement**) 이란을 향한 침략과 전쟁에 직접적인 군사적 참여에 해당할 것이라고 했습니다(**would amount to direct military participation**).',
       ],
     },
     {
       narrative: [
-        '3. 서울세계불꽃축제에는 약 53만 명의 관람객(**spectators**)이 현장에 있었습니다(**on hand**).',
+        '3. 그 관리는 또한 서울에 미국의 군사 작전을 지원함으로써 자국의 이익과 평판을 희생하지 말라고 촉구했습니다(**urged not to sacrifice its interests and reputation**).',
       ],
     },
     {
       narrative: [
-        '4. 한국 팀은 마지막 약 20분간 공연하며(**with its show for the final 20 minutes**) 밤을 마무리했고(**capped off the night**), 관람객들의 감탄을 자아냈습니다(**drawing oohs and aahs**).',
-      ],
-    },
-    {
-      narrative: [
-        '5. 약 6,800명의 인력이 동원돼(**were mobilized**) 인파를 관리하고(**manage crowds**) 비상 상황에 대응했습니다(**handle emergencies**).',
-      ],
-    },
-    {
-      narrative: [
-        '6. 서울시는 관련 기관들과 함께(**with relevant agencies**) 안전본부를 설치해(**set up a safety headquarters**) 인파와 교통을 관리했습니다(**oversee crowds and traffic**).',
-      ],
-    },
-    {
-      narrative: [
-        '7. 현장 지휘센터(**operational command centers**)가 응급의료시설을 겸했고(**doubling as emergency medical stations**), 45척의 순찰선(**45 patrol boats**)이 투입됐습니다.',
-      ],
-    },
-    {
-      narrative: [
-        '8. 교통 통제가 시행됐고(**Traffic controls were also enforced**), 제한 구간의 24개 버스 노선이 일시적으로 우회됐습니다(**were temporarily rerouted**).',
+        '4. 그 경고는 한국이 워싱턴으로부터의 커지는 압박 속에서(**amid growing pressure from Washington**) 핵심 수로를 확보하기 위한 노력에 가능한 기여를 저울질하고 있는 가운데 나왔습니다(**comes as Korea weighs a possible contribution to efforts to secure the key waterway**).',
       ],
     },
   ],
 
   source: {
-    text: 'Yonhap | Fireworks show lights up Seoul skies',
-    url: 'https://en.yna.co.kr/view/AEN20260905000751315',
+    text: 'The Korea Times | Iranian official warns Korea Hormuz deployment would mean joining war',
+    url: 'https://www.koreatimes.co.kr/world/20260906/iranian-official-warns-koreas-hormuz-deployment-would-mean-joining-war',
   },
 
- 
 
 };
+ 
+
+
 
 // ===============================
 
