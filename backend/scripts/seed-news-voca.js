@@ -8,62 +8,66 @@ import { uploadNewsVoca } from './news-voca-format.js';
 
 // ========== 여기만 수정 ==========
 const article = {
-  title: '평범한 사업의 백만장자들',
+  title: '클랜시 재판 논란',
 
-  slug: 'american-dream-minting-millionaires-main-street-wsj',
+  slug: 'lindsay-clancy-murder-trial-victim-or-criminal-bbc',
 
   metaDescription:
-    'WSJ 기사에서 추출한 평범한 사업과 백만장자 관련 문장. beaver-themed paraphernalia, tactile Main Street industries, incremental innovation, competence nor grit, prerequisite, staggeringly high.',
+    'BBC 기사에서 추출한 클랜시 재판 관련 문장. transfixed and divided, postpartum psychosis, declared a mistrial, mirrored the wider discourse, precluded criminal liability, railed against toxic empathy.',
 
-  password: 'password_seed_american_dream_minting_millionaires_main_street_wsj',
+  password: 'password_seed_lindsay_clancy_murder_trial_victim_or_criminal_bbc',
 
-  datePublished: '2026-09-04',
+  datePublished: '2026-09-05',
 
   intro: [
-    '평범한 지역 사업에서도 점진적 혁신과 끈기로 큰 부를 만들 수 있다는 월스트리트 저널의 기사에서 추출한 문장입니다.',
+    '클랜시 재판이 미국 사회에서 정신질환과 형사 책임을 둘러싼 논쟁을 불러일으켰다는 BBC 기사에서 추출한 문장입니다.',
   ],
 
   words: [
     {
       narrative: [
-        '1. 버키스 여행자 센터들은 바비큐와 화장실, 비버 테마의 용품들(**beaver-themed paraphernalia**)로 높이 평가받고 있습니다(**are revered for**).',
+        '1. 그 재판은 클랜시가 피해자인지 감옥에 가야 하는 범죄자인지에 대해(**whether Clancy was a victim or a criminal who deserved to be behind bars**) 전국의 시선을 사로잡았고 국민을 분열시켰습니다(**transfixed and divided the nation**).',
       ],
     },
     {
       narrative: [
-        '2. 분석에 따르면(**According to our analysis**), 미국의 총 31조 달러 규모 민간 사업 자산 중 거의 절반은(**nearly half**) 촉각을 이용한 메인 스트리트 산업(**tactile, Main Street industries**)에 있습니다.',
+        '2. 36세 간호사의 변호인단은 그녀가 산후 정신병을 앓고 있었다고 주장했습니다(**had been suffering from postpartum psychosis**).',
       ],
     },
     {
       narrative: [
-        '3. 경제 성장의 핵심인 변혁적 혁신과는 달리(**Unlike the transformational innovation central to economic growth**), 일상 속 백만장자들의 혁신은 대개 더 점진적입니다(**often more incremental**).',
+        '3. 판사는 배심원들이 만장일치 판단에 실패한 후(**after jurors failed to come to a unanimous decision**) 금요일 재판 무효를 선언했습니다(**declared a mistrial**).',
       ],
     },
     {
       narrative: [
-        '4. 능력도 투지도(**Neither competence nor grit**) 은행 계좌처럼 안정적으로 물려줄 수는 없습니다(**can be passed down as reliably as a bank account**).',
+        '4. 그들이 합의하지 못한 상황은(**Their inability to agree**) 이 재판을 둘러싼 더 넓은 사회적 논쟁을 그대로 반영했습니다(**mirrored the wider discourse around the trial**).',
       ],
     },
     {
       narrative: [
-        "5. 엘리트 학위는 막대한 부를 쌓기 위한 필수 전제 조건이 아닙니다(**aren't a prerequisite for building massive wealth**).",
+        '5. 하지만 그들 중 일부는 산후 정신병이 클랜시의 형사 책임을 배제한다는 주장(**postpartum psychosis precluded Clancy from criminal liability**)에 이의를 제기하는 듯했습니다(**seemed to dispute**).',
       ],
     },
     {
       narrative: [
-        '6. 그 고객들의 갱신율은 믿기 힘들 정도로 높아서(**was staggeringly high**), 반복적으로 발생하는 수익 기반을 보장했습니다(**ensuring a recurring base of revenue**).',
+        '6. 하지만 텍사스의 한 어머니 러셀과 같은 다른 부모들은 “해로운 공감”을 격렬하게 비난했습니다(**railed against "toxic empathy"**).',
+      ],
+    },
+    {
+      narrative: [
+        '7. 많은 사용자들은 그 사건이 언급되지 않는 플랫폼을 찾는 데 애를 먹었습니다(**being hard-pressed to find a platform where the case was not being mentioned**).',
       ],
     },
   ],
 
   source: {
-    text: "WSJ | The American Dream Is Alive. And It's Minting Millionaires. | By Eric Zwick and Owen Zidar",
-    url: 'https://www.wsj.com/business/entrepreneurship/the-american-dream-is-alive-and-its-minting-millionaires-3903775b?mod=hp_featst_pos3',
+    text: 'BBC | Lindsay Clancy murder trial has divided US on whether she is victim or criminal | By Ana Faguy, Brandon Drenon and Sheila Flynn',
+    url: 'https://www.bbc.com/news/articles/cx2z0xnw2d6o',
   },
 
-  youtube: 'https://youtube.com/shorts/IqhbzjgZ6C8',
+  youtube: 'https://youtube.com/shorts/m3MTOEwThPw',
 };
-// ===============================
 
 uploadNewsVoca(article, API_BASE)
   .then(() => console.log('완료.'))
