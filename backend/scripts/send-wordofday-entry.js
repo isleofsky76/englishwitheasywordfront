@@ -1,5 +1,5 @@
 /**
-cd C:\langchain\backend; node scripts/send-wordofday-entry.js; cd C:\langchain; git add word-of-the-day/precaution/ sitemap.xml resources/precaution.jpg backend/scripts/send-wordofday-entry.js; git commit -m "Add word of the day: precaution"; git push origin main
+cd C:\langchain\backend; node scripts/send-wordofday-entry.js; cd C:\langchain; git pull origin main --no-edit; git add word-of-the-day/precaution/ sitemap.xml backend/scripts/send-wordofday-entry.js; git commit -m "Add word of the day: precaution"; git push origin main
 
 
 
@@ -36,7 +36,7 @@ const hl = (text) =>
 const hlSoft = (text) =>
   `<span style="font-weight:700;color:#1a1a1a;padding:0.06em 0.2em;border-radius:3px;background:rgba(255,229,102,0.72);border-bottom:2.5px solid #f0b429;">${text}</span>`;
 
-const imageSrc = '/resources/precaution.jpg';
+const imageSrc = '/resources/robo%20taxi.jpg';
 
 const entry = {
   title: 'precaution | 예방 조치',
