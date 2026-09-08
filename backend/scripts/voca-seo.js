@@ -109,7 +109,7 @@ export const BOARD_SEO = {
     cssFile: 'page30_viewpost_wordofday.css',
     cssVersion: '20260611a',
     jsFile: 'page30_viewpost_wordofday.js',
-    jsVersion: '20260903d',
+    jsVersion: '20260908tts',
     listHtml: 'word-of-the-day-list.html',
   },
   'photo-english': {

@@ -1,5 +1,5 @@
 /**
-cd C:\langchain\backend; node scripts/send-wordofday-entry.js; cd C:\langchain; git add word-of-the-day/ sitemap.xml; git commit -m "Add word of the day: scrape"; git push origin main
+cd C:\langchain\backend; node scripts/send-wordofday-entry.js; cd C:\langchain; git add word-of-the-day/precaution/ sitemap.xml resources/precaution.jpg backend/scripts/send-wordofday-entry.js; git commit -m "Add word of the day: precaution"; git push origin main
 
 
 
@@ -36,26 +36,26 @@ const hl = (text) =>
 const hlSoft = (text) =>
   `<span style="font-weight:700;color:#1a1a1a;padding:0.06em 0.2em;border-radius:3px;background:rgba(255,229,102,0.72);border-bottom:2.5px solid #f0b429;">${text}</span>`;
 
+const imageSrc = '/resources/precaution.jpg';
+
 const entry = {
+  title: 'precaution | 예방 조치',
 
-  title: 'scrape | 긁다 · 가까스로 얻다',
-
-  // 태그 사이 빈 줄/개행 넣지 말 것
-  message: `<div style="max-width:36rem;width:100%;margin:0 auto;box-sizing:border-box;color:#374151;font-size:0.95rem;line-height:2.05;"><p style="margin:0 0 0.85rem;padding:0;font-size:1.35rem;font-weight:700;color:#1a365d;line-height:1.6;">scrape</p><p style="margin:0 0 0.35rem;padding:0;">발음: ${hl('/skreɪp/')} (스크레이프)</p><p style="margin:0 0 0.35rem;padding:0;">동사: ${hl('긁다')}, 긁어내다, 긁혀서 상처를 내다</p><p style="margin:0 0 0.85rem;padding:0;">명사: 긁힌 자국, 찰과상</p><p style="margin:0 0 0.35rem;padding:0;">${hlSoft('scrape a point')}: 가까스로 승점 1점을 얻다</p><p style="margin:0 0 0.35rem;padding:0;">${hlSoft('scrape mud off')}: 진흙을 긁어내다</p><p style="margin:0 0 1rem;padding:0;">${hlSoft('scrape against')}: ~에 긁히다</p><p style="margin:0 0 0.55rem;padding:0;">📌 의미: ${hl('표면을 긁거나, 힘겹게 어떤 결과를 얻는 것')}</p><p style="margin:0 0 1rem;padding:0;">→ scrape는 기본적으로 바닥이나 표면을 ‘긁다·긁어내다’라는 뜻임. 의자 다리가 바닥을 긁거나, 신발에 묻은 진흙을 긁어낼 때 쓸 수 있음. 또 차나 피부가 어딘가에 긁혀 상처나 흠이 나는 상황에도 쓰임. 스포츠에서는 ${hlSoft('scrape a point')}처럼 ‘간신히 승점 1점을 얻다’라는 뜻으로도 자주 쓰임</p><p style="margin:0 0 0.45rem;padding:0;font-weight:700;color:#1a365d;">예문 1</p><p style="margin:0 0 0.2rem;padding:0;">The team managed to scrape a point in the final minutes of the match.🔊</p><p style="margin:0 0 0.85rem;padding:0;color:#4b5563;">그 팀은 경기 막판에 가까스로 승점 1점을 얻어냈다.</p><p style="margin:0 0 0.45rem;padding:0;font-weight:700;color:#1a365d;">예문 2</p><p style="margin:0 0 0.2rem;padding:0;">Don’t scrape your chairs on the floor.🔊</p><p style="margin:0 0 0.85rem;padding:0;color:#4b5563;">의자를 바닥에 긁지 마세요.</p><p style="margin:0 0 0.45rem;padding:0;font-weight:700;color:#1a365d;">예문 3</p><p style="margin:0 0 0.2rem;padding:0;">She scraped the mud off her boots.🔊</p><p style="margin:0 0 0.85rem;padding:0;color:#4b5563;">그녀는 부츠에 묻은 진흙을 긁어냈다.</p><p style="margin:0 0 0.45rem;padding:0;font-weight:700;color:#1a365d;">예문 4</p><p style="margin:0 0 0.2rem;padding:0;">I scraped the side of my car against the wall.🔊</p><p style="margin:0 0 1rem;padding:0;color:#4b5563;">차 옆면을 벽에 긁었다.</p><p style="margin:0 0 0.55rem;padding:0;">💡 핵심 뉘앙스:</p><p style="margin:0;padding:0;">${hl('scrape')} → 단순히 ‘문지르다’가 아니라, 표면이 닿으면서 거칠게 긁히거나 무언가를 긁어내는 느낌이 있음. 축구 기사에서 ${hlSoft('scrape a point')}는 쉽게 얻은 승점이 아니라, 힘든 경기에서 간신히 따낸 승점이라는 뉘앙스가 강함. 일상에서는 scrape the floor, scrape mud off, scrape against the wall처럼 많이 쓰임.</p></div>`,
+  // 태그 사이 빈 줄/개행 넣지 말 것 — 이미지 맨 위, 글은 아래
+  message: `<div style="max-width:36rem;width:100%;margin:0 auto;box-sizing:border-box;color:#374151;font-size:0.95rem;line-height:2.05;"><p style="margin:0;padding:0;text-align:left;"><img src="${imageSrc}" alt="precaution" loading="lazy" class="wotd-hero-image" style="max-width:100%;height:auto;border-radius:8px;display:block;margin:0 0 0.85rem 0;"></p><p style="margin:0 0 0.85rem;padding:0;font-size:1.35rem;font-weight:700;color:#1a365d;line-height:1.6;">precaution</p><p style="margin:0 0 0.35rem;padding:0;">발음: ${hl('/prɪˈkɔːʃən/')} (프리코션)</p><p style="margin:0 0 0.85rem;padding:0;">명사: ${hl('예방 조치')}, 안전 조치</p><p style="margin:0 0 0.35rem;padding:0;">${hlSoft('as a precaution')}: 예방 조치로, 만일에 대비해</p><p style="margin:0 0 0.35rem;padding:0;">${hlSoft('take precautions')}: 예방 조치를 취하다</p><p style="margin:0 0 1rem;padding:0;">${hlSoft('safety precaution')}: 안전 예방 조치</p><p style="margin:0 0 0.55rem;padding:0;">📌 의미: ${hl('위험이나 사고가 생기기 전에 미리 취하는 조치')}</p><p style="margin:0 0 1rem;padding:0;">→ precaution은 문제가 발생한 뒤 대응하는 것이 아니라, 위험이나 사고를 막기 위해 사전에 취하는 조치를 뜻함. ${hlSoft('as a precaution')}은 ‘혹시 모르니 예방 차원에서’라는 뜻으로 뉴스와 일상에서 매우 자주 쓰임.</p><p style="margin:0 0 0.45rem;padding:0;font-weight:700;color:#1a365d;">예문 1</p><p style="margin:0 0 0.2rem;padding:0;">They'll still have a human driver at the wheel as a safety precaution.</p><p style="margin:0 0 0.85rem;padding:0;color:#4b5563;">안전 예방 조치로 운전석에는 여전히 인간 운전자가 탑승합니다.</p><p style="margin:0 0 0.45rem;padding:0;font-weight:700;color:#1a365d;">예문 2</p><p style="margin:0 0 0.2rem;padding:0;">The building was evacuated as a precaution after smoke was detected.</p><p style="margin:0 0 0.85rem;padding:0;color:#4b5563;">연기가 감지된 뒤 예방 조치로 건물에서 사람들이 대피했습니다.</p><p style="margin:0 0 0.45rem;padding:0;font-weight:700;color:#1a365d;">예문 3</p><p style="margin:0 0 0.2rem;padding:0;">Doctors advised travelers to take extra precautions against the virus.</p><p style="margin:0 0 1rem;padding:0;color:#4b5563;">의사들은 여행객들에게 바이러스에 대비해 추가 예방 조치를 취하라고 권고했습니다.</p><p style="margin:0 0 0.55rem;padding:0;">💡 핵심 뉘앙스:</p><p style="margin:0;padding:0;">${hl('precaution')} → 실제 위험이 이미 발생했다는 뜻이 아니라, 혹시 생길 수 있는 위험을 미리 막기 위한 행동이라는 점이 핵심임. 특히 ${hlSoft('as a precaution')}, ${hlSoft('take precautions')}, ${hlSoft('safety precaution')} 형태로 자주 사용됨.</p></div>`,
 
   nickname: 'admin',
 
-  password: 'seed_password_scrape',
+  password: 'seed_password_precaution',
 
   isSecret: false,
 
-  slug: 'scrape',
+  slug: 'precaution',
 
   metaDescription:
-    'scrape 뜻과 예문. 긁다, 긁어내다, scrape a point(가까스로 승점 1점), scrape mud off, scrape against.',
+    'precaution 뜻과 예문. 예방 조치, 안전 조치, as a precaution, take precautions, safety precaution.',
 
   datePublished: '2026-09-08',
-
 };
 // =================================
 
