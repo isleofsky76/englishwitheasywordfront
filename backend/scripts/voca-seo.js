@@ -107,7 +107,7 @@ export const BOARD_SEO = {
   'word-of-the-day': {
     label: 'Word of the Day',
     cssFile: 'page30_viewpost_wordofday.css',
-    cssVersion: '20260611a',
+    cssVersion: '20260908ratio',
     jsFile: 'page30_viewpost_wordofday.js',
     jsVersion: '20260908tts',
     listHtml: 'word-of-the-day-list.html',
