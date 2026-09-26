@@ -10,47 +10,49 @@ import { uploadKoreaNews } from './korea-news-format.js';
 // ========== 여기만 수정 ==========
 
 const article = {
-  title: '장관 후보자 논란',
+  title: '나나 입술 필러 논란',
 
-  slug: 'minister-nominees-confirmation-hearings-lee-cabinet-koreatimes',
+  slug: 'nana-apologizes-lip-filler-controversy-netflix-the-scandal-koreaherald',
 
   metaDescription:
-    'The Korea Times 기사에서 추출한 장관 후보자 인사청문회 관련 문장. minister nominees, mounting questions, confirmation hearings, fails to pass the hearing, steps down, deal a blow, Cabinet reshuffle, falling approval ratings.',
+    'The Korea Herald 기사에서 추출한 나나의 넷플릭스 The Scandal 입술 필러 논란 관련 문장. sparked by her appearance, disrupting immersion, made viewers uncomfortable, felt out of place.',
 
-  password: 'password_seed_minister_nominees_confirmation_hearings_lee_cabinet_koreatimes',
+  password: 'password_seed_nana_lip_filler_controversy_netflix_the_scandal_koreaherald',
 
-  datePublished: '2026-09-06',
+  datePublished: '2026-09-23',
 
   intro: [
-    '두 장관 후보자가 인사청문회를 앞두고 논란에 직면했다는 The Korea Times 기사에서 추출한 문장입니다.',
+    '배우 나나가 넷플릭스 The Scandal에서 자신의 외모를 둘러싼 논란에 대해 사과했다는 The Korea Herald 기사에서 추출한 문장입니다.',
   ],
 
   words: [
     {
       narrative: [
-        '1. 두 명의 장관 후보자들(**Two minister nominees**)은 인사청문회를(**confirmation hearings**) 통과할 수 있는지(**whether they can survive**)를 둘러싸고 증가하는 의문들(**mounting questions**)에 직면하고 있습니다(**are facing**).',
+        '1. 나나는 자신의 외모로 촉발된(**sparked by her appearance**) 논란에 대해(**the controversy**) 사과했습니다(**apologized for**).',
       ],
     },
     {
       narrative: [
-        '2. 만약 그들 중 단 한 명이라도 청문회 통과에 실패하거나(**fails to pass the hearing**) 후보 지명에서 사퇴한다면(**steps down from the nomination**), 그것은 이재명 대통령에게 타격을 입힐 것입니다(**will deal a blow to**).',
+        '2. 시청자들은 그녀의 입술 필러로 보이는 것(**apparent lip filler**)이 드라마에 대한 몰입을 방해했다며(**disrupting immersion**) 그녀를 비판했습니다(**criticized her**).',
       ],
     },
     {
       narrative: [
-        '3. 대통령은 내각 개편(**the Cabinet reshuffle**)이 하락하는 지지율 속에서(**amid falling approval ratings**) 자신의 정책들을 위한 동력을 되찾는 데 도움이 되기를 바랐습니다(**would help him regain momentum for his policies**).',
+        '3. 나나는 자신의 입술이 시청자들을 불편하게 했다면(**made viewers uncomfortable**) 그것은 자신의 잘못이며(**that was my fault**), 배우로서 자신에게 적절하지 않은 개인적인 선택(**a personal choice that wasn’t the right one for me as an actor**)이었다고 말했습니다.',
+      ],
+    },
+    {
+      narrative: [
+        '4. 비판하는 사람들은(**Critics**) 그 모습이 시대극 배경에 어울리지 않았으며(**felt out of place for the historical setting**) 그녀의 캐릭터에도 어울리지 않았다고(**did not suit her character**) 말했습니다.',
       ],
     },
   ],
 
   source: {
-    text: "The Korea Times | Controversies cloud confirmation prospects for Lee's Cabinet nominees | By Yi Whan-woo",
-    url: 'https://www.koreatimes.co.kr/southkorea/politics/20260906/controversies-cloud-confirmation-prospects-for-lees-cabinet-nominees',
+    text: "The Korea Herald | Nana apologizes over lip filler controversy in Netflix's 'The Scandal' | By Lee Yoon-seo",
+    url: 'https://www.koreaherald.com/article/10883710',
   },
-
-  
 };
-
 
 
 // ===============================
