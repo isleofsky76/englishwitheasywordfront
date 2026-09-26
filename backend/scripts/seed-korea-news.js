@@ -10,50 +10,45 @@ import { uploadKoreaNews } from './korea-news-format.js';
 // ========== 여기만 수정 ==========
 
 const article = {
-  title: '나나 입술 필러 논란',
+  title: '추석 해외여행 1위 일본',
 
-  slug: 'nana-apologizes-lip-filler-controversy-netflix-the-scandal-koreaherald',
+  slug: 'koreans-traveling-chuseok-japan-top-destination-koreaherald',
 
   metaDescription:
-    'The Korea Herald 기사에서 추출한 나나의 넷플릭스 The Scandal 입술 필러 논란 관련 문장. sparked by her appearance, disrupting immersion, made viewers uncomfortable, felt out of place.',
+    'The Korea Herald 기사에서 추출한 추석 여행 관련 문장. most popular overseas destination, short-haul options, extending the break, personal leave, measles cases, checking vaccination records.',
 
-  password: 'password_seed_nana_lip_filler_controversy_netflix_the_scandal_koreaherald',
+  password: 'password_seed_koreans_chuseok_travel_japan_top_destination_koreaherald',
 
-  datePublished: '2026-09-23',
+  datePublished: '2026-09-22',
 
   intro: [
-    '배우 나나가 넷플릭스 The Scandal에서 자신의 외모를 둘러싼 논란에 대해 사과했다는 The Korea Herald 기사에서 추출한 문장입니다.',
+    '올해 추석 연휴 한국인들이 가장 많이 찾은 해외 여행지와 일본 여행 시 주의사항을 다룬 The Korea Herald 기사에서 추출한 문장입니다.',
   ],
 
   words: [
     {
       narrative: [
-        '1. 나나는 자신의 외모로 촉발된(**sparked by her appearance**) 논란에 대해(**the controversy**) 사과했습니다(**apologized for**).',
+        '1. 일본은 올해 추석 연휴 동안(**during this year’s Chuseok holiday**) 한국인들에게 가장 인기 있는 해외 여행지였으며(**the most popular overseas destination**), 오사카·후쿠오카·도쿄가 상위 3개 도시에 올랐습니다(**ranking as the top three cities**).',
       ],
     },
     {
       narrative: [
-        '2. 시청자들은 그녀의 입술 필러로 보이는 것(**apparent lip filler**)이 드라마에 대한 몰입을 방해했다며(**disrupting immersion**) 그녀를 비판했습니다(**criticized her**).',
+        '2. 예약 데이터는 가까운 여행지(**nearby destinations**)와 국내의 소도시(**smaller domestic cities**)에 대한 뚜렷한 선호(**a clear preference**)를 보여주었습니다.',
       ],
     },
     {
       narrative: [
-        '3. 나나는 자신의 입술이 시청자들을 불편하게 했다면(**made viewers uncomfortable**) 그것은 자신의 잘못이며(**that was my fault**), 배우로서 자신에게 적절하지 않은 개인적인 선택(**a personal choice that wasn’t the right one for me as an actor**)이었다고 말했습니다.',
+        '3. 많은 여행객이 연휴를 스스로 연장했으며(**extending the break on their own**), 일부는 휴가를 내서(**took personal leave**) 쉬는 기간을 늘린 것으로 보입니다(**stretch out their time off**).',
       ],
     },
-    {
-      narrative: [
-        '4. 비판하는 사람들은(**Critics**) 그 모습이 시대극 배경에 어울리지 않았으며(**felt out of place for the historical setting**) 그녀의 캐릭터에도 어울리지 않았다고(**did not suit her character**) 말했습니다.',
-      ],
-    },
+  
   ],
 
   source: {
-    text: "The Korea Herald | Nana apologizes over lip filler controversy in Netflix's 'The Scandal' | By Lee Yoon-seo",
-    url: 'https://www.koreaherald.com/article/10883710',
+    text: 'The Korea Herald | Where are Koreans traveling for Chuseok? This country tops the list | By Jung Seo-young',
+    url: 'https://www.koreaherald.com/article/10881960',
   },
 };
-
 
 // ===============================
 
