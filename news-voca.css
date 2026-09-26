@@ -1,6 +1,12 @@
 /* 뉴스 어휘 — cooking-voca(cv-*)와 동일 구조, nv-* 네임스페이스 */
 
-
+@font-face {
+  font-family: 'NanumBarunPen';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumBarunpen.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
 
 #post-message .nv-text {
 
@@ -182,7 +188,9 @@
 }
 
 #post-message .nv-narrative .nv-hl {
+  font-family: 'NanumBarunPen', 'Nanum Barun Pen', cursive;
   font-weight: 700;
+  font-size: 1.12em;
   color: #222;
 }
 
@@ -392,9 +400,11 @@
 
 
 #post-message .nv-hl {
+  font-family: 'NanumBarunPen', 'Nanum Barun Pen', cursive;
   color: inherit;
-  font-weight: 600;
+  font-weight: 700;
   font-style: normal;
+  font-size: 1.12em;
   padding: 0.04em 0.1em;
   border-radius: 2px;
   box-decoration-break: clone;
