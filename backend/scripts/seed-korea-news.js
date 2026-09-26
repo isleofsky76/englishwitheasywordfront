@@ -10,43 +10,43 @@ import { uploadKoreaNews } from './korea-news-format.js';
 // ========== 여기만 수정 ==========
 
 const article = {
-  title: '유튜브 먹방 규제 강화',
+  title: '북한군 포로 이송 비공개 논란',
 
-  slug: 'youtube-mukbang-eating-disorders-monetization-koreaherald',
+  slug: 'kyiv-denies-seoul-north-korean-pow-transfer-confidential-koreaherald',
 
   metaDescription:
-    'The Korea Herald 기사에서 추출한 유튜브 먹방 규제 관련 문장. tightens restrictions, eating disorders, monetize content, limit advertising revenue, curb monetization, sanctions, monetization suspended.',
+    'The Korea Herald 기사에서 추출한 북한군 포로 한국 이송 비공개 합의 논란 관련 문장. keep the transfer confidential, no such agreement, conceal the whereabouts, break the agreement, disclose the information, reveal the truth.',
 
-  password: 'password_seed_youtube_mukbang_eating_disorders_monetization_koreaherald',
+  password: 'password_seed_north_korean_pow_transfer_confidential_koreaherald',
 
-  datePublished: '2026-09-25',
+  datePublished: '2026-09-26',
 
   intro: [
-    '유튜브의 섭식장애 관련 콘텐츠 규제가 한국 먹방 크리에이터들의 수익 창출에 미치는 영향을 다룬 The Korea Herald 기사에서 추출한 문장입니다.',
+    '북한군 포로 2명의 한국 이송을 비공개로 하기로 합의했다는 한국 정부의 주장에 대해 우크라이나 측이 부인하면서 벌어진 논란을 다룬 The Korea Herald 기사에서 추출한 문장입니다.',
   ],
 
   words: [
     {
       narrative: [
-        '1. 유튜브가 섭식장애와 관련된 콘텐츠에 대한 규제를 강화하면서(**tightens restrictions on content related to eating disorders**), 특히 많은 양을 먹는 것으로 알려진(**known for their large appetites**) 한국 먹방 크리에이터들이 우려를 나타내고 있습니다(**are voicing concerns**).',
+        '1. 우크라이나는 양측이 북한군 포로 2명의 최근 한국 이송을(**the recent transfer of two North Korean prisoners-of-war to South Korea**) 비공개로 유지하기로 합의했다는(**agreed to keep ... confidential**) 한국 측의 주장을 부인했습니다(**denied Seoul’s claim**).',
       ],
     },
     {
       narrative: [
-        '2. 유튜브의 더 엄격해진 정책(**YouTube’s stricter policy**)이 일부 먹방 유튜버들이 콘텐츠로 수익을 창출하는 능력에(**ability to monetize their content**) 영향을 미칠 수 있다는 우려가 제기됐습니다(**raising concerns**).',
+        '2. 우크라이나 대통령의 보좌관은 그러한 합의는 없었다며(**There was no such agreement**), 특정 포로들의 소재를 숨기는 것은(**conceal the whereabouts of specific prisoners**) 잘못된 일이라고 밝혔습니다(**it would be wrong**).',
       ],
     },
     {
       narrative: [
-        '3. 유튜브는 섭식장애를 조장하거나 모방하게 할 수 있는 신호가 포함된 콘텐츠(**content containing signals that may encourage or imitate eating disorders**)에 대해 광고 수익을 제한하겠다고(**limit advertising revenue**) 밝혔습니다.',
+        '3. 이재명 대통령은 한국과 우크라이나가 포로 이송을 비공개로 유지하기로 합의했으며(**reached an agreement to keep the POW transfer confidential**), 우크라이나 측이 합의를 깨고(**break the agreement**) 정보를 공개한 것(**disclose the information**)에 깊은 유감을 표했습니다.',
       ],
     },
-   
+  
   ],
 
   source: {
-    text: 'The Korea Herald | Is YouTube ending the mukbang era? | By Song Seung-hyun',
-    url: 'https://www.koreaherald.com/article/10884608',
+    text: "The Korea Herald | Kyiv denies Seoul's claim of consensus to keep North Korean POW transfer confidential | By Son Ji-hyoung",
+    url: 'https://www.koreaherald.com/article/10884823',
   },
 };
 // ===============================
