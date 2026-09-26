@@ -10,46 +10,45 @@ import { uploadKoreaNews } from './korea-news-format.js';
 // ========== 여기만 수정 ==========
 
 const article = {
-  title: '추석 해외여행 1위 일본',
+  title: '유튜브 먹방 규제 강화',
 
-  slug: 'koreans-traveling-chuseok-japan-top-destination-koreaherald',
+  slug: 'youtube-mukbang-eating-disorders-monetization-koreaherald',
 
   metaDescription:
-    'The Korea Herald 기사에서 추출한 추석 여행 관련 문장. most popular overseas destination, short-haul options, extending the break, personal leave, measles cases, checking vaccination records.',
+    'The Korea Herald 기사에서 추출한 유튜브 먹방 규제 관련 문장. tightens restrictions, eating disorders, monetize content, limit advertising revenue, curb monetization, sanctions, monetization suspended.',
 
-  password: 'password_seed_koreans_chuseok_travel_japan_top_destination_koreaherald',
+  password: 'password_seed_youtube_mukbang_eating_disorders_monetization_koreaherald',
 
-  datePublished: '2026-09-22',
+  datePublished: '2026-09-25',
 
   intro: [
-    '올해 추석 연휴 한국인들이 가장 많이 찾은 해외 여행지와 일본 여행 시 주의사항을 다룬 The Korea Herald 기사에서 추출한 문장입니다.',
+    '유튜브의 섭식장애 관련 콘텐츠 규제가 한국 먹방 크리에이터들의 수익 창출에 미치는 영향을 다룬 The Korea Herald 기사에서 추출한 문장입니다.',
   ],
 
   words: [
     {
       narrative: [
-        '1. 일본은 올해 추석 연휴 동안(**during this year’s Chuseok holiday**) 한국인들에게 가장 인기 있는 해외 여행지였으며(**the most popular overseas destination**), 오사카·후쿠오카·도쿄가 상위 3개 도시에 올랐습니다(**ranking as the top three cities**).',
+        '1. 유튜브가 섭식장애와 관련된 콘텐츠에 대한 규제를 강화하면서(**tightens restrictions on content related to eating disorders**), 특히 많은 양을 먹는 것으로 알려진(**known for their large appetites**) 한국 먹방 크리에이터들이 우려를 나타내고 있습니다(**are voicing concerns**).',
       ],
     },
     {
       narrative: [
-        '2. 예약 데이터는 가까운 여행지(**nearby destinations**)와 국내의 소도시(**smaller domestic cities**)에 대한 뚜렷한 선호(**a clear preference**)를 보여주었습니다.',
+        '2. 유튜브의 더 엄격해진 정책(**YouTube’s stricter policy**)이 일부 먹방 유튜버들이 콘텐츠로 수익을 창출하는 능력에(**ability to monetize their content**) 영향을 미칠 수 있다는 우려가 제기됐습니다(**raising concerns**).',
       ],
     },
     {
       narrative: [
-        '3. 많은 여행객이 연휴를 스스로 연장했으며(**extending the break on their own**), 일부는 휴가를 내서(**took personal leave**) 쉬는 기간을 늘린 것으로 보입니다(**stretch out their time off**).',
+        '3. 유튜브는 섭식장애를 조장하거나 모방하게 할 수 있는 신호가 포함된 콘텐츠(**content containing signals that may encourage or imitate eating disorders**)에 대해 광고 수익을 제한하겠다고(**limit advertising revenue**) 밝혔습니다.',
       ],
     },
-  
+   
   ],
 
   source: {
-    text: 'The Korea Herald | Where are Koreans traveling for Chuseok? This country tops the list | By Jung Seo-young',
-    url: 'https://www.koreaherald.com/article/10881960',
+    text: 'The Korea Herald | Is YouTube ending the mukbang era? | By Song Seung-hyun',
+    url: 'https://www.koreaherald.com/article/10884608',
   },
 };
-
 // ===============================
 
 uploadKoreaNews(article, API_BASE)
