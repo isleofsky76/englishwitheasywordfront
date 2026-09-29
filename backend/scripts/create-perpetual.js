@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { generateHtmlMessage } from './generate-html-format.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -61,41 +62,7 @@ const WORD_DATA = {
   imageIsUrl: true
 };
 
-function generateTextContent(data) {
-  // 기존 precaution 양식과 동일한 단순 텍스트 형식 + 노란색 하이라이트
-  
-  const keyPhrasesText = data.keyPhrases.map(phrase => 
-    `<mark>${phrase.phrase}</mark>: ${phrase.meaning}`
-  ).join('\n');
-  
-  const examplesText = data.examples.map((ex, idx) => {
-    // 주요 단어를 하이라이트
-    const highlightedEn = ex.en.replace(new RegExp(`\\b${data.word}\\b`, 'gi'), '<mark>$&</mark>');
-    const highlightedKo = ex.ko.replace(new RegExp(data.koreanMeaning.split(',')[0].trim(), 'g'), '<mark>$&</mark>');
-    
-    return `예문 ${idx + 1}\n${highlightedEn}\n${highlightedKo}`;
-  }).join('\n\n');
-  
-  return `
-${data.word}
-
-발음: ${data.pronunciation}
-
-${data.partOfSpeech}: <mark>${data.koreanMeaning}</mark>
-
-${keyPhrasesText}
-
-📌 의미:
-<mark>${data.englishDefinition}</mark>
-
-${examplesText}
-
-💡 핵심 뉘앙스:
-<mark>${data.word}</mark> → ${data.koreanMeaning}을 의미하며, <mark>${data.synonyms.slice(0, 3).join(', ')}</mark> 등과 유사한 의미로 사용됩니다.
-
-유의어: ${data.synonyms.join(', ')}
-`.trim();
-}
+// generateHtmlMessage 함수는 generate-html-format.js에서 import
 
 function generateStaticHtml(data) {
   const ogImageTag = data.imageFile ? `
@@ -201,11 +168,11 @@ function createWordDirectory(data) {
 }
 
 function generateApiData(data) {
-  const textContent = generateTextContent(data);
+  const htmlMessage = generateHtmlMessage(data);
   
   return {
     title: `${data.word} | ${data.koreanMeaning}`,
-    message: textContent,
+    message: htmlMessage,
     nickname: data.nickname,
     password: data.password,
     isSecret: false,
