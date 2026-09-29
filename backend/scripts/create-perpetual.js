@@ -53,7 +53,7 @@ const WORD_DATA = {
   slug: 'perpetual',
   metaDescription: 'perpetual 뜻과 예문. 영구적인, 끊임없는, 지속적인, perpetual motion, perpetual calendar, in perpetual fear.',
   
-  nickname: 'English Easy Study',
+  nickname: 'admin',
   password: 'english2024',
   
   // Imgur 이미지 URL (무한 루프, 시계, 영구적인 것을 상징하는 이미지)
@@ -62,32 +62,36 @@ const WORD_DATA = {
 };
 
 function generateTextContent(data) {
-  // 기존 precaution 양식과 동일한 단순 텍스트 형식
+  // 기존 precaution 양식과 동일한 단순 텍스트 형식 + 노란색 하이라이트
   
   const keyPhrasesText = data.keyPhrases.map(phrase => 
-    `${phrase.phrase}: ${phrase.meaning}`
+    `<mark>${phrase.phrase}</mark>: ${phrase.meaning}`
   ).join('\n');
   
-  const examplesText = data.examples.map((ex, idx) => 
-    `예문 ${idx + 1}\n${ex.en}\n${ex.ko}`
-  ).join('\n\n');
+  const examplesText = data.examples.map((ex, idx) => {
+    // 주요 단어를 하이라이트
+    const highlightedEn = ex.en.replace(new RegExp(`\\b${data.word}\\b`, 'gi'), '<mark>$&</mark>');
+    const highlightedKo = ex.ko.replace(new RegExp(data.koreanMeaning.split(',')[0].trim(), 'g'), '<mark>$&</mark>');
+    
+    return `예문 ${idx + 1}\n${highlightedEn}\n${highlightedKo}`;
+  }).join('\n\n');
   
   return `
 ${data.word}
 
 발음: ${data.pronunciation}
 
-${data.partOfSpeech}: ${data.koreanMeaning}
+${data.partOfSpeech}: <mark>${data.koreanMeaning}</mark>
 
 ${keyPhrasesText}
 
 📌 의미:
-${data.englishDefinition}
+<mark>${data.englishDefinition}</mark>
 
 ${examplesText}
 
 💡 핵심 뉘앙스:
-${data.word} → ${data.koreanMeaning}을 의미하며, ${data.synonyms.slice(0, 3).join(', ')} 등과 유사한 의미로 사용됩니다.
+<mark>${data.word}</mark> → ${data.koreanMeaning}을 의미하며, <mark>${data.synonyms.slice(0, 3).join(', ')}</mark> 등과 유사한 의미로 사용됩니다.
 
 유의어: ${data.synonyms.join(', ')}
 `.trim();
