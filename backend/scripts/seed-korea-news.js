@@ -10,43 +10,42 @@ import { uploadKoreaNews } from './korea-news-format.js';
 // ========== 여기만 수정 ==========
 
 const article = {
-  title: '북한군 포로 이송 비공개 논란',
+  title: '영화 어쌔신, 추석 흥행과 역사 논쟁',
 
-  slug: 'kyiv-denies-seoul-north-korean-pow-transfer-confidential-koreaherald',
+  slug: 'assassins-chuseok-box-office-partisan-battle-koreaherald',
 
   metaDescription:
-    'The Korea Herald 기사에서 추출한 북한군 포로 한국 이송 비공개 합의 논란 관련 문장. keep the transfer confidential, no such agreement, conceal the whereabouts, break the agreement, disclose the information, reveal the truth.',
+    'The Korea Herald 기사에서 추출한 영화 The Assassin(s)의 추석 흥행과 역사 논쟁 관련 문장. shot dead during a live broadcast, holiday box office hit, flashpoint, partisan battle, topped a crowded Chuseok frame, sold 1.4 million tickets.',
 
-  password: 'password_seed_north_korean_pow_transfer_confidential_koreaherald',
+  password: 'password_seed_assassins_chuseok_box_office_koreaherald',
 
-  datePublished: '2026-09-26',
+  datePublished: '2026-09-28',
 
   intro: [
-    '북한군 포로 2명의 한국 이송을 비공개로 하기로 합의했다는 한국 정부의 주장에 대해 우크라이나 측이 부인하면서 벌어진 논란을 다룬 The Korea Herald 기사에서 추출한 문장입니다.',
+    '영부인 육영수 피격 사건을 다룬 영화 The Assassin(s)가 추석 박스오피스 1위가 되고 역사 논쟁의 불씨가 됐다는 The Korea Herald 기사에서 추출한 문장입니다.',
   ],
 
   words: [
     {
       narrative: [
-        '1. 우크라이나는 양측이 북한군 포로 2명의 최근 한국 이송을(**the recent transfer of two North Korean prisoners-of-war to South Korea**) 비공개로 유지하기로 합의했다는(**agreed to keep ... confidential**) 한국 측의 주장을 부인했습니다(**denied Seoul’s claim**).',
+        '1. 한국의 영부인이 국가 행사 생중계 도중 총에 맞아 숨진 지 반세기가 넘은 뒤(**more than half a century after ... was shot dead during a live broadcast**), 그 사건을 다룬 영화가 명절 박스오피스 최대 흥행작이 되었습니다(**the country\'s biggest holiday box office hit**).',
       ],
     },
     {
       narrative: [
-        '2. 우크라이나 대통령의 보좌관은 그러한 합의는 없었다며(**There was no such agreement**), 특정 포로들의 소재를 숨기는 것은(**conceal the whereabouts of specific prisoners**) 잘못된 일이라고 밝혔습니다(**it would be wrong**).',
+        '2. 이 영화는 한국이 자기 역사를 두고 오래 벌여 온 당파 싸움의 가장 최근 불씨가 되기도 했습니다(**the latest flashpoint in Korea\'s long-running partisan battle**).',
       ],
     },
     {
       narrative: [
-        '3. 이재명 대통령은 한국과 우크라이나가 포로 이송을 비공개로 유지하기로 합의했으며(**reached an agreement to keep the POW transfer confidential**), 우크라이나 측이 합의를 깨고(**break the agreement**) 정보를 공개한 것(**disclose the information**)에 깊은 유감을 표했습니다.',
+        '3. 영화진흥위원회 실시간 집계에 따르면, 이 영화는 나흘간의 추석 연휴 동안 140만 장의 표를 팔며(**sold 1.4 million tickets over the four-day holiday**) 북적인 추석 상영작들 사이에서 1위를 차지했습니다(**topped a crowded Chuseok frame**).',
       ],
     },
-  
   ],
 
   source: {
-    text: "The Korea Herald | Kyiv denies Seoul's claim of consensus to keep North Korean POW transfer confidential | By Son Ji-hyoung",
-    url: 'https://www.koreaherald.com/article/10884823',
+    text: 'The Korea Herald | Korean holiday hit about a 1974 assassination draws fire from conservatives | By Moon Ki-hoon',
+    url: 'https://www.koreaherald.com/article/10886459',
   },
 };
 // ===============================
