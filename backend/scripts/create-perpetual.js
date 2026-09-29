@@ -61,76 +61,36 @@ const WORD_DATA = {
   imageIsUrl: true
 };
 
-function generateHtmlContent(data) {
-  const examplesHtml = data.examples.map((ex, idx) => `
-    <div class="wotd-example">
-      <div class="example-number">${idx + 1}</div>
-      <div class="example-text">
-        <div class="example-en">${ex.en}</div>
-        <div class="example-ko">${ex.ko}</div>
-      </div>
-    </div>
-  `).join('\n');
+function generateTextContent(data) {
+  // 기존 precaution 양식과 동일한 단순 텍스트 형식
+  
+  const keyPhrasesText = data.keyPhrases.map(phrase => 
+    `${phrase.phrase}: ${phrase.meaning}`
+  ).join('\n');
+  
+  const examplesText = data.examples.map((ex, idx) => 
+    `예문 ${idx + 1}\n${ex.en}\n${ex.ko}`
+  ).join('\n\n');
+  
+  return `
+${data.word}
 
-  const keyPhrasesHtml = data.keyPhrases.map(phrase => `
-    <li><strong>${phrase.phrase}</strong> - ${phrase.meaning}</li>
-  `).join('\n');
+발음: ${data.pronunciation}
 
-  const synonymsHtml = data.synonyms.map(syn => `<span class="synonym-tag">${syn}</span>`).join(' ');
+${data.partOfSpeech}: ${data.koreanMeaning}
 
-  const imageHtml = data.imageFile ? `
-  <section class="wotd-image-section">
-    <img src="${data.imageFile}" 
-         alt="${data.word} illustration" 
-         class="wotd-main-image"
-         loading="lazy"
-         onerror="this.style.display='none'">
-  </section>
-  ` : '';
+${keyPhrasesText}
 
-  return `<article class="wotd-card">
-  <header class="wotd-header">
-    <h1 class="wotd-word">${data.word}</h1>
-    <div class="wotd-pronunciation">
-      <button class="tts-button" data-wotd-tts="${data.word}" type="button" aria-label="발음 듣기" title="발음 듣기">
-        🔊
-      </button>
-      <span class="pronunciation-text">${data.pronunciation}</span>
-    </div>
-    <span class="wotd-pos">${data.partOfSpeech}</span>
-  </header>
+📌 의미:
+${data.englishDefinition}
 
-  ${imageHtml}
+${examplesText}
 
-  <section class="wotd-meaning">
-    <h2 class="section-title">뜻</h2>
-    <div class="meaning-ko">${data.koreanMeaning}</div>
-    <div class="meaning-en">${data.englishDefinition}</div>
-  </section>
+💡 핵심 뉘앙스:
+${data.word} → ${data.koreanMeaning}을 의미하며, ${data.synonyms.slice(0, 3).join(', ')} 등과 유사한 의미로 사용됩니다.
 
-  <section class="wotd-examples">
-    <h2 class="section-title">예문</h2>
-    ${examplesHtml}
-  </section>
-
-  <section class="wotd-phrases">
-    <h2 class="section-title">주요 표현</h2>
-    <ul class="phrases-list">
-      ${keyPhrasesHtml}
-    </ul>
-  </section>
-
-  <section class="wotd-synonyms">
-    <h2 class="section-title">유의어</h2>
-    <div class="synonyms-container">
-      ${synonymsHtml}
-    </div>
-  </section>
-
-  <footer class="wotd-footer">
-    <p>💡 오늘의 단어를 활용하여 영어 실력을 향상시켜보세요!</p>
-  </footer>
-</article>`;
+유의어: ${data.synonyms.join(', ')}
+`.trim();
 }
 
 function generateStaticHtml(data) {
@@ -227,7 +187,6 @@ function createWordDirectory(data) {
   fs.mkdirSync(wordDir, { recursive: true });
   console.log(`✅ 디렉토리 생성됨: ${wordDir}`);
   
-  const htmlContent = generateHtmlContent(data);
   const staticHtml = generateStaticHtml(data);
   
   const htmlPath = path.join(wordDir, 'index.html');
@@ -238,11 +197,11 @@ function createWordDirectory(data) {
 }
 
 function generateApiData(data) {
-  const htmlContent = generateHtmlContent(data);
+  const textContent = generateTextContent(data);
   
   return {
     title: `${data.word} | ${data.koreanMeaning}`,
-    message: htmlContent,
+    message: textContent,
     nickname: data.nickname,
     password: data.password,
     isSecret: false,
