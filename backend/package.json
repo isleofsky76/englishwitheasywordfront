@@ -1,0 +1,17 @@
+{
+  "name": "englishwitheasyword-backend",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@google-cloud/text-to-speech": "7.1.0",
+    "bcrypt": "6.0.0",
+    "body-parser": "2.3.0",
+    "cors": "2.8.6",
+    "dotenv": "18.0.4",
+    "express": "4.21.2",
+    "express-session": "1.19.0",
+    "mongoose": "8.19.1",
+    "openai": "4.104.0",
+    "rss": "1.2.2"
+  }
+}

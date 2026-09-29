@@ -14,7 +14,13 @@ English Easy Study 웹사이트에 뉴스 어휘 글을 게시하는 방법을 �
 
 ## 🚀 빠른 시작 (3단계)
 
-### 1️⃣ 스크립트 실행
+### 1️⃣ backend 디렉토리로 이동
+
+```bash
+cd backend
+```
+
+### 2️⃣ 스크립트 실행
 
 터미널에서 다음 명령어를 실행하세요:
 
@@ -22,7 +28,7 @@ English Easy Study 웹사이트에 뉴스 어휘 글을 게시하는 방법을 �
 ./publish-news-voca.sh
 ```
 
-### 2️⃣ MongoDB URI 입력
+### 3️⃣ MongoDB URI 입력
 
 처음 실행 시 MongoDB 연결 주소를 입력하라는 메시지가 나타납니다:
 
@@ -36,7 +42,7 @@ MongoDB URI: mongodb://localhost:27017/englisheasystudy
 MongoDB URI: mongodb+srv://username:password@cluster.mongodb.net/englisheasystudy
 ```
 
-### 3️⃣ 메뉴에서 선택
+### 4️⃣ 메뉴에서 선택
 
 ```
 1) 예제 글 추가 (테스트용)

@@ -7,7 +7,13 @@
 
 ## 🚀 빠른 시작
 
-### 1단계: MongoDB URI 설정
+### 1단계: backend 디렉토리로 이동
+
+```bash
+cd backend
+```
+
+### 2단계: MongoDB URI 설정
 
 `.env` 파일을 생성하거나 환경 변수를 설정하세요:
 
@@ -24,21 +30,23 @@ export MONGO_URI="mongodb://localhost:27017/englisheasystudy"
 export MONGO_URI="mongodb+srv://username:password@cluster.mongodb.net/englisheasystudy"
 ```
 
-### 2단계: 패키지 설치
+### 3단계: 패키지 설치 (최초 1회만)
 
 ```bash
-cd backend
 npm install
-cd ..
 ```
 
-### 3단계: 글 작성
+### 4단계: 글 작성
 
 `article-template.json` 파일을 수정하여 원하는 내용을 작성하세요.
 
-### 4단계: 글 추가 실행
+### 5단계: 글 추가 실행
 
 ```bash
+# 쉬운 방법: 대화형 스크립트 사용
+./publish-news-voca.sh
+
+# 또는 직접 실행
 # 템플릿 파일 사용
 node add-news-voca-article.js "$(cat article-template.json)"
 
