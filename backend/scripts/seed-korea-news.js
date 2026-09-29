@@ -10,42 +10,42 @@ import { uploadKoreaNews } from './korea-news-format.js';
 // ========== 여기만 수정 ==========
 
 const article = {
-  title: '영화 어쌔신, 추석 흥행과 역사 논쟁',
+  title: '두 살 전 스마트폰 시작, 영유아 절반',
 
-  slug: 'assassins-chuseok-box-office-partisan-battle-koreaherald',
+  slug: 'toddlers-under-2-smartphone-use-mind-survey-koreaherald',
 
   metaDescription:
-    'The Korea Herald 기사에서 추출한 영화 어쌔신 추석 흥행과 보수 진영 역사 논쟁 관련 문장. biggest holiday box office hit, 1.4 million tickets, partisan battle, unconscionable crime, taken over by leftist forces.',
+    'The Korea Herald 기사에서 추출한 만 2세 미만 스마트폰 시작 조사 관련 문장. before turning two, 50.98 percent, 12 to 23 months, younger age, no sedentary screen time.',
 
-  password: 'password_seed_assassins_chuseok_box_office_koreaherald',
+  password: 'password_seed_toddlers_under_2_smartphones_koreaherald',
 
   datePublished: '2026-09-28',
 
   intro: [
-    '1974년 영부인 육영수 여사 피격을 다룬 영화 ‘어쌔신’이 추석 최대 흥행작이 된 뒤, 보수 진영의 반발로 역사 논쟁이 번진 일을 다룬 The Korea Herald 기사에서 추출한 문장입니다.',
+    '만 5세 미만 아동의 절반 이상이 두 돌 전에 스마트폰을 쓰기 시작했다는 국립정신건강센터 조사 결과를 전한 The Korea Herald 기사에서 추출한 문장입니다.',
   ],
 
   words: [
     {
       narrative: [
-        '1. 한국의 영부인이 국가 행사 생중계 도중 총에 맞아 숨진 지(**shot dead during a live broadcast of a national ceremony**) 반세기가 넘은 뒤, 그 살해를 다룬 영화가 명절 박스오피스 최대 흥행작이 되었습니다(**biggest holiday box office hit**).',
+        '1. 국립정신건강센터 정신건강연구소의 MIND 보고서는 2~5세 한국 아동 400명의 부모를 조사했고(**surveyed the parents of 400 Korean children aged 2 to 5**), 만 5세 미만의 절반 이상이 두 돌 전에 스마트폰을 쓰기 시작했다고 밝혔습니다(**More than half of children under five began using smartphones before turning two**).',
       ],
     },
     {
       narrative: [
-        '2. 영화진흥위원회 실시간 집계에 따르면, 이 영화는 나흘간의 추석 연휴 동안 140만 장의 표를 팔며(**sold 1.4 million tickets over the four-day holiday**) 북적인 추석 상영작들 사이에서 1위를 차지했습니다(**topped a crowded Chuseok frame**).',
+        '2. 12~23개월에 시작했다는 응답이 37.18%로 가장 많았고(**began using smartphones at 12 to 23 months old**), 0~11개월은 13.8%여서 두 살 전 시작이 50.98%였습니다(**50.98 percent began using smartphones before turning two**).',
       ],
     },
     {
       narrative: [
-        '3. 이 영화는 한국이 자기 역사를 두고 오래 벌여 온 당파 싸움의 가장 최근 불씨가 되었고(**the latest flashpoint in Korea\'s long-running partisan battle**), 국민의힘 주진우 의원은 유족의 마음을 찢는 양심 없는 범죄라고(**an unconscionable crime**), 나경원 의원은 영화계가 좌파 세력에 장악됐다고(**taken over by leftist forces**) 비판했습니다.',
+        '3. 스마트폰 사용 고위험군 어머니의 자녀는 저위험군 어머니의 자녀보다 더 어린 나이에 스마트폰을 시작하는 경향이 있었고(**tended to start using smartphones at a younger age**), 세계보건기구 2019년 지침은 만 2세 미만에게 앉아서 하는 화면 시청을 하지 말 것을 권합니다(**no sedentary screen time for children under two**).',
       ],
     },
   ],
 
   source: {
-    text: 'The Korea Herald | Korean holiday hit about a 1974 assassination draws fire from conservatives | By Moon Ki-hoon',
-    url: 'https://www.koreaherald.com/article/10886459',
+    text: 'The Korea Herald | More toddlers under 2 start to use smartphones | By Hwang Sun-jun',
+    url: 'https://www.koreaherald.com/article/10886387',
   },
 };
 // ===============================
