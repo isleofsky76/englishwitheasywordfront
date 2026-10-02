@@ -10,42 +10,42 @@ import { uploadKoreaNews } from './korea-news-format.js';
 // ========== 여기만 수정 ==========
 
 const article = {
-  title: '두 살 전 스마트폰 시작, 영유아 절반',
+  title: '제주 호텔 염소 가스, 59명 병원 이송',
 
-  slug: 'toddlers-under-2-smartphone-use-mind-survey-koreaherald',
+  slug: 'jeju-grand-josun-chlorine-gas-59-hospitalized-koreaherald',
 
   metaDescription:
-    'The Korea Herald 기사에서 추출한 만 2세 미만 스마트폰 시작 조사 관련 문장. before turning two, 50.98 percent, 12 to 23 months, younger age, no sedentary screen time.',
+    'The Korea Herald 기사에서 추출한 제주 그랜드 조선 호텔 염소 가스 환자 이송 관련 문장. Fifty-nine guests and employees were hospitalized, evacuated all 85 guests, chlorine gas, face masks.',
 
-  password: 'password_seed_toddlers_under_2_smartphones_koreaherald',
+  password: 'password_seed_jeju_grand_josun_chlorine_gas_koreaherald',
 
-  datePublished: '2026-09-28',
+  datePublished: '2026-10-01',
 
   intro: [
-    '만 5세 미만 아동의 절반 이상이 두 돌 전에 스마트폰을 쓰기 시작했다는 국립정신건강센터 조사 결과를 전한 The Korea Herald 기사에서 추출한 문장입니다.',
+    '제주 서귀포 그랜드 조선 제주 호텔에서 염소 가스가 퍼져 투숙객과 직원 59명이 병원으로 옮겨진 일을 전한 The Korea Herald 기사에서 추출한 문장입니다.',
   ],
 
   words: [
     {
       narrative: [
-        '1. 국립정신건강센터 정신건강연구소의 MIND 보고서는 2~5세 한국 아동 400명의 부모를 조사했고(**surveyed the parents of 400 Korean children aged 2 to 5**), 만 5세 미만의 절반 이상이 두 돌 전에 스마트폰을 쓰기 시작했다고 밝혔습니다(**More than half of children under five began using smartphones before turning two**).',
+        '1. 목요일 제주 그랜드 조선 제주 호텔에 염소 가스가 퍼지면서 투숙객과 직원 59명이 메스꺼움, 어지럼증 등 증상으로 병원에 이송됐습니다(**Fifty-nine guests and employees were hospitalized Thursday after chlorine gas spread**).',
       ],
     },
     {
       narrative: [
-        '2. 12~23개월에 시작했다는 응답이 37.18%로 가장 많았고(**began using smartphones at 12 to 23 months old**), 0~11개월은 13.8%여서 두 살 전 시작이 50.98%였습니다(**50.98 percent began using smartphones before turning two**).',
+        '2. 소방은 서귀포 중문관광단지 5성급 호텔 투숙객 85명 전원을 대피시킨 뒤(**evacuated all 85 guests**) 59명을 인근 병원으로 옮겼고 중상자는 없었으며(**None was reported to be seriously injured**), 1층 수영장 청소 중 소독제 비율이 잘못돼 염소 가스가 발생한 것으로 보고 있습니다(**mixed in incorrect proportions, generating chlorine gas**).',
       ],
     },
     {
       narrative: [
-        '3. 스마트폰 사용 고위험군 어머니의 자녀는 저위험군 어머니의 자녀보다 더 어린 나이에 스마트폰을 시작하는 경향이 있었고(**tended to start using smartphones at a younger age**), 세계보건기구 2019년 지침은 만 2세 미만에게 앉아서 하는 화면 시청을 하지 말 것을 권합니다(**no sedentary screen time for children under two**).',
+        '3. 일부 투숙객은 신세계그룹 조선호텔앤리조트가 운영하는 호텔이 곧바로 대피시키지 않고 마스크도 지급하지 않았다고 비판했고(**did not immediately evacuate them and failed to provide face masks**), 호텔 측은 안내 방송과 객실 방문으로 대피를 알렸다고 밝혔습니다(**issued evacuation instructions through announcements and visits to guest rooms**).',
       ],
     },
   ],
 
   source: {
-    text: 'The Korea Herald | More toddlers under 2 start to use smartphones | By Hwang Sun-jun',
-    url: 'https://www.koreaherald.com/article/10886387',
+    text: 'The Korea Herald | 59 hospitalized after chlorine gas spreads in Jeju hotel | By Lee Seung-ku',
+    url: 'https://www.koreaherald.com/article/10890993',
   },
 };
 // ===============================
