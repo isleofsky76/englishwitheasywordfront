@@ -1,0 +1,8 @@
+# Static SEO files win when present.
+# Missing SEO folders fall back to board HTML (no Netlify 404).
+
+[[redirects]]
+  from = "/korea-news/*"
+  to = "/korea-news.html"
+  status = 200
+  force = false
