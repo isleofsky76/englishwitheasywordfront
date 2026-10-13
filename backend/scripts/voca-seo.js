@@ -152,6 +152,54 @@ function escapeHtml(text) {
     .replace(/"/g, '&quot;');
 }
 
+const BOARD_STATIC_MESSAGE_CLASS = {
+  'english-quotes': 'post-message-body cm-blog',
+  'calm-mind': 'post-message-body cm-blog',
+};
+
+function formatStaticMetaDateTime(datePublished) {
+  if (!datePublished) return '-';
+  const raw = String(datePublished);
+  const d = new Date(/^\d{4}-\d{2}-\d{2}$/.test(raw) ? `${raw}T00:00:00` : raw);
+  if (Number.isNaN(d.getTime())) return raw;
+  const y = d.getFullYear();
+  const m = ('0' + (d.getMonth() + 1)).slice(-2);
+  const day = ('0' + d.getDate()).slice(-2);
+  const h = ('0' + d.getHours()).slice(-2);
+  const min = ('0' + d.getMinutes()).slice(-2);
+  return `${y}.${m}.${day}  ${h}:${min}`;
+}
+
+/** 크롤러용: slug SEO 페이지 main 안에 제목·메타·본문 HTML 인라인 */
+export function buildStaticPostMainHtml(config, boardPath) {
+  const message = String(config.message || '').trim();
+  const msgClass = BOARD_STATIC_MESSAGE_CLASS[boardPath] || 'post-message-body';
+  const headingTag = boardPath === 'news-voca' || boardPath === 'ranking-news' ? 'h1' : 'h1';
+
+  if (!message) {
+    return `        <header id="post-header">
+            <${headingTag} id="post-title"></${headingTag}>
+            <p id="post-meta"></p>
+        </header>
+        <article id="post-content">
+            <div id="post-message" class="${msgClass}"></div>
+        </article>`;
+  }
+
+  const title = escapeHtml(config.title || '제목 없음');
+  const datePublished = config.datePublished || toIsoDateOnly();
+  const dateTimeStr = formatStaticMetaDateTime(datePublished);
+  const meta = `<p id="post-meta"><time datetime="${escapeHtml(String(datePublished))}">${escapeHtml(dateTimeStr)}</time><span class="post-meta-sep" aria-hidden="true"> · </span><span class="post-meta-part">조회 <span class="post-meta-views-num">0</span></span><span class="post-meta-sep" aria-hidden="true"> · </span><span class="post-meta-part">추천수 <span class="post-meta-likes-num">0</span></span></p>`;
+
+  return `        <header id="post-header">
+            <${headingTag} id="post-title">${title}</${headingTag}>
+            ${meta}
+        </header>
+        <article id="post-content">
+            <div id="post-message" class="${msgClass}">${message}</div>
+        </article>`;
+}
+
 export function buildArticleJsonLd({ title, slug, boardPath, metaDescription, datePublished }) {
   const headline = String(title || '').replace(/^\[(AP|CNN|BBC)\]\s*/i, '').trim();
   const pageUrl = `${SITE_ORIGIN}/${boardPath}/${slug}`;
@@ -270,13 +318,7 @@ ${(board.extraCss || []).map((c) => `    <link rel="stylesheet" href="../../${c.
         </div>
     </nav>
     <main id="post-container" role="main">
-        <header id="post-header">
-            <h1 id="post-title"></h1>
-            <p id="post-meta"></p>
-        </header>
-        <article id="post-content">
-            <div id="post-message" class="post-message-body"></div>
-        </article>
+${buildStaticPostMainHtml(config, boardPath)}
     </main>
     <script src="../../page30-api-config.js"></script>
     <script src="../../viewpost-seo.js?v=20260622a"></script>
@@ -517,6 +559,7 @@ export function applySeoAfterUpload(boardPath, config) {
         slug: config.slug,
         metaDescription: config.metaDescription,
         datePublished: config.datePublished || toIsoDateOnly(),
+        message: config.message,
       })
     : null;
   const sitemapPath = updateSitemap({

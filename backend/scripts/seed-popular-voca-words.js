@@ -186,6 +186,7 @@ async function run() {
             slug: posts[i].slug,
             metaDescription: posts[i].metaDescription,
             datePublished: lastmod,
+            message: posts[i].message,
           });
           updateSitemap({
             boardPath: 'popular-voca',

@@ -259,6 +259,7 @@ async function seed() {
             slug: post.slug,
             metaDescription: post.metaDescription,
             datePublished: toIsoDateOnly(),
+            message: post.message,
           });
           if (seo?.seoPath) console.log(`     SEO page: ${seo.seoPath}`);
           if (seo?.url) console.log(`     URL: ${seo.url}`);

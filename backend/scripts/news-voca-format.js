@@ -13,7 +13,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { updateSitemap, FRONTEND_ROOT, SITE_ORIGIN } from './voca-seo.js';
+import { updateSitemap, FRONTEND_ROOT, SITE_ORIGIN, buildStaticPostMainHtml } from './voca-seo.js';
 
 function escapeHtml(text) {
   return String(text ?? '')
@@ -668,13 +668,7 @@ export function buildNewsVocaSeoPageHtml(config) {
         </div>
     </nav>
     <main id="post-container" role="main">
-        <header id="post-header">
-            <h1 id="post-title"></h1>
-            <p id="post-meta"></p>
-        </header>
-        <article id="post-content">
-            <div id="post-message" class="post-message-body"></div>
-        </article>
+${buildStaticPostMainHtml(config, 'news-voca')}
     </main>
     <script src="../../page30-api-config.js"></script>
     <script src="../../viewpost-meta.js?v=20260627"></script>
@@ -811,7 +805,7 @@ export async function uploadNewsVoca(config, apiBase) {
   console.log(`  "${post.title}" 추가됨 (${elapsed()})`);
 
   if (config.slug && config.metaDescription) {
-    const seoPagePath = writeNewsVocaSeoPage(config);
+    const seoPagePath = writeNewsVocaSeoPage({ ...config, message });
     if (seoPagePath) console.log(`  SEO page: ${seoPagePath}`);
 
     const sitemapPath = updateSitemap({

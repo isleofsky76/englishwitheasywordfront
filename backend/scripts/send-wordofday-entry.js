@@ -175,6 +175,8 @@ async function run() {
 
         datePublished: datePublished || toIsoDateOnly(),
 
+        message,
+
       });
 
       if (seo?.seoPath) console.log('  SEO page:', seo.seoPath);

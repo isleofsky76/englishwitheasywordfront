@@ -151,6 +151,7 @@ async function run() {
         slug,
         metaDescription,
         datePublished: datePublished || toIsoDateOnly(),
+        message,
       });
       if (seo?.seoPath) console.log('  SEO page:', seo.seoPath);
       if (seo?.sitemapPath) console.log('  sitemap:', seo.sitemapPath);

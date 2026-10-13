@@ -113,6 +113,7 @@ async function main() {
     slug: article.slug,
     metaDescription: article.metaDescription,
     datePublished: article.datePublished || toIsoDateOnly(),
+    message: post.message,
   });
   if (seo) {
     if (seo.seoPath) console.log(`  SEO 페이지: ${seo.seoPath}`);

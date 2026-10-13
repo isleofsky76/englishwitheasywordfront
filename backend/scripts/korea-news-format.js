@@ -120,6 +120,7 @@ export async function uploadKoreaNews(config, apiBase) {
     slug: config.slug,
     metaDescription: config.metaDescription,
     datePublished,
+    message: post.message,
   });
   if (seo) {
     if (seo.seoPath) console.log(`  SEO 페이지: ${seo.seoPath}`);
