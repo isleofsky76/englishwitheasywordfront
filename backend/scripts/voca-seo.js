@@ -208,8 +208,8 @@ export function buildArticleJsonLd({ title, slug, boardPath, metaDescription, da
     '@type': 'Article',
     headline,
     description: metaDescription,
-    author: { '@type': 'Organization', name: 'English Easy Study' },
-    publisher: { '@type': 'Organization', name: 'English Easy Study', url: SITE_ORIGIN },
+    author: { '@type': 'Organization', name: '시사영단어', alternateName: 'News English Lab' },
+    publisher: { '@type': 'Organization', name: '시사영단어', alternateName: 'News English Lab', url: SITE_ORIGIN },
     datePublished: datePublished || toIsoDateOnly(),
     dateModified: datePublished || toIsoDateOnly(),
     mainEntityOfPage: { '@type': 'WebPage', '@id': pageUrl },
@@ -223,11 +223,11 @@ function buildSeoHead({ docTitle, title, slug, boardPath, metaDescription, pageU
     <title>${escapeHtml(docTitle)}</title>
     <meta name="description" content="${escapeHtml(metaDescription)}">
     <meta name="robots" content="index, follow">
-    <meta name="author" content="English Easy Study">
+    <meta name="author" content="시사영단어">
     <link rel="canonical" href="${escapeHtml(pageUrl)}">
     <meta property="og:type" content="article">
     <meta property="og:locale" content="ko_KR">
-    <meta property="og:site_name" content="English Easy Study">
+    <meta property="og:site_name" content="시사영단어">
     <meta property="og:title" content="${escapeHtml(title)}">
     <meta property="og:description" content="${escapeHtml(metaDescription)}">
     <meta property="og:url" content="${escapeHtml(pageUrl)}">
@@ -243,7 +243,7 @@ function buildQuizSeoPageHtml(boardPath, board, config) {
   const { title, slug, metaDescription } = config;
   const pageUrl = `${SITE_ORIGIN}/${boardPath}/${slug}/`;
   const datePublished = config.datePublished || toIsoDateOnly();
-  const docTitle = `${title} | ${board.label} · English Easy Study`;
+  const docTitle = `${title} | ${board.label} · 시사영단어`;
   const jsonLd = buildArticleJsonLd({ title, slug, boardPath, metaDescription, datePublished });
   const head = buildSeoHead({ docTitle, title, slug, boardPath, metaDescription, pageUrl, jsonLd });
 
@@ -289,7 +289,7 @@ export function buildSeoPageHtml(boardPath, config) {
   const { title, slug, metaDescription } = config;
   const pageUrl = `${SITE_ORIGIN}/${boardPath}/${slug}`;
   const datePublished = config.datePublished || toIsoDateOnly();
-  const docTitle = `${title} | ${board.label} · English Easy Study`;
+  const docTitle = `${title} | ${board.label} · 시사영단어`;
   const jsonLd = buildArticleJsonLd({ title, slug, boardPath, metaDescription, datePublished });
   const head = buildSeoHead({ docTitle, title, slug, boardPath, metaDescription, pageUrl, jsonLd });
 

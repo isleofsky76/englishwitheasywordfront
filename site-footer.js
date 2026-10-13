@@ -57,7 +57,7 @@
       '</ul></nav>' +
       '<p class="site-legal-footer-copy">© ' +
       year +
-      ' English Easy Study · 뉴스 영어 랩. All rights reserved.</p>' +
+      ' 시사영단어 · News English Lab. All rights reserved.</p>' +
       '</div></footer>'
     );
   }

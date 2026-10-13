@@ -156,8 +156,8 @@
     return (
       '<div class="site-masthead-brand">' +
         '<a href="' + base + 'index.html">' +
-          '<span class="site-title-ko">시사 영단어</span>' +
-          '<span class="site-title-en">(News English Lab)</span>' +
+          '<span class="site-title-ko">시사영단어</span>' +
+          '<span class="site-title-en">News English Lab</span>' +
         '</a>' +
       '</div>' +
       '<div class="site-masthead-search">' +
