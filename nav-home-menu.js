@@ -8,7 +8,7 @@
 
 (function () {
 
-    var NAV_HOME_MENU_VERSION = '20260821f';
+    var NAV_HOME_MENU_VERSION = '20261013legal';
 
     var PRIMARY_BAR_HREFS = {
         'index.html': true,
@@ -235,21 +235,30 @@
 
     pinNavbarWhileOpen();
 
-    function loadSiteMasthead() {
+    function scriptDirBase() {
         var scripts = document.querySelectorAll('script[src]');
-        var base = '';
         for (var i = 0; i < scripts.length; i += 1) {
             var src = scripts[i].getAttribute('src') || '';
             if (src.indexOf('nav-home-menu.js') !== -1) {
-                base = src.replace(/[^/]+$/, '');
-                break;
+                return src.replace(/[^/]+$/, '');
             }
         }
+        return '';
+    }
+
+    function loadSiteMasthead() {
+        var base = scriptDirBase();
         document.documentElement.classList.add('has-site-masthead');
-        if (document.querySelector('script[src*="site-masthead.js"]')) return;
-        var s = document.createElement('script');
-        s.src = base + 'site-masthead.js?v=20260818a';
-        document.head.appendChild(s);
+        if (!document.querySelector('script[src*="site-masthead.js"]')) {
+            var s = document.createElement('script');
+            s.src = base + 'site-masthead.js?v=20260818a';
+            document.head.appendChild(s);
+        }
+        if (!document.querySelector('script[src*="site-footer.js"]')) {
+            var f = document.createElement('script');
+            f.src = base + 'site-footer.js?v=20261013a';
+            document.head.appendChild(f);
+        }
     }
 
     if (document.readyState === 'loading') {

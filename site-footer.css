@@ -1,0 +1,96 @@
+/* 사이트 공통 푸터 — 신뢰·애드센스용 링크 */
+.site-legal-footer {
+  margin-top: 2.5rem;
+  padding: 1.5rem 1rem 2rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  background: #f7f8fa;
+  color: #4b5563;
+  font-family: 'Noto Sans KR', 'IBM Plex Sans', sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.site-legal-footer-inner {
+  max-width: 920px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.site-legal-footer-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.35rem 0.85rem;
+  margin: 0 0 0.75rem;
+  padding: 0;
+  list-style: none;
+}
+
+.site-legal-footer-nav a {
+  color: #1f4e79;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.site-legal-footer-nav a:hover,
+.site-legal-footer-nav a:focus {
+  text-decoration: underline;
+}
+
+.site-legal-footer-nav .sep {
+  color: #9ca3af;
+  user-select: none;
+}
+
+.site-legal-footer-copy {
+  margin: 0;
+  color: #6b7280;
+  font-size: 0.82rem;
+}
+
+.site-legal-footer-copy a {
+  color: #4a90e2;
+}
+
+body.legal-page {
+  padding-top: 4.5rem;
+  background: #fafbfc;
+}
+
+.legal-page main.legal-main {
+  max-width: 720px;
+  margin: 0 auto 3rem;
+  padding: 1.5rem 1.15rem 2rem;
+}
+
+.legal-page h1 {
+  font-size: 1.65rem;
+  font-weight: 700;
+  color: #1a365d;
+  margin: 0 0 0.5rem;
+}
+
+.legal-page .legal-updated {
+  color: #6b7280;
+  font-size: 0.88rem;
+  margin-bottom: 1.5rem;
+}
+
+.legal-page h2 {
+  font-size: 1.15rem;
+  font-weight: 650;
+  color: #1f4e79;
+  margin: 1.6rem 0 0.55rem;
+}
+
+.legal-page p,
+.legal-page li {
+  color: #374151;
+  line-height: 1.75;
+  font-size: 0.98rem;
+}
+
+.legal-page ul {
+  padding-left: 1.2rem;
+  margin: 0.4rem 0 0.8rem;
+}

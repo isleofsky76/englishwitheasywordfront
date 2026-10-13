@@ -434,6 +434,9 @@ const SITEMAP_STATIC_URLS = [
   { loc: `${SITE_ORIGIN}/word-of-the-day-list.html`, priority: '0.8' },
   { loc: `${SITE_ORIGIN}/photo-english-list.html`, priority: '0.8' },
   { loc: `${SITE_ORIGIN}/vocabulary-quiz-list.html`, priority: '0.8' },
+  { loc: `${SITE_ORIGIN}/about.html`, priority: '0.6' },
+  { loc: `${SITE_ORIGIN}/privacy.html`, priority: '0.5' },
+  { loc: `${SITE_ORIGIN}/terms.html`, priority: '0.5' },
 ];
 
 function entryLastmod(entry) {
