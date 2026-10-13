@@ -12,7 +12,7 @@
  * 주의: HTML 태그 사이 빈 줄/개행은 viewpost가 <br>로 바꿔 간격이 벌어지니 붙일 것
  */
 
-import { API_BASE } from './loadEnv.js';
+import { API_BASE, writeAuthHeaders } from './loadEnv.js';
 import { applySeoAfterUpload, toIsoDateOnly, SITE_ORIGIN } from './voca-seo.js';
 
 // ========== 여기만 수정 ==========
@@ -133,7 +133,7 @@ async function run() {
 
     const res = await fetch(`${API_BASE}${API_PATH}`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: writeAuthHeaders({ 'Content-Type': 'application/json' }),
       body: JSON.stringify({ title, message, nickname, password, isSecret, slug, metaDescription }),
     });
     const data = await res.json();

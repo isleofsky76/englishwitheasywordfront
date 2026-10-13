@@ -36,7 +36,8 @@ const CORS_ALLOWED_ORIGINS = [
 ];
 app.use(cors({
   origin: (origin, callback) => {
-    if (!origin || CORS_ALLOWED_ORIGINS.includes(origin)) {
+    // file:// 로 HTML을 열면 Origin이 문자열 "null"
+    if (!origin || origin === 'null' || CORS_ALLOWED_ORIGINS.includes(origin)) {
       return callback(null, true);
     }
     // 로컬 개발: Live Server 등 localhost/127.0.0.1 임의 포트 허용
@@ -46,7 +47,7 @@ app.use(cors({
     callback(null, false);
   },
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'Origin', 'Accept'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'Origin', 'Accept', 'X-Write-Token'],
   credentials: false,
   optionsSuccessStatus: 200
 }));
@@ -54,6 +55,20 @@ app.use(cors({
 // Body parser 설정 (이미지 업로드를 위한 크기 제한 증가)
 app.use(express.json({ limit: '10mb' })); // JSON 본문 크기 제한: 10MB
 app.use(express.urlencoded({ extended: true, limit: '10mb' })); // URL 인코딩 본문 크기 제한: 10MB
+
+/** WRITE_API_TOKEN 설정 시에만 글 생성 POST에 토큰 요구. 미설정이면 기존과 동일. */
+const writeApiToken = process.env.WRITE_API_TOKEN || '';
+function requireWriteToken(req, res, next) {
+  if (!writeApiToken) return next();
+  const got =
+    req.get('x-write-token') ||
+    (req.body && (req.body.writeToken || req.body.adminPasswordInput)) ||
+    '';
+  if (String(got) !== String(writeApiToken)) {
+    return res.status(403).json({ error: 'Write token required' });
+  }
+  return next();
+}
 
 // Session middleware for conversation history
 app.use(session({
@@ -103,7 +118,15 @@ function escapeSsmlText(s) {
 function buildWordMarkedSsml(text) {
   const tokens = String(text || '').trim().split(/\s+/).filter(Boolean);
   if (!tokens.length) return '<speak></speak>';
-  const body = tokens.map((tok, i) => `<mark name="w${i}"/>${escapeSsmlText(tok)}`).join(' ');
+  const body = tokens.map((tok, i) => {
+    // live/lyve → IPA /laɪv/ (라이브). 철자 V(/viː/→라이비) 방지
+    const core = String(tok).replace(/^[^A-Za-z]+/, '').replace(/[^A-Za-z]+$/, '');
+    const spoken =
+      /^(lyve|laive|live|lyev)$/i.test(core)
+        ? `<phoneme alphabet="ipa" ph="laɪv">${escapeSsmlText(tok)}</phoneme>`
+        : escapeSsmlText(tok);
+    return `<mark name="w${i}"/>${spoken}`;
+  }).join(' ');
   return `<speak>${body}</speak>`;
 }
 
@@ -214,6 +237,10 @@ app.get('/generate-audio', async (req, res) => {
     'en-US-Wavenet-D': ['en-US-Chirp-HD-D'], // 미국 영어 Chirp-HD-D 음성 (Wavenet-D 대체)
     'en-US-Wavenet-C': ['en-US-Wavenet-C'], // 미국 영어 Wavenet-C (여성)
     'en-US-Chirp3-HD-Zubenelgenubi': ['en-US-Chirp-HD-D'], // 미국 영어 Chirp-HD-D 음성 (Chirp3-HD-Zubenelgenubi 대체)
+    'en-US-Chirp3-HD-Sulafat': ['en-US-Chirp3-HD-Sulafat'],
+    'en-US-Chirp3-HD-Gacrux': ['en-US-Chirp3-HD-Gacrux'],
+    'en-US-Chirp3-HD-Algenib': ['en-US-Chirp3-HD-Algenib'],
+    'en-US-Chirp3-HD-Enceladus': ['en-US-Chirp3-HD-Enceladus'],
     'en-US-Chirp-HD-D': ['en-US-Chirp-HD-D'], // 미국 영어 Chirp-HD-D 음성 (직접 매핑)
     'en-US-Chirp-HD-F': ['en-US-Chirp-HD-F'], // 미국 영어 Chirp-HD-F 음성
     'en-US-News-N': ['en-US-News-N'], // 미국 News-N
@@ -303,15 +330,21 @@ app.get('/generate-audio', async (req, res) => {
     ? Math.min(TTS_VOLUME_GAIN_DB_MAX, Math.max(TTS_VOLUME_GAIN_DB_MIN, rawGainDb))
     : 0;
 
-  // AI 발음: 한국어·영어 모두 에이아이(글자 A I)로 읽기 — OpenAI 등 단어 안 AI는 \b 경계로 제외
+  // AI 발음: artificial intelligence (한국어는 인공지능). OpenAI 등 단어 안 AI는 \b 경계로 제외
   let textForInput = String(text || '');
-  const hasAI = /\bAI\b/i.test(textForInput);
+  const hasAI = /\bA\.I\.?\b/i.test(textForInput) || /\bAI\b/i.test(textForInput);
 
   if (hasAI) {
     if (actualLanguageCode === 'ko-KR' || (language && /^ko/i.test(language))) {
-      textForInput = textForInput.replace(/\bAI\b/gi, '에이아이');
+      textForInput = textForInput
+        .replace(/\bA\.I\.?\b/gi, '인공지능')
+        .replace(/\bAI['']s\b/gi, '인공지능의')
+        .replace(/\bAI\b/gi, '인공지능');
     } else {
-      textForInput = textForInput.replace(/\bAI\b/gi, 'A I');
+      textForInput = textForInput
+        .replace(/\bA\.I\.?\b/gi, 'artificial intelligence')
+        .replace(/\bAI['']s\b/gi, "artificial intelligence's")
+        .replace(/\bAI\b/gi, 'artificial intelligence');
     }
   }
 
@@ -321,6 +354,19 @@ app.get('/generate-audio', async (req, res) => {
     textForInput = textForInput
       .replace(/\bVAR['']s\b/gi, "bee ay ahl's")
       .replace(/\bVAR\b/gi, 'bee ay ahl');
+  }
+
+  // live /laɪv/ (라이브) — 동사 /lɪv/·철자 V(라이비) 방지. marks SSML에서 IPA 재확인
+  if (!isKoLang) {
+    const toLyve = (m) => (m[0] === 'L' ? 'Lyve' : 'lyve');
+    textForInput = textForInput
+      .replace(/\blye-v\b/gi, toLyve)
+      .replace(/\blaive\b/gi, toLyve)
+      .replace(/\blive\b(?=\s+images?\b)/gi, toLyve)
+      .replace(
+        /\blive\b(?=\s+(?:stream|broadcast|show|feed|tv|TV|music|video|event|coverage|update|session|demo|concert|performance|audio|footage|camera|cameras)\b)/gi,
+        toLyve
+      );
   }
 
   if (actualLanguageCode === 'ko-KR' || (language && /^ko/i.test(language))) {
@@ -1951,7 +1997,7 @@ app.get('/guestbook/by-slug/:slug', (req, res) =>
   findEntryBySlug(req, res, GuestbookEntry, 'Guestbook')
 );
 
-app.post('/guestbook', async (req, res) => {
+app.post('/guestbook', requireWriteToken, async (req, res) => {
   const { title, message, nickname, password, isSecret, slug, metaDescription } = req.body;
 
   if (!title || !message || !nickname || !password) {
@@ -2204,7 +2250,7 @@ app.get('/wordofday/by-slug/:slug', (req, res) =>
   findEntryBySlug(req, res, WordOfDayEntry, 'WordOfDay')
 );
 
-app.post('/wordofday', async (req, res) => {
+app.post('/wordofday', requireWriteToken, async (req, res) => {
   if (mongoose.connection.readyState !== 1) {
     return res.status(503).json({ error: 'MongoDB에 연결되지 않았습니다. MongoDB가 실행 중인지 확인하세요.', detail: 'MongoDB connection not ready' });
   }
@@ -2335,7 +2381,7 @@ app.get('/vocabulary-quiz/by-slug/:slug', (req, res) =>
   findEntryBySlug(req, res, VocabularyQuizEntry, 'VocabularyQuiz')
 );
 
-app.post('/vocabulary-quiz', async (req, res) => {
+app.post('/vocabulary-quiz', requireWriteToken, async (req, res) => {
   if (mongoose.connection.readyState !== 1) {
     return res.status(503).json({ error: 'MongoDB에 연결되지 않았습니다.' });
   }
@@ -2398,7 +2444,7 @@ app.get('/photo-english/by-slug/:slug', (req, res) =>
   findEntryBySlug(req, res, PhotoEnglishEntry, 'PhotoEnglish')
 );
 
-app.post('/photo-english', async (req, res) => {
+app.post('/photo-english', requireWriteToken, async (req, res) => {
   if (mongoose.connection.readyState !== 1) {
     return res.status(503).json({ error: 'MongoDB에 연결되지 않았습니다. MongoDB가 실행 중인지 확인하세요.', detail: 'MongoDB connection not ready' });
   }
@@ -2529,7 +2575,7 @@ app.get('/ranking-news/by-slug/:slug', (req, res) =>
   findEntryBySlug(req, res, RankingNewsEntry, 'RankingNews')
 );
 
-app.post('/ranking-news', async (req, res) => {
+app.post('/ranking-news', requireWriteToken, async (req, res) => {
   if (mongoose.connection.readyState !== 1) {
     return res.status(503).json({ error: 'MongoDB에 연결되지 않았습니다. MongoDB가 실행 중인지 확인하세요.', detail: 'MongoDB connection not ready' });
   }
@@ -2661,7 +2707,7 @@ app.get('/cooking-voca/by-slug/:slug', (req, res) =>
   findEntryBySlug(req, res, CookingVocaEntry, 'CookingVoca')
 );
 
-app.post('/cooking-voca', async (req, res) => {
+app.post('/cooking-voca', requireWriteToken, async (req, res) => {
   if (mongoose.connection.readyState !== 1) {
     return res.status(503).json({ error: 'MongoDB에 연결되지 않았습니다. MongoDB가 실행 중인지 확인하세요.', detail: 'MongoDB connection not ready' });
   }
@@ -2793,7 +2839,7 @@ app.get('/culture-voca/by-slug/:slug', (req, res) =>
   findEntryBySlug(req, res, CultureVocaEntry, 'CultureVoca')
 );
 
-app.post('/culture-voca', async (req, res) => {
+app.post('/culture-voca', requireWriteToken, async (req, res) => {
   if (mongoose.connection.readyState !== 1) {
     return res.status(503).json({ error: 'MongoDB에 연결되지 않았습니다. MongoDB가 실행 중인지 확인하세요.', detail: 'MongoDB connection not ready' });
   }
@@ -2925,7 +2971,7 @@ app.get('/defense-news/by-slug/:slug', (req, res) =>
   findEntryBySlug(req, res, DefenseNewsEntry, 'DefenseNews')
 );
 
-app.post('/defense-news', async (req, res) => {
+app.post('/defense-news', requireWriteToken, async (req, res) => {
   if (mongoose.connection.readyState !== 1) {
     return res.status(503).json({ error: 'MongoDB에 연결되지 않았습니다. MongoDB가 실행 중인지 확인하세요.', detail: 'MongoDB connection not ready' });
   }
@@ -3083,7 +3129,7 @@ app.get('/korea-news/by-slug/:slug', (req, res) =>
   findEntryBySlug(req, res, KoreaNewsEntry, 'KoreaNews')
 );
 
-app.post('/korea-news', async (req, res) => {
+app.post('/korea-news', requireWriteToken, async (req, res) => {
   if (mongoose.connection.readyState !== 1) {
     return res.status(503).json({ error: 'MongoDB에 연결되지 않았습니다. MongoDB가 실행 중인지 확인하세요.', detail: 'MongoDB connection not ready' });
   }
@@ -3241,7 +3287,7 @@ app.get('/shorts-bg-image/by-slug/:slug', (req, res) =>
   findEntryBySlug(req, res, ShortsBgImageEntry, 'ShortsBgImage')
 );
 
-app.post('/shorts-bg-image', async (req, res) => {
+app.post('/shorts-bg-image', requireWriteToken, async (req, res) => {
   if (mongoose.connection.readyState !== 1) {
     return res.status(503).json({ error: 'MongoDB에 연결되지 않았습니다. MongoDB가 실행 중인지 확인하세요.', detail: 'MongoDB connection not ready' });
   }
@@ -3406,7 +3452,7 @@ app.get('/vocabulary/by-slug/:slug', (req, res) =>
   findEntryBySlug(req, res, VocabularyEntry, 'Vocabulary')
 );
 
-app.post('/vocabulary', async (req, res) => {
+app.post('/vocabulary', requireWriteToken, async (req, res) => {
   const { title, message, nickname, password, isSecret, slug, metaDescription } = req.body;
 
   if (!title || !message || !nickname || !password) {
@@ -3592,7 +3638,7 @@ app.get('/opinions/by-slug/:slug', (req, res) =>
   findEntryBySlug(req, res, OpinionEntry, 'Opinions')
 );
 
-app.post('/opinions', async (req, res) => {
+app.post('/opinions', requireWriteToken, async (req, res) => {
   const { title, message, nickname, password, isSecret, slug, metaDescription } = req.body;
 
   if (!title || !message || !nickname || !password) {
@@ -3773,7 +3819,7 @@ app.get('/calm-mind/by-slug/:slug', (req, res) =>
   findEntryBySlug(req, res, CalmMindEntry, 'Calm Mind')
 );
 
-app.post('/calm-mind', async (req, res) => {
+app.post('/calm-mind', requireWriteToken, async (req, res) => {
   const { title, message, nickname, password, isSecret, slug, metaDescription } = req.body;
 
   if (!title || !message || !nickname || !password) {
@@ -3954,7 +4000,7 @@ app.get('/english-quotes/by-slug/:slug', (req, res) =>
   findEntryBySlug(req, res, EnglishQuotesEntry, 'English Quotes')
 );
 
-app.post('/english-quotes', async (req, res) => {
+app.post('/english-quotes', requireWriteToken, async (req, res) => {
   const { title, message, nickname, password, isSecret, slug, metaDescription } = req.body;
 
   if (!title || !message || !nickname || !password) {
@@ -4135,7 +4181,7 @@ app.get('/easy-voca/by-slug/:slug', (req, res) =>
   findEntryBySlug(req, res, EasyVocaEntry, 'EasyVoca')
 );
 
-app.post('/easy-voca', async (req, res) => {
+app.post('/easy-voca', requireWriteToken, async (req, res) => {
   const { title, message, nickname, password, isSecret, slug, metaDescription } = req.body;
 
   if (!title || !message || !nickname || !password) {
@@ -4321,7 +4367,7 @@ app.get('/situational-english/by-slug/:slug', (req, res) =>
   findEntryBySlug(req, res, SituationalEnglishEntry, 'SituationalEnglish')
 );
 
-app.post('/situational-english', async (req, res) => {
+app.post('/situational-english', requireWriteToken, async (req, res) => {
   const { title, message, nickname, password, isSecret, slug, metaDescription } = req.body;
 
   if (!title || !message || !nickname || !password) {
@@ -4507,7 +4553,7 @@ app.get('/pros-cons/by-slug/:slug', (req, res) =>
   findEntryBySlug(req, res, ProsConsEntry, 'ProsCons')
 );
 
-app.post('/pros-cons', async (req, res) => {
+app.post('/pros-cons', requireWriteToken, async (req, res) => {
   const { title, message, nickname, password, isSecret, slug, metaDescription } = req.body;
 
   if (!title || !message || !nickname || !password) {

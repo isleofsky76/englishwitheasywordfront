@@ -39,77 +39,11 @@
         <div class="guestbook-list" id="guestbook-list"></div>
     </main>
 
-    <div class="modal fade" id="write-post-modal" tabindex="-1" aria-labelledby="write-post-modal-label" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title text-primary" id="write-post-modal-label">글쓰기</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="guestbook-form">
-                        <div class="row g-2">
-                            <div class="col-md-6">
-                                <input type="text" id="title" class="form-control" placeholder="제목" required>
-                            </div>
-                            <div class="col-md-6">
-                                <input type="text" id="nickname" class="form-control" placeholder="닉네임" required>
-                            </div>
-                        </div>
-                        <div class="mt-2">
-                            <textarea id="message" class="form-control" placeholder="이미지 URL 또는 HTML (예: &lt;img src=&quot;/resources/...&quot;&gt;)" rows="8" required></textarea>
-                        </div>
-                        <div class="row g-2 mt-2">
-                            <div class="col-md-6">
-                                <input type="password" id="password" class="form-control" placeholder="비밀번호" required>
-                            </div>
-                            <div class="col-md-6 d-flex align-items-center">
-                                <input type="checkbox" id="isSecret" class="form-check-input me-2">
-                                <label for="isSecret" class="form-check-label">비공개</label>
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-primary w-100 mt-3">등록</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+    
 
-    <div class="modal fade" id="edit-post-modal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title text-warning">글 수정</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form id="edit-form" class="modal-body">
-                    <input type="hidden" id="edit-id">
-                    <div class="row g-2">
-                        <div class="col-md-6">
-                            <input type="text" id="edit-title" class="form-control" placeholder="제목" required>
-                        </div>
-                        <div class="col-md-6">
-                            <input type="text" id="edit-nickname" class="form-control" placeholder="닉네임" required>
-                        </div>
-                    </div>
-                    <div class="mt-2">
-                        <textarea id="edit-message" class="form-control" placeholder="내용" rows="8" required></textarea>
-                    </div>
-                    <div class="row g-2 mt-2">
-                        <div class="col-md-6">
-                            <input type="password" id="edit-password" class="form-control" placeholder="비밀번호" required>
-                        </div>
-                        <div class="col-md-6 d-flex align-items-center">
-                            <input type="checkbox" id="edit-isSecret" class="form-check-input me-2">
-                            <label for="edit-isSecret" class="form-check-label">비공개</label>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-warning w-100 mt-3">수정</button>
-                </form>
-            </div>
-        </div>
-    </div>
+    
 
+    <script src="admin-list-forms.js?v=20261013a"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="nav-home-menu.js?v=20260831a"></script>
     <script src="page30-api-config.js"></script>
