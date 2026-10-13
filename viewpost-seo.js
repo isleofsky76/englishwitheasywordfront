@@ -14,6 +14,7 @@
         'english-synonym.html': 'english-synonym',
         'english-opinions.html': 'english-opinions',
         'calm-mind.html': 'calm-mind',
+        'english-quotes.html': 'english-quotes',
         'popular-voca.html': 'popular-voca',
         'situational-english.html': 'situational-english',
         'pros-cons.html': 'pros-cons',

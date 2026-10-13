@@ -15,7 +15,8 @@
         'word-of-the-day-list.html': true,
         'vocabulary-quiz.html': true,
         'english-synonym-list.html': true,
-        'calm-mind-list.html': true
+        'calm-mind-list.html': true,
+        'english-quotes-list.html': true
     };
 
     var HOME_SECTION_LINKS = [
@@ -59,6 +60,8 @@
         { href: 'shorts-bg-image-list.html', label: '신문읽는 이미지', pages: ['shorts-bg-image-list.html', 'shorts-bg-image.html'] },
 
         { href: 'calm-mind-list.html', label: '마음 다스리는 글', pages: ['calm-mind-list.html', 'calm-mind.html'] },
+
+        { href: 'english-quotes-list.html', label: '영어 명언', pages: ['english-quotes-list.html', 'english-quotes.html'] },
 
         { href: 'english-directory.html', label: '학습 사이트 디렉터리', pages: ['english-directory.html'] }
 
