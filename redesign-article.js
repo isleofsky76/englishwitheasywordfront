@@ -5,7 +5,7 @@
 (function (global) {
   'use strict';
 
-  var ASSET_VER = '20261020rd9';
+  var ASSET_VER = '20261020rd10';
 
   function assetBase() {
     var scripts = document.querySelectorAll('script[src]');
@@ -330,11 +330,10 @@
     var likeHost = '<div id="rd-like-host" hidden></div>';
 
     /* 기사 slug + '-quiz' → vocabulary-quiz 복습 (영어 : 뜻) */
-    var base = assetBase();
     var articleSlug = String(post.slug || options.slug || '').trim();
     var reviewQuizHref = articleSlug
-      ? base + 'vocabulary-quiz.html?slug=' + encodeURIComponent(articleSlug + '-quiz')
-      : base + 'vocabulary-quiz-list.html';
+      ? '/vocabulary-quiz/' + encodeURIComponent(articleSlug + '-quiz') + '/'
+      : '/vocabulary-quiz-list.html';
 
     container.innerHTML =
       '<div class="rd-article-head">' +
@@ -404,9 +403,11 @@
             .slice(0, 3)
             .map(function (e) {
               var slug = String(e.slug || '').trim();
+              /* SEO 상세(/defense-news/foo/)에서도 깨지지 않게 사이트 루트 절대경로 */
               var href = slug && cfg.postPath
-                ? cfg.postPath + '/' + encodeURIComponent(slug) + '/'
-                : cfg.postPage + (slug ? ('?slug=' + encodeURIComponent(slug)) : '');
+                ? '/' + String(cfg.postPath).replace(/^\/+|\/+$/g, '') + '/' + encodeURIComponent(slug) + '/'
+                : '/' + String(cfg.postPage || '').replace(/^\//, '') +
+                  (slug ? ('?slug=' + encodeURIComponent(slug)) : '');
               var thumbMatch = String(e.message || '').match(/img\.youtube\.com\/vi\/([a-zA-Z0-9_-]+)\//i);
               return {
                 href: href,
