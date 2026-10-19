@@ -252,26 +252,21 @@ function buildQuizSeoPageHtml(boardPath, board, config) {
 <head>
 ${head}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../../navbar-unified.css?v=20260612c">
-    <link rel="stylesheet" href="../../nav-home-menu.css?v=20260626e">
+    <link rel="stylesheet" href="../../redesign-tokens.css?v=20261019rd7">
+    <link rel="stylesheet" href="../../site-masthead.css?v=20261019rd7">
+    <link rel="stylesheet" href="../../nav-home-menu.css?v=20260815j">
     <link rel="stylesheet" href="../../${board.cssFile}?v=${board.cssVersion}">
 </head>
 <body data-nv-slug="${escapeHtml(slug)}" data-nv-board="${escapeHtml(boardPath)}">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" aria-label="주 메뉴">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="../../${board.listHtml}">${escapeHtml(board.label)}</a>
-            <div data-nav-home-menu class="nav-home-menu-slot ms-auto"></div>
-        </div>
-    </nav>
+    <nav id="navbar" class="navbar navbar-expand site-masthead" aria-label="주 메뉴"></nav>
     <main class="vocabulary-quiz-main">
         <div id="vocabulary-quiz-entries"></div>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../../nav-home-menu.js?v=20260721c"></script>
     <script src="../../page30-api-config.js?v=20260721"></script>
+    <script src="../../site-masthead.js?v=20261019rd7"></script>
+    <script src="../../site-footer.js?v=20261013a"></script>
+    <script src="../../nav-home-menu.js?v=20260816d"></script>
     <script src="../../${board.jsFile}?v=${board.jsVersion}"></script>
 </body>
 </html>

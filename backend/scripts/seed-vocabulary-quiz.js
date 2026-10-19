@@ -14,26 +14,24 @@ import { uploadVocabularyQuiz } from './vocabulary-quiz-format.js';
 
 const article = {
   format: 'reveal',
-  title: '조깅 부상 관련 어휘',
-  slug: 'jogging-injury-vocabulary',
-  /** 기존 오늘의 퀴즈 URL 정리 */
-  deleteSlugs: ['daily-vocabulary-quiz-01'],
+  title: '테슬라 로드스터 뉴스 단어',
+  slug: 'tesla-roadster-vocabulary',
   metaDescription:
-    '조깅·러닝 부상 관련 영어 어휘. overuse, ache, kneecap, stress fracture 등을 클릭해서 뜻을 확인하는 퀴즈입니다.',
-  sourceUrl: 'https://youtube.com/shorts/Awc28hBniog',
+    '테슬라 로드스터 뉴스 영어 어휘. spectacle, thruster, reiterate, formidable 등을 클릭해서 뜻을 확인하는 퀴즈입니다.',
+  sourceUrl: 'https://www.youtube.com/watch?v=81s7MWKgUl0',
   sourceLabel: '유튜브 보기',
   datePublished: '2026-10-19',
   section1Title: '1. 영어 → 한글',
   section2Title: '2. 한글 → 영어',
   pairs: [
-    { en: 'overuse', ko: '과사용 (과도한 사용)' },
-    { en: 'ache', ko: '쑤심 (통증)' },
-    { en: 'knee pain', ko: '무릎 통증' },
-    { en: 'kneecap', ko: '슬개골 (무릎뼈)' },
-    { en: 'twinge', ko: '찌릿한 통증' },
-    { en: 'stress fracture', ko: '피로골절' },
-    { en: 'cartilage', ko: '연골' },
-    { en: 'arthritis', ko: '관절염' },
+    { en: 'spectacle', ko: '장관 (광경)' },
+    { en: 'thruster', ko: '추진장치' },
+    { en: 'reiterate', ko: '재확인하다' },
+    { en: 'formidable', ko: '막강한' },
+    { en: 'upend', ko: '뒤흔들다 (뒤집다)' },
+    { en: 'commoditize', ko: '범용 상품으로 만들다' },
+    { en: 'bolster', ko: '강화하다 (뒷받침하다)' },
+    { en: 'stoke', ko: '(기대·감정을) 고조시키다' },
   ],
 };
 
