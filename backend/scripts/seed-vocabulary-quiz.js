@@ -14,24 +14,22 @@ import { uploadVocabularyQuiz } from './vocabulary-quiz-format.js';
 
 const article = {
   format: 'reveal',
-  title: '테슬라 로드스터 뉴스 단어',
-  slug: 'tesla-roadster-vocabulary',
+  title: 'AI 투자 경고 기사 추출 어휘',
+  slug: 'ai-investment-warning-vocabulary',
   metaDescription:
-    '테슬라 로드스터 뉴스 영어 어휘. spectacle, thruster, reiterate, formidable 등을 클릭해서 뜻을 확인하는 퀴즈입니다.',
-  sourceUrl: 'https://www.youtube.com/watch?v=81s7MWKgUl0',
+    'AI 투자 경고 기사 영어 어휘. be alive to, mirage, drastically, deflate 등을 클릭해서 뜻을 확인하는 퀴즈입니다.',
+  sourceUrl: 'https://youtube.com/shorts/tkwXENfK-KU',
   sourceLabel: '유튜브 보기',
   datePublished: '2026-10-19',
   section1Title: '1. 영어 → 한글',
   section2Title: '2. 한글 → 영어',
   pairs: [
-    { en: 'spectacle', ko: '장관 (광경)' },
-    { en: 'thruster', ko: '추진장치' },
-    { en: 'reiterate', ko: '재확인하다' },
-    { en: 'formidable', ko: '막강한' },
-    { en: 'upend', ko: '뒤흔들다 (뒤집다)' },
-    { en: 'commoditize', ko: '범용 상품으로 만들다' },
-    { en: 'bolster', ko: '강화하다 (뒷받침하다)' },
-    { en: 'stoke', ko: '(기대·감정을) 고조시키다' },
+    { en: 'be alive to', ko: '~을 인식하다 (알아차리다)' },
+    { en: 'mirage', ko: '신기루 (환상)' },
+    { en: 'drastically', ko: '급격하게 (대폭)' },
+    { en: 'deflate', ko: '줄어들다 (거품이 빠지다)' },
+    { en: 'materialize', ko: '현실화되다 (실제로 이루어지다)' },
+    { en: 'interlude', ko: '막간 (일시적인 조정)' },
   ],
 };
 
