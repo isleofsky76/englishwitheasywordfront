@@ -4,26 +4,61 @@
  * nav-home-menu.js 가 로드함
  */
 (function () {
-    var VERSION = '20260821f';
-  var PRIMARY_NAV_COUNT = 7;
-  var NAV_ITEMS = [
+    var VERSION = '20261019rd7';
+  /* 시안 주 메뉴 5개 — href는 기존 URL 유지 */
+  var PRIMARY_NAV_ITEMS = [
+    {
+      href: 'news-voca-list.html',
+      label: '뉴스 영어',
+      tone: 'news',
+      pages: [
+        'news-voca-list.html', 'news-voca.html',
+        'korea-news-list.html', 'korea-news.html',
+        'defense-news-list.html', 'defense-news.html',
+        'culture-voca-list.html', 'culture-voca.html',
+        'ranking-news-list.html', 'ranking-news.html'
+      ]
+    },
+    { href: 'word-of-the-day-list.html?api=prod', label: '단어장', tone: 'wotd', pages: ['word-of-the-day-list.html', 'word-of-the-day.html'] },
+    {
+      href: 'popular-voca-list.html',
+      label: '표현',
+      tone: 'popular',
+      pages: [
+        'popular-voca-list.html', 'popular-voca.html',
+        'situational-english-list.html', 'situational-english.html',
+        'pros-cons-list.html', 'pros-cons.html'
+      ]
+    },
+    { href: 'vocabulary-quiz-list.html', label: '퀴즈', tone: 'quiz', pages: ['vocabulary-quiz-list.html', 'vocabulary-quiz.html'] },
+    {
+      href: 'english-opinions-list.html',
+      label: '읽을거리',
+      tone: 'opine',
+      pages: [
+        'english-opinions-list.html', 'english-opinions.html',
+        'calm-mind-list.html', 'calm-mind.html',
+        'english-quotes-list.html', 'english-quotes.html'
+      ]
+    }
+  ];
+  var EXTRA_NAV_ITEMS = [
     { href: 'index.html', label: '홈', tone: 'home', pages: ['index.html', ''] },
     { href: 'english-synonym-list.html', label: '연관단어', tone: 'syn', pages: ['english-synonym-list.html', 'english-synonym.html'] },
     { href: 'defense-news-list.html', label: '국방뉴스', tone: 'defense', pages: ['defense-news-list.html', 'defense-news.html'] },
-    { href: 'news-voca-list.html', label: '국제', tone: 'news', pages: ['news-voca-list.html', 'news-voca.html'] },
+    { href: 'korea-news-list.html', label: '한국뉴스', tone: 'defense', pages: ['korea-news-list.html', 'korea-news.html'] },
     { href: 'culture-voca-list.html', label: '컬쳐', tone: 'culture', pages: ['culture-voca-list.html', 'culture-voca.html'] },
-    { href: 'english-opinions-list.html', label: '오피니언', tone: 'opine', pages: ['english-opinions-list.html', 'english-opinions.html'] },
+    { href: 'shorts-bg-image-list.html', label: '신문읽는 이미지', tone: 'sbgi', pages: ['shorts-bg-image-list.html', 'shorts-bg-image.html'] },
     { href: 'calm-mind-list.html', label: '마음글', tone: 'calm', pages: ['calm-mind-list.html', 'calm-mind.html'] },
-    { href: 'word-of-the-day-list.html', label: '단어장', tone: 'wotd', pages: ['word-of-the-day-list.html', 'word-of-the-day.html'] },
-    { href: 'vocabulary-quiz.html', label: '퀴즈', tone: 'quiz', pages: ['vocabulary-quiz.html', 'vocabulary-quiz-list.html'] },
-    { href: 'popular-voca-list.html', label: '이럴 땐 영어로?', tone: 'popular', pages: ['popular-voca-list.html', 'popular-voca.html'] },
     { href: 'situational-english-list.html', label: '상황', tone: 'sit', pages: ['situational-english-list.html', 'situational-english.html'] },
     { href: 'cooking-voca-list.html', label: '요리', tone: 'cook', pages: ['cooking-voca-list.html', 'cooking-voca.html'] },
     { href: 'ranking-news-list.html', label: '랭킹', tone: 'rank', pages: ['ranking-news-list.html', 'ranking-news.html'] },
     { href: 'photo-english-list.html', label: '포토', tone: 'photo', pages: ['photo-english-list.html', 'photo-english.html'] },
     { href: 'pros-cons-list.html', label: 'Pros & Cons', tone: 'pros', pages: ['pros-cons-list.html', 'pros-cons.html'] },
+    { href: 'english-quotes-list.html', label: '영어 명언', tone: 'quote', pages: ['english-quotes-list.html', 'english-quotes.html'] },
     { href: 'english-directory.html', label: '학습 사이트', tone: 'dir', pages: ['english-directory.html'] }
   ];
+  var NAV_ITEMS = PRIMARY_NAV_ITEMS.concat(EXTRA_NAV_ITEMS);
 
   function assetBase() {
     var scripts = document.querySelectorAll('script[src]');
@@ -44,6 +79,7 @@
       var map = {
         'news-voca': 'news-voca.html',
         'defense-news': 'defense-news.html',
+        'korea-news': 'korea-news.html',
         'word-of-the-day': 'word-of-the-day.html',
         'popular-voca': 'popular-voca.html',
         'english-synonym': 'english-synonym.html',
@@ -54,6 +90,7 @@
         'ranking-news': 'ranking-news.html',
         'photo-english': 'photo-english.html',
         'english-opinions': 'english-opinions.html',
+        'shorts-bg-image': 'shorts-bg-image.html',
         'calm-mind': 'calm-mind.html',
         'vocabulary-quiz': 'vocabulary-quiz.html'
       };
@@ -67,11 +104,13 @@
   }
 
   function ensureCss(base) {
-    if (document.querySelector('link[href*="site-masthead.css"]')) return;
-    var link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.href = base + 'site-masthead.css?v=' + VERSION;
-    document.head.appendChild(link);
+    ensureLink(base + 'redesign-tokens.css?v=' + VERSION);
+    if (!document.querySelector('link[href*="site-masthead.css"]')) {
+      var link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = base + 'site-masthead.css?v=' + VERSION;
+      document.head.appendChild(link);
+    }
   }
 
   function ensureScript(src, done) {
@@ -105,16 +144,16 @@
   }
 
   function ensureWeather(base) {
-    ensureLink(base + 'weather-banner.css?v=20260612g');
-    ensureLink(base + 'world-clock.css?v=20260612g');
+    ensureLink(base + 'weather-banner.css?v=20261019rd7');
+    ensureLink(base + 'world-clock.css?v=20261019rd6');
     if (!document.querySelector('script[src*="weather-banner.js"]')) {
       var w = document.createElement('script');
-      w.src = base + 'weather-banner.js?v=20260612e';
+      w.src = base + 'weather-banner.js?v=20261019rd7';
       document.head.appendChild(w);
     }
     if (!document.querySelector('script[src*="world-clock.js"]')) {
       var c = document.createElement('script');
-      c.src = base + 'world-clock.js?v=20260612g';
+      c.src = base + 'world-clock.js?v=20261019rd6';
       document.head.appendChild(c);
     }
   }
@@ -127,8 +166,8 @@
   }
 
   function buildNavHtml(base, page) {
-    var primary = NAV_ITEMS.slice(0, PRIMARY_NAV_COUNT);
-    var extra = NAV_ITEMS.slice(PRIMARY_NAV_COUNT);
+    var primary = PRIMARY_NAV_ITEMS;
+    var extra = EXTRA_NAV_ITEMS;
     var html = primary.map(function (item) {
       return '<li class="nav-item">' + navItemHtml(base, page, item) + '</li>';
     }).join('');
@@ -150,21 +189,27 @@
 
   function mastheadHtml(base, page) {
     return (
-      '<div class="site-masthead-brand">' +
-        '<a href="' + base + 'index.html">' +
-          '<span class="site-title-ko">시사 영단어</span>' +
-          '<span class="site-title-en">(News English Lab)</span>' +
-        '</a>' +
-      '</div>' +
-      '<div class="site-masthead-search">' +
-        '<form class="site-search-form" id="site-search-form" role="search">' +
-          '<input class="site-search-input" id="site-search-input" type="search" name="q" placeholder="단어·제목 검색" autocomplete="off" enterkeyhint="search">' +
-          '<button class="site-search-submit" type="submit">검색</button>' +
-        '</form>' +
-        '<ul class="site-search-results" id="site-search-results" hidden></ul>' +
-      '</div>' +
-      '<div class="container-fluid">' +
-        '<ul class="navbar-nav site-primary-nav">' + buildNavHtml(base, page) + '</ul>' +
+      '<div class="site-masthead-bar">' +
+        '<div class="site-masthead-brand">' +
+          '<a href="' + base + 'index.html">' +
+            '<span class="site-title-ko">시사영단어</span>' +
+            '<span class="site-title-en">News English Lab</span>' +
+          '</a>' +
+        '</div>' +
+        '<button type="button" class="site-masthead-mobile-toggle" aria-expanded="false" aria-controls="site-masthead-nav" aria-label="메뉴">' +
+          '<span></span><span></span><span></span>' +
+        '</button>' +
+        '<div class="site-masthead-nav-wrap" id="site-masthead-nav">' +
+          '<ul class="navbar-nav site-primary-nav">' + buildNavHtml(base, page) + '</ul>' +
+        '</div>' +
+        '<div class="site-masthead-search">' +
+          '<form class="site-search-form" id="site-search-form" role="search">' +
+            '<label for="site-search-input" class="visually-hidden">단어 검색</label>' +
+            '<input class="site-search-input" id="site-search-input" type="search" name="q" placeholder="단어나 표현 검색" autocomplete="off" enterkeyhint="search">' +
+            '<button class="site-search-submit" type="submit" aria-label="검색">검색</button>' +
+          '</form>' +
+          '<ul class="site-search-results" id="site-search-results" hidden></ul>' +
+        '</div>' +
       '</div>'
     );
   }
@@ -188,15 +233,26 @@
     bar.setAttribute('aria-label', 'YouTube Shorts istudyeng 바로가기');
     bar.innerHTML =
       '<span class="yt-billboard__inner">' +
-        '<span class="yt-billboard__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5.5v13l12-6.5z"/></svg></span>' +
+        '<span class="yt-billboard__icon" aria-hidden="true">' +
+          '<svg viewBox="0 0 28 20" xmlns="http://www.w3.org/2000/svg" focusable="false">' +
+            '<path fill="#FF0000" d="M27.33 3.12A3.5 3.5 0 0 0 24.86.65C22.7 0 14 0 14 0S5.3 0 3.14.65A3.5 3.5 0 0 0 .67 3.12 36.7 36.7 0 0 0 0 10a36.7 36.7 0 0 0 .67 6.88 3.5 3.5 0 0 0 2.47 2.47C5.3 20 14 20 14 20s8.7 0 10.86-.65a3.5 3.5 0 0 0 2.47-2.47A36.7 36.7 0 0 0 28 10a36.7 36.7 0 0 0-.67-6.88z"/>' +
+            '<path fill="#fff" d="M11.2 14.3V5.7L18.5 10l-7.3 4.3z"/>' +
+          '</svg>' +
+        '</span>' +
         '<span class="yt-billboard__title">YouTube로 공부하기</span>' +
         '<span class="yt-billboard__handle">@istudyeng</span>' +
       '</span>';
-    var clock = document.getElementById('world-clock-bar');
-    var weather = document.getElementById('weather-banner');
-    var nav = document.querySelector('.navbar.fixed-top');
-    var after = clock || weather || nav;
-    if (after) after.insertAdjacentElement('afterend', bar);
+    var slot = document.getElementById('yt-billboard-slot');
+    if (slot) {
+      slot.replaceWith(bar);
+      document.documentElement.classList.add('has-yt-billboard');
+      return;
+    }
+    var nav = document.querySelector('.site-masthead') ||
+      document.querySelector('#navbar') ||
+      document.querySelector('.navbar.fixed-top') ||
+      document.querySelector('.navbar');
+    if (nav) nav.insertAdjacentElement('afterend', bar);
     else document.body.insertBefore(bar, document.body.firstChild);
     document.documentElement.classList.add('has-yt-billboard');
   }
@@ -347,17 +403,53 @@
     });
   }
 
+  function bindMobileToggle(nav) {
+    var btn = nav.querySelector('.site-masthead-mobile-toggle');
+    if (!btn || btn.dataset.bound === '1') return;
+    btn.dataset.bound = '1';
+    btn.addEventListener('click', function () {
+      var open = !nav.classList.contains('is-nav-open');
+      nav.classList.toggle('is-nav-open', open);
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      syncNavbarHeight();
+    });
+  }
+
   function mountNavbar(base) {
-    var nav = document.querySelector('.navbar.fixed-top');
+    var nav = document.querySelector('.navbar.fixed-top') || document.querySelector('.site-masthead');
     if (!nav) return;
     if (!nav.id) nav.id = 'navbar';
     nav.classList.add('site-masthead', 'navbar-expand');
+    nav.classList.remove('navbar-dark', 'bg-primary');
+    /* 시안형 마크업으로 항상 갱신 (검색 바인딩은 initSearch가 담당) */
     nav.innerHTML = mastheadHtml(base, currentPageKey());
     bindMoreMenu(nav);
+    bindMobileToggle(nav);
     syncNavbarHeight();
     window.addEventListener('resize', syncNavbarHeight);
     window.addEventListener('load', syncNavbarHeight);
     requestAnimationFrame(syncNavbarHeight);
+  }
+
+  /** 문서 순서: 헤더 → YouTube → 날씨 → 시계 */
+  function placeUtilityBars() {
+    var nav = document.querySelector('.site-masthead') || document.querySelector('#navbar');
+    var yt = document.getElementById('yt-billboard-bar');
+    var weather = document.getElementById('weather-banner');
+    var clock = document.getElementById('world-clock-bar');
+    if (!nav) return false;
+    if (yt && yt.previousElementSibling !== nav) {
+      nav.insertAdjacentElement('afterend', yt);
+    }
+    var afterNav = yt || nav;
+    if (weather && weather.previousElementSibling !== afterNav) {
+      afterNav.insertAdjacentElement('afterend', weather);
+    }
+    var afterWeather = weather || afterNav;
+    if (clock && clock.previousElementSibling !== afterWeather) {
+      afterWeather.insertAdjacentElement('afterend', clock);
+    }
+    return !!(yt || weather || clock);
   }
 
   function mount() {
@@ -367,13 +459,20 @@
     ensureWeather(base);
     mountNavbar(base);
     injectYoutubeBar();
+    placeUtilityBars();
     ensureScript(base + 'home-board-preview.js?v=' + VERSION, function () {
       initSearch(base);
     });
-    setTimeout(function () {
-      injectYoutubeBar();
+    var tries = 0;
+    var timer = setInterval(function () {
+      tries += 1;
+      if (!document.getElementById('yt-billboard-bar')) injectYoutubeBar();
+      var ready = placeUtilityBars();
       syncNavbarHeight();
-    }, 400);
+      if ((ready && document.getElementById('weather-banner')) || tries > 20) {
+        clearInterval(timer);
+      }
+    }, 200);
   }
 
   window.SiteMasthead = { mount: mount };

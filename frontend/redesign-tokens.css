@@ -1,0 +1,42 @@
+/* 시사영단어 리디자인 — 공통 토큰 (시안 redesign-reference) */
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600&family=Noto+Serif+KR:wght@600;700;900&display=swap");
+
+:root {
+  --accent: #B23A0B;
+  --accent-soft: #F2A27E;
+  --ink: #16181D;
+  --ink-muted: #5A5F69;
+  --ink-soft: #33363D;
+  --line: #D9D3C6;
+  --line-strong: #16181D;
+  --page-bg: #F6F3EC;
+  --surface: #FFFFFF;
+  --surface-warm: #EDE8DC;
+  --surface-dark: #16181D;
+  --text-on-dark: #F6F3EC;
+  --text-on-dark-muted: #C9CCD3;
+  --font-sans: "IBM Plex Sans KR", "Noto Sans KR", sans-serif;
+  --font-serif: "Noto Serif KR", serif;
+  --max-width: 1240px;
+  --navbar-height: 76px;
+}
+
+html {
+  background: var(--page-bg);
+}
+
+body.rd-home,
+html.has-site-masthead body {
+  margin: 0;
+  font-family: var(--font-sans);
+  color: var(--ink);
+  background: var(--page-bg);
+}
+
+a {
+  color: var(--ink);
+  text-decoration: none;
+}
+a:hover {
+  color: var(--accent);
+}

@@ -8,14 +8,15 @@
 
 (function () {
 
-    var NAV_HOME_MENU_VERSION = '20260821f';
+    var NAV_HOME_MENU_VERSION = '20261013legal';
 
     var PRIMARY_BAR_HREFS = {
         'index.html': true,
         'word-of-the-day-list.html': true,
         'vocabulary-quiz.html': true,
         'english-synonym-list.html': true,
-        'calm-mind-list.html': true
+        'calm-mind-list.html': true,
+        'english-quotes-list.html': true
     };
 
     var HOME_SECTION_LINKS = [
@@ -34,6 +35,7 @@
         { href: 'english-synonym-list.html', label: '유의어', pages: ['english-synonym-list.html', 'english-synonym.html'] },
 
         { href: 'defense-news-list.html', label: '국방뉴스', pages: ['defense-news-list.html', 'defense-news.html'] },
+        { href: 'korea-news-list.html', label: '한국뉴스', pages: ['korea-news-list.html', 'korea-news.html'] },
 
         { href: 'news-voca-list.html', label: '국제', pages: ['news-voca-list.html', 'news-voca.html'] },
 
@@ -55,7 +57,11 @@
 
         { href: 'english-opinions-list.html', label: '오피니언', pages: ['english-opinions-list.html', 'english-opinions.html'] },
 
+        { href: 'shorts-bg-image-list.html', label: '신문읽는 이미지', pages: ['shorts-bg-image-list.html', 'shorts-bg-image.html'] },
+
         { href: 'calm-mind-list.html', label: '마음 다스리는 글', pages: ['calm-mind-list.html', 'calm-mind.html'] },
+
+        { href: 'english-quotes-list.html', label: '영어 명언', pages: ['english-quotes-list.html', 'english-quotes.html'] },
 
         { href: 'english-directory.html', label: '학습 사이트 디렉터리', pages: ['english-directory.html'] }
 
@@ -229,21 +235,30 @@
 
     pinNavbarWhileOpen();
 
-    function loadSiteMasthead() {
+    function scriptDirBase() {
         var scripts = document.querySelectorAll('script[src]');
-        var base = '';
         for (var i = 0; i < scripts.length; i += 1) {
             var src = scripts[i].getAttribute('src') || '';
             if (src.indexOf('nav-home-menu.js') !== -1) {
-                base = src.replace(/[^/]+$/, '');
-                break;
+                return src.replace(/[^/]+$/, '');
             }
         }
+        return '';
+    }
+
+    function loadSiteMasthead() {
+        var base = scriptDirBase();
         document.documentElement.classList.add('has-site-masthead');
-        if (document.querySelector('script[src*="site-masthead.js"]')) return;
-        var s = document.createElement('script');
-        s.src = base + 'site-masthead.js?v=20260818a';
-        document.head.appendChild(s);
+        if (!document.querySelector('script[src*="site-masthead.js"]')) {
+            var s = document.createElement('script');
+            s.src = base + 'site-masthead.js?v=20261019rd7';
+            document.head.appendChild(s);
+        }
+        if (!document.querySelector('script[src*="site-footer.js"]')) {
+            var f = document.createElement('script');
+            f.src = base + 'site-footer.js?v=20261013a';
+            document.head.appendChild(f);
+        }
     }
 
     if (document.readyState === 'loading') {
