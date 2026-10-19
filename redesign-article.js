@@ -5,7 +5,7 @@
 (function (global) {
   'use strict';
 
-  var ASSET_VER = '20261020rd18';
+  var ASSET_VER = '20261020rd19';
 
   /** 캐시된 구버전 JS가 그려도 QUICK REVIEW 즉시 제거 */
   function stripQuickReview() {
@@ -353,7 +353,8 @@
     options = options || {};
     var Config = global.BoardListConfig;
     var cfg = Config && Config.get(options.boardKey);
-    if (!cfg || cfg.articleLayout === 'header-only') return false;
+    /* expression-cards 만 카드형 redesign — classic/header-only 는 기존 본문 유지 */
+    if (!cfg || cfg.articleLayout !== 'expression-cards') return false;
 
     ensureCss();
     document.body.classList.add('rd-article', 'rd-article-like-hidden');

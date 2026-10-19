@@ -748,38 +748,11 @@ async function loadPost() {
         updatePageSeo(post, formattedDate);
 
         let usedRedesign = false;
-        if (typeof renderRedesignArticle === 'function') {
-            let related = [];
-            try {
-                const listRes = await fetch(`${API_BASE_URL}/guestbook`, { cache: 'no-store' });
-                if (listRes.ok) {
-                    const listData = await listRes.json();
-                    const entries = Array.isArray(listData) ? listData : (listData.entries || []);
-                    const newest = entries.slice().reverse();
-                    const Config = window.BoardListConfig;
-                    related = newest
-                        .filter((e) => e && e._id !== post._id)
-                        .slice(0, 3)
-                        .map((e) => {
-                            const slug = String(e.slug || '').trim();
-                            const href = slug
-                                ? `news-voca/${encodeURIComponent(slug)}/`
-                                : `news-voca.html?index=0`;
-                            const thumbMatch = String(e.message || '').match(/img\.youtube\.com\/vi\/([a-zA-Z0-9_-]+)\//i);
-                            return {
-                                href: href,
-                                title: Config ? Config.cleanTitle(e) : (e.title || '제목 없음'),
-                                thumb: thumbMatch ? `https://img.youtube.com/vi/${thumbMatch[1]}/hqdefault.jpg` : ''
-                            };
-                        });
-                }
-            } catch (relErr) {
-                console.warn('related fetch skipped', relErr);
-            }
-            usedRedesign = !!renderRedesignArticle(postContainer, post, {
+        if (typeof mountRedesignArticle === 'function') {
+            usedRedesign = await mountRedesignArticle(postContainer, post, {
                 boardKey: 'news-voca',
-                convertedMessage: convertedMessage,
-                related: related
+                apiBaseUrl: API_BASE_URL,
+                convertedMessage: convertedMessage
             });
         }
 
@@ -991,10 +964,10 @@ function nvLoadScript(src) {
     const base = nvAssetBase();
     try {
         if (!window.BoardListConfig) {
-            await nvLoadScript(base + 'board-list-config.js?v=20261020classic2');
+            await nvLoadScript(base + 'board-list-config.js?v=20261020classic3');
         }
-        if (!window.renderRedesignArticle) {
-            await nvLoadScript(base + 'redesign-article.js?v=20261020rd18');
+        if (!window.mountRedesignArticle) {
+            await nvLoadScript(base + 'redesign-article.js?v=20261020rd19');
         }
     } catch (e) {
         console.warn('redesign deps skipped', e);
