@@ -20,7 +20,7 @@ export const BOARD_SEO = {
     cssFile: 'news-voca.css',
     cssVersion: '20261020rd18',
     jsFile: 'news-voca.js',
-    jsVersion: '20261020rd18',
+    jsVersion: '20261020classic2',
     listHtml: 'news-voca-list.html',
   },
   'cooking-voca': {
@@ -36,7 +36,7 @@ export const BOARD_SEO = {
     cssFile: 'culture-voca.css',
     cssVersion: '20260622a',
     jsFile: 'culture-voca.js',
-    jsVersion: '20261020rd18',
+    jsVersion: '20261020classic2',
     listHtml: 'culture-voca-list.html',
   },
   'defense-news': {
@@ -44,7 +44,7 @@ export const BOARD_SEO = {
     cssFile: 'news-voca.css',
     cssVersion: '20261020rd18',
     jsFile: 'defense-news.js',
-    jsVersion: '20261020rd18',
+    jsVersion: '20261020classic2',
     listHtml: 'defense-news-list.html',
   },
   'korea-news': {
@@ -52,7 +52,7 @@ export const BOARD_SEO = {
     cssFile: 'news-voca.css',
     cssVersion: '20261020rd18',
     jsFile: 'korea-news.js',
-    jsVersion: '20261020classic1',
+    jsVersion: '20261020classic2',
     listHtml: 'korea-news-list.html',
   },
   'shorts-bg-image': {
@@ -68,7 +68,7 @@ export const BOARD_SEO = {
     cssFile: 'ranking-news.css',
     cssVersion: '20260622a',
     jsFile: 'page30_viewpost_ranking_news.js',
-    jsVersion: '20260903d',
+    jsVersion: '20261020classic2',
     listHtml: 'ranking-news-list.html',
   },
   'english-synonym': {
@@ -76,7 +76,7 @@ export const BOARD_SEO = {
     cssFile: 'page30_viewpost_v.css',
     cssVersion: '20260903e',
     jsFile: 'page30_viewpost_v.js',
-    jsVersion: '20260905tts5',
+    jsVersion: '20261020classic2',
     listHtml: 'english-synonym-list.html',
     extraCss: [{ file: 'news-voca.css', version: '20260926barun' }],
   },
@@ -85,7 +85,7 @@ export const BOARD_SEO = {
     cssFile: 'page30_viewpost_opinions.css',
     cssVersion: '20260816a',
     jsFile: 'page30_viewpost_opinions.js',
-    jsVersion: '20260903d',
+    jsVersion: '20261020classic2',
     listHtml: 'english-opinions-list.html',
   },
   'calm-mind': {

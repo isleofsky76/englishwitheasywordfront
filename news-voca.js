@@ -991,7 +991,7 @@ function nvLoadScript(src) {
     const base = nvAssetBase();
     try {
         if (!window.BoardListConfig) {
-            await nvLoadScript(base + 'board-list-config.js?v=20261019rd4');
+            await nvLoadScript(base + 'board-list-config.js?v=20261020classic2');
         }
         if (!window.renderRedesignArticle) {
             await nvLoadScript(base + 'redesign-article.js?v=20261020rd18');
