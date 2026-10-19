@@ -1,0 +1,484 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100%;
+  min-height: 100dvh;
+  background: #06221c;
+  font-family: "Arial", "Helvetica Neue", Helvetica, sans-serif;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100dvh;
+  overscroll-behavior: none;
+}
+
+/* 세로 9:16 쇼츠 프레임 — 뷰포트에 맞춤, 여백은 body 배경(레터박스) */
+.shorts-frame {
+  position: relative;
+  aspect-ratio: 9 / 16;
+  width: min(100vw, calc(100dvh * 9 / 16));
+  height: auto;
+  max-height: 100dvh;
+  margin: 0 auto;
+  border-radius: 0;
+  overflow: hidden;
+  touch-action: manipulation;
+  /* 위쪽 레이어는 약하게 — bg.jpeg가 보이도록 */
+  background:
+    radial-gradient(circle at 30% 20%, rgba(32, 98, 80, 0.22), transparent 38%),
+    radial-gradient(circle at 70% 75%, rgba(18, 68, 55, 0.18), transparent 38%),
+    linear-gradient(180deg, rgba(5, 42, 36, 0.42) 0%, rgba(6, 33, 29, 0.38) 40%, rgba(7, 27, 24, 0.45) 100%),
+    url("resources/bg.jpeg") center / cover no-repeat;
+  box-shadow: none;
+  border: none;
+}
+
+.grain {
+  position: absolute;
+  inset: 0;
+  opacity: 0.08;
+  background-image:
+    radial-gradient(rgba(255, 255, 255, 0.45) 0.5px, transparent 0.5px);
+  background-size: 6px 6px;
+  pointer-events: none;
+}
+
+.card-logo {
+  position: absolute;
+  top: max(10px, env(safe-area-inset-top, 0px));
+  left: max(10px, env(safe-area-inset-left, 0px));
+  /* .content 전체 레이어 위에 보이도록 */
+  z-index: 4;
+  width: clamp(36px, 10vw, 52px);
+  height: clamp(36px, 10vw, 52px);
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  pointer-events: none;
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  padding: max(34px, env(safe-area-inset-top, 0px))
+    max(28px, env(safe-area-inset-right, 0px))
+    max(22px, env(safe-area-inset-bottom, 0px))
+    max(28px, env(safe-area-inset-left, 0px));
+  display: flex;
+  flex-direction: column;
+  color: white;
+}
+
+.top-label-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 56px;
+  margin-bottom: 24px;
+  flex-shrink: 0;
+}
+
+.top-line {
+  width: 56px;
+  height: 1px;
+  background: rgba(190, 215, 170, 0.5);
+}
+
+.top-label {
+  color: #d7e88c;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+}
+
+.card-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 단어: 쇼츠형 헤드라인 — clamp 기준 +10% */
+.word {
+  text-align: center;
+  font-size: clamp(52.8px, 12.144vw, 94.6px);
+  font-weight: 900;
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+  color: #f4cc4a;
+  margin-bottom: clamp(12px, 2.8vw, 18px);
+  flex-shrink: 0;
+}
+
+/* 마스크 전·후 동일 줄 높이(토글 시 튐 방지) */
+.word.word--masked {
+  line-height: 1.02;
+}
+
+/* 마스크/풀 단어 공통 래퍼 — 부모(.word)와 동일 타입그래피 상속 */
+.word .word-mask-line {
+  display: inline-block;
+  white-space: nowrap;
+  max-width: 100%;
+  vertical-align: baseline;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  font-style: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+  color: inherit;
+}
+
+/* `_` + thin space(U+2009) — 칸이 붙지 않게, 일반 스페이스보다 좁게 */
+.word .word-mask-fill {
+  display: inline;
+  vertical-align: baseline;
+  margin-left: 0.02em;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  color: inherit;
+}
+
+/* 뜻: 단어 대비 약 1/3 전후로 읽기 크기 유지(한글 가독성) */
+.meaning-badge {
+  align-self: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: min(170px, 100%);
+  max-width: 100%;
+  padding: clamp(8px, 2vw, 12px) clamp(16px, 4vw, 24px);
+  border-radius: 999px;
+  border: 1px solid rgba(186, 209, 177, 0.35);
+  color: #ffffff;
+  font-size: clamp(14.4px, 3.696vw, 21.12px);
+  font-weight: 500;
+  line-height: 1.35;
+  background: rgba(255, 255, 255, 0.03);
+  margin-top: 10px;
+  margin-bottom: clamp(10px, 4vw, 20px);
+  flex-shrink: 0;
+}
+
+.divider {
+  width: calc(100% - (clamp(18px, 5vw, 32px) * 2));
+  height: 1px;
+  background: rgba(186, 209, 177, 0.35);
+  margin: 45px auto 16px;
+  flex-shrink: 0;
+}
+
+/* 상단(단어·뜻) 아래 남는 세로 공간: 영어 예문 / 한국어 번역 각 50% */
+.example-split {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* (레거시) dimmed — 현재 스크립트에서는 기본 적용 안 함. 숨김과 겹칠 때는 흐림보다 완전 비표시가 우선 */
+.example-split.example-split--dimmed .translation:not(.translation--concealed) {
+  opacity: 0.38;
+}
+
+.example-split.example-split--dimmed .sentence:not(.sentence--concealed) {
+  opacity: 1;
+  color: rgba(250, 250, 248, 0.38);
+}
+
+.example-split.example-split--dimmed .sentence:not(.sentence--concealed) .highlight,
+.example-split.example-split--dimmed .sentence:not(.sentence--concealed) .highlight.highlight-underline {
+  color: inherit;
+  font-weight: inherit;
+}
+
+.example-split.example-split--dimmed .sentence:not(.sentence--concealed) .highlight-underline {
+  text-decoration: none;
+}
+
+.example-split.example-split--dimmed .sentence:not(.sentence--concealed) .highlight-underline.roboto-mono-wordlines {
+  color: inherit;
+  font-weight: inherit;
+}
+
+.example-split.example-split--dimmed .sentence.sentence--concealed {
+  opacity: 0;
+  visibility: hidden;
+  color: transparent;
+  transform: translateY(14px);
+  pointer-events: none;
+  transition: none;
+}
+
+.example-split.example-split--dimmed .translation.translation--concealed {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(14px);
+  pointer-events: none;
+  transition: none;
+}
+
+.example-split .sentence,
+.example-split .translation {
+  transition: opacity 0.58s ease, transform 0.58s ease, color 0.45s ease;
+}
+
+.example-half {
+  flex: 1 1 0;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px clamp(18px, 5vw, 32px);
+  overflow: auto;
+}
+
+.example-half--en {
+  position: relative;
+  padding-top: 2px;
+  margin-top: -10px;
+}
+
+.example-half--en::after {
+  content: "";
+  position: absolute;
+  left: clamp(18px, 5vw, 32px);
+  right: clamp(18px, 5vw, 32px);
+  bottom: 0;
+  height: 1px;
+  background: rgba(186, 209, 177, 0.35);
+  pointer-events: none;
+}
+
+/* 영어는 가운데 정렬 유지, 한글은 위쪽 기준 — 카드마다 블록 높이가 달라도 동일하게 위로 올라가 보이게 */
+.example-half--ko {
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+/* 영어 예문: NanumBarunPen — 29.7 / 400 (기준 27 +10%) */
+.sentence {
+  font-family: "NanumBarunPen", "Noto Sans KR", system-ui, sans-serif;
+  text-rendering: optimizeLegibility;
+  font-size: 29.7px;
+  line-height: 1.45;
+  font-weight: 400;
+  font-style: normal;
+  color: #fafaf8;
+  margin: 0;
+  word-break: keep-all;
+  text-align: left;
+  width: 100%;
+  transition: opacity 0.58s ease, transform 0.58s ease;
+}
+
+/* 기본 숨김: 예문·번역은 잠금 해제 전까지 완전 비표시(흐림 단계 없음) */
+.sentence.sentence--concealed {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(14px);
+  transition: none;
+  pointer-events: none;
+}
+
+.translation.translation--concealed {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(14px);
+  transition: none;
+  pointer-events: none;
+}
+
+/* 예문 안에 제목 태그를 넣을 때(선택) — 제목1 22 / 제목2 18 / 제목3(미기재 시 16) */
+.sentence h1 {
+  font-size: 22px;
+  font-weight: 400;
+  font-style: normal;
+  width: 100%;
+  margin: 0 0 0.45em;
+  line-height: 1.35;
+}
+
+.sentence h2 {
+  font-size: 18px;
+  font-weight: 400;
+  font-style: normal;
+  width: 100%;
+  margin: 0 0 0.4em;
+  line-height: 1.35;
+}
+
+.sentence h3 {
+  font-size: 16px;
+  font-weight: 400;
+  font-style: normal;
+  width: 100%;
+  margin: 0 0 0.35em;
+  line-height: 1.35;
+}
+
+.highlight {
+  color: #f4cc4a;
+  font-weight: 700;
+}
+
+/* 기본(단어 가림·첫 카드): 예문 속 키워드(highlightWord)만 흐리게 — 공개 후에는 제거 */
+.highlight--dim {
+  opacity: 0.4;
+}
+
+.highlight-underline {
+  text-decoration-line: underline;
+  text-decoration-color: #f4cc4a;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.14em;
+}
+
+/* highlightWordlines(밑줄 구간) — 본문과 동일 NanumBarunPen, 전체 노란색 */
+.sentence .highlight-underline.roboto-mono-wordlines {
+  color: #f4cc4a;
+  font-weight: 700;
+}
+
+.sentence .roboto-mono-wordlines {
+  font-family: "NanumBarunPen", "Noto Sans KR", system-ui, sans-serif;
+  font-style: normal;
+}
+
+/* 한글 번역: 나눔바른펜 */
+.translation {
+  font-family: "NanumBarunPen", "Noto Sans KR", system-ui, sans-serif;
+  text-rendering: optimizeLegibility;
+  font-size: 22px;
+  line-height: 1.58;
+  font-weight: 400;
+  color: #e4ebe5;
+  text-align: left;
+  word-break: keep-all;
+  margin: 30px 0 0;
+  width: 100%;
+}
+
+.translation .translation-main {
+  color: inherit;
+}
+
+.translation .small-line {
+  display: block;
+}
+
+/* 번역 출처 괄호 */
+.translation .translation-cite {
+  display: block;
+  margin-top: 0.5em;
+  font-size: clamp(14px, 3.4vw, 16px);
+  font-weight: 400;
+  line-height: 1.42;
+  color: rgba(222, 235, 198, 0.92);
+  letter-spacing: 0.02em;
+}
+
+.card-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: auto;
+  padding-top: 8px;
+  flex-shrink: 0;
+}
+
+.card-nav-btn {
+  min-width: 44px;
+  min-height: 44px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(186, 209, 177, 0.35);
+  background: rgba(255, 255, 255, 0.06);
+  color: #d7e88c;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 2px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.card-nav-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.card-index {
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(250, 250, 248, 0.78);
+  min-width: 52px;
+  text-align: center;
+}
+
+/* optional subtle vignette — 로고·텍스트 아래 레이어 */
+.shorts-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    radial-gradient(circle at center, transparent 55%, rgba(0, 0, 0, 0.12) 100%);
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .example-split .sentence,
+  .example-split .translation {
+    transition: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .content {
+    padding: max(28px, env(safe-area-inset-top, 0px))
+      max(22px, env(safe-area-inset-right, 0px))
+      max(18px, env(safe-area-inset-bottom, 0px))
+      max(22px, env(safe-area-inset-left, 0px));
+  }
+
+  .top-line {
+    width: 40px;
+  }
+
+  .meaning-badge {
+    min-width: 150px;
+    padding: 9px 18px;
+  }
+
+  .sentence {
+    font-size: clamp(23.1px, 6.6vw, 29.7px);
+    line-height: 1.44;
+  }
+
+  .translation {
+    line-height: 1.62;
+  }
+}

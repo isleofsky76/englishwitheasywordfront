@@ -1,0 +1,280 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+  background: #030609;
+}
+
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wrapper {
+  position: relative;
+  width: min(100vw, calc(100dvh * 9 / 16));
+  height: min(100dvh, calc(100vw * 16 / 9));
+  aspect-ratio: 9 / 16;
+  overflow: hidden auto;
+  background: #030609;
+  padding: 7% 6% 10%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.page-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(120% 70% at 50% 0%, rgba(184, 239, 67, 0.08), transparent 55%),
+    #071012;
+  pointer-events: none;
+}
+
+.page-dim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    180deg,
+    rgba(5, 9, 11, 0.55) 0%,
+    rgba(5, 9, 11, 0.2) 40%,
+    rgba(5, 9, 11, 0.75) 100%
+  );
+  pointer-events: none;
+}
+
+.page-header,
+.section-nav,
+.voice-root,
+.status {
+  position: relative;
+  z-index: 2;
+}
+
+.page-kicker {
+  margin: 0 0 6px;
+  color: #9aa39a;
+  font-family: "Poppins", "Pretendard", sans-serif;
+  font-size: clamp(11px, 2.8vw, 13px);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.page-title {
+  margin: 0;
+  color: #b8ef43;
+  font-family: "Poppins", "Pretendard", sans-serif;
+  font-size: clamp(28px, 8vw, 40px);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+  text-shadow:
+    0 2px 3px rgba(0, 0, 0, 0.9),
+    0 3px 10px rgba(0, 0, 0, 0.7);
+}
+
+.page-sub {
+  margin: 10px 0 0;
+  color: #c9cbc4;
+  font-family: "Pretendard", "Noto Sans KR", sans-serif;
+  font-size: clamp(12px, 3.2vw, 14px);
+  font-weight: 500;
+  line-height: 1.45;
+}
+
+.section-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.nav-btn {
+  border: 1px solid rgba(210, 220, 190, 0.16);
+  border-radius: 999px;
+  background: rgba(10, 14, 16, 0.7);
+  color: #c9cbc4;
+  font-family: "Pretendard", sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 6px 10px;
+  cursor: pointer;
+}
+
+.nav-btn.is-active {
+  border-color: rgba(184, 239, 67, 0.55);
+  background: rgba(184, 239, 67, 0.16);
+  color: #b8ef43;
+}
+
+.voice-root {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  flex: 1;
+}
+
+.section-title {
+  margin: 0 0 10px;
+  color: #d7d9d1;
+  font-family: "Pretendard", "Poppins", sans-serif;
+  font-size: clamp(13px, 3.4vw, 15px);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.voice-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.voice-card {
+  padding: 12px 12px 10px;
+  border: 1px solid rgba(210, 220, 190, 0.14);
+  border-radius: 12px;
+  background: rgba(12, 18, 20, 0.72);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+}
+
+.voice-card.is-default {
+  border-color: rgba(184, 239, 67, 0.45);
+  background: rgba(18, 28, 16, 0.78);
+}
+
+.voice-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.voice-num {
+  color: #8f9788;
+  font-family: "Poppins", sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.voice-badge {
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: #b8ef43;
+  color: #10140a;
+  font-family: "Poppins", sans-serif;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+}
+
+.voice-name {
+  margin: 8px 0 0;
+  color: #f1efe9;
+  font-family: "Poppins", "Pretendard", sans-serif;
+  font-size: clamp(17px, 4.8vw, 21px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.voice-family {
+  margin: 2px 0 0;
+  color: #b8ef43;
+  font-family: "Poppins", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.voice-id {
+  display: block;
+  margin-top: 8px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.35);
+  color: #d7d9d1;
+  font-family: ui-monospace, "SF Mono", Consolas, monospace;
+  font-size: clamp(10px, 2.6vw, 12px);
+  word-break: break-all;
+}
+
+.voice-lang {
+  margin: 6px 0 0;
+  color: #9aa39a;
+  font-family: "Pretendard", sans-serif;
+  font-size: 11px;
+}
+
+.voice-lang code {
+  color: #c9cbc4;
+  font-family: ui-monospace, Consolas, monospace;
+}
+
+.voice-note {
+  margin: 8px 0 0;
+  color: #9aa39a;
+  font-family: "Pretendard", sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.used-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 8px;
+}
+
+.used-tag {
+  padding: 3px 7px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.06);
+  color: #b0b5a8;
+  font-family: "Pretendard", sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.play-btn {
+  margin-top: 10px;
+  width: 100%;
+  height: 38px;
+  border: 0;
+  border-radius: 10px;
+  background: #b8ef43;
+  color: #10140a;
+  font-family: "Poppins", "Pretendard", sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+.play-btn:hover {
+  filter: brightness(1.05);
+}
+
+.play-btn:active {
+  transform: scale(0.98);
+}
+
+.status {
+  margin: 0;
+  min-height: 1.2em;
+  color: #8f9788;
+  font-family: "Pretendard", sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  word-break: break-all;
+}
