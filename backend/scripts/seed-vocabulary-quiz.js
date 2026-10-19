@@ -5,7 +5,11 @@
  *   cd backend && node scripts/seed-vocabulary-quiz.js
  *
  * 클릭 공개형: format: 'reveal' + pairs[{ en, ko }]
- * 객관식형: quizzes[{ question, choices, answer, meaning, en, ko }]
+ *   directions: ['en-ko'] 만 쓰면 영어 → 뜻 한 방향
+ *
+ * 국방뉴스 QUICK REVIEW 연동 규칙:
+ *   기사 slug 가 foo 이면 퀴즈 slug 는 foo-quiz
+ *   redesign 의 「복습 퀴즈 풀기」가 이 URL로 연결됨
  */
 import { API_BASE } from './loadEnv.js';
 import { uploadVocabularyQuiz } from './vocabulary-quiz-format.js';
@@ -14,22 +18,25 @@ import { uploadVocabularyQuiz } from './vocabulary-quiz-format.js';
 
 const article = {
   format: 'reveal',
-  title: 'AI 투자 경고 기사 추출 어휘',
-  slug: 'ai-investment-warning-vocabulary',
+  directions: ['en-ko'],
+  title: 'USS 에이브러햄 링컨 상륙 — 복습 퀴즈',
+  slug: 'staggered-shore-leave-related-words-quiz',
   metaDescription:
-    'AI 투자 경고 기사 영어 어휘. be alive to, mirage, drastically, deflate 등을 클릭해서 뜻을 확인하는 퀴즈입니다.',
-  sourceUrl: 'https://youtube.com/shorts/tkwXENfK-KU',
-  sourceLabel: '유튜브 보기',
-  datePublished: '2026-10-19',
-  section1Title: '1. 영어 → 한글',
-  section2Title: '2. 한글 → 영어',
+    'USS 에이브러햄 링컨 승조원 파타야 상륙 기사 복습. staggered, shore leave, stint 등 영어 표현의 뜻을 클릭해 확인합니다.',
+  sourceUrl: 'https://englisheasystudy.com/defense-news/staggered-shore-leave-related-words/',
+  sourceLabel: '원문 글 보기',
+  datePublished: '2026-10-20',
+  section1Title: '영어 : 뜻',
   pairs: [
-    { en: 'be alive to', ko: '~을 인식하다 (알아차리다)' },
-    { en: 'mirage', ko: '신기루 (환상)' },
-    { en: 'drastically', ko: '급격하게 (대폭)' },
-    { en: 'deflate', ko: '줄어들다 (거품이 빠지다)' },
-    { en: 'materialize', ko: '현실화되다 (실제로 이루어지다)' },
-    { en: 'interlude', ko: '막간 (일시적인 조정)' },
+    { en: 'staggered', ko: '시차를 둔, 시차제의' },
+    { en: 'shore leave', ko: '상륙 허가, 육상 휴가' },
+    { en: 'stint', ko: '일정 기간 동안의 일·활동' },
+    { en: 'off-limits', ko: '출입 금지의' },
+    { en: 'abrupt', ko: '갑작스러운' },
+    { en: 'intermittently', ko: '간헐적으로' },
+    { en: 'conduct oneself', ko: '처신하다, 행동하다' },
+    { en: 'deteriorating', ko: '악화되는' },
+    { en: 'infamous', ko: '악명 높은' },
   ],
 };
 
@@ -38,7 +45,10 @@ const article = {
 uploadVocabularyQuiz(article, API_BASE)
   .then(() => {
     console.log('완료.');
-    console.log('상세:', `${API_BASE.includes('localhost') ? 'http://localhost' : 'https://englisheasystudy.com'}/vocabulary-quiz.html?slug=${article.slug}`);
+    console.log(
+      '상세:',
+      `${API_BASE.includes('localhost') ? 'http://localhost' : 'https://englisheasystudy.com'}/vocabulary-quiz.html?slug=${article.slug}`
+    );
   })
   .catch((err) => {
     console.error('실패:', err.message || err);

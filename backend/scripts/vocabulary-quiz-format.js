@@ -27,20 +27,30 @@ function buildRevealQuizzes(config) {
     hide: String(p.en || '').trim(),
   }));
 
-  return [
-    {
+  /* directions: ['en-ko'] | ['ko-en'] | ['en-ko','ko-en'] (기본 둘 다) */
+  const dirs = Array.isArray(config.directions) && config.directions.length
+    ? config.directions.map((d) => String(d || '').trim())
+    : ['en-ko', 'ko-en'];
+
+  const sections = [];
+  if (dirs.includes('en-ko')) {
+    sections.push({
       type: 'reveal-section',
-      title: config.section1Title || '1. 영어 → 한글',
+      title: config.section1Title || '영어 → 뜻',
       direction: 'en-ko',
       items: enKoItems,
-    },
-    {
+    });
+  }
+  if (dirs.includes('ko-en')) {
+    sections.push({
       type: 'reveal-section',
-      title: config.section2Title || '2. 한글 → 영어',
+      title: config.section2Title || '뜻 → 영어',
       direction: 'ko-en',
       items: koEnItems,
-    },
-  ];
+    });
+  }
+  if (!sections.length) throw new Error('directions 에 en-ko 또는 ko-en 이 필요합니다.');
+  return sections;
 }
 
 async function deleteBySlugOrId(apiBase, config, password) {
