@@ -1037,7 +1037,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     
-    function renderMessages(messages, container) {
+        function renderMessages(messages, container) {
+        if (typeof renderRedesignBoardList === 'function') {
+            renderRedesignBoardList(container, messages, {
+                boardKey: 'korea-news',
+                apiMode: typeof apiMode !== 'undefined' ? apiMode : null,
+                pageSize: 12
+            });
+            return;
+        }
         renderGuestbookTable(container, messages, {
             postPage: 'korea-news.html',
             postPath: 'korea-news',

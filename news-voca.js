@@ -747,15 +747,53 @@ async function loadPost() {
 
         updatePageSeo(post, formattedDate);
 
-        postContainer.innerHTML = `
-            <header id="post-header">
-                <h1 id="post-title">${escapeHtml(post.title || '제목 없음')}</h1>
-                ${metaHtml}
-            </header>
-            <article id="post-content">
-                <div id="post-message" class="post-message-body">${convertedMessage || '<p class="nv-empty">내용이 없습니다.</p>'}</div>
-            </article>
-        `;
+        let usedRedesign = false;
+        if (typeof renderRedesignArticle === 'function') {
+            let related = [];
+            try {
+                const listRes = await fetch(`${API_BASE_URL}/guestbook`, { cache: 'no-store' });
+                if (listRes.ok) {
+                    const listData = await listRes.json();
+                    const entries = Array.isArray(listData) ? listData : (listData.entries || []);
+                    const newest = entries.slice().reverse();
+                    const Config = window.BoardListConfig;
+                    related = newest
+                        .filter((e) => e && e._id !== post._id)
+                        .slice(0, 3)
+                        .map((e) => {
+                            const slug = String(e.slug || '').trim();
+                            const href = slug
+                                ? `news-voca/${encodeURIComponent(slug)}/`
+                                : `news-voca.html?index=0`;
+                            const thumbMatch = String(e.message || '').match(/img\.youtube\.com\/vi\/([a-zA-Z0-9_-]+)\//i);
+                            return {
+                                href: href,
+                                title: Config ? Config.cleanTitle(e) : (e.title || '제목 없음'),
+                                thumb: thumbMatch ? `https://img.youtube.com/vi/${thumbMatch[1]}/hqdefault.jpg` : ''
+                            };
+                        });
+                }
+            } catch (relErr) {
+                console.warn('related fetch skipped', relErr);
+            }
+            usedRedesign = !!renderRedesignArticle(postContainer, post, {
+                boardKey: 'news-voca',
+                convertedMessage: convertedMessage,
+                related: related
+            });
+        }
+
+        if (!usedRedesign) {
+            postContainer.innerHTML = `
+                <header id="post-header">
+                    <h1 id="post-title">${escapeHtml(post.title || '제목 없음')}</h1>
+                    ${metaHtml}
+                </header>
+                <article id="post-content">
+                    <div id="post-message" class="post-message-body">${convertedMessage || '<p class="nv-empty">내용이 없습니다.</p>'}</div>
+                </article>
+            `;
+        }
         
         // 게시글 내용 복사 시 HTML 태그 제거하고 순수 텍스트만 복사
         const postMessage = document.getElementById('post-message');
@@ -924,4 +962,41 @@ async function loadPost() {
     }
 }
 
-loadPost();
+function nvAssetBase() {
+    const scripts = document.querySelectorAll('script[src]');
+    for (let i = 0; i < scripts.length; i += 1) {
+        const src = scripts[i].getAttribute('src') || '';
+        if (/news-voca\.js/.test(src)) return src.replace(/[^/]+$/, '');
+    }
+    return '';
+}
+
+function nvLoadScript(src) {
+    return new Promise((resolve, reject) => {
+        const name = src.replace(/^.*\//, '').split('?')[0];
+        if (document.querySelector(`script[src*="${name}"]`)) {
+            resolve();
+            return;
+        }
+        const s = document.createElement('script');
+        s.src = src;
+        s.onload = () => resolve();
+        s.onerror = () => reject(new Error('fail ' + src));
+        document.head.appendChild(s);
+    });
+}
+
+(async function nvBootRedesign() {
+    const base = nvAssetBase();
+    try {
+        if (!window.BoardListConfig) {
+            await nvLoadScript(base + 'board-list-config.js?v=20261019rd4');
+        }
+        if (!window.renderRedesignArticle) {
+            await nvLoadScript(base + 'redesign-article.js?v=20261019rd4');
+        }
+    } catch (e) {
+        console.warn('redesign deps skipped', e);
+    }
+    loadPost();
+})();

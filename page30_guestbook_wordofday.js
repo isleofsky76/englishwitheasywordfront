@@ -1027,7 +1027,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     
-    function renderMessages(messages, container) {
+        function renderMessages(messages, container) {
+        if (typeof renderRedesignBoardList === 'function') {
+            renderRedesignBoardList(container, messages, {
+                boardKey: 'word-of-the-day',
+                apiMode: typeof apiMode !== 'undefined' ? apiMode : null,
+                pageSize: 12
+            });
+            return;
+        }
         renderGuestbookTable(container, messages, {
             postPage: 'word-of-the-day.html',
             apiMode: apiMode,

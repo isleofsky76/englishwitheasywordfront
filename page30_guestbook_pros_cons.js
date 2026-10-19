@@ -981,7 +981,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     
-    function renderMessages(messages, container) {
+        function renderMessages(messages, container) {
+        if (typeof renderRedesignBoardList === 'function') {
+            renderRedesignBoardList(container, messages, {
+                boardKey: 'pros-cons',
+                apiMode: typeof apiMode !== 'undefined' ? apiMode : null,
+                pageSize: 12
+            });
+            return;
+        }
         renderGuestbookTable(container, messages, {
             postPage: 'pros-cons.html',
             apiMode: apiMode,
@@ -1102,4 +1110,5 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
 

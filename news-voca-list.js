@@ -1044,12 +1044,21 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     function renderMessages(messages, container) {
+        if (typeof renderRedesignBoardList === 'function') {
+            renderRedesignBoardList(container, messages, {
+                boardKey: 'news-voca',
+                apiMode: apiMode,
+                pageSize: 12
+            });
+            return;
+        }
         renderGuestbookTable(container, messages, {
             postPage: 'news-voca.html',
+            postPath: 'news-voca',
             apiMode: apiMode,
             board: 'guestbook',
             apiBaseUrl: API_BASE_URL,
-            hideViewsAndLikes: false
+            hideViewsAndLikes: true
         });
     }
 

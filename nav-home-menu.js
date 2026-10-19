@@ -251,7 +251,7 @@
         document.documentElement.classList.add('has-site-masthead');
         if (!document.querySelector('script[src*="site-masthead.js"]')) {
             var s = document.createElement('script');
-            s.src = base + 'site-masthead.js?v=20260818a';
+            s.src = base + 'site-masthead.js?v=20261019rd4';
             document.head.appendChild(s);
         }
         if (!document.querySelector('script[src*="site-footer.js"]')) {

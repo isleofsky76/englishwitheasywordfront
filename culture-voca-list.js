@@ -1037,7 +1037,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     
-    function renderMessages(messages, container) {
+        function renderMessages(messages, container) {
+        if (typeof renderRedesignBoardList === 'function') {
+            renderRedesignBoardList(container, messages, {
+                boardKey: 'culture-voca',
+                apiMode: typeof apiMode !== 'undefined' ? apiMode : null,
+                pageSize: 12
+            });
+            return;
+        }
         renderGuestbookTable(container, messages, {
             postPage: 'culture-voca.html',
             apiMode: apiMode,

@@ -101,6 +101,11 @@
 .site-masthead .site-primary-nav .nav-link.active {
   color: var(--accent) !important;
 }
+.site-masthead .site-primary-nav .nav-link.active {
+  font-weight: 600;
+  border-bottom: 2px solid var(--accent);
+  padding-bottom: 2px !important;
+}
 
 .site-masthead .site-masthead-search {
   position: relative;

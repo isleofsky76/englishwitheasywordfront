@@ -464,7 +464,15 @@ async function loadPost() {
             ? buildPostMetaHtml(post)
             : '';
         // HTML 구조 재생성
-        postContainer.innerHTML = `
+                let usedRedesign = false;
+        if (typeof mountRedesignArticle === 'function') {
+            usedRedesign = await mountRedesignArticle(postContainer, post, {
+                boardKey: 'english-synonym',
+                apiBaseUrl: API_BASE_URL,
+                convertedMessage: convertedMessage
+            });
+        }
+        if (!usedRedesign) {postContainer.innerHTML = `
             <div id="post-header">
                 <h2 id="post-title">${escapeHtml(post.title || '제목 없음')}</h2>
                 ${metaHtml}
@@ -474,6 +482,8 @@ async function loadPost() {
             </div>
         `;
         
+                }
+
         // 게시글 내용 복사 시 HTML 태그 제거하고 순수 텍스트만 복사
         const postMessage = document.getElementById('post-message');
         if (postMessage) {
@@ -510,5 +520,28 @@ async function loadPost() {
     }
 }
 
-loadPost();
-
+function rdAssetBase() {
+    const scripts = document.querySelectorAll('script[src]');
+    for (let i = 0; i < scripts.length; i += 1) {
+        const src = scripts[i].getAttribute('src') || '';
+        if (/page30_viewpost_v\.js/.test(src)) return src.replace(/[^/]+$/, '');
+    }
+    return '';
+}
+function rdLoadScript(src) {
+    return new Promise((resolve, reject) => {
+        const name = src.replace(/^.*\//, '').split('?')[0];
+        if (document.querySelector('script[src*="' + name + '"]')) { resolve(); return; }
+        const s = document.createElement('script');
+        s.src = src; s.onload = () => resolve(); s.onerror = () => reject(new Error(src));
+        document.head.appendChild(s);
+    });
+}
+(async function rdBoot() {
+    const base = rdAssetBase();
+    try {
+        if (!window.BoardListConfig) await rdLoadScript(base + 'board-list-config.js?v=20261019rd4');
+        if (!window.mountRedesignArticle) await rdLoadScript(base + 'redesign-article.js?v=20261019rd4');
+    } catch (e) { console.warn(e); }
+    loadPost();
+})();

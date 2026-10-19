@@ -1024,7 +1024,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     // 메시지 렌더링 함수 (성능 최적화: DocumentFragment 사용)
-    function renderMessages(messages, container) {
+        function renderMessages(messages, container) {
+        if (typeof renderRedesignBoardList === 'function') {
+            renderRedesignBoardList(container, messages, {
+                boardKey: 'english-synonym',
+                apiMode: typeof apiMode !== 'undefined' ? apiMode : null,
+                pageSize: 12
+            });
+            return;
+        }
         renderGuestbookTable(container, messages, {
             postPage: 'english-synonym.html',
             apiMode: apiMode,
@@ -1145,4 +1153,5 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
 

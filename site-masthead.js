@@ -4,14 +4,43 @@
  * nav-home-menu.js 가 로드함
  */
 (function () {
-    var VERSION = '20261019rd';
+    var VERSION = '20261019rd4';
   /* 시안 주 메뉴 5개 — href는 기존 URL 유지 */
   var PRIMARY_NAV_ITEMS = [
-    { href: 'news-voca-list.html', label: '뉴스 영어', tone: 'news', pages: ['news-voca-list.html', 'news-voca.html'] },
+    {
+      href: 'news-voca-list.html',
+      label: '뉴스 영어',
+      tone: 'news',
+      pages: [
+        'news-voca-list.html', 'news-voca.html',
+        'korea-news-list.html', 'korea-news.html',
+        'defense-news-list.html', 'defense-news.html',
+        'culture-voca-list.html', 'culture-voca.html',
+        'ranking-news-list.html', 'ranking-news.html'
+      ]
+    },
     { href: 'word-of-the-day-list.html?api=prod', label: '단어장', tone: 'wotd', pages: ['word-of-the-day-list.html', 'word-of-the-day.html'] },
-    { href: 'popular-voca-list.html', label: '표현', tone: 'popular', pages: ['popular-voca-list.html', 'popular-voca.html'] },
+    {
+      href: 'popular-voca-list.html',
+      label: '표현',
+      tone: 'popular',
+      pages: [
+        'popular-voca-list.html', 'popular-voca.html',
+        'situational-english-list.html', 'situational-english.html',
+        'pros-cons-list.html', 'pros-cons.html'
+      ]
+    },
     { href: 'vocabulary-quiz-list.html', label: '퀴즈', tone: 'quiz', pages: ['vocabulary-quiz-list.html', 'vocabulary-quiz.html'] },
-    { href: 'english-opinions-list.html', label: '읽을거리', tone: 'opine', pages: ['english-opinions-list.html', 'english-opinions.html'] }
+    {
+      href: 'english-opinions-list.html',
+      label: '읽을거리',
+      tone: 'opine',
+      pages: [
+        'english-opinions-list.html', 'english-opinions.html',
+        'calm-mind-list.html', 'calm-mind.html',
+        'english-quotes-list.html', 'english-quotes.html'
+      ]
+    }
   ];
   var EXTRA_NAV_ITEMS = [
     { href: 'index.html', label: '홈', tone: 'home', pages: ['index.html', ''] },

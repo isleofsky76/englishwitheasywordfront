@@ -788,7 +788,15 @@ async function loadPost() {
 
         updatePageSeo(post, formattedDate);
 
-        postContainer.innerHTML = `
+                let usedRedesign = false;
+        if (typeof mountRedesignArticle === 'function') {
+            usedRedesign = await mountRedesignArticle(postContainer, post, {
+                boardKey: 'culture-voca',
+                apiBaseUrl: API_BASE_URL,
+                convertedMessage: convertedMessage
+            });
+        }
+        if (!usedRedesign) {postContainer.innerHTML = `
             <header id="post-header">
                 <h1 id="post-title">${escapeHtml(post.title || '제목 없음')}</h1>
                 ${metaHtml}
@@ -798,6 +806,8 @@ async function loadPost() {
             </article>
         `;
         
+                }
+
         // 게시글 내용 복사 시 HTML 태그 제거하고 순수 텍스트만 복사
         const postMessage = document.getElementById('post-message');
         if (postMessage) {
@@ -965,4 +975,28 @@ async function loadPost() {
     }
 }
 
-loadPost();
+function rdAssetBase() {
+    const scripts = document.querySelectorAll('script[src]');
+    for (let i = 0; i < scripts.length; i += 1) {
+        const src = scripts[i].getAttribute('src') || '';
+        if (/culture-voca\.js/.test(src)) return src.replace(/[^/]+$/, '');
+    }
+    return '';
+}
+function rdLoadScript(src) {
+    return new Promise((resolve, reject) => {
+        const name = src.replace(/^.*\//, '').split('?')[0];
+        if (document.querySelector('script[src*="' + name + '"]')) { resolve(); return; }
+        const s = document.createElement('script');
+        s.src = src; s.onload = () => resolve(); s.onerror = () => reject(new Error(src));
+        document.head.appendChild(s);
+    });
+}
+(async function rdBoot() {
+    const base = rdAssetBase();
+    try {
+        if (!window.BoardListConfig) await rdLoadScript(base + 'board-list-config.js?v=20261019rd4');
+        if (!window.mountRedesignArticle) await rdLoadScript(base + 'redesign-article.js?v=20261019rd4');
+    } catch (e) { console.warn(e); }
+    loadPost();
+})();
