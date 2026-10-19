@@ -63,7 +63,11 @@
   }
 
   function injectFooter() {
-    if (document.getElementById('site-legal-footer') || document.querySelector('.site-legal-footer')) {
+    if (
+      document.getElementById('site-legal-footer') ||
+      document.querySelector('.site-legal-footer') ||
+      document.querySelector('.rd-footer')
+    ) {
       return;
     }
     ensureCss();

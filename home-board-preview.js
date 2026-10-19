@@ -80,7 +80,8 @@
       { path: '/culture-voca', page: 'culture-voca.html', postPath: 'culture-voca', label: '컬쳐' },
       { path: '/ranking-news', page: 'ranking-news.html', postPath: 'ranking-news', label: '랭킹' },
       { path: '/photo-english', page: 'photo-english.html', postPath: 'photo-english', label: '포토' },
-      { path: '/pros-cons', page: 'pros-cons.html', postPath: 'pros-cons', label: 'Pros & Cons' }
+      { path: '/pros-cons', page: 'pros-cons.html', postPath: 'pros-cons', label: 'Pros & Cons' },
+      { path: '/english-quotes', page: 'english-quotes.html', postPath: 'english-quotes', label: '영어 명언' }
     ];
   }
 

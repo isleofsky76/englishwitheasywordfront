@@ -52,794 +52,25 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600&family=Noto+Serif+KR:wght@600;700;900&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="redesign-tokens.css?v=20261019rd">
+    <link rel="stylesheet" href="site-masthead.css?v=20261019rd">
+    <link rel="stylesheet" href="redesign-home.css?v=20261019rd">
+    <link rel="stylesheet" href="title-text-sharp.css?v=20260818i">
     
     <!-- Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6108574897789788" crossorigin="anonymous"></script>
     
     <style>
-        :root {
-            --bg-warning: #FAEEDA;
-            --text-warning: #854F0B;
-            --bg-accent: #E6F1FB;
-            --text-accent: #185FA5;
-            --bg-success: #EAF3DE;
-            --text-success: #3B6D11;
-            --fill-accent: #378ADD;
-            --surface-2: #FFFFFF;
-            --text-primary: #2C2C2A;
-            --text-secondary: #888780;
-            --border-soft: #E8E6DC;
-            --page-bg: #FBFBFA;
-            --navbar-height: 102px;
-        }
-        .site-masthead.navbar.fixed-top {
-            height: auto !important;
-            min-height: 0 !important;
-            max-height: none !important;
-            flex-direction: column;
-            align-items: stretch;
-            justify-content: flex-start;
-            padding: 0 !important;
-        }
-        .site-masthead-brand {
-            text-align: center;
-            padding: 0.55rem 1rem 0.2rem;
-            border-bottom: none;
-        }
-        .site-masthead-brand a {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: #fff !important;
-            text-decoration: none;
-            line-height: 1.25;
-        }
-        .site-title-ko {
-            font-size: 1.18rem;
-            font-weight: 700;
-            letter-spacing: -0.03em;
-        }
-        .site-title-en {
-            font-family: 'Poppins', 'Noto Sans KR', sans-serif;
-            font-size: 0.78rem;
-            font-weight: 500;
-            opacity: 0.92;
-            margin-top: 0.12rem;
-        }
-        .site-masthead-search {
-            position: relative;
-            padding: 0.28rem 1rem 0.42rem;
-            z-index: 1040;
-        }
-        .site-search-form {
-            display: flex !important;
-            flex-direction: row !important;
-            flex-wrap: nowrap !important;
-            align-items: center;
-            justify-content: center;
-            width: auto;
-            max-width: 340px;
-            margin: 0 auto;
-            gap: 8px;
-        }
-        .site-search-input {
-            flex: 1 1 auto;
-            width: auto;
-            max-width: 248px;
-            min-width: 0;
-            height: 2.05rem;
-            border: none;
-            border-radius: 999px;
-            padding: 0 0.95rem;
-            font-size: 0.88rem;
-            color: #1e3a5f;
-            background: #fff;
-            outline: none;
-        }
-        .site-search-input::placeholder {
-            color: #7a93ab;
-        }
-        .site-search-submit {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            flex: 0 0 auto;
-            white-space: nowrap;
-            min-width: 58px;
-            height: 2.05rem;
-            border: none;
-            border-radius: 999px;
-            padding: 0 0.9rem;
-            font-size: 0.84rem;
-            font-weight: 600;
-            color: #fff;
-            background: #4b5563;
-            cursor: pointer;
-        }
-        .site-search-submit:hover {
-            background: #374151;
-        }
-        .site-search-results {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            width: min(340px, calc(100% - 2rem));
-            margin: 0.3rem 0 0;
-            padding: 0.25rem 0;
-            list-style: none;
-            background: #fff;
-            border-radius: 10px;
-            box-shadow: 0 10px 28px rgba(15, 40, 70, 0.2);
-            max-height: min(58vh, 22rem);
-            overflow-y: auto;
-            z-index: 1100;
-        }
-        .site-search-results[hidden] {
-            display: none;
-        }
-        .site-search-results a {
-            display: flex;
-            flex-direction: column;
-            gap: 0.12rem;
-            padding: 0.5rem 0.85rem;
-            text-decoration: none;
-            color: #1f2937;
-        }
-        .site-search-results a:hover,
-        .site-search-results a.is-active {
-            background: #eef4fc;
-        }
-        .site-search-results .site-search-label {
-            font-size: 0.72rem;
-            font-weight: 600;
-            color: #2b6cb0;
-        }
-        .site-search-results .site-search-title {
-            font-size: 0.86rem;
-            line-height: 1.35;
-            letter-spacing: -0.02em;
-        }
-        .site-search-empty {
-            padding: 0.7rem 0.85rem;
-            font-size: 0.84rem;
-            color: #667;
-        }
-        #site-search-page[hidden],
-        #home-previews[hidden] {
-            display: none !important;
-        }
-        .site-search-page-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            gap: 0.55rem;
-        }
-        .site-search-page-list li a {
-            display: block;
-            padding: 0.85rem 0.95rem;
-            border: 1px solid var(--border-soft);
-            border-radius: 12px;
-            background: var(--surface-2);
-            color: var(--text-primary);
-            text-decoration: none;
-            font-size: 0.95rem;
-            font-weight: 500;
-            line-height: 1.45;
-            letter-spacing: -0.02em;
-        }
-        .site-search-page-list li a:hover {
-            border-color: #c5d7ee;
-            box-shadow: 0 2px 8px rgba(43, 108, 176, 0.08);
-        }
-        .site-masthead .container-fluid {
-            justify-content: center;
-            flex-wrap: wrap !important;
-            gap: 0;
-            height: auto !important;
-            min-height: 0;
-            padding-top: 0.12rem !important;
-            padding-bottom: 0.2rem !important;
-            background: transparent !important;
-            box-shadow: none;
-        }
-        .site-primary-nav {
-            display: flex;
-            flex: 1 1 100%;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            margin: 0;
-            padding: 0;
-            list-style: none;
-            gap: 0.05rem 0.15rem;
-        }
-        .site-primary-nav .nav-link {
-            font-size: 0.84rem;
-            font-weight: 600;
-            white-space: nowrap;
-            padding: 0.32rem 0.42rem !important;
-            letter-spacing: -0.03em;
-            text-decoration: none;
-        }
-        .site-primary-nav .nav-link:hover,
-        .site-primary-nav .nav-link:focus {
-            opacity: 0.88;
-        }
-        .site-primary-nav .nav-link.active {
-            text-decoration: underline;
-            text-underline-offset: 0.28em;
-        }
-        .nav-tone-home { color: #dce3ff !important; }
-        .nav-tone-wotd { color: #ffc4ae !important; }
-        .nav-tone-syn { color: #8ef0e8 !important; }
-        .nav-tone-defense { color: #d4e07a !important; }
-        .nav-tone-news { color: #9fecc0 !important; }
-        .nav-tone-quiz { color: #d4ee9a !important; }
-        .nav-tone-popular { color: #ffd56a !important; }
-        .nav-tone-sit { color: #e0ccff !important; }
-        .nav-tone-cook { color: #ffc08a !important; }
-        .nav-tone-culture { color: #ffb6d9 !important; }
-        .nav-tone-rank { color: #ffb0b0 !important; }
-        .nav-tone-photo { color: #9ed4ff !important; }
-        .nav-tone-pros { color: #d7dee8 !important; }
-        .nav-tone-dir { color: #b8d8ff !important; }
-        body {
-            font-family: 'Noto Sans KR', 'Poppins', sans-serif;
-            background: var(--page-bg);
-            color: var(--text-primary);
-        }
-        * {
-            font-family: 'Noto Sans KR', 'Poppins', sans-serif;
-        }
-        .main-content {
-            margin-top: 20px;
-            margin-bottom: 30px;
-            padding-left: 1.25rem;
-            padding-right: 1.25rem;
-        }
-        .yt-billboard {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
-            width: 100%;
-            max-width: 970px;
-            height: 250px;
-            margin: 0 auto 1.35rem;
-            padding: 1rem 1.25rem;
-            box-sizing: border-box;
-            border-radius: 14px;
-            background: linear-gradient(135deg, #1a1a1a 0%, #2b0a0a 48%, #111 100%);
-            color: #fff;
-            text-decoration: none;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16);
-            overflow: hidden;
-        }
-        .yt-billboard:hover {
-            color: #fff;
-            filter: brightness(1.06);
-        }
-        .yt-billboard__icon {
-            flex-shrink: 0;
-            width: 72px;
-            height: 52px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #ff0000;
-            border-radius: 14px;
-            box-shadow: 0 6px 16px rgba(255, 0, 0, 0.35);
-        }
-        .yt-billboard__icon svg {
-            width: 28px;
-            height: 28px;
-            display: block;
-            margin-left: 3px;
-        }
-        .yt-billboard__copy {
-            display: flex;
-            flex-direction: column;
-            gap: 0.18rem;
-            min-width: 0;
-        }
-        .yt-billboard__kicker {
-            font-size: 0.78rem;
-            font-weight: 600;
-            letter-spacing: 0.04em;
-            color: #ffb4b4;
-        }
-        .yt-billboard__title {
-            font-size: 1.28rem;
-            font-weight: 700;
-            letter-spacing: -0.03em;
-            line-height: 1.25;
-        }
-        .yt-billboard__handle {
-            font-family: 'Poppins', 'Noto Sans KR', sans-serif;
-            font-size: 0.92rem;
-            font-weight: 500;
-            color: #ececec;
-        }
-        @media (max-width: 600px) {
-            .yt-billboard {
-                height: 100px;
-                gap: 0.7rem;
-                padding: 0.7rem 0.9rem;
-                border-radius: 12px;
-            }
-            .yt-billboard__icon {
-                width: 52px;
-                height: 38px;
-                border-radius: 10px;
-            }
-            .yt-billboard__icon svg {
-                width: 18px;
-                height: 18px;
-            }
-            .yt-billboard__title {
-                font-size: 0.98rem;
-            }
-            .yt-billboard__handle {
-                font-size: 0.78rem;
-            }
-            .yt-billboard__kicker {
-                font-size: 0.68rem;
-            }
-        }
-        .intro-text {
-            background: white;
-            border-radius: 0;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-            padding: 1.2rem 0 1rem 0;
-            margin-bottom: 2rem;
-            text-align: left;
-        }
-        .intro-text h2 {
-            color: #4a90e2;
-            font-weight: 700;
-            font-size: 1.14rem;
-            font-family: 'Poppins', sans-serif;
-            margin-bottom: 0.5rem;
-        }
-        .intro-text p {
-            color: #333;
-            font-size: 0.84rem;
-            font-family: 'Poppins', sans-serif;
-            padding-left: 0;
-        }
-        .preview-section {
-            background: transparent;
-            border: none;
-            box-shadow: none;
-            padding: 1.1rem 0 0.65rem;
-            margin: 0;
-            text-align: left;
-        }
-        #home-previews {
-            padding: 0;
-            margin-bottom: 0;
-        }
-        #home-previews > .preview-section {
-            border-top: 1px solid #eceae4;
-        }
-        #home-previews > .preview-section:first-of-type {
-            border-top: none;
-            padding-top: 0.45rem;
-        }
-        .preview-section:first-of-type {
-            padding-top: 0.85rem;
-        }
-        .preview-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 0.35rem;
-            padding-bottom: 0.45rem;
-            border-bottom: 1px solid #eceae4;
-        }
-        .preview-section h2,
-        .preview-section h3 {
-            display: flex;
-            align-items: center;
-            gap: 0.45rem;
-            font-size: 20px;
-            font-weight: 700;
-            color: #111827;
-            margin: 0;
-            line-height: 1.35;
-            letter-spacing: -0.02em;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            text-rendering: optimizeLegibility;
-        }
-        .preview-more {
-            font-size: 12px;
-            font-weight: 400;
-            color: var(--text-secondary);
-            flex-shrink: 0;
-        }
-        .preview-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            gap: 0;
-        }
-        .preview-list li,
-        .preview-card {
-            padding: 0;
-            font-size: 0.84rem;
-            line-height: 1.45;
-            color: var(--text-primary);
-            border: none;
-            border-radius: 0;
-            background: transparent;
-            overflow: hidden;
-        }
-        .preview-list li:not(:last-child) {
-            border-bottom: 1px solid #f3f2ee;
-        }
-        .preview-list li a {
-            color: var(--text-primary);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.58rem 0;
-            overflow: hidden;
-            min-width: 0;
-        }
-        .preview-num {
-            flex-shrink: 0;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            min-width: 2.2rem;
-            height: 2.2rem;
-            padding: 0 0.4rem;
-            border-radius: 8px;
-            background: var(--bg-accent);
-            color: var(--text-accent);
-            font-weight: 500;
-            font-size: 14px;
-            text-align: center;
-            line-height: 1;
-        }
-        .preview-body {
-            flex: 1;
-            min-width: 0;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            gap: 0.35rem;
-            overflow: hidden;
-            white-space: nowrap;
-        }
-        .preview-meta {
-            display: inline-flex;
-            flex-shrink: 0;
-            align-items: center;
-            gap: 0.35rem;
-        }
-        .preview-new {
-            display: inline-flex;
-            align-items: center;
-            padding: 3px 8px;
-            border-radius: 999px;
-            background: var(--bg-success);
-            color: var(--text-success);
-            font-size: 11px;
-            font-weight: 500;
-            letter-spacing: 0.02em;
-            line-height: 1.2;
-        }
-        .preview-badge {
-            display: inline-flex;
-            align-items: center;
-            width: fit-content;
-            max-width: 100%;
-            padding: 3px 8px;
-            border-radius: 6px;
-            font-size: 11px;
-            font-weight: 500;
-            line-height: 1.25;
-            color: var(--text-accent);
-            background: var(--bg-accent);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        .preview-badge--wordofday,
-        .preview-badge--proscons,
-        .preview-badge--cooking,
-        .preview-badge--ranking {
-            background: var(--bg-warning);
-            color: var(--text-warning);
-        }
-        .preview-badge--news,
-        .preview-badge--defense,
-        .preview-badge--quiz,
-        .preview-badge--synonym,
-        .preview-badge--situational,
-        .preview-badge--culture,
-        .preview-badge--photo,
-        .preview-badge--default,
-        .preview-badge--source,
-        .preview-badge--wsj,
-        .preview-badge--cnn,
-        .preview-badge--bbc {
-            background: var(--bg-accent);
-            color: var(--text-accent);
-        }
-        .preview-badge--popular {
-            background: var(--bg-success);
-            color: var(--text-success);
-        }
-        .preview-date {
-            color: var(--text-secondary);
-            font-size: 12px;
-            font-weight: 400;
-        }
-        .preview-list li > a:not(:has(.preview-title)),
-        .preview-title {
-            font-size: 16px;
-            font-weight: 500;
-            color: #374151;
-            line-height: 1.55;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            text-rendering: optimizeLegibility;
-        }
-        .preview-title {
-            flex: 0 1 auto;
-            min-width: 0;
-            max-width: 100%;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-        .preview-title .preview-source,
-        .preview-title .preview-sep {
-            color: #4b5563;
-            font-size: 16px;
-            font-weight: 600;
-            line-height: 1.55;
-        }
-        .preview-title .preview-title-text {
-            color: #374151;
-            font-size: 16px;
-            font-weight: 500;
-            line-height: 1.55;
-        }
-        .preview-title .preview-sep {
-            margin: 0 0.1rem;
-        }
-        .preview-meta-stats .preview-date {
-            color: var(--text-secondary);
-            font-size: 12px;
-            font-weight: 400;
-        }
-        .preview-views {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.28rem;
-            color: var(--text-secondary);
-            font-weight: 400;
-            font-size: 12px;
-            margin-left: 0;
-        }
-        .preview-meta-stats {
-            display: inline-flex;
-            align-items: center;
-            flex-shrink: 0;
-            flex-wrap: nowrap;
-            gap: 0;
-            margin-left: 0.45rem;
-            color: var(--text-secondary);
-            font-size: 12px;
-            font-weight: 400;
-            white-space: nowrap;
-        }
-        .preview-meta-stats--hidden {
-            display: none !important;
-        }
-        .preview-likes {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.2rem;
-            color: var(--text-secondary);
-            font-size: 12px;
-            font-weight: 400;
-        }
-        .preview-like-heart {
-            color: var(--text-secondary);
-            font-size: 12px;
-            line-height: 1;
-            opacity: 0.85;
-            filter: grayscale(1);
-        }
-        .preview-meta-stats .preview-sep {
-            color: var(--text-secondary);
-            font-size: 12px;
-            font-weight: 400;
-        }
-        .preview-meta-stats .preview-sep--stats {
-            margin: 0 0.45em;
-            letter-spacing: 0.08em;
-        }
-        .preview-views-icon {
-            font-size: 12px;
-            line-height: 1;
-            opacity: 0.85;
-        }
-        .preview-arrow {
-            display: none;
-        }
-        .preview-list li a:hover {
-            color: inherit;
-            background: transparent;
-        }
-        .preview-list li:hover {
-            border-color: inherit;
-            box-shadow: none;
-        }
-        .preview-list li a:hover .preview-title,
-        .preview-list li a:hover .preview-title-text {
-            color: var(--text-accent);
-        }
-        .preview-list li.preview-empty {
-            text-align: center;
-            color: var(--text-secondary);
-            font-size: 0.82rem;
-            padding: 0.75rem 0;
-            border: none;
-            background: transparent;
-            box-shadow: none;
-        }
-        .preview-list--skeleton {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-        .preview-list--skeleton .preview-skeleton {
-            padding: 0.5rem 0;
-        }
-        .preview-skeleton-line {
-            display: block;
-            height: 0.82rem;
-            max-width: 92%;
-            border-radius: 6px;
-            background: linear-gradient(90deg, #e8e8e8 0%, #f4f4f4 50%, #e8e8e8 100%);
-            background-size: 200% 100%;
-            animation: preview-skeleton-shimmer 1.3s ease-in-out infinite;
-        }
-        .preview-list--skeleton .preview-skeleton:nth-child(2) .preview-skeleton-line {
-            max-width: 78%;
-        }
-        .preview-list--skeleton .preview-skeleton:nth-child(3) .preview-skeleton-line {
-            max-width: 64%;
-        }
-        @keyframes preview-skeleton-shimmer {
-            0% { background-position: 100% 0; }
-            100% { background-position: -100% 0; }
-        }
-        .preview-more a {
-            color: var(--text-secondary);
-            font-weight: 400;
-            text-decoration: none;
-        }
-        .preview-more a:hover {
-            color: var(--text-accent);
-            text-decoration: none;
-        }
-        #home-best,
-        #home-recent {
-            scroll-margin-top: calc(var(--navbar-height, 56px) + 20px);
-        }
-        .resources-section {
-            background: #fff;
-            border-radius: 14px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-            padding: 1.5rem 1.2rem;
-            margin-bottom: 2rem;
-        }
-        .resources-section h4 {
-            color: #357abd;
-            font-weight: 600;
-            margin-bottom: 0.7rem;
-        }
-        .resources-section p {
-            color: #444;
-            font-size: 1rem;
-            font-family: 'Poppins', sans-serif;
-        }
-        @media (max-width: 600px) {
-            :root {
-                --navbar-height: 96px;
-            }
-            .site-title-ko {
-                font-size: 1.08rem;
-            }
-            .site-title-en {
-                font-size: 0.72rem;
-            }
-            .site-primary-nav .nav-link {
-                font-size: 0.78rem;
-                padding: 0.26rem 0.32rem !important;
-            }
-            .main-content {
-                margin-top: 16px;
-                padding-left: max(16px, env(safe-area-inset-left, 0px));
-                padding-right: max(16px, env(safe-area-inset-right, 0px));
-            }
-            .intro-text {
-                padding: 1.2rem 0 1rem 0;
-            }
-            .preview-section {
-                padding: 1.45rem 0 0.85rem;
-            }
-            .preview-section h2,
-            .preview-section h3 {
-                font-size: 20px;
-                font-weight: 700;
-            }
-            .preview-title .preview-title-text,
-            .preview-title .preview-source {
-                font-size: 16px;
-            }
-            .preview-list li a,
-            .preview-body {
-                max-width: 100%;
-                min-width: 0;
-            }
-            .preview-title {
-                flex: 0 1 auto;
-                min-width: 0;
-                max-width: 100%;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                white-space: nowrap;
-            }
-            .preview-title .preview-source,
-            .preview-title .preview-sep,
-            .preview-title .preview-title-text {
-                display: inline;
-            }
-        }
-    </style>
-    
-    <!-- External Stylesheets -->
-    <link rel="stylesheet" href="title-text-sharp.css?v=20260818i">
-    <link rel="stylesheet" href="navbar-unified.css?v=20260612c">
-    <link rel="stylesheet" href="nav-home-menu.css?v=20260815a">
-    <link rel="stylesheet" href="weather-banner.css?v=20260612g">
-    <link rel="stylesheet" href="world-clock.css?v=20260612g">
-    <link rel="stylesheet" href="site-masthead.css?v=20260831a">
-    <style>
-        /* navbar-unified / nav-home-menu 이후에 덮어씀 */
-        :root {
-            --navbar-height: 168px;
-        }
-        .site-masthead.navbar,
-        .site-masthead.navbar.bg-primary,
-        .site-masthead.navbar.fixed-top {
-            background-color: #1e4e8c !important;
-        }
-        .site-masthead .container-fluid {
-            flex-wrap: wrap !important;
-            background: transparent !important;
-        }
-        @media (max-width: 600px) {
-            :root {
-                --navbar-height: 188px;
-            }
-        }
+        /* 홈 리디자인 — 레거시 preview / 파란 네비 오버라이드 제거 */
+        body.rd-home { background: var(--page-bg, #F6F3EC); }
+        .visually-hidden {
+          position: absolute !important; width: 1px !important; height: 1px !important;
+          padding: 0 !important; margin: -1px !important; overflow: hidden !important;
+          clip: rect(0, 0, 0, 0) !important; border: 0 !important;
+        }
+        .main-content { padding-top: 0 !important; }
+        #weather-banner, #world-clock-bar { display: none !important; }
     </style>
     
     <!-- JSON-LD Structured Data -->
@@ -907,555 +138,176 @@
     <script src="weather-banner.js?v=20260612e" defer></script>
     <script src="world-clock.js?v=20260612g" defer></script>
 </head>
-<body>
+<body class="rd-home">
+
     <script>
         (function () {
             function syncNavbarHeight() {
                 var nav = document.getElementById('navbar');
                 if (!nav) return;
                 var h = Math.ceil(nav.getBoundingClientRect().height);
-                if (h > 0) {
-                    document.documentElement.style.setProperty('--navbar-height', h + 'px');
-                }
+                if (h > 0) document.documentElement.style.setProperty('--navbar-height', h + 'px');
             }
             function syncSoon() {
                 syncNavbarHeight();
                 requestAnimationFrame(syncNavbarHeight);
             }
             window.addEventListener('resize', syncSoon);
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', syncSoon);
-            } else {
-                syncSoon();
-            }
+            if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', syncSoon);
+            else syncSoon();
             window.addEventListener('load', syncSoon);
         })();
     </script>
-    <nav id="navbar" class="navbar navbar-expand navbar-dark bg-primary fixed-top site-masthead" aria-label="주 메뉴">
-        <div class="site-masthead-brand">
-            <a href="index.html">
-                <span class="site-title-ko">시사영단어</span>
-                <span class="site-title-en">News English Lab</span>
-            </a>
-        </div>
-        <div class="site-masthead-search">
-            <form class="site-search-form" id="site-search-form" role="search" action="index.html" method="get">
-                <input class="site-search-input" id="site-search-input" type="search" name="q" placeholder="단어·제목 검색" autocomplete="off" enterkeyhint="search">
-                <button class="site-search-submit" type="submit">검색</button>
-            </form>
-            <ul class="site-search-results" id="site-search-results" hidden></ul>
-        </div>
-        <div class="container-fluid">
-            <ul class="navbar-nav site-primary-nav">
-                <li class="nav-item"><a class="nav-link nav-tone-home active" href="index.html" aria-current="page">홈</a></li>
-                <li class="nav-item"><a class="nav-link nav-tone-syn" href="english-synonym-list.html">연관단어</a></li>
-                <li class="nav-item"><a class="nav-link nav-tone-defense" href="defense-news-list.html">국방뉴스</a></li>
-                <li class="nav-item"><a class="nav-link nav-tone-news" href="news-voca-list.html">국제</a></li>
-                <li class="nav-item"><a class="nav-link nav-tone-culture" href="culture-voca-list.html">컬쳐</a></li>
-                <li class="nav-item"><a class="nav-link nav-tone-opine" href="english-opinions-list.html">오피니언</a></li>
-                <li class="nav-item"><a class="nav-link nav-tone-sbgi" href="shorts-bg-image-list.html">신문읽는 이미지</a></li>
-                <li class="nav-item"><a class="nav-link nav-tone-calm" href="calm-mind-list.html">마음글</a></li>
-                <li class="nav-item nav-more">
-                    <button type="button" class="nav-more-toggle" aria-expanded="false" aria-haspopup="true" aria-label="더보기">
-                        <span class="nav-more-icon" aria-hidden="true"><span></span><span></span><span></span></span>
-                    </button>
-                </li>
-            </ul>
-        </div>
-    </nav>
+    <nav id="navbar" class="navbar navbar-expand site-masthead" aria-label="주 메뉴"></nav>
     <div id="yt-billboard-slot" class="yt-billboard-slot" aria-hidden="true"></div>
-    
-    <main class="container main-content">
-        <!-- Hero Section -->
-        <section class="preview-section" id="home-previews" aria-label="영어 학습 섹션">
-            <!-- Synonyms -->
-            <article class="preview-section">
-                <div class="preview-header">
-                    <h2>연관단어</h2>
-                    <div class="preview-more"><a href="english-synonym-list.html">더보기 &gt;</a></div>
-                </div>
-                <div id="synonym-preview-list" role="region" aria-label="연관단어 목록" data-home-preview-static="1"><!-- home-preview:synonym START -->
-<ul class="preview-list"><li class="preview-card"><a href="english-synonym/ransack-related-words/"><span class="preview-body"><span class="preview-title"><span class="preview-title-text">Steal 말고 쓸 수 있는 영어 표현?</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 21</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 1</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li><li class="preview-card"><a href="english-synonym/brook-related-words/"><span class="preview-body"><span class="preview-title"><span class="preview-title-text">용납하다, 참다와 허용하다</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 10</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 0</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li><li class="preview-card"><a href="english-synonym/indomitable-related-words/"><span class="preview-body"><span class="preview-title"><span class="preview-title-text">불굴의, 천하무적의와 난공불락의</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 15</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 0</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li><li class="preview-card"><a href="english-synonym/imbue-related-words/"><span class="preview-body"><span class="preview-title"><span class="preview-title-text">불어넣다, 스며들게 하다와 심어주다</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 7</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 0</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li><li class="preview-card"><a href="english-synonym/coalesce-related-words/"><span class="preview-body"><span class="preview-title"><span class="preview-title-text">합치다, 통합하다와 융합하다</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 7</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 0</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li></ul>
-<!-- home-preview:synonym END -->
-                </div>
-            </article>
 
-            <!-- Defense News -->
-            <article class="preview-section">
-                <div class="preview-header">
-                    <h2>국방뉴스</h2>
-                    <div class="preview-more"><a href="defense-news-list.html">더보기 &gt;</a></div>
-                </div>
-                <div id="defense-news-preview-list" role="region" aria-label="국방뉴스 목록" data-home-preview-static="1"><!-- home-preview:defense START -->
-<ul class="preview-list"><li class="preview-card"><a href="defense-news/staggered-shore-leave-related-words/"><span class="preview-body"><span class="preview-title"><span class="preview-title-text">USS 에이브러햄 링컨 승조원들의 태국 상륙</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 15</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 0</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li><li class="preview-card"><a href="defense-news/defunding-us-military-related-words/"><span class="preview-body"><span class="preview-title"><span class="preview-title-text">미국 국방 예산을 감축하는 것</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 9</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 0</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li><li class="preview-card"><a href="defense-news/pentagon-120-billion-weapon-contract/"><span class="preview-body"><span class="preview-title"><span class="preview-title-text">미 국방부 1200억 달러 무기 계약</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 9</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 0</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li><li class="preview-card"><a href="defense-news/uk-naval-drone-china-components/"><span class="preview-body"><span class="preview-title"><span class="preview-title-text">영국 해군 드론·중국 부품 논란</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 9</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 0</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li><li class="preview-card"><a href="defense-news/bulwark-related-words/"><span class="preview-body"><span class="preview-title"><span class="preview-title-text">미국의 조선 능력 부족은 해군에 걸림돌이 된다</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 12</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 0</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li></ul>
-<!-- home-preview:defense END --></div>
-            </article>
+    <div class="rd-wrap" id="rd-home">
+      <div class="rd-datebar">
+        <div class="rd-datebar-inner">
+          <span id="rd-date-label">오늘의 학습</span>
+          <span>WSJ · Economist · CNN · Korea Herald · Korea Times 기사로 배우는 영어</span>
+        </div>
+      </div>
 
-            <!-- Korea News (국방 / 국제) -->
-            <article class="preview-section">
-                <div class="preview-header">
-                    <h2>한국뉴스</h2>
-                    <div class="preview-more"><a href="korea-news-list.html">더보기 &gt;</a></div>
-                </div>
-                <div id="korea-news-preview-list" role="region" aria-label="한국뉴스 목록" data-home-preview-static="1"><!-- home-preview:korea START -->
-<ul class="preview-list"><li class="preview-card"><a href="korea-news/korea-milk-carton-separate-disposal-mandatory-koreaherald/"><span class="preview-body"><span class="preview-title"><span class="preview-title-text">우유팩 분리배출 의무화 논란</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 2</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 0</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li><li class="preview-card"><a href="korea-news/yoo-hae-jin-police-protection-the-assassins-backlash-koreaherald/"><span class="preview-body"><span class="preview-title"><span class="preview-title-text">영화 역사 왜곡 논란에 유해진 경찰 신변 보호</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 2</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 0</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li><li class="preview-card"><a href="korea-news/korea-recalls-ambassador-ukraine-north-korean-pow-dispute-koreatimes/"><span class="preview-body"><span class="preview-title"><span class="preview-title-text">한국, 북한군 포로 논란에 주우크라이나 대사 소환</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 1</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 0</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li><li class="preview-card"><a href="korea-news/overnight-coupang-outage-widespread-disruptions-hacking-fears-koreatimes/"><span class="preview-body"><span class="preview-title"><span class="preview-title-text">쿠팡 새벽 서비스 장애·해킹 우려</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 2</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 0</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li><li class="preview-card"><a href="korea-news/toddlers-under-2-smartphone-use-mind-survey-koreaherald/"><span class="preview-body"><span class="preview-title"><span class="preview-title-text">두 살 전 스마트폰 시작, 영유아 절반</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 6</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 0</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li></ul>
-<!-- home-preview:korea END --></div>
-            </article>
+      <section class="rd-hero" aria-label="오늘의 단어와 기사">
+        <div class="rd-hero-word" id="rd-hero-word">
+          <span class="rd-kicker">WORD OF THE DAY · 오늘의 단어</span>
+          <h1>…</h1>
+          <div class="rd-hero-meta"><span class="meaning">불러오는 중</span></div>
+          <p class="rd-hero-example">오늘의 단어를 준비하고 있습니다.</p>
+          <div class="rd-hero-actions">
+            <a class="rd-btn rd-btn-solid" href="word-of-the-day-list.html?api=prod">단어장 보기</a>
+            <a class="rd-btn rd-btn-outline" href="vocabulary-quiz-list.html">오늘의 퀴즈 풀기</a>
+          </div>
+        </div>
+        <a class="rd-hero-article" id="rd-hero-article" href="news-voca-list.html">
+          <span class="rd-kicker">오늘의 기사 · 국제</span>
+          <div class="rd-hero-article-img">[기사 대표 이미지]</div>
+          <span class="rd-hero-article-title">최신 국제 뉴스 어휘</span>
+          <span class="rd-hero-article-desc">기사를 불러오는 중…</span>
+          <span class="rd-hero-article-cta">어휘와 함께 읽기 →</span>
+        </a>
+      </section>
 
-            <!-- News Vocabulary -->
-            <article class="preview-section">
-                <div class="preview-header">
-                    <h2>국제</h2>
-                    <div class="preview-more"><a href="news-voca-list.html">더보기 &gt;</a></div>
-                </div>
-                <div id="news-voca-preview-list" role="region" aria-label="뉴스 어휘 목록" data-home-preview-static="1"><!-- home-preview:news START -->
-<ul class="preview-list"><li class="preview-card"><a href="news-voca/record-labels-ai-music-fraudulent-royalties-economist/"><span class="preview-body"><span class="preview-title"><span class="preview-title-text">AI 음악에 흔들리는 음반업계</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 1</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 0</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li><li class="preview-card"><a href="news-voca/walmart-automation-robots-warehouses-struggle-wsj/"><span class="preview-body"><span class="preview-title"><span class="preview-title-text">월마트 로봇 자동화의 난관</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 2</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 0</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li><li class="preview-card"><a href="news-voca/trump-putin-russian-diesel-deal-ukraine-cnn/"><span class="preview-body"><span class="preview-title"><span class="preview-title-text">러시아산 디젤 거래 논란</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 1</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 0</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li><li class="preview-card"><a href="news-voca/personal-ai-agents-privacy-errors-shopping-wsj/"><span class="preview-body"><span class="preview-title"><span class="preview-title-text">AI 에이전트의 실수</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 1</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 0</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li><li class="preview-card"><a href="news-voca/affluent-older-americans-wealth-postpandemic-wsj/"><span class="preview-body"><span class="preview-title"><span class="preview-title-text">미국의 자산 양극화</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 1</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 0</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li></ul>
-<!-- home-preview:news END --></div>
-            </article>
+      <section class="rd-paths" aria-label="학습 경로">
+        <div class="rd-paths-inner">
+          <div class="rd-path-card">
+            <span class="rd-path-num">01</span>
+            <h2>뉴스로 배우기</h2>
+            <p>실제 영문 기사에서 뽑은 시사 어휘를 주제별로 읽습니다.</p>
+            <div class="rd-chips">
+              <a class="rd-chip" href="news-voca-list.html">국제</a>
+              <a class="rd-chip" href="korea-news-list.html">한국</a>
+              <a class="rd-chip" href="defense-news-list.html">국방</a>
+              <a class="rd-chip" href="culture-voca-list.html">컬쳐</a>
+              <a class="rd-chip" href="ranking-news-list.html">랭킹</a>
+            </div>
+          </div>
+          <div class="rd-path-card">
+            <span class="rd-path-num">02</span>
+            <h2>단어 다지기</h2>
+            <p>매일 한 단어, 비슷한 말과 퀴즈로 확실히 내 것으로 만듭니다.</p>
+            <div class="rd-chips">
+              <a class="rd-chip" href="word-of-the-day-list.html?api=prod">단어장</a>
+              <a class="rd-chip" href="english-synonym-list.html">연관단어</a>
+              <a class="rd-chip" href="vocabulary-quiz-list.html">퀴즈</a>
+            </div>
+          </div>
+          <div class="rd-path-card">
+            <span class="rd-path-num">03</span>
+            <h2>표현 익히기</h2>
+            <p>일상과 토론에서 바로 쓰는 영어 표현을 상황별로 익힙니다.</p>
+            <div class="rd-chips">
+              <a class="rd-chip" href="popular-voca-list.html">이럴 땐 영어로?</a>
+              <a class="rd-chip" href="situational-english-list.html">상황</a>
+              <a class="rd-chip" href="pros-cons-list.html">Pros &amp; Cons</a>
+              <a class="rd-chip" href="photo-english-list.html">포토</a>
+            </div>
+          </div>
+        </div>
+      </section>
 
-            <!-- Culture Voca -->
-            <article class="preview-section">
-                <div class="preview-header">
-                    <h2>컬쳐</h2>
-                    <div class="preview-more"><a href="culture-voca-list.html">더보기 &gt;</a></div>
-                </div>
-                <div id="culture-voca-preview-list" role="region" aria-label="컬쳐 어휘 목록" data-home-preview-static="1"><!-- home-preview:culture START -->
-<ul class="preview-list"><li class="preview-card"><a href="culture-voca.html?index=2"><span class="preview-body"><span class="preview-title"><span class="preview-title-text">일은 잊으세요. 수동적 소득이 새로운 미국인의 꿈입니다.</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 4</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 0</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li><li class="preview-card"><a href="culture-voca.html?index=1"><span class="preview-body"><span class="preview-title"><span class="preview-title-text">영국에서 길가 식당들이 성인용품점으로 바뀌면서 난처한 상황이 벌어지고 있습니다</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 3</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 0</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li><li class="preview-card"><a href="culture-voca.html?index=0"><span class="preview-body"><span class="preview-title"><span class="preview-title-text">토이 스토리 5 리뷰 기사에서 추출한 어휘 | Toy Story 5 Review Vocabulary</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 6</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 1</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li></ul>
-<!-- home-preview:culture END --></div>
-            </article>
+      <section class="rd-section" aria-label="최신 뉴스 어휘">
+        <div class="rd-section-head">
+          <h2>최신 뉴스 어휘</h2>
+          <a href="news-voca-list.html">전체 보기 →</a>
+        </div>
+        <div class="rd-news-cards" id="rd-news-cards"></div>
+        <div class="rd-news-list" id="rd-news-list"></div>
+      </section>
 
-            <!-- Opinions -->
-            <article class="preview-section">
-                <div class="preview-header">
-                    <h2>오피니언</h2>
-                    <div class="preview-more"><a href="english-opinions-list.html">더보기 &gt;</a></div>
-                </div>
-                <div id="opinions-preview-list" role="region" aria-label="오피니언 목록" data-home-preview-static="1"><!-- home-preview:opinions START -->
-<ul class="preview-list"><li class="preview-card"><a href="english-opinions/uniquely-related-words/"><span class="preview-body"><span class="preview-title"><span class="preview-title-text">셀카 세대는 베이비부머 세대가 저지른 실수다</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 13</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 0</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li><li class="preview-card"><a href="english-opinions/low-key-related-words/"><span class="preview-body"><span class="preview-title"><span class="preview-title-text">친구들이 모두 칠순(70세)이 될 때</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 11</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 0</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li><li class="preview-card"><a href="english-opinions/purge-related-words/"><span class="preview-body"><span class="preview-title"><span class="preview-title-text">스미스소니언은 어떻게 미국의 큰 줄거리(본질적 이야기)를 놓쳐버렸는가?</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 9</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 0</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li><li class="preview-card"><a href="english-opinions/raucous-related-words/"><span class="preview-body"><span class="preview-title"><span class="preview-title-text">Theodore Roosevelt</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 11</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 0</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li></ul>
-<!-- home-preview:opinions END --></div>
-            </article>
+      <div class="rd-quiz-banner-wrap">
+        <div class="rd-quiz-banner" id="rd-quiz-banner">
+          <div>
+            <span class="label">TODAY'S QUIZ</span>
+            <span class="words">오늘의 퀴즈</span>
+            <span class="desc">불러오는 중…</span>
+          </div>
+          <a class="rd-btn" href="vocabulary-quiz-list.html">퀴즈 시작하기</a>
+        </div>
+      </div>
 
-            <!-- Shorts background / newspaper reading image -->
-            <article class="preview-section">
-                <div class="preview-header">
-                    <h2>신문읽는 이미지</h2>
-                    <div class="preview-more"><a href="shorts-bg-image-list.html">더보기 &gt;</a></div>
-                </div>
-                <div id="shorts-bg-image-preview-list" role="region" aria-label="신문읽는 이미지 목록" data-home-preview-static="1"><!-- home-preview:shorts START -->
-<ul class="preview-list"><li class="preview-card"><a href="shorts-bg-image/paris-street-cafe-scene/"><span class="preview-body"><span class="preview-title"><span class="preview-title-text">파리 노천카페와 거리 풍경 · Paris street cafe scene</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 10</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 0</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li><li class="preview-card"><a href="shorts-bg-image/harbor-cafe-fishermen-sunset/"><span class="preview-body"><span class="preview-title"><span class="preview-title-text">항구 카페와 어부들의 저녁 풍경 · Harbor cafe and fishermen at sunset</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 6</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 0</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li><li class="preview-card"><a href="shorts-bg-image/urban-street-cafe-newsstand/"><span class="preview-body"><span class="preview-title"><span class="preview-title-text">도심 거리 카페와 신문 가판대 · Urban street cafe and newsstand</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 14</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 0</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li><li class="preview-card"><a href="shorts-bg-image/spanish-vineyard-terrace/"><span class="preview-body"><span class="preview-title"><span class="preview-title-text">스페인 포도원 테라스 · Spanish vineyard terrace</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 13</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 0</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li><li class="preview-card"><a href="shorts-bg-image/london-city-street-newsstand/"><span class="preview-body"><span class="preview-title"><span class="preview-title-text">런던 도심 거리와 신문 가판대 · London city street and newsstand</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 12</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 0</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li></ul>
-<!-- home-preview:shorts END --></div>
-            </article>
+      <section class="rd-section" aria-label="이럴 땐 영어로">
+        <div class="rd-section-head">
+          <h2>이럴 땐 영어로?</h2>
+          <a href="popular-voca-list.html">전체 보기 →</a>
+        </div>
+        <div class="rd-phrase-grid" id="rd-phrase-grid"></div>
+      </section>
 
-            <!-- Calm Mind -->
-            <article class="preview-section">
-                <div class="preview-header">
-                    <h2>마음 다스리는 글</h2>
-                    <div class="preview-more"><a href="calm-mind-list.html">더보기 &gt;</a></div>
-                </div>
-                <div id="calm-mind-preview-list" role="region" aria-label="마음 다스리는 글 목록" data-home-preview-static="1"><!-- home-preview:calm START -->
-<ul class="preview-list"><li class="preview-card"><a href="calm-mind/does-suffering-make-you-wise/"><span class="preview-body"><span class="preview-title"><span class="preview-title-text">고생을 많이 하면 정말 법륜스님처럼 현명해지나요? | 법륜스님 즉문즉설</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 10</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 1</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li><li class="preview-card"><a href="calm-mind/how-to-become-a-wise-adult/"><span class="preview-body"><span class="preview-title"><span class="preview-title-text">지혜로운 어른이 되려면 어떻게 해야 하나요? | 법륜스님 즉문즉설</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 16</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 0</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li><li class="preview-card"><a href="calm-mind/anger-i-cannot-control/"><span class="preview-body"><span class="preview-title"><span class="preview-title-text">감당할 수 없는 화 | 법륜 스님 즉문즉설</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 15</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 0</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li><li class="preview-card"><a href="calm-mind/do-your-best-without-clinging-to-results/"><span class="preview-body"><span class="preview-title"><span class="preview-title-text">될 대로 되라며 살아도 될까요? | 법륜 스님 즉문즉설</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 11</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 0</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li><li class="preview-card"><a href="calm-mind/when-korean-society-feels-cold/"><span class="preview-body"><span class="preview-title"><span class="preview-title-text">한국 사회가 차갑게 느껴질 때 | 법륜 스님 즉문즉설</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 11</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 0</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li></ul>
-<!-- home-preview:calm END --></div>
-            </article>
+      <section class="rd-section rd-reading" aria-label="천천히 읽을거리">
+        <div class="rd-section-head">
+          <h2>천천히 읽을거리</h2>
+        </div>
+        <div class="rd-reading-grid">
+          <div class="rd-reading-col" id="rd-read-opinions"></div>
+          <div class="rd-reading-col" id="rd-read-culture"></div>
+          <div class="rd-reading-col" id="rd-read-calm"></div>
+          <div class="rd-reading-col" id="rd-read-quotes"></div>
+        </div>
+      </section>
 
-            <!-- English Quotes -->
-            <article class="preview-section">
-                <div class="preview-header">
-                    <h2>영어 명언</h2>
-                    <div class="preview-more"><a href="english-quotes-list.html">더보기 &gt;</a></div>
-                </div>
-                <div id="english-quotes-preview-list" role="region" aria-label="영어 명언 목록" data-home-preview-static="1"><!-- home-preview:quotes START -->
-<ul class="preview-list"><li class="preview-card"><a href="english-quotes/journey-of-a-thousand-miles/"><span class="preview-body"><span class="preview-title"><span class="preview-title-text">천 리 길도 한 걸음부터: 노자가 전하는 시작의 힘</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 1</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 0</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li></ul>
-<!-- home-preview:quotes END --></div>
-            </article>
+      <section id="site-search-page" hidden>
+        <article>
+          <div id="site-search-page-list" role="region" aria-label="검색 결과"></div>
+        </article>
+      </section>
 
-            <!-- Word of the Day -->
-            <article class="preview-section">
-                <div class="preview-header">
-                    <h2>단어장</h2>
-                    <div class="preview-more"><a href="word-of-the-day-list.html?api=prod">더보기 &gt;</a></div>
-                </div>
-                <div id="wordofday-preview-list" role="region" aria-label="오늘의 단어장 목록" data-home-preview-static="1"><!-- home-preview:wordofday START -->
-<ul class="preview-list"><li class="preview-card"><a href="word-of-the-day/discernment/"><span class="preview-body"><span class="preview-title"><span class="preview-title-text">discernment | 안목, 분별력</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 2</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 0</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li><li class="preview-card"><a href="word-of-the-day/epicenter/"><span class="preview-body"><span class="preview-title"><span class="preview-title-text">epicenter | 진앙, 중심지</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 1</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 0</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li><li class="preview-card"><a href="word-of-the-day/precaution/"><span class="preview-body"><span class="preview-title"><span class="preview-title-text">precaution | 예방 조치</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 1</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 0</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li><li class="preview-card"><a href="word-of-the-day/palpable/"><span class="preview-body"><span class="preview-title"><span class="preview-title-text">palpable | 명백한, 확연한, 만져서 느낄 수 있는</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 4</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 0</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li><li class="preview-card"><a href="word-of-the-day/perpetual/"><span class="preview-body"><span class="preview-title"><span class="preview-title-text">perpetual | 영구적인, 끊임없는, 지속적인</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 9</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 0</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li></ul>
-<!-- home-preview:wordofday END --></div>
-            </article>
-            
-            <!-- Vocabulary Quiz -->
-            <article class="preview-section">
-                <div class="preview-header">
-                    <h2>퀴즈</h2>
-                    <div class="preview-more"><a href="vocabulary-quiz-list.html">더보기 &gt;</a></div>
-                </div>
-                <div id="vocabulary-quiz-preview-list" role="region" aria-label="영어 단어 퀴즈 목록" data-home-preview-static="1"><!-- home-preview:quiz START -->
-<ul class="preview-list"><li class="preview-card"><a href="vocabulary-quiz.html?slug=daily-vocabulary-quiz-01"><span class="preview-body"><span class="preview-title"><span class="preview-title-text">만병통치약 | 현실도피 | 기진맥진</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 0</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 0</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li></ul>
-<!-- home-preview:quiz END --></div>
-            </article>
-            
-            <!-- Popular Vocabulary -->
-            <article class="preview-section">
-                <div class="preview-header">
-                    <h2>이럴 땐 영어로?</h2>
-                    <div class="preview-more"><a href="popular-voca-list.html">더보기 &gt;</a></div>
-                </div>
-                <div id="easy-voca-preview-list" role="region" aria-label="이럴 땐 영어로? 목록" data-home-preview-static="1"><!-- home-preview:easy START -->
-<ul class="preview-list"><li class="preview-card"><a href="popular-voca/dont-fall-for-it/"><span class="preview-body"><span class="preview-title"><span class="preview-title-text">속지 마세요 영어로?</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 28</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 2</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li><li class="preview-card"><a href="popular-voca/true-colours/"><span class="preview-body"><span class="preview-title"><span class="preview-title-text">본색을 드러내다 영어로?</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 14</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 0</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li><li class="preview-card"><a href="popular-voca/blurt-out/"><span class="preview-body"><span class="preview-title"><span class="preview-title-text">무심코 말하다 영어로?</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 14</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 0</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li><li class="preview-card"><a href="popular-voca/haste-makes-waste/"><span class="preview-body"><span class="preview-title"><span class="preview-title-text">급할수록 돌아가세요 영어로?</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 10</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 0</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li><li class="preview-card"><a href="popular-voca/crocodile-tears/"><span class="preview-body"><span class="preview-title"><span class="preview-title-text">가식적인 눈물을 흘리다 영어로?</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 12</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 0</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li></ul>
-<!-- home-preview:easy END --></div>
-            </article>
-
-            <!-- Situational English -->
-            <article class="preview-section">
-                <div class="preview-header">
-                    <h2>상황</h2>
-                    <div class="preview-more"><a href="situational-english-list.html">더보기 &gt;</a></div>
-                </div>
-                <div id="situational-english-preview-list" role="region" aria-label="상황 영어 목록" data-home-preview-static="1"><!-- home-preview:situational START -->
-<ul class="preview-list"><li class="preview-card"><a href="situational-english.html?index=10"><span class="preview-body"><span class="preview-title"><span class="preview-title-text">박물관/미술관에서</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 11</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 1</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li><li class="preview-card"><a href="situational-english.html?index=9"><span class="preview-body"><span class="preview-title"><span class="preview-title-text">자동차 대여소에서</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 2</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 0</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li><li class="preview-card"><a href="situational-english.html?index=8"><span class="preview-body"><span class="preview-title"><span class="preview-title-text">병원에서</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 4</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 1</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li><li class="preview-card"><a href="situational-english.html?index=7"><span class="preview-body"><span class="preview-title"><span class="preview-title-text">기차역에서</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 5</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 0</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li><li class="preview-card"><a href="situational-english.html?index=6"><span class="preview-body"><span class="preview-title"><span class="preview-title-text">집안에서</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 4</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 1</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li></ul>
-<!-- home-preview:situational END --></div>
-            </article>
-            
-            <!-- Cooking Voca -->
-            <article class="preview-section">
-                <div class="preview-header">
-                    <h2>요리</h2>
-                    <div class="preview-more"><a href="cooking-voca-list.html">더보기 &gt;</a></div>
-                </div>
-                <div id="cooking-voca-preview-list" role="region" aria-label="요리 영어 목록" data-home-preview-static="1"><!-- home-preview:cooking START -->
-<ul class="preview-list"><li class="preview-card"><a href="cooking-voca.html?index=0"><span class="preview-body"><span class="preview-title"><span class="preview-title-text">채식 및 비건 핑거푸드 아이디어 | Vegetarian and Vegan Finger Food</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 13</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 1</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li></ul>
-<!-- home-preview:cooking END --></div>
-            </article>
-            
-            <!-- Ranking News -->
-            <article class="preview-section">
-                <div class="preview-header">
-                    <h2>랭킹</h2>
-                    <div class="preview-more"><a href="ranking-news-list.html">더보기 &gt;</a></div>
-                </div>
-                <div id="ranking-news-preview-list" role="region" aria-label="랭킹 뉴스 목록" data-home-preview-static="1"><!-- home-preview:ranking START -->
-<ul class="preview-list"><li class="preview-card"><a href="ranking-news.html?index=1"><span class="preview-body"><span class="preview-title"><span class="preview-title-text">전 세계 기업 시가총액 TOP 30 | Market Cap 기준</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 6</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 1</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li><li class="preview-card"><a href="ranking-news.html?index=0"><span class="preview-body"><span class="preview-title"><span class="preview-title-text">FIFA 남자 랭킹 TOP 20 | 2026년 6월 11일 기준</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 2</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 0</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li></ul>
-<!-- home-preview:ranking END --></div>
-            </article>
-            
-            <!-- Photo English -->
-            <article class="preview-section">
-                <div class="preview-header">
-                    <h2>포토</h2>
-                    <div class="preview-more"><a href="photo-english-list.html">더보기 &gt;</a></div>
-                </div>
-                <div id="photo-english-preview-list" role="region" aria-label="포토 영어 목록" data-home-preview-static="1"><!-- home-preview:photo START -->
-<ul class="preview-list"><li class="preview-card"><a href="photo-english.html?index=35"><span class="preview-body"><span class="preview-title"><span class="preview-title-text">데이트 분석 | Dating with a Spreadsheet</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 6</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 0</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li><li class="preview-card"><a href="photo-english.html?index=34"><span class="preview-body"><span class="preview-title"><span class="preview-title-text">건물 안전 | Building Safety</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 3</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 0</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li><li class="preview-card"><a href="photo-english.html?index=33"><span class="preview-body"><span class="preview-title"><span class="preview-title-text">산불 | Wildfires</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 4</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 0</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li><li class="preview-card"><a href="photo-english.html?index=32"><span class="preview-body"><span class="preview-title"><span class="preview-title-text">공원 | My Favorite Park</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 3</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 0</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li><li class="preview-card"><a href="photo-english.html?index=31"><span class="preview-body"><span class="preview-title"><span class="preview-title-text">점심 | My Lunch Break</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 3</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 0</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li></ul>
-<!-- home-preview:photo END --></div>
-            </article>
-            
-            <!-- Pros & Cons -->
-            <article class="preview-section">
-                <div class="preview-header">
-                    <h2>Pros & Cons</h2>
-                    <div class="preview-more"><a href="pros-cons-list.html">더보기 &gt;</a></div>
-                </div>
-                <div id="pros-cons-preview-list" role="region" aria-label="Pros & Cons 목록" data-home-preview-static="1"><!-- home-preview:proscons START -->
-<ul class="preview-list"><li class="preview-card"><a href="pros-cons.html?index=8"><span class="preview-body"><span class="preview-title"><span class="preview-title-text">AI가 생성한 창작물도 저작권으로 보호해야 할까?</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 3</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 0</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li><li class="preview-card"><a href="pros-cons.html?index=7"><span class="preview-body"><span class="preview-title"><span class="preview-title-text">설탕세는 도입해야 할까?</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 4</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 1</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li><li class="preview-card"><a href="pros-cons.html?index=6"><span class="preview-body"><span class="preview-title"><span class="preview-title-text">종교계의 AI 활용, 수용해야 할까?</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 8</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 0</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li><li class="preview-card"><a href="pros-cons.html?index=5"><span class="preview-body"><span class="preview-title"><span class="preview-title-text">주 4일 근무제는 도입되어야 할까?</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 3</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 1</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li><li class="preview-card"><a href="pros-cons.html?index=4"><span class="preview-body"><span class="preview-title"><span class="preview-title-text">AI 교사는 인간 교사를 대체할 수 있을까?</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 2</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 1</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li></ul>
-<!-- home-preview:proscons END --></div>
-            </article>
-            
-            <!-- English Link Directory -->
-            <article class="preview-section">
-                <div class="preview-header">
-                    <h2>영어 학습 사이트 디렉터리</h2>
-                    <div class="preview-more"><a href="english-directory.html">더보기 &gt;</a></div>
-                </div>
-                <div id="english-directory-preview-list" role="region" aria-label="영어 학습 사이트 디렉터리 목록"></div>
-            </article>
-
-            <!-- Best Views -->
-            <article class="preview-section" id="home-best">
-                <div class="preview-header">
-                    <h2>Best 조회수</h2>
-                </div>
-                <div id="best-views-preview-list" role="region" aria-label="조회수 Best 목록" data-home-preview-static="1"><!-- home-preview:best START -->
-<ul class="preview-list"><li class="preview-card"><a href="pros-cons.html?index=0"><span class="preview-body"><span class="preview-title"><span class="preview-source">Pros &amp; Cons</span><span class="preview-sep" aria-hidden="true"> | </span><span class="preview-title-text">인류는 다른 행성에 정착해야 할까?  - Pros &amp; Cons</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 53</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 1</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li><li class="preview-card"><a href="word-of-the-day.html?index=0"><span class="preview-body"><span class="preview-title"><span class="preview-source">단어장</span><span class="preview-sep" aria-hidden="true"> | </span><span class="preview-title-text">deliberate</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 33</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 1</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li><li class="preview-card"><a href="popular-voca.html?index=3"><span class="preview-body"><span class="preview-title"><span class="preview-source">이럴 땐 영어로?</span><span class="preview-sep" aria-hidden="true"> | </span><span class="preview-title-text">부화하다, 화물 출입구, 만들어 내다 의미의 단어는?</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 32</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 2</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li><li class="preview-card"><a href="popular-voca/dont-fall-for-it/"><span class="preview-body"><span class="preview-title"><span class="preview-source">이럴 땐 영어로?</span><span class="preview-sep" aria-hidden="true"> | </span><span class="preview-title-text">속지 마세요 영어로?</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 28</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 2</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li><li class="preview-card"><a href="news-voca.html?index=33"><span class="preview-body"><span class="preview-title"><span class="preview-source">국제</span><span class="preview-sep" aria-hidden="true"> | </span><span class="preview-title-text">CPI와 PCE가 엇갈리며 연준의 금리 판단이 어려워진 상황</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 28</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 1</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li><li class="preview-card"><a href="english-synonym.html?index=9"><span class="preview-body"><span class="preview-title"><span class="preview-source">연관단어</span><span class="preview-sep" aria-hidden="true"> | </span><span class="preview-title-text">화재관련 유의어</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 25</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 0</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li><li class="preview-card"><a href="news-voca.html?index=99"><span class="preview-body"><span class="preview-title"><span class="preview-source">국제</span><span class="preview-sep" aria-hidden="true"> | </span><span class="preview-title-text">전동 로봇 다리로 산을 오르는 시대가 오다</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 24</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 2</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li><li class="preview-card"><a href="news-voca.html?index=32"><span class="preview-body"><span class="preview-title"><span class="preview-source">국제</span><span class="preview-sep" aria-hidden="true"> | </span><span class="preview-title-text">중동 리스크와 금융시장 변동성 관련 어휘 정리</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 24</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 0</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li></ul>
-<!-- home-preview:best END --></div>
-            </article>
-
-            <!-- Recent Updates -->
-            <article class="preview-section" id="home-recent">
-                <div class="preview-header">
-                    <h2>최신 업데이트</h2>
-                </div>
-                <div id="recent-updates-preview-list" role="region" aria-label="최신 업데이트 목록" data-home-preview-static="1"><!-- home-preview:recent START -->
-<ul class="preview-list"><li class="preview-card preview-card--recent"><a href="english-quotes/journey-of-a-thousand-miles/"><span class="preview-body"><span class="preview-meta"><span class="preview-new">NEW</span></span><span class="preview-title"><span class="preview-source">영어 명언</span><span class="preview-sep" aria-hidden="true"> | </span><span class="preview-title-text">천 리 길도 한 걸음부터: 노자가 전하는 시작의 힘</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 1</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 0</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li><li class="preview-card preview-card--recent"><a href="word-of-the-day/discernment/"><span class="preview-body"><span class="preview-meta"><span class="preview-new">NEW</span></span><span class="preview-title"><span class="preview-source">단어장</span><span class="preview-sep" aria-hidden="true"> | </span><span class="preview-title-text">discernment | 안목, 분별력</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 2</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 0</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li><li class="preview-card preview-card--recent"><a href="word-of-the-day/epicenter/"><span class="preview-body"><span class="preview-title"><span class="preview-source">단어장</span><span class="preview-sep" aria-hidden="true"> | </span><span class="preview-title-text">epicenter | 진앙, 중심지</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 1</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 0</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li><li class="preview-card preview-card--recent"><a href="word-of-the-day/precaution/"><span class="preview-body"><span class="preview-title"><span class="preview-source">단어장</span><span class="preview-sep" aria-hidden="true"> | </span><span class="preview-title-text">precaution | 예방 조치</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 1</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 0</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li><li class="preview-card preview-card--recent"><a href="news-voca/record-labels-ai-music-fraudulent-royalties-economist/"><span class="preview-body"><span class="preview-title"><span class="preview-source">국제</span><span class="preview-sep" aria-hidden="true"> | </span><span class="preview-title-text">AI 음악에 흔들리는 음반업계</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 1</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 0</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li><li class="preview-card preview-card--recent"><a href="news-voca/walmart-automation-robots-warehouses-struggle-wsj/"><span class="preview-body"><span class="preview-title"><span class="preview-source">국제</span><span class="preview-sep" aria-hidden="true"> | </span><span class="preview-title-text">월마트 로봇 자동화의 난관</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 2</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 0</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li><li class="preview-card preview-card--recent"><a href="news-voca/trump-putin-russian-diesel-deal-ukraine-cnn/"><span class="preview-body"><span class="preview-title"><span class="preview-source">국제</span><span class="preview-sep" aria-hidden="true"> | </span><span class="preview-title-text">러시아산 디젤 거래 논란</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 1</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 0</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li><li class="preview-card preview-card--recent"><a href="news-voca/personal-ai-agents-privacy-errors-shopping-wsj/"><span class="preview-body"><span class="preview-title"><span class="preview-source">국제</span><span class="preview-sep" aria-hidden="true"> | </span><span class="preview-title-text">AI 에이전트의 실수</span></span><span class="preview-meta-stats preview-meta-stats--hidden"><span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> 1</span><span class="preview-sep preview-sep--stats" aria-hidden="true"> </span><span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> 0</span></span></span><span class="preview-arrow" aria-hidden="true">›</span></a></li></ul>
-<!-- home-preview:recent END --></div>
-            </article>
-
-            <!-- Learning Sites (replaced by 영어 학습 사이트 디렉터리)
-            <article class="preview-section">
-                <div class="preview-header">
-                    <h2>학습 사이트</h2>
-                    <div class="preview-more"><a href="learning-site.html">더보기 &gt;</a></div>
-                </div>
-                <ul class="preview-list">
-                    <li><a href="learning-site.html">주인장 · 영어공부 (Owner · English Study)</a></li>
-                    <li><a href="learning-site.html">유아/어린이 · KidsTV123, Starfall</a></li>
-                    <li><a href="learning-site.html">기초/초급 · 홍시쌤, 프랭크쌤영어</a></li>
-                    <li><a href="learning-site.html">중급 · BBC Learning English, Shaw English</a></li>
-                    <li><a href="learning-site.html">고급/전문 · VOA, 윤희영 News English</a></li>
-                    <li><a href="learning-site.html">비즈니스 · 실무 영어 채널</a></li>
-                </ul>
-            </article>
-            -->
-        </section>
-
-        <section id="site-search-page" hidden>
-            <article class="preview-section">
-                <div id="site-search-page-list" role="region" aria-label="검색 결과"></div>
-            </article>
-        </section>
-        
-           <!-- Footer Text -->
-    <section class="intro-text">
-        <p>
-            Thank you for being here. For any questions, email us at 
-            <a href="mailto:everydayalittlehelp@gmail.com" style="color: #4a90e2; text-decoration: underline;">everydayalittlehelp@gmail.com</a>.
-            You can also find us on
-            <a href="https://www.youtube.com/@istudyeng" target="_blank" rel="noopener noreferrer" style="color: #ff0000; text-decoration: underline;">YouTube @istudyeng</a>
-            and
-            <a href="https://x.com/istudyengli" target="_blank" rel="noopener noreferrer" style="color: #1d9bf0; text-decoration: underline;">X @istudyengli</a>.
-        </p>
-        <p style="margin-top:0.85rem;font-size:0.92rem;">
-            <a href="about.html">사이트 소개</a>
-            <span aria-hidden="true"> · </span>
-            <a href="privacy.html">개인정보처리방침</a>
-            <span aria-hidden="true"> · </span>
-            <a href="terms.html">이용약관</a>
-        </p>
-    </section>
-</main>
-<footer class="site-legal-footer" role="contentinfo" aria-label="사이트 정보">
-    <div class="site-legal-footer-inner">
-        <nav aria-label="법적 고지">
-            <ul class="site-legal-footer-nav">
-                <li><a href="about.html">사이트 소개</a></li>
-                <li class="sep" aria-hidden="true">·</li>
-                <li><a href="privacy.html">개인정보처리방침</a></li>
-                <li class="sep" aria-hidden="true">·</li>
-                <li><a href="terms.html">이용약관</a></li>
-                <li class="sep" aria-hidden="true">·</li>
-                <li><a href="mailto:everydayalittlehelp@gmail.com">문의</a></li>
-            </ul>
-        </nav>
-        <p class="site-legal-footer-copy">© 2026 시사영단어 · News English Lab. All rights reserved.</p>
+      <!-- SEO/레거시 미리보기 앵커 — 숨김 유지, home-board-preview 캐시용 -->
+      <section id="home-previews" hidden aria-hidden="true">
+        <div id="wordofday-preview-list"></div>
+        <div id="news-voca-preview-list"></div>
+        <div id="best-views-preview-list"></div>
+        <div id="recent-updates-preview-list"></div>
+      </section>
     </div>
-</footer>
 
-    <!-- Bootstrap Bundle -->
+    <footer class="rd-footer" role="contentinfo" aria-label="사이트 정보">
+      <div class="rd-footer-inner">
+        <div class="rd-footer-brand">
+          <span class="name">시사영단어</span>
+          <span class="desc">뉴스로 배우는 시사 영어. 뉴스 어휘, 오늘의 단어, 유의어, 퀴즈를 무료로.</span>
+        </div>
+        <div class="rd-footer-links">
+          <a href="https://www.youtube.com/@istudyeng" target="_blank" rel="noopener noreferrer">YouTube</a>
+          <a href="https://x.com/istudyengli" target="_blank" rel="noopener noreferrer">X</a>
+          <a href="about.html">사이트 소개</a>
+          <a href="privacy.html">개인정보처리방침</a>
+          <a href="terms.html">이용약관</a>
+          <a href="english-directory.html">학습 사이트 디렉터리</a>
+        </div>
+      </div>
+      <div class="rd-footer-copy">© 2026 시사영단어 · News English Lab</div>
+    </footer>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="viewpost-seo.js?v=20260702"></script>
     <link rel="stylesheet" href="site-footer.css?v=20261013a">
     <script src="nav-home-menu.js?v=20261013legal"></script>
-    <script src="site-masthead.js?v=20260831a"></script>
+    <script src="site-masthead.js?v=20261019rd"></script>
     <script src="site-footer.js?v=20261013a"></script>
-    <script src="home-board-preview.js?v=20260906gray"></script>
-    <script src="english-directory.js" defer></script>
-    
-    <script>
-        function navigateTo(page) {
-            window.location.href = page;
-        }
-        function buildPreviewListHtml(rows, emptyMessage) {
-            if (!rows.length) {
-                return '<ul class="preview-list"><li class="preview-empty">' + emptyMessage + '</li></ul>';
-            }
-            return '<ul class="preview-list">' + rows.join('') + '</ul>';
-        }
+    <script src="home-board-preview.js?v=20261019rd"></script>
+    <script src="home-redesign.js?v=20261019rd"></script>
 
-        function formatMetaStatsHtml(views, likes) {
-            var viewCount = Number(views) || 0;
-            var likeCount = parseInt(likes, 10) || 0;
-            return '<span class="preview-meta-stats preview-meta-stats--hidden">' +
-                '<span class="preview-views"><span class="preview-views-icon" aria-hidden="true">👁</span> ' + viewCount + '</span>' +
-                '<span class="preview-sep preview-sep--stats" aria-hidden="true"> </span>' +
-                '<span class="preview-likes"><span class="preview-like-heart" aria-hidden="true">♥</span> ' + likeCount + '</span>' +
-                '</span>';
-        }
-
-        function buildPreviewRow(title, views, href, dateStr, likes) {
-            var rawTitle = String(title || '제목 없음');
-            var sourceMatch = rawTitle.match(/^\[([^\]]+)\]\s*(.*)$/);
-            var source = sourceMatch ? sourceMatch[1].trim() : '';
-            var mainTitle = sourceMatch ? (sourceMatch[2] || '').trim() : rawTitle;
-            if (!mainTitle) mainTitle = '제목 없음';
-            var safeTitle = mainTitle.replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-            var safeSource = source.replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-            var titleParts = [];
-            if (safeSource) {
-                titleParts.push('<span class="preview-source">' + safeSource + '</span>');
-                titleParts.push('<span class="preview-sep" aria-hidden="true"> | </span>');
-            }
-            titleParts.push('<span class="preview-title-text">' + safeTitle + '</span>');
-            var titleHtml = titleParts.join('');
-            return '<li class="preview-card"><a href="' + href + '">' +
-                '<span class="preview-body">' +
-                    '<span class="preview-title">' + titleHtml + '</span>' +
-                    formatMetaStatsHtml(views, likes) +
-                '</span>' +
-                '<span class="preview-arrow" aria-hidden="true">›</span>' +
-                '</a></li>';
-        }
-
-        function getApiBase() {
-            var urlParams = new URLSearchParams(window.location.search);
-            var apiMode = urlParams.get('api');
-            if (apiMode === 'prod') {
-                return 'https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app';
-            }
-            if (apiMode === 'local') {
-                return 'http://' + window.location.hostname + ':3000';
-            }
-            if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-                return 'http://' + window.location.hostname + ':3000';
-            }
-            return 'https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app';
-        }
-
-        function parseEntries(data) {
-            if (Array.isArray(data)) return data;
-            if (data && data.entries) return data.entries;
-            if (data && data.data) return Array.isArray(data.data) ? data.data : [];
-            return [];
-        }
-
-        var BOARD_POST_PATHS = {
-            'news-voca.html': 'news-voca',
-            'word-of-the-day.html': 'word-of-the-day',
-            'english-synonym.html': 'english-synonym',
-            'defense-news.html': 'defense-news',
-            'korea-news.html': 'korea-news',
-            'english-opinions.html': 'english-opinions',
-            'calm-mind.html': 'calm-mind',
-            'english-quotes.html': 'english-quotes',
-            'popular-voca.html': 'popular-voca',
-            'situational-english.html': 'situational-english',
-            'cooking-voca.html': 'cooking-voca',
-            'culture-voca.html': 'culture-voca',
-            'ranking-news.html': 'ranking-news',
-            'photo-english.html': 'photo-english',
-            'pros-cons.html': 'pros-cons'
-        };
-
-        function buildPreviewHref(entry, postPage, origIdx, apiParam, postPath) {
-            if (postPage === 'vocabulary-quiz.html' && entry && entry.slug) {
-                return 'vocabulary-quiz.html?slug=' + encodeURIComponent(entry.slug);
-            }
-            if (entry && entry.href) return String(entry.href);
-            if (window.ViewpostSeo && window.ViewpostSeo.buildListPostHref) {
-                return window.ViewpostSeo.buildListPostHref(entry, postPage, origIdx, apiParam, postPath);
-            }
-            var slug = entry && String(entry.slug || '').trim();
-            var path = postPath || BOARD_POST_PATHS[postPage] || null;
-            if (slug && path) {
-                var href = path + '/' + encodeURIComponent(slug) + '/';
-                if (apiParam) href += '?' + String(apiParam).replace(/^&/, '');
-                return href;
-            }
-            if (slug) return postPage + '?slug=' + encodeURIComponent(slug) + apiParam;
-            return postPage + '?index=' + origIdx + apiParam;
-        }
-
-        function renderPreviewList(container, entries, postPage, apiMode, emptyMessage, postPath) {
-            var total = entries.length;
-            var reversed = entries.slice().reverse();
-            var preview = reversed.slice(0, 5);
-            var apiParam = apiMode ? '&api=' + apiMode : '';
-            if (preview.length === 0) {
-                container.innerHTML = buildPreviewListHtml([], emptyMessage);
-                return;
-            }
-            var rows = preview.map(function(entry, idx) {
-                var origIdx = total - 1 - idx;
-                var href = buildPreviewHref(entry, postPage, origIdx, apiParam, postPath);
-                return buildPreviewRow(entry.title, entry.views, href, entry.date, entry.likes);
-            });
-            container.innerHTML = buildPreviewListHtml(rows, '');
-            if (window.HomeBoardPreview && window.HomeBoardPreview.applyPreviewStatsVisibility) {
-                window.HomeBoardPreview.applyPreviewStatsVisibility(container);
-            }
-        }
-
-        function buildSkeletonListHtml(count) {
-            if (window.HomeBoardPreview && HomeBoardPreview.buildSkeletonListHtml) {
-                return HomeBoardPreview.buildSkeletonListHtml(count || 3);
-            }
-            return '<ul class="preview-list preview-list--skeleton"><li class="preview-skeleton" aria-hidden="true"><span class="preview-skeleton-line"></span></li></ul>';
-        }
-
-        function loadSectionPreview(config) {
-            var listEl = document.getElementById(config.listId);
-            if (!listEl) return;
-            var urlParams = new URLSearchParams(window.location.search);
-            var apiMode = config.apiMode !== undefined ? config.apiMode : urlParams.get('api');
-            if (config.wordofdayApi) {
-                apiMode = apiMode || (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1' ? 'prod' : null);
-            }
-            var fallbackHtml = buildPreviewListHtml([], config.fallbackLink);
-            var timeoutMs = config.timeoutMs === undefined ? 8000 : config.timeoutMs;
-            var timeoutId = timeoutMs > 0 ? setTimeout(function() { listEl.innerHTML = fallbackHtml; }, timeoutMs) : null;
-
-            function finish(entries) {
-                if (timeoutId) clearTimeout(timeoutId);
-                renderPreviewList(listEl, entries, config.postPage, apiMode, config.emptyMessage, config.postPath);
-            }
-
-            function fail() {
-                if (timeoutId) clearTimeout(timeoutId);
-                listEl.innerHTML = fallbackHtml;
-            }
-
-            if (window.HomeBoardPreview && HomeBoardPreview.fetchBoardEntries) {
-                HomeBoardPreview.fetchBoardEntries(config.apiPath).then(finish).catch(fail);
-                return;
-            }
-
-            fetch(getApiBase() + config.apiPath)
-                .then(function(r) {
-                    if (!r.ok) throw new Error('HTTP ' + r.status);
-                    return r.json();
-                })
-                .then(function(data) { finish(parseEntries(data)); })
-                .catch(fail);
-        }
-
-        var previewSkeletonHtml = buildSkeletonListHtml(3);
-        ['best-views-preview-list', 'recent-updates-preview-list', 'wordofday-preview-list', 'news-voca-preview-list', 'defense-news-preview-list', 'korea-news-preview-list', 'vocabulary-quiz-preview-list', 'synonym-preview-list', 'easy-voca-preview-list', 'situational-english-preview-list', 'cooking-voca-preview-list', 'culture-voca-preview-list', 'ranking-news-preview-list', 'photo-english-preview-list', 'pros-cons-preview-list', 'opinions-preview-list', 'shorts-bg-image-preview-list', 'calm-mind-preview-list', 'english-quotes-preview-list'].forEach(function(id) {
-            var el = document.getElementById(id);
-            if (!el) return;
-            if (el.getAttribute('data-home-preview-static') === '1' && el.querySelector('.preview-card')) return;
-            el.innerHTML = previewSkeletonHtml;
-        });
-
-        var HOME_PREVIEW_SECTIONS = [
-            { listId: 'synonym-preview-list', apiPath: '/vocabulary', postPage: 'english-synonym.html', emptyMessage: '게시글이 없습니다.', fallbackLink: '<a href="english-synonym-list.html">연관단어 보기</a>' },
-            { listId: 'defense-news-preview-list', apiPath: '/defense-news', postPage: 'defense-news.html', postPath: 'defense-news', emptyMessage: '게시글이 없습니다.', fallbackLink: '<a href="defense-news-list.html">국방뉴스 보기</a>' },
-            { listId: 'korea-news-preview-list', apiPath: '/korea-news', postPage: 'korea-news.html', postPath: 'korea-news', emptyMessage: '게시글이 없습니다.', fallbackLink: '<a href="korea-news-list.html">한국뉴스 보기</a>' },
-            { listId: 'news-voca-preview-list', apiPath: '/guestbook', postPage: 'news-voca.html', emptyMessage: '게시글이 없습니다.', fallbackLink: '<a href="news-voca-list.html">뉴스 어휘 보기</a>' },
-            { listId: 'culture-voca-preview-list', apiPath: '/culture-voca', postPage: 'culture-voca.html', emptyMessage: '게시글이 없습니다.', fallbackLink: '<a href="culture-voca-list.html">컬쳐 어휘 보기</a>' },
-            { listId: 'opinions-preview-list', apiPath: '/opinions', postPage: 'english-opinions.html', postPath: 'english-opinions', emptyMessage: '게시글이 없습니다.', fallbackLink: '<a href="english-opinions-list.html">오피니언 보기</a>' },
-            { listId: 'shorts-bg-image-preview-list', apiPath: '/shorts-bg-image', postPage: 'shorts-bg-image.html', postPath: 'shorts-bg-image', emptyMessage: '게시글이 없습니다.', fallbackLink: '<a href="shorts-bg-image-list.html">신문읽는 이미지 보기</a>' },
-            { listId: 'calm-mind-preview-list', apiPath: '/calm-mind', postPage: 'calm-mind.html', postPath: 'calm-mind', emptyMessage: '게시글이 없습니다.', fallbackLink: '<a href="calm-mind-list.html">마음 다스리는 글 보기</a>' },
-            { listId: 'english-quotes-preview-list', apiPath: '/english-quotes', postPage: 'english-quotes.html', postPath: 'english-quotes', emptyMessage: '게시글이 없습니다.', fallbackLink: '<a href="english-quotes-list.html">영어 명언 보기</a>' },
-            { listId: 'vocabulary-quiz-preview-list', apiPath: '/vocabulary-quiz', postPage: 'vocabulary-quiz.html', emptyMessage: '등록된 퀴즈가 없습니다.', fallbackLink: '<a href="vocabulary-quiz-list.html">영어 단어 퀴즈 보기</a>', timeoutMs: 0 },
-            { listId: 'easy-voca-preview-list', apiPath: '/easy-voca', postPage: 'popular-voca.html', emptyMessage: '게시글이 없습니다.', fallbackLink: '<a href="popular-voca-list.html">이럴 땐 영어로? 보기</a>' },
-            { listId: 'situational-english-preview-list', apiPath: '/situational-english', postPage: 'situational-english.html', emptyMessage: '게시글이 없습니다.', fallbackLink: '<a href="situational-english-list.html">상황 영어 보기</a>' },
-            { listId: 'ranking-news-preview-list', apiPath: '/ranking-news', postPage: 'ranking-news.html', emptyMessage: '게시글이 없습니다.', fallbackLink: '<a href="ranking-news-list.html">랭킹 뉴스 보기</a>' },
-            { listId: 'cooking-voca-preview-list', apiPath: '/cooking-voca', postPage: 'cooking-voca.html', emptyMessage: '게시글이 없습니다.', fallbackLink: '<a href="cooking-voca-list.html">요리 영어 보기</a>' },
-            { listId: 'photo-english-preview-list', apiPath: '/photo-english', postPage: 'photo-english.html', emptyMessage: '게시글이 없습니다.', fallbackLink: '<a href="photo-english-list.html">포토 영어 보기</a>' },
-            { listId: 'pros-cons-preview-list', apiPath: '/pros-cons', postPage: 'pros-cons.html', emptyMessage: '게시글이 없습니다.', fallbackLink: '<a href="pros-cons-list.html">Pros & Cons 보기</a>' },
-            { listId: 'wordofday-preview-list', apiPath: '/wordofday', postPage: 'word-of-the-day.html', emptyMessage: '게시글이 없습니다.', fallbackLink: '<a href="word-of-the-day-list.html?api=prod">오늘의 단어장 보기</a>', wordofdayApi: true }
-        ];
-
-        HOME_PREVIEW_SECTIONS.forEach(loadSectionPreview);
-
-        if (window.HomeBoardPreview) {
-            HomeBoardPreview.loadBest(document.getElementById('best-views-preview-list'), 8);
-            HomeBoardPreview.loadRecent(document.getElementById('recent-updates-preview-list'), 8);
-        }
-    </script>
 </body>
 </html>

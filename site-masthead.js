@@ -4,28 +4,32 @@
  * nav-home-menu.js 가 로드함
  */
 (function () {
-    var VERSION = '20260821f';
-  var PRIMARY_NAV_COUNT = 7;
-  var NAV_ITEMS = [
+    var VERSION = '20261019rd';
+  /* 시안 주 메뉴 5개 — href는 기존 URL 유지 */
+  var PRIMARY_NAV_ITEMS = [
+    { href: 'news-voca-list.html', label: '뉴스 영어', tone: 'news', pages: ['news-voca-list.html', 'news-voca.html'] },
+    { href: 'word-of-the-day-list.html?api=prod', label: '단어장', tone: 'wotd', pages: ['word-of-the-day-list.html', 'word-of-the-day.html'] },
+    { href: 'popular-voca-list.html', label: '표현', tone: 'popular', pages: ['popular-voca-list.html', 'popular-voca.html'] },
+    { href: 'vocabulary-quiz-list.html', label: '퀴즈', tone: 'quiz', pages: ['vocabulary-quiz-list.html', 'vocabulary-quiz.html'] },
+    { href: 'english-opinions-list.html', label: '읽을거리', tone: 'opine', pages: ['english-opinions-list.html', 'english-opinions.html'] }
+  ];
+  var EXTRA_NAV_ITEMS = [
     { href: 'index.html', label: '홈', tone: 'home', pages: ['index.html', ''] },
     { href: 'english-synonym-list.html', label: '연관단어', tone: 'syn', pages: ['english-synonym-list.html', 'english-synonym.html'] },
     { href: 'defense-news-list.html', label: '국방뉴스', tone: 'defense', pages: ['defense-news-list.html', 'defense-news.html'] },
     { href: 'korea-news-list.html', label: '한국뉴스', tone: 'defense', pages: ['korea-news-list.html', 'korea-news.html'] },
-    { href: 'news-voca-list.html', label: '국제', tone: 'news', pages: ['news-voca-list.html', 'news-voca.html'] },
     { href: 'culture-voca-list.html', label: '컬쳐', tone: 'culture', pages: ['culture-voca-list.html', 'culture-voca.html'] },
-    { href: 'english-opinions-list.html', label: '오피니언', tone: 'opine', pages: ['english-opinions-list.html', 'english-opinions.html'] },
     { href: 'shorts-bg-image-list.html', label: '신문읽는 이미지', tone: 'sbgi', pages: ['shorts-bg-image-list.html', 'shorts-bg-image.html'] },
     { href: 'calm-mind-list.html', label: '마음글', tone: 'calm', pages: ['calm-mind-list.html', 'calm-mind.html'] },
-    { href: 'word-of-the-day-list.html', label: '단어장', tone: 'wotd', pages: ['word-of-the-day-list.html', 'word-of-the-day.html'] },
-    { href: 'vocabulary-quiz.html', label: '퀴즈', tone: 'quiz', pages: ['vocabulary-quiz.html', 'vocabulary-quiz-list.html'] },
-    { href: 'popular-voca-list.html', label: '이럴 땐 영어로?', tone: 'popular', pages: ['popular-voca-list.html', 'popular-voca.html'] },
     { href: 'situational-english-list.html', label: '상황', tone: 'sit', pages: ['situational-english-list.html', 'situational-english.html'] },
     { href: 'cooking-voca-list.html', label: '요리', tone: 'cook', pages: ['cooking-voca-list.html', 'cooking-voca.html'] },
     { href: 'ranking-news-list.html', label: '랭킹', tone: 'rank', pages: ['ranking-news-list.html', 'ranking-news.html'] },
     { href: 'photo-english-list.html', label: '포토', tone: 'photo', pages: ['photo-english-list.html', 'photo-english.html'] },
     { href: 'pros-cons-list.html', label: 'Pros & Cons', tone: 'pros', pages: ['pros-cons-list.html', 'pros-cons.html'] },
+    { href: 'english-quotes-list.html', label: '영어 명언', tone: 'quote', pages: ['english-quotes-list.html', 'english-quotes.html'] },
     { href: 'english-directory.html', label: '학습 사이트', tone: 'dir', pages: ['english-directory.html'] }
   ];
+  var NAV_ITEMS = PRIMARY_NAV_ITEMS.concat(EXTRA_NAV_ITEMS);
 
   function assetBase() {
     var scripts = document.querySelectorAll('script[src]');
@@ -71,11 +75,13 @@
   }
 
   function ensureCss(base) {
-    if (document.querySelector('link[href*="site-masthead.css"]')) return;
-    var link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.href = base + 'site-masthead.css?v=' + VERSION;
-    document.head.appendChild(link);
+    ensureLink(base + 'redesign-tokens.css?v=' + VERSION);
+    if (!document.querySelector('link[href*="site-masthead.css"]')) {
+      var link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = base + 'site-masthead.css?v=' + VERSION;
+      document.head.appendChild(link);
+    }
   }
 
   function ensureScript(src, done) {
@@ -131,8 +137,8 @@
   }
 
   function buildNavHtml(base, page) {
-    var primary = NAV_ITEMS.slice(0, PRIMARY_NAV_COUNT);
-    var extra = NAV_ITEMS.slice(PRIMARY_NAV_COUNT);
+    var primary = PRIMARY_NAV_ITEMS;
+    var extra = EXTRA_NAV_ITEMS;
     var html = primary.map(function (item) {
       return '<li class="nav-item">' + navItemHtml(base, page, item) + '</li>';
     }).join('');
@@ -154,21 +160,27 @@
 
   function mastheadHtml(base, page) {
     return (
-      '<div class="site-masthead-brand">' +
-        '<a href="' + base + 'index.html">' +
-          '<span class="site-title-ko">시사영단어</span>' +
-          '<span class="site-title-en">News English Lab</span>' +
-        '</a>' +
-      '</div>' +
-      '<div class="site-masthead-search">' +
-        '<form class="site-search-form" id="site-search-form" role="search">' +
-          '<input class="site-search-input" id="site-search-input" type="search" name="q" placeholder="단어·제목 검색" autocomplete="off" enterkeyhint="search">' +
-          '<button class="site-search-submit" type="submit">검색</button>' +
-        '</form>' +
-        '<ul class="site-search-results" id="site-search-results" hidden></ul>' +
-      '</div>' +
-      '<div class="container-fluid">' +
-        '<ul class="navbar-nav site-primary-nav">' + buildNavHtml(base, page) + '</ul>' +
+      '<div class="site-masthead-bar">' +
+        '<div class="site-masthead-brand">' +
+          '<a href="' + base + 'index.html">' +
+            '<span class="site-title-ko">시사영단어</span>' +
+            '<span class="site-title-en">News English Lab</span>' +
+          '</a>' +
+        '</div>' +
+        '<button type="button" class="site-masthead-mobile-toggle" aria-expanded="false" aria-controls="site-masthead-nav" aria-label="메뉴">' +
+          '<span></span><span></span><span></span>' +
+        '</button>' +
+        '<div class="site-masthead-nav-wrap" id="site-masthead-nav">' +
+          '<ul class="navbar-nav site-primary-nav">' + buildNavHtml(base, page) + '</ul>' +
+        '</div>' +
+        '<div class="site-masthead-search">' +
+          '<form class="site-search-form" id="site-search-form" role="search">' +
+            '<label for="site-search-input" class="visually-hidden">단어 검색</label>' +
+            '<input class="site-search-input" id="site-search-input" type="search" name="q" placeholder="단어나 표현 검색" autocomplete="off" enterkeyhint="search">' +
+            '<button class="site-search-submit" type="submit" aria-label="검색">검색</button>' +
+          '</form>' +
+          '<ul class="site-search-results" id="site-search-results" hidden></ul>' +
+        '</div>' +
       '</div>'
     );
   }
@@ -357,21 +369,28 @@
     });
   }
 
+  function bindMobileToggle(nav) {
+    var btn = nav.querySelector('.site-masthead-mobile-toggle');
+    if (!btn || btn.dataset.bound === '1') return;
+    btn.dataset.bound = '1';
+    btn.addEventListener('click', function () {
+      var open = !nav.classList.contains('is-nav-open');
+      nav.classList.toggle('is-nav-open', open);
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      syncNavbarHeight();
+    });
+  }
+
   function mountNavbar(base) {
-    var nav = document.querySelector('.navbar.fixed-top');
+    var nav = document.querySelector('.navbar.fixed-top') || document.querySelector('.site-masthead');
     if (!nav) return;
     if (!nav.id) nav.id = 'navbar';
     nav.classList.add('site-masthead', 'navbar-expand');
-    if (nav.querySelector('.site-masthead-brand') && nav.querySelector('#site-search-form')) {
-      bindMoreMenu(nav);
-      syncNavbarHeight();
-      window.addEventListener('resize', syncNavbarHeight);
-      window.addEventListener('load', syncNavbarHeight);
-      requestAnimationFrame(syncNavbarHeight);
-      return;
-    }
+    nav.classList.remove('navbar-dark', 'bg-primary');
+    /* 시안형 마크업으로 항상 갱신 (검색 바인딩은 initSearch가 담당) */
     nav.innerHTML = mastheadHtml(base, currentPageKey());
     bindMoreMenu(nav);
+    bindMobileToggle(nav);
     syncNavbarHeight();
     window.addEventListener('resize', syncNavbarHeight);
     window.addEventListener('load', syncNavbarHeight);
