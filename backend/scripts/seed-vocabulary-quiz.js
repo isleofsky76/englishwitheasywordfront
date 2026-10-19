@@ -23,8 +23,8 @@ const article = {
   sourceUrl: 'https://youtube.com/shorts/Awc28hBniog',
   sourceLabel: '유튜브 보기',
   datePublished: '2026-10-19',
-  section1Title: '1. 영어 → 한글 (숨긴 한글을 클릭해 확인)',
-  section2Title: '2. 한글 → 영어 (숨긴 영어를 클릭해 확인)',
+  section1Title: '1. 영어 → 한글',
+  section2Title: '2. 한글 → 영어',
   pairs: [
     { en: 'overuse', ko: '과사용 (과도한 사용)' },
     { en: 'ache', ko: '쑤심 (통증)' },

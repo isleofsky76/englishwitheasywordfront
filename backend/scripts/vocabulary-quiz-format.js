@@ -30,13 +30,13 @@ function buildRevealQuizzes(config) {
   return [
     {
       type: 'reveal-section',
-      title: config.section1Title || '1. 영어 → 한글 (숨긴 부분을 클릭해 확인)',
+      title: config.section1Title || '1. 영어 → 한글',
       direction: 'en-ko',
       items: enKoItems,
     },
     {
       type: 'reveal-section',
-      title: config.section2Title || '2. 한글 → 영어 (숨긴 부분을 클릭해 확인)',
+      title: config.section2Title || '2. 한글 → 영어',
       direction: 'ko-en',
       items: koEnItems,
     },
