@@ -285,6 +285,7 @@
   align-items: center;
   justify-content: center;
   min-height: var(--yt-billboard-height);
+  margin-top: 10px;
   background: var(--ink) !important;
   color: var(--text-on-dark) !important;
   text-decoration: none !important;
