@@ -23,6 +23,32 @@
     return list;
   }
 
+  function setRevealOpen(answer, open) {
+    var mask = answer.querySelector(".quiz-reveal-mask");
+    var text = answer.querySelector(".quiz-reveal-text");
+    var hint = answer.querySelector(".quiz-reveal-hint");
+    answer.classList.toggle("is-open", open);
+    if (open) {
+      if (mask) mask.hidden = true;
+      if (text) {
+        text.hidden = false;
+        text.textContent = answer.dataset.answer || "";
+      }
+      if (hint) hint.hidden = true;
+      answer.setAttribute("aria-expanded", "true");
+      answer.setAttribute("aria-label", "정답 숨기기");
+    } else {
+      if (mask) mask.hidden = false;
+      if (text) {
+        text.hidden = true;
+        text.textContent = "";
+      }
+      if (hint) hint.hidden = false;
+      answer.setAttribute("aria-expanded", "false");
+      answer.setAttribute("aria-label", "정답 보기");
+    }
+  }
+
   function renderRevealRow(item) {
     var row = createElement("div", "quiz-reveal-row");
     var prompt = createElement("span", "quiz-reveal-prompt", item.show || "");
@@ -34,32 +60,10 @@
     answer.innerHTML =
       '<span class="quiz-reveal-mask" aria-hidden="true">????</span>' +
       '<span class="quiz-reveal-text" hidden></span>' +
-      '<span class="quiz-reveal-hint">클릭해서 확인</span>';
+      '<span class="quiz-reveal-hint">click</span>';
 
     answer.addEventListener("click", function () {
-      var open = answer.classList.toggle("is-open");
-      var mask = answer.querySelector(".quiz-reveal-mask");
-      var text = answer.querySelector(".quiz-reveal-text");
-      var hint = answer.querySelector(".quiz-reveal-hint");
-      if (open) {
-        if (mask) mask.hidden = true;
-        if (text) {
-          text.hidden = false;
-          text.textContent = answer.dataset.answer || "";
-        }
-        if (hint) hint.hidden = true;
-        answer.setAttribute("aria-expanded", "true");
-        answer.setAttribute("aria-label", "정답 숨기기");
-      } else {
-        if (mask) mask.hidden = false;
-        if (text) {
-          text.hidden = true;
-          text.textContent = "";
-        }
-        if (hint) hint.hidden = false;
-        answer.setAttribute("aria-expanded", "false");
-        answer.setAttribute("aria-label", "정답 보기");
-      }
+      setRevealOpen(answer, !answer.classList.contains("is-open"));
     });
 
     row.appendChild(prompt);
@@ -71,7 +75,7 @@
   function renderRevealSection(section) {
     var card = createElement("section", "vocabulary-quiz-card quiz-reveal-card");
     card.appendChild(
-      createElement("h3", "quiz-question", section.title || "클릭해서 정답 확인")
+      createElement("h3", "quiz-question", section.title || "정답 확인")
     );
     var list = createElement("div", "quiz-reveal-list");
     (section.items || []).forEach(function (item) {
@@ -80,6 +84,25 @@
     });
     card.appendChild(list);
     return card;
+  }
+
+  function renderRevealAllButton(article) {
+    var wrap = createElement("p", "quiz-reveal-toolbar");
+    var btn = createElement("button", "quiz-reveal-all-btn", "전체");
+    btn.type = "button";
+    btn.setAttribute("aria-pressed", "false");
+    btn.addEventListener("click", function () {
+      var answers = article.querySelectorAll(".quiz-reveal-answer");
+      var openAll = !btn.classList.contains("is-open");
+      answers.forEach(function (answer) {
+        setRevealOpen(answer, openAll);
+      });
+      btn.classList.toggle("is-open", openAll);
+      btn.setAttribute("aria-pressed", openAll ? "true" : "false");
+      btn.textContent = openAll ? "숨기기" : "전체";
+    });
+    wrap.appendChild(btn);
+    return wrap;
   }
 
   function renderQuiz(quiz, index) {
@@ -146,26 +169,26 @@
       );
     }
 
+    var actions = createElement("div", "quiz-entry-actions");
     if (entry.sourceUrl) {
-      article.appendChild(
+      actions.appendChild(
         renderYoutubeButton(entry.sourceUrl, entry.sourceLabel || "유튜브 보기")
       );
+    }
+    var hasReveal = (entry.quizzes || []).some(function (q) {
+      return q && q.type === "reveal-section";
+    });
+    if (hasReveal) {
+      actions.appendChild(renderRevealAllButton(article));
+    }
+    if (actions.childNodes.length) {
+      article.appendChild(actions);
     }
 
     (entry.quizzes || []).forEach(function (quiz, index) {
       article.appendChild(renderQuiz(quiz, index));
     });
 
-    if (entry.sourceUrl) {
-      var source = createElement("p", "quiz-source");
-      source.appendChild(document.createTextNode("출처: "));
-      var link = createElement("a", "", entry.sourceLabel || "YouTube");
-      link.href = entry.sourceUrl;
-      link.target = "_blank";
-      link.rel = "noopener noreferrer";
-      source.appendChild(link);
-      article.appendChild(source);
-    }
     return article;
   }
 

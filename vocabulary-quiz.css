@@ -157,8 +157,49 @@ html.has-site-masthead .vocabulary-quiz-main {
 }
 
 /* 클릭 공개형 퀴즈 */
-.quiz-youtube {
+.quiz-entry-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
   margin: 0 0 20px;
+}
+
+.quiz-youtube {
+  margin: 0;
+}
+
+.quiz-reveal-toolbar {
+  margin: 0;
+}
+
+.quiz-reveal-all-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  min-width: 88px;
+  padding: 0 18px;
+  border: 1px solid #16181d;
+  border-radius: 999px;
+  background: #fff;
+  color: #16181d;
+  font: inherit;
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.quiz-reveal-all-btn:hover,
+.quiz-reveal-all-btn:focus-visible {
+  color: #b23a0b;
+  border-color: #b23a0b;
+  outline: none;
+}
+
+.quiz-reveal-all-btn.is-open {
+  background: #16181d;
+  color: #f6f3ec;
 }
 
 .quiz-youtube-btn {
