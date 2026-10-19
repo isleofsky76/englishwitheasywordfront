@@ -5,7 +5,7 @@
 (function (global) {
   'use strict';
 
-  var ASSET_VER = '20261020rd19';
+  var ASSET_VER = '20261020rd20';
 
   /** 캐시된 구버전 JS가 그려도 QUICK REVIEW 즉시 제거 */
   function stripQuickReview() {
@@ -325,9 +325,28 @@
     } catch (e) { /* ignore */ }
   }
 
-  /** 국방뉴스: 본문 앞 번호(1. ) 제거 — 헤더 번호와 중복 방지 */
+  /** narrative 카드: 본문 앞 번호(1. ) 제거 — 헤더 01 과 중복 방지 */
   function stripLeadingListNum(text) {
     return String(text || '').replace(/^\s*\d+\s*[.)]\s*/, '').trim();
+  }
+
+  function wantsExpressionCards(cfg) {
+    return !!(cfg && (cfg.articleLayout === 'expression-cards' || cfg.articleLayout === 'auto'));
+  }
+
+  /** staggered형: nv-narrative 섹션 + 실제 표현 카드가 있을 때만 카드 UI */
+  function isNarrativeCardCapable(parser, cards) {
+    if (!parser || !cards || !cards.length) return false;
+    var narrative = parser.querySelector(
+      '.nv-word-section.nv-narrative, .nv-narrative-text, .nv-narrative-def'
+    );
+    if (!narrative) return false;
+    for (var i = 0; i < cards.length; i += 1) {
+      var c = cards[i];
+      if (!c || !c.expression || c.expression === '표현') return false;
+      if (!c.ko && !c.enHtml) return false;
+    }
+    return true;
   }
 
   function renderCardHtml(card, opts) {
@@ -353,22 +372,13 @@
     options = options || {};
     var Config = global.BoardListConfig;
     var cfg = Config && Config.get(options.boardKey);
-    /* expression-cards 만 카드형 redesign — classic/header-only 는 기존 본문 유지 */
-    if (!cfg || cfg.articleLayout !== 'expression-cards') return false;
-
-    ensureCss();
-    document.body.classList.add('rd-article', 'rd-article-like-hidden');
+    /* expression-cards / auto 만 카드형 — classic·header-only 는 기존 본문 */
+    if (!wantsExpressionCards(cfg)) return false;
 
     var html = options.convertedMessage != null ? options.convertedMessage : (post.message || '');
     var parser = document.createElement('div');
     parser.innerHTML = html;
 
-    var title = Config ? Config.cleanTitle(post) : String(post.title || '제목 없음');
-    var source = resolveSource(post, cfg);
-    var date = formatDate(post.date);
-    var summary = extractSummary(post, parser);
-    var yt = extractYoutube(html);
-    var sourceUrl = extractSourceLink(html) || (post.sourceUrl || '');
     var cards = parseCards(parser);
     if (Array.isArray(post.words) && post.words.length && !cards.length) {
       cards = post.words.map(function (w, i) {
@@ -382,6 +392,21 @@
         };
       });
     }
+
+    /* auto: narrative(staggered) 구조가 아니면 classic 본문으로 폴백 */
+    if (cfg.articleLayout === 'auto' && !isNarrativeCardCapable(parser, cards)) return false;
+    if (cfg.articleLayout === 'expression-cards' && !cards.length) return false;
+
+    ensureCss();
+    document.body.classList.add('rd-article', 'rd-article-like-hidden');
+
+    var title = Config ? Config.cleanTitle(post) : String(post.title || '제목 없음');
+    var source = resolveSource(post, cfg);
+    var date = formatDate(post.date);
+    var summary = extractSummary(post, parser);
+    var yt = extractYoutube(html);
+    var sourceUrl = extractSourceLink(html) || (post.sourceUrl || '');
+    var narrativeMode = isNarrativeCardCapable(parser, cards);
 
     var crumb =
       '<nav class="rd-article-crumb" aria-label="위치">' +
@@ -462,9 +487,9 @@
             (cards.length
               ? cards.map(function (c) {
                   return renderCardHtml(c, {
-                    /* 국방뉴스: 번호 + 단어만, 옆에 뜻 없음 → 아래에 문장만 */
-                    hideMeaning: options.boardKey === 'defense-news',
-                    stripKoNum: options.boardKey === 'defense-news'
+                    /* narrative: 01 staggered + 문장만 (뜻은 옆이 아니라 cf./문장 안) */
+                    hideMeaning: narrativeMode,
+                    stripKoNum: narrativeMode
                   });
                 }).join('')
               : '<div class="rd-article-fallback">' + html + '</div>') +
@@ -560,7 +585,8 @@
       markArticleReady();
       return false;
     }
-    if (!cfg || cfg.articleLayout !== 'expression-cards') {
+    /* header-only 등: 크롬만 */
+    if (!wantsExpressionCards(cfg)) {
       applyRedesignChrome(options.boardKey);
       markArticleReady();
       return false;
@@ -574,7 +600,7 @@
       prev: options.prev,
       next: options.next
     });
-    if (ok && !related.length && options.apiBaseUrl && cfg.apiPath) {
+    if (ok && !related.length && options.apiBaseUrl && cfg && cfg.apiPath) {
       fetch(options.apiBaseUrl + cfg.apiPath, { cache: 'no-store' })
         .then(function (res) { return res.ok ? res.json() : null; })
         .then(function (data) {

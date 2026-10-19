@@ -28,7 +28,8 @@
       apiPath: '/guestbook',
       navGroup: 'news',
       tabs: NEWS_TABS,
-      articleLayout: 'classic',
+      /* auto: nv-narrative(staggered) 구조일 때만 카드형 redesign */
+      articleLayout: 'auto',
       breadcrumbParent: { label: '뉴스 영어', href: 'news-voca-list.html' }
     },
     'korea-news': {
@@ -45,8 +46,7 @@
       apiPath: '/korea-news',
       navGroup: 'news',
       tabs: NEWS_TABS,
-      /* 기존 nv-* 본문 유지 — expression-cards redesign 미적용 */
-      articleLayout: 'classic',
+      articleLayout: 'auto',
       breadcrumbParent: { label: '뉴스 영어', href: 'news-voca-list.html' }
     },
     'defense-news': {
@@ -63,7 +63,7 @@
       apiPath: '/defense-news',
       navGroup: 'news',
       tabs: NEWS_TABS,
-      articleLayout: 'classic',
+      articleLayout: 'auto',
       breadcrumbParent: { label: '뉴스 영어', href: 'news-voca-list.html' }
     },
     'culture-voca': {
@@ -80,7 +80,7 @@
       apiPath: '/culture-voca',
       navGroup: 'news',
       tabs: NEWS_TABS,
-      articleLayout: 'classic',
+      articleLayout: 'auto',
       breadcrumbParent: { label: '뉴스 영어', href: 'news-voca-list.html' }
     },
     'ranking-news': {
@@ -97,7 +97,7 @@
       apiPath: '/ranking-news',
       navGroup: 'news',
       tabs: NEWS_TABS,
-      articleLayout: 'classic',
+      articleLayout: 'auto',
       breadcrumbParent: { label: '뉴스 영어', href: 'news-voca-list.html' }
     },
     'english-opinions': {
@@ -114,7 +114,7 @@
       apiPath: '/opinions',
       navGroup: 'read',
       tabs: null,
-      articleLayout: 'classic',
+      articleLayout: 'auto',
       breadcrumbParent: { label: '읽을거리', href: 'english-opinions-list.html' }
     },
     'english-synonym': {
@@ -131,7 +131,7 @@
       apiPath: '/vocabulary',
       navGroup: 'vocab',
       tabs: null,
-      articleLayout: 'classic',
+      articleLayout: 'auto',
       breadcrumbParent: { label: '연관단어', href: 'english-synonym-list.html' }
     },
     'word-of-the-day': {
