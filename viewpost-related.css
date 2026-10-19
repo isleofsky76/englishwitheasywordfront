@@ -1,8 +1,11 @@
 .viewpost-related-row {
   margin-top: 28px;
-  padding-top: 24px;
+  padding: 24px 16px 0;
   border-top: 1px dashed #d0d7de;
   text-align: left;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
 }
 
 .viewpost-related-heading {
@@ -31,7 +34,7 @@
 
 .viewpost-related-link {
   display: block;
-  padding: 12px 4px;
+  padding: 12px 0;
   color: #333;
   text-decoration: none;
   font-size: 0.98rem;
@@ -83,7 +86,7 @@
 @media (max-width: 767px) {
   .viewpost-related-row {
     margin-top: 24px;
-    padding-top: 20px;
+    padding: 20px 16px 0;
   }
 
   .viewpost-related-heading {
@@ -94,7 +97,7 @@
 
   .viewpost-related-link {
     min-height: 44px;
-    padding: 12px 2px;
+    padding: 12px 0;
     font-size: 0.95rem;
     line-height: 1.55;
   }
@@ -117,7 +120,7 @@
 @media (max-width: 480px) {
   .viewpost-related-row {
     margin-top: 20px;
-    padding-top: 18px;
+    padding: 18px 16px 0;
   }
 
   .viewpost-related-heading {
