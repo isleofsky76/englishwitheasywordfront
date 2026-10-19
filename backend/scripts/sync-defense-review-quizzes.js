@@ -15,10 +15,20 @@ import { toIsoDateOnly } from './voca-seo.js';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '../..');
 const DEFENSE_DIR = path.join(ROOT, 'defense-news');
-const JS_VER = '20261020rd13';
+const JS_VER = '20261020rd14';
 
 /** 수동 보정 (자동 추출 실패·애매한 경우) */
 const MEANINGS = {
+  'pentagon-120-billion-weapon-contract': {
+    covert: '은밀한',
+    thwart: '방해하다, 저지하다',
+    skepticism: '회의적인 태도',
+    'subject to further talks': '추가 협상을 거쳐야 하는',
+    appropriation: '예산 승인',
+    earmark: '특정 용도로 배정하다',
+    value: '평가하다, (규모를) 산정하다',
+    weaponry: '무기류',
+  },
   'defunding-us-military-related-words': {
     round: '차례, 한 차례',
     'press leak': '언론 유출 보도',
@@ -51,6 +61,14 @@ function extractMarks(html) {
       .replace(/\s+/g, ' ')
       .trim();
     if (w) out.push(w);
+  }
+  /* mark 누락분: 은밀한(covert) — THAAD 등 짧은 대문자 약어 제외 */
+  const plain = String(html || '').replace(/<mark[^>]*>[\s\S]*?<\/mark>/gi, '');
+  const parenRe = /\(([A-Za-z][A-Za-z0-9'/.\s-]{0,80})\)/g;
+  while ((m = parenRe.exec(plain))) {
+    const w = m[1].replace(/\s+/g, ' ').trim();
+    if (!w || /^[A-Z0-9]{2,6}$/.test(w)) continue;
+    out.push(w);
   }
   const seen = new Set();
   const uniq = [];

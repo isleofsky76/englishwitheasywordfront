@@ -5,7 +5,7 @@
 (function (global) {
   'use strict';
 
-  var ASSET_VER = '20261020rd13';
+  var ASSET_VER = '20261020rd14';
 
   function assetBase() {
     var scripts = document.querySelectorAll('script[src]');
@@ -107,6 +107,25 @@
     return '';
   }
 
+  /** mark 없을 때 본문 괄호 영어 추출. THAAD 같은 짧은 대문자 약어는 제외 */
+  function extractParenEnglish(koText) {
+    var text = String(koText || '');
+    var out = [];
+    var seen = {};
+    var re = /\(([A-Za-z][A-Za-z0-9'/.\s-]{0,80})\)/g;
+    var m;
+    while ((m = re.exec(text))) {
+      var w = m[1].replace(/\s+/g, ' ').trim();
+      if (!w) continue;
+      if (/^[A-Z0-9]{2,6}$/.test(w)) continue; /* THAAD, WSJ 등 */
+      var k = w.toLowerCase();
+      if (seen[k]) continue;
+      seen[k] = true;
+      out.push(w);
+    }
+    return out;
+  }
+
   /** narrative 본문에서 뜻 추출: 한글(표현) 우선, 단일 표현이면 cf. … */
   function extractNarrativeMeaning(koText, wordEn) {
     var text = String(koText || '').trim();
@@ -171,8 +190,12 @@
         koText = stripHtml(sec.querySelector('.nv-narrative-text').innerHTML);
       }
 
-      /* 한 섹션에 mark가 여러 개면 staggered처럼 단어별 카드로 분리
-         (round · press leak · … 한 줄 덤프 방지) */
+      /* mark 없으면 은밀한(covert) 형태에서 영어 복구 — '표현' 폴백 방지 */
+      if (isNarrative && !wordEn && !unique.length) {
+        unique = extractParenEnglish(koText);
+      }
+
+      /* 한 섹션에 표현이 여러 개면 staggered처럼 단어별 카드로 분리 */
       if (isNarrative && !wordEn && unique.length > 1) {
         unique.forEach(function (w) {
           var m = extractNarrativeMeaning(koText, w);
@@ -195,9 +218,20 @@
         enHtml = highlightPhrase(enHtml, wordEn);
       }
 
-      if (!wordEn && !koText && !enHtml) return;
+      /* 단어 없는 narrative 섹션은 카드로 만들지 않음 (가짜 '표현' 금지) */
+      if (!wordEn) {
+        if (!isNarrative && (koText || enHtml)) {
+          cards.push({
+            expression: '표현',
+            meaning: meaning,
+            enHtml: enHtml,
+            ko: koText
+          });
+        }
+        return;
+      }
       cards.push({
-        expression: wordEn || ('표현'),
+        expression: wordEn,
         meaning: meaning,
         enHtml: enHtml,
         ko: koText
