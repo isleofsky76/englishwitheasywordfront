@@ -5,7 +5,7 @@
 (function (global) {
   'use strict';
 
-  var ASSET_VER = '20261019rd7';
+  var ASSET_VER = '20261020rd8';
 
   function assetBase() {
     var scripts = document.querySelectorAll('script[src]');
@@ -141,12 +141,9 @@
 
       if (enEx) {
         enHtml = enEx.innerHTML;
-      } else if (unique.length) {
-        // narrative-only: build a simple English line from marks
-        enHtml = unique.map(function (w) {
-          return '<mark>' + escapeHtml(w) + '</mark>';
-        }).join(' · ');
       }
+      /* narrative-only: 표현은 rd-expr-word(01 staggered)에만 두고
+         mark를 다시 enHtml로 만들면 staggered 가 두 번 보임 → 생략 */
 
       if (koEx) koText = stripHtml(koEx.innerHTML);
       else if (sec.querySelector('.nv-narrative-text')) {
