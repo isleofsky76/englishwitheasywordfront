@@ -45,7 +45,8 @@
       apiPath: '/korea-news',
       navGroup: 'news',
       tabs: NEWS_TABS,
-      articleLayout: 'expression-cards',
+      /* 기존 nv-* 본문 유지 — expression-cards redesign 미적용 */
+      articleLayout: 'classic',
       breadcrumbParent: { label: '뉴스 영어', href: 'news-voca-list.html' }
     },
     'defense-news': {

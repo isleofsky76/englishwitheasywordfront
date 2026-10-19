@@ -18,9 +18,9 @@ export const BOARD_SEO = {
   'news-voca': {
     label: 'News Voca',
     cssFile: 'news-voca.css',
-    cssVersion: '20261020rd17',
+    cssVersion: '20261020rd18',
     jsFile: 'news-voca.js',
-    jsVersion: '20261020rd17',
+    jsVersion: '20261020rd18',
     listHtml: 'news-voca-list.html',
   },
   'cooking-voca': {
@@ -36,23 +36,23 @@ export const BOARD_SEO = {
     cssFile: 'culture-voca.css',
     cssVersion: '20260622a',
     jsFile: 'culture-voca.js',
-    jsVersion: '20261020rd17',
+    jsVersion: '20261020rd18',
     listHtml: 'culture-voca-list.html',
   },
   'defense-news': {
     label: '국방뉴스',
     cssFile: 'news-voca.css',
-    cssVersion: '20261020rd17',
+    cssVersion: '20261020rd18',
     jsFile: 'defense-news.js',
-    jsVersion: '20261020rd17',
+    jsVersion: '20261020rd18',
     listHtml: 'defense-news-list.html',
   },
   'korea-news': {
     label: '한국뉴스',
     cssFile: 'news-voca.css',
-    cssVersion: '20261020rd17',
+    cssVersion: '20261020rd18',
     jsFile: 'korea-news.js',
-    jsVersion: '20261020rd17',
+    jsVersion: '20261020classic1',
     listHtml: 'korea-news-list.html',
   },
   'shorts-bg-image': {
@@ -304,9 +304,9 @@ ${(board.extraCss || []).map((c) => `    <link rel="stylesheet" href="../../${c.
     <link rel="stylesheet" href="../../navbar-unified.css?v=20260612c">
     <link rel="stylesheet" href="../../weather-banner.css?v=20260612g">
     <link rel="stylesheet" href="../../world-clock.css?v=20260612g">
-    <link rel="preload" href="../../redesign-tokens.css?v=20261020rd17" as="style">
-    <link rel="preload" href="../../redesign-article.css?v=20261020rd17" as="style">
-    <link rel="preload" href="../../redesign-article.js?v=20261020rd17" as="script">
+    <link rel="preload" href="../../redesign-tokens.css?v=20261020rd18" as="style">
+    <link rel="preload" href="../../redesign-article.css?v=20261020rd18" as="style">
+    <link rel="preload" href="../../redesign-article.js?v=20261020rd18" as="script">
     <style id="rd-fouc-guard">
       /* SEO 구형 본문이 redesign 전에 깜빡이지 않도록 */
       body[data-nv-board]:not(.rd-ready) #post-container {

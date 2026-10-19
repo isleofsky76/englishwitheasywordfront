@@ -5,7 +5,7 @@
 (function (global) {
   'use strict';
 
-  var ASSET_VER = '20261020rd17';
+  var ASSET_VER = '20261020rd18';
 
   /** 캐시된 구버전 JS가 그려도 QUICK REVIEW 즉시 제거 */
   function stripQuickReview() {
@@ -554,6 +554,11 @@
   async function mountRedesignArticle(container, post, options) {
     options = options || {};
     var cfg = global.BoardListConfig && global.BoardListConfig.get(options.boardKey);
+    /* classic: 기존 본문/헤더 유지 (카드형 redesign·chrome 모두 생략) */
+    if (cfg && cfg.articleLayout === 'classic') {
+      markArticleReady();
+      return false;
+    }
     if (!cfg || cfg.articleLayout !== 'expression-cards') {
       applyRedesignChrome(options.boardKey);
       markArticleReady();
