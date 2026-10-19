@@ -4,7 +4,7 @@
  * nav-home-menu.js 가 로드함
  */
 (function () {
-    var VERSION = '20261019rd6';
+    var VERSION = '20261019rd7';
   /* 시안 주 메뉴 5개 — href는 기존 URL 유지 */
   var PRIMARY_NAV_ITEMS = [
     {
@@ -144,11 +144,11 @@
   }
 
   function ensureWeather(base) {
-    ensureLink(base + 'weather-banner.css?v=20261019rd6');
+    ensureLink(base + 'weather-banner.css?v=20261019rd7');
     ensureLink(base + 'world-clock.css?v=20261019rd6');
     if (!document.querySelector('script[src*="weather-banner.js"]')) {
       var w = document.createElement('script');
-      w.src = base + 'weather-banner.js?v=20261019rd6';
+      w.src = base + 'weather-banner.js?v=20261019rd7';
       document.head.appendChild(w);
     }
     if (!document.querySelector('script[src*="world-clock.js"]')) {
@@ -248,11 +248,11 @@
       document.documentElement.classList.add('has-yt-billboard');
       return;
     }
-    var clock = document.getElementById('world-clock-bar');
-    var weather = document.getElementById('weather-banner');
-    var nav = document.querySelector('.navbar.fixed-top');
-    var after = clock || weather || nav;
-    if (after) after.insertAdjacentElement('afterend', bar);
+    var nav = document.querySelector('.site-masthead') ||
+      document.querySelector('#navbar') ||
+      document.querySelector('.navbar.fixed-top') ||
+      document.querySelector('.navbar');
+    if (nav) nav.insertAdjacentElement('afterend', bar);
     else document.body.insertBefore(bar, document.body.firstChild);
     document.documentElement.classList.add('has-yt-billboard');
   }
@@ -431,25 +431,25 @@
     requestAnimationFrame(syncNavbarHeight);
   }
 
-  /** 날씨·시계를 YouTube 바(없으면 헤더) 바로 아래로 배치 */
+  /** 문서 순서: 헤더 → YouTube → 날씨 → 시계 */
   function placeUtilityBars() {
+    var nav = document.querySelector('.site-masthead') || document.querySelector('#navbar');
+    var yt = document.getElementById('yt-billboard-bar');
     var weather = document.getElementById('weather-banner');
     var clock = document.getElementById('world-clock-bar');
-    if (!weather && !clock) return false;
-    var yt = document.getElementById('yt-billboard-bar');
-    var nav = document.querySelector('.site-masthead') || document.querySelector('#navbar');
-    var host = yt || nav;
-    if (!host) return false;
-    if (weather && weather.previousElementSibling !== host) {
-      host.insertAdjacentElement('afterend', weather);
+    if (!nav) return false;
+    if (yt && yt.previousElementSibling !== nav) {
+      nav.insertAdjacentElement('afterend', yt);
     }
-    if (clock) {
-      var after = weather && weather.parentNode ? weather : host;
-      if (clock.previousElementSibling !== after) {
-        after.insertAdjacentElement('afterend', clock);
-      }
+    var afterNav = yt || nav;
+    if (weather && weather.previousElementSibling !== afterNav) {
+      afterNav.insertAdjacentElement('afterend', weather);
     }
-    return !!(weather || clock);
+    var afterWeather = weather || afterNav;
+    if (clock && clock.previousElementSibling !== afterWeather) {
+      afterWeather.insertAdjacentElement('afterend', clock);
+    }
+    return !!(yt || weather || clock);
   }
 
   function mount() {

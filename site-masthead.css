@@ -387,7 +387,8 @@ html.has-site-masthead.has-weather-banner body,
 html.has-site-masthead.has-weather-banner:not(.page-with-main-content) body,
 html.has-site-masthead.has-world-clock.has-weather-banner body,
 html.has-site-masthead.has-world-clock.has-weather-banner:not(.page-with-main-content) body,
-html.has-site-masthead.has-yt-billboard.has-world-clock.has-weather-banner:not(.page-with-main-content) body {
+html.has-site-masthead.has-yt-billboard.has-world-clock.has-weather-banner:not(.page-with-main-content) body,
+html.has-site-masthead.has-yt-billboard body {
   padding-top: 0 !important;
 }
 

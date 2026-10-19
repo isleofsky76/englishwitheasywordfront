@@ -95,8 +95,20 @@ html.has-weather-banner:not(.page-with-main-content) body {
   padding-top: calc(var(--navbar-height) + var(--weather-banner-height)) !important;
 }
 
+/* 시안형 헤더(문서 흐름)에서는 고정 헤더용 body 여백 제거 */
+html.has-site-masthead body,
+html.has-site-masthead.has-weather-banner body,
+html.has-site-masthead.has-weather-banner:not(.page-with-main-content) body {
+  padding-top: 0 !important;
+}
+
 html.has-weather-banner.page-with-main-content .main-content {
   margin-top: calc(var(--navbar-height) + var(--weather-banner-height) + 28px) !important;
+}
+
+html.has-site-masthead.has-weather-banner.page-with-main-content .main-content,
+html.has-site-masthead .main-content {
+  margin-top: 12px !important;
 }
 
 @media (max-width: 600px) {
