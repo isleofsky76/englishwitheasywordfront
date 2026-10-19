@@ -5,7 +5,7 @@
 (function (global) {
   'use strict';
 
-  var ASSET_VER = '20261020rd10';
+  var ASSET_VER = '20261020rd11';
 
   function assetBase() {
     var scripts = document.querySelectorAll('script[src]');
@@ -107,11 +107,32 @@
     return '';
   }
 
+  /** narrative 본문에서 뜻 추출: 한글(표현) 우선, 단일 표현이면 cf. … */
+  function extractNarrativeMeaning(koText, wordEn) {
+    var text = String(koText || '').trim();
+    var word = String(wordEn || '').trim();
+    if (!text || !word) return '';
+    var esc = word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    var re = new RegExp('([가-힣0-9A-Za-z·\\s]{1,40}?)\\(\\s*' + esc + '\\s*\\)', 'i');
+    var m = text.match(re);
+    if (m) {
+      var ko = m[1].replace(/^[\d.]+\s*/, '').replace(/\s+/g, ' ').trim();
+      if (ko && ko.toLowerCase() !== word.toLowerCase()) return ko;
+    }
+    var parenCount = (text.match(/\(/g) || []).length;
+    var cf = text.match(/\bcf\.\s*(.+)$/i);
+    if (cf && parenCount <= 1) {
+      var cfMeaning = cf[1].replace(/\s+/g, ' ').trim();
+      if (cfMeaning && cfMeaning.toLowerCase() !== word.toLowerCase()) return cfMeaning;
+    }
+    return '';
+  }
+
   function parseCards(root) {
     var cards = [];
     if (!root) return cards;
     var sections = root.querySelectorAll('.nv-word-section');
-    sections.forEach(function (sec, idx) {
+    sections.forEach(function (sec) {
       var marks = Array.prototype.map.call(sec.querySelectorAll('mark.nv-hl, .nv-hl, mark'), function (el) {
         return stripHtml(el.innerHTML);
       }).filter(Boolean);
@@ -128,16 +149,16 @@
       var koEl = sec.querySelector('.nv-ko, .nv-phrase-ko');
       if (enEl) wordEn = stripHtml(enEl.innerHTML);
       if (koEl) wordKo = stripHtml(koEl.innerHTML);
-      if (!wordEn && unique.length) wordEn = unique[0];
 
       var meaningEl = sec.querySelector('.nv-meaning-text');
       var meaning = meaningEl ? stripHtml(meaningEl.innerHTML) : (wordKo || '');
-      if (postMeaningHidden(meaning, wordEn)) meaning = wordKo || '';
 
       var enEx = sec.querySelector('.nv-ex-en');
       var koEx = sec.querySelector('.nv-ex-ko, .nv-narrative-def, .nv-narrative-text');
       var enHtml = '';
       var koText = '';
+      var isNarrative = !!(sec.classList && sec.classList.contains('nv-narrative')) ||
+        !!sec.querySelector('.nv-narrative-text, .nv-narrative-def');
 
       if (enEx) {
         enHtml = enEx.innerHTML;
@@ -150,6 +171,25 @@
         koText = stripHtml(sec.querySelector('.nv-narrative-text').innerHTML);
       }
 
+      /* 한 섹션에 mark가 여러 개면 staggered처럼 단어별 카드로 분리
+         (round · press leak · … 한 줄 덤프 방지) */
+      if (isNarrative && !wordEn && unique.length > 1) {
+        unique.forEach(function (w) {
+          var m = extractNarrativeMeaning(koText, w);
+          cards.push({
+            expression: w,
+            meaning: m,
+            enHtml: '',
+            ko: koText
+          });
+        });
+        return;
+      }
+
+      if (!wordEn && unique.length) wordEn = unique[0];
+      if (postMeaningHidden(meaning, wordEn)) meaning = wordKo || '';
+      if (isNarrative && !meaning) meaning = extractNarrativeMeaning(koText, wordEn);
+
       // Prefer highlighting expression inside English if we have raw English without marks
       if (enEx && wordEn && enHtml.indexOf('<mark') === -1) {
         enHtml = highlightPhrase(enHtml, wordEn);
@@ -157,15 +197,23 @@
 
       if (!wordEn && !koText && !enHtml) return;
       cards.push({
-        id: 'rd-expr-' + (idx + 1),
-        num: padNum(idx + 1),
-        expression: wordEn || ('표현 ' + (idx + 1)),
+        expression: wordEn || ('표현'),
         meaning: meaning,
         enHtml: enHtml,
         ko: koText
       });
     });
-    return cards;
+
+    return cards.map(function (card, i) {
+      return {
+        id: 'rd-expr-' + (i + 1),
+        num: padNum(i + 1),
+        expression: card.expression,
+        meaning: card.meaning,
+        enHtml: card.enHtml,
+        ko: card.ko
+      };
+    });
   }
 
   function postMeaningHidden(meaning, expression) {

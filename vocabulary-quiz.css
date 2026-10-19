@@ -234,8 +234,8 @@ html.has-site-masthead .vocabulary-quiz-main {
 
 .quiz-reveal-row {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1.2fr);
-  align-items: center;
+  grid-template-columns: minmax(0, 1.6fr) auto minmax(0, 0.8fr);
+  align-items: start;
   gap: 8px 10px;
   padding: 10px 12px;
   border: 1px solid var(--quiz-border);
@@ -246,8 +246,9 @@ html.has-site-masthead .vocabulary-quiz-main {
 .quiz-reveal-prompt {
   font-weight: 700;
   font-size: 1.02rem;
-  line-height: 1.4;
-  word-break: break-word;
+  line-height: 1.55;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
 }
 
 .quiz-reveal-colon {

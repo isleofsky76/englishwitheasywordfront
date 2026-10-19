@@ -10,6 +10,9 @@
  * 국방뉴스 QUICK REVIEW 연동 규칙:
  *   기사 slug 가 foo 이면 퀴즈 slug 는 foo-quiz
  *   redesign 의 「복습 퀴즈 풀기」가 이 URL로 연결됨
+ *
+ * narrative 국방뉴스 일괄:
+ *   node scripts/sync-defense-review-quizzes.js
  */
 import { API_BASE } from './loadEnv.js';
 import { uploadVocabularyQuiz } from './vocabulary-quiz-format.js';
@@ -19,24 +22,22 @@ import { uploadVocabularyQuiz } from './vocabulary-quiz-format.js';
 const article = {
   format: 'reveal',
   directions: ['en-ko'],
-  title: 'USS 에이브러햄 링컨 상륙 — 복습 퀴즈',
-  slug: 'staggered-shore-leave-related-words-quiz',
+  title: '미국 국방 예산을 감축하는 것 — 복습 퀴즈',
+  slug: 'defunding-us-military-related-words-quiz',
   metaDescription:
-    'USS 에이브러햄 링컨 승조원 파타야 상륙 기사 복습. staggered, shore leave, stint 등 영어 표현의 뜻을 클릭해 확인합니다.',
-  sourceUrl: 'https://englisheasystudy.com/defense-news/staggered-shore-leave-related-words/',
+    'WSJ 국방 예산 사설 복습. round, arsenal, dire straits, readiness 등 영어 표현의 뜻을 클릭해 확인합니다.',
+  sourceUrl: 'https://englisheasystudy.com/defense-news/defunding-us-military-related-words/',
   sourceLabel: '원문 글 보기',
-  datePublished: '2026-10-20',
+  datePublished: '2026-09-04',
   section1Title: '영어 : 뜻',
   pairs: [
-    { en: 'staggered', ko: '시차를 둔, 시차제의' },
-    { en: 'shore leave', ko: '상륙 허가, 육상 휴가' },
-    { en: 'stint', ko: '일정 기간 동안의 일·활동' },
-    { en: 'off-limits', ko: '출입 금지의' },
-    { en: 'abrupt', ko: '갑작스러운' },
-    { en: 'intermittently', ko: '간헐적으로' },
-    { en: 'conduct oneself', ko: '처신하다, 행동하다' },
-    { en: 'deteriorating', ko: '악화되는' },
-    { en: 'infamous', ko: '악명 높은' },
+    { en: 'round', ko: '차례, 한 차례' },
+    { en: 'press leak', ko: '언론 유출 보도' },
+    { en: 'arsenal', ko: '무기 비축량' },
+    { en: 'dire straits', ko: '심각한 곤경' },
+    { en: 'readiness', ko: '대비태세' },
+    { en: 'are compounding', ko: '누적되고 있다' },
+    { en: 'defunding the military', ko: '군 재정 지원을 줄이다, 예산 삭감' },
   ],
 };
 

@@ -44,7 +44,7 @@ export const BOARD_SEO = {
     cssFile: 'news-voca.css',
     cssVersion: '20260926barun',
     jsFile: 'defense-news.js',
-    jsVersion: '20260903d',
+    jsVersion: '20261020rd11',
     listHtml: 'defense-news-list.html',
   },
   'korea-news': {
@@ -52,7 +52,7 @@ export const BOARD_SEO = {
     cssFile: 'news-voca.css',
     cssVersion: '20260926barun',
     jsFile: 'korea-news.js',
-    jsVersion: '20260906a',
+    jsVersion: '20261020rd11',
     listHtml: 'korea-news-list.html',
   },
   'shorts-bg-image': {
