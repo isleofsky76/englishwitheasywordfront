@@ -24,7 +24,7 @@
   justify-content: flex-start;
   padding: 0 !important;
   overflow: visible;
-  border-bottom: 1px solid var(--ink);
+  border-bottom: none;
   box-shadow: none !important;
 }
 
@@ -289,10 +289,37 @@
   background: var(--ink) !important;
   color: var(--text-on-dark) !important;
   text-decoration: none !important;
-  border-bottom: 1px solid var(--line);
+  border-bottom: none;
 }
 #yt-billboard-bar:hover {
   color: var(--accent-soft) !important;
+}
+#yt-billboard-bar .yt-billboard__inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+#yt-billboard-bar .yt-billboard__icon {
+  flex-shrink: 0;
+  width: 22px;
+  height: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+#yt-billboard-bar .yt-billboard__icon svg {
+  width: 22px;
+  height: 16px;
+  display: block;
+}
+#yt-billboard-bar .yt-billboard__title {
+  font-size: 14px;
+  font-weight: 600;
+}
+#yt-billboard-bar .yt-billboard__handle {
+  font-size: 13px;
+  opacity: 0.9;
 }
 
 @media (max-width: 900px) {

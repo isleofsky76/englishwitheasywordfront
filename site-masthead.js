@@ -204,7 +204,12 @@
     bar.setAttribute('aria-label', 'YouTube Shorts istudyeng 바로가기');
     bar.innerHTML =
       '<span class="yt-billboard__inner">' +
-        '<span class="yt-billboard__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5.5v13l12-6.5z"/></svg></span>' +
+        '<span class="yt-billboard__icon" aria-hidden="true">' +
+          '<svg viewBox="0 0 28 20" xmlns="http://www.w3.org/2000/svg" focusable="false">' +
+            '<path fill="#FF0000" d="M27.33 3.12A3.5 3.5 0 0 0 24.86.65C22.7 0 14 0 14 0S5.3 0 3.14.65A3.5 3.5 0 0 0 .67 3.12 36.7 36.7 0 0 0 0 10a36.7 36.7 0 0 0 .67 6.88 3.5 3.5 0 0 0 2.47 2.47C5.3 20 14 20 14 20s8.7 0 10.86-.65a3.5 3.5 0 0 0 2.47-2.47A36.7 36.7 0 0 0 28 10a36.7 36.7 0 0 0-.67-6.88z"/>' +
+            '<path fill="#fff" d="M11.2 14.3V5.7L18.5 10l-7.3 4.3z"/>' +
+          '</svg>' +
+        '</span>' +
         '<span class="yt-billboard__title">YouTube로 공부하기</span>' +
         '<span class="yt-billboard__handle">@istudyeng</span>' +
       '</span>';
