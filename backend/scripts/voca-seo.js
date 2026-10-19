@@ -44,7 +44,7 @@ export const BOARD_SEO = {
     cssFile: 'news-voca.css',
     cssVersion: '20260926barun',
     jsFile: 'defense-news.js',
-    jsVersion: '20261020rd15',
+    jsVersion: '20261020rd16',
     listHtml: 'defense-news-list.html',
   },
   'korea-news': {
@@ -52,7 +52,7 @@ export const BOARD_SEO = {
     cssFile: 'news-voca.css',
     cssVersion: '20260926barun',
     jsFile: 'korea-news.js',
-    jsVersion: '20261020rd15',
+    jsVersion: '20261020rd16',
     listHtml: 'korea-news-list.html',
   },
   'shorts-bg-image': {
@@ -304,9 +304,9 @@ ${(board.extraCss || []).map((c) => `    <link rel="stylesheet" href="../../${c.
     <link rel="stylesheet" href="../../navbar-unified.css?v=20260612c">
     <link rel="stylesheet" href="../../weather-banner.css?v=20260612g">
     <link rel="stylesheet" href="../../world-clock.css?v=20260612g">
-    <link rel="preload" href="../../redesign-tokens.css?v=20261020rd15" as="style">
-    <link rel="preload" href="../../redesign-article.css?v=20261020rd15" as="style">
-    <link rel="preload" href="../../redesign-article.js?v=20261020rd15" as="script">
+    <link rel="preload" href="../../redesign-tokens.css?v=20261020rd16" as="style">
+    <link rel="preload" href="../../redesign-article.css?v=20261020rd16" as="style">
+    <link rel="preload" href="../../redesign-article.js?v=20261020rd16" as="script">
     <style id="rd-fouc-guard">
       /* SEO 구형 본문이 redesign 전에 깜빡이지 않도록 */
       body[data-nv-board]:not(.rd-ready) #post-container {

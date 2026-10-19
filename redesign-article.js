@@ -5,7 +5,7 @@
 (function (global) {
   'use strict';
 
-  var ASSET_VER = '20261020rd15';
+  var ASSET_VER = '20261020rd16';
 
   function markArticleReady() {
     try {

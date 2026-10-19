@@ -1,6 +1,11 @@
 /* 상세 페이지 리디자인 — design/redesign-article.html */
 @import url("redesign-tokens.css");
 
+/* QUICK REVIEW 블록 완전 제거 (캐시된 구 JS 대비) */
+.rd-review {
+  display: none !important;
+}
+
 body.rd-article {
   margin: 0;
   font-family: var(--font-sans);
