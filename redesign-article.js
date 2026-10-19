@@ -5,7 +5,7 @@
 (function (global) {
   'use strict';
 
-  var ASSET_VER = '20261020rd11';
+  var ASSET_VER = '20261020rd12';
 
   function assetBase() {
     var scripts = document.querySelectorAll('script[src]');
@@ -377,12 +377,6 @@
     // Preserve like button hook in a visually hidden form if present
     var likeHost = '<div id="rd-like-host" hidden></div>';
 
-    /* 기사 slug + '-quiz' → vocabulary-quiz 복습 (영어 : 뜻) */
-    var articleSlug = String(post.slug || options.slug || '').trim();
-    var reviewQuizHref = articleSlug
-      ? '/vocabulary-quiz/' + encodeURIComponent(articleSlug + '-quiz') + '/'
-      : '/vocabulary-quiz-list.html';
-
     container.innerHTML =
       '<div class="rd-article-head">' +
         crumb +
@@ -398,11 +392,6 @@
               '<div class="rd-article-fallback">' + html + '</div>') +
           '</div>' +
           actions +
-          '<div class="rd-review">' +
-            '<div><div class="rd-review-kicker">QUICK REVIEW</div>' +
-            '<div class="rd-review-title">방금 읽은 표현, 기억나나요?</div></div>' +
-            '<a href="' + escapeAttr(reviewQuizHref) + '">복습 퀴즈 풀기</a>' +
-          '</div>' +
           navHtml +
         '</div>' +
         '<aside class="rd-article-side">' +

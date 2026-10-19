@@ -246,43 +246,6 @@ body.rd-article main#post-container {
   flex-shrink: 0;
 }
 
-.rd-review {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  padding: 32px;
-  background: var(--accent);
-  color: #fff;
-  border-radius: 4px;
-}
-
-.rd-review-kicker {
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 2px;
-}
-
-.rd-review-title {
-  font-family: var(--font-serif);
-  font-weight: 900;
-  font-size: 26px;
-  margin-top: 8px;
-}
-
-.rd-review a {
-  display: inline-flex;
-  align-items: center;
-  min-height: 48px;
-  padding: 0 24px;
-  border-radius: 999px;
-  background: #fff;
-  color: var(--ink) !important;
-  font-weight: 600;
-  font-size: 15px;
-}
-
 .rd-article-nav {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));

@@ -7,11 +7,7 @@
  * 클릭 공개형: format: 'reveal' + pairs[{ en, ko }]
  *   directions: ['en-ko'] 만 쓰면 영어 → 뜻 한 방향
  *
- * 국방뉴스 QUICK REVIEW 연동 규칙:
- *   기사 slug 가 foo 이면 퀴즈 slug 는 foo-quiz
- *   redesign 의 「복습 퀴즈 풀기」가 이 URL로 연결됨
- *
- * narrative 국방뉴스 일괄:
+ * narrative 국방뉴스 일괄 퀴즈:
  *   node scripts/sync-defense-review-quizzes.js
  */
 import { API_BASE } from './loadEnv.js';
