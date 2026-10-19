@@ -5,7 +5,7 @@
 (function (global) {
   'use strict';
 
-  var ASSET_VER = '20261020rd20';
+  var ASSET_VER = '20261020rd21';
 
   /** 캐시된 구버전 JS가 그려도 QUICK REVIEW 즉시 제거 */
   function stripQuickReview() {
@@ -52,11 +52,12 @@
       'redesign-article.css?v=' + ASSET_VER,
       'site-masthead.css?v=' + ASSET_VER
     ].forEach(function (href) {
-      var path = base + href;
-      if (document.querySelector('link[href*="' + href.split('?')[0] + '"]')) return;
+      var file = href.split('?')[0];
+      /* preload 링크만 있으면 stylesheet 가 안 붙음 → rel=stylesheet 만 검사 */
+      if (document.querySelector('link[rel="stylesheet"][href*="' + file + '"]')) return;
       var link = document.createElement('link');
       link.rel = 'stylesheet';
-      link.href = path;
+      link.href = base + href;
       document.head.appendChild(link);
     });
   }
@@ -222,23 +223,13 @@
         unique = extractParenEnglish(koText);
       }
 
-      /* 한 섹션에 표현이 여러 개면 staggered처럼 단어별 카드로 분리 */
-      if (isNarrative && !wordEn && unique.length > 1) {
-        unique.forEach(function (w) {
-          var m = extractNarrativeMeaning(koText, w);
-          cards.push({
-            expression: w,
-            meaning: m,
-            enHtml: '',
-            ko: koText
-          });
-        });
-        return;
-      }
-
+      /* 섹션당 카드 1개 — 여러 mark 를 쪼개면 같은 문장이 반복됨 */
       if (!wordEn && unique.length) wordEn = unique[0];
+      var moreExprs = unique.length > 1 ? unique.slice(1) : [];
       if (postMeaningHidden(meaning, wordEn)) meaning = wordKo || '';
-      if (isNarrative && !meaning) meaning = extractNarrativeMeaning(koText, wordEn);
+      if (isNarrative && !meaning && unique.length === 1) {
+        meaning = extractNarrativeMeaning(koText, wordEn);
+      }
 
       // Prefer highlighting expression inside English if we have raw English without marks
       if (enEx && wordEn && enHtml.indexOf('<mark') === -1) {
@@ -260,6 +251,7 @@
       cards.push({
         expression: wordEn,
         meaning: meaning,
+        moreExprs: moreExprs,
         enHtml: enHtml,
         ko: koText
       });
@@ -271,6 +263,7 @@
         num: padNum(i + 1),
         expression: card.expression,
         meaning: card.meaning,
+        moreExprs: card.moreExprs || [],
         enHtml: card.enHtml,
         ko: card.ko
       };
@@ -354,6 +347,12 @@
     var showMeaning = !opts.hideMeaning && card.meaning;
     var ko = card.ko || '';
     if (opts.stripKoNum && ko) ko = stripLeadingListNum(ko);
+    var more = Array.isArray(card.moreExprs) ? card.moreExprs.filter(Boolean) : [];
+    var moreHtml = more.length
+      ? '<p class="rd-expr-more">' + more.map(function (w) {
+          return '<span>' + escapeHtml(w) + '</span>';
+        }).join('') + '</p>'
+      : '';
     return (
       '<article class="rd-expr" id="' + escapeAttr(card.id) + '">' +
         '<div class="rd-expr-top">' +
@@ -361,6 +360,7 @@
           '<span class="rd-expr-word">' + escapeHtml(card.expression) + '</span>' +
           (showMeaning ? '<span class="rd-expr-meaning">' + escapeHtml(card.meaning) + '</span>' : '') +
         '</div>' +
+        moreHtml +
         (card.enHtml ? '<p class="rd-expr-en">' + card.enHtml + '</p>' : '') +
         (ko ? '<p class="rd-expr-ko">' + escapeHtml(ko) + '</p>' : '') +
       '</article>'

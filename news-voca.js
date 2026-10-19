@@ -964,10 +964,10 @@ function nvLoadScript(src) {
     const base = nvAssetBase();
     try {
         if (!window.BoardListConfig) {
-            await nvLoadScript(base + 'board-list-config.js?v=20261020auto1');
+            await nvLoadScript(base + 'board-list-config.js?v=20261020auto2');
         }
         if (!window.mountRedesignArticle) {
-            await nvLoadScript(base + 'redesign-article.js?v=20261020rd20');
+            await nvLoadScript(base + 'redesign-article.js?v=20261020rd21');
         }
     } catch (e) {
         console.warn('redesign deps skipped', e);
