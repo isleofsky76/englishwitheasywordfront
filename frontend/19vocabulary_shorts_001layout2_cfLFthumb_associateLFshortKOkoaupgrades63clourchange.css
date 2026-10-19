@@ -1,0 +1,1351 @@
+/* 단일 파일 — 400·700 모두 등록해야 bold(.meta 등)가 Gaegu/Dongle로 안 넘어감 */
+@font-face {
+  font-family: "NanumBarunPen";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumBarunpen.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "NanumBarunPen";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumBarunpen.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* Shorts 프레임 · 공통 왼쪽 여백 */
+  --frame-w: 565px;
+  --frame-h: 900px;
+  --content-pad: 28px;
+  --num-col: 34px;
+  --num-gap: 10px;
+  --content-indent: calc(var(--num-col) + var(--num-gap)); /* EN·meta·defs 공통 시작점 */
+  /* 남색 노트 테마 (upgrades4 배경 #2F3543 기준) */
+  --paper: #2F3543;
+  --grid: rgba(245, 241, 232, 0.06);
+  --ink: #F5F1E8; /* 따뜻한 미백 — 순백보다 눈 피로↓ */
+  --ink-on-light: #1A1A1A; /* 노란/분홍 칩 위 글자 */
+  --sub: #B8B2A4;
+  --yellow: #FFE45C;
+  --yellow-soft: rgba(255, 228, 92, 0.42);
+  --pink: #F7B6C8;
+  --pink-soft: rgba(247, 182, 200, 0.45);
+  --red: #FF6B75;
+  --blue: #F7FAFC; /* 예문 상자 — 거의 화이트(선명도), 아주 약한 쿨톤 */
+  --blue-line: #5BA3C4;
+  --pos-bg: #6BA3C4;
+  --mint: #B5EBE3; /* meta·defs — 연한 민트 (남색 위 가독) */
+  /* upgrades3 제목 3색 */
+  --title-accent: #9BFF00;
+  --title-hl: #FFD91A;
+  --title-plain: #F5F5F2;
+  --photo-bg: #454D5C;
+  /* 가독성 타이포 — KO 본문 / EN 본문 / EN 디스플레이 */
+  --font-ko: "Pretendard", "Noto Sans KR", sans-serif;
+  --font-ko-hand: "NanumBarunPen", "Pretendard", "Noto Sans KR", sans-serif;
+  --font-en-body: "Andika", "Poppins", "Helvetica Neue", Arial, sans-serif;
+  --font-en-display: "Poppins", "Andika", sans-serif;
+  /* 손글씨 빨간 밑줄 — 거의 직선, 아주 약한 손떨림만 */
+  --hand-underline: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 8' preserveAspectRatio='none'%3E%3Cpath d='M2 4.2 C60 3.6 120 4.7 180 4.1 S220 4.4 238 4.3' fill='none' stroke='%23e8505b' stroke-width='2.3' stroke-linecap='round'/%3E%3C/svg%3E");
+  --hand-underline-short: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 8' preserveAspectRatio='none'%3E%3Cpath d='M2 4.3 C30 3.9 60 4.6 90 4.2 S110 4.4 118 4.3' fill='none' stroke='%23e8505b' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+/** 사람이 펜으로 그은 듯한 빨간 밑줄 */
+.hand-underline {
+  position: relative;
+  border-bottom: none !important;
+  display: inline-block;
+}
+.hand-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 100%; /* 단어 길이만큼 */
+  bottom: -0.14em;
+  height: 0.28em;
+  background-image: var(--hand-underline);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: center;
+  pointer-events: none;
+  transform: none;
+  opacity: 0.95;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  min-height: 100dvh;
+  overflow: hidden;
+  overflow-x: hidden;
+  background: var(--paper);
+  background-color: var(--paper);
+}
+
+body {
+  background: var(--paper);
+  background-color: var(--paper);
+  font-family: var(--font-ko);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ---------- 카드 — Shorts 565×900 프레임 ---------- */
+.card {
+  width: 100%;
+  max-width: var(--frame-w);
+  height: 100%;
+  height: 100dvh;
+  max-height: var(--frame-h);
+  margin: 0 auto;
+  padding-top: 20px; /* cardData 항목 전체 위로 20px */
+  background-color: var(--paper);
+  background-image: none;
+  box-shadow: none;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/*
+ * cardData.tag / category / headline / headIcon
+ * → 여기 .card-header 상자 안에 렌더됨 (불투명 배경)
+ */
+.card-header {
+  flex-shrink: 0;
+  /* z-index 제거 — page-bar가 screens 위로 올라갈 수 있게 */
+  padding: 22px var(--content-pad) 14px;
+  background-color: var(--paper);
+  background-image: none;
+  position: relative;
+  box-shadow: none; /* 하단 그림자가 번호·EN을 가리지 않게 */
+}
+
+.screens {
+  --words-lift: 40px;
+  flex: 1;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  scroll-padding-top: 0;
+  overscroll-behavior-y: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  position: relative;
+  z-index: 20; /* header보다 위 */
+  background-color: var(--paper);
+  /* words를 상자 안에서 올리지 말고, screens 자체를 올려 잘림 방지 */
+  margin-top: calc(-1 * var(--words-lift));
+}
+.screens::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+}
+
+
+/* 한 화면 = 단어 1개 */
+.screen {
+  --pic-w: 356px; /* 316 + 왼쪽만 40px */
+  --pic-h: 192px; /* 전체 80% (240×0.8) */
+  height: 100%;
+  min-height: 100%;
+  max-height: 100%;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  scroll-margin-top: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* 다음 화면 비침 방지 */
+  isolation: isolate;
+  contain: paint;
+  position: relative;
+  background-color: var(--paper);
+  z-index: 0;
+}
+
+.screen .words {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 6px;
+  min-height: 0;
+  padding-top: 28px; /* +20px: words 전체 아래로 */
+  margin: 0; /* 음수 마진 제거 — 잘림 원인 */
+  width: 100%;
+  overflow: visible;
+  position: relative;
+  z-index: 30;
+}
+
+.page-bar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 4px;
+  position: relative;
+  z-index: 50; /* screens(20)보다 위 — 정리/N 하단 가림 방지 */
+  pointer-events: none;
+}
+
+.page-bar[hidden] { display: none; }
+
+.page-num {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--sub);
+  position: relative;
+  top: -22px; /* 해당 텍스트만 위로 */
+  left: -30px; /* 왼쪽으로 30px (기존 -10 + 20) */
+}
+
+/* ---------- 헤더 ---------- */
+.top { display: flex; justify-content: space-between; align-items: center; }
+
+.tag {
+  font-family: "Gaegu", cursive;
+  font-weight: 700;
+  font-size: 26px; /* +4px */
+  background: var(--pink);
+  color: var(--ink-on-light);
+  padding: 2px 12px;
+  border-radius: 6px;
+  transform: translate(30px, -10px) rotate(-3deg); /* 오른쪽으로 30px */
+  position: relative;
+  margin-left: -12px;
+  margin-right: 4px;
+}
+/* 태그 양옆 — 손글씨 강조선 3줄 (≡ 대신) */
+.tag::before,
+.tag::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 13px;
+  height: 18px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  pointer-events: none;
+}
+/* 왼쪽: 바깥쪽으로 퍼지는 3선 (길이 축소) */
+.tag::before {
+  left: -16px;
+  transform: translateY(-50%);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 18' fill='none'%3E%3Cpath d='M12.5 3.4 C9 2.7 5.5 2.1 2.2 1.5' stroke='%23F5F1E8' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M12.6 9 C8.5 9.05 5.2 9.1 2 9.15' stroke='%23F5F1E8' stroke-width='2.1' stroke-linecap='round'/%3E%3Cpath d='M12.5 14.5 C9 15.1 5.6 15.7 2.3 16.3' stroke='%23F5F1E8' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+/* 오른쪽: 대칭 */
+.tag::after {
+  right: -16px;
+  transform: translateY(-50%) scaleX(-1);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 18' fill='none'%3E%3Cpath d='M12.5 3.4 C9 2.7 5.5 2.1 2.2 1.5' stroke='%23F5F1E8' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M12.6 9 C8.5 9.05 5.2 9.1 2 9.15' stroke='%23F5F1E8' stroke-width='2.1' stroke-linecap='round'/%3E%3Cpath d='M12.5 14.5 C9 15.1 5.6 15.7 2.3 16.3' stroke='%23F5F1E8' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+.category {
+  font-family: "Gaegu", cursive;
+  font-size: 24px; /* +4px */
+  font-weight: 700;
+  color: var(--ink); /* 다른 본문과 같은 따뜻한 미백 */
+  background: none;
+  padding: 0 2px 2px;
+  border-radius: 0;
+  box-shadow: none;
+  border-bottom: 3px solid var(--yellow); /* 노란색 밑줄 */
+  transform: translateY(-10px);
+}
+
+.headline-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin: 16px 0 0; /* tag/category ↔ 제목 */
+  width: 100%;
+  position: relative;
+  box-sizing: border-box;
+}
+
+/* 제목 — 글 너비만큼만, 밑줄도 글에 맞춤 / 아이콘은 오른쪽 */
+.headline {
+  flex: 0 1 auto;
+  min-width: 0;
+  max-width: calc(100% - 52px);
+  width: fit-content;
+  display: inline-block;
+  box-sizing: border-box;
+  font-family: "Black Han Sans", "Noto Sans KR", sans-serif;
+  font-size: 34px;
+  font-weight: 400; /* Black Han Sans는 단일 weight */
+  font-synthesis: none;
+  line-height: 1.25;
+  letter-spacing: normal;
+  color: var(--title-accent); /* upgrades3 기본(라임) — 3색 유지 */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-stroke: 0;
+  background: none;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0 0 0.28em;
+  margin: 0 0 0 30px; /* 제목만 오른쪽 30px(+20) — head-icon 등 영향 없음 */
+  border-bottom: none;
+  position: relative;
+  text-align: left;
+}
+.headline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 100%;
+  bottom: 0.02em;
+  height: 6px;
+  background-image: var(--hand-underline);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  pointer-events: none;
+  transform: none;
+  z-index: 1;
+}
+
+.headline .headline-line {
+  display: inline;
+  padding: 0;
+  color: inherit;
+  background: none;
+  box-shadow: none;
+  border-radius: 0;
+  font-weight: inherit;
+  font-synthesis: none;
+  -webkit-text-stroke: 0;
+}
+.headline .title-hl {
+  color: var(--title-hl); /* [강조] 노랑 */
+}
+.headline .title-plain {
+  color: var(--title-plain); /* (강조) 미백 */
+}
+
+.head-icon {
+  flex: 0 0 auto;
+  position: relative;
+  z-index: 2;
+  font-size: 43px; /* 36×1.2 (+20%) */
+  line-height: 1;
+  transform: translateX(-20px) rotate(-12deg); /* 아이콘만 왼쪽 20px */
+  margin: 2px 0 0;
+  /* 페이지 번호과 같은 오른쪽 끝 */
+}
+
+/* ---------- 마지막 정리 화면: 번호. en : ko ---------- */
+.screen-summary {
+  justify-content: flex-start;
+  padding-top: 36px; /* +20px: 정리 항목 전체 아래로 */
+  font-family: "NanumBarunPen", "Nanum Barun Pen", sans-serif;
+}
+
+.summary-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 0;
+  padding: 0 12px; /* 좌우 검정 여백 최소화 */
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.summary-row {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr);
+  column-gap: 10px;
+  align-items: start;
+}
+
+/* en 옆 → 길면 다음 줄 (en과 같은 시작점) */
+.summary-titles {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  column-gap: 0;
+  row-gap: 14px; /* KO 줄바꿈 시 EN과 간격 */
+  min-width: 0;
+}
+.summary-titles.is-ko-wrapped {
+  flex-wrap: wrap;
+}
+
+.summary-row .en {
+  flex: 0 0 auto;
+  overflow: visible;
+  font-size: clamp(32px, 7vw, 40px);
+  padding: 8px 0 10px; /* 좌우 여백 없음 */
+  color: var(--ink); /* 검정 대신 본문과 같은 색 */
+  background: none; /* 노란 칩 제거 — 배경과 동일 */
+  border-radius: 0;
+}
+
+.summary-row .ko {
+  flex: 0 1 auto; /* 글자 너비만큼 — V가 한글 옆에 붙도록 */
+  max-width: 100%;
+  width: fit-content;
+  margin-left: 10px;
+  font-family: "NanumBarunPen", "Nanum Barun Pen", sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.summary-colon {
+  flex: 0 0 auto;
+  font-family: "NanumBarunPen", "Nanum Barun Pen", sans-serif;
+  font-weight: 800;
+  font-size: 28px;
+  color: var(--ink);
+  line-height: 1;
+  margin: 0 2px;
+}
+
+.screen-summary .en,
+.screen-summary .num {
+  font-family: "NanumBarunPen", "Nanum Barun Pen", sans-serif;
+}
+
+.summary-row .num {
+  margin-top: 8px;
+}
+
+/* 한글 바로 옆 10px — 비스듬한 V 체크 (짧은 획→긴 획) */
+.summary-check {
+  position: relative;
+  display: inline-block;
+  margin-left: 10px;
+  width: 0.72em;
+  height: 1.08em;
+  vertical-align: -0.2em;
+  overflow: visible;
+  transform: translateY(-10px) rotate(-10deg);
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0;
+}
+.summary-row.is-checked .summary-check {
+  opacity: 1;
+}
+.summary-check-left,
+.summary-check-right {
+  fill: none;
+  stroke-width: 4.55;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+}
+.summary-row.is-drawing-check .summary-check-left {
+  animation: summary-check-draw 220ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+.summary-row.is-drawing-check .summary-check-right {
+  animation: summary-check-draw 420ms cubic-bezier(0.4, 0, 0.2, 1) 200ms forwards;
+}
+.summary-row.is-check-done .summary-check-left,
+.summary-row.is-check-done .summary-check-right {
+  stroke-dashoffset: 0;
+}
+@keyframes summary-check-draw {
+  to { stroke-dashoffset: 0; }
+}
+
+/* ---------- 단어 섹션 ---------- */
+.word {
+  flex: 1;
+  min-height: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 8px var(--content-pad) 12px;
+  border-bottom: none;
+  overflow: visible; /* 번호·EN 최상단 노출 */
+  position: relative;
+  box-sizing: border-box;
+  z-index: 30;
+}
+.word:first-child { padding-top: 4px; }
+.word:last-child { padding-bottom: 12px; }
+
+.word-head {
+  display: grid;
+  grid-template-columns: var(--num-col) minmax(0, 1fr);
+  column-gap: var(--num-gap);
+  row-gap: 6px;
+  align-items: start;
+  overflow: visible;
+  position: relative;
+  z-index: 40; /* 번호·EN 최우선 */
+  padding-top: 4px;
+  margin: 0;
+  width: 100%;
+}
+
+/* 기본: 영어 : 한글 한 줄 — 글자 수 20 초과 시에만 줄바꿈 */
+.word-titles {
+  grid-column: 2;
+  grid-row: 1;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: flex-end;
+  column-gap: 8px;
+  row-gap: 10px;
+  min-width: 0;
+}
+.word-titles.is-ko-wrapped {
+  flex-wrap: wrap;
+}
+
+.en-ko-colon {
+  flex: 0 0 auto;
+  font-family: "Baloo 2", sans-serif;
+  font-weight: 800;
+  font-size: clamp(32px, 8vw, 42px);
+  color: var(--ink);
+  line-height: 1;
+  align-self: center;
+  margin: 0 2px;
+}
+.word-titles.is-ko-wrapped .en-ko-colon {
+  display: none; /* 줄바꿈 시 콜론 숨김 */
+}
+
+/* 번호 — 손으로 반쯤 색칠한 동그라미 (최우선 노출) */
+.num {
+  --num-ink: #e8505b;
+  --num-fill: rgba(247, 182, 200, 0.72);
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 2.4px solid var(--num-ink);
+  display: grid;
+  place-items: center;
+  font-family: "Baloo 2", sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #333;
+  grid-column: 1;
+  grid-row: 1;
+  margin-top: 17px;
+  position: relative;
+  z-index: 42;
+  overflow: hidden;
+  isolation: isolate;
+  background-color: #fffaf8;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 34 34'%3E%3Cpath d='M15.2 1.2 C16.8 4.5 14.6 8.2 16.1 11.4 C17.5 14.8 14.9 17.6 16.4 21.1 C17.8 24.4 15.5 27.8 17.2 31.2 C17.8 32.4 19.2 33 20.5 32.8 C28.8 31.2 34 25.2 34 17 C34 8.2 27.9 1.8 19.2 1.1 C17.6 1 16.2 0.9 15.2 1.2 Z' fill='%23f7b6c8' fill-opacity='0.78'/%3E%3Cpath d='M15.5 2.5 C16.9 5.8 14.8 9.2 16.2 12.4 C17.6 15.6 15.1 18.4 16.6 21.6 C18 24.8 15.6 28 17 31' fill='none' stroke='%23e8505b' stroke-width='1.35' stroke-linecap='round' opacity='0.35'/%3E%3C/svg%3E");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  box-shadow: inset 0 0 0 1px rgba(232, 80, 91, 0.12);
+}
+
+.en {
+  flex: 0 0 auto;
+  font-family: "Baloo 2", sans-serif;
+  font-weight: 800;
+  font-size: clamp(38px, 10vw, 50px);
+  line-height: 1.05;
+  padding: 2px 18px 3px; /* 위·아래 노란 여백 축소 */
+  color: var(--ink-on-light);
+  background: var(--yellow);
+  border-radius: 40% 12px 35% 10px / 20px 30px 14px 30px;
+  position: relative;
+  z-index: 41; /* 헤더·이미지·본문보다 위 */
+  overflow: visible;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+.ko {
+  /* 기본 EN 옆 — 글자 수 20 초과 시에만 다음 줄 */
+  flex: 0 1 auto;
+  white-space: nowrap;
+  max-width: 100%;
+  margin-left: 15px; /* 영어에 15px 더 가깝게 — 정리 화면은 .summary-titles .ko */
+  font-family: "NanumBarunPen", "Nanum Barun Pen", "Gaegu", cursive;
+  font-size: 32px; /* -2px */
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  position: relative;
+  display: inline-block;
+  border-bottom: none;
+  padding-bottom: 0.12em;
+  transform: translateY(-5px); /* 아래로 10px 더 */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-stroke: 0.4px rgba(0, 0, 0, 0.45);
+  paint-order: stroke fill;
+  text-shadow:
+    0.25px 0 0 rgba(0, 0, 0, 0.22),
+    -0.25px 0 0 rgba(0, 0, 0, 0.22),
+    0 0.25px 0 rgba(0, 0, 0, 0.22),
+    0 -0.25px 0 rgba(0, 0, 0, 0.22);
+}
+.word-titles.is-ko-wrapped .ko {
+  margin-left: 0;
+  flex-basis: 100%; /* 줄바꿈 시 EN 왼쪽 정렬 */
+}
+.summary-titles .ko {
+  margin-left: 20px; /* 영어와 간격 */
+  font-family: "NanumBarunPen", "Nanum Barun Pen", sans-serif;
+  transform: translateY(1px); /* 기본(-5px)보다 6px 아래 — 한글·V 함께 */
+}
+.summary-titles .ko::after {
+  content: none; /* 정리 화면 밑줄 제거 */
+}
+.summary-titles.is-ko-wrapped .summary-colon {
+  display: none;
+}
+.summary-titles.is-ko-wrapped .ko {
+  margin-left: 0;
+  margin-top: 2px;
+  flex-basis: 100%;
+}
+/* autoplay: en 낭독 중 숨김 → 이후 표시 (자리는 유지) */
+.ko.is-ko-hidden {
+  visibility: hidden;
+}
+.ko::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 100%; /* 단어 길이만큼 */
+  bottom: -0.02em;
+  height: 0.28em;
+  background-image: var(--hand-underline-short);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  pointer-events: none;
+  transform: none;
+}
+
+.meta {
+  /* EN 열과 같은 왼쪽 시작점 — pos/reading/ipa */
+  display: block;
+  margin: 8px 0 4px var(--content-indent);
+  font-family: "NanumBarunPen", "Nanum Barun Pen", sans-serif;
+  font-size: 22px; /* pos/reading/ipa */
+  font-weight: 700;
+  line-height: 1.45;
+  letter-spacing: 0.03em;
+  color: var(--ink);
+  white-space: nowrap;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-stroke: 0.35px rgba(0, 0, 0, 0.45);
+  paint-order: stroke fill;
+  text-shadow:
+    0.2px 0 0 rgba(0, 0, 0, 0.22),
+    -0.2px 0 0 rgba(0, 0, 0, 0.22),
+    0 0.2px 0 rgba(0, 0, 0, 0.22),
+    0 -0.2px 0 rgba(0, 0, 0, 0.22);
+}
+.meta-body {
+  display: inline;
+  line-height: inherit;
+  color: inherit;
+  font-family: "NanumBarunPen", "Nanum Barun Pen", sans-serif; /* reading */
+}
+.pos {
+  background: none;
+  color: inherit;
+  border-radius: 0;
+  padding: 0;
+  margin: 0;
+  font-size: inherit;
+  font-weight: inherit;
+  font-family: "NanumBarunPen", "Nanum Barun Pen", sans-serif;
+  display: inline;
+  line-height: inherit;
+}
+/* 품사 첫 단어 — 아래쪽만 파스텔 분홍 */
+.pos-hl {
+  background: linear-gradient(
+    transparent 58%,
+    var(--pink-soft) 58%,
+    var(--pink) 100%
+  );
+  color: inherit;
+  border-radius: 0;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+.ipa {
+  display: inline;
+  font-family: "NanumBarunPen", "Nanum Barun Pen", sans-serif;
+  margin: 0; /* reading에 바로 붙임: 제런터크래틱/ipa/ */
+  padding: 0;
+  font-size: inherit;
+  font-weight: inherit;
+  color: inherit;
+  vertical-align: baseline;
+}
+
+.body {
+  flex: 0 1 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: stretch;
+  margin-left: var(--content-indent); /* 번호 열 다음 = EN과 왼쪽 정렬 */
+  margin-right: 0;
+  min-height: 0;
+  overflow: visible;
+}
+.left {
+  flex: 0 1 auto;
+  width: 100%;
+  min-width: 0;
+  overflow: visible;
+  position: relative;
+  z-index: 2;
+}
+
+.defs {
+  list-style: none;
+  margin: 2px 0 8px 0;
+  font-family: "NanumBarunPen", "Nanum Barun Pen", "Gaegu", cursive;
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--ink);
+}
+.defs li {
+  position: relative;
+  padding-left: 16px;
+  line-height: 1.55;
+}
+.defs li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  font-weight: 700;
+}
+.defs li.star::after {
+  content: "★";
+  position: absolute;
+  left: -18px;
+  top: -2px;
+  color: #f2c400;
+  font-size: 22px;
+  -webkit-text-stroke: .6px rgba(0, 0, 0, 0.45);
+}
+
+/* 예문 — 상자 없이 배경 위 글 + 바로 위 세련된 ex) 배너 */
+.example-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px; /* 예문에 최대한 가깝게 */
+  margin: 0 0 0 -20px;
+  width: calc(100% - 10px);
+  max-width: none;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 2;
+}
+.ex-banner {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  width: fit-content;
+  font-family: var(--font-en-display);
+  font-size: 12px;
+  font-weight: 600;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  color: rgba(245, 241, 232, 0.88);
+  /* 은은한 classic 배너 — 왼쪽 정렬, 오른쪽 패딩 최소화 */
+  background: rgba(245, 241, 232, 0.08);
+  border: 1px solid rgba(245, 241, 232, 0.28);
+  box-shadow: none;
+  padding: 3px 4px 4px 7px;
+  border-radius: 2px;
+  transform: translateY(2px);
+}
+.example {
+  --ex-size: 26px;
+  --ex-lh: 1.5;
+  background: none;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  max-width: none;
+  font-family: var(--font-en-body);
+  font-size: var(--ex-size);
+  font-weight: 500;
+  font-synthesis: none;
+  line-height: var(--ex-lh);
+  letter-spacing: 0.01em;
+  color: var(--ink); /* 남색 배경 위 밝은 글 */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: geometricPrecision;
+  -webkit-text-stroke: 0;
+  text-shadow: none;
+  box-sizing: border-box;
+  height: auto;
+  min-height: 0;
+  max-height: none;
+  overflow: visible;
+  display: block;
+  position: relative;
+  z-index: 2;
+}
+.example-inner {
+  display: block;
+  width: 100%;
+  min-width: 0;
+}
+.example mark {
+  display: inline;
+  background: none;
+  color: inherit;
+  font-weight: 700;
+  -webkit-text-stroke: 0;
+  text-shadow: none;
+  padding: 0;
+  margin: 0;
+  line-height: inherit;
+  vertical-align: baseline;
+  border-radius: 0;
+}
+
+/* texts[] 매칭 구문 — 예문 안 하이라이트만 */
+.ex-gloss {
+  display: inline;
+  position: relative;
+  vertical-align: baseline;
+  line-height: inherit;
+}
+.ex-gloss-word {
+  display: inline;
+}
+.ex-gloss.is-active .ex-gloss-word {
+  /* 아래쪽만 살짝 하이라이트 */
+  background: linear-gradient(
+    transparent 58%,
+    var(--yellow-soft) 58%,
+    var(--yellow) 100%
+  );
+  color: inherit;
+  -webkit-text-stroke: 0;
+  text-shadow: none;
+  border-radius: 0;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+/* texts[] */
+.texts-below {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  box-sizing: border-box;
+  margin: 12px 0 0;
+  width: 100%;
+  max-width: 100%;
+  padding: 0;
+}
+.texts-item {
+  display: inline-flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.25em; /* 한 칸 간격 */
+  margin: 0;
+  max-width: 100%;
+  padding: 0;
+  font-family: var(--font-ko-hand);
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  text-align: left;
+  white-space: nowrap;
+  background: none;
+  border: none;
+  box-shadow: none;
+}
+.texts-item::before {
+  content: "cf.";
+  flex-shrink: 0;
+  color: inherit;
+  font-family: var(--font-en-body);
+  font-size: 0.88em;
+  font-weight: 500;
+  font-style: italic;
+  margin-right: 0; /* gap으로만 한 칸 */
+}
+.texts-item.is-active {
+  color: var(--ink);
+}
+.texts-item .texts-en {
+  color: inherit;
+  font-family: var(--font-en-body);
+  font-size: 0.88em;
+  font-weight: 500;
+}
+.texts-item .texts-en::after {
+  content: none; /* · 제거 — gap 한 칸만 */
+}
+.texts-item .texts-ko {
+  color: inherit;
+}
+
+/* 예문 낭독 중 현재 구문 — 아래쪽만 살짝 노랑 */
+.ex-phrase {
+  border-radius: 0;
+  transition: background 0.12s ease, color 0.12s ease;
+}
+.ex-phrase.is-reading {
+  background: linear-gradient(
+    transparent 58%,
+    var(--yellow-soft) 58%,
+    var(--yellow) 100%
+  );
+  color: inherit;
+  -webkit-text-stroke: 0;
+  text-shadow: none;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+/* 예문 바로 아래 — example과 동일 폭 (넘치지 않게) */
+.trans {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  box-sizing: border-box;
+  margin: 12px 0 0 -20px; /* example-block과 같은 왼쪽 정렬 */
+  padding: 0;
+  width: calc(100% - 10px); /* example-block width와 동일 */
+  max-width: calc(100% - 10px);
+  font-family: "NanumBarunPen", "Nanum Barun Pen", "Gaegu", cursive;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  -webkit-font-smoothing: antialiased;
+  z-index: 2;
+  overflow: hidden;
+}
+.trans::before {
+  content: "↳";
+  flex-shrink: 0;
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1.35;
+  position: relative;
+  top: -5px;
+}
+.trans-text {
+  flex: 1;
+  min-width: 0;
+  max-width: 100%;
+  font-family: inherit;
+  font-weight: inherit;
+  overflow-wrap: break-word;
+  word-break: keep-all;
+}
+
+/* ---------- 이미지 + note(오른쪽) ---------- */
+.pic {
+  position: relative;
+  left: auto;
+  right: auto;
+  bottom: auto;
+  width: calc(100% - var(--content-indent));
+  max-width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center; /* note — 이미지 오른쪽 세로 가운데 */
+  z-index: 5;
+  overflow: visible;
+  margin: 12px 0 0 var(--content-indent);
+  padding: 0;
+  pointer-events: none;
+  transform: none;
+  gap: 12px;
+}
+
+.pic-media {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  pointer-events: auto;
+  transform: translate(-35px, 20px); /* 왼쪽만 +40px (5px − 40px), note는 고정 */
+}
+.photo {
+  position: relative;
+  width: var(--pic-w, 140px);
+  height: var(--pic-h, 209px);
+  margin: 0;
+  background: transparent; /* contain 좌우 여백 배경 제거 */
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 64px;
+  overflow: hidden;
+  pointer-events: auto;
+  flex-shrink: 0;
+}
+.ai-image-label {
+  margin-top: 6px;
+  font-family: "Andika", "Poppins", "Helvetica Neue", Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--sub);
+  letter-spacing: 0.02em;
+}
+.photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* 원본 비율 유지, 잘림 없음 */
+  object-position: center;
+  display: block;
+}
+
+.spark {
+  display: none;
+}
+.spark .spark-mid {
+  display: inline-block;
+  transform: translateX(5px);
+}
+.spark.yellow { color: #f2c400; }
+
+.caption {
+  position: relative;
+  left: auto;
+  bottom: auto;
+  flex: 1 1 100%;
+  margin-top: 0;
+  font-family: "Patrick Hand", sans-serif;
+  font-size: 19px;
+  color: var(--ink);
+  transform: rotate(-6deg);
+  border-bottom: 2px solid var(--sub);
+  z-index: 6;
+}
+
+/* note — 이미지 오른쪽, 가운데 정렬 */
+.note {
+  display: block;
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+  text-align: center;
+  font-family: "NanumBarunPen", "Nanum Barun Pen", "Gaegu", cursive;
+  font-size: 20px;
+  font-weight: 500;
+  margin: 0 0 0 -50px; /* 이미지 폭 확대 보정 */
+  padding: 0;
+  line-height: 1.25;
+  color: var(--ink);
+  width: auto;
+  max-width: none;
+  transform: translate(-60px, 20px); /* 왼쪽 60px · 아래 20px — 레이아웃(이미지) 미영향 */
+}
+.note b {
+  font-family: "NanumBarunPen", "Nanum Barun Pen", "Gaegu", cursive;
+  font-size: 23px;
+  font-weight: 500;
+  border-bottom: none;
+  display: inline-block;
+  transform: rotate(-4deg);
+  position: relative;
+  /* 사선 위 공백 + 사선 높이 + 사선 아래 공백 */
+  padding-bottom: 0.75em;
+  margin-bottom: 0.45em; /* note text와 간격 */
+  text-align: center;
+}
+.note b::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 100%; /* 단어 길이만큼 */
+  bottom: 0.28em; /* 사선 아래 공백 */
+  height: 0.28em;
+  background-image: var(--hand-underline-short);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  pointer-events: none;
+  transform: none;
+}
+
+/* ---------- 배경 연하게 / 진하게 (upgrades2 팔레트와 함께) ---------- */
+.paper-bg-adjust {
+  position: fixed;
+  left: 52px;
+  bottom: calc(clamp(150px, 24vh, 210px) + 10px);
+  z-index: 500021;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  max-width: calc(100vw - 70px);
+  pointer-events: auto;
+}
+
+.paper-bg-adjust[hidden] {
+  display: none !important;
+}
+
+.paper-bg-adjust__btn {
+  border: 1px solid rgba(245, 241, 232, 0.28);
+  border-radius: 999px;
+  padding: 6px 12px;
+  background: rgba(47, 53, 67, 0.92);
+  color: rgba(245, 241, 232, 0.88);
+  font-family: "Pretendard", "Noto Sans KR", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: filter 140ms ease, border-color 140ms ease;
+}
+
+.paper-bg-adjust__btn:hover {
+  filter: brightness(1.1);
+  border-color: rgba(186, 255, 0, 0.45);
+}
+
+.paper-bg-adjust__hex {
+  font-family: "Poppins", "Pretendard", sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  color: #baff00;
+  font-variant-numeric: tabular-nums;
+  padding: 0 4px;
+}
+
+/* upgrades2 팔레트 — 이 페이지에서는 왼쪽 하단 컨트롤 위에 맞춤 */
+#page-bg-picker {
+  bottom: calc(clamp(150px, 24vh, 210px) + 52px);
+}
+
+/* ---------- auto play + BGM (화면 맨 아래) ---------- */
+.controls {
+  position: fixed;
+  left: 50%;
+  bottom: 16px;
+  transform: translateX(-50%);
+  z-index: 20;
+  width: min(320px, calc(100% - 80px));
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+}
+
+.controls[hidden] {
+  display: none !important;
+}
+
+#autoplay-btn {
+  display: block;
+  width: 100%;
+  border: 0;
+  border-radius: 999px;
+  padding: 12px 18px;
+  font-family: "Gaegu", cursive;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--paper);
+  background: var(--ink);
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+  transition: transform 140ms ease, opacity 180ms ease;
+}
+
+#autoplay-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+#autoplay-btn:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+
+#autoplay-btn.is-hidden,
+#autoplay-btn[hidden],
+.bgm-btn[hidden],
+.bgm-start-wrap[hidden] {
+  display: none !important;
+}
+
+.bgm-btn {
+  border: 1px solid rgba(245, 241, 232, 0.28);
+  border-radius: 999px;
+  padding: 6px 12px;
+  background: rgba(47, 53, 67, 0.92);
+  color: rgba(245, 241, 232, 0.72);
+  font-family: "Poppins", "Pretendard", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+  cursor: pointer;
+  transition: color 140ms ease, border-color 140ms ease, background 140ms ease;
+}
+
+.bgm-btn.is-on {
+  color: #baff00;
+  border-color: rgba(186, 255, 0, 0.55);
+  background: rgba(186, 255, 0, 0.12);
+}
+
+.bgm-btn.is-off {
+  color: rgba(245, 241, 232, 0.55);
+}
+
+.bgm-btn:hover {
+  filter: brightness(1.08);
+}
+
+.bgm-start-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: 1px solid rgba(245, 241, 232, 0.28);
+  border-radius: 999px;
+  padding: 6px 12px;
+  background: rgba(47, 53, 67, 0.92);
+  color: rgba(245, 241, 232, 0.72);
+  font-family: "Poppins", "Pretendard", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+  cursor: default;
+  user-select: none;
+}
+
+.bgm-start-caption {
+  opacity: 0.72;
+}
+
+.bgm-start-sec {
+  width: 3.2em;
+  border: 0;
+  outline: none;
+  background: transparent;
+  color: #baff00;
+  font: inherit;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  padding: 0;
+  -moz-appearance: textfield;
+}
+
+.bgm-start-sec::-webkit-outer-spin-button,
+.bgm-start-sec::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.bgm-start-label {
+  min-width: 2.4em;
+  color: rgba(245, 241, 232, 0.55);
+  font-variant-numeric: tabular-nums;
+}
+
+/* 낭독 중에도 번호·EN 최우선 유지 */
+.word.is-speaking {
+  z-index: 30;
+  overflow: visible;
+}
+
+.word.is-speaking .word-head {
+  z-index: 40;
+  overflow: visible;
+}
+
+.word.is-speaking .en {
+  z-index: 41;
+  outline: none;
+  box-shadow: none; /* 하이라이트 종료 후 테두리 없음 */
+  border-radius: 40% 12px 35% 10px / 20px 30px 14px 30px;
+}
+
+/* en 낭독 1·2·3회 — 테두리 3색 */
+.en.is-en-highlight {
+  z-index: 41;
+  border-radius: 40% 12px 35% 10px / 20px 30px 14px 30px;
+  transition: box-shadow 180ms ease;
+}
+.en.is-en-highlight[data-en-pass="1"] {
+  box-shadow: 0 0 0 3px #e8505b;
+}
+.en.is-en-highlight[data-en-pass="2"] {
+  box-shadow: 0 0 0 3px #f2c400;
+}
+.en.is-en-highlight[data-en-pass="3"] {
+  box-shadow: 0 0 0 3px #3d8bfd;
+}
+
+/* 예문 하이라이트 테두리 — spark/pic보다 항상 최상단 */
+.word.is-speaking .left,
+.word:has(.example.is-reading-example) .left {
+  z-index: 6;
+}
+
+.word.is-speaking .example,
+.example.is-reading-example {
+  position: relative;
+  z-index: 8;
+  box-shadow: 0 0 0 3px rgba(232, 80, 91, 0.35);
+  transition: box-shadow 180ms ease, outline-color 180ms ease;
+}
+
+/* 예문 낭독 회차(enRepeat 1·2·3)마다 테두리 색 변경 */
+.example.is-reading-example[data-example-pass="1"] {
+  box-shadow: 0 0 0 3px #e8505b;
+}
+.example.is-reading-example[data-example-pass="2"] {
+  box-shadow: 0 0 0 3px #f2c400;
+}
+.example.is-reading-example[data-example-pass="3"] {
+  box-shadow: 0 0 0 3px #3d8bfd;
+}
+
+/* ---------- 모바일 ---------- */
+@media (max-width: 400px) {
+  .screen {
+    --pic-w: 256px; /* 216 + 왼쪽만 40px */
+    --pic-h: 192px; /* 240×0.8 */
+  }
+  .photo { font-size: 48px; }
+  .example { --ex-size: 24px; }
+}
