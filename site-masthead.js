@@ -4,7 +4,7 @@
  * nav-home-menu.js 가 로드함
  */
 (function () {
-    var VERSION = '20261019rd5';
+    var VERSION = '20261019rd6';
   /* 시안 주 메뉴 5개 — href는 기존 URL 유지 */
   var PRIMARY_NAV_ITEMS = [
     {
@@ -144,16 +144,16 @@
   }
 
   function ensureWeather(base) {
-    ensureLink(base + 'weather-banner.css?v=20260612g');
-    ensureLink(base + 'world-clock.css?v=20260612g');
+    ensureLink(base + 'weather-banner.css?v=20261019rd6');
+    ensureLink(base + 'world-clock.css?v=20261019rd6');
     if (!document.querySelector('script[src*="weather-banner.js"]')) {
       var w = document.createElement('script');
-      w.src = base + 'weather-banner.js?v=20260612e';
+      w.src = base + 'weather-banner.js?v=20261019rd6';
       document.head.appendChild(w);
     }
     if (!document.querySelector('script[src*="world-clock.js"]')) {
       var c = document.createElement('script');
-      c.src = base + 'world-clock.js?v=20260612g';
+      c.src = base + 'world-clock.js?v=20261019rd6';
       document.head.appendChild(c);
     }
   }
@@ -431,6 +431,27 @@
     requestAnimationFrame(syncNavbarHeight);
   }
 
+  /** 날씨·시계를 YouTube 바(없으면 헤더) 바로 아래로 배치 */
+  function placeUtilityBars() {
+    var weather = document.getElementById('weather-banner');
+    var clock = document.getElementById('world-clock-bar');
+    if (!weather && !clock) return false;
+    var yt = document.getElementById('yt-billboard-bar');
+    var nav = document.querySelector('.site-masthead') || document.querySelector('#navbar');
+    var host = yt || nav;
+    if (!host) return false;
+    if (weather && weather.previousElementSibling !== host) {
+      host.insertAdjacentElement('afterend', weather);
+    }
+    if (clock) {
+      var after = weather && weather.parentNode ? weather : host;
+      if (clock.previousElementSibling !== after) {
+        after.insertAdjacentElement('afterend', clock);
+      }
+    }
+    return !!(weather || clock);
+  }
+
   function mount() {
     document.documentElement.classList.add('has-site-masthead');
     var base = assetBase();
@@ -438,13 +459,20 @@
     ensureWeather(base);
     mountNavbar(base);
     injectYoutubeBar();
+    placeUtilityBars();
     ensureScript(base + 'home-board-preview.js?v=' + VERSION, function () {
       initSearch(base);
     });
-    setTimeout(function () {
+    var tries = 0;
+    var timer = setInterval(function () {
+      tries += 1;
       if (!document.getElementById('yt-billboard-bar')) injectYoutubeBar();
+      var ready = placeUtilityBars();
       syncNavbarHeight();
-    }, 400);
+      if ((ready && document.getElementById('weather-banner')) || tries > 20) {
+        clearInterval(timer);
+      }
+    }, 200);
   }
 
   window.SiteMasthead = { mount: mount };

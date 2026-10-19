@@ -381,6 +381,17 @@ html.has-site-masthead .site-masthead.navbar.fixed-top {
   right: auto !important;
 }
 
+/* 구 페이지 body padding-top(고정 헤더용) 제거 — 상단 공백 원인 */
+html.has-site-masthead body,
+html.has-site-masthead.has-weather-banner body,
+html.has-site-masthead.has-weather-banner:not(.page-with-main-content) body,
+html.has-site-masthead.has-world-clock.has-weather-banner body,
+html.has-site-masthead.has-world-clock.has-weather-banner:not(.page-with-main-content) body,
+html.has-site-masthead.has-yt-billboard.has-world-clock.has-weather-banner:not(.page-with-main-content) body {
+  padding-top: 0 !important;
+}
+
+/* 날씨·시계: YouTube 아래 슬림 유틸 바 (시안 톤) */
 html.has-site-masthead .weather-banner,
 html.has-site-masthead .world-clock-bar {
   position: relative !important;
@@ -389,15 +400,47 @@ html.has-site-masthead .world-clock-bar {
   right: auto !important;
   z-index: 1;
   width: 100%;
+  height: auto !important;
+  min-height: 0;
+  padding: 6px 16px !important;
+  box-sizing: border-box;
+  background: var(--page-bg, #F6F3EC) !important;
+  border-bottom: 1px solid var(--line, #D9D3C6) !important;
+  color: var(--ink-muted, #5A5F69) !important;
+  font-family: var(--font-sans, "IBM Plex Sans KR", sans-serif) !important;
+  font-size: 12px !important;
+  font-weight: 500;
 }
 
-html.has-site-masthead body,
-html.has-site-masthead.has-weather-banner body,
-html.has-site-masthead.has-weather-banner:not(.page-with-main-content) body,
-html.has-site-masthead.has-world-clock.has-weather-banner body,
-html.has-site-masthead.has-world-clock.has-weather-banner:not(.page-with-main-content) body,
-html.has-site-masthead.has-yt-billboard.has-world-clock.has-weather-banner:not(.page-with-main-content) body {
-  padding-top: 0 !important;
+html.has-site-masthead .weather-banner__en,
+html.has-site-masthead .world-clock-bar__label,
+html.has-site-masthead .world-clock-bar__city {
+  color: var(--ink-muted, #5A5F69) !important;
+}
+
+html.has-site-masthead #yt-billboard-bar,
+html.has-site-masthead .yt-billboard {
+  min-height: 52px;
+  margin-top: 8px;
+}
+
+html.has-site-masthead #post-container,
+html.has-site-masthead .guestbook-container,
+html.has-site-masthead main#main-content {
+  padding-top: 12px !important;
+  margin-top: 0 !important;
+}
+
+@media (max-width: 900px) {
+  /* 모바일: 시계 줄 숨겨 상단 공간 절약 (날씨만 유지) */
+  html.has-site-masthead .world-clock-bar {
+    display: none !important;
+  }
+
+  html.has-site-masthead .weather-banner {
+    padding: 5px 12px !important;
+    font-size: 11px !important;
+  }
 }
 
 html.has-site-masthead .main-content,
