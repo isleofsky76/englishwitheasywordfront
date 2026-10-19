@@ -5,7 +5,7 @@
 (function (global) {
   'use strict';
 
-  var ASSET_VER = '20261020rd12';
+  var ASSET_VER = '20261020rd13';
 
   function assetBase() {
     var scripts = document.querySelectorAll('script[src]');
@@ -264,16 +264,25 @@
     } catch (e) { /* ignore */ }
   }
 
-  function renderCardHtml(card) {
+  /** 국방뉴스: 본문 앞 번호(1. ) 제거 — 헤더 번호와 중복 방지 */
+  function stripLeadingListNum(text) {
+    return String(text || '').replace(/^\s*\d+\s*[.)]\s*/, '').trim();
+  }
+
+  function renderCardHtml(card, opts) {
+    opts = opts || {};
+    var showMeaning = !opts.hideMeaning && card.meaning;
+    var ko = card.ko || '';
+    if (opts.stripKoNum && ko) ko = stripLeadingListNum(ko);
     return (
       '<article class="rd-expr" id="' + escapeAttr(card.id) + '">' +
         '<div class="rd-expr-top">' +
           '<span class="rd-expr-num">' + escapeHtml(card.num) + '</span>' +
           '<span class="rd-expr-word">' + escapeHtml(card.expression) + '</span>' +
-          (card.meaning ? '<span class="rd-expr-meaning">' + escapeHtml(card.meaning) + '</span>' : '') +
+          (showMeaning ? '<span class="rd-expr-meaning">' + escapeHtml(card.meaning) + '</span>' : '') +
         '</div>' +
         (card.enHtml ? '<p class="rd-expr-en">' + card.enHtml + '</p>' : '') +
-        (card.ko ? '<p class="rd-expr-ko">' + escapeHtml(card.ko) + '</p>' : '') +
+        (ko ? '<p class="rd-expr-ko">' + escapeHtml(ko) + '</p>' : '') +
       '</article>'
     );
   }
@@ -388,8 +397,15 @@
         '<div class="rd-article-main" id="post-content">' +
           ytBlock +
           '<div id="post-message" class="rd-article-cards">' +
-            (cards.length ? cards.map(renderCardHtml).join('') :
-              '<div class="rd-article-fallback">' + html + '</div>') +
+            (cards.length
+              ? cards.map(function (c) {
+                  return renderCardHtml(c, {
+                    /* 국방뉴스: 번호 + 단어만, 옆에 뜻 없음 → 아래에 문장만 */
+                    hideMeaning: options.boardKey === 'defense-news',
+                    stripKoNum: options.boardKey === 'defense-news'
+                  });
+                }).join('')
+              : '<div class="rd-article-fallback">' + html + '</div>') +
           '</div>' +
           actions +
           navHtml +

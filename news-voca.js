@@ -993,7 +993,7 @@ function nvLoadScript(src) {
             await nvLoadScript(base + 'board-list-config.js?v=20261019rd4');
         }
         if (!window.renderRedesignArticle) {
-            await nvLoadScript(base + 'redesign-article.js?v=20261020rd12');
+            await nvLoadScript(base + 'redesign-article.js?v=20261020rd13');
         }
     } catch (e) {
         console.warn('redesign deps skipped', e);

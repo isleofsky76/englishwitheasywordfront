@@ -15,7 +15,7 @@ import { toIsoDateOnly } from './voca-seo.js';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '../..');
 const DEFENSE_DIR = path.join(ROOT, 'defense-news');
-const JS_VER = '20261020rd12';
+const JS_VER = '20261020rd13';
 
 /** 수동 보정 (자동 추출 실패·애매한 경우) */
 const MEANINGS = {
