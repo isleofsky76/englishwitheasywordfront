@@ -149,33 +149,41 @@ function showError(container, message, details = '') {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    // 기본적으로 모든 form 숨기기
-    document.getElementById('write-post-container').style.display = 'none';
-    document.getElementById('edit-post-container').style.display = 'none';
-    // 모달은 기본적으로 숨김 상태 (Bootstrap이 자동 처리)
+    /* 공개 목록에는 관리자 폼이 없음(?admin=1 시에만 주입) — null 가드 필수 */
+    const writePostContainer = document.getElementById('write-post-container');
+    const editPostContainer = document.getElementById('edit-post-container');
+    if (writePostContainer) writePostContainer.style.display = 'none';
+    if (editPostContainer) editPostContainer.style.display = 'none';
 
-    // URL 파라미터 확인
     const params = new URLSearchParams(window.location.search);
-    if (params.get('edit') === 'true') {
-        document.getElementById('edit-id').value = params.get('id');
-        document.getElementById('edit-title').value = decodeURIComponent(params.get('title'));
-        document.getElementById('edit-message').value = decodeURIComponent(params.get('message'));
-        document.getElementById('edit-nickname').value = decodeURIComponent(params.get('nickname'));
-        document.getElementById('edit-isSecret').checked = params.get('isSecret') === 'true';
-        
-        document.getElementById('edit-post-container').style.display = 'block';
+    if (params.get('edit') === 'true' && editPostContainer) {
+        const editId = document.getElementById('edit-id');
+        const editTitle = document.getElementById('edit-title');
+        const editMessage = document.getElementById('edit-message');
+        const editNickname = document.getElementById('edit-nickname');
+        const editIsSecret = document.getElementById('edit-isSecret');
+        if (editId) editId.value = params.get('id');
+        if (editTitle) editTitle.value = decodeURIComponent(params.get('title'));
+        if (editMessage) editMessage.value = decodeURIComponent(params.get('message'));
+        if (editNickname) editNickname.value = decodeURIComponent(params.get('nickname'));
+        if (editIsSecret) editIsSecret.checked = params.get('isSecret') === 'true';
+        editPostContainer.style.display = 'block';
     }
 
     const guestbookList = document.getElementById('guestbook-list');
+    loadMessages();
+
     const writeModalElement = document.getElementById('write-post-modal');
-    const writeModal = new bootstrap.Modal(writeModalElement);
+    const writeModal = writeModalElement && window.bootstrap
+        ? bootstrap.Modal.getOrCreateInstance(writeModalElement)
+        : null;
     
     const writePostButton = document.getElementById('write-post-button');
-    if (writePostButton) {
+    if (writePostButton && writeModal && guestbookList) {
         writePostButton.addEventListener('click', () => {
             guestbookList.style.display = 'none';
             writeModal.show();
-            document.getElementById('edit-post-container').style.display = 'none';
+            if (editPostContainer) editPostContainer.style.display = 'none';
             setTimeout(() => {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }, 300);
@@ -183,9 +191,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     // 모달이 닫힐 때 게시판 목록 다시 보이기
-    writeModalElement.addEventListener('hidden.bs.modal', () => {
-        guestbookList.style.display = 'block';
-    });
+    if (writeModalElement && guestbookList) {
+        writeModalElement.addEventListener('hidden.bs.modal', () => {
+            guestbookList.style.display = 'block';
+        });
+    }
     
     // 텍스트 에디터 기능 추가
     const messageEditor = document.getElementById('message');
@@ -194,7 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 선택 영역 저장 및 복원 함수
     function saveSelection() {
         const selection = window.getSelection();
-        if (selection.rangeCount > 0 && messageEditor.contains(selection.anchorNode)) {
+        if (selection.rangeCount > 0 && messageEditor && messageEditor.contains(selection.anchorNode)) {
             return selection.getRangeAt(0).cloneRange();
         }
         // 저장된 선택 영역이 있으면 사용
@@ -797,8 +807,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 // 폼 리셋 및 컨테이너 숨기기
                 form.reset();
-                document.getElementById('edit-post-container').style.display = 'none';
-                document.getElementById('write-post-container').style.display = 'none';
+                if (editPostContainer) editPostContainer.style.display = 'none';
+                if (writePostContainer) writePostContainer.style.display = 'none';
                 
                 // 성공 피드백
                 submitButton.textContent = '✓ 수정 완료';
@@ -848,7 +858,7 @@ document.addEventListener('DOMContentLoaded', () => {
     var editCancelBtn = document.getElementById('edit-cancel-btn');
     if (editCancelBtn) {
         editCancelBtn.addEventListener('click', function() {
-            document.getElementById('edit-post-container').style.display = 'none';
+            if (editPostContainer) editPostContainer.style.display = 'none';
         });
     }
 
@@ -1092,17 +1102,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 const data = await response.json();
                 const entry = data.entry;
 
-                document.getElementById('edit-id').value = entry._id;
-                document.getElementById('edit-title').value = entry.title;
-                document.getElementById('edit-message').value = entry.message;
-                document.getElementById('edit-nickname').value = entry.nickname;
-                document.getElementById('edit-isSecret').checked = entry.isSecret;
+                const editId = document.getElementById('edit-id');
+                const editTitle = document.getElementById('edit-title');
+                const editMessage = document.getElementById('edit-message');
+                const editNickname = document.getElementById('edit-nickname');
+                const editIsSecret = document.getElementById('edit-isSecret');
+                if (editId) editId.value = entry._id;
+                if (editTitle) editTitle.value = entry.title;
+                if (editMessage) editMessage.value = entry.message;
+                if (editNickname) editNickname.value = entry.nickname;
+                if (editIsSecret) editIsSecret.checked = entry.isSecret;
 
-                document.getElementById('write-post-container').style.display = 'none';
-                document.getElementById('edit-post-container').style.display = 'block';
-                
-                // 편집 컨테이너로 스크롤
-                document.getElementById('edit-post-container').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                if (writePostContainer) writePostContainer.style.display = 'none';
+                if (editPostContainer) {
+                    editPostContainer.style.display = 'block';
+                    editPostContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
             } else {
                 const errorData = await response.json();
                 alert(`오류: ${errorData.error || '게시글을 불러올 수 없습니다.'}`);
@@ -1143,9 +1158,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // 초기 로드
-    loadMessages();
-    
     // 페이지 가시성 변경 시 캐시 무효화 (다른 탭에서 돌아왔을 때)
     document.addEventListener('visibilitychange', () => {
         if (!document.hidden && cache.lastFetch) {
