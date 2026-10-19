@@ -6,7 +6,7 @@
  */
 (function () {
     var DEFAULT_LIMIT = 5;
-    var CACHE_VERSION = '20261019pad';
+    var CACHE_VERSION = '20261019norel';
 
     var BOARD_ROWS = [
         {
@@ -244,6 +244,16 @@
 
     window.initViewpostRelated = function (options) {
         options = options || {};
+        // 리디자인 상세의「함께 읽기」와 중복되므로 숨김
+        if (document.body && document.body.classList.contains('rd-article')) {
+            var dup = document.querySelector('.viewpost-related-row');
+            if (dup) {
+                dup.innerHTML = '';
+                dup.hidden = true;
+                dup.remove();
+            }
+            return;
+        }
         var boardConfig = resolveBoardConfig(options);
         if (!boardConfig) return;
 
@@ -264,6 +274,12 @@
                 return res.json();
             })
             .then(function (data) {
+                if (document.body && document.body.classList.contains('rd-article')) {
+                    row.innerHTML = '';
+                    row.hidden = true;
+                    row.remove();
+                    return;
+                }
                 renderRelated(row, boardConfig, normalizeEntries(data), currentSlug);
             })
             .catch(function (err) {

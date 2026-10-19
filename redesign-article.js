@@ -5,7 +5,7 @@
 (function (global) {
   'use strict';
 
-  var ASSET_VER = '20261019rd4';
+  var ASSET_VER = '20261019rd7';
 
   function assetBase() {
     var scripts = document.querySelectorAll('script[src]');

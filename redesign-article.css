@@ -396,6 +396,11 @@ body.rd-article .post-meta-sep {
   display: none !important;
 }
 
+/* 「함께 읽기」와 중복되는 하단「다른 ○○」목록 숨김 */
+body.rd-article .viewpost-related-row {
+  display: none !important;
+}
+
 .rd-article-fallback {
   max-width: 860px;
   margin: 0 auto;
