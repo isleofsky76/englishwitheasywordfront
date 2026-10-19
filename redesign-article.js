@@ -5,7 +5,14 @@
 (function (global) {
   'use strict';
 
-  var ASSET_VER = '20261020rd14';
+  var ASSET_VER = '20261020rd15';
+
+  function markArticleReady() {
+    try {
+      document.documentElement.classList.add('rd-ready');
+      document.body.classList.add('rd-ready');
+    } catch (e) { /* ignore */ }
+  }
 
   function assetBase() {
     var scripts = document.querySelectorAll('script[src]');
@@ -456,6 +463,7 @@
     // Keep a hidden like control so initViewpostLike can still bind if called after
     if (typeof options.onReady === 'function') options.onReady(container);
 
+    markArticleReady();
     return true;
   }
 
@@ -470,51 +478,88 @@
   /**
    * Fetch related + render. Returns true if redesign applied.
    */
+  function mapRelatedEntries(entries, post, cfg) {
+    var newest = (entries || []).slice().reverse();
+    return newest
+      .filter(function (e) { return e && e._id !== post._id; })
+      .slice(0, 3)
+      .map(function (e) {
+        var slug = String(e.slug || '').trim();
+        var href = slug && cfg.postPath
+          ? '/' + String(cfg.postPath).replace(/^\/+|\/+$/g, '') + '/' + encodeURIComponent(slug) + '/'
+          : '/' + String(cfg.postPage || '').replace(/^\//, '') +
+            (slug ? ('?slug=' + encodeURIComponent(slug)) : '');
+        var thumbMatch = String(e.message || '').match(/img\.youtube\.com\/vi\/([a-zA-Z0-9_-]+)\//i);
+        return {
+          href: href,
+          title: global.BoardListConfig.cleanTitle(e),
+          thumb: thumbMatch ? 'https://img.youtube.com/vi/' + thumbMatch[1] + '/hqdefault.jpg' : ''
+        };
+      });
+  }
+
+  function fillRelatedSidebar(related) {
+    if (!related || !related.length) return;
+    var host = document.querySelector('.rd-article-side');
+    if (!host) return;
+    var html = related.slice(0, 3).map(function (r) {
+      var thumb = r.thumb
+        ? '<div class="rd-side-related-img"><img src="' + escapeAttr(r.thumb) + '" alt=""></div>'
+        : '<div class="rd-side-related-img"></div>';
+      return '<a href="' + escapeAttr(r.href) + '">' + thumb +
+        '<span class="rd-side-related-title">' + escapeHtml(r.title) + '</span></a>';
+    }).join('');
+    var existing = host.querySelector('.rd-side-related');
+    if (existing) {
+      existing.innerHTML = html;
+      return;
+    }
+    var tocBlock = host.querySelector('.rd-side-toc');
+    var block = document.createElement('div');
+    block.className = 'rd-side-block';
+    block.innerHTML = '<h2>함께 읽기</h2><div class="rd-side-related">' + html + '</div>';
+    if (tocBlock && tocBlock.parentElement) {
+      tocBlock.parentElement.insertAdjacentElement('afterend', block);
+    } else {
+      var ad = host.querySelector('#rd-ad-host');
+      if (ad && ad.parentElement) host.insertBefore(block, ad.parentElement);
+      else host.appendChild(block);
+    }
+  }
+
   async function mountRedesignArticle(container, post, options) {
     options = options || {};
     var cfg = global.BoardListConfig && global.BoardListConfig.get(options.boardKey);
     if (!cfg || cfg.articleLayout !== 'expression-cards') {
       applyRedesignChrome(options.boardKey);
+      markArticleReady();
       return false;
     }
     var related = options.related || [];
-    if (!related.length && options.apiBaseUrl && cfg.apiPath) {
-      try {
-        var res = await fetch(options.apiBaseUrl + cfg.apiPath, { cache: 'no-store' });
-        if (res.ok) {
-          var data = await res.json();
-          var entries = Array.isArray(data) ? data : (data.entries || []);
-          var newest = entries.slice().reverse();
-          related = newest
-            .filter(function (e) { return e && e._id !== post._id; })
-            .slice(0, 3)
-            .map(function (e) {
-              var slug = String(e.slug || '').trim();
-              /* SEO 상세(/defense-news/foo/)에서도 깨지지 않게 사이트 루트 절대경로 */
-              var href = slug && cfg.postPath
-                ? '/' + String(cfg.postPath).replace(/^\/+|\/+$/g, '') + '/' + encodeURIComponent(slug) + '/'
-                : '/' + String(cfg.postPage || '').replace(/^\//, '') +
-                  (slug ? ('?slug=' + encodeURIComponent(slug)) : '');
-              var thumbMatch = String(e.message || '').match(/img\.youtube\.com\/vi\/([a-zA-Z0-9_-]+)\//i);
-              return {
-                href: href,
-                title: global.BoardListConfig.cleanTitle(e),
-                thumb: thumbMatch ? 'https://img.youtube.com/vi/' + thumbMatch[1] + '/hqdefault.jpg' : ''
-              };
-            });
-        }
-      } catch (e) { /* ignore */ }
-    }
-    return !!renderRedesignArticle(container, post, {
+    /* 관련글 API는 렌더를 막지 않음 — FOUC/대기 시간 줄이기 */
+    var ok = !!renderRedesignArticle(container, post, {
       boardKey: options.boardKey,
       convertedMessage: options.convertedMessage,
       related: related,
       prev: options.prev,
       next: options.next
     });
+    if (ok && !related.length && options.apiBaseUrl && cfg.apiPath) {
+      fetch(options.apiBaseUrl + cfg.apiPath, { cache: 'no-store' })
+        .then(function (res) { return res.ok ? res.json() : null; })
+        .then(function (data) {
+          if (!data) return;
+          var entries = Array.isArray(data) ? data : (data.entries || []);
+          fillRelatedSidebar(mapRelatedEntries(entries, post, cfg));
+        })
+        .catch(function () { /* ignore */ });
+    }
+    if (!ok) markArticleReady();
+    return ok;
   }
 
   global.renderRedesignArticle = renderRedesignArticle;
   global.mountRedesignArticle = mountRedesignArticle;
   global.applyRedesignChrome = applyRedesignChrome;
+  global.markArticleReady = markArticleReady;
 })(typeof window !== 'undefined' ? window : globalThis);

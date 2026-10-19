@@ -44,7 +44,7 @@ export const BOARD_SEO = {
     cssFile: 'news-voca.css',
     cssVersion: '20260926barun',
     jsFile: 'defense-news.js',
-    jsVersion: '20261020rd14',
+    jsVersion: '20261020rd15',
     listHtml: 'defense-news-list.html',
   },
   'korea-news': {
@@ -52,7 +52,7 @@ export const BOARD_SEO = {
     cssFile: 'news-voca.css',
     cssVersion: '20260926barun',
     jsFile: 'korea-news.js',
-    jsVersion: '20261020rd14',
+    jsVersion: '20261020rd15',
     listHtml: 'korea-news-list.html',
   },
   'shorts-bg-image': {
@@ -304,6 +304,22 @@ ${(board.extraCss || []).map((c) => `    <link rel="stylesheet" href="../../${c.
     <link rel="stylesheet" href="../../navbar-unified.css?v=20260612c">
     <link rel="stylesheet" href="../../weather-banner.css?v=20260612g">
     <link rel="stylesheet" href="../../world-clock.css?v=20260612g">
+    <link rel="preload" href="../../redesign-tokens.css?v=20261020rd15" as="style">
+    <link rel="preload" href="../../redesign-article.css?v=20261020rd15" as="style">
+    <link rel="preload" href="../../redesign-article.js?v=20261020rd15" as="script">
+    <style id="rd-fouc-guard">
+      /* SEO 구형 본문이 redesign 전에 깜빡이지 않도록 */
+      body[data-nv-board]:not(.rd-ready) #post-container {
+        visibility: hidden !important;
+      }
+      @keyframes rd-fouc-fallback {
+        to { visibility: visible !important; }
+      }
+      body[data-nv-board]:not(.rd-ready) #post-container {
+        animation: rd-fouc-fallback 0s linear 4s forwards;
+      }
+    </style>
+    <noscript><style>body[data-nv-board] #post-container{visibility:visible!important}</style></noscript>
 </head>
 <body data-nv-slug="${escapeHtml(slug)}" data-nv-board="${escapeHtml(boardPath)}">
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" aria-label="주 메뉴">

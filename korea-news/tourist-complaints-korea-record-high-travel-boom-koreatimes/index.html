@@ -32,6 +32,21 @@
     <link rel="stylesheet" href="../../navbar-unified.css?v=20260612c">
     <link rel="stylesheet" href="../../weather-banner.css?v=20260612g">
     <link rel="stylesheet" href="../../world-clock.css?v=20260612g">
+    <link rel="preload" href="../../redesign-tokens.css?v=20261020rd15" as="style">
+    <link rel="preload" href="../../redesign-article.css?v=20261020rd15" as="style">
+    <link rel="preload" href="../../redesign-article.js?v=20261020rd15" as="script">
+    <style id="rd-fouc-guard">
+      body[data-nv-board]:not(.rd-ready) #post-container {
+        visibility: hidden !important;
+      }
+      @keyframes rd-fouc-fallback {
+        to { visibility: visible !important; }
+      }
+      body[data-nv-board]:not(.rd-ready) #post-container {
+        animation: rd-fouc-fallback 0s linear 4s forwards;
+      }
+    </style>
+    <noscript><style>body[data-nv-board] #post-container{visibility:visible!important}</style></noscript>
 </head>
 <body data-nv-slug="tourist-complaints-korea-record-high-travel-boom-koreatimes" data-nv-board="korea-news">
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" aria-label="주 메뉴">
@@ -104,7 +119,7 @@
     <script src="../../viewpost-like.js?v=20260906gray"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../../nav-home-menu.js?v=20260720a"></script>
-    <script src="../../korea-news.js?v=20260906a"></script>
+    <script src="../../korea-news.js?v=20261020rd15"></script>
     <script src="../../weather-banner.js?v=20260612e" defer></script>
     <script src="../../world-clock.js?v=20260612g" defer></script>
 </body>

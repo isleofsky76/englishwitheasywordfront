@@ -479,6 +479,7 @@ async function loadPost() {
         `;
         
                 }
+        if (typeof markArticleReady === 'function') markArticleReady();
 
         // 게시글 내용 복사 시 HTML 태그 제거하고 순수 텍스트만 복사
         const postMessage = document.getElementById('post-message');
@@ -537,7 +538,7 @@ function rdLoadScript(src) {
     const base = rdAssetBase();
     try {
         if (!window.BoardListConfig) await rdLoadScript(base + 'board-list-config.js?v=20261019rd4');
-        if (!window.mountRedesignArticle) await rdLoadScript(base + 'redesign-article.js?v=20261020rd14');
+        if (!window.mountRedesignArticle) await rdLoadScript(base + 'redesign-article.js?v=20261020rd15');
     } catch (e) { console.warn(e); }
     loadPost();
 })();

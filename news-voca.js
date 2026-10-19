@@ -794,6 +794,7 @@ async function loadPost() {
                 </article>
             `;
         }
+        if (typeof markArticleReady === 'function') markArticleReady();
         
         // 게시글 내용 복사 시 HTML 태그 제거하고 순수 텍스트만 복사
         const postMessage = document.getElementById('post-message');
@@ -993,7 +994,7 @@ function nvLoadScript(src) {
             await nvLoadScript(base + 'board-list-config.js?v=20261019rd4');
         }
         if (!window.renderRedesignArticle) {
-            await nvLoadScript(base + 'redesign-article.js?v=20261020rd14');
+            await nvLoadScript(base + 'redesign-article.js?v=20261020rd15');
         }
     } catch (e) {
         console.warn('redesign deps skipped', e);
