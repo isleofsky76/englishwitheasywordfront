@@ -2,7 +2,9 @@
 @import url("redesign-tokens.css");
 
 /* QUICK REVIEW 블록 완전 제거 (캐시된 구 JS 대비) */
-.rd-review {
+.rd-review,
+.rd-review-kicker,
+.rd-review-title {
   display: none !important;
 }
 

@@ -5,10 +5,30 @@
 (function (global) {
   'use strict';
 
-  var ASSET_VER = '20261020rd16';
+  var ASSET_VER = '20261020rd17';
+
+  /** 캐시된 구버전 JS가 그려도 QUICK REVIEW 즉시 제거 */
+  function stripQuickReview() {
+    try {
+      document.querySelectorAll('.rd-review').forEach(function (el) { el.remove(); });
+      document.querySelectorAll('a').forEach(function (a) {
+        if (String(a.textContent || '').replace(/\s+/g, ' ').trim() !== '복습 퀴즈 풀기') return;
+        var box = a.parentElement;
+        while (box && box !== document.body) {
+          var t = String(box.textContent || '');
+          if (/QUICK REVIEW|방금 읽은 표현/.test(t)) {
+            box.remove();
+            return;
+          }
+          box = box.parentElement;
+        }
+      });
+    } catch (e) { /* ignore */ }
+  }
 
   function markArticleReady() {
     try {
+      stripQuickReview();
       document.documentElement.classList.add('rd-ready');
       document.body.classList.add('rd-ready');
     } catch (e) { /* ignore */ }
@@ -464,6 +484,10 @@
     if (typeof options.onReady === 'function') options.onReady(container);
 
     markArticleReady();
+    stripQuickReview();
+    setTimeout(stripQuickReview, 0);
+    setTimeout(stripQuickReview, 300);
+    setTimeout(stripQuickReview, 1000);
     return true;
   }
 

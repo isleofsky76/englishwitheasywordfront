@@ -1,5 +1,10 @@
 /* 뉴스 어휘 — cooking-voca(cv-*)와 동일 구조, nv-* 네임스페이스 */
 
+/* 기사 QUICK REVIEW CTA 제거 (SEO head에서 구 JS가 그려도 숨김) */
+.rd-review {
+  display: none !important;
+}
+
 @font-face {
   font-family: 'NanumBarunPen';
   src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumBarunpen.woff') format('woff');
