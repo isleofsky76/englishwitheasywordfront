@@ -156,6 +156,123 @@ html.has-site-masthead .vocabulary-quiz-main {
   font-weight: 700;
 }
 
+/* 클릭 공개형 퀴즈 */
+.quiz-youtube {
+  margin: 0 0 20px;
+}
+
+.quiz-youtube-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 18px;
+  border-radius: 999px;
+  background: #16181d;
+  color: #f6f3ec !important;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-decoration: none !important;
+}
+
+.quiz-youtube-btn:hover {
+  color: #f2a27e !important;
+}
+
+.quiz-youtube-icon {
+  width: 22px;
+  height: 16px;
+  display: block;
+}
+
+.quiz-reveal-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.quiz-reveal-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1.2fr);
+  align-items: center;
+  gap: 8px 10px;
+  padding: 10px 12px;
+  border: 1px solid var(--quiz-border);
+  border-radius: 10px;
+  background: #f8faf9;
+}
+
+.quiz-reveal-prompt {
+  font-weight: 700;
+  font-size: 1.02rem;
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+.quiz-reveal-colon {
+  color: var(--quiz-muted);
+  font-weight: 700;
+}
+
+.quiz-reveal-answer {
+  justify-self: stretch;
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 1px dashed #b7c8be;
+  border-radius: 8px;
+  background: #eef2ef;
+  color: var(--quiz-text);
+  font: inherit;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+}
+
+.quiz-reveal-answer:hover,
+.quiz-reveal-answer:focus-visible {
+  border-color: var(--quiz-green);
+  outline: none;
+}
+
+.quiz-reveal-mask {
+  letter-spacing: 0.08em;
+  color: #8a968f;
+  filter: blur(3px);
+  user-select: none;
+}
+
+.quiz-reveal-hint {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--quiz-green);
+}
+
+.quiz-reveal-answer.is-open {
+  border-style: solid;
+  border-color: var(--quiz-green);
+  background: var(--quiz-green-soft);
+}
+
+.quiz-reveal-text {
+  color: var(--quiz-green);
+  font-weight: 800;
+}
+
+@media (max-width: 520px) {
+  .quiz-reveal-row {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+
+  .quiz-reveal-colon {
+    display: none;
+  }
+}
+
 @media (max-width: 520px) {
   .vocabulary-quiz-main {
     width: min(100% - 24px, 760px);

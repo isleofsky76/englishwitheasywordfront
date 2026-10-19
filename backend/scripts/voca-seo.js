@@ -132,9 +132,9 @@ export const BOARD_SEO = {
   'vocabulary-quiz': {
     label: '영어 단어 퀴즈',
     cssFile: 'vocabulary-quiz.css',
-    cssVersion: '20260721a',
+    cssVersion: '20261019quiz1',
     jsFile: 'vocabulary-quiz.js',
-    jsVersion: '20260722a',
+    jsVersion: '20261019quiz1',
     listHtml: 'vocabulary-quiz-list.html',
     pageKind: 'quiz',
   },
