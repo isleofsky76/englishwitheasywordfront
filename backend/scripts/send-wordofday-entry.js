@@ -28,24 +28,24 @@ import { applySeoAfterUpload, toIsoDateOnly, SITE_ORIGIN } from './voca-seo.js';
 // ========== 여기만 수정 ==========
 // redesign-word 시안용: .wotd-word / .wotd-core / .wotd-ex / .wotd-col …
 
-const imageSrc = '/resources/tackle.jpg';
+const imageSrc = '/resources/commit.jpg';
 
 const entry = {
-  title: 'tackle | 다루다, 맞서다',
+  title: 'commit | 약속하다, 저지르다, 전념하다',
 
   // 태그 사이 빈 줄/개행 넣지 말 것
-  message: `<div class="wotd-word"><img class="wotd-hero-image" src="${imageSrc}" alt="tackle" loading="lazy"><span class="wotd-ipa">/ˈtækəl/</span><span class="wotd-ipa-ko">태클</span><div class="wotd-pos" data-pos="동사" data-primary="1"><span class="wotd-meaning">다루다, 맞서다</span><span class="wotd-meaning-sub">(문제·과제에) 달려들다</span></div><div class="wotd-pos" data-pos="명사"><span class="wotd-meaning">태클</span></div><p class="wotd-core">어렵거나 큰 문제·과제에 <em class="wotd-core-em">정면으로 맞서</em> 다루기 시작하다</p><p class="wotd-nuance">tackle은 스포츠의 ‘태클’에서 확장되어, 사회·정책·업무상의 난제에 적극적으로 달려드는 동사로 자주 쓰입니다. 단순한 ‘다루다(handle)’보다 <mark>해결을 위해 뛰어든다</mark>는 능동적 뉘앙스가 강해요. 명사로는 미식축구·럭비의 태클을 뜻합니다.</p><div class="wotd-compare"><span class="wotd-cmp-en">handle</span><span class="wotd-cmp-ko">처리하다 · 중립적, 일상적</span></div><div class="wotd-compare" data-active="1"><span class="wotd-cmp-en">tackle</span><span class="wotd-cmp-ko">맞서 다루다 · 능동적, 의지</span></div><div class="wotd-col"><span class="wotd-col-en">tackle a problem</span><span class="wotd-col-ko">문제를 다루다, 해결에 나서다</span></div><div class="wotd-col"><span class="wotd-col-en">tackle hunger</span><span class="wotd-col-ko">기아 문제 해결에 나서다</span></div><div class="wotd-col"><span class="wotd-col-en">step up to tackle</span><span class="wotd-col-ko">나서서 해결하다</span></div><section class="wotd-ex" data-tag="뉴스 예문"><p class="wotd-ex-en">He had called on billionaires to “step up now, on a one-time basis” to <mark>tackle</mark> global hunger.</p><p class="wotd-ex-ko">그는 억만장자들에게 세계 기아 문제 해결을 위해 “지금, 일회성으로라도 나서 달라”고 요청한 바 있다.</p></section><section class="wotd-ex"><p class="wotd-ex-en">We need to <mark>tackle</mark> the housing shortage head-on.</p><p class="wotd-ex-ko">우리는 주택 부족 문제에 정면으로 맞서야 한다.</p></section><section class="wotd-ex"><p class="wotd-ex-en">She <mark>tackled</mark> the assignment as soon as she got home.</p><p class="wotd-ex-ko">그녀는 집에 도착하자마자 그 과제에 달라붙었다.</p></section><p class="wotd-takeaway">문제로 ‘손을 대기’보다, 어렵더라도 정면으로 맞서서 해결에 착수한다는 뜻이 강함. step up과 함께 쓰면 ‘책임을 지고 나서다’는 의미가 더해짐.</p><div class="wotd-glance"><div><dt>품사</dt><dd>동사 · 명사</dd></div><div><dt>비슷한 말</dt><dd>address, confront</dd></div><div><dt>반대 말</dt><dd>avoid, ignore</dd></div><div><dt>자주 나오는 곳</dt><dd>정책·경제 뉴스</dd></div></div></div>`,
+  message: `<div class="wotd-word"><img class="wotd-hero-image" src="${imageSrc}" alt="commit" loading="lazy"><span class="wotd-ipa">/kəˈmɪt/</span><span class="wotd-ipa-ko">커밋</span><div class="wotd-pos" data-pos="동사" data-primary="1"><span class="wotd-meaning">약속하다, (자원·주식 등을) 투입하다</span><span class="wotd-meaning-sub">(범죄 등을) 저지르다; (자신·결정에) 전념하다</span></div><p class="wotd-core">돈·시간·주식 등을 <em class="wotd-core-em">공식적으로 내놓거나</em>, 잘못을 저지르거나, 결정에 자신을 묶다</p><p class="wotd-nuance">commit은 문맥에 따라 뜻이 크게 갈립니다. 뉴스·비즈니스에서는 <mark>주식·자금·자원을 출연·투입한다</mark>는 뜻이 흔하고, commit a crime처럼 ‘저지르다’, commit yourself처럼 ‘결정·전념하다’로도 씁니다. 같은 철자라도 목적어를 보면 의미가 바로 갈립니다.</p><div class="wotd-compare"><span class="wotd-cmp-en">promise</span><span class="wotd-cmp-ko">약속하다 · 말의 약속</span></div><div class="wotd-compare" data-active="1"><span class="wotd-cmp-en">commit</span><span class="wotd-cmp-ko">출연·투입·저지름·전념 · 행동·책임이 따름</span></div><div class="wotd-col"><span class="wotd-col-en">commit shares / money</span><span class="wotd-col-ko">주식·자금을 출연하다, 투입하다</span></div><div class="wotd-col"><span class="wotd-col-en">commit a crime</span><span class="wotd-col-ko">범죄를 저지르다</span></div><div class="wotd-col"><span class="wotd-col-en">commit yourself</span><span class="wotd-col-ko">결정하다, 전념하다, 약정하다</span></div><section class="wotd-ex" data-tag="뉴스 예문"><p class="wotd-ex-en">The pledge comes a day after AI competitor Anthropic said it plans to <mark>commit</mark> 5% of its shares to a new “public benefit fund” with the flexibility to make charitable donations or direct money to “specific populations.”</p><p class="wotd-ex-ko">이번 약속은 AI 경쟁사 앤트로픽이 자사 주식의 5%를 자선 기부나 특정 계층 지원에 활용할 수 있는 새로운 공익기금에 출연하겠다는 계획을 밝힌 지 하루 만에 나왔다.</p></section><section class="wotd-ex"><p class="wotd-ex-en">People who <mark>commit</mark> such crimes aren’t normal.</p><p class="wotd-ex-ko">그러한 범죄를 저지르는 사람들은 정상이 아니다.</p></section><section class="wotd-ex"><p class="wotd-ex-en">You don’t have to <mark>commit</mark> yourself now, just think about it.</p><p class="wotd-ex-ko">지금 결정하지 않으셔도 됩니다. 그냥 생각을 해 보세요.</p></section><p class="wotd-takeaway">commit은 ‘약속’보다 한 걸음 더 나아가, 자원 투입·범죄 행위·자기 결정처럼 결과가 따르는 행동을 가리킨다. 목적어(shares, crime, yourself)를 보면 뜻이 갈린다.</p><div class="wotd-glance"><div><dt>품사</dt><dd>동사</dd></div><div><dt>비슷한 말</dt><dd>pledge, perpetrate, dedicate</dd></div><div><dt>반대 말</dt><dd>withdraw, refrain</dd></div><div><dt>자주 나오는 곳</dt><dd>경제·사회·일상 회화</dd></div></div></div>`,
 
   nickname: 'admin',
 
-  password: 'seed_password_tackle',
+  password: 'seed_password_commit',
 
   isSecret: false,
 
-  slug: 'tackle',
+  slug: 'commit',
 
   metaDescription:
-    'tackle 뜻과 예문. 다루다, 맞서다의 의미와 tackle a problem, tackle hunger, step up to tackle 표현.',
+    'commit 뜻과 예문. 약속하다·저지르다·전념하다의 의미와 commit shares, commit a crime, commit yourself 표현.',
 
   datePublished: '2026-10-20',
 };
