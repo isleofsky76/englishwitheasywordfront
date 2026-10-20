@@ -3,8 +3,7 @@
  *
  * 사용법: 아래 article 만 수정 → node scripts/newspaperscript.js
  *
- * 노출 양식: 이미지(9:16) + 섹션별 「한글 : english」 단어 목록
- * (live: /shorts-bg-image/harbor-cafe-fishermen-sunset/ 과 동일)
+ * 노출 양식: 이미지(9:16) + 섹션별 「english : 한글」 단어 목록
  */
 import { API_BASE } from './loadEnv.js';
 import { uploadShortsBgImage } from './shorts-bg-image-format.js';
@@ -12,72 +11,89 @@ import { uploadShortsBgImage } from './shorts-bg-image-format.js';
 // ========== 여기만 수정 ==========
 
 const article = {
-  title: '항구 카페와 어부들의 저녁 풍경 · Harbor cafe and fishermen at sunset',
+  title: '베네치아 운하 카페 · Venice canal-side café',
 
-  slug: 'harbor-cafe-fishermen-sunset',
+  slug: 'venice-canal-side-cafe',
 
   metaDescription:
-    '항구 카페와 어부들의 저녁 노을 풍경을 담은 쇼츠용 배경 이미지. harbor, pier, fisherman, sunset 등 관련 영어 표현.',
+    '베네치아 운하 옆 카페 풍경을 담은 쇼츠용 배경 이미지. canal, gondola, espresso, gondolier, newspaper 등 관련 영어 표현.',
 
-  password: 'seed_shorts_harbor-cafe-fishermen-sunset',
+  password: 'seed_shorts_venice-canal-side-cafe',
 
-  datePublished: '2026-09-02',
+  datePublished: '2026-10-20',
 
   /** 사이트 루트 기준 경로. resources/ 또는 frontend/resources/ 에 파일 배치 */
-  image: '/resources/harbor_cafe_fishermen.jpg',
+  image: '/resources/venice.jpg',
 
   sections: [
     {
-      heading: '전체적인 항구 풍경 (Overall Harbor Scene)',
-      body: `항구 : harbor
-바다 : sea
-등대 : lighthouse
-부두 : pier / dock
-어선 : fishing boat
-보트 : boat
-해안 : coast
-노을 : sunset
-잔잔한 : calm
-평화로운 : peaceful`,
+      heading: '전체 분위기 (Overall Scene)',
+      body: `canal : 운하
+gondola : 곤돌라
+bridge : 다리
+arch : 아치
+facade : 건물 정면
+pastel : 파스텔의
+romantic : 낭만적인
+waterfront : 물가
+reflection : 반사
+ripple : 물결
+glisten : 반짝이다
+float : 떠다니다
+historic : 역사적인
+serene : 고요한`,
     },
     {
-      heading: '좌측 카페 풍경 (Cafe Area)',
-      body: `카페 : cafe
-테이블 : table
-의자 : chair
-신문 : newspaper
-커피잔 : coffee cup
-책 : book
-손님 : customer / patron (단골)
-읽다 : read
-마시다 : drink
-앉다 : sit`,
+      heading: '좌측 전경 (Left Foreground)',
+      body: `couple : 커플
+espresso : 에스프레소
+saucer : 받침 접시
+awning : 차양
+striped : 줄무늬의
+metal : 철제의
+geranium : 제라늄
+windowsill : 창턱
+balcony : 발코니
+cheerful : 쾌활한
+laugh : 웃다
+chat : 수다 떨다
+lean : 기대다
+hang : 매달리다`,
     },
     {
-      heading: '어부와 작업 공간 (Fishermen & Work Area)',
-      body: `어부 : fisherman
-해산물 : seafood
-생선 : fish
-장갑 : gloves
-작업복 : workwear
-(물품 운송용 대형 나무) 상자 : crate
-바구니 : basket
-그물 : fishing net
-나르다 : carry
-분류하다 : sort`,
+      heading: '중앙 풍경 (Center Scene)',
+      body: `waiter : 웨이터
+vest : 조끼
+tray : 쟁반
+croissant : 크루아상
+gondolier : 뱃사공
+oar : 노
+hat : 모자
+passenger : 승객
+elegant : 우아한
+skilled : 능숙한
+balance : 균형 잡다
+row : 노 젓다
+glide : 미끄러지다
+deliver : 가져다주다`,
     },
     {
-      heading: '부두와 장비 (Dock & Equipment)',
-      body: `밧줄 : rope
-부표 : buoy
-통발 : lobster trap / fishing trap
-선착장 : dock
-나무 난간 : wooden railing
-엔진 : engine
-정박하다 : dock / moor ((배를) 계류[정박]하다 (=tie up))
-내리다 : unload
-쌓다 : stack
-작업하다 : work`,
+      heading: '우측 전경 (Right Foreground)',
+      body: `gentleman : 신사
+glasses : 안경
+newspaper : 신문
+cappuccino : 카푸치노
+fedora : 중절모
+pigeon : 비둘기
+crumb : 부스러기
+cane : 지팡이
+elderly : 나이 든
+absorbed : 몰두한
+leisurely : 느긋한
+unfold : 펼치다
+read : 읽다
+peck : 쪼다
+linger : 머무르다`,
     },
   ],
 };
