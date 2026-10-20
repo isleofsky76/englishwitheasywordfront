@@ -36,19 +36,23 @@
     <link rel="stylesheet" href="../../redesign-article.css?v=20261020rd23">
     <link rel="preload" href="../../redesign-article.js?v=20261020rd23" as="script">
     <style id="rd-fouc-guard">
-      /* SEO 구형 본문이 redesign 전에 깜빡이지 않도록 */
+      /* SEO 구형 본문이 redesign 전에 깜빡이지 않도록 (!important 금지: 키프레임 fallback이 무시됨) */
       body[data-nv-board]:not(.rd-ready) #post-container {
-        visibility: hidden !important;
-      }
-      @keyframes rd-fouc-fallback {
-        to { visibility: visible !important; }
-      }
-      body[data-nv-board]:not(.rd-ready) #post-container {
-        animation: rd-fouc-fallback 0s linear 4s forwards;
+        visibility: hidden;
       }
       /* QUICK REVIEW 배너 강제 숨김 */
       .rd-review { display: none !important; }
     </style>
+    <script>
+    (function () {
+      function rdReady() {
+        document.documentElement.classList.add('rd-ready');
+        if (document.body) document.body.classList.add('rd-ready');
+      }
+      /* header-only 보드가 rd-ready를 안 켜도 본문이 영구 숨김되지 않게 */
+      setTimeout(rdReady, 1200);
+    })();
+    </script>
     <noscript><style>body[data-nv-board] #post-container{visibility:visible!important}</style></noscript>
 </head>
 <body data-nv-slug="contradiction-related-words" data-nv-board="english-synonym">
