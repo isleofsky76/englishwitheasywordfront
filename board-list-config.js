@@ -148,7 +148,7 @@
       apiPath: '/wordofday',
       navGroup: 'wotd',
       tabs: null,
-      articleLayout: 'expression-cards',
+      articleLayout: 'word-detail',
       breadcrumbParent: { label: '단어장', href: 'word-of-the-day-list.html?api=prod' }
     },
     'popular-voca': {

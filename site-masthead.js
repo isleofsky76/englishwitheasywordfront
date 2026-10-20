@@ -74,27 +74,32 @@
   function currentPageKey() {
     var parts = (window.location.pathname || '').replace(/\\/g, '/').split('/').filter(Boolean);
     var last = parts[parts.length - 1] || 'index.html';
-    if (last === 'index.html' || last === '') {
-      var folder = parts[parts.length - 2] || '';
-      var map = {
-        'news-voca': 'news-voca.html',
-        'defense-news': 'defense-news.html',
-        'korea-news': 'korea-news.html',
-        'word-of-the-day': 'word-of-the-day.html',
-        'popular-voca': 'popular-voca.html',
-        'english-synonym': 'english-synonym.html',
-        'cooking-voca': 'cooking-voca.html',
-        'situational-english': 'situational-english.html',
-        'pros-cons': 'pros-cons.html',
-        'culture-voca': 'culture-voca.html',
-        'ranking-news': 'ranking-news.html',
-        'photo-english': 'photo-english.html',
-        'english-opinions': 'english-opinions.html',
-        'shorts-bg-image': 'shorts-bg-image.html',
-        'calm-mind': 'calm-mind.html',
-        'vocabulary-quiz': 'vocabulary-quiz.html'
-      };
-      return map[folder] || 'index.html';
+    var folderMap = {
+      'news-voca': 'news-voca.html',
+      'defense-news': 'defense-news.html',
+      'korea-news': 'korea-news.html',
+      'word-of-the-day': 'word-of-the-day.html',
+      'popular-voca': 'popular-voca.html',
+      'english-synonym': 'english-synonym.html',
+      'cooking-voca': 'cooking-voca.html',
+      'situational-english': 'situational-english.html',
+      'pros-cons': 'pros-cons.html',
+      'culture-voca': 'culture-voca.html',
+      'ranking-news': 'ranking-news.html',
+      'photo-english': 'photo-english.html',
+      'english-opinions': 'english-opinions.html',
+      'shorts-bg-image': 'shorts-bg-image.html',
+      'calm-mind': 'calm-mind.html',
+      'vocabulary-quiz': 'vocabulary-quiz.html'
+    };
+    /* /board/slug/ 또는 /board/slug/index.html → board html 키 */
+    if (last === 'index.html' || last === '' || !/\.html?$/i.test(last)) {
+      var folder = (last === 'index.html' || last === '')
+        ? (parts[parts.length - 2] || '')
+        : (parts[parts.length - 2] || parts[parts.length - 1] || '');
+      if (folderMap[folder]) return folderMap[folder];
+      if (folderMap[last]) return folderMap[last];
+      if (last === 'index.html' || last === '') return 'index.html';
     }
     return last.split('?')[0];
   }

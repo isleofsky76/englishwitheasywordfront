@@ -121,9 +121,9 @@ export const BOARD_SEO = {
     cssFile: 'page30_viewpost_wordofday.css',
     cssVersion: '20261020pad1',
     jsFile: 'page30_viewpost_wordofday.js',
-    jsVersion: '20261020rd28',
+    jsVersion: '20261020rd29',
     listHtml: 'word-of-the-day-list.html',
-    articleLayout: 'expression-cards',
+    articleLayout: 'word-detail',
   },
   'photo-english': {
     label: '포토영어',

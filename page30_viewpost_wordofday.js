@@ -529,7 +529,14 @@ async function loadPost() {
 
         const postContainer = document.getElementById('post-container');
         let usedRedesign = false;
-        if (typeof mountRedesignArticle === 'function') {
+        if (typeof mountRedesignWord === 'function') {
+            usedRedesign = await mountRedesignWord(postContainer, post, {
+                boardKey: 'word-of-the-day',
+                apiBaseUrl: API_BASE_URL,
+                convertedMessage: convertedMessage
+            });
+        }
+        if (!usedRedesign && typeof mountRedesignArticle === 'function') {
             usedRedesign = await mountRedesignArticle(postContainer, post, {
                 boardKey: 'word-of-the-day',
                 apiBaseUrl: API_BASE_URL,
@@ -548,11 +555,12 @@ async function loadPost() {
         }
         if (typeof markViewpostReady === 'function') markViewpostReady();
         else if (typeof markArticleReady === 'function') markArticleReady();
-        enhanceWordOfDayLayout(post);
-        // 영어 줄 뒤에 개별 스피커 아이콘 추가
-        attachWordOfDayWebTTS();
+        if (!document.body.classList.contains('rd-word')) {
+            enhanceWordOfDayLayout(post);
+            attachWordOfDayWebTTS();
+        }
 
-        if (typeof initViewpostLike === 'function') {
+        if (typeof initViewpostLike === 'function' && !document.body.classList.contains('rd-word')) {
             initViewpostLike({
                 entryId: post._id,
                 likes: post.likes,
@@ -586,9 +594,10 @@ function rdLoadScript(src) {
 (async function rdBoot() {
     const base = rdAssetBase();
     try {
-        if (!window.markViewpostReady) await rdLoadScript(base + 'viewpost-rd-ready.js?v=20261020rd28');
-        if (!window.BoardListConfig) await rdLoadScript(base + 'board-list-config.js?v=20261020rd28');
-        if (!window.mountRedesignArticle) await rdLoadScript(base + 'redesign-article.js?v=20261020rd28');
+        if (!window.markViewpostReady) await rdLoadScript(base + 'viewpost-rd-ready.js?v=20261020rd29');
+        if (!window.BoardListConfig) await rdLoadScript(base + 'board-list-config.js?v=20261020rd29');
+        if (!window.mountRedesignWord) await rdLoadScript(base + 'redesign-word.js?v=20261020rd29');
+        if (!window.mountRedesignArticle) await rdLoadScript(base + 'redesign-article.js?v=20261020rd29');
     } catch (e) { console.warn(e); }
     loadPost();
 })();
