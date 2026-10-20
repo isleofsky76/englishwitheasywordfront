@@ -38,13 +38,16 @@ export function buildShortsBgImageMessage(config) {
     throw new Error('sections 또는 description(풍경 묘사)가 필요합니다.');
   }
 
+  // alt에 줄바꿈이 들어가면 <img> 속성이 깨져 이미지가 안 보임 → title 우선, 공백으로 정규화
   const altSource =
     config.alt ||
-    sections[0]?.body ||
-    fallbackText ||
     config.title ||
+    sections[0]?.heading ||
+    fallbackText ||
     'Shorts background';
-  const alt = escapeHtmlAttr(String(altSource).slice(0, 120));
+  const alt = escapeHtmlAttr(
+    String(altSource).replace(/\s+/g, ' ').trim().slice(0, 120)
+  );
   const src = escapeHtmlAttr(image);
 
   const bodyHtml = sections.length
