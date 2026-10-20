@@ -7,8 +7,9 @@ body.sbgi-article {
   --sbgi-border: var(--line, #D9D3C6);
   --sbgi-text: var(--ink, #16181D);
   --sbgi-muted: var(--ink-muted, #5A5F69);
-  --sbgi-image-max-w: min(100%, 26.25rem);
-  --sbgi-image-max-h: min(84vh, 780px);
+  /* 본문 폭에 맞춤 — 어두운 프레임/좁은 rem 캡 제거 */
+  --sbgi-image-max-w: 100%;
+  --sbgi-image-max-h: min(72vh, 640px);
 }
 
 body.sbgi-article {
@@ -66,11 +67,11 @@ body.sbgi-article #post-title {
   position: relative;
   width: 100%;
   max-width: var(--sbgi-image-max-w);
-  margin: 0.75rem auto 1.25rem;
-  border-radius: 14px;
-  overflow: hidden;
-  background: #111827;
-  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.12);
+  margin: 0.5rem 0 1.35rem;
+  border-radius: 0;
+  overflow: visible;
+  background: transparent;
+  box-shadow: none;
 }
 
 #post-message .sbgi-image-wrap img {
@@ -78,8 +79,10 @@ body.sbgi-article #post-title {
   width: 100%;
   height: auto;
   max-height: var(--sbgi-image-max-h);
+  margin: 0 auto;
   object-fit: contain;
   object-position: center;
+  border-radius: 0;
 }
 
 #post-message .sbgi-scenes {
@@ -271,19 +274,40 @@ body.sbgi-article #post-title {
   }
 }
 
-@media (min-width: 992px) {
+@media (min-width: 768px) {
   .sbgi-page,
   body.sbgi-article {
-    --sbgi-image-max-w: min(100%, 28rem);
-    --sbgi-image-max-h: min(88vh, 820px);
+    --sbgi-image-max-w: 100%;
+    --sbgi-image-max-h: min(82vh, 900px);
+  }
+
+  body.sbgi-article #post-container {
+    max-width: 860px;
+  }
+}
+
+@media (min-width: 1100px) {
+  .sbgi-page,
+  body.sbgi-article {
+    --sbgi-image-max-h: min(86vh, 980px);
+  }
+
+  body.sbgi-article #post-container {
+    max-width: 960px;
+  }
+
+  .sbgi-post-body,
+  #post-message.sbgi-post-body,
+  #post-message {
+    max-width: 52rem;
   }
 }
 
 @media (max-width: 576px) {
   .sbgi-page,
   body.sbgi-article {
-    --sbgi-image-max-w: min(94vw, 24rem);
-    --sbgi-image-max-h: min(93.6vh, 864px);
+    --sbgi-image-max-w: 100%;
+    --sbgi-image-max-h: min(70vh, 560px);
   }
 
   body.sbgi-article #post-container {
