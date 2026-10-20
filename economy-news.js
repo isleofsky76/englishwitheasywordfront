@@ -621,6 +621,16 @@ function showError(message, details = '') {
     `;
 }
 
+async function loadEconomyStaticFeedEntries() {
+    const res = await fetch('/economy-news/feed.json', { cache: 'no-store' });
+    if (!res.ok) throw new Error(`static feed HTTP ${res.status}`);
+    const data = await res.json();
+    if (Array.isArray(data)) return data;
+    if (data && Array.isArray(data.entries)) return data.entries;
+    if (data && Array.isArray(data.data)) return data.data;
+    return [];
+}
+
 async function loadPost() {
     const params = new URLSearchParams(window.location.search);
     const slug = window.ViewpostSeo
@@ -639,51 +649,57 @@ async function loadPost() {
         let post = null;
 
         if (slug) {
-            const slugUrl = `${API_BASE_URL}/economy-news/by-slug/${encodeURIComponent(slug)}`;
-            const slugRes = await fetch(slugUrl);
-            if (slugRes.ok) {
-                post = (await slugRes.json()).entry;
-            } else if (!index) {
+            try {
+                const slugUrl = `${API_BASE_URL}/economy-news/by-slug/${encodeURIComponent(slug)}`;
+                const slugRes = await fetch(slugUrl);
+                if (slugRes.ok) {
+                    post = (await slugRes.json()).entry;
+                }
+            } catch (slugErr) {
+                console.warn('slug API 실패:', slugErr);
+            }
+            if (!post) {
+                try {
+                    const entries = await loadEconomyStaticFeedEntries();
+                    post = entries.find((e) => e && e.slug === slug) || null;
+                    if (post) console.warn('⚠️ API 실패 — 정적 피드에서 slug 로드');
+                } catch (feedErr) {
+                    console.warn('정적 피드 slug 로드 실패:', feedErr);
+                }
+            }
+            if (!post && !index) {
                 showError('게시글을 찾을 수 없습니다', `slug "${slug}"에 해당하는 글이 없습니다.`);
                 return;
             }
         }
 
         if (!post) {
-        const url = `${API_BASE_URL}/economy-news`;
-        console.log('📡 API 요청 URL:', url);
-        const response = await fetch(url);
-        console.log('📥 응답 상태:', response.status, response.statusText);
-
-        if (!response.ok) {
-            if (response.status === 503) {
-                const errorData = await response.json();
-                showError('데이터베이스 연결 오류', 
-                    `${errorData.error || 'MongoDB 연결이 되지 않았습니다.'}<br><br>
-                    <strong>해결 방법:</strong><br>
-                    1. MongoDB 서비스가 실행 중인지 확인<br>
-                    2. backend/.env 파일의 MONGO_URI 설정 확인<br>
-                    3. 백엔드 서버를 재시작`);
-                return;
-            }
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const messages = await response.json();
-        console.log('📦 응답 데이터:', messages);
-
-        // API 응답 형식 확인 및 정규화
         let entries = [];
-        if (Array.isArray(messages)) {
-            entries = messages;
-        } else if (messages.entries && Array.isArray(messages.entries)) {
-            entries = messages.entries;
-        } else if (messages.data && Array.isArray(messages.data)) {
-            entries = messages.data;
-        } else {
-            console.error('⚠️ 예상치 못한 응답 형식:', messages);
-            showError('게시글을 불러올 수 없습니다', '서버 응답 형식이 올바르지 않습니다.');
-            return;
+        let usedStatic = false;
+        try {
+            const url = `${API_BASE_URL}/economy-news`;
+            console.log('📡 API 요청 URL:', url);
+            const response = await fetch(url);
+            console.log('📥 응답 상태:', response.status, response.statusText);
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const messages = await response.json();
+            if (Array.isArray(messages)) {
+                entries = messages;
+            } else if (messages.entries && Array.isArray(messages.entries)) {
+                entries = messages.entries;
+            } else if (messages.data && Array.isArray(messages.data)) {
+                entries = messages.data;
+            } else {
+                throw new Error('bad-format');
+            }
+        } catch (listErr) {
+            console.warn('목록 API 실패 — 정적 피드 시도:', listErr.message);
+            entries = await loadEconomyStaticFeedEntries();
+            usedStatic = true;
         }
 
         const indexNum = parseInt(index, 10);
@@ -697,8 +713,6 @@ async function loadPost() {
             return;
         }
 
-        // 목록에서 전달된 index는 원본 배열 기준이므로 직접 사용
-        // 목록에서는 역순으로 표시하지만, index는 total - 1 - idx로 계산되어 원본 배열의 인덱스입니다
         post = entries[indexNum];
         
         if (!post) {
@@ -706,7 +720,7 @@ async function loadPost() {
             return;
         }
         
-        console.log(`📌 인덱스 ${indexNum}로 게시글 찾기 (총 ${entries.length}개)`);
+        console.log(`📌 인덱스 ${indexNum}로 게시글 찾기 (총 ${entries.length}개)${usedStatic ? ' [static feed]' : ''}`);
         window.currentIndex = indexNum;
         }
 

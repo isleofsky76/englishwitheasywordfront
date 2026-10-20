@@ -86,6 +86,23 @@
     ];
   }
 
+  var STATIC_FEED_BY_PATH = {
+    '/economy-news': '/economy-news/feed.json'
+  };
+
+  function fetchStaticFeedEntries(board) {
+    var feedUrl = STATIC_FEED_BY_PATH[board.path];
+    if (!feedUrl) return Promise.reject(new Error('no static feed'));
+    return fetch(feedUrl, { cache: 'no-store' })
+      .then(function (r) {
+        if (!r.ok) throw new Error('static feed HTTP ' + r.status);
+        return r.json();
+      })
+      .then(function (data) {
+        return parseEntries(data);
+      });
+  }
+
   function fetchAllPreviewEntries(apiBase, boards, apiMode) {
     return Promise.allSettled(boards.map(function (board) {
       return fetch(apiBase + board.path)
@@ -97,6 +114,13 @@
           var entries = parseEntries(data);
           boardEntriesCache[board.path] = entries;
           return { board: board, entries: entries };
+        })
+        .catch(function (err) {
+          return fetchStaticFeedEntries(board).then(function (entries) {
+            console.warn('home preview: API 실패 → 정적 피드', board.path, err && err.message);
+            boardEntriesCache[board.path] = entries;
+            return { board: board, entries: entries };
+          });
         });
     })).then(function (results) {
       var combined = [];

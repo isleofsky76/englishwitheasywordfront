@@ -52,7 +52,7 @@ export const BOARD_SEO = {
     cssFile: 'news-voca.css',
     cssVersion: '20261020rd21',
     jsFile: 'economy-news.js',
-    jsVersion: '20261020auto2',
+    jsVersion: '20261020feed1',
     listHtml: 'economy-news-list.html',
   },
   'korea-news': {

@@ -9,8 +9,44 @@
  *
  * 본문 HTML은 국제뉴스(news-voca)와 동일한 nv-* 마크업을 씁니다.
  */
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import { buildNewsVocaMessage } from './news-voca-format.js';
-import { applySeoAfterUpload, toIsoDateOnly } from './voca-seo.js';
+import { applySeoAfterUpload, toIsoDateOnly, FRONTEND_ROOT } from './voca-seo.js';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const FEED_PATH = path.join(FRONTEND_ROOT || path.join(__dirname, '../..'), 'economy-news', 'feed.json');
+
+function upsertStaticFeed(entry) {
+  fs.mkdirSync(path.dirname(FEED_PATH), { recursive: true });
+  let feed = { entries: [] };
+  try {
+    if (fs.existsSync(FEED_PATH)) {
+      feed = JSON.parse(fs.readFileSync(FEED_PATH, 'utf8'));
+      if (!Array.isArray(feed.entries)) feed.entries = [];
+    }
+  } catch (_) {
+    feed = { entries: [] };
+  }
+  const slug = entry.slug || '';
+  feed.entries = feed.entries.filter((e) => e && e.slug !== slug);
+  feed.entries.push({
+    _id: entry._id || `static-${slug || Date.now()}`,
+    title: entry.title,
+    message: entry.message,
+    slug: entry.slug || '',
+    metaDescription: entry.metaDescription || '',
+    date: entry.date || new Date().toISOString(),
+    views: entry.views || 0,
+    likes: entry.likes || 0,
+    nickname: entry.nickname || 'admin',
+    isSecret: false,
+  });
+  fs.writeFileSync(FEED_PATH, JSON.stringify(feed, null, 2), 'utf8');
+  console.log(`  정적 피드: ${FEED_PATH}`);
+  return FEED_PATH;
+}
 
 async function parseApiJson(res, label) {
   const ct = res.headers.get('content-type') || '';
@@ -76,35 +112,57 @@ export async function uploadEconomyNews(config, apiBase) {
         console.log(`  삭제할 기존 글 없음. (${elapsed()})`);
       }
     } catch (e) {
-      if (/JSON이 아닌 응답/.test(e.message)) {
-        console.warn('  ⚠️ delete-by-slug API 미배포 — 목록에서 같은 slug를 찾아 삭제합니다.');
-        await deleteMatchingEntries(apiBase, config);
+      if (/JSON이 아닌 응답|HTTP 404|404/.test(String(e.message || ''))) {
+        console.warn('  ⚠️ delete-by-slug API 미배포 — 삭제 생략 후 SEO·정적 피드로 계속합니다.');
       } else {
         throw e;
       }
     }
   } else {
     console.log('  기존 글 삭제 중 (동일 비밀번호)...');
-    await deleteMatchingEntries(apiBase, config);
+    try {
+      await deleteMatchingEntries(apiBase, config);
+    } catch (e) {
+      if (/JSON이 아닌 응답|HTTP 404|404/.test(String(e.message || ''))) {
+        console.warn('  ⚠️ 목록 API 미배포 — 삭제 생략.');
+      } else {
+        throw e;
+      }
+    }
   }
 
   const payloadKb = (JSON.stringify(post).length / 1024).toFixed(1);
   console.log(`  서버에 업로드 중... (${payloadKb} KB)`);
 
-  const res = await fetch(`${apiBase}/economy-news`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-    body: JSON.stringify(post),
-    signal: AbortSignal.timeout(180000),
-  });
+  let savedEntry = null;
+  try {
+    const res = await fetch(`${apiBase}/economy-news`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify(post),
+      signal: AbortSignal.timeout(180000),
+    });
 
-  const data = await parseApiJson(res, 'POST /economy-news');
-  if (!res.ok) {
-    console.log('  실패:', data.error || res.status);
-    throw new Error(data.error || `HTTP ${res.status}`);
+    if (res.status === 404) {
+      console.warn(
+        '  ⚠️ Cloudtype에 /economy-news API가 아직 없습니다. SEO·정적 피드만 갱신합니다. 백엔드 재배포 후 다시 업로드하세요.'
+      );
+    } else {
+      const data = await parseApiJson(res, 'POST /economy-news');
+      if (!res.ok) {
+        console.log('  실패:', data.error || res.status);
+        throw new Error(data.error || `HTTP ${res.status}`);
+      }
+      savedEntry = data.entry || null;
+      console.log(`  "${post.title}" 추가됨 (${elapsed()})`);
+    }
+  } catch (e) {
+    if (/JSON이 아닌 응답|HTTP 404|404/.test(String(e.message || ''))) {
+      console.warn('  ⚠️ API 업로드 생략:', e.message);
+    } else {
+      throw e;
+    }
   }
-
-  console.log(`  "${post.title}" 추가됨 (${elapsed()})`);
 
   const seo = applySeoAfterUpload('economy-news', {
     title: config.title,
@@ -118,6 +176,18 @@ export async function uploadEconomyNews(config, apiBase) {
     console.log(`  sitemap: ${seo.sitemapPath}`);
     console.log(`  URL: ${seo.url}`);
   }
+
+  upsertStaticFeed({
+    _id: savedEntry?._id,
+    title: config.title,
+    message: post.message,
+    slug: config.slug,
+    metaDescription: config.metaDescription,
+    date: datePublished,
+    views: savedEntry?.views || 0,
+    likes: savedEntry?.likes || 0,
+    nickname: post.nickname,
+  });
 }
 
 async function deleteMatchingEntries(apiBase, config) {

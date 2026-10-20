@@ -980,61 +980,53 @@ document.addEventListener('DOMContentLoaded', () => {
             
             const messages = await response.json();
             console.log('📦 응답 데이터:', messages);
-            console.log('📦 응답 데이터 타입:', typeof messages);
-            console.log('📦 entries 존재 여부:', messages.entries ? '있음' : '없음');
-            console.log('📦 entries 타입:', Array.isArray(messages.entries) ? '배열' : typeof messages.entries);
             
-            // 서버에서 에러 메시지가 있는 경우
             if (messages.error) {
                 showError(list, '데이터베이스 연결 오류', 
                     `${messages.error}${messages.details ? `<br>상세: ${messages.details}` : ''}`);
                 return;
             }
             
-            // API 응답 형식 확인 및 정규화
-            let normalizedMessages = messages;
-            if (Array.isArray(messages)) {
-                // 배열로 직접 반환된 경우
-                normalizedMessages = { entries: messages };
-            } else if (!messages.entries && messages.data) {
-                // data 필드에 있는 경우
-                normalizedMessages = { entries: Array.isArray(messages.data) ? messages.data : [] };
-            } else if (!messages.entries) {
-                // entries가 없는 경우
-                console.warn('⚠️ 예상치 못한 응답 형식:', messages);
-                normalizedMessages = { entries: [] };
-            }
-            
-            // 캐시 업데이트
+            const normalizedMessages = normalizeEconomyListPayload(messages);
             cache.messages = normalizedMessages;
             cache.lastFetch = Date.now();
-            
-            // 메시지 렌더링
             renderMessages(normalizedMessages, list);
             
         } catch (error) {
             console.error('❌ Error while loading messages:', error);
-            console.error('❌ Error details:', {
-                name: error.name,
-                message: error.message,
-                stack: error.stack
-            });
-            
+            try {
+                const staticFeed = await loadEconomyStaticFeed();
+                if (staticFeed && staticFeed.entries && staticFeed.entries.length) {
+                    console.warn('⚠️ API 실패 — 정적 피드로 표시:', error.message);
+                    cache.messages = staticFeed;
+                    cache.lastFetch = Date.now();
+                    renderMessages(staticFeed, list);
+                    return;
+                }
+            } catch (feedErr) {
+                console.warn('정적 피드 로드 실패:', feedErr);
+            }
+
             let errorMessage = `요청 URL: <code>${API_BASE_URL}/economy-news</code><br><br>`;
             errorMessage += `<a href="${API_BASE_URL}/healthz" target="_blank" rel="noopener">healthz로 서버 응답 확인</a> · 페이지 새로고침을 한 번 더 해보세요.<br><br>`;
-
-            if (error.name === 'TypeError' && String(error.message || '').includes('fetch')) {
-                errorMessage += '<strong>이 메시지가 나오는 흔한 이유</strong><br>';
-                errorMessage += '1. Cloudtype 백엔드가 꺼져 있거나 503인데, 프록시 응답에 CORS 헤더가 없어 브라우저가 내용을 숨김 → <code>Failed to fetch</code>만 보임<br>';
-                errorMessage += '2. 배포한 <code>backend/index.js</code>가 최신인지, <code>MONGO_URI</code>가 서버에 설정됐는지 확인<br>';
-                errorMessage += '3. 로컬에서는 주소에서 <code>?api=prod</code>를 빼면 <code>http://127.0.0.1:3000</code>으로 붙습니다(로컬에서 <code>node index.js</code> 실행)<br>';
-                errorMessage += '4. 사이트 도메인이 CORS 허용 목록에 있는지(배포한 index.js의 CORS) 확인';
-            } else {
-                errorMessage += `<strong>에러:</strong> ${error.message}`;
-            }
-            
+            errorMessage += `<strong>에러:</strong> ${error.message}`;
             showError(list, '게시글을 불러올 수 없습니다', errorMessage);
         }
+    }
+
+    function normalizeEconomyListPayload(messages) {
+        if (Array.isArray(messages)) return { entries: messages };
+        if (messages && Array.isArray(messages.entries)) return messages;
+        if (messages && messages.data) {
+            return { entries: Array.isArray(messages.data) ? messages.data : [] };
+        }
+        return { entries: [] };
+    }
+
+    async function loadEconomyStaticFeed() {
+        const res = await fetch('/economy-news/feed.json', { cache: 'no-store' });
+        if (!res.ok) throw new Error(`static feed HTTP ${res.status}`);
+        return normalizeEconomyListPayload(await res.json());
     }
     
         function renderMessages(messages, container) {
