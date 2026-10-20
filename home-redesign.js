@@ -130,6 +130,7 @@
       guestbook: { page: 'news-voca.html', postPath: 'news-voca', label: '국제' },
       'korea-news': { page: 'korea-news.html', postPath: 'korea-news', label: '한국' },
       'defense-news': { page: 'defense-news.html', postPath: 'defense-news', label: '국방' },
+      'economy-news': { page: 'economy-news.html', postPath: 'economy-news', label: '경제' },
       wordofday: { page: 'word-of-the-day.html', postPath: 'word-of-the-day', label: '단어장' },
       'vocabulary-quiz': { page: 'vocabulary-quiz.html', label: '퀴즈' },
       'easy-voca': { page: 'popular-voca.html', postPath: 'popular-voca', label: '표현' },
@@ -212,7 +213,7 @@
       '</div>';
   }
 
-  function mixNews(intl, korea, defense) {
+  function mixNews(intl, korea, defense, economy) {
     var items = [];
     function push(list, label, board, take) {
       reverseSlice(list, take).forEach(function (entry, i) {
@@ -229,9 +230,10 @@
         });
       });
     }
-    push(intl, '국제', 'guestbook', 4);
-    push(korea, '한국', 'korea-news', 3);
-    push(defense, '국방', 'defense-news', 3);
+    push(intl, '국제', 'guestbook', 3);
+    push(korea, '한국', 'korea-news', 2);
+    push(defense, '국방', 'defense-news', 2);
+    push(economy, '경제', 'economy-news', 3);
     items.sort(function (a, b) {
       return new Date(b.date || 0) - new Date(a.date || 0);
     });
@@ -342,6 +344,7 @@
       fetchEntries('/guestbook'),
       fetchEntries('/korea-news'),
       fetchEntries('/defense-news'),
+      fetchEntries('/economy-news'),
       fetchEntries('/vocabulary-quiz'),
       fetchEntries('/easy-voca'),
       fetchEntries('/opinions'),
@@ -353,17 +356,18 @@
       var intl = results[1] || [];
       var korea = results[2] || [];
       var defense = results[3] || [];
-      var quiz = results[4] || [];
-      var phrases = results[5] || [];
-      var opinions = results[6] || [];
-      var culture = results[7] || [];
-      var calm = results[8] || [];
-      var quotes = results[9] || [];
+      var economy = results[4] || [];
+      var quiz = results[5] || [];
+      var phrases = results[6] || [];
+      var opinions = results[7] || [];
+      var culture = results[8] || [];
+      var calm = results[9] || [];
+      var quotes = results[10] || [];
 
       var w = latest(wotd);
       if (w) renderHeroWord(w, wotd.length - 1);
 
-      renderNews(mixNews(intl, korea, defense));
+      renderNews(mixNews(intl, korea, defense, economy));
       renderQuiz(quiz);
       renderPhrases(phrases);
       renderReadingCol('rd-read-opinions', 'english-opinions-list.html', '오피니언', opinions, 'opinions');

@@ -9,6 +9,7 @@
     { key: 'news-voca', label: '국제', href: 'news-voca-list.html' },
     { key: 'korea-news', label: '한국', href: 'korea-news-list.html' },
     { key: 'defense-news', label: '국방', href: 'defense-news-list.html' },
+    { key: 'economy-news', label: '경제', href: 'economy-news-list.html' },
     { key: 'culture-voca', label: '컬쳐', href: 'culture-voca-list.html' },
     { key: 'ranking-news', label: '랭킹', href: 'ranking-news-list.html' }
   ];
@@ -61,6 +62,23 @@
       postPath: 'defense-news',
       board: 'defense-news',
       apiPath: '/defense-news',
+      navGroup: 'news',
+      tabs: NEWS_TABS,
+      articleLayout: 'auto',
+      breadcrumbParent: { label: '뉴스 영어', href: 'news-voca-list.html' }
+    },
+    'economy-news': {
+      key: 'economy-news',
+      labelEn: 'ECONOMY NEWS',
+      title: '경제 뉴스',
+      description: '경제·금융·비즈니스 영문 기사의 핵심 표현을 원문과 함께 읽습니다.',
+      tabLabel: '경제',
+      categoryLabel: '경제',
+      listPage: 'economy-news-list.html',
+      postPage: 'economy-news.html',
+      postPath: 'economy-news',
+      board: 'economy-news',
+      apiPath: '/economy-news',
       navGroup: 'news',
       tabs: NEWS_TABS,
       articleLayout: 'auto',

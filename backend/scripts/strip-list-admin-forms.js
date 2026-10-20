@@ -14,6 +14,7 @@ const ROOT = path.join(__dirname, '..', '..');
 const LIST_FILES = [
   'news-voca-list.html',
   'defense-news-list.html',
+  'economy-news-list.html',
   'korea-news-list.html',
   'cooking-voca-list.html',
   'culture-voca-list.html',
