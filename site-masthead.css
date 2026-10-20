@@ -328,6 +328,12 @@
 }
 
 @media (max-width: 900px) {
+  /* 모바일: 로고·메뉴가 화면 상단에 붙지 않도록 */
+  .site-masthead-bar {
+    padding: max(14px, env(safe-area-inset-top, 0px)) 16px 10px;
+    min-height: 0;
+    gap: 12px;
+  }
   .site-masthead-mobile-toggle {
     display: inline-flex;
     flex-direction: column;
