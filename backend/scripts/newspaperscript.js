@@ -1,9 +1,11 @@
 /**
- * 신문읽는 이미지(shorts-bg-image) 업로드
+ * 신문읽는 이미지(shorts-bg-image) 업로드 (수동)
  *
  * 사용법: 아래 article 만 수정 → node scripts/newspaperscript.js
  *
  * 노출 양식: 이미지(9:16) + 섹션별 「english : 한글」 단어 목록
+ *
+ * 이미지 이름만으로 AI 배치 업로드: newspaperscript_batch.js
  */
 import { API_BASE } from './loadEnv.js';
 import { uploadShortsBgImage } from './shorts-bg-image-format.js';
