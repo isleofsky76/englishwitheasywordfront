@@ -46,7 +46,11 @@ function sanitizeHtml(html) {
     div.innerHTML = html;
     
     // 허용된 태그와 속성
-    const allowedTags = ['p', 'br', 'strong', 'b', 'em', 'i', 'u', 'span', 'div', 'a', 'img', 'button'];
+    /* h2/h3/mark 유지 — 오피니언 단어 카드 redesign·TTS 구조에 필요 */
+    const allowedTags = [
+      'p', 'br', 'strong', 'b', 'em', 'i', 'u', 'span', 'div', 'a', 'img', 'button',
+      'h2', 'h3', 'h4', 'mark', 'hr', 'ul', 'ol', 'li'
+    ];
     const allowedAttributes = [
         'style', 'href', 'target', 'rel', 'src', 'alt', 'loading', 'decoding', 'onerror',
         'type', 'class', 'aria-label', 'title', 'data-vv-tts',
@@ -459,26 +463,26 @@ async function loadPost() {
         const metaHtml = typeof buildPostMetaHtml === 'function'
             ? buildPostMetaHtml(post)
             : '';
-        // HTML 구조 재생성
-                let usedRedesign = false;
+        let usedRedesign = false;
         if (typeof mountRedesignArticle === 'function') {
             usedRedesign = await mountRedesignArticle(postContainer, post, {
                 boardKey: 'english-opinions',
                 apiBaseUrl: API_BASE_URL,
+                /* sanitize 전 원문도 파싱 가능하도록 — convertMediaLinks는 yt/링크 보강용 */
                 convertedMessage: convertedMessage
             });
         }
-        if (!usedRedesign) {postContainer.innerHTML = `
+        if (!usedRedesign) {
+            postContainer.innerHTML = `
             <div id="post-header">
                 <h2 id="post-title">${escapeHtml(post.title || '제목 없음')}</h2>
                 ${metaHtml}
             </div>
             <div id="post-content">
-                <p id="post-message">${convertedMessage || '<span style="color: #999;">내용이 없습니다.</span>'}</p>
+                <div id="post-message" class="post-message-body">${convertedMessage || '<span style="color: #999;">내용이 없습니다.</span>'}</div>
             </div>
         `;
-        
-                }
+        }
         if (typeof markArticleReady === 'function') markArticleReady();
 
         // 게시글 내용 복사 시 HTML 태그 제거하고 순수 텍스트만 복사
@@ -537,8 +541,8 @@ function rdLoadScript(src) {
 (async function rdBoot() {
     const base = rdAssetBase();
     try {
-        if (!window.BoardListConfig) await rdLoadScript(base + 'board-list-config.js?v=20261020auto2');
-        if (!window.mountRedesignArticle) await rdLoadScript(base + 'redesign-article.js?v=20261020rd21');
+        if (!window.BoardListConfig) await rdLoadScript(base + 'board-list-config.js?v=20261020op2');
+        if (!window.mountRedesignArticle) await rdLoadScript(base + 'redesign-article.js?v=20261020rd22');
     } catch (e) { console.warn(e); }
     loadPost();
 })();

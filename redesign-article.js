@@ -5,7 +5,7 @@
 (function (global) {
   'use strict';
 
-  var ASSET_VER = '20261020rd21';
+  var ASSET_VER = '20261020rd22';
 
   /** 캐시된 구버전 JS가 그려도 QUICK REVIEW 즉시 제거 */
   function stripQuickReview() {
@@ -122,7 +122,8 @@
   function extractSourceLink(html) {
     var m = String(html || '').match(
       /class=["'][^"']*nv-related-link--article[^"']*["'][^>]*href=["']([^"']+)["']/i
-    ) || String(html || '').match(/href=["'](https?:\/\/[^"']+)["'][^>]*>[\s\S]*?신문보기/i);
+    ) || String(html || '').match(/href=["'](https?:\/\/[^"']+)["'][^>]*>[\s\S]*?신문\s*보기/i) ||
+      String(html || '').match(/href=["'](https?:\/\/[^"']+)["'][^>]*>[\s\S]*?신문보기/i);
     return m ? m[1] : '';
   }
 
@@ -132,6 +133,18 @@
     if (!root) return '';
     var lead = root.querySelector('.nv-lead-text, .nv-lead p');
     if (lead) return stripHtml(lead.innerHTML);
+    var headings = root.querySelectorAll('h2');
+    for (var i = 0; i < headings.length; i += 1) {
+      if (!/한\s*줄\s*요약/.test(headings[i].textContent || '')) continue;
+      var next = headings[i].nextElementSibling;
+      while (next && next.tagName !== 'P' && next.tagName !== 'H2' && next.tagName !== 'H3') {
+        next = next.nextElementSibling;
+      }
+      if (next && next.tagName === 'P') {
+        var t = stripHtml(next.innerHTML);
+        if (t) return t.length > 200 ? t.slice(0, 197) + '…' : t;
+      }
+    }
     return '';
   }
 
@@ -173,6 +186,64 @@
       if (cfMeaning && cfMeaning.toLowerCase() !== word.toLowerCase()) return cfMeaning;
     }
     return '';
+  }
+
+  /** 오피니언형: h3(단어 : 뜻) + p(영문 / 해석: 한글) */
+  function parseHeadingCards(root) {
+    var cards = [];
+    if (!root) return cards;
+    var headings = root.querySelectorAll('h3');
+    headings.forEach(function (h3) {
+      var strong = h3.querySelector('strong');
+      var expression = strong ? stripHtml(strong.innerHTML).trim() : '';
+      var headText = stripHtml(h3.innerHTML).replace(/\s+/g, ' ').trim();
+      if (!expression) {
+        var bare = headText.replace(/^[0-9]+[.)]\s*/, '').replace(/^[^\w]*\s*/, '');
+        var mWord = bare.match(/^([A-Za-z][A-Za-z0-9'\/.\s-]{0,60}?)(?:\s*\/|\s*\(|\s*:)/);
+        if (mWord) expression = mWord[1].replace(/\s+/g, ' ').trim();
+      }
+      if (!expression) return;
+
+      var meaning = '';
+      var colon = headText.lastIndexOf(':');
+      if (colon >= 0) {
+        meaning = headText.slice(colon + 1).replace(/\s+/g, ' ').trim();
+      }
+
+      var p = h3.nextElementSibling;
+      while (p && p.tagName !== 'P' && p.tagName !== 'H3' && p.tagName !== 'H2') {
+        p = p.nextElementSibling;
+      }
+      var enHtml = '';
+      var ko = '';
+      if (p && p.tagName === 'P') {
+        var html = p.innerHTML || '';
+        var split = html.split(/<br\s*\/?>\s*해석\s*:/i);
+        var enPart = split[0] || '';
+        var koPart = split.length > 1 ? split.slice(1).join(' ') : '';
+        if (split.length < 2) {
+          var plain = stripHtml(html);
+          var idx = plain.indexOf('해석:');
+          if (idx >= 0) {
+            enPart = plain.slice(0, idx);
+            koPart = plain.slice(idx + 3);
+          }
+        }
+        var enPlain = stripHtml(enPart).replace(/\s+/g, ' ').trim();
+        enHtml = enPlain ? highlightPhrase(enPlain, expression) : '';
+        ko = stripHtml(koPart).replace(/^해석\s*:\s*/i, '').replace(/\s+/g, ' ').trim();
+      }
+
+      if (!enHtml && !ko && !meaning) return;
+      cards.push({
+        expression: expression,
+        meaning: meaning,
+        moreExprs: [],
+        enHtml: enHtml,
+        ko: ko
+      });
+    });
+    return cards;
   }
 
   function parseCards(root) {
@@ -257,6 +328,10 @@
       });
     });
 
+    if (!cards.length) {
+      cards = parseHeadingCards(root);
+    }
+
     return cards.map(function (card, i) {
       return {
         id: 'rd-expr-' + (i + 1),
@@ -327,19 +402,29 @@
     return !!(cfg && (cfg.articleLayout === 'expression-cards' || cfg.articleLayout === 'auto'));
   }
 
-  /** staggered형: nv-narrative 섹션 + 실제 표현 카드가 있을 때만 카드 UI */
-  function isNarrativeCardCapable(parser, cards) {
-    if (!parser || !cards || !cards.length) return false;
-    var narrative = parser.querySelector(
-      '.nv-word-section.nv-narrative, .nv-narrative-text, .nv-narrative-def'
-    );
-    if (!narrative) return false;
+  function cardsHaveContent(cards) {
+    if (!cards || !cards.length) return false;
     for (var i = 0; i < cards.length; i += 1) {
       var c = cards[i];
       if (!c || !c.expression || c.expression === '표현') return false;
-      if (!c.ko && !c.enHtml) return false;
+      if (!c.ko && !c.enHtml && !c.meaning) return false;
     }
     return true;
+  }
+
+  /** staggered형: nv-narrative — 뜻은 옆이 아니라 문장/cf. */
+  function isNarrativeCardCapable(parser, cards) {
+    if (!parser || !cardsHaveContent(cards)) return false;
+    return !!parser.querySelector(
+      '.nv-word-section.nv-narrative, .nv-narrative-text, .nv-narrative-def'
+    );
+  }
+
+  /** auto: narrative 또는 오피니언 h3 카드 구조 */
+  function isExpressionCardCapable(parser, cards) {
+    if (!cardsHaveContent(cards)) return false;
+    if (isNarrativeCardCapable(parser, cards)) return true;
+    return !!parser.querySelector('h3 strong, h3');
   }
 
   function renderCardHtml(card, opts) {
@@ -393,8 +478,8 @@
       });
     }
 
-    /* auto: narrative(staggered) 구조가 아니면 classic 본문으로 폴백 */
-    if (cfg.articleLayout === 'auto' && !isNarrativeCardCapable(parser, cards)) return false;
+    /* auto: 카드 파싱 가능한 구조만 redesign, 아니면 classic */
+    if (cfg.articleLayout === 'auto' && !isExpressionCardCapable(parser, cards)) return false;
     if (cfg.articleLayout === 'expression-cards' && !cards.length) return false;
 
     ensureCss();

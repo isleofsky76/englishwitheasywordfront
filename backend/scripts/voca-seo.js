@@ -85,7 +85,7 @@ export const BOARD_SEO = {
     cssFile: 'page30_viewpost_opinions.css',
     cssVersion: '20260816a',
     jsFile: 'page30_viewpost_opinions.js',
-    jsVersion: '20261020auto2',
+    jsVersion: '20261020op2',
     listHtml: 'english-opinions-list.html',
   },
   'calm-mind': {
@@ -304,9 +304,9 @@ ${(board.extraCss || []).map((c) => `    <link rel="stylesheet" href="../../${c.
     <link rel="stylesheet" href="../../navbar-unified.css?v=20260612c">
     <link rel="stylesheet" href="../../weather-banner.css?v=20260612g">
     <link rel="stylesheet" href="../../world-clock.css?v=20260612g">
-    <link rel="stylesheet" href="../../redesign-tokens.css?v=20261020rd21">
-    <link rel="stylesheet" href="../../redesign-article.css?v=20261020rd21">
-    <link rel="preload" href="../../redesign-article.js?v=20261020rd21" as="script">
+    <link rel="stylesheet" href="../../redesign-tokens.css?v=20261020rd22">
+    <link rel="stylesheet" href="../../redesign-article.css?v=20261020rd22">
+    <link rel="preload" href="../../redesign-article.js?v=20261020rd22" as="script">
     <style id="rd-fouc-guard">
       /* SEO 구형 본문이 redesign 전에 깜빡이지 않도록 */
       body[data-nv-board]:not(.rd-ready) #post-container {
