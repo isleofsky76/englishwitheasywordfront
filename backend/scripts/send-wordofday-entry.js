@@ -28,24 +28,24 @@ import { applySeoAfterUpload, toIsoDateOnly, SITE_ORIGIN } from './voca-seo.js';
 // ========== 여기만 수정 ==========
 // redesign-word 시안용: .wotd-word / .wotd-core / .wotd-ex / .wotd-col …
 
-const imageSrc = '/resources/thwart.jpg';
+const imageSrc = '/resources/leafy.jpg';
 
 const entry = {
-  title: 'thwart | 좌절시키다, 방해하다',
+  title: 'leafy | 녹음이 우거진',
 
   // 태그 사이 빈 줄/개행 넣지 말 것
-  message: `<div class="wotd-word"><img class="wotd-hero-image" src="${imageSrc}" alt="thwart" loading="lazy"><span class="wotd-ipa">/θwɔːrt/</span><span class="wotd-ipa-ko">스워트</span><div class="wotd-pos" data-pos="동사" data-primary="1"><span class="wotd-meaning">좌절시키다, 방해하다</span><span class="wotd-meaning-sub">(계획·시도·공격 등을) 가로막다</span></div><p class="wotd-core">누군가의 계획·행동·효과가 <em class="wotd-core-em">뜻대로 되지 못하게</em> 막거나 무산시키다</p><p class="wotd-nuance">thwart는 단순한 ‘막다(stop)’보다, 상대의 목적 달성을 <mark>좌절·무산시킨다</mark>는 뉘앙스가 강합니다. 시위 차단, 치료 방해, 공격 방어처럼 ‘상대가 하려던 것을 가로막는’ 뉴스·과학·설명문에서 자주 나옵니다.</p><div class="wotd-compare"><span class="wotd-cmp-en">stop</span><span class="wotd-cmp-ko">멈추다 · 일상적, 중립적</span></div><div class="wotd-compare" data-active="1"><span class="wotd-cmp-en">thwart</span><span class="wotd-cmp-ko">좌절시키다 · 목적 달성을 가로막음</span></div><div class="wotd-col"><span class="wotd-col-en">thwart protesters</span><span class="wotd-col-ko">시위대를 가로막다</span></div><div class="wotd-col"><span class="wotd-col-en">thwart efforts</span><span class="wotd-col-ko">노력을 저해하다, 무산시키다</span></div><div class="wotd-col"><span class="wotd-col-en">thwart attackers</span><span class="wotd-col-ko">공격자를 좌절시키다</span></div><section class="wotd-ex" data-tag="뉴스 예문"><p class="wotd-ex-en">Police refused them permission to protest and unprecedented curbs were in place to <mark>thwart</mark> the protesters from reaching the venue.</p><p class="wotd-ex-ko">경찰은 시위 허가를 거부했고, 시위대가 행사장에 도달하지 못하도록 전례 없는 통제가 시행되었다.</p></section><section class="wotd-ex"><p class="wotd-ex-en">New research suggests that using vitamins can <mark>thwart</mark> cancer-fighting efforts.</p><p class="wotd-ex-ko">새로운 연구결과는 비타민을 사용하는 것이 항암효과를 저해시킬 수 있다는 점을 보여준다.</p></section><section class="wotd-ex"><p class="wotd-ex-en">This combative guy shoots the barbs of stinging hairs to <mark>thwart</mark> its attackers.</p><p class="wotd-ex-ko">이 전투적인 녀석은 이러한 날카로운 끝을 가진 따끔한 털을 쏘아내서 공격자를 좌절시킨다.</p></section><p class="wotd-takeaway">thwart는 ‘막는다’보다 ‘상대의 목적을 좌절시킨다’에 가깝다. from ~ing와 함께 쓰면 ‘~하지 못하게 가로막다’로 자주 쓰인다.</p><div class="wotd-glance"><div><dt>품사</dt><dd>동사</dd></div><div><dt>비슷한 말</dt><dd>foil, hinder, frustrate</dd></div><div><dt>반대 말</dt><dd>aid, facilitate, enable</dd></div><div><dt>자주 나오는 곳</dt><dd>뉴스·과학·설명문</dd></div></div></div>`,
+  message: `<div class="wotd-word"><img class="wotd-hero-image" src="${imageSrc}" alt="leafy" loading="lazy"><span class="wotd-ipa">/ˈliːfi/</span><span class="wotd-ipa-ko">리피</span><div class="wotd-pos" data-pos="형용사" data-primary="1"><span class="wotd-meaning">녹음이 우거진</span><span class="wotd-meaning-sub">잎이 많은, 나무가 우거진</span></div><p class="wotd-core">나무·풀의 잎이 많아 <em class="wotd-core-em">푸르고 우거진</em> 모습, 또는 잎채소처럼 잎이 많은 상태</p><p class="wotd-nuance">leafy는 도시·거리·그늘을 수식할 때는 <mark>녹음이 우거진, 나무가 많은</mark> 느낌을 주고, leafy green vegetables처럼 쓰면 ‘잎이 많은(엽채류)’라는 뜻입니다. 여행·생활·건강 글에서 자주 나옵니다.</p><div class="wotd-compare"><span class="wotd-cmp-en">green</span><span class="wotd-cmp-ko">녹색의 · 색깔·환경</span></div><div class="wotd-compare" data-active="1"><span class="wotd-cmp-en">leafy</span><span class="wotd-cmp-ko">잎이 우거진 · 나무·채소의 무성함</span></div><div class="wotd-col"><span class="wotd-col-en">leafy city / street</span><span class="wotd-col-ko">녹음이 우거진 도시·거리</span></div><div class="wotd-col"><span class="wotd-col-en">leafy green vegetables</span><span class="wotd-col-ko">잎이 많은 녹색 채소</span></div><div class="wotd-col"><span class="wotd-col-en">leafy shade</span><span class="wotd-col-ko">무성한 잎이 만드는 그늘</span></div><section class="wotd-ex" data-tag="여행 예문"><p class="wotd-ex-en">I set out by car, leaving Kalamata, the <mark>leafy</mark> port city and gateway to the area, on a coastal road circuit.</p><p class="wotd-ex-ko">나는 녹음이 우거진 항구도시이자 이 지역의 관문인 칼라마타를 떠나 해안도로를 순환하는 자동차 여행에 나섰다.</p></section><section class="wotd-ex"><p class="wotd-ex-en">Eat plenty of <mark>leafy</mark> green vegetables.</p><p class="wotd-ex-ko">잎이 많은 녹색 채소를 충분히 먹어라.</p></section><section class="wotd-ex"><p class="wotd-ex-en">We sat in the <mark>leafy</mark> shade of an oak tree.</p><p class="wotd-ex-ko">우리는 떡갈나무의 무성한 잎이 만드는 그늘 속에 앉아 있었다.</p></section><p class="wotd-takeaway">leafy는 ‘잎이 많다’는 뜻으로, 도시·그늘에는 녹음의 이미지, 채소에는 엽채류의 이미지를 더한다.</p><div class="wotd-glance"><div><dt>품사</dt><dd>형용사</dd></div><div><dt>비슷한 말</dt><dd>lush, verdant, wooded</dd></div><div><dt>반대 말</dt><dd>bare, barren</dd></div><div><dt>자주 나오는 곳</dt><dd>여행·생활·건강</dd></div></div></div>`,
 
   nickname: 'admin',
 
-  password: 'seed_password_thwart',
+  password: 'seed_password_leafy',
 
   isSecret: false,
 
-  slug: 'thwart',
+  slug: 'leafy',
 
   metaDescription:
-    'thwart 뜻과 예문. 좌절시키다, 방해하다의 의미와 thwart protesters, thwart efforts, thwart attackers 표현.',
+    'leafy 뜻과 예문. 녹음이 우거진, 잎이 많다는 의미와 leafy city, leafy green vegetables, leafy shade 표현.',
 
   datePublished: '2026-10-20',
 };

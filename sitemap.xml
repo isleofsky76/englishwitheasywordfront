@@ -746,6 +746,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://englisheasystudy.com/word-of-the-day/leafy/</loc>
+    <lastmod>2026-10-20</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://englisheasystudy.com/word-of-the-day/palpable/</loc>
     <lastmod>2026-09-29</lastmod>
     <priority>0.7</priority>
@@ -768,6 +773,6 @@
   <url>
     <loc>https://englisheasystudy.com/word-of-the-day/thwart/</loc>
     <lastmod>2026-10-20</lastmod>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
 </urlset>
