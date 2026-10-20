@@ -34,26 +34,26 @@ const hlSoft = (text) =>
   `<span style="font-weight:700;color:#1a1a1a;padding:0.06em 0.2em;border-radius:3px;background:rgba(255,229,102,0.72);border-bottom:2.5px solid #f0b429;">${text}</span>`;
 
 // 실제 업로드한 이미지 경로로 변경
-const imageSrc = '/resources/discernment.jpg';
+const imageSrc = '/resources/tackle.jpg';
 
 const entry = {
-  title: 'discernment | 안목, 분별력',
+  title: 'tackle | 다루다, 맞서다',
 
   // 태그 사이 빈 줄/개행 넣지 말 것 — 이미지 맨 위, 글은 아래
-  message: `<div style="max-width:36rem;width:100%;margin:0 auto;box-sizing:border-box;color:#374151;font-size:0.95rem;line-height:2.05;"><p style="margin:0;padding:0;text-align:left;"><img src="${imageSrc}" alt="discernment" loading="lazy" class="wotd-hero-image" style="max-width:100%;height:auto;border-radius:8px;display:block;margin:0 0 0.85rem 0;"></p><p style="margin:0 0 0.85rem;padding:0;font-size:1.35rem;font-weight:700;color:#1a365d;line-height:1.6;">discernment</p><p style="margin:0 0 0.35rem;padding:0;">발음: ${hl('/dɪˈsɜːrnmənt/')} (디서른먼트)</p><p style="margin:0 0 0.85rem;padding:0;">명사(불가산): ${hl('안목, 분별력')}, 판단력</p><p style="margin:0 0 0.35rem;padding:0;">${hlSoft('show discernment')}: 안목이나 분별력을 보여 주다</p><p style="margin:0 0 0.35rem;padding:0;">${hlSoft('a person of discernment')}: 안목이 있는 사람</p><p style="margin:0 0 1rem;padding:0;">${hlSoft('exercise discernment')}: 분별력을 발휘하다</p><p style="margin:0 0 0.55rem;padding:0;">📌 의미: ${hl('겉으로 쉽게 드러나지 않는 차이나 가치를 알아보고 현명하게 판단하는 능력')}</p><p style="margin:0 0 1rem;padding:0;">→ discernment는 사람이나 사물의 본질, 품질, 가치를 세심하게 구별하고 판단하는 능력을 뜻함. 사람이나 작품을 고르는 문맥에서는 ‘안목’, 정보의 진위나 옳고 그름을 판단하는 문맥에서는 ‘분별력’으로 옮기면 자연스러움. 동사 ${hlSoft('discern')}은 ‘알아보다, 분별하다’라는 뜻임.</p><p style="margin:0 0 0.45rem;padding:0;font-weight:700;color:#1a365d;">예문 1</p><p style="margin:0 0 0.2rem;padding:0;">He shows great discernment in his choice of friends.</p><p style="margin:0 0 0.85rem;padding:0;color:#4b5563;">그는 친구를 선택할 때 뛰어난 안목을 보여 준다.</p><p style="margin:0 0 0.45rem;padding:0;font-weight:700;color:#1a365d;">예문 2</p><p style="margin:0 0 0.2rem;padding:0;">It is clear that you are a person of discernment.</p><p style="margin:0 0 0.85rem;padding:0;color:#4b5563;">당신은 안목이 있는 사람임이 분명합니다.</p><p style="margin:0 0 0.45rem;padding:0;font-weight:700;color:#1a365d;">예문 3</p><p style="margin:0 0 0.2rem;padding:0;">Still, amid the cacophony of influencers, “the sort of expertise and discernment that Vogue represents, still has a place,” he added.</p><p style="margin:0 0 1rem;padding:0;color:#4b5563;">하지만 수많은 인플루언서의 목소리가 뒤섞인 혼란 속에서도 “보그가 대표하는 전문성과 안목은 여전히 설 자리가 있다”고 그는 덧붙였다.</p><p style="margin:0 0 0.55rem;padding:0;">💡 핵심 뉘앙스:</p><p style="margin:0;padding:0;">${hl('discernment')} → 단순히 취향이 있다는 뜻을 넘어, 미묘한 차이를 알아보고 무엇이 가치 있는지 판단하는 능력을 강조함. 예문 3의 ${hlSoft('expertise and discernment')}는 전문 지식과 더불어 좋은 콘텐츠나 스타일을 가려내는 안목을 뜻함. ‘안목이 있는 사람’은 ${hlSoft('a person of discernment')}로 표현할 수 있음.</p></div>`,
+  message: `<div style="max-width:36rem;width:100%;margin:0 auto;box-sizing:border-box;color:#374151;font-size:0.95rem;line-height:2.05;"><p style="margin:0;padding:0;text-align:left;"><img src="${imageSrc}" alt="tackle" loading="lazy" class="wotd-hero-image" style="max-width:100%;height:auto;border-radius:8px;display:block;margin:0 0 0.85rem 0;"></p><p style="margin:0 0 0.85rem;padding:0;font-size:1.35rem;font-weight:700;color:#1a365d;line-height:1.6;">tackle</p><p style="margin:0 0 0.35rem;padding:0;">발음: ${hl('/ˈtækəl/')} (태클)</p><p style="margin:0 0 0.85rem;padding:0;">동사: ${hl('다루다, 맞서다')}, (문제·과제에) 달려들다; 명사: 태클</p><p style="margin:0 0 0.35rem;padding:0;">${hlSoft('tackle a problem')}: 문제를 다루다, 해결에 나서다</p><p style="margin:0 0 0.35rem;padding:0;">${hlSoft('tackle hunger')}: 기아 문제 해결에 나서다</p><p style="margin:0 0 1rem;padding:0;">${hlSoft('step up to tackle')}: 나서서 해결하다</p><p style="margin:0 0 0.55rem;padding:0;">📌 의미: ${hl('어렵거나 큰 문제·과제에 정면으로 맞서 다루기 시작하다')}</p><p style="margin:0 0 1rem;padding:0;">→ tackle은 스포츠의 ‘태클’에서 확장되어, 사회·정책·업무상의 난제에 적극적으로 달려드는 동사로 자주 쓰임. 단순한 ‘다루다(handle)’보다 ${hl('해결을 위해 뛰어든다')}는 능동적 뉘앙스가 강함. 명사로는 미식축구·럭비의 태클을 뜻함.</p><p style="margin:0 0 0.45rem;padding:0;font-weight:700;color:#1a365d;">예문 1</p><p style="margin:0 0 0.2rem;padding:0;">We need to tackle the housing shortage head-on.</p><p style="margin:0 0 0.85rem;padding:0;color:#4b5563;">우리는 주택 부족 문제에 정면으로 맞서야 한다.</p><p style="margin:0 0 0.45rem;padding:0;font-weight:700;color:#1a365d;">예문 2</p><p style="margin:0 0 0.2rem;padding:0;">She tackled the assignment as soon as she got home.</p><p style="margin:0 0 0.85rem;padding:0;color:#4b5563;">그녀는 집에 도착하자마자 그 과제에 달라붙었다.</p><p style="margin:0 0 0.45rem;padding:0;font-weight:700;color:#1a365d;">예문 3</p><p style="margin:0 0 0.2rem;padding:0;">He had called on billionaires to “step up now, on a one-time basis” to tackle global hunger.</p><p style="margin:0 0 1rem;padding:0;color:#4b5563;">그는 억만장자들에게 세계 기아 문제 해결을 위해 “지금, 일회성으로라도 나서 달라”고 요청한 바 있다.</p><p style="margin:0 0 0.55rem;padding:0;">💡 핵심 뉘앙스:</p><p style="margin:0;padding:0;">${hl('tackle')} → 문제로 ‘손을 대기’보다, 어렵더라도 ${hlSoft('정면으로 맞서서 해결에 착수한다')}는 뜻이 강함. 예문 3의 ${hlSoft('to tackle global hunger')}는 세계 기아라는 거대한 과제에 나서서 대응하라는 호소임. ${hlSoft('step up')}과 함께 쓰이면 ‘책임을 지고 나서다’는 의미가 더해짐.</p></div>`,
 
   nickname: 'admin',
 
-  password: 'seed_password_discernment',
+  password: 'seed_password_tackle',
 
   isSecret: false,
 
-  slug: 'discernment',
+  slug: 'tackle',
 
   metaDescription:
-    'discernment 뜻과 예문. 안목, 분별력, 판단력의 의미와 show discernment, a person of discernment, exercise discernment 표현.',
+    'tackle 뜻과 예문. 다루다, 맞서다의 의미와 tackle a problem, tackle hunger, step up to tackle 표현.',
 
-  datePublished: '2026-10-12',
+  datePublished: '2026-10-20',
 };
 // =================================
 
