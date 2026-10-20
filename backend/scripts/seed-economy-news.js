@@ -9,60 +9,75 @@ import { uploadEconomyNews } from './economy-news-format.js';
 // ========== 여기만 수정 ==========
 
 const article = {
-  title: 'AI 주식시장 흔들림이 주는 경고: 이번에도 다르지 않다',
+  title: 'AI 투자에서 가장 위험한 영역, 금리 상승에 직면하다',
 
-  slug: 'be-alive-to-mirage-drastically-deflate-materialize-interlude-related-words',
+  slug: 'stare-down-immune-prominent-weather-vane-related-words',
 
   metaDescription:
-    'WSJ 기사에서 추출한 AI 투자·주식시장 관련 시사 영단어. be alive to, mirage, drastically, deflate, materialize, interlude 등.',
+    'WSJ 기사에서 추출한 AI 투자·금리 상승·주식시장 관련 시사 영단어. stare down, immune, prominent, weather vane, endure, dour, whirlwind, retreat, mirror 등.',
 
-  password: 'seed_finance_ai-stock-market-wobble-related-words',
+  password: 'seed_finance_ai-trade-higher-rates-related-words',
 
-  datePublished: '2026-10-18',
+  datePublished: '2026-10-15',
 
   intro: [
-    'AI 관련 주식시장의 최근 하락을 계기로 수조 달러 규모의 AI 설비투자에 대한 기대와 잠재적 위험을 분석한 월스트리트저널(WSJ) 기사에서 주요 시사 영단어를 정리합니다. AI 인프라 투자가 예상보다 부진하면 기업 실적과 주가에 타격을 줄 수 있지만, 반대로 대규모 투자가 지속되더라도 과잉투자와 높은 주식 가치평가에 따른 위험이 존재한다는 점을 다룹니다.',
+    '금리 상승과 차입비용 증가가 AI 데이터센터 기업들의 주가에 미치는 영향을 분석한 월스트리트저널(WSJ) 기사에서 주요 시사 영단어를 정리합니다. 코어위브(CoreWeave)를 비롯한 AI 인프라 관련 기업들이 시장 혼란과 주가 하락을 겪으면서, 막대한 차입에 의존하는 AI 투자 구조의 위험성이 부각되고 있습니다.',
   ],
 
   words: [
     {
       narrative: [
-        '1. 투자자들은 수조 달러 규모의 AI 설비투자가 기대에 미치지 못할 수 있다는 주요 위험을 인식하고(**be alive to**) 있었다. cf. be alive to: ~을 인식하다, 알아차리다',
+        '1. 투자자들은 AI 관련 기업들의 자금조달에 부담을 주는 높은 차입비용에 직면하고(**staring down**) 있었다. cf. stare down: 맞서다, 직면하다',
       ],
     },
     {
       narrative: [
-        '2. AI 관련 기업들이 현재 벌어들이는 막대한 이익은 단순한 환상이나 신기루(**mirage**)가 아니라 실제로 존재하는 수익이다. cf. mirage: 신기루, 환상',
+        '2. 투자자들은 AI 데이터센터 기업들이 높은 차입비용의 영향을 받지 않을(**immune**) 것이라고 믿었다. cf. immune to: ~의 영향을 받지 않는',
       ],
     },
     {
       narrative: [
-        '3. 몇 년 뒤 AI 데이터센터 등 인프라 구축이 완료되면 유지보수와 업그레이드 비용은 신규 건설보다 적게 들기 때문에 설비투자는 급격히(**drastically**) 감소할 수 있다. cf. drastically: 급격하게, 대폭',
+        '3. 높은 차입비용의 영향을 받지 않을 것이라는 기대에도 예외가 있었으며, 그중 코어위브(CoreWeave)가 가장 두드러진(**prominent**) 사례였다. cf. prominent: 두드러진, 중요한',
       ],
     },
     {
       narrative: [
-        '4. AI 관련 기업들의 이익이 줄어들면(**deflate**), 현재 주식에 반영된 높은 가치평가 수준이 더욱 뚜렷하게 드러날 것이다. cf. deflate: 줄어들다, 거품이 빠지다',
+        '4. 코어위브는 AI 투자에서 가장 위험한 영역의 시장 상황을 보여주는 풍향계(**weather vane**)와 같은 존재가 됐다. cf. weather vane: 풍향계, 상황이나 변화의 방향을 보여주는 지표',
       ],
     },
     {
       narrative: [
-        '5. 최근 주가 움직임은 기대했던 AI 설비투자가 실제로 이루어지지(**materialize**) 않을 경우 시장이 얼마나 큰 타격을 받을 수 있는지 보여준다. cf. materialize: 현실화되다, 실제로 이루어지다',
+        '5. 코어위브는 이번 주 주식시장에서 발생한 거센 혼란을 견뎌야(**endured**) 했다. cf. endure: 견디다, 겪다',
       ],
     },
     {
       narrative: [
-        '6. 최근의 주가 하락이 거센 AI 강세장 속 일시적인 조정(**interlude**)에 불과하고 데이터센터 건설이 예상대로 지속되더라도, 과잉투자 등으로 인해 또 다른 위험이 발생할 수 있다. cf. interlude: 막간, 일시적인 중단·조정',
+        '6. 목요일에는 AI 관련 기업들에 대한 시장 분위기가 가장 침울하고 비관적인(**dour**) 상태에 이르렀다. cf. dour: 침울한, 비관적인',
+      ],
+    },
+    {
+      narrative: [
+        '7. 이번 급격한 시장 혼란(**whirlwind**)은 AI 관련 기업들의 주가가 차입비용 변화에 얼마나 민감한지를 드러냈다. cf. whirlwind: 회오리바람, 소용돌이, 급격한 혼란',
+      ],
+    },
+    {
+      narrative: [
+        '8. AI 인프라 관련 기업인 네비우스 그룹(Nebius Group)의 주가는 15% 하락했다(**retreated**). cf. retreat: 후퇴하다, 하락하다',
+      ],
+    },
+    {
+      narrative: [
+        '9. 네비우스와 아이렌(IREN)의 주가 하락은 코어위브의 15% 하락과 대체로 비슷한 양상을 보였다(**mirrored**). cf. mirror: 반영하다, 비슷한 양상을 보이다',
       ],
     },
   ],
 
   source: {
-    text: 'The Wall Street Journal | The AI Stock Market Wobble Is a Reminder: This Time Isn’t Different | By James Mackintosh',
-    url: 'https://www.wsj.com/finance/stocks/the-ai-stock-market-wobble-is-a-reminder-this-time-isnt-different-d3ea7f07',
+    text: 'The Wall Street Journal | The Riskiest Corner of the AI Trade Is Crashing Into Higher Rates | By David Uberti, Jack Pitcher and Sam Goldfarb',
+    url: 'https://www.wsj.com/finance/stocks/the-riskiest-corner-of-the-ai-trade-is-crashing-into-higher-rates-fcdaad37',
   },
 
-  youtube: 'https://youtube.com/shorts/tkwXENfK-KU',
+  youtube: 'https://youtube.com/shorts/UgfdyCx5FT0',
 };
 // ===============================
 
