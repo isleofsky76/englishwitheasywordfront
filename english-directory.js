@@ -262,19 +262,26 @@
     return cut || desc;
   }
 
+  function catId(cat) {
+    return 'cat-' + String(cat || '').replace(/[^a-z0-9]+/gi, '-').toLowerCase();
+  }
+
   function buildCard(site) {
     var country = inferCountry(site);
     var note = shortNote(site);
+    var level = String(site.level || '').trim();
 
     return (
       '<article class="dir-note" data-category="' + escapeHtml(site.category) + '">' +
-        '<p class="dir-note-line">' +
-          '<span class="dir-note-name">' + escapeHtml(site.name) + '</span>' +
-          '<span class="dir-note-flag" aria-label="' + escapeHtml(country.label) + '"> ' + country.flag + '</span>' +
-          ' ' +
+        '<div class="dir-note-top">' +
+          '<a class="dir-note-name" href="' + escapeHtml(site.url) + '" target="_blank" rel="noopener noreferrer">' +
+            escapeHtml(site.name) +
+          '</a>' +
+          '<span class="dir-note-flag" aria-label="' + escapeHtml(country.label) + '">' + country.flag + '</span>' +
+          (level ? '<span class="dir-note-level">' + escapeHtml(level) + '</span>' : '') +
           '<a class="dir-note-visit" href="' + escapeHtml(site.url) + '" target="_blank" rel="noopener noreferrer">방문하기</a>' +
-        '</p>' +
-        '<p class="dir-note-desc">- ' + escapeHtml(note) + '</p>' +
+        '</div>' +
+        '<p class="dir-note-desc">' + escapeHtml(note) + '</p>' +
       '</article>'
     );
   }
@@ -310,23 +317,64 @@
     var filtersEl = root.querySelector('[data-dir-filters]');
     var contentEl = root.querySelector('[data-dir-content]');
     var countEl = root.querySelector('[data-dir-count]');
+    var searchEl = root.querySelector('[data-dir-search]');
     var activeCategory = 'all';
+    var searchQuery = '';
+    var searchTimer = null;
+
+    function matchesSearch(site, q) {
+      if (!q) return true;
+      var blob = [
+        site.name,
+        site.desc,
+        site.category,
+        site.level,
+        site.type,
+        site.url
+      ].join(' ').toLowerCase();
+      return blob.indexOf(q) !== -1;
+    }
 
     function getFilteredSites() {
+      var q = searchQuery;
       return SITES.filter(function (site) {
-        return activeCategory === 'all' || site.category === activeCategory;
+        if (activeCategory !== 'all' && site.category !== activeCategory) return false;
+        return matchesSearch(site, q);
       });
+    }
+
+    function categoryFromHash() {
+      var hash = String(window.location.hash || '').replace(/^#/, '');
+      if (!hash) return null;
+      for (var i = 0; i < CATEGORIES.length; i += 1) {
+        if (catId(CATEGORIES[i]) === hash) return CATEGORIES[i];
+      }
+      return null;
     }
 
     function renderFilters() {
       if (!filtersEl) return;
-      var buttons = ['<button type="button" class="dir-filter-btn is-active" data-cat="all">전체</button>'];
+      var buttons = [
+        '<button type="button" class="dir-filter-btn' +
+          (activeCategory === 'all' ? ' is-active' : '') +
+          '" data-cat="all">전체</button>'
+      ];
       CATEGORIES.forEach(function (cat) {
         buttons.push(
-          '<button type="button" class="dir-filter-btn" data-cat="' + escapeHtml(cat) + '">' + escapeHtml(cat) + '</button>'
+          '<button type="button" class="dir-filter-btn' +
+            (activeCategory === cat ? ' is-active' : '') +
+            '" data-cat="' + escapeHtml(cat) + '">' + escapeHtml(cat) + '</button>'
         );
       });
       filtersEl.innerHTML = buttons.join('');
+    }
+
+    function setActiveFilter(cat) {
+      activeCategory = cat || 'all';
+      if (!filtersEl) return;
+      filtersEl.querySelectorAll('.dir-filter-btn').forEach(function (el) {
+        el.classList.toggle('is-active', el.getAttribute('data-cat') === activeCategory);
+      });
     }
 
     function renderContent() {
@@ -334,16 +382,26 @@
       var filtered = getFilteredSites();
 
       if (countEl) {
-        countEl.textContent = '총 ' + filtered.length + '개 사이트';
+        var label = searchQuery
+          ? '검색 결과 ' + filtered.length + '개'
+          : '총 ' + filtered.length + '개 사이트';
+        countEl.textContent = label;
       }
 
       if (!filtered.length) {
-        contentEl.innerHTML = '<p class="dir-empty">이 카테고리에 등록된 사이트가 없습니다.</p>';
+        contentEl.innerHTML = '<p class="dir-empty">조건에 맞는 사이트가 없습니다. 검색어나 카테고리를 바꿔 보세요.</p>';
         return;
       }
 
-      if (activeCategory !== 'all') {
-        contentEl.innerHTML = '<div class="dir-notes">' + filtered.map(buildCard).join('') + '</div>';
+      if (activeCategory !== 'all' || searchQuery) {
+        var heading = activeCategory !== 'all'
+          ? '<h2 class="dir-category-title">' + escapeHtml(activeCategory) + '</h2>'
+          : '';
+        contentEl.innerHTML =
+          '<section class="dir-category">' +
+            heading +
+            '<div class="dir-notes">' + filtered.map(buildCard).join('') + '</div>' +
+          '</section>';
         return;
       }
 
@@ -352,7 +410,7 @@
         var catSites = SITES.filter(function (s) { return s.category === cat; });
         if (!catSites.length) return;
         html +=
-          '<section class="dir-category" id="cat-' + cat.replace(/[^a-z0-9]+/gi, '-').toLowerCase() + '">' +
+          '<section class="dir-category" id="' + catId(cat) + '">' +
             '<h2 class="dir-category-title">' + escapeHtml(cat) + '</h2>' +
             '<div class="dir-notes">' + catSites.map(buildCard).join('') + '</div>' +
           '</section>';
@@ -360,23 +418,46 @@
       contentEl.innerHTML = html;
     }
 
-    function setActiveFilter(btn) {
-      if (!filtersEl) return;
-      filtersEl.querySelectorAll('.dir-filter-btn').forEach(function (el) {
-        el.classList.toggle('is-active', el === btn);
-      });
-    }
+    var hashCat = categoryFromHash();
+    if (hashCat) activeCategory = hashCat;
 
     renderFilters();
     renderContent();
+
+    if (hashCat) {
+      setTimeout(function () {
+        var el = document.getElementById(catId(hashCat));
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 80);
+    }
 
     if (filtersEl) {
       filtersEl.addEventListener('click', function (e) {
         var btn = e.target.closest('[data-cat]');
         if (!btn) return;
-        activeCategory = btn.getAttribute('data-cat');
-        setActiveFilter(btn);
+        setActiveFilter(btn.getAttribute('data-cat'));
+        if (activeCategory === 'all') {
+          if (window.history && window.history.replaceState) {
+            window.history.replaceState(null, '', window.location.pathname + window.location.search);
+          }
+        } else {
+          var id = catId(activeCategory);
+          if (window.history && window.history.replaceState) {
+            window.history.replaceState(null, '', '#' + id);
+          }
+        }
         renderContent();
+      });
+    }
+
+    if (searchEl) {
+      searchEl.addEventListener('input', function () {
+        var value = String(searchEl.value || '').trim().toLowerCase();
+        clearTimeout(searchTimer);
+        searchTimer = setTimeout(function () {
+          searchQuery = value;
+          renderContent();
+        }, 120);
       });
     }
   }

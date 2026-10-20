@@ -1,238 +1,312 @@
-:root {
-  --text-primary: #2C2C2A;
-  --text-secondary: #888780;
-  --text-accent: #185FA5;
-  --fill-accent: #378ADD;
-  --border-soft: #E8E6DC;
-  --page-bg: #FBFBFA;
-  --max-width: 720px;
-}
+/* 영어 학습 사이트 디렉터리 — redesign 톤 */
+@import url("redesign-tokens.css");
 
 html {
   scroll-behavior: smooth;
 }
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
 body.english-directory-page {
   margin: 0;
   min-height: 100vh;
-  font-family: 'Noto Sans KR', 'Poppins', system-ui, sans-serif;
+  font-family: var(--font-sans);
   background: var(--page-bg);
-  color: var(--text-primary);
+  color: var(--ink);
   line-height: 1.55;
   -webkit-font-smoothing: antialiased;
 }
 
-/* 유튜브 배너 ↔ 제목 배너 사이 여백 축소 */
-body.english-directory-page #yt-billboard-bar {
-  margin: 8px 12px 8px;
+body.english-directory-page .weather-banner,
+body.english-directory-page .world-clock-bar,
+body.english-directory-page .navbar.bg-primary:not(.site-masthead) {
+  display: none !important;
 }
 
 #dir-menu {
-  scroll-margin-top: 12px;
-}
-
-.dir-banner {
-  margin: 0;
-  padding: 0.7rem 1.25rem;
-  background: #1e4e8c;
-  color: #fff;
-  text-align: center;
-}
-
-.dir-banner h1 {
-  margin: 0;
-  font-size: calc(1.25rem + 2px);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  line-height: 1.35;
-  color: #fff;
+  scroll-margin-top: 88px;
 }
 
 .dir-page {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0 0 4rem;
+}
+
+.dir-hero {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 0.75rem 1.25rem 2.5rem;
+  padding: 48px 24px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.dir-kicker {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: var(--accent);
+  text-transform: uppercase;
+}
+
+.dir-hero h1 {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-weight: 900;
+  font-size: clamp(34px, 5.5vw, 52px);
+  line-height: 1.15;
+  letter-spacing: -1px;
+  color: var(--ink);
 }
 
 .dir-lead {
-  margin: 0 0 0.65rem;
-  font-size: 14px;
+  margin: 0;
+  max-width: 640px;
+  font-size: 17px;
   font-weight: 400;
-  color: var(--text-secondary);
-  line-height: 1.45;
+  color: var(--ink-muted);
+  line-height: 1.65;
+}
+
+.dir-toolbar {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 24px 8px;
+}
+
+.dir-search {
+  display: block;
+  margin-bottom: 16px;
+}
+
+.dir-search input {
+  width: 100%;
+  min-height: 48px;
+  padding: 0 18px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+  font-family: inherit;
+  font-size: 16px;
+  color: var(--ink);
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.dir-search input::placeholder {
+  color: var(--ink-muted);
+}
+
+.dir-search input:focus {
+  border-color: var(--ink);
+  box-shadow: 0 0 0 3px rgba(22, 24, 29, 0.08);
 }
 
 .dir-filters {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.35rem;
-  margin-bottom: 0.45rem;
+  gap: 8px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid var(--ink);
+  margin-bottom: 12px;
 }
 
 .dir-filter-btn {
-  padding: 0.3rem 0.7rem;
-  font-size: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 0 16px;
+  font-size: 14px;
   font-weight: 500;
   font-family: inherit;
-  color: var(--text-secondary);
-  background: transparent;
-  border: 1px solid var(--border-soft);
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--line);
   border-radius: 999px;
   cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
 }
 
 .dir-filter-btn:hover {
-  color: var(--text-primary);
+  border-color: var(--ink);
 }
 
 .dir-filter-btn.is-active {
-  color: var(--text-accent);
-  border-color: #b7d3f0;
-  background: #E6F1FB;
+  color: var(--text-on-dark);
+  border-color: var(--ink);
+  background: var(--ink);
+  font-weight: 600;
 }
 
 .dir-count {
-  margin: 0 0 0.55rem;
-  font-size: 12px;
-  font-weight: 400;
-  color: var(--text-secondary);
+  margin: 0 0 20px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink-muted);
+}
+
+[data-dir-content] {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 24px;
 }
 
 .dir-category {
-  margin-bottom: 1.25rem;
-  scroll-margin-top: 12px;
+  margin-bottom: 2rem;
+  scroll-margin-top: 96px;
 }
 
 .dir-category-title {
-  margin: 0 0 0.45rem;
-  font-size: 19px;
-  font-weight: 600;
-  color: #1e4e8c;
+  margin: 0 0 12px;
+  padding-bottom: 8px;
+  font-family: var(--font-serif);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--ink);
   letter-spacing: -0.02em;
+  border-bottom: 1px solid var(--line);
 }
 
 .dir-notes {
   display: flex;
   flex-direction: column;
-  gap: 0.65rem;
 }
 
 .dir-note {
   margin: 0;
-  padding: 0;
-  border: none;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line);
   background: none;
   box-shadow: none;
 }
 
-.dir-note-line {
-  margin: 0;
-  font-size: 17px;
-  font-weight: 500;
-  color: var(--text-primary);
-  line-height: 1.45;
+.dir-note:last-child {
+  border-bottom: none;
+}
+
+.dir-note-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px 12px;
 }
 
 .dir-note-name {
-  font-weight: 500;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  text-decoration: none;
+}
+
+.dir-note-name:hover {
+  color: var(--accent);
 }
 
 .dir-note-flag {
-  font-weight: 400;
+  font-size: 14px;
+  line-height: 1;
+}
+
+.dir-note-level {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ink-muted);
+  letter-spacing: 0.01em;
 }
 
 .dir-note-visit {
-  display: inline;
-  margin-left: 0.15rem;
-  padding: 0;
+  margin-left: auto;
   font-size: 13px;
-  font-weight: 500;
-  color: var(--text-accent) !important;
-  text-decoration: underline !important;
-  text-underline-offset: 2px;
-  background: none;
-  border: none;
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+  white-space: nowrap;
 }
 
 .dir-note-visit:hover {
-  color: #0f4f8c !important;
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
 
 .dir-note-desc {
-  margin: 0.15rem 0 0;
+  margin: 6px 0 0;
   padding: 0;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 400;
-  color: var(--text-secondary);
-  line-height: 1.45;
+  color: var(--ink-muted);
+  line-height: 1.55;
 }
 
 .dir-empty {
   text-align: left;
-  padding: 1rem 0;
-  color: var(--text-secondary);
-  font-size: 0.9rem;
+  padding: 2rem 0;
+  color: var(--ink-muted);
+  font-size: 0.95rem;
 }
 
 .dir-footer {
-  margin-top: 2rem;
-  padding-top: 1rem;
-  border-top: 1px solid var(--border-soft);
+  max-width: var(--max-width);
+  margin: 2.5rem auto 0;
+  padding: 1.25rem 24px 0;
+  border-top: 1px solid var(--line);
   text-align: left;
 }
 
 .dir-footer p {
   margin: 0;
-  font-size: 0.82rem;
-  color: var(--text-secondary);
-  line-height: 1.55;
+  font-size: 0.85rem;
+  color: var(--ink-muted);
+  line-height: 1.6;
 }
 
 .dir-footer a {
-  color: var(--text-accent);
+  color: var(--accent);
   text-decoration: underline;
+  text-underline-offset: 2px;
 }
 
 .dir-back-menu-wrap {
-  margin: 1.5rem 0 0;
-  padding-top: 0.5rem;
+  margin: 1.25rem 0 0;
 }
 
 .dir-back-menu-btn {
   display: inline;
-  font-size: 0.84rem;
-  font-weight: 500;
-  color: var(--text-accent) !important;
-  text-decoration: underline !important;
-  background: none;
-  border: none;
-  box-shadow: none;
-  padding: 0;
-  min-height: auto;
-  border-radius: 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ink) !important;
+  text-decoration: none !important;
 }
 
 .dir-back-menu-btn:hover {
-  color: #0f4f8c !important;
+  color: var(--accent) !important;
 }
 
-@media (max-width: 600px) {
-  .dir-page {
+@media (max-width: 640px) {
+  .dir-hero {
+    padding: 36px 16px 22px;
+  }
+
+  .dir-toolbar,
+  [data-dir-content],
+  .dir-footer {
     padding-left: max(16px, env(safe-area-inset-left, 0px));
     padding-right: max(16px, env(safe-area-inset-right, 0px));
   }
 
-  .dir-banner {
-    padding: 0.9rem 1rem;
+  .dir-note-top {
+    gap: 6px 10px;
   }
 
-  .dir-banner h1 {
-    font-size: calc(1.1rem + 2px);
+  .dir-note-visit {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .dir-filter-btn {
+    min-height: 36px;
+    padding: 0 12px;
+    font-size: 13px;
   }
 }
