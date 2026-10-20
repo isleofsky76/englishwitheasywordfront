@@ -167,6 +167,27 @@
         '<a class="rd-btn rd-btn-solid" href="' + esc(href) + '">단어 자세히 보기</a>' +
         '<a class="rd-btn rd-btn-outline" href="vocabulary-quiz-list.html">오늘의 퀴즈 풀기</a>' +
       '</div>';
+    renderHeroWotdMedia(entry, index, f, href);
+  }
+
+  /** 기사 카드 자리 — 오늘의 단어 이미지 썸네일 → 본문 연결 */
+  function renderHeroWotdMedia(entry, index, fields, href) {
+    var root = document.getElementById('rd-hero-media');
+    if (!root || !entry) return;
+    var f = fields || extractWotdFields(entry);
+    var link = href || boardHref('wordofday', entry, index);
+    var img = f.image || '';
+    root.href = link;
+    root.setAttribute('aria-label', f.word + ' 자세히 보기');
+    root.innerHTML =
+      '<div class="rd-hero-media-img">' +
+        (img
+          ? '<img src="' + esc(img) + '" alt="' + esc(f.word) + '">'
+          : '[오늘의 단어 이미지]') +
+      '</div>' +
+      '<span class="rd-hero-media-title">' + esc(f.word) + '</span>' +
+      '<span class="rd-hero-media-desc">' + esc(f.meaning) + '</span>' +
+      '<span class="rd-hero-media-cta">단어 자세히 보기 →</span>';
   }
 
   function mixNews(intl, korea, defense) {
