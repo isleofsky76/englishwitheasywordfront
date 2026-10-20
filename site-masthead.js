@@ -4,7 +4,7 @@
  * nav-home-menu.js 가 로드함
  */
 (function () {
-    var VERSION = '20261020mh2';
+    var VERSION = '20261020travel2';
   /* 시안 주 메뉴 5개 — href는 기존 URL 유지 */
   var PRIMARY_NAV_ITEMS = [
     {

@@ -60,7 +60,7 @@ export const BOARD_SEO = {
     cssFile: 'news-voca.css',
     cssVersion: '20261020rd21',
     jsFile: 'travel-news.js',
-    jsVersion: '20261020travel1',
+    jsVersion: '20261020travel2',
     listHtml: 'travel-news-list.html',
   },
   'korea-news': {
@@ -365,7 +365,7 @@ ${buildStaticPostMainHtml(config, boardPath)}
     <script src="../../viewpost-like.js?v=20260906gray"></script>
     <script src="../../viewpost-rd-ready.js?v=20261020rd24"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../../nav-home-menu.js?v=20260720a"></script>
+    <script src="../../nav-home-menu.js?v=20261020travel2"></script>
     <script src="../../${board.jsFile}?v=${board.jsVersion}"></script>
     <script src="../../weather-banner.js?v=20260612e" defer></script>
     <script src="../../world-clock.js?v=20260612g" defer></script>
