@@ -286,6 +286,23 @@
       tabs: null,
       articleLayout: 'header-only',
       breadcrumbParent: { label: '신문읽는 이미지', href: 'shorts-bg-image-list.html' }
+    },
+    'cooking-voca': {
+      key: 'cooking-voca',
+      labelEn: 'COOKING VOCABULARY',
+      title: '요리 영어',
+      description: '요리·레시피 속 영어 표현을 뜻과 함께 정리했습니다. 영어 : 뜻으로 빠르게 훑어보세요.',
+      tabLabel: '요리',
+      categoryLabel: '요리',
+      listPage: 'cooking-voca-list.html',
+      postPage: 'cooking-voca.html',
+      postPath: 'cooking-voca',
+      board: 'cooking-voca',
+      apiPath: '/cooking-voca',
+      navGroup: 'express',
+      tabs: null,
+      articleLayout: 'header-only',
+      breadcrumbParent: { label: '요리', href: 'cooking-voca-list.html' }
     }
   };
 
@@ -322,11 +339,37 @@
     return title.replace(/^\[([^\]]+)\]\s*/, '').trim() || title;
   }
 
+  /** "한글 | English" / "English | 한글" → { en, ko, display: "English : 한글" } */
+  function splitBilingualTitle(title) {
+    var t = String(title || '').trim();
+    var m = t.match(/^(.+?)\s*[|｜]\s*(.+)$/);
+    if (!m) return { display: t, en: '', ko: '', bilingual: false };
+    var a = m[1].trim();
+    var b = m[2].trim();
+    var aKo = /[가-힣]/.test(a);
+    var bKo = /[가-힣]/.test(b);
+    var aEn = /[A-Za-z]/.test(a);
+    var bEn = /[A-Za-z]/.test(b);
+    var en = '';
+    var ko = '';
+    if (aKo && bEn) {
+      ko = a;
+      en = b;
+    } else if (aEn && bKo) {
+      en = a;
+      ko = b;
+    } else {
+      return { display: t, en: '', ko: '', bilingual: false };
+    }
+    return { display: en + ' : ' + ko, en: en, ko: ko, bilingual: true };
+  }
+
   global.BoardListConfig = {
     BOARDS: BOARDS,
     NEWS_TABS: NEWS_TABS,
     get: getBoardConfig,
     resolveSource: resolveSource,
-    cleanTitle: cleanTitle
+    cleanTitle: cleanTitle,
+    splitBilingualTitle: splitBilingualTitle
   };
 })(typeof window !== 'undefined' ? window : globalThis);

@@ -77,51 +77,101 @@
       var t = stripHtml(lead[1]);
       if (t) return t.length > 160 ? t.slice(0, 157) + '…' : t;
     }
+    /* 요리 어휘 등 단어 나열형은 요약 대신 태그로 보여 줌 */
+    if (/cv-en|cv-word|make-ahead|finger food/i.test(msg) ||
+        (msg.match(/[A-Za-z][A-Za-z0-9'\/.\s-]{0,40}\s+[가-힣]/g) || []).length >= 4) {
+      return '';
+    }
     var plain = stripHtml(msg);
     if (!plain) return '';
     return plain.length > 160 ? plain.slice(0, 157) + '…' : plain;
   }
 
+  function pushTag(tags, seen, word, limit) {
+    var en = String(word || '').replace(/\s+/g, ' ').trim();
+    var key = en.toLowerCase();
+    if (!en || seen[key] || en.length > 48 || tags.length >= limit) return;
+    if (!/[A-Za-z]/.test(en)) return;
+    seen[key] = true;
+    tags.push(en);
+  }
+
   function extractTags(entry, limit) {
     limit = limit || 4;
     var tags = [];
+    var seen = {};
     if (entry && Array.isArray(entry.tags)) {
-      tags = entry.tags.map(function (t) { return String(t || '').trim(); }).filter(Boolean);
+      entry.tags.forEach(function (t) {
+        pushTag(tags, seen, t, limit);
+      });
     }
-    if (!tags.length && entry && entry.message) {
-      var re = /<mark[^>]*class=["'][^"']*nv-hl[^"']*["'][^>]*>([\s\S]*?)<\/mark>/gi;
-      var m;
-      var seen = {};
-      while ((m = re.exec(entry.message)) && tags.length < limit) {
-        var word = stripHtml(m[1]).replace(/\s+/g, ' ').trim();
-        var key = word.toLowerCase();
-        if (word && !seen[key] && word.length < 48) {
-          seen[key] = true;
-          tags.push(word);
-        }
-      }
-      /* 신문읽는 이미지: 항구 : harbor → harbor */
-      if (!tags.length) {
-        var lineRe = /(?:^|\n)\s*[^:\n가-힣]*[가-힣][^:\n]*\s*:\s*([A-Za-z][A-Za-z0-9'\/.\s-]{0,40})/g;
-        var lm;
-        while ((lm = lineRe.exec(entry.message)) && tags.length < limit) {
-          var en = String(lm[1] || '').replace(/\s+/g, ' ').trim();
-          var ek = en.toLowerCase();
-          if (en && !seen[ek] && en.length < 48) {
-            seen[ek] = true;
-            tags.push(en);
-          }
-        }
+    if (tags.length >= limit || !entry || !entry.message) return tags.slice(0, limit);
+
+    var msg = String(entry.message);
+    var m;
+    var re = /<mark[^>]*class=["'][^"']*nv-hl[^"']*["'][^>]*>([\s\S]*?)<\/mark>/gi;
+    while ((m = re.exec(msg)) && tags.length < limit) {
+      pushTag(tags, seen, stripHtml(m[1]), limit);
+    }
+
+    /* 요리 어휘: <span class="cv-en">make-ahead</span> */
+    if (tags.length < limit) {
+      var cvRe = /class=["'][^"']*cv-en[^"']*["'][^>]*>([\s\S]*?)<\/(?:span|div|strong|b)>/gi;
+      while ((m = cvRe.exec(msg)) && tags.length < limit) {
+        pushTag(tags, seen, stripHtml(m[1]), limit);
       }
     }
+
+    /* 신문읽는 이미지: 항구 : harbor → harbor */
+    if (tags.length < limit) {
+      var lineRe = /(?:^|\n)\s*[^:\n가-힣]*[가-힣][^:\n]*\s*:\s*([A-Za-z][A-Za-z0-9'\/.\s-]{0,40})/g;
+      while ((m = lineRe.exec(msg)) && tags.length < limit) {
+        pushTag(tags, seen, m[1], limit);
+      }
+    }
+
+    /* 영어 : 뜻 / 영어 뜻 (요리 어휘 평문) */
+    if (tags.length < limit) {
+      var plain = stripHtml(msg);
+      var enKoRe = /(?:^|\n)\s*([A-Za-z][A-Za-z0-9'\/.\s-]{0,42}?)\s*[:：]?\s+[가-힣]/g;
+      while ((m = enKoRe.exec(plain)) && tags.length < limit) {
+        pushTag(tags, seen, m[1], limit);
+      }
+    }
+
     return tags.slice(0, limit);
+  }
+
+  function titleHtml(item, className) {
+    if (item && item.bilingual && item.titleEn && item.titleKo) {
+      return (
+        '<span class="' + className + ' rd-list-title-bi">' +
+          '<span class="rd-list-title-en">' + escapeHtml(item.titleEn) + '</span>' +
+          '<span class="rd-list-title-sep" aria-hidden="true"> : </span>' +
+          '<span class="rd-list-title-ko">' + escapeHtml(item.titleKo) + '</span>' +
+        '</span>'
+      );
+    }
+    return '<span class="' + className + '">' + escapeHtml(item.title) + '</span>';
+  }
+
+  function monoFromTitle(item) {
+    var src = (item && (item.titleEn || item.title)) || '';
+    var words = String(src).replace(/[^A-Za-z\s]/g, ' ').trim().split(/\s+/).filter(Boolean);
+    if (words.length >= 2) {
+      return (words[0].charAt(0) + words[1].charAt(0)).toUpperCase();
+    }
+    if (words[0]) return words[0].slice(0, 2).toUpperCase();
+    var ko = String((item && item.titleKo) || src).trim();
+    return ko ? ko.charAt(0) : '·';
   }
 
   function imgHtml(src, className, placeholder) {
     if (src) {
       return '<div class="' + className + '"><img src="' + escapeAttr(src) + '" alt="" loading="lazy" decoding="async"></div>';
     }
-    return '<div class="' + className + '" aria-hidden="true">' + escapeHtml(placeholder || '') + '</div>';
+    return '<div class="' + className + ' rd-list-img-empty" aria-hidden="true">' +
+      escapeHtml(placeholder || '') + '</div>';
   }
 
   function currentPageFromHash() {
@@ -172,10 +222,17 @@
   function enrich(entry, index, total, cfg, apiMode) {
     var Config = global.BoardListConfig;
     var originalIndex = total - 1 - index;
+    var cleaned = Config.cleanTitle(entry);
+    var bi = typeof Config.splitBilingualTitle === 'function'
+      ? Config.splitBilingualTitle(cleaned)
+      : { display: cleaned, en: '', ko: '', bilingual: false };
     return {
       entry: entry,
       href: buildHref(entry, originalIndex, cfg, apiMode),
-      title: Config.cleanTitle(entry),
+      title: bi.bilingual ? bi.display : cleaned,
+      titleEn: bi.en || '',
+      titleKo: bi.ko || '',
+      bilingual: !!bi.bilingual,
       source: Config.resolveSource(entry),
       date: formatDate(entry.date),
       thumb: extractThumb(entry),
@@ -192,9 +249,9 @@
     }).join('');
     return (
       '<a class="rd-list-feature" href="' + escapeAttr(item.href) + '">' +
-        imgHtml(item.thumb, 'rd-list-feature-img', '이미지 없음') +
+        imgHtml(item.thumb, 'rd-list-feature-img', monoFromTitle(item)) +
         '<span class="rd-list-feature-meta">' + escapeHtml(metaParts.join(' · ')) + '</span>' +
-        '<span class="rd-list-feature-title">' + escapeHtml(item.title) + '</span>' +
+        titleHtml(item, 'rd-list-feature-title') +
         (item.summary ? '<span class="rd-list-feature-summary">' + escapeHtml(item.summary) + '</span>' : '') +
         (tags ? '<div class="rd-list-tags">' + tags + '</div>' : '') +
       '</a>'
@@ -209,7 +266,7 @@
           '<span class="rd-list-side-num">' + (i + 1) + '</span>' +
           '<span class="rd-list-side-body">' +
             (item.source ? '<span class="rd-list-side-source">' + escapeHtml(item.source) + '</span>' : '') +
-            '<span class="rd-list-side-title">' + escapeHtml(item.title) + '</span>' +
+            titleHtml(item, 'rd-list-side-title') +
           '</span>' +
         '</a>'
       );
@@ -226,9 +283,9 @@
     var metaParts = [cfg.categoryLabel, item.source].filter(Boolean);
     return (
       '<a class="rd-list-card" href="' + escapeAttr(item.href) + '">' +
-        imgHtml(item.thumb, 'rd-list-card-img', '') +
+        imgHtml(item.thumb, 'rd-list-card-img', monoFromTitle(item)) +
         (metaParts.length ? '<span class="rd-list-card-meta">' + escapeHtml(metaParts.join(' · ')) + '</span>' : '') +
-        '<span class="rd-list-card-title">' + escapeHtml(item.title) + '</span>' +
+        titleHtml(item, 'rd-list-card-title') +
       '</a>'
     );
   }
