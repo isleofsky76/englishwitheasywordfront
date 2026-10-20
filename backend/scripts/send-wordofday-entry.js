@@ -28,24 +28,24 @@ import { applySeoAfterUpload, toIsoDateOnly, SITE_ORIGIN } from './voca-seo.js';
 // ========== 여기만 수정 ==========
 // redesign-word 시안용: .wotd-word / .wotd-core / .wotd-ex / .wotd-col …
 
-const imageSrc = '/resources/commit.jpg';
+const imageSrc = '/resources/thwart.jpg';
 
 const entry = {
-  title: 'commit | 약속하다, 저지르다, 전념하다',
+  title: 'thwart | 좌절시키다, 방해하다',
 
   // 태그 사이 빈 줄/개행 넣지 말 것
-  message: `<div class="wotd-word"><img class="wotd-hero-image" src="${imageSrc}" alt="commit" loading="lazy"><span class="wotd-ipa">/kəˈmɪt/</span><span class="wotd-ipa-ko">커밋</span><div class="wotd-pos" data-pos="동사" data-primary="1"><span class="wotd-meaning">약속하다, (자원·주식 등을) 투입하다</span><span class="wotd-meaning-sub">(범죄 등을) 저지르다; (자신·결정에) 전념하다</span></div><p class="wotd-core">돈·시간·주식 등을 <em class="wotd-core-em">공식적으로 내놓거나</em>, 잘못을 저지르거나, 결정에 자신을 묶다</p><p class="wotd-nuance">commit은 문맥에 따라 뜻이 크게 갈립니다. 뉴스·비즈니스에서는 <mark>주식·자금·자원을 출연·투입한다</mark>는 뜻이 흔하고, commit a crime처럼 ‘저지르다’, commit yourself처럼 ‘결정·전념하다’로도 씁니다. 같은 철자라도 목적어를 보면 의미가 바로 갈립니다.</p><div class="wotd-compare"><span class="wotd-cmp-en">promise</span><span class="wotd-cmp-ko">약속하다 · 말의 약속</span></div><div class="wotd-compare" data-active="1"><span class="wotd-cmp-en">commit</span><span class="wotd-cmp-ko">출연·투입·저지름·전념 · 행동·책임이 따름</span></div><div class="wotd-col"><span class="wotd-col-en">commit shares / money</span><span class="wotd-col-ko">주식·자금을 출연하다, 투입하다</span></div><div class="wotd-col"><span class="wotd-col-en">commit a crime</span><span class="wotd-col-ko">범죄를 저지르다</span></div><div class="wotd-col"><span class="wotd-col-en">commit yourself</span><span class="wotd-col-ko">결정하다, 전념하다, 약정하다</span></div><section class="wotd-ex" data-tag="뉴스 예문"><p class="wotd-ex-en">The pledge comes a day after AI competitor Anthropic said it plans to <mark>commit</mark> 5% of its shares to a new “public benefit fund” with the flexibility to make charitable donations or direct money to “specific populations.”</p><p class="wotd-ex-ko">이번 약속은 AI 경쟁사 앤트로픽이 자사 주식의 5%를 자선 기부나 특정 계층 지원에 활용할 수 있는 새로운 공익기금에 출연하겠다는 계획을 밝힌 지 하루 만에 나왔다.</p></section><section class="wotd-ex"><p class="wotd-ex-en">People who <mark>commit</mark> such crimes aren’t normal.</p><p class="wotd-ex-ko">그러한 범죄를 저지르는 사람들은 정상이 아니다.</p></section><section class="wotd-ex"><p class="wotd-ex-en">You don’t have to <mark>commit</mark> yourself now, just think about it.</p><p class="wotd-ex-ko">지금 결정하지 않으셔도 됩니다. 그냥 생각을 해 보세요.</p></section><p class="wotd-takeaway">commit은 ‘약속’보다 한 걸음 더 나아가, 자원 투입·범죄 행위·자기 결정처럼 결과가 따르는 행동을 가리킨다. 목적어(shares, crime, yourself)를 보면 뜻이 갈린다.</p><div class="wotd-glance"><div><dt>품사</dt><dd>동사</dd></div><div><dt>비슷한 말</dt><dd>pledge, perpetrate, dedicate</dd></div><div><dt>반대 말</dt><dd>withdraw, refrain</dd></div><div><dt>자주 나오는 곳</dt><dd>경제·사회·일상 회화</dd></div></div></div>`,
+  message: `<div class="wotd-word"><img class="wotd-hero-image" src="${imageSrc}" alt="thwart" loading="lazy"><span class="wotd-ipa">/θwɔːrt/</span><span class="wotd-ipa-ko">스워트</span><div class="wotd-pos" data-pos="동사" data-primary="1"><span class="wotd-meaning">좌절시키다, 방해하다</span><span class="wotd-meaning-sub">(계획·시도·공격 등을) 가로막다</span></div><p class="wotd-core">누군가의 계획·행동·효과가 <em class="wotd-core-em">뜻대로 되지 못하게</em> 막거나 무산시키다</p><p class="wotd-nuance">thwart는 단순한 ‘막다(stop)’보다, 상대의 목적 달성을 <mark>좌절·무산시킨다</mark>는 뉘앙스가 강합니다. 시위 차단, 치료 방해, 공격 방어처럼 ‘상대가 하려던 것을 가로막는’ 뉴스·과학·설명문에서 자주 나옵니다.</p><div class="wotd-compare"><span class="wotd-cmp-en">stop</span><span class="wotd-cmp-ko">멈추다 · 일상적, 중립적</span></div><div class="wotd-compare" data-active="1"><span class="wotd-cmp-en">thwart</span><span class="wotd-cmp-ko">좌절시키다 · 목적 달성을 가로막음</span></div><div class="wotd-col"><span class="wotd-col-en">thwart protesters</span><span class="wotd-col-ko">시위대를 가로막다</span></div><div class="wotd-col"><span class="wotd-col-en">thwart efforts</span><span class="wotd-col-ko">노력을 저해하다, 무산시키다</span></div><div class="wotd-col"><span class="wotd-col-en">thwart attackers</span><span class="wotd-col-ko">공격자를 좌절시키다</span></div><section class="wotd-ex" data-tag="뉴스 예문"><p class="wotd-ex-en">Police refused them permission to protest and unprecedented curbs were in place to <mark>thwart</mark> the protesters from reaching the venue.</p><p class="wotd-ex-ko">경찰은 시위 허가를 거부했고, 시위대가 행사장에 도달하지 못하도록 전례 없는 통제가 시행되었다.</p></section><section class="wotd-ex"><p class="wotd-ex-en">New research suggests that using vitamins can <mark>thwart</mark> cancer-fighting efforts.</p><p class="wotd-ex-ko">새로운 연구결과는 비타민을 사용하는 것이 항암효과를 저해시킬 수 있다는 점을 보여준다.</p></section><section class="wotd-ex"><p class="wotd-ex-en">This combative guy shoots the barbs of stinging hairs to <mark>thwart</mark> its attackers.</p><p class="wotd-ex-ko">이 전투적인 녀석은 이러한 날카로운 끝을 가진 따끔한 털을 쏘아내서 공격자를 좌절시킨다.</p></section><p class="wotd-takeaway">thwart는 ‘막는다’보다 ‘상대의 목적을 좌절시킨다’에 가깝다. from ~ing와 함께 쓰면 ‘~하지 못하게 가로막다’로 자주 쓰인다.</p><div class="wotd-glance"><div><dt>품사</dt><dd>동사</dd></div><div><dt>비슷한 말</dt><dd>foil, hinder, frustrate</dd></div><div><dt>반대 말</dt><dd>aid, facilitate, enable</dd></div><div><dt>자주 나오는 곳</dt><dd>뉴스·과학·설명문</dd></div></div></div>`,
 
   nickname: 'admin',
 
-  password: 'seed_password_commit',
+  password: 'seed_password_thwart',
 
   isSecret: false,
 
-  slug: 'commit',
+  slug: 'thwart',
 
   metaDescription:
-    'commit 뜻과 예문. 약속하다·저지르다·전념하다의 의미와 commit shares, commit a crime, commit yourself 표현.',
+    'thwart 뜻과 예문. 좌절시키다, 방해하다의 의미와 thwart protesters, thwart efforts, thwart attackers 표현.',
 
   datePublished: '2026-10-20',
 };
