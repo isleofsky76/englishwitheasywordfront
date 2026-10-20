@@ -76,7 +76,7 @@ export const BOARD_SEO = {
     cssFile: 'page30_viewpost_v.css',
     cssVersion: '20260903e',
     jsFile: 'page30_viewpost_v.js',
-    jsVersion: '20261020auto2',
+    jsVersion: '20261020rd23',
     listHtml: 'english-synonym-list.html',
     extraCss: [{ file: 'news-voca.css', version: '20260926barun' }],
   },
@@ -85,7 +85,7 @@ export const BOARD_SEO = {
     cssFile: 'page30_viewpost_opinions.css',
     cssVersion: '20260816a',
     jsFile: 'page30_viewpost_opinions.js',
-    jsVersion: '20261020op2',
+    jsVersion: '20261020rd23',
     listHtml: 'english-opinions-list.html',
   },
   'calm-mind': {
