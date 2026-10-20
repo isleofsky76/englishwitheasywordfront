@@ -527,7 +527,17 @@ async function loadPost() {
             ? buildPostMetaHtml(post)
             : '';
 
-        document.getElementById('post-container').innerHTML = `
+        const postContainer = document.getElementById('post-container');
+        let usedRedesign = false;
+        if (typeof mountRedesignArticle === 'function') {
+            usedRedesign = await mountRedesignArticle(postContainer, post, {
+                boardKey: 'word-of-the-day',
+                apiBaseUrl: API_BASE_URL,
+                convertedMessage: convertedMessage
+            });
+        }
+        if (!usedRedesign) {
+            postContainer.innerHTML = `
             <div id="post-header">
                 <h2 id="post-title">${escapeHtml(post.title || '제목 없음')}</h2>
                 ${metaHtml}
@@ -535,6 +545,9 @@ async function loadPost() {
             <div id="post-content">
                 <div id="post-message">${convertedMessage || '<span style="color: #999;">내용이 없습니다.</span>'}</div>
             </div>`;
+        }
+        if (typeof markViewpostReady === 'function') markViewpostReady();
+        else if (typeof markArticleReady === 'function') markArticleReady();
         enhanceWordOfDayLayout(post);
         // 영어 줄 뒤에 개별 스피커 아이콘 추가
         attachWordOfDayWebTTS();
@@ -549,7 +562,33 @@ async function loadPost() {
         }
     } catch (error) {
         showError('게시글을 불러올 수 없습니다', error.message);
+        if (typeof markViewpostReady === 'function') markViewpostReady();
     }
 }
 
-loadPost();
+function rdAssetBase() {
+    const scripts = document.querySelectorAll('script[src]');
+    for (let i = 0; i < scripts.length; i += 1) {
+        const src = scripts[i].getAttribute('src') || '';
+        if (/page30_viewpost_wordofday\.js/.test(src)) return src.replace(/[^/]+$/, '');
+    }
+    return '';
+}
+function rdLoadScript(src) {
+    return new Promise((resolve, reject) => {
+        const name = src.replace(/^.*\//, '').split('?')[0];
+        if (document.querySelector('script[src*="' + name + '"]')) { resolve(); return; }
+        const s = document.createElement('script');
+        s.src = src; s.onload = () => resolve(); s.onerror = () => reject(new Error(src));
+        document.head.appendChild(s);
+    });
+}
+(async function rdBoot() {
+    const base = rdAssetBase();
+    try {
+        if (!window.markViewpostReady) await rdLoadScript(base + 'viewpost-rd-ready.js?v=20261020rd24');
+        if (!window.BoardListConfig) await rdLoadScript(base + 'board-list-config.js?v=20261020rd24');
+        if (!window.mountRedesignArticle) await rdLoadScript(base + 'redesign-article.js?v=20261020rd24');
+    } catch (e) { console.warn(e); }
+    loadPost();
+})();

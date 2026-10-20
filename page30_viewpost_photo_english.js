@@ -950,6 +950,11 @@ async function loadPost() {
                 <div id="post-message">${convertedMessage || '<span style="color: #999;">내용이 없습니다.</span>'}</div>
             </div>`;
 
+        if (typeof markViewpostReady === 'function') markViewpostReady();
+        else {
+            document.documentElement.classList.add('rd-ready');
+            if (document.body) document.body.classList.add('rd-ready');
+        }
         enhancePhotoEnglishLesson(post);
         // 영어 줄 뒤에 개별 스피커 아이콘 추가 (레거시 레이아웃용)
         attachPhotoEnglishWebTTS();
@@ -964,6 +969,7 @@ async function loadPost() {
         }
     } catch (error) {
         showError('게시글을 불러올 수 없습니다', error.message);
+        if (typeof markViewpostReady === 'function') markViewpostReady();
     }
 }
 

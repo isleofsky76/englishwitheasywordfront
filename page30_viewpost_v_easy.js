@@ -462,8 +462,16 @@ async function loadPost() {
             ? buildPostMetaHtml(post)
             : '';
 
-        // HTML 구조 재생성
-        postContainer.innerHTML = `
+        let usedRedesign = false;
+        if (typeof mountRedesignArticle === 'function') {
+            usedRedesign = await mountRedesignArticle(postContainer, post, {
+                boardKey: 'popular-voca',
+                apiBaseUrl: API_BASE_URL,
+                convertedMessage: convertedMessage
+            });
+        }
+        if (!usedRedesign) {
+            postContainer.innerHTML = `
             <div id="post-header">
                 <h2 id="post-title">${escapeHtml(post.title || '제목 없음')}</h2>
                 ${metaHtml}
@@ -472,7 +480,10 @@ async function loadPost() {
                 <div id="post-message">${convertedMessage || '<span style="color: #999;">내용이 없습니다.</span>'}</div>
             </div>
         `;
-        
+        }
+        if (typeof markViewpostReady === 'function') markViewpostReady();
+        else if (typeof markArticleReady === 'function') markArticleReady();
+
         // 게시글 내용 복사 시 HTML 태그 제거하고 순수 텍스트만 복사
         const postMessage = document.getElementById('post-message');
         if (postMessage) {
@@ -506,8 +517,34 @@ async function loadPost() {
         showError('게시글을 불러올 수 없습니다', 
             `백엔드 서버(${API_BASE_URL})가 실행 중인지 확인해주세요.<br><br>
             <strong>에러 메시지:</strong> ${error.message}`);
+        if (typeof markViewpostReady === 'function') markViewpostReady();
     }
 }
 
-loadPost();
+function rdAssetBase() {
+    const scripts = document.querySelectorAll('script[src]');
+    for (let i = 0; i < scripts.length; i += 1) {
+        const src = scripts[i].getAttribute('src') || '';
+        if (/page30_viewpost_v_easy\.js/.test(src)) return src.replace(/[^/]+$/, '');
+    }
+    return '';
+}
+function rdLoadScript(src) {
+    return new Promise((resolve, reject) => {
+        const name = src.replace(/^.*\//, '').split('?')[0];
+        if (document.querySelector('script[src*="' + name + '"]')) { resolve(); return; }
+        const s = document.createElement('script');
+        s.src = src; s.onload = () => resolve(); s.onerror = () => reject(new Error(src));
+        document.head.appendChild(s);
+    });
+}
+(async function rdBoot() {
+    const base = rdAssetBase();
+    try {
+        if (!window.markViewpostReady) await rdLoadScript(base + 'viewpost-rd-ready.js?v=20261020rd24');
+        if (!window.BoardListConfig) await rdLoadScript(base + 'board-list-config.js?v=20261020rd24');
+        if (!window.mountRedesignArticle) await rdLoadScript(base + 'redesign-article.js?v=20261020rd24');
+    } catch (e) { console.warn(e); }
+    loadPost();
+})();
 

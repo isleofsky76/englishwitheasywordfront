@@ -251,6 +251,12 @@ async function loadPost() {
       </div>
     `;
 
+    if (typeof markViewpostReady === 'function') markViewpostReady();
+    else {
+      document.documentElement.classList.add('rd-ready');
+      if (document.body) document.body.classList.add('rd-ready');
+    }
+
     const postMessage = document.getElementById('post-message');
     if (postMessage) attachProsConsTTS(postMessage);
 
@@ -264,6 +270,7 @@ async function loadPost() {
     }
   } catch (error) {
     console.error('Error while loading post:', error);
+    if (typeof markViewpostReady === 'function') markViewpostReady();
     showError(
       '게시글을 불러올 수 없습니다',
       `백엔드 서버(${API_BASE_URL})가 실행 중인지 확인해주세요.<br><br><strong>에러:</strong> ${error.message}`

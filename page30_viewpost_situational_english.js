@@ -679,6 +679,12 @@ async function loadPost() {
             }
         }
 
+        if (typeof markViewpostReady === 'function') markViewpostReady();
+        else {
+            document.documentElement.classList.add('rd-ready');
+            if (document.body) document.body.classList.add('rd-ready');
+        }
+
         if (typeof initViewpostLike === 'function') {
             initViewpostLike({
                 entryId: post._id,
@@ -693,6 +699,7 @@ async function loadPost() {
         showError('게시글을 불러올 수 없습니다', 
             `백엔드 서버(${API_BASE_URL})가 실행 중인지 확인해주세요.<br><br>
             <strong>에러 메시지:</strong> ${error.message}`);
+        if (typeof markViewpostReady === 'function') markViewpostReady();
     }
 }
 

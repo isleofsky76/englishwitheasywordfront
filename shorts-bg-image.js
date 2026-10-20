@@ -817,6 +817,12 @@ async function loadPost() {
         const postContent = document.getElementById('post-content');
         if (postContent) attachVocabularyWebTTS(postContent);
 
+        if (typeof markViewpostReady === 'function') markViewpostReady();
+        else {
+            document.documentElement.classList.add('rd-ready');
+            if (document.body) document.body.classList.add('rd-ready');
+        }
+
         if (typeof initViewpostLike === 'function') {
             initViewpostLike({
                 entryId: post._id,
