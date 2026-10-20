@@ -76,7 +76,7 @@ export const BOARD_SEO = {
     cssFile: 'shorts-bg-image.css',
     cssVersion: '20261020sbgi3',
     jsFile: 'shorts-bg-image.js',
-    jsVersion: '20261020sbgi2',
+    jsVersion: '20261020sbgi4',
     listHtml: 'shorts-bg-image-list.html',
     articleLayout: 'header-only',
   },

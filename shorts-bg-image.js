@@ -439,7 +439,7 @@ function enhanceSbgiScenes(root) {
                 '<span class="sbgi-en">' + sbgiEscapeHtml(pair.en) + '</span>' +
                 '<span class="sbgi-sep" aria-hidden="true">:</span>' +
                 '<span class="sbgi-ko">' +
-                  '<span class="sbgi-ko-mask" aria-hidden="true">????</span>' +
+                  '<span class="sbgi-ko-mask" aria-hidden="true"></span>' +
                   '<span class="sbgi-ko-text" hidden>' + sbgiEscapeHtml(pair.ko) + '</span>' +
                 '</span>';
             setSbgiItemOpen(item, false);
