@@ -344,6 +344,135 @@ function vvBindTtsButtons(container) {
     });
 }
 
+/** 한글:영어 줄 → 영어:한글 카드 + 전체 숨기기/클릭 공개 */
+function parseSbgiPair(line) {
+    var text = String(line || '').replace(/\s+/g, ' ').trim();
+    if (!text || text.indexOf(':') < 0) return null;
+    var idx = text.indexOf(':');
+    var left = text.slice(0, idx).trim();
+    var right = text.slice(idx + 1).trim();
+    if (!left || !right) return null;
+    var leftKo = /[가-힣]/.test(left);
+    var rightEn = /[A-Za-z]/.test(right);
+    var leftEn = /[A-Za-z]/.test(left);
+    var rightKo = /[가-힣]/.test(right);
+    var en = '';
+    var ko = '';
+    if (leftKo && rightEn) {
+        ko = left;
+        en = right;
+    } else if (leftEn && rightKo) {
+        en = left;
+        ko = right;
+    } else if (rightEn) {
+        en = right;
+        ko = left;
+    } else if (leftEn) {
+        en = left;
+        ko = right;
+    } else {
+        return null;
+    }
+    en = en.replace(/\s+/g, ' ').trim();
+    ko = ko.replace(/\s+/g, ' ').trim();
+    if (!en || !ko) return null;
+    return { en: en, ko: ko };
+}
+
+function sbgiEscapeHtml(text) {
+    if (!text) return '';
+    var div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
+function setSbgiItemOpen(item, open) {
+    if (!item) return;
+    var mask = item.querySelector('.sbgi-ko-mask');
+    var text = item.querySelector('.sbgi-ko-text');
+    item.classList.toggle('is-open', !!open);
+    if (mask) mask.hidden = !!open;
+    if (text) text.hidden = !open;
+    item.setAttribute('aria-pressed', open ? 'true' : 'false');
+    var en = item.getAttribute('data-sbgi-en') || '';
+    var ko = item.getAttribute('data-sbgi-ko') || '';
+    item.setAttribute('aria-label', open ? (en + ' : ' + ko) : (en + ' : 뜻 보기'));
+}
+
+function enhanceSbgiScenes(root) {
+    if (!root || root.getAttribute('data-sbgi-enhanced') === '1') return;
+    var scenes = root.querySelectorAll('.sbgi-scene');
+    if (!scenes.length) return;
+    root.setAttribute('data-sbgi-enhanced', '1');
+    document.body.classList.add('sbgi-article');
+
+    scenes.forEach(function (scene) {
+        var raw = String(scene.textContent || '');
+        var lines = raw.split(/\r?\n/);
+        var pairs = [];
+        lines.forEach(function (line) {
+            var pair = parseSbgiPair(line);
+            if (pair) pairs.push(pair);
+        });
+        if (!pairs.length) return;
+
+        var wrap = document.createElement('div');
+        wrap.className = 'sbgi-vocab';
+        var toolbar = document.createElement('div');
+        toolbar.className = 'sbgi-vocab-toolbar';
+        var allBtn = document.createElement('button');
+        allBtn.type = 'button';
+        allBtn.className = 'sbgi-hide-all-btn';
+        allBtn.textContent = '전체 보기';
+        allBtn.setAttribute('aria-pressed', 'false');
+        toolbar.appendChild(allBtn);
+
+        var grid = document.createElement('div');
+        grid.className = 'sbgi-vocab-grid';
+        pairs.forEach(function (pair) {
+            var item = document.createElement('button');
+            item.type = 'button';
+            item.className = 'sbgi-vocab-item';
+            item.setAttribute('data-sbgi-en', pair.en);
+            item.setAttribute('data-sbgi-ko', pair.ko);
+            item.innerHTML =
+                '<span class="sbgi-en">' + sbgiEscapeHtml(pair.en) + '</span>' +
+                '<span class="sbgi-sep" aria-hidden="true">:</span>' +
+                '<span class="sbgi-ko">' +
+                  '<span class="sbgi-ko-mask" aria-hidden="true">????</span>' +
+                  '<span class="sbgi-ko-text" hidden>' + sbgiEscapeHtml(pair.ko) + '</span>' +
+                '</span>';
+            setSbgiItemOpen(item, false);
+            item.addEventListener('click', function () {
+                setSbgiItemOpen(item, !item.classList.contains('is-open'));
+                var items = grid.querySelectorAll('.sbgi-vocab-item');
+                var allOpen = true;
+                items.forEach(function (el) {
+                    if (!el.classList.contains('is-open')) allOpen = false;
+                });
+                allBtn.classList.toggle('is-open', allOpen);
+                allBtn.setAttribute('aria-pressed', allOpen ? 'true' : 'false');
+                allBtn.textContent = allOpen ? '전체 숨기기' : '전체 보기';
+            });
+            grid.appendChild(item);
+        });
+
+        allBtn.addEventListener('click', function () {
+            var openAll = !allBtn.classList.contains('is-open');
+            grid.querySelectorAll('.sbgi-vocab-item').forEach(function (item) {
+                setSbgiItemOpen(item, openAll);
+            });
+            allBtn.classList.toggle('is-open', openAll);
+            allBtn.setAttribute('aria-pressed', openAll ? 'true' : 'false');
+            allBtn.textContent = openAll ? '전체 숨기기' : '전체 보기';
+        });
+
+        wrap.appendChild(toolbar);
+        wrap.appendChild(grid);
+        scene.replaceWith(wrap);
+    });
+}
+
 function attachVocabularyWebTTS(container) {
     if (!container) return;
     try {
@@ -351,7 +480,7 @@ function attachVocabularyWebTTS(container) {
     } catch (_) {}
 
     const paragraphs = container.querySelectorAll(
-        'p, .nv-sentence-en, .nv-term, .nv-source-title, .clv-en'
+        'p, .nv-sentence-en, .nv-term, .nv-source-title, .clv-en, .sbgi-en'
     );
     paragraphs.forEach((p) => {
         if (p.getAttribute('data-vv-tts') === '1') return;
@@ -815,7 +944,10 @@ async function loadPost() {
             });
         }
         const postContent = document.getElementById('post-content');
-        if (postContent) attachVocabularyWebTTS(postContent);
+        if (postContent) {
+            enhanceSbgiScenes(postContent);
+            attachVocabularyWebTTS(postContent);
+        }
 
         if (typeof markViewpostReady === 'function') markViewpostReady();
         else {
@@ -971,4 +1103,8 @@ async function loadPost() {
     }
 }
 
-loadPost();
+(function bootSbgi() {
+    var msg = document.getElementById('post-message');
+    if (msg) enhanceSbgiScenes(msg);
+    loadPost();
+})();

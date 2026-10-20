@@ -1,14 +1,33 @@
-/* 쇼츠 배경 이미지 게시판 */
+/* 쇼츠 배경 이미지 — redesign 톤 + 영어:한글 숨기기 */
+@import url("redesign-tokens.css");
 
-.sbgi-page {
-  --sbgi-accent: #7c3aed;
-  --sbgi-accent-soft: #ede9fe;
-  --sbgi-border: #e5e7eb;
-  --sbgi-text: #374151;
-  --sbgi-muted: #6b7280;
-  /* 쇼츠 이미지 — 원본 비율 유지, 화면별 최대 크기 */
-  --sbgi-image-max-w: min(100%, 26.25rem); /* ~420px */
+.sbgi-page,
+body.sbgi-article {
+  --sbgi-accent: var(--accent, #B23A0B);
+  --sbgi-border: var(--line, #D9D3C6);
+  --sbgi-text: var(--ink, #16181D);
+  --sbgi-muted: var(--ink-muted, #5A5F69);
+  --sbgi-image-max-w: min(100%, 26.25rem);
   --sbgi-image-max-h: min(84vh, 780px);
+}
+
+body.sbgi-article {
+  background: var(--page-bg, #F6F3EC);
+  font-family: var(--font-sans, "IBM Plex Sans KR", sans-serif);
+  color: var(--sbgi-text);
+}
+
+body.sbgi-article #post-container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 24px 20px 48px;
+}
+
+body.sbgi-article #post-title {
+  font-family: var(--font-serif, "Noto Serif KR", serif);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
 }
 
 .sbgi-list-intro {
@@ -18,13 +37,12 @@
   font-size: 0.92rem;
   line-height: 1.65;
   color: var(--sbgi-text);
-  background: var(--sbgi-accent-soft);
-  border: 1px solid #ddd6fe;
+  background: var(--surface-warm, #EDE8DC);
+  border: 1px solid var(--sbgi-border);
   border-radius: 10px;
   text-align: center;
 }
 
-/* 목록 카드 썸네일 */
 #guestbook-list .sbgi-card-thumb {
   display: block;
   width: 100%;
@@ -35,13 +53,12 @@
   background: #f3f4f6;
 }
 
-/* 상세 본문 */
 .sbgi-post-body,
-#post-message.sbgi-post-body {
+#post-message.sbgi-post-body,
+#post-message {
   max-width: 42rem;
   width: 100%;
   margin: 0 auto;
-  padding: 0 0.75rem;
   box-sizing: border-box;
 }
 
@@ -49,7 +66,7 @@
   position: relative;
   width: 100%;
   max-width: var(--sbgi-image-max-w);
-  margin: 0.75rem auto 1rem;
+  margin: 0.75rem auto 1.25rem;
   border-radius: 14px;
   overflow: hidden;
   background: #111827;
@@ -68,52 +85,161 @@
 #post-message .sbgi-scenes {
   display: flex;
   flex-direction: column;
-  gap: 0.85rem;
+  gap: 1.35rem;
   margin-top: 0.25rem;
 }
 
-#post-message .sbgi-section-title {
-  margin: 0 0 0.45rem;
-  font-size: 0.92rem;
-  font-weight: 700;
-  color: #5b21b6;
-  line-height: 1.45;
+#post-message .sbgi-section {
+  margin: 0;
+  padding: 0 0 1.1rem;
+  border-bottom: 1px solid var(--sbgi-border);
 }
 
+#post-message .sbgi-section:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+#post-message .sbgi-section-title {
+  margin: 0 0 0.75rem;
+  font-family: var(--font-serif, "Noto Serif KR", serif);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--sbgi-text);
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+}
+
+/* legacy plain scene (enhance 전) */
 #post-message .sbgi-scene {
-  margin: 0.85rem 0 0;
+  margin: 0;
   padding: 0.85rem 1rem;
   font-size: 0.95rem;
   line-height: 1.65;
   color: var(--sbgi-text);
-  background: #fafafa;
+  background: var(--surface, #fff);
   border: 1px solid var(--sbgi-border);
   border-radius: 10px;
   text-align: left;
   white-space: pre-line;
 }
 
-#post-message .sbgi-caption {
-  margin: 0.5rem 0 0;
-  font-size: 0.88rem;
-  color: var(--sbgi-muted);
-  line-height: 1.55;
-  text-align: center;
+/* 영어 : 한글 카드 */
+#post-message .sbgi-vocab {
+  margin: 0;
 }
 
-#post-message .sbgi-note {
-  margin: 1rem 0 0;
-  padding: 0.75rem 0.9rem;
-  font-size: 0.88rem;
-  line-height: 1.6;
+#post-message .sbgi-vocab-toolbar {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0 0 0.65rem;
+}
+
+#post-message .sbgi-hide-all-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  min-width: 108px;
+  padding: 0 16px;
+  border-radius: 999px;
+  border: 1px solid var(--sbgi-text);
+  background: var(--surface, #fff);
   color: var(--sbgi-text);
-  background: #f9fafb;
+  font: inherit;
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+#post-message .sbgi-hide-all-btn:hover,
+#post-message .sbgi-hide-all-btn:focus-visible {
+  color: var(--sbgi-accent);
+  border-color: var(--sbgi-accent);
+  outline: none;
+}
+
+#post-message .sbgi-hide-all-btn.is-open {
+  background: var(--sbgi-text);
+  color: var(--text-on-dark, #F6F3EC);
+  border-color: var(--sbgi-text);
+}
+
+#post-message .sbgi-vocab-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+
+#post-message .sbgi-vocab-item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 10px;
+  width: 100%;
+  margin: 0;
+  padding: 12px 14px;
   border: 1px solid var(--sbgi-border);
-  border-radius: 8px;
+  border-radius: 12px;
+  background: var(--surface, #fff);
+  color: var(--sbgi-text);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+#post-message .sbgi-vocab-item:hover,
+#post-message .sbgi-vocab-item:focus-visible {
+  border-color: var(--sbgi-text);
+  outline: none;
+}
+
+#post-message .sbgi-vocab-item.is-open {
+  background: var(--surface-warm, #EDE8DC);
+  border-color: var(--sbgi-border);
+}
+
+#post-message .sbgi-en {
+  font-size: 1.02rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--sbgi-text);
+}
+
+#post-message .sbgi-sep {
+  color: var(--sbgi-muted);
+  font-weight: 500;
+}
+
+#post-message .sbgi-ko {
+  font-size: 0.95rem;
+  color: var(--sbgi-muted);
+}
+
+#post-message .sbgi-ko-mask {
+  display: inline-block;
+  min-width: 3.2em;
+  padding: 0.1em 0.35em;
+  border-radius: 6px;
+  background: rgba(22, 24, 29, 0.08);
+  color: var(--sbgi-muted);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+
+#post-message .sbgi-ko-text {
+  color: var(--sbgi-text);
+  font-weight: 500;
+}
+
+#post-message .sbgi-vocab-item.is-open .sbgi-ko-text {
+  color: var(--sbgi-accent);
+  font-weight: 600;
 }
 
 #post-message .sbgi-ai-note {
-  margin: 1.1rem 0 0;
+  margin: 1.25rem 0 0;
   padding: 0;
   font-size: 0.78rem;
   line-height: 1.45;
@@ -130,32 +256,38 @@
 }
 
 #post-message a {
-  color: #5b21b6;
+  color: var(--sbgi-accent);
   text-decoration: none;
-  border-bottom: 1px solid transparent;
 }
 
 #post-message a:hover {
-  border-bottom-color: #5b21b6;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+@media (min-width: 640px) {
+  #post-message .sbgi-vocab-grid {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 @media (min-width: 992px) {
-  .sbgi-page {
-    --sbgi-image-max-w: min(100%, 28rem); /* PC 큰 화면 ~448px */
+  .sbgi-page,
+  body.sbgi-article {
+    --sbgi-image-max-w: min(100%, 28rem);
     --sbgi-image-max-h: min(88vh, 820px);
   }
 }
 
 @media (max-width: 576px) {
-  .sbgi-page {
-    --sbgi-image-max-w: min(94vw, 24rem); /* 모바일 거의 전폭 */
-    --sbgi-image-max-h: min(93.6vh, 864px); /* 78vh·720px 대비 +20% */
+  .sbgi-page,
+  body.sbgi-article {
+    --sbgi-image-max-w: min(94vw, 24rem);
+    --sbgi-image-max-h: min(93.6vh, 864px);
   }
 
-  .sbgi-post-body,
-  #post-message.sbgi-post-body {
-    max-width: 100%;
-    padding: 0 0.5rem;
+  body.sbgi-article #post-container {
+    padding: 18px 14px 40px;
   }
 
   #guestbook-list .sbgi-card-thumb {

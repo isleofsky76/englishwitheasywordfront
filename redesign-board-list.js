@@ -100,6 +100,19 @@
           tags.push(word);
         }
       }
+      /* 신문읽는 이미지: 항구 : harbor → harbor */
+      if (!tags.length) {
+        var lineRe = /(?:^|\n)\s*[^:\n가-힣]*[가-힣][^:\n]*\s*:\s*([A-Za-z][A-Za-z0-9'\/.\s-]{0,40})/g;
+        var lm;
+        while ((lm = lineRe.exec(entry.message)) && tags.length < limit) {
+          var en = String(lm[1] || '').replace(/\s+/g, ' ').trim();
+          var ek = en.toLowerCase();
+          if (en && !seen[ek] && en.length < 48) {
+            seen[ek] = true;
+            tags.push(en);
+          }
+        }
+      }
     }
     return tags.slice(0, limit);
   }

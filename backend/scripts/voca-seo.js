@@ -58,9 +58,9 @@ export const BOARD_SEO = {
   'shorts-bg-image': {
     label: '신문읽는 이미지',
     cssFile: 'shorts-bg-image.css',
-    cssVersion: '20260831d',
+    cssVersion: '20261020sbgi2',
     jsFile: 'shorts-bg-image.js',
-    jsVersion: '20260903d',
+    jsVersion: '20261020sbgi2',
     listHtml: 'shorts-bg-image-list.html',
   },
   'ranking-news': {
