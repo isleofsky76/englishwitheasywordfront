@@ -5,7 +5,7 @@
 (function (global) {
   'use strict';
 
-  var ASSET_VER = '20261020rd22';
+  var ASSET_VER = '20261020rd23';
 
   /** 캐시된 구버전 JS가 그려도 QUICK REVIEW 즉시 제거 */
   function stripQuickReview() {
@@ -263,13 +263,18 @@
 
       var wordEn = '';
       var wordKo = '';
-      var enEl = sec.querySelector('.nv-en, .nv-phrase-en, .nv-section-title');
+      var enEl = sec.querySelector('.nv-en, .nv-phrase-en');
+      var titleEl = sec.querySelector('.nv-section-title');
       var koEl = sec.querySelector('.nv-ko, .nv-phrase-ko');
       if (enEl) wordEn = stripHtml(enEl.innerHTML);
+      /* 섹션 제목(1. 불어넣다…)은 표현이 아니라 한글 묶음 — 번호는 카드 01과 중복되므로 제거 */
+      var titleText = titleEl ? stripLeadingListNum(stripHtml(titleEl.innerHTML)) : '';
+      if (!wordEn && titleText) wordEn = titleText;
       if (koEl) wordKo = stripHtml(koEl.innerHTML);
 
       var meaningEl = sec.querySelector('.nv-meaning-text');
       var meaning = meaningEl ? stripHtml(meaningEl.innerHTML) : (wordKo || '');
+      if (!meaning && titleText && wordEn && titleText !== wordEn) meaning = titleText;
 
       var enEx = sec.querySelector('.nv-ex-en');
       var koEx = sec.querySelector('.nv-ex-ko, .nv-narrative-def, .nv-narrative-text');
@@ -336,7 +341,7 @@
       return {
         id: 'rd-expr-' + (i + 1),
         num: padNum(i + 1),
-        expression: card.expression,
+        expression: stripLeadingListNum(card.expression),
         meaning: card.meaning,
         moreExprs: card.moreExprs || [],
         enHtml: card.enHtml,

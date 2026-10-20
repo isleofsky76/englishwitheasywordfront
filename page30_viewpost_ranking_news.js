@@ -886,7 +886,7 @@ function rdLoadScript(src) {
     const base = rdAssetBase();
     try {
         if (!window.BoardListConfig) await rdLoadScript(base + 'board-list-config.js?v=20261020auto2');
-        if (!window.mountRedesignArticle) await rdLoadScript(base + 'redesign-article.js?v=20261020rd21');
+        if (!window.mountRedesignArticle) await rdLoadScript(base + 'redesign-article.js?v=20261020rd23');
     } catch (e) { console.warn(e); }
     loadPost();
 })();
