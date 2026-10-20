@@ -304,9 +304,9 @@ ${(board.extraCss || []).map((c) => `    <link rel="stylesheet" href="../../${c.
     <link rel="stylesheet" href="../../navbar-unified.css?v=20260612c">
     <link rel="stylesheet" href="../../weather-banner.css?v=20260612g">
     <link rel="stylesheet" href="../../world-clock.css?v=20260612g">
-    <link rel="stylesheet" href="../../redesign-tokens.css?v=20261020rd23">
-    <link rel="stylesheet" href="../../redesign-article.css?v=20261020rd23">
-    <link rel="preload" href="../../redesign-article.js?v=20261020rd23" as="script">
+    <link rel="stylesheet" href="../../redesign-tokens.css?v=20261020rd25">
+    <link rel="stylesheet" href="../../redesign-article.css?v=20261020rd25">
+    <link rel="preload" href="../../redesign-article.js?v=20261020rd25" as="script">
     <style id="rd-fouc-guard">
       /* SEO 구형 본문이 redesign 전에 깜빡이지 않도록 (!important 금지: 키프레임 fallback이 무시됨) */
       body[data-nv-board]:not(.rd-ready) #post-container {

@@ -21,13 +21,26 @@ body.rd-article .world-clock-bar {
   display: none !important;
 }
 
-body.rd-article #post-container,
-body.rd-article main#post-container {
+/* 카드형 redesign 본문만 full-bleed */
+body.rd-article #post-container:has(.rd-article-layout),
+body.rd-article main#post-container:has(.rd-article-layout) {
   max-width: none;
   padding: 0;
   margin: 0;
   background: transparent;
   box-shadow: none;
+}
+
+/* header-only(단어장 등) — 기존 본문 유지, 좌우 여백 확보 */
+body.rd-article #post-container:not(:has(.rd-article-layout)),
+body.rd-article main#post-container:not(:has(.rd-article-layout)) {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 30px 24px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  box-sizing: border-box;
 }
 
 .rd-article-head {
@@ -400,6 +413,16 @@ body.rd-article .viewpost-related-row {
 }
 
 @media (max-width: 900px) {
+  /* 단어장·표현 등 header-only 모바일 좌우 여백 */
+  body.rd-article #post-container:not(:has(.rd-article-layout)),
+  body.rd-article main#post-container:not(:has(.rd-article-layout)) {
+    max-width: 100%;
+    margin: 12px 0 0;
+    padding: 22px 20px 28px;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
   .rd-article-layout {
     padding: 0 16px 56px;
     gap: 36px;

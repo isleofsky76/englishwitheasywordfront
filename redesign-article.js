@@ -5,7 +5,7 @@
 (function (global) {
   'use strict';
 
-  var ASSET_VER = '20261020rd24';
+  var ASSET_VER = '20261020rd25';
 
   /** 캐시된 구버전 JS가 그려도 QUICK REVIEW 즉시 제거 */
   function stripQuickReview() {
