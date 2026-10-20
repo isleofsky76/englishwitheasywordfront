@@ -443,14 +443,17 @@
 }
 
 @media (max-width: 720px) {
+  /* 모바일 — 날짜·출처 바는 공간만 차지하므로 숨김 */
+  .rd-datebar {
+    display: none;
+  }
   .rd-hero {
     padding: 32px 16px 40px;
     gap: 28px;
   }
   .rd-section,
   .rd-quiz-banner-wrap,
-  .rd-paths-inner,
-  .rd-datebar-inner {
+  .rd-paths-inner {
     padding-left: 16px;
     padding-right: 16px;
   }
