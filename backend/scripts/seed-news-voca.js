@@ -8,66 +8,62 @@ import { uploadNewsVoca } from './news-voca-format.js';
 
 // ========== 여기만 수정 ==========
 const article = {
-  title: '클랜시 재판 논란',
+  title: '프랑스는 왜 불타고 있는가',
 
-  slug: 'lindsay-clancy-murder-trial-victim-or-criminal-bbc',
+  slug: 'unleash-maneuver-woes-runoff-ostensibly-detached-related-words',
 
   metaDescription:
-    'BBC 기사에서 추출한 클랜시 재판 관련 문장. transfixed and divided, postpartum psychosis, declared a mistrial, mirrored the wider discourse, precluded criminal liability, railed against toxic empathy.',
+    'WSJ Opinion 기사에서 추출한 프랑스 시위·정치 위기·대통령 선거 관련 시사 영단어. unleash, maneuver, woes, runoff, ostensibly, detached 등.',
 
-  password: 'password_seed_lindsay_clancy_murder_trial_victim_or_criminal_bbc',
+  password: 'seed_politics_france-burning-related-words',
 
-  datePublished: '2026-09-05',
+  datePublished: '2026-10-18',
 
   intro: [
-    '클랜시 재판이 미국 사회에서 정신질환과 형사 책임을 둘러싼 논쟁을 불러일으켰다는 BBC 기사에서 추출한 문장입니다.',
+    '프랑스에서 발생한 시위와 폭동, 공공서비스 악화, 재정·정치적 위기 및 차기 대통령 선거를 둘러싼 정치권의 움직임을 다룬 월스트리트저널(WSJ) 사설에서 주요 시사 영단어를 정리합니다. 프랑스 의회의 예산안 처리 교착 상태와 장뤼크 멜랑숑의 시위 관련 발언, 대통령 선거를 앞둔 정치적 계산 등을 살펴봅니다.',
   ],
 
   words: [
     {
       narrative: [
-        '1. 그 재판은 클랜시가 피해자인지 감옥에 가야 하는 범죄자인지에 대해(**whether Clancy was a victim or a criminal who deserved to be behind bars**) 전국의 시선을 사로잡았고 국민을 분열시켰습니다(**transfixed and divided the nation**).',
+        '1. 극좌 정당 대표 장뤼크 멜랑숑은 약탈과 방화를 규탄하면서도 경찰이 시위대에 폭력을 퍼부었다(**unleashing**)고 비난했다. cf. unleash: 억제된 힘·감정·폭력 등을 터뜨리다, 퍼붓다',
       ],
     },
     {
       narrative: [
-        '2. 36세 간호사의 변호인단은 그녀가 산후 정신병을 앓고 있었다고 주장했습니다(**had been suffering from postpartum psychosis**).',
+        '2. 프랑스 정당들이 내년 대통령 선거를 앞두고 유리한 위치를 차지하기 위해 책략을 쓰는(**maneuver**) 가운데, 하원은 교착 상태에 빠져 연간 예산안조차 통과시키지 못하고 있다. cf. maneuver: 유리한 위치를 차지하려 책략을 쓰다',
       ],
     },
     {
       narrative: [
-        '3. 판사는 배심원들이 만장일치 판단에 실패한 후(**after jurors failed to come to a unanimous decision**) 금요일 심리 무효를 선언했습니다(**declared a mistrial**).',
+        '3. 프랑스 위기의 근본적인 재정·정치적 문제들(**woes**)은 이미 알려져 있지만, 이번에는 극좌 후보 멜랑숑의 선거 전 정치적 승부수가 주목받고 있다. cf. woes: 고충, 심각한 문제들',
       ],
     },
     {
       narrative: [
-        '4. 그들이 합의하지 못한 상황은(**Their inability to agree**) 이 재판을 둘러싼 더 넓은 사회적 논쟁을 그대로 반영했습니다(**mirrored the wider discourse around the trial**).',
+        '4. 프랑스 대통령 선거에서 관건은 누가 1차 투표를 통과해 르펜과 맞붙을 가능성이 있는 양자 결선투표(**runoff**)에 진출하느냐다. cf. runoff: 결선투표',
       ],
     },
     {
       narrative: [
-        '5. 하지만 그들 중 일부는 산후 정신병이 클랜시의 형사 책임을 배제한다는 주장(**postpartum psychosis precluded Clancy from criminal liability**)에 이의를 제기하는 듯했습니다(**seemed to dispute**).',
+        '5. 프랑스의 폭동은 표면적으로는(**ostensibly**) 공공서비스 악화에 대한 불만 때문이지만, WSJ 사설은 내년 4월 대통령 선거를 고려한 정치적 계산도 작용하고 있다고 분석했다. cf. ostensibly: 표면적으로는, 겉보기에는',
       ],
     },
     {
       narrative: [
-        '6. 하지만 텍사스의 한 어머니 러셀과 같은 다른 부모들은 “해로운 공감”을 격렬하게 비난했습니다(**railed against "toxic empathy"**).',
-      ],
-    },
-    {
-      narrative: [
-        '7. 많은 사용자들은 그 사건이 언급되지 않는 플랫폼을 찾는 데 애를 먹었습니다(**being hard-pressed to find a platform where the case was not being mentioned**).',
+        '6. 지금까지 극좌 정당 ‘굴복하지 않는 프랑스’의 대표 멜랑숑은 시위에 다소 거리를 두는(**detached**) 태도를 취해 왔다. cf. detached: 거리를 둔, 초연한',
       ],
     },
   ],
 
   source: {
-    text: 'BBC | Lindsay Clancy murder trial has divided US on whether she is victim or criminal | By Ana Faguy, Brandon Drenon and Sheila Flynn',
-    url: 'https://www.bbc.com/news/articles/cx2z0xnw2d6o',
+    text: 'The Wall Street Journal Opinion | Why France Is Burning | By The Editorial Board',
+    url: 'https://www.wsj.com/opinion/why-france-is-burning-f0b964e9',
   },
 
-  youtube: 'https://youtube.com/shorts/m3MTOEwThPw',
+  youtube: 'https://youtube.com/shorts/KgMg_F2mO-w',
 };
+// ===============================
 
 uploadNewsVoca(article, API_BASE)
   .then(() => console.log('완료.'))
