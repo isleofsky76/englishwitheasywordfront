@@ -349,7 +349,9 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // 선택 영역 유지를 위한 전역 변수
     let savedSelection = null;
-    
+
+    // 글쓰기 폼이 없는 목록 페이지(어드민 폼 제거됨)에서는 에디터 바인딩 생략
+    if (messageEditor) {
     // 에디터에서 선택 변경 시 저장
     messageEditor.addEventListener('mouseup', () => {
         const selection = window.getSelection();
@@ -430,6 +432,7 @@ document.addEventListener('DOMContentLoaded', () => {
             messageEditor.innerHTML = '';
         }
     });
+    }
     
     // 이미지 업로드 처리 (보안 강화) - 이미지 업로드가 있는 경우에만 활성화
     const imageUpload = document.getElementById('image-upload');
@@ -437,7 +440,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const messageTextarea = messageEditor; // 호환성을 위해 유지
     
     // 이미지 업로드가 있는 경우에만 처리
-    if (imageUpload && imagePreview) {
+    if (messageEditor && imageUpload && imagePreview) {
         // 업로드 제한 설정 (서버 제한 고려)
         const MAX_FILE_SIZE = 1 * 1024 * 1024; // 1MB (Base64 변환 후 약 1.3MB)
         const MAX_FILES = 3; // 최대 3개 (서버 제한 고려)
@@ -987,7 +990,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
             
-            const normalizedMessages = normalizeEconomyListPayload(messages);
+            let normalizedMessages = normalizeEconomyListPayload(messages);
+            // API는 살아 있으나 DB가 비어 있으면 정적 피드로 표시
+            if (!normalizedMessages.entries.length) {
+                try {
+                    const staticFeed = await loadEconomyStaticFeed();
+                    if (staticFeed.entries.length) {
+                        console.warn('⚠️ API entries 비어 있음 — 정적 피드로 표시');
+                        normalizedMessages = staticFeed;
+                    }
+                } catch (feedErr) {
+                    console.warn('정적 피드 로드 실패:', feedErr);
+                }
+            }
             cache.messages = normalizedMessages;
             cache.lastFetch = Date.now();
             renderMessages(normalizedMessages, list);
