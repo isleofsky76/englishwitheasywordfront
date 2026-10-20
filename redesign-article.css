@@ -22,6 +22,8 @@ body.rd-article .world-clock-bar {
 }
 
 /* 카드형 redesign 본문만 full-bleed */
+body.rd-article:not(.rd-article--header-only) #post-container,
+body.rd-article:not(.rd-article--header-only) main#post-container,
 body.rd-article #post-container:has(.rd-article-layout),
 body.rd-article main#post-container:has(.rd-article-layout) {
   max-width: none;
@@ -31,7 +33,9 @@ body.rd-article main#post-container:has(.rd-article-layout) {
   box-shadow: none;
 }
 
-/* header-only(단어장 등) — 기존 본문 유지, 좌우 여백 확보 */
+/* header-only(단어장·표현 등 전 게시판) — 기존 본문 유지, 좌우 여백 확보 */
+body.rd-article.rd-article--header-only #post-container,
+body.rd-article.rd-article--header-only main#post-container,
 body.rd-article #post-container:not(:has(.rd-article-layout)),
 body.rd-article main#post-container:not(:has(.rd-article-layout)) {
   max-width: 900px;
@@ -413,7 +417,9 @@ body.rd-article .viewpost-related-row {
 }
 
 @media (max-width: 900px) {
-  /* 단어장·표현 등 header-only 모바일 좌우 여백 */
+  /* header-only 전 게시판 모바일 좌우 여백 */
+  body.rd-article.rd-article--header-only #post-container,
+  body.rd-article.rd-article--header-only main#post-container,
   body.rd-article #post-container:not(:has(.rd-article-layout)),
   body.rd-article main#post-container:not(:has(.rd-article-layout)) {
     max-width: 100%;

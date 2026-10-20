@@ -267,8 +267,21 @@ body {
   line-height: 1.55;
 }
 
+/* header-only redesign이 패딩을 지워도 단어장 좌우 여백 유지 */
+body.rd-article.rd-article--header-only #post-container,
+body[data-nv-board="word-of-the-day"] #post-container {
+  box-sizing: border-box;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
 /* 모바일 레이아웃 정리 */
 @media (max-width: 767px) {
+  body.rd-article.rd-article--header-only #post-container,
+  body[data-nv-board="word-of-the-day"] #post-container {
+    padding: 22px 20px 28px;
+  }
+
   .wotd-card {
     flex-direction: column;
     padding: 1.2rem 1.15rem;

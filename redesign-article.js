@@ -5,7 +5,7 @@
 (function (global) {
   'use strict';
 
-  var ASSET_VER = '20261020rd25';
+  var ASSET_VER = '20261020rd27';
 
   /** 캐시된 구버전 JS가 그려도 QUICK REVIEW 즉시 제거 */
   function stripQuickReview() {
@@ -611,7 +611,7 @@
    * Apply shell tokens/masthead page class for header-only boards
    */
   function applyRedesignChrome(boardKey) {
-    document.body.classList.add('rd-article');
+    document.body.classList.add('rd-article', 'rd-article--header-only');
     if (boardKey) document.body.setAttribute('data-rd-board', boardKey);
   }
 

@@ -62,6 +62,7 @@ export const BOARD_SEO = {
     jsFile: 'shorts-bg-image.js',
     jsVersion: '20261020sbgi2',
     listHtml: 'shorts-bg-image-list.html',
+    articleLayout: 'header-only',
   },
   'ranking-news': {
     label: 'Ranking News',
@@ -95,6 +96,7 @@ export const BOARD_SEO = {
     jsFile: 'page30_viewpost_calm_mind.js',
     jsVersion: '20260903d',
     listHtml: 'calm-mind-list.html',
+    articleLayout: 'header-only',
   },
   'english-quotes': {
     label: '영어 명언',
@@ -103,6 +105,7 @@ export const BOARD_SEO = {
     jsFile: 'page30_viewpost_english_quotes.js',
     jsVersion: '20261013a',
     listHtml: 'english-quotes-list.html',
+    articleLayout: 'header-only',
   },
   'popular-voca': {
     label: '이럴 땐 영어로?',
@@ -111,14 +114,16 @@ export const BOARD_SEO = {
     jsFile: 'page30_viewpost_v_easy.js',
     jsVersion: '20261020rd24',
     listHtml: 'popular-voca-list.html',
+    articleLayout: 'header-only',
   },
   'word-of-the-day': {
     label: 'Word of the Day',
     cssFile: 'page30_viewpost_wordofday.css',
-    cssVersion: '20260908ratio',
+    cssVersion: '20261020pad1',
     jsFile: 'page30_viewpost_wordofday.js',
     jsVersion: '20261020rd24',
     listHtml: 'word-of-the-day-list.html',
+    articleLayout: 'header-only',
   },
   'photo-english': {
     label: '포토영어',
@@ -128,6 +133,7 @@ export const BOARD_SEO = {
     jsVersion: '20261020rd24',
     listHtml: 'photo-english-list.html',
     extraCss: [{ file: 'photo-english.css', version: '20260727r' }],
+    articleLayout: 'header-only',
   },
   'vocabulary-quiz': {
     label: '영어 단어 퀴즈',
@@ -304,9 +310,9 @@ ${(board.extraCss || []).map((c) => `    <link rel="stylesheet" href="../../${c.
     <link rel="stylesheet" href="../../navbar-unified.css?v=20260612c">
     <link rel="stylesheet" href="../../weather-banner.css?v=20260612g">
     <link rel="stylesheet" href="../../world-clock.css?v=20260612g">
-    <link rel="stylesheet" href="../../redesign-tokens.css?v=20261020rd25">
-    <link rel="stylesheet" href="../../redesign-article.css?v=20261020rd25">
-    <link rel="preload" href="../../redesign-article.js?v=20261020rd25" as="script">
+    <link rel="stylesheet" href="../../redesign-tokens.css?v=20261020rd27">
+    <link rel="stylesheet" href="../../redesign-article.css?v=20261020rd27">
+    <link rel="preload" href="../../redesign-article.js?v=20261020rd27" as="script">
     <style id="rd-fouc-guard">
       /* SEO 구형 본문이 redesign 전에 깜빡이지 않도록 (!important 금지: 키프레임 fallback이 무시됨) */
       body[data-nv-board]:not(.rd-ready) #post-container {
@@ -327,7 +333,7 @@ ${(board.extraCss || []).map((c) => `    <link rel="stylesheet" href="../../${c.
     </script>
     <noscript><style>body[data-nv-board] #post-container{visibility:visible!important}</style></noscript>
 </head>
-<body data-nv-slug="${escapeHtml(slug)}" data-nv-board="${escapeHtml(boardPath)}">
+<body class="${board.articleLayout === 'header-only' ? 'rd-article rd-article--header-only' : ''}" data-nv-slug="${escapeHtml(slug)}" data-nv-board="${escapeHtml(boardPath)}">
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" aria-label="주 메뉴">
         <div class="container-fluid">
             <a class="navbar-brand" href="../../${board.listHtml}">${escapeHtml(board.label)}</a>
