@@ -181,7 +181,6 @@
       : '국제 뉴스 어휘와 함께 읽어보세요.';
     root.href = href;
     root.innerHTML =
-      '<span class="rd-kicker">오늘의 기사 · ' + esc(label || '국제') + '</span>' +
       '<div class="rd-hero-article-img">' +
         (img ? '<img src="' + esc(img) + '" alt="">' : '[기사 대표 이미지]') +
       '</div>' +
