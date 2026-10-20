@@ -169,26 +169,6 @@
       '</div>';
   }
 
-  function renderHeroArticle(entry, index, label) {
-    var root = document.getElementById('rd-hero-article');
-    if (!root || !entry) return;
-    var parts = parseTitleParts(entry.title);
-    var src = sourceFromSlugOrHref(entry.slug, '', parts.source);
-    var href = boardHref('guestbook', entry, index);
-    var img = extractImage(entry.message);
-    var desc = src
-      ? src + ' 기사에서 뽑은 핵심 어휘로 읽어보세요.'
-      : '국제 뉴스 어휘와 함께 읽어보세요.';
-    root.href = href;
-    root.innerHTML =
-      '<div class="rd-hero-article-img">' +
-        (img ? '<img src="' + esc(img) + '" alt="">' : '[기사 대표 이미지]') +
-      '</div>' +
-      '<span class="rd-hero-article-title">' + esc(parts.title) + '</span>' +
-      '<span class="rd-hero-article-desc">' + esc(desc) + '</span>' +
-      '<span class="rd-hero-article-cta">어휘와 함께 읽기 →</span>';
-  }
-
   function mixNews(intl, korea, defense) {
     var items = [];
     function push(list, label, board, take) {
@@ -339,9 +319,6 @@
 
       var w = latest(wotd);
       if (w) renderHeroWord(w, wotd.length - 1);
-
-      var a = latest(intl);
-      if (a) renderHeroArticle(a, intl.length - 1, '국제');
 
       renderNews(mixNews(intl, korea, defense));
       renderQuiz(quiz);
