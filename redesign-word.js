@@ -5,7 +5,7 @@
 (function (global) {
   'use strict';
 
-  var ASSET_VER = '20261020rd29';
+  var ASSET_VER = '20261020rd30';
   var SPEAKER_SVG =
     '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M15.5 8.5a5 5 0 0 1 0 7"></path></svg>';
   var SPEAKER_FULL_SVG =
@@ -451,7 +451,7 @@
               '<div class="rd-word-yt-play">' + YT_PLAY_SVG + '</div>' +
               '<div>' +
                 '<div class="rd-word-yt-kicker">YOUTUBE</div>' +
-                '<div class="rd-word-yt-title">영상으로 듣고<br>소리 내어 따라 하기</div>' +
+                '<div class="rd-word-yt-title">유튜브로 학습하기</div>' +
                 '<div class="rd-word-yt-handle">@istudyeng</div>' +
               '</div>' +
               '<span class="rd-word-yt-cta">채널 보러 가기 ↗</span>' +

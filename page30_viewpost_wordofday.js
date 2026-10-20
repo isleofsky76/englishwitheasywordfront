@@ -594,10 +594,10 @@ function rdLoadScript(src) {
 (async function rdBoot() {
     const base = rdAssetBase();
     try {
-        if (!window.markViewpostReady) await rdLoadScript(base + 'viewpost-rd-ready.js?v=20261020rd29');
-        if (!window.BoardListConfig) await rdLoadScript(base + 'board-list-config.js?v=20261020rd29');
-        if (!window.mountRedesignWord) await rdLoadScript(base + 'redesign-word.js?v=20261020rd29');
-        if (!window.mountRedesignArticle) await rdLoadScript(base + 'redesign-article.js?v=20261020rd29');
+        if (!window.markViewpostReady) await rdLoadScript(base + 'viewpost-rd-ready.js?v=20261020rd30');
+        if (!window.BoardListConfig) await rdLoadScript(base + 'board-list-config.js?v=20261020rd30');
+        if (!window.mountRedesignWord) await rdLoadScript(base + 'redesign-word.js?v=20261020rd30');
+        if (!window.mountRedesignArticle) await rdLoadScript(base + 'redesign-article.js?v=20261020rd30');
     } catch (e) { console.warn(e); }
     loadPost();
 })();
