@@ -141,6 +141,13 @@ body.rd-article main#post-container:not(:has(.rd-article-layout)) {
   background: var(--surface-warm);
   overflow: hidden;
 }
+.rd-yt--photo {
+  aspect-ratio: 4 / 5;
+  max-height: 420px;
+}
+.rd-yt--photo img {
+  object-fit: cover;
+}
 
 .rd-yt iframe,
 .rd-yt img {

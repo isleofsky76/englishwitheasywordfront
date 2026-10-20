@@ -5,7 +5,7 @@
 (function (global) {
   'use strict';
 
-  var ASSET_VER = '20261020rd27';
+  var ASSET_VER = '20261020rd28';
 
   /** 캐시된 구버전 JS가 그려도 QUICK REVIEW 즉시 제거 */
   function stripQuickReview() {
@@ -117,6 +117,15 @@
       embed: 'https://www.youtube.com/embed/' + id,
       thumb: 'https://img.youtube.com/vi/' + id + '/hqdefault.jpg'
     };
+  }
+
+  /** Word of the Day 등 — 본문 히어로 이미지 */
+  function extractHeroImage(html) {
+    var msg = String(html || '');
+    var m = msg.match(/<img[^>]+class=["'][^"']*wotd-hero-image[^"']*["'][^>]+src=["']([^"']+)["']/i) ||
+      msg.match(/<img[^>]+src=["']([^"']+)["'][^>]+class=["'][^"']*wotd-hero-image[^"']*["']/i) ||
+      msg.match(/<img[^>]+src=["'](\/resources\/[^"']+\.(?:jpg|jpeg|png|webp))["']/i);
+    return m ? m[1] : '';
   }
 
   function extractSourceLink(html) {
@@ -495,6 +504,7 @@
     var date = formatDate(post.date);
     var summary = extractSummary(post, parser);
     var yt = extractYoutube(html);
+    var heroImg = !yt ? extractHeroImage(html) : '';
     var sourceUrl = extractSourceLink(html) || (post.sourceUrl || '');
     var narrativeMode = isNarrativeCardCapable(parser, cards);
 
@@ -519,6 +529,11 @@
             '<img src="' + escapeAttr(yt.thumb) + '" alt="">' +
             '<span class="rd-yt-play">▶ YouTube</span>' +
           '</a>' +
+        '</div>';
+    } else if (heroImg) {
+      ytBlock =
+        '<div class="rd-yt rd-yt--photo">' +
+          '<img src="' + escapeAttr(heroImg) + '" alt="">' +
         '</div>';
     }
 
