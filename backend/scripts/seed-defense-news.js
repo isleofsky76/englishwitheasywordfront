@@ -9,77 +9,76 @@ import { uploadDefenseNews } from './defense-news-format.js';
 // ========== 여기만 수정 ==========
 
 const article = {
-  title: 'USS 에이브러햄 링컨 승조원들의 태국 상륙',
+  title: '트럼프, 러시아 대규모 공격 감행한 우크라이나와 젤렌스키 비난',
 
-  slug: 'staggered-shore-leave-related-words',
+  slug: 'deteriorate-relieve-acknowledge-halt-related-words',
 
   metaDescription:
-    'Guardian 기사에서 추출한 해군·군사 생활 관련 표현. staggered, shore leave, stint, off-limits, abrupt, intermittently, conduct oneself, deteriorating, infamous 등.',
+    'CNN 기사에서 추출한 우크라이나·러시아 전쟁과 미국의 외교·경제제재 관련 시사 영단어. deteriorate, relieve, acknowledge, halt, pound, waive, mandate, spark, curtail 등.',
 
-  password: 'seed_defense_staggered-shore-leave-related-words',
+  password: 'seed_politics_deteriorate-relieve-acknowledge-halt-related-words',
 
-  datePublished: '2026-09-04',
+  datePublished: '2026-10-19',
 
   intro: [
-    '장기간 해상 작전을 마치고 태국에 도착한 미 항공모함 USS 에이브러햄 링컨 승조원들의 상륙과 생활 여건을 다룬 Guardian 기사에서 사용된 해군·군사 관련 시사 어휘를 정리합니다.',
+    '우크라이나가 러시아를 상대로 대규모 공격을 감행하자 트럼프 대통령이 젤렌스키를 비난했다. 양국의 에너지 시설 공격 중단 합의 논란, 러시아에 대한 미국의 제재 면제 조치, 우크라이나군의 스타링크 접근 제한 등을 다룬 CNN 기사에서 주요 시사 영단어를 정리합니다.',
   ],
 
   words: [
     {
       narrative: [
-        '1. 수많은 승조원이 한꺼번에 함정을 떠나지 않도록 여러 그룹으로 나눠 순차적으로(**staggered**) 상륙시키고 있었다. cf. 시차를 둔, 시차제의',
+        '1. 우크라이나의 러시아 공격은 젤렌스키와 트럼프의 관계가 점차 악화되는(**deteriorating**) 가운데 이루어졌다. cf. deteriorate: 악화되다',
       ],
     },
     {
       narrative: [
-        '2. 장기간 바다에서 임무를 수행한 승조원들에게 태국 파타야에서의 상륙 허가와(**shore leave**) 자유시간이 주어졌다.',
+        '2. 백악관은 중요한 중간선거를 앞두고 원유와 경유 가격에 가해지는 상승 압력을 완화하려(**relieve**) 하고 있었다. cf. 부담·압박 등을 덜어 주다',
       ],
     },
     {
       narrative: [
-        '3. USS 에이브러햄 링컨 승조원들은 기록적으로 긴 해상 파견 기간(**stint**)을 보낸 뒤 태국에 도착했다. cf. 일정 기간 동안의 일·활동',
+        '3. 트럼프는 러시아와 우크라이나가 에너지 시설 공격을 중단하기로 합의했다고 주장했지만, 우크라이나와 러시아 어느 쪽도 그러한 합의를 인정하지(**acknowledge**) 않았다. cf. 사실·존재 등을 인정하다',
       ],
     },
     {
       narrative: [
-        '4. 승조원들의 안전과 군 기강을 위해 파타야의 일부 지역은 일몰 이후 출입 금지(**off-limits**) 구역으로 지정됐다.',
+        '4. 우크라이나는 러시아 에너지 시설에 대한 공격을 잠시 중단했지만(**halted**), 러시아는 우크라이나에 대한 공격을 멈추지 않았다. cf. halt: 중단하다, 멈추다',
       ],
     },
     {
       narrative: [
-        '5. 전쟁이 발발하면서 가족과의 통신이 갑작스럽게(**abrupt**) 끊긴 승조원도 있었다.',
+        '5. 우크라이나가 공격을 잠시 중단한 것과 달리 러시아는 우크라이나의 에너지 시설과 도시들을 계속 맹렬히 공격하고(**pounding**) 있었다. cf. pound: 반복적으로 맹공격하다',
       ],
     },
     {
       narrative: [
-        '6. 이후 통신이 일부 회복되면서 가족과 간헐적으로(**intermittently**) 연락할 수 있게 됐다.',
+        '6. 트럼프는 러시아산 경유 수입에 대한 제재를 면제했으며(**waived**), 러시아를 광범위한 경제적 처벌에서 제외하는 면제 조항도 발동했다. cf. waive: 규정·의무·제재 등의 적용을 면제하다',
       ],
     },
     {
       narrative: [
-        '7. 해군은 상륙한 승조원들에게 충분히 휴식하되 미국과 태국의 법률에 맞게 처신할 것(**conduct oneself**)을 요구했다.',
+        '7. 트럼프가 면제한 경제제재는 미국 의회가 법적으로 의무화한(**mandated**) 조치였다. cf. mandate: 법률·권한에 따라 의무화하다',
       ],
     },
     {
       narrative: [
-        '8. 기록적인 장기 항해가 이어지면서 함정 내 생활 여건이 점차 악화되는(**deteriorating**) 문제도 제기됐다.',
+        '8. 트럼프가 러시아에 대한 경제제재 면제 조항을 발동하자 공화당 내부에서조차 비판이 촉발됐다(**sparking**). cf. spark: 논란·비판·사건 등을 촉발하다',
       ],
     },
     {
       narrative: [
-        '9. 승조원들이 방문한 파타야에는 세계적으로 악명 높은(**infamous**) 유흥가로 알려진 지역도 있어 출입과 행동에 각별한 주의가 요구됐다.',
+        '9. 우크라이나군이 단거리 및 전장용 드론을 유도하는 데 사용하는 스타링크 시스템에 대한 접근은 여전히 제한된(**curtailed**) 상태였다. cf. curtail: 활동·권한·접근 등을 제한하거나 축소하다',
       ],
     },
   ],
 
   source: {
-    text: 'The Guardian | ‘It’s a fever dream right now’: sailors of USS Abraham Lincoln voice joy after arriving in Thailand',
-    url: 'https://www.theguardian.com/world/2026/sep/02/uss-abraham-lincolns-crew-arrive-thailand-after-record-stint-at-sea',
+    text: 'CNN | Trump slams Zelensky after Ukraine defies US president with major attack on Russia | By Tim Lister and Daria Tarasova-Markina',
+    url: 'https://edition.cnn.com/2026/10/18/europe/ukraine-russia-drone-attack-trump-intl',
   },
 
-  youtube: 'https://www.youtube.com/shorts/KQhzinijll4',
+  youtube: 'https://youtube.com/shorts/hT3EwnRcMGg',
 };
-
 // ===============================
 
 uploadDefenseNews(article, API_BASE)
