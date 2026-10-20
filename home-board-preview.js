@@ -69,6 +69,7 @@
       { path: '/guestbook', page: 'news-voca.html', postPath: 'news-voca', label: '국제' },
       { path: '/defense-news', page: 'defense-news.html', postPath: 'defense-news', label: '국방뉴스' },
       { path: '/economy-news', page: 'economy-news.html', postPath: 'economy-news', label: '경제뉴스' },
+      { path: '/travel-news', page: 'travel-news.html', postPath: 'travel-news', label: '여행뉴스' },
       { path: '/korea-news', page: 'korea-news.html', postPath: 'korea-news', label: '한국뉴스' },
       { path: '/vocabulary-quiz', page: 'vocabulary-quiz.html', label: '퀴즈' },
       { path: '/vocabulary', page: 'english-synonym.html', postPath: 'english-synonym', label: '연관단어' },
@@ -87,7 +88,8 @@
   }
 
   var STATIC_FEED_BY_PATH = {
-    '/economy-news': '/economy-news/feed.json'
+    '/economy-news': '/economy-news/feed.json',
+    '/travel-news': '/travel-news/feed.json'
   };
 
   function fetchStaticFeedEntries(board) {
@@ -207,6 +209,7 @@
     '국제': { badge: 'preview-badge--news', accent: 'preview-accent--news' },
     '국방뉴스': { badge: 'preview-badge--defense', accent: 'preview-accent--defense' },
     '경제뉴스': { badge: 'preview-badge--news', accent: 'preview-accent--news' },
+    '여행뉴스': { badge: 'preview-badge--news', accent: 'preview-accent--news' },
     '한국뉴스': { badge: 'preview-badge--defense', accent: 'preview-accent--defense' },
     '퀴즈': { badge: 'preview-badge--quiz', accent: 'preview-accent--quiz' },
     '유의어': { badge: 'preview-badge--synonym', accent: 'preview-accent--synonym' },

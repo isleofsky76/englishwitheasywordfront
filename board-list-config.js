@@ -10,6 +10,7 @@
     { key: 'korea-news', label: '한국', href: 'korea-news-list.html' },
     { key: 'defense-news', label: '국방', href: 'defense-news-list.html' },
     { key: 'economy-news', label: '경제', href: 'economy-news-list.html' },
+    { key: 'travel-news', label: '여행', href: 'travel-news-list.html' },
     { key: 'culture-voca', label: '컬쳐', href: 'culture-voca-list.html' },
     { key: 'ranking-news', label: '랭킹', href: 'ranking-news-list.html' }
   ];
@@ -79,6 +80,23 @@
       postPath: 'economy-news',
       board: 'economy-news',
       apiPath: '/economy-news',
+      navGroup: 'news',
+      tabs: NEWS_TABS,
+      articleLayout: 'auto',
+      breadcrumbParent: { label: '뉴스 영어', href: 'news-voca-list.html' }
+    },
+    'travel-news': {
+      key: 'travel-news',
+      labelEn: 'TRAVEL NEWS',
+      title: '여행 뉴스',
+      description: '여행·관광·항공 영문 기사의 핵심 표현을 원문과 함께 읽습니다.',
+      tabLabel: '여행',
+      categoryLabel: '여행',
+      listPage: 'travel-news-list.html',
+      postPage: 'travel-news.html',
+      postPath: 'travel-news',
+      board: 'travel-news',
+      apiPath: '/travel-news',
       navGroup: 'news',
       tabs: NEWS_TABS,
       articleLayout: 'auto',

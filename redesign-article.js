@@ -38,7 +38,7 @@
     var scripts = document.querySelectorAll('script[src]');
     for (var i = 0; i < scripts.length; i += 1) {
       var src = scripts[i].getAttribute('src') || '';
-      if (/redesign-article\.js|news-voca\.js|korea-news\.js|defense-news\.js|economy-news\.js/.test(src)) {
+      if (/redesign-article\.js|news-voca\.js|korea-news\.js|defense-news\.js|economy-news\.js|travel-news\.js/.test(src)) {
         return src.replace(/[^/]+$/, '');
       }
     }
