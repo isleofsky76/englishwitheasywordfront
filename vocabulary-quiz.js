@@ -8,6 +8,10 @@
     return element;
   }
 
+  function padNum(n) {
+    return n < 10 ? "0" + n : String(n);
+  }
+
   function getApiBase() {
     if (typeof window.getPage30ApiBaseUrl === "function") {
       return window.getPage30ApiBaseUrl();
@@ -49,9 +53,12 @@
     }
   }
 
-  function renderRevealRow(item) {
-    var row = createElement("div", "quiz-reveal-row");
-    var prompt = createElement("span", "quiz-reveal-prompt", item.show || "");
+  function renderRevealRow(item, index) {
+    var row = createElement("article", "quiz-reveal-row");
+    var top = createElement("div", "quiz-reveal-top");
+    top.appendChild(createElement("span", "quiz-reveal-num", padNum(index + 1)));
+    top.appendChild(createElement("span", "quiz-reveal-prompt", item.show || ""));
+
     var answer = createElement("button", "quiz-reveal-answer");
     answer.type = "button";
     answer.setAttribute("aria-expanded", "false");
@@ -66,8 +73,7 @@
       setRevealOpen(answer, !answer.classList.contains("is-open"));
     });
 
-    row.appendChild(prompt);
-    row.appendChild(createElement("span", "quiz-reveal-colon", ":"));
+    row.appendChild(top);
     row.appendChild(answer);
     return row;
   }
@@ -75,12 +81,12 @@
   function renderRevealSection(section) {
     var card = createElement("section", "vocabulary-quiz-card quiz-reveal-card");
     card.appendChild(
-      createElement("h3", "quiz-question", section.title || "정답 확인")
+      createElement("h2", "quiz-section-title", section.title || "영어 : 뜻")
     );
     var list = createElement("div", "quiz-reveal-list");
-    (section.items || []).forEach(function (item) {
+    (section.items || []).forEach(function (item, index) {
       if (!item || (!item.show && !item.hide)) return;
-      list.appendChild(renderRevealRow(item));
+      list.appendChild(renderRevealRow(item, index));
     });
     card.appendChild(list);
     return card;
@@ -157,17 +163,42 @@
     return wrap;
   }
 
+  function renderCrumb() {
+    var nav = createElement("nav", "quiz-crumb");
+    nav.setAttribute("aria-label", "위치");
+    var home = createElement("a", "", "홈");
+    home.href = "/index.html";
+    var quiz = createElement("a", "", "퀴즈");
+    quiz.href = "/vocabulary-quiz-list.html";
+    var current = createElement("span", "is-current", "상세");
+    nav.appendChild(home);
+    nav.appendChild(createElement("span", "quiz-crumb-sep", "/"));
+    nav.appendChild(quiz);
+    nav.appendChild(createElement("span", "quiz-crumb-sep", "/"));
+    nav.appendChild(current);
+    return nav;
+  }
+
+  // empty/error 목록 링크도 루트 기준
+  function listHref() {
+    return "/vocabulary-quiz-list.html";
+  }
+
   function renderEntry(entry) {
     var article = createElement("article", "quiz-entry");
     article.id = entry.slug || entry._id || "quiz-entry";
-    article.appendChild(createElement("h1", "quiz-entry-title", entry.title));
+
+    var head = createElement("div", "quiz-entry-head");
+    head.appendChild(renderCrumb());
+    head.appendChild(createElement("h1", "quiz-entry-title", entry.title));
 
     var date = entry.date ? new Date(entry.date) : null;
     if (date && !isNaN(date.getTime())) {
-      article.appendChild(
+      head.appendChild(
         createElement("p", "quiz-entry-date", date.toLocaleDateString("ko-KR"))
       );
     }
+    article.appendChild(head);
 
     var actions = createElement("div", "quiz-entry-actions");
     if (entry.sourceUrl) {
@@ -238,12 +269,13 @@
   }
 
   async function init() {
+    document.body.classList.add("rd-quiz");
     var container = document.getElementById("vocabulary-quiz-entries");
     if (!container) return;
 
     var params = new URLSearchParams(window.location.search);
     if (!resolveSlug() && params.get("index") === null) {
-      window.location.replace("vocabulary-quiz-list.html");
+      window.location.replace(listHref());
       return;
     }
 
@@ -257,7 +289,7 @@
         );
         var back = createElement("p", "quiz-source");
         var backLink = createElement("a", "", "목록으로");
-        backLink.href = "vocabulary-quiz-list.html";
+        backLink.href = listHref();
         back.appendChild(backLink);
         container.appendChild(back);
         return;

@@ -252,6 +252,23 @@
       tabs: null,
       articleLayout: 'header-only',
       breadcrumbParent: { label: '읽을거리', href: 'english-opinions-list.html' }
+    },
+    'vocabulary-quiz': {
+      key: 'vocabulary-quiz',
+      labelEn: 'VOCABULARY QUIZ',
+      title: '퀴즈',
+      description: '핵심 표현을 클릭해 뜻을 확인하고, 객관식으로 복습합니다.',
+      tabLabel: '퀴즈',
+      categoryLabel: '퀴즈',
+      listPage: 'vocabulary-quiz-list.html',
+      postPage: 'vocabulary-quiz.html',
+      postPath: 'vocabulary-quiz',
+      board: 'vocabulary-quiz',
+      apiPath: '/vocabulary-quiz',
+      navGroup: 'quiz',
+      tabs: null,
+      articleLayout: 'header-only',
+      breadcrumbParent: { label: '퀴즈', href: 'vocabulary-quiz-list.html' }
     }
   };
 

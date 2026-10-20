@@ -16,19 +16,36 @@
     list.innerHTML = '<p class="text-muted p-3">목록을 불러오는 중...</p>';
 
     try {
-      var response = await fetch(API_BASE_URL + "/vocabulary-quiz", { cache: "no-store" });
+      var response = await fetch(API_BASE_URL + "/vocabulary-quiz", {
+        cache: "no-store",
+      });
       if (!response.ok) throw new Error("HTTP " + response.status);
       var data = await response.json();
       var messages = Array.isArray(data)
         ? { entries: data }
         : { entries: data.entries || [] };
-      renderGuestbookTable(list, messages, {
-        postPage: "vocabulary-quiz.html",
-        apiMode: apiMode,
-        board: "vocabulary-quiz",
-        apiBaseUrl: API_BASE_URL,
-        hideViewsAndLikes: true
-      });
+
+      if (typeof renderRedesignBoardList === "function") {
+        renderRedesignBoardList(list, messages, {
+          boardKey: "vocabulary-quiz",
+          apiMode: apiMode,
+        });
+        return;
+      }
+
+      if (typeof renderGuestbookTable === "function") {
+        renderGuestbookTable(list, messages, {
+          postPage: "vocabulary-quiz.html",
+          apiMode: apiMode,
+          board: "vocabulary-quiz",
+          apiBaseUrl: API_BASE_URL,
+          hideViewsAndLikes: true,
+        });
+        return;
+      }
+
+      list.innerHTML =
+        '<p class="text-danger p-3">목록 렌더러를 불러오지 못했습니다.</p>';
     } catch (error) {
       console.error("[vocabulary-quiz-list]", error);
       list.innerHTML =
