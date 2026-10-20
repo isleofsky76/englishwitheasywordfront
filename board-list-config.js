@@ -269,6 +269,23 @@
       tabs: null,
       articleLayout: 'header-only',
       breadcrumbParent: { label: '퀴즈', href: 'vocabulary-quiz-list.html' }
+    },
+    'shorts-bg-image': {
+      key: 'shorts-bg-image',
+      labelEn: 'SHORTS BACKDROP',
+      title: '신문읽는 이미지',
+      description: '유튜브 쇼츠·영어 학습 영상용 배경 이미지와 장면 속 표현을 모았습니다.',
+      tabLabel: '신문읽는 이미지',
+      categoryLabel: '신문읽는 이미지',
+      listPage: 'shorts-bg-image-list.html',
+      postPage: 'shorts-bg-image.html',
+      postPath: 'shorts-bg-image',
+      board: 'shorts-bg-image',
+      apiPath: '/shorts-bg-image',
+      navGroup: 'express',
+      tabs: null,
+      articleLayout: 'header-only',
+      breadcrumbParent: { label: '신문읽는 이미지', href: 'shorts-bg-image-list.html' }
     }
   };
 
