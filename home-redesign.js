@@ -67,8 +67,28 @@
   }
 
   function extractImage(message) {
-    var m = String(message || '').match(/<img[^>]+src=["']([^"']+)["']/i);
+    var raw = String(message || '');
+    var m = raw.match(/<img[^>]+src=["']([^"']+)["']/i);
+    if (!m) m = raw.match(/src=["']([^"']+\.(?:jpg|jpeg|png|webp|gif)[^"']*)["']/i);
     return m ? m[1] : '';
+  }
+
+  /** 본문 img → slug/단어 resources 경로 순으로 썸네일 후보 */
+  function resolveWotdThumb(entry, fields) {
+    var f = fields || {};
+    var fromMsg = f.image || extractImage(entry && entry.message);
+    if (fromMsg) return fromMsg;
+    var slug = String((entry && entry.slug) || f.slug || '')
+      .trim()
+      .toLowerCase()
+      .replace(/[^a-z0-9_-]+/g, '-');
+    var word = String(f.word || '')
+      .trim()
+      .toLowerCase()
+      .replace(/[^a-z0-9_-]+/g, '-');
+    if (slug) return '/resources/' + slug + '.jpg';
+    if (word) return '/resources/' + word + '.jpg';
+    return '';
   }
 
   function extractWotdFields(entry) {
@@ -176,18 +196,20 @@
     if (!root || !entry) return;
     var f = fields || extractWotdFields(entry);
     var link = href || boardHref('wordofday', entry, index);
-    var img = f.image || '';
+    var img = resolveWotdThumb(entry, f);
     root.href = link;
     root.setAttribute('aria-label', f.word + ' 자세히 보기');
+    if (!img) {
+      root.innerHTML =
+        '<div class="rd-hero-media-img is-empty"></div>' +
+        '<span class="rd-hero-media-cta">단어 자세히 보기 →</span>';
+      return;
+    }
     root.innerHTML =
       '<div class="rd-hero-media-img">' +
-        (img
-          ? '<img src="' + esc(img) + '" alt="' + esc(f.word) + '">'
-          : '[오늘의 단어 이미지]') +
-      '</div>' +
-      '<span class="rd-hero-media-title">' + esc(f.word) + '</span>' +
-      '<span class="rd-hero-media-desc">' + esc(f.meaning) + '</span>' +
-      '<span class="rd-hero-media-cta">단어 자세히 보기 →</span>';
+        '<img src="' + esc(img) + '" alt="' + esc(f.word) + '" ' +
+          'onerror="this.onerror=null;this.closest(\'.rd-hero-media-img\').classList.add(\'is-empty\');this.remove();">' +
+      '</div>';
   }
 
   function mixNews(intl, korea, defense) {
