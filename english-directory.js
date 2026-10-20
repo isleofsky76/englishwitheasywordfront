@@ -266,23 +266,44 @@
     return 'cat-' + String(cat || '').replace(/[^a-z0-9]+/gi, '-').toLowerCase();
   }
 
+  function siteHost(url) {
+    try {
+      return new URL(url).hostname.replace(/^www\./i, '');
+    } catch (e) {
+      return '';
+    }
+  }
+
+  function siteThumb(url) {
+    var host = siteHost(url);
+    if (!host) return '';
+    return 'https://www.google.com/s2/favicons?domain=' + encodeURIComponent(host) + '&sz=128';
+  }
+
   function buildCard(site) {
     var country = inferCountry(site);
     var note = shortNote(site);
     var level = String(site.level || '').trim();
+    var thumb = siteThumb(site.url);
+    var host = siteHost(site.url);
+    var thumbHtml = thumb
+      ? '<img class="dir-card-img" src="' + escapeHtml(thumb) + '" alt="" loading="lazy" decoding="async" width="64" height="64">'
+      : '<span class="dir-card-img is-fallback" aria-hidden="true">' + escapeHtml((site.name || '?').charAt(0)) + '</span>';
 
     return (
-      '<article class="dir-note" data-category="' + escapeHtml(site.category) + '">' +
-        '<div class="dir-note-top">' +
-          '<a class="dir-note-name" href="' + escapeHtml(site.url) + '" target="_blank" rel="noopener noreferrer">' +
-            escapeHtml(site.name) +
-          '</a>' +
-          '<span class="dir-note-flag" aria-label="' + escapeHtml(country.label) + '">' + country.flag + '</span>' +
-          (level ? '<span class="dir-note-level">' + escapeHtml(level) + '</span>' : '') +
-          '<a class="dir-note-visit" href="' + escapeHtml(site.url) + '" target="_blank" rel="noopener noreferrer">방문하기</a>' +
-        '</div>' +
-        '<p class="dir-note-desc">' + escapeHtml(note) + '</p>' +
-      '</article>'
+      '<a class="dir-card" data-category="' + escapeHtml(site.category) + '"' +
+        ' href="' + escapeHtml(site.url) + '" target="_blank" rel="noopener noreferrer">' +
+        '<span class="dir-card-thumb">' + thumbHtml + '</span>' +
+        '<span class="dir-card-body">' +
+          '<span class="dir-card-title-row">' +
+            '<span class="dir-card-name">' + escapeHtml(site.name) + '</span>' +
+            '<span class="dir-card-flag" aria-label="' + escapeHtml(country.label) + '">' + country.flag + '</span>' +
+          '</span>' +
+          (host ? '<span class="dir-card-host">' + escapeHtml(host) + '</span>' : '') +
+          (level ? '<span class="dir-card-level">' + escapeHtml(level) + '</span>' : '') +
+          (note ? '<span class="dir-card-desc">' + escapeHtml(note) + '</span>' : '') +
+        '</span>' +
+      '</a>'
     );
   }
 
@@ -400,7 +421,7 @@
         contentEl.innerHTML =
           '<section class="dir-category">' +
             heading +
-            '<div class="dir-notes">' + filtered.map(buildCard).join('') + '</div>' +
+            '<div class="dir-cards">' + filtered.map(buildCard).join('') + '</div>' +
           '</section>';
         return;
       }
@@ -412,7 +433,7 @@
         html +=
           '<section class="dir-category" id="' + catId(cat) + '">' +
             '<h2 class="dir-category-title">' + escapeHtml(cat) + '</h2>' +
-            '<div class="dir-notes">' + catSites.map(buildCard).join('') + '</div>' +
+            '<div class="dir-cards">' + catSites.map(buildCard).join('') + '</div>' +
           '</section>';
       });
       contentEl.innerHTML = html;
