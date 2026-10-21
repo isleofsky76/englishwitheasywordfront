@@ -13,88 +13,88 @@ import { uploadShortsBgImage } from './shorts-bg-image-format.js';
 // ========== 여기만 수정 ==========
 
 const article = {
-  title: '엑상프로방스 시장 광장 · Aix-en-Provence market square',
+  title: '트라스테베레 밤거리 · Trastevere night street',
 
-  slug: 'aix-en-provence-market-square',
+  slug: 'trastevere-night-street',
 
   metaDescription:
-    '프랑스 엑상프로방스 야외 시장 광장 풍경을 담은 쇼츠용 배경 이미지. market, fountain, cobblestone, peach, bouquet 등 관련 영어 표현.',
+    '로마 트라스테베레 골목의 밤 풍경을 담은 쇼츠용 배경 이미지. cobblestone, string lights, newsstand, scooter, fountain 등 관련 영어 표현.',
 
-  password: 'seed_shorts_aix-en-provence-market-square',
+  password: 'seed_shorts_trastevere-night-street',
 
   datePublished: '2026-10-21',
 
   /** 사이트 루트 기준 경로. resources/ 또는 frontend/resources/ 에 파일 배치 */
-  image: '/resources/Aix-en-Provence.jpg',
+  image: '/resources/Trastevere.jpg',
 
   sections: [
     {
       heading: '전체 분위기 (Overall Scene)',
-      body: `market : 시장
-square : 광장
+      body: `alley : 골목
 cobblestone : 조약돌 길
-awning : 차양
-shade : 그늘
-sunlit : 햇살 가득한
+twilight : 황혼
+stringlight : 줄조명
+glow : 빛
+warm : 따뜻한
 bustling : 활기찬
-leafy : 잎이 무성한
+narrow : 좁은
 ochre : 황토색의
-shutter : 덧문
-clocktower : 시계탑
-browse : 둘러보다
-gather : 모이다
-stroll : 거닐다`,
+dusk : 해질녘
+crowd : 인파
+stroll : 거닐다
+dine : 식사하다
+linger : 머무르다`,
     },
     {
       heading: '좌측 전경 (Left Foreground)',
-      body: `crate : 상자
-peach : 복숭아
-produce : 농산물
-chalkboard : 칠판
-stall : 가판대
-umbrella : 우산
-customer : 손님
-vendor : 상인
-fresh : 신선한
-pile : 쌓다
-weigh : 달다
-pick : 고르다
-display : 진열하다
-bargain : 흥정하다`,
-    },
-    {
-      heading: '중앙 풍경 (Center Scene)',
-      body: `fountain : 분수
-moss : 이끼
-newspaper : 신문
-bench : 긴 의자
-stroller : 유모차
-leash : 목줄
-dog : 개
-couple : 두 사람
-edge : 가장자리
-sleep : 자다
-sniff : 냄새 맡다
-read : 읽다
-sit : 앉다
+      body: `shop : 가게
+treat : 간식
+scoop : 뜨다
+fountain : 분수
+slice : 조각
+group : 무리
+laugh : 웃다
+share : 나눠 먹다
+lean : 기대다
+eat : 먹다
+gather : 모이다
+bright : 밝은
+window : 창문
 chat : 이야기하다`,
     },
     {
+      heading: '중앙 풍경 (Center Scene)',
+      body: `couple : 두 사람
+tablecloth : 식탁보
+checkered : 바둑판무늬의
+wine : 포도주
+carafe : 물병
+plate : 접시
+lamp : 등
+rider : 타는 사람
+cat : 고양이
+weave : 비집고 가다
+pour : 따르다
+sit : 앉다
+pass : 지나가다
+glow : 빛나다`,
+    },
+    {
       heading: '우측 전경 (Right Foreground)',
-      body: `bouquet : 꽃다발
-peony : 작약
-bloom : 꽃
-bread : 빵
-staircase : 계단
-teenager : 십 대
-snack : 간식
-elder : 어르신
-hold : 들다
-stand : 서 있다
-climb : 오르다
-sell : 팔다
-buy : 사다
-admire : 감상하다`,
+      body: `newsstand : 신문 가판대
+newspaper : 신문
+driver : 운전사
+car : 차
+door : 문
+booth : 매점
+postcard : 엽서
+magazine : 잡지
+lean : 기대다
+read : 읽다
+open : 열다
+wait : 기다리다
+weathered : 낡은
+sell : 팔다`,
     },
   ],
 };
