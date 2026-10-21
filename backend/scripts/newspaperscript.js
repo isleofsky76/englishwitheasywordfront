@@ -18,7 +18,7 @@ const article = {
   slug: 'dubrovnik-harbor-scene',
 
   metaDescription:
-    '크로아티아 두브로브니크 항구와 성벽 풍경을 담은 쇼츠용 배경 이미지. harbor, fortress, fisherman, lavender, seagull 등 관련 영어 표현.',
+    '크로아티아 두브로브니크 항구와 성벽 풍경을 담은 쇼츠용 배경 이미지. harbor, fortress, fisherman, seagull 등 관련 영어 표현.',
 
   password: 'seed_shorts_dubrovnik-harbor-scene',
 
@@ -33,7 +33,6 @@ const article = {
       body: `harbor : 항구
 fortress : 요새
 stonewall : 돌담
-terracotta : 테라코타
 rooftop : 지붕
 pier : 부두
 turquoise : 청록색의
@@ -42,25 +41,26 @@ medieval : 중세의
 coastal : 해안의
 bustling : 활기찬
 hillside : 언덕 마을
-cablecar : 케이블카
+tower : 탑
+breeze : 바람
 overlook : 내려다보다`,
     },
     {
       heading: '좌측 전경 (Left Foreground)',
       body: `gentleman : 신사
-sunglasses : 선글라스
 newspaper : 신문
-umbrella : 파라솔
-lemonade : 레모네이드
-olive : 올리브
+umbrella : 우산
 bread : 빵
 basket : 바구니
-cafe : 카페
 table : 탁자
-patio : 테라스
+glass : 잔
+shade : 그늘
+elderly : 나이 든
 read : 읽다
 sip : 홀짝이다
-relax : 쉬다`,
+relax : 쉬다
+seat : 앉다
+stroll : 거닐다`,
     },
     {
       heading: '중앙 풍경 (Center Scene)',
@@ -82,14 +82,14 @@ watch : 지켜보다`,
     {
       heading: '우측 전경 (Right Foreground)',
       body: `vendor : 상인
-lavender : 라벤더
 mushroom : 버섯
 stall : 가판대
-icecream : 아이스크림
-cone : 콘
 boy : 소년
 cap : 모자
 seagull : 갈매기
+bag : 봉지
+dried : 말린
+treat : 간식
 feed : 먹이를 주다
 reach : 손을 뻗다
 hand : 건네다

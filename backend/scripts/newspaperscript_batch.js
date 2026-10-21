@@ -148,6 +148,7 @@ Rules:
 - Each body: one vocab per line as "english : 한글" (space around colon).
 - 12–14 lines per section; mix nouns, adjectives, and verbs visible or implied in that region.
 - Prefer concrete scene words over abstract theory.
+- Avoid loanwords where Korean is just a transliteration of English (no lemonade/레모네이드, lavender/라벤더, cone/콘, cafe/카페, ice cream/아이스크림, terracotta/테라코타, etc.). Use words with distinct native Korean meanings.
 - title format must include " · " between Korean and English.
 - slug: lowercase kebab-case, ASCII only; prefer something based on the English title (file stem hint: "${fileStem}").
 - No HTML, no markdown fences, JSON only.`;
