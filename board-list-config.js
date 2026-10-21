@@ -310,7 +310,7 @@
       key: 'shorts-bg-image',
       labelEn: 'SHORTS BACKDROP',
       title: '신문읽는 이미지',
-      description: '유튜브 쇼츠·영어 학습 영상용 배경 이미지와 장면 속 표현을 모았습니다.',
+      description: '단어 학습용 목적으로 AI를 활용해 만들었습니다.',
       tabLabel: '신문읽는 이미지',
       categoryLabel: '신문읽는 이미지',
       listPage: 'shorts-bg-image-list.html',
