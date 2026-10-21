@@ -907,7 +907,11 @@ async function loadPost() {
         }
 
         // 이미지/동영상 링크 변환하여 표시
-        const convertedMessage = fixLegacyCultureVocaLayout(convertMediaLinks(post.message || ''));
+        const convertedMessage = fixLegacyCultureVocaLayout(convertMediaLinks(post.message || ''))
+            .replace(
+                /\*?Google Gemini로 생성된 글과 이미지입니다\.\s*관리자 리뷰 후에 게시 되었습니다\./g,
+                '*단어 학습용 목적으로 AI를 활용해 만들었습니다.'
+            );
         console.log('원본 메시지:', post.message);
         console.log('변환된 메시지:', convertedMessage);
         
