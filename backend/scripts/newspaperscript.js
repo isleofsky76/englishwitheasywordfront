@@ -13,88 +13,88 @@ import { uploadShortsBgImage } from './shorts-bg-image-format.js';
 // ========== 여기만 수정 ==========
 
 const article = {
-  title: '이스탄불 보스포루스 부두 · Istanbul Bosphorus waterfront',
+  title: '엑상프로방스 시장 광장 · Aix-en-Provence market square',
 
-  slug: 'istanbul-bosphorus-waterfront',
+  slug: 'aix-en-provence-market-square',
 
   metaDescription:
-    '이스탄불 보스포루스 부두의 비 오는 날 풍경을 담은 쇼츠용 배경 이미지. ferry, mosque, fisherman, seagull, newsstand 등 관련 영어 표현.',
+    '프랑스 엑상프로방스 야외 시장 광장 풍경을 담은 쇼츠용 배경 이미지. market, fountain, cobblestone, peach, bouquet 등 관련 영어 표현.',
 
-  password: 'seed_shorts_istanbul-bosphorus-waterfront',
+  password: 'seed_shorts_aix-en-provence-market-square',
 
   datePublished: '2026-10-21',
 
   /** 사이트 루트 기준 경로. resources/ 또는 frontend/resources/ 에 파일 배치 */
-  image: '/resources/istanbul.jpg',
+  image: '/resources/Aix-en-Provence.jpg',
 
   sections: [
     {
       heading: '전체 분위기 (Overall Scene)',
-      body: `waterfront : 물가
-ferry : 여객선
-mosque : 이슬람 사원
-dome : 둥근 지붕
-minaret : 첨탑
-overcast : 잔뜩 흐린
-rainy : 비 오는
-wet : 젖은
-skyline : 도시 실루엣
-harbor : 항구
-gray : 회색의
-calm : 잔잔한
-historic : 역사적인
-overlook : 내려다보다`,
+      body: `market : 시장
+square : 광장
+cobblestone : 조약돌 길
+awning : 차양
+shade : 그늘
+sunlit : 햇살 가득한
+bustling : 활기찬
+leafy : 잎이 무성한
+ochre : 황토색의
+shutter : 덧문
+clocktower : 시계탑
+browse : 둘러보다
+gather : 모이다
+stroll : 거닐다`,
     },
     {
       heading: '좌측 전경 (Left Foreground)',
-      body: `vendor : 장사꾼
-cart : 손수레
-sesame : 참깨
-ring : 고리
-bread : 빵
-glove : 장갑
-student : 학생
-uniform : 교복
-step : 계단
-yawn : 하품하다
-screen : 화면
-eat : 먹다
-reach : 손을 뻗다
-pile : 쌓다`,
+      body: `crate : 상자
+peach : 복숭아
+produce : 농산물
+chalkboard : 칠판
+stall : 가판대
+umbrella : 우산
+customer : 손님
+vendor : 상인
+fresh : 신선한
+pile : 쌓다
+weigh : 달다
+pick : 고르다
+display : 진열하다
+bargain : 흥정하다`,
     },
     {
       heading: '중앙 풍경 (Center Scene)',
-      body: `fisherman : 낚시꾼
-rod : 낚싯대
-railing : 난간
-seagull : 갈매기
+      body: `fountain : 분수
+moss : 이끼
+newspaper : 신문
 bench : 긴 의자
-umbrella : 우산
+stroller : 유모차
+leash : 목줄
+dog : 개
 couple : 두 사람
-cast : 던지다
-feed : 먹이를 주다
-gather : 모이다
-lean : 기대다
-watch : 바라보다
-pass : 지나가다
-hold : 잡다`,
+edge : 가장자리
+sleep : 자다
+sniff : 냄새 맡다
+read : 읽다
+sit : 앉다
+chat : 이야기하다`,
     },
     {
       heading: '우측 전경 (Right Foreground)',
-      body: `newsstand : 신문 가판대
-newspaper : 신문
-tea : 차
-glass : 잔
-stool : 의자
-beanie : 털모자
-rusty : 녹슨
-booth : 매점
-cat : 고양이
-crate : 상자
-sip : 홀짝이다
-read : 읽다
-sit : 앉다
-weathered : 낡은`,
+      body: `bouquet : 꽃다발
+peony : 작약
+bloom : 꽃
+bread : 빵
+staircase : 계단
+teenager : 십 대
+snack : 간식
+elder : 어르신
+hold : 들다
+stand : 서 있다
+climb : 오르다
+sell : 팔다
+buy : 사다
+admire : 감상하다`,
     },
   ],
 };
