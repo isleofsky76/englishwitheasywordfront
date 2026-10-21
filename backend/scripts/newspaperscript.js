@@ -13,89 +13,88 @@ import { uploadShortsBgImage } from './shorts-bg-image-format.js';
 // ========== 여기만 수정 ==========
 
 const article = {
-  title: '베네치아 운하 카페 · Venice canal-side café',
+  title: '리스본 노란 트램 거리 · Lisbon yellow tram street',
 
-  slug: 'venice-canal-side-cafe',
+  slug: 'lisbon-yellow-tram-street',
 
   metaDescription:
-    '베네치아 운하 옆 카페 풍경을 담은 쇼츠용 배경 이미지. canal, gondola, espresso, gondolier, newspaper 등 관련 영어 표현.',
+    '리스본 언덕길과 노란 트램(28번) 풍경을 담은 쇼츠용 배경 이미지. tram, cobblestone, azulejo, pastel de nata, fado 등 관련 영어 표현.',
 
-  password: 'seed_shorts_venice-canal-side-cafe',
+  password: 'seed_shorts_lisbon-yellow-tram-street',
 
-  datePublished: '2026-10-20',
+  datePublished: '2026-10-21',
 
   /** 사이트 루트 기준 경로. resources/ 또는 frontend/resources/ 에 파일 배치 */
-  image: '/resources/venice.jpg',
+  image: '/resources/lisbon.jpg',
 
   sections: [
     {
       heading: '전체 분위기 (Overall Scene)',
-      body: `canal : 운하
-gondola : 곤돌라
-bridge : 다리
-arch : 아치
+      body: `tram : 트램
+cobblestone : 조약돌 포장
+hill : 언덕
+azulejo : 아줄레주(타일)
 facade : 건물 정면
-pastel : 파스텔의
-romantic : 낭만적인
-waterfront : 물가
-reflection : 반사
-ripple : 물결
-glisten : 반짝이다
-float : 떠다니다
-historic : 역사적인
-serene : 고요한`,
+balcony : 발코니
+rooftop : 지붕
+harbor : 항구
+bridge : 다리
+sunlit : 햇살 가득한
+steep : 가파른
+picturesque : 그림 같은
+bustling : 활기찬
+descend : 내려가다`,
     },
     {
       heading: '좌측 전경 (Left Foreground)',
-      body: `couple : 커플
+      body: `gentleman : 신사
+fedora : 중절모
+newspaper : 신문
 espresso : 에스프레소
-saucer : 받침 접시
-awning : 차양
-striped : 줄무늬의
-metal : 철제의
-geranium : 제라늄
-windowsill : 창턱
-balcony : 발코니
-cheerful : 쾌활한
-laugh : 웃다
-chat : 수다 떨다
-lean : 기대다
-hang : 매달리다`,
+pastel : 에그타르트
+marble : 대리석
+cafe : 카페
+table : 탁자
+glasses : 안경
+waiter : 웨이터
+tray : 쟁반
+guitar : 기타
+musician : 연주자
+read : 읽다`,
     },
     {
       heading: '중앙 풍경 (Center Scene)',
-      body: `waiter : 웨이터
-vest : 조끼
-tray : 쟁반
-croissant : 크루아상
-gondolier : 뱃사공
-oar : 노
-hat : 모자
+      body: `yellow : 노란색의
+track : 선로
 passenger : 승객
-elegant : 우아한
-skilled : 능숙한
-balance : 균형 잡다
-row : 노 젓다
-glide : 미끄러지다
-deliver : 가져다주다`,
+tourist : 관광객
+photo : 사진
+skirt : 치마
+sidewalk : 보도
+crowd : 사람들
+window : 창문
+lean : 기대다
+observe : 바라보다
+walk : 걷다
+snap : 사진을 찍다
+approach : 다가오다`,
     },
     {
       heading: '우측 전경 (Right Foreground)',
-      body: `gentleman : 신사
-glasses : 안경
-newspaper : 신문
-cappuccino : 카푸치노
-fedora : 중절모
-pigeon : 비둘기
-crumb : 부스러기
-cane : 지팡이
-elderly : 나이 든
-absorbed : 몰두한
-leisurely : 느긋한
-unfold : 펼치다
-read : 읽다
-peck : 쪼다
-linger : 머무르다`,
+      body: `boy : 소년
+scooter : 킥보드
+sidewalk : 보도
+cat : 고양이
+tabby : 줄무늬 고양이
+curl : 몸을 둥글게 말다
+asleep : 잠든
+step : 계단
+stone : 돌
+ride : 타다
+nap : 낮잠 자다
+rest : 쉬다
+nearby : 근처의
+sunny : 햇볕이 드는`,
     },
   ],
 };
