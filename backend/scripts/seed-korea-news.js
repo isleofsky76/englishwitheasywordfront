@@ -10,71 +10,71 @@ import { uploadKoreaNews } from './korea-news-format.js';
 // ========== 여기만 수정 ==========
 
 const article = {
-  title: '교보문고 의심 주문 거절',
+  title: '강남 방화 용의자 특허 사기 주장',
 
-  slug: 'kyobo-rejects-suspicious-100000-book-order-koreaherald',
+  slug: 'gangnam-arson-suspect-patent-fraud-koreaherald',
 
   metaDescription:
-    'The Korea Herald 기사에서 추출한 교보문고 대량 주문 거절 관련 표현. suspicious, bulk order, acquire, recipient, transaction, obtain.',
+    'The Korea Herald 기사에서 추출한 강남 방화 사건 관련 표현. arson, defraud, flammable, blaze, cardiac arrest, laceration.',
 
-  password: 'password_seed_kyobo_rejects_suspicious_order_koreaherald',
+  password: 'password_seed_gangnam_arson_suspect_patent_fraud_koreaherald',
 
   datePublished: '2026-10-20',
 
-  youtube: 'https://youtube.com/shorts/MVmedU2O0m0',
+  youtube: 'https://youtube.com/shorts/6LkTVDi7JeQ',
 
   intro: [
-    '교보문고가 AI 저작권 우려 속에서 의심스러운 도서 10만 권 주문을 거절했다는 The Korea Herald 기사에서 추출한 문장입니다. *AI 음성과 이미지를 사용했습니다.',
+    '강남 방화 용의자가 특허 사기 피해를 주장하고 2022년에도 유사 범행을 시도했다는 The Korea Herald 기사에서 추출한 문장입니다. *AI 음성과 이미지를 사용했습니다.',
   ],
 
   words: [
     {
-      word: { en: 'suspicious', ko: '의심스러운' },
+      word: { en: 'arson', ko: '방화' },
       example: {
-        en: 'Kyobo rejects suspicious 100,000-book order amid AI copyright fears',
-        ko: '교보문고, AI 저작권 우려 속 의심스러운 도서 10만 권 주문 거절.',
+        en: 'Gangnam arson suspect claims patent fraud, had attempted similar attack in 2022',
+        ko: '강남 방화 용의자, 특허 사기 피해 주장…2022년에도 유사 범행 시도.',
       },
     },
     {
-      word: { en: 'bulk order', ko: '대량 주문' },
+      word: { en: 'defraud', ko: '사취하다, 사기를 치다' },
       example: {
-        en: 'The official stated that verifying the intended use and recipient of bulk orders is standard procedure for Kyobo and has not previously been an issue.',
-        ko: '관계자는 대량 주문의 사용 목적과 수령인을 확인하는 것이 교보문고의 표준 절차이며, 이전에는 문제가 된 적이 없다고 밝혔다.',
+        en: 'He said a patent law firm had defrauded him over a patent he filed in 2000.',
+        ko: '그는 특허법률사무소가 자신이 2000년에 출원한 특허와 관련해 자신에게 사기를 쳤다고 주장했다.',
       },
     },
     {
-      word: { en: 'acquire', ko: '획득하다, 취득하다' },
+      word: { en: 'flammable', ko: '인화성의' },
       example: {
-        en: 'Meanwhile, the Korean Publishers Association plans to survey major bookstores, secondhand booksellers and distributors to assess attempts to acquire books in bulk.',
-        ko: '한편 대한출판문화협회는 도서 대량 확보 시도를 파악하기 위해 주요 서점과 중고서점, 유통업체를 대상으로 실태조사를 실시할 계획이다.',
+        en: 'Surveillance footage showed the man carrying two plastic containers suspected of holding flammable substances near his home in western Seoul and later carrying them into the Shinmyeong Building, according to Yonhap.',
+        ko: '연합뉴스에 따르면 CCTV 영상에는 이 남성이 서울 서부의 자택 근처에서 인화성 물질이 담긴 것으로 의심되는 플라스틱 용기 두 개를 들고 있다가 이후 신명빌딩 안으로 가져가는 모습이 담겼다.',
       },
     },
     {
-      word: { en: 'recipient', ko: '수령인, 받는 사람' },
+      word: { en: 'blaze', ko: '큰불, 화재' },
       example: {
-        en: 'Kyobo attempted to verify the end recipient’s identity but could not obtain enough information to complete the sale.',
-        ko: '교보문고는 최종 수령인의 신원을 확인하려 했지만, 거래를 완료할 만큼 충분한 정보를 얻지 못했다.',
+        en: 'Firefighters extinguished the blaze at the Hanyang Building at 12:35 p.m. and the Shinmyeong Building at 2:20 p.m.',
+        ko: '소방관들은 한양빌딩의 화재를 오후 12시 35분에, 신명빌딩의 화재를 오후 2시 20분에 진화했다.',
       },
     },
     {
-      word: { en: 'transaction', ko: '거래' },
+      word: { en: 'cardiac arrest', ko: '심정지' },
       example: {
-        en: 'According to a Kyobo Book Center official, the bookstore chain received a request from a foreign company with no prior transaction history to purchase 100,000 books.',
-        ko: '교보문고 관계자에 따르면 교보문고는 이전 거래 이력이 없는 해외 기업으로부터 도서 10만 권 구매 요청을 받았다.',
+        en: 'One person found in cardiac arrest was taken to a hospital and later resumed breathing, according to fire authorities.',
+        ko: '소방당국에 따르면 심정지 상태로 발견된 한 명은 병원으로 이송된 뒤 다시 호흡하기 시작했다.',
       },
     },
     {
-      word: { en: 'obtain', ko: '얻다, 확보하다' },
+      word: { en: 'laceration', ko: '열상, 찢어진 상처' },
       example: {
-        en: 'However, in this case, the company could not obtain clear answers during verification.',
-        ko: '그러나 이번 사례에서는 회사가 확인 과정에서 명확한 답변을 얻지 못했다.',
+        en: 'Eight people were injured at the Hanyang Building, including three who were classified as seriously injured with breathing difficulties or lacerations.',
+        ko: '한양빌딩에서는 8명이 다쳤으며, 이 가운데 3명은 호흡곤란이나 열상으로 중상자로 분류됐다.',
       },
     },
   ],
 
   source: {
-    text: 'The Korea Herald | Kyobo rejects suspicious 100,000-book order amid AI copyright fears | By Song Seung-hyun | Published : Oct. 20, 2026 - 15:09:46',
-    url: 'https://www.koreaherald.com/article/10908784',
+    text: 'The Korea Herald | Gangnam arson suspect claims patent fraud, had attempted similar attack in 2022 | By Moon Joon-hyun | Published : Oct. 20, 2026 - 19:43:09',
+    url: 'https://www.koreaherald.com/article/10909100',
   },
 };
 // ===============================
