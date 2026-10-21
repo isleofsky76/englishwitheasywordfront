@@ -21,9 +21,6 @@ const article = {
 
   datePublished: '2026-10-20',
 
-  /* 목록 썸네일 — 제목만 있는 텍스트 이미지 */
-  thumbnail: '/resources/kyobo-rejects-suspicious-order-title.jpg',
-
   youtube: 'https://youtube.com/shorts/MVmedU2O0m0',
 
   intro: [
