@@ -13,88 +13,88 @@ import { uploadShortsBgImage } from './shorts-bg-image-format.js';
 // ========== 여기만 수정 ==========
 
 const article = {
-  title: '리스본 노란 트램 거리 · Lisbon yellow tram street',
+  title: '두브로브니크 항구 풍경 · Dubrovnik harbor scene',
 
-  slug: 'lisbon-yellow-tram-street',
+  slug: 'dubrovnik-harbor-scene',
 
   metaDescription:
-    '리스본 언덕길과 노란 트램(28번) 풍경을 담은 쇼츠용 배경 이미지. tram, cobblestone, azulejo, pastel de nata, fado 등 관련 영어 표현.',
+    '크로아티아 두브로브니크 항구와 성벽 풍경을 담은 쇼츠용 배경 이미지. harbor, fortress, fisherman, lavender, seagull 등 관련 영어 표현.',
 
-  password: 'seed_shorts_lisbon-yellow-tram-street',
+  password: 'seed_shorts_dubrovnik-harbor-scene',
 
   datePublished: '2026-10-21',
 
   /** 사이트 루트 기준 경로. resources/ 또는 frontend/resources/ 에 파일 배치 */
-  image: '/resources/lisbon.jpg',
+  image: '/resources/dodubrovnik.jpg',
 
   sections: [
     {
       heading: '전체 분위기 (Overall Scene)',
-      body: `tram : 트램
-cobblestone : 조약돌 포장
-hill : 언덕
-azulejo : 아줄레주(타일)
-facade : 건물 정면
-balcony : 발코니
+      body: `harbor : 항구
+fortress : 요새
+stonewall : 돌담
+terracotta : 테라코타
 rooftop : 지붕
-harbor : 항구
-bridge : 다리
+pier : 부두
+turquoise : 청록색의
 sunlit : 햇살 가득한
-steep : 가파른
-picturesque : 그림 같은
+medieval : 중세의
+coastal : 해안의
 bustling : 활기찬
-descend : 내려가다`,
+hillside : 언덕 마을
+cablecar : 케이블카
+overlook : 내려다보다`,
     },
     {
       heading: '좌측 전경 (Left Foreground)',
       body: `gentleman : 신사
-fedora : 중절모
+sunglasses : 선글라스
 newspaper : 신문
-espresso : 에스프레소
-pastel : 에그타르트
-marble : 대리석
+umbrella : 파라솔
+lemonade : 레모네이드
+olive : 올리브
+bread : 빵
+basket : 바구니
 cafe : 카페
 table : 탁자
-glasses : 안경
-waiter : 웨이터
-tray : 쟁반
-guitar : 기타
-musician : 연주자
-read : 읽다`,
+patio : 테라스
+read : 읽다
+sip : 홀짝이다
+relax : 쉬다`,
     },
     {
       heading: '중앙 풍경 (Center Scene)',
-      body: `yellow : 노란색의
-track : 선로
-passenger : 승객
-tourist : 관광객
-photo : 사진
-skirt : 치마
-sidewalk : 보도
-crowd : 사람들
-window : 창문
-lean : 기대다
-observe : 바라보다
-walk : 걷다
-snap : 사진을 찍다
-approach : 다가오다`,
+      body: `fisherman : 어부
+net : 그물
+crate : 상자
+bin : 통
+fish : 생선
+cat : 고양이
+tabby : 줄무늬 고양이
+sailor : 선원
+rope : 밧줄
+bollard : 계선주
+boat : 배
+moor : 배를 매다
+mend : 수리하다
+watch : 지켜보다`,
     },
     {
       heading: '우측 전경 (Right Foreground)',
-      body: `boy : 소년
-scooter : 킥보드
-sidewalk : 보도
-cat : 고양이
-tabby : 줄무늬 고양이
-curl : 몸을 둥글게 말다
-asleep : 잠든
-step : 계단
-stone : 돌
-ride : 타다
-nap : 낮잠 자다
-rest : 쉬다
-nearby : 근처의
-sunny : 햇볕이 드는`,
+      body: `vendor : 상인
+lavender : 라벤더
+mushroom : 버섯
+stall : 가판대
+icecream : 아이스크림
+cone : 콘
+boy : 소년
+cap : 모자
+seagull : 갈매기
+feed : 먹이를 주다
+reach : 손을 뻗다
+hand : 건네다
+fly : 날다
+market : 시장`,
     },
   ],
 };

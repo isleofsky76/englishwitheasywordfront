@@ -22,12 +22,7 @@ import { SITE_ORIGIN, toIsoDateOnly } from './voca-seo.js';
 // ========== 여기만 수정 (이미지 파일명) ==========
 
 const images = [
-
-
-  'lisbon.jpg',
-  
-
-
+  'dodubrovnik.jpg',
 ];
 
 // ===============================================
