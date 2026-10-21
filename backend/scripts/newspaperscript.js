@@ -13,88 +13,88 @@ import { uploadShortsBgImage } from './shorts-bg-image-format.js';
 // ========== 여기만 수정 ==========
 
 const article = {
-  title: '트라스테베레 밤거리 · Trastevere night street',
+  title: '피렌체 폰테베키오 · Florence Ponte Vecchio',
 
-  slug: 'trastevere-night-street',
+  slug: 'florence-ponte-vecchio',
 
   metaDescription:
-    '로마 트라스테베레 골목의 밤 풍경을 담은 쇼츠용 배경 이미지. cobblestone, string lights, newsstand, scooter, fountain 등 관련 영어 표현.',
+    '피렌체 아르노강과 폰테베키오 다리 풍경을 담은 쇼츠용 배경 이미지. bridge, river, dome, easel, postcard 등 관련 영어 표현.',
 
-  password: 'seed_shorts_trastevere-night-street',
+  password: 'seed_shorts_florence-ponte-vecchio',
 
   datePublished: '2026-10-21',
 
   /** 사이트 루트 기준 경로. resources/ 또는 frontend/resources/ 에 파일 배치 */
-  image: '/resources/Trastevere.jpg',
+  image: '/resources/PonteVecchio.jpg',
 
   sections: [
     {
       heading: '전체 분위기 (Overall Scene)',
-      body: `alley : 골목
-cobblestone : 조약돌 길
-twilight : 황혼
-stringlight : 줄조명
-glow : 빛
-warm : 따뜻한
-bustling : 활기찬
-narrow : 좁은
+      body: `bridge : 다리
+river : 강
+dome : 둥근 지붕
+belltower : 종탑
+skyline : 도시 실루엣
+arch : 아치
+shop : 가게
+sunlit : 햇살 가득한
+medieval : 중세의
+calm : 잔잔한
 ochre : 황토색의
-dusk : 해질녘
-crowd : 인파
-stroll : 거닐다
-dine : 식사하다
-linger : 머무르다`,
+overlook : 내려다보다
+span : 가로지르다
+gleam : 반짝이다`,
     },
     {
       heading: '좌측 전경 (Left Foreground)',
-      body: `shop : 가게
-treat : 간식
-scoop : 뜨다
-fountain : 분수
-slice : 조각
-group : 무리
-laugh : 웃다
-share : 나눠 먹다
+      body: `artist : 화가
+frame : 그림 받침대
+watercolor : 수채화
+apron : 앞치마
+newspaper : 신문
+stool : 의자
+paint : 그리다
 lean : 기대다
-eat : 먹다
-gather : 모이다
-bright : 밝은
-window : 창문
-chat : 이야기하다`,
+finish : 완성작
+beard : 수염
+read : 읽다
+sit : 앉다
+display : 진열하다
+brush : 붓`,
     },
     {
       heading: '중앙 풍경 (Center Scene)',
-      body: `couple : 두 사람
-tablecloth : 식탁보
-checkered : 바둑판무늬의
-wine : 포도주
-carafe : 물병
-plate : 접시
-lamp : 등
-rider : 타는 사람
+      body: `postcard : 엽서
+hat : 모자
+stand : 가판대
 cat : 고양이
-weave : 비집고 가다
-pour : 따르다
-sit : 앉다
-pass : 지나가다
-glow : 빛나다`,
+tabby : 줄무늬 고양이
+bouquet : 꽃다발
+sunflower : 해바라기
+tote : 손가방
+pavement : 돌바닥
+browse : 고르다
+lie : 눕다
+carry : 들다
+walk : 걷다
+wrap : 싸다`,
     },
     {
       heading: '우측 전경 (Right Foreground)',
-      body: `newsstand : 신문 가판대
-newspaper : 신문
-driver : 운전사
-car : 차
-door : 문
-booth : 매점
-postcard : 엽서
-magazine : 잡지
-lean : 기대다
-read : 읽다
-open : 열다
-wait : 기다리다
-weathered : 낡은
-sell : 팔다`,
+      body: `tourist : 관광객
+schoolchild : 학생
+sunhat : 챙 모자
+map : 지도
+shade : 그늘
+shield : 가리다
+group : 무리
+couple : 두 사람
+gaze : 바라보다
+hold : 잡다
+approach : 다가오다
+point : 가리키다
+gather : 모이다
+wander : 거닐다`,
     },
   ],
 };
