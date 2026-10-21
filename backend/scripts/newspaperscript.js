@@ -13,88 +13,88 @@ import { uploadShortsBgImage } from './shorts-bg-image-format.js';
 // ========== 여기만 수정 ==========
 
 const article = {
-  title: '두브로브니크 항구 풍경 · Dubrovnik harbor scene',
+  title: '이스탄불 보스포루스 부두 · Istanbul Bosphorus waterfront',
 
-  slug: 'dubrovnik-harbor-scene',
+  slug: 'istanbul-bosphorus-waterfront',
 
   metaDescription:
-    '크로아티아 두브로브니크 항구와 성벽 풍경을 담은 쇼츠용 배경 이미지. harbor, fortress, fisherman, seagull 등 관련 영어 표현.',
+    '이스탄불 보스포루스 부두의 비 오는 날 풍경을 담은 쇼츠용 배경 이미지. ferry, mosque, fisherman, seagull, newsstand 등 관련 영어 표현.',
 
-  password: 'seed_shorts_dubrovnik-harbor-scene',
+  password: 'seed_shorts_istanbul-bosphorus-waterfront',
 
   datePublished: '2026-10-21',
 
   /** 사이트 루트 기준 경로. resources/ 또는 frontend/resources/ 에 파일 배치 */
-  image: '/resources/dodubrovnik.jpg',
+  image: '/resources/istanbul.jpg',
 
   sections: [
     {
       heading: '전체 분위기 (Overall Scene)',
-      body: `harbor : 항구
-fortress : 요새
-stonewall : 돌담
-rooftop : 지붕
-pier : 부두
-turquoise : 청록색의
-sunlit : 햇살 가득한
-medieval : 중세의
-coastal : 해안의
-bustling : 활기찬
-hillside : 언덕 마을
-tower : 탑
-breeze : 바람
+      body: `waterfront : 물가
+ferry : 여객선
+mosque : 이슬람 사원
+dome : 둥근 지붕
+minaret : 첨탑
+overcast : 잔뜩 흐린
+rainy : 비 오는
+wet : 젖은
+skyline : 도시 실루엣
+harbor : 항구
+gray : 회색의
+calm : 잔잔한
+historic : 역사적인
 overlook : 내려다보다`,
     },
     {
       heading: '좌측 전경 (Left Foreground)',
-      body: `gentleman : 신사
-newspaper : 신문
-umbrella : 우산
+      body: `vendor : 장사꾼
+cart : 손수레
+sesame : 참깨
+ring : 고리
 bread : 빵
-basket : 바구니
-table : 탁자
-glass : 잔
-shade : 그늘
-elderly : 나이 든
-read : 읽다
-sip : 홀짝이다
-relax : 쉬다
-seat : 앉다
-stroll : 거닐다`,
+glove : 장갑
+student : 학생
+uniform : 교복
+step : 계단
+yawn : 하품하다
+screen : 화면
+eat : 먹다
+reach : 손을 뻗다
+pile : 쌓다`,
     },
     {
       heading: '중앙 풍경 (Center Scene)',
-      body: `fisherman : 어부
-net : 그물
-crate : 상자
-bin : 통
-fish : 생선
-cat : 고양이
-tabby : 줄무늬 고양이
-sailor : 선원
-rope : 밧줄
-bollard : 계선주
-boat : 배
-moor : 배를 매다
-mend : 수리하다
-watch : 지켜보다`,
+      body: `fisherman : 낚시꾼
+rod : 낚싯대
+railing : 난간
+seagull : 갈매기
+bench : 긴 의자
+umbrella : 우산
+couple : 두 사람
+cast : 던지다
+feed : 먹이를 주다
+gather : 모이다
+lean : 기대다
+watch : 바라보다
+pass : 지나가다
+hold : 잡다`,
     },
     {
       heading: '우측 전경 (Right Foreground)',
-      body: `vendor : 상인
-mushroom : 버섯
-stall : 가판대
-boy : 소년
-cap : 모자
-seagull : 갈매기
-bag : 봉지
-dried : 말린
-treat : 간식
-feed : 먹이를 주다
-reach : 손을 뻗다
-hand : 건네다
-fly : 날다
-market : 시장`,
+      body: `newsstand : 신문 가판대
+newspaper : 신문
+tea : 차
+glass : 잔
+stool : 의자
+beanie : 털모자
+rusty : 녹슨
+booth : 매점
+cat : 고양이
+crate : 상자
+sip : 홀짝이다
+read : 읽다
+sit : 앉다
+weathered : 낡은`,
     },
   ],
 };
