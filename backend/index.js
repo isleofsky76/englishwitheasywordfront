@@ -842,6 +842,7 @@ const koreaNewsEntrySchema = new mongoose.Schema({
   isSecret: { type: Boolean, default: false },
   slug: { type: String, default: '' },
   metaDescription: { type: String, default: '' },
+  thumbnail: { type: String, default: '' },
   category: { type: String, default: '', enum: ['', '국방', '국제'] }
 }, { collection: 'koreanews' });
 

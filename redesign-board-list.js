@@ -57,10 +57,17 @@
     if (entry && entry.thumbnail) return String(entry.thumbnail);
     var msg = entry && entry.message ? String(entry.message) : '';
     if (!msg) return '';
+    /* 제목/커버 이미지 우선 (유튜브 썸네일보다 앞) */
+    var cover = msg.match(/class=["'][^"']*nv-cover-img[^"']*["'][^>]*src=["']([^"']+)["']/i) ||
+      msg.match(/src=["']([^"']+)["'][^>]*class=["'][^"']*nv-cover-img[^"']*["']/i);
+    if (cover && cover[1] && !/data:image\//i.test(cover[1])) return cover[1];
+    var resImg = msg.match(/<img[^>]+src=["'](\/resources\/[^"']+)["']/i);
+    if (resImg && resImg[1]) return resImg[1];
     var yt = msg.match(/img\.youtube\.com\/vi\/([a-zA-Z0-9_-]+)\//i);
     if (yt) return 'https://img.youtube.com/vi/' + yt[1] + '/hqdefault.jpg';
     var ytWatch = msg.match(/youtube\.com\/watch\?v=([a-zA-Z0-9_-]+)/i) ||
-      msg.match(/youtu\.be\/([a-zA-Z0-9_-]+)/i);
+      msg.match(/youtu\.be\/([a-zA-Z0-9_-]+)/i) ||
+      msg.match(/youtube\.com\/shorts\/([a-zA-Z0-9_-]+)/i);
     if (ytWatch) return 'https://img.youtube.com/vi/' + ytWatch[1] + '/hqdefault.jpg';
     var img = msg.match(/<img[^>]+src=["']([^"']+)["']/i);
     if (img && img[1] && !/data:image\//i.test(img[1])) return img[1];

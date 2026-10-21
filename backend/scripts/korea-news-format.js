@@ -29,8 +29,26 @@ function withCategoryTitle(title, category) {
   return `[${cat}] ${t}`;
 }
 
+function escapeAttr(value) {
+  return String(value ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/"/g, '&quot;')
+    .replace(/</g, '&lt;');
+}
+
 export function buildKoreaNewsMessage(config) {
-  return buildNewsVocaMessage({ ...config, sourceAtEnd: true });
+  let message = buildNewsVocaMessage({ ...config, sourceAtEnd: true });
+  const cover = String(config.thumbnail || config.coverImage || '').trim();
+  if (!cover) return message;
+
+  /* 목록 썸네일용 제목 이미지 — 유튜브 썸네일보다 우선되도록 본문 상단에 배치 */
+  const alt = escapeAttr(config.title || '');
+  const src = escapeAttr(cover);
+  const coverHtml = `<p class="nv-cover"><img class="nv-cover-img" src="${src}" alt="${alt}" loading="eager" decoding="async" width="1280" height="720"></p>`;
+  message = message.replace('<article class="nv-text">', `<article class="nv-text">\n${coverHtml}`);
+  /* 유튜브 미리보기 이미지는 제거(링크는 유지) — 목록이 제목 썸네일을 쓰도록 */
+  message = message.replace(/<div class="nv-yt-thumb">[\s\S]*?<\/div>\s*/g, '');
+  return message;
 }
 
 export async function uploadKoreaNews(config, apiBase) {
@@ -40,6 +58,7 @@ export async function uploadKoreaNews(config, apiBase) {
   const sectionCount = (message.match(/nv-word-section/g) || []).length;
   const datePublished = config.datePublished || toIsoDateOnly();
 
+  const thumbnail = String(config.thumbnail || config.coverImage || '').trim();
   const post = {
     title,
     message,
@@ -48,6 +67,7 @@ export async function uploadKoreaNews(config, apiBase) {
     isSecret: false,
     slug: config.slug || '',
     metaDescription: config.metaDescription || '',
+    thumbnail,
     category,
   };
 
