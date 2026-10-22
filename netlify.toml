@@ -7,4 +7,15 @@
   status = 200
   force = false
 
-# redeploy 2026-10-22T00:26:30.5057142+09:00
+# HTML은 항상 최신, CSS/JS는 버전 쿼리(?v=)로 캐시 무효화
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/index.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# redeploy 2026-10-22T15:30:00+09:00

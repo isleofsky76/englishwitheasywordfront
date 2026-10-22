@@ -64,7 +64,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600&family=Noto+Serif+KR:wght@600;700;900&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="redesign-tokens.css?v=20261019rd">
-    <link rel="stylesheet" href="site-masthead.css?v=20261020mh1">
+    <link rel="stylesheet" href="site-masthead.css?v=20261022yt1">
     <link rel="stylesheet" href="redesign-home.css?v=20261020rd26">
     <link rel="stylesheet" href="title-text-sharp.css?v=20260818i">
     
@@ -74,6 +74,16 @@
     <style>
         /* 홈 리디자인 — 레거시 preview / 파란 네비 오버라이드 제거 */
         body.rd-home { background: var(--page-bg, #F6F3EC); }
+        /* YouTube 바 FOUC: CSS 도착 전 SVG가 화면을 덮지 않도록 */
+        #yt-billboard-bar .yt-billboard__icon,
+        #yt-billboard-bar .yt-billboard__icon svg {
+          width: 22px !important;
+          height: 16px !important;
+          max-width: 22px !important;
+          max-height: 16px !important;
+          display: block;
+        }
+        #yt-billboard-slot:empty { display: none; }
         .visually-hidden {
           position: absolute !important; width: 1px !important; height: 1px !important;
           padding: 0 !important; margin: -1px !important; overflow: hidden !important;
@@ -312,7 +322,7 @@
     <script src="viewpost-seo.js?v=20260702"></script>
     <link rel="stylesheet" href="site-footer.css?v=20261013a">
     <script src="nav-home-menu.js?v=20261013legal"></script>
-    <script src="site-masthead.js?v=20261020mh1"></script>
+    <script src="site-masthead.js?v=20261022yt1"></script>
     <script src="site-footer.js?v=20261013a"></script>
     <script src="home-board-preview.js?v=20261020travel1"></script>
     <script src="home-redesign.js?v=20261020travel1"></script>

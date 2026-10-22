@@ -4,7 +4,7 @@
  * nav-home-menu.js 가 로드함
  */
 (function () {
-    var VERSION = '20261020travel2';
+    var VERSION = '20261022yt1';
   /* 시안 주 메뉴 5개 — href는 기존 URL 유지 */
   var PRIMARY_NAV_ITEMS = [
     {
@@ -114,14 +114,28 @@
     return item.pages.indexOf(page) !== -1;
   }
 
-  function ensureCss(base) {
+  /** masthead CSS가 적용된 뒤에 YouTube 바를 넣기 위해 onload 대기 */
+  function ensureCss(base, done) {
     ensureLink(base + 'redesign-tokens.css?v=' + VERSION);
-    if (!document.querySelector('link[href*="site-masthead.css"]')) {
-      var link = document.createElement('link');
-      link.rel = 'stylesheet';
-      link.href = base + 'site-masthead.css?v=' + VERSION;
-      document.head.appendChild(link);
+    var existing = document.querySelector('link[href*="site-masthead.css"]');
+    if (existing) {
+      if (done) done();
+      return;
     }
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = base + 'site-masthead.css?v=' + VERSION;
+    var settled = false;
+    var finish = function () {
+      if (settled) return;
+      settled = true;
+      if (done) done();
+    };
+    link.onload = finish;
+    link.onerror = finish;
+    document.head.appendChild(link);
+    /* 캐시 히트 등으로 onload가 안 오는 경우 대비 */
+    setTimeout(finish, 120);
   }
 
   function ensureScript(src, done) {
@@ -242,10 +256,11 @@
     bar.target = '_blank';
     bar.rel = 'noopener noreferrer';
     bar.setAttribute('aria-label', 'YouTube Shorts istudyeng 바로가기');
+    /* width/height·inline style: CSS 로드 전에 SVG가 화면 전체로 커지는 FOUC 방지 */
     bar.innerHTML =
       '<span class="yt-billboard__inner">' +
-        '<span class="yt-billboard__icon" aria-hidden="true">' +
-          '<svg viewBox="0 0 28 20" xmlns="http://www.w3.org/2000/svg" focusable="false">' +
+        '<span class="yt-billboard__icon" aria-hidden="true" style="display:inline-flex;width:22px;height:16px;flex-shrink:0;overflow:hidden;">' +
+          '<svg width="22" height="16" viewBox="0 0 28 20" xmlns="http://www.w3.org/2000/svg" focusable="false" style="width:22px;height:16px;display:block;">' +
             '<path fill="#FF0000" d="M27.33 3.12A3.5 3.5 0 0 0 24.86.65C22.7 0 14 0 14 0S5.3 0 3.14.65A3.5 3.5 0 0 0 .67 3.12 36.7 36.7 0 0 0 0 10a36.7 36.7 0 0 0 .67 6.88 3.5 3.5 0 0 0 2.47 2.47C5.3 20 14 20 14 20s8.7 0 10.86-.65a3.5 3.5 0 0 0 2.47-2.47A36.7 36.7 0 0 0 28 10a36.7 36.7 0 0 0-.67-6.88z"/>' +
             '<path fill="#fff" d="M11.2 14.3V5.7L18.5 10l-7.3 4.3z"/>' +
           '</svg>' +
@@ -466,13 +481,16 @@
   function mount() {
     document.documentElement.classList.add('has-site-masthead');
     var base = assetBase();
-    ensureCss(base);
     ensureWeather(base);
     mountNavbar(base);
-    injectYoutubeBar();
-    placeUtilityBars();
     ensureScript(base + 'home-board-preview.js?v=' + VERSION, function () {
       initSearch(base);
+    });
+    /* CSS 적용 후에만 YouTube 바 삽입 — 빨간 아이콘 거대화 FOUC 방지 */
+    ensureCss(base, function () {
+      injectYoutubeBar();
+      placeUtilityBars();
+      syncNavbarHeight();
     });
     var tries = 0;
     var timer = setInterval(function () {
