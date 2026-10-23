@@ -12,8 +12,8 @@ const article = {
   slug: 'php-security-bug-vocabulary',
   metaDescription:
     'WSJ PHP 보안 취약점 기사 어휘. bug, flaw, vulnerability, exploit, Bugmageddon 등을 입력·채점하는 퀴즈입니다.',
-  sourceUrl: '',
-  sourceLabel: '',
+  sourceUrl: 'https://youtube.com/shorts/eZ8AcdFbnfI',
+  sourceLabel: '유튜브 보기',
   datePublished: '2026-10-21',
   section1Title: '영어 → 한글',
   section2Title: '한글 → 영어',
