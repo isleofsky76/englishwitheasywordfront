@@ -53,8 +53,21 @@
     return cfg.postPage + '?index=' + originalIndex + (apiParam ? '&' + apiParam : '');
   }
 
+  function youtubeThumbFromUrl(url) {
+    var s = String(url || '');
+    if (!s) return '';
+    var m = s.match(/img\.youtube\.com\/vi\/([a-zA-Z0-9_-]+)\//i) ||
+      s.match(/youtube\.com\/watch\?v=([a-zA-Z0-9_-]+)/i) ||
+      s.match(/youtu\.be\/([a-zA-Z0-9_-]+)/i) ||
+      s.match(/youtube\.com\/shorts\/([a-zA-Z0-9_-]+)/i);
+    return m ? 'https://img.youtube.com/vi/' + m[1] + '/hqdefault.jpg' : '';
+  }
+
   function extractThumb(entry) {
     if (entry && entry.thumbnail) return String(entry.thumbnail);
+    /* 퀴즈 등 — sourceUrl 유튜브 썸네일 */
+    var fromSource = youtubeThumbFromUrl(entry && entry.sourceUrl);
+    if (fromSource) return fromSource;
     var msg = entry && entry.message ? String(entry.message) : '';
     if (!msg) return '';
     /* 제목/커버 이미지 우선 (유튜브 썸네일보다 앞) */
@@ -63,12 +76,8 @@
     if (cover && cover[1] && !/data:image\//i.test(cover[1])) return cover[1];
     var resImg = msg.match(/<img[^>]+src=["'](\/resources\/[^"']+)["']/i);
     if (resImg && resImg[1]) return resImg[1];
-    var yt = msg.match(/img\.youtube\.com\/vi\/([a-zA-Z0-9_-]+)\//i);
-    if (yt) return 'https://img.youtube.com/vi/' + yt[1] + '/hqdefault.jpg';
-    var ytWatch = msg.match(/youtube\.com\/watch\?v=([a-zA-Z0-9_-]+)/i) ||
-      msg.match(/youtu\.be\/([a-zA-Z0-9_-]+)/i) ||
-      msg.match(/youtube\.com\/shorts\/([a-zA-Z0-9_-]+)/i);
-    if (ytWatch) return 'https://img.youtube.com/vi/' + ytWatch[1] + '/hqdefault.jpg';
+    var fromMsg = youtubeThumbFromUrl(msg);
+    if (fromMsg) return fromMsg;
     var img = msg.match(/<img[^>]+src=["']([^"']+)["']/i);
     if (img && img[1] && !/data:image\//i.test(img[1])) return img[1];
     return '';
@@ -110,6 +119,16 @@
     if (entry && Array.isArray(entry.tags)) {
       entry.tags.forEach(function (t) {
         pushTag(tags, seen, t, limit);
+      });
+    }
+    /* vocabulary-quiz reveal items */
+    if (entry && Array.isArray(entry.quizzes) && tags.length < limit) {
+      entry.quizzes.forEach(function (section) {
+        (section && section.items ? section.items : []).forEach(function (item) {
+          if (tags.length >= limit) return;
+          var show = String((item && item.show) || '').trim();
+          if (/^[A-Za-z]/.test(show)) pushTag(tags, seen, show, limit);
+        });
       });
     }
     if (tags.length >= limit || !entry || !entry.message) return tags.slice(0, limit);
@@ -173,12 +192,29 @@
     return ko ? ko.charAt(0) : '·';
   }
 
-  function imgHtml(src, className, placeholder) {
+  function imgHtml(src, className, placeholder, opts) {
+    opts = opts || {};
     if (src) {
-      return '<div class="' + className + '"><img src="' + escapeAttr(src) + '" alt="" loading="lazy" decoding="async"></div>';
+      var play = opts.youtube
+        ? '<span class="rd-list-yt-badge" aria-hidden="true">' +
+          '<svg viewBox="0 0 28 20" width="28" height="20" focusable="false">' +
+          '<rect x="0.5" y="0.5" width="27" height="19" rx="5.5" fill="#fff"/>' +
+          '<path fill="#e11d1d" d="M11.2 5.4v9.2L19.2 10 11.2 5.4z"/>' +
+          '</svg></span>'
+        : '';
+      return (
+        '<div class="' + className + (opts.youtube ? ' has-yt' : '') + '">' +
+          '<img src="' + escapeAttr(src) + '" alt="" loading="lazy" decoding="async">' +
+          play +
+        '</div>'
+      );
     }
-    return '<div class="' + className + ' rd-list-img-empty" aria-hidden="true">' +
-      escapeHtml(placeholder || '') + '</div>';
+    return (
+      '<div class="' + className + ' rd-list-img-empty" aria-hidden="true">' +
+        '<span class="rd-list-empty-badge">QUIZ</span>' +
+        '<span class="rd-list-empty-letter">' + escapeHtml(placeholder || '') + '</span>' +
+      '</div>'
+    );
   }
 
   function currentPageFromHash() {
@@ -256,7 +292,9 @@
     }).join('');
     return (
       '<a class="rd-list-feature" href="' + escapeAttr(item.href) + '">' +
-        imgHtml(item.thumb, 'rd-list-feature-img', monoFromTitle(item)) +
+        imgHtml(item.thumb, 'rd-list-feature-img', monoFromTitle(item), {
+          youtube: /img\.youtube\.com\/vi\//i.test(item.thumb || '')
+        }) +
         '<span class="rd-list-feature-meta">' + escapeHtml(metaParts.join(' · ')) + '</span>' +
         titleHtml(item, 'rd-list-feature-title') +
         (item.summary ? '<span class="rd-list-feature-summary">' + escapeHtml(item.summary) + '</span>' : '') +
@@ -290,9 +328,18 @@
     var metaParts = [cfg.categoryLabel, item.source].filter(Boolean);
     return (
       '<a class="rd-list-card" href="' + escapeAttr(item.href) + '">' +
-        imgHtml(item.thumb, 'rd-list-card-img', monoFromTitle(item)) +
+        imgHtml(item.thumb, 'rd-list-card-img', monoFromTitle(item), {
+          youtube: /img\.youtube\.com\/vi\//i.test(item.thumb || '')
+        }) +
         (metaParts.length ? '<span class="rd-list-card-meta">' + escapeHtml(metaParts.join(' · ')) + '</span>' : '') +
         titleHtml(item, 'rd-list-card-title') +
+        (item.tags && item.tags.length
+          ? '<div class="rd-list-tags rd-list-card-tags">' +
+            item.tags.slice(0, 3).map(function (t) {
+              return '<span class="rd-list-tag">' + escapeHtml(t) + '</span>';
+            }).join('') +
+            '</div>'
+          : '') +
       '</a>'
     );
   }
