@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>조깅 부상 어휘 퀴즈</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Noto+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: one narrow column, rows styled like running-track lanes; O/X stamps at the lane's end */
+:root{
+  --bg:#f3f5f8; --surface:#ffffff; --fg:#17202e; --muted:#5d6878; --line:#d9dee6;
+  --accent:#2453a6; --accent-soft:#e3ebf8;
+  --ok:#1d8a52; --ok-soft:#e1f3e9; --bad:#d23b3b; --bad-soft:#fbe5e5;
+  --display:"Do Hyeon","Noto Sans KR",system-ui,sans-serif;
+  --body:"Noto Sans KR",system-ui,-apple-system,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#10151d; --surface:#18202b; --fg:#e7ecf3; --muted:#9aa5b5; --line:#2a3442;
+  --accent:#7ea6ec; --accent-soft:#1f2c42;
+  --ok:#4fc988; --ok-soft:#173326; --bad:#f07272; --bad-soft:#3a1d1f; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#10151d; --surface:#18202b; --fg:#e7ecf3; --muted:#9aa5b5; --line:#2a3442;
+  --accent:#7ea6ec; --accent-soft:#1f2c42;
+  --ok:#4fc988; --ok-soft:#173326; --bad:#f07272; --bad-soft:#3a1d1f; color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:15px;line-height:1.5}
+.wrap{max-width:680px;margin:0 auto;padding-block:28px 48px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header{display:grid;gap:6px;margin-bottom:20px}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:var(--accent);text-transform:uppercase}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(28px,6vw,38px);line-height:1.1;margin:0;text-wrap:balance}
+.sub{color:var(--muted);margin:0}
+.bar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;
+  background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:14px}
+.seg{display:inline-flex;background:var(--accent-soft);border-radius:999px;padding:3px}
+.seg button{border:0;background:transparent;color:var(--accent);font:600 14px var(--body);padding:7px 14px;border-radius:999px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--surface)}
+.score{font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:14px;color:var(--muted)}
+.score b{color:var(--fg);font-size:18px}
+.track{height:6px;border-radius:3px;background:var(--line);overflow:hidden;margin:-4px 0 18px}
+.track i{display:block;height:100%;width:0;background:var(--ok);transition:width .3s}
+ol{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+li{display:grid;grid-template-columns:28px minmax(0,1fr) minmax(0,1.2fr) 40px;gap:10px;align-items:center;
+  background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 12px;transition:background .2s,border-color .2s}
+.n{font-family:var(--mono);font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.q{font-weight:700;font-size:16px;min-width:0;overflow-wrap:anywhere}
+.q small{display:block;font-weight:400;font-size:12px;color:var(--muted)}
+input{width:100%;box-sizing:border-box;font:15px var(--body);color:var(--fg);background:var(--bg);
+  border:1px solid var(--line);border-radius:8px;padding:9px 10px}
+input:focus{outline:2px solid var(--accent);outline-offset:1px}
+.mark{font-family:var(--display);font-size:30px;line-height:1;text-align:center}
+li.ok{background:var(--ok-soft);border-color:var(--ok)} li.ok .mark{color:var(--ok)}
+li.bad{background:var(--bad-soft);border-color:var(--bad)} li.bad .mark{color:var(--bad)}
+.ans{grid-column:2 / -1;font-size:13px;color:var(--bad)}
+li.ok .mark{animation:pop .25s ease-out}
+@keyframes pop{from{transform:scale(.4)}to{transform:scale(1)}}
+.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.btn{font:600 14px var(--body);border-radius:8px;padding:10px 16px;cursor:pointer;border:1px solid var(--line);background:var(--surface);color:var(--fg)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--surface)}
+.btn:focus-visible,.seg button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.hint{font-size:13px;color:var(--muted);margin-top:14px}
+@media (max-width:480px){
+  li{grid-template-columns:22px minmax(0,1fr) 36px}
+  li input{grid-column:2 / 3;grid-row:2}
+  li .mark{grid-row:1 / 3;grid-column:3}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="eyebrow">Vocabulary Quiz · Running</span>
+    <h1>조깅 부상 관련 어휘</h1>
+    <p class="sub">빈칸에 뜻을 입력하고 Enter를 누르면 바로 채점됩니다.</p>
+  </header>
+
+  <div class="bar">
+    <div class="seg" role="group" aria-label="퀴즈 방향">
+      <button id="m-en" aria-pressed="true">영어 → 한글</button>
+      <button id="m-ko" aria-pressed="false">한글 → 영어</button>
+    </div>
+    <div class="score"><b id="sc">0</b> / <span id="tot">0</span> 정답</div>
+  </div>
+  <div class="track"><i id="prog"></i></div>
+
+  <ol id="list"></ol>
+
+  <div class="actions">
+    <button class="btn primary" id="checkAll">전체 채점</button>
+    <button class="btn" id="reveal">정답 보기</button>
+    <button class="btn" id="reset">다시 하기</button>
+  </div>
+  <p class="hint">띄어쓰기와 대소문자는 구분하지 않습니다. 정답이 여러 개인 단어는 그중 하나만 맞아도 O 입니다.</p>
+</div>
+
+<script>
+// 단어 데이터: en = 영어, ko = 한글 정답(여러 개 허용)
+const WORDS = [
+  {en:["overuse"], ko:["과사용","과도한 사용","남용","과사용하다","남용하다","과도하게 쓰다","과도하게 사용하다"]},
+  {en:["ache"], ko:["통증","아픔","아프다","욱신거리다","쑤시다","결리다"]},
+  {en:["kneecap"], ko:["무릎뼈","슬개골","무릎뚜껑"]},
+  {en:["stress fracture"], ko:["피로골절","스트레스 골절","스트레스골절"]},
+  {en:["sprain"], ko:["염좌","삠","접질림","삐다","접질리다","염좌를 입다"]},
+  {en:["shin splints"], ko:["정강이 통증","정강이 부목","정강이통증","신스플린트"]},
+  {en:["tendon"], ko:["힘줄","건","힘줄조직"]},
+  {en:["ligament"], ko:["인대"]},
+  {en:["cramp"], ko:["경련","쥐","쥐가 나다","경련이 일어나다","경련하다"]},
+  {en:["blister"], ko:["물집","수포","물집이 생기다","물집이 잡히다"]},
+  {en:["inflammation"], ko:["염증","염증 반응"]},
+  {en:["warm-up","warm up","warmup"], ko:["준비운동","워밍업","준비 운동","몸을 풀다","준비운동하다","워밍업하다"]},
+];
+
+const $ = id => document.getElementById(id);
+let mode = "en"; // en: 영어 문제 → 한글 입력
+const norm = s => s.toLowerCase().replace(/[\s\-.]/g,"");
+
+function render(){
+  $("list").innerHTML = WORDS.map((w,i)=>{
+    const q = mode==="en" ? w.en[0] : w.ko[0];
+    const ph = mode==="en" ? "한글 뜻 입력" : "영어 단어 입력";
+    return `<li id="r${i}">
+      <span class="n">${String(i+1).padStart(2,"0")}</span>
+      <span class="q">${q}</span>
+      <input id="in${i}" data-i="${i}" placeholder="${ph}" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="${q} 정답">
+      <span class="mark" aria-live="polite"></span>
+    </li>`;
+  }).join("");
+  $("tot").textContent = WORDS.length;
+  updateScore();
+}
+
+function check(i, showAnswer){
+  const li = $("r"+i), inp = $("in"+i), v = inp.value.trim();
+  const answers = mode==="en" ? WORDS[i].ko : WORDS[i].en;
+  li.querySelector(".ans")?.remove();
+  if(!v && !showAnswer){ li.className=""; li.querySelector(".mark").textContent=""; return; }
+  const ok = answers.some(a => norm(a)===norm(v));
+  li.className = ok ? "ok" : "bad";
+  li.querySelector(".mark").textContent = ok ? "O" : "X";
+  if(!ok && showAnswer){
+    const d=document.createElement("span"); d.className="ans";
+    d.textContent = "정답: " + answers.join(", ");
+    li.appendChild(d);
+  }
+  updateScore();
+}
+
+function updateScore(){
+  const n = document.querySelectorAll("#list li.ok").length;
+  $("sc").textContent = n;
+  $("prog").style.width = (n/WORDS.length*100)+"%";
+}
+
+$("list").addEventListener("keydown", e=>{
+  if(e.key!=="Enter" || !e.target.dataset.i) return;
+  const i = +e.target.dataset.i; check(i,false);
+  $("in"+(i+1))?.focus();
+});
+$("list").addEventListener("input", e=>{
+  const li = e.target.closest("li");
+  if(li.className){ li.className=""; li.querySelector(".mark").textContent=""; li.querySelector(".ans")?.remove(); updateScore(); }
+});
+$("checkAll").onclick = ()=> WORDS.forEach((_,i)=>check(i,false));
+$("reveal").onclick = ()=> WORDS.forEach((_,i)=>check(i,true));
+$("reset").onclick = ()=> { render(); $("in0").focus(); };
+function setMode(m){ mode=m; $("m-en").setAttribute("aria-pressed",m==="en"); $("m-ko").setAttribute("aria-pressed",m==="ko"); render(); }
+$("m-en").onclick = ()=>setMode("en");
+$("m-ko").onclick = ()=>setMode("ko");
+
+render();
+</script>
+</body>
+</html>
