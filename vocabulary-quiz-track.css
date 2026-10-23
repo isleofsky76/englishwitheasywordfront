@@ -100,6 +100,33 @@ html.has-site-masthead .vq-track {
   margin: 0;
 }
 
+.vq-track .vq-youtube {
+  margin: 4px 0 0;
+}
+
+.vq-track .vq-youtube-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font: 600 14px var(--vq-body);
+  color: #fff;
+  background: #ff0000;
+  text-decoration: none;
+  border-radius: 8px;
+  padding: 8px 14px;
+}
+
+.vq-track .vq-youtube-btn:hover {
+  background: #cc0000;
+  color: #fff;
+}
+
+.vq-track .vq-youtube-icon {
+  width: 22px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
 .vq-track .vq-bar {
   display: flex;
   flex-wrap: wrap;
