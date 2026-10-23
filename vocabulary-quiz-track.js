@@ -82,7 +82,7 @@
         i +
         '" data-i="' +
         i +
-        '" placeholder="' +
+        '" type="text" enterkeyhint="go" inputmode="text" placeholder="' +
         escapeHtml(ph) +
         '" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="' +
         escapeHtml(q) +
@@ -180,11 +180,20 @@
 
     list.addEventListener("keydown", function (e) {
       if (e.key !== "Enter" || !e.target.dataset.i) return;
+      e.preventDefault();
       var i = +e.target.dataset.i;
       check(i, false);
       var next = $("in" + (i + 1));
       if (next) next.focus();
+      else e.target.blur();
     });
+
+    /* 모바일: Next로만 넘어가도, 칸을 떠날 때 입력값이 있으면 채점 */
+    list.addEventListener("blur", function (e) {
+      if (!e.target || !e.target.dataset || e.target.dataset.i == null) return;
+      if (!String(e.target.value || "").trim()) return;
+      check(+e.target.dataset.i, false);
+    }, true);
 
     list.addEventListener("input", function (e) {
       var li = e.target.closest("li");
