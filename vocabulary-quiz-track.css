@@ -255,6 +255,13 @@ html.has-site-masthead .vq-track {
 .vq-track .vq-ans.is-ok {
   color: var(--vq-ok);
 }
+.vq-track .vq-list > li.is-revealed {
+  background: var(--vq-accent-soft);
+  border-color: var(--vq-accent);
+}
+.vq-track .vq-list > li.is-revealed .vq-ans {
+  color: var(--vq-accent);
+}
 
 @keyframes vq-pop {
   from {

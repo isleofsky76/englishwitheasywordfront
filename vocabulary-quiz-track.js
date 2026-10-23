@@ -96,6 +96,20 @@
     updateScore();
   }
 
+  function answerListFor(i) {
+    var raw = mode === "en" ? WORDS[i].ko : WORDS[i].en;
+    return expandAnswers(raw);
+  }
+
+  function setAnswerLine(li, answers, ok) {
+    var prev = li.querySelector(".vq-ans");
+    if (prev) prev.remove();
+    var d = document.createElement("span");
+    d.className = "vq-ans" + (ok ? " is-ok" : "");
+    d.textContent = (ok ? "인정 답: " : "정답: ") + answers.join(", ");
+    li.appendChild(d);
+  }
+
   function check(i, showAnswer) {
     var li = $("r" + i);
     var inp = $("in" + i);
@@ -117,22 +131,27 @@
 
     var ok = v ? matchesAny(v, rawAnswers) : false;
     var mark = li.querySelector(".vq-mark");
+
     if (!v && showAnswer) {
-      li.className = "bad";
-      if (mark) mark.textContent = "X";
-    } else {
-      li.className = ok ? "ok" : "bad";
-      if (mark) mark.textContent = ok ? "O" : "X";
+      /* 입력 없이 정답 보기 — X 없이 정답만 전체 표시 */
+      li.className = "is-revealed";
+      if (mark) mark.textContent = "";
+      setAnswerLine(li, answers, false);
+      updateScore();
+      return;
     }
 
-    /* 채점·정답 보기 후 인정 답 목록 표시 */
-    if (showAnswer || v) {
-      var d = document.createElement("span");
-      d.className = "vq-ans" + (ok ? " is-ok" : "");
-      d.textContent = (ok ? "인정 답: " : "정답: ") + answers.join(", ");
-      li.appendChild(d);
-    }
+    li.className = ok ? "ok" : "bad";
+    if (mark) mark.textContent = ok ? "O" : "X";
+    if (showAnswer || v) setAnswerLine(li, answers, ok);
     updateScore();
+  }
+
+  /** 입력 여부와 관계없이 모든 문항 정답 표시 */
+  function revealAll() {
+    WORDS.forEach(function (_, i) {
+      check(i, true);
+    });
   }
 
   function updateScore() {
@@ -193,9 +212,7 @@
     }
     if (reveal) {
       reveal.onclick = function () {
-        WORDS.forEach(function (_, i) {
-          check(i, true);
-        });
+        revealAll();
       };
     }
     if (reset) {
