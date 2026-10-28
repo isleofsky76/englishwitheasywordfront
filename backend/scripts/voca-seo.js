@@ -33,11 +33,12 @@ export const BOARD_SEO = {
   },
   'culture-voca': {
     label: 'Culture Voca',
-    cssFile: 'culture-voca.css',
-    cssVersion: '20260622a',
+    cssFile: 'news-voca.css',
+    cssVersion: '20261020rd21',
     jsFile: 'culture-voca.js',
     jsVersion: '20261020auto2',
     listHtml: 'culture-voca-list.html',
+    extraCss: [{ file: 'culture-voca.css', version: '20260617' }],
   },
   'defense-news': {
     label: '국방뉴스',
