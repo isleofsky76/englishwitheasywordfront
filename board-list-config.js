@@ -5,7 +5,20 @@
 (function (global) {
   'use strict';
 
-  var NEWS_TABS = [
+  /* 글 없는 보드 — 메뉴/탭에서 숨김. 살리려면 아래 배열에서 키를 제거하면 됩니다. */
+  var HIDDEN_EMPTY_BOARDS = {
+    'us-news': true,
+    'weather-news': true,
+    'retail-news': true,
+    'literature-news': true,
+    'health-news': true,
+    'politics-news': true,
+    'ai-news': true,
+    'incident-news': true,
+    'ukraine-news': true
+  };
+
+  var NEWS_TABS_ALL = [
     { key: 'news-voca', label: '국제', href: 'news-voca-list.html' },
     { key: 'korea-news', label: '한국', href: 'korea-news-list.html' },
     { key: 'defense-news', label: '국방', href: 'defense-news-list.html' },
@@ -25,6 +38,7 @@
     { key: 'culture-voca', label: '컬쳐', href: 'culture-voca-list.html' },
     { key: 'ranking-news', label: '랭킹', href: 'ranking-news-list.html' }
   ];
+  var NEWS_TABS = NEWS_TABS_ALL.filter(function (t) { return !HIDDEN_EMPTY_BOARDS[t.key]; });
 
   var BOARDS = {
     'news-voca': {
@@ -601,6 +615,8 @@
   global.BoardListConfig = {
     BOARDS: BOARDS,
     NEWS_TABS: NEWS_TABS,
+    NEWS_TABS_ALL: NEWS_TABS_ALL,
+    HIDDEN_EMPTY_BOARDS: HIDDEN_EMPTY_BOARDS,
     get: getBoardConfig,
     resolveSource: resolveSource,
     cleanTitle: cleanTitle,

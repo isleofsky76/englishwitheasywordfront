@@ -4,7 +4,7 @@
  * nav-home-menu.js 가 로드함
  */
 (function () {
-    var VERSION = '20261022yt1';
+    var VERSION = '20261028hide1';
   /* 시안 주 메뉴 5개 — href는 기존 URL 유지 */
   var PRIMARY_NAV_ITEMS = [
     {
@@ -62,16 +62,8 @@
     { href: 'economy-news-list.html', label: '경제뉴스', tone: 'news', pages: ['economy-news-list.html', 'economy-news.html'] },
     { href: 'travel-news-list.html', label: '여행뉴스', tone: 'news', pages: ['travel-news-list.html', 'travel-news.html'] },
     { href: 'sports-news-list.html', label: '스포츠뉴스', tone: 'news', pages: ['sports-news-list.html', 'sports-news.html'] },
-    { href: 'us-news-list.html', label: '미국뉴스', tone: 'news', pages: ['us-news-list.html', 'us-news.html'] },
-    { href: 'weather-news-list.html', label: '날씨환경뉴스', tone: 'news', pages: ['weather-news-list.html', 'weather-news.html'] },
-    { href: 'retail-news-list.html', label: '유통뉴스', tone: 'news', pages: ['retail-news-list.html', 'retail-news.html'] },
-    { href: 'literature-news-list.html', label: '문학뉴스', tone: 'news', pages: ['literature-news-list.html', 'literature-news.html'] },
-    { href: 'health-news-list.html', label: '헬스뉴스', tone: 'news', pages: ['health-news-list.html', 'health-news.html'] },
-    { href: 'politics-news-list.html', label: '정치뉴스', tone: 'news', pages: ['politics-news-list.html', 'politics-news.html'] },
+    /* 빈 보드 숨김 — 요청 시 복원: us/weather/retail/literature/health/politics/ai/incident/ukraine */
     { href: 'industry-news-list.html', label: '산업뉴스', tone: 'news', pages: ['industry-news-list.html', 'industry-news.html'] },
-    { href: 'ai-news-list.html', label: '인공지능뉴스', tone: 'news', pages: ['ai-news-list.html', 'ai-news.html'] },
-    { href: 'incident-news-list.html', label: '사건사고뉴스', tone: 'news', pages: ['incident-news-list.html', 'incident-news.html'] },
-    { href: 'ukraine-news-list.html', label: '우크라이나러시아뉴스', tone: 'news', pages: ['ukraine-news-list.html', 'ukraine-news.html'] },
     { href: 'korea-news-list.html', label: '한국뉴스', tone: 'defense', pages: ['korea-news-list.html', 'korea-news.html'] },
     { href: 'culture-voca-list.html', label: '컬쳐', tone: 'culture', pages: ['culture-voca-list.html', 'culture-voca.html'] },
     { href: 'shorts-bg-image-list.html', label: '신문읽는 이미지', tone: 'sbgi', pages: ['shorts-bg-image-list.html', 'shorts-bg-image.html'] },
