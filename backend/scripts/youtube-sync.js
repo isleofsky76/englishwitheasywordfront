@@ -32,6 +32,7 @@ import { uploadDefenseNews } from './defense-news-format.js';
 import { uploadTravelNews } from './travel-news-format.js';
 import { uploadKoreaNews } from './korea-news-format.js';
 import { uploadRetailNews } from './retail-news-format.js';
+import { uploadUkraineNews } from './ukraine-news-format.js';
 import { uploadSynonym } from './synonym-format.js';
 import { uploadUsNews } from './us-news-format.js';
 
@@ -51,6 +52,7 @@ const UPLOADERS = {
   'travel-news': uploadTravelNews,
   'korea-news': uploadKoreaNews,
   'retail-news': uploadRetailNews,
+  'ukraine-news': uploadUkraineNews,
   'english-synonym': uploadSynonym,
   'us-news': uploadUsNews,
 };
@@ -123,6 +125,7 @@ function discoverKnownVideoIds() {
     path.join(REPO_ROOT, 'travel-news'),
     path.join(REPO_ROOT, 'korea-news'),
     path.join(REPO_ROOT, 'retail-news'),
+    path.join(REPO_ROOT, 'ukraine-news'),
     path.join(REPO_ROOT, 'us-news'),
   ];
   for (const dir of scanDirs) {
