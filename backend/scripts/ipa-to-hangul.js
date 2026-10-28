@@ -34,6 +34,21 @@ const HANGUL_OVERRIDES = {
   abide: '어바이드',
   stomach: '스터먹',
   countenance: '카운터넌스',
+  see: '씨',
+  look: '룩',
+  watch: '워치',
+  glimpse: '글림프스',
+  notice: '노티스',
+  spot: '스팟',
+  glance: '글랜스',
+  peek: '픽',
+  peep: '핍',
+  peer: '피어',
+  gaze: '게이지',
+  stare: '스테어',
+  gawk: '곡',
+  glare: '글레어',
+  glower: '글라우어',
 };
 
 const CLUSTER = {
