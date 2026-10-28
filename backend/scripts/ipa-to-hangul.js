@@ -49,6 +49,21 @@ const HANGUL_OVERRIDES = {
   gawk: '곡',
   glare: '글레어',
   glower: '글라우어',
+  mention: '멘션',
+  express: '익스프레스',
+  explain: '익스플레인',
+  clarify: '클래리파이',
+  articulate: '아티큘레이트',
+  'spell out': '스펠 아웃',
+  pronounce: '프러나운스',
+  enunciate: '이너시에이트',
+  expressive: '익스프레시브',
+  eloquent: '엘로퀀트',
+  coherent: '코히런트',
+  elaborate: '일래보레이트',
+  manifest: '매니페스트',
+  explicit: '익스플리싯',
+  assert: '어설트',
 };
 
 /** 사전 API에 IPA가 비는 단어 보완 */
@@ -67,6 +82,15 @@ const IPA_OVERRIDES = {
   glare: 'ɡleə',
   glower: 'ˈɡlaʊə',
   glance: 'ɡlɑːns',
+  'spell out': 'spel aʊt',
+  enunciate: 'ɪˈnʌnsieɪt',
+  eloquent: 'ˈeləkwənt',
+  coherent: 'kəʊˈhɪərənt',
+  elaborate: 'ɪˈlæbəreɪt',
+  explicit: 'ɪkˈsplɪsɪt',
+  assert: 'əˈsɜːt',
+  clarify: 'ˈklærɪfaɪ',
+  articulate: 'ɑːˈtɪkjuleɪt',
 };
 
 export function ipaForExpression(expression, fallbackIpa = '') {
