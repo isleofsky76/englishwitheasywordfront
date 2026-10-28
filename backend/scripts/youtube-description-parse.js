@@ -65,8 +65,9 @@ function buildSlug(words) {
 function parseWords(description) {
   const text = String(description || '').replace(/\r\n/g, '\n');
   const words = [];
+  /* 구분자는 앞뒤 공백 있는 — / – / - 만 (call-up 같은 하이픈 단어 보호) */
   const blockRe =
-    /^(\d+)\.\s*(?:\*\*)?(.+?)(?:\*\*)?\s*[—–\-]\s*(?:\*\*)?(.+?)(?:\*\*)?\s*$/gm;
+    /^(\d+)\.\s*(?:\*\*)?(.+?)(?:\*\*)?\s+[—–\-]\s+(?:\*\*)?(.+?)(?:\*\*)?\s*$/gm;
   let m;
   const starts = [];
   while ((m = blockRe.exec(text)) !== null) {
