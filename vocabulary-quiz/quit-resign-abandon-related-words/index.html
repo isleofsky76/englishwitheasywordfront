@@ -35,7 +35,7 @@
     <link rel="stylesheet" href="../../redesign-tokens.css?v=20261020quiz1">
     <link rel="stylesheet" href="../../site-masthead.css?v=20261020quiz1">
     <link rel="stylesheet" href="../../nav-home-menu.css?v=20260815j">
-    <link rel="stylesheet" href="../../vocabulary-quiz-track.css?v=20261023track8">
+    <link rel="stylesheet" href="../../vocabulary-quiz-track.css?v=20261029alt1">
 </head>
 <body class="rd-quiz-track" data-nv-slug="quit-resign-abandon-related-words" data-nv-board="vocabulary-quiz">
     <nav id="navbar" class="navbar navbar-expand site-masthead" aria-label="주 메뉴"></nav>
@@ -71,7 +71,7 @@
         <button type="button" class="vq-btn" id="reveal">정답 보기</button>
         <button type="button" class="vq-btn" id="reset">다시 하기</button>
       </div>
-      <p class="vq-hint">모바일: 입력 후 다음 칸으로 넘어가면 자동 채점. 전체 정답은 <b>정답 보기</b>. 뜻이 여러 개면 하나만 맞아도 O.</p>
+      <p class="vq-hint">모바일: 입력 후 다음 칸으로 넘어가면 자동 채점. 전체 정답은 <b>정답 보기</b>. 뜻이 여러 개면 하나만 맞아도 O. 유사·대체 표현도 정답으로 인정합니다.</p>
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -82,28 +82,249 @@
     <script>
       /* ko: 명사·동사 등 품사별 뜻을 모두 인정 (하나만 맞아도 O) */
       window.VOCAB_QUIZ_TRACK_WORDS = [
-        {en:["quit"], ko:["그만두다","사직하다","그만하다","끊다"]},
-        {en:["step down","stepped down","steps down"], ko:["물러나다","사임하다","자리에서 물러나다","하야하다"]},
-        {en:["vacate"], ko:["자리를 비우다","직책에서 물러나다","비우다","떠나다","물러나다"]},
-        {en:["resign"], ko:["사임하다","사직하다","물러나다"]},
-        {en:["demit"], ko:["사직하다","직책을 내려놓다","사임하다","물러나다"]},
-        {en:["abdicate"], ko:["퇴위하다","왕위를 포기하다","자리를 버리다","양위하다"]},
-        {en:["hand over","handed over","hands over"], ko:["넘겨주다","인도하다","양도하다","전달하다"]},
-        {en:["yield"], ko:["양보하다","넘겨주다","내주다","굴복하다","산출하다"]},
-        {en:["surrender"], ko:["내주다","포기하다","항복하다","넘겨주다"]},
-        {en:["cede"], ko:["양도하다","넘겨주다","할양하다"]},
-        {en:["relinquish"], ko:["내려놓다","포기하다","양도하다","손을 떼다"]},
-        {en:["give up","gave up","gives up"], ko:["포기하다","그만두다","손을 들다"]},
-        {en:["waive"], ko:["권리를 포기하다","포기하다","면제하다","철회하다"]},
-        {en:["renounce"], ko:["공식적으로 포기하다","포기하다","단념하다","부인하다"]},
-        {en:["abnegate"], ko:["스스로 포기하다","자제하다","포기하다","부인하다"]},
-        {en:["abandon"], ko:["버리다","포기하다","방기하다","떠나다"]},
-        {en:["desert"], ko:["저버리다","떠나다","버리다","탈영하다"]},
-        {en:["forsake"], ko:["저버리다","버리다","떠나다","포기하다"]},
-        {en:["disown"], ko:["의절하다","관계를 끊다","부인하다","인정하지 않다"]},
-        {en:["abjure"], ko:["엄숙히 포기하다","공식 포기하다","단념하다","맹세하고 포기하다"]}
+        {
+          "en": [
+            "quit",
+            "resign",
+            "give up",
+            "step down"
+          ],
+          "ko": [
+            "그만두다",
+            "사직하다",
+            "그만하다",
+            "끊다",
+            "포기하다",
+            "사임하다",
+            "물러나다"
+          ]
+        },
+        {
+          "en": [
+            "step down",
+            "stepped down",
+            "steps down"
+          ],
+          "ko": [
+            "물러나다",
+            "사임하다",
+            "자리에서 물러나다",
+            "하야하다"
+          ]
+        },
+        {
+          "en": [
+            "vacate"
+          ],
+          "ko": [
+            "자리를 비우다",
+            "직책에서 물러나다",
+            "비우다",
+            "떠나다",
+            "물러나다"
+          ]
+        },
+        {
+          "en": [
+            "resign",
+            "quit",
+            "step down",
+            "give up"
+          ],
+          "ko": [
+            "사임하다",
+            "사직하다",
+            "물러나다",
+            "그만두다",
+            "그만하다",
+            "끊다",
+            "포기하다"
+          ]
+        },
+        {
+          "en": [
+            "demit"
+          ],
+          "ko": [
+            "사직하다",
+            "직책을 내려놓다",
+            "사임하다",
+            "물러나다"
+          ]
+        },
+        {
+          "en": [
+            "abdicate"
+          ],
+          "ko": [
+            "퇴위하다",
+            "왕위를 포기하다",
+            "자리를 버리다",
+            "양위하다"
+          ]
+        },
+        {
+          "en": [
+            "hand over",
+            "handed over",
+            "hands over"
+          ],
+          "ko": [
+            "넘겨주다",
+            "인도하다",
+            "양도하다",
+            "전달하다"
+          ]
+        },
+        {
+          "en": [
+            "yield"
+          ],
+          "ko": [
+            "양보하다",
+            "넘겨주다",
+            "내주다",
+            "굴복하다",
+            "산출하다"
+          ]
+        },
+        {
+          "en": [
+            "surrender"
+          ],
+          "ko": [
+            "내주다",
+            "포기하다",
+            "항복하다",
+            "넘겨주다"
+          ]
+        },
+        {
+          "en": [
+            "cede"
+          ],
+          "ko": [
+            "양도하다",
+            "넘겨주다",
+            "할양하다"
+          ]
+        },
+        {
+          "en": [
+            "relinquish"
+          ],
+          "ko": [
+            "내려놓다",
+            "포기하다",
+            "양도하다",
+            "손을 떼다"
+          ]
+        },
+        {
+          "en": [
+            "give up",
+            "gave up",
+            "gives up"
+          ],
+          "ko": [
+            "포기하다",
+            "그만두다",
+            "손을 들다"
+          ]
+        },
+        {
+          "en": [
+            "waive"
+          ],
+          "ko": [
+            "권리를 포기하다",
+            "포기하다",
+            "면제하다",
+            "철회하다"
+          ]
+        },
+        {
+          "en": [
+            "renounce"
+          ],
+          "ko": [
+            "공식적으로 포기하다",
+            "포기하다",
+            "단념하다",
+            "부인하다"
+          ]
+        },
+        {
+          "en": [
+            "abnegate"
+          ],
+          "ko": [
+            "스스로 포기하다",
+            "자제하다",
+            "포기하다",
+            "부인하다"
+          ]
+        },
+        {
+          "en": [
+            "abandon",
+            "desert",
+            "forsake",
+            "give up"
+          ],
+          "ko": [
+            "버리다",
+            "포기하다",
+            "방기하다",
+            "떠나다"
+          ]
+        },
+        {
+          "en": [
+            "desert"
+          ],
+          "ko": [
+            "저버리다",
+            "떠나다",
+            "버리다",
+            "탈영하다"
+          ]
+        },
+        {
+          "en": [
+            "forsake"
+          ],
+          "ko": [
+            "저버리다",
+            "버리다",
+            "떠나다",
+            "포기하다"
+          ]
+        },
+        {
+          "en": [
+            "disown"
+          ],
+          "ko": [
+            "의절하다",
+            "관계를 끊다",
+            "부인하다",
+            "인정하지 않다"
+          ]
+        },
+        {
+          "en": [
+            "abjure"
+          ],
+          "ko": [
+            "엄숙히 포기하다",
+            "공식 포기하다",
+            "단념하다",
+            "맹세하고 포기하다"
+          ]
+        }
       ];
     </script>
-    <script src="../../vocabulary-quiz-track.js?v=20261023track8"></script>
+    <script src="../../vocabulary-quiz-track.js?v=20261029alt1"></script>
 </body>
 </html>

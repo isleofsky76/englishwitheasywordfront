@@ -35,7 +35,7 @@
     <link rel="stylesheet" href="../../redesign-tokens.css?v=20261020quiz1">
     <link rel="stylesheet" href="../../site-masthead.css?v=20261020quiz1">
     <link rel="stylesheet" href="../../nav-home-menu.css?v=20260815j">
-    <link rel="stylesheet" href="../../vocabulary-quiz-track.css?v=20261023track8">
+    <link rel="stylesheet" href="../../vocabulary-quiz-track.css?v=20261029alt1">
 </head>
 <body class="rd-quiz-track" data-nv-slug="php-security-bug-vocabulary" data-nv-board="vocabulary-quiz">
     <nav id="navbar" class="navbar navbar-expand site-masthead" aria-label="주 메뉴"></nav>
@@ -71,7 +71,7 @@
         <button type="button" class="vq-btn" id="reveal">정답 보기</button>
         <button type="button" class="vq-btn" id="reset">다시 하기</button>
       </div>
-      <p class="vq-hint">출처: The Wall Street Journal · AI Just Found a Bug That Puts up to 70% of the World’s Websites at Risk. 모바일: 입력 후 다음 칸으로 넘어가면 자동 채점. 전체 정답은 <b>정답 보기</b>. 뜻이 여러 개면 하나만 맞아도 O.</p>
+      <p class="vq-hint">출처: The Wall Street Journal · AI Just Found a Bug That Puts up to 70% of the World’s Websites at Risk. 모바일: 입력 후 다음 칸으로 넘어가면 자동 채점. 전체 정답은 <b>정답 보기</b>. 뜻이 여러 개면 하나만 맞아도 O. 유사·대체 표현도 정답으로 인정합니다.</p>
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -82,20 +82,165 @@
     <script>
       /* ko: 명사·동사·형용사 등 품사별 뜻을 모두 인정 (하나만 맞아도 O) */
       window.VOCAB_QUIZ_TRACK_WORDS = [
-        {en:["bug"], ko:["버그","소프트웨어 오류","프로그램 오류","오류","결함"]},
-        {en:["flaw"], ko:["결함","허점","약점","흠","결점"]},
-        {en:["vulnerability"], ko:["취약점","보안 취약점","취약성"]},
-        {en:["risky"], ko:["위험한","위험성이 있는","리스크가 큰"]},
-        {en:["severe"], ko:["매우 심각한","심각한","혹독한","심한"]},
-        {en:["critical"], ko:["중대한","치명적인","위급한","비판적인","중대함"]},
-        {en:["unauthorized"], ko:["허가받지 않은","무단의","승인되지 않은","비인가"]},
-        {en:["exploit"], ko:["악용하다","이용하다","착취하다","익스플로잇","취약점을 악용하다"]},
-        {en:["steal"], ko:["훔치다","도둑질하다","가로채다"]},
-        {en:["launch"], ko:["공격을 개시하다","개시하다","시작하다","발사하다","출시하다"]},
-        {en:["trigger"], ko:["촉발하다","유발하다","일으키다","방아쇠","트리거"]},
-        {en:["Bugmageddon","bugmageddon"], ko:["버그 대재앙","버그마게돈","버그 종말"]}
+        {
+          "en": [
+            "bug",
+            "flaw",
+            "vulnerability"
+          ],
+          "ko": [
+            "버그",
+            "소프트웨어 오류",
+            "프로그램 오류",
+            "오류",
+            "결함",
+            "허점",
+            "약점",
+            "흠",
+            "결점"
+          ]
+        },
+        {
+          "en": [
+            "flaw",
+            "bug",
+            "vulnerability"
+          ],
+          "ko": [
+            "결함",
+            "허점",
+            "약점",
+            "흠",
+            "결점",
+            "버그",
+            "오류",
+            "소프트웨어 오류",
+            "프로그램 오류",
+            "취약점",
+            "보안 취약점",
+            "취약성"
+          ]
+        },
+        {
+          "en": [
+            "vulnerability",
+            "flaw",
+            "bug"
+          ],
+          "ko": [
+            "취약점",
+            "보안 취약점",
+            "취약성",
+            "허점",
+            "결함",
+            "약점",
+            "흠",
+            "결점",
+            "버그"
+          ]
+        },
+        {
+          "en": [
+            "risky"
+          ],
+          "ko": [
+            "위험한",
+            "위험성이 있는",
+            "리스크가 큰"
+          ]
+        },
+        {
+          "en": [
+            "severe"
+          ],
+          "ko": [
+            "매우 심각한",
+            "심각한",
+            "혹독한",
+            "심한"
+          ]
+        },
+        {
+          "en": [
+            "critical"
+          ],
+          "ko": [
+            "중대한",
+            "치명적인",
+            "위급한",
+            "비판적인",
+            "중대함"
+          ]
+        },
+        {
+          "en": [
+            "unauthorized"
+          ],
+          "ko": [
+            "허가받지 않은",
+            "무단의",
+            "승인되지 않은",
+            "비인가"
+          ]
+        },
+        {
+          "en": [
+            "exploit"
+          ],
+          "ko": [
+            "악용하다",
+            "이용하다",
+            "착취하다",
+            "익스플로잇",
+            "취약점을 악용하다"
+          ]
+        },
+        {
+          "en": [
+            "steal"
+          ],
+          "ko": [
+            "훔치다",
+            "도둑질하다",
+            "가로채다"
+          ]
+        },
+        {
+          "en": [
+            "launch"
+          ],
+          "ko": [
+            "공격을 개시하다",
+            "개시하다",
+            "시작하다",
+            "발사하다",
+            "출시하다"
+          ]
+        },
+        {
+          "en": [
+            "trigger"
+          ],
+          "ko": [
+            "촉발하다",
+            "유발하다",
+            "일으키다",
+            "방아쇠",
+            "트리거"
+          ]
+        },
+        {
+          "en": [
+            "Bugmageddon"
+          ],
+          "ko": [
+            "버그 대재앙",
+            "버그마게돈",
+            "버그 종말"
+          ]
+        }
       ];
     </script>
-    <script src="../../vocabulary-quiz-track.js?v=20261023track8"></script>
+    <script src="../../vocabulary-quiz-track.js?v=20261029alt1"></script>
 </body>
 </html>

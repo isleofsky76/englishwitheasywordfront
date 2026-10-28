@@ -30,6 +30,54 @@ export const QUIZ_ANSWER_ALTS = {
     ko: ['정체된', '변화가 없는', '고인', '침체된', '정체'],
     en: [],
   },
+  ask: {
+    ko: ['부탁하다', '해 달라고 부탁하다', '묻다', '요청하다'],
+    en: ['request', 'seek'],
+  },
+  request: {
+    ko: ['요청하다', '공식적으로 요청하다', '부탁하다', '요구하다'],
+    en: ['ask', 'seek'],
+  },
+  beg: {
+    ko: ['애원하다', '간청하다', '빌다'],
+    en: ['plead', 'implore', 'entreat', 'beseech'],
+  },
+  plead: {
+    ko: ['간청하다', '애원하다', '호소하다'],
+    en: ['beg', 'implore', 'entreat', 'beseech'],
+  },
+  implore: {
+    ko: ['애원하다', '간청하다', '호소하다'],
+    en: ['beg', 'plead', 'entreat', 'beseech'],
+  },
+  demand: {
+    ko: ['요구하다', '강하게 요구하다', '요구'],
+    en: ['insist', 'call for'],
+  },
+  bug: {
+    ko: ['버그', '오류', '결함', '소프트웨어 오류', '프로그램 오류'],
+    en: ['flaw'],
+  },
+  flaw: {
+    ko: ['결함', '허점', '약점', '흠', '결점', '버그'],
+    en: ['bug', 'vulnerability'],
+  },
+  vulnerability: {
+    ko: ['취약점', '보안 취약점', '취약성', '허점'],
+    en: ['flaw'],
+  },
+  quit: {
+    ko: ['그만두다', '사직하다', '그만하다', '끊다', '포기하다'],
+    en: ['resign', 'give up'],
+  },
+  resign: {
+    ko: ['사임하다', '사직하다', '물러나다'],
+    en: ['quit', 'step down'],
+  },
+  abandon: {
+    ko: ['버리다', '포기하다', '방기하다', '떠나다'],
+    en: ['desert', 'forsake', 'give up'],
+  },
 };
 
 function uniq(list) {
@@ -64,11 +112,33 @@ function tokensOverlap(a, b) {
   return a.some((t) => b.some((o) => o.includes(t) || t.includes(o)));
 }
 
+/** 너무 흔해서 묶음 병합에 쓰면 안 되는 토큰 */
+const WEAK_KO_TOKENS = new Set([
+  '하다',
+  '되다',
+  '있는',
+  '없는',
+  '같은',
+  '다른',
+  '위한',
+  '대한',
+  '관련',
+  '상태',
+  '완전한',
+  '공식적으로',
+]);
+
+function strongTokens(text) {
+  return hangulTokens(text).filter((t) => t.length >= 3 && !WEAK_KO_TOKENS.has(t));
+}
+
 /**
  * @param {{en:string, ko:string}[]} pairs
+ * @param {{ siblingMerge?: boolean }} [options]
  * @returns {{en:string[], ko:string[]}[]}
  */
-export function enrichQuizTrackWords(pairs) {
+export function enrichQuizTrackWords(pairs, options = {}) {
+  const siblingMerge = options.siblingMerge !== false;
   const base = (pairs || [])
     .map((p) => ({
       en: String(p.en || '').trim(),
@@ -79,19 +149,21 @@ export function enrichQuizTrackWords(pairs) {
   const withTokens = base.map((p) => ({
     ...p,
     koParts: splitQuizMeanings(p.ko),
-    tokens: hangulTokens(p.ko),
+    tokens: strongTokens(p.ko),
   }));
 
   return withTokens.map((p) => {
     const en = new Set([p.en]);
     const ko = new Set(p.koParts);
 
-    /* 같은 연관단어 묶음에서 한글 의미 토큰이 겹치면 정답 공유 */
-    for (const other of withTokens) {
-      if (other.en === p.en) continue;
-      if (!tokensOverlap(p.tokens, other.tokens)) continue;
-      en.add(other.en);
-      other.koParts.forEach((k) => ko.add(k));
+    /* 같은 묶음: 강한 한글 토큰이 겹칠 때만 정답 공유 */
+    if (siblingMerge) {
+      for (const other of withTokens) {
+        if (other.en === p.en) continue;
+        if (!tokensOverlap(p.tokens, other.tokens)) continue;
+        en.add(other.en);
+        other.koParts.forEach((k) => ko.add(k));
+      }
     }
 
     const alts = QUIZ_ANSWER_ALTS[p.en.toLowerCase()];
@@ -100,17 +172,47 @@ export function enrichQuizTrackWords(pairs) {
       (alts.ko || []).forEach((k) => ko.add(k));
     }
 
-    /* 공백 유무 변형도 정답으로 등록 */
+    /* 공백 유무 변형 */
     for (const k of [...ko]) {
       const packed = k.replace(/\s+/g, '');
-      const spaced = k.replace(/([가-힣])([가-힣])/g, '$1 $2'); // light — skip heavy
       if (packed && packed !== k) ko.add(packed);
-      void spaced;
     }
 
     return {
       en: uniq([...en]),
       ko: uniq([...ko]),
     };
+  });
+}
+
+/** 기존 track 문항 배열을 보강 (원본 유지 + alts/공백/선택적 묶음 병합) */
+export function enrichExistingTrackWords(original, options = {}) {
+  const items = (original || []).map((w) => ({
+    enAll: Array.isArray(w.en) ? w.en.map(String) : [String(w.en || '')],
+    koAll: Array.isArray(w.ko) ? w.ko.map(String) : [String(w.ko || '')],
+  }));
+  const avgKo = items.length
+    ? items.reduce((n, w) => n + w.koAll.length, 0) / items.length
+    : 0;
+  /* 이미 복수 정답이 많은 퀴즈는 묶음 병합 생략 (과도한 교차 인정 방지) */
+  const siblingMerge = options.siblingMerge ?? avgKo < 2.5;
+
+  const pairs = items.map((w) => ({
+    en: String(w.enAll[0] || '').trim(),
+    ko: w.koAll.join(', '),
+  }));
+  const enriched = enrichQuizTrackWords(pairs, { siblingMerge });
+
+  return items.map((w, i) => {
+    const e = enriched[i] || { en: w.enAll, ko: w.koAll };
+    let en = uniq([...w.enAll, ...(e.en || [])]);
+    let ko = uniq([...w.koAll, ...(e.ko || [])]);
+    for (const form of [...en]) {
+      const alts = QUIZ_ANSWER_ALTS[String(form || '').toLowerCase()];
+      if (!alts) continue;
+      en = uniq([...en, ...(alts.en || [])]);
+      ko = uniq([...ko, ...(alts.ko || [])]);
+    }
+    return { en, ko };
   });
 }

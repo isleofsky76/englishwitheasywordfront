@@ -11,6 +11,7 @@ import { fileURLToPath } from 'url';
 import { API_BASE } from './loadEnv.js';
 import { uploadVocabularyQuiz } from './vocabulary-quiz-format.js';
 import { toIsoDateOnly } from './voca-seo.js';
+import { enrichQuizTrackWords } from './quiz-answer-alts.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '../..');
@@ -180,10 +181,10 @@ async function main() {
     await uploadVocabularyQuiz(
       {
         format: 'reveal',
-        directions: ['en-ko'],
+        directions: ['en-ko', 'ko-en'],
         title: `${title} — 복습 퀴즈`,
         slug: `${slug}-quiz`,
-        metaDescription: `${title} 핵심 표현 복습. 영어를 보고 뜻을 클릭해 확인합니다.`,
+        metaDescription: `${title} 핵심 표현 복습. 뜻을 입력하고 바로 채점합니다.`,
         sourceUrl: `https://englisheasystudy.com/defense-news/${slug}/`,
         sourceLabel: '원문 글 보기',
         datePublished: (() => {
@@ -192,8 +193,12 @@ async function main() {
           const d = raw instanceof Date ? raw : new Date(raw);
           return Number.isNaN(d.getTime()) ? toIsoDateOnly() : toIsoDateOnly(d);
         })(),
-        section1Title: '영어 : 뜻',
+        section1Title: '영어 → 한글',
+        section2Title: '한글 → 영어',
         pairs,
+        trackWords: enrichQuizTrackWords(pairs, { siblingMerge: true }),
+        eyebrow: 'Vocabulary Quiz · Defense',
+        hint: '유사·대체 표현도 정답으로 인정합니다.',
       },
       API_BASE
     );

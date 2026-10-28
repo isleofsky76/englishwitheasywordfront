@@ -35,7 +35,7 @@
     <link rel="stylesheet" href="../../redesign-tokens.css?v=20261020quiz1">
     <link rel="stylesheet" href="../../site-masthead.css?v=20261020quiz1">
     <link rel="stylesheet" href="../../nav-home-menu.css?v=20260815j">
-    <link rel="stylesheet" href="../../vocabulary-quiz-track.css?v=20261023track7">
+    <link rel="stylesheet" href="../../vocabulary-quiz-track.css?v=20261029alt1">
 </head>
 <body class="rd-quiz-track" data-nv-slug="jogging-injury-vocabulary" data-nv-board="vocabulary-quiz">
     <nav id="navbar" class="navbar navbar-expand site-masthead" aria-label="주 메뉴"></nav>
@@ -71,7 +71,7 @@
         <button type="button" class="vq-btn" id="reveal">정답 보기</button>
         <button type="button" class="vq-btn" id="reset">다시 하기</button>
       </div>
-      <p class="vq-hint">모바일: 입력 후 다음 칸으로 넘어가면 자동 채점됩니다. 전체 정답은 <b>정답 보기</b>를 누르세요. 띄어쓰기·대소문자는 구분하지 않으며, 뜻이 여러 개면 하나만 맞아도 O 입니다.</p>
+      <p class="vq-hint">모바일: 입력 후 다음 칸으로 넘어가면 자동 채점됩니다. 전체 정답은 <b>정답 보기</b>를 누르세요. 띄어쓰기·대소문자는 구분하지 않으며, 뜻이 여러 개면 하나만 맞아도 O 입니다. 유사·대체 표현도 정답으로 인정합니다.</p>
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -82,20 +82,140 @@
     <script>
       /* ko: 명사·동사 등 품사별 뜻을 모두 인정 (하나만 맞아도 O) */
       window.VOCAB_QUIZ_TRACK_WORDS = [
-        {en:["overuse"], ko:["과사용","과도한 사용","남용","과사용하다","남용하다","과도하게 쓰다","과도하게 사용하다"]},
-        {en:["ache"], ko:["통증","아픔","아프다","욱신거리다","쑤시다","결리다"]},
-        {en:["kneecap"], ko:["무릎뼈","슬개골","무릎뚜껑"]},
-        {en:["stress fracture"], ko:["피로골절","스트레스 골절","스트레스골절"]},
-        {en:["sprain"], ko:["염좌","삠","접질림","삐다","접질리다","염좌를 입다"]},
-        {en:["shin splints"], ko:["정강이 통증","정강이 부목","정강이통증","신스플린트"]},
-        {en:["tendon"], ko:["힘줄","건","힘줄조직"]},
-        {en:["ligament"], ko:["인대"]},
-        {en:["cramp"], ko:["경련","쥐","쥐가 나다","경련이 일어나다","경련하다"]},
-        {en:["blister"], ko:["물집","수포","물집이 생기다","물집이 잡히다"]},
-        {en:["inflammation"], ko:["염증","염증 반응"]},
-        {en:["warm-up","warm up","warmup"], ko:["준비운동","워밍업","준비 운동","몸을 풀다","준비운동하다","워밍업하다"]}
+        {
+          "en": [
+            "overuse"
+          ],
+          "ko": [
+            "과사용",
+            "과도한 사용",
+            "남용",
+            "과사용하다",
+            "남용하다",
+            "과도하게 쓰다",
+            "과도하게 사용하다"
+          ]
+        },
+        {
+          "en": [
+            "ache"
+          ],
+          "ko": [
+            "통증",
+            "아픔",
+            "아프다",
+            "욱신거리다",
+            "쑤시다",
+            "결리다"
+          ]
+        },
+        {
+          "en": [
+            "kneecap"
+          ],
+          "ko": [
+            "무릎뼈",
+            "슬개골",
+            "무릎뚜껑"
+          ]
+        },
+        {
+          "en": [
+            "stress fracture"
+          ],
+          "ko": [
+            "피로골절",
+            "스트레스 골절"
+          ]
+        },
+        {
+          "en": [
+            "sprain"
+          ],
+          "ko": [
+            "염좌",
+            "삠",
+            "접질림",
+            "삐다",
+            "접질리다",
+            "염좌를 입다"
+          ]
+        },
+        {
+          "en": [
+            "shin splints"
+          ],
+          "ko": [
+            "정강이 통증",
+            "정강이 부목",
+            "신스플린트"
+          ]
+        },
+        {
+          "en": [
+            "tendon"
+          ],
+          "ko": [
+            "힘줄",
+            "건",
+            "힘줄조직"
+          ]
+        },
+        {
+          "en": [
+            "ligament"
+          ],
+          "ko": [
+            "인대"
+          ]
+        },
+        {
+          "en": [
+            "cramp"
+          ],
+          "ko": [
+            "경련",
+            "쥐",
+            "쥐가 나다",
+            "경련이 일어나다",
+            "경련하다"
+          ]
+        },
+        {
+          "en": [
+            "blister"
+          ],
+          "ko": [
+            "물집",
+            "수포",
+            "물집이 생기다",
+            "물집이 잡히다"
+          ]
+        },
+        {
+          "en": [
+            "inflammation"
+          ],
+          "ko": [
+            "염증",
+            "염증 반응"
+          ]
+        },
+        {
+          "en": [
+            "warm-up",
+            "warm up"
+          ],
+          "ko": [
+            "준비운동",
+            "워밍업",
+            "몸을 풀다",
+            "준비운동하다",
+            "워밍업하다"
+          ]
+        }
       ];
     </script>
-    <script src="../../vocabulary-quiz-track.js?v=20261023track8"></script>
+    <script src="../../vocabulary-quiz-track.js?v=20261029alt1"></script>
 </body>
 </html>
