@@ -136,10 +136,19 @@ function inferBoard({ title, description, sourceLabel }) {
 
 function normalizeSourceLabel(raw) {
   const t = String(raw || '').trim();
+  if (!t) return '';
   for (const a of SOURCE_ALIASES) {
     if (a.re.test(t)) return a.label;
   }
-  return t || 'Unknown';
+  return t;
+}
+
+function cleanTopicTitle(title) {
+  return String(title || '')
+    .replace(/#연관단어/g, '')
+    .replace(/#\S+/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
 }
 
 export function parseYoutubeDescription(video) {
@@ -150,21 +159,31 @@ export function parseYoutubeDescription(video) {
   const sourceUrl = pick(/원본\s*링크\s*:\s*(https?:\/\/\S+)/i, description);
   const author = normalizeAuthor(pick(/저자\s*:\s*(.+)/i, description));
   const sourceLabel = normalizeSourceLabel(sourceRaw);
+  const hasSource = Boolean(sourceLabel || sourceUrl || articleTitle);
   const words = parseWords(description);
   const board = inferBoard({ title, description, sourceLabel });
   const slug = buildSlug(words);
-  const sourceText = [sourceLabel, articleTitle, author ? `By ${author}` : '']
-    .filter(Boolean)
-    .join(' | ');
+  const sourceText = hasSource
+    ? [sourceLabel, articleTitle, author ? `By ${author}` : ''].filter(Boolean).join(' | ')
+    : '';
 
   const wordList = words.map((w) => w.expression).filter(Boolean).join(', ');
-  const metaDescription = `${sourceLabel} 기사에서 추출한 시사 영단어. ${wordList}${
-    wordList ? ' 등.' : ''
-  }`.slice(0, 160);
+  const topic = cleanTopicTitle(title) || title;
+  const isSynonym = board === 'english-synonym' || /#연관단어/.test(title);
 
-  const intro = [
-    `${title} 주제를 다룬 ${sourceLabel} 기사에서 주요 시사 영단어를 정리합니다. *AI 음성과 이미지를 사용했습니다.`,
-  ];
+  let metaDescription;
+  let intro;
+  if (!hasSource || isSynonym) {
+    metaDescription = `${topic} 연관단어${wordList ? `. ${wordList} 등.` : '.'}`.slice(0, 160);
+    intro = [`${topic} 연관단어를 정리합니다. *AI 음성과 이미지를 사용했습니다.`];
+  } else {
+    metaDescription = `${sourceLabel} 기사에서 추출한 시사 영단어. ${wordList}${
+      wordList ? ' 등.' : ''
+    }`.slice(0, 160);
+    intro = [
+      `${title} 주제를 다룬 ${sourceLabel} 기사에서 주요 시사 영단어를 정리합니다. *AI 음성과 이미지를 사용했습니다.`,
+    ];
+  }
 
   const datePublished = (video.published || new Date().toISOString()).slice(0, 10);
 
@@ -181,7 +200,7 @@ export function parseYoutubeDescription(video) {
     wordMeta: words,
     source: {
       text: sourceText,
-      url: sourceUrl,
+      url: sourceUrl || '',
     },
     youtube: video.url || `https://youtube.com/shorts/${video.videoId}`,
     publishedAt: video.published || '',
