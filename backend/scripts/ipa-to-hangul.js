@@ -64,6 +64,15 @@ const HANGUL_OVERRIDES = {
   manifest: '매니페스트',
   explicit: '익스플리싯',
   assert: '어설트',
+  connect: '커넥트',
+  link: '링크',
+  attach: '어태치',
+  stick: '스틱',
+  unite: '유나이트',
+  paste: '페이스트',
+  glue: '글루',
+  adhere: '어드히어',
+  plaster: '플래스터',
 };
 
 /** 사전 API에 IPA가 비는 단어 보완 */
@@ -91,6 +100,15 @@ const IPA_OVERRIDES = {
   assert: 'əˈsɜːt',
   clarify: 'ˈklærɪfaɪ',
   articulate: 'ɑːˈtɪkjuleɪt',
+  connect: 'kəˈnekt',
+  link: 'lɪŋk',
+  attach: 'əˈtætʃ',
+  stick: 'stɪk',
+  unite: 'juːˈnaɪt',
+  paste: 'peɪst',
+  glue: 'ɡluː',
+  adhere: 'ədˈhɪə',
+  plaster: 'ˈplɑːstə',
 };
 
 export function ipaForExpression(expression, fallbackIpa = '') {
