@@ -5,7 +5,7 @@
 (function (global) {
   'use strict';
 
-  var ASSET_VER = '20261020rd28';
+  var ASSET_VER = '20261028src1';
 
   /** 캐시된 구버전 JS가 그려도 QUICK REVIEW 즉시 제거 */
   function stripQuickReview() {
@@ -97,8 +97,25 @@
     return n < 10 ? '0' + n : String(n);
   }
 
-  function resolveSource(post, cfg) {
+  function extractSourceFull(html) {
+    var msg = String(html || '');
+    var m = msg.match(/class=["'][^"']*nv-source-text[^"']*["'][^>]*>([\s\S]*?)<\/p>/i) ||
+      msg.match(/<p class="nv-source-text">([\s\S]*?)<\/p>/i);
+    if (!m) return '';
+    return stripHtml(m[1]);
+  }
+
+  function shortSourceLabel(full) {
+    var t = String(full || '').trim();
+    if (!t) return '';
+    var parts = t.split(/\s*[|｜]\s*/).map(function (s) { return s.trim(); }).filter(Boolean);
+    return parts[0] || t;
+  }
+
+  function resolveSource(post, cfg, html) {
     if (post && post.source) return String(post.source).trim();
+    var fromHtml = shortSourceLabel(extractSourceFull(html));
+    if (fromHtml) return fromHtml;
     if (global.BoardListConfig) return global.BoardListConfig.resolveSource(post);
     return '';
   }
@@ -129,10 +146,13 @@
   }
 
   function extractSourceLink(html) {
-    var m = String(html || '').match(
-      /class=["'][^"']*nv-related-link--article[^"']*["'][^>]*href=["']([^"']+)["']/i
-    ) || String(html || '').match(/href=["'](https?:\/\/[^"']+)["'][^>]*>[\s\S]*?신문\s*보기/i) ||
-      String(html || '').match(/href=["'](https?:\/\/[^"']+)["'][^>]*>[\s\S]*?신문보기/i);
+    var msg = String(html || '');
+    var m = msg.match(/class=["'][^"']*nv-source-link[^"']*["'][^>]*href=["']([^"']+)["']/i) ||
+      msg.match(/href=["']([^"']+)["'][^>]*class=["'][^"']*nv-source-link[^"']*["']/i) ||
+      msg.match(/class=["'][^"']*nv-related-link--article[^"']*["'][^>]*href=["']([^"']+)["']/i) ||
+      msg.match(/href=["'](https?:\/\/[^"']+)["'][^>]*>[\s\S]*?원문\s*기사\s*보기/i) ||
+      msg.match(/href=["'](https?:\/\/[^"']+)["'][^>]*>[\s\S]*?신문\s*보기/i) ||
+      msg.match(/href=["'](https?:\/\/[^"']+)["'][^>]*>[\s\S]*?신문보기/i);
     return m ? m[1] : '';
   }
 
@@ -500,7 +520,8 @@
     document.body.classList.add('rd-article', 'rd-article-like-hidden');
 
     var title = Config ? Config.cleanTitle(post) : String(post.title || '제목 없음');
-    var source = resolveSource(post, cfg);
+    var sourceFull = extractSourceFull(html);
+    var source = resolveSource(post, cfg, html) || shortSourceLabel(sourceFull);
     var date = formatDate(post.date);
     var summary = extractSummary(post, parser);
     var yt = extractYoutube(html);
@@ -546,6 +567,18 @@
       actions += '<a class="rd-btn-outline" href="' + escapeAttr(sourceUrl) + '" target="_blank" rel="noopener noreferrer">원문 기사 보기 ↗</a>';
     }
     actions += '</div>';
+
+    var sourceBlock = '';
+    if (sourceFull || sourceUrl) {
+      sourceBlock =
+        '<aside class="rd-source-block" aria-label="출처">' +
+          '<p class="rd-source-block-label">출처</p>' +
+          (sourceFull ? '<p class="rd-source-block-text">' + escapeHtml(sourceFull) + '</p>' : '') +
+          (sourceUrl
+            ? '<p class="rd-source-block-link"><a href="' + escapeAttr(sourceUrl) + '" target="_blank" rel="noopener noreferrer">원문 기사 보기 ↗</a></p>'
+            : '') +
+        '</aside>';
+    }
 
     var toc = cards.map(function (c) {
       return '<a href="#' + escapeAttr(c.id) + '"><span class="num">' + escapeHtml(c.num) + '</span>' +
@@ -599,6 +632,7 @@
                 }).join('')
               : '<div class="rd-article-fallback">' + html + '</div>') +
           '</div>' +
+          sourceBlock +
           actions +
           navHtml +
         '</div>' +

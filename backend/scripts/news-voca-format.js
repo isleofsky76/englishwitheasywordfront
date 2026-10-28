@@ -385,7 +385,22 @@ function buildRelatedLinksHtml(youtubeUrl, sourceUrl) {
 }
 
 function buildSourceHtml(sourceText, sourceUrl) {
-  return buildRelatedLinksHtml('', sourceUrl);
+  const text = String(sourceText || '').trim();
+  const url = String(sourceUrl || '').trim();
+  if (!text && !url) return '';
+
+  const textHtml = text
+    ? `<p class="nv-source-text">${escapeHtml(text)}</p>`
+    : '';
+  const linkHtml = url
+    ? `<p class="nv-source-link-wrap"><a class="nv-source-link" href="${escapeHtml(url)}" rel="noopener noreferrer" target="_blank">원문 기사 보기</a></p>`
+    : '';
+
+  return `<footer class="nv-source">
+  <p class="nv-source-label">출처</p>
+  ${textHtml}
+  ${linkHtml}
+</footer>`;
 }
 
 function buildYoutubeHtml(youtubeUrl) {
@@ -596,26 +611,28 @@ function buildArticleJsonLd({ title, slug, metaDescription, datePublished }) {
 export function buildNewsVocaMessage(config) {
   const { intro, sections, sourceText, sourceUrl, youtubeUrl } = resolveArticleData(config);
 
+  const resolvedSourceUrl = config.sourceUrl || sourceUrl || config.source?.url || '';
+  const resolvedSourceText =
+    (typeof config.source === 'string' ? config.source : '') ||
+    sourceText ||
+    config.source?.text ||
+    '';
+
+  /* 유튜브는 related, 출처 문구·원문 링크는 nv-source 에 명확히 표시 */
   const relatedLinksHtml = buildRelatedLinksHtml(
     config.youtube || config.youtubeUrl || youtubeUrl,
-    config.sourceUrl || sourceUrl || config.source?.url
+    ''
   );
+  const sourceHtml = buildSourceHtml(resolvedSourceText, resolvedSourceUrl);
   const leadHtml = buildLeadHtml(intro);
   const sectionsHtml = sections.map(buildWordSectionHtml).join('\n');
   const bodyHtml = sectionsHtml ? `<div class="nv-body">\n${sectionsHtml}\n</div>` : '';
-
-  if (config.sourceAtEnd) {
-    return `<article class="nv-text">
-${leadHtml}
-${bodyHtml}
-${relatedLinksHtml}
-</article>`;
-  }
 
   return `<article class="nv-text">
 ${leadHtml}
 ${bodyHtml}
 ${relatedLinksHtml}
+${sourceHtml}
 </article>`;
 }
 
