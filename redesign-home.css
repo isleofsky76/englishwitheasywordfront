@@ -12,7 +12,7 @@
 .rd-datebar-inner {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 10px 24px;
+  padding: 8px 24px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -29,9 +29,9 @@
   flex-wrap: wrap;
   gap: 40px;
 }
-/* 홈: 경로·퀴즈 우선 배치 후 하단 오늘의 단어 */
+/* 홈: 경로·퀴즈 우선 — 날짜바 직후 여백 최소화 */
 .rd-home .rd-paths {
-  padding-top: 28px;
+  padding-top: 0;
 }
 .rd-hero--bottom {
   margin-top: 24px;
@@ -177,16 +177,16 @@
 .rd-paths-inner {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 48px 24px;
+  padding: 14px 24px 24px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 24px;
+  gap: 20px;
 }
 .rd-path-card {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  padding: 28px;
+  padding: 24px;
   background: var(--surface);
   border-radius: 4px;
 }
@@ -325,7 +325,7 @@
 .rd-quiz-banner-wrap {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 40px 24px;
+  padding: 28px 24px 36px;
 }
 .rd-quiz-banner {
   display: flex;
