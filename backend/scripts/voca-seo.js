@@ -416,8 +416,8 @@ ${(board.extraCss || []).map((c) => `    <link rel="stylesheet" href="../../${c.
     <link rel="stylesheet" href="../../weather-banner.css?v=20260612g">
     <link rel="stylesheet" href="../../world-clock.css?v=20260612g">
     <link rel="stylesheet" href="../../redesign-tokens.css?v=20261020rd27">
-    <link rel="stylesheet" href="../../redesign-article.css?v=20261028src1">
-    <link rel="preload" href="../../redesign-article.js?v=20261028src1" as="script">
+    <link rel="stylesheet" href="../../redesign-article.css?v=20261028path1">
+    <link rel="preload" href="../../redesign-article.js?v=20261028path1" as="script">
     <style id="rd-fouc-guard">
       /* SEO 구형 본문이 redesign 전에 깜빡이지 않도록 (!important 금지: 키프레임 fallback이 무시됨) */
       body[data-nv-board]:not(.rd-ready) #post-container {
@@ -592,6 +592,7 @@ const SITEMAP_STATIC_URLS = [
   { loc: `${SITE_ORIGIN}/economy-news-list.html`, priority: '0.9' },
   { loc: `${SITE_ORIGIN}/travel-news-list.html`, priority: '0.9' },
   { loc: `${SITE_ORIGIN}/sports-news-list.html`, priority: '0.9' },
+  { loc: `${SITE_ORIGIN}/us-news-list.html`, priority: '0.9' },
   /* 빈 보드 목록은 사이트맵에서 제외 — 요청 시 복원 */
   { loc: `${SITE_ORIGIN}/industry-news-list.html`, priority: '0.9' },
   { loc: `${SITE_ORIGIN}/korea-news-list.html`, priority: '0.9' },

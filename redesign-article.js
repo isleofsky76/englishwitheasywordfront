@@ -5,7 +5,30 @@
 (function (global) {
   'use strict';
 
-  var ASSET_VER = '20261028src1';
+  var ASSET_VER = '20261028path1';
+
+  /** SEO 경로 /board/slug/ 에서 list.html 상대링크가 깨지지 않게 */
+  function seoPathPrefix() {
+    try {
+      var parts = String(window.location.pathname || '')
+        .replace(/\\/g, '/')
+        .split('/')
+        .filter(Boolean);
+      if (parts.length && /index\.html$/i.test(parts[parts.length - 1])) parts.pop();
+      if (parts.length >= 2 && !/\.html?$/i.test(parts[parts.length - 1])) {
+        return '../'.repeat(parts.length);
+      }
+    } catch (e) { /* ignore */ }
+    return '';
+  }
+
+  function siteHref(href) {
+    var h = String(href || '').trim();
+    if (!h) return h;
+    if (/^(https?:|mailto:|tel:|#|\/)/i.test(h)) return h;
+    if (/^\.\.\//.test(h)) return h;
+    return seoPathPrefix() + h.replace(/^\.\//, '');
+  }
 
   /** 캐시된 구버전 JS가 그려도 QUICK REVIEW 즉시 제거 */
   function stripQuickReview() {
@@ -531,8 +554,8 @@
 
     var crumb =
       '<nav class="rd-article-crumb" aria-label="위치">' +
-        '<a href="index.html">홈</a><span aria-hidden="true">/</span>' +
-        '<a href="' + escapeAttr(cfg.breadcrumbParent.href) + '">' + escapeHtml(cfg.breadcrumbParent.label) + '</a>' +
+        '<a href="' + escapeAttr(siteHref('index.html')) + '">홈</a><span aria-hidden="true">/</span>' +
+        '<a href="' + escapeAttr(siteHref(cfg.breadcrumbParent.href)) + '">' + escapeHtml(cfg.breadcrumbParent.label) + '</a>' +
         '<span aria-hidden="true">/</span>' +
         '<span class="is-current">' + escapeHtml(cfg.categoryLabel) + '</span>' +
       '</nav>';
