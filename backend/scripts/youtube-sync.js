@@ -91,6 +91,8 @@ function quizConfigFromArticle(article) {
     .map((p) => p.en)
     .join(', ');
 
+  const isSyn = article.board === 'english-synonym';
+  const sourceText = String(article.source?.text || '').trim();
   return {
     format: 'reveal',
     directions: ['en-ko', 'ko-en'],
@@ -103,6 +105,8 @@ function quizConfigFromArticle(article) {
     section1Title: '영어 → 한글',
     section2Title: '한글 → 영어',
     pairs,
+    eyebrow: isSyn ? 'Vocabulary Quiz · Related Words' : 'Vocabulary Quiz · News',
+    hint: sourceText ? `출처: ${sourceText}.` : '',
     password: `seed_vocabulary_quiz_${slug.slice(0, 48)}`,
   };
 }

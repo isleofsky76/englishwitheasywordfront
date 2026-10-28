@@ -136,6 +136,13 @@ export async function uploadVocabularyQuiz(config, apiBase = API_BASE) {
       metaDescription: post.metaDescription,
       datePublished,
       message: '',
+      pairs: config.pairs,
+      trackWords: config.trackWords,
+      sourceUrl: post.sourceUrl,
+      sourceLabel: post.sourceLabel,
+      youtube: config.youtube || post.sourceUrl,
+      eyebrow: config.eyebrow || '',
+      hint: config.hint || '',
     });
     if (seo) {
       if (seo.seoPath) console.log(`  SEO 페이지: ${seo.seoPath}`);

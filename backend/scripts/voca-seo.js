@@ -350,6 +350,30 @@ function buildSeoHead({ docTitle, title, slug, boardPath, metaDescription, pageU
     <script type="application/ld+json">${JSON.stringify(jsonLd)}</script>`;
 }
 
+function splitQuizMeanings(ko) {
+  return String(ko || '')
+    .split(/[,，、/;；·･・|]+/)
+    .map((s) => s.trim())
+    .filter(Boolean);
+}
+
+/** pairs / trackWords → VOCAB_QUIZ_TRACK_WORDS */
+export function toVocabQuizTrackWords(config) {
+  if (Array.isArray(config.trackWords) && config.trackWords.length) {
+    return config.trackWords.map((w) => ({
+      en: Array.isArray(w.en) ? w.en : [String(w.en || '').trim()].filter(Boolean),
+      ko: Array.isArray(w.ko) ? w.ko : splitQuizMeanings(w.ko),
+    }));
+  }
+  const pairs = Array.isArray(config.pairs) ? config.pairs : [];
+  return pairs
+    .map((p) => ({
+      en: [String(p.en || '').trim()].filter(Boolean),
+      ko: splitQuizMeanings(p.ko),
+    }))
+    .filter((w) => w.en.length && w.ko.length);
+}
+
 function buildQuizSeoPageHtml(boardPath, board, config) {
   const { title, slug, metaDescription } = config;
   const pageUrl = `${SITE_ORIGIN}/${boardPath}/${slug}/`;
@@ -357,7 +381,96 @@ function buildQuizSeoPageHtml(boardPath, board, config) {
   const docTitle = `${title} | ${board.label} · 시사영단어`;
   const jsonLd = buildArticleJsonLd({ title, slug, boardPath, metaDescription, datePublished });
   const head = buildSeoHead({ docTitle, title, slug, boardPath, metaDescription, pageUrl, jsonLd });
+  const trackWords = toVocabQuizTrackWords(config);
+  const TRACK_VER = '20261023track8';
 
+  /* 최신 양식: vocabulary-quiz-track (입력·즉시 채점) */
+  if (trackWords.length) {
+    const yt = String(config.sourceUrl || config.youtube || '').trim();
+    const eyebrow = escapeHtml(config.eyebrow || 'Vocabulary Quiz · News');
+    const hintExtra = String(config.hint || '').trim();
+    const hint = hintExtra
+      ? `${escapeHtml(hintExtra)} 모바일: 입력 후 다음 칸으로 넘어가면 자동 채점. 전체 정답은 <b>정답 보기</b>. 뜻이 여러 개면 하나만 맞아도 O.`
+      : '모바일: 입력 후 다음 칸으로 넘어가면 자동 채점. 전체 정답은 <b>정답 보기</b>. 뜻이 여러 개면 하나만 맞아도 O.';
+    const ytBlock = yt
+      ? `
+        <p class="vq-youtube">
+          <a class="vq-youtube-btn" href="${escapeHtml(yt)}" target="_blank" rel="noopener noreferrer">
+            <svg class="vq-youtube-icon" viewBox="0 0 28 20" aria-hidden="true" focusable="false">
+              <rect x="0.5" y="0.5" width="27" height="19" rx="5.5" fill="#fff" opacity="0.95"/>
+              <path fill="#e11d1d" d="M11.2 5.4v9.2L19.2 10 11.2 5.4z"/>
+            </svg>
+            <span>${escapeHtml(config.sourceLabel || '유튜브 보기')}</span>
+          </a>
+        </p>`
+      : '';
+    const wordsJson = JSON.stringify(trackWords, null, 8).replace(/^/gm, '        ');
+
+    return `<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KWGQ5C5RD3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-KWGQ5C5RD3');
+</script>
+
+${head}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Noto+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@500&display=swap">
+    <link rel="stylesheet" href="../../redesign-tokens.css?v=20261020quiz1">
+    <link rel="stylesheet" href="../../site-masthead.css?v=20261020quiz1">
+    <link rel="stylesheet" href="../../nav-home-menu.css?v=20260815j">
+    <link rel="stylesheet" href="../../vocabulary-quiz-track.css?v=${TRACK_VER}">
+</head>
+<body class="rd-quiz-track" data-nv-slug="${escapeHtml(slug)}" data-nv-board="${escapeHtml(boardPath)}">
+    <nav id="navbar" class="navbar navbar-expand site-masthead" aria-label="주 메뉴"></nav>
+    <main class="vq-track" id="vq-track">
+      <header class="vq-header">
+        <span class="vq-eyebrow">${eyebrow}</span>
+        <h1 class="vq-title">${escapeHtml(title)}</h1>
+        <p class="vq-sub">뜻을 입력한 뒤 키보드의 이동/완료를 누르거나, 아래 <b>정답 보기</b>를 탭하세요.</p>${ytBlock}
+      </header>
+
+      <div class="vq-bar">
+        <div class="vq-seg" role="group" aria-label="퀴즈 방향">
+          <button type="button" id="m-en" aria-pressed="true">영어 → 한글</button>
+          <button type="button" id="m-ko" aria-pressed="false">한글 → 영어</button>
+        </div>
+        <div class="vq-score"><b id="sc">0</b> / <span id="tot">0</span> 정답</div>
+      </div>
+      <div class="vq-progress"><i id="prog"></i></div>
+
+      <ol class="vq-list" id="list"></ol>
+
+      <div class="vq-actions">
+        <button type="button" class="vq-btn primary" id="checkAll">전체 채점</button>
+        <button type="button" class="vq-btn" id="reveal">정답 보기</button>
+        <button type="button" class="vq-btn" id="reset">다시 하기</button>
+      </div>
+      <p class="vq-hint">${hint}</p>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../page30-api-config.js?v=20260721"></script>
+    <script src="../../site-masthead.js?v=20261020quiz1"></script>
+    <script src="../../site-footer.js?v=20261013a"></script>
+    <script src="../../nav-home-menu.js?v=20260816d"></script>
+    <script>
+      /* ko: 명사·동사 등 품사별 뜻을 모두 인정 (하나만 맞아도 O) */
+      window.VOCAB_QUIZ_TRACK_WORDS =
+${wordsJson};
+    </script>
+    <script src="../../vocabulary-quiz-track.js?v=${TRACK_VER}"></script>
+</body>
+</html>
+`;
+  }
+
+  /* 구형 API 로드 셸 (pairs 없을 때만) */
   return `<!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -737,6 +850,13 @@ export function applySeoAfterUpload(boardPath, config) {
         metaDescription: config.metaDescription,
         datePublished: config.datePublished || toIsoDateOnly(),
         message: config.message,
+        pairs: config.pairs,
+        trackWords: config.trackWords,
+        sourceUrl: config.sourceUrl || config.youtube || '',
+        sourceLabel: config.sourceLabel || '',
+        youtube: config.youtube || '',
+        eyebrow: config.eyebrow || '',
+        hint: config.hint || '',
       })
     : null;
   const sitemapPath = updateSitemap({
