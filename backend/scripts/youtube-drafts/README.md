@@ -9,5 +9,5 @@ cd backend
 node scripts/youtube-sync.js --list
 node scripts/youtube-sync.js --draft --limit 3
 node scripts/youtube-sync.js --upload <videoId>
-# 글 + vocabulary-quiz 동시 생성 (끄려면 --no-quiz)
+# 연관단어면 vocabulary-quiz 동시 생성 (끄려면 --no-quiz)
 ```

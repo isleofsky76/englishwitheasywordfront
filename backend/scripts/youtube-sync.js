@@ -391,7 +391,8 @@ async function uploadArticle(article, options = {}) {
 
   let quizSlug = '';
   const skipQuiz = options.skipQuiz || prepared.skipQuiz === true;
-  if (!skipQuiz) {
+  /* 퀴즈는 연관단어(english-synonym)만 자동 생성 */
+  if (!skipQuiz && board === 'english-synonym') {
     const quiz = quizConfigFromArticle(prepared);
     if (quiz) {
       console.log(`\n퀴즈 생성: ${quiz.title} (${quiz.pairs.length}단어)`);
@@ -434,7 +435,7 @@ function printHelp() {
   node scripts/youtube-sync.js --playlist <PLAYLIST_ID> --list
   node scripts/youtube-sync.js --mark-seen   # 현재 채널 최신을 모두 본 것으로 표시
 
-  기본: 글 업로드 후 wordMeta로 vocabulary-quiz 도 함께 생성
+  연관단어(english-synonym) 업로드 시 vocabulary-quiz 도 함께 생성
   --no-quiz 로 퀴즈 생략
 
 상태: ${STATE_PATH}
