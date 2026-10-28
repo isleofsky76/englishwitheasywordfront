@@ -11,6 +11,7 @@
     { key: 'defense-news', label: '국방', href: 'defense-news-list.html' },
     { key: 'economy-news', label: '경제', href: 'economy-news-list.html' },
     { key: 'travel-news', label: '여행', href: 'travel-news-list.html' },
+    { key: 'sports-news', label: '스포츠', href: 'sports-news-list.html' },
     { key: 'culture-voca', label: '컬쳐', href: 'culture-voca-list.html' },
     { key: 'ranking-news', label: '랭킹', href: 'ranking-news-list.html' }
   ];
@@ -97,6 +98,23 @@
       postPath: 'travel-news',
       board: 'travel-news',
       apiPath: '/travel-news',
+      navGroup: 'news',
+      tabs: NEWS_TABS,
+      articleLayout: 'auto',
+      breadcrumbParent: { label: '뉴스 영어', href: 'news-voca-list.html' }
+    },
+    'sports-news': {
+      key: 'sports-news',
+      labelEn: 'SPORTS NEWS',
+      title: '스포츠 뉴스',
+      description: '축구·스포츠 영문 기사의 핵심 표현을 원문과 함께 읽습니다.',
+      tabLabel: '스포츠',
+      categoryLabel: '스포츠',
+      listPage: 'sports-news-list.html',
+      postPage: 'sports-news.html',
+      postPath: 'sports-news',
+      board: 'sports-news',
+      apiPath: '/sports-news',
       navGroup: 'news',
       tabs: NEWS_TABS,
       articleLayout: 'auto',

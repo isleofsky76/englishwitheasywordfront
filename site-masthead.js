@@ -17,6 +17,7 @@
         'defense-news-list.html', 'defense-news.html',
         'economy-news-list.html', 'economy-news.html',
         'travel-news-list.html', 'travel-news.html',
+        'sports-news-list.html', 'sports-news.html',
         'culture-voca-list.html', 'culture-voca.html',
         'ranking-news-list.html', 'ranking-news.html'
       ]
@@ -50,6 +51,7 @@
     { href: 'defense-news-list.html', label: '국방뉴스', tone: 'defense', pages: ['defense-news-list.html', 'defense-news.html'] },
     { href: 'economy-news-list.html', label: '경제뉴스', tone: 'news', pages: ['economy-news-list.html', 'economy-news.html'] },
     { href: 'travel-news-list.html', label: '여행뉴스', tone: 'news', pages: ['travel-news-list.html', 'travel-news.html'] },
+    { href: 'sports-news-list.html', label: '스포츠뉴스', tone: 'news', pages: ['sports-news-list.html', 'sports-news.html'] },
     { href: 'korea-news-list.html', label: '한국뉴스', tone: 'defense', pages: ['korea-news-list.html', 'korea-news.html'] },
     { href: 'culture-voca-list.html', label: '컬쳐', tone: 'culture', pages: ['culture-voca-list.html', 'culture-voca.html'] },
     { href: 'shorts-bg-image-list.html', label: '신문읽는 이미지', tone: 'sbgi', pages: ['shorts-bg-image-list.html', 'shorts-bg-image.html'] },
@@ -83,6 +85,7 @@
       'defense-news': 'defense-news.html',
       'economy-news': 'economy-news.html',
       'travel-news': 'travel-news.html',
+      'sports-news': 'sports-news.html',
       'korea-news': 'korea-news.html',
       'word-of-the-day': 'word-of-the-day.html',
       'popular-voca': 'popular-voca.html',

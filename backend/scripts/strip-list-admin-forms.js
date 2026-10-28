@@ -16,6 +16,7 @@ const LIST_FILES = [
   'defense-news-list.html',
   'economy-news-list.html',
   'travel-news-list.html',
+  'sports-news-list.html',
   'korea-news-list.html',
   'cooking-voca-list.html',
   'culture-voca-list.html',

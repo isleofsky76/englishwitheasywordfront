@@ -70,6 +70,7 @@
       { path: '/defense-news', page: 'defense-news.html', postPath: 'defense-news', label: '국방뉴스' },
       { path: '/economy-news', page: 'economy-news.html', postPath: 'economy-news', label: '경제뉴스' },
       { path: '/travel-news', page: 'travel-news.html', postPath: 'travel-news', label: '여행뉴스' },
+      { path: '/sports-news', page: 'sports-news.html', postPath: 'sports-news', label: '스포츠뉴스' },
       { path: '/korea-news', page: 'korea-news.html', postPath: 'korea-news', label: '한국뉴스' },
       { path: '/vocabulary-quiz', page: 'vocabulary-quiz.html', label: '퀴즈' },
       { path: '/vocabulary', page: 'english-synonym.html', postPath: 'english-synonym', label: '연관단어' },
@@ -89,7 +90,8 @@
 
   var STATIC_FEED_BY_PATH = {
     '/economy-news': '/economy-news/feed.json',
-    '/travel-news': '/travel-news/feed.json'
+    '/travel-news': '/travel-news/feed.json',
+    '/sports-news': '/sports-news/feed.json'
   };
 
   function fetchStaticFeedEntries(board) {

@@ -7,6 +7,12 @@
   status = 200
   force = false
 
+[[redirects]]
+  from = "/sports-news/*"
+  to = "/sports-news.html"
+  status = 200
+  force = false
+
 # HTML은 항상 최신, CSS/JS는 버전 쿼리(?v=)로 캐시 무효화
 [[headers]]
   for = "/*.html"
