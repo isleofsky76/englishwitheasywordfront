@@ -35,6 +35,7 @@ import { uploadRetailNews } from './retail-news-format.js';
 import { uploadUkraineNews } from './ukraine-news-format.js';
 import { uploadSynonym } from './synonym-format.js';
 import { uploadUsNews } from './us-news-format.js';
+import { uploadVocabularyQuiz } from './vocabulary-quiz-format.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -57,9 +58,59 @@ const UPLOADERS = {
   'us-news': uploadUsNews,
 };
 
+/** 업로드된 글의 wordMeta → 퀴즈 pairs */
+function quizConfigFromArticle(article) {
+  const meta = Array.isArray(article.wordMeta) ? article.wordMeta : [];
+  const pairs = [];
+  const seen = new Set();
+  for (const w of meta) {
+    const en = String(w.expression || '').trim();
+    const ko = String(w.meaning || '')
+      .replace(/\s+/g, ' ')
+      .trim();
+    if (!en || !ko) continue;
+    const key = en.toLowerCase();
+    if (seen.has(key)) continue;
+    seen.add(key);
+    pairs.push({ en, ko });
+  }
+  if (pairs.length < 3) return null;
+
+  const baseTitle = String(article.title || '')
+    .replace(/#연관단어/g, '')
+    .replace(/#\S+/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+  const baseSlug = String(article.slug || '')
+    .replace(/-related-words$/i, '')
+    .replace(/-quiz$/i, '')
+    .trim();
+  const slug = `${baseSlug || 'yt'}-quiz`.slice(0, 80);
+  const wordList = pairs
+    .slice(0, 8)
+    .map((p) => p.en)
+    .join(', ');
+
+  return {
+    format: 'reveal',
+    directions: ['en-ko', 'ko-en'],
+    title: `${baseTitle || '시사 영단어'} 퀴즈`,
+    slug,
+    metaDescription: `${baseTitle} 어휘 퀴즈. ${wordList}${wordList ? ' 등.' : ''}`.slice(0, 160),
+    sourceUrl: article.youtube || '',
+    sourceLabel: article.youtube ? '유튜브 보기' : '',
+    datePublished: article.datePublished || new Date().toISOString().slice(0, 10),
+    section1Title: '영어 → 한글',
+    section2Title: '한글 → 영어',
+    pairs,
+    password: `seed_vocabulary_quiz_${slug.slice(0, 48)}`,
+  };
+}
+
 function parseArgs(argv) {
   const args = {
     list: false,
+    noQuiz: false,
     draft: false,
     upload: '',
     uploadDrafts: false,
@@ -81,6 +132,7 @@ function parseArgs(argv) {
     else if (a === '--limit') args.limit = Math.max(1, Number(argv[++i]) || 10);
     else if (a === '--playlist') args.playlist = String(argv[++i] || '').trim();
     else if (a === '--board') args.board = String(argv[++i] || '').trim();
+    else if (a === '--no-quiz') args.noQuiz = true;
     else if (a === '--ids') {
       args.ids = String(argv[++i] || '')
         .split(',')
@@ -320,7 +372,7 @@ async function prepareArticle(article) {
   return next;
 }
 
-async function uploadArticle(article) {
+async function uploadArticle(article, options = {}) {
   const prepared = await prepareArticle(article);
   const board = prepared.board || 'news-voca';
   const upload = UPLOADERS[board];
@@ -332,10 +384,37 @@ async function uploadArticle(article) {
   }
   console.log(`\n업로드: [${board}] ${prepared.title} (${prepared.videoId})`);
   await upload(prepared, API_BASE);
+
+  let quizSlug = '';
+  const skipQuiz = options.skipQuiz || prepared.skipQuiz === true;
+  if (!skipQuiz) {
+    const quiz = quizConfigFromArticle(prepared);
+    if (quiz) {
+      console.log(`\n퀴즈 생성: ${quiz.title} (${quiz.pairs.length}단어)`);
+      try {
+        await uploadVocabularyQuiz(quiz, API_BASE);
+        quizSlug = quiz.slug;
+      } catch (err) {
+        console.warn('  ⚠️ 퀴즈 업로드 실패:', err.message || err);
+      }
+    } else {
+      console.log('  (퀴즈 생략: wordMeta 3개 미만)');
+    }
+  }
+
   const file = draftPath(prepared.videoId);
   fs.writeFileSync(
     file,
-    JSON.stringify({ ...prepared, status: 'uploaded', uploadedAt: new Date().toISOString() }, null, 2),
+    JSON.stringify(
+      {
+        ...prepared,
+        status: 'uploaded',
+        uploadedAt: new Date().toISOString(),
+        quizSlug: quizSlug || prepared.quizSlug || '',
+      },
+      null,
+      2
+    ),
     'utf8'
   );
 }
@@ -347,8 +426,12 @@ function printHelp() {
   node scripts/youtube-sync.js --draft [--limit 5]
   node scripts/youtube-sync.js --upload <videoId>
   node scripts/youtube-sync.js --upload-drafts
+  node scripts/youtube-sync.js --upload <videoId> --no-quiz
   node scripts/youtube-sync.js --playlist <PLAYLIST_ID> --list
   node scripts/youtube-sync.js --mark-seen   # 현재 채널 최신을 모두 본 것으로 표시
+
+  기본: 글 업로드 후 wordMeta로 vocabulary-quiz 도 함께 생성
+  --no-quiz 로 퀴즈 생략
 
 상태: ${STATE_PATH}
 초안: ${DRAFTS_DIR}
@@ -371,7 +454,7 @@ async function main() {
 
   if (args.upload) {
     const draft = readDraft(args.upload);
-    await uploadArticle(draft);
+    await uploadArticle(draft, { skipQuiz: args.noQuiz });
     state.uploadedVideoIds[args.upload] = { at: new Date().toISOString(), board: draft.board };
     state.seenVideoIds[args.upload] = state.seenVideoIds[args.upload] || { at: new Date().toISOString() };
     saveState(state);
@@ -387,7 +470,7 @@ async function main() {
       const draft = JSON.parse(fs.readFileSync(path.join(DRAFTS_DIR, f), 'utf8'));
       if (draft.status === 'uploaded') continue;
       if (state.uploadedVideoIds[draft.videoId]) continue;
-      await uploadArticle(draft);
+      await uploadArticle(draft, { skipQuiz: args.noQuiz });
       state.uploadedVideoIds[draft.videoId] = { at: new Date().toISOString(), board: draft.board };
       state.seenVideoIds[draft.videoId] = state.seenVideoIds[draft.videoId] || { at: new Date().toISOString() };
       n += 1;
