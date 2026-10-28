@@ -226,6 +226,11 @@ export function parseYoutubeDescription(video) {
 
   const datePublished = (video.published || new Date().toISOString()).slice(0, 10);
 
+  const youtube = video.url || `https://youtube.com/shorts/${video.videoId}`;
+  const thumbnail =
+    video.thumbnail ||
+    (video.videoId ? `https://i.ytimg.com/vi/${video.videoId}/hqdefault.jpg` : '');
+
   return {
     board,
     videoId: video.videoId,
@@ -241,7 +246,8 @@ export function parseYoutubeDescription(video) {
       text: sourceText,
       url: sourceUrl || '',
     },
-    youtube: video.url || `https://youtube.com/shorts/${video.videoId}`,
+    youtube,
+    thumbnail,
     publishedAt: video.published || '',
     parsedWordCount: words.length,
   };

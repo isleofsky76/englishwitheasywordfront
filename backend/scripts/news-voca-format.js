@@ -104,6 +104,34 @@ function extractYoutubeVideoId(url) {
   return m ? m[1] : null;
 }
 
+/** 목록 섬네일 — 항상 유튜브 미리보기(i.ytimg) */
+export function youtubeThumbnailUrl(youtubeUrlOrId) {
+  const raw = String(youtubeUrlOrId || '').trim();
+  if (!raw) return '';
+  const id = extractYoutubeVideoId(raw) || (/^[a-zA-Z0-9_-]{6,}$/.test(raw) ? raw : '');
+  if (!id) return '';
+  return `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
+}
+
+function escapeAttr(value) {
+  return String(value ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/"/g, '&quot;')
+    .replace(/</g, '&lt;');
+}
+
+function injectCoverHtml(message, coverUrl, title) {
+  const src = String(coverUrl || '').trim();
+  if (!src || !message) return message;
+  if (/nv-cover-img/.test(message)) return message;
+  const alt = escapeAttr(title || '');
+  const coverHtml = `<p class="nv-cover"><img class="nv-cover-img" src="${escapeAttr(src)}" alt="${alt}" loading="eager" decoding="async" width="1280" height="720"></p>`;
+  return String(message).replace(
+    '<article class="nv-text">',
+    `<article class="nv-text">\n${coverHtml}`
+  );
+}
+
 function isWordTitleLine(line) {
   const t = line.trim();
   return /^중요\s*단어\s*\d+\./i.test(t) || /^##\s+/.test(t);
@@ -358,8 +386,8 @@ function buildRelatedLinksHtml(youtubeUrl, sourceUrl) {
   const videoId = extractYoutubeVideoId(youtubeUrl);
   if (videoId) {
     const watchUrl = `https://www.youtube.com/watch?v=${videoId}`;
-    const thumbUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
-    const thumbFallback = `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
+    const thumbUrl = youtubeThumbnailUrl(videoId);
+    const thumbFallback = `https://i.ytimg.com/vi/${videoId}/mqdefault.jpg`;
     lines.push(
       `<p class="nv-related-link-line"><a class="nv-related-link nv-related-link--youtube" href="${escapeHtml(watchUrl)}" rel="noopener noreferrer" target="_blank"><span aria-hidden="true">📺</span> 유튜브 보기</a></p>`
     );
@@ -617,23 +645,32 @@ export function buildNewsVocaMessage(config) {
     sourceText ||
     config.source?.text ||
     '';
+  const resolvedYoutube = config.youtube || config.youtubeUrl || youtubeUrl || '';
+  const cover =
+    String(config.thumbnail || config.coverImage || '').trim() ||
+    youtubeThumbnailUrl(resolvedYoutube || config.videoId || '');
 
   /* 유튜브는 related, 출처 문구·원문 링크는 nv-source 에 명확히 표시 */
-  const relatedLinksHtml = buildRelatedLinksHtml(
-    config.youtube || config.youtubeUrl || youtubeUrl,
-    ''
-  );
+  const relatedLinksHtml = buildRelatedLinksHtml(resolvedYoutube, '');
   const sourceHtml = buildSourceHtml(resolvedSourceText, resolvedSourceUrl);
   const leadHtml = buildLeadHtml(intro);
   const sectionsHtml = sections.map(buildWordSectionHtml).join('\n');
   const bodyHtml = sectionsHtml ? `<div class="nv-body">\n${sectionsHtml}\n</div>` : '';
 
-  return `<article class="nv-text">
+  let message = `<article class="nv-text">
 ${leadHtml}
 ${bodyHtml}
 ${relatedLinksHtml}
 ${sourceHtml}
 </article>`;
+
+  /* 한국뉴스와 동일 — 목록 섬네일용 유튜브 미리보기를 본문 상단 커버로 */
+  if (cover) {
+    message = injectCoverHtml(message, cover, config.title);
+    /* 하단 중복 미리보기 이미지 제거(유튜브 링크 문구는 유지) */
+    message = message.replace(/<div class="nv-yt-thumb">[\s\S]*?<\/div>\s*/g, '');
+  }
+  return message;
 }
 
 export function buildNewsVocaSeoPageHtml(config) {
@@ -724,7 +761,11 @@ async function parseApiJson(res, label) {
 }
 
 export async function uploadNewsVoca(config, apiBase) {
-  const message = buildNewsVocaMessage(config);
+  const resolvedYoutube = config.youtube || config.youtubeUrl || '';
+  const thumbnail =
+    String(config.thumbnail || config.coverImage || '').trim() ||
+    youtubeThumbnailUrl(resolvedYoutube || config.videoId || '');
+  const message = buildNewsVocaMessage({ ...config, thumbnail, youtube: resolvedYoutube });
   const sectionCount = (message.match(/nv-word-section/g) || []).length;
   const datePublished = config.datePublished || toIsoDateOnly();
 
@@ -736,6 +777,7 @@ export async function uploadNewsVoca(config, apiBase) {
     isSecret: false,
     slug: config.slug || '',
     metaDescription: config.metaDescription || '',
+    ...(thumbnail ? { thumbnail } : {}),
   };
 
   console.log('뉴스 어휘 업로드 중...', apiBase);

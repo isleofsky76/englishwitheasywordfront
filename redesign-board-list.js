@@ -56,11 +56,11 @@
   function youtubeThumbFromUrl(url) {
     var s = String(url || '');
     if (!s) return '';
-    var m = s.match(/img\.youtube\.com\/vi\/([a-zA-Z0-9_-]+)\//i) ||
+    var m = s.match(/(?:img\.youtube|i\.ytimg)\.com\/vi\/([a-zA-Z0-9_-]+)\//i) ||
       s.match(/youtube\.com\/watch\?v=([a-zA-Z0-9_-]+)/i) ||
       s.match(/youtu\.be\/([a-zA-Z0-9_-]+)/i) ||
       s.match(/youtube\.com\/shorts\/([a-zA-Z0-9_-]+)/i);
-    return m ? 'https://img.youtube.com/vi/' + m[1] + '/hqdefault.jpg' : '';
+    return m ? 'https://i.ytimg.com/vi/' + m[1] + '/hqdefault.jpg' : '';
   }
 
   function extractThumb(entry) {
@@ -78,6 +78,9 @@
     if (resImg && resImg[1]) return resImg[1];
     var fromMsg = youtubeThumbFromUrl(msg);
     if (fromMsg) return fromMsg;
+    /* i.ytimg 커버/썸네일 (한국·국제뉴스 nv-cover) */
+    var ytimg = msg.match(/https?:\/\/i\.ytimg\.com\/vi\/[a-zA-Z0-9_-]+\/[a-z0-9.]+\.jpg/i);
+    if (ytimg) return ytimg[0];
     var img = msg.match(/<img[^>]+src=["']([^"']+)["']/i);
     if (img && img[1] && !/data:image\//i.test(img[1])) return img[1];
     return '';
@@ -192,6 +195,16 @@
     return ko ? ko.charAt(0) : '·';
   }
 
+  function optsEmptyBadge(cfg) {
+    if (!cfg) return 'NEWS';
+    if (cfg.quiz || cfg.key === 'vocabulary-quiz' || /quiz/i.test(cfg.postPath || '')) return 'QUIZ';
+    return 'NEWS';
+  }
+
+  function isYoutubeThumb(url) {
+    return /(?:img\.youtube|i\.ytimg)\.com\/vi\//i.test(String(url || ''));
+  }
+
   function imgHtml(src, className, placeholder, opts) {
     opts = opts || {};
     if (src) {
@@ -211,7 +224,7 @@
     }
     return (
       '<div class="' + className + ' rd-list-img-empty" aria-hidden="true">' +
-        '<span class="rd-list-empty-badge">QUIZ</span>' +
+        '<span class="rd-list-empty-badge">' + escapeHtml(opts.emptyBadge || 'NEWS') + '</span>' +
         '<span class="rd-list-empty-letter">' + escapeHtml(placeholder || '') + '</span>' +
       '</div>'
     );
@@ -293,7 +306,8 @@
     return (
       '<a class="rd-list-feature" href="' + escapeAttr(item.href) + '">' +
         imgHtml(item.thumb, 'rd-list-feature-img', monoFromTitle(item), {
-          youtube: /img\.youtube\.com\/vi\//i.test(item.thumb || '')
+          youtube: isYoutubeThumb(item.thumb),
+          emptyBadge: optsEmptyBadge(cfg)
         }) +
         '<span class="rd-list-feature-meta">' + escapeHtml(metaParts.join(' · ')) + '</span>' +
         titleHtml(item, 'rd-list-feature-title') +
@@ -329,7 +343,8 @@
     return (
       '<a class="rd-list-card" href="' + escapeAttr(item.href) + '">' +
         imgHtml(item.thumb, 'rd-list-card-img', monoFromTitle(item), {
-          youtube: /img\.youtube\.com\/vi\//i.test(item.thumb || '')
+          youtube: isYoutubeThumb(item.thumb),
+          emptyBadge: optsEmptyBadge(cfg)
         }) +
         (metaParts.length ? '<span class="rd-list-card-meta">' + escapeHtml(metaParts.join(' · ')) + '</span>' : '') +
         titleHtml(item, 'rd-list-card-title') +
