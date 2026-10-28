@@ -15,9 +15,13 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import OpenAI from 'openai';
 import { API_BASE } from './loadEnv.js';
 import { fetchChannelVideos } from './youtube-rss.js';
-import { parseYoutubeDescription } from './youtube-description-parse.js';
+import {
+  parseYoutubeDescription,
+  applySynonymWordFormat,
+} from './youtube-description-parse.js';
 import { uploadNewsVoca } from './news-voca-format.js';
 import { uploadCultureVoca } from './culture-voca-format.js';
 import { uploadSportsNews } from './sports-news-format.js';
@@ -174,24 +178,143 @@ function readDraft(videoId) {
   return JSON.parse(fs.readFileSync(file, 'utf8'));
 }
 
+function stripIpaSlashes(ipa) {
+  return String(ipa || '')
+    .replace(/^\/+|\/+$/g, '')
+    .trim();
+}
+
+/** 무료 사전 API로 IPA (한글 근사는 OpenAI가 있을 때만) */
+async function fetchPronunciationFromDictionary(expression) {
+  const head = String(expression || '')
+    .trim()
+    .split(/\s+/)[0]
+    .toLowerCase()
+    .replace(/[^a-z'-]/g, '');
+  if (!head) return null;
+  try {
+    const res = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(head)}`, {
+      signal: AbortSignal.timeout(20000),
+    });
+    if (!res.ok) return null;
+    const data = await res.json();
+    const entry = Array.isArray(data) ? data[0] : null;
+    if (!entry) return null;
+    let ipa = stripIpaSlashes(entry.phonetic || '');
+    if (!ipa && Array.isArray(entry.phonetics)) {
+      for (const p of entry.phonetics) {
+        const t = stripIpaSlashes(p?.text || '');
+        if (t) {
+          ipa = t;
+          break;
+        }
+      }
+    }
+    if (!ipa) return null;
+    return { ipa, ipaKo: '' };
+  } catch {
+    return null;
+  }
+}
+
+async function fetchPronunciationsViaOpenAI(list) {
+  const apiKey = process.env.OPENAI_API_KEY;
+  if (!apiKey) return {};
+  const openai = new OpenAI({ apiKey });
+  const models = [process.env.YOUTUBE_SYNC_MODEL, 'gpt-4o-mini'].filter(
+    (m, i, arr) => m && arr.indexOf(m) === i
+  );
+  const prompt = `For each English word/phrase below, return JSON object mapping the exact lowercase expression to {"ipa":"IPA without surrounding slashes","ipaKo":"Korean hangul approximation only"}.
+Expressions:
+${list.map((e) => `- ${e}`).join('\n')}
+Rules: reply JSON only; keys must match expressions lowercased; IPA like ˈrænˌsæk not /ˈrænˌsæk/.`;
+  for (const model of models) {
+    try {
+      const completion = await openai.chat.completions.create({
+        model,
+        response_format: { type: 'json_object' },
+        temperature: 0.2,
+        messages: [
+          {
+            role: 'system',
+            content: 'You are a pronunciation helper for Korean English learners. Reply with JSON only.',
+          },
+          { role: 'user', content: prompt },
+        ],
+      });
+      const raw = completion.choices[0]?.message?.content || '';
+      const data = JSON.parse(
+        String(raw)
+          .replace(/^\s*```(?:json)?\s*/i, '')
+          .replace(/\s*```\s*$/, '')
+          .trim()
+      );
+      const out = {};
+      for (const exp of list) {
+        const hit = data[exp] || data[exp.toLowerCase()];
+        if (hit && (hit.ipa || hit.ipaKo)) {
+          out[exp.toLowerCase()] = {
+            ipa: stripIpaSlashes(hit.ipa),
+            ipaKo: String(hit.ipaKo || '').trim(),
+          };
+        }
+      }
+      return out;
+    } catch (err) {
+      console.warn(`  발음 모델 ${model} 실패:`, err.message);
+    }
+  }
+  return {};
+}
+
+/** 연관단어용 IPA + 한글 발음 (기존 ransack 양식) */
+async function fetchPronunciations(expressions) {
+  const list = (expressions || []).map((e) => String(e || '').trim()).filter(Boolean);
+  if (!list.length) return {};
+
+  let out = await fetchPronunciationsViaOpenAI(list);
+  const missing = list.filter((e) => !out[e.toLowerCase()]?.ipa);
+  if (missing.length) {
+    console.log(`  사전 API로 발음 보강... (${missing.length}개)`);
+    for (const exp of missing) {
+      const hit = await fetchPronunciationFromDictionary(exp);
+      if (hit?.ipa) out[exp.toLowerCase()] = hit;
+      await new Promise((r) => setTimeout(r, 120));
+    }
+  }
+  return out;
+}
+
+async function prepareArticle(article) {
+  let next = { ...article };
+  if (next.board === 'english-synonym') {
+    const expressions = (next.wordMeta || []).map((w) => w.expression);
+    console.log(`  연관단어 발음 생성 중... (${expressions.length}개)`);
+    const pronunciations = await fetchPronunciations(expressions);
+    next = applySynonymWordFormat(next, pronunciations);
+    next.pronunciations = pronunciations;
+  }
+  return next;
+}
+
 async function uploadArticle(article) {
-  const board = article.board || 'news-voca';
+  const prepared = await prepareArticle(article);
+  const board = prepared.board || 'news-voca';
   const upload = UPLOADERS[board];
   if (!upload) {
     throw new Error(`보드 "${board}" 업로더가 없습니다. news-voca 등으로 board를 수정하세요.`);
   }
-  if (!article.parsedWordCount && !(article.words || []).length) {
+  if (!prepared.parsedWordCount && !(prepared.words || []).length) {
     throw new Error('단어가 비어 있어 업로드할 수 없습니다. 설명란 파싱을 확인하세요.');
   }
-  console.log(`\n업로드: [${board}] ${article.title} (${article.videoId})`);
-  await upload(article, API_BASE);
-  const file = draftPath(article.videoId);
-  if (fs.existsSync(file)) {
-    const d = JSON.parse(fs.readFileSync(file, 'utf8'));
-    d.status = 'uploaded';
-    d.uploadedAt = new Date().toISOString();
-    fs.writeFileSync(file, JSON.stringify(d, null, 2), 'utf8');
-  }
+  console.log(`\n업로드: [${board}] ${prepared.title} (${prepared.videoId})`);
+  await upload(prepared, API_BASE);
+  const file = draftPath(prepared.videoId);
+  fs.writeFileSync(
+    file,
+    JSON.stringify({ ...prepared, status: 'uploaded', uploadedAt: new Date().toISOString() }, null, 2),
+    'utf8'
+  );
 }
 
 function printHelp() {
@@ -325,10 +448,11 @@ async function main() {
         console.log(`건너뜀(업로더 없음: ${article.board}): ${v.videoId} | ${v.title}`);
         continue;
       }
-      const file = writeDraft(article);
+      const prepared = await prepareArticle(article);
+      const file = writeDraft(prepared);
       made += 1;
       console.log(
-        `초안: ${path.relative(REPO_ROOT, file)} | [${article.board}] words=${article.parsedWordCount} | ${article.title}`
+        `초안: ${path.relative(REPO_ROOT, file)} | [${prepared.board}] words=${prepared.parsedWordCount} | ${prepared.title}`
       );
     }
     saveState(state);

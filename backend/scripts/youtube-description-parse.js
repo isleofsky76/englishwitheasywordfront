@@ -120,6 +120,41 @@ function wordsToNarratives(words) {
   });
 }
 
+/**
+ * 기존 연관단어 seed 양식:
+ *   title: '1. 마구 뒤지다·난장판으로 만들다'
+ *   narrative: ['**ransack**(ˈrænˌsæk / 랜색)']
+ */
+export function wordsToSynonymSections(words, pronunciations = {}) {
+  return (words || []).map((w, i) => {
+    const n = w.num || i + 1;
+    const expression = String(w.expression || '').trim();
+    const meaning = String(w.meaning || '').trim() || expression;
+    const key = expression.toLowerCase();
+    const p = pronunciations[key] || pronunciations[expression] || {};
+    const ipa = String(p.ipa || '')
+      .replace(/^\/+|\/+$/g, '')
+      .trim();
+    const ipaKo = String(p.ipaKo || '').trim();
+    const pron =
+      ipa && ipaKo ? `(${ipa} / ${ipaKo})` : ipa ? `(${ipa})` : ipaKo ? `(${ipaKo})` : '';
+    return {
+      title: `${n}. ${meaning}`,
+      narrative: [`**${expression}**${pron}`],
+    };
+  });
+}
+
+export function applySynonymWordFormat(article, pronunciations = {}) {
+  if (!article) return article;
+  const meta = article.wordMeta || [];
+  if (!meta.length) return article;
+  return {
+    ...article,
+    words: wordsToSynonymSections(meta, pronunciations),
+  };
+}
+
 function inferBoard({ title, description, sourceLabel }) {
   /* 푸터(Economist 언급 등)로 오분류되지 않게 제목·해시태그·출처만 사용 */
   const tags = String(description || '')
