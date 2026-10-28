@@ -5,6 +5,16 @@
 import { API_BASE, getSeedPassword, writeAuthHeaders } from './loadEnv.js';
 import { applySeoAfterUpload, toIsoDateOnly } from './voca-seo.js';
 
+function youtubeThumbFromUrl(url) {
+  const s = String(url || '');
+  const m =
+    s.match(/(?:img\.youtube|i\.ytimg)\.com\/vi\/([a-zA-Z0-9_-]+)\//i) ||
+    s.match(/youtube\.com\/watch\?v=([a-zA-Z0-9_-]+)/i) ||
+    s.match(/youtu\.be\/([a-zA-Z0-9_-]+)/i) ||
+    s.match(/youtube\.com\/shorts\/([a-zA-Z0-9_-]+)/i);
+  return m ? `https://i.ytimg.com/vi/${m[1]}/hqdefault.jpg` : '';
+}
+
 async function parseApiJson(res, label) {
   const ct = res.headers.get('content-type') || '';
   const text = await res.text();
@@ -103,16 +113,26 @@ export async function uploadVocabularyQuiz(config, apiBase = API_BASE) {
   console.log('Vocabulary Quiz 업로드 중...', apiBase);
   await deleteBySlugOrId(apiBase, config, password);
 
+  /* 목록 섬네일 — 항상 유튜브 미리보기 (기사 URL보다 youtube 우선) */
+  const youtube =
+    config.youtube ||
+    (/youtube\.com|youtu\.be/i.test(String(config.sourceUrl || '')) ? config.sourceUrl : '') ||
+    '';
+  const sourceUrl = youtube || config.sourceUrl || '';
+  const thumbnail =
+    String(config.thumbnail || '').trim() || youtubeThumbFromUrl(youtube || sourceUrl);
+
   const post = {
     title: config.title,
     quizzes,
-    sourceUrl: config.sourceUrl || config.youtube || '',
-    sourceLabel: config.sourceLabel || (config.sourceUrl || config.youtube ? '유튜브 보기' : ''),
+    sourceUrl,
+    sourceLabel: config.sourceLabel || (sourceUrl ? (youtube ? '유튜브 보기' : '원문 보기') : ''),
     nickname: config.nickname || 'admin',
     password,
     isSecret: false,
     slug: config.slug || '',
     metaDescription: config.metaDescription || '',
+    ...(thumbnail ? { thumbnail } : {}),
   };
 
   const res = await fetch(`${apiBase}/vocabulary-quiz`, {
@@ -127,7 +147,8 @@ export async function uploadVocabularyQuiz(config, apiBase = API_BASE) {
 
   console.log(`  "${post.title}" 추가됨`);
   console.log(`  slug: ${post.slug}`);
-  if (post.sourceUrl) console.log(`  youtube: ${post.sourceUrl}`);
+  if (youtube) console.log(`  youtube: ${youtube}`);
+  if (thumbnail) console.log(`  thumbnail: ${thumbnail}`);
 
   if (config.slug) {
     const seo = applySeoAfterUpload('vocabulary-quiz', {
@@ -140,7 +161,8 @@ export async function uploadVocabularyQuiz(config, apiBase = API_BASE) {
       trackWords: config.trackWords,
       sourceUrl: post.sourceUrl,
       sourceLabel: post.sourceLabel,
-      youtube: config.youtube || post.sourceUrl,
+      youtube: youtube || config.youtube || '',
+      thumbnail,
       eyebrow: config.eyebrow || '',
       hint: config.hint || '',
     });
