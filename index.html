@@ -65,7 +65,7 @@
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600&family=Noto+Serif+KR:wght@600;700;900&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="redesign-tokens.css?v=20261019rd">
     <link rel="stylesheet" href="site-masthead.css?v=20261022yt1">
-    <link rel="stylesheet" href="redesign-home.css?v=20261020rd26">
+    <link rel="stylesheet" href="redesign-home.css?v=20261028home1">
     <link rel="stylesheet" href="title-text-sharp.css?v=20260818i">
     
     <!-- Google AdSense -->
@@ -189,22 +189,7 @@
         </div>
       </div>
 
-      <section class="rd-hero" aria-label="오늘의 단어">
-        <div class="rd-hero-word" id="rd-hero-word">
-          <span class="rd-kicker">WORD OF THE DAY · 오늘의 단어</span>
-          <h1>…</h1>
-          <div class="rd-hero-meta"><span class="meaning">불러오는 중</span></div>
-          <p class="rd-hero-example">오늘의 단어를 준비하고 있습니다.</p>
-          <div class="rd-hero-actions">
-            <a class="rd-btn rd-btn-solid" href="word-of-the-day-list.html?api=prod">단어장 보기</a>
-            <a class="rd-btn rd-btn-outline" href="vocabulary-quiz-list.html">오늘의 퀴즈 풀기</a>
-          </div>
-        </div>
-        <a class="rd-hero-media" id="rd-hero-media" href="word-of-the-day-list.html?api=prod" aria-label="오늘의 단어 자세히 보기">
-          <div class="rd-hero-media-img is-empty"></div>
-        </a>
-      </section>
-
+      <!-- GA: YouTube·퀴즈 재방문이 강함 → 경로/퀴즈를 먼저, 오늘의 단어는 하단 -->
       <section class="rd-paths" aria-label="학습 경로">
         <div class="rd-paths-inner">
           <div class="rd-path-card">
@@ -227,11 +212,11 @@
           <div class="rd-path-card">
             <span class="rd-path-num">02</span>
             <h2>단어 다지기</h2>
-            <p>매일 한 단어, 비슷한 말과 퀴즈로 확실히 내 것으로 만듭니다.</p>
+            <p>비슷한 말과 퀴즈로 확실히 내 것으로 만듭니다.</p>
             <div class="rd-chips">
-              <a class="rd-chip" href="word-of-the-day-list.html?api=prod">단어장</a>
               <a class="rd-chip" href="english-synonym-list.html">연관단어</a>
               <a class="rd-chip" href="vocabulary-quiz-list.html">퀴즈</a>
+              <a class="rd-chip" href="word-of-the-day-list.html?api=prod">단어장</a>
             </div>
           </div>
           <div class="rd-path-card">
@@ -248,6 +233,17 @@
         </div>
       </section>
 
+      <div class="rd-quiz-banner-wrap">
+        <div class="rd-quiz-banner" id="rd-quiz-banner">
+          <div>
+            <span class="label">TODAY'S QUIZ</span>
+            <span class="words">오늘의 퀴즈</span>
+            <span class="desc">불러오는 중…</span>
+          </div>
+          <a class="rd-btn" href="vocabulary-quiz-list.html">퀴즈 바로 풀기</a>
+        </div>
+      </div>
+
       <section class="rd-section" aria-label="최신 뉴스 어휘">
         <div class="rd-section-head">
           <h2>최신 뉴스 어휘</h2>
@@ -256,17 +252,6 @@
         <div class="rd-news-cards" id="rd-news-cards"></div>
         <div class="rd-news-list" id="rd-news-list"></div>
       </section>
-
-      <div class="rd-quiz-banner-wrap">
-        <div class="rd-quiz-banner" id="rd-quiz-banner">
-          <div>
-            <span class="label">TODAY'S QUIZ</span>
-            <span class="words">오늘의 퀴즈</span>
-            <span class="desc">불러오는 중…</span>
-          </div>
-          <a class="rd-btn" href="vocabulary-quiz-list.html">퀴즈 시작하기</a>
-        </div>
-      </div>
 
       <section class="rd-section" aria-label="이럴 땐 영어로">
         <div class="rd-section-head">
@@ -286,6 +271,22 @@
           <div class="rd-reading-col" id="rd-read-calm"></div>
           <div class="rd-reading-col" id="rd-read-quotes"></div>
         </div>
+      </section>
+
+      <section class="rd-hero rd-hero--bottom" aria-label="오늘의 단어">
+        <div class="rd-hero-word" id="rd-hero-word">
+          <span class="rd-kicker">WORD OF THE DAY · 오늘의 단어</span>
+          <h1>…</h1>
+          <div class="rd-hero-meta"><span class="meaning">불러오는 중</span></div>
+          <p class="rd-hero-example">오늘의 단어를 준비하고 있습니다.</p>
+          <div class="rd-hero-actions">
+            <a class="rd-btn rd-btn-solid" href="word-of-the-day-list.html?api=prod">단어장 보기</a>
+            <a class="rd-btn rd-btn-outline" href="vocabulary-quiz-list.html">퀴즈 풀기</a>
+          </div>
+        </div>
+        <a class="rd-hero-media" id="rd-hero-media" href="word-of-the-day-list.html?api=prod" aria-label="오늘의 단어 자세히 보기">
+          <div class="rd-hero-media-img is-empty"></div>
+        </a>
       </section>
 
       <section id="site-search-page" hidden>

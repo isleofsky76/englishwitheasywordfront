@@ -29,6 +29,18 @@
   flex-wrap: wrap;
   gap: 40px;
 }
+/* 홈: 경로·퀴즈 우선 배치 후 하단 오늘의 단어 */
+.rd-home .rd-paths {
+  padding-top: 28px;
+}
+.rd-hero--bottom {
+  margin-top: 24px;
+  padding-top: 40px;
+  border-top: 1px solid var(--line, rgba(0, 0, 0, 0.08));
+}
+.rd-hero--bottom .rd-hero-word h1 {
+  font-size: clamp(36px, 7vw, 64px);
+}
 .rd-hero-word {
   flex: 3 1 560px;
   min-width: 0;
