@@ -71,6 +71,16 @@
       { path: '/economy-news', page: 'economy-news.html', postPath: 'economy-news', label: '경제뉴스' },
       { path: '/travel-news', page: 'travel-news.html', postPath: 'travel-news', label: '여행뉴스' },
       { path: '/sports-news', page: 'sports-news.html', postPath: 'sports-news', label: '스포츠뉴스' },
+      { path: '/us-news', page: 'us-news.html', postPath: 'us-news', label: '미국뉴스' },
+      { path: '/weather-news', page: 'weather-news.html', postPath: 'weather-news', label: '날씨환경뉴스' },
+      { path: '/retail-news', page: 'retail-news.html', postPath: 'retail-news', label: '유통뉴스' },
+      { path: '/literature-news', page: 'literature-news.html', postPath: 'literature-news', label: '문학뉴스' },
+      { path: '/health-news', page: 'health-news.html', postPath: 'health-news', label: '헬스뉴스' },
+      { path: '/politics-news', page: 'politics-news.html', postPath: 'politics-news', label: '정치뉴스' },
+      { path: '/industry-news', page: 'industry-news.html', postPath: 'industry-news', label: '산업뉴스' },
+      { path: '/ai-news', page: 'ai-news.html', postPath: 'ai-news', label: '인공지능뉴스' },
+      { path: '/incident-news', page: 'incident-news.html', postPath: 'incident-news', label: '사건사고뉴스' },
+      { path: '/ukraine-news', page: 'ukraine-news.html', postPath: 'ukraine-news', label: '우크라이나러시아뉴스' },
       { path: '/korea-news', page: 'korea-news.html', postPath: 'korea-news', label: '한국뉴스' },
       { path: '/vocabulary-quiz', page: 'vocabulary-quiz.html', label: '퀴즈' },
       { path: '/vocabulary', page: 'english-synonym.html', postPath: 'english-synonym', label: '연관단어' },
@@ -91,7 +101,17 @@
   var STATIC_FEED_BY_PATH = {
     '/economy-news': '/economy-news/feed.json',
     '/travel-news': '/travel-news/feed.json',
-    '/sports-news': '/sports-news/feed.json'
+    '/sports-news': '/sports-news/feed.json',
+    '/us-news': '/us-news/feed.json',
+    '/weather-news': '/weather-news/feed.json',
+    '/retail-news': '/retail-news/feed.json',
+    '/literature-news': '/literature-news/feed.json',
+    '/health-news': '/health-news/feed.json',
+    '/politics-news': '/politics-news/feed.json',
+    '/industry-news': '/industry-news/feed.json',
+    '/ai-news': '/ai-news/feed.json',
+    '/incident-news': '/incident-news/feed.json',
+    '/ukraine-news': '/ukraine-news/feed.json'
   };
 
   function fetchStaticFeedEntries(board) {

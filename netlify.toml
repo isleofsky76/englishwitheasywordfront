@@ -13,6 +13,66 @@
   status = 200
   force = false
 
+[[redirects]]
+  from = "/us-news/*"
+  to = "/us-news.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/weather-news/*"
+  to = "/weather-news.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/retail-news/*"
+  to = "/retail-news.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/literature-news/*"
+  to = "/literature-news.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/health-news/*"
+  to = "/health-news.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/politics-news/*"
+  to = "/politics-news.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/industry-news/*"
+  to = "/industry-news.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/ai-news/*"
+  to = "/ai-news.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/incident-news/*"
+  to = "/incident-news.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/ukraine-news/*"
+  to = "/ukraine-news.html"
+  status = 200
+  force = false
+
 # HTML은 항상 최신, CSS/JS는 버전 쿼리(?v=)로 캐시 무효화
 [[headers]]
   for = "/*.html"
