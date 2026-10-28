@@ -31,6 +31,7 @@ import { uploadEconomyNews } from './economy-news-format.js';
 import { uploadDefenseNews } from './defense-news-format.js';
 import { uploadTravelNews } from './travel-news-format.js';
 import { uploadKoreaNews } from './korea-news-format.js';
+import { uploadRetailNews } from './retail-news-format.js';
 import { uploadSynonym } from './synonym-format.js';
 import { uploadUsNews } from './us-news-format.js';
 
@@ -49,6 +50,7 @@ const UPLOADERS = {
   'defense-news': uploadDefenseNews,
   'travel-news': uploadTravelNews,
   'korea-news': uploadKoreaNews,
+  'retail-news': uploadRetailNews,
   'english-synonym': uploadSynonym,
   'us-news': uploadUsNews,
 };
@@ -120,6 +122,8 @@ function discoverKnownVideoIds() {
     path.join(REPO_ROOT, 'defense-news'),
     path.join(REPO_ROOT, 'travel-news'),
     path.join(REPO_ROOT, 'korea-news'),
+    path.join(REPO_ROOT, 'retail-news'),
+    path.join(REPO_ROOT, 'us-news'),
   ];
   for (const dir of scanDirs) {
     if (!fs.existsSync(dir)) continue;

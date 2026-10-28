@@ -72,7 +72,8 @@
       { path: '/travel-news', page: 'travel-news.html', postPath: 'travel-news', label: '여행뉴스' },
       { path: '/sports-news', page: 'sports-news.html', postPath: 'sports-news', label: '스포츠뉴스' },
       { path: '/us-news', page: 'us-news.html', postPath: 'us-news', label: '미국뉴스' },
-      /* 빈 보드 숨김 — 요청 시 복원: weather/retail/literature/health/politics/ai/incident/ukraine */
+      { path: '/retail-news', page: 'retail-news.html', postPath: 'retail-news', label: '유통뉴스' },
+      /* 빈 보드 숨김 — 요청 시 복원: weather/literature/health/politics/ai/incident/ukraine */
       { path: '/industry-news', page: 'industry-news.html', postPath: 'industry-news', label: '산업뉴스' },
       { path: '/korea-news', page: 'korea-news.html', postPath: 'korea-news', label: '한국뉴스' },
       { path: '/vocabulary-quiz', page: 'vocabulary-quiz.html', label: '퀴즈' },
