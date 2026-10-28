@@ -26,6 +26,8 @@ import { uploadEconomyNews } from './economy-news-format.js';
 import { uploadDefenseNews } from './defense-news-format.js';
 import { uploadTravelNews } from './travel-news-format.js';
 import { uploadKoreaNews } from './korea-news-format.js';
+import { uploadSynonym } from './synonym-format.js';
+import { uploadUsNews } from './us-news-format.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -42,6 +44,8 @@ const UPLOADERS = {
   'defense-news': uploadDefenseNews,
   'travel-news': uploadTravelNews,
   'korea-news': uploadKoreaNews,
+  'english-synonym': uploadSynonym,
+  'us-news': uploadUsNews,
 };
 
 function parseArgs(argv) {
@@ -54,6 +58,8 @@ function parseArgs(argv) {
     playlist: '',
     includeSeen: false,
     markSeen: false,
+    ids: [],
+    board: '',
   };
   for (let i = 0; i < argv.length; i += 1) {
     const a = argv[i];
@@ -65,7 +71,13 @@ function parseArgs(argv) {
     else if (a === '--upload') args.upload = String(argv[++i] || '').trim();
     else if (a === '--limit') args.limit = Math.max(1, Number(argv[++i]) || 10);
     else if (a === '--playlist') args.playlist = String(argv[++i] || '').trim();
-    else if (a === '--help' || a === '-h') args.help = true;
+    else if (a === '--board') args.board = String(argv[++i] || '').trim();
+    else if (a === '--ids') {
+      args.ids = String(argv[++i] || '')
+        .split(',')
+        .map((s) => s.trim())
+        .filter(Boolean);
+    } else if (a === '--help' || a === '-h') args.help = true;
   }
   if (!args.list && !args.draft && !args.upload && !args.uploadDrafts && !args.markSeen) {
     args.list = true;
@@ -247,10 +259,15 @@ async function main() {
   console.log(`채널 ${feed.handle || ''} RSS: ${feed.videos.length}개 (최신순)`);
   if (feed.playlistId) console.log(`플레이리스트: ${feed.playlistId}`);
 
-  const candidates = feed.videos.filter((v) => {
+  let candidates = feed.videos.filter((v) => {
+    if (args.ids.length) return args.ids.includes(v.videoId);
     if (args.includeSeen) return true;
     return !state.uploadedVideoIds[v.videoId];
   });
+  if (args.ids.length) {
+    const missing = args.ids.filter((id) => !feed.videos.some((v) => v.videoId === id));
+    if (missing.length) console.warn('RSS에 없음(최신 15개 밖일 수 있음):', missing.join(', '));
+  }
 
   if (args.markSeen) {
     for (const v of feed.videos) {
@@ -270,13 +287,9 @@ async function main() {
     }
     for (const v of rows) {
       const article = parseYoutubeDescription(v);
+      if (args.board) article.board = args.board;
       const flag = state.seenVideoIds[v.videoId] ? 'seen' : 'NEW';
-      const skip =
-        article.board === 'english-synonym'
-          ? ' skip=연관단어'
-          : !article.parsedWordCount
-            ? ' skip=단어없음'
-            : '';
+      const skip = !article.parsedWordCount ? ' skip=단어없음' : '';
       console.log(
         `- [${flag}] ${v.videoId} | ${v.published?.slice(0, 10) || ''} | board=${article.board} words=${article.parsedWordCount}${skip} | ${v.title}`
       );
@@ -299,13 +312,17 @@ async function main() {
     let made = 0;
     for (const v of rows) {
       const article = parseYoutubeDescription(v);
-      state.seenVideoIds[v.videoId] = { at: new Date().toISOString(), title: v.title };
-      if (article.board === 'english-synonym') {
-        console.log(`건너뜀(연관단어): ${v.videoId} | ${v.title}`);
-        continue;
+      if (args.board) {
+        article.board = args.board;
+        article.password = `seed_${args.board.replace(/-/g, '_')}_${article.slug.slice(0, 48)}`;
       }
+      state.seenVideoIds[v.videoId] = { at: new Date().toISOString(), title: v.title };
       if (!article.parsedWordCount) {
         console.log(`건너뜀(단어없음): ${v.videoId} | ${v.title}`);
+        continue;
+      }
+      if (!UPLOADERS[article.board]) {
+        console.log(`건너뜀(업로더 없음: ${article.board}): ${v.videoId} | ${v.title}`);
         continue;
       }
       const file = writeDraft(article);
