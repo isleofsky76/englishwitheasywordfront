@@ -22,7 +22,7 @@ import {
   parseYoutubeDescription,
   applySynonymWordFormat,
 } from './youtube-description-parse.js';
-import { hangulForExpression } from './ipa-to-hangul.js';
+import { hangulForExpression, ipaForExpression } from './ipa-to-hangul.js';
 import { uploadNewsVoca } from './news-voca-format.js';
 import { uploadCultureVoca } from './culture-voca-format.js';
 import { uploadSportsNews } from './sports-news-format.js';
@@ -292,7 +292,7 @@ function fillHangulPronunciations(pronunciations, expressions) {
     const key = String(exp || '').trim().toLowerCase();
     if (!key) continue;
     const cur = out[key] || {};
-    const ipa = String(cur.ipa || '').trim();
+    const ipa = ipaForExpression(exp, cur.ipa);
     let ipaKo = String(cur.ipaKo || '').trim();
     if (!ipaKo) ipaKo = hangulForExpression(exp, ipa);
     out[key] = { ipa, ipaKo };

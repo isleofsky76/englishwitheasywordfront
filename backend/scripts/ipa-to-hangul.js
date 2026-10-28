@@ -51,6 +51,32 @@ const HANGUL_OVERRIDES = {
   glower: '글라우어',
 };
 
+/** 사전 API에 IPA가 비는 단어 보완 */
+const IPA_OVERRIDES = {
+  look: 'lʊk',
+  watch: 'wɒtʃ',
+  postponement: 'pəˈspəʊnmənt',
+  adjournment: 'əˈdʒɜːnmənt',
+  holdup: 'ˈhəʊldʌp',
+  peek: 'piːk',
+  peep: 'piːp',
+  peer: 'pɪə',
+  gaze: 'ɡeɪz',
+  stare: 'steə',
+  gawk: 'ɡɔːk',
+  glare: 'ɡleə',
+  glower: 'ˈɡlaʊə',
+  glance: 'ɡlɑːns',
+};
+
+export function ipaForExpression(expression, fallbackIpa = '') {
+  const key = String(expression || '').trim().toLowerCase();
+  if (IPA_OVERRIDES[key]) return IPA_OVERRIDES[key];
+  return String(fallbackIpa || '')
+    .replace(/^\/+|\/+$/g, '')
+    .trim();
+}
+
 const CLUSTER = {
   br: '브', bl: '블', pr: '프', pl: '플', tr: '트', dr: '드', kr: '크', kl: '클',
   gr: '그', gl: '글', fr: '프', fl: '플', θr: '스', st: '스', sp: '스', sk: '스',
