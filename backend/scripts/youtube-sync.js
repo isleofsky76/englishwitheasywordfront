@@ -1,0 +1,327 @@
+/**
+ * @istudyeng 최신 Shorts → 사이트 글 초안/업로드
+ *
+ * 사용법 (backend 폴더):
+ *   node scripts/youtube-sync.js --list
+ *   node scripts/youtube-sync.js --draft
+ *   node scripts/youtube-sync.js --draft --limit 3
+ *   node scripts/youtube-sync.js --upload <videoId>
+ *   node scripts/youtube-sync.js --upload-drafts
+ *   node scripts/youtube-sync.js --playlist PL.... --list
+ *
+ * 기본: 새 영상만 초안 JSON 생성 (자동 공개 업로드 안 함)
+ * --upload / --upload-drafts 로 검수 후 게시
+ */
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { API_BASE } from './loadEnv.js';
+import { fetchChannelVideos } from './youtube-rss.js';
+import { parseYoutubeDescription } from './youtube-description-parse.js';
+import { uploadNewsVoca } from './news-voca-format.js';
+import { uploadCultureVoca } from './culture-voca-format.js';
+import { uploadSportsNews } from './sports-news-format.js';
+import { uploadIndustryNews } from './industry-news-format.js';
+import { uploadEconomyNews } from './economy-news-format.js';
+import { uploadDefenseNews } from './defense-news-format.js';
+import { uploadTravelNews } from './travel-news-format.js';
+import { uploadKoreaNews } from './korea-news-format.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const REPO_ROOT = path.resolve(__dirname, '..', '..');
+const STATE_PATH = path.join(__dirname, 'youtube-sync-state.json');
+const DRAFTS_DIR = path.join(__dirname, 'youtube-drafts');
+
+const UPLOADERS = {
+  'news-voca': uploadNewsVoca,
+  'culture-voca': uploadCultureVoca,
+  'sports-news': uploadSportsNews,
+  'industry-news': uploadIndustryNews,
+  'economy-news': uploadEconomyNews,
+  'defense-news': uploadDefenseNews,
+  'travel-news': uploadTravelNews,
+  'korea-news': uploadKoreaNews,
+};
+
+function parseArgs(argv) {
+  const args = {
+    list: false,
+    draft: false,
+    upload: '',
+    uploadDrafts: false,
+    limit: 10,
+    playlist: '',
+    includeSeen: false,
+    markSeen: false,
+  };
+  for (let i = 0; i < argv.length; i += 1) {
+    const a = argv[i];
+    if (a === '--list') args.list = true;
+    else if (a === '--draft') args.draft = true;
+    else if (a === '--upload-drafts') args.uploadDrafts = true;
+    else if (a === '--include-seen') args.includeSeen = true;
+    else if (a === '--mark-seen') args.markSeen = true;
+    else if (a === '--upload') args.upload = String(argv[++i] || '').trim();
+    else if (a === '--limit') args.limit = Math.max(1, Number(argv[++i]) || 10);
+    else if (a === '--playlist') args.playlist = String(argv[++i] || '').trim();
+    else if (a === '--help' || a === '-h') args.help = true;
+  }
+  if (!args.list && !args.draft && !args.upload && !args.uploadDrafts && !args.markSeen) {
+    args.list = true;
+  }
+  return args;
+}
+
+function loadState() {
+  if (!fs.existsSync(STATE_PATH)) {
+    return { seenVideoIds: {}, uploadedVideoIds: {}, updatedAt: '' };
+  }
+  try {
+    return JSON.parse(fs.readFileSync(STATE_PATH, 'utf8'));
+  } catch {
+    return { seenVideoIds: {}, uploadedVideoIds: {}, updatedAt: '' };
+  }
+}
+
+function saveState(state) {
+  state.updatedAt = new Date().toISOString();
+  fs.writeFileSync(STATE_PATH, JSON.stringify(state, null, 2), 'utf8');
+}
+
+/** 이미 사이트/시드에 연결된 영상 ID 수집 */
+function discoverKnownVideoIds() {
+  const ids = new Set();
+  const re = /(?:youtube\.com\/(?:shorts\/|watch\?v=)|youtu\.be\/)([a-zA-Z0-9_-]{6,})/gi;
+  const scanDirs = [
+    path.join(__dirname),
+    path.join(REPO_ROOT, 'news-voca'),
+    path.join(REPO_ROOT, 'culture-voca'),
+    path.join(REPO_ROOT, 'sports-news'),
+    path.join(REPO_ROOT, 'industry-news'),
+    path.join(REPO_ROOT, 'economy-news'),
+    path.join(REPO_ROOT, 'defense-news'),
+    path.join(REPO_ROOT, 'travel-news'),
+    path.join(REPO_ROOT, 'korea-news'),
+  ];
+  for (const dir of scanDirs) {
+    if (!fs.existsSync(dir)) continue;
+    const walk = (p, depth = 0) => {
+      if (depth > 3) return;
+      let entries;
+      try {
+        entries = fs.readdirSync(p, { withFileTypes: true });
+      } catch {
+        return;
+      }
+      for (const ent of entries) {
+        const full = path.join(p, ent.name);
+        if (ent.isDirectory()) {
+          if (ent.name === 'node_modules' || ent.name === 'youtube-drafts') continue;
+          walk(full, depth + 1);
+        } else if (/\.(js|html|json|md)$/i.test(ent.name)) {
+          let text = '';
+          try {
+            text = fs.readFileSync(full, 'utf8');
+          } catch {
+            continue;
+          }
+          let m;
+          while ((m = re.exec(text)) !== null) ids.add(m[1]);
+        }
+      }
+    };
+    walk(dir);
+  }
+  return ids;
+}
+
+function ensureDraftsDir() {
+  if (!fs.existsSync(DRAFTS_DIR)) fs.mkdirSync(DRAFTS_DIR, { recursive: true });
+}
+
+function draftPath(videoId) {
+  return path.join(DRAFTS_DIR, `${videoId}.json`);
+}
+
+function writeDraft(article) {
+  ensureDraftsDir();
+  const file = draftPath(article.videoId);
+  const payload = {
+    ...article,
+    status: 'draft',
+    createdAt: new Date().toISOString(),
+  };
+  fs.writeFileSync(file, JSON.stringify(payload, null, 2), 'utf8');
+  return file;
+}
+
+function readDraft(videoId) {
+  const file = draftPath(videoId);
+  if (!fs.existsSync(file)) throw new Error(`초안 없음: ${file}`);
+  return JSON.parse(fs.readFileSync(file, 'utf8'));
+}
+
+async function uploadArticle(article) {
+  const board = article.board || 'news-voca';
+  const upload = UPLOADERS[board];
+  if (!upload) {
+    throw new Error(`보드 "${board}" 업로더가 없습니다. news-voca 등으로 board를 수정하세요.`);
+  }
+  if (!article.parsedWordCount && !(article.words || []).length) {
+    throw new Error('단어가 비어 있어 업로드할 수 없습니다. 설명란 파싱을 확인하세요.');
+  }
+  console.log(`\n업로드: [${board}] ${article.title} (${article.videoId})`);
+  await upload(article, API_BASE);
+  const file = draftPath(article.videoId);
+  if (fs.existsSync(file)) {
+    const d = JSON.parse(fs.readFileSync(file, 'utf8'));
+    d.status = 'uploaded';
+    d.uploadedAt = new Date().toISOString();
+    fs.writeFileSync(file, JSON.stringify(d, null, 2), 'utf8');
+  }
+}
+
+function printHelp() {
+  console.log(`YouTube → 시사영단어 동기화
+
+  node scripts/youtube-sync.js --list
+  node scripts/youtube-sync.js --draft [--limit 5]
+  node scripts/youtube-sync.js --upload <videoId>
+  node scripts/youtube-sync.js --upload-drafts
+  node scripts/youtube-sync.js --playlist <PLAYLIST_ID> --list
+  node scripts/youtube-sync.js --mark-seen   # 현재 채널 최신을 모두 본 것으로 표시
+
+상태: ${STATE_PATH}
+초안: ${DRAFTS_DIR}
+`);
+}
+
+async function main() {
+  const args = parseArgs(process.argv.slice(2));
+  if (args.help) {
+    printHelp();
+    return;
+  }
+
+  const state = loadState();
+  const known = discoverKnownVideoIds();
+  for (const id of known) {
+    if (!state.seenVideoIds[id]) state.seenVideoIds[id] = { via: 'repo-scan', at: new Date().toISOString() };
+    if (!state.uploadedVideoIds[id]) state.uploadedVideoIds[id] = { via: 'repo-scan', at: new Date().toISOString() };
+  }
+
+  if (args.upload) {
+    const draft = readDraft(args.upload);
+    await uploadArticle(draft);
+    state.uploadedVideoIds[args.upload] = { at: new Date().toISOString(), board: draft.board };
+    state.seenVideoIds[args.upload] = state.seenVideoIds[args.upload] || { at: new Date().toISOString() };
+    saveState(state);
+    console.log('완료.');
+    return;
+  }
+
+  if (args.uploadDrafts) {
+    ensureDraftsDir();
+    const files = fs.readdirSync(DRAFTS_DIR).filter((f) => f.endsWith('.json'));
+    let n = 0;
+    for (const f of files) {
+      const draft = JSON.parse(fs.readFileSync(path.join(DRAFTS_DIR, f), 'utf8'));
+      if (draft.status === 'uploaded') continue;
+      if (state.uploadedVideoIds[draft.videoId]) continue;
+      await uploadArticle(draft);
+      state.uploadedVideoIds[draft.videoId] = { at: new Date().toISOString(), board: draft.board };
+      state.seenVideoIds[draft.videoId] = state.seenVideoIds[draft.videoId] || { at: new Date().toISOString() };
+      n += 1;
+    }
+    saveState(state);
+    console.log(`업로드 ${n}건 완료.`);
+    return;
+  }
+
+  const feed = await fetchChannelVideos({
+    playlistId: args.playlist || process.env.YOUTUBE_PLAYLIST_ID || '',
+    /* list는 빠르게, draft/upload 전에만 watch 설명 보강 */
+    enrich: Boolean(args.draft || args.upload || args.uploadDrafts),
+  });
+  console.log(`채널 ${feed.handle || ''} RSS: ${feed.videos.length}개 (최신순)`);
+  if (feed.playlistId) console.log(`플레이리스트: ${feed.playlistId}`);
+
+  const candidates = feed.videos.filter((v) => {
+    if (args.includeSeen) return true;
+    return !state.uploadedVideoIds[v.videoId];
+  });
+
+  if (args.markSeen) {
+    for (const v of feed.videos) {
+      state.seenVideoIds[v.videoId] = { at: new Date().toISOString(), title: v.title };
+    }
+    saveState(state);
+    console.log(`본 것으로 표시: ${feed.videos.length}개`);
+    return;
+  }
+
+  if (args.list) {
+    const rows = candidates.slice(0, args.limit);
+    if (!rows.length) {
+      console.log('새 영상 없음 (이미 업로드/시드된 항목). --include-seen 으로 전체 표시 가능.');
+      saveState(state);
+      return;
+    }
+    for (const v of rows) {
+      const article = parseYoutubeDescription(v);
+      const flag = state.seenVideoIds[v.videoId] ? 'seen' : 'NEW';
+      const skip =
+        article.board === 'english-synonym'
+          ? ' skip=연관단어'
+          : !article.parsedWordCount
+            ? ' skip=단어없음'
+            : '';
+      console.log(
+        `- [${flag}] ${v.videoId} | ${v.published?.slice(0, 10) || ''} | board=${article.board} words=${article.parsedWordCount}${skip} | ${v.title}`
+      );
+      if (!article.parsedWordCount) console.log('    ⚠️ 설명에서 단어를 못 찾음');
+      if (article.board !== 'english-synonym' && !article.source?.url) {
+        console.log('    ⚠️ 원문 링크 없음');
+      }
+    }
+    saveState(state);
+    return;
+  }
+
+  if (args.draft) {
+    const rows = candidates.slice(0, args.limit);
+    if (!rows.length) {
+      console.log('초안 만들 새 영상 없음.');
+      saveState(state);
+      return;
+    }
+    let made = 0;
+    for (const v of rows) {
+      const article = parseYoutubeDescription(v);
+      state.seenVideoIds[v.videoId] = { at: new Date().toISOString(), title: v.title };
+      if (article.board === 'english-synonym') {
+        console.log(`건너뜀(연관단어): ${v.videoId} | ${v.title}`);
+        continue;
+      }
+      if (!article.parsedWordCount) {
+        console.log(`건너뜀(단어없음): ${v.videoId} | ${v.title}`);
+        continue;
+      }
+      const file = writeDraft(article);
+      made += 1;
+      console.log(
+        `초안: ${path.relative(REPO_ROOT, file)} | [${article.board}] words=${article.parsedWordCount} | ${article.title}`
+      );
+    }
+    saveState(state);
+    console.log(`\n초안 ${made}건 생성.`);
+    console.log(`검수 후 업로드: node scripts/youtube-sync.js --upload <videoId>`);
+    console.log(`또는 초안 일괄: node scripts/youtube-sync.js --upload-drafts`);
+  }
+}
+
+main().catch((err) => {
+  console.error('오류:', err.message || err);
+  process.exitCode = 1;
+});
