@@ -7,7 +7,7 @@
 
   /* 글 없는 보드 — 메뉴/탭에서 숨김. 살리려면 아래 배열에서 키를 제거하면 됩니다. */
   var HIDDEN_EMPTY_BOARDS = {
-    'us-news': true,
+    /* us-news: 글 올림 — 다시 노출 */
     'weather-news': true,
     'retail-news': true,
     'literature-news': true,
