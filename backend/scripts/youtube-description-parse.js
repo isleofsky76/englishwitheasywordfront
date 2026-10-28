@@ -136,8 +136,11 @@ export function wordsToSynonymSections(words, pronunciations = {}) {
       .replace(/^\/+|\/+$/g, '')
       .trim();
     const ipaKo = String(p.ipaKo || '').trim();
-    const pron =
-      ipa && ipaKo ? `(${ipa} / ${ipaKo})` : ipa ? `(${ipa})` : ipaKo ? `(${ipaKo})` : '';
+    /* brook(brʊk / 브룩) 양식 고정 */
+    let pron = '';
+    if (ipa && ipaKo) pron = `(${ipa} / ${ipaKo})`;
+    else if (ipaKo) pron = `(${ipaKo})`;
+    else if (ipa) pron = `(${ipa})`;
     return {
       title: `${n}. ${meaning}`,
       narrative: [`**${expression}**${pron}`],

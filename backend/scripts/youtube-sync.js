@@ -22,6 +22,7 @@ import {
   parseYoutubeDescription,
   applySynonymWordFormat,
 } from './youtube-description-parse.js';
+import { hangulForExpression } from './ipa-to-hangul.js';
 import { uploadNewsVoca } from './news-voca-format.js';
 import { uploadCultureVoca } from './culture-voca-format.js';
 import { uploadSportsNews } from './sports-news-format.js';
@@ -285,12 +286,27 @@ async function fetchPronunciations(expressions) {
   return out;
 }
 
+function fillHangulPronunciations(pronunciations, expressions) {
+  const out = { ...(pronunciations || {}) };
+  for (const exp of expressions || []) {
+    const key = String(exp || '').trim().toLowerCase();
+    if (!key) continue;
+    const cur = out[key] || {};
+    const ipa = String(cur.ipa || '').trim();
+    let ipaKo = String(cur.ipaKo || '').trim();
+    if (!ipaKo) ipaKo = hangulForExpression(exp, ipa);
+    out[key] = { ipa, ipaKo };
+  }
+  return out;
+}
+
 async function prepareArticle(article) {
   let next = { ...article };
   if (next.board === 'english-synonym') {
     const expressions = (next.wordMeta || []).map((w) => w.expression);
     console.log(`  연관단어 발음 생성 중... (${expressions.length}개)`);
-    const pronunciations = await fetchPronunciations(expressions);
+    let pronunciations = await fetchPronunciations(expressions);
+    pronunciations = fillHangulPronunciations(pronunciations, expressions);
     next = applySynonymWordFormat(next, pronunciations);
     next.pronunciations = pronunciations;
   }
