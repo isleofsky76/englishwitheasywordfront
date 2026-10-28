@@ -359,10 +359,14 @@
   }
   .site-masthead .site-search-form {
     width: 100%;
+    padding: 0 4px 0 14px;
   }
-  .site-masthead .site-search-input {
-    width: 100% !important;
-    max-width: none;
+  .site-masthead .site-search-input,
+  .site-masthead .site-search-input[type="search"] {
+    width: auto !important;
+    max-width: none !important;
+    flex: 1 1 auto;
+    min-width: 0;
   }
   .site-masthead .nav-more-menu {
     position: static;
