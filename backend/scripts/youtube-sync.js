@@ -36,6 +36,7 @@ import { uploadUkraineNews } from './ukraine-news-format.js';
 import { uploadSynonym } from './synonym-format.js';
 import { uploadUsNews } from './us-news-format.js';
 import { uploadVocabularyQuiz } from './vocabulary-quiz-format.js';
+import { enrichQuizTrackWords } from './quiz-answer-alts.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -93,6 +94,7 @@ function quizConfigFromArticle(article) {
 
   const isSyn = article.board === 'english-synonym';
   const sourceText = String(article.source?.text || '').trim();
+  const trackWords = isSyn ? enrichQuizTrackWords(pairs) : undefined;
   return {
     format: 'reveal',
     directions: ['en-ko', 'ko-en'],
@@ -105,8 +107,13 @@ function quizConfigFromArticle(article) {
     section1Title: '영어 → 한글',
     section2Title: '한글 → 영어',
     pairs,
+    trackWords,
     eyebrow: isSyn ? 'Vocabulary Quiz · Related Words' : 'Vocabulary Quiz · News',
-    hint: sourceText ? `출처: ${sourceText}.` : '',
+    hint: isSyn
+      ? '유사·대체 표현도 정답으로 인정합니다.'
+      : sourceText
+        ? `출처: ${sourceText}.`
+        : '',
     password: `seed_vocabulary_quiz_${slug.slice(0, 48)}`,
   };
 }

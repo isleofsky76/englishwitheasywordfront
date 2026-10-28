@@ -10,6 +10,7 @@ import { fileURLToPath } from 'url';
 import { API_BASE } from './loadEnv.js';
 import { uploadVocabularyQuiz } from './vocabulary-quiz-format.js';
 import { toIsoDateOnly } from './voca-seo.js';
+import { enrichQuizTrackWords } from './quiz-answer-alts.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '../..');
@@ -21,14 +22,6 @@ function stripTags(s) {
     .replace(/<[^>]+>/g, '')
     .replace(/\s+/g, ' ')
     .trim();
-}
-
-function splitMeanings(ko) {
-  return String(ko || '')
-    .replace(/^\d+\.\s*/, '')
-    .split(/[,，、/;；·･・|]+/)
-    .map((x) => x.trim())
-    .filter(Boolean);
 }
 
 function pairsFromSynonymHtml(html) {
@@ -79,6 +72,7 @@ function quizFromDraft(draft) {
     pairs.push({ en, ko });
   }
   if (pairs.length < 3) return null;
+  const trackWords = enrichQuizTrackWords(pairs);
   const baseTitle = String(draft.title || '')
     .replace(/#연관단어/g, '')
     .replace(/#\S+/g, '')
@@ -105,8 +99,9 @@ function quizFromDraft(draft) {
     section1Title: '영어 → 한글',
     section2Title: '한글 → 영어',
     pairs,
+    trackWords,
     eyebrow: 'Vocabulary Quiz · Related Words',
-    hint: '',
+    hint: '유사·대체 표현도 정답으로 인정합니다.',
     password: `seed_vocabulary_quiz_${slug.slice(0, 48)}`,
   };
 }
@@ -117,6 +112,7 @@ function quizFromSeoPage(slug) {
   const html = fs.readFileSync(file, 'utf8');
   const pairs = pairsFromSynonymHtml(html);
   if (pairs.length < 3) return null;
+  const trackWords = enrichQuizTrackWords(pairs);
   const titleRaw = titleFromHtml(html, slug).replace(/#연관단어/g, '').trim();
   const baseSlug = slug.replace(/-related-words$/i, '').replace(/-synonyms$/i, '').replace(/-quiz$/i, '');
   const quizSlug = `${baseSlug}-quiz`.slice(0, 80);
@@ -137,8 +133,9 @@ function quizFromSeoPage(slug) {
     section1Title: '영어 → 한글',
     section2Title: '한글 → 영어',
     pairs,
+    trackWords,
     eyebrow: 'Vocabulary Quiz · Related Words',
-    hint: '',
+    hint: '유사·대체 표현도 정답으로 인정합니다.',
     password: `seed_vocabulary_quiz_${quizSlug.slice(0, 48)}`,
   };
 }

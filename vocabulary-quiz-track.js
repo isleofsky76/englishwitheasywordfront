@@ -38,7 +38,16 @@
     return out;
   }
 
-  /** 여러 뜻 중 하나만 맞아도 true (입력에 여러 개를 적어도 그중 하나면 OK) */
+  /** 포함 관계도 허용 (짧은 오답 남발 방지를 위해 최소 길이) */
+  function softMatch(userNorm, answerNorm) {
+    if (!userNorm || !answerNorm) return false;
+    if (userNorm === answerNorm) return true;
+    var minLen = /[a-z]/.test(userNorm) ? 4 : 2;
+    if (userNorm.length < minLen || answerNorm.length < minLen) return false;
+    return answerNorm.indexOf(userNorm) !== -1 || userNorm.indexOf(answerNorm) !== -1;
+  }
+
+  /** 여러 뜻 중 하나만 맞아도 true (유사·대체 표현 / 부분 일치 포함) */
   function matchesAny(userValue, answerList) {
     var answers = expandAnswers(answerList);
     if (!answers.length) return false;
@@ -47,7 +56,7 @@
     return parts.some(function (part) {
       var n = norm(part);
       return answers.some(function (a) {
-        return norm(a) === n;
+        return softMatch(n, norm(a));
       });
     });
   }

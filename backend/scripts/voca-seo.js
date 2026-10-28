@@ -382,7 +382,7 @@ function buildQuizSeoPageHtml(boardPath, board, config) {
   const jsonLd = buildArticleJsonLd({ title, slug, boardPath, metaDescription, datePublished });
   const head = buildSeoHead({ docTitle, title, slug, boardPath, metaDescription, pageUrl, jsonLd });
   const trackWords = toVocabQuizTrackWords(config);
-  const TRACK_VER = '20261023track8';
+  const TRACK_VER = '20261029alt1';
 
   /* 최신 양식: vocabulary-quiz-track (입력·즉시 채점) */
   if (trackWords.length) {
