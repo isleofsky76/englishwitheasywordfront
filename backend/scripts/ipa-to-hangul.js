@@ -73,6 +73,18 @@ const HANGUL_OVERRIDES = {
   glue: '글루',
   adhere: '어드히어',
   plaster: '플래스터',
+  hindrance: '힌드런스',
+  impediment: '임페디먼트',
+  obstacle: '옵스터클',
+  obstruction: '업스트럭션',
+  barrier: '배리어',
+  interfere: '인터피어',
+  obstruct: '업스트럭트',
+  encounter: '인카운터',
+  struggle: '스트러글',
+  overcome: '오버컴',
+  obscure: '업스큐어',
+  neglect: '니글렉트',
 };
 
 /** 사전 API에 IPA가 비는 단어 보완 */
@@ -109,6 +121,18 @@ const IPA_OVERRIDES = {
   glue: 'ɡluː',
   adhere: 'ədˈhɪə',
   plaster: 'ˈplɑːstə',
+  hindrance: 'ˈhɪndrəns',
+  impediment: 'ɪmˈpedɪmənt',
+  obstacle: 'ˈɒbstəkl',
+  obstruction: 'əbˈstrʌkʃn',
+  barrier: 'ˈbæriə',
+  interfere: 'ˌɪntəˈfɪə',
+  obstruct: 'əbˈstrʌkt',
+  encounter: 'ɪnˈkaʊntə',
+  struggle: 'ˈstrʌɡl',
+  overcome: 'ˌəʊvəˈkʌm',
+  obscure: 'əbˈskjʊə',
+  neglect: 'nɪˈɡlekt',
 };
 
 export function ipaForExpression(expression, fallbackIpa = '') {
