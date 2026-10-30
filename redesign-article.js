@@ -581,13 +581,11 @@
         '</div>';
     }
 
+    /* 하단 CTA — 유튜브만 (원문 기사는 출처 블록에만 표시) */
     var actions = '<div class="rd-article-actions">';
     if (yt) {
       actions += '<a class="rd-btn-solid" href="' + escapeAttr(yt.watch) + '" target="_blank" rel="noopener noreferrer">' +
         ytLogoSvg() + ' 유튜브로 듣기</a>';
-    }
-    if (sourceUrl) {
-      actions += '<a class="rd-btn-outline" href="' + escapeAttr(sourceUrl) + '" target="_blank" rel="noopener noreferrer">원문 기사 보기 ↗</a>';
     }
     actions += '</div>';
 
