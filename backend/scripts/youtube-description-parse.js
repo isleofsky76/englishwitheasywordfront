@@ -101,19 +101,22 @@ function parseWords(description) {
   return words;
 }
 
-function boldExpression(sentence, expression) {
-  const s = String(sentence || '').trim();
+/** 표제어는 항상 사전 원형. 문장 속 변화형은 그대로 두고 끝에 (**lemma**)만 붙인다. */
+function lemmaAnnotation(sentence, expression) {
+  const s = String(sentence || '')
+    .trim()
+    .replace(/\*\*/g, '');
   const exp = String(expression || '').trim();
-  if (!s) return `**${exp}**`;
-  const re = new RegExp(`\\b${exp.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'i');
-  if (re.test(s)) return s.replace(re, (hit) => `**${hit}**`);
+  if (!exp) return s;
+  if (!s) return `(**${exp}**)`;
+  if (/\(\*\*[^*]+\*\*\)\s*$/.test(s)) return s;
   return `${s} (**${exp}**)`;
 }
 
 function wordsToNarratives(words) {
   return words.map((w, i) => {
     const n = w.num || i + 1;
-    const en = boldExpression(w.exampleEn, w.expression);
+    const en = lemmaAnnotation(w.exampleEn, w.expression);
     const line = w.exampleKo
       ? `${n}. ${en} / ${w.exampleKo} cf. ${w.expression}: ${w.meaning}`
       : `${n}. ${en} cf. ${w.expression}: ${w.meaning}`;

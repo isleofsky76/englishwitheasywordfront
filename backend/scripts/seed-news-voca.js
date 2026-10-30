@@ -26,77 +26,77 @@ const article = {
   words: [
     {
       narrative: [
-        '1. ... was replaced by his sister Darline, a political **novice**. / 그의 여동생 달린(정치 초보자)으로 교체되었다 cf. novice: 초보자, 경험이 없는 사람 (명)',
+        '1. ... was replaced by his sister Darline, a political novice. (**novice**) / 그의 여동생 달린(정치 초보자)으로 교체되었다 cf. novice: 초보자, 경험이 없는 사람 (명)',
       ],
     },
     {
       narrative: [
-        '2. from a nationwide **polling error** / 전국적인 여론조사 오차로 인해 cf. polling error: 여론조사 오차 (명)',
+        '2. from a nationwide polling error (**polling error**) / 전국적인 여론조사 오차로 인해 cf. polling error: 여론조사 오차 (명)',
       ],
     },
     {
       narrative: [
-        '3. ... can implement a **partisan** agenda. / 편파적인 의제를 실행할 수 있다 cf. partisan: 편파[당파]적인 (형)',
+        '3. ... can implement a partisan agenda. (**partisan**) / 편파적인 의제를 실행할 수 있다 cf. partisan: 편파[당파]적인 (형)',
       ],
     },
     {
       narrative: [
-        '4. **pundits** have assumed that... (**pundit**) / 평론가들은 …라고 가정해 왔다 cf. pundit: 정치·시사 평론가 (명)',
+        '4. pundits have assumed that... (**pundit**) / 평론가들은 …라고 가정해 왔다 cf. pundit: 정치·시사 평론가 (명)',
       ],
     },
     {
       narrative: [
-        '5. America’s most prominent team of **pollsters** (**pollster**) / 미국에서 가장 유명한 여론조사 전문가 팀 cf. pollster: 여론조사 전문가 (명)',
+        '5. America’s most prominent team of pollsters (**pollster**) / 미국에서 가장 유명한 여론조사 전문가 팀 cf. pollster: 여론조사 전문가 (명)',
       ],
     },
     {
       narrative: [
-        '6. when the **generic ballot** vastly overstated the Democratic advantage... / 정당 지지도 조사가 민주당의 우세를 크게 과장했을 때 cf. generic ballot: 후보 대신 정당 지지도를 묻는 조사 (명)',
+        '6. when the generic ballot vastly overstated the Democratic advantage... (**generic ballot**) / 정당 지지도 조사가 민주당의 우세를 크게 과장했을 때 cf. generic ballot: 후보 대신 정당 지지도를 묻는 조사 (명)',
       ],
     },
     {
       narrative: [
-        '7. The **auguries** are good for Democrats. (**augury**) / 민주당에게 앞날을 암시하는 징조가 좋다 cf. augury: 앞일을 암시하는 징조 (명)',
+        '7. The auguries are good for Democrats. (**augury**) / 민주당에게 앞날을 암시하는 징조가 좋다 cf. augury: 앞일을 암시하는 징조 (명)',
       ],
     },
     {
       narrative: [
-        '8. Republicans’ seemingly **impregnable** Senate map / 공화당의 겉보기엔 난공불락인 상원 지도 cf. impregnable: 난공불락의 (형)',
+        '8. Republicans’ seemingly impregnable Senate map (**impregnable**) / 공화당의 겉보기엔 난공불락인 상원 지도 cf. impregnable: 난공불락의 (형)',
       ],
     },
     {
       narrative: [
-        '9. her team planted **spoiler candidates** on the ballot... (**spoiler candidate**) / 그녀의 팀이 투표용지에 표를 잠식하는 후보들을 심어 놓았다 cf. spoiler candidate: 망치는 후보, 표를 잠식하는 후보 (명)',
+        '9. her team planted spoiler candidates on the ballot... (**spoiler candidate**) / 그녀의 팀이 투표용지에 표를 잠식하는 후보들을 심어 놓았다 cf. spoiler candidate: 망치는 후보, 표를 잠식하는 후보 (명)',
       ],
     },
     {
       narrative: [
-        '10. **out-raise** cf. out-raise: 상대보다 더 많은 선거자금을 모으다 (동)',
+        '10. (**out-raise**) cf. out-raise: 상대보다 더 많은 선거자금을 모으다 (동)',
       ],
     },
     {
       narrative: [
-        '11. ...where we reward their nominee for **eking out** a narrow financial advantage. (**eke out**) / 가까스로 얻은 근소한 자금 우위에 대해 후보에게 가산점을 주는 경우 cf. eke out: 가까스로 얻어 내다 (동)',
+        '11. ...where we reward their nominee for eking out a narrow financial advantage. (**eke out**) / 가까스로 얻은 근소한 자금 우위에 대해 후보에게 가산점을 주는 경우 cf. eke out: 가까스로 얻어 내다 (동)',
       ],
     },
     {
       narrative: [
-        '12. they also have a marked tendency to **overshoot**... / 그들은 또한 (목표보다) 더 가는 뚜렷한 경향이 있다 cf. overshoot: (목표 지점보다) 더 가다 (동)',
+        '12. they also have a marked tendency to overshoot... (**overshoot**) / 그들은 또한 (목표보다) 더 가는 뚜렷한 경향이 있다 cf. overshoot: (목표 지점보다) 더 가다 (동)',
       ],
     },
     {
       narrative: [
-        '13. ...the **probability** of the Senate changing hands at just 53%. / 상원이 바뀌는 확률을 겨우 53%로 본다 cf. probability: 확률, 가능성 (명)',
+        '13. ...the probability of the Senate changing hands at just 53%. (**probability**) / 상원이 바뀌는 확률을 겨우 53%로 본다 cf. probability: 확률, 가능성 (명)',
       ],
     },
     {
       narrative: [
-        '14. a 94% chance of gaining control of the **House of Representatives**... / 하원 장악 확률 94% cf. House of Representatives: 미국 하원 (명)',
+        '14. a 94% chance of gaining control of the House of Representatives... (**House of Representatives**) / 하원 장악 확률 94% cf. House of Representatives: 미국 하원 (명)',
       ],
     },
     {
       narrative: [
-        '15. Winning the Senate would enable them to block his **judicial nominees** as well. / 상원을 차지하면 그의 판사 지명자들까지 막을 수 있다 cf. judicial nominees: 판사 지명자들 (명)',
+        '15. Winning the Senate would enable them to block his judicial nominees as well. (**judicial nominee**) / 상원을 차지하면 그의 판사 지명자들까지 막을 수 있다 cf. judicial nominee: 판사 지명자 (명)',
       ],
     },
   ],
@@ -203,8 +203,8 @@ const article = {
     },
     {
       num: 15,
-      expression: 'judicial nominees',
-      meaning: '판사 지명자들',
+      expression: 'judicial nominee',
+      meaning: '판사 지명자',
       exampleEn: 'Winning the Senate would enable them to block his judicial nominees as well.',
       exampleKo: '',
     },
