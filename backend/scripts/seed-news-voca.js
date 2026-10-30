@@ -8,215 +8,106 @@ import { uploadNewsVoca } from './news-voca-format.js';
 
 // ========== 여기만 수정 ==========
 const article = {
-  title: '중간선거 결과 전망',
+  title: '중국에서 가장 성공한 애스트로터프 작전: 풀뿌리 축구',
 
-  slug: 'novice-polling-error-partisan-pundit-pollster-generic-ballot-augury-impregnable',
+  slug: 'astroturf-steed-charge-fluffed-shot-excruciating-related-words',
 
   metaDescription:
-    'The Economist 기사에서 추출한 시사 영단어. novice, polling error, partisan, pundit, pollster, generic ballot, augury, impregnable, spoiler candidate, out-raise, eke out.',
+    'The Economist 기사에서 추출한 시사 영단어. Astroturf, steed, charge, fluffed shot, excruciating, perennially, belt out, clad, penumbra, mar, scalper, wend one’s way.',
 
-  password: 'seed_news_voca_novice-polling-error-partisan-pundit-pollster',
+  password: 'seed_news_voca_astroturf-steed-charge-fluffed-shot',
 
-  datePublished: '2026-10-28',
+  datePublished: '2026-10-26',
 
   intro: [
-    '중간선거 결과 전망 주제를 다룬 The Economist 기사에서 주요 시사 영단어를 정리합니다. *AI 음성과 이미지를 사용했습니다.',
+    '중국에서 가장 성공한 애스트로터프 작전: 풀뿌리 축구 주제를 다룬 The Economist 기사에서 주요 시사 영단어를 정리합니다. *AI 음성과 이미지를 사용했습니다.',
   ],
 
   words: [
     {
       narrative: [
-        '1. ... was replaced by his sister Darline, a political novice. (**novice**) / 그의 여동생 달린(정치 초보자)으로 교체되었다 cf. novice: 초보자, 경험이 없는 사람 (명)',
+        '1. China’s most successful Astroturf operation: grassroots football (**Astroturf**) / 중국에서 가장 성공한 애스트로터프 작전: 풀뿌리 축구 cf. Astroturf: 인조 잔디; (비유) 가짜 풀뿌리 운동 (명)',
       ],
     },
     {
       narrative: [
-        '2. from a nationwide polling error (**polling error**) / 전국적인 여론조사 오차로 인해 cf. polling error: 여론조사 오차 (명)',
+        '2. mounted his black steed and charged around a stadium. (**steed**) / 검은 말을 타고 경기장 안을 돌진했다. cf. steed: 말, 준마 (명)',
       ],
     },
     {
       narrative: [
-        '3. ... can implement a partisan agenda. (**partisan**) / 편파적인 의제를 실행할 수 있다 cf. partisan: 편파[당파]적인 (형)',
+        '3. charged around a stadium. (**charge**) / 경기장 안을 돌진했다. cf. charge: 돌진하다, 돌격하다 (동)',
       ],
     },
     {
       narrative: [
-        '4. pundits have assumed that... (**pundit**) / 평론가들은 …라고 가정해 왔다 cf. pundit: 정치·시사 평론가 (명)',
+        '4. missed passes, fluffed shots (**fluffed shot**) / 패스 실수, 헛찬 슛 cf. fluffed shot: 실축, 헛찬 슛 (명)',
       ],
     },
     {
       narrative: [
-        '5. America’s most prominent team of pollsters (**pollster**) / 미국에서 가장 유명한 여론조사 전문가 팀 cf. pollster: 여론조사 전문가 (명)',
+        '5. a goal review that took 11 excruciating minutes. (**excruciating**) / 11분이나 걸린 견디기 힘든 골 판독 cf. excruciating: 극도로 고통스러운, 견디기 힘든 (형)',
       ],
     },
     {
       narrative: [
-        '6. when the generic ballot vastly overstated the Democratic advantage... (**generic ballot**) / 정당 지지도 조사가 민주당의 우세를 크게 과장했을 때 cf. generic ballot: 후보 대신 정당 지지도를 묻는 조사 (명)',
+        '6. China’s perennially inept national team. (**perennially**) / 중국의 늘 무기력한 국가대표팀 cf. perennially: 늘, 만성적으로 (부)',
       ],
     },
     {
       narrative: [
-        '7. The auguries are good for Democrats. (**augury**) / 민주당에게 앞날을 암시하는 징조가 좋다 cf. augury: 앞일을 암시하는 징조 (명)',
+        '7. Superfans gathered early to bang on drums, wave oversized flags and belt out their chants. (**belt out**) / 열성 팬들이 일찍 모여 북을 치고 거대한 깃발을 흔들며 응원가를 목청껏 불렀다. cf. belt out: 목청껏 부르다 (동)',
       ],
     },
     {
       narrative: [
-        '8. Republicans’ seemingly impregnable Senate map (**impregnable**) / 공화당의 겉보기엔 난공불락인 상원 지도 cf. impregnable: 난공불락의 (형)',
+        '8. they were clad in ankle-length Chinese opera-style robes. (**clad**) / 그들은 발목까지 오는 중국 전통극 스타일 도포를 입고 있었다. cf. clad: ~을 입은 (형)',
       ],
     },
     {
       narrative: [
-        '9. her team planted spoiler candidates on the ballot... (**spoiler candidate**) / 그녀의 팀이 투표용지에 표를 잠식하는 후보들을 심어 놓았다 cf. spoiler candidate: 망치는 후보, 표를 잠식하는 후보 (명)',
+        '9. ...the penumbra of China’s property downturn is visible (**penumbra**) / …중국 부동산 침체의 영향권 가장자리가 보인다 cf. penumbra: 반그림자, 영향권의 가장자리 (명)',
       ],
     },
     {
       narrative: [
-        '10. (**out-raise**) cf. out-raise: 상대보다 더 많은 선거자금을 모으다 (동)',
+        '10. ... marred by match-fixing scandals. (**mar**) / …승부조작 스캔들로 훼손된 cf. mar: 훼손하다, 망치다 (동)',
       ],
     },
     {
       narrative: [
-        '11. ...where we reward their nominee for eking out a narrow financial advantage. (**eke out**) / 가까스로 얻은 근소한 자금 우위에 대해 후보에게 가산점을 주는 경우 cf. eke out: 가까스로 얻어 내다 (동)',
+        '11. When scalpers muscled in, authorities introduced facial-recognition turnstiles (**scalper**) / 암표상들이 끼어들자 당국은 안면인식 개찰구를 도입했다 cf. scalper: 암표상 (명)',
       ],
     },
     {
       narrative: [
-        '12. they also have a marked tendency to overshoot... (**overshoot**) / 그들은 또한 (목표보다) 더 가는 뚜렷한 경향이 있다 cf. overshoot: (목표 지점보다) 더 가다 (동)',
-      ],
-    },
-    {
-      narrative: [
-        '13. ...the probability of the Senate changing hands at just 53%. (**probability**) / 상원이 바뀌는 확률을 겨우 53%로 본다 cf. probability: 확률, 가능성 (명)',
-      ],
-    },
-    {
-      narrative: [
-        '14. a 94% chance of gaining control of the House of Representatives... (**House of Representatives**) / 하원 장악 확률 94% cf. House of Representatives: 미국 하원 (명)',
-      ],
-    },
-    {
-      narrative: [
-        '15. Winning the Senate would enable them to block his judicial nominees as well. (**judicial nominee**) / 상원을 차지하면 그의 판사 지명자들까지 막을 수 있다 cf. judicial nominee: 판사 지명자 (명)',
+        '12. Money is starting to wend its way into the local leagues. (**wend one’s way**) / 돈이 지방 리그로 서서히 흘러들기 시작했다. ※ Leo wended his way home through the wet streets. / 레오는 젖은 거리를 지나 천천히 집으로 향했다. cf. wend one’s way: 천천히 나아가다, 길을 잡다 (동)',
       ],
     },
   ],
 
   wordMeta: [
-    {
-      num: 1,
-      expression: 'novice',
-      meaning: '초보자, 경험이 없는 사람',
-      exampleEn: '... was replaced by his sister Darline, a political novice.',
-      exampleKo: '',
-    },
-    {
-      num: 2,
-      expression: 'polling error',
-      meaning: '여론조사 오차',
-      exampleEn: 'from a nationwide polling error',
-      exampleKo: '',
-    },
-    {
-      num: 3,
-      expression: 'partisan',
-      meaning: '편파[당파]적인',
-      exampleEn: '... can implement a partisan agenda.',
-      exampleKo: '',
-    },
-    {
-      num: 4,
-      expression: 'pundit',
-      meaning: '정치·시사 평론가',
-      exampleEn: 'pundits have assumed that...',
-      exampleKo: '',
-    },
-    {
-      num: 5,
-      expression: 'pollster',
-      meaning: '여론조사 전문가',
-      exampleEn: 'America’s most prominent team of pollsters',
-      exampleKo: '',
-    },
-    {
-      num: 6,
-      expression: 'generic ballot',
-      meaning: '후보 대신 정당 지지도를 묻는 조사',
-      exampleEn: 'when the generic ballot vastly overstated the Democratic advantage...',
-      exampleKo: '',
-    },
-    {
-      num: 7,
-      expression: 'augury',
-      meaning: '앞일을 암시하는 징조',
-      exampleEn: 'The auguries are good for Democrats.',
-      exampleKo: '',
-    },
-    {
-      num: 8,
-      expression: 'impregnable',
-      meaning: '난공불락의',
-      exampleEn: 'Republicans’ seemingly impregnable Senate map',
-      exampleKo: '',
-    },
-    {
-      num: 9,
-      expression: 'spoiler candidate',
-      meaning: '망치는 후보, 표를 잠식하는 후보',
-      exampleEn: 'her team planted spoiler candidates on the ballot...',
-      exampleKo: '',
-    },
-    {
-      num: 10,
-      expression: 'out-raise',
-      meaning: '상대보다 더 많은 선거자금을 모으다',
-      exampleEn: '',
-      exampleKo: '',
-    },
-    {
-      num: 11,
-      expression: 'eke out',
-      meaning: '가까스로 얻어 내다',
-      exampleEn:
-        '...where we reward their nominee for eking out a narrow financial advantage.',
-      exampleKo: '',
-    },
-    {
-      num: 12,
-      expression: 'overshoot',
-      meaning: '(목표 지점보다) 더 가다',
-      exampleEn: 'they also have a marked tendency to overshoot...',
-      exampleKo: '',
-    },
-    {
-      num: 13,
-      expression: 'probability',
-      meaning: '확률, 가능성',
-      exampleEn: '...the probability of the Senate changing hands at just 53%.',
-      exampleKo: '',
-    },
-    {
-      num: 14,
-      expression: 'House of Representatives',
-      meaning: '미국 하원',
-      exampleEn: 'a 94% chance of gaining control of the House of Representatives...',
-      exampleKo: '',
-    },
-    {
-      num: 15,
-      expression: 'judicial nominee',
-      meaning: '판사 지명자',
-      exampleEn: 'Winning the Senate would enable them to block his judicial nominees as well.',
-      exampleKo: '',
-    },
+    { num: 1, expression: 'Astroturf', meaning: '인조 잔디; (비유) 가짜 풀뿌리 운동', exampleEn: 'China’s most successful Astroturf operation: grassroots football', exampleKo: '' },
+    { num: 2, expression: 'steed', meaning: '말, 준마', exampleEn: 'mounted his black steed and charged around a stadium.', exampleKo: '' },
+    { num: 3, expression: 'charge', meaning: '돌진하다, 돌격하다', exampleEn: 'charged around a stadium.', exampleKo: '' },
+    { num: 4, expression: 'fluffed shot', meaning: '실축, 헛찬 슛', exampleEn: 'missed passes, fluffed shots', exampleKo: '' },
+    { num: 5, expression: 'excruciating', meaning: '극도로 고통스러운, 견디기 힘든', exampleEn: 'a goal review that took 11 excruciating minutes.', exampleKo: '' },
+    { num: 6, expression: 'perennially', meaning: '늘, 만성적으로', exampleEn: 'China’s perennially inept national team.', exampleKo: '' },
+    { num: 7, expression: 'belt out', meaning: '목청껏 부르다', exampleEn: 'Superfans gathered early to bang on drums, wave oversized flags and belt out their chants.', exampleKo: '' },
+    { num: 8, expression: 'clad', meaning: '~을 입은', exampleEn: 'they were clad in ankle-length Chinese opera-style robes.', exampleKo: '' },
+    { num: 9, expression: 'penumbra', meaning: '반그림자, 영향권의 가장자리', exampleEn: '...the penumbra of China’s property downturn is visible', exampleKo: '' },
+    { num: 10, expression: 'mar', meaning: '훼손하다, 망치다', exampleEn: '... marred by match-fixing scandals.', exampleKo: '' },
+    { num: 11, expression: 'scalper', meaning: '암표상', exampleEn: 'When scalpers muscled in, authorities introduced facial-recognition turnstiles', exampleKo: '' },
+    { num: 12, expression: 'wend one’s way', meaning: '천천히 나아가다, 길을 잡다', exampleEn: 'Money is starting to wend its way into the local leagues.', exampleKo: '' },
   ],
 
   source: {
-    text: "The Economist | Our forecast of the midterms’ outcome | Oct 28th 2026",
-    url: 'https://www.economist.com/united-states/2026/10/28/our-forecast-of-the-midterms-outcome',
+    text: "The Economist | China’s most successful Astroturf operation: grassroots football | Oct 26th 2026",
+    url: 'https://www.economist.com/china/2026/10/26/chinas-most-successful-astroturf-operation-grassroots-football',
   },
 
-  youtube: 'https://www.youtube.com/shorts/TQtC56XcQuc',
-  videoId: 'TQtC56XcQuc',
+  youtube: 'https://www.youtube.com/shorts/cuUz5gO41gM',
+  videoId: 'cuUz5gO41gM',
 };
 // ===============================
 
