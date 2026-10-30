@@ -187,7 +187,6 @@
       '<p class="rd-hero-example">' + esc(f.example) + '</p>' +
       '<div class="rd-hero-actions">' +
         '<a class="rd-btn rd-btn-solid" href="' + esc(href) + '">단어 자세히 보기</a>' +
-        '<a class="rd-btn rd-btn-outline" href="vocabulary-quiz-list.html">오늘의 퀴즈 풀기</a>' +
       '</div>';
     renderHeroWotdMedia(entry, index, f, href);
   }
