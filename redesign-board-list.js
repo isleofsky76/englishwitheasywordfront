@@ -63,26 +63,45 @@
     return m ? 'https://i.ytimg.com/vi/' + m[1] + '/hqdefault.jpg' : '';
   }
 
+  /**
+   * 목록 미리보기 — 유튜브 썸네일을 항상 최우선.
+   * (뉴스·국제 등은 유튜브만 쓰도록 업로드 시 thumbnail을 i.ytimg로 고정)
+   */
   function extractThumb(entry) {
-    if (entry && entry.thumbnail) return String(entry.thumbnail);
+    if (entry && entry.thumbnail) {
+      var fromField = youtubeThumbFromUrl(entry.thumbnail);
+      if (fromField) return fromField;
+      if (/(?:img\.youtube|i\.ytimg)\.com\/vi\//i.test(String(entry.thumbnail))) {
+        return String(entry.thumbnail);
+      }
+    }
     /* 퀴즈 등 — sourceUrl 유튜브 썸네일 */
     var fromSource = youtubeThumbFromUrl(entry && entry.sourceUrl);
     if (fromSource) return fromSource;
     var msg = entry && entry.message ? String(entry.message) : '';
     if (!msg) return '';
-    /* 제목/커버 이미지 우선 (유튜브 썸네일보다 앞) */
+    var fromMsg = youtubeThumbFromUrl(msg);
+    if (fromMsg) return fromMsg;
+    /* i.ytimg / img.youtube 커버 */
+    var ytimg = msg.match(/https?:\/\/(?:i\.ytimg|img\.youtube)\.com\/vi\/[a-zA-Z0-9_-]+\/[a-z0-9.]+\.jpg/i);
+    if (ytimg) return ytimg[0];
     var cover = msg.match(/class=["'][^"']*nv-cover-img[^"']*["'][^>]*src=["']([^"']+)["']/i) ||
       msg.match(/src=["']([^"']+)["'][^>]*class=["'][^"']*nv-cover-img[^"']*["']/i);
+    if (cover && cover[1]) {
+      var fromCover = youtubeThumbFromUrl(cover[1]);
+      if (fromCover) return fromCover;
+      if (/(?:img\.youtube|i\.ytimg)\.com\/vi\//i.test(cover[1])) return cover[1];
+    }
+    /* 유튜브가 없을 때만 일반 이미지 (포토 보드 등) */
     if (cover && cover[1] && !/data:image\//i.test(cover[1])) return cover[1];
     var resImg = msg.match(/<img[^>]+src=["'](\/resources\/[^"']+)["']/i);
     if (resImg && resImg[1]) return resImg[1];
-    var fromMsg = youtubeThumbFromUrl(msg);
-    if (fromMsg) return fromMsg;
-    /* i.ytimg 커버/썸네일 (한국·국제뉴스 nv-cover) */
-    var ytimg = msg.match(/https?:\/\/i\.ytimg\.com\/vi\/[a-zA-Z0-9_-]+\/[a-z0-9.]+\.jpg/i);
-    if (ytimg) return ytimg[0];
     var img = msg.match(/<img[^>]+src=["']([^"']+)["']/i);
-    if (img && img[1] && !/data:image\//i.test(img[1])) return img[1];
+    if (img && img[1] && !/data:image\//i.test(img[1]) &&
+        !/(?:img\.youtube|i\.ytimg)\.com\/vi\//i.test(img[1])) {
+      /* 본문 일반 이미지는 뉴스 미리보기로 쓰지 않음 — 유튜브 없을 때만 */
+      return '';
+    }
     return '';
   }
 

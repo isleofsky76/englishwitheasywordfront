@@ -2,6 +2,12 @@
 # Missing SEO folders fall back to board HTML (no Netlify 404).
 
 [[redirects]]
+  from = "/news-voca/*"
+  to = "/news-voca.html"
+  status = 200
+  force = false
+
+[[redirects]]
   from = "/korea-news/*"
   to = "/korea-news.html"
   status = 200
@@ -84,4 +90,4 @@
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
 
-# redeploy 2026-10-22T15:30:00+09:00
+# redeploy 2026-10-30T18:40:00+09:00

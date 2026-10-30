@@ -8,105 +8,143 @@ import { uploadNewsVoca } from './news-voca-format.js';
 
 // ========== 여기만 수정 ==========
 const article = {
-  title: '조부모님들은 아프신 곳이 많지만 손주들을 위해 쓸 돈은 더 많다',
+  title: '인도네시아 포퓰리스트 대통령은 매력을 잃어가고 있다',
 
-  slug: 'aches-and-pains-caregiver-grandparenthood-milestone-ailment-related-words',
+  slug: 'hold-back-court-erratic-gimmick-malady-loggerheads-dissident-assailant-populous',
 
   metaDescription:
-    'WSJ 기사에서 추출한 고령 조부모·손주·건강·돌봄 관련 시사 영단어. aches and pains, caregiver, degenerative spine condition, grandparenthood, child care, median age, milestone, healthy life expectancy, arthritis, cataract, ailment, walker, back brace, stroller, health scare 등.',
+    'The Economist 기사에서 추출한 시사 영단어. hold back, court, erratic, gimmick, malady, loggerheads, dissident, assailant, populous.',
 
-  password: 'seed_news_aches-and-pains-caregiver-grandparenthood-related-words',
+  password: 'seed_news_voca_hold-back-court-erratic-gimmick-malady-loggerheads',
 
-  datePublished: '2026-10-24',
+  datePublished: '2026-10-22',
 
   intro: [
-    '조부모가 되는 시기가 늦어지면서 건강 부담은 커지지만 손주를 위한 경제적 지원은 늘었다는 월스트리트저널(WSJ) 기사에서 주요 시사 영단어를 정리합니다. 돌봄, 건강수명, 관절염·백내장 등 질환과 관련된 표현을 살펴봅니다. *AI 음성과 이미지를 사용했습니다.',
+    '인도네시아 포퓰리스트 대통령은 매력을 잃어가고 있다 주제를 다룬 The Economist 기사에서 주요 시사 영단어를 정리합니다. *AI 음성과 이미지를 사용했습니다.',
   ],
 
   words: [
     {
       narrative: [
-        '1. 나이가 많은 조부모는 몸 여기저기의 쑤심과 통증(**aches and pains**)이 더 많지만, 손주를 위해 쓸 돈도 더 많다. cf. aches and pains: 몸 여기저기의 쑤심과 통증',
+        '1. Prabowo Subianto’s erratic policies are **holding back** his country / 프라보워 수비안토의 변덕스러운 정책이 나라를 가로막고 있다 cf. hold back: 저지하다, 발전을 가로막다',
       ],
     },
     {
       narrative: [
-        '2. 성인들은 종종 중요한 돌봄 역할(**caregivers**)을 맡는다. cf. caregiver: 돌보는 사람',
+        '2. Flows of foreign direct investment (FDI), which soared... as he (Jokowi) **courted** Chinese miners, have been disappointing. / 조코위가 중국 광산업계의 지지를 얻으려 할 때 치솟았던 FDI가 기대에 못 미치고 있다 cf. court: 구애하다, 지지를 얻으려 하다',
       ],
     },
     {
       narrative: [
-        '3. 그는 함께하는 시간을 제한할지도 모른다고 걱정한 퇴행성 척추 질환(**degenerative spine condition**)이 있었다. cf. degenerative spine condition: 퇴행성 척추 질환',
+        '3. Mr Prabowo’s **erratic** rule is making Indonesia a tricky place to do business. / 프라보워의 변덕스러운 통치가 인도네시아를 사업하기 까다로운 곳으로 만들고 있다 cf. erratic: 변덕스러운, 종잡을 수 없는',
       ],
     },
     {
       narrative: [
-        '4. 조부모가 되는 시기가 늦어지면(**Delayed grandparenthood**) 손주 삶에 활발히 참여할 수 있는 건강한 기간이 줄어들 수 있다. cf. grandparenthood: 조부모가 되는 것, 조부모로서의 삶',
+        '4. Such **gimmicks**(무상급식 등) used to be popular... / 그런 술수(무상급식 등)는 한때 인기가 있었다 cf. gimmick: 술수, 눈길을 끌기 위한 수법',
       ],
     },
     {
       narrative: [
-        '5. 무료 육아(**child care**) 제공을 포함한 지원이 이뤄진다. cf. child care: 육아, 아이 돌봄',
+        '5. Mr Prabowo has done little to cure underlying economic **maladies**. / 프라보워는 근본적인 경제 병폐를 거의 고치지 못했다 cf. malady: 병폐, 고질적인 문제',
       ],
     },
     {
       narrative: [
-        '6. 할머니가 되는 중위 연령(**median age**)은 44세였다. cf. median age: 중위 연령',
+        '6. **loggerhead** — 긴 자루 끝에 둥근 쇠뭉치가 달린 쇠 도구 / **be at loggerheads** (갈등 상태에 있는) cf. loggerhead: 긴 자루 끝에 둥근 쇠뭉치가 달린 쇠 도구; be at loggerheads: 갈등 상태에 있다',
       ],
     },
     {
       narrative: [
-        '7. 그 중요한 단계(**milestone**)는 이제 57세로 건너뛴다. cf. milestone: 중요한 단계·사건',
+        '7. Some fear he will be tempted to use dirty tricks to suppress **dissent** again. / 일부는 그가 다시 반대를 억압하기 위해 더러운 수단을 쓸까 봐 두려워한다 ※ 예문 속 dissent는 명사/동사 ‘반대, 이견’ / cf. **dissident**: 반체제 인사',
       ],
     },
     {
       narrative: [
-        '8. 건강수명(**healthy life expectancy**)이 늘어난 점을 감안해도, 손주와 보내는 건강한 해는 약 3분의 1 줄어든다. cf. healthy life expectancy: 건강수명',
+        '8. **Assailants** beat up one of the protest’s main organisers. / 괴한들이 시위의 주요 주최자 중 한 명을 폭행했다 cf. assailant: 공격자, 습격자, 괴한',
       ],
     },
     {
       narrative: [
-        '9. 그는 무릎 관절염(**arthritis**)과 최근 백내장 수술을 관리하면서도 손주와 시간을 보낸다. cf. arthritis: 관절염',
-      ],
-    },
-    {
-      narrative: [
-        '10. 최근 백내장(**cataract**) 수술을 받은 상태였다. cf. cataract: 백내장',
-      ],
-    },
-    {
-      narrative: [
-        '11. 질환(**ailments**) 때문에 원하는 만큼 깊게 관여하기 어려워질 수 있다. cf. ailment: 질환, 몸의 불편',
-      ],
-    },
-    {
-      narrative: [
-        '12. David Andrus는 보행 보조기(**walker**)와 허리 보조기를 사용한다. cf. walker: 보행 보조기',
-      ],
-    },
-    {
-      narrative: [
-        '13. 그는 보행 보조기와 허리·등 보조기(**back brace**)를 사용한다. cf. back brace: 허리·등 보조기',
-      ],
-    },
-    {
-      narrative: [
-        '14. 앞마당에서 유모차(**stroller**)의 아기를 돌본다. cf. stroller: 유모차',
-      ],
-    },
-    {
-      narrative: [
-        '15. 건강 문제로 크게 걱정하게 되는 일(**health scares**)이 있어도, David와 Martha는 조부모가 된 것이 인생에서 가장 행복한 순간을 만들었다고 했다. cf. health scare: 건강 문제로 크게 걱정하게 되는 일',
+        '9. Indonesia, the world’s fourth-most-**populous** country. / 세계 인구 4위의 나라 인도네시아 cf. populous: 인구가 많은',
       ],
     },
   ],
 
+  wordMeta: [
+    {
+      num: 1,
+      expression: 'hold back',
+      meaning: '저지하다, 발전을 가로막다',
+      exampleEn: 'Prabowo Subianto’s erratic policies are holding back his country',
+      exampleKo: '',
+    },
+    {
+      num: 2,
+      expression: 'court',
+      meaning: '구애하다, 지지를 얻으려 하다',
+      exampleEn:
+        'Flows of foreign direct investment (FDI), which soared... as he (Jokowi) courted Chinese miners, have been disappointing.',
+      exampleKo: '',
+    },
+    {
+      num: 3,
+      expression: 'erratic',
+      meaning: '변덕스러운, 종잡을 수 없는',
+      exampleEn: 'Mr Prabowo’s erratic rule is making Indonesia a tricky place to do business.',
+      exampleKo: '',
+    },
+    {
+      num: 4,
+      expression: 'gimmick',
+      meaning: '술수, 눈길을 끌기 위한 수법',
+      exampleEn: 'Such gimmicks(무상급식 등) used to be popular...',
+      exampleKo: '',
+    },
+    {
+      num: 5,
+      expression: 'malady',
+      meaning: '병폐, 고질적인 문제',
+      exampleEn: 'Mr Prabowo has done little to cure underlying economic maladies.',
+      exampleKo: '',
+    },
+    {
+      num: 6,
+      expression: 'loggerhead / be at loggerheads',
+      meaning: '긴 자루 끝에 둥근 쇠뭉치가 달린 쇠 도구 / 갈등 상태에 있는',
+      exampleEn: 'be at loggerheads',
+      exampleKo: '',
+    },
+    {
+      num: 7,
+      expression: 'dissident',
+      meaning: '반체제 인사 (예문 dissent = 반대·이견)',
+      exampleEn: 'Some fear he will be tempted to use dirty tricks to suppress dissent again.',
+      exampleKo: '',
+    },
+    {
+      num: 8,
+      expression: 'assailant',
+      meaning: '공격자, 습격자, 괴한',
+      exampleEn: 'Assailants beat up one of the protest’s main organisers.',
+      exampleKo: '',
+    },
+    {
+      num: 9,
+      expression: 'populous',
+      meaning: '인구가 많은',
+      exampleEn: 'Indonesia, the world’s fourth-most-populous country.',
+      exampleKo: '',
+    },
+  ],
+
   source: {
-    text: 'The Wall Street Journal | Older Grandparents Have More Aches and Pains—and More Money for Grandkids | By Rachel Wolfe',
-    url: 'https://www.wsj.com/lifestyle/relationships/older-grandparents-have-more-aches-and-painsand-more-money-for-grandkids-d1c4f76d',
+    text: "The Economist | Indonesia’s populist president is losing his charm | Oct 22nd 2026",
+    url: 'https://www.economist.com/leaders/2026/10/22/indonesias-populist-president-is-losing-his-charm',
   },
 
-  youtube: 'https://youtube.com/shorts/sTzUOIMuHwE',
+  youtube: 'https://www.youtube.com/shorts/opd3lVItmd4',
+  videoId: 'opd3lVItmd4',
 };
 // ===============================
 

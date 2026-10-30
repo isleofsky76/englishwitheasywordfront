@@ -646,9 +646,10 @@ export function buildNewsVocaMessage(config) {
     config.source?.text ||
     '';
   const resolvedYoutube = config.youtube || config.youtubeUrl || youtubeUrl || '';
+  /* 목록·본문 커버 미리보기 — 유튜브 썸네일만 */
   const cover =
-    String(config.thumbnail || config.coverImage || '').trim() ||
-    youtubeThumbnailUrl(resolvedYoutube || config.videoId || '');
+    youtubeThumbnailUrl(resolvedYoutube || config.videoId || '') ||
+    youtubeThumbnailUrl(config.thumbnail || config.coverImage || '');
 
   /* 유튜브는 related, 출처 문구·원문 링크는 nv-source 에 명확히 표시 */
   const relatedLinksHtml = buildRelatedLinksHtml(resolvedYoutube, '');
@@ -762,9 +763,10 @@ async function parseApiJson(res, label) {
 
 export async function uploadNewsVoca(config, apiBase) {
   const resolvedYoutube = config.youtube || config.youtubeUrl || '';
+  /* 목록 섬네일 — 항상 유튜브 미리보기(i.ytimg). 일반 이미지는 무시 */
   const thumbnail =
-    String(config.thumbnail || config.coverImage || '').trim() ||
-    youtubeThumbnailUrl(resolvedYoutube || config.videoId || '');
+    youtubeThumbnailUrl(resolvedYoutube || config.videoId || '') ||
+    youtubeThumbnailUrl(config.thumbnail || config.coverImage || '');
   const message = buildNewsVocaMessage({ ...config, thumbnail, youtube: resolvedYoutube });
   const sectionCount = (message.match(/nv-word-section/g) || []).length;
   const datePublished = config.datePublished || toIsoDateOnly();
