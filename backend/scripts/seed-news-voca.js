@@ -8,65 +8,95 @@ import { uploadNewsVoca } from './news-voca-format.js';
 
 // ========== 여기만 수정 ==========
 const article = {
-  title: '인도네시아 포퓰리스트 대통령은 매력을 잃어가고 있다',
+  title: '중간선거 결과 전망',
 
-  slug: 'hold-back-court-erratic-gimmick-malady-loggerheads-dissident-assailant-populous',
+  slug: 'novice-polling-error-partisan-pundit-pollster-generic-ballot-augury-impregnable',
 
   metaDescription:
-    'The Economist 기사에서 추출한 시사 영단어. hold back, court, erratic, gimmick, malady, loggerhead, dissident, assailant, populous.',
+    'The Economist 기사에서 추출한 시사 영단어. novice, polling error, partisan, pundit, pollster, generic ballot, augury, impregnable, spoiler candidate, out-raise, eke out.',
 
-  password: 'seed_news_voca_hold-back-court-erratic-gimmick-malady-loggerheads',
+  password: 'seed_news_voca_novice-polling-error-partisan-pundit-pollster',
 
-  datePublished: '2026-10-22',
+  datePublished: '2026-10-28',
 
   intro: [
-    '인도네시아 포퓰리스트 대통령은 매력을 잃어가고 있다 주제를 다룬 The Economist 기사에서 주요 시사 영단어를 정리합니다. *AI 음성과 이미지를 사용했습니다.',
+    '중간선거 결과 전망 주제를 다룬 The Economist 기사에서 주요 시사 영단어를 정리합니다. *AI 음성과 이미지를 사용했습니다.',
   ],
 
   words: [
     {
       narrative: [
-        '1. Prabowo Subianto’s erratic policies are holding back his country (**hold back**) / 프라보워 수비안토의 변덕스러운 정책이 나라를 가로막고 있다 cf. hold back: 저지하다, 발전을 가로막다 (동)',
+        '1. ... was replaced by his sister Darline, a political **novice**. / 그의 여동생 달린(정치 초보자)으로 교체되었다 cf. novice: 초보자, 경험이 없는 사람 (명)',
       ],
     },
     {
       narrative: [
-        '2. Flows of foreign direct investment (FDI), which soared... as he (Jokowi) courted Chinese miners, have been disappointing. (**court**) / 조코위가 중국 광산업계의 지지를 얻으려 할 때 치솟았던 FDI가 기대에 못 미치고 있다 cf. court: 구애하다, 지지를 얻으려 하다 (동)',
+        '2. from a nationwide **polling error** / 전국적인 여론조사 오차로 인해 cf. polling error: 여론조사 오차 (명)',
       ],
     },
     {
       narrative: [
-        '3. Mr Prabowo’s erratic rule is making Indonesia a tricky place to do business. (**erratic**) / 프라보워의 변덕스러운 통치가 인도네시아를 사업하기 까다로운 곳으로 만들고 있다 cf. erratic: 변덕스러운, 종잡을 수 없는 (형)',
+        '3. ... can implement a **partisan** agenda. / 편파적인 의제를 실행할 수 있다 cf. partisan: 편파[당파]적인 (형)',
       ],
     },
     {
       narrative: [
-        '4. Such gimmicks(무상급식 등) used to be popular... (**gimmick**) / 그런 술수(무상급식 등)는 한때 인기가 있었다 cf. gimmick: 술수, 눈길을 끌기 위한 수법 (명)',
+        '4. **pundits** have assumed that... (**pundit**) / 평론가들은 …라고 가정해 왔다 cf. pundit: 정치·시사 평론가 (명)',
       ],
     },
     {
       narrative: [
-        '5. Mr Prabowo has done little to cure underlying economic maladies. (**malady**) / 프라보워는 근본적인 경제 병폐를 거의 고치지 못했다 cf. malady: 병폐, 고질적인 문제 (명)',
+        '5. America’s most prominent team of **pollsters** (**pollster**) / 미국에서 가장 유명한 여론조사 전문가 팀 cf. pollster: 여론조사 전문가 (명)',
       ],
     },
     {
       narrative: [
-        '6. be at loggerheads. (**loggerhead**) / 갈등 상태에 있다 · loggerhead: 긴 자루 끝에 둥근 쇠뭉치가 달린 쇠 도구 (명) · be at loggerheads: 갈등 상태에 있는',
+        '6. when the **generic ballot** vastly overstated the Democratic advantage... / 정당 지지도 조사가 민주당의 우세를 크게 과장했을 때 cf. generic ballot: 후보 대신 정당 지지도를 묻는 조사 (명)',
       ],
     },
     {
       narrative: [
-        '7. Some fear he will be tempted to use dirty tricks to suppress dissent again. (**dissident**) / 일부는 그가 다시 반대를 억압하기 위해 더러운 수단을 쓸까 봐 두려워한다 cf. dissident: 반체제 인사 (명) ※ 예문 속 dissent는 명사/동사 ‘반대, 이견’',
+        '7. The **auguries** are good for Democrats. (**augury**) / 민주당에게 앞날을 암시하는 징조가 좋다 cf. augury: 앞일을 암시하는 징조 (명)',
       ],
     },
     {
       narrative: [
-        '8. Assailants beat up one of the protest’s main organisers. (**assailant**) / 괴한들이 시위의 주요 주최자 중 한 명을 폭행했다 cf. assailant: 공격자, 습격자, 괴한 (명)',
+        '8. Republicans’ seemingly **impregnable** Senate map / 공화당의 겉보기엔 난공불락인 상원 지도 cf. impregnable: 난공불락의 (형)',
       ],
     },
     {
       narrative: [
-        '9. Indonesia, the world’s fourth-most-populous country. (**populous**) / 세계 인구 4위의 나라 인도네시아 cf. populous: 인구가 많은 (형)',
+        '9. her team planted **spoiler candidates** on the ballot... (**spoiler candidate**) / 그녀의 팀이 투표용지에 표를 잠식하는 후보들을 심어 놓았다 cf. spoiler candidate: 망치는 후보, 표를 잠식하는 후보 (명)',
+      ],
+    },
+    {
+      narrative: [
+        '10. **out-raise** cf. out-raise: 상대보다 더 많은 선거자금을 모으다 (동)',
+      ],
+    },
+    {
+      narrative: [
+        '11. ...where we reward their nominee for **eking out** a narrow financial advantage. (**eke out**) / 가까스로 얻은 근소한 자금 우위에 대해 후보에게 가산점을 주는 경우 cf. eke out: 가까스로 얻어 내다 (동)',
+      ],
+    },
+    {
+      narrative: [
+        '12. they also have a marked tendency to **overshoot**... / 그들은 또한 (목표보다) 더 가는 뚜렷한 경향이 있다 cf. overshoot: (목표 지점보다) 더 가다 (동)',
+      ],
+    },
+    {
+      narrative: [
+        '13. ...the **probability** of the Senate changing hands at just 53%. / 상원이 바뀌는 확률을 겨우 53%로 본다 cf. probability: 확률, 가능성 (명)',
+      ],
+    },
+    {
+      narrative: [
+        '14. a 94% chance of gaining control of the **House of Representatives**... / 하원 장악 확률 94% cf. House of Representatives: 미국 하원 (명)',
+      ],
+    },
+    {
+      narrative: [
+        '15. Winning the Senate would enable them to block his **judicial nominees** as well. / 상원을 차지하면 그의 판사 지명자들까지 막을 수 있다 cf. judicial nominees: 판사 지명자들 (명)',
       ],
     },
   ],
@@ -74,77 +104,119 @@ const article = {
   wordMeta: [
     {
       num: 1,
-      expression: 'hold back',
-      meaning: '저지하다, 발전을 가로막다',
-      exampleEn: 'Prabowo Subianto’s erratic policies are holding back his country',
+      expression: 'novice',
+      meaning: '초보자, 경험이 없는 사람',
+      exampleEn: '... was replaced by his sister Darline, a political novice.',
       exampleKo: '',
     },
     {
       num: 2,
-      expression: 'court',
-      meaning: '구애하다, 지지를 얻으려 하다',
-      exampleEn:
-        'Flows of foreign direct investment (FDI), which soared... as he (Jokowi) courted Chinese miners, have been disappointing.',
+      expression: 'polling error',
+      meaning: '여론조사 오차',
+      exampleEn: 'from a nationwide polling error',
       exampleKo: '',
     },
     {
       num: 3,
-      expression: 'erratic',
-      meaning: '변덕스러운, 종잡을 수 없는',
-      exampleEn: 'Mr Prabowo’s erratic rule is making Indonesia a tricky place to do business.',
+      expression: 'partisan',
+      meaning: '편파[당파]적인',
+      exampleEn: '... can implement a partisan agenda.',
       exampleKo: '',
     },
     {
       num: 4,
-      expression: 'gimmick',
-      meaning: '술수, 눈길을 끌기 위한 수법',
-      exampleEn: 'Such gimmicks(무상급식 등) used to be popular...',
+      expression: 'pundit',
+      meaning: '정치·시사 평론가',
+      exampleEn: 'pundits have assumed that...',
       exampleKo: '',
     },
     {
       num: 5,
-      expression: 'malady',
-      meaning: '병폐, 고질적인 문제',
-      exampleEn: 'Mr Prabowo has done little to cure underlying economic maladies.',
+      expression: 'pollster',
+      meaning: '여론조사 전문가',
+      exampleEn: 'America’s most prominent team of pollsters',
       exampleKo: '',
     },
     {
       num: 6,
-      expression: 'loggerhead',
-      meaning: '긴 자루 끝에 둥근 쇠뭉치가 달린 쇠 도구 (be at loggerheads: 갈등 상태에 있는)',
-      exampleEn: 'be at loggerheads',
+      expression: 'generic ballot',
+      meaning: '후보 대신 정당 지지도를 묻는 조사',
+      exampleEn: 'when the generic ballot vastly overstated the Democratic advantage...',
       exampleKo: '',
     },
     {
       num: 7,
-      expression: 'dissident',
-      meaning: '반체제 인사 (예문 dissent = 반대·이견)',
-      exampleEn: 'Some fear he will be tempted to use dirty tricks to suppress dissent again.',
+      expression: 'augury',
+      meaning: '앞일을 암시하는 징조',
+      exampleEn: 'The auguries are good for Democrats.',
       exampleKo: '',
     },
     {
       num: 8,
-      expression: 'assailant',
-      meaning: '공격자, 습격자, 괴한',
-      exampleEn: 'Assailants beat up one of the protest’s main organisers.',
+      expression: 'impregnable',
+      meaning: '난공불락의',
+      exampleEn: 'Republicans’ seemingly impregnable Senate map',
       exampleKo: '',
     },
     {
       num: 9,
-      expression: 'populous',
-      meaning: '인구가 많은',
-      exampleEn: 'Indonesia, the world’s fourth-most-populous country.',
+      expression: 'spoiler candidate',
+      meaning: '망치는 후보, 표를 잠식하는 후보',
+      exampleEn: 'her team planted spoiler candidates on the ballot...',
+      exampleKo: '',
+    },
+    {
+      num: 10,
+      expression: 'out-raise',
+      meaning: '상대보다 더 많은 선거자금을 모으다',
+      exampleEn: '',
+      exampleKo: '',
+    },
+    {
+      num: 11,
+      expression: 'eke out',
+      meaning: '가까스로 얻어 내다',
+      exampleEn:
+        '...where we reward their nominee for eking out a narrow financial advantage.',
+      exampleKo: '',
+    },
+    {
+      num: 12,
+      expression: 'overshoot',
+      meaning: '(목표 지점보다) 더 가다',
+      exampleEn: 'they also have a marked tendency to overshoot...',
+      exampleKo: '',
+    },
+    {
+      num: 13,
+      expression: 'probability',
+      meaning: '확률, 가능성',
+      exampleEn: '...the probability of the Senate changing hands at just 53%.',
+      exampleKo: '',
+    },
+    {
+      num: 14,
+      expression: 'House of Representatives',
+      meaning: '미국 하원',
+      exampleEn: 'a 94% chance of gaining control of the House of Representatives...',
+      exampleKo: '',
+    },
+    {
+      num: 15,
+      expression: 'judicial nominees',
+      meaning: '판사 지명자들',
+      exampleEn: 'Winning the Senate would enable them to block his judicial nominees as well.',
       exampleKo: '',
     },
   ],
 
   source: {
-    text: "The Economist | Indonesia’s populist president is losing his charm | Oct 22nd 2026",
-    url: 'https://www.economist.com/leaders/2026/10/22/indonesias-populist-president-is-losing-his-charm',
+    text: "The Economist | Our forecast of the midterms’ outcome | Oct 28th 2026",
+    url: 'https://www.economist.com/united-states/2026/10/28/our-forecast-of-the-midterms-outcome',
   },
 
-  youtube: 'https://www.youtube.com/shorts/opd3lVItmd4',
-  videoId: 'opd3lVItmd4',
+  youtube: 'https://www.youtube.com/shorts/TQtC56XcQuc',
+  videoId: 'TQtC56XcQuc',
 };
 // ===============================
 
