@@ -28,24 +28,24 @@ import { applySeoAfterUpload, toIsoDateOnly, SITE_ORIGIN } from './voca-seo.js';
 // ========== 여기만 수정 ==========
 // redesign-word 시안용: .wotd-word / .wotd-core / .wotd-ex / .wotd-col …
 
-const imageSrc = '/resources/requite.jpg';
+const imageSrc = '/resources/smitten.jpg';
 
 const entry = {
-  title: 'requite | 보답하다, 갚다',
+  title: 'smitten | 홀딱 반한, 푹 빠진',
 
   // 태그 사이 빈 줄/개행 넣지 말 것
-  message: `<div class="wotd-word"><img class="wotd-hero-image" src="${imageSrc}" alt="requite" loading="lazy"><span class="wotd-ipa">/rɪˈkwaɪt/</span><span class="wotd-ipa-ko">리콰이트</span><div class="wotd-pos" data-pos="동사" data-primary="1"><span class="wotd-meaning">보답하다, 갚다</span><span class="wotd-meaning-sub">(은혜·친절·사랑에) 응답하다</span></div><p class="wotd-core">받은 친절·은혜·감정에 <em class="wotd-core-em">그에 맞는 보답</em>을 하다. 부정형 unrequited는 ‘보답받지 못한’</p><p class="wotd-nuance">requite는 ‘갚다(repay)’보다 격식 있고, 특히 <mark>사랑·호의에 대한 보답</mark> 맥락에서 자주 쓰입니다. 실제로는 unrequited love(짝사랑)처럼 부정형으로 더 흔히 만납니다.</p><div class="wotd-compare"><span class="wotd-cmp-en">repay</span><span class="wotd-cmp-ko">갚다 · 돈·호의, 일상적</span></div><div class="wotd-compare" data-active="1"><span class="wotd-cmp-en">requite</span><span class="wotd-cmp-ko">보답하다 · 감정·은혜, 격식</span></div><div class="wotd-col"><span class="wotd-col-en">unrequited love</span><span class="wotd-col-ko">짝사랑, 보답받지 못한 사랑</span></div><div class="wotd-col"><span class="wotd-col-en">requite kindness</span><span class="wotd-col-ko">친절에 보답하다</span></div><div class="wotd-col"><span class="wotd-col-en">go unrequited</span><span class="wotd-col-ko">보답받지 못한 채 끝나다</span></div><section class="wotd-ex"><p class="wotd-ex-en">His love for her went <mark>unrequited</mark>.</p><p class="wotd-ex-ko">그녀를 향한 그의 사랑은 끝내 보답받지 못했다. (짝사랑으로 끝났다)</p></section><section class="wotd-ex"><p class="wotd-ex-en">She never forgot his kindness and <mark>requited</mark> it years later.</p><p class="wotd-ex-ko">그녀는 그의 친절을 잊지 않았고, 몇 년 뒤 그 은혜를 갚았다.</p></section><section class="wotd-ex"><p class="wotd-ex-en">Many parents feel their sacrifices are <mark>unrequited</mark> when their adult children rarely call.</p><p class="wotd-ex-ko">다 큰 자녀가 연락을 잘 하지 않을 때, 많은 부모는 자신의 희생이 보답받지 못한다고 느낀다.</p></section><p class="wotd-takeaway">requite는 ‘보답하다’이고, 일상·문학에서는 unrequited(보답받지 못한) 형태로 더 자주 등장한다.</p><div class="wotd-glance"><div><dt>품사</dt><dd>동사</dd></div><div><dt>비슷한 말</dt><dd>repay, return, reciprocate</dd></div><div><dt>반대 말</dt><dd>ignore, spurn, neglect</dd></div><div><dt>자주 나오는 곳</dt><dd>문학·관계·에세이</dd></div></div></div>`,
+  message: `<div class="wotd-word"><img class="wotd-hero-image" src="${imageSrc}" alt="smitten" loading="lazy"><span class="wotd-ipa">/ˈsmɪtn/</span><span class="wotd-ipa-ko">스미튼</span><div class="wotd-pos" data-pos="형용사" data-primary="1"><span class="wotd-meaning">홀딱 반한, 푹 빠진</span><span class="wotd-meaning-sub">(사람·아이·아이디어에) 매료된</span></div><p class="wotd-core">누군가·무언가에 <em class="wotd-core-em">강하게 마음이 끌려</em> 반하거나 푹 빠진 상태. 보통 be smitten with/by</p><p class="wotd-nuance">smitten은 연애의 ‘한눈에 반하다’뿐 아니라, 손주·비전처럼 <mark>애정·매혹에 푹 빠진</mark> 느낌에도 씁니다. be in love보다 가볍고 생생한 뉘앙스예요.</p><div class="wotd-compare"><span class="wotd-cmp-en">in love</span><span class="wotd-cmp-ko">사랑에 빠진 · 더 진지·지속적</span></div><div class="wotd-compare" data-active="1"><span class="wotd-cmp-en">smitten</span><span class="wotd-cmp-ko">홀딱 반한 · 강렬·즉각적</span></div><div class="wotd-col"><span class="wotd-col-en">smitten with</span><span class="wotd-col-ko">~에게 홀딱 반하다</span></div><div class="wotd-col"><span class="wotd-col-en">completely smitten</span><span class="wotd-col-ko">완전히 푹 빠진</span></div><div class="wotd-col"><span class="wotd-col-en">smitten by</span><span class="wotd-col-ko">~에 매료된</span></div><section class="wotd-ex"><p class="wotd-ex-en">He was <mark>smitten</mark> with her from the moment they met.</p><p class="wotd-ex-ko">그는 그녀를 처음 만난 순간부터 홀딱 반했다.</p></section><section class="wotd-ex"><p class="wotd-ex-en">My father is completely <mark>smitten</mark> with his first granddaughter.</p><p class="wotd-ex-ko">아버지는 첫 손녀에게 완전히 푹 빠지셨다.</p></section><section class="wotd-ex"><p class="wotd-ex-en">Investors were <mark>smitten</mark> by the company’s bold vision, but the profits never came.</p><p class="wotd-ex-ko">투자자들은 그 회사의 대담한 비전에 매료됐지만, 수익은 끝내 나지 않았다.</p></section><p class="wotd-takeaway">smitten은 ‘홀딱 반한·푹 빠진’ 상태로, smitten with/by와 함께 사람·애정·아이디어에 두루 쓴다.</p><div class="wotd-glance"><div><dt>품사</dt><dd>형용사</dd></div><div><dt>비슷한 말</dt><dd>infatuated, captivated, enamored</dd></div><div><dt>반대 말</dt><dd>indifferent, unmoved, cold</dd></div><div><dt>자주 나오는 곳</dt><dd>일상·관계·비즈니스 비유</dd></div></div></div>`,
 
   nickname: 'admin',
 
-  password: 'seed_password_requite',
+  password: 'seed_password_smitten',
 
   isSecret: false,
 
-  slug: 'requite',
+  slug: 'smitten',
 
   metaDescription:
-    'requite 뜻과 예문. 보답하다, 갚다의 의미와 unrequited love, requite kindness, go unrequited 표현.',
+    'smitten 뜻과 예문. 홀딱 반한, 푹 빠지다의 의미와 smitten with, completely smitten, smitten by 표현.',
 
   datePublished: '2026-10-31',
 };
