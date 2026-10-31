@@ -1,7 +1,7 @@
 /**
  * 수동: 아래 entry 수정 후
  *   cd C:\langchain\backend; node scripts/send-wordofday-entry.js
- *   cd C:\langchain; git pull origin main --no-edit; git add word-of-the-day/{slug}/ sitemap.xml backend/scripts/send-wordofday-entry.js; git commit -m "Add word of the day: {word}"; git push origin main
+ *   cd C:\langchain; git pull origin main --no-edit; git add word-of-the-day/{slug}/ sitemap.xml resources/{word}.jpg backend/scripts/send-wordofday-entry.js; git commit -m "Add word of the day: {word}"; git push origin main
  *
  * 자동 (단어 선택 + GitHub resources 이미지 + 업로드 + 배포):
  *   cd C:\langchain\backend; node scripts/send-wordofday-entry.js --auto
@@ -28,26 +28,26 @@ import { applySeoAfterUpload, toIsoDateOnly, SITE_ORIGIN } from './voca-seo.js';
 // ========== 여기만 수정 ==========
 // redesign-word 시안용: .wotd-word / .wotd-core / .wotd-ex / .wotd-col …
 
-const imageSrc = '/resources/leafy.jpg';
+const imageSrc = '/resources/requite.jpg';
 
 const entry = {
-  title: 'leafy | 녹음이 우거진',
+  title: 'requite | 보답하다, 갚다',
 
   // 태그 사이 빈 줄/개행 넣지 말 것
-  message: `<div class="wotd-word"><img class="wotd-hero-image" src="${imageSrc}" alt="leafy" loading="lazy"><span class="wotd-ipa">/ˈliːfi/</span><span class="wotd-ipa-ko">리피</span><div class="wotd-pos" data-pos="형용사" data-primary="1"><span class="wotd-meaning">녹음이 우거진</span><span class="wotd-meaning-sub">잎이 많은, 나무가 우거진</span></div><p class="wotd-core">나무·풀의 잎이 많아 <em class="wotd-core-em">푸르고 우거진</em> 모습, 또는 잎채소처럼 잎이 많은 상태</p><p class="wotd-nuance">leafy는 도시·거리·그늘을 수식할 때는 <mark>녹음이 우거진, 나무가 많은</mark> 느낌을 주고, leafy green vegetables처럼 쓰면 ‘잎이 많은(엽채류)’라는 뜻입니다. 여행·생활·건강 글에서 자주 나옵니다.</p><div class="wotd-compare"><span class="wotd-cmp-en">green</span><span class="wotd-cmp-ko">녹색의 · 색깔·환경</span></div><div class="wotd-compare" data-active="1"><span class="wotd-cmp-en">leafy</span><span class="wotd-cmp-ko">잎이 우거진 · 나무·채소의 무성함</span></div><div class="wotd-col"><span class="wotd-col-en">leafy city / street</span><span class="wotd-col-ko">녹음이 우거진 도시·거리</span></div><div class="wotd-col"><span class="wotd-col-en">leafy green vegetables</span><span class="wotd-col-ko">잎이 많은 녹색 채소</span></div><div class="wotd-col"><span class="wotd-col-en">leafy shade</span><span class="wotd-col-ko">무성한 잎이 만드는 그늘</span></div><section class="wotd-ex" data-tag="여행 예문"><p class="wotd-ex-en">I set out by car, leaving Kalamata, the <mark>leafy</mark> port city and gateway to the area, on a coastal road circuit.</p><p class="wotd-ex-ko">나는 녹음이 우거진 항구도시이자 이 지역의 관문인 칼라마타를 떠나 해안도로를 순환하는 자동차 여행에 나섰다.</p></section><section class="wotd-ex"><p class="wotd-ex-en">Eat plenty of <mark>leafy</mark> green vegetables.</p><p class="wotd-ex-ko">잎이 많은 녹색 채소를 충분히 먹어라.</p></section><section class="wotd-ex"><p class="wotd-ex-en">We sat in the <mark>leafy</mark> shade of an oak tree.</p><p class="wotd-ex-ko">우리는 떡갈나무의 무성한 잎이 만드는 그늘 속에 앉아 있었다.</p></section><p class="wotd-takeaway">leafy는 ‘잎이 많다’는 뜻으로, 도시·그늘에는 녹음의 이미지, 채소에는 엽채류의 이미지를 더한다.</p><div class="wotd-glance"><div><dt>품사</dt><dd>형용사</dd></div><div><dt>비슷한 말</dt><dd>lush, verdant, wooded</dd></div><div><dt>반대 말</dt><dd>bare, barren</dd></div><div><dt>자주 나오는 곳</dt><dd>여행·생활·건강</dd></div></div></div>`,
+  message: `<div class="wotd-word"><img class="wotd-hero-image" src="${imageSrc}" alt="requite" loading="lazy"><span class="wotd-ipa">/rɪˈkwaɪt/</span><span class="wotd-ipa-ko">리콰이트</span><div class="wotd-pos" data-pos="동사" data-primary="1"><span class="wotd-meaning">보답하다, 갚다</span><span class="wotd-meaning-sub">(은혜·친절·사랑에) 응답하다</span></div><p class="wotd-core">받은 친절·은혜·감정에 <em class="wotd-core-em">그에 맞는 보답</em>을 하다. 부정형 unrequited는 ‘보답받지 못한’</p><p class="wotd-nuance">requite는 ‘갚다(repay)’보다 격식 있고, 특히 <mark>사랑·호의에 대한 보답</mark> 맥락에서 자주 쓰입니다. 실제로는 unrequited love(짝사랑)처럼 부정형으로 더 흔히 만납니다.</p><div class="wotd-compare"><span class="wotd-cmp-en">repay</span><span class="wotd-cmp-ko">갚다 · 돈·호의, 일상적</span></div><div class="wotd-compare" data-active="1"><span class="wotd-cmp-en">requite</span><span class="wotd-cmp-ko">보답하다 · 감정·은혜, 격식</span></div><div class="wotd-col"><span class="wotd-col-en">unrequited love</span><span class="wotd-col-ko">짝사랑, 보답받지 못한 사랑</span></div><div class="wotd-col"><span class="wotd-col-en">requite kindness</span><span class="wotd-col-ko">친절에 보답하다</span></div><div class="wotd-col"><span class="wotd-col-en">go unrequited</span><span class="wotd-col-ko">보답받지 못한 채 끝나다</span></div><section class="wotd-ex"><p class="wotd-ex-en">His love for her went <mark>unrequited</mark>.</p><p class="wotd-ex-ko">그녀를 향한 그의 사랑은 끝내 보답받지 못했다. (짝사랑으로 끝났다)</p></section><section class="wotd-ex"><p class="wotd-ex-en">She never forgot his kindness and <mark>requited</mark> it years later.</p><p class="wotd-ex-ko">그녀는 그의 친절을 잊지 않았고, 몇 년 뒤 그 은혜를 갚았다.</p></section><section class="wotd-ex"><p class="wotd-ex-en">Many parents feel their sacrifices are <mark>unrequited</mark> when their adult children rarely call.</p><p class="wotd-ex-ko">다 큰 자녀가 연락을 잘 하지 않을 때, 많은 부모는 자신의 희생이 보답받지 못한다고 느낀다.</p></section><p class="wotd-takeaway">requite는 ‘보답하다’이고, 일상·문학에서는 unrequited(보답받지 못한) 형태로 더 자주 등장한다.</p><div class="wotd-glance"><div><dt>품사</dt><dd>동사</dd></div><div><dt>비슷한 말</dt><dd>repay, return, reciprocate</dd></div><div><dt>반대 말</dt><dd>ignore, spurn, neglect</dd></div><div><dt>자주 나오는 곳</dt><dd>문학·관계·에세이</dd></div></div></div>`,
 
   nickname: 'admin',
 
-  password: 'seed_password_leafy',
+  password: 'seed_password_requite',
 
   isSecret: false,
 
-  slug: 'leafy',
+  slug: 'requite',
 
   metaDescription:
-    'leafy 뜻과 예문. 녹음이 우거진, 잎이 많다는 의미와 leafy city, leafy green vegetables, leafy shade 표현.',
+    'requite 뜻과 예문. 보답하다, 갚다의 의미와 unrequited love, requite kindness, go unrequited 표현.',
 
-  datePublished: '2026-10-20',
+  datePublished: '2026-10-31',
 };
 // =================================
 
