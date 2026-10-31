@@ -1113,7 +1113,7 @@
   <url>
     <loc>https://englisheasystudy.com/word-of-the-day/smitten/</loc>
     <lastmod>2026-10-31</lastmod>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://englisheasystudy.com/word-of-the-day/tackle/</loc>
@@ -1124,5 +1124,10 @@
     <loc>https://englisheasystudy.com/word-of-the-day/thwart/</loc>
     <lastmod>2026-10-20</lastmod>
     <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://englisheasystudy.com/word-of-the-day/weathered/</loc>
+    <lastmod>2026-10-31</lastmod>
+    <priority>0.8</priority>
   </url>
 </urlset>
