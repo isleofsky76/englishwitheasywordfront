@@ -226,9 +226,13 @@ export const BOARD_SEO = {
     cssFile: 'page30_viewpost_wordofday.css',
     cssVersion: '20261020pad1',
     jsFile: 'page30_viewpost_wordofday.js',
-    jsVersion: '20261020rd30',
+    jsVersion: '20261031fouc1',
     listHtml: 'word-of-the-day-list.html',
     articleLayout: 'word-detail',
+    extraCss: [
+      { file: 'redesign-word.css', version: '20261031fouc1' },
+      { file: 'site-masthead.css', version: '20261031fouc1' },
+    ],
   },
   'photo-english': {
     label: '포토영어',
@@ -536,17 +540,46 @@ ${(board.extraCss || []).map((c) => `    <link rel="stylesheet" href="../../${c.
       body[data-nv-board]:not(.rd-ready) #post-container {
         visibility: hidden;
       }
+      /* 구형 파란 Bootstrap navbar — JS/rd-word 전에 먼저 보이지 않게 */
+      body[data-nv-board]:not(.rd-ready) .navbar.bg-primary:not(.site-masthead),
+      body[data-nv-board]:not(.rd-ready) .weather-banner,
+      body[data-nv-board]:not(.rd-ready) .world-clock-bar {
+        display: none !important;
+      }
       /* QUICK REVIEW 배너 강제 숨김 */
       .rd-review { display: none !important; }
     </style>
     <script>
     (function () {
-      function rdReady() {
+      var SEO_SKELETON =
+        '<div class="vp-skeleton" aria-hidden="true" style="padding:20px 12px 40px;min-height:48vh;box-sizing:border-box">' +
+        '<div style="height:28px;width:68%;max-width:380px;border-radius:8px;background:#e8edf2;margin:0 auto 16px"></div>' +
+        '<div style="height:12px;width:40%;max-width:160px;border-radius:6px;background:#eef2f6;margin:0 auto 28px"></div>' +
+        '<div style="height:11px;width:92%;max-width:720px;border-radius:6px;background:#eef2f6;margin:0 auto 10px"></div>' +
+        '<div style="height:11px;width:88%;max-width:720px;border-radius:6px;background:#eef2f6;margin:0 auto 10px"></div>' +
+        '<div style="height:11px;width:84%;max-width:720px;border-radius:6px;background:#eef2f6;margin:0 auto"></div>' +
+        '</div>';
+      function stripSeoToSkeleton() {
+        var el = document.getElementById('post-container');
+        if (!el) return;
+        if (el.querySelector('.rd-word-page, .rd-article-layout, .rd-article-head')) return;
+        if (el.querySelector('.wotd-word, #post-title, #post-message')) {
+          el.innerHTML = SEO_SKELETON;
+        }
+      }
+      function whenBody(fn) {
+        if (document.body) fn();
+        else document.addEventListener('DOMContentLoaded', fn, { once: true });
+      }
+      /* 구형 SEO 텍스트 디자인이 절대 먼저 보이지 않게 즉시 스켈레톤으로 교체 */
+      whenBody(stripSeoToSkeleton);
+      /* redesign 실패 안전망 — 구형 본문 노출 없이 스켈레톤만 공개 */
+      setTimeout(function () {
+        if (document.documentElement.classList.contains('rd-ready')) return;
+        stripSeoToSkeleton();
         document.documentElement.classList.add('rd-ready');
         if (document.body) document.body.classList.add('rd-ready');
-      }
-      /* header-only 보드가 rd-ready를 안 켜도 본문이 영구 숨김되지 않게 */
-      setTimeout(rdReady, 1200);
+      }, 4500);
     })();
     </script>
     <noscript><style>body[data-nv-board] #post-container{visibility:visible!important}</style></noscript>

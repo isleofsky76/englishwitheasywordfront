@@ -8,6 +8,8 @@ body.rd-word {
   background: var(--page-bg);
 }
 
+/* SEO HTML의 파란 Bootstrap navbar — redesign 전·후 모두 숨김 (깜빡임 방지) */
+body[data-nv-board="word-of-the-day"] .navbar.bg-primary:not(.site-masthead),
 body.rd-word .navbar.bg-primary:not(.site-masthead),
 body.rd-word .weather-banner,
 body.rd-word .world-clock-bar {

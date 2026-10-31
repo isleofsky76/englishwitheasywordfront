@@ -25,7 +25,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../page30_viewpost.css?v=20260628">
     <link rel="stylesheet" href="../../page30_viewpost_wordofday.css?v=20261020pad1">
-    <link rel="stylesheet" href="../../redesign-word.css?v=20261031fouc1">
+    <link rel="stylesheet" href="../../redesign-word.css?v=20261101navFouc">
     <link rel="stylesheet" href="../../site-masthead.css?v=20261031fouc1">
     <link rel="stylesheet" href="../../title-text-sharp.css?v=20260610">
     <link rel="stylesheet" href="../../viewpost-like.css?v=20260906gray">
@@ -40,6 +40,12 @@
       /* SEO 구형 본문이 redesign 전에 깜빡이지 않도록 (!important 금지: 키프레임 fallback이 무시됨) */
       body[data-nv-board]:not(.rd-ready) #post-container {
         visibility: hidden;
+      }
+      /* 구형 파란 Bootstrap navbar — JS/rd-word 전에 먼저 보이지 않게 */
+      body[data-nv-board]:not(.rd-ready) .navbar.bg-primary:not(.site-masthead),
+      body[data-nv-board]:not(.rd-ready) .weather-banner,
+      body[data-nv-board]:not(.rd-ready) .world-clock-bar {
+        display: none !important;
       }
       /* QUICK REVIEW 배너 강제 숨김 */
       .rd-review { display: none !important; }

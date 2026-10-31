@@ -5,7 +5,7 @@
 (function (global) {
   'use strict';
 
-  var ASSET_VER = '20261020rd30';
+  var ASSET_VER = '20261101navFouc';
   var SPEAKER_SVG =
     '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M15.5 8.5a5 5 0 0 1 0 7"></path></svg>';
   var SPEAKER_FULL_SVG =
@@ -33,18 +33,36 @@
 
   function ensureCss() {
     var base = assetBase();
-    [
+    var hrefs = [
       'redesign-tokens.css?v=' + ASSET_VER,
       'redesign-word.css?v=' + ASSET_VER,
       'site-masthead.css?v=' + ASSET_VER
-    ].forEach(function (href) {
+    ];
+    var waiters = [];
+    hrefs.forEach(function (href) {
       var file = href.split('?')[0];
-      if (document.querySelector('link[rel="stylesheet"][href*="' + file + '"]')) return;
-      var link = document.createElement('link');
-      link.rel = 'stylesheet';
-      link.href = base + href;
-      document.head.appendChild(link);
+      var existing = document.querySelector('link[rel="stylesheet"][href*="' + file + '"]');
+      if (existing) {
+        /* 이미 있어도 로드 전이면 onload 대기 */
+        if (existing.sheet) return;
+        waiters.push(new Promise(function (resolve) {
+          existing.addEventListener('load', resolve, { once: true });
+          existing.addEventListener('error', resolve, { once: true });
+          setTimeout(resolve, 1200);
+        }));
+        return;
+      }
+      waiters.push(new Promise(function (resolve) {
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = base + href;
+        link.onload = function () { resolve(); };
+        link.onerror = function () { resolve(); };
+        document.head.appendChild(link);
+        setTimeout(resolve, 1200);
+      }));
     });
+    return Promise.all(waiters);
   }
 
   function ensureScript(file) {
@@ -536,10 +554,11 @@
     var data = parseWordPayload(html);
     if (!data.capable) return false;
 
-    ensureCss();
     document.body.classList.add('rd-word');
     document.body.classList.remove('rd-article', 'rd-article--header-only', 'rd-article-like-hidden');
 
+    /* CSS가 붙은 뒤에만 rd-ready — 구형/unstyled 깜빡임 방지 */
+    await ensureCss();
     renderWordPage(container, post, data, options);
     markReady();
 
