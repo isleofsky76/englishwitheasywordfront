@@ -415,8 +415,34 @@
     var count = document.getElementById('os-count');
     if (count) count.textContent = '불러오는 중…';
 
+    function publishDictWords(items) {
+      var map = Object.create(null);
+      (items || []).forEach(function (it) {
+        if (!it) return;
+        var meaning = String(it.meaning || '').trim();
+        if (!meaning) return;
+        var pos = String(it.pos || '').trim();
+        function put(key) {
+          var k = String(key || '')
+            .toLowerCase()
+            .replace(/’/g, "'")
+            .trim();
+          if (!k) return;
+          if (!map[k]) map[k] = { meaning: meaning, pos: pos };
+        }
+        put(it.word);
+        put(it.highlight);
+        String(it.word || '')
+          .toLowerCase()
+          .split(/[\s/]+/)
+          .forEach(put);
+      });
+      window.DICT_WORDS = map;
+    }
+
     function applyItems(items) {
       all = items;
+      publishDictWords(items);
       refresh();
     }
 

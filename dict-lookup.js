@@ -1,8 +1,9 @@
 /*!
- * dict-lookup.js — 영어 단어 마우스 오버 시 네이버/Cambridge 사전 링크 팝업
+ * dict-lookup.js — 영어 단어 마우스 오버 시 한글 뜻 + 네이버/Cambridge 링크
  * 의존성 없음. CSS는 이 파일에서 <style>로 주입합니다.
  *
- * 사용법 (</body> 바로 위):
+ * 뜻 소스: window.DICT_WORDS 또는 closest .os-item 의 뜻
+ * 사용법:
  *   <script>window.DICT_CONFIG = { container: '.os-en' };</script>
  *   <script src="/dict-lookup.js" defer></script>
  */
@@ -42,6 +43,46 @@
   const hasHighlight =
     typeof CSS !== 'undefined' && CSS.highlights && typeof Highlight !== 'undefined';
 
+  function wordsMap() {
+    return window.DICT_WORDS && typeof window.DICT_WORDS === 'object' ? window.DICT_WORDS : {};
+  }
+
+  function findEntry(raw) {
+    const WORDS = wordsMap();
+    const w = String(raw || '').toLowerCase().replace(/’/g, "'");
+    const tries = [w];
+    if (/ies$/.test(w)) tries.push(w.slice(0, -3) + 'y');
+    if (/ied$/.test(w)) tries.push(w.slice(0, -3) + 'y');
+    if (/ves$/.test(w)) tries.push(w.slice(0, -3) + 'f', w.slice(0, -3) + 'fe');
+    if (/es$/.test(w)) tries.push(w.slice(0, -2), w.slice(0, -1));
+    if (/s$/.test(w)) tries.push(w.slice(0, -1));
+    if (/ed$/.test(w)) {
+      tries.push(w.slice(0, -2), w.slice(0, -1));
+      if (/(.)\1ed$/.test(w)) tries.push(w.slice(0, -3));
+    }
+    if (/ing$/.test(w)) {
+      tries.push(w.slice(0, -3), w.slice(0, -3) + 'e');
+      if (/(.)\1ing$/.test(w)) tries.push(w.slice(0, -4));
+    }
+    for (let i = 0; i < tries.length; i += 1) {
+      const t = tries[i];
+      if (WORDS[t] && WORDS[t].meaning) {
+        return { lemma: t, meaning: WORDS[t].meaning, pos: WORDS[t].pos || '' };
+      }
+    }
+    return null;
+  }
+
+  function meaningFromItem(node, hoveredWord) {
+    const mapped = findEntry(hoveredWord);
+    if (mapped && mapped.meaning) return mapped.meaning;
+    const e = node && (node.nodeType === 1 ? node : node.parentElement);
+    const item = e && e.closest('.os-item');
+    if (!item) return null;
+    const koEl = item.querySelector('.os-head-ko');
+    return koEl ? String(koEl.textContent || '').trim() : null;
+  }
+
   const style = document.createElement('style');
   style.textContent = `
     :root{--dl-bg:#fdfbf5;--dl-foot:#f6f1e4;--dl-line:#d9cfb6;--dl-rule:#ebe3cf;--dl-ink:#2a241a;--dl-link:#6b4a17;--dl-link-hi:#3b2a0e;--dl-dot:#c9bd9f;--dl-mark:#f6efdc;--dl-shadow:rgba(60,45,20,.12)}
@@ -56,13 +97,17 @@
     .dl-arrow{width:9px;height:9px;background:var(--dl-bg);border:1px solid var(--dl-line);border-right:0;border-bottom:0;
       transform:rotate(45deg);margin-bottom:-5px;position:relative;z-index:1}
     .dl-above .dl-arrow{transform:rotate(225deg);margin:-5px 0 0}
-    .dl-card{width:min(240px,calc(100vw - 24px));box-sizing:border-box;display:flex;flex-direction:column;
+    .dl-card{width:min(280px,calc(100vw - 24px));box-sizing:border-box;display:flex;flex-direction:column;
       background:var(--dl-bg);border:1px solid var(--dl-line);border-radius:6px;box-shadow:0 8px 22px var(--dl-shadow);
-      font-family:"Source Serif 4",Georgia,"Times New Roman",serif;line-height:1.4;color:var(--dl-ink)}
-    .dl-word{padding:12px 16px 10px;font-size:19px;font-style:italic;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+      line-height:1.45;color:var(--dl-ink)}
+    .dl-meaning{padding:12px 14px 10px;font-size:15px;font-weight:500;
+      font-family:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+      word-break:keep-all;overflow-wrap:anywhere}
+    .dl-meaning[hidden]{display:none !important}
     .dl-foot{display:flex;align-items:center;flex-wrap:wrap;gap:2px;padding:7px 10px 8px 11px;border-top:1px solid var(--dl-rule);
       background:var(--dl-foot);border-radius:0 0 6px 6px;font-size:13px;
       font-family:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif}
+    .dl-card:not(:has(.dl-meaning:not([hidden])) .dl-foot{border-top:0;border-radius:6px}
     .dl-foot a{padding:4px 5px;color:var(--dl-link);text-decoration:none;border-radius:3px}
     .dl-foot a:hover,.dl-foot a:focus-visible{color:var(--dl-link-hi);text-decoration:underline;text-underline-offset:3px;outline:none}
     .dl-dot{color:var(--dl-dot)}
@@ -75,12 +120,12 @@
   bubble.className = 'dl-bubble';
   bubble.innerHTML =
     '<div class="dl-arrow" aria-hidden="true"></div>' +
-    '<div class="dl-card" role="dialog" aria-label="사전 검색">' +
-    '<div class="dl-word"></div>' +
+    '<div class="dl-card" role="dialog" aria-label="단어 뜻">' +
+    '<div class="dl-meaning"></div>' +
     '<div class="dl-foot"></div>' +
     '</div>';
 
-  const elWord = bubble.querySelector('.dl-word');
+  const elMeaning = bubble.querySelector('.dl-meaning');
   const elFoot = bubble.querySelector('.dl-foot');
   const extLinks = CONFIG.dictionaries.map(function (d, i) {
     if (i > 0) {
@@ -107,11 +152,25 @@
   let showTimer = null;
   let hideTimer = null;
 
-  function show(word, rect) {
+  function resolveMeaning(word, node) {
+    const fromItem = meaningFromItem(node, word);
+    if (fromItem) return fromItem;
+    const entry = findEntry(word);
+    return entry ? entry.meaning : '';
+  }
+
+  function show(word, rect, node) {
     clearTimeout(hideTimer);
     current = { word: word };
     const q = String(word).toLowerCase();
-    elWord.textContent = q;
+    const meaning = resolveMeaning(word, node);
+    if (meaning) {
+      elMeaning.hidden = false;
+      elMeaning.textContent = meaning;
+    } else {
+      elMeaning.hidden = true;
+      elMeaning.textContent = '';
+    }
     CONFIG.dictionaries.forEach(function (d, i) {
       extLinks[i].href = d.url(q);
     });
@@ -191,7 +250,7 @@
     const hit = Array.from(range.getClientRects()).find(function (r) {
       return x >= r.left - 1 && x <= r.right + 1 && y >= r.top - 1 && y <= r.bottom + 1;
     });
-    return hit ? { word: word.replace(/’/g, "'"), range: range, rect: hit } : null;
+    return hit ? { word: word.replace(/’/g, "'"), range: range, rect: hit, node: c.node } : null;
   }
 
   if (canHover) {
@@ -228,7 +287,7 @@
         showTimer = setTimeout(
           function () {
             if (hasHighlight) CSS.highlights.set('dl-word', new Highlight(found.range));
-            show(found.word, found.rect);
+            show(found.word, found.rect, found.node);
             pending = null;
           },
           current ? CONFIG.switchDelay : CONFIG.hoverDelay
@@ -260,7 +319,9 @@
         const range = sel.getRangeAt(0);
         if (!isAllowed(range.commonAncestorContainer)) return;
         const rect = range.getBoundingClientRect();
-        if (rect.width || rect.height) show(text.replace(/’/g, "'"), rect);
+        if (rect.width || rect.height) {
+          show(text.replace(/’/g, "'"), rect, range.commonAncestorContainer);
+        }
       }, 250);
     });
     document.addEventListener(
