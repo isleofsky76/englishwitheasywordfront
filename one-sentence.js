@@ -68,6 +68,19 @@
     } catch (e) { /* ignore */ }
   }
 
+  function normalizeCfList(raw) {
+    var list = Array.isArray(raw) ? raw : (raw && raw.word ? [raw] : []);
+    return list
+      .map(function (c) {
+        return {
+          word: String((c && c.word) || '').trim(),
+          pos: String((c && c.pos) || '').trim(),
+          meaning: String((c && c.meaning) || '').trim()
+        };
+      })
+      .filter(function (c) { return !!c.word; });
+  }
+
   function normalizeEntry(raw) {
     if (!raw) return null;
     var word = String(raw.word || '').trim();
@@ -81,6 +94,7 @@
       ko: String(raw.ko || '').trim(),
       en: en,
       highlight: String(raw.highlight || word).trim(),
+      cf: normalizeCfList(raw.cf),
       date: raw.date || null
     };
   }
@@ -92,18 +106,32 @@
       .replace(/^-+|-+$/g, '');
   }
 
+  function renderCfLines(cfList) {
+    if (!cfList || !cfList.length) return '';
+    return cfList.map(function (c) {
+      return (
+        '<p class="os-cf">' +
+          '<span class="os-cf-label">cf.</span> ' +
+          '<span class="os-cf-en">' + escapeHtml(c.word) + '</span>' +
+          (c.pos ? ' <span class="os-cf-pos">' + escapeHtml(c.pos) + '</span>' : '') +
+          (c.meaning ? ' <span class="os-cf-dash">-</span> <span class="os-cf-ko">' + escapeHtml(c.meaning) + '</span>' : '') +
+        '</p>'
+      );
+    }).join('');
+  }
+
   function renderItem(item) {
     var aid = wordAnchorId(item.word);
     var pos = String(item.pos || '').trim();
     var meaning = String(item.meaning || '').trim();
     return (
       '<article class="os-item" id="' + escapeAttr(aid) + '" data-word="' + escapeAttr(item.word) + '">' +
-        '<p class="os-cf">' +
-          '<span class="os-cf-label">cf.</span> ' +
-          '<span class="os-cf-en">' + escapeHtml(item.word) + '</span>' +
-          (pos ? ' <span class="os-cf-pos">' + escapeHtml(pos) + '</span>' : '') +
-          (meaning ? ' <span class="os-cf-ko">' + escapeHtml(meaning) + '</span>' : '') +
+        '<p class="os-head">' +
+          '<span class="os-head-en">' + escapeHtml(item.word) + '</span>' +
+          (pos ? ' <span class="os-head-pos">' + escapeHtml(pos) + '</span>' : '') +
+          (meaning ? ' <span class="os-head-ko">' + escapeHtml(meaning) + '</span>' : '') +
         '</p>' +
+        renderCfLines(item.cf) +
         (item.ko ? '<p class="os-ko">' + escapeHtml(item.ko) + '</p>' : '') +
         '<div class="os-en-row">' +
           '<p class="os-en">' + highlightEn(item.en, item.highlight || item.word) + '</p>' +

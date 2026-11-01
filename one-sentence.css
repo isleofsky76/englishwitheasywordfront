@@ -125,33 +125,60 @@
   display: none !important;
 }
 
-/* cf. 영어 품사 한글뜻 */
-.os-cf {
-  margin: 0 0 8px;
+/* 단어 품사 한글뜻 */
+.os-head {
+  margin: 0 0 4px;
   font-size: var(--os-body);
   line-height: 1.55;
   color: var(--ink);
 }
 
-.os-cf-label {
-  font-style: italic;
-  font-weight: 500;
-  color: #555;
-}
-
-.os-cf-en {
+.os-head-en {
   font-weight: 700;
   color: var(--os-blue);
 }
 
-.os-cf-pos {
+.os-head-pos {
+  font-weight: 500;
+  color: #555;
+}
+
+.os-head-ko {
+  font-weight: 500;
+  color: var(--ink);
+}
+
+/* cf. 연관어 품사 - 뜻 (있을 때만) */
+.os-cf {
+  margin: 0 0 6px;
+  font-size: 15px;
+  line-height: 1.5;
+  color: #444;
+}
+
+.os-cf-label {
+  font-style: italic;
   font-weight: 500;
   color: #666;
 }
 
-.os-cf-ko {
+.os-cf-en {
+  font-weight: 600;
+  color: #222;
+}
+
+.os-cf-pos {
   font-weight: 500;
-  color: var(--ink);
+  color: #555;
+}
+
+.os-cf-dash {
+  color: #888;
+}
+
+.os-cf-ko {
+  font-weight: 400;
+  color: #333;
 }
 
 .os-ko {

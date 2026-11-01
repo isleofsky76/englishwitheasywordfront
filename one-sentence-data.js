@@ -10,7 +10,8 @@ window.ONE_SENTENCE_FEED = [
     meaning: '홀딱 반한, 푹 빠진',
     ko: '그는 그녀를 처음 만난 순간부터 홀딱 반했다.',
     en: 'He was smitten with her from the moment they met.',
-    highlight: 'smitten'
+    highlight: 'smitten',
+    cf: [{ word: 'smite', pos: '동사', meaning: '(세게) 치다; 반하게 하다' }]
   },
   {
     word: 'requite',
@@ -18,7 +19,8 @@ window.ONE_SENTENCE_FEED = [
     meaning: '보답하다, 갚다',
     ko: '그녀는 그의 친절을 잊지 않았고, 몇 년 뒤 그 은혜를 갚았다.',
     en: 'She never forgot his kindness and requited it years later.',
-    highlight: 'requited'
+    highlight: 'requited',
+    cf: []
   },
   {
     word: 'weathered',
@@ -26,7 +28,8 @@ window.ONE_SENTENCE_FEED = [
     meaning: '풍화된, 햇볕·바람에 그을린',
     ko: '바위들이 풍화되어 기이하고 멋진 형태로 변해 있다.',
     en: 'The rocks are weathered into fantastic forms.',
-    highlight: 'weathered'
+    highlight: 'weathered',
+    cf: [{ word: 'weather', pos: '동사', meaning: '견뎌내다' }]
   },
   {
     word: 'piquant',
@@ -34,7 +37,8 @@ window.ONE_SENTENCE_FEED = [
     meaning: '톡 쏘는, 매콤한, 자극적인',
     ko: '그는 생선에 톡 쏘는 소스를 곁들여 냈다.',
     en: 'He served the fish with a piquant sauce.',
-    highlight: 'piquant'
+    highlight: 'piquant',
+    cf: []
   },
   {
     word: 'tragicomic',
@@ -42,7 +46,11 @@ window.ONE_SENTENCE_FEED = [
     meaning: '비극적이면서도 우스운, 희비극의',
     ko: '마지막에 비극적이면서도 우스운 장면이 몇 개 있었다.',
     en: 'There were a few tragicomic final scenes.',
-    highlight: 'tragicomic'
+    highlight: 'tragicomic',
+    cf: [
+      { word: 'tragic', pos: '형용사', meaning: '비극적인' },
+      { word: 'comic', pos: '형용사', meaning: '우스운, 희극적인' }
+    ]
   },
   {
     word: 'idyll',
@@ -50,6 +58,7 @@ window.ONE_SENTENCE_FEED = [
     meaning: '목가, 전원적인 시·생활',
     ko: '그녀의 시는 농장 생활에 대한 목가였다.',
     en: 'Her poem was an idyll about her life on a farm.',
-    highlight: 'idyll'
+    highlight: 'idyll',
+    cf: [{ word: 'idyllic', pos: '형용사', meaning: '목가적인' }]
   }
 ];

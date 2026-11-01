@@ -697,6 +697,12 @@ const wordOfDayEntrySchema = new mongoose.Schema({
 const WordOfDayEntry = mongoose.model('WordOfDayEntry', wordOfDayEntrySchema);
 
 // 문장으로 익히는 단어 (one-sentence.html) → 컬렉션 onesentence
+const oneSentenceCfSchema = new mongoose.Schema({
+  word: { type: String, default: '' },
+  pos: { type: String, default: '' },
+  meaning: { type: String, default: '' },
+}, { _id: false });
+
 const oneSentenceEntrySchema = new mongoose.Schema({
   word: { type: String, required: true },
   pos: { type: String, default: '' },
@@ -704,6 +710,8 @@ const oneSentenceEntrySchema = new mongoose.Schema({
   ko: { type: String, default: '' },
   en: { type: String, required: true },
   highlight: { type: String, default: '' },
+  /* 예: [{ word:'weather', pos:'동사', meaning:'견뎌내다' }] → cf. weather 동사 - 견뎌내다 */
+  cf: { type: [oneSentenceCfSchema], default: [] },
   nickname: String,
   password: String,
   date: { type: Date, default: Date.now },
@@ -2667,12 +2675,21 @@ app.post('/onesentence', requireWriteToken, async (req, res) => {
       detail: 'MongoDB connection not ready',
     });
   }
-  const { word, pos, meaning, ko, en, highlight, nickname, password } = req.body;
+  const { word, pos, meaning, ko, en, highlight, cf, nickname, password } = req.body;
   if (!word || !en || !nickname || !password) {
     return res.status(400).json({ error: 'word, en, nickname, password are required' });
   }
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
+    const cfList = Array.isArray(cf)
+      ? cf
+          .map((c) => ({
+            word: String(c?.word || '').trim(),
+            pos: String(c?.pos || '').trim(),
+            meaning: String(c?.meaning || '').trim(),
+          }))
+          .filter((c) => c.word)
+      : [];
     const newEntry = new OneSentenceEntry({
       word: String(word).trim(),
       pos: String(pos || '').trim(),
@@ -2680,6 +2697,7 @@ app.post('/onesentence', requireWriteToken, async (req, res) => {
       ko: String(ko || '').trim(),
       en: String(en).trim(),
       highlight: String(highlight || word).trim(),
+      cf: cfList,
       nickname,
       password: hashedPassword,
     });

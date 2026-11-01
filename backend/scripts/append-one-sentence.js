@@ -48,6 +48,7 @@ const SEED_ITEMS = [
     ko: '바위들이 풍화되어 기이하고 멋진 형태로 변해 있다.',
     en: 'The rocks are weathered into fantastic forms.',
     highlight: 'weathered',
+    cf: [{ word: 'weather', pos: '동사', meaning: '견뎌내다' }],
   },
 ];
 
@@ -59,12 +60,45 @@ const oneSentenceEntrySchema = new mongoose.Schema(
     ko: { type: String, default: '' },
     en: { type: String, required: true },
     highlight: { type: String, default: '' },
+    cf: {
+      type: [
+        {
+          word: { type: String, default: '' },
+          pos: { type: String, default: '' },
+          meaning: { type: String, default: '' },
+        },
+      ],
+      default: [],
+    },
     nickname: String,
     password: String,
     date: { type: Date, default: Date.now },
   },
   { collection: 'onesentence' }
 );
+
+function parseCfFromArgs() {
+  const word = argValue('--cf-word');
+  if (!word) return [];
+  return [
+    {
+      word,
+      pos: argValue('--cf-pos') || '',
+      meaning: argValue('--cf-meaning') || '',
+    },
+  ];
+}
+
+function normalizeCf(cf) {
+  if (!Array.isArray(cf)) return [];
+  return cf
+    .map((c) => ({
+      word: String(c?.word || '').trim(),
+      pos: String(c?.pos || '').trim(),
+      meaning: String(c?.meaning || '').trim(),
+    }))
+    .filter((c) => c.word);
+}
 
 function seedPasswordFor(word) {
   return `seed_password_onesentence_${String(word || 'x')
@@ -94,6 +128,7 @@ async function postEntryHttp(item) {
     ko: item.ko || '',
     en: item.en,
     highlight: item.highlight || item.word,
+    cf: normalizeCf(item.cf),
     nickname: 'admin',
     password: seedPasswordFor(item.word),
   };
@@ -137,6 +172,7 @@ async function postEntryDirect(item) {
       ko: String(item.ko || '').trim(),
       en: String(item.en).trim(),
       highlight: String(item.highlight || item.word).trim(),
+      cf: normalizeCf(item.cf),
       nickname: 'admin',
       password: hashedPassword,
     });
@@ -189,6 +225,7 @@ async function runOne() {
     ko: argValue('--ko') || '',
     en,
     highlight: argValue('--highlight') || word,
+    cf: parseCfFromArgs(),
   };
   console.log('One Sentence 추가…', hasFlag('--direct') ? 'MONGO direct' : API_BASE);
   if (hasFlag('--dry-run')) {
