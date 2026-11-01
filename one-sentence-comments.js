@@ -5,7 +5,12 @@
   'use strict';
 
   var counts = Object.create(null);
-  var badwords = { blocked: [], blockedHangulJamo: [], allowlist: [] };
+  var badwords = {
+    blockedA: [],
+    blockedB: [],
+    blockedHangulJamo: [],
+    allowlist: [],
+  };
   var listCache = Object.create(null);
   var POLICY_WARN = '사이트 규정에 어긋난 글은 관리자가 임의로 삭제할 수 있습니다.';
 
@@ -47,41 +52,73 @@
 
   function stripAllowlist(text) {
     var t = String(text || '').toLowerCase();
-    (badwords.allowlist || []).forEach(function (a) {
+    var allows = (badwords.allowlist || []).slice().sort(function (a, b) {
+      return String(b).length - String(a).length;
+    });
+    allows.forEach(function (a) {
       var needle = String(a || '')
         .toLowerCase()
         .trim();
       if (!needle) return;
-      t = t.split(needle).join(' ');
+      if (/\s/.test(needle) || /[^a-z]/i.test(needle)) {
+        t = t.split(needle).join(' ');
+      } else {
+        var re = new RegExp('(?:^|[^a-z])' + needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '(?=[^a-z]|$)', 'gi');
+        t = t.replace(re, ' ');
+      }
     });
     return t;
   }
 
-  function englishWordBoundaryHit(originalLower, word) {
+  function englishWordBoundaryHit(haystackLower, word) {
     var w = String(word || '')
       .toLowerCase()
       .trim();
     if (!w || /[^a-z]/.test(w)) return false;
-    var re = new RegExp('(?:^|[^a-z])' + w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '(?:[^a-z]|$)', 'i');
-    return re.test(originalLower);
+    var re = new RegExp('(?:^|[^a-z])' + w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '(?=[^a-z]|$)', 'i');
+    return re.test(haystackLower);
+  }
+
+  function phraseHit(haystackLower, phrase) {
+    var p = String(phrase || '')
+      .toLowerCase()
+      .trim();
+    if (!p) return false;
+    if (/\s/.test(p)) return haystackLower.indexOf(p) !== -1;
+    if (/^[a-z]+$/i.test(p)) return englishWordBoundaryHit(haystackLower, p);
+    return (
+      haystackLower.indexOf(p) !== -1 ||
+      normalizeForFilter(haystackLower).indexOf(normalizeForFilter(p)) !== -1
+    );
+  }
+
+  function listHits(haystackLower, terms) {
+    var i;
+    for (i = 0; i < (terms || []).length; i += 1) {
+      if (phraseHit(haystackLower, terms[i])) return true;
+    }
+    return false;
+  }
+
+  function autoBlockTerms() {
+    var a = badwords.blockedA || badwords.blocked || [];
+    var b = badwords.blockedB || [];
+    return a.concat(b);
   }
 
   function containsBadWords(text) {
     var originalLower = stripAllowlist(text);
     var compact = normalizeForFilter(originalLower);
-    var blocked = badwords.blocked || [];
+    var terms = autoBlockTerms();
     var jamo = badwords.blockedHangulJamo || [];
     var i;
-    for (i = 0; i < blocked.length; i += 1) {
-      var term = String(blocked[i] || '').trim();
-      if (!term) continue;
-      var tLower = term.toLowerCase();
-      if (/^[a-z]+$/i.test(term)) {
-        if (englishWordBoundaryHit(originalLower, tLower)) return true;
-        if (compact.indexOf(normalizeForFilter(tLower)) !== -1) return true;
-      } else if (originalLower.indexOf(tLower) !== -1 || compact.indexOf(normalizeForFilter(tLower)) !== -1) {
-        return true;
-      }
+    if (listHits(originalLower, terms)) return true;
+    for (i = 0; i < terms.length; i += 1) {
+      var t = String(terms[i] || '')
+        .trim()
+        .toLowerCase();
+      if (!t || /\s/.test(t)) continue;
+      if (/^[a-z0-9]+$/i.test(t) && compact.indexOf(normalizeForFilter(t)) !== -1) return true;
     }
     for (i = 0; i < jamo.length; i += 1) {
       var j = String(jamo[i] || '').trim();
@@ -133,9 +170,15 @@
 
   async function loadBadwords() {
     try {
-      var res = await fetch('comment-badwords.json?v=20261101c1', { cache: 'no-store' });
+      var res = await fetch('comment-badwords.json?v=20261101c3', { cache: 'no-store' });
       if (!res.ok) return;
-      badwords = await res.json();
+      var raw = await res.json();
+      badwords = {
+        blockedA: raw.blockedA || raw.blocked || [],
+        blockedB: raw.blockedB || [],
+        blockedHangulJamo: raw.blockedHangulJamo || [],
+        allowlist: raw.allowlist || [],
+      };
     } catch (e) {
       console.warn('[os-comments] badwords load failed', e);
     }
