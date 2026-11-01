@@ -164,9 +164,10 @@ ${sampleSite.join(', ') || '(none)'}
 Already published on the one-sentence feed (do NOT repeat, case-insensitive):
 ${existingSample.join(', ') || '(none)'}
 
-Create exactly ${count} NEW English words useful for intermediate learners.
-Prefer words related to the site themes above, or high-frequency exam/news/daily words NOT in the published list.
-Each item needs a VERY EASY example sentence (A2–B1), natural Korean translation, POS in Korean, short Korean meaning, and optional cf. related lemma.
+Create exactly ${count} NEW English words useful for upper-intermediate Korean learners (TOEFL/news level).
+Prefer less common but useful words related to the site themes above — NOT basic everyday verbs like get/make/help/gather/obtain/analyze.
+Avoid CEFR A1–A2 basic vocabulary. Target B2–C1 lemmas (e.g. reticent, piquant, weathered, deliberate).
+Each item needs a CLEAR, natural example sentence (not childish), natural Korean translation, POS in Korean, short Korean meaning, and optional cf. related lemma.
 
 Return JSON:
 {
@@ -187,12 +188,13 @@ Return JSON:
 
 Rules:
 - Exactly ${count} items in items[]
-- Easy, concrete sentences. No slang, no sexual/violent content
+- Concrete sentences adults would use (news/work/life). No slang, no sexual/violent content
 - Do NOT use markdown or bold markers (no **, __, *, backticks)
+- Do NOT pick basic words: gather, convey, essential, obtain, remarkable, navigate, persuade, contribute, anticipate, analyze, adapt, help, make, get, need, want, good, big
 - meaning: short, dictionary-like Korean
 - cf: 0–2 items only when a related form/lemma is genuinely helpful (e.g. weathered → weather). Omit empty cf
 - highlight must appear inside en (case-insensitive)
-- Do not invent obscure words`;
+- Prefer exam/news-worthy words over textbook beginner lists`;
 
   const models = [process.env.ONESENTENCE_MODEL, 'gpt-4o-mini', 'gpt-4o'].filter(
     (m, i, arr) => m && arr.indexOf(m) === i
