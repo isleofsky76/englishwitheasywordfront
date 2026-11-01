@@ -100,7 +100,7 @@
     if (!text) return '댓글 내용을 입력해 주세요.';
     if (text.length > 100) return '댓글은 100자까지 입력할 수 있어요.';
     if (nick.length > 10) return '닉네임은 10자까지 입력할 수 있어요.';
-    if (!/^\d{4}$/.test(pw)) return '비밀번호는 숫자 4자리여야 해요.';
+    if (!pw || pw.length > 14 || /\s/.test(pw)) return '비밀번호는 1~14자로 입력해 주세요. (공백 불가)';
     if (hasLink(text) || hasLink(nick)) return '링크는 포함할 수 없어요.';
     if (containsBadWords(text) || containsBadWords(nick)) return '사용할 수 없는 표현이 포함되어 있어요.';
     return '';
@@ -226,12 +226,11 @@
 
     var input = document.createElement('input');
     input.type = 'password';
-    input.inputMode = 'numeric';
-    input.maxLength = 4;
-    input.pattern = '\\d{4}';
-    input.placeholder = '숫자 4자리';
+    input.maxLength = 14;
+    input.placeholder = '1~14자';
     input.className = 'os-cmt-del-pw';
     input.setAttribute('aria-label', '삭제 비밀번호');
+    input.autocomplete = 'new-password';
 
     var msg = document.createElement('p');
     msg.className = 'os-cmt-msg';
@@ -242,8 +241,8 @@
     ok.textContent = '확인';
     ok.addEventListener('click', async function () {
       var pw = input.value;
-      if (!/^\d{4}$/.test(pw)) {
-        msg.textContent = '비밀번호는 숫자 4자리여야 해요.';
+      if (!pw || pw.length > 14 || /\s/.test(pw)) {
+        msg.textContent = '비밀번호는 1~14자로 입력해 주세요. (공백 불가)';
         return;
       }
       ok.disabled = true;
@@ -409,17 +408,16 @@
     var pwLabel = document.createElement('label');
     pwLabel.className = 'os-cmt-field';
     var pwSpan = document.createElement('span');
-    pwSpan.textContent = '비밀번호 (숫자 4자리)';
+    pwSpan.textContent = '비밀번호 (1~14자, 영문·숫자·특수문자)';
     var pwInput = document.createElement('input');
     pwInput.type = 'password';
-    pwInput.inputMode = 'numeric';
-    pwInput.maxLength = 4;
-    pwInput.pattern = '\\d{4}';
+    pwInput.maxLength = 14;
     pwInput.required = true;
     pwInput.name = 'password';
-    pwInput.placeholder = '••••';
+    pwInput.placeholder = '삭제 시 필요';
+    pwInput.autocomplete = 'new-password';
     pwInput.addEventListener('input', function () {
-      pwInput.value = pwInput.value.replace(/\D/g, '').slice(0, 4);
+      pwInput.value = pwInput.value.replace(/\s/g, '').slice(0, 14);
     });
     pwLabel.appendChild(pwSpan);
     pwLabel.appendChild(pwInput);
