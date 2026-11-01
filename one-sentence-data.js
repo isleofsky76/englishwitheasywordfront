@@ -43,7 +43,7 @@ window.ONE_SENTENCE_FEED = [
       {
         "word": "weather",
         "pos": "동사",
-        "meaning": "견뎌내다"
+        "meaning": "풍화시키다; (비바람 등을) 견뎌내다"
       }
     ]
   },
@@ -66,7 +66,7 @@ window.ONE_SENTENCE_FEED = [
     "en": "There were a few tragicomic final scenes.",
     "highlight": "tragicomic",
     "ipa": "/ˌtrædʒɪˈkɒmɪk/",
-    "ipaKo": "트레지코믹",
+    "ipaKo": "트래지코믹",
     "cf": [
       {
         "word": "tragic",
@@ -100,18 +100,17 @@ window.ONE_SENTENCE_FEED = [
   {
     "word": "deliberate",
     "pos": "형용사",
-    "meaning": "신중한, 차분한",
+    "meaning": "신중한, 차분한 (형용사) / 숙고하다 (동사)",
     "ko": "그녀는 천천히 신중한 태도로 말을 했다.",
     "en": "She spoke in a slow and deliberate way.",
     "highlight": "deliberate",
-    "ipa": "/dɪˈlɪbərɪt/",
+    "ipa": "/dɪˈlɪbərət/",
     "ipaKo": "딜리버릿",
     "cf": [
       {
         "word": "deliberate",
         "pos": "동사",
-        "meaning": "숙고하다",
-        "_id": "6ae6b17138b65fd044b76605"
+        "meaning": "숙고하다 (/dɪˈlɪbəreɪt/ 딜리버리트)"
       }
     ]
   },
@@ -166,7 +165,7 @@ window.ONE_SENTENCE_FEED = [
     "word": "vanity",
     "pos": "명사",
     "meaning": "덧없음, 허무함",
-    "ko": "죽음 앞에서 인간의 야심은 덧없어 보인다.",
+    "ko": "철학자들은 죽음 앞에서 인간 야망의 덧없음에 대해 글을 쓴다.",
     "en": "Philosophers write about the vanity of human ambition in the face of death.",
     "highlight": "vanity",
     "ipa": "/ˈvænɪti/",
@@ -246,7 +245,7 @@ window.ONE_SENTENCE_FEED = [
     "en": "The scrupulous accountant ensured every transaction was accurately recorded.",
     "highlight": "scrupulous",
     "ipa": "/ˈskruːpjələs/",
-    "ipaKo": "스크루퓨러스",
+    "ipaKo": "스크루퓰러스",
     "cf": []
   },
   {
@@ -355,8 +354,8 @@ window.ONE_SENTENCE_FEED = [
     "ko": "그의 탕진하는 소비 습관은 재정적인 파산으로 이어졌다.",
     "en": "His profligate spending habits led to financial ruin.",
     "highlight": "profligate",
-    "ipa": "/ˈprɒflɪɡət/",
-    "ipaKo": "프롤리게이트",
+    "ipa": "/ˈprɑːflɪɡət/",
+    "ipaKo": "프라플리거트",
     "cf": []
   },
   {
@@ -410,7 +409,7 @@ window.ONE_SENTENCE_FEED = [
     "ko": "그의 낭비하는 생활 방식은 결국 그의 몰락으로 이어졌다.",
     "en": "His prodigal lifestyle eventually led to his downfall.",
     "highlight": "prodigal",
-    "ipa": "/ˈprɒdɪɡəl/",
+    "ipa": "/ˈprɑːdɪɡəl/",
     "ipaKo": "프라디걸",
     "cf": []
   },
@@ -418,8 +417,8 @@ window.ONE_SENTENCE_FEED = [
     "word": "querulous",
     "pos": "형용사",
     "meaning": "불평하는",
-    "ko": "그녀의 불평하는 태도는 함께 일하기 어렵게 만들었다.",
-    "en": "Her querulous attitude made it difficult to work with her.",
+    "ko": "그녀의 불평하는 태도 때문에 그녀와 함께 일하기 어려웠다.",
+    "en": "Her querulous attitude made it hard to work with her.",
     "highlight": "querulous",
     "ipa": "/ˈkwɛrələs/",
     "ipaKo": "퀘러러스",
@@ -429,7 +428,7 @@ window.ONE_SENTENCE_FEED = [
     "word": "fastidious",
     "pos": "형용사",
     "meaning": "까다로운",
-    "ko": "그는 자신의 일에 대해 까다롭게 구하며 모든 것이 완벽하도록 했다.",
+    "ko": "그는 자신의 일에 대해 까다롭게 굴며 모든 것이 완벽하도록 했다.",
     "en": "He was fastidious about his work, ensuring everything was perfect.",
     "highlight": "fastidious",
     "ipa": "/fæˈstɪdiəs/",
@@ -443,7 +442,7 @@ window.ONE_SENTENCE_FEED = [
     "ko": "그 저항하는 학생은 교사의 지시를 따르기를 거부했다.",
     "en": "The recalcitrant student refused to follow the teacher's instructions.",
     "highlight": "recalcitrant",
-    "ipa": "/rɪˈkælɪstrənt/",
+    "ipa": "/rɪˈkælsɪtrənt/",
     "ipaKo": "리칼시트런트",
     "cf": []
   },
@@ -487,7 +486,7 @@ window.ONE_SENTENCE_FEED = [
     "word": "absurdist",
     "pos": "형용사",
     "meaning": "부조리한, 부조리주의의",
-    "ko": "어떤 이메일은 부조리한 음시처럼 읽힌다.",
+    "ko": "어떤 이메일은 부조리한 교향시처럼 읽힌다.",
     "en": "Some of the emails read like absurdist tone poems.",
     "highlight": "absurdist",
     "ipa": "/əbˈsɜːrdɪst/",
@@ -540,8 +539,8 @@ window.ONE_SENTENCE_FEED = [
   {
     "word": "acquisitiveness",
     "pos": "명사",
-    "meaning": "획득욕, 소유욕",
-    "ko": "그의 지나친 소유욕이 결국 친구들을 멀어지게 했다.",
+    "meaning": "소유욕, 탐욕",
+    "ko": "그의 소유욕 때문에 그는 나쁜 거래까지 포함해 모든 거래를 쫓아다녔다.",
     "en": "His acquisitiveness made him chase every deal, even the bad ones.",
     "highlight": "acquisitiveness",
     "ipa": "/əˈkwɪzətɪvnəs/",
@@ -559,7 +558,7 @@ window.ONE_SENTENCE_FEED = [
     "word": "anticipated",
     "pos": "형용사",
     "meaning": "기대되던, 예상된",
-    "ko": "새 정책에 대한 기대되던 발표는 사무실에 화제를 불러일으켰다.",
+    "ko": "새 정책에 대한 기대를 모았던 발표는 사무실에 화제를 불러일으켰다.",
     "en": "The anticipated announcement regarding the new policy created a buzz in the office.",
     "highlight": "anticipated",
     "ipa": "/ænˈtɪsɪpeɪtɪd/",
@@ -591,13 +590,19 @@ window.ONE_SENTENCE_FEED = [
   {
     "word": "articulate",
     "pos": "형용사/동사",
-    "meaning": "(생각을) 분명히 표현하는; 또렷이 말하다",
+    "meaning": "(생각을) 분명히 표현하다; 또렷이 말하다 (동사) / 또렷한 (형용사)",
     "ko": "그녀는 발표 중에 자신의 생각을 분명히 표현할 수 있었다.",
     "en": "She was able to articulate her thoughts clearly during the presentation.",
     "highlight": "articulate",
     "ipa": "/ɑːrˈtɪkjuleɪt/",
-    "ipaKo": "아르티큘레이트",
-    "cf": []
+    "ipaKo": "아티큘레이트",
+    "cf": [
+      {
+        "word": "articulate",
+        "pos": "형용사",
+        "meaning": "또렷한, 분명한 (/ɑːrˈtɪkjələt/ 아티큘릿)"
+      }
+    ]
   },
   {
     "word": "appraisal",
@@ -618,7 +623,7 @@ window.ONE_SENTENCE_FEED = [
     "en": "He is particularly adept at negotiating complex contracts.",
     "highlight": "adept",
     "ipa": "/əˈdɛpt/",
-    "ipaKo": "어덥트",
+    "ipaKo": "어뎁트",
     "cf": []
   },
   {
@@ -636,7 +641,7 @@ window.ONE_SENTENCE_FEED = [
     "word": "artisanal",
     "pos": "형용사",
     "meaning": "수공예의, 장인이 만든",
-    "ko": "그 식당은 지역 재료로 만든 수공예의 빵을 전문으로 한다.",
+    "ko": "그 식당은 지역 재료로 만든 수제 빵을 전문으로 한다.",
     "en": "The restaurant specializes in artisanal bread made from local ingredients.",
     "highlight": "artisanal",
     "ipa": "/ɑːrˈtɪzənl/",
@@ -668,9 +673,9 @@ window.ONE_SENTENCE_FEED = [
   {
     "word": "adjudicate",
     "pos": "동사",
-    "meaning": "판결하다, 심판하다",
-    "ko": "위원회는 다음 주에 대회의 출품작을 판결할 것이다.",
-    "en": "The committee will adjudicate the entries for the competition next week.",
+    "meaning": "판결하다, 심판하다, 심사하다",
+    "ko": "위원회는 다음 주에 대회 출품작을 심사할 것이다.",
+    "en": "The committee will adjudicate the contest entries next week.",
     "highlight": "adjudicate",
     "ipa": "/əˈdʒuːdɪkeɪt/",
     "ipaKo": "어주디케이트",
@@ -690,13 +695,19 @@ window.ONE_SENTENCE_FEED = [
   {
     "word": "aggrieve",
     "pos": "동사",
-    "meaning": "(부당하게) 괴롭히다, 분개하게 하다",
-    "ko": "직장에서의 불공정한 대우는 많은 직원들을 괴롭히기 시작했다.",
-    "en": "The unfair treatment at work began to aggrieve many employees.",
-    "highlight": "aggrieve",
+    "meaning": "(부당하게) 괴롭히다, 분개하게 하다; (주로 aggrieved로) 분개한",
+    "ko": "많은 직원들이 갑작스러운 급여 삭감에 분개했다.",
+    "en": "Many employees felt aggrieved by the sudden pay cut.",
+    "highlight": "aggrieved",
     "ipa": "/əˈɡriːv/",
     "ipaKo": "어그리브",
-    "cf": []
+    "cf": [
+      {
+        "word": "aggrieved",
+        "pos": "형용사",
+        "meaning": "분개한, 억울한"
+      }
+    ]
   },
   {
     "word": "antic",
@@ -706,18 +717,18 @@ window.ONE_SENTENCE_FEED = [
     "en": "The clown's antics kept the audience entertained throughout the show.",
     "highlight": "antics",
     "ipa": "/ˈæntɪk/",
-    "ipaKo": "안틱",
+    "ipaKo": "앤틱",
     "cf": []
   },
   {
     "word": "aquiline",
     "pos": "형용사",
     "meaning": "(코가) 매부리 모양의; 독수리 같은",
-    "ko": "그의 매부리 코는 그에게 독특한 외모를 주었다.",
-    "en": "His aquiline nose gave him a distinguished appearance.",
+    "ko": "그의 매부리코는 그에게 기품 있는 인상을 주었다.",
+    "en": "His aquiline nose gave him a distinguished look.",
     "highlight": "aquiline",
     "ipa": "/ˈækwɪlaɪn/",
-    "ipaKo": "아퀼라인",
+    "ipaKo": "애퀼라인",
     "cf": []
   },
   {
@@ -805,7 +816,7 @@ window.ONE_SENTENCE_FEED = [
     "en": "Her algophobia made it difficult for her to seek medical help.",
     "highlight": "algophobia",
     "ipa": "/ˌælɡəˈfoʊbiə/",
-    "ipaKo": "알고포비아",
+    "ipaKo": "앨거포비아",
     "cf": []
   }
 ];
