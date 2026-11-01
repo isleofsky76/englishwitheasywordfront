@@ -161,10 +161,40 @@
     );
   }
 
+  function letterOf(word) {
+    var ch = String(word || '').trim().charAt(0).toUpperCase();
+    return /[A-Z]/.test(ch) ? ch : '#';
+  }
+
+  function sortByWord(items) {
+    return items.slice().sort(function (a, b) {
+      var aw = String(a.word || '').toLowerCase();
+      var bw = String(b.word || '').toLowerCase();
+      if (aw < bw) return -1;
+      if (aw > bw) return 1;
+      return String(a.meaning || '').localeCompare(String(b.meaning || ''), 'ko');
+    });
+  }
+
+  function groupByLetter(items) {
+    var sorted = sortByWord(items);
+    var groups = [];
+    var cur = null;
+    sorted.forEach(function (it) {
+      var letter = letterOf(it.word);
+      if (!cur || cur.letter !== letter) {
+        cur = { letter: letter, items: [] };
+        groups.push(cur);
+      }
+      cur.items.push(it);
+    });
+    return groups;
+  }
+
   function uniqueWords(items) {
     var seen = Object.create(null);
     var out = [];
-    items.forEach(function (it) {
+    sortByWord(items).forEach(function (it) {
       var key = String(it.word || '').toLowerCase();
       if (!key || seen[key]) return;
       seen[key] = true;
@@ -183,12 +213,27 @@
       return;
     }
     tags.removeAttribute('hidden');
-    tags.innerHTML = words.map(function (w) {
-      return (
+    var html = '';
+    var lastLetter = '';
+    words.forEach(function (w) {
+      var letter = letterOf(w);
+      if (letter !== lastLetter) {
+        lastLetter = letter;
+        html +=
+          '<span class="os-tag-letter" id="os-tag-' +
+          escapeAttr(letter) +
+          '">' +
+          escapeHtml(letter) +
+          '</span>';
+      }
+      html +=
         '<button type="button" class="os-tag" data-os-jump="' +
-          escapeAttr(w) + '">' + escapeHtml(w) + '</button>'
-      );
-    }).join('');
+        escapeAttr(w) +
+        '">' +
+        escapeHtml(w) +
+        '</button>';
+    });
+    tags.innerHTML = html;
   }
 
   function filterItems(items, q) {
@@ -203,11 +248,46 @@
   function renderFeed(items) {
     var feed = document.getElementById('os-feed');
     var count = document.getElementById('os-count');
+    var index = document.getElementById('os-alpha');
     if (!feed) return;
     if (!items.length) {
       feed.innerHTML = '<p class="os-empty">아직 등록된 문장이 없습니다.</p>';
+      if (index) {
+        index.hidden = true;
+        index.innerHTML = '';
+      }
     } else {
-      feed.innerHTML = items.map(renderItem).join('');
+      var groups = groupByLetter(items);
+      feed.innerHTML = groups
+        .map(function (g) {
+          return (
+            '<section class="os-letter-group" id="os-letter-' +
+            escapeAttr(g.letter) +
+            '" aria-label="' +
+            escapeAttr(g.letter) +
+            '">' +
+            '<h2 class="os-letter-head">' +
+            escapeHtml(g.letter) +
+            '</h2>' +
+            g.items.map(renderItem).join('') +
+            '</section>'
+          );
+        })
+        .join('');
+      if (index) {
+        index.hidden = false;
+        index.innerHTML = groups
+          .map(function (g) {
+            return (
+              '<a class="os-alpha-link" href="#os-letter-' +
+              escapeAttr(g.letter) +
+              '">' +
+              escapeHtml(g.letter) +
+              '</a>'
+            );
+          })
+          .join('');
+      }
     }
     if (count) count.textContent = '총 ' + items.length + '개';
   }

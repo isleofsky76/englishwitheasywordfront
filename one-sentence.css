@@ -103,10 +103,57 @@
   background: var(--line);
 }
 
-/* 일기장처럼 한 줄기로 이어지는 피드 */
+.os-alpha {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 10px;
+  margin: 18px 0 0;
+  padding: 0;
+}
+
+.os-alpha[hidden] {
+  display: none !important;
+}
+
+.os-alpha-link {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1a1a1a;
+  text-decoration: none;
+  min-width: 1.2em;
+  text-align: center;
+}
+
+.os-alpha-link:hover {
+  color: var(--os-blue);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* 알파벳별 분류 피드 */
 .os-feed {
   display: block;
   padding-top: 8px;
+}
+
+.os-letter-group {
+  margin: 0;
+  padding: 0;
+}
+
+.os-letter-head {
+  margin: 28px 0 4px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--line);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #222;
+  scroll-margin-top: 88px;
+}
+
+.os-letter-group:first-child .os-letter-head {
+  margin-top: 12px;
 }
 
 .os-item {
@@ -117,7 +164,7 @@
   scroll-margin-top: 88px;
 }
 
-.os-item:last-child {
+.os-letter-group .os-item:last-child {
   border-bottom: none;
 }
 
@@ -273,6 +320,19 @@
 
 .os-tags[hidden] {
   display: none !important;
+}
+
+.os-tag-letter {
+  flex-basis: 100%;
+  margin-top: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #888;
+}
+
+.os-tags .os-tag-letter:first-child {
+  margin-top: 0;
 }
 
 .os-tag {
