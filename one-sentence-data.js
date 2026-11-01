@@ -2685,5 +2685,302 @@ window.ONE_SENTENCE_FEED = [
         "meaning": "허구의 (혼동 주의)"
       }
     ]
+  },
+  {
+    "word": "gimmick",
+    "pos": "명사",
+    "meaning": "(관심을 끌기 위한) 술책, 꼼수, 눈속임용 장치",
+    "ko": "그 사은품은 그냥 마케팅 꼼수일 뿐이다.",
+    "en": "The free gift is just a marketing gimmick.",
+    "highlight": "gimmick",
+    "ipa": "/ˈɡɪmɪk/",
+    "ipaKo": "기믹",
+    "cf": []
+  },
+  {
+    "word": "grotesque",
+    "pos": "형용사",
+    "meaning": "기괴한, 괴상한",
+    "ko": "그 조각상은 기괴한 얼굴을 하고 있었다.",
+    "en": "The statue had a grotesque face.",
+    "highlight": "grotesque",
+    "ipa": "/ɡroʊˈtesk/",
+    "ipaKo": "그로우테스크",
+    "cf": []
+  },
+  {
+    "word": "grotesque",
+    "pos": "형용사",
+    "meaning": "터무니없는, 어처구니없는",
+    "ko": "그건 터무니없는 돈 낭비다.",
+    "en": "It's a grotesque waste of money.",
+    "highlight": "grotesque",
+    "ipa": "/ɡroʊˈtesk/",
+    "ipaKo": "그로우테스크",
+    "cf": []
+  },
+  {
+    "word": "grotesque",
+    "pos": "명사",
+    "meaning": "(미술) 그로테스크 양식; 괴상한 모습의 사람이나 물건",
+    "ko": "교회 벽은 괴기스러운 조각들로 장식되어 있다.",
+    "en": "The church walls are decorated with grotesques.",
+    "highlight": "grotesques",
+    "ipa": "/ɡroʊˈtesk/",
+    "ipaKo": "그로우테스크",
+    "cf": []
+  },
+  {
+    "word": "garbled",
+    "pos": "형용사",
+    "meaning": "(말이나 메시지가) 뒤죽박죽인, 왜곡된, 알아듣기 힘든",
+    "ko": "음성 메시지가 너무 뭉개져서 알아들을 수 없었다.",
+    "en": "The voicemail was too garbled to understand.",
+    "highlight": "garbled",
+    "ipa": "/ˈɡɑːrbld/",
+    "ipaKo": "가블드",
+    "cf": []
+  },
+  {
+    "word": "gingerly",
+    "pos": "부사",
+    "meaning": "조심조심, 신중하게",
+    "ko": "그녀는 멍든 곳을 조심스럽게 만졌다.",
+    "en": "She gingerly touched the bruise.",
+    "highlight": "gingerly",
+    "ipa": "/ˈdʒɪndʒərli/",
+    "ipaKo": "진절리",
+    "cf": []
+  },
+  {
+    "word": "gingerly",
+    "pos": "형용사",
+    "meaning": "조심스러운",
+    "ko": "그는 얼음 위에서 조심스럽게 몇 걸음을 디뎠다.",
+    "en": "He took a few gingerly steps on the ice.",
+    "highlight": "gingerly",
+    "ipa": "/ˈdʒɪndʒərli/",
+    "ipaKo": "진절리",
+    "cf": []
+  },
+  {
+    "word": "ginormous",
+    "pos": "형용사",
+    "meaning": "(구어) 엄청나게 큰 (giant + enormous)",
+    "ko": "그들은 어마어마하게 큰 집에 산다.",
+    "en": "They live in a ginormous house.",
+    "highlight": "ginormous",
+    "ipa": "/dʒaɪˈnɔːrməs/",
+    "ipaKo": "자이노머스",
+    "cf": []
+  },
+  {
+    "word": "gully",
+    "pos": "명사",
+    "meaning": "(빗물에 파인) 협곡, 도랑, 골짜기",
+    "ko": "차가 도랑으로 미끄러져 들어갔다.",
+    "en": "The car slid into a gully.",
+    "highlight": "gully",
+    "ipa": "/ˈɡʌli/",
+    "ipaKo": "걸리",
+    "cf": []
+  },
+  {
+    "word": "glower",
+    "pos": "동사",
+    "meaning": "노려보다, 쏘아보다",
+    "ko": "그는 웨이터를 노려보았다.",
+    "en": "He glowered at the waiter.",
+    "highlight": "glowered",
+    "ipa": "/ˈɡlaʊər/",
+    "ipaKo": "글라우어",
+    "cf": []
+  },
+  {
+    "word": "glower",
+    "pos": "명사",
+    "meaning": "노려봄, 성난 표정",
+    "ko": "그녀는 노려보는 것으로 대답했다.",
+    "en": "She answered with a glower.",
+    "highlight": "glower",
+    "ipa": "/ˈɡlaʊər/",
+    "ipaKo": "글라우어",
+    "cf": []
+  },
+  {
+    "word": "grubby",
+    "pos": "형용사",
+    "meaning": "더러운, 지저분한; (비유) 비열한, 추잡한",
+    "ko": "저녁 먹기 전에 그 더러운 손 좀 씻어라.",
+    "en": "Wash your grubby hands before dinner.",
+    "highlight": "grubby",
+    "ipa": "/ˈɡrʌbi/",
+    "ipaKo": "그러비",
+    "cf": []
+  },
+  {
+    "word": "guffaw",
+    "pos": "명사",
+    "meaning": "큰 웃음, 너털웃음",
+    "ko": "그의 농담에 커다란 웃음이 터졌다.",
+    "en": "His joke drew a loud guffaw.",
+    "highlight": "guffaw",
+    "ipa": "/ɡəˈfɔː/",
+    "ipaKo": "거포",
+    "cf": []
+  },
+  {
+    "word": "guffaw",
+    "pos": "동사",
+    "meaning": "껄껄 웃다, 너털웃음을 터뜨리다",
+    "ko": "관객들은 그 장면에서 껄껄 웃었다.",
+    "en": "The audience guffawed at the scene.",
+    "highlight": "guffawed",
+    "ipa": "/ɡəˈfɔː/",
+    "ipaKo": "거포",
+    "cf": []
+  },
+  {
+    "word": "go ballistic",
+    "pos": "관용구",
+    "meaning": "(구어) 몹시 화를 내다, 길길이 날뛰다",
+    "ko": "아빠는 청구서를 보고 길길이 날뛰셨다.",
+    "en": "My dad went ballistic when he saw the bill.",
+    "highlight": "went ballistic",
+    "ipa": "/ɡoʊ bəˈlɪstɪk/",
+    "ipaKo": "고우 벌리스틱",
+    "cf": []
+  },
+  {
+    "word": "gravy train",
+    "pos": "명사",
+    "meaning": "(구어) 노력 없이 쉽게 돈 버는 일, 꿀 빠는 자리",
+    "ko": "일부 컨설턴트들에게 그 프로젝트는 꿀단지였다.",
+    "en": "For some consultants, the project was a gravy train.",
+    "highlight": "gravy train",
+    "ipa": "/ˈɡreɪvi treɪn/",
+    "ipaKo": "그레이비 트레인",
+    "cf": []
+  },
+  {
+    "word": "gremlin",
+    "pos": "명사",
+    "meaning": "그렘린(기계 고장을 일으킨다는 상상 속 요정); (비유) 원인 모를 고장",
+    "ko": "원인 모를 시스템 오류로 웹사이트가 다운됐다.",
+    "en": "A gremlin in the system crashed the website.",
+    "highlight": "gremlin",
+    "ipa": "/ˈɡremlɪn/",
+    "ipaKo": "그렘린",
+    "cf": []
+  },
+  {
+    "word": "grizzled",
+    "pos": "형용사",
+    "meaning": "(머리나 수염이) 희끗희끗한; 노련한, 산전수전 다 겪은",
+    "ko": "희끗희끗한 머리의 참전용사가 전쟁 이야기를 들려주었다.",
+    "en": "The grizzled veteran told stories of the war.",
+    "highlight": "grizzled",
+    "ipa": "/ˈɡrɪzld/",
+    "ipaKo": "그리즐드",
+    "cf": []
+  },
+  {
+    "word": "gastronomic",
+    "pos": "형용사",
+    "meaning": "미식의, 요리의",
+    "ko": "리옹은 미식 전통으로 유명하다.",
+    "en": "Lyon is famous for its gastronomic traditions.",
+    "highlight": "gastronomic",
+    "ipa": "/ˌɡæstrəˈnɑːmɪk/",
+    "ipaKo": "개스트러나믹",
+    "cf": []
+  },
+  {
+    "word": "grogginess",
+    "pos": "명사",
+    "meaning": "(잠이 덜 깨거나 약 기운으로) 몽롱함, 비틀거림",
+    "ko": "몽롱함은 그 약의 흔한 부작용이다.",
+    "en": "Grogginess is a common side effect of the medicine.",
+    "highlight": "Grogginess",
+    "ipa": "/ˈɡrɑːɡinəs/",
+    "ipaKo": "그라기니스",
+    "cf": []
+  },
+  {
+    "word": "gesticulate",
+    "pos": "동사",
+    "meaning": "(말하면서) 몸짓을 하다, 손짓을 크게 하다",
+    "ko": "그는 설명하면서 손짓을 요란하게 했다.",
+    "en": "He gesticulated wildly as he explained.",
+    "highlight": "gesticulated",
+    "ipa": "/dʒeˈstɪkjəleɪt/",
+    "ipaKo": "제스티큘레이트",
+    "cf": []
+  },
+  {
+    "word": "goggle",
+    "pos": "동사",
+    "meaning": "(놀라서) 눈을 휘둥그레 뜨고 보다",
+    "ko": "관광객들이 그 거대한 건물을 눈이 휘둥그레져 쳐다보았다.",
+    "en": "Tourists goggled at the huge building.",
+    "highlight": "goggled",
+    "ipa": "/ˈɡɑːɡl/",
+    "ipaKo": "가글",
+    "cf": []
+  },
+  {
+    "word": "goggles",
+    "pos": "명사",
+    "meaning": "(복수) 고글, 보호 안경",
+    "ko": "실험실에서는 보안경을 써라.",
+    "en": "Wear safety goggles in the lab.",
+    "highlight": "goggles",
+    "ipa": "/ˈɡɑːɡlz/",
+    "ipaKo": "가글즈",
+    "cf": []
+  },
+  {
+    "word": "garrulous",
+    "pos": "형용사",
+    "meaning": "말이 많은, 수다스러운",
+    "ko": "수다스러운 택시 기사는 가는 내내 말을 했다.",
+    "en": "The garrulous taxi driver talked the whole way.",
+    "highlight": "garrulous",
+    "ipa": "/ˈɡærələs/",
+    "ipaKo": "개럴러스",
+    "cf": []
+  },
+  {
+    "word": "guttural",
+    "pos": "형용사",
+    "meaning": "목구멍에서 나는, 후음의, 거친 소리의",
+    "ko": "개가 낮고 거친 소리로 으르렁거렸다.",
+    "en": "The dog let out a low, guttural growl.",
+    "highlight": "guttural",
+    "ipa": "/ˈɡʌtərəl/",
+    "ipaKo": "거터럴",
+    "cf": []
+  },
+  {
+    "word": "guttural",
+    "pos": "명사",
+    "meaning": "(음성학) 후음",
+    "ko": "독일어에는 후음이 여럿 있다.",
+    "en": "German has several gutturals.",
+    "highlight": "gutturals",
+    "ipa": "/ˈɡʌtərəl/",
+    "ipaKo": "거터럴",
+    "cf": []
+  },
+  {
+    "word": "genus",
+    "pos": "명사",
+    "meaning": "(생물 분류) 속(屬); 종류, 부류 (복수: genera /ˈdʒenərə/ 제너러)",
+    "ko": "사자와 호랑이는 표범속에 속한다.",
+    "en": "Lions and tigers belong to the genus Panthera.",
+    "highlight": "genus",
+    "ipa": "/ˈdʒiːnəs/",
+    "ipaKo": "지너스",
+    "cf": []
   }
 ];
