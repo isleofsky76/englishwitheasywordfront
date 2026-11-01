@@ -464,5 +464,23 @@ window.ONE_SENTENCE_FEED = [
         "_id": "6ae6b9b2fe1884a5020c498a"
       }
     ]
+  },
+  {
+    "word": "ambient",
+    "pos": "형용사",
+    "meaning": "주변의, 주위의",
+    "ko": "주변의 온도·빛·사정이 작업에 영향을 줄 수 있다.",
+    "en": "Check the ambient temperature, light, and conditions before you start.",
+    "highlight": "ambient",
+    "ipa": "/ˈæmbiənt/",
+    "ipaKo": "앰비언트",
+    "cf": [
+      {
+        "word": "ambience",
+        "pos": "명사",
+        "meaning": "분위기, 환경",
+        "_id": "6ae6ba0bf5c6f4738894fe4c"
+      }
+    ]
   }
 ];
