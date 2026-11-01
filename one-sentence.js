@@ -113,14 +113,14 @@
     );
   }
 
-  function uniqueWords(items) {
+  function uniqueWordEntries(items) {
     var seen = Object.create(null);
     var out = [];
     items.forEach(function (it) {
       var key = String(it.word || '').toLowerCase();
       if (!key || seen[key]) return;
       seen[key] = true;
-      out.push(it.word);
+      out.push({ word: it.word, pos: String(it.pos || '').trim() });
     });
     return out;
   }
@@ -128,18 +128,20 @@
   function renderTags(items) {
     var tags = document.getElementById('os-tags');
     if (!tags) return;
-    var words = uniqueWords(items);
-    if (!words.length) {
+    var entries = uniqueWordEntries(items);
+    if (!entries.length) {
       tags.setAttribute('hidden', '');
       tags.innerHTML = '';
       return;
     }
     tags.removeAttribute('hidden');
-    /* 단어 단어 단어 … 클릭 시 위로 이동 */
-    tags.innerHTML = words.map(function (w) {
+    /* 단어(+품사) 나열 … 클릭 시 위로 이동 */
+    tags.innerHTML = entries.map(function (e) {
       return (
-        '<button type="button" class="os-tag" data-os-jump="' +
-          escapeAttr(w) + '">' + escapeHtml(w) + '</button>'
+        '<button type="button" class="os-tag" data-os-jump="' + escapeAttr(e.word) + '">' +
+          '<span class="os-tag-word">' + escapeHtml(e.word) + '</span>' +
+          (e.pos ? '<span class="os-tag-pos">' + escapeHtml(e.pos) + '</span>' : '') +
+        '</button>'
       );
     }).join('');
   }
