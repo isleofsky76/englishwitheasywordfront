@@ -75,6 +75,20 @@
     return null;
   }
 
+  function cleanCfMeaning(raw) {
+    let s = String(raw || '').replace(/\s+/g, ' ').trim();
+    if (!s) return '';
+    s = s.split(/\s*cf\./i)[0];
+    s = s.split(/※/)[0];
+    s = s.split(/\s+\d{1,2}\.\s+/)[0];
+    const withPos = s.match(
+      /^(.*?)(?:\s*[\(（]\s*(?:명|동|형|부|숙|관|감|형용사|동사|명사|부사)[^\)）]*[\)）])/
+    );
+    if (withPos) s = withPos[1];
+    else s = s.replace(/\s*[\(（][^\)）]{0,12}[\)）]\s*$/u, '');
+    return s.replace(/^[,，、.\s]+|[,，、.\s]+$/g, '').trim();
+  }
+
   function meaningFromNewsCard(node, hoveredWord) {
     const e = node && (node.nodeType === 1 ? node : node.parentElement);
     if (!e) return '';
@@ -95,12 +109,19 @@
     let meaning = meaningEl ? String(meaningEl.textContent || '').trim() : '';
     if (!meaning) {
       const blob = String(card.textContent || '');
-      const cf = blob.match(/\bcf\.\s*[^:：]+[:：]\s*([^\n]+)/i);
-      if (cf) meaning = cf[1].replace(/\([^)]*\)\s*$/, '').trim();
+      const escaped = expr
+        ? expr.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+        : '[^:：]+';
+      const cf = blob.match(
+        new RegExp('cf\\.\\s*(?:' + escaped + ')\\s*[:：]\\s*(.+)$', 'i')
+      );
+      if (cf) meaning = cf[1];
     }
+    meaning = cleanCfMeaning(meaning);
     if (!meaning) return '';
     if (!expr) return meaning;
-    if (expr === hw || expr.indexOf(hw) !== -1 || hw.indexOf(expr) !== -1) return meaning;
+    /* 해당 카드의 표제어와 일치할 때만 */
+    if (expr === hw || expr.split(/[\s/]+/).indexOf(hw) !== -1) return meaning;
     return '';
   }
 

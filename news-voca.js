@@ -354,6 +354,21 @@ function vvBindTtsButtons(container) {
     });
 }
 
+/** cf. 뒤 뜻만 남기고 다음 번호·다음 단어 조각은 제거 */
+function cleanNewsCfMeaning(raw) {
+    let s = String(raw || '').replace(/\s+/g, ' ').trim();
+    if (!s) return '';
+    s = s.split(/\s*cf\./i)[0];
+    s = s.split(/※/)[0];
+    s = s.split(/\s+\d{1,2}\.\s+/)[0];
+    const withPos = s.match(
+        /^(.*?)(?:\s*[\(（]\s*(?:명|동|형|부|숙|관|감|형용사|동사|명사|부사)[^\)）]*[\)）])/
+    );
+    if (withPos) s = withPos[1];
+    else s = s.replace(/\s*[\(（][^\)）]{0,12}[\)）]\s*$/u, '');
+    return s.replace(/^[,，、.\s]+|[,，、.\s]+$/g, '').trim();
+}
+
 /** 뉴스 본문에서 단어→뜻을 모아 사전 팝업(DICT_WORDS)에 넣음 */
 function publishNewsDictWords(root) {
     const map = Object.create(null);
@@ -364,15 +379,9 @@ function publishNewsDictWords(root) {
             .replace(/\s+/g, ' ')
             .trim()
             .toLowerCase();
-        let meaning = String(rawMeaning || '')
-            .replace(/\s+/g, ' ')
-            .replace(/\([^)]*\)\s*$/, '')
-            .trim();
+        const meaning = cleanNewsCfMeaning(rawMeaning);
         if (!word || !meaning || !/[a-z]/.test(word)) return;
         if (!map[word]) map[word] = { meaning: meaning, pos: '' };
-        const parts = word.split(/[\s/]+/).filter(Boolean);
-        if (parts.length === 1) return;
-        /* 구 표현은 전체 키만 기본, 하이픈 합성어는 통째로 유지 */
     }
 
     if (root) {
@@ -382,22 +391,25 @@ function publishNewsDictWords(root) {
             put(w && w.textContent, m && m.textContent);
         });
 
-        const blob = String(root.textContent || '');
-        const cfRe = /\bcf\.\s*([^:：\n]+?)\s*[:：]\s*([^\n]+?)(?=\s*(?:\bcf\.|※|$))/gi;
-        let m;
-        while ((m = cfRe.exec(blob))) {
-            put(m[1], m[2]);
-        }
+        /* 섹션 단위로만 파싱 — 전체 textContent면 다음 항목이 붙음 */
+        root.querySelectorAll('.nv-word-section, .rd-expr, p.nv-narrative-text, p.nv-narrative-def').forEach((sec) => {
+            const text = String(sec.textContent || '');
+            const cfRe = /\bcf\.\s*([^:：]+?)\s*[:：]\s*(.+)$/i;
+            const m = text.match(cfRe);
+            if (m) put(m[1], m[2]);
+        });
 
         root.querySelectorAll('mark.nv-hl, .nv-hl').forEach((mark) => {
-            const host = mark.closest('p, .nv-narrative-text, .rd-expr-en') || mark.parentElement;
+            const host =
+                mark.closest('.nv-word-section, .rd-expr, p, .nv-narrative-text') ||
+                mark.parentElement;
             if (!host) return;
             const text = host.textContent || '';
             const word = (mark.textContent || '').trim();
-            const cf = text.match(new RegExp(
-                'cf\\.\\s*' + word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\s*[:：]\\s*([^\\n]+)',
-                'i'
-            ));
+            const escaped = word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            const cf = text.match(
+                new RegExp('cf\\.\\s*' + escaped + '\\s*[:：]\\s*(.+)$', 'i')
+            );
             if (cf) put(word, cf[1]);
         });
     }
@@ -413,7 +425,7 @@ function ensureNewsDictLookup() {
     );
     if (document.querySelector('script[data-dict-lookup="1"]')) return;
     const s = document.createElement('script');
-    s.src = '/dict-lookup.js?v=20261101nv1';
+    s.src = '/dict-lookup.js?v=20261101nv2';
     s.defer = true;
     s.setAttribute('data-dict-lookup', '1');
     document.body.appendChild(s);
