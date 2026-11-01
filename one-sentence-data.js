@@ -65,8 +65,8 @@ window.ONE_SENTENCE_FEED = [
     "ko": "마지막에 비극적이면서도 우스운 장면이 몇 개 있었다.",
     "en": "There were a few tragicomic final scenes.",
     "highlight": "tragicomic",
-    "ipa": "/ˌtrædʒɪˈkɒmɪk/",
-    "ipaKo": "트래지코믹",
+    "ipa": "/ˌtrædʒɪˈkɑːmɪk/",
+    "ipaKo": "트래지카믹",
     "cf": [
       {
         "word": "tragic",
@@ -110,7 +110,7 @@ window.ONE_SENTENCE_FEED = [
       {
         "word": "deliberate",
         "pos": "동사",
-        "meaning": "숙고하다 (/dɪˈlɪbəreɪt/ 딜리버리트)"
+        "meaning": "숙고하다 (/dɪˈlɪbəreɪt/ 딜리버레이트)"
       }
     ]
   },
@@ -387,8 +387,8 @@ window.ONE_SENTENCE_FEED = [
     "ko": "그의 과시하는 부의 표현은 많은 사람들을 불쾌하게 했다.",
     "en": "His ostentatious display of wealth was off-putting to many.",
     "highlight": "ostentatious",
-    "ipa": "/ˌɒstɛnˈteɪʃəs/",
-    "ipaKo": "오스텐테이셔스",
+    "ipa": "/ˌɑːstənˈteɪʃəs/",
+    "ipaKo": "아스텐테이셔스",
     "cf": []
   },
   {
@@ -398,7 +398,7 @@ window.ONE_SENTENCE_FEED = [
     "ko": "회사의 위태로운 재정 상황은 투자자들 사이에서 우려를 불러일으켰다.",
     "en": "The company's precarious financial situation raised concerns among investors.",
     "highlight": "precarious",
-    "ipa": "/prɪˈkɛəriəs/",
+    "ipa": "/prɪˈkeriəs/",
     "ipaKo": "프리케리어스",
     "cf": []
   },
@@ -443,7 +443,7 @@ window.ONE_SENTENCE_FEED = [
     "en": "The recalcitrant student refused to follow the teacher's instructions.",
     "highlight": "recalcitrant",
     "ipa": "/rɪˈkælsɪtrənt/",
-    "ipaKo": "리칼시트런트",
+    "ipaKo": "리캘시트런트",
     "cf": []
   },
   {
@@ -589,18 +589,18 @@ window.ONE_SENTENCE_FEED = [
   },
   {
     "word": "articulate",
-    "pos": "형용사/동사",
-    "meaning": "(생각을) 분명히 표현하다; 또렷이 말하다 (동사) / 또렷한 (형용사)",
+    "pos": "동사",
+    "meaning": "(생각을) 분명히 표현하다; 또렷이 말하다",
     "ko": "그녀는 발표 중에 자신의 생각을 분명히 표현할 수 있었다.",
     "en": "She was able to articulate her thoughts clearly during the presentation.",
     "highlight": "articulate",
     "ipa": "/ɑːrˈtɪkjuleɪt/",
-    "ipaKo": "아티큘레이트",
+    "ipaKo": "아르티큘레이트",
     "cf": [
       {
         "word": "articulate",
         "pos": "형용사",
-        "meaning": "또렷한, 분명한 (/ɑːrˈtɪkjələt/ 아티큘릿)"
+        "meaning": "또렷한, 분명한 (/ɑːrˈtɪkjələt/ 아르티큘릿)"
       }
     ]
   },
@@ -695,7 +695,7 @@ window.ONE_SENTENCE_FEED = [
   {
     "word": "aggrieve",
     "pos": "동사",
-    "meaning": "(부당하게) 괴롭히다, 분개하게 하다; (주로 aggrieved로) 분개한",
+    "meaning": "(부당하게) 괴롭히다, 분개하게 하다",
     "ko": "많은 직원들이 갑작스러운 급여 삭감에 분개했다.",
     "en": "Many employees felt aggrieved by the sudden pay cut.",
     "highlight": "aggrieved",
@@ -761,7 +761,7 @@ window.ONE_SENTENCE_FEED = [
     "en": "His arrant disregard for the rules led to serious consequences.",
     "highlight": "arrant",
     "ipa": "/ˈærənt/",
-    "ipaKo": "아런트",
+    "ipaKo": "애런트",
     "cf": []
   },
   {
@@ -772,7 +772,7 @@ window.ONE_SENTENCE_FEED = [
     "en": "The antinomy in his argument left the audience confused.",
     "highlight": "antinomy",
     "ipa": "/ænˈtɪnəmi/",
-    "ipaKo": "안티노미",
+    "ipaKo": "앤티노미",
     "cf": []
   },
   {
@@ -805,14 +805,14 @@ window.ONE_SENTENCE_FEED = [
     "en": "The use of antimetabole in his speech added depth to his argument.",
     "highlight": "antimetabole",
     "ipa": "/ˌæntɪməˈtæboʊli/",
-    "ipaKo": "안티메타볼리",
+    "ipaKo": "앤티메타볼리",
     "cf": []
   },
   {
     "word": "algophobia",
     "pos": "명사",
     "meaning": "통증 공포증",
-    "ko": "그녀의 통증 공포증은 의료 도움을 받는 것을 어렵게 만들었다.",
+    "ko": "그녀의 통증 공포증은 진료를 받는 것을 어렵게 만들었다.",
     "en": "Her algophobia made it difficult for her to seek medical help.",
     "highlight": "algophobia",
     "ipa": "/ˌælɡəˈfoʊbiə/",
@@ -911,7 +911,7 @@ window.ONE_SENTENCE_FEED = [
     "pos": "동사",
     "meaning": "(꺼내기 어려운 이야기를) 꺼내다",
     "ko": "그는 돈 이야기를 어떻게 꺼내야 할지 몰랐다.",
-    "en": "He didn’t know how to broach the subject of money.",
+    "en": "He didn't know how to broach the subject of money.",
     "highlight": "broach",
     "ipa": "/broʊtʃ/",
     "ipaKo": "브로치",
@@ -1028,7 +1028,7 @@ window.ONE_SENTENCE_FEED = [
     "pos": "명사",
     "meaning": "허튼소리, 터무니없는 말",
     "ko": "\"그건 완전히 허튼소리야!\" 그가 소리쳤다.",
-    "en": "“That’s complete balderdash!” he shouted.",
+    "en": "\"That's complete balderdash!\" he shouted.",
     "highlight": "balderdash",
     "ipa": "/ˈbɔːldərdæʃ/",
     "ipaKo": "볼더대시",
