@@ -1131,5 +1131,533 @@ window.ONE_SENTENCE_FEED = [
     "ipa": "/breɪ/",
     "ipaKo": "브레이",
     "cf": []
+  },
+  {
+    "word": "concession",
+    "pos": "명사",
+    "meaning": "양보; 영업권, (경기장 등의) 매점",
+    "ko": "회사는 파업을 끝내기 위해 몇 가지를 양보했다.",
+    "en": "The company made several concessions to end the strike.",
+    "highlight": "concessions",
+    "ipa": "/kənˈseʃən/",
+    "ipaKo": "컨세션",
+    "cf": [
+      {
+        "word": "concede",
+        "pos": "동사",
+        "meaning": "인정하다, 양보하다"
+      }
+    ]
+  },
+  {
+    "word": "casually",
+    "pos": "부사",
+    "meaning": "아무렇지 않게, 무심코; 편하게",
+    "ko": "그녀는 해외로 이사 간다고 아무렇지 않게 말했다.",
+    "en": "She casually mentioned that she was moving abroad.",
+    "highlight": "casually",
+    "ipa": "/ˈkæʒuəli/",
+    "ipaKo": "캐주얼리",
+    "cf": [
+      {
+        "word": "casual",
+        "pos": "형용사",
+        "meaning": "격식 없는, 무심한"
+      }
+    ]
+  },
+  {
+    "word": "cultivate",
+    "pos": "동사",
+    "meaning": "경작하다; (관계·능력을) 기르다",
+    "ko": "좋은 습관을 기르려면 시간이 걸린다.",
+    "en": "It takes time to cultivate good habits.",
+    "highlight": "cultivate",
+    "ipa": "/ˈkʌltɪveɪt/",
+    "ipaKo": "컬티베이트",
+    "cf": []
+  },
+  {
+    "word": "concise",
+    "pos": "형용사",
+    "meaning": "간결한",
+    "ko": "답변은 명확하고 간결하게 하세요.",
+    "en": "Keep your answers clear and concise.",
+    "highlight": "concise",
+    "ipa": "/kənˈsaɪs/",
+    "ipaKo": "컨사이스",
+    "cf": []
+  },
+  {
+    "word": "covert",
+    "pos": "형용사",
+    "meaning": "은밀한, 비밀의",
+    "ko": "그 기관은 해외에서 비밀 작전을 벌였다.",
+    "en": "The agency ran a covert operation overseas.",
+    "highlight": "covert",
+    "ipa": "/ˈkoʊvərt/",
+    "ipaKo": "코버트",
+    "cf": [
+      {
+        "word": "overt",
+        "pos": "형용사",
+        "meaning": "공공연한"
+      }
+    ]
+  },
+  {
+    "word": "camouflage",
+    "pos": "명사",
+    "meaning": "위장",
+    "ko": "그 도마뱀의 피부는 바위 위에서 위장 역할을 한다.",
+    "en": "The lizard's skin acts as camouflage against the rocks.",
+    "highlight": "camouflage",
+    "ipa": "/ˈkæməflɑːʒ/",
+    "ipaKo": "캐머플라주",
+    "cf": []
+  },
+  {
+    "word": "camouflage",
+    "pos": "동사",
+    "meaning": "위장하다",
+    "ko": "병사들은 그물과 나뭇가지로 차량을 위장했다.",
+    "en": "Soldiers camouflaged their vehicles with netting and branches.",
+    "highlight": "camouflaged",
+    "ipa": "/ˈkæməflɑːʒ/",
+    "ipaKo": "캐머플라주",
+    "cf": []
+  },
+  {
+    "word": "counterintuitive",
+    "pos": "형용사",
+    "meaning": "직관에 어긋나는",
+    "ko": "직관에 어긋나 보이지만, 쉬는 것이 생산성을 높일 수 있다.",
+    "en": "It seems counterintuitive, but resting can make you more productive.",
+    "highlight": "counterintuitive",
+    "ipa": "/ˌkaʊntərɪnˈtuːɪtɪv/",
+    "ipaKo": "카운터인투이티브",
+    "cf": []
+  },
+  {
+    "word": "cortex",
+    "pos": "명사",
+    "meaning": "(대뇌) 피질; 겉껍질",
+    "ko": "전전두엽 피질은 우리가 결정을 내리도록 돕는다.",
+    "en": "The prefrontal cortex helps us make decisions.",
+    "highlight": "cortex",
+    "ipa": "/ˈkɔːrteks/",
+    "ipaKo": "코어텍스",
+    "cf": []
+  },
+  {
+    "word": "conjure",
+    "pos": "동사",
+    "meaning": "(마술로) 불러내다; (conjure up) 떠올리게 하다",
+    "ko": "갓 구운 빵 냄새가 어린 시절의 기억을 떠올리게 했다.",
+    "en": "The smell of fresh bread conjured up memories of childhood.",
+    "highlight": "conjured up",
+    "ipa": "/ˈkʌndʒər/",
+    "ipaKo": "컨저",
+    "cf": []
+  },
+  {
+    "word": "coveted",
+    "pos": "형용사",
+    "meaning": "누구나 탐내는, 선망의 대상인",
+    "ko": "그녀는 모두가 탐내는 최우수 신인상을 받았다.",
+    "en": "She won the coveted award for best new artist.",
+    "highlight": "coveted",
+    "ipa": "/ˈkʌvɪtɪd/",
+    "ipaKo": "커비티드",
+    "cf": [
+      {
+        "word": "covet",
+        "pos": "동사",
+        "meaning": "탐내다"
+      }
+    ]
+  },
+  {
+    "word": "cumbersome",
+    "pos": "형용사",
+    "meaning": "거추장스러운, 번거로운",
+    "ko": "예전 신청 절차는 느리고 번거로웠다.",
+    "en": "The old application process was slow and cumbersome.",
+    "highlight": "cumbersome",
+    "ipa": "/ˈkʌmbərsəm/",
+    "ipaKo": "컴버섬",
+    "cf": []
+  },
+  {
+    "word": "coax",
+    "pos": "동사",
+    "meaning": "구슬리다, 달래서 ~하게 하다",
+    "ko": "그녀는 고양이를 달래서 침대 밑에서 나오게 했다.",
+    "en": "She coaxed the cat out from under the bed.",
+    "highlight": "coaxed",
+    "ipa": "/koʊks/",
+    "ipaKo": "코욱스",
+    "cf": []
+  },
+  {
+    "word": "crowdfunding",
+    "pos": "명사",
+    "meaning": "크라우드펀딩(대중에게 소액 투자를 받는 방식)",
+    "ko": "그 영화는 크라우드펀딩으로 모은 돈으로 제작되었다.",
+    "en": "The film was made with money raised through crowdfunding.",
+    "highlight": "crowdfunding",
+    "ipa": "/ˈkraʊdˌfʌndɪŋ/",
+    "ipaKo": "크라우드펀딩",
+    "cf": []
+  },
+  {
+    "word": "confidant",
+    "pos": "명사",
+    "meaning": "(비밀을 털어놓는) 막역한 친구",
+    "ko": "언니는 늘 그녀가 가장 믿고 속을 털어놓는 사람이었다.",
+    "en": "Her sister has always been her closest confidant.",
+    "highlight": "confidant",
+    "ipa": "/ˈkɑːnfɪdænt/",
+    "ipaKo": "칸피댄트",
+    "cf": [
+      {
+        "word": "confident",
+        "pos": "형용사",
+        "meaning": "자신 있는 (철자 주의)"
+      }
+    ]
+  },
+  {
+    "word": "contentment",
+    "pos": "명사",
+    "meaning": "만족, 흡족함",
+    "ko": "그는 식사를 마치고 흡족한 듯 한숨을 내쉬었다.",
+    "en": "He sighed with contentment after the meal.",
+    "highlight": "contentment",
+    "ipa": "/kənˈtentmənt/",
+    "ipaKo": "컨텐트먼트",
+    "cf": [
+      {
+        "word": "content",
+        "pos": "형용사",
+        "meaning": "만족하는"
+      }
+    ]
+  },
+  {
+    "word": "catharsis",
+    "pos": "명사",
+    "meaning": "카타르시스, (감정의) 정화",
+    "ko": "일기를 쓰는 것은 그녀에게 일종의 카타르시스가 되었다.",
+    "en": "Writing in her journal gave her a kind of catharsis.",
+    "highlight": "catharsis",
+    "ipa": "/kəˈθɑːrsɪs/",
+    "ipaKo": "커싸시스",
+    "cf": []
+  },
+  {
+    "word": "concoct",
+    "pos": "동사",
+    "meaning": "(재료를 섞어) 만들다; (이야기를) 지어내다",
+    "ko": "그는 지각한 데 대해 그럴듯한 핑계를 지어냈다.",
+    "en": "He concocted an elaborate excuse for being late.",
+    "highlight": "concocted",
+    "ipa": "/kənˈkɑːkt/",
+    "ipaKo": "컨칵트",
+    "cf": []
+  },
+  {
+    "word": "choreograph",
+    "pos": "동사",
+    "meaning": "안무하다; 세밀하게 계획하다",
+    "ko": "그녀는 학교 뮤지컬의 춤을 안무했다.",
+    "en": "She choreographed the dance for the school musical.",
+    "highlight": "choreographed",
+    "ipa": "/ˈkɔːriəɡræf/",
+    "ipaKo": "코리어그래프",
+    "cf": [
+      {
+        "word": "choreography",
+        "pos": "명사",
+        "meaning": "안무"
+      }
+    ]
+  },
+  {
+    "word": "cinch",
+    "pos": "명사",
+    "meaning": "(구어) 아주 쉬운 일, 확실한 것",
+    "ko": "그 시험은 식은 죽 먹기였다.",
+    "en": "The exam was a cinch.",
+    "highlight": "cinch",
+    "ipa": "/sɪntʃ/",
+    "ipaKo": "신치",
+    "cf": []
+  },
+  {
+    "word": "cogent",
+    "pos": "형용사",
+    "meaning": "설득력 있는",
+    "ko": "그녀는 새 정책을 지지하는 설득력 있는 주장을 내놓았다.",
+    "en": "She presented a cogent argument for the new policy.",
+    "highlight": "cogent",
+    "ipa": "/ˈkoʊdʒənt/",
+    "ipaKo": "코전트",
+    "cf": []
+  },
+  {
+    "word": "cicada",
+    "pos": "명사",
+    "meaning": "매미",
+    "ko": "여름 내내 매미들이 시끄럽게 울었다.",
+    "en": "The cicadas sang loudly all summer.",
+    "highlight": "cicadas",
+    "ipa": "/sɪˈkeɪdə/",
+    "ipaKo": "시케이더",
+    "cf": []
+  },
+  {
+    "word": "conflate",
+    "pos": "동사",
+    "meaning": "(서로 다른 것을) 하나로 뭉뚱그리다, 혼동하다",
+    "ko": "사람들은 흔히 자신감과 능력을 혼동한다.",
+    "en": "People often conflate confidence with competence.",
+    "highlight": "conflate",
+    "ipa": "/kənˈfleɪt/",
+    "ipaKo": "컨플레이트",
+    "cf": []
+  },
+  {
+    "word": "cavernous",
+    "pos": "형용사",
+    "meaning": "동굴 같은, 넓고 휑한",
+    "ko": "넓고 휑한 홀에 우리 목소리가 울렸다.",
+    "en": "Our voices echoed in the cavernous hall.",
+    "highlight": "cavernous",
+    "ipa": "/ˈkævərnəs/",
+    "ipaKo": "캐버너스",
+    "cf": [
+      {
+        "word": "cavern",
+        "pos": "명사",
+        "meaning": "큰 동굴"
+      }
+    ]
+  },
+  {
+    "word": "capitulate",
+    "pos": "동사",
+    "meaning": "굴복하다, 항복하다",
+    "ko": "몇 시간을 조른 끝에 부모님은 결국 두 손을 들었다.",
+    "en": "After hours of pleading, his parents finally capitulated.",
+    "highlight": "capitulated",
+    "ipa": "/kəˈpɪtʃəleɪt/",
+    "ipaKo": "커피철레이트",
+    "cf": []
+  },
+  {
+    "word": "crepe",
+    "pos": "명사",
+    "meaning": "크레이프(얇게 부친 팬케이크)",
+    "ko": "우리는 아침으로 딸기를 곁들인 크레이프를 먹었다.",
+    "en": "We had crepes with strawberries for breakfast.",
+    "highlight": "crepes",
+    "ipa": "/kreɪp/",
+    "ipaKo": "크레이프",
+    "cf": []
+  },
+  {
+    "word": "calzone",
+    "pos": "명사",
+    "meaning": "칼초네(반달 모양으로 접어 구운 피자)",
+    "ko": "나는 햄 치즈 칼초네를 주문했다.",
+    "en": "I ordered a ham and cheese calzone.",
+    "highlight": "calzone",
+    "ipa": "/kælˈzoʊni/",
+    "ipaKo": "캘조니",
+    "cf": []
+  },
+  {
+    "word": "chutney",
+    "pos": "명사",
+    "meaning": "처트니(과일·채소로 만든 인도식 소스)",
+    "ko": "카레에 망고 처트니가 곁들여 나왔다.",
+    "en": "The curry came with mango chutney.",
+    "highlight": "chutney",
+    "ipa": "/ˈtʃʌtni/",
+    "ipaKo": "처트니",
+    "cf": []
+  },
+  {
+    "word": "conifer",
+    "pos": "명사",
+    "meaning": "침엽수",
+    "ko": "소나무와 전나무는 침엽수이다.",
+    "en": "Pines and firs are conifers.",
+    "highlight": "conifers",
+    "ipa": "/ˈkɑːnɪfər/",
+    "ipaKo": "카니퍼",
+    "cf": []
+  },
+  {
+    "word": "curt",
+    "pos": "형용사",
+    "meaning": "퉁명스러운, (말이) 무뚝뚝하게 짧은",
+    "ko": "그는 퉁명스럽게 한마디 하고 전화를 끊었다.",
+    "en": "He gave a curt reply and hung up.",
+    "highlight": "curt",
+    "ipa": "/kɜːrt/",
+    "ipaKo": "커트",
+    "cf": []
+  },
+  {
+    "word": "compendium",
+    "pos": "명사",
+    "meaning": "모음집, 요약집",
+    "ko": "그 책은 전통 요리법 모음집이다.",
+    "en": "The book is a compendium of traditional recipes.",
+    "highlight": "compendium",
+    "ipa": "/kəmˈpendiəm/",
+    "ipaKo": "컴펜디엄",
+    "cf": []
+  },
+  {
+    "word": "cabana",
+    "pos": "명사",
+    "meaning": "(해변·수영장의) 오두막, 카바나",
+    "ko": "우리는 수영장 옆 카바나를 빌렸다.",
+    "en": "We rented a cabana by the pool.",
+    "highlight": "cabana",
+    "ipa": "/kəˈbænə/",
+    "ipaKo": "커배너",
+    "cf": []
+  },
+  {
+    "word": "confection",
+    "pos": "명사",
+    "meaning": "단 과자, 사탕류; 정교하게 만든 것",
+    "ko": "빵집 진열장은 알록달록한 과자로 가득했다.",
+    "en": "The bakery window was full of colorful confections.",
+    "highlight": "confections",
+    "ipa": "/kənˈfekʃən/",
+    "ipaKo": "컨펙션",
+    "cf": [
+      {
+        "word": "confectionery",
+        "pos": "명사",
+        "meaning": "과자류, 제과점"
+      }
+    ]
+  },
+  {
+    "word": "carpe diem",
+    "pos": "라틴어",
+    "meaning": "현재를 즐겨라, 오늘을 붙잡아라",
+    "ko": "오늘을 즐겨라. 이런 기회는 다시 오지 않을지도 모른다.",
+    "en": "Carpe diem—you may never get this chance again.",
+    "highlight": "Carpe diem",
+    "ipa": "/ˌkɑːrpeɪ ˈdiːem/",
+    "ipaKo": "카르페 디엠",
+    "cf": []
+  },
+  {
+    "word": "calisthenics",
+    "pos": "명사",
+    "meaning": "맨몸 운동, 체조",
+    "ko": "그는 몸을 관리하려고 매일 아침 맨몸 운동을 한다.",
+    "en": "He does calisthenics every morning to stay fit.",
+    "highlight": "calisthenics",
+    "ipa": "/ˌkælɪsˈθenɪks/",
+    "ipaKo": "캘리스세닉스",
+    "cf": []
+  },
+  {
+    "word": "chimera",
+    "pos": "명사",
+    "meaning": "키메라(그리스 신화 속 괴물); 헛된 꿈, 망상",
+    "ko": "많은 사람에게 완벽한 일과 삶의 균형은 여전히 헛된 꿈이다.",
+    "en": "For many, a perfect work-life balance remains a chimera.",
+    "highlight": "chimera",
+    "ipa": "/kaɪˈmɪrə/",
+    "ipaKo": "카이미러",
+    "cf": []
+  },
+  {
+    "word": "compunction",
+    "pos": "명사",
+    "meaning": "양심의 가책, 거리낌",
+    "ko": "그는 상사에게 거짓말하는 데 아무런 거리낌이 없었다.",
+    "en": "He had no compunction about lying to his boss.",
+    "highlight": "compunction",
+    "ipa": "/kəmˈpʌŋkʃən/",
+    "ipaKo": "컴펑크션",
+    "cf": []
+  },
+  {
+    "word": "centenarian",
+    "pos": "명사",
+    "meaning": "100세 이상인 사람",
+    "ko": "그 마을에는 100세 이상 노인이 유난히 많다.",
+    "en": "The village has an unusually high number of centenarians.",
+    "highlight": "centenarians",
+    "ipa": "/ˌsentəˈneriən/",
+    "ipaKo": "센터네리언",
+    "cf": [
+      {
+        "word": "centennial",
+        "pos": "명사",
+        "meaning": "100주년"
+      }
+    ]
+  },
+  {
+    "word": "clunker",
+    "pos": "명사",
+    "meaning": "(구어) 고물 자동차; 실패작",
+    "ko": "그는 매주 고장 나는 낡은 고물차를 몰았다.",
+    "en": "He drove an old clunker that broke down every week.",
+    "highlight": "clunker",
+    "ipa": "/ˈklʌŋkər/",
+    "ipaKo": "클렁커",
+    "cf": []
+  },
+  {
+    "word": "commissary",
+    "pos": "명사",
+    "meaning": "(군대·회사 등의) 매점, 구내식당",
+    "ko": "군인들은 매점에서 간식을 샀다.",
+    "en": "The soldiers bought snacks at the commissary.",
+    "highlight": "commissary",
+    "ipa": "/ˈkɑːmɪseri/",
+    "ipaKo": "카미세리",
+    "cf": []
+  },
+  {
+    "word": "conspiratorial",
+    "pos": "형용사",
+    "meaning": "공모하는 듯한, 뭔가 꾸미는 듯한",
+    "ko": "그녀는 나에게 뭔가 꾸미는 듯한 윙크를 보냈다.",
+    "en": "She gave me a conspiratorial wink.",
+    "highlight": "conspiratorial",
+    "ipa": "/kənˌspɪrəˈtɔːriəl/",
+    "ipaKo": "컨스피러토리얼",
+    "cf": [
+      {
+        "word": "conspiracy",
+        "pos": "명사",
+        "meaning": "음모"
+      }
+    ]
+  },
+  {
+    "word": "cloudburst",
+    "pos": "명사",
+    "meaning": "갑작스러운 폭우",
+    "ko": "갑작스러운 폭우로 거리가 물에 잠겼다.",
+    "en": "A sudden cloudburst flooded the streets.",
+    "highlight": "cloudburst",
+    "ipa": "/ˈklaʊdbɜːrst/",
+    "ipaKo": "클라우드버스트",
+    "cf": []
   }
 ];
