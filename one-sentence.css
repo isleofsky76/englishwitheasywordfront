@@ -577,12 +577,44 @@
   margin-left: 10px;
 }
 
+.os-cmt-action-sep {
+  font-size: 12px;
+  color: var(--os-ink-muted);
+  opacity: 0.35;
+}
+
 .os-cmt-del-form {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 6px;
   margin-top: 4px;
+}
+
+.os-cmt-edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 6px;
+  width: 100%;
+}
+
+.os-cmt-edit-nick,
+.os-cmt-edit-body {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--os-ink);
+  font-family: inherit;
+  font-size: 14px;
+}
+
+.os-cmt-edit-body {
+  resize: vertical;
+  min-height: 56px;
 }
 
 .os-cmt-del-pw {

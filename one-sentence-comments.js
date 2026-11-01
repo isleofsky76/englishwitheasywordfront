@@ -252,12 +252,26 @@
       var actions = document.createElement('div');
       actions.className = 'os-cmt-actions';
 
+      var editBtn = document.createElement('button');
+      editBtn.type = 'button';
+      editBtn.className = 'os-cmt-del';
+      editBtn.textContent = '수정';
+      editBtn.addEventListener('click', function () {
+        openEditUi(actions, c, wordKey);
+      });
+      actions.appendChild(editBtn);
+
+      var sep = document.createElement('span');
+      sep.className = 'os-cmt-action-sep';
+      sep.textContent = ' · ';
+      actions.appendChild(sep);
+
       var delBtn = document.createElement('button');
       delBtn.type = 'button';
       delBtn.className = 'os-cmt-del';
       delBtn.textContent = '삭제';
       delBtn.addEventListener('click', function () {
-        openDeleteUi(actions, c.id, wordKey, false);
+        openDeleteUi(actions, c.id, wordKey);
       });
       actions.appendChild(delBtn);
 
@@ -287,7 +301,7 @@
     var input = document.createElement('input');
     input.type = 'password';
     input.maxLength = 14;
-    input.placeholder = '1~14자';
+    input.placeholder = '비밀번호';
     input.className = 'os-cmt-del-pw';
     input.setAttribute('aria-label', '삭제 비밀번호');
     input.autocomplete = 'new-password';
@@ -336,6 +350,103 @@
     wrap.appendChild(msg);
     actionsEl.appendChild(wrap);
     input.focus();
+  }
+
+  function openEditUi(actionsEl, comment, wordKey) {
+    actionsEl.textContent = '';
+    var wrap = document.createElement('div');
+    wrap.className = 'os-cmt-edit-form';
+
+    var nickInput = document.createElement('input');
+    nickInput.type = 'text';
+    nickInput.maxLength = 10;
+    nickInput.className = 'os-cmt-edit-nick';
+    nickInput.placeholder = '닉네임 (선택)';
+    nickInput.value = comment.nickname || '';
+
+    var bodyInput = document.createElement('textarea');
+    bodyInput.rows = 2;
+    bodyInput.maxLength = 100;
+    bodyInput.className = 'os-cmt-edit-body';
+    bodyInput.placeholder = '댓글';
+    bodyInput.value = comment.body || '';
+
+    var counter = document.createElement('span');
+    counter.className = 'os-cmt-counter';
+    counter.textContent = String(bodyInput.value.length) + '/100';
+
+    var pwInput = document.createElement('input');
+    pwInput.type = 'password';
+    pwInput.maxLength = 14;
+    pwInput.className = 'os-cmt-del-pw';
+    pwInput.placeholder = '비밀번호';
+    pwInput.autocomplete = 'new-password';
+
+    var msg = document.createElement('p');
+    msg.className = 'os-cmt-msg';
+
+    function refreshWarn() {
+      var err = clientValidateContent(nickInput.value, bodyInput.value);
+      msg.textContent = err || '';
+    }
+    nickInput.addEventListener('input', refreshWarn);
+    bodyInput.addEventListener('input', function () {
+      counter.textContent = String(bodyInput.value.length) + '/100';
+      refreshWarn();
+    });
+
+    var ok = document.createElement('button');
+    ok.type = 'button';
+    ok.className = 'os-cmt-btn';
+    ok.textContent = '저장';
+    ok.addEventListener('click', async function () {
+      var err = clientValidate(nickInput.value, bodyInput.value, pwInput.value);
+      if (err) {
+        msg.textContent = err;
+        return;
+      }
+      ok.disabled = true;
+      try {
+        await fetchJson(apiBase().replace(/\/$/, '') + '/onesentence/comments/edit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            id: comment.id,
+            nickname: nickInput.value,
+            body: bodyInput.value,
+            password: pwInput.value,
+          }),
+        });
+        delete listCache[wordKey];
+        await refreshPanel(wordKey);
+      } catch (ex) {
+        msg.textContent = ex && ex.message ? ex.message : '수정에 실패했어요.';
+        ok.disabled = false;
+      }
+    });
+
+    var cancel = document.createElement('button');
+    cancel.type = 'button';
+    cancel.className = 'os-cmt-btn os-cmt-btn-ghost';
+    cancel.textContent = '취소';
+    cancel.addEventListener('click', async function () {
+      delete listCache[wordKey];
+      await refreshPanel(wordKey);
+    });
+
+    var row = document.createElement('div');
+    row.className = 'os-cmt-del-form';
+    row.appendChild(pwInput);
+    row.appendChild(ok);
+    row.appendChild(cancel);
+
+    wrap.appendChild(nickInput);
+    wrap.appendChild(bodyInput);
+    wrap.appendChild(counter);
+    wrap.appendChild(row);
+    wrap.appendChild(msg);
+    actionsEl.appendChild(wrap);
+    bodyInput.focus();
   }
 
   async function adminDeleteComment(commentId, wordKey) {
