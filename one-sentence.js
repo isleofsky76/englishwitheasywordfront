@@ -427,15 +427,18 @@
             .toLowerCase()
             .replace(/’/g, "'")
             .trim();
-          if (!k) return;
-          if (!map[k]) map[k] = { meaning: meaning, pos: pos };
+          if (!k || /[^a-z0-9'’.\- ]/.test(k)) return;
+          if (!map[k]) {
+            map[k] = { meaning: meaning, pos: pos };
+            return;
+          }
+          /* 같은 표제어·다른 품사면 뜻을 이어 붙임 */
+          if (map[k].meaning.indexOf(meaning) === -1) {
+            map[k].meaning = map[k].meaning + ' / ' + meaning;
+          }
         }
         put(it.word);
         put(it.highlight);
-        String(it.word || '')
-          .toLowerCase()
-          .split(/[\s/]+/)
-          .forEach(put);
       });
       window.DICT_WORDS = map;
     }

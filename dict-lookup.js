@@ -51,18 +51,20 @@
     const WORDS = wordsMap();
     const w = String(raw || '').toLowerCase().replace(/’/g, "'");
     const tries = [w];
-    if (/ies$/.test(w)) tries.push(w.slice(0, -3) + 'y');
-    if (/ied$/.test(w)) tries.push(w.slice(0, -3) + 'y');
-    if (/ves$/.test(w)) tries.push(w.slice(0, -3) + 'f', w.slice(0, -3) + 'fe');
-    if (/es$/.test(w)) tries.push(w.slice(0, -2), w.slice(0, -1));
-    if (/s$/.test(w)) tries.push(w.slice(0, -1));
-    if (/ed$/.test(w)) {
-      tries.push(w.slice(0, -2), w.slice(0, -1));
-      if (/(.)\1ed$/.test(w)) tries.push(w.slice(0, -3));
-    }
-    if (/ing$/.test(w)) {
-      tries.push(w.slice(0, -3), w.slice(0, -3) + 'e');
-      if (/(.)\1ing$/.test(w)) tries.push(w.slice(0, -4));
+    if (w.length > 3) {
+      if (/ies$/.test(w)) tries.push(w.slice(0, -3) + 'y');
+      if (/ied$/.test(w)) tries.push(w.slice(0, -3) + 'y');
+      if (/ves$/.test(w)) tries.push(w.slice(0, -3) + 'f', w.slice(0, -3) + 'fe');
+      if (/es$/.test(w)) tries.push(w.slice(0, -2), w.slice(0, -1));
+      else if (/s$/.test(w)) tries.push(w.slice(0, -1));
+      if (/ed$/.test(w)) {
+        tries.push(w.slice(0, -2), w.slice(0, -1));
+        if (/(.)\1ed$/.test(w)) tries.push(w.slice(0, -3));
+      }
+      if (/ing$/.test(w)) {
+        tries.push(w.slice(0, -3), w.slice(0, -3) + 'e');
+        if (/(.)\1ing$/.test(w)) tries.push(w.slice(0, -4));
+      }
     }
     for (let i = 0; i < tries.length; i += 1) {
       const t = tries[i];
@@ -73,14 +75,9 @@
     return null;
   }
 
-  function meaningFromItem(node, hoveredWord) {
+  function meaningForWord(hoveredWord) {
     const mapped = findEntry(hoveredWord);
-    if (mapped && mapped.meaning) return mapped.meaning;
-    const e = node && (node.nodeType === 1 ? node : node.parentElement);
-    const item = e && e.closest('.os-item');
-    if (!item) return null;
-    const koEl = item.querySelector('.os-head-ko');
-    return koEl ? String(koEl.textContent || '').trim() : null;
+    return mapped && mapped.meaning ? mapped.meaning : '';
   }
 
   const style = document.createElement('style');
@@ -152,18 +149,11 @@
   let showTimer = null;
   let hideTimer = null;
 
-  function resolveMeaning(word, node) {
-    const fromItem = meaningFromItem(node, word);
-    if (fromItem) return fromItem;
-    const entry = findEntry(word);
-    return entry ? entry.meaning : '';
-  }
-
-  function show(word, rect, node) {
+  function show(word, rect) {
     clearTimeout(hideTimer);
     current = { word: word };
     const q = String(word).toLowerCase();
-    const meaning = resolveMeaning(word, node);
+    const meaning = meaningForWord(word);
     if (meaning) {
       elMeaning.hidden = false;
       elMeaning.textContent = meaning;
@@ -287,7 +277,7 @@
         showTimer = setTimeout(
           function () {
             if (hasHighlight) CSS.highlights.set('dl-word', new Highlight(found.range));
-            show(found.word, found.rect, found.node);
+            show(found.word, found.rect);
             pending = null;
           },
           current ? CONFIG.switchDelay : CONFIG.hoverDelay
@@ -320,7 +310,7 @@
         if (!isAllowed(range.commonAncestorContainer)) return;
         const rect = range.getBoundingClientRect();
         if (rect.width || rect.height) {
-          show(text.replace(/’/g, "'"), rect, range.commonAncestorContainer);
+          show(text.replace(/’/g, "'"), rect);
         }
       }, 250);
     });
