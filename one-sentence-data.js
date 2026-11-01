@@ -1659,5 +1659,264 @@ window.ONE_SENTENCE_FEED = [
     "ipa": "/ˈklaʊdbɜːrst/",
     "ipaKo": "클라우드버스트",
     "cf": []
+  },
+  {
+    "word": "de-escalate",
+    "pos": "동사",
+    "meaning": "(긴장이나 갈등을) 완화하다, 단계적으로 축소하다",
+    "ko": "경찰관들은 긴장된 상황을 진정시키도록 훈련받는다.",
+    "en": "Officers are trained to de-escalate tense situations.",
+    "highlight": "de-escalate",
+    "ipa": "/diːˈeskəleɪt/",
+    "ipaKo": "디에스컬레이트",
+    "cf": []
+  },
+  {
+    "word": "definitive",
+    "pos": "형용사",
+    "meaning": "결정적인, 최종적인; 가장 권위 있는",
+    "ko": "이것은 링컨 전기의 결정판이다.",
+    "en": "This is the definitive biography of Lincoln.",
+    "highlight": "definitive",
+    "ipa": "/dɪˈfɪnətɪv/",
+    "ipaKo": "디피니티브",
+    "cf": []
+  },
+  {
+    "word": "degust",
+    "pos": "동사",
+    "meaning": "(천천히) 음미하다, 시음하다",
+    "ko": "우리는 여러 지역 와인을 시음했다.",
+    "en": "We degusted several local wines.",
+    "highlight": "degusted",
+    "ipa": "/dɪˈɡʌst/",
+    "ipaKo": "디거스트",
+    "cf": []
+  },
+  {
+    "word": "deliquesce",
+    "pos": "동사",
+    "meaning": "(화학) 조해하다; (비유) 녹아 없어지다",
+    "ko": "염화칼슘은 습한 공기에서 조해된다.",
+    "en": "Calcium chloride deliquesces in humid air.",
+    "highlight": "deliquesces",
+    "ipa": "/ˌdelɪˈkwes/",
+    "ipaKo": "델리퀘스",
+    "cf": []
+  },
+  {
+    "word": "demonym",
+    "pos": "명사",
+    "meaning": "지역 주민을 부르는 명칭 (예: Korean, Parisian)",
+    "ko": "\"Seoulite\"는 서울 사람을 가리키는 명칭이다.",
+    "en": "\"Seoulite\" is the demonym for people from Seoul.",
+    "highlight": "demonym",
+    "ipa": "/ˈdeməˌnɪm/",
+    "ipaKo": "데머님",
+    "cf": []
+  },
+  {
+    "word": "demotic",
+    "pos": "형용사",
+    "meaning": "민중의, 대중적인; (언어가) 통속적인",
+    "ko": "그 소설은 생생한 구어체로 쓰였다.",
+    "en": "The novel is written in a lively demotic style.",
+    "highlight": "demotic",
+    "ipa": "/dɪˈmɑːtɪk/",
+    "ipaKo": "디마틱",
+    "cf": []
+  },
+  {
+    "word": "demotic",
+    "pos": "명사",
+    "meaning": "(Demotic) 고대 이집트의 민중문자; 현대 그리스 구어",
+    "ko": "그 파피루스는 민중문자로 쓰여 있다.",
+    "en": "The papyrus is written in Demotic.",
+    "highlight": "Demotic",
+    "ipa": "/dɪˈmɑːtɪk/",
+    "ipaKo": "디마틱",
+    "cf": []
+  },
+  {
+    "word": "dexterous",
+    "pos": "형용사",
+    "meaning": "손재주가 좋은, 솜씨 있는; (머리가) 기민한",
+    "ko": "손재주가 좋은 외과의는 좁은 공간에서도 수술할 수 있다.",
+    "en": "A dexterous surgeon can work in tight spaces.",
+    "highlight": "dexterous",
+    "ipa": "/ˈdekstərəs/",
+    "ipaKo": "덱스터러스",
+    "cf": []
+  },
+  {
+    "word": "diligently",
+    "pos": "부사",
+    "meaning": "부지런히, 성실하게",
+    "ko": "그녀는 논문 작업을 성실히 했다.",
+    "en": "She worked diligently on her thesis.",
+    "highlight": "diligently",
+    "ipa": "/ˈdɪlɪdʒəntli/",
+    "ipaKo": "딜리전틀리",
+    "cf": []
+  },
+  {
+    "word": "dilly-dally",
+    "pos": "동사",
+    "meaning": "(구어) 꾸물거리다, 우물쭈물하다",
+    "ko": "꾸물대지 말고 옷 입어!",
+    "en": "Stop dilly-dallying and get dressed!",
+    "highlight": "dilly-dallying",
+    "ipa": "/ˈdɪliˌdæli/",
+    "ipaKo": "딜리댈리",
+    "cf": []
+  },
+  {
+    "word": "disaffiliate",
+    "pos": "동사",
+    "meaning": "제휴나 소속 관계를 끊다, 탈퇴하다(시키다)",
+    "ko": "노조는 연맹 탈퇴를 표결로 결정했다.",
+    "en": "The union voted to disaffiliate from the federation.",
+    "highlight": "disaffiliate",
+    "ipa": "/ˌdɪsəˈfɪlieɪt/",
+    "ipaKo": "디서필리에이트",
+    "cf": []
+  },
+  {
+    "word": "discreet",
+    "pos": "형용사",
+    "meaning": "신중한, 입이 무거운; 눈에 띄지 않는, 은은한",
+    "ko": "이 일은 조용히 처리해 주세요.",
+    "en": "Please be discreet about this matter.",
+    "highlight": "discreet",
+    "ipa": "/dɪˈskriːt/",
+    "ipaKo": "디스크리트",
+    "cf": [
+      {
+        "word": "discrete",
+        "pos": "형용사",
+        "meaning": "별개의 (동음이의·철자 주의)"
+      }
+    ]
+  },
+  {
+    "word": "disinformation",
+    "pos": "명사",
+    "meaning": "(의도적으로 퍼뜨린) 허위 정보",
+    "ko": "그 캠페인은 온라인에 허위 정보를 퍼뜨렸다.",
+    "en": "The campaign spread disinformation online.",
+    "highlight": "disinformation",
+    "ipa": "/ˌdɪsɪnfərˈmeɪʃən/",
+    "ipaKo": "디스인퍼메이션",
+    "cf": []
+  },
+  {
+    "word": "disintermediate",
+    "pos": "동사",
+    "meaning": "중개자를 배제하다, 유통 단계를 없애다",
+    "ko": "온라인 예약 사이트들이 여행사라는 중개자를 밀어냈다.",
+    "en": "Online booking sites have disintermediated travel agents.",
+    "highlight": "disintermediated",
+    "ipa": "/ˌdɪsɪntərˈmiːdieɪt/",
+    "ipaKo": "디스인터미디에이트",
+    "cf": []
+  },
+  {
+    "word": "dismantle",
+    "pos": "동사",
+    "meaning": "(기계·구조물을) 해체하다, 분해하다; (제도·조직을) 폐지하다",
+    "ko": "정부는 그 기관을 해체할 계획이다.",
+    "en": "The government plans to dismantle the agency.",
+    "highlight": "dismantle",
+    "ipa": "/dɪsˈmæntl/",
+    "ipaKo": "디스맨틀",
+    "cf": []
+  },
+  {
+    "word": "disorientation",
+    "pos": "명사",
+    "meaning": "방향 감각 상실, 혼란, 혼미",
+    "ko": "시차증은 정신을 혼미하게 만들 수 있다.",
+    "en": "Jet lag can cause disorientation.",
+    "highlight": "disorientation",
+    "ipa": "/dɪsˌɔːriənˈteɪʃən/",
+    "ipaKo": "디스오리엔테이션",
+    "cf": []
+  },
+  {
+    "word": "dispossession",
+    "pos": "명사",
+    "meaning": "(토지나 재산의) 박탈, 강탈, 퇴거",
+    "ko": "그 책은 원주민들이 땅을 빼앗긴 역사를 다룬다.",
+    "en": "The book examines the dispossession of indigenous peoples.",
+    "highlight": "dispossession",
+    "ipa": "/ˌdɪspəˈzeʃən/",
+    "ipaKo": "디스퍼제션",
+    "cf": []
+  },
+  {
+    "word": "dithyramb",
+    "pos": "명사",
+    "meaning": "디티람보스(디오니소스 찬가); 열광적인 시·글·연설",
+    "ko": "그의 평론은 젊은 피아니스트에 대한 열렬한 찬사였다.",
+    "en": "His review was a dithyramb to the young pianist.",
+    "highlight": "dithyramb",
+    "ipa": "/ˈdɪθəræm/",
+    "ipaKo": "디서램 (디서램브도 씀)",
+    "cf": []
+  },
+  {
+    "word": "divestiture",
+    "pos": "명사",
+    "meaning": "(자산이나 사업부의) 매각, 처분; (권리의) 박탈",
+    "ko": "회사는 반도체 부문 매각을 발표했다.",
+    "en": "The company announced the divestiture of its chip unit.",
+    "highlight": "divestiture",
+    "ipa": "/daɪˈvestətʃər/",
+    "ipaKo": "다이베스티처 (디베스티처도 씀)",
+    "cf": []
+  },
+  {
+    "word": "dollar diplomacy",
+    "pos": "명사",
+    "meaning": "달러 외교(경제력·투자로 영향력을 넓히는 외교)",
+    "ko": "태프트의 달러 외교는 중남미에서 미국의 영향력 확대를 목표로 했다.",
+    "en": "Taft's dollar diplomacy aimed to expand U.S. influence in Latin America.",
+    "highlight": "dollar diplomacy",
+    "ipa": "/ˈdɑːlər dɪˈploʊməsi/",
+    "ipaKo": "달러 디플로머시",
+    "cf": []
+  },
+  {
+    "word": "dolma",
+    "pos": "명사",
+    "meaning": "돌마(포도잎·채소에 쌀·고기를 채운 중동·지중해 요리; 복수 dolmas/dolmades)",
+    "ko": "우리는 전채로 돌마를 주문했다.",
+    "en": "We ordered dolmas as a starter.",
+    "highlight": "dolmas",
+    "ipa": "/ˈdoʊlmə/",
+    "ipaKo": "돌마",
+    "cf": []
+  },
+  {
+    "word": "downtrodden",
+    "pos": "형용사",
+    "meaning": "억압받는, 짓밟힌",
+    "ko": "그 소설은 억압받는 노동자들을 대변한다.",
+    "en": "The novel gives a voice to downtrodden workers.",
+    "highlight": "downtrodden",
+    "ipa": "/ˈdaʊnˌtrɑːdn/",
+    "ipaKo": "다운트라든",
+    "cf": []
+  },
+  {
+    "word": "downtrodden",
+    "pos": "명사",
+    "meaning": "(the downtrodden) 억압받는 사람들",
+    "ko": "그녀는 억압받는 이들을 돕는 데 일생을 바쳤다.",
+    "en": "She devoted her life to helping the downtrodden.",
+    "highlight": "downtrodden",
+    "ipa": "/ˈdaʊnˌtrɑːdn/",
+    "ipaKo": "다운트라든",
+    "cf": []
   }
 ];
