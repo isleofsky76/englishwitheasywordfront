@@ -2210,5 +2210,187 @@ window.ONE_SENTENCE_FEED = [
     "ipa": "/ɪkˈstruːd/",
     "ipaKo": "익스트루드",
     "cf": []
+  },
+  {
+    "word": "venomous",
+    "pos": "형용사",
+    "meaning": "독이 있는",
+    "ko": "독사에게 물리면 죽을 수도 있다.",
+    "en": "The bite of a venomous snake can be deadly.",
+    "highlight": "venomous",
+    "ipa": "/ˈvenəməs/",
+    "ipaKo": "베너머스",
+    "cf": []
+  },
+  {
+    "word": "venomous",
+    "pos": "형용사",
+    "meaning": "(말이나 태도가) 악의에 찬",
+    "ko": "그는 그녀를 악의 어린 눈으로 쳐다보았다.",
+    "en": "He gave her a venomous look.",
+    "highlight": "venomous",
+    "ipa": "/ˈvenəməs/",
+    "ipaKo": "베너머스",
+    "cf": []
+  },
+  {
+    "word": "vigil",
+    "pos": "명사",
+    "meaning": "추모 집회, 촛불 집회",
+    "ko": "수백 명이 촛불 추모 집회에 모였다.",
+    "en": "Hundreds gathered for a candlelight vigil.",
+    "highlight": "vigil",
+    "ipa": "/ˈvɪdʒəl/",
+    "ipaKo": "비절",
+    "cf": []
+  },
+  {
+    "word": "vigil",
+    "pos": "명사",
+    "meaning": "(밤샘) 간호, 철야",
+    "ko": "그녀는 아버지 곁에서 밤을 새우며 간호했다.",
+    "en": "She kept vigil at her father's bedside.",
+    "highlight": "vigil",
+    "ipa": "/ˈvɪdʒəl/",
+    "ipaKo": "비절",
+    "cf": []
+  },
+  {
+    "word": "vindicated",
+    "pos": "동사",
+    "meaning": "(vindicate의 과거·과거분사) 옳음이나 결백을 입증하다",
+    "ko": "새로운 증거가 피고인의 결백을 입증했다.",
+    "en": "New evidence vindicated the accused man.",
+    "highlight": "vindicated",
+    "ipa": "/ˈvɪndɪkeɪtɪd/",
+    "ipaKo": "빈디케이티드",
+    "cf": [
+      {
+        "word": "vindicate",
+        "pos": "동사",
+        "meaning": "(옳음·결백을) 입증하다"
+      }
+    ]
+  },
+  {
+    "word": "vindicated",
+    "pos": "형용사",
+    "meaning": "(자신이 옳았음이 밝혀져) 떳떳한, 정당성이 입증된",
+    "ko": "결과가 나오자 내가 옳았다는 게 입증되어 후련했다.",
+    "en": "When the results came in, I felt vindicated.",
+    "highlight": "vindicated",
+    "ipa": "/ˈvɪndɪkeɪtɪd/",
+    "ipaKo": "빈디케이티드",
+    "cf": []
+  },
+  {
+    "word": "vehemently",
+    "pos": "부사",
+    "meaning": "격렬하게, 강력하게 (h는 거의 발음하지 않음)",
+    "ko": "그녀는 그 혐의를 강력히 부인했다.",
+    "en": "She vehemently denied the accusation.",
+    "highlight": "vehemently",
+    "ipa": "/ˈviːəməntli/",
+    "ipaKo": "비어먼틀리",
+    "cf": []
+  },
+  {
+    "word": "vestige",
+    "pos": "명사",
+    "meaning": "흔적, 자취, 잔재",
+    "ko": "이 유적은 고대 도시의 마지막 흔적이다.",
+    "en": "These ruins are the last vestige of the ancient city.",
+    "highlight": "vestige",
+    "ipa": "/ˈvestɪdʒ/",
+    "ipaKo": "베스티지",
+    "cf": []
+  },
+  {
+    "word": "vestige",
+    "pos": "명사",
+    "meaning": "(부정문에서) 아주 조금",
+    "ko": "그의 마음에는 의심이 조금도 없었다.",
+    "en": "There wasn't a vestige of doubt in his mind.",
+    "highlight": "vestige",
+    "ipa": "/ˈvestɪdʒ/",
+    "ipaKo": "베스티지",
+    "cf": []
+  },
+  {
+    "word": "valiantly",
+    "pos": "부사",
+    "meaning": "용감하게, 씩씩하게",
+    "ko": "그 팀은 용감히 싸웠지만 졌다.",
+    "en": "The team fought valiantly but lost.",
+    "highlight": "valiantly",
+    "ipa": "/ˈvæliəntli/",
+    "ipaKo": "밸리언틀리",
+    "cf": []
+  },
+  {
+    "word": "vociferous",
+    "pos": "형용사",
+    "meaning": "(의견을) 소리 높여 외치는, 목소리가 큰, 시끄러운 (문어체·덜 쓰임)",
+    "ko": "그는 그 정책을 소리 높여 비판하는 사람이다.",
+    "en": "He is a vociferous critic of the policy.",
+    "highlight": "vociferous",
+    "ipa": "/voʊˈsɪfərəs/",
+    "ipaKo": "보우시퍼러스",
+    "cf": []
+  },
+  {
+    "word": "vicissitude",
+    "pos": "명사",
+    "meaning": "(주로 복수 vicissitudes) 흥망성쇠, 우여곡절, 변천",
+    "ko": "그녀는 인생의 우여곡절을 품위 있게 견뎌냈다.",
+    "en": "She endured the vicissitudes of life with grace.",
+    "highlight": "vicissitudes",
+    "ipa": "/vɪˈsɪsətuːd/",
+    "ipaKo": "비시서투드",
+    "cf": []
+  },
+  {
+    "word": "variegated",
+    "pos": "형용사",
+    "meaning": "(잎이나 꽃이) 얼룩덜룩한, 색이 다양한; 다채로운",
+    "ko": "이 식물은 초록과 흰색이 섞인 얼룩무늬 잎을 가졌다.",
+    "en": "This plant has variegated green and white leaves.",
+    "highlight": "variegated",
+    "ipa": "/ˈveriəɡeɪtɪd/",
+    "ipaKo": "베리어게이티드",
+    "cf": []
+  },
+  {
+    "word": "vermilion",
+    "pos": "명사",
+    "meaning": "주홍색, 주홍색 안료",
+    "ko": "사원의 문은 주홍색으로 칠해져 있었다.",
+    "en": "The temple gate was painted in vermilion.",
+    "highlight": "vermilion",
+    "ipa": "/vərˈmɪljən/",
+    "ipaKo": "버밀리언",
+    "cf": []
+  },
+  {
+    "word": "vermilion",
+    "pos": "형용사",
+    "meaning": "주홍색의",
+    "ko": "그녀는 파티에 주홍빛 립스틱을 바르고 갔다.",
+    "en": "She wore vermilion lipstick to the party.",
+    "highlight": "vermilion",
+    "ipa": "/vərˈmɪljən/",
+    "ipaKo": "버밀리언",
+    "cf": []
+  },
+  {
+    "word": "vanity fair",
+    "pos": "명사",
+    "meaning": "허영의 시장; 허영과 사치로 가득한 세상이나 사교계 (『천로역정』 유래; Vanity Fair 소설·잡지명)",
+    "ko": "그는 할리우드를 명성과 돈이 판치는 허영의 시장으로 보았다.",
+    "en": "He saw Hollywood as a vanity fair of fame and money.",
+    "highlight": "vanity fair",
+    "ipa": "/ˈvænəti ˈfer/",
+    "ipaKo": "배너티 페어",
+    "cf": []
   }
 ];
