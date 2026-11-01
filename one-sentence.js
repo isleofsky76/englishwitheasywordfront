@@ -158,12 +158,12 @@
         '</p>' +
         meta +
         renderCfLines(item.cf) +
-        (item.ko ? '<p class="os-ko">' + escapeHtml(item.ko) + '</p>' : '') +
         '<div class="os-en-row">' +
           '<p class="os-en">' + highlightEn(item.en, item.highlight || item.word) + '</p>' +
           '<button type="button" class="os-tts" data-os-tts="' + escapeAttr(item.en) +
             '" aria-label="' + escapeAttr(item.word + ' 문장 듣기') + '">' + SPEAKER_SVG + '</button>' +
         '</div>' +
+        (item.ko ? '<p class="os-ko">' + escapeHtml(item.ko) + '</p>' : '') +
       '</article>'
     );
   }

@@ -2,14 +2,16 @@
 @import url("redesign-tokens.css");
 
 .os-page {
-  --os-blue: #2f6fed;
-  --os-ink-soft: #5c584f;
-  --os-hl: #fff2a8;
+  --os-blue: #3d6eb8;
+  --os-ink: #3a3834;
+  --os-ink-soft: #6a6660;
+  --os-ink-muted: #7a756c;
+  --os-hl: #f3ecc0;
   --os-max: 680px;
   --os-body: 17px;
   margin: 0;
   font-family: var(--font-sans);
-  color: var(--ink);
+  color: var(--os-ink);
   background: var(--page-bg);
   -webkit-font-smoothing: antialiased;
 }
@@ -144,11 +146,11 @@
 .os-letter-head {
   margin: 32px 0 8px;
   padding-bottom: 8px;
-  border-bottom: 2px solid #222;
-  font-size: 18px;
-  font-weight: 800;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.14);
+  font-size: 17px;
+  font-weight: 700;
   letter-spacing: 0.04em;
-  color: #111;
+  color: var(--os-ink-soft);
   scroll-margin-top: 88px;
 }
 
@@ -160,7 +162,7 @@
   display: block;
   padding: 26px 0 24px;
   border: none;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
   scroll-margin-top: 88px;
 }
 
@@ -177,49 +179,49 @@
   margin: 0 0 2px;
   font-size: var(--os-body);
   line-height: 1.45;
-  color: var(--ink);
+  color: var(--os-ink);
 }
 
 .os-head-en {
-  font-size: 1.2em;
-  font-weight: 800;
-  color: #0b57d0;
+  font-size: 1.15em;
+  font-weight: 700;
+  color: var(--os-blue);
   letter-spacing: -0.02em;
 }
 
 .os-head-sound {
-  font-weight: 500;
-  color: #444;
+  font-weight: 400;
+  color: var(--os-ink-soft);
   white-space: nowrap;
 }
 
 .os-head-ipa {
   font-family: "Lucida Sans Unicode", "Arial Unicode MS", "Segoe UI", sans-serif;
   font-size: 0.95em;
-  color: #333;
+  color: var(--os-ink-soft);
 }
 
 .os-head-pron {
   font-size: 0.95em;
-  font-weight: 600;
-  color: #222;
+  font-weight: 500;
+  color: var(--os-ink-soft);
 }
 
 .os-meta {
   margin: 0 0 8px;
   font-size: 16px;
   line-height: 1.5;
-  color: var(--ink);
+  color: var(--os-ink);
 }
 
 .os-head-pos {
-  font-weight: 700;
-  color: #333;
+  font-weight: 600;
+  color: var(--os-ink-soft);
 }
 
 .os-head-ko {
-  font-weight: 600;
-  color: #111;
+  font-weight: 500;
+  color: var(--os-ink);
 }
 
 /* cf. 연관어 (있을 때만) */
@@ -227,12 +229,12 @@
   margin: 0 0 10px;
   font-size: 14px;
   line-height: 1.5;
-  color: #444;
+  color: var(--os-ink-muted);
 }
 
 .os-cf-label {
   font-style: italic;
-  font-weight: 600;
+  font-weight: 500;
   color: inherit;
 }
 
@@ -240,16 +242,20 @@
 .os-cf-pos,
 .os-cf-dash,
 .os-cf-ko {
-  font-weight: 500;
+  font-weight: 400;
   color: inherit;
 }
 
+.os-en-row {
+  margin-bottom: 4px;
+}
+
 .os-ko {
-  margin: 0 0 8px;
+  margin: 4px 0 0;
   font-size: var(--os-body);
   line-height: 1.7;
-  color: #222;
-  font-weight: 500;
+  color: var(--os-ink-soft);
+  font-weight: 400;
 }
 
 .os-en-row {
@@ -265,11 +271,11 @@
   min-width: 0;
   margin: 0;
   font-family: inherit;
-  font-size: 1.05em;
-  font-weight: 500;
+  font-size: 1.02em;
+  font-weight: 450;
   line-height: 1.7;
   letter-spacing: 0;
-  color: #111;
+  color: var(--os-ink);
 }
 
 .os-en mark {
@@ -277,7 +283,7 @@
   color: inherit;
   padding: 0 0.08em;
   border-radius: 2px;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .os-tts {
