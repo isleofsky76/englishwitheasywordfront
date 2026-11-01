@@ -536,5 +536,23 @@ window.ONE_SENTENCE_FEED = [
         "_id": "6ae6bb941cb2cae855a28bcd"
       }
     ]
+  },
+  {
+    "word": "acquisitiveness",
+    "pos": "명사",
+    "meaning": "획득욕, 소유욕",
+    "ko": "그의 지나친 소유욕이 결국 친구들을 멀어지게 했다.",
+    "en": "His acquisitiveness made him chase every deal, even the bad ones.",
+    "highlight": "acquisitiveness",
+    "ipa": "/əˈkwɪzətɪvnəs/",
+    "ipaKo": "어퀴지티브니스",
+    "cf": [
+      {
+        "word": "acquisitive",
+        "pos": "형용사",
+        "meaning": "소유욕이 강한",
+        "_id": "6ae6bbd8d2eadd39209cc31b"
+      }
+    ]
   }
 ];
