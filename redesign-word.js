@@ -5,7 +5,7 @@
 (function (global) {
   'use strict';
 
-  var ASSET_VER = '20261101endef1';
+  var ASSET_VER = '20261101endef2';
   var SPEAKER_SVG =
     '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M15.5 8.5a5 5 0 0 1 0 7"></path></svg>';
   var SPEAKER_FULL_SVG =
@@ -477,7 +477,7 @@
                     '<h2 class="rd-word-h2">영영 정의</h2>' +
                     '<button type="button" class="rd-word-tts rd-word-endef-tts" data-rd-tts="' +
                       escapeAttr(data.endefSpeak || '') +
-                      '" aria-label="영영 정의 듣기">' + SPEAKER_FULL_SVG + '<span>듣기</span></button>' +
+                      '" aria-label="영영 정의 듣기" title="영영 정의 듣기">' + SPEAKER_FULL_SVG + '</button>' +
                   '</div>' +
                   '<div class="rd-word-endef-body">' +
                     data.endefHtml.map(function (html) {
