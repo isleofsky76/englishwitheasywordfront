@@ -3219,5 +3219,270 @@ window.ONE_SENTENCE_FEED = [
     "ipa": "/ˈhɑːmənɪm/",
     "ipaKo": "하머님",
     "cf": []
+  },
+  {
+    "word": "anecdote",
+    "pos": "명사",
+    "meaning": "일화, 짧은 실화",
+    "ko": "그는 재미있는 일화로 연설을 시작했다.",
+    "en": "He opened his speech with a funny anecdote.",
+    "highlight": "anecdote",
+    "ipa": "/ˈænɪkdoʊt/",
+    "ipaKo": "애닉도트",
+    "cf": []
+  },
+  {
+    "word": "ad hoc",
+    "pos": "형용사",
+    "meaning": "임시의, 특별한 목적을 위한",
+    "ko": "그들은 위기 대응을 위해 임시 위원회를 꾸렸다.",
+    "en": "They formed an ad hoc committee to handle the crisis.",
+    "highlight": "ad hoc",
+    "ipa": "/ˌæd ˈhɑːk/",
+    "ipaKo": "애드 학",
+    "cf": []
+  },
+  {
+    "word": "ad hoc",
+    "pos": "부사",
+    "meaning": "그때그때, 임시로",
+    "ko": "결정이 그때그때 즉흥적으로 내려졌다.",
+    "en": "Decisions were made ad hoc.",
+    "highlight": "ad hoc",
+    "ipa": "/ˌæd ˈhɑːk/",
+    "ipaKo": "애드 학",
+    "cf": []
+  },
+  {
+    "word": "accentuate",
+    "pos": "동사",
+    "meaning": "강조하다, 두드러지게 하다",
+    "ko": "그 드레스는 그녀의 몸매를 돋보이게 한다.",
+    "en": "The dress accentuates her figure.",
+    "highlight": "accentuates",
+    "ipa": "/əkˈsentʃueɪt/",
+    "ipaKo": "억센추에이트",
+    "cf": []
+  },
+  {
+    "word": "abdicate",
+    "pos": "동사",
+    "meaning": "(왕위를) 물려주다, 퇴위하다",
+    "ko": "왕은 아들에게 왕위를 물려주었다.",
+    "en": "The king abdicated in favor of his son.",
+    "highlight": "abdicated",
+    "ipa": "/ˈæbdɪkeɪt/",
+    "ipaKo": "앱디케이트",
+    "cf": []
+  },
+  {
+    "word": "abdicate",
+    "pos": "동사",
+    "meaning": "(책임을) 저버리다",
+    "ko": "부모는 자녀에 대한 책임을 저버릴 수 없다.",
+    "en": "Parents can't abdicate responsibility for their children.",
+    "highlight": "abdicate",
+    "ipa": "/ˈæbdɪkeɪt/",
+    "ipaKo": "앱디케이트",
+    "cf": []
+  },
+  {
+    "word": "affable",
+    "pos": "형용사",
+    "meaning": "상냥한, 붙임성 있는",
+    "ko": "새 매니저는 상냥하고 말 붙이기 편하다.",
+    "en": "Our new manager is affable and easy to talk to.",
+    "highlight": "affable",
+    "ipa": "/ˈæfəbl/",
+    "ipaKo": "애퍼블",
+    "cf": []
+  },
+  {
+    "word": "acquiesce",
+    "pos": "동사",
+    "meaning": "(마지못해) 따르다, 묵인하다 (주로 acquiesce to/in)",
+    "ko": "그녀는 결국 그들의 요구에 마지못해 응했다.",
+    "en": "She finally acquiesced to their demands.",
+    "highlight": "acquiesced",
+    "ipa": "/ˌækwiˈes/",
+    "ipaKo": "애퀴에스",
+    "cf": []
+  },
+  {
+    "word": "adulation",
+    "pos": "명사",
+    "meaning": "지나친 칭찬, 열렬한 찬사, 숭배",
+    "ko": "그 가수는 수백만 팬의 열렬한 찬사를 누렸다.",
+    "en": "The singer enjoyed the adulation of millions of fans.",
+    "highlight": "adulation",
+    "ipa": "/ˌædʒəˈleɪʃən/",
+    "ipaKo": "애줄레이션",
+    "cf": []
+  },
+  {
+    "word": "adroit",
+    "pos": "형용사",
+    "meaning": "능숙한, 솜씨 좋은, 수완 있는",
+    "ko": "그녀는 까다로운 고객을 능숙하게 다룬다.",
+    "en": "She is adroit at handling difficult clients.",
+    "highlight": "adroit",
+    "ipa": "/əˈdrɔɪt/",
+    "ipaKo": "어드로이트",
+    "cf": []
+  },
+  {
+    "word": "amortize",
+    "pos": "동사",
+    "meaning": "(부채를) 분할 상환하다; (회계) 비용을 여러 해에 걸쳐 나누어 처리하다",
+    "ko": "그 대출은 30년에 걸쳐 분할 상환된다.",
+    "en": "The loan will be amortized over 30 years.",
+    "highlight": "amortized",
+    "ipa": "/ˈæmərtaɪz/",
+    "ipaKo": "애머타이즈",
+    "cf": []
+  },
+  {
+    "word": "aggrandize",
+    "pos": "동사",
+    "meaning": "(권력·지위를) 키우다, 강화하다; 과장하다",
+    "ko": "그는 자기 세력을 키우려고 직위를 이용했다.",
+    "en": "He used his position to aggrandize himself.",
+    "highlight": "aggrandize",
+    "ipa": "/əˈɡrændaɪz/",
+    "ipaKo": "어그랜다이즈",
+    "cf": []
+  },
+  {
+    "word": "self-aggrandizing",
+    "pos": "형용사",
+    "meaning": "자기를 과장하는, 자기 자랑하는",
+    "ko": "나는 그의 자기 자랑 이야기에 질렸다.",
+    "en": "I'm tired of his self-aggrandizing stories.",
+    "highlight": "self-aggrandizing",
+    "ipa": "/ˌself əˈɡrændaɪzɪŋ/",
+    "ipaKo": "셀프 어그랜다이징",
+    "cf": [
+      {
+        "word": "aggrandize",
+        "pos": "동사",
+        "meaning": "(지위·세력을) 키우다"
+      }
+    ]
+  },
+  {
+    "word": "abscond",
+    "pos": "동사",
+    "meaning": "(돈을 가지고) 도주하다, 종적을 감추다",
+    "ko": "회계 담당자가 200만 달러를 들고 잠적했다.",
+    "en": "The accountant absconded with $2 million.",
+    "highlight": "absconded",
+    "ipa": "/əbˈskɑːnd/",
+    "ipaKo": "엡스칸드",
+    "cf": []
+  },
+  {
+    "word": "assiduous",
+    "pos": "형용사",
+    "meaning": "끈기 있는, 근면한, 세심한",
+    "ko": "그녀의 끈기 있는 조사 덕분에 사건이 해결되었다.",
+    "en": "Thanks to her assiduous research, the case was solved.",
+    "highlight": "assiduous",
+    "ipa": "/əˈsɪdʒuəs/",
+    "ipaKo": "어시주어스",
+    "cf": []
+  },
+  {
+    "word": "acquisitive",
+    "pos": "형용사",
+    "meaning": "탐욕스러운, 소유욕이 강한; (기업이) 인수에 적극적인",
+    "ko": "우리는 물욕이 강한 사회에 살고 있다.",
+    "en": "We live in an acquisitive society.",
+    "highlight": "acquisitive",
+    "ipa": "/əˈkwɪzətɪv/",
+    "ipaKo": "어퀴저티브",
+    "cf": []
+  },
+  {
+    "word": "augur",
+    "pos": "동사",
+    "meaning": "(좋거나 나쁜 일의) 징조가 되다 (주로 augur well/ill)",
+    "ko": "판매 호조는 그 회사에 좋은 징조다.",
+    "en": "The strong sales augur well for the company.",
+    "highlight": "augur",
+    "ipa": "/ˈɔːɡər/",
+    "ipaKo": "오거",
+    "cf": []
+  },
+  {
+    "word": "augur",
+    "pos": "명사",
+    "meaning": "(고대 로마의) 점술가, 예언자",
+    "ko": "점술가는 새가 나는 모습으로 점을 쳤다.",
+    "en": "The augur read the flight of birds.",
+    "highlight": "augur",
+    "ipa": "/ˈɔːɡər/",
+    "ipaKo": "오거",
+    "cf": []
+  },
+  {
+    "word": "accoutrement",
+    "pos": "명사",
+    "meaning": "(주로 복수) 장비, 부속품, 액세서리; (생활 방식의) 상징적 물건",
+    "ko": "고급차와 큰 집은 성공을 상징하는 물건들이다.",
+    "en": "The fancy car and big house are the accoutrements of success.",
+    "highlight": "accoutrements",
+    "ipa": "/əˈkuːtrəmənt/",
+    "ipaKo": "어쿠터먼트",
+    "cf": []
+  },
+  {
+    "word": "asunder",
+    "pos": "부사",
+    "meaning": "(문어) 산산이, 따로따로 떨어져",
+    "ko": "그 가족은 전쟁으로 뿔뿔이 흩어졌다.",
+    "en": "The family was torn asunder by the war.",
+    "highlight": "asunder",
+    "ipa": "/əˈsʌndər/",
+    "ipaKo": "어선더",
+    "cf": []
+  },
+  {
+    "word": "apotheosis",
+    "pos": "명사",
+    "meaning": "극치, 정점, 전형; 신격화",
+    "ko": "이 소설은 그의 경력의 정점이다.",
+    "en": "This novel is the apotheosis of his career.",
+    "highlight": "apotheosis",
+    "ipa": "/əˌpɑːθiˈoʊsɪs/",
+    "ipaKo": "어파시오시스",
+    "cf": []
+  },
+  {
+    "word": "arboreal",
+    "pos": "형용사",
+    "meaning": "나무에 사는, 수목의",
+    "ko": "나무늘보는 나무에서 사는 동물이다.",
+    "en": "Sloths are arboreal animals.",
+    "highlight": "arboreal",
+    "ipa": "/ɑːrˈbɔːriəl/",
+    "ipaKo": "아르보리얼",
+    "cf": []
+  },
+  {
+    "word": "august",
+    "pos": "형용사",
+    "meaning": "위엄 있는, 존엄한, 권위 있는 (뒤 강세 어거스트; 8월 August는 앞 강세 오거스트)",
+    "ko": "그녀는 그 권위 있는 기관의 일원으로 선출되었다.",
+    "en": "She was elected to that august institution.",
+    "highlight": "august",
+    "ipa": "/ɔːˈɡʌst/",
+    "ipaKo": "어거스트",
+    "cf": [
+      {
+        "word": "August",
+        "pos": "명사",
+        "meaning": "8월 (/ˈɔːɡəst/ 오거스트 · 앞에 강세)"
+      }
+    ]
   }
 ];
