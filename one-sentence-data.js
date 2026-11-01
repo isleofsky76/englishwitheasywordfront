@@ -3484,5 +3484,264 @@ window.ONE_SENTENCE_FEED = [
         "meaning": "8월 (/ˈɔːɡəst/ 오거스트 · 앞에 강세)"
       }
     ]
+  },
+  {
+    "word": "culminate",
+    "pos": "동사",
+    "meaning": "절정에 이르다, (결국 ~으로) 끝나다 (culminate in)",
+    "ko": "수년간의 노력이 결국 금메달로 결실을 맺었다.",
+    "en": "Years of hard work culminated in a gold medal.",
+    "highlight": "culminated",
+    "ipa": "/ˈkʌlmɪneɪt/",
+    "ipaKo": "컬미네이트",
+    "cf": []
+  },
+  {
+    "word": "cohort",
+    "pos": "명사",
+    "meaning": "(통계·연구) 동일 집단, 코호트",
+    "ko": "그 연구는 어린이 5,000명으로 이루어진 집단을 추적했다.",
+    "en": "The study followed a cohort of 5,000 children.",
+    "highlight": "cohort",
+    "ipa": "/ˈkoʊhɔːrt/",
+    "ipaKo": "코우호트",
+    "cf": []
+  },
+  {
+    "word": "cohort",
+    "pos": "명사",
+    "meaning": "동료, 패거리",
+    "ko": "사장이 측근들을 데리고 도착했다.",
+    "en": "The boss arrived with his cohorts.",
+    "highlight": "cohorts",
+    "ipa": "/ˈkoʊhɔːrt/",
+    "ipaKo": "코우호트",
+    "cf": []
+  },
+  {
+    "word": "crux",
+    "pos": "명사",
+    "meaning": "(문제의) 핵심, 가장 중요한 부분",
+    "ko": "문제의 핵심은 자금 부족이다.",
+    "en": "The crux of the problem is a lack of funding.",
+    "highlight": "crux",
+    "ipa": "/krʌks/",
+    "ipaKo": "크럭스",
+    "cf": []
+  },
+  {
+    "word": "corrode",
+    "pos": "동사",
+    "meaning": "부식하다, 녹슬다",
+    "ko": "바닷물은 금속을 부식시킨다.",
+    "en": "Salt water corrodes metal.",
+    "highlight": "corrodes",
+    "ipa": "/kəˈroʊd/",
+    "ipaKo": "커로우드",
+    "cf": []
+  },
+  {
+    "word": "corrode",
+    "pos": "동사",
+    "meaning": "(서서히) 약화시키다, 좀먹다",
+    "ko": "거짓말이 서서히 그들의 신뢰를 좀먹었다.",
+    "en": "Lies slowly corroded their trust.",
+    "highlight": "corroded",
+    "ipa": "/kəˈroʊd/",
+    "ipaKo": "커로우드",
+    "cf": []
+  },
+  {
+    "word": "cordial",
+    "pos": "형용사",
+    "meaning": "다정한, 화기애애한, 정중한",
+    "ko": "두 정상은 화기애애한 회담을 가졌다.",
+    "en": "The two leaders had a cordial meeting.",
+    "highlight": "cordial",
+    "ipa": "/ˈkɔːrdʒəl/",
+    "ipaKo": "코절",
+    "cf": []
+  },
+  {
+    "word": "cordial",
+    "pos": "명사",
+    "meaning": "(영국) 과일 원액 음료; (미국) 리큐어, 달콤한 술",
+    "ko": "그녀는 라임 원액을 탄산수에 탔다.",
+    "en": "She mixed lime cordial with soda.",
+    "highlight": "cordial",
+    "ipa": "/ˈkɔːrdʒəl/",
+    "ipaKo": "코절",
+    "cf": []
+  },
+  {
+    "word": "conscientious",
+    "pos": "형용사",
+    "meaning": "양심적인, 성실한, 꼼꼼한",
+    "ko": "그녀는 마감을 절대 어기지 않는 성실한 학생이다.",
+    "en": "She is a conscientious student who never misses a deadline.",
+    "highlight": "conscientious",
+    "ipa": "/ˌkɑːnʃiˈenʃəs/",
+    "ipaKo": "칸시엔셔스",
+    "cf": [
+      {
+        "word": "conscientious objector",
+        "pos": "명사",
+        "meaning": "양심적 병역 거부자"
+      }
+    ]
+  },
+  {
+    "word": "cadence",
+    "pos": "명사",
+    "meaning": "(목소리·언어의) 억양, 운율, 리듬; (음악) 종지; (운동) 케이던스",
+    "ko": "나는 그녀 목소리의 부드러운 억양이 좋다.",
+    "en": "I love the gentle cadence of her voice.",
+    "highlight": "cadence",
+    "ipa": "/ˈkeɪdns/",
+    "ipaKo": "케이든스",
+    "cf": []
+  },
+  {
+    "word": "cadence",
+    "pos": "명사",
+    "meaning": "주기, 리듬 (회의·업무 주기)",
+    "ko": "팀은 매주 주기적으로 회의한다.",
+    "en": "The team meets on a weekly cadence.",
+    "highlight": "cadence",
+    "ipa": "/ˈkeɪdns/",
+    "ipaKo": "케이든스",
+    "cf": []
+  },
+  {
+    "word": "colloquial",
+    "pos": "형용사",
+    "meaning": "구어의, 일상 회화체의",
+    "ko": "\"gonna\"는 \"going to\"의 구어체 표현이다.",
+    "en": "\"Gonna\" is a colloquial form of \"going to.\"",
+    "highlight": "colloquial",
+    "ipa": "/kəˈloʊkwiəl/",
+    "ipaKo": "컬로우퀴얼",
+    "cf": []
+  },
+  {
+    "word": "collude",
+    "pos": "동사",
+    "meaning": "공모하다, 결탁하다, 담합하다",
+    "ko": "그 회사들은 가격을 담합했다.",
+    "en": "The companies colluded to fix prices.",
+    "highlight": "colluded",
+    "ipa": "/kəˈluːd/",
+    "ipaKo": "컬루드",
+    "cf": []
+  },
+  {
+    "word": "cotton",
+    "pos": "명사",
+    "meaning": "면, 목화, 솜",
+    "ko": "이 셔츠는 면 100%다.",
+    "en": "This shirt is 100% cotton.",
+    "highlight": "cotton",
+    "ipa": "/ˈkɑːtn/",
+    "ipaKo": "카튼",
+    "cf": []
+  },
+  {
+    "word": "cotton on",
+    "pos": "동사",
+    "meaning": "(구어) 알아차리다, 이해하다",
+    "ko": "그 농담을 알아듣는 데 한참 걸렸다.",
+    "en": "It took me a while to cotton on to the joke.",
+    "highlight": "cotton on",
+    "ipa": "/ˈkɑːtn ɑːn/",
+    "ipaKo": "카튼 온",
+    "cf": []
+  },
+  {
+    "word": "cotton to",
+    "pos": "동사",
+    "meaning": "(미국 구어) ~을 좋아하게 되다 (주로 부정문)",
+    "ko": "나는 낯선 사람들은 별로야.",
+    "en": "I don't cotton to strangers.",
+    "highlight": "cotton to",
+    "ipa": "/ˈkɑːtn tuː/",
+    "ipaKo": "카튼 투",
+    "cf": []
+  },
+  {
+    "word": "cloying",
+    "pos": "형용사",
+    "meaning": "(지나치게 달아서) 물리는, 느끼한",
+    "ko": "그 디저트는 질릴 정도로 달았다.",
+    "en": "The dessert was cloyingly sweet.",
+    "highlight": "cloyingly",
+    "ipa": "/ˈklɔɪɪŋ/",
+    "ipaKo": "클로잉",
+    "cf": []
+  },
+  {
+    "word": "cloying",
+    "pos": "형용사",
+    "meaning": "(감정 표현이) 지나치게 감상적인",
+    "ko": "영화 결말이 지나치게 신파였다.",
+    "en": "The movie's ending was cloying.",
+    "highlight": "cloying",
+    "ipa": "/ˈklɔɪɪŋ/",
+    "ipaKo": "클로잉",
+    "cf": []
+  },
+  {
+    "word": "circumscribe",
+    "pos": "동사",
+    "meaning": "(권리나 활동을) 제한하다, 한정하다; (수학) 외접시키다",
+    "ko": "새 법은 경찰의 권한을 제한한다.",
+    "en": "The new law circumscribes the power of the police.",
+    "highlight": "circumscribes",
+    "ipa": "/ˈsɜːrkəmskraɪb/",
+    "ipaKo": "서컴스크라이브",
+    "cf": []
+  },
+  {
+    "word": "cavalcade",
+    "pos": "명사",
+    "meaning": "(말이나 차량의) 행렬, 퍼레이드; (사람이나 일의) 연속",
+    "ko": "차량 행렬이 대통령을 뒤따랐다.",
+    "en": "A cavalcade of cars followed the president.",
+    "highlight": "cavalcade",
+    "ipa": "/ˌkævlˈkeɪd/",
+    "ipaKo": "캐벌케이드",
+    "cf": []
+  },
+  {
+    "word": "churlish",
+    "pos": "형용사",
+    "meaning": "무례한, 버릇없는, 인색한",
+    "ko": "그런 친절한 제안을 거절하는 건 예의가 아닐 것이다.",
+    "en": "It would be churlish to refuse such a kind offer.",
+    "highlight": "churlish",
+    "ipa": "/ˈtʃɜːrlɪʃ/",
+    "ipaKo": "철리시",
+    "cf": []
+  },
+  {
+    "word": "canoodle",
+    "pos": "동사",
+    "meaning": "(구어) 껴안고 애무하다, 꽁냥거리다",
+    "ko": "한 커플이 공원 벤치에서 꽁냥거리고 있었다.",
+    "en": "A couple was canoodling on the park bench.",
+    "highlight": "canoodling",
+    "ipa": "/kəˈnuːdl/",
+    "ipaKo": "커누들",
+    "cf": []
+  },
+  {
+    "word": "comely",
+    "pos": "형용사",
+    "meaning": "(고어·문어) 어여쁜, 잘생긴, 매력적인",
+    "ko": "그녀는 어여쁜 젊은 여인이었다.",
+    "en": "She was a comely young woman.",
+    "highlight": "comely",
+    "ipa": "/ˈkʌmli/",
+    "ipaKo": "컴리",
+    "cf": []
   }
 ];
