@@ -109,11 +109,12 @@ export function containsNumericAbusePatterns(text) {
   // 18 반복 (1818, 181818, 18181818 …) — 단독 "18" 제외
   if (/(?:18){2,}/.test(c)) return true;
 
-  // 18 + 욕설 접미 (18년은 연도·기간과 겹쳐 제외)
-  if (/18(?:놈|새끼|뇬|련|새키|쉐끼|새끼들)/.test(c)) return true;
+  // 18/10/108 + 욕설 접미 (LoL·커뮤니티 우회형). 18년(연도·기간)은 제외
+  if (/(?:18|10|108)(?:놈|넘|새끼|새기|새키|쉐끼|새끼들|뇬|련)/.test(c)) return true;
+  if (/18(?:발|팔|섹|쉑)/.test(c)) return true;
 
   // 욕설 자판·초성 + 18
-  if (/시18|씨18|ㅅㅂ18|tlqkf18|\btlqkf\b|tlqkf/.test(c)) return true;
+  if (/시18|씨18|ㅅㅂ18|tlqkf/.test(c)) return true;
 
   // 성적 조합 69 (단독 69·6969 제외)
   if (/(?:섹|sex|sexy|porn)69|69(?:섹|sex|sexy|porn)/.test(c)) return true;
