@@ -382,6 +382,18 @@
     });
   }
 
+  function renderLoading() {
+    var feed = document.getElementById('os-feed');
+    var count = document.getElementById('os-count');
+    var index = document.getElementById('os-alpha');
+    if (feed) feed.innerHTML = '<p class="os-empty" aria-live="polite">글을 불러오는 중입니다.</p>';
+    if (count) count.textContent = '글을 불러오는 중입니다.';
+    if (index) {
+      index.hidden = true;
+      index.innerHTML = '';
+    }
+  }
+
   function renderFeed(items) {
     var feed = document.getElementById('os-feed');
     var count = document.getElementById('os-count');
@@ -793,10 +805,8 @@
       input.addEventListener('input', refresh);
     }
 
-    renderFeed([]);
+    renderLoading();
     renderTags([]);
-    var count = document.getElementById('os-count');
-    if (count) count.textContent = '불러오는 중…';
 
     function publishDictWords(items) {
       var map = Object.create(null);
