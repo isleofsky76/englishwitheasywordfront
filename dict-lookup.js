@@ -19,7 +19,7 @@
       maxWords: 4,
       dictionaries: [
         {
-          label: '네이버',
+          label: 'Naver',
           url: function (q) {
             return 'https://en.dict.naver.com/#/search?query=' + encodeURIComponent(q);
           },
@@ -94,20 +94,21 @@
     .dl-arrow{width:9px;height:9px;background:var(--dl-bg);border:1px solid var(--dl-line);border-right:0;border-bottom:0;
       transform:rotate(45deg);margin-bottom:-5px;position:relative;z-index:1}
     .dl-above .dl-arrow{transform:rotate(225deg);margin:-5px 0 0}
-    .dl-card{width:min(280px,calc(100vw - 24px));box-sizing:border-box;display:flex;flex-direction:column;
+    .dl-card{width:max-content;max-width:min(260px,calc(100vw - 24px));box-sizing:border-box;display:flex;flex-direction:column;align-items:center;
       background:var(--dl-bg);border:1px solid var(--dl-line);border-radius:6px;box-shadow:0 8px 22px var(--dl-shadow);
-      line-height:1.45;color:var(--dl-ink)}
-    .dl-meaning{padding:12px 14px 10px;font-size:15px;font-weight:500;
+      line-height:1.4;color:var(--dl-ink);text-align:center}
+    .dl-meaning{padding:10px 12px 8px;font-size:14px;font-weight:500;text-align:center;
       font-family:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
       word-break:keep-all;overflow-wrap:anywhere}
     .dl-meaning[hidden]{display:none !important}
-    .dl-foot{display:flex;align-items:center;flex-wrap:wrap;gap:2px;padding:7px 10px 8px 11px;border-top:1px solid var(--dl-rule);
-      background:var(--dl-foot);border-radius:0 0 6px 6px;font-size:13px;
-      font-family:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif}
-    .dl-card:not(:has(.dl-meaning:not([hidden])) .dl-foot{border-top:0;border-radius:6px}
-    .dl-foot a{padding:4px 5px;color:var(--dl-link);text-decoration:none;border-radius:3px}
-    .dl-foot a:hover,.dl-foot a:focus-visible{color:var(--dl-link-hi);text-decoration:underline;text-underline-offset:3px;outline:none}
-    .dl-dot{color:var(--dl-dot)}
+    .dl-foot{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:0;padding:6px 10px 8px;border-top:1px solid var(--dl-rule);
+      background:var(--dl-foot);border-radius:0 0 6px 6px;font-size:12px;line-height:1.35;width:100%;box-sizing:border-box;
+      font-family:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;color:var(--dl-ink)}
+    .dl-card.dl-links-only .dl-foot{border-top:0;border-radius:6px;padding:8px 10px}
+    .dl-foot-label{color:var(--dl-ink);margin-right:2px;white-space:nowrap}
+    .dl-foot a{padding:0 1px;color:var(--dl-link);text-decoration:none;border-radius:2px;white-space:nowrap}
+    .dl-foot a:hover,.dl-foot a:focus-visible{color:var(--dl-link-hi);text-decoration:underline;text-underline-offset:2px;outline:none}
+    .dl-sep{color:var(--dl-dot);margin:0 1px}
     ::highlight(dl-word){background-color:var(--dl-mark)}
     @media (prefers-reduced-motion: reduce){.dl-bubble{transition:none}}
   `;
@@ -119,18 +120,21 @@
     '<div class="dl-arrow" aria-hidden="true"></div>' +
     '<div class="dl-card" role="dialog" aria-label="단어 뜻">' +
     '<div class="dl-meaning"></div>' +
-    '<div class="dl-foot"></div>' +
+    '<div class="dl-foot"><span class="dl-foot-label">영어사전 :</span></div>' +
     '</div>';
 
+  const elCard = bubble.querySelector('.dl-card');
   const elMeaning = bubble.querySelector('.dl-meaning');
   const elFoot = bubble.querySelector('.dl-foot');
   const extLinks = CONFIG.dictionaries.map(function (d, i) {
     if (i > 0) {
-      const dot = document.createElement('span');
-      dot.className = 'dl-dot';
-      dot.setAttribute('aria-hidden', 'true');
-      dot.textContent = '·';
-      elFoot.appendChild(dot);
+      const sep = document.createElement('span');
+      sep.className = 'dl-sep';
+      sep.setAttribute('aria-hidden', 'true');
+      sep.textContent = ',';
+      elFoot.appendChild(sep);
+    } else {
+      elFoot.appendChild(document.createTextNode(' '));
     }
     const a = document.createElement('a');
     a.textContent = d.label;
@@ -157,9 +161,11 @@
     if (meaning) {
       elMeaning.hidden = false;
       elMeaning.textContent = meaning;
+      elCard.classList.remove('dl-links-only');
     } else {
       elMeaning.hidden = true;
       elMeaning.textContent = '';
+      elCard.classList.add('dl-links-only');
     }
     CONFIG.dictionaries.forEach(function (d, i) {
       extLinks[i].href = d.url(q);
