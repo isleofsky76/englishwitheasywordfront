@@ -166,5 +166,21 @@ window.ONE_SENTENCE_FEED = [
         "_id": "6ae6b55e88e41b68b0f58f40"
       }
     ]
+  },
+  {
+    "word": "complaisant",
+    "pos": "형용사",
+    "meaning": "고분고분한, 비위를 맞추는",
+    "ko": "그 신하는 왕의 명령을 고분고분한 태도로 따랐다.",
+    "en": "The courtier obeyed the king's orders in a complaisant manner.",
+    "highlight": "complaisant",
+    "cf": [
+      {
+        "word": "complaisance",
+        "pos": "명사",
+        "meaning": "고분고분함, 비위 맞춤",
+        "_id": "6ae6b5dbf4218ec530e3502a"
+      }
+    ]
   }
 ];
