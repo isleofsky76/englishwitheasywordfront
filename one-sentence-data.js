@@ -1448,7 +1448,7 @@ window.ONE_SENTENCE_FEED = [
     "word": "capitulate",
     "pos": "동사",
     "meaning": "굴복하다, 항복하다",
-    "ko": "몇 시간을 조른 끝에 부모님은 결국 두 손을 들었다.",
+    "ko": "그가 몇 시간 동안 조르자 부모님은 결국 두 손을 들었다.",
     "en": "After hours of pleading, his parents finally capitulated.",
     "highlight": "capitulated",
     "ipa": "/kəˈpɪtʃəleɪt/",
@@ -1503,7 +1503,7 @@ window.ONE_SENTENCE_FEED = [
     "word": "curt",
     "pos": "형용사",
     "meaning": "퉁명스러운, (말이) 무뚝뚝하게 짧은",
-    "ko": "그는 퉁명스럽게 한마디 하고 전화를 끊었다.",
+    "ko": "그는 퉁명스럽게 대답하고 전화를 끊었다.",
     "en": "He gave a curt reply and hung up.",
     "highlight": "curt",
     "ipa": "/kɜːrt/",
@@ -1551,13 +1551,13 @@ window.ONE_SENTENCE_FEED = [
   },
   {
     "word": "carpe diem",
-    "pos": "라틴어",
+    "pos": "감탄사·관용구",
     "meaning": "현재를 즐겨라, 오늘을 붙잡아라",
     "ko": "오늘을 즐겨라. 이런 기회는 다시 오지 않을지도 모른다.",
     "en": "Carpe diem—you may never get this chance again.",
     "highlight": "Carpe diem",
     "ipa": "/ˌkɑːrpeɪ ˈdiːem/",
-    "ipaKo": "카르페 디엠",
+    "ipaKo": "카르페이 디엠",
     "cf": []
   },
   {
@@ -1624,7 +1624,7 @@ window.ONE_SENTENCE_FEED = [
   {
     "word": "commissary",
     "pos": "명사",
-    "meaning": "(군대·회사 등의) 매점, 구내식당",
+    "meaning": "군부대 매점; (영화사·방송국 등의) 구내식당",
     "ko": "군인들은 매점에서 간식을 샀다.",
     "en": "The soldiers bought snacks at the commissary.",
     "highlight": "commissary",
