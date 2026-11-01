@@ -178,7 +178,7 @@ Return JSON:
   "items": [
     {
       "word": "lemma lowercase",
-      "pos": "형용사|동사|명사|부사|숙어",
+      "pos": "형용사|동사|명사|부사|숙어 (한 항목에 품사 하나만; 다중 품사면 항목을 나누세요)",
       "meaning": "짧은 한국어 뜻",
       "ipa": "/ˈædəpt/",
       "ipaKo": "어댑트",
@@ -197,10 +197,11 @@ Rules:
 - Concrete sentences adults would use (news/work/life). No slang, no sexual/violent content
 - Do NOT use markdown or bold markers (no **, __, *, backticks)
 - Do NOT pick basic words: gather, convey, essential, obtain, remarkable, navigate, persuade, contribute, anticipate, analyze, adapt, help, make, get, need, want, good, big
-- meaning: short, dictionary-like Korean
+- meaning: short, dictionary-like Korean; do not mix POS in one meaning line
+- pos: exactly one part of speech per item (never "명사/동사"). If a word has two POS, output two separate items with matching example sentences
 - ipa: IPA in slashes (US English preferred)
 - ipaKo: Korean hangul approximation of the pronunciation
-- cf: 0–2 items only when a related form/lemma is genuinely helpful (e.g. weathered → weather). Omit empty cf
+- cf: 0–2 items only when a related form/lemma is genuinely helpful (e.g. weathered → weather). Do not put the same word's other POS in cf — make a separate item instead
 - highlight must appear inside en (case-insensitive)
 - Prefer exam/news-worthy words over textbook beginner lists`;
 

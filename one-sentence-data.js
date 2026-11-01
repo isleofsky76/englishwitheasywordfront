@@ -100,19 +100,13 @@ window.ONE_SENTENCE_FEED = [
   {
     "word": "deliberate",
     "pos": "형용사",
-    "meaning": "신중한, 차분한 (형용사) / 숙고하다 (동사)",
+    "meaning": "신중한, 차분한",
     "ko": "그녀는 천천히 신중한 태도로 말을 했다.",
     "en": "She spoke in a slow and deliberate way.",
     "highlight": "deliberate",
     "ipa": "/dɪˈlɪbərət/",
     "ipaKo": "딜리버릿",
-    "cf": [
-      {
-        "word": "deliberate",
-        "pos": "동사",
-        "meaning": "숙고하다 (/dɪˈlɪbəreɪt/ 딜리버레이트)"
-      }
-    ]
+    "cf": []
   },
   {
     "word": "reticent",
@@ -596,13 +590,7 @@ window.ONE_SENTENCE_FEED = [
     "highlight": "articulate",
     "ipa": "/ɑːrˈtɪkjuleɪt/",
     "ipaKo": "아르티큘레이트",
-    "cf": [
-      {
-        "word": "articulate",
-        "pos": "형용사",
-        "meaning": "또렷한, 분명한 (/ɑːrˈtɪkjələt/ 아르티큘릿)"
-      }
-    ]
+    "cf": []
   },
   {
     "word": "appraisal",
@@ -661,8 +649,8 @@ window.ONE_SENTENCE_FEED = [
   },
   {
     "word": "askew",
-    "pos": "부사/형용사",
-    "meaning": "비뚤어진, 삐딱하게",
+    "pos": "부사",
+    "meaning": "삐딱하게",
     "ko": "그 그림이 비뚤어져 걸려 있어 방이 불균형하게 느껴졌다.",
     "en": "The picture hung askew, making the room feel unbalanced.",
     "highlight": "askew",
@@ -711,8 +699,8 @@ window.ONE_SENTENCE_FEED = [
   },
   {
     "word": "antic",
-    "pos": "명사/형용사",
-    "meaning": "익살스러운 짓; 기괴한",
+    "pos": "명사",
+    "meaning": "익살스러운 짓",
     "ko": "광대의 익살스러운 짓은 관객을 공연 내내 즐겁게 했다.",
     "en": "The clown's antics kept the audience entertained throughout the show.",
     "highlight": "antics",
@@ -839,8 +827,8 @@ window.ONE_SENTENCE_FEED = [
   },
   {
     "word": "buoy",
-    "pos": "명사/동사",
-    "meaning": "부표; (기운을) 북돋우다",
+    "pos": "동사",
+    "meaning": "(기운을) 북돋우다",
     "ko": "팀은 그 좋은 소식에 힘을 얻었다.",
     "en": "The team was buoyed by the good news.",
     "highlight": "buoyed",
@@ -930,8 +918,8 @@ window.ONE_SENTENCE_FEED = [
   },
   {
     "word": "bare bones",
-    "pos": "명사/형용사",
-    "meaning": "골자, 핵심; (bare-bones) 최소한의",
+    "pos": "형용사",
+    "meaning": "(bare-bones) 최소한의",
     "ko": "우리에게는 그 프로젝트를 위한 최소한의 예산밖에 없었다.",
     "en": "We had only a bare-bones budget for the project.",
     "highlight": "bare-bones",
@@ -1003,7 +991,7 @@ window.ONE_SENTENCE_FEED = [
   },
   {
     "word": "bray",
-    "pos": "동사/명사",
+    "pos": "동사",
     "meaning": "(당나귀가) 울다; (사람이) 시끄럽게 웃다",
     "ko": "당나귀가 들판에서 시끄럽게 울었다.",
     "en": "The donkey brayed loudly in the field.",
@@ -1065,6 +1053,83 @@ window.ONE_SENTENCE_FEED = [
     "highlight": "braggadocio",
     "ipa": "/ˌbræɡəˈdoʊʃioʊ/",
     "ipaKo": "브래거도시오",
+    "cf": []
+  },
+  {
+    "word": "deliberate",
+    "pos": "동사",
+    "meaning": "숙고하다",
+    "ko": "배심원단은 평결에 이르기 전에 몇 시간 동안 숙고할 것이다.",
+    "en": "The jury will deliberate for several hours before reaching a verdict.",
+    "highlight": "deliberate",
+    "ipa": "/dɪˈlɪbəreɪt/",
+    "ipaKo": "딜리버레이트",
+    "cf": []
+  },
+  {
+    "word": "articulate",
+    "pos": "형용사",
+    "meaning": "또렷한, 분명한",
+    "ko": "그녀는 청중의 관심을 잃지 않는 또렷한 화자다.",
+    "en": "She is an articulate speaker who never loses her audience.",
+    "highlight": "articulate",
+    "ipa": "/ɑːrˈtɪkjələt/",
+    "ipaKo": "아르티큘릿",
+    "cf": []
+  },
+  {
+    "word": "askew",
+    "pos": "형용사",
+    "meaning": "비뚤어진",
+    "ko": "그의 넥타이는 긴 회의 후에 비뚤어 보였다.",
+    "en": "His tie looked askew after the long meeting.",
+    "highlight": "askew",
+    "ipa": "/əˈskjuː/",
+    "ipaKo": "어스큐",
+    "cf": []
+  },
+  {
+    "word": "antic",
+    "pos": "형용사",
+    "meaning": "기괴한, 익살스러운",
+    "ko": "그 영화의 익살스러운 유머는 모두를 계속 웃게 했다.",
+    "en": "The movie's antic humor kept everyone laughing.",
+    "highlight": "antic",
+    "ipa": "/ˈæntɪk/",
+    "ipaKo": "앤틱",
+    "cf": []
+  },
+  {
+    "word": "buoy",
+    "pos": "명사",
+    "meaning": "부표",
+    "ko": "주황색 부표가 수영 구역을 표시했다.",
+    "en": "A bright orange buoy marked the swimming area.",
+    "highlight": "buoy",
+    "ipa": "/ˈbuːi/",
+    "ipaKo": "부이 (영국식 /bɔɪ/ 보이)",
+    "cf": []
+  },
+  {
+    "word": "bare bones",
+    "pos": "명사",
+    "meaning": "골자, 핵심",
+    "ko": "계획의 골자만 알려 주세요.",
+    "en": "Just give me the bare bones of the plan.",
+    "highlight": "bare bones",
+    "ipa": "/ˌber ˈboʊnz/",
+    "ipaKo": "베어 본즈",
+    "cf": []
+  },
+  {
+    "word": "bray",
+    "pos": "명사",
+    "meaning": "(당나귀의) 울음소리",
+    "ko": "농장에서 당나귀 울음소리가 들렸다.",
+    "en": "We heard the bray of a donkey from the farm.",
+    "highlight": "bray",
+    "ipa": "/breɪ/",
+    "ipaKo": "브레이",
     "cf": []
   }
 ];

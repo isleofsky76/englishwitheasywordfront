@@ -101,11 +101,16 @@
     };
   }
 
-  function wordAnchorId(word) {
-    return 'os-w-' + String(word || '')
+  function wordAnchorId(word, pos) {
+    var base = 'os-w-' + String(word || '')
       .toLowerCase()
       .replace(/[^a-z0-9]+/g, '-')
       .replace(/^-+|-+$/g, '');
+    var p = String(pos || '')
+      .toLowerCase()
+      .replace(/[^a-z0-9가-힣]+/g, '-')
+      .replace(/^-+|-+$/g, '');
+    return p ? base + '-' + p : base;
   }
 
   function renderCfLines(cfList) {
@@ -139,7 +144,7 @@
   }
 
   function renderItem(item) {
-    var aid = wordAnchorId(item.word);
+    var aid = wordAnchorId(item.word, item.pos);
     var pos = String(item.pos || '').trim();
     var meaning = String(item.meaning || '').trim();
     var meta =
@@ -173,12 +178,17 @@
     return /[A-Z]/.test(ch) ? ch : '#';
   }
 
+  var POS_ORDER = { '명사': 1, '동사': 2, '형용사': 3, '부사': 4, '숙어': 5 };
+
   function sortByWord(items) {
     return items.slice().sort(function (a, b) {
       var aw = String(a.word || '').toLowerCase();
       var bw = String(b.word || '').toLowerCase();
       if (aw < bw) return -1;
       if (aw > bw) return 1;
+      var ap = POS_ORDER[String(a.pos || '').trim()] || 50;
+      var bp = POS_ORDER[String(b.pos || '').trim()] || 50;
+      if (ap !== bp) return ap - bp;
       return String(a.meaning || '').localeCompare(String(b.meaning || ''), 'ko');
     });
   }
