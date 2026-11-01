@@ -1,18 +1,7 @@
 /**
- * 문장으로 익히는 단어 — 피드 데이터
- * ---------------------------------------------------------------
- * ★ 여기만 수정하면 됩니다. 배열 맨 위 = 001, 아래로 002, 003…
- * 새 문장 추가: 객체 하나를 배열 맨 아래(또는 위)에 넣고 push.
- *
- * 필드:
- *   word, pos, meaning, ko, en, highlight(영문에서 노란 표시할 부분)
- *
- * 수동 추가 예:
- *   { word: 'smitten', pos: '형용사', meaning: '홀딱 반한, 푹 빠진',
- *     ko: '…', en: 'He was smitten …', highlight: 'smitten' }
- *
- * CLI로 한 줄 추가 (backend):
- *   node scripts/append-one-sentence.js --word smitten --pos 형용사 --meaning "홀딱 반한, 푹 빠진" --ko "…" --en "…" --highlight smitten
+ * 문장 피드 로컬 폴백 (API /onesentence 실패 시에만 사용)
+ * 실제 누적은 MongoDB onesentence 컬렉션입니다.
+ * 추가: cd backend && node scripts/append-one-sentence.js --word … --en …
  */
 window.ONE_SENTENCE_FEED = [
   {

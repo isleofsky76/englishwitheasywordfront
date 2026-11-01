@@ -1,18 +1,13 @@
 /**
- * one-sentence-data.js 피드에 항목 1개 추가 (배열 맨 아래 = 다음 번호)
+ * 문장 피드 DB(/onesentence)에 1건 추가 — 누적 표시
  *
  *   cd C:\langchain\backend
  *   node scripts/append-one-sentence.js --word smitten --pos 형용사 --meaning "홀딱 반한, 푹 빠진" --ko "그는…" --en "He was smitten…" --highlight smitten
  *
- * --prepend  : 맨 위(001)에 삽입
- * --dry-run  : 파일 미기록, 미리보기만
+ * --seed   : 샘플 3건을 한 번에 넣기 (이미 있으면 스킵)
+ * --dry-run: 전송 안 함
  */
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
-
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const DATA_PATH = path.resolve(__dirname, '..', '..', 'one-sentence-data.js');
+import { API_BASE, writeAuthHeaders } from './loadEnv.js';
 
 function argValue(flag) {
   const i = process.argv.indexOf(flag);
@@ -26,75 +21,130 @@ function hasFlag(flag) {
   return process.argv.includes(flag);
 }
 
-function jsString(s) {
-  return JSON.stringify(String(s ?? ''));
+const SEED_ITEMS = [
+  {
+    word: 'smitten',
+    pos: '형용사',
+    meaning: '홀딱 반한, 푹 빠진',
+    ko: '그는 그녀를 처음 만난 순간부터 홀딱 반했다.',
+    en: 'He was smitten with her from the moment they met.',
+    highlight: 'smitten',
+  },
+  {
+    word: 'requite',
+    pos: '동사',
+    meaning: '보답하다, 갚다',
+    ko: '그녀는 그의 친절을 잊지 않았고, 몇 년 뒤 그 은혜를 갚았다.',
+    en: 'She never forgot his kindness and requited it years later.',
+    highlight: 'requited',
+  },
+  {
+    word: 'weathered',
+    pos: '형용사',
+    meaning: '풍화된, 햇볕·바람에 그을린',
+    ko: '바위들이 풍화되어 기이하고 멋진 형태로 변해 있다.',
+    en: 'The rocks are weathered into fantastic forms.',
+    highlight: 'weathered',
+  },
+];
+
+async function listEntries() {
+  const res = await fetch(`${API_BASE}/onesentence`);
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
+  return data.entries || [];
 }
 
-function buildEntryObject({ word, pos, meaning, ko, en, highlight }) {
+async function postEntry(item) {
+  const password = `seed_password_onesentence_${String(item.word || 'x')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '_')}`;
+  const body = {
+    word: item.word,
+    pos: item.pos || '',
+    meaning: item.meaning || '',
+    ko: item.ko || '',
+    en: item.en,
+    highlight: item.highlight || item.word,
+    nickname: 'admin',
+    password,
+  };
+  const res = await fetch(`${API_BASE}/onesentence`, {
+    method: 'POST',
+    headers: writeAuthHeaders({ 'Content-Type': 'application/json' }),
+    body: JSON.stringify(body),
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(data.error || data.detail || `HTTP ${res.status}`);
+  return data.entry;
+}
+
+function sameItem(a, b) {
   return (
-    '  {\n' +
-    `    word: ${jsString(word)},\n` +
-    `    pos: ${jsString(pos)},\n` +
-    `    meaning: ${jsString(meaning)},\n` +
-    `    ko: ${jsString(ko)},\n` +
-    `    en: ${jsString(en)},\n` +
-    `    highlight: ${jsString(highlight || word)}\n` +
-    '  }'
+    String(a.word || '').toLowerCase() === String(b.word || '').toLowerCase() &&
+    String(a.en || '').trim() === String(b.en || '').trim()
   );
 }
 
-function main() {
-  const word = argValue('--word');
-  const pos = argValue('--pos') || '';
-  const meaning = argValue('--meaning') || '';
-  const ko = argValue('--ko') || '';
-  const en = argValue('--en');
-  const highlight = argValue('--highlight') || word || '';
-  const prepend = hasFlag('--prepend');
-  const dryRun = hasFlag('--dry-run');
-
-  if (!word || !en) {
-    console.error('필수: --word, --en');
-    process.exit(1);
+async function runSeed() {
+  console.log('One Sentence 시드…', API_BASE);
+  const existing = await listEntries();
+  console.log(`  기존 ${existing.length}건`);
+  let added = 0;
+  for (const item of SEED_ITEMS) {
+    if (existing.some((e) => sameItem(e, item))) {
+      console.log(`  스킵(이미 있음): ${item.word}`);
+      continue;
+    }
+    if (hasFlag('--dry-run')) {
+      console.log('  [dry-run] 추가 예정:', item.word);
+      continue;
+    }
+    const entry = await postEntry(item);
+    added += 1;
+    console.log(`  추가: ${entry.word} (${entry._id})`);
   }
-
-  const raw = fs.readFileSync(DATA_PATH, 'utf8');
-  const marker = 'window.ONE_SENTENCE_FEED = [';
-  const start = raw.indexOf(marker);
-  if (start === -1) {
-    console.error('ONE_SENTENCE_FEED 배열을 찾지 못했습니다:', DATA_PATH);
-    process.exit(1);
-  }
-  const arrStart = start + marker.length;
-  const end = raw.indexOf('\n];', arrStart);
-  if (end === -1) {
-    console.error('배열 끝을 찾지 못했습니다.');
-    process.exit(1);
-  }
-
-  const inside = raw.slice(arrStart, end).trim();
-  const entry = buildEntryObject({ word, pos, meaning, ko, en, highlight });
-  let nextInside;
-  if (!inside) {
-    nextInside = '\n' + entry + '\n';
-  } else if (prepend) {
-    nextInside = '\n' + entry + ',\n' + inside.replace(/^\n?/, '') + (inside.endsWith('\n') ? '' : '\n');
-  } else {
-    const trimmed = inside.replace(/,?\s*$/, '');
-    nextInside = trimmed + ',\n' + entry + '\n';
-  }
-
-  const out = raw.slice(0, arrStart) + nextInside + raw.slice(end);
-  console.log(prepend ? '맨 위(001)에 추가:' : '맨 아래에 추가:');
-  console.log(entry);
-
-  if (dryRun) {
-    console.log('[dry-run] 파일 미기록');
-    return;
-  }
-  fs.writeFileSync(DATA_PATH, out, 'utf8');
-  console.log('저장:', DATA_PATH);
-  console.log('배포: git add one-sentence-data.js && git commit -m "Add one-sentence: ' + word + '" && git push');
+  console.log(`완료. +${added}`);
 }
 
-main();
+async function runOne() {
+  const word = argValue('--word');
+  const en = argValue('--en');
+  if (!word || !en) {
+    console.error('필수: --word, --en  (또는 --seed)');
+    process.exit(1);
+  }
+  const item = {
+    word,
+    pos: argValue('--pos') || '',
+    meaning: argValue('--meaning') || '',
+    ko: argValue('--ko') || '',
+    en,
+    highlight: argValue('--highlight') || word,
+  };
+  console.log('One Sentence 추가…', API_BASE);
+  if (hasFlag('--dry-run')) {
+    console.log('[dry-run]', item);
+    return;
+  }
+  const existing = await listEntries();
+  if (existing.some((e) => sameItem(e, item))) {
+    console.log('이미 같은 문장이 있어 스킵합니다.');
+    return;
+  }
+  const entry = await postEntry(item);
+  console.log('추가됨:', entry.word, entry._id);
+  console.log(`현재 총 ${(existing.length + 1)}건 (대략)`);
+}
+
+if (hasFlag('--seed')) {
+  runSeed().catch((e) => {
+    console.error('오류:', e.message);
+    process.exit(1);
+  });
+} else {
+  runOne().catch((e) => {
+    console.error('오류:', e.message);
+    process.exit(1);
+  });
+}

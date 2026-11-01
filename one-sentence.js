@@ -1,6 +1,6 @@
 /**
- * 문장으로 익히는 단어 — 렌더 / 검색 / TTS
- * 피드 내용은 one-sentence-data.js 의 ONE_SENTENCE_FEED 만 수정하세요.
+ * 문장으로 익히는 단어 — DB(/onesentence) 누적 피드 + 검색 + TTS
+ * 데이터 추가: backend/scripts/append-one-sentence.js
  */
 (function () {
   'use strict';
@@ -8,9 +8,14 @@
   var SPEAKER_SVG =
     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M15.5 8.5a5 5 0 0 1 0 7"></path><path d="M19 5a10 10 0 0 1 0 14"></path></svg>';
 
-  function getFeed() {
-    var feed = window.ONE_SENTENCE_FEED;
-    return Array.isArray(feed) ? feed.slice() : [];
+  /** API 실패 시 잠깐 보일 로컬 폴백 (배포 직후 등) */
+  var FALLBACK_FEED = Array.isArray(window.ONE_SENTENCE_FEED) ? window.ONE_SENTENCE_FEED.slice() : [];
+
+  function apiBase() {
+    if (typeof window.getPage30ApiBaseUrl === 'function') {
+      return window.getPage30ApiBaseUrl();
+    }
+    return 'https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app';
   }
 
   function escapeHtml(text) {
@@ -67,6 +72,23 @@
     } catch (e) { /* ignore */ }
   }
 
+  function normalizeEntry(raw) {
+    if (!raw) return null;
+    var word = String(raw.word || '').trim();
+    var en = String(raw.en || '').trim();
+    if (!word || !en) return null;
+    return {
+      id: raw._id || '',
+      word: word,
+      pos: String(raw.pos || '').trim(),
+      meaning: String(raw.meaning || '').trim(),
+      ko: String(raw.ko || '').trim(),
+      en: en,
+      highlight: String(raw.highlight || word).trim(),
+      date: raw.date || null
+    };
+  }
+
   function renderItem(item, index) {
     var num = padNum(index + 1);
     return (
@@ -103,7 +125,7 @@
     var count = document.getElementById('os-count');
     if (!feed) return;
     if (!items.length) {
-      feed.innerHTML = '<p class="os-empty">검색 결과가 없습니다.</p>';
+      feed.innerHTML = '<p class="os-empty">아직 등록된 문장이 없습니다.</p>';
     } else {
       feed.innerHTML = items.map(renderItem).join('');
     }
@@ -121,10 +143,19 @@
     });
   }
 
+  async function loadFeedFromApi() {
+    var url = apiBase().replace(/\/$/, '') + '/onesentence';
+    var res = await fetch(url, { cache: 'no-store' });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    var data = await res.json();
+    var list = Array.isArray(data.entries) ? data.entries : (Array.isArray(data) ? data : []);
+    return list.map(normalizeEntry).filter(Boolean);
+  }
+
   function init() {
     bindFeed();
     var input = document.getElementById('os-search-input');
-    var all = getFeed();
+    var all = [];
 
     function refresh() {
       renderFeed(filterItems(all, input ? input.value : ''));
@@ -133,7 +164,21 @@
     if (input) {
       input.addEventListener('input', refresh);
     }
-    refresh();
+
+    renderFeed([]);
+    var count = document.getElementById('os-count');
+    if (count) count.textContent = '불러오는 중…';
+
+    loadFeedFromApi()
+      .then(function (items) {
+        all = items.length ? items : FALLBACK_FEED.map(normalizeEntry).filter(Boolean);
+        refresh();
+      })
+      .catch(function (err) {
+        console.warn('[one-sentence] API 로드 실패, 로컬 폴백:', err);
+        all = FALLBACK_FEED.map(normalizeEntry).filter(Boolean);
+        refresh();
+      });
   }
 
   if (document.readyState === 'loading') {

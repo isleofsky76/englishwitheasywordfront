@@ -696,6 +696,21 @@ const wordOfDayEntrySchema = new mongoose.Schema({
 
 const WordOfDayEntry = mongoose.model('WordOfDayEntry', wordOfDayEntrySchema);
 
+// 문장으로 익히는 단어 (one-sentence.html) → 컬렉션 onesentence
+const oneSentenceEntrySchema = new mongoose.Schema({
+  word: { type: String, required: true },
+  pos: { type: String, default: '' },
+  meaning: { type: String, default: '' },
+  ko: { type: String, default: '' },
+  en: { type: String, required: true },
+  highlight: { type: String, default: '' },
+  nickname: String,
+  password: String,
+  date: { type: Date, default: Date.now },
+}, { collection: 'onesentence' });
+
+const OneSentenceEntry = mongoose.model('OneSentenceEntry', oneSentenceEntrySchema);
+
 // 영어 단어 퀴즈 (vocabulary-quiz.html) → 컬렉션 vocabularyquiz
 const vocabularyQuizEntrySchema = new mongoose.Schema({
   title: String,
@@ -2627,6 +2642,66 @@ app.post('/wordofday-admin/deletepost', async (req, res) => {
     res.json({ message: 'Post deleted by admin' });
   } catch (error) {
     res.status(500).json({ error: 'Error deleting post' });
+  }
+});
+
+//================================== One Sentence API (onesentence 컬렉션)
+app.get('/onesentence', async (req, res) => {
+  try {
+    if (mongoose.connection.readyState !== 1) {
+      return res.status(503).json({ error: 'MongoDB 연결이 되지 않았습니다.', entries: [] });
+    }
+    /* 오래된 것부터 = 화면 001 → 아래로 누적 */
+    const entries = await OneSentenceEntry.find().sort({ date: 1, _id: 1 });
+    res.status(200).json({ entries });
+  } catch (error) {
+    console.error('One Sentence entries 오류:', error);
+    res.status(500).json({ error: 'Error retrieving one-sentence entries', entries: [] });
+  }
+});
+
+app.post('/onesentence', requireWriteToken, async (req, res) => {
+  if (mongoose.connection.readyState !== 1) {
+    return res.status(503).json({
+      error: 'MongoDB에 연결되지 않았습니다.',
+      detail: 'MongoDB connection not ready',
+    });
+  }
+  const { word, pos, meaning, ko, en, highlight, nickname, password } = req.body;
+  if (!word || !en || !nickname || !password) {
+    return res.status(400).json({ error: 'word, en, nickname, password are required' });
+  }
+  try {
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const newEntry = new OneSentenceEntry({
+      word: String(word).trim(),
+      pos: String(pos || '').trim(),
+      meaning: String(meaning || '').trim(),
+      ko: String(ko || '').trim(),
+      en: String(en).trim(),
+      highlight: String(highlight || word).trim(),
+      nickname,
+      password: hashedPassword,
+    });
+    await newEntry.save();
+    res.status(201).json({ entry: newEntry });
+  } catch (error) {
+    console.error('One Sentence save 오류:', error);
+    res.status(500).json({ error: 'Error saving one-sentence entry', detail: error.message });
+  }
+});
+
+app.post('/onesentence-deletepost', async (req, res) => {
+  const { id, password } = req.body;
+  const entry = await OneSentenceEntry.findById(id);
+  if (!entry) return res.status(404).json({ error: 'Post not found' });
+  const isMatch = await safeBcryptCompare(password, entry.password);
+  if (!isMatch) return res.status(403).json({ error: 'Invalid password' });
+  try {
+    await OneSentenceEntry.findByIdAndDelete(id);
+    res.json({ message: 'Post deleted' });
+  } catch (error) {
+    res.status(500).json({ error: 'Error deleting one-sentence entry' });
   }
 });
 
@@ -5504,6 +5579,12 @@ if (uri) {
           console.log('wordofday 컬렉션 생성됨');
         } catch (e) {
           if (e.code !== 48 && e.codeName !== 'NamespaceExists') console.error('wordofday 컬렉션:', e.message);
+        }
+        try {
+          await db.createCollection('onesentence');
+          console.log('onesentence 컬렉션 생성됨');
+        } catch (e) {
+          if (e.code !== 48 && e.codeName !== 'NamespaceExists') console.error('onesentence 컬렉션:', e.message);
         }
         try {
           await db.createCollection('photoenglish');
