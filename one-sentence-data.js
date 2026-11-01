@@ -60,5 +60,14 @@ window.ONE_SENTENCE_FEED = [
     en: 'Her poem was an idyll about her life on a farm.',
     highlight: 'idyll',
     cf: [{ word: 'idyllic', pos: '형용사', meaning: '목가적인' }]
+  },
+  {
+    word: 'deliberate',
+    pos: '형용사',
+    meaning: '신중한, 차분한',
+    ko: '그녀는 천천히 신중한 태도로 말을 했다.',
+    en: 'She spoke in a slow and deliberate way.',
+    highlight: 'deliberate',
+    cf: [{ word: 'deliberate', pos: '동사', meaning: '숙고하다' }]
   }
 ];
