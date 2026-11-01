@@ -85,9 +85,17 @@
     };
   }
 
+  function wordAnchorId(word) {
+    return 'os-w-' + String(word || '')
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '');
+  }
+
   function renderItem(item) {
+    var aid = wordAnchorId(item.word);
     return (
-      '<article class="os-item" data-word="' + escapeAttr(item.word) + '">' +
+      '<article class="os-item" id="' + escapeAttr(aid) + '" data-word="' + escapeAttr(item.word) + '">' +
         '<div class="os-word-row">' +
           '<span class="os-chip">' +
             '<span class="os-chip-en">' + escapeHtml(item.word) + '</span>' +
@@ -103,6 +111,36 @@
         '</div>' +
       '</article>'
     );
+  }
+
+  function uniqueWords(items) {
+    var seen = Object.create(null);
+    var out = [];
+    items.forEach(function (it) {
+      var key = String(it.word || '').toLowerCase();
+      if (!key || seen[key]) return;
+      seen[key] = true;
+      out.push(it.word);
+    });
+    return out;
+  }
+
+  function renderTags(items) {
+    var tags = document.getElementById('os-tags');
+    if (!tags) return;
+    var words = uniqueWords(items);
+    if (!words.length) {
+      tags.hidden = true;
+      tags.innerHTML = '';
+      return;
+    }
+    tags.hidden = false;
+    tags.innerHTML = words.map(function (w) {
+      return (
+        '<a class="os-tag" href="#' + escapeAttr(wordAnchorId(w)) + '" data-os-jump="' +
+          escapeAttr(w) + '">#' + escapeHtml(w) + '</a>'
+      );
+    }).join(' ');
   }
 
   function filterItems(items, q) {
@@ -126,15 +164,45 @@
     if (count) count.textContent = '총 ' + items.length + '개';
   }
 
+  function scrollToWord(word) {
+    var el = document.getElementById(wordAnchorId(word));
+    if (!el) return;
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    el.classList.add('os-item-flash');
+    window.setTimeout(function () {
+      el.classList.remove('os-item-flash');
+    }, 1200);
+  }
+
   function bindFeed() {
     var feed = document.getElementById('os-feed');
-    if (!feed || feed._osBound) return;
-    feed._osBound = true;
-    feed.addEventListener('click', function (e) {
-      var btn = e.target.closest('[data-os-tts]');
-      if (!btn || !feed.contains(btn)) return;
-      speakText(btn.getAttribute('data-os-tts') || '', btn);
-    });
+    if (feed && !feed._osBound) {
+      feed._osBound = true;
+      feed.addEventListener('click', function (e) {
+        var btn = e.target.closest('[data-os-tts]');
+        if (!btn || !feed.contains(btn)) return;
+        speakText(btn.getAttribute('data-os-tts') || '', btn);
+      });
+    }
+
+    var tags = document.getElementById('os-tags');
+    if (tags && !tags._osBound) {
+      tags._osBound = true;
+      tags.addEventListener('click', function (e) {
+        var a = e.target.closest('[data-os-jump]');
+        if (!a || !tags.contains(a)) return;
+        e.preventDefault();
+        var word = a.getAttribute('data-os-jump') || '';
+        var input = document.getElementById('os-search-input');
+        if (input && input.value) {
+          input.value = '';
+          input.dispatchEvent(new Event('input', { bubbles: true }));
+          window.setTimeout(function () { scrollToWord(word); }, 40);
+        } else {
+          scrollToWord(word);
+        }
+      });
+    }
   }
 
   async function loadFeedFromApi() {
@@ -152,7 +220,9 @@
     var all = [];
 
     function refresh() {
-      renderFeed(filterItems(all, input ? input.value : ''));
+      var visible = filterItems(all, input ? input.value : '');
+      renderFeed(visible);
+      renderTags(all);
     }
 
     if (input) {
