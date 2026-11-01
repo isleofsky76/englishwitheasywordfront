@@ -1,6 +1,5 @@
 /**
  * 문장 피드 로컬 폴백 (API /onesentence 실패 시에만 사용)
- * 실제 누적은 MongoDB onesentence 컬렉션입니다.
  */
 window.ONE_SENTENCE_FEED = [
   {
@@ -151,5 +150,21 @@ window.ONE_SENTENCE_FEED = [
     "en": "Philosophers write about the vanity of human ambition in the face of death.",
     "highlight": "vanity",
     "cf": []
+  },
+  {
+    "word": "mirth",
+    "pos": "명사",
+    "meaning": "즐거움, 환희",
+    "ko": "그 공연은 관객들 사이에 큰 즐거움을 불러일으켰다.",
+    "en": "The performance produced much mirth among the audience.",
+    "highlight": "mirth",
+    "cf": [
+      {
+        "word": "mirthful",
+        "pos": "형용사",
+        "meaning": "즐거운, 유쾌한",
+        "_id": "6ae6b55e88e41b68b0f58f40"
+      }
+    ]
   }
 ];
