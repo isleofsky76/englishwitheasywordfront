@@ -226,7 +226,7 @@
 
   async function loadBadwords() {
     try {
-      var res = await fetch('comment-badwords.json?v=20261101c9', { cache: 'no-store' });
+      var res = await fetch('comment-badwords.json?v=20261101c10', { cache: 'no-store' });
       if (!res.ok) return;
       var raw = await res.json();
       badwords = {
