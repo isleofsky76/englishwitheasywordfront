@@ -4,8 +4,8 @@
  * nav-home-menu.js 가 로드함
  */
 (function () {
-    var VERSION = '20261028ua1';
-  /* 시안 주 메뉴 5개 — href는 기존 URL 유지 */
+    var VERSION = '20261101os1';
+  /* 시안 주 메뉴 — href는 기존 URL 유지 */
   var PRIMARY_NAV_ITEMS = [
     {
       href: 'news-voca-list.html',
@@ -33,6 +33,7 @@
       ]
     },
     { href: 'word-of-the-day-list.html?api=prod', label: '단어장', tone: 'wotd', pages: ['word-of-the-day-list.html', 'word-of-the-day.html'] },
+    { href: 'one-sentence.html', label: '문장', tone: 'osent', pages: ['one-sentence.html'] },
     {
       href: 'popular-voca-list.html',
       label: '표현',
