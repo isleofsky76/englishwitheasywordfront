@@ -1,12 +1,15 @@
 /**
- * 문장 피드 DB(/onesentence)에 1건 추가 — 누적 표시
+ * 문장 피드 DB(onesentence)에 1건 추가 — 누적 표시
  *
  *   cd C:\langchain\backend
  *   node scripts/append-one-sentence.js --word smitten --pos 형용사 --meaning "홀딱 반한, 푹 빠진" --ko "그는…" --en "He was smitten…" --highlight smitten
  *
  * --seed   : 샘플 3건을 한 번에 넣기 (이미 있으면 스킵)
+ * --direct : HTTP API 대신 MONGO_URI로 컬렉션에 직접 기록 (Cloudtype 미배포 시)
  * --dry-run: 전송 안 함
  */
+import bcrypt from 'bcrypt';
+import mongoose from 'mongoose';
 import { API_BASE, writeAuthHeaders } from './loadEnv.js';
 
 function argValue(flag) {
@@ -48,17 +51,42 @@ const SEED_ITEMS = [
   },
 ];
 
-async function listEntries() {
+const oneSentenceEntrySchema = new mongoose.Schema(
+  {
+    word: { type: String, required: true },
+    pos: { type: String, default: '' },
+    meaning: { type: String, default: '' },
+    ko: { type: String, default: '' },
+    en: { type: String, required: true },
+    highlight: { type: String, default: '' },
+    nickname: String,
+    password: String,
+    date: { type: Date, default: Date.now },
+  },
+  { collection: 'onesentence' }
+);
+
+function seedPasswordFor(word) {
+  return `seed_password_onesentence_${String(word || 'x')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '_')}`;
+}
+
+function sameItem(a, b) {
+  return (
+    String(a.word || '').toLowerCase() === String(b.word || '').toLowerCase() &&
+    String(a.en || '').trim() === String(b.en || '').trim()
+  );
+}
+
+async function listEntriesHttp() {
   const res = await fetch(`${API_BASE}/onesentence`);
   const data = await res.json().catch(() => ({}));
   if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
   return data.entries || [];
 }
 
-async function postEntry(item) {
-  const password = `seed_password_onesentence_${String(item.word || 'x')
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '_')}`;
+async function postEntryHttp(item) {
   const body = {
     word: item.word,
     pos: item.pos || '',
@@ -67,7 +95,7 @@ async function postEntry(item) {
     en: item.en,
     highlight: item.highlight || item.word,
     nickname: 'admin',
-    password,
+    password: seedPasswordFor(item.word),
   };
   const res = await fetch(`${API_BASE}/onesentence`, {
     method: 'POST',
@@ -79,15 +107,55 @@ async function postEntry(item) {
   return data.entry;
 }
 
-function sameItem(a, b) {
-  return (
-    String(a.word || '').toLowerCase() === String(b.word || '').toLowerCase() &&
-    String(a.en || '').trim() === String(b.en || '').trim()
-  );
+async function withDirectDb(fn) {
+  const uri = process.env.MONGO_URI;
+  if (!uri) throw new Error('.env에 MONGO_URI가 없습니다.');
+  const OneSentenceEntry =
+    mongoose.models.OneSentenceEntry ||
+    mongoose.model('OneSentenceEntry', oneSentenceEntrySchema);
+  await mongoose.connect(uri);
+  try {
+    return await fn(OneSentenceEntry);
+  } finally {
+    await mongoose.disconnect().catch(() => {});
+  }
+}
+
+async function listEntriesDirect() {
+  return withDirectDb(async (OneSentenceEntry) => {
+    return OneSentenceEntry.find().sort({ date: 1, _id: 1 }).lean();
+  });
+}
+
+async function postEntryDirect(item) {
+  return withDirectDb(async (OneSentenceEntry) => {
+    const hashedPassword = await bcrypt.hash(seedPasswordFor(item.word), 10);
+    const entry = await OneSentenceEntry.create({
+      word: String(item.word).trim(),
+      pos: String(item.pos || '').trim(),
+      meaning: String(item.meaning || '').trim(),
+      ko: String(item.ko || '').trim(),
+      en: String(item.en).trim(),
+      highlight: String(item.highlight || item.word).trim(),
+      nickname: 'admin',
+      password: hashedPassword,
+    });
+    return entry.toObject();
+  });
+}
+
+async function listEntries() {
+  if (hasFlag('--direct')) return listEntriesDirect();
+  return listEntriesHttp();
+}
+
+async function postEntry(item) {
+  if (hasFlag('--direct')) return postEntryDirect(item);
+  return postEntryHttp(item);
 }
 
 async function runSeed() {
-  console.log('One Sentence 시드…', API_BASE);
+  console.log('One Sentence 시드…', hasFlag('--direct') ? 'MONGO direct' : API_BASE);
   const existing = await listEntries();
   console.log(`  기존 ${existing.length}건`);
   let added = 0;
@@ -122,7 +190,7 @@ async function runOne() {
     en,
     highlight: argValue('--highlight') || word,
   };
-  console.log('One Sentence 추가…', API_BASE);
+  console.log('One Sentence 추가…', hasFlag('--direct') ? 'MONGO direct' : API_BASE);
   if (hasFlag('--dry-run')) {
     console.log('[dry-run]', item);
     return;
@@ -134,7 +202,7 @@ async function runOne() {
   }
   const entry = await postEntry(item);
   console.log('추가됨:', entry.word, entry._id);
-  console.log(`현재 총 ${(existing.length + 1)}건 (대략)`);
+  console.log(`현재 총 ${existing.length + 1}건 (대략)`);
 }
 
 if (hasFlag('--seed')) {
