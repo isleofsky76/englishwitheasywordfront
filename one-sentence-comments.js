@@ -381,10 +381,10 @@
     var root = findCommentsRoot(wordKey);
     if (!root) return;
     var btn = root.querySelector('[data-os-cmt-toggle]');
-    var panel = root.querySelector('[data-os-cmt-panel]');
+    var listPanel = root.querySelector('[data-os-cmt-list-panel]');
     var listEl = root.querySelector('[data-os-cmt-list]');
     if (btn) setToggleLabel(btn, counts[wordKey] || 0);
-    if (panel && !panel.hidden && listEl) {
+    if (listPanel && !listPanel.hidden && listEl) {
       try {
         var list = await loadComments(wordKey);
         renderCommentList(listEl, list, wordKey);
@@ -409,6 +409,9 @@
     if (!root || !wordKey) return;
     root.textContent = '';
 
+    var bar = document.createElement('div');
+    bar.className = 'os-cmt-bar';
+
     var toggle = document.createElement('button');
     toggle.type = 'button';
     toggle.className = 'os-cmt-toggle';
@@ -416,18 +419,34 @@
     toggle.setAttribute('aria-expanded', 'false');
     setToggleLabel(toggle, counts[wordKey] || 0);
 
-    var panel = document.createElement('div');
-    panel.className = 'os-cmt-panel';
-    panel.setAttribute('data-os-cmt-panel', '');
-    panel.hidden = true;
+    var writeBtn = document.createElement('button');
+    writeBtn.type = 'button';
+    writeBtn.className = 'os-cmt-write';
+    writeBtn.setAttribute('data-os-cmt-write', '');
+    writeBtn.setAttribute('aria-expanded', 'false');
+    writeBtn.textContent = '등록';
 
-    var warn = document.createElement('p');
-    warn.className = 'os-cmt-policy';
-    warn.textContent = POLICY_WARN;
+    bar.appendChild(toggle);
+    bar.appendChild(writeBtn);
+
+    var listPanel = document.createElement('div');
+    listPanel.className = 'os-cmt-panel';
+    listPanel.setAttribute('data-os-cmt-list-panel', '');
+    listPanel.hidden = true;
 
     var listEl = document.createElement('div');
     listEl.className = 'os-cmt-list';
     listEl.setAttribute('data-os-cmt-list', '');
+    listPanel.appendChild(listEl);
+
+    var formPanel = document.createElement('div');
+    formPanel.className = 'os-cmt-panel os-cmt-write-panel';
+    formPanel.setAttribute('data-os-cmt-form-panel', '');
+    formPanel.hidden = true;
+
+    var warn = document.createElement('p');
+    warn.className = 'os-cmt-policy';
+    warn.textContent = POLICY_WARN;
 
     var form = document.createElement('form');
     form.className = 'os-cmt-form';
@@ -496,13 +515,46 @@
     var submit = document.createElement('button');
     submit.type = 'submit';
     submit.className = 'os-cmt-submit';
-    submit.textContent = '등록';
+    submit.textContent = '등록하기';
 
     form.appendChild(nickLabel);
     form.appendChild(bodyLabel);
     form.appendChild(pwLabel);
     form.appendChild(formMsg);
     form.appendChild(submit);
+    formPanel.appendChild(warn);
+    formPanel.appendChild(form);
+
+    async function openListPanel() {
+      formPanel.hidden = true;
+      writeBtn.setAttribute('aria-expanded', 'false');
+      listPanel.hidden = false;
+      toggle.setAttribute('aria-expanded', 'true');
+      listEl.textContent = '';
+      var loading = document.createElement('p');
+      loading.className = 'os-cmt-empty';
+      loading.textContent = '불러오는 중…';
+      listEl.appendChild(loading);
+      try {
+        var list = await loadComments(wordKey);
+        renderCommentList(listEl, list, wordKey);
+        setToggleLabel(toggle, list.length);
+      } catch (err) {
+        listEl.textContent = '';
+        var fail = document.createElement('p');
+        fail.className = 'os-cmt-msg';
+        fail.textContent = '댓글을 불러오지 못했어요.';
+        listEl.appendChild(fail);
+      }
+    }
+
+    function openFormPanel() {
+      listPanel.hidden = true;
+      toggle.setAttribute('aria-expanded', 'false');
+      formPanel.hidden = false;
+      writeBtn.setAttribute('aria-expanded', 'true');
+      bodyInput.focus();
+    }
 
     form.addEventListener('submit', async function (e) {
       e.preventDefault();
@@ -531,11 +583,12 @@
         pwInput.value = '';
         counter.textContent = '0/100';
         formMsg.textContent = '';
+        formPanel.hidden = true;
+        writeBtn.setAttribute('aria-expanded', 'false');
         delete listCache[wordKey];
         counts[wordKey] = (counts[wordKey] || 0) + 1;
-        panel.hidden = false;
-        toggle.setAttribute('aria-expanded', 'true');
-        await refreshPanel(wordKey);
+        setToggleLabel(toggle, counts[wordKey]);
+        await openListPanel();
       } catch (ex) {
         formMsg.textContent = ex && ex.message ? ex.message : '등록에 실패했어요.';
       } finally {
@@ -544,34 +597,26 @@
     });
 
     toggle.addEventListener('click', async function () {
-      var open = panel.hidden;
-      panel.hidden = !open;
-      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-      if (open) {
-        listEl.textContent = '';
-        var loading = document.createElement('p');
-        loading.className = 'os-cmt-empty';
-        loading.textContent = '불러오는 중…';
-        listEl.appendChild(loading);
-        try {
-          var list = await loadComments(wordKey);
-          renderCommentList(listEl, list, wordKey);
-          setToggleLabel(toggle, list.length);
-        } catch (err) {
-          listEl.textContent = '';
-          var fail = document.createElement('p');
-          fail.className = 'os-cmt-msg';
-          fail.textContent = '댓글을 불러오지 못했어요.';
-          listEl.appendChild(fail);
-        }
+      if (!listPanel.hidden) {
+        listPanel.hidden = true;
+        toggle.setAttribute('aria-expanded', 'false');
+        return;
       }
+      await openListPanel();
     });
 
-    panel.appendChild(warn);
-    panel.appendChild(listEl);
-    panel.appendChild(form);
-    root.appendChild(toggle);
-    root.appendChild(panel);
+    writeBtn.addEventListener('click', function () {
+      if (!formPanel.hidden) {
+        formPanel.hidden = true;
+        writeBtn.setAttribute('aria-expanded', 'false');
+        return;
+      }
+      openFormPanel();
+    });
+
+    root.appendChild(bar);
+    root.appendChild(listPanel);
+    root.appendChild(formPanel);
   }
 
   function mountAll() {

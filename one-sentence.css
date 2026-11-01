@@ -453,7 +453,14 @@
   margin-top: 8px;
 }
 
-.os-cmt-toggle {
+.os-cmt-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.os-cmt-toggle,
+.os-cmt-write {
   margin: 0;
   padding: 0;
   border: none;
@@ -472,7 +479,8 @@
 }
 
 .os-cmt-toggle.is-empty:hover,
-.os-cmt-toggle:hover {
+.os-cmt-toggle:hover,
+.os-cmt-write:hover {
   opacity: 1;
   color: var(--os-blue);
 }
