@@ -1,8 +1,6 @@
 /**
  * 문장 피드 로컬 폴백 (API /onesentence 실패 시에만 사용)
  * 실제 누적은 MongoDB onesentence 컬렉션입니다.
- * 추가: cd backend && node scripts/append-one-sentence.js --word … --en …
- * 자동: cd backend && node scripts/auto-onesentence.js --count 10
  */
 window.ONE_SENTENCE_FEED = [
   {
@@ -127,6 +125,31 @@ window.ONE_SENTENCE_FEED = [
     "ko": "많은 동물들이 다양한 환경에 적응할 수 있다.",
     "en": "Many animals can adapt to different environments.",
     "highlight": "adapt",
+    "cf": []
+  },
+  {
+    "word": "vanity",
+    "pos": "명사",
+    "meaning": "허영심, 자만",
+    "ko": "그녀는 개인적인 허영심이 없었다.",
+    "en": "She had no personal vanity.",
+    "highlight": "vanity",
+    "cf": [
+      {
+        "word": "vain",
+        "pos": "형용사",
+        "meaning": "허영심 있는; 헛된",
+        "_id": "6ae6b4f605b67c288ca6f05f"
+      }
+    ]
+  },
+  {
+    "word": "vanity",
+    "pos": "명사",
+    "meaning": "덧없음, 허무함",
+    "ko": "죽음 앞에서 인간의 야심은 덧없어 보인다.",
+    "en": "Philosophers write about the vanity of human ambition in the face of death.",
+    "highlight": "vanity",
     "cf": []
   }
 ];
