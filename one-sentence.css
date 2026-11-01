@@ -556,9 +556,11 @@
 
 .os-cmt-actions {
   margin-top: 6px;
+  min-height: 1.2em;
 }
 
-.os-cmt-del {
+.os-cmt-del,
+.os-cmt-action-sep {
   margin: 0;
   padding: 0;
   border: none;
@@ -567,24 +569,38 @@
   font-size: 12px;
   color: var(--os-ink-muted);
   cursor: pointer;
-  opacity: 0.35;
   text-decoration: underline;
   text-underline-offset: 2px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.15s ease;
 }
 
-.os-cmt-del:hover,
-.os-cmt-actions:focus-within .os-cmt-del {
+.os-cmt-action-sep {
+  cursor: default;
+  text-decoration: none;
+}
+
+.os-cmt-item:hover .os-cmt-del,
+.os-cmt-item:hover .os-cmt-action-sep,
+.os-cmt-item:focus-within .os-cmt-del,
+.os-cmt-item:focus-within .os-cmt-action-sep,
+.os-cmt-actions:focus-within .os-cmt-del,
+.os-cmt-actions:focus-within .os-cmt-action-sep {
   opacity: 1;
+  visibility: visible;
 }
 
 .os-cmt-admin-del {
   margin-left: 10px;
 }
 
-.os-cmt-action-sep {
-  font-size: 12px;
-  color: var(--os-ink-muted);
-  opacity: 0.35;
+@media (hover: none) {
+  .os-cmt-del,
+  .os-cmt-action-sep {
+    opacity: 0.7;
+    visibility: visible;
+  }
 }
 
 .os-cmt-del-form {
