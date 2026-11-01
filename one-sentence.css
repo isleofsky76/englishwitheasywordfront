@@ -353,6 +353,7 @@
 }
 
 .os-tag {
+  position: relative;
   display: inline;
   margin: 0;
   padding: 0;
@@ -374,6 +375,44 @@
   text-decoration: underline;
   text-underline-offset: 3px;
   outline: none;
+  z-index: 3;
+}
+
+.os-tag[data-tip]::after {
+  content: attr(data-tip);
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 8px);
+  transform: translateX(-50%) translateY(4px);
+  z-index: 20;
+  box-sizing: border-box;
+  width: max-content;
+  max-width: min(280px, 70vw);
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: #2a2a2a;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: 0;
+  text-align: left;
+  text-decoration: none;
+  white-space: normal;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.12s ease, transform 0.12s ease, visibility 0.12s;
+}
+
+.os-tag[data-tip]:hover::after,
+.os-tag[data-tip]:focus-visible::after {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
 }
 
 .os-item-flash {

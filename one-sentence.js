@@ -208,22 +208,35 @@
     return groups;
   }
 
-  function uniqueWords(items) {
-    var seen = Object.create(null);
-    var out = [];
+  function uniqueWordTags(items) {
+    var map = Object.create(null);
+    var order = [];
     sortByWord(items).forEach(function (it) {
       var key = String(it.word || '').toLowerCase();
-      if (!key || seen[key]) return;
-      seen[key] = true;
-      out.push(it.word);
+      if (!key) return;
+      if (!map[key]) {
+        map[key] = { word: it.word, tips: [] };
+        order.push(key);
+      }
+      var tip = [String(it.pos || '').trim(), String(it.meaning || '').trim()]
+        .filter(Boolean)
+        .join(' · ');
+      if (tip && map[key].tips.indexOf(tip) === -1) {
+        map[key].tips.push(tip);
+      }
     });
-    return out;
+    return order.map(function (k) {
+      return {
+        word: map[k].word,
+        tip: map[k].tips.join(' / ')
+      };
+    });
   }
 
   function renderTags(items) {
     var tags = document.getElementById('os-tags');
     if (!tags) return;
-    var words = uniqueWords(items);
+    var words = uniqueWordTags(items);
     if (!words.length) {
       tags.setAttribute('hidden', '');
       tags.innerHTML = '';
@@ -232,7 +245,9 @@
     tags.removeAttribute('hidden');
     var html = '';
     var lastLetter = '';
-    words.forEach(function (w) {
+    words.forEach(function (entry) {
+      var w = entry.word;
+      var tip = entry.tip || '';
       var letter = letterOf(w);
       if (letter !== lastLetter) {
         lastLetter = letter;
@@ -246,7 +261,13 @@
       html +=
         '<button type="button" class="os-tag" data-os-jump="' +
         escapeAttr(w) +
-        '">' +
+        '"' +
+        (tip
+          ? ' data-tip="' + escapeAttr(tip) + '" aria-label="' +
+            escapeAttr(w + ' — ' + tip) +
+            '"'
+          : '') +
+        '>' +
         escapeHtml(w) +
         '</button>';
     });
