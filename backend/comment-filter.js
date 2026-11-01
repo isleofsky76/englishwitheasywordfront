@@ -90,12 +90,47 @@ function listHits(haystackLower, terms) {
   return false;
 }
 
-/** 댓글 자동 차단 대상: A + B (+ 자모). 예약 관리자 닉네임 단독은 예외 */
+/** 숫자 유지 compact — 18/69 은어 검사용 (1→i 치환하지 않음) */
+export function normalizeKeepDigits(text) {
+  return String(text || '')
+    .toLowerCase()
+    .replace(/[^a-z0-9가-힣ㄱ-ㅎㅏ-ㅣ]+/gi, '');
+}
+
+/**
+ * 숫자형 욕설·성인 은어 패턴
+ * - 단독 18 / 69 / 18년 / 6969 는 학습 문맥 가능 → 자동 차단하지 않음
+ * - 1818·181818 반복, 18놈/18새끼, tlqkf, 섹69, 19금 등은 차단
+ */
+export function containsNumericAbusePatterns(text) {
+  const c = normalizeKeepDigits(text);
+  if (!c) return false;
+
+  // 18 반복 (1818, 181818, 18181818 …) — 단독 "18" 제외
+  if (/(?:18){2,}/.test(c)) return true;
+
+  // 18 + 욕설 접미 (18년은 연도·기간과 겹쳐 제외)
+  if (/18(?:놈|새끼|뇬|련|새키|쉐끼|새끼들)/.test(c)) return true;
+
+  // 욕설 자판·초성 + 18
+  if (/시18|씨18|ㅅㅂ18|tlqkf18|\btlqkf\b|tlqkf/.test(c)) return true;
+
+  // 성적 조합 69 (단독 69·6969 제외)
+  if (/(?:섹|sex|sexy|porn)69|69(?:섹|sex|sexy|porn)/.test(c)) return true;
+
+  // 19금 / 야동19
+  if (/19금|19禁|야동19/.test(c)) return true;
+
+  return false;
+}
+
+/** 댓글 자동 차단 대상: A + B (+ 자모 + 숫자 은어). 예약 관리자 닉네임 단독은 예외 */
 export function containsBadWords(text) {
   if (isReservedAdminNickname(text)) return false;
   const originalLower = stripAllowlist(text);
   const compact = normalizeForFilter(originalLower);
 
+  if (containsNumericAbusePatterns(originalLower)) return true;
   if (listHits(originalLower, lists.blockedA)) return true;
   if (listHits(originalLower, lists.blockedB)) return true;
 

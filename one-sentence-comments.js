@@ -124,6 +124,24 @@
     return terms;
   }
 
+  function normalizeKeepDigits(text) {
+    return String(text || '')
+      .toLowerCase()
+      .replace(/[^a-z0-9가-힣ㄱ-ㅎㅏ-ㅣ]+/gi, '');
+  }
+
+  /** 단독 18/69/18년/6969는 허용, 1818·18놈·tlqkf·19금·섹69 등은 차단 */
+  function containsNumericAbusePatterns(text) {
+    var c = normalizeKeepDigits(text);
+    if (!c) return false;
+    if (/(?:18){2,}/.test(c)) return true;
+    if (/18(?:놈|새끼|뇬|련|새키|쉐끼|새끼들)/.test(c)) return true;
+    if (/시18|씨18|ㅅㅂ18|tlqkf/.test(c)) return true;
+    if (/(?:섹|sex|sexy|porn)69|69(?:섹|sex|sexy|porn)/.test(c)) return true;
+    if (/19금|19禁|야동19/.test(c)) return true;
+    return false;
+  }
+
   function containsBadWords(text) {
     if (isReservedAdminNickname(text)) return false;
     var originalLower = stripAllowlist(text);
@@ -131,6 +149,7 @@
     var terms = autoBlockTerms();
     var jamo = badwords.blockedHangulJamo || [];
     var i;
+    if (containsNumericAbusePatterns(originalLower)) return true;
     if (listHits(originalLower, terms)) return true;
     for (i = 0; i < terms.length; i += 1) {
       var t = String(terms[i] || '')
@@ -206,7 +225,7 @@
 
   async function loadBadwords() {
     try {
-      var res = await fetch('comment-badwords.json?v=20261101c7', { cache: 'no-store' });
+      var res = await fetch('comment-badwords.json?v=20261101c8', { cache: 'no-store' });
       if (!res.ok) return;
       var raw = await res.json();
       badwords = {
