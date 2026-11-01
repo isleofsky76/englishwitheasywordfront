@@ -86,10 +86,10 @@
     if (!p) return false;
     if (/\s/.test(p)) return haystackLower.indexOf(p) !== -1;
     if (/^[a-z]+$/i.test(p)) return englishWordBoundaryHit(haystackLower, p);
-    return (
-      haystackLower.indexOf(p) !== -1 ||
-      normalizeForFilter(haystackLower).indexOf(normalizeForFilter(p)) !== -1
-    );
+    if (haystackLower.indexOf(p) !== -1) return true;
+    var needle = normalizeForFilter(p);
+    if (!needle || needle.length < 2) return false;
+    return normalizeForFilter(haystackLower).indexOf(needle) !== -1;
   }
 
   function listHits(haystackLower, terms) {
@@ -157,7 +157,9 @@
         .trim()
         .toLowerCase();
       if (!t || /\s/.test(t)) continue;
-      if (/^[a-z0-9]+$/i.test(t) && compact.indexOf(normalizeForFilter(t)) !== -1) return true;
+      var nt = normalizeForFilter(t);
+      if (!nt || nt.length < 2) continue;
+      if (/^[a-z0-9]+$/i.test(t) && compact.indexOf(nt) !== -1) return true;
     }
     for (i = 0; i < jamo.length; i += 1) {
       var j = String(jamo[i] || '').trim();

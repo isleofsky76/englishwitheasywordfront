@@ -79,8 +79,12 @@ function phraseHit(haystackLower, phrase) {
   if (!p) return false;
   if (/\s/.test(p)) return haystackLower.includes(p);
   if (/^[a-z]+$/i.test(p)) return englishWordBoundaryHit(haystackLower, p);
-  // 한글·혼합: 원문 포함 또는 정규화 포함
-  return haystackLower.includes(p) || normalizeForFilter(haystackLower).includes(normalizeForFilter(p));
+  // 원문 그대로 포함 (한·중·일 등)
+  if (haystackLower.includes(p)) return true;
+  // 정규화 비교 — 빈 문자열(중국어만 있는 항 등)은 오탐이므로 무시
+  const needle = normalizeForFilter(p);
+  if (!needle || needle.length < 2) return false;
+  return normalizeForFilter(haystackLower).includes(needle);
 }
 
 function listHits(haystackLower, terms) {
@@ -140,11 +144,16 @@ export function containsBadWords(text) {
   for (const term of autoTerms) {
     const t = String(term || '').trim().toLowerCase();
     if (!t || /\s/.test(t)) continue;
-    if (/^[a-z0-9]+$/i.test(t) && compact.includes(normalizeForFilter(t))) {
-      // 짧은 영문이 compact에만 잡히는 경우, 원문 단어 경계도 한번 더 확인하되
-      // 치환 우회(s3x)는 compact 매칭을 허용
-      if (/[0-9@$]/.test(String(text || '').toLowerCase()) || englishWordBoundaryHit(originalLower, t) || compact.includes(normalizeForFilter(t))) {
-        if (compact.includes(normalizeForFilter(t))) return true;
+    const nt = normalizeForFilter(t);
+    if (!nt || nt.length < 2) continue;
+    if (/^[a-z0-9]+$/i.test(t) && compact.includes(nt)) {
+      // 치환 우회(s3x) 또는 단어 경계 매칭
+      if (
+        /[0-9@$]/.test(String(text || '').toLowerCase()) ||
+        englishWordBoundaryHit(originalLower, t) ||
+        compact.includes(nt)
+      ) {
+        return true;
       }
     }
   }
