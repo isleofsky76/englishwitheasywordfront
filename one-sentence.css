@@ -147,7 +147,7 @@
   margin: 32px 0 8px;
   padding-bottom: 8px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.14);
-  font-size: 17px;
+  font-size: var(--os-body);
   font-weight: 700;
   letter-spacing: 0.04em;
   color: var(--os-ink-soft);
@@ -178,18 +178,19 @@
 .os-head {
   margin: 0 0 2px;
   font-size: var(--os-body);
-  line-height: 1.45;
+  line-height: 1.55;
   color: var(--os-ink);
 }
 
 .os-head-en {
-  font-size: 1.15em;
+  font-size: inherit;
   font-weight: 700;
   color: var(--os-blue);
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
 }
 
 .os-head-sound {
+  font-size: inherit;
   font-weight: 400;
   color: var(--os-ink-soft);
   white-space: nowrap;
@@ -197,20 +198,20 @@
 
 .os-head-ipa {
   font-family: "Lucida Sans Unicode", "Arial Unicode MS", "Segoe UI", sans-serif;
-  font-size: 0.95em;
+  font-size: inherit;
   color: var(--os-ink-soft);
 }
 
 .os-head-pron {
-  font-size: 0.95em;
+  font-size: inherit;
   font-weight: 500;
   color: var(--os-ink-soft);
 }
 
 .os-meta {
   margin: 0 0 8px;
-  font-size: 16px;
-  line-height: 1.5;
+  font-size: var(--os-body);
+  line-height: 1.55;
   color: var(--os-ink);
 }
 
@@ -227,8 +228,8 @@
 /* cf. 연관어 (있을 때만) */
 .os-cf {
   margin: 0 0 10px;
-  font-size: 14px;
-  line-height: 1.5;
+  font-size: var(--os-body);
+  line-height: 1.55;
   color: var(--os-ink-muted);
 }
 
@@ -271,8 +272,8 @@
   min-width: 0;
   margin: 0;
   font-family: inherit;
-  font-size: 1.02em;
-  font-weight: 450;
+  font-size: var(--os-body);
+  font-weight: 400;
   line-height: 1.7;
   letter-spacing: 0;
   color: var(--os-ink);
