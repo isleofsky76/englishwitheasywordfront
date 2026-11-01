@@ -297,16 +297,15 @@ function appendFallbackJs(item) {
     highlight: item.highlight || item.word,
     cf: item.cf || [],
   };
-  const block = `,\n  ${JSON.stringify(entry, null, 2).replace(/\n/g, '\n  ')}\n];`;
-  if (!/\];\s*$/.test(src.trimEnd()) && !src.includes('];')) {
-    throw new Error('one-sentence-data.js 형식을 파싱할 수 없습니다.');
-  }
-  // insert before final ];
   const idx = src.lastIndexOf('];');
   if (idx === -1) throw new Error('one-sentence-data.js 끝에 ]; 가 없습니다.');
-  const before = src.slice(0, idx).replace(/,\s*$/, '');
-  src = `${before}${block}\n`;
-  fs.writeFileSync(FALLBACK_JS, src, 'utf8');
+  let before = src.slice(0, idx).replace(/\s+$/, '');
+  if (!before.endsWith('[')) {
+    before = before.replace(/,?\s*$/, '');
+    before += ',';
+  }
+  const block = `\n  ${JSON.stringify(entry, null, 2).replace(/\n/g, '\n  ')}\n];\n`;
+  fs.writeFileSync(FALLBACK_JS, `${before}${block}`, 'utf8');
   return true;
 }
 
