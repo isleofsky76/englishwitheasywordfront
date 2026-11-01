@@ -130,17 +130,18 @@
     if (!tags) return;
     var words = uniqueWords(items);
     if (!words.length) {
-      tags.hidden = true;
+      tags.setAttribute('hidden', '');
       tags.innerHTML = '';
       return;
     }
-    tags.hidden = false;
+    tags.removeAttribute('hidden');
+    /* 단어 단어 단어 … 클릭 시 위로 이동 */
     tags.innerHTML = words.map(function (w) {
       return (
-        '<a class="os-tag" href="#' + escapeAttr(wordAnchorId(w)) + '" data-os-jump="' +
-          escapeAttr(w) + '">#' + escapeHtml(w) + '</a>'
+        '<button type="button" class="os-tag" data-os-jump="' +
+          escapeAttr(w) + '">' + escapeHtml(w) + '</button>'
       );
-    }).join(' ');
+    }).join('');
   }
 
   function filterItems(items, q) {
@@ -189,15 +190,14 @@
     if (tags && !tags._osBound) {
       tags._osBound = true;
       tags.addEventListener('click', function (e) {
-        var a = e.target.closest('[data-os-jump]');
-        if (!a || !tags.contains(a)) return;
-        e.preventDefault();
-        var word = a.getAttribute('data-os-jump') || '';
+        var btn = e.target.closest('[data-os-jump]');
+        if (!btn || !tags.contains(btn)) return;
+        var word = btn.getAttribute('data-os-jump') || '';
         var input = document.getElementById('os-search-input');
         if (input && input.value) {
           input.value = '';
-          input.dispatchEvent(new Event('input', { bubbles: true }));
-          window.setTimeout(function () { scrollToWord(word); }, 40);
+          if (typeof tags._osRefresh === 'function') tags._osRefresh();
+          window.setTimeout(function () { scrollToWord(word); }, 50);
         } else {
           scrollToWord(word);
         }
@@ -217,6 +217,7 @@
   function init() {
     bindFeed();
     var input = document.getElementById('os-search-input');
+    var tags = document.getElementById('os-tags');
     var all = [];
 
     function refresh() {
@@ -225,23 +226,29 @@
       renderTags(all);
     }
 
+    if (tags) tags._osRefresh = refresh;
+
     if (input) {
       input.addEventListener('input', refresh);
     }
 
     renderFeed([]);
+    renderTags([]);
     var count = document.getElementById('os-count');
     if (count) count.textContent = '불러오는 중…';
 
+    function applyItems(items) {
+      all = items;
+      refresh();
+    }
+
     loadFeedFromApi()
       .then(function (items) {
-        all = items.length ? items : FALLBACK_FEED.map(normalizeEntry).filter(Boolean);
-        refresh();
+        applyItems(items.length ? items : FALLBACK_FEED.map(normalizeEntry).filter(Boolean));
       })
       .catch(function (err) {
         console.warn('[one-sentence] API 로드 실패, 로컬 폴백:', err);
-        all = FALLBACK_FEED.map(normalizeEntry).filter(Boolean);
-        refresh();
+        applyItems(FALLBACK_FEED.map(normalizeEntry).filter(Boolean));
       });
   }
 

@@ -114,6 +114,7 @@
   padding: 22px 0 20px;
   border: none;
   border-bottom: 1px dashed rgba(0, 0, 0, 0.08);
+  scroll-margin-top: 88px;
 }
 
 .os-item:last-child {
@@ -247,26 +248,40 @@
 .os-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px 12px;
-  margin-top: 36px;
-  padding-top: 22px;
+  align-items: baseline;
+  gap: 10px 14px;
+  margin-top: 40px;
+  padding: 20px 0 8px;
   border-top: 1px solid var(--line);
-  line-height: 1.6;
+  line-height: 1.5;
+}
+
+.os-tags[hidden] {
+  display: none !important;
 }
 
 .os-tag {
-  font-size: 12px;
+  display: inline;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  font-family: inherit;
+  font-size: 13px;
   font-weight: 500;
   letter-spacing: 0.01em;
-  color: #8a857a;
+  color: #6b7280;
   text-decoration: none;
   white-space: nowrap;
+  cursor: pointer;
 }
 
-.os-tag:hover {
+.os-tag:hover,
+.os-tag:focus-visible {
   color: var(--os-blue);
   text-decoration: underline;
-  text-underline-offset: 2px;
+  text-underline-offset: 3px;
+  outline: none;
 }
 
 .os-item-flash {
