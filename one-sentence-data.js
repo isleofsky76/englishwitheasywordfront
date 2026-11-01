@@ -43,5 +43,13 @@ window.ONE_SENTENCE_FEED = [
     ko: '마지막에 비극적이면서도 우스운 장면이 몇 개 있었다.',
     en: 'There were a few tragicomic final scenes.',
     highlight: 'tragicomic'
+  },
+  {
+    word: 'idyll',
+    pos: '명사',
+    meaning: '목가, 전원적인 시·생활',
+    ko: '그녀의 시는 농장 생활에 대한 목가였다.',
+    en: 'Her poem was an idyll about her life on a farm.',
+    highlight: 'idyll'
   }
 ];
