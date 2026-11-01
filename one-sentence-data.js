@@ -518,5 +518,23 @@ window.ONE_SENTENCE_FEED = [
         "_id": "6ae6bb410aa2cc0ac78f6dfb"
       }
     ]
+  },
+  {
+    "word": "tang",
+    "pos": "명사",
+    "meaning": "톡 쏘는 맛, 강한 향미",
+    "ko": "내 소스에는 식초의 톡 쏘는 맛이 잘 살아 있다.",
+    "en": "My sauce has a nice vinegar tang.",
+    "highlight": "tang",
+    "ipa": "/tæŋ/",
+    "ipaKo": "탱",
+    "cf": [
+      {
+        "word": "tangy",
+        "pos": "형용사",
+        "meaning": "톡 쏘는, 상큼한",
+        "_id": "6ae6bb941cb2cae855a28bcd"
+      }
+    ]
   }
 ];
