@@ -2392,5 +2392,298 @@ window.ONE_SENTENCE_FEED = [
     "ipa": "/ˈvænəti ˈfer/",
     "ipaKo": "배너티 페어",
     "cf": []
+  },
+  {
+    "word": "fierce",
+    "pos": "형용사",
+    "meaning": "사나운, 맹렬한, 격렬한; (구어) 멋진, 당당한",
+    "ko": "두 회사는 치열하게 경쟁하고 있다.",
+    "en": "The two companies are in fierce competition.",
+    "highlight": "fierce",
+    "ipa": "/fɪrs/",
+    "ipaKo": "피어스",
+    "cf": []
+  },
+  {
+    "word": "feat",
+    "pos": "명사",
+    "meaning": "위업, 공적, 묘기",
+    "ko": "산소통 없이 에베레스트를 오르는 것은 놀라운 위업이다.",
+    "en": "Climbing Everest without oxygen is an incredible feat.",
+    "highlight": "feat",
+    "ipa": "/fiːt/",
+    "ipaKo": "피트",
+    "cf": [
+      {
+        "word": "feet",
+        "pos": "명사",
+        "meaning": "발 (동음이의)"
+      }
+    ]
+  },
+  {
+    "word": "fabricate",
+    "pos": "동사",
+    "meaning": "(거짓을) 날조하다, 조작하다",
+    "ko": "그 기자는 기사에 인용문을 날조했다.",
+    "en": "The reporter fabricated quotes in his articles.",
+    "highlight": "fabricated",
+    "ipa": "/ˈfæbrɪkeɪt/",
+    "ipaKo": "패브리케이트",
+    "cf": []
+  },
+  {
+    "word": "fabricate",
+    "pos": "동사",
+    "meaning": "(부품을 조립해) 제작하다",
+    "ko": "그 부품들은 한국에서 제작된다.",
+    "en": "The parts are fabricated in Korea.",
+    "highlight": "fabricated",
+    "ipa": "/ˈfæbrɪkeɪt/",
+    "ipaKo": "패브리케이트",
+    "cf": []
+  },
+  {
+    "word": "flair",
+    "pos": "명사",
+    "meaning": "재능, 소질; 세련된 감각, 멋",
+    "ko": "그녀는 언어에 소질이 있다.",
+    "en": "She has a flair for languages.",
+    "highlight": "flair",
+    "ipa": "/fler/",
+    "ipaKo": "플레어",
+    "cf": [
+      {
+        "word": "flare",
+        "pos": "동사",
+        "meaning": "확 타오르다 (동음이의)"
+      }
+    ]
+  },
+  {
+    "word": "foliage",
+    "pos": "명사",
+    "meaning": "(집합적) 나뭇잎, 잎",
+    "ko": "사람들은 단풍을 보러 북쪽으로 차를 몰고 간다.",
+    "en": "People drive north to see the fall foliage.",
+    "highlight": "foliage",
+    "ipa": "/ˈfoʊliɪdʒ/",
+    "ipaKo": "포울리이지",
+    "cf": []
+  },
+  {
+    "word": "forage",
+    "pos": "동사",
+    "meaning": "(먹이나 물건을) 찾아다니다",
+    "ko": "곰은 여름에 산딸기를 찾아다닌다.",
+    "en": "Bears forage for berries in the summer.",
+    "highlight": "forage",
+    "ipa": "/ˈfɔːrɪdʒ/",
+    "ipaKo": "포리지",
+    "cf": []
+  },
+  {
+    "word": "forage",
+    "pos": "명사",
+    "meaning": "(가축의) 사료, 꼴; 먹이 찾기",
+    "ko": "소들에게는 신선한 꼴이 필요하다.",
+    "en": "The cattle need fresh forage.",
+    "highlight": "forage",
+    "ipa": "/ˈfɔːrɪdʒ/",
+    "ipaKo": "포리지",
+    "cf": []
+  },
+  {
+    "word": "full-fledged",
+    "pos": "형용사",
+    "meaning": "완전히 자격을 갖춘, 본격적인, 완전한 (영: fully-fledged)",
+    "ko": "그 분쟁은 전면전으로 번졌다.",
+    "en": "The dispute grew into a full-fledged war.",
+    "highlight": "full-fledged",
+    "ipa": "/ˌfʊlˈfledʒd/",
+    "ipaKo": "풀플레지드",
+    "cf": []
+  },
+  {
+    "word": "frenzied",
+    "pos": "형용사",
+    "meaning": "광란의, 미친 듯한, 열광적인",
+    "ko": "블랙프라이데이에 미친 듯한 구매 열풍이 일었다.",
+    "en": "There was frenzied buying on Black Friday.",
+    "highlight": "frenzied",
+    "ipa": "/ˈfrenzid/",
+    "ipaKo": "프렌지드",
+    "cf": []
+  },
+  {
+    "word": "frenetic",
+    "pos": "형용사",
+    "meaning": "정신없이 바쁜, 열광적인",
+    "ko": "도시 생활의 정신없는 속도를 따라갈 수가 없다.",
+    "en": "I can't keep up with the frenetic pace of city life.",
+    "highlight": "frenetic",
+    "ipa": "/frəˈnetɪk/",
+    "ipaKo": "프러네틱",
+    "cf": []
+  },
+  {
+    "word": "fiesta",
+    "pos": "명사",
+    "meaning": "(스페인어권의) 축제, 종교 축일; 잔치",
+    "ko": "온 마을이 여름 축제를 즐긴다.",
+    "en": "The whole town celebrates the summer fiesta.",
+    "highlight": "fiesta",
+    "ipa": "/fiˈestə/",
+    "ipaKo": "피에스타",
+    "cf": []
+  },
+  {
+    "word": "finicky",
+    "pos": "형용사",
+    "meaning": "까다로운, 깐깐한; (일이) 세심함을 요하는",
+    "ko": "우리 고양이는 입맛이 까다롭다.",
+    "en": "My cat is a finicky eater.",
+    "highlight": "finicky",
+    "ipa": "/ˈfɪnɪki/",
+    "ipaKo": "피니키",
+    "cf": []
+  },
+  {
+    "word": "firebrand",
+    "pos": "명사",
+    "meaning": "선동가, 열혈 운동가; (원뜻) 타고 있는 나무토막, 횃불",
+    "ko": "그는 젊은 정치 선동가였다.",
+    "en": "He was a young political firebrand.",
+    "highlight": "firebrand",
+    "ipa": "/ˈfaɪərbrænd/",
+    "ipaKo": "파이어브랜드",
+    "cf": []
+  },
+  {
+    "word": "fractal",
+    "pos": "명사",
+    "meaning": "(수학) 프랙탈; 부분이 전체와 같은 모양으로 끝없이 반복되는 구조",
+    "ko": "눈송이는 자연 속 프랙탈이다.",
+    "en": "Snowflakes are natural fractals.",
+    "highlight": "fractals",
+    "ipa": "/ˈfræktl/",
+    "ipaKo": "프랙틀",
+    "cf": []
+  },
+  {
+    "word": "fractal",
+    "pos": "형용사",
+    "meaning": "프랙탈의",
+    "ko": "그 벽지는 프랙탈 무늬를 쓴다.",
+    "en": "The wallpaper uses fractal patterns.",
+    "highlight": "fractal",
+    "ipa": "/ˈfræktl/",
+    "ipaKo": "프랙틀",
+    "cf": []
+  },
+  {
+    "word": "furtively",
+    "pos": "부사",
+    "meaning": "몰래, 남의 눈을 피해, 슬그머니",
+    "ko": "그는 회의 중 슬쩍 휴대폰을 훔쳐보았다.",
+    "en": "He glanced furtively at his phone during the meeting.",
+    "highlight": "furtively",
+    "ipa": "/ˈfɜːrtɪvli/",
+    "ipaKo": "퍼티블리",
+    "cf": []
+  },
+  {
+    "word": "fuchsia",
+    "pos": "명사",
+    "meaning": "푸크시아(꽃); 자홍색 (발음: 푹시아가 아니라 퓨셔)",
+    "ko": "푸크시아는 여름 내내 핀다.",
+    "en": "Fuchsias bloom all summer.",
+    "highlight": "Fuchsias",
+    "ipa": "/ˈfjuːʃə/",
+    "ipaKo": "퓨셔",
+    "cf": []
+  },
+  {
+    "word": "fuchsia",
+    "pos": "형용사",
+    "meaning": "자홍색의",
+    "ko": "그녀는 자홍색 드레스를 입었다.",
+    "en": "She wore a fuchsia dress.",
+    "highlight": "fuchsia",
+    "ipa": "/ˈfjuːʃə/",
+    "ipaKo": "퓨셔",
+    "cf": []
+  },
+  {
+    "word": "finagle",
+    "pos": "동사",
+    "meaning": "(구어) 속임수나 수완을 써서 얻어내다",
+    "ko": "그는 수완을 부려 콘서트 공짜표 두 장을 얻어냈다.",
+    "en": "He finagled two free tickets to the concert.",
+    "highlight": "finagled",
+    "ipa": "/fɪˈneɪɡl/",
+    "ipaKo": "피네이글",
+    "cf": []
+  },
+  {
+    "word": "facetiously",
+    "pos": "부사",
+    "meaning": "(부적절하게) 농담조로, 익살맞게",
+    "ko": "\"그냥 다 때려치울까,\" 그가 농담조로 말했다.",
+    "en": "\"Maybe we should just quit,\" he said facetiously.",
+    "highlight": "facetiously",
+    "ipa": "/fəˈsiːʃəsli/",
+    "ipaKo": "퍼시셔슬리",
+    "cf": []
+  },
+  {
+    "word": "foresighted",
+    "pos": "형용사",
+    "meaning": "선견지명이 있는, 앞을 내다보는",
+    "ko": "태양광에 투자한 것은 선견지명 있는 결정이었다.",
+    "en": "It was a foresighted decision to invest in solar power.",
+    "highlight": "foresighted",
+    "ipa": "/ˈfɔːrsaɪtɪd/",
+    "ipaKo": "포어사이티드",
+    "cf": []
+  },
+  {
+    "word": "fathomless",
+    "pos": "형용사",
+    "meaning": "헤아릴 수 없이 깊은; 이해할 수 없는, 불가해한",
+    "ko": "그녀는 끝없이 깊은 바다를 응시했다.",
+    "en": "She stared into the fathomless ocean.",
+    "highlight": "fathomless",
+    "ipa": "/ˈfæðəmləs/",
+    "ipaKo": "패덤리스",
+    "cf": []
+  },
+  {
+    "word": "fabulist",
+    "pos": "명사",
+    "meaning": "우화 작가; 거짓말쟁이, 허풍쟁이",
+    "ko": "그 기자는 거짓말쟁이였음이 드러났다.",
+    "en": "The journalist was exposed as a fabulist.",
+    "highlight": "fabulist",
+    "ipa": "/ˈfæbjəlɪst/",
+    "ipaKo": "패뷸리스트",
+    "cf": []
+  },
+  {
+    "word": "factitious",
+    "pos": "형용사",
+    "meaning": "인위적인, 꾸며낸, 거짓의 (의학: factitious disorder)",
+    "ko": "그 위기는 표를 얻으려고 꾸며낸 것이었다.",
+    "en": "The crisis was factitious, created to win votes.",
+    "highlight": "factitious",
+    "ipa": "/fækˈtɪʃəs/",
+    "ipaKo": "팩티셔스",
+    "cf": [
+      {
+        "word": "fictitious",
+        "pos": "형용사",
+        "meaning": "허구의 (혼동 주의)"
+      }
+    ]
   }
 ];
