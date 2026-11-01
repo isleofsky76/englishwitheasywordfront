@@ -188,6 +188,7 @@ Return JSON:
 Rules:
 - Exactly ${count} items in items[]
 - Easy, concrete sentences. No slang, no sexual/violent content
+- Do NOT use markdown or bold markers (no **, __, *, backticks)
 - meaning: short, dictionary-like Korean
 - cf: 0–2 items only when a related form/lemma is genuinely helpful (e.g. weathered → weather). Omit empty cf
 - highlight must appear inside en (case-insensitive)
@@ -234,14 +235,23 @@ Rules:
   return items;
 }
 
+function stripMd(text) {
+  return String(text || '')
+    .replace(/\*\*([^*]+)\*\*/g, '$1')
+    .replace(/\*([^*]+)\*/g, '$1')
+    .replace(/__([^_]+)__/g, '$1')
+    .replace(/`([^`]+)`/g, '$1')
+    .trim();
+}
+
 function validateItem(item, existingKeys) {
-  const word = String(item?.word || '').trim();
-  const en = String(item?.en || '').trim();
-  const ko = String(item?.ko || '').trim();
+  const word = stripMd(item?.word || '');
+  const en = stripMd(item?.en || '');
+  const ko = stripMd(item?.ko || '');
   if (!word || !en || !ko) return { ok: false, reason: 'word/en/ko 필수' };
   const key = normalizeWordKey(word);
   if (existingKeys.has(key)) return { ok: false, reason: '이미 있음' };
-  const highlight = String(item.highlight || word).trim();
+  const highlight = stripMd(item.highlight || word);
   if (!new RegExp(highlight.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i').test(en)) {
     return { ok: false, reason: 'highlight가 예문에 없음' };
   }
@@ -249,12 +259,16 @@ function validateItem(item, existingKeys) {
     ok: true,
     item: {
       word,
-      pos: String(item.pos || '').trim(),
-      meaning: String(item.meaning || '').trim(),
+      pos: stripMd(item.pos || ''),
+      meaning: stripMd(item.meaning || ''),
       ko,
       en,
       highlight,
-      cf: normalizeCf(item.cf),
+      cf: normalizeCf(item.cf).map((c) => ({
+        word: stripMd(c.word),
+        pos: stripMd(c.pos),
+        meaning: stripMd(c.meaning),
+      })),
     },
   };
 }
@@ -262,13 +276,11 @@ function validateItem(item, existingKeys) {
 function bumpFallbackHtmlCache() {
   if (!fs.existsSync(FALLBACK_HTML)) return;
   let html = fs.readFileSync(FALLBACK_HTML, 'utf8');
-  const stamp = `os${new Date().toISOString().slice(0, 10).replace(/-/g, '')}${Date.now().toString(36).slice(-3)}`;
-  html = html.replace(/one-sentence(?:-data)?\.(?:js|css)\?v=[^"']+/g, (m) =>
-    m.replace(/\?v=[^"']+/, `?v=${stamp}`)
+  const stamp = `20261101os${Date.now().toString(36).slice(-4)}`;
+  html = html.replace(
+    /(one-sentence(?:-data)?\.(?:css|js)|site-masthead\.js)\?v=[^"']+/g,
+    (_, file) => `${file}?v=${stamp}`
   );
-  // also bump script refs that share osN pattern
-  html = html.replace(/(one-sentence(?:-data)?\.(?:js|css)\?v=)2026[0-9a-z]+/gi, `$1${stamp}`);
-  html = html.replace(/(site-masthead\.js\?v=)2026[0-9a-z]+/gi, `$1${stamp}`);
   fs.writeFileSync(FALLBACK_HTML, html, 'utf8');
   return stamp;
 }

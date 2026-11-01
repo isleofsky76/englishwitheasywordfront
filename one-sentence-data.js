@@ -78,5 +78,14 @@ window.ONE_SENTENCE_FEED = [
     en: 'He was reticent about his plans for the future.',
     highlight: 'reticent',
     cf: [{ word: 'reticence', pos: '명사', meaning: '과묵함' }]
+  },
+  {
+    word: 'adapt',
+    pos: '동사',
+    meaning: '적응하다',
+    ko: '많은 동물들이 다양한 환경에 적응할 수 있다.',
+    en: 'Many animals can adapt to different environments.',
+    highlight: 'adapt',
+    cf: []
   }
 ];
