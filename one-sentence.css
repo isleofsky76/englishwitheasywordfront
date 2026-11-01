@@ -125,51 +125,33 @@
   display: none !important;
 }
 
-.os-word-row {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 6px 10px;
-  margin-bottom: 8px;
-  min-width: 0;
-}
-
-.os-chip {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 8px;
-  max-width: 100%;
-  padding: 0;
-  border-radius: 0;
-  background: transparent;
-}
-
-.os-chip-en {
+/* cf. 영어 품사 한글뜻 */
+.os-cf {
+  margin: 0 0 8px;
   font-size: var(--os-body);
+  line-height: 1.55;
+  color: var(--ink);
+}
+
+.os-cf-label {
+  font-style: italic;
+  font-weight: 500;
+  color: #555;
+}
+
+.os-cf-en {
   font-weight: 700;
   color: var(--os-blue);
-  letter-spacing: -0.01em;
-  border-bottom: 2px solid rgba(47, 111, 237, 0.28);
-  line-height: 1.4;
 }
 
-.os-chip-pos {
-  display: inline;
-  padding: 0;
-  border: none;
-  border-radius: 0;
-  background: transparent;
-  font-size: 13px;
+.os-cf-pos {
   font-weight: 500;
-  color: #8a857a;
-  white-space: nowrap;
+  color: #666;
 }
 
-.os-meaning {
-  font-size: var(--os-body);
+.os-cf-ko {
   font-weight: 500;
-  color: var(--os-ink-soft);
-  line-height: 1.5;
+  color: var(--ink);
 }
 
 .os-ko {
@@ -282,17 +264,6 @@
   text-decoration: underline;
   text-underline-offset: 3px;
   outline: none;
-}
-
-.os-tag-word {
-  font-weight: 500;
-}
-
-.os-tag-pos {
-  margin-left: 4px;
-  font-size: 11px;
-  font-weight: 400;
-  color: #555;
 }
 
 .os-item-flash {

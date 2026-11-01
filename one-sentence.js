@@ -94,15 +94,16 @@
 
   function renderItem(item) {
     var aid = wordAnchorId(item.word);
+    var pos = String(item.pos || '').trim();
+    var meaning = String(item.meaning || '').trim();
     return (
       '<article class="os-item" id="' + escapeAttr(aid) + '" data-word="' + escapeAttr(item.word) + '">' +
-        '<div class="os-word-row">' +
-          '<span class="os-chip">' +
-            '<span class="os-chip-en">' + escapeHtml(item.word) + '</span>' +
-            (item.pos ? '<span class="os-chip-pos">' + escapeHtml(item.pos) + '</span>' : '') +
-          '</span>' +
-          (item.meaning ? '<span class="os-meaning">' + escapeHtml(item.meaning) + '</span>' : '') +
-        '</div>' +
+        '<p class="os-cf">' +
+          '<span class="os-cf-label">cf.</span> ' +
+          '<span class="os-cf-en">' + escapeHtml(item.word) + '</span>' +
+          (pos ? ' <span class="os-cf-pos">' + escapeHtml(pos) + '</span>' : '') +
+          (meaning ? ' <span class="os-cf-ko">' + escapeHtml(meaning) + '</span>' : '') +
+        '</p>' +
         (item.ko ? '<p class="os-ko">' + escapeHtml(item.ko) + '</p>' : '') +
         '<div class="os-en-row">' +
           '<p class="os-en">' + highlightEn(item.en, item.highlight || item.word) + '</p>' +
@@ -113,14 +114,14 @@
     );
   }
 
-  function uniqueWordEntries(items) {
+  function uniqueWords(items) {
     var seen = Object.create(null);
     var out = [];
     items.forEach(function (it) {
       var key = String(it.word || '').toLowerCase();
       if (!key || seen[key]) return;
       seen[key] = true;
-      out.push({ word: it.word, pos: String(it.pos || '').trim() });
+      out.push(it.word);
     });
     return out;
   }
@@ -128,20 +129,17 @@
   function renderTags(items) {
     var tags = document.getElementById('os-tags');
     if (!tags) return;
-    var entries = uniqueWordEntries(items);
-    if (!entries.length) {
+    var words = uniqueWords(items);
+    if (!words.length) {
       tags.setAttribute('hidden', '');
       tags.innerHTML = '';
       return;
     }
     tags.removeAttribute('hidden');
-    /* 단어(+품사) 나열 … 클릭 시 위로 이동 */
-    tags.innerHTML = entries.map(function (e) {
+    tags.innerHTML = words.map(function (w) {
       return (
-        '<button type="button" class="os-tag" data-os-jump="' + escapeAttr(e.word) + '">' +
-          '<span class="os-tag-word">' + escapeHtml(e.word) + '</span>' +
-          (e.pos ? '<span class="os-tag-pos">' + escapeHtml(e.pos) + '</span>' : '') +
-        '</button>'
+        '<button type="button" class="os-tag" data-os-jump="' +
+          escapeAttr(w) + '">' + escapeHtml(w) + '</button>'
       );
     }).join('');
   }
