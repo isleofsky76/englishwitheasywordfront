@@ -94,6 +94,8 @@
       ko: String(raw.ko || '').trim(),
       en: en,
       highlight: String(raw.highlight || word).trim(),
+      ipa: String(raw.ipa || '').trim(),
+      ipaKo: String(raw.ipaKo || '').trim(),
       cf: normalizeCfList(raw.cf),
       date: raw.date || null
     };
@@ -120,6 +122,22 @@
     }).join('');
   }
 
+  function renderPron(item) {
+    var ipa = String(item.ipa || '').trim();
+    var ipaKo = String(item.ipaKo || '').trim();
+    if (!ipa && !ipaKo) return '';
+    var inner = '';
+    if (ipa) {
+      var shown = /^\//.test(ipa) ? ipa : ('/' + ipa + '/');
+      inner += '<span class="os-head-ipa">' + escapeHtml(shown) + '</span>';
+    }
+    if (ipaKo) {
+      if (inner) inner += ' ';
+      inner += '<span class="os-head-pron">' + escapeHtml(ipaKo) + '</span>';
+    }
+    return ' <span class="os-head-sound">' + inner + '</span>';
+  }
+
   function renderItem(item) {
     var aid = wordAnchorId(item.word);
     var pos = String(item.pos || '').trim();
@@ -128,6 +146,7 @@
       '<article class="os-item" id="' + escapeAttr(aid) + '" data-word="' + escapeAttr(item.word) + '">' +
         '<p class="os-head">' +
           '<span class="os-head-en">' + escapeHtml(item.word) + '</span>' +
+          renderPron(item) +
           (pos ? ' <span class="os-head-pos">' + escapeHtml(pos) + '</span>' : '') +
           (meaning ? ' <span class="os-head-ko">' + escapeHtml(meaning) + '</span>' : '') +
         '</p>' +

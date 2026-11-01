@@ -710,6 +710,8 @@ const oneSentenceEntrySchema = new mongoose.Schema({
   ko: { type: String, default: '' },
   en: { type: String, required: true },
   highlight: { type: String, default: '' },
+  ipa: { type: String, default: '' },
+  ipaKo: { type: String, default: '' },
   /* 예: [{ word:'weather', pos:'동사', meaning:'견뎌내다' }] → cf. weather 동사 - 견뎌내다 */
   cf: { type: [oneSentenceCfSchema], default: [] },
   nickname: String,
@@ -2675,7 +2677,7 @@ app.post('/onesentence', requireWriteToken, async (req, res) => {
       detail: 'MongoDB connection not ready',
     });
   }
-  const { word, pos, meaning, ko, en, highlight, cf, nickname, password } = req.body;
+  const { word, pos, meaning, ko, en, highlight, ipa, ipaKo, cf, nickname, password } = req.body;
   if (!word || !en || !nickname || !password) {
     return res.status(400).json({ error: 'word, en, nickname, password are required' });
   }
@@ -2697,6 +2699,8 @@ app.post('/onesentence', requireWriteToken, async (req, res) => {
       ko: String(ko || '').trim(),
       en: String(en).trim(),
       highlight: String(highlight || word).trim(),
+      ipa: String(ipa || '').trim(),
+      ipaKo: String(ipaKo || '').trim(),
       cf: cfList,
       nickname,
       password: hashedPassword,

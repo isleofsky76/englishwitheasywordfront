@@ -44,6 +44,8 @@ const oneSentenceEntrySchema = new mongoose.Schema(
     ko: { type: String, default: '' },
     en: { type: String, required: true },
     highlight: { type: String, default: '' },
+    ipa: { type: String, default: '' },
+    ipaKo: { type: String, default: '' },
     cf: {
       type: [
         {
@@ -114,6 +116,8 @@ async function saveEntry(item) {
       ko: String(item.ko || '').trim(),
       en: String(item.en).trim(),
       highlight: String(item.highlight || item.word).trim(),
+      ipa: String(item.ipa || '').trim(),
+      ipaKo: String(item.ipaKo || '').trim(),
       cf: normalizeCf(item.cf),
       nickname: 'admin',
       password: hashedPassword,
@@ -176,7 +180,9 @@ Return JSON:
       "word": "lemma lowercase",
       "pos": "형용사|동사|명사|부사|숙어",
       "meaning": "짧은 한국어 뜻",
-      "en": "Easy example sentence containing the word.",
+      "ipa": "/ˈædəpt/",
+      "ipaKo": "어댑트",
+      "en": "Clear example sentence containing the word.",
       "ko": "자연스러운 한국어 번역",
       "highlight": "exact form as it appears in en (may be inflected)",
       "cf": [
@@ -192,6 +198,8 @@ Rules:
 - Do NOT use markdown or bold markers (no **, __, *, backticks)
 - Do NOT pick basic words: gather, convey, essential, obtain, remarkable, navigate, persuade, contribute, anticipate, analyze, adapt, help, make, get, need, want, good, big
 - meaning: short, dictionary-like Korean
+- ipa: IPA in slashes (US English preferred)
+- ipaKo: Korean hangul approximation of the pronunciation
 - cf: 0–2 items only when a related form/lemma is genuinely helpful (e.g. weathered → weather). Omit empty cf
 - highlight must appear inside en (case-insensitive)
 - Prefer exam/news-worthy words over textbook beginner lists`;
@@ -266,6 +274,8 @@ function validateItem(item, existingKeys) {
       ko,
       en,
       highlight,
+      ipa: stripMd(item.ipa || ''),
+      ipaKo: stripMd(item.ipaKo || ''),
       cf: normalizeCf(item.cf).map((c) => ({
         word: stripMd(c.word),
         pos: stripMd(c.pos),
@@ -297,6 +307,8 @@ function appendFallbackJs(item) {
     ko: item.ko,
     en: item.en,
     highlight: item.highlight || item.word,
+    ipa: item.ipa || '',
+    ipaKo: item.ipaKo || '',
     cf: item.cf || [],
   };
   const idx = src.lastIndexOf('];');

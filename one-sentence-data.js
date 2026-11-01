@@ -9,6 +9,8 @@ window.ONE_SENTENCE_FEED = [
     "ko": "그는 그녀를 처음 만난 순간부터 홀딱 반했다.",
     "en": "He was smitten with her from the moment they met.",
     "highlight": "smitten",
+    "ipa": "/ˈsmɪtən/",
+    "ipaKo": "스미튼",
     "cf": [
       {
         "word": "smite",
@@ -24,6 +26,8 @@ window.ONE_SENTENCE_FEED = [
     "ko": "그녀는 그의 친절을 잊지 않았고, 몇 년 뒤 그 은혜를 갚았다.",
     "en": "She never forgot his kindness and requited it years later.",
     "highlight": "requited",
+    "ipa": "/rɪˈkwaɪt/",
+    "ipaKo": "리콰이트",
     "cf": []
   },
   {
@@ -33,6 +37,8 @@ window.ONE_SENTENCE_FEED = [
     "ko": "바위들이 풍화되어 기이하고 멋진 형태로 변해 있다.",
     "en": "The rocks are weathered into fantastic forms.",
     "highlight": "weathered",
+    "ipa": "/ˈwɛðərd/",
+    "ipaKo": "웨더드",
     "cf": [
       {
         "word": "weather",
@@ -48,6 +54,8 @@ window.ONE_SENTENCE_FEED = [
     "ko": "그는 생선에 톡 쏘는 소스를 곁들여 냈다.",
     "en": "He served the fish with a piquant sauce.",
     "highlight": "piquant",
+    "ipa": "/ˈpiːkənt/",
+    "ipaKo": "피컨트",
     "cf": []
   },
   {
@@ -57,6 +65,8 @@ window.ONE_SENTENCE_FEED = [
     "ko": "마지막에 비극적이면서도 우스운 장면이 몇 개 있었다.",
     "en": "There were a few tragicomic final scenes.",
     "highlight": "tragicomic",
+    "ipa": "/ˌtrædʒɪˈkɒmɪk/",
+    "ipaKo": "트레지코믹",
     "cf": [
       {
         "word": "tragic",
@@ -77,6 +87,8 @@ window.ONE_SENTENCE_FEED = [
     "ko": "그녀의 시는 농장 생활에 대한 목가였다.",
     "en": "Her poem was an idyll about her life on a farm.",
     "highlight": "idyll",
+    "ipa": "/ˈaɪdəl/",
+    "ipaKo": "아이들",
     "cf": [
       {
         "word": "idyllic",
@@ -92,6 +104,8 @@ window.ONE_SENTENCE_FEED = [
     "ko": "그녀는 천천히 신중한 태도로 말을 했다.",
     "en": "She spoke in a slow and deliberate way.",
     "highlight": "deliberate",
+    "ipa": "/dɪˈlɪbərɪt/",
+    "ipaKo": "딜리버릿",
     "cf": [
       {
         "word": "deliberate",
@@ -108,6 +122,8 @@ window.ONE_SENTENCE_FEED = [
     "ko": "그는 앞으로의 계획에 대해 말수가 적었다.",
     "en": "He was reticent about his plans for the future.",
     "highlight": "reticent",
+    "ipa": "/ˈrɛtɪsənt/",
+    "ipaKo": "레티센트",
     "cf": [
       {
         "word": "reticence",
@@ -124,6 +140,8 @@ window.ONE_SENTENCE_FEED = [
     "ko": "많은 동물들이 다양한 환경에 적응할 수 있다.",
     "en": "Many animals can adapt to different environments.",
     "highlight": "adapt",
+    "ipa": "/əˈdæpt/",
+    "ipaKo": "어댑트",
     "cf": []
   },
   {
@@ -133,6 +151,8 @@ window.ONE_SENTENCE_FEED = [
     "ko": "그녀는 개인적인 허영심이 없었다.",
     "en": "She had no personal vanity.",
     "highlight": "vanity",
+    "ipa": "/ˈvænɪti/",
+    "ipaKo": "배니티",
     "cf": [
       {
         "word": "vain",
@@ -149,6 +169,8 @@ window.ONE_SENTENCE_FEED = [
     "ko": "죽음 앞에서 인간의 야심은 덧없어 보인다.",
     "en": "Philosophers write about the vanity of human ambition in the face of death.",
     "highlight": "vanity",
+    "ipa": "/ˈvænɪti/",
+    "ipaKo": "배니티",
     "cf": []
   },
   {
@@ -158,6 +180,8 @@ window.ONE_SENTENCE_FEED = [
     "ko": "그 공연은 관객들 사이에 큰 즐거움을 불러일으켰다.",
     "en": "The performance produced much mirth among the audience.",
     "highlight": "mirth",
+    "ipa": "/mɜːrθ/",
+    "ipaKo": "머스",
     "cf": [
       {
         "word": "mirthful",
@@ -174,6 +198,8 @@ window.ONE_SENTENCE_FEED = [
     "ko": "그 신하는 왕의 명령을 고분고분한 태도로 따랐다.",
     "en": "The courtier obeyed the king's orders in a complaisant manner.",
     "highlight": "complaisant",
+    "ipa": "/kəmˈpleɪzənt/",
+    "ipaKo": "컴플레이전트",
     "cf": [
       {
         "word": "complaisance",

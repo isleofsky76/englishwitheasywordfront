@@ -22,6 +22,8 @@ const items = rows.map((r) => ({
   ko: r.ko || '',
   en: r.en,
   highlight: r.highlight || r.word,
+  ipa: r.ipa || '',
+  ipaKo: r.ipaKo || '',
   cf: Array.isArray(r.cf) ? r.cf : [],
 }));
 const body = items

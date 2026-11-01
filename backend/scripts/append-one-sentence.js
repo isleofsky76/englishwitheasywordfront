@@ -60,6 +60,8 @@ const oneSentenceEntrySchema = new mongoose.Schema(
     ko: { type: String, default: '' },
     en: { type: String, required: true },
     highlight: { type: String, default: '' },
+    ipa: { type: String, default: '' },
+    ipaKo: { type: String, default: '' },
     cf: {
       type: [
         {
@@ -128,6 +130,8 @@ async function postEntryHttp(item) {
     ko: item.ko || '',
     en: item.en,
     highlight: item.highlight || item.word,
+    ipa: item.ipa || '',
+    ipaKo: item.ipaKo || '',
     cf: normalizeCf(item.cf),
     nickname: 'admin',
     password: seedPasswordFor(item.word),
@@ -172,6 +176,8 @@ async function postEntryDirect(item) {
       ko: String(item.ko || '').trim(),
       en: String(item.en).trim(),
       highlight: String(item.highlight || item.word).trim(),
+      ipa: String(item.ipa || '').trim(),
+      ipaKo: String(item.ipaKo || '').trim(),
       cf: normalizeCf(item.cf),
       nickname: 'admin',
       password: hashedPassword,
@@ -225,6 +231,8 @@ async function runOne() {
     ko: argValue('--ko') || '',
     en,
     highlight: argValue('--highlight') || word,
+    ipa: argValue('--ipa') || '',
+    ipaKo: argValue('--ipa-ko') || '',
     cf: parseCfFromArgs(),
   };
   console.log('One Sentence 추가…', hasFlag('--direct') ? 'MONGO direct' : API_BASE);
