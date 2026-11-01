@@ -1918,5 +1918,297 @@ window.ONE_SENTENCE_FEED = [
     "ipa": "/ˈdaʊnˌtrɑːdn/",
     "ipaKo": "다운트라든",
     "cf": []
+  },
+  {
+    "word": "empirical",
+    "pos": "형용사",
+    "meaning": "경험적인, 실증적인 (관찰이나 실험에 근거한)",
+    "ko": "그 주장에는 실증적 근거가 없다.",
+    "en": "There is no empirical evidence for that claim.",
+    "highlight": "empirical",
+    "ipa": "/ɪmˈpɪrɪkl/",
+    "ipaKo": "임피리컬",
+    "cf": []
+  },
+  {
+    "word": "equilibrium",
+    "pos": "명사",
+    "meaning": "평형, 균형; (마음의) 평정",
+    "ko": "시장은 결국 균형 상태로 돌아간다.",
+    "en": "The market eventually returns to equilibrium.",
+    "highlight": "equilibrium",
+    "ipa": "/ˌiːkwəˈlɪbriəm/",
+    "ipaKo": "이퀄리브리엄",
+    "cf": []
+  },
+  {
+    "word": "etiquette",
+    "pos": "명사",
+    "meaning": "예절, 에티켓",
+    "ko": "조용한 사무실에서는 전화 예절이 중요하다.",
+    "en": "Phone etiquette matters in a quiet office.",
+    "highlight": "etiquette",
+    "ipa": "/ˈetɪkət/",
+    "ipaKo": "에티컷",
+    "cf": []
+  },
+  {
+    "word": "excursion",
+    "pos": "명사",
+    "meaning": "(짧은) 여행, 소풍, 견학; (본론에서) 벗어남",
+    "ko": "우리는 그 섬으로 당일치기 여행을 갔다.",
+    "en": "We went on a day excursion to the island.",
+    "highlight": "excursion",
+    "ipa": "/ɪkˈskɜːrʒən/",
+    "ipaKo": "익스커젼",
+    "cf": []
+  },
+  {
+    "word": "epitome",
+    "pos": "명사",
+    "meaning": "전형, 본보기, 완벽한 예 (발음: 에피톰이 아니라 이피터미)",
+    "ko": "그녀는 우아함 그 자체다.",
+    "en": "She is the epitome of elegance.",
+    "highlight": "epitome",
+    "ipa": "/ɪˈpɪtəmi/",
+    "ipaKo": "이피터미",
+    "cf": []
+  },
+  {
+    "word": "elude",
+    "pos": "동사",
+    "meaning": "(교묘히) 피하다, 빠져나가다",
+    "ko": "용의자는 몇 주 동안 경찰을 따돌렸다.",
+    "en": "The suspect eluded the police for weeks.",
+    "highlight": "eluded",
+    "ipa": "/ɪˈluːd/",
+    "ipaKo": "일루드",
+    "cf": []
+  },
+  {
+    "word": "elude",
+    "pos": "동사",
+    "meaning": "(이해나 기억에서) 벗어나다",
+    "ko": "그 사람 이름이 기억이 안 난다.",
+    "en": "His name eludes me.",
+    "highlight": "eludes",
+    "ipa": "/ɪˈluːd/",
+    "ipaKo": "일루드",
+    "cf": []
+  },
+  {
+    "word": "emanate",
+    "pos": "동사",
+    "meaning": "(빛·냄새·소리 등이) 나오다, 퍼지다, 발산하다",
+    "ko": "부엌에서 이상한 냄새가 났다.",
+    "en": "A strange smell emanated from the kitchen.",
+    "highlight": "emanated",
+    "ipa": "/ˈeməneɪt/",
+    "ipaKo": "에머네이트",
+    "cf": []
+  },
+  {
+    "word": "elated",
+    "pos": "형용사",
+    "meaning": "신이 난, 매우 기뻐하는",
+    "ko": "그녀는 그 소식에 몹시 기뻐했다.",
+    "en": "She was elated by the news.",
+    "highlight": "elated",
+    "ipa": "/ɪˈleɪtɪd/",
+    "ipaKo": "일레이티드",
+    "cf": []
+  },
+  {
+    "word": "exasperation",
+    "pos": "명사",
+    "meaning": "몹시 화남, 격분, 짜증",
+    "ko": "그는 짜증스럽게 한숨을 쉬었다.",
+    "en": "He sighed in exasperation.",
+    "highlight": "exasperation",
+    "ipa": "/ɪɡˌzæspəˈreɪʃən/",
+    "ipaKo": "이그재스퍼레이션",
+    "cf": []
+  },
+  {
+    "word": "eleventh hour",
+    "pos": "명사",
+    "meaning": "(the eleventh hour) 마지막 순간, 막판",
+    "ko": "계약은 막판에 체결되었다.",
+    "en": "The deal was signed at the eleventh hour.",
+    "highlight": "eleventh hour",
+    "ipa": "/ɪˈlevənθ ˈaʊər/",
+    "ipaKo": "일레븐스 아워",
+    "cf": []
+  },
+  {
+    "word": "eleventh-hour",
+    "pos": "형용사",
+    "meaning": "막판의",
+    "ko": "그들은 막판 합의에 이르렀다.",
+    "en": "They reached an eleventh-hour agreement.",
+    "highlight": "eleventh-hour",
+    "ipa": "/ɪˈlevənθ ˈaʊər/",
+    "ipaKo": "일레븐스 아워",
+    "cf": []
+  },
+  {
+    "word": "eucalyptus",
+    "pos": "명사",
+    "meaning": "유칼립투스 (나무, 또는 그 기름)",
+    "ko": "코알라는 거의 유칼립투스 잎만 먹는다.",
+    "en": "Koalas feed almost entirely on eucalyptus leaves.",
+    "highlight": "eucalyptus",
+    "ipa": "/ˌjuːkəˈlɪptəs/",
+    "ipaKo": "유컬립터스",
+    "cf": []
+  },
+  {
+    "word": "enchantment",
+    "pos": "명사",
+    "meaning": "매혹, 황홀감; 마법, 마법에 걸린 상태",
+    "ko": "그 구시가지에는 매혹적인 분위기가 있다.",
+    "en": "The old town has a sense of enchantment.",
+    "highlight": "enchantment",
+    "ipa": "/ɪnˈtʃæntmənt/",
+    "ipaKo": "인챈트먼트",
+    "cf": []
+  },
+  {
+    "word": "enthralled",
+    "pos": "형용사",
+    "meaning": "마음을 빼앗긴, 매료된 (enthrall의 과거분사)",
+    "ko": "아이들은 마술쇼에 푹 빠졌다.",
+    "en": "The children were enthralled by the magic show.",
+    "highlight": "enthralled",
+    "ipa": "/ɪnˈθrɔːld/",
+    "ipaKo": "인쓰롤드",
+    "cf": [
+      {
+        "word": "enthrall",
+        "pos": "동사",
+        "meaning": "마음을 사로잡다"
+      }
+    ]
+  },
+  {
+    "word": "exhilaration",
+    "pos": "명사",
+    "meaning": "들뜬 기분, 짜릿함, 유쾌함",
+    "ko": "산 정상에서 순수한 짜릿함을 느꼈다.",
+    "en": "I felt pure exhilaration at the top of the mountain.",
+    "highlight": "exhilaration",
+    "ipa": "/ɪɡˌzɪləˈreɪʃən/",
+    "ipaKo": "이그질러레이션",
+    "cf": []
+  },
+  {
+    "word": "equanimity",
+    "pos": "명사",
+    "meaning": "(어려운 상황에서의) 침착, 평정심",
+    "ko": "그녀는 나쁜 소식을 침착하게 받아들였다.",
+    "en": "She accepted the bad news with equanimity.",
+    "highlight": "equanimity",
+    "ipa": "/ˌekwəˈnɪməti/",
+    "ipaKo": "에퀴니머티 (이퀴-도 씀)",
+    "cf": []
+  },
+  {
+    "word": "epoxy",
+    "pos": "명사",
+    "meaning": "에폭시 (수지, 접착제)",
+    "ko": "갈라진 틈을 에폭시로 메워라.",
+    "en": "Seal the crack with epoxy.",
+    "highlight": "epoxy",
+    "ipa": "/ɪˈpɑːksi/",
+    "ipaKo": "이팍시",
+    "cf": []
+  },
+  {
+    "word": "epoxy",
+    "pos": "동사",
+    "meaning": "에폭시로 붙이다",
+    "ko": "그는 머그잔 손잡이를 에폭시로 다시 붙였다.",
+    "en": "He epoxied the handle back onto the mug.",
+    "highlight": "epoxied",
+    "ipa": "/ɪˈpɑːksi/",
+    "ipaKo": "이팍시",
+    "cf": []
+  },
+  {
+    "word": "epigenetics",
+    "pos": "명사",
+    "meaning": "후성유전학 (DNA 서열 변화 없이 유전자 발현이 바뀌는 현상 연구)",
+    "ko": "후성유전학은 식단이 유전자 발현에 어떤 영향을 주는지 보여준다.",
+    "en": "Epigenetics shows how diet can affect gene expression.",
+    "highlight": "Epigenetics",
+    "ipa": "/ˌepɪdʒəˈnetɪks/",
+    "ipaKo": "에피저네틱스",
+    "cf": []
+  },
+  {
+    "word": "escapade",
+    "pos": "명사",
+    "meaning": "(무모하거나 장난스러운) 모험, 일탈 행위",
+    "ko": "그는 십 대 시절의 일탈담을 들려주었다.",
+    "en": "He told us about his teenage escapades.",
+    "highlight": "escapades",
+    "ipa": "/ˈeskəpeɪd/",
+    "ipaKo": "에스커페이드",
+    "cf": []
+  },
+  {
+    "word": "ether",
+    "pos": "명사",
+    "meaning": "(화학) 에테르",
+    "ko": "에테르는 한때 마취제로 쓰였다.",
+    "en": "Ether was once used as an anesthetic.",
+    "highlight": "Ether",
+    "ipa": "/ˈiːθər/",
+    "ipaKo": "이써",
+    "cf": []
+  },
+  {
+    "word": "ether",
+    "pos": "명사",
+    "meaning": "(the ether) 허공, 온라인 공간; (시적) 하늘, 창공",
+    "ko": "그 이메일은 허공으로 사라져버린 것 같다.",
+    "en": "The email seems to have vanished into the ether.",
+    "highlight": "ether",
+    "ipa": "/ˈiːθər/",
+    "ipaKo": "이써",
+    "cf": []
+  },
+  {
+    "word": "excoriate",
+    "pos": "동사",
+    "meaning": "혹평하다, 맹렬히 비난하다; (의학) 피부를 벗기다, 찰과상을 입히다",
+    "ko": "평론가들은 그 영화를 혹평했다.",
+    "en": "Critics excoriated the film.",
+    "highlight": "excoriated",
+    "ipa": "/ɪkˈskɔːrieɪt/",
+    "ipaKo": "익스코리에이트",
+    "cf": []
+  },
+  {
+    "word": "emblazon",
+    "pos": "동사",
+    "meaning": "(문장이나 로고를) 눈에 띄게 새기다, 장식하다",
+    "ko": "셔츠에는 팀 로고가 큼지막하게 새겨져 있었다.",
+    "en": "The shirt was emblazoned with the team logo.",
+    "highlight": "emblazoned",
+    "ipa": "/ɪmˈbleɪzn/",
+    "ipaKo": "임블레이즌",
+    "cf": []
+  },
+  {
+    "word": "extrude",
+    "pos": "동사",
+    "meaning": "(틀에 넣고) 밀어내어 성형하다, 압출하다",
+    "ko": "플라스틱을 밀어내어 가는 관 모양으로 만든다.",
+    "en": "The plastic is extruded into thin tubes.",
+    "highlight": "extruded",
+    "ipa": "/ɪkˈstruːd/",
+    "ipaKo": "익스트루드",
+    "cf": []
   }
 ];
