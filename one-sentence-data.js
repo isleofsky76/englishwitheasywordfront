@@ -818,5 +818,253 @@ window.ONE_SENTENCE_FEED = [
     "ipa": "/ˌælɡəˈfoʊbiə/",
     "ipaKo": "앨거포비아",
     "cf": []
+  },
+  {
+    "word": "baffled",
+    "pos": "형용사",
+    "meaning": "당황한, 어리둥절한",
+    "ko": "의사들은 그녀의 특이한 증상에 어리둥절했다.",
+    "en": "Doctors were baffled by her unusual symptoms.",
+    "highlight": "baffled",
+    "ipa": "/ˈbæfəld/",
+    "ipaKo": "배플드",
+    "cf": [
+      {
+        "word": "baffle",
+        "pos": "동사",
+        "meaning": "당황하게 하다",
+        "_id": "6ae6c07cff45b32e10b8dfa9"
+      }
+    ]
+  },
+  {
+    "word": "buoy",
+    "pos": "명사/동사",
+    "meaning": "부표; (기운을) 북돋우다",
+    "ko": "팀은 그 좋은 소식에 힘을 얻었다.",
+    "en": "The team was buoyed by the good news.",
+    "highlight": "buoyed",
+    "ipa": "/ˈbuːi/",
+    "ipaKo": "부이 (영국식 /bɔɪ/ 보이)",
+    "cf": [
+      {
+        "word": "buoyant",
+        "pos": "형용사",
+        "meaning": "잘 뜨는; 낙관적인",
+        "_id": "6ae6c07cff45b32e10b8dfac"
+      }
+    ]
+  },
+  {
+    "word": "brazen",
+    "pos": "형용사",
+    "meaning": "뻔뻔한, 대놓고 하는",
+    "ko": "대낮에 대놓고 속이려는 뻔뻔한 시도였다.",
+    "en": "It was a brazen attempt to cheat in broad daylight.",
+    "highlight": "brazen",
+    "ipa": "/ˈbreɪzən/",
+    "ipaKo": "브레이즌",
+    "cf": []
+  },
+  {
+    "word": "banter",
+    "pos": "명사",
+    "meaning": "(악의 없는) 농담, 놀림",
+    "ko": "친구들은 커피를 마시며 정겨운 농담을 주고받았다.",
+    "en": "The friends exchanged friendly banter over coffee.",
+    "highlight": "banter",
+    "ipa": "/ˈbæntər/",
+    "ipaKo": "밴터",
+    "cf": []
+  },
+  {
+    "word": "buoyant",
+    "pos": "형용사",
+    "meaning": "(물에) 잘 뜨는; 낙관적인, 들뜬",
+    "ko": "면접이 끝난 뒤 그녀는 들뜬 기분이었다.",
+    "en": "She was in a buoyant mood after the interview.",
+    "highlight": "buoyant",
+    "ipa": "/ˈbɔɪənt/",
+    "ipaKo": "보이언트",
+    "cf": [
+      {
+        "word": "buoy",
+        "pos": "동사",
+        "meaning": "(기운을) 북돋우다",
+        "_id": "6ae6c07cff45b32e10b8dfb3"
+      }
+    ]
+  },
+  {
+    "word": "bunting",
+    "pos": "명사",
+    "meaning": "(축제용) 깃발 장식; 멧새",
+    "ko": "거리는 축제를 위해 알록달록한 깃발 장식으로 꾸며졌다.",
+    "en": "The street was decorated with colorful bunting for the festival.",
+    "highlight": "bunting",
+    "ipa": "/ˈbʌntɪŋ/",
+    "ipaKo": "번팅",
+    "cf": []
+  },
+  {
+    "word": "broach",
+    "pos": "동사",
+    "meaning": "(꺼내기 어려운 이야기를) 꺼내다",
+    "ko": "그는 돈 이야기를 어떻게 꺼내야 할지 몰랐다.",
+    "en": "He didn’t know how to broach the subject of money.",
+    "highlight": "broach",
+    "ipa": "/broʊtʃ/",
+    "ipaKo": "브로치",
+    "cf": []
+  },
+  {
+    "word": "biopic",
+    "pos": "명사",
+    "meaning": "전기 영화",
+    "ko": "그 전기 영화는 한 유명 재즈 가수의 삶을 다룬다.",
+    "en": "The biopic tells the story of a famous jazz singer.",
+    "highlight": "biopic",
+    "ipa": "/ˈbaɪoʊpɪk/",
+    "ipaKo": "바이오픽",
+    "cf": []
+  },
+  {
+    "word": "bare bones",
+    "pos": "명사/형용사",
+    "meaning": "골자, 핵심; (bare-bones) 최소한의",
+    "ko": "우리에게는 그 프로젝트를 위한 최소한의 예산밖에 없었다.",
+    "en": "We had only a bare-bones budget for the project.",
+    "highlight": "bare-bones",
+    "ipa": "/ˌber ˈboʊnz/",
+    "ipaKo": "베어 본즈",
+    "cf": []
+  },
+  {
+    "word": "begrudgingly",
+    "pos": "부사",
+    "meaning": "마지못해",
+    "ko": "그는 마지못해 그녀가 옳다고 인정했다.",
+    "en": "He begrudgingly admitted that she was right.",
+    "highlight": "begrudgingly",
+    "ipa": "/bɪˈɡrʌdʒɪŋli/",
+    "ipaKo": "비그러징리",
+    "cf": [
+      {
+        "word": "begrudge",
+        "pos": "동사",
+        "meaning": "아까워하다; 마지못해 주다",
+        "_id": "6ae6c07dff45b32e10b8dfbe"
+      }
+    ]
+  },
+  {
+    "word": "bedraggled",
+    "pos": "형용사",
+    "meaning": "(비·진흙에) 젖어 꾀죄죄한",
+    "ko": "비에 젖어 꾀죄죄해진 등산객들이 마침내 오두막에 도착했다.",
+    "en": "The bedraggled hikers finally reached the cabin.",
+    "highlight": "bedraggled",
+    "ipa": "/bɪˈdræɡəld/",
+    "ipaKo": "비드래글드",
+    "cf": []
+  },
+  {
+    "word": "bivalve",
+    "pos": "명사",
+    "meaning": "쌍각류(조개처럼 껍데기가 두 장인 연체동물)",
+    "ko": "대합과 굴은 쌍각류이다.",
+    "en": "Clams and oysters are bivalves.",
+    "highlight": "bivalves",
+    "ipa": "/ˈbaɪvælv/",
+    "ipaKo": "바이밸브",
+    "cf": []
+  },
+  {
+    "word": "bioluminescent",
+    "pos": "형용사",
+    "meaning": "생물 발광의, 스스로 빛을 내는",
+    "ko": "만은 빛을 내는 플랑크톤으로 반짝였다.",
+    "en": "The bay glowed with bioluminescent plankton.",
+    "highlight": "bioluminescent",
+    "ipa": "/ˌbaɪoʊˌluːmɪˈnesənt/",
+    "ipaKo": "바이오루미네선트",
+    "cf": []
+  },
+  {
+    "word": "beseech",
+    "pos": "동사",
+    "meaning": "간청하다, 애원하다 (과거형 besought / beseeched)",
+    "ko": "결정을 다시 생각해 주시기를 간청합니다.",
+    "en": "I beseech you to reconsider your decision.",
+    "highlight": "beseech",
+    "ipa": "/bɪˈsiːtʃ/",
+    "ipaKo": "비시치",
+    "cf": []
+  },
+  {
+    "word": "bray",
+    "pos": "동사/명사",
+    "meaning": "(당나귀가) 울다; (사람이) 시끄럽게 웃다",
+    "ko": "당나귀가 들판에서 시끄럽게 울었다.",
+    "en": "The donkey brayed loudly in the field.",
+    "highlight": "brayed",
+    "ipa": "/breɪ/",
+    "ipaKo": "브레이",
+    "cf": []
+  },
+  {
+    "word": "balsam",
+    "pos": "명사",
+    "meaning": "발삼(나무에서 나는 향유); 봉선화",
+    "ko": "공기에서 소나무와 발삼 향이 났다.",
+    "en": "The air smelled of pine and balsam.",
+    "highlight": "balsam",
+    "ipa": "/ˈbɔːlsəm/",
+    "ipaKo": "볼섬",
+    "cf": []
+  },
+  {
+    "word": "balderdash",
+    "pos": "명사",
+    "meaning": "허튼소리, 터무니없는 말",
+    "ko": "\"그건 완전히 허튼소리야!\" 그가 소리쳤다.",
+    "en": "“That’s complete balderdash!” he shouted.",
+    "highlight": "balderdash",
+    "ipa": "/ˈbɔːldərdæʃ/",
+    "ipaKo": "볼더대시",
+    "cf": []
+  },
+  {
+    "word": "bric-a-brac",
+    "pos": "명사",
+    "meaning": "(값싼) 자잘한 장식품, 잡동사니",
+    "ko": "선반은 자잘한 장식품들로 빼곡했다.",
+    "en": "The shelves were crowded with bric-a-brac.",
+    "highlight": "bric-a-brac",
+    "ipa": "/ˈbrɪk ə bræk/",
+    "ipaKo": "브릭어브랙",
+    "cf": []
+  },
+  {
+    "word": "brio",
+    "pos": "명사",
+    "meaning": "활기, 생기",
+    "ko": "오케스트라는 무척 활기차게 연주했다.",
+    "en": "The orchestra played with great brio.",
+    "highlight": "brio",
+    "ipa": "/ˈbriːoʊ/",
+    "ipaKo": "브리오",
+    "cf": []
+  },
+  {
+    "word": "braggadocio",
+    "pos": "명사",
+    "meaning": "허풍, 큰소리",
+    "ko": "그의 허풍 뒤에는 깊은 불안감이 숨어 있었다.",
+    "en": "His braggadocio hid a deep insecurity.",
+    "highlight": "braggadocio",
+    "ipa": "/ˌbræɡəˈdoʊʃioʊ/",
+    "ipaKo": "브래거도시오",
+    "cf": []
   }
 ];
