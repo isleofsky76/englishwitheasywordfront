@@ -446,5 +446,23 @@ window.ONE_SENTENCE_FEED = [
     "ipa": "/rɪˈkælɪstrənt/",
     "ipaKo": "리칼시트런트",
     "cf": []
+  },
+  {
+    "word": "aback",
+    "pos": "부사",
+    "meaning": "(taken aback) 깜짝 놀라, 당황하여",
+    "ko": "그녀는 그의 분노에 완전히 깜짝 놀랐다.",
+    "en": "She was completely taken aback by his anger.",
+    "highlight": "aback",
+    "ipa": "/əˈbæk/",
+    "ipaKo": "어백",
+    "cf": [
+      {
+        "word": "taken aback",
+        "pos": "숙어",
+        "meaning": "깜짝 놀라다, 당황하다",
+        "_id": "6ae6b9b2fe1884a5020c498a"
+      }
+    ]
   }
 ];
