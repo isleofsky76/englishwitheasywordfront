@@ -31,10 +31,6 @@
     return escapeHtml(text).replace(/\n/g, ' ');
   }
 
-  function padNum(n) {
-    return String(n).padStart(3, '0');
-  }
-
   function highlightEn(en, highlight) {
     var raw = String(en || '');
     var hl = String(highlight || '').trim();
@@ -89,11 +85,9 @@
     };
   }
 
-  function renderItem(item, index) {
-    var num = padNum(index + 1);
+  function renderItem(item) {
     return (
       '<article class="os-item" data-word="' + escapeAttr(item.word) + '">' +
-        '<span class="os-num" aria-hidden="true">' + num + '</span>' +
         '<div class="os-word-row">' +
           '<span class="os-chip">' +
             '<span class="os-chip-en">' + escapeHtml(item.word) + '</span>' +

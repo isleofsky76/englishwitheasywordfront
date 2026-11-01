@@ -1,13 +1,12 @@
-/* 문장으로 익히는 단어 — ONE SENTENCE · ONE WORD */
+/* 문장으로 익히는 단어 — 노트에 일기 쓰듯 이어 읽기 */
 @import url("redesign-tokens.css");
 
 .os-page {
   --os-blue: #2f6fed;
-  --os-blue-soft: #e8f0fe;
-  --os-blue-chip: #dfeaff;
+  --os-ink-soft: #5c584f;
   --os-hl: #fff2a8;
-  --os-num: #b8b4ab;
-  --os-max: 820px;
+  --os-max: 680px;
+  --os-body: 17px;
   margin: 0;
   font-family: var(--font-sans);
   color: var(--ink);
@@ -18,19 +17,19 @@
 .os-main {
   max-width: var(--os-max);
   margin: 0 auto;
-  padding: 48px 24px 96px;
+  padding: 48px 24px 120px;
   box-sizing: border-box;
 }
 
 .os-hero {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 12px;
 }
 
 .os-kicker {
   margin: 0;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.14em;
   color: var(--os-blue);
@@ -38,41 +37,41 @@
 
 .os-title {
   margin: 0;
-  font-size: clamp(34px, 5vw, 48px);
+  font-size: clamp(28px, 4.5vw, 40px);
   font-weight: 800;
   letter-spacing: -0.03em;
-  line-height: 1.15;
+  line-height: 1.2;
   color: var(--ink);
 }
 
 .os-lead {
   margin: 0;
-  max-width: 36em;
-  font-size: 16px;
-  line-height: 1.55;
+  max-width: 34em;
+  font-size: 15px;
+  line-height: 1.6;
   color: var(--ink-muted);
 }
 
 .os-toolbar {
   display: flex;
   align-items: center;
-  gap: 16px;
-  margin-top: 18px;
+  gap: 14px;
+  margin-top: 16px;
   flex-wrap: wrap;
 }
 
 .os-search {
-  flex: 1 1 280px;
+  flex: 1 1 260px;
   min-width: 0;
 }
 
 .os-search input {
   width: 100%;
   box-sizing: border-box;
-  height: 48px;
-  padding: 0 18px;
+  height: 44px;
+  padding: 0 16px;
   border: 1px solid var(--line);
-  border-radius: 999px;
+  border-radius: 10px;
   background: var(--surface);
   color: var(--ink);
   font-family: inherit;
@@ -86,14 +85,14 @@
 
 .os-search input:focus {
   border-color: var(--os-blue);
-  box-shadow: 0 0 0 3px rgba(47, 111, 237, 0.15);
+  box-shadow: 0 0 0 3px rgba(47, 111, 237, 0.12);
 }
 
 .os-count {
   margin: 0;
   flex-shrink: 0;
-  font-size: 15px;
-  font-weight: 600;
+  font-size: 14px;
+  font-weight: 500;
   color: var(--ink-soft);
   white-space: nowrap;
 }
@@ -104,18 +103,17 @@
   background: var(--line);
 }
 
+/* 일기장처럼 한 줄기로 이어지는 피드 */
 .os-feed {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
+  display: block;
+  padding-top: 8px;
 }
 
 .os-item {
-  display: grid;
-  grid-template-columns: 56px minmax(0, 1fr);
-  gap: 8px 12px;
-  padding: 36px 0 32px;
-  border-bottom: 1px solid var(--line);
+  display: block;
+  padding: 22px 0 20px;
+  border: none;
+  border-bottom: 1px dashed rgba(0, 0, 0, 0.08);
 }
 
 .os-item:last-child {
@@ -123,72 +121,69 @@
 }
 
 .os-num {
-  grid-row: 1 / span 3;
-  padding-top: 6px;
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  color: var(--os-num);
-  font-variant-numeric: tabular-nums;
+  display: none !important;
 }
 
 .os-word-row {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
-  gap: 10px 12px;
+  align-items: baseline;
+  gap: 6px 10px;
+  margin-bottom: 8px;
   min-width: 0;
 }
 
 .os-chip {
   display: inline-flex;
-  align-items: center;
+  align-items: baseline;
   gap: 8px;
   max-width: 100%;
-  padding: 6px 10px 6px 12px;
-  border-radius: 999px;
-  background: var(--os-blue-chip);
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
 }
 
 .os-chip-en {
-  font-size: 18px;
+  font-size: var(--os-body);
   font-weight: 700;
   color: var(--os-blue);
   letter-spacing: -0.01em;
+  border-bottom: 2px solid rgba(47, 111, 237, 0.28);
+  line-height: 1.4;
 }
 
 .os-chip-pos {
-  display: inline-flex;
-  align-items: center;
-  padding: 2px 8px;
-  border: 1px solid #c5c9d2;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.65);
-  font-size: 12px;
-  font-weight: 600;
-  color: #6a7080;
+  display: inline;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  font-size: 13px;
+  font-weight: 500;
+  color: #8a857a;
   white-space: nowrap;
 }
 
 .os-meaning {
-  font-size: 17px;
-  font-weight: 600;
-  color: var(--ink);
-  line-height: 1.35;
+  font-size: var(--os-body);
+  font-weight: 500;
+  color: var(--os-ink-soft);
+  line-height: 1.5;
 }
 
 .os-ko {
-  margin: 10px 0 0;
-  font-size: 16px;
-  line-height: 1.55;
-  color: var(--ink-muted);
+  margin: 0 0 6px;
+  font-size: var(--os-body);
+  line-height: 1.7;
+  color: var(--ink);
+  font-weight: 400;
 }
 
 .os-en-row {
   display: flex;
   align-items: flex-start;
-  gap: 14px;
-  margin-top: 10px;
+  gap: 10px;
+  margin-top: 0;
   min-width: 0;
 }
 
@@ -196,75 +191,69 @@
   flex: 1 1 auto;
   min-width: 0;
   margin: 0;
-  font-family: var(--font-serif);
-  font-size: clamp(22px, 3.2vw, 28px);
-  font-weight: 700;
-  line-height: 1.45;
-  letter-spacing: -0.02em;
+  font-family: inherit;
+  font-size: var(--os-body);
+  font-weight: 400;
+  line-height: 1.7;
+  letter-spacing: 0;
   color: var(--ink);
 }
 
 .os-en mark {
   background: var(--os-hl);
   color: inherit;
-  padding: 0 0.08em;
+  padding: 0 0.06em;
   border-radius: 2px;
+  font-weight: 600;
 }
 
 .os-tts {
   flex-shrink: 0;
-  width: 44px;
-  height: 44px;
+  width: 32px;
+  height: 32px;
   margin-top: 2px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid var(--line);
+  border: none;
   border-radius: 999px;
-  background: var(--surface);
-  color: var(--ink-muted);
+  background: transparent;
+  color: #9a968c;
   cursor: pointer;
   padding: 0;
+  opacity: 0.7;
 }
 
 .os-tts:hover,
 .os-tts.is-playing {
-  border-color: var(--os-blue);
   color: var(--os-blue);
+  background: rgba(47, 111, 237, 0.08);
+  opacity: 1;
 }
 
 .os-tts svg {
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
 }
 
 .os-empty {
   padding: 48px 0;
-  text-align: center;
+  text-align: left;
   color: var(--ink-muted);
-  font-size: 15px;
+  font-size: var(--os-body);
+  line-height: 1.7;
 }
 
 @media (max-width: 640px) {
   .os-main {
-    padding: 32px 18px 72px;
+    padding: 32px 18px 88px;
   }
 
   .os-item {
-    grid-template-columns: 44px minmax(0, 1fr);
-    padding: 28px 0 24px;
+    padding: 18px 0 16px;
   }
 
-  .os-num {
-    font-size: 13px;
-  }
-
-  .os-en {
-    font-size: 22px;
-  }
-
-  .os-tts {
-    width: 40px;
-    height: 40px;
+  .os-page {
+    --os-body: 16px;
   }
 }
