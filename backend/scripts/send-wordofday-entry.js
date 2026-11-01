@@ -1,23 +1,9 @@
 /**
  * 수동: 아래 entry 수정 후
  *   cd C:\langchain\backend; node scripts/send-wordofday-entry.js
- *   cd C:\langchain; git pull origin main --no-edit; git add word-of-the-day/{slug}/ sitemap.xml resources/{word}.jpg backend/scripts/send-wordofday-entry.js; git commit -m "Add word of the day: {word}"; git push origin main
+ *   cd C:\langchain; git pull origin main --no-edit; git add word-of-the-day/{slug}/ sitemap.xml resources/{word}.jpg backend/scripts/send-wordofday-entry.js redesign-word.js redesign-word.css; git commit -m "Add word of the day: {word}"; git push origin main
  *
- * 자동 (단어 선택 + GitHub resources 이미지 + 업로드 + 배포):
- *   cd C:\langchain\backend; node scripts/send-wordofday-entry.js --auto
- *
- * 미리보기만: node scripts/send-wordofday-entry.js --auto --dry-run
- * 미게시 목록: node scripts/send-wordofday-entry.js --auto --list
- * 단어 지정:   node scripts/send-wordofday-entry.js --auto --word admonish
- * Git 생략:    node scripts/send-wordofday-entry.js --auto --no-git
- * 삭제만:      node scripts/send-wordofday-entry.js --delete-only
- *
- * Word of the Day 글 1개 추가 (+ slug SEO)
- * - 같은 title 또는 slug + 비밀번호가 맞으면 기존 글 삭제 후 추가
- * - slug·metaDescription 있으면 /word-of-the-day/{slug}/ + sitemap 갱신
- *
- * 주의: 유튜브·원문 URL은 href/src에 넣지 말고 본문 텍스트로만 둠
- *       HTML 태그 사이 빈 줄/개행은 viewpost가 <br>로 바꿔 간격이 벌어지니 붙일 것
+ * 자동: node scripts/send-wordofday-entry.js --auto
  */
 
 import { API_BASE, writeAuthHeaders } from './loadEnv.js';
@@ -26,26 +12,24 @@ import { applySeoAfterUpload, toIsoDateOnly, SITE_ORIGIN } from './voca-seo.js';
 
 
 // ========== 여기만 수정 ==========
-// redesign-word 시안용: .wotd-word / .wotd-core / .wotd-ex / .wotd-col …
-
-const imageSrc = '/resources/weathered.jpg';
+const imageSrc = '/resources/smitten.jpg';
 
 const entry = {
-  title: 'weathered | 풍화된, (위기 등을) 견뎌 낸',
+  title: 'smitten | 홀딱 반한, 푹 빠진',
 
   // 태그 사이 빈 줄/개행 넣지 말 것
-  message: `<div class="wotd-word"><img class="wotd-hero-image" src="${imageSrc}" alt="weathered" loading="lazy"><span class="wotd-ipa">/ˈweðərd/</span><span class="wotd-ipa-ko">웨더드</span><div class="wotd-pos" data-pos="형용사" data-primary="1"><span class="wotd-meaning">풍화된, 햇볕·바람에 그을린</span><span class="wotd-meaning-sub">비바람·세월에 닳고 닳은</span></div><div class="wotd-pos" data-pos="동사"><span class="wotd-meaning">weather — (위기 등을) 견뎌 내다</span><span class="wotd-meaning-sub">원형 weather / weathered / weathered</span></div><p class="wotd-core">바위·얼굴처럼 <em class="wotd-core-em">비바람·햇볕에 닳아</em> 변한 모습(형용사 weathered), 또는 위기·고난을 무사히 통과하다(동사 weather)</p><p class="wotd-nuance">weathered는 자연·외모의 <mark>풍화·그을림</mark>을 나타내는 형용사입니다. 동사 원형은 <mark>weather</mark>로, weather a crisis처럼 <mark>시련을 견뎌 내다</mark>는 뜻으로 씁니다.</p><div class="wotd-compare"><span class="wotd-cmp-en">worn</span><span class="wotd-cmp-ko">닳은 · 일반적, 사용으로</span></div><div class="wotd-compare" data-active="1"><span class="wotd-cmp-en">weathered</span><span class="wotd-cmp-ko">풍화된 · 자연·세월의 힘</span></div><div class="wotd-col"><span class="wotd-col-en">weathered rock / stone</span><span class="wotd-col-ko">풍화된 바위·돌</span></div><div class="wotd-col"><span class="wotd-col-en">weather a crisis</span><span class="wotd-col-ko">위기를 견뎌 내다</span></div><div class="wotd-col"><span class="wotd-col-en">weathered face / skin</span><span class="wotd-col-ko">햇볕·바람에 그을린 얼굴·피부</span></div><section class="wotd-ex"><p class="wotd-ex-en">The rocks are <mark>weathered</mark> into fantastic forms.</p><p class="wotd-ex-ko">바위들이 풍화되어 기이하고 멋진 형태로 변해 있다.</p></section><section class="wotd-ex"><p class="wotd-ex-en">He <mark>weathered</mark> the crisis like a martyr.</p><p class="wotd-ex-ko">그는 순교자처럼 그 위기를 견뎌 냈다.</p></section><section class="wotd-ex"><p class="wotd-ex-en">Her face was <mark>weathered</mark> by the sun.</p><p class="wotd-ex-ko">그녀의 얼굴은 햇볕에 그을려 거칠어져 있었다.</p></section><p class="wotd-takeaway">weathered는 ‘풍화된·그을린’ 형용사이고, 동사 원형 weather는 ‘(위기 등을) 견뎌 내다’로 함께 익힌다.</p><div class="wotd-glance"><div><dt>품사</dt><dd>weathered 형용사 · weather 동사</dd></div><div><dt>비슷한 말</dt><dd>eroded, worn, endure, survive</dd></div><div><dt>반대 말</dt><dd>fresh, smooth, succumb</dd></div><div><dt>자주 나오는 곳</dt><dd>자연·인물 묘사·뉴스</dd></div></div></div>`,
+  message: `<div class="wotd-word"><img class="wotd-hero-image" src="${imageSrc}" alt="smitten" loading="lazy"><span class="wotd-ipa">/ˈsmɪtn/</span><span class="wotd-ipa-ko">스미튼</span><div class="wotd-pos" data-pos="형용사" data-primary="1"><span class="wotd-meaning">홀딱 반한, 푹 빠진</span><span class="wotd-meaning-sub">(사람·아이·아이디어에) 매료된</span></div><p class="wotd-core">누군가·무언가에 <em class="wotd-core-em">강하게 마음이 끌려</em> 반하거나 푹 빠진 상태. 보통 be smitten with/by</p><p class="wotd-nuance">smitten은 연애의 ‘한눈에 반하다’뿐 아니라, 손주·비전처럼 <mark>애정·매혹에 푹 빠진</mark> 느낌에도 씁니다. be in love보다 가볍고 생생한 뉘앙스예요.</p><div class="wotd-compare"><span class="wotd-cmp-en">in love</span><span class="wotd-cmp-ko">사랑에 빠진 · 더 진지·지속적</span></div><div class="wotd-compare" data-active="1"><span class="wotd-cmp-en">smitten</span><span class="wotd-cmp-ko">홀딱 반한 · 강렬·즉각적</span></div><div class="wotd-col"><span class="wotd-col-en">smitten with</span><span class="wotd-col-ko">~에게 홀딱 반하다</span></div><div class="wotd-col"><span class="wotd-col-en">completely smitten</span><span class="wotd-col-ko">완전히 푹 빠진</span></div><div class="wotd-col"><span class="wotd-col-en">smitten by</span><span class="wotd-col-ko">~에 매료된</span></div><section class="wotd-ex"><p class="wotd-ex-en">He was <mark>smitten</mark> with her from the moment they met.</p><p class="wotd-ex-ko">그는 그녀를 처음 만난 순간부터 홀딱 반했다.</p></section><section class="wotd-ex"><p class="wotd-ex-en">My father is completely <mark>smitten</mark> with his first granddaughter.</p><p class="wotd-ex-ko">아버지는 첫 손녀에게 완전히 푹 빠지셨다.</p></section><section class="wotd-ex"><p class="wotd-ex-en">Investors were <mark>smitten</mark> by the company’s bold vision, but the profits never came.</p><p class="wotd-ex-ko">투자자들은 그 회사의 대담한 비전에 매료됐지만, 수익은 끝내 나지 않았다.</p></section><div class="wotd-endef"><p>Smitten means you like someone or something so much that you can't stop thinking about them, like you've been hit by a wave of sudden love.</p><p>When you are smitten, your heart feels completely captured, and you feel very happy and a little bit silly because you are so charmed.</p><p>For example, "As soon as he saw the cute puppy at the pet shop, he was totally smitten and wanted to take it home right away." Or, "She was so smitten with the new boy in her class that she smiled every time she heard his name."</p></div><p class="wotd-takeaway">smitten은 ‘홀딱 반한·푹 빠진’ 상태로, smitten with/by와 함께 사람·애정·아이디어에 두루 쓴다.</p><div class="wotd-glance"><div><dt>품사</dt><dd>형용사</dd></div><div><dt>비슷한 말</dt><dd>infatuated, captivated, enamored</dd></div><div><dt>반대 말</dt><dd>indifferent, unmoved, cold</dd></div><div><dt>자주 나오는 곳</dt><dd>일상·관계·비즈니스 비유</dd></div></div></div>`,
 
   nickname: 'admin',
 
-  password: 'seed_password_weathered',
+  password: 'seed_password_smitten',
 
   isSecret: false,
 
-  slug: 'weathered',
+  slug: 'smitten',
 
   metaDescription:
-    'weathered 뜻과 예문. 풍화된, 위기를 견뎌 내다의 의미와 weathered rock, weather a crisis, weathered face 표현.',
+    'smitten 뜻과 예문. 홀딱 반한, 푹 빠지다의 의미와 smitten with, completely smitten, smitten by 표현.',
 
   datePublished: '2026-10-31',
 };

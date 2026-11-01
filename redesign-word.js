@@ -5,7 +5,7 @@
 (function (global) {
   'use strict';
 
-  var ASSET_VER = '20261101navFouc';
+  var ASSET_VER = '20261101endef1';
   var SPEAKER_SVG =
     '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M15.5 8.5a5 5 0 0 1 0 7"></path></svg>';
   var SPEAKER_FULL_SVG =
@@ -183,6 +183,21 @@
     var takeawayEl = box.querySelector('.wotd-takeaway');
     var takeaway = takeawayEl ? stripTags(takeawayEl.innerHTML) : '';
 
+    /* 영영 정의 — 핵심 뉘앙스 위에 표시 + TTS */
+    var endefEl = box.querySelector('.wotd-endef');
+    var endefHtml = '';
+    var endefSpeak = '';
+    if (endefEl) {
+      var parts = Array.from(endefEl.querySelectorAll('p'));
+      if (parts.length) {
+        endefHtml = parts.map(function (p) { return allowSafeHtml(p.innerHTML); }).filter(Boolean);
+        endefSpeak = parts.map(function (p) { return stripTags(p.innerHTML); }).filter(Boolean).join(' ');
+      } else {
+        endefSpeak = stripTags(endefEl.innerHTML);
+        endefHtml = endefSpeak ? [escapeHtml(endefSpeak)] : [];
+      }
+    }
+
     var glance = Array.from(box.querySelectorAll('.wotd-glance > div, .wotd-glance-row')).map(function (el) {
       var dt = el.querySelector('dt, .wotd-gl-k');
       var dd = el.querySelector('dd, .wotd-gl-v');
@@ -202,6 +217,8 @@
       compares: compares,
       collocations: collocations,
       examples: examples,
+      endefHtml: endefHtml,
+      endefSpeak: endefSpeak,
       takeaway: takeaway,
       glance: glance,
       capable: !!(coreHtml || examples.length || pos.length)
@@ -454,6 +471,21 @@
               : '') +
             colHtml +
             exHtml +
+            (data.endefHtml && data.endefHtml.length
+              ? '<div class="rd-word-section rd-word-endef">' +
+                  '<div class="rd-word-endef-head">' +
+                    '<h2 class="rd-word-h2">영영 정의</h2>' +
+                    '<button type="button" class="rd-word-tts rd-word-endef-tts" data-rd-tts="' +
+                      escapeAttr(data.endefSpeak || '') +
+                      '" aria-label="영영 정의 듣기">' + SPEAKER_FULL_SVG + '<span>듣기</span></button>' +
+                  '</div>' +
+                  '<div class="rd-word-endef-body">' +
+                    data.endefHtml.map(function (html) {
+                      return '<p class="rd-word-endef-p">' + html + '</p>';
+                    }).join('') +
+                  '</div>' +
+                '</div>'
+              : '') +
             (data.takeaway
               ? '<div class="rd-word-takeaway">' +
                   '<span class="rd-word-takeaway-label">핵심 뉘앙스 한 줄 정리</span>' +

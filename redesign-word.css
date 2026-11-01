@@ -406,6 +406,72 @@ body.rd-word main#post-container {
   color: var(--accent);
 }
 
+/* 영영 정의 — 예문 아래 · 한 줄 정리 위 */
+.rd-word-endef {
+  padding: 28px 0 8px;
+  border-top: 1px solid var(--line);
+}
+
+.rd-word-endef-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.rd-word-endef-head .rd-word-h2 {
+  margin: 0;
+}
+
+.rd-word-endef-tts {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  padding: 10px 16px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface, #fff);
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.rd-word-endef-tts svg {
+  width: 18px;
+  height: 18px;
+}
+
+.rd-word-endef-tts:hover,
+.rd-word-endef-tts.is-playing {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.rd-word-endef-body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 22px 24px;
+  background: #f7f4ee;
+  border-left: 3px solid var(--accent);
+  border-radius: 0 4px 4px 0;
+}
+
+.rd-word-endef-p {
+  margin: 0;
+  font-family: var(--font-serif, Georgia, "Times New Roman", serif);
+  font-size: 18px;
+  line-height: 1.7;
+  color: var(--ink);
+}
+
+.rd-word-endef-p + .rd-word-endef-p {
+  opacity: 0.92;
+}
+
 .rd-word-takeaway {
   display: flex;
   flex-direction: column;

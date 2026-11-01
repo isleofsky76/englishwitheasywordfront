@@ -230,8 +230,8 @@ export const BOARD_SEO = {
     listHtml: 'word-of-the-day-list.html',
     articleLayout: 'word-detail',
     extraCss: [
-      { file: 'redesign-word.css', version: '20261031fouc1' },
-      { file: 'site-masthead.css', version: '20261031fouc1' },
+      { file: 'redesign-word.css', version: '20261101endef1' },
+      { file: 'site-masthead.css', version: '20261101endef1' },
     ],
   },
   'photo-english': {
