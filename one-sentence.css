@@ -132,10 +132,10 @@
   text-underline-offset: 3px;
 }
 
-/* 알파벳별 분류 피드 */
+/* 알파벳별 분류 피드 (단어 목록 아래) */
 .os-feed {
   display: block;
-  padding-top: 8px;
+  padding-top: 20px;
 }
 
 .os-letter-group {
@@ -862,9 +862,9 @@
   flex-wrap: wrap;
   align-items: baseline;
   gap: 10px 14px;
-  margin-top: 40px;
-  padding: 20px 0 8px;
-  border-top: 1px solid var(--line);
+  margin: 0 0 8px;
+  padding: 4px 0 28px;
+  border-bottom: 1px solid var(--line);
   line-height: 1.5;
 }
 

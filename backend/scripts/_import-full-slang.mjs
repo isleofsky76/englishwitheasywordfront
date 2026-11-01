@@ -13,8 +13,24 @@ const targets = [
   path.join(__dirname, '..', '..', 'comment-badwords.json'),
 ];
 
-/** 단독 숫자는 학습 문맥 가능 → 목록 자동차단에서 제외 (패턴 규칙으로 1818 등은 별도 차단) */
-const EXCLUDE_EXACT = new Set(['18', '69', '6969', 'slang', 'slang,']);
+/**
+ * 목록 자동차단에서 제외:
+ * - 단독 18 → comment-filter 패턴으로 은어 차단 (18살/2018은 예외)
+ * - 69/6969 → 문맥형, 조합만 패턴 차단
+ * - 1글자·과단 조각 → hello/문장 오탐 방지
+ */
+const EXCLUDE_EXACT = new Set([
+  '18',
+  '69',
+  '6969',
+  '18년',
+  '년',
+  '놈',
+  '련',
+  '뇬',
+  'slang',
+  'slang,',
+]);
 
 function cleanTerm(t) {
   return String(t || '')

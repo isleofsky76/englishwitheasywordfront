@@ -132,7 +132,8 @@
 
   function isEducationalEighteenContext(text) {
     var raw = String(text || '').toLowerCase();
-    return /18\s*살|18\s*세|18\s*세기|18\s*년|2018|1918|18\s*years|age\s*of\s*18|under\s*18|over\s*18|turned\s*18|18th|18\s*century/i.test(
+    if (/(?:19|20)\d{2}/.test(raw)) return true;
+    return /18\s*살|18\s*세|18\s*세기|18\s*년|18\s*years|age\s*of\s*18|under\s*18|over\s*18|turned\s*18|18th|18\s*century/i.test(
       raw
     );
   }
@@ -171,7 +172,15 @@
       if (!t || /\s/.test(t)) continue;
       var nt = normalizeForFilter(t);
       if (!nt || nt.length < 2) continue;
-      if (/^[a-z0-9]+$/i.test(t) && compact.indexOf(nt) !== -1) return true;
+      if (/^[a-z]+$/i.test(t)) {
+        if (englishWordBoundaryHit(originalLower, t)) return true;
+        continue;
+      }
+      if (/^[a-z0-9]+$/i.test(t) && compact.indexOf(nt) !== -1) {
+        if (/[0-9@$]/.test(String(text || '').toLowerCase()) || englishWordBoundaryHit(originalLower, t)) {
+          return true;
+        }
+      }
     }
     for (i = 0; i < jamo.length; i += 1) {
       var j = String(jamo[i] || '').trim();
