@@ -100,10 +100,14 @@
     return false;
   }
 
+  var FALLBACK_BLOCK = ['sex', 'sexy', 'porn', 'porno', 'xxx', 'fuck', 'fucking', 'dick', 'pussy', '섹스', '포르노', '야동'];
+
   function autoBlockTerms() {
     var a = badwords.blockedA || badwords.blocked || [];
     var b = badwords.blockedB || [];
-    return a.concat(b);
+    var terms = a.concat(b);
+    if (!terms.length) return FALLBACK_BLOCK.slice();
+    return terms;
   }
 
   function containsBadWords(text) {
@@ -130,16 +134,25 @@
     return false;
   }
 
-  function clientValidate(nickname, body, password) {
+  function clientValidateContent(nickname, body) {
     var nick = String(nickname || '').trim();
+    var text = String(body || '').trim();
+    if (nick.length > 10) return '닉네임은 10자까지 입력할 수 있어요.';
+    if (text.length > 100) return '댓글은 100자까지 입력할 수 있어요.';
+    if (hasLink(text) || hasLink(nick)) return '링크는 포함할 수 없어요.';
+    if ((text && containsBadWords(text)) || (nick && containsBadWords(nick))) {
+      return '사용할 수 없는 표현이 포함되어 있어요.';
+    }
+    return '';
+  }
+
+  function clientValidate(nickname, body, password) {
     var text = String(body || '').trim();
     var pw = String(password || '');
     if (!text) return '댓글 내용을 입력해 주세요.';
-    if (text.length > 100) return '댓글은 100자까지 입력할 수 있어요.';
-    if (nick.length > 10) return '닉네임은 10자까지 입력할 수 있어요.';
+    var contentErr = clientValidateContent(nickname, body);
+    if (contentErr) return contentErr;
     if (!pw || pw.length > 14 || /\s/.test(pw)) return '비밀번호는 1~14자로 입력해 주세요. (공백 불가)';
-    if (hasLink(text) || hasLink(nick)) return '링크는 포함할 수 없어요.';
-    if (containsBadWords(text) || containsBadWords(nick)) return '사용할 수 없는 표현이 포함되어 있어요.';
     return '';
   }
 
@@ -170,7 +183,7 @@
 
   async function loadBadwords() {
     try {
-      var res = await fetch('comment-badwords.json?v=20261101c3', { cache: 'no-store' });
+      var res = await fetch('comment-badwords.json?v=20261101c4', { cache: 'no-store' });
       if (!res.ok) return;
       var raw = await res.json();
       badwords = {
@@ -441,9 +454,6 @@
     var counter = document.createElement('span');
     counter.className = 'os-cmt-counter';
     counter.textContent = '0/100';
-    bodyInput.addEventListener('input', function () {
-      counter.textContent = String(bodyInput.value.length) + '/100';
-    });
     bodyLabel.appendChild(bodySpan);
     bodyLabel.appendChild(bodyInput);
     bodyLabel.appendChild(counter);
@@ -468,6 +478,16 @@
     var formMsg = document.createElement('p');
     formMsg.className = 'os-cmt-msg';
     formMsg.setAttribute('aria-live', 'polite');
+
+    function refreshContentWarning() {
+      var err = clientValidateContent(nickInput.value, bodyInput.value);
+      formMsg.textContent = err || '';
+    }
+    nickInput.addEventListener('input', refreshContentWarning);
+    bodyInput.addEventListener('input', function () {
+      counter.textContent = String(bodyInput.value.length) + '/100';
+      refreshContentWarning();
+    });
 
     var submit = document.createElement('button');
     submit.type = 'submit';

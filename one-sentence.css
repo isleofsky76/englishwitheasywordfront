@@ -625,8 +625,9 @@
 
 .os-cmt-msg {
   margin: 0;
-  font-size: 12px;
-  font-weight: 500;
+  min-height: 1.2em;
+  font-size: 13px;
+  font-weight: 600;
   color: #b42318;
 }
 
