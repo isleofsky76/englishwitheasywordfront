@@ -554,5 +554,258 @@ window.ONE_SENTENCE_FEED = [
         "_id": "6ae6bbd8d2eadd39209cc31b"
       }
     ]
+  },
+  {
+    "word": "anticipated",
+    "pos": "형용사",
+    "meaning": "기대되던, 예상된",
+    "ko": "새 정책에 대한 기대되던 발표는 사무실에 화제를 불러일으켰다.",
+    "en": "The anticipated announcement regarding the new policy created a buzz in the office.",
+    "highlight": "anticipated",
+    "ipa": "/ænˈtɪsɪpeɪtɪd/",
+    "ipaKo": "앤티시페이티드",
+    "cf": []
+  },
+  {
+    "word": "analytical",
+    "pos": "형용사",
+    "meaning": "분석적인",
+    "ko": "그녀의 분석적인 능력은 복잡한 문제를 해결하는 데 중요했다.",
+    "en": "Her analytical skills were crucial in solving the complex problem.",
+    "highlight": "analytical",
+    "ipa": "/ˌænəˈlɪtɪkəl/",
+    "ipaKo": "애널리티컬",
+    "cf": []
+  },
+  {
+    "word": "analogy",
+    "pos": "명사",
+    "meaning": "유추, 비유",
+    "ko": "그는 팀에게 복잡한 개념을 설명하기 위해 비유를 사용했다.",
+    "en": "He used an analogy to explain the complicated concept to the team.",
+    "highlight": "analogy",
+    "ipa": "/əˈnælədʒi/",
+    "ipaKo": "어낼러지",
+    "cf": []
+  },
+  {
+    "word": "articulate",
+    "pos": "형용사/동사",
+    "meaning": "(생각을) 분명히 표현하는; 또렷이 말하다",
+    "ko": "그녀는 발표 중에 자신의 생각을 분명히 표현할 수 있었다.",
+    "en": "She was able to articulate her thoughts clearly during the presentation.",
+    "highlight": "articulate",
+    "ipa": "/ɑːrˈtɪkjuleɪt/",
+    "ipaKo": "아르티큘레이트",
+    "cf": []
+  },
+  {
+    "word": "appraisal",
+    "pos": "명사",
+    "meaning": "평가, 감정",
+    "ko": "평가 결과는 그 부동산의 실제 시장 가치를 드러냈다.",
+    "en": "The appraisal of the property revealed its true market value.",
+    "highlight": "appraisal",
+    "ipa": "/əˈpreɪzl/",
+    "ipaKo": "어프레이절",
+    "cf": []
+  },
+  {
+    "word": "adept",
+    "pos": "형용사",
+    "meaning": "능숙한, 숙련된",
+    "ko": "그는 특히 복잡한 계약을 협상하는 데 능숙하다.",
+    "en": "He is particularly adept at negotiating complex contracts.",
+    "highlight": "adept",
+    "ipa": "/əˈdɛpt/",
+    "ipaKo": "어덥트",
+    "cf": []
+  },
+  {
+    "word": "alchemy",
+    "pos": "명사",
+    "meaning": "연금술; 신비한 변환",
+    "ko": "고대의 연금술에 대한 문헌은 역사적으로 많은 학자들을 매료시켰다.",
+    "en": "The ancient texts on alchemy fascinated many scholars throughout history.",
+    "highlight": "alchemy",
+    "ipa": "/ˈælkəmi/",
+    "ipaKo": "앨커미",
+    "cf": []
+  },
+  {
+    "word": "artisanal",
+    "pos": "형용사",
+    "meaning": "수공예의, 장인이 만든",
+    "ko": "그 식당은 지역 재료로 만든 수공예의 빵을 전문으로 한다.",
+    "en": "The restaurant specializes in artisanal bread made from local ingredients.",
+    "highlight": "artisanal",
+    "ipa": "/ɑːrˈtɪzənl/",
+    "ipaKo": "아르티자널",
+    "cf": []
+  },
+  {
+    "word": "aghast",
+    "pos": "형용사",
+    "meaning": "경악한, 아연실색한",
+    "ko": "그녀는 회의 중 갑작스러운 전개에 경악했다.",
+    "en": "She was aghast at the sudden turn of events during the meeting.",
+    "highlight": "aghast",
+    "ipa": "/əˈɡæst/",
+    "ipaKo": "어개스트",
+    "cf": []
+  },
+  {
+    "word": "askew",
+    "pos": "부사/형용사",
+    "meaning": "비뚤어진, 삐딱하게",
+    "ko": "그 그림이 비뚤어져 걸려 있어 방이 불균형하게 느껴졌다.",
+    "en": "The picture hung askew, making the room feel unbalanced.",
+    "highlight": "askew",
+    "ipa": "/əˈskjuː/",
+    "ipaKo": "어스큐",
+    "cf": []
+  },
+  {
+    "word": "adjudicate",
+    "pos": "동사",
+    "meaning": "판결하다, 심판하다",
+    "ko": "위원회는 다음 주에 대회의 출품작을 판결할 것이다.",
+    "en": "The committee will adjudicate the entries for the competition next week.",
+    "highlight": "adjudicate",
+    "ipa": "/əˈdʒuːdɪkeɪt/",
+    "ipaKo": "어주디케이트",
+    "cf": []
+  },
+  {
+    "word": "aesthete",
+    "pos": "명사",
+    "meaning": "심미주의자, 미적 감각이 뛰어난 사람",
+    "ko": "그는 심미주의자로서 모든 형태의 예술에서 아름다움을 감상했다.",
+    "en": "As an aesthete, he appreciated the beauty in all forms of art.",
+    "highlight": "aesthete",
+    "ipa": "/ˈiːsθiːt/",
+    "ipaKo": "이스티트",
+    "cf": []
+  },
+  {
+    "word": "aggrieve",
+    "pos": "동사",
+    "meaning": "(부당하게) 괴롭히다, 분개하게 하다",
+    "ko": "직장에서의 불공정한 대우는 많은 직원들을 괴롭히기 시작했다.",
+    "en": "The unfair treatment at work began to aggrieve many employees.",
+    "highlight": "aggrieve",
+    "ipa": "/əˈɡriːv/",
+    "ipaKo": "어그리브",
+    "cf": []
+  },
+  {
+    "word": "antic",
+    "pos": "명사/형용사",
+    "meaning": "익살스러운 짓; 기괴한",
+    "ko": "광대의 익살스러운 짓은 관객을 공연 내내 즐겁게 했다.",
+    "en": "The clown's antics kept the audience entertained throughout the show.",
+    "highlight": "antics",
+    "ipa": "/ˈæntɪk/",
+    "ipaKo": "안틱",
+    "cf": []
+  },
+  {
+    "word": "aquiline",
+    "pos": "형용사",
+    "meaning": "(코가) 매부리 모양의; 독수리 같은",
+    "ko": "그의 매부리 코는 그에게 독특한 외모를 주었다.",
+    "en": "His aquiline nose gave him a distinguished appearance.",
+    "highlight": "aquiline",
+    "ipa": "/ˈækwɪlaɪn/",
+    "ipaKo": "아퀼라인",
+    "cf": []
+  },
+  {
+    "word": "arroyo",
+    "pos": "명사",
+    "meaning": "(건조 지대의) 마른 골짜기, 협곡",
+    "ko": "그 마른 골짜기는 사막의 황량한 풍경을 드러냈다.",
+    "en": "The arroyo was dry, revealing the stark landscape of the desert.",
+    "highlight": "arroyo",
+    "ipa": "/əˈrɔɪoʊ/",
+    "ipaKo": "아로요",
+    "cf": []
+  },
+  {
+    "word": "ambit",
+    "pos": "명사",
+    "meaning": "범위, 영역",
+    "ko": "그 프로젝트는 우리의 현재 능력의 범위에 포함된다.",
+    "en": "The project falls within the ambit of our current capabilities.",
+    "highlight": "ambit",
+    "ipa": "/ˈæmbɪt/",
+    "ipaKo": "앰빗",
+    "cf": []
+  },
+  {
+    "word": "arrant",
+    "pos": "형용사",
+    "meaning": "철저한, 순전한(나쁜 의미)",
+    "ko": "그의 철저한 규칙 무시는 심각한 결과를 초래했다.",
+    "en": "His arrant disregard for the rules led to serious consequences.",
+    "highlight": "arrant",
+    "ipa": "/ˈærənt/",
+    "ipaKo": "아런트",
+    "cf": []
+  },
+  {
+    "word": "antinomy",
+    "pos": "명사",
+    "meaning": "이율배반, 모순",
+    "ko": "그의 주장에 있는 모순은 청중을 혼란스럽게 했다.",
+    "en": "The antinomy in his argument left the audience confused.",
+    "highlight": "antinomy",
+    "ipa": "/ænˈtɪnəmi/",
+    "ipaKo": "안티노미",
+    "cf": []
+  },
+  {
+    "word": "ataraxia",
+    "pos": "명사",
+    "meaning": "아타락시아(마음의 평정)",
+    "ko": "아타락시아를 달성하는 것은 정신 건강을 유지하는 데 필수적이다.",
+    "en": "Achieving ataraxia is essential for maintaining mental health.",
+    "highlight": "ataraxia",
+    "ipa": "/ˌætəˈræksiə/",
+    "ipaKo": "아타락시아",
+    "cf": []
+  },
+  {
+    "word": "aphotic",
+    "pos": "형용사",
+    "meaning": "빛이 닿지 않는(심해 등)",
+    "ko": "바다의 빛이 닿지 않는 구역은 많은 독특한 종들의 서식지이다.",
+    "en": "The aphotic zone of the ocean is home to many unique species.",
+    "highlight": "aphotic",
+    "ipa": "/eɪˈfoʊtɪk/",
+    "ipaKo": "에이포틱",
+    "cf": []
+  },
+  {
+    "word": "antimetabole",
+    "pos": "명사",
+    "meaning": "역순 반복법(어구를 뒤집어 반복하는 수사법)",
+    "ko": "그의 연설에서 역순 반복법의 사용은 그의 주장을 더욱 깊이 있게 만들었다.",
+    "en": "The use of antimetabole in his speech added depth to his argument.",
+    "highlight": "antimetabole",
+    "ipa": "/ˌæntɪməˈtæboʊli/",
+    "ipaKo": "안티메타볼리",
+    "cf": []
+  },
+  {
+    "word": "algophobia",
+    "pos": "명사",
+    "meaning": "통증 공포증",
+    "ko": "그녀의 통증 공포증은 의료 도움을 받는 것을 어렵게 만들었다.",
+    "en": "Her algophobia made it difficult for her to seek medical help.",
+    "highlight": "algophobia",
+    "ipa": "/ˌælɡəˈfoʊbiə/",
+    "ipaKo": "알고포비아",
+    "cf": []
   }
 ];
