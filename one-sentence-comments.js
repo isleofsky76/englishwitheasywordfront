@@ -764,6 +764,21 @@
     nickLabel.appendChild(nickSpan);
     nickLabel.appendChild(nickInput);
 
+    // 허니팟: 사람에게는 숨기고, 자동입력 봇만 채우게 둠
+    var honeyLabel = document.createElement('label');
+    honeyLabel.className = 'os-cmt-honeypot';
+    honeyLabel.setAttribute('aria-hidden', 'true');
+    var honeySpan = document.createElement('span');
+    honeySpan.textContent = '웹사이트';
+    var honeyInput = document.createElement('input');
+    honeyInput.type = 'text';
+    honeyInput.name = 'website';
+    honeyInput.tabIndex = -1;
+    honeyInput.autocomplete = 'off';
+    honeyInput.setAttribute('aria-hidden', 'true');
+    honeyLabel.appendChild(honeySpan);
+    honeyLabel.appendChild(honeyInput);
+
     var adminPwLabel = document.createElement('label');
     adminPwLabel.className = 'os-cmt-field os-cmt-admin-pw-field';
     adminPwLabel.hidden = true;
@@ -838,6 +853,7 @@
     submit.textContent = '등록하기';
 
     form.appendChild(nickLabel);
+    form.appendChild(honeyLabel);
     form.appendChild(adminPwLabel);
     form.appendChild(bodyLabel);
     form.appendChild(pwLabel);
@@ -898,6 +914,7 @@
           nickname: nickInput.value,
           body: bodyInput.value,
           password: pwInput.value,
+          website: honeyInput.value,
         };
         if (isReservedAdminNickname(nickInput.value)) {
           payload.adminPasswordInput = adminPwInput.value;
@@ -910,6 +927,7 @@
         nickInput.value = '';
         bodyInput.value = '';
         pwInput.value = '';
+        honeyInput.value = '';
         adminPwInput.value = '';
         adminPwLabel.hidden = true;
         counter.textContent = '0/100';
