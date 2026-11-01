@@ -1,40 +1,53 @@
 /**
- * page30 guestbook / viewpost 계열 공통 API 베이스 URL
- * 라이브(englisheasystudy.com 등)에서는 항상 프로덕션 백엔드로 연결됩니다.
- * URL만 바뀌면 이 파일의 PRODUCTION_API_BASE 한 줄만 수정하면 됩니다.
+ * page30 guestbook / viewpost / one-sentence 공통 API 베이스 URL
+ *
+ * 보안: apiBase·api=local 오버라이드는 localhost에서만 허용.
+ * 운영 도메인에서는 항상 PRODUCTION_API_BASE만 사용
+ * (?apiBase= 피싱으로 관리자·댓글 비밀번호 탈취 방지)
  */
 (function () {
-    var PRODUCTION_API_BASE = 'https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app';
+  var PRODUCTION_API_BASE =
+    'https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app';
 
-    function isLocalHost(hostname) {
-        return hostname === 'localhost' || hostname === '127.0.0.1';
+  function isLocalHost(hostname) {
+    return (
+      hostname === 'localhost' ||
+      hostname === '127.0.0.1' ||
+      hostname === '[::1]' ||
+      hostname === '::1'
+    );
+  }
+
+  /**
+   * @returns {string} API origin (no trailing slash)
+   */
+  function getPage30ApiBaseUrl() {
+    var h = window.location.hostname;
+
+    // 운영·프리뷰·기타 호스트: URL 파라미터로 API를 바꿀 수 없음
+    if (!isLocalHost(h)) {
+      return PRODUCTION_API_BASE;
     }
 
-    /**
-     * @returns {string} API origin (no trailing slash)
-     */
-    function getPage30ApiBaseUrl() {
-        var params = new URLSearchParams(window.location.search);
-        var customBase = params.get('apiBase');
-        if (customBase) {
-            try {
-                var parsed = new URL(customBase);
-                if (parsed.protocol === 'http:' || parsed.protocol === 'https:') {
-                    return parsed.origin;
-                }
-            } catch (e) { /* ignore */ }
+    var params = new URLSearchParams(window.location.search);
+    var customBase = params.get('apiBase');
+    if (customBase) {
+      try {
+        var parsed = new URL(customBase);
+        if (parsed.protocol === 'http:' || parsed.protocol === 'https:') {
+          return parsed.origin;
         }
-        if (params.get('api') === 'prod') return PRODUCTION_API_BASE;
-        if (params.get('api') === 'local') {
-            return 'http://' + window.location.hostname + ':3000';
-        }
-        var h = window.location.hostname;
-        if (isLocalHost(h)) {
-            return 'http://' + h + ':3000';
-        }
-        return PRODUCTION_API_BASE;
+      } catch (e) {
+        /* ignore invalid apiBase */
+      }
     }
+    if (params.get('api') === 'prod') return PRODUCTION_API_BASE;
+    if (params.get('api') === 'local') {
+      return 'http://' + h + ':3000';
+    }
+    return 'http://' + h + ':3000';
+  }
 
-    window.PAGE30_PRODUCTION_API_BASE = PRODUCTION_API_BASE;
-    window.getPage30ApiBaseUrl = getPage30ApiBaseUrl;
+  window.PAGE30_PRODUCTION_API_BASE = PRODUCTION_API_BASE;
+  window.getPage30ApiBaseUrl = getPage30ApiBaseUrl;
 })();

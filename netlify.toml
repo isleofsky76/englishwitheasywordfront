@@ -90,4 +90,15 @@
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
 
-# redeploy 2026-10-30T18:40:00+09:00
+# 클릭재킹·referrer 최소 방어 (AdSense script-src는 건드리지 않음)
+# HSTS(max-age)는 Cloudflare SSL/TLS → Edge Certificates에서 설정
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    Content-Security-Policy = "frame-ancestors 'none'; base-uri 'self'; form-action 'self'"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Content-Type-Options = "nosniff"
+
+# redeploy 2026-11-01 security headers + apiBase lockdown
+

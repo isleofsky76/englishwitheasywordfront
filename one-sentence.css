@@ -467,15 +467,18 @@
   background: none;
   font: inherit;
   font-size: 12px;
+  line-height: 1.4;
   color: var(--os-ink-muted);
   cursor: pointer;
   text-decoration: underline;
   text-underline-offset: 2px;
   opacity: 0.85;
+  -webkit-text-fill-color: currentColor;
 }
 
 .os-cmt-toggle.is-empty {
-  opacity: 0.28;
+  /* 댓글 0개여도 '등록'과 같은 색/농도 유지 */
+  opacity: 0.85;
 }
 
 .os-cmt-toggle.is-empty:hover,
@@ -483,6 +486,7 @@
 .os-cmt-write:hover {
   opacity: 1;
   color: var(--os-blue);
+  -webkit-text-fill-color: currentColor;
 }
 
 .os-cmt-panel {

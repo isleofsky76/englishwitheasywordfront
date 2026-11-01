@@ -103,18 +103,29 @@
   var FALLBACK_BLOCK = [
     'sex', 'sexy', 'porn', 'porno', 'xxx', 'fuck', 'fucking', 'dick', 'pussy',
     '섹스', '포르노', '야동',
-    'admin', 'administrator', 'administration', '관리자', '주인장', '운영자', '어드민'
+    'administrator', 'administration', '운영자', '어드민'
   ];
+
+  function isReservedAdminNickname(nickname) {
+    var raw = String(nickname || '').trim();
+    if (!raw) return false;
+    var lower = raw.toLowerCase();
+    return lower === 'admin' || raw === '관리자' || raw === '주인장';
+  }
 
   function autoBlockTerms() {
     var a = badwords.blockedA || badwords.blocked || [];
     var b = badwords.blockedB || [];
-    var terms = a.concat(b);
+    var terms = a.concat(b).filter(function (term) {
+      // 예약 관리자 닉네임은 금지어 목록에 남아 있어도 예외
+      return !isReservedAdminNickname(term);
+    });
     if (!terms.length) return FALLBACK_BLOCK.slice();
     return terms;
   }
 
   function containsBadWords(text) {
+    if (isReservedAdminNickname(text)) return false;
     var originalLower = stripAllowlist(text);
     var compact = normalizeForFilter(originalLower);
     var terms = autoBlockTerms();
@@ -144,7 +155,12 @@
     if (nick.length > 10) return '닉네임은 10자까지 입력할 수 있어요.';
     if (text.length > 100) return '댓글은 100자까지 입력할 수 있어요.';
     if (hasLink(text) || hasLink(nick)) return '링크는 포함할 수 없어요.';
-    if ((text && containsBadWords(text)) || (nick && containsBadWords(nick))) {
+    // admin / 관리자 / 주인장 → 금지어 예외 (등록 시 관리자 비밀번호로 검증)
+    var reserved = isReservedAdminNickname(nick);
+    if (text && containsBadWords(text)) {
+      return '사용할 수 없는 표현이 포함되어 있어요.';
+    }
+    if (nick && !reserved && containsBadWords(nick)) {
       return '사용할 수 없는 표현이 포함되어 있어요.';
     }
     return '';
@@ -187,7 +203,7 @@
 
   async function loadBadwords() {
     try {
-      var res = await fetch('comment-badwords.json?v=20261101c5', { cache: 'no-store' });
+      var res = await fetch('comment-badwords.json?v=20261101c7', { cache: 'no-store' });
       if (!res.ok) return;
       var raw = await res.json();
       badwords = {
@@ -364,6 +380,13 @@
     nickInput.placeholder = '닉네임 (선택)';
     nickInput.value = comment.nickname || '';
 
+    var adminPwInput = document.createElement('input');
+    adminPwInput.type = 'password';
+    adminPwInput.className = 'os-cmt-edit-nick';
+    adminPwInput.placeholder = '관리자 비밀번호 (예약 닉네임용)';
+    adminPwInput.autocomplete = 'off';
+    adminPwInput.hidden = !isReservedAdminNickname(nickInput.value);
+
     var bodyInput = document.createElement('textarea');
     bodyInput.rows = 2;
     bodyInput.maxLength = 100;
@@ -386,6 +409,8 @@
     msg.className = 'os-cmt-msg';
 
     function refreshWarn() {
+      adminPwInput.hidden = !isReservedAdminNickname(nickInput.value);
+      if (adminPwInput.hidden) adminPwInput.value = '';
       var err = clientValidateContent(nickInput.value, bodyInput.value);
       msg.textContent = err || '';
     }
@@ -405,17 +430,25 @@
         msg.textContent = err;
         return;
       }
+      if (isReservedAdminNickname(nickInput.value) && !String(adminPwInput.value || '').trim()) {
+        msg.textContent = 'admin / 관리자 / 주인장 닉네임은 관리자 비밀번호가 필요해요.';
+        return;
+      }
       ok.disabled = true;
       try {
+        var payload = {
+          id: comment.id,
+          nickname: nickInput.value,
+          body: bodyInput.value,
+          password: pwInput.value,
+        };
+        if (isReservedAdminNickname(nickInput.value)) {
+          payload.adminPasswordInput = adminPwInput.value;
+        }
         await fetchJson(apiBase().replace(/\/$/, '') + '/onesentence/comments/edit', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            id: comment.id,
-            nickname: nickInput.value,
-            body: bodyInput.value,
-            password: pwInput.value,
-          }),
+          body: JSON.stringify(payload),
         });
         delete listCache[wordKey];
         await refreshPanel(wordKey);
@@ -441,6 +474,7 @@
     row.appendChild(cancel);
 
     wrap.appendChild(nickInput);
+    wrap.appendChild(adminPwInput);
     wrap.appendChild(bodyInput);
     wrap.appendChild(counter);
     wrap.appendChild(row);
@@ -575,6 +609,19 @@
     nickLabel.appendChild(nickSpan);
     nickLabel.appendChild(nickInput);
 
+    var adminPwLabel = document.createElement('label');
+    adminPwLabel.className = 'os-cmt-field os-cmt-admin-pw-field';
+    adminPwLabel.hidden = true;
+    var adminPwSpan = document.createElement('span');
+    adminPwSpan.textContent = '관리자 비밀번호 (admin/관리자/주인장 닉네임용)';
+    var adminPwInput = document.createElement('input');
+    adminPwInput.type = 'password';
+    adminPwInput.name = 'adminPasswordInput';
+    adminPwInput.placeholder = 'ADMIN_PASSWORD';
+    adminPwInput.autocomplete = 'off';
+    adminPwLabel.appendChild(adminPwSpan);
+    adminPwLabel.appendChild(adminPwInput);
+
     var bodyLabel = document.createElement('label');
     bodyLabel.className = 'os-cmt-field';
     var bodySpan = document.createElement('span');
@@ -613,7 +660,14 @@
     formMsg.className = 'os-cmt-msg';
     formMsg.setAttribute('aria-live', 'polite');
 
+    function syncAdminNickField() {
+      var reserved = isReservedAdminNickname(nickInput.value);
+      adminPwLabel.hidden = !reserved;
+      if (!reserved) adminPwInput.value = '';
+    }
+
     function refreshContentWarning() {
+      syncAdminNickField();
       var err = clientValidateContent(nickInput.value, bodyInput.value);
       formMsg.textContent = err || '';
     }
@@ -629,6 +683,7 @@
     submit.textContent = '등록하기';
 
     form.appendChild(nickLabel);
+    form.appendChild(adminPwLabel);
     form.appendChild(bodyLabel);
     form.appendChild(pwLabel);
     form.appendChild(formMsg);
@@ -674,24 +729,34 @@
         formMsg.textContent = err;
         return;
       }
+      if (isReservedAdminNickname(nickInput.value) && !String(adminPwInput.value || '').trim()) {
+        formMsg.textContent = 'admin / 관리자 / 주인장 닉네임은 관리자 비밀번호가 필요해요.';
+        return;
+      }
       submit.disabled = true;
       formMsg.textContent = '등록 중…';
       try {
+        var payload = {
+          wordKey: wordKey,
+          word: word,
+          pos: pos,
+          nickname: nickInput.value,
+          body: bodyInput.value,
+          password: pwInput.value,
+        };
+        if (isReservedAdminNickname(nickInput.value)) {
+          payload.adminPasswordInput = adminPwInput.value;
+        }
         await fetchJson(apiBase().replace(/\/$/, '') + '/onesentence/comments', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            wordKey: wordKey,
-            word: word,
-            pos: pos,
-            nickname: nickInput.value,
-            body: bodyInput.value,
-            password: pwInput.value,
-          }),
+          body: JSON.stringify(payload),
         });
         nickInput.value = '';
         bodyInput.value = '';
         pwInput.value = '';
+        adminPwInput.value = '';
+        adminPwLabel.hidden = true;
         counter.textContent = '0/100';
         formMsg.textContent = '';
         formPanel.hidden = true;
