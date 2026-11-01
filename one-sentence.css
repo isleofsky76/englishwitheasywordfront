@@ -148,37 +148,26 @@
   color: var(--ink);
 }
 
-/* cf. 연관어 품사 - 뜻 (있을 때만) */
+/* cf. 연관어 품사 - 뜻 (있을 때만) — 줄 전체 동일 색 */
 .os-cf {
   margin: 0 0 6px;
   font-size: 15px;
   line-height: 1.5;
-  color: #444;
+  color: #333;
 }
 
 .os-cf-label {
   font-style: italic;
   font-weight: 500;
-  color: #666;
+  color: inherit;
 }
 
-.os-cf-en {
-  font-weight: 600;
-  color: #222;
-}
-
-.os-cf-pos {
-  font-weight: 500;
-  color: #555;
-}
-
-.os-cf-dash {
-  color: #888;
-}
-
+.os-cf-en,
+.os-cf-pos,
+.os-cf-dash,
 .os-cf-ko {
   font-weight: 400;
-  color: #333;
+  color: inherit;
 }
 
 .os-ko {
