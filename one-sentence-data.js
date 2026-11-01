@@ -2982,5 +2982,242 @@ window.ONE_SENTENCE_FEED = [
     "ipa": "/ˈdʒiːnəs/",
     "ipaKo": "지너스",
     "cf": []
+  },
+  {
+    "word": "hearty",
+    "pos": "형용사",
+    "meaning": "(음식이) 푸짐한, 든든한",
+    "ko": "우리는 등산 전에 든든한 아침을 먹었다.",
+    "en": "We had a hearty breakfast before the hike.",
+    "highlight": "hearty",
+    "ipa": "/ˈhɑːrti/",
+    "ipaKo": "하티",
+    "cf": []
+  },
+  {
+    "word": "hearty",
+    "pos": "형용사",
+    "meaning": "따뜻한, 진심 어린; 원기 왕성한",
+    "ko": "그는 우리를 진심으로 환영해 주었다.",
+    "en": "He gave us a hearty welcome.",
+    "highlight": "hearty",
+    "ipa": "/ˈhɑːrti/",
+    "ipaKo": "하티",
+    "cf": []
+  },
+  {
+    "word": "headway",
+    "pos": "명사",
+    "meaning": "진전, 진척 (주로 make headway)",
+    "ko": "협상단이 마침내 진전을 보이고 있다.",
+    "en": "The negotiators are finally making headway.",
+    "highlight": "headway",
+    "ipa": "/ˈhedweɪ/",
+    "ipaKo": "헤드웨이",
+    "cf": []
+  },
+  {
+    "word": "habitually",
+    "pos": "부사",
+    "meaning": "습관적으로, 상습적으로",
+    "ko": "그는 상습적으로 회의에 늦는다.",
+    "en": "He is habitually late for meetings.",
+    "highlight": "habitually",
+    "ipa": "/həˈbɪtʃuəli/",
+    "ipaKo": "허비추얼리",
+    "cf": []
+  },
+  {
+    "word": "haphazardly",
+    "pos": "부사",
+    "meaning": "되는대로, 무계획적으로, 아무렇게나",
+    "ko": "책들이 바닥에 아무렇게나 쌓여 있었다.",
+    "en": "Books were stacked haphazardly on the floor.",
+    "highlight": "haphazardly",
+    "ipa": "/hæpˈhæzərdli/",
+    "ipaKo": "햅해저들리",
+    "cf": []
+  },
+  {
+    "word": "haywire",
+    "pos": "형용사",
+    "meaning": "(구어) 고장 난, 엉망이 된, 제멋대로인 (주로 go haywire)",
+    "ko": "업데이트 후에 내 휴대폰이 맛이 갔다.",
+    "en": "My phone went haywire after the update.",
+    "highlight": "haywire",
+    "ipa": "/ˈheɪwaɪər/",
+    "ipaKo": "헤이와이어",
+    "cf": []
+  },
+  {
+    "word": "hat trick",
+    "pos": "명사",
+    "meaning": "해트트릭; 한 경기에서 3골(3점); 같은 일을 세 번 연속 성공하는 것",
+    "ko": "손흥민이 후반전에 해트트릭을 기록했다.",
+    "en": "Son scored a hat trick in the second half.",
+    "highlight": "hat trick",
+    "ipa": "/ˈhæt trɪk/",
+    "ipaKo": "햇 트릭",
+    "cf": []
+  },
+  {
+    "word": "hyperbole",
+    "pos": "명사",
+    "meaning": "과장, 과장법 (발음: 하이퍼볼이 아니라 하이퍼벌리)",
+    "ko": "\"백만 번은 말했잖아\"는 과장법이다.",
+    "en": "\"I've told you a million times\" is hyperbole.",
+    "highlight": "hyperbole",
+    "ipa": "/haɪˈpɜːrbəli/",
+    "ipaKo": "하이퍼벌리",
+    "cf": []
+  },
+  {
+    "word": "hubris",
+    "pos": "명사",
+    "meaning": "오만, 자만 (특히 몰락을 부르는 지나친 자신감)",
+    "ko": "CEO의 오만이 회사의 몰락을 불렀다.",
+    "en": "The CEO's hubris led to the company's collapse.",
+    "highlight": "hubris",
+    "ipa": "/ˈhjuːbrɪs/",
+    "ipaKo": "휴브리스",
+    "cf": []
+  },
+  {
+    "word": "halal",
+    "pos": "형용사",
+    "meaning": "할랄의; 이슬람 율법상 허용된 (특히 음식)",
+    "ko": "그 식당은 할랄 음식을 판다.",
+    "en": "The restaurant serves halal food.",
+    "highlight": "halal",
+    "ipa": "/həˈlɑːl/",
+    "ipaKo": "헐랄",
+    "cf": []
+  },
+  {
+    "word": "halal",
+    "pos": "명사",
+    "meaning": "할랄 고기, 할랄 음식",
+    "ko": "이 고기는 할랄인가요?",
+    "en": "Is this meat halal?",
+    "highlight": "halal",
+    "ipa": "/həˈlɑːl/",
+    "ipaKo": "헐랄",
+    "cf": []
+  },
+  {
+    "word": "hyperbolic",
+    "pos": "형용사",
+    "meaning": "과장된, 과장법의",
+    "ko": "언론 보도가 과장되어 있었다.",
+    "en": "The media's coverage was hyperbolic.",
+    "highlight": "hyperbolic",
+    "ipa": "/ˌhaɪpərˈbɑːlɪk/",
+    "ipaKo": "하이퍼발릭",
+    "cf": []
+  },
+  {
+    "word": "hyperbolic",
+    "pos": "형용사",
+    "meaning": "(수학) 쌍곡선의",
+    "ko": "그 그래프는 쌍곡선을 보여준다.",
+    "en": "The graph shows a hyperbolic curve.",
+    "highlight": "hyperbolic",
+    "ipa": "/ˌhaɪpərˈbɑːlɪk/",
+    "ipaKo": "하이퍼발릭",
+    "cf": []
+  },
+  {
+    "word": "haute couture",
+    "pos": "명사",
+    "meaning": "오트 쿠튀르, 고급 맞춤 패션; 그런 옷을 만드는 디자이너나 의상실",
+    "ko": "파리는 오트 쿠튀르의 수도다.",
+    "en": "Paris is the capital of haute couture.",
+    "highlight": "haute couture",
+    "ipa": "/ˌoʊt kuˈtʊr/",
+    "ipaKo": "오우트 쿠투어",
+    "cf": []
+  },
+  {
+    "word": "haute couture",
+    "pos": "형용사",
+    "meaning": "고급 맞춤 패션의",
+    "ko": "그녀는 갈라에 오트 쿠튀르 드레스를 입고 갔다.",
+    "en": "She wore an haute couture gown to the gala.",
+    "highlight": "haute couture",
+    "ipa": "/ˌoʊt kuˈtʊr/",
+    "ipaKo": "오우트 쿠투어",
+    "cf": []
+  },
+  {
+    "word": "Heimlich maneuver",
+    "pos": "명사",
+    "meaning": "하임리히법; 기도가 막힌 사람의 배를 뒤에서 세게 밀어 올려 이물질을 빼내는 응급처치",
+    "ko": "웨이터가 하임리히법으로 그녀의 목숨을 구했다.",
+    "en": "The waiter saved her life with the Heimlich maneuver.",
+    "highlight": "Heimlich maneuver",
+    "ipa": "/ˈhaɪmlɪk məˈnuːvər/",
+    "ipaKo": "하임리크 머누버",
+    "cf": []
+  },
+  {
+    "word": "habanero",
+    "pos": "명사",
+    "meaning": "하바네로 (매우 매운 고추)",
+    "ko": "이 살사는 하바네로로 만들어서 아주 맵다.",
+    "en": "This salsa is made with habaneros, so it's very spicy.",
+    "highlight": "habaneros",
+    "ipa": "/ˌhɑːbəˈneroʊ/",
+    "ipaKo": "하버네로우",
+    "cf": []
+  },
+  {
+    "word": "hunky-dory",
+    "pos": "형용사",
+    "meaning": "(구어) 아주 좋은, 문제없는",
+    "ko": "걱정 마, 다 잘되고 있어.",
+    "en": "Don't worry, everything's hunky-dory.",
+    "highlight": "hunky-dory",
+    "ipa": "/ˌhʌŋkiˈdɔːri/",
+    "ipaKo": "헝키도리",
+    "cf": []
+  },
+  {
+    "word": "holographic",
+    "pos": "형용사",
+    "meaning": "홀로그램의, 홀로그래피의",
+    "ko": "신용카드에는 홀로그램 보안 스티커가 붙어 있다.",
+    "en": "Credit cards have a holographic security label.",
+    "highlight": "holographic",
+    "ipa": "/ˌhɑːləˈɡræfɪk/",
+    "ipaKo": "할러그래픽",
+    "cf": []
+  },
+  {
+    "word": "haram",
+    "pos": "형용사",
+    "meaning": "하람의; 이슬람 율법상 금지된 (halal의 반대)",
+    "ko": "돼지고기와 술은 무슬림에게 금지된 것이다.",
+    "en": "Pork and alcohol are haram for Muslims.",
+    "highlight": "haram",
+    "ipa": "/həˈrɑːm/",
+    "ipaKo": "허람",
+    "cf": [
+      {
+        "word": "halal",
+        "pos": "형용사",
+        "meaning": "이슬람 율법상 허용된"
+      }
+    ]
+  },
+  {
+    "word": "homonym",
+    "pos": "명사",
+    "meaning": "동음이의어, 동철이의어 (예: bank 은행 / bank 강둑)",
+    "ko": "\"bat\"은 동음이의어로, 동물(박쥐)도 되고 야구 방망이도 된다.",
+    "en": "\"Bat\" is a homonym: it can be an animal or a baseball bat.",
+    "highlight": "homonym",
+    "ipa": "/ˈhɑːmənɪm/",
+    "ipaKo": "하머님",
+    "cf": []
   }
 ];
