@@ -100,7 +100,11 @@
     return false;
   }
 
-  var FALLBACK_BLOCK = ['sex', 'sexy', 'porn', 'porno', 'xxx', 'fuck', 'fucking', 'dick', 'pussy', '섹스', '포르노', '야동'];
+  var FALLBACK_BLOCK = [
+    'sex', 'sexy', 'porn', 'porno', 'xxx', 'fuck', 'fucking', 'dick', 'pussy',
+    '섹스', '포르노', '야동',
+    'admin', 'administrator', 'administration', '관리자', '주인장', '운영자', '어드민'
+  ];
 
   function autoBlockTerms() {
     var a = badwords.blockedA || badwords.blocked || [];
@@ -183,7 +187,7 @@
 
   async function loadBadwords() {
     try {
-      var res = await fetch('comment-badwords.json?v=20261101c4', { cache: 'no-store' });
+      var res = await fetch('comment-badwords.json?v=20261101c5', { cache: 'no-store' });
       if (!res.ok) return;
       var raw = await res.json();
       badwords = {
