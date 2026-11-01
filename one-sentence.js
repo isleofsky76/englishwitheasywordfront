@@ -248,7 +248,11 @@
       escapeAttr(item.word) +
       '"' +
       (item.id ? ' data-id="' + escapeAttr(item.id) + '"' : '') +
-      '>' +
+      ' data-word-key="' +
+      escapeAttr(aid) +
+      '" data-pos="' +
+      escapeAttr(pos) +
+      '">' +
         '<p class="os-head">' +
           '<span class="os-head-en">' + escapeHtml(item.word) + '</span>' +
           renderPron(item) +
@@ -262,6 +266,7 @@
         '</div>' +
         (item.ko ? '<p class="os-ko">' + escapeHtml(item.ko) + '</p>' : '') +
         renderMemoBox(item.memo) +
+        '<div class="os-comments-root" data-os-comments-root></div>' +
         renderAdminActions(item) +
       '</article>'
     );
@@ -422,6 +427,9 @@
       }
     }
     if (count) count.textContent = '총 ' + items.length + '개';
+    if (window.OsComments && typeof window.OsComments.mountAll === 'function') {
+      window.OsComments.mountAll();
+    }
   }
 
   function scrollToWord(word) {
@@ -833,6 +841,12 @@
         applyItems(FALLBACK_FEED.map(normalizeEntry).filter(Boolean));
       });
   }
+
+  window.OneSentencePage = {
+    isAdminUnlocked: isAdminUnlocked,
+    apiBase: apiBase,
+    wordAnchorId: wordAnchorId,
+  };
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
