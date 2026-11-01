@@ -1,6 +1,7 @@
 /**
  * 문장으로 익히는 단어 — DB(/onesentence) 누적 피드 + 검색 + TTS
- * 데이터 추가: backend/scripts/append-one-sentence.js
+ * 관리자: ?admin=1 로 UI 잠금 해제 (변이 API는 서버 ADMIN_PASSWORD 검증)
+ * 데이터 추가: backend/scripts/append-one-sentence.js 또는 페이지 관리자 폼
  */
 (function () {
   'use strict';
@@ -11,11 +12,55 @@
   /** API 실패 시 잠깐 보일 로컬 폴백 (배포 직후 등) */
   var FALLBACK_FEED = Array.isArray(window.ONE_SENTENCE_FEED) ? window.ONE_SENTENCE_FEED.slice() : [];
 
+  var ADMIN_STORAGE_KEY = 'ees-os-admin';
+  var cachedAdminPassword = '';
+  var deleteConfirmTimers = Object.create(null);
+  var feedAll = [];
+  var refreshFeed = function () {};
+
   function apiBase() {
     if (typeof window.getPage30ApiBaseUrl === 'function') {
       return window.getPage30ApiBaseUrl();
     }
     return 'https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app';
+  }
+
+  function isAdminUnlocked() {
+    try {
+      return sessionStorage.getItem(ADMIN_STORAGE_KEY) === '1';
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function syncAdminUnlockFromUrl() {
+    var params = new URLSearchParams(window.location.search);
+    if (params.get('admin') === '1') {
+      try {
+        sessionStorage.setItem(ADMIN_STORAGE_KEY, '1');
+      } catch (e) { /* ignore */ }
+    }
+    if (params.get('admin') === '0') {
+      try {
+        sessionStorage.removeItem(ADMIN_STORAGE_KEY);
+      } catch (e) { /* ignore */ }
+      cachedAdminPassword = '';
+    }
+  }
+
+  function promptAdminPassword() {
+    if (cachedAdminPassword) return cachedAdminPassword;
+    var pw = window.prompt('관리자 비밀번호를 입력하세요:');
+    if (pw == null || !String(pw).trim()) return '';
+    return String(pw);
+  }
+
+  function rememberAdminPassword(pw) {
+    cachedAdminPassword = String(pw || '');
+  }
+
+  function clearRememberedPassword() {
+    cachedAdminPassword = '';
   }
 
   function escapeHtml(text) {
@@ -86,8 +131,9 @@
     var word = String(raw.word || '').trim();
     var en = String(raw.en || '').trim();
     if (!word || !en) return null;
+    var id = raw._id != null ? String(raw._id) : (raw.id != null ? String(raw.id) : '');
     return {
-      id: raw._id || '',
+      id: id,
       word: word,
       pos: String(raw.pos || '').trim(),
       meaning: String(raw.meaning || '').trim(),
@@ -97,8 +143,19 @@
       ipa: String(raw.ipa || '').trim(),
       ipaKo: String(raw.ipaKo || '').trim(),
       cf: normalizeCfList(raw.cf),
+      memo: String(raw.memo || '').trim(),
       date: raw.date || null
     };
+  }
+
+  function parseCfLine(raw) {
+    var s = String(raw || '').trim();
+    if (!s) return [];
+    var m = s.match(/^(.+?)\s+(\S+)\s*[-–—]\s*(.+)$/);
+    if (m) {
+      return [{ word: m[1].trim(), pos: m[2].trim(), meaning: m[3].trim() }];
+    }
+    return [{ word: s, pos: '', meaning: '' }];
   }
 
   function wordAnchorId(word, pos) {
@@ -143,6 +200,35 @@
     return ' <span class="os-head-sound">' + inner + '</span>';
   }
 
+  function renderMemoBox(memo) {
+    var text = String(memo || '').trim();
+    if (!text) return '';
+    return (
+      '<div class="os-memo">' +
+        '<span class="os-memo-label">메모</span>' +
+        '<p class="os-memo-body">' + escapeHtml(text) + '</p>' +
+      '</div>'
+    );
+  }
+
+  function renderAdminActions(item) {
+    if (!isAdminUnlocked() || !item.id) return '';
+    return (
+      '<div class="os-admin-actions">' +
+        '<button type="button" class="os-admin-link" data-os-memo="' +
+        escapeAttr(item.id) +
+        '">관리자 메모</button>' +
+        '<span class="os-admin-sep" aria-hidden="true"> · </span>' +
+        '<button type="button" class="os-admin-link" data-os-del="' +
+        escapeAttr(item.id) +
+        '">삭제</button>' +
+      '</div>' +
+      '<div class="os-memo-editor" data-os-memo-editor="' +
+      escapeAttr(item.id) +
+      '" hidden></div>'
+    );
+  }
+
   function renderItem(item) {
     var aid = wordAnchorId(item.word, item.pos);
     var pos = String(item.pos || '').trim();
@@ -156,7 +242,13 @@
           '</p>'
         : '';
     return (
-      '<article class="os-item" id="' + escapeAttr(aid) + '" data-word="' + escapeAttr(item.word) + '">' +
+      '<article class="os-item" id="' +
+      escapeAttr(aid) +
+      '" data-word="' +
+      escapeAttr(item.word) +
+      '"' +
+      (item.id ? ' data-id="' + escapeAttr(item.id) + '"' : '') +
+      '>' +
         '<p class="os-head">' +
           '<span class="os-head-en">' + escapeHtml(item.word) + '</span>' +
           renderPron(item) +
@@ -169,6 +261,8 @@
             '" aria-label="' + escapeAttr(item.word + ' 문장 듣기') + '">' + SPEAKER_SVG + '</button>' +
         '</div>' +
         (item.ko ? '<p class="os-ko">' + escapeHtml(item.ko) + '</p>' : '') +
+        renderMemoBox(item.memo) +
+        renderAdminActions(item) +
       '</article>'
     );
   }
@@ -278,7 +372,7 @@
     var needle = String(q || '').trim().toLowerCase();
     if (!needle) return items.slice();
     return items.filter(function (it) {
-      var blob = [it.word, it.pos, it.meaning, it.ko, it.en].join(' ').toLowerCase();
+      var blob = [it.word, it.pos, it.meaning, it.ko, it.en, it.memo, it.ipaKo].join(' ').toLowerCase();
       return blob.indexOf(needle) !== -1;
     });
   }
@@ -353,14 +447,302 @@
     }, 1200);
   }
 
+  async function loadFeedFromApi() {
+    var url = apiBase().replace(/\/$/, '') + '/onesentence';
+    var res = await fetch(url, { cache: 'no-store' });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    var data = await res.json();
+    var list = Array.isArray(data.entries) ? data.entries : (Array.isArray(data) ? data : []);
+    return list.map(normalizeEntry).filter(Boolean);
+  }
+
+  async function adminPost(path, body) {
+    var url = apiBase().replace(/\/$/, '') + path;
+    var res = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
+    var data = null;
+    try {
+      data = await res.json();
+    } catch (e) {
+      data = null;
+    }
+    if (!res.ok) {
+      var msg = (data && data.error) || ('HTTP ' + res.status);
+      var err = new Error(msg);
+      err.status = res.status;
+      throw err;
+    }
+    return data;
+  }
+
+  function findItemById(id) {
+    var sid = String(id || '');
+    for (var i = 0; i < feedAll.length; i += 1) {
+      if (String(feedAll[i].id) === sid) return feedAll[i];
+    }
+    return null;
+  }
+
+  function openMemoEditor(id) {
+    var editor = document.querySelector('[data-os-memo-editor="' + id + '"]');
+    if (!editor) return;
+    var item = findItemById(id);
+    editor.hidden = false;
+    editor.textContent = '';
+
+    var ta = document.createElement('textarea');
+    ta.className = 'os-memo-textarea';
+    ta.rows = 3;
+    ta.value = item ? String(item.memo || '') : '';
+    ta.setAttribute('aria-label', '관리자 메모');
+
+    var row = document.createElement('div');
+    row.className = 'os-memo-editor-actions';
+
+    var btnCancel = document.createElement('button');
+    btnCancel.type = 'button';
+    btnCancel.className = 'os-memo-btn';
+    btnCancel.textContent = '취소';
+    btnCancel.addEventListener('click', function () {
+      editor.hidden = true;
+      editor.textContent = '';
+    });
+
+    var btnSave = document.createElement('button');
+    btnSave.type = 'button';
+    btnSave.className = 'os-memo-btn os-memo-btn-primary';
+    btnSave.textContent = '저장';
+    btnSave.addEventListener('click', function () {
+      saveMemo(id, ta.value, btnSave);
+    });
+
+    row.appendChild(btnCancel);
+    row.appendChild(btnSave);
+    editor.appendChild(ta);
+    editor.appendChild(row);
+    ta.focus();
+  }
+
+  async function saveMemo(id, memoText, btn) {
+    var pw = promptAdminPassword();
+    if (!pw) return;
+    if (btn) {
+      btn.disabled = true;
+      btn.textContent = '저장 중…';
+    }
+    try {
+      await adminPost('/onesentence/admin/memo', {
+        id: id,
+        memo: memoText,
+        adminPasswordInput: pw,
+      });
+      rememberAdminPassword(pw);
+      var item = findItemById(id);
+      if (item) item.memo = String(memoText || '').trim();
+      refreshFeed();
+    } catch (err) {
+      if (err && err.status === 403) clearRememberedPassword();
+      window.alert('메모 저장 실패: ' + (err && err.message ? err.message : err));
+      if (btn) {
+        btn.disabled = false;
+        btn.textContent = '저장';
+      }
+    }
+  }
+
+  async function deleteEntry(id, btn) {
+    var key = String(id);
+    var now = Date.now();
+    if (!deleteConfirmTimers[key] || now > deleteConfirmTimers[key]) {
+      deleteConfirmTimers[key] = now + 3000;
+      if (btn) btn.textContent = '한 번 더 누르면 삭제';
+      window.setTimeout(function () {
+        if (deleteConfirmTimers[key] && Date.now() >= deleteConfirmTimers[key] - 50) {
+          delete deleteConfirmTimers[key];
+          if (btn && btn.isConnected) btn.textContent = '삭제';
+        }
+      }, 3000);
+      return;
+    }
+    delete deleteConfirmTimers[key];
+    var pw = promptAdminPassword();
+    if (!pw) {
+      if (btn) btn.textContent = '삭제';
+      return;
+    }
+    if (btn) {
+      btn.disabled = true;
+      btn.textContent = '삭제 중…';
+    }
+    try {
+      await adminPost('/onesentence/admin/deletepost', {
+        id: id,
+        adminPasswordInput: pw,
+      });
+      rememberAdminPassword(pw);
+      feedAll = feedAll.filter(function (it) {
+        return String(it.id) !== key;
+      });
+      refreshFeed();
+    } catch (err) {
+      if (err && err.status === 403) clearRememberedPassword();
+      window.alert('삭제 실패: ' + (err && err.message ? err.message : err));
+      if (btn) {
+        btn.disabled = false;
+        btn.textContent = '삭제';
+      }
+    }
+  }
+
+  function injectAdminForm() {
+    if (!isAdminUnlocked()) {
+      var old = document.getElementById('os-admin-form');
+      if (old) old.remove();
+      return;
+    }
+    if (document.getElementById('os-admin-form')) return;
+    var hero = document.querySelector('.os-hero');
+    if (!hero) return;
+
+    var form = document.createElement('form');
+    form.id = 'os-admin-form';
+    form.className = 'os-admin-form';
+    form.setAttribute('autocomplete', 'off');
+
+    var title = document.createElement('h2');
+    title.className = 'os-admin-form-title';
+    title.textContent = '새 단어 추가';
+    form.appendChild(title);
+
+    function field(labelText, name, opts) {
+      opts = opts || {};
+      var wrap = document.createElement('label');
+      wrap.className = 'os-admin-field';
+      var span = document.createElement('span');
+      span.textContent = labelText;
+      wrap.appendChild(span);
+      var input;
+      if (opts.textarea) {
+        input = document.createElement('textarea');
+        input.rows = opts.rows || 2;
+      } else {
+        input = document.createElement('input');
+        input.type = opts.type || 'text';
+      }
+      input.name = name;
+      input.id = 'os-af-' + name;
+      if (opts.required) input.required = true;
+      if (opts.placeholder) input.placeholder = opts.placeholder;
+      wrap.appendChild(input);
+      form.appendChild(wrap);
+      return input;
+    }
+
+    field('word (단어)', 'word', { required: true });
+    field('ipa (발음기호)', 'ipa', { placeholder: '/əˈbæk/' });
+    field('ko (한글 발음)', 'ipaKo', { placeholder: '어백' });
+    field('pos (품사)', 'pos', { placeholder: '부사' });
+    field('def (뜻)', 'meaning', { required: true, placeholder: '(taken aback) 깜짝 놀라, 당황하여' });
+    field('cf (참고, 선택)', 'cf', { placeholder: 'taken aback 숙어 - 깜짝 놀라다' });
+    field('ex (예문)', 'en', { required: true, textarea: true });
+    field('exko (예문 해석)', 'ko', { required: true, textarea: true });
+    field('highlight (강조, 선택)', 'highlight', { placeholder: '비우면 단어와 동일' });
+    field('memo (관리자 메모, 선택)', 'memo', { textarea: true, rows: 2 });
+
+    var actions = document.createElement('div');
+    actions.className = 'os-admin-form-actions';
+    var submit = document.createElement('button');
+    submit.type = 'submit';
+    submit.className = 'os-admin-submit';
+    submit.textContent = '추가';
+    var status = document.createElement('p');
+    status.className = 'os-admin-status';
+    status.setAttribute('aria-live', 'polite');
+    actions.appendChild(submit);
+    actions.appendChild(status);
+    form.appendChild(actions);
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var fd = new FormData(form);
+      var pw = promptAdminPassword();
+      if (!pw) return;
+      var payload = {
+        word: String(fd.get('word') || '').trim(),
+        ipa: String(fd.get('ipa') || '').trim(),
+        ipaKo: String(fd.get('ipaKo') || '').trim(),
+        pos: String(fd.get('pos') || '').trim(),
+        meaning: String(fd.get('meaning') || '').trim(),
+        en: String(fd.get('en') || '').trim(),
+        ko: String(fd.get('ko') || '').trim(),
+        highlight: String(fd.get('highlight') || '').trim(),
+        memo: String(fd.get('memo') || '').trim(),
+        cf: parseCfLine(fd.get('cf')),
+        adminPasswordInput: pw,
+      };
+      if (!payload.word || !payload.en) {
+        status.textContent = 'word와 예문(ex)은 필수입니다.';
+        return;
+      }
+      submit.disabled = true;
+      status.textContent = '저장 중…';
+      adminPost('/onesentence/admin/create', payload)
+        .then(function (data) {
+          rememberAdminPassword(pw);
+          status.textContent = '추가됨';
+          form.reset();
+          submit.disabled = false;
+          var entry = normalizeEntry(data && data.entry);
+          if (entry) {
+            feedAll = feedAll.concat([entry]);
+            refreshFeed();
+            window.setTimeout(function () {
+              scrollToWord(entry.word);
+            }, 80);
+          } else {
+            return loadFeedFromApi().then(function (items) {
+              feedAll = items;
+              refreshFeed();
+            });
+          }
+        })
+        .catch(function (err) {
+          if (err && err.status === 403) clearRememberedPassword();
+          status.textContent = '실패: ' + (err && err.message ? err.message : err);
+          submit.disabled = false;
+        });
+    });
+
+    var toolbar = hero.querySelector('.os-toolbar');
+    if (toolbar && toolbar.nextSibling) {
+      hero.insertBefore(form, toolbar.nextSibling);
+    } else {
+      hero.appendChild(form);
+    }
+  }
+
   function bindFeed() {
     var feed = document.getElementById('os-feed');
     if (feed && !feed._osBound) {
       feed._osBound = true;
       feed.addEventListener('click', function (e) {
-        var btn = e.target.closest('[data-os-tts]');
-        if (!btn || !feed.contains(btn)) return;
-        speakText(btn.getAttribute('data-os-tts') || '', btn);
+        var tts = e.target.closest('[data-os-tts]');
+        if (tts && feed.contains(tts)) {
+          speakText(tts.getAttribute('data-os-tts') || '', tts);
+          return;
+        }
+        var memoBtn = e.target.closest('[data-os-memo]');
+        if (memoBtn && feed.contains(memoBtn)) {
+          openMemoEditor(memoBtn.getAttribute('data-os-memo') || '');
+          return;
+        }
+        var delBtn = e.target.closest('[data-os-del]');
+        if (delBtn && feed.contains(delBtn)) {
+          deleteEntry(delBtn.getAttribute('data-os-del') || '', delBtn);
+        }
       });
     }
 
@@ -383,26 +765,19 @@
     }
   }
 
-  async function loadFeedFromApi() {
-    var url = apiBase().replace(/\/$/, '') + '/onesentence';
-    var res = await fetch(url, { cache: 'no-store' });
-    if (!res.ok) throw new Error('HTTP ' + res.status);
-    var data = await res.json();
-    var list = Array.isArray(data.entries) ? data.entries : (Array.isArray(data) ? data : []);
-    return list.map(normalizeEntry).filter(Boolean);
-  }
-
   function init() {
+    syncAdminUnlockFromUrl();
+    injectAdminForm();
     bindFeed();
     var input = document.getElementById('os-search-input');
     var tags = document.getElementById('os-tags');
-    var all = [];
 
     function refresh() {
-      var visible = filterItems(all, input ? input.value : '');
+      var visible = filterItems(feedAll, input ? input.value : '');
       renderFeed(visible);
-      renderTags(all);
+      renderTags(feedAll);
     }
+    refreshFeed = refresh;
 
     if (tags) tags._osRefresh = refresh;
 
@@ -444,7 +819,7 @@
     }
 
     function applyItems(items) {
-      all = items;
+      feedAll = items;
       publishDictWords(items);
       refresh();
     }

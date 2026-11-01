@@ -714,6 +714,7 @@ const oneSentenceEntrySchema = new mongoose.Schema({
   ipaKo: { type: String, default: '' },
   /* 예: [{ word:'weather', pos:'동사', meaning:'견뎌내다' }] → cf. weather 동사 - 견뎌내다 */
   cf: { type: [oneSentenceCfSchema], default: [] },
+  memo: { type: String, default: '' },
   nickname: String,
   password: String,
   date: { type: Date, default: Date.now },
@@ -2723,6 +2724,100 @@ app.post('/onesentence-deletepost', async (req, res) => {
     await OneSentenceEntry.findByIdAndDelete(id);
     res.json({ message: 'Post deleted' });
   } catch (error) {
+    res.status(500).json({ error: 'Error deleting one-sentence entry' });
+  }
+});
+
+function normalizeOneSentenceCf(cf) {
+  if (Array.isArray(cf)) {
+    return cf
+      .map((c) => ({
+        word: String(c?.word || '').trim(),
+        pos: String(c?.pos || '').trim(),
+        meaning: String(c?.meaning || '').trim(),
+      }))
+      .filter((c) => c.word);
+  }
+  const raw = String(cf || '').trim();
+  if (!raw) return [];
+  // "taken aback 숙어 - 깜짝 놀라다" / "weather 동사 - 견뎌내다"
+  const m = raw.match(/^(.+?)\s+(\S+)\s*[-–—]\s*(.+)$/);
+  if (m) {
+    return [{ word: m[1].trim(), pos: m[2].trim(), meaning: m[3].trim() }];
+  }
+  return [{ word: raw, pos: '', meaning: '' }];
+}
+
+function requireOneSentenceAdmin(req, res) {
+  const { adminPasswordInput } = req.body || {};
+  if (!adminPassword || adminPasswordInput !== adminPassword) {
+    res.status(403).json({ error: 'Invalid admin password' });
+    return false;
+  }
+  return true;
+}
+
+app.post('/onesentence/admin/create', async (req, res) => {
+  if (!requireOneSentenceAdmin(req, res)) return;
+  if (mongoose.connection.readyState !== 1) {
+    return res.status(503).json({ error: 'MongoDB에 연결되지 않았습니다.' });
+  }
+  const { word, pos, meaning, ko, en, highlight, ipa, ipaKo, cf, memo } = req.body || {};
+  if (!word || !en) {
+    return res.status(400).json({ error: 'word and en are required' });
+  }
+  try {
+    const randomPw = `os_admin_${Date.now()}_${Math.random().toString(36).slice(2)}`;
+    const hashedPassword = await bcrypt.hash(randomPw, 10);
+    const newEntry = new OneSentenceEntry({
+      word: String(word).trim(),
+      pos: String(pos || '').trim(),
+      meaning: String(meaning || '').trim(),
+      ko: String(ko || '').trim(),
+      en: String(en).trim(),
+      highlight: String(highlight || word).trim(),
+      ipa: String(ipa || '').trim(),
+      ipaKo: String(ipaKo || '').trim(),
+      cf: normalizeOneSentenceCf(cf),
+      memo: String(memo || '').trim(),
+      nickname: 'admin',
+      password: hashedPassword,
+    });
+    await newEntry.save();
+    res.status(201).json({ entry: newEntry });
+  } catch (error) {
+    console.error('One Sentence admin create 오류:', error);
+    res.status(500).json({ error: 'Error saving one-sentence entry', detail: error.message });
+  }
+});
+
+app.post('/onesentence/admin/memo', async (req, res) => {
+  if (!requireOneSentenceAdmin(req, res)) return;
+  const { id, memo } = req.body || {};
+  if (!id) return res.status(400).json({ error: 'id is required' });
+  try {
+    const entry = await OneSentenceEntry.findById(id);
+    if (!entry) return res.status(404).json({ error: 'Post not found' });
+    entry.memo = String(memo == null ? '' : memo).trim();
+    await entry.save();
+    res.json({ entry });
+  } catch (error) {
+    console.error('One Sentence admin memo 오류:', error);
+    res.status(500).json({ error: 'Error updating memo' });
+  }
+});
+
+app.post('/onesentence/admin/deletepost', async (req, res) => {
+  if (!requireOneSentenceAdmin(req, res)) return;
+  const { id } = req.body || {};
+  if (!id) return res.status(400).json({ error: 'id is required' });
+  try {
+    const entry = await OneSentenceEntry.findById(id);
+    if (!entry) return res.status(404).json({ error: 'Post not found' });
+    await OneSentenceEntry.findByIdAndDelete(id);
+    res.json({ message: 'Post deleted by admin' });
+  } catch (error) {
+    console.error('One Sentence admin delete 오류:', error);
     res.status(500).json({ error: 'Error deleting one-sentence entry' });
   }
 });

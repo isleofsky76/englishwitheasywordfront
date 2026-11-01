@@ -259,6 +259,195 @@
   font-weight: 400;
 }
 
+/* 방문자에게 보이는 관리자 메모 */
+.os-memo {
+  margin: 10px 0 0;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: rgba(58, 56, 52, 0.05);
+  border: 1px solid rgba(58, 56, 52, 0.08);
+}
+
+.os-memo-label {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--os-ink-muted);
+}
+
+.os-memo-body {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--os-ink-soft);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* 관리자 전용 컨트롤 (?admin=1) */
+.os-admin-actions {
+  margin-top: 8px;
+  font-size: 12px;
+  line-height: 1.4;
+  opacity: 0.28;
+  transition: opacity 0.15s ease;
+}
+
+.os-admin-actions:hover,
+.os-admin-actions:focus-within {
+  opacity: 1;
+}
+
+.os-admin-link {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  font: inherit;
+  font-size: 12px;
+  color: var(--os-ink-muted);
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.os-admin-link:hover {
+  color: var(--os-blue);
+}
+
+.os-admin-sep {
+  color: var(--os-ink-muted);
+}
+
+.os-memo-editor {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.os-memo-editor[hidden] {
+  display: none !important;
+}
+
+.os-memo-textarea {
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 72px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--os-ink);
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1.5;
+  resize: vertical;
+}
+
+.os-memo-editor-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.os-memo-btn {
+  height: 32px;
+  padding: 0 12px;
+  border: 1px solid rgba(0, 0, 0, 0.16);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--os-ink);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.os-memo-btn-primary {
+  border-color: var(--os-blue);
+  background: var(--os-blue);
+  color: #fff;
+}
+
+.os-admin-form {
+  margin-top: 18px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.os-admin-form-title {
+  margin: 0 0 4px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--os-ink);
+}
+
+.os-admin-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--os-ink-muted);
+}
+
+.os-admin-field input,
+.os-admin-field textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 9px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--os-ink);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.45;
+}
+
+.os-admin-field textarea {
+  resize: vertical;
+  min-height: 56px;
+}
+
+.os-admin-form-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.os-admin-submit {
+  height: 38px;
+  padding: 0 16px;
+  border: none;
+  border-radius: 8px;
+  background: var(--os-blue);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.os-admin-submit:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.os-admin-status {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--os-ink-soft);
+}
+
 .os-en-row {
   display: flex;
   align-items: flex-start;
