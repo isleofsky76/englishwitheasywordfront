@@ -354,6 +354,71 @@ function vvBindTtsButtons(container) {
     });
 }
 
+/** 뉴스 본문에서 단어→뜻을 모아 사전 팝업(DICT_WORDS)에 넣음 */
+function publishNewsDictWords(root) {
+    const map = Object.create(null);
+    function put(rawWord, rawMeaning) {
+        const word = String(rawWord || '')
+            .replace(/<[^>]+>/g, '')
+            .replace(/[’']/g, "'")
+            .replace(/\s+/g, ' ')
+            .trim()
+            .toLowerCase();
+        let meaning = String(rawMeaning || '')
+            .replace(/\s+/g, ' ')
+            .replace(/\([^)]*\)\s*$/, '')
+            .trim();
+        if (!word || !meaning || !/[a-z]/.test(word)) return;
+        if (!map[word]) map[word] = { meaning: meaning, pos: '' };
+        const parts = word.split(/[\s/]+/).filter(Boolean);
+        if (parts.length === 1) return;
+        /* 구 표현은 전체 키만 기본, 하이픈 합성어는 통째로 유지 */
+    }
+
+    if (root) {
+        root.querySelectorAll('.rd-expr').forEach((card) => {
+            const w = card.querySelector('.rd-expr-word');
+            const m = card.querySelector('.rd-expr-meaning');
+            put(w && w.textContent, m && m.textContent);
+        });
+
+        const blob = String(root.textContent || '');
+        const cfRe = /\bcf\.\s*([^:：\n]+?)\s*[:：]\s*([^\n]+?)(?=\s*(?:\bcf\.|※|$))/gi;
+        let m;
+        while ((m = cfRe.exec(blob))) {
+            put(m[1], m[2]);
+        }
+
+        root.querySelectorAll('mark.nv-hl, .nv-hl').forEach((mark) => {
+            const host = mark.closest('p, .nv-narrative-text, .rd-expr-en') || mark.parentElement;
+            if (!host) return;
+            const text = host.textContent || '';
+            const word = (mark.textContent || '').trim();
+            const cf = text.match(new RegExp(
+                'cf\\.\\s*' + word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\s*[:：]\\s*([^\\n]+)',
+                'i'
+            ));
+            if (cf) put(word, cf[1]);
+        });
+    }
+
+    window.DICT_WORDS = Object.assign(Object.create(null), window.DICT_WORDS || {}, map);
+}
+
+/** 문장 페이지와 동일한 사전 팝업 스크립트 로드 */
+function ensureNewsDictLookup() {
+    window.DICT_CONFIG = Object.assign(
+        { container: '#post-message, .rd-article-cards, .nv-body' },
+        window.DICT_CONFIG || {}
+    );
+    if (document.querySelector('script[data-dict-lookup="1"]')) return;
+    const s = document.createElement('script');
+    s.src = '/dict-lookup.js?v=20261101nv1';
+    s.defer = true;
+    s.setAttribute('data-dict-lookup', '1');
+    document.body.appendChild(s);
+}
+
 function attachVocabularyWebTTS(container) {
     if (!container) return;
     try {
@@ -787,6 +852,13 @@ async function loadPost() {
         }
         const postContent = document.getElementById('post-content');
         if (postContent) attachVocabularyWebTTS(postContent);
+        if (postMessage) {
+            publishNewsDictWords(postMessage);
+            ensureNewsDictLookup();
+        } else if (postContent) {
+            publishNewsDictWords(postContent);
+            ensureNewsDictLookup();
+        }
 
         if (typeof initViewpostLike === 'function') {
             initViewpostLike({

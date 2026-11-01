@@ -75,9 +75,39 @@
     return null;
   }
 
-  function meaningForWord(hoveredWord) {
+  function meaningFromNewsCard(node, hoveredWord) {
+    const e = node && (node.nodeType === 1 ? node : node.parentElement);
+    if (!e) return '';
+    const card = e.closest('.rd-expr, .nv-word-section');
+    if (!card) return '';
+    const hw = String(hoveredWord || '')
+      .toLowerCase()
+      .replace(/’/g, "'")
+      .trim();
+    if (!hw) return '';
+    const exprEl = card.querySelector('.rd-expr-word, mark.nv-hl, .nv-hl');
+    const meaningEl = card.querySelector('.rd-expr-meaning');
+    const expr = String((exprEl && exprEl.textContent) || '')
+      .toLowerCase()
+      .replace(/’/g, "'")
+      .replace(/\s+/g, ' ')
+      .trim();
+    let meaning = meaningEl ? String(meaningEl.textContent || '').trim() : '';
+    if (!meaning) {
+      const blob = String(card.textContent || '');
+      const cf = blob.match(/\bcf\.\s*[^:：]+[:：]\s*([^\n]+)/i);
+      if (cf) meaning = cf[1].replace(/\([^)]*\)\s*$/, '').trim();
+    }
+    if (!meaning) return '';
+    if (!expr) return meaning;
+    if (expr === hw || expr.indexOf(hw) !== -1 || hw.indexOf(expr) !== -1) return meaning;
+    return '';
+  }
+
+  function meaningForWord(hoveredWord, node) {
     const mapped = findEntry(hoveredWord);
-    return mapped && mapped.meaning ? mapped.meaning : '';
+    if (mapped && mapped.meaning) return mapped.meaning;
+    return meaningFromNewsCard(node, hoveredWord);
   }
 
   const style = document.createElement('style');
@@ -153,11 +183,11 @@
   let showTimer = null;
   let hideTimer = null;
 
-  function show(word, rect) {
+  function show(word, rect, node) {
     clearTimeout(hideTimer);
     current = { word: word };
     const q = String(word).toLowerCase();
-    const meaning = meaningForWord(word);
+    const meaning = meaningForWord(word, node);
     if (meaning) {
       elMeaning.hidden = false;
       elMeaning.textContent = meaning;
@@ -283,7 +313,7 @@
         showTimer = setTimeout(
           function () {
             if (hasHighlight) CSS.highlights.set('dl-word', new Highlight(found.range));
-            show(found.word, found.rect);
+            show(found.word, found.rect, found.node);
             pending = null;
           },
           current ? CONFIG.switchDelay : CONFIG.hoverDelay
@@ -316,7 +346,7 @@
         if (!isAllowed(range.commonAncestorContainer)) return;
         const rect = range.getBoundingClientRect();
         if (rect.width || rect.height) {
-          show(text.replace(/’/g, "'"), rect);
+          show(text.replace(/’/g, "'"), rect, range.commonAncestorContainer);
         }
       }, 250);
     });
