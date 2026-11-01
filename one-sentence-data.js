@@ -482,5 +482,23 @@ window.ONE_SENTENCE_FEED = [
         "_id": "6ae6ba0bf5c6f4738894fe4c"
       }
     ]
+  },
+  {
+    "word": "absurdist",
+    "pos": "형용사",
+    "meaning": "부조리한, 부조리주의의",
+    "ko": "어떤 이메일은 부조리한 음시처럼 읽힌다.",
+    "en": "Some of the emails read like absurdist tone poems.",
+    "highlight": "absurdist",
+    "ipa": "/əbˈsɜːrdɪst/",
+    "ipaKo": "앱서디스트",
+    "cf": [
+      {
+        "word": "absurd",
+        "pos": "형용사",
+        "meaning": "터무니없는, 불합리한",
+        "_id": "6ae6bad3773e9214965d5b19"
+      }
+    ]
   }
 ];
