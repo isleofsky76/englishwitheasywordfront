@@ -35,5 +35,13 @@ window.ONE_SENTENCE_FEED = [
     ko: '그는 생선에 톡 쏘는 소스를 곁들여 냈다.',
     en: 'He served the fish with a piquant sauce.',
     highlight: 'piquant'
+  },
+  {
+    word: 'tragicomic',
+    pos: '형용사',
+    meaning: '비극적이면서도 우스운, 희비극의',
+    ko: '마지막에 비극적이면서도 우스운 장면이 몇 개 있었다.',
+    en: 'There were a few tragicomic final scenes.',
+    highlight: 'tragicomic'
   }
 ];
