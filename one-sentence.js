@@ -142,14 +142,21 @@
     var aid = wordAnchorId(item.word);
     var pos = String(item.pos || '').trim();
     var meaning = String(item.meaning || '').trim();
+    var meta =
+      pos || meaning
+        ? '<p class="os-meta">' +
+          (pos ? '<span class="os-head-pos">' + escapeHtml(pos) + '</span>' : '') +
+          (pos && meaning ? ' ' : '') +
+          (meaning ? '<span class="os-head-ko">' + escapeHtml(meaning) + '</span>' : '') +
+          '</p>'
+        : '';
     return (
       '<article class="os-item" id="' + escapeAttr(aid) + '" data-word="' + escapeAttr(item.word) + '">' +
         '<p class="os-head">' +
           '<span class="os-head-en">' + escapeHtml(item.word) + '</span>' +
           renderPron(item) +
-          (pos ? ' <span class="os-head-pos">' + escapeHtml(pos) + '</span>' : '') +
-          (meaning ? ' <span class="os-head-ko">' + escapeHtml(meaning) + '</span>' : '') +
         '</p>' +
+        meta +
         renderCfLines(item.cf) +
         (item.ko ? '<p class="os-ko">' + escapeHtml(item.ko) + '</p>' : '') +
         '<div class="os-en-row">' +

@@ -142,13 +142,13 @@
 }
 
 .os-letter-head {
-  margin: 28px 0 4px;
-  padding-bottom: 6px;
-  border-bottom: 1px solid var(--line);
-  font-size: 15px;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  color: #222;
+  margin: 32px 0 8px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #222;
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: #111;
   scroll-margin-top: 88px;
 }
 
@@ -158,9 +158,9 @@
 
 .os-item {
   display: block;
-  padding: 22px 0 20px;
+  padding: 26px 0 24px;
   border: none;
-  border-bottom: 1px dashed rgba(0, 0, 0, 0.08);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   scroll-margin-top: 88px;
 }
 
@@ -172,57 +172,67 @@
   display: none !important;
 }
 
-/* 단어 품사 한글뜻 */
+/* 1줄: 단어 + 발음 / 2줄: 품사 + 뜻 */
 .os-head {
-  margin: 0 0 4px;
+  margin: 0 0 2px;
   font-size: var(--os-body);
-  line-height: 1.55;
+  line-height: 1.45;
   color: var(--ink);
 }
 
 .os-head-en {
-  font-weight: 700;
-  color: var(--os-blue);
+  font-size: 1.2em;
+  font-weight: 800;
+  color: #0b57d0;
+  letter-spacing: -0.02em;
 }
 
 .os-head-sound {
-  font-weight: 400;
-  color: #555;
+  font-weight: 500;
+  color: #444;
   white-space: nowrap;
 }
 
 .os-head-ipa {
   font-family: "Lucida Sans Unicode", "Arial Unicode MS", "Segoe UI", sans-serif;
-  font-size: 0.92em;
-  color: #555;
+  font-size: 0.95em;
+  color: #333;
 }
 
 .os-head-pron {
-  font-size: 0.92em;
-  color: #555;
+  font-size: 0.95em;
+  font-weight: 600;
+  color: #222;
 }
 
-.os-head-pos {
-  font-weight: 500;
-  color: #555;
-}
-
-.os-head-ko {
-  font-weight: 500;
+.os-meta {
+  margin: 0 0 8px;
+  font-size: 16px;
+  line-height: 1.5;
   color: var(--ink);
 }
 
-/* cf. 연관어 품사 - 뜻 (있을 때만) — 줄 전체 동일 색 */
-.os-cf {
-  margin: 0 0 6px;
-  font-size: 15px;
-  line-height: 1.5;
+.os-head-pos {
+  font-weight: 700;
   color: #333;
+}
+
+.os-head-ko {
+  font-weight: 600;
+  color: #111;
+}
+
+/* cf. 연관어 (있을 때만) */
+.os-cf {
+  margin: 0 0 10px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #444;
 }
 
 .os-cf-label {
   font-style: italic;
-  font-weight: 500;
+  font-weight: 600;
   color: inherit;
 }
 
@@ -230,16 +240,16 @@
 .os-cf-pos,
 .os-cf-dash,
 .os-cf-ko {
-  font-weight: 400;
+  font-weight: 500;
   color: inherit;
 }
 
 .os-ko {
-  margin: 0 0 6px;
+  margin: 0 0 8px;
   font-size: var(--os-body);
   line-height: 1.7;
-  color: var(--ink);
-  font-weight: 400;
+  color: #222;
+  font-weight: 500;
 }
 
 .os-en-row {
@@ -255,19 +265,19 @@
   min-width: 0;
   margin: 0;
   font-family: inherit;
-  font-size: var(--os-body);
-  font-weight: 400;
+  font-size: 1.05em;
+  font-weight: 500;
   line-height: 1.7;
   letter-spacing: 0;
-  color: var(--ink);
+  color: #111;
 }
 
 .os-en mark {
   background: var(--os-hl);
   color: inherit;
-  padding: 0 0.06em;
+  padding: 0 0.08em;
   border-radius: 2px;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .os-tts {
