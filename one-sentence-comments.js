@@ -239,6 +239,136 @@
     btn.setAttribute('aria-expanded', btn.getAttribute('aria-expanded') === 'true' ? 'true' : 'false');
   }
 
+  function truncatePreview(text, max) {
+    var t = String(text || '').replace(/\s+/g, ' ').trim();
+    if (t.length <= max) return t;
+    return t.slice(0, max - 1) + '…';
+  }
+
+  function ensurePreviewEl(root) {
+    var el = root.querySelector('[data-os-cmt-preview]');
+    if (el) return el;
+    el = document.createElement('div');
+    el.className = 'os-cmt-preview';
+    el.setAttribute('data-os-cmt-preview', '');
+    el.hidden = true;
+    el.setAttribute('role', 'tooltip');
+    root.appendChild(el);
+    return el;
+  }
+
+  function renderPreviewContent(previewEl, comments) {
+    previewEl.textContent = '';
+    if (!comments || !comments.length) {
+      var empty = document.createElement('p');
+      empty.className = 'os-cmt-preview-empty';
+      empty.textContent = '아직 댓글이 없습니다.';
+      previewEl.appendChild(empty);
+      return;
+    }
+    var slice = comments.slice(-3).reverse();
+    slice.forEach(function (c) {
+      var row = document.createElement('div');
+      row.className = 'os-cmt-preview-item';
+      var nick = document.createElement('strong');
+      nick.className = 'os-cmt-preview-nick';
+      nick.textContent = c.nickname && String(c.nickname).trim() ? String(c.nickname).trim() : '익명';
+      var body = document.createElement('span');
+      body.className = 'os-cmt-preview-body';
+      body.textContent = truncatePreview(c.body, 60);
+      row.appendChild(nick);
+      row.appendChild(document.createTextNode(' · '));
+      row.appendChild(body);
+      previewEl.appendChild(row);
+    });
+    if (comments.length > 3) {
+      var more = document.createElement('p');
+      more.className = 'os-cmt-preview-more';
+      more.textContent = '외 ' + (comments.length - 3) + '개 · 클릭하면 전체 보기';
+      previewEl.appendChild(more);
+    }
+  }
+
+  function bindCommentPreview(root, toggle, wordKey, listPanel) {
+    var previewEl = ensurePreviewEl(root);
+    var hideTimer = null;
+    var showTimer = null;
+    var loading = false;
+
+    function clearHide() {
+      if (hideTimer) {
+        clearTimeout(hideTimer);
+        hideTimer = null;
+      }
+    }
+
+    function clearShow() {
+      if (showTimer) {
+        clearTimeout(showTimer);
+        showTimer = null;
+      }
+    }
+
+    function hidePreview() {
+      clearHide();
+      clearShow();
+      previewEl.hidden = true;
+    }
+
+    async function showPreview() {
+      if (!listPanel.hidden) return;
+      if (!(counts[wordKey] > 0) && !(listCache[wordKey] && listCache[wordKey].length)) {
+        return;
+      }
+      previewEl.hidden = false;
+      previewEl.textContent = '';
+      var loadingMsg = document.createElement('p');
+      loadingMsg.className = 'os-cmt-preview-empty';
+      loadingMsg.textContent = '불러오는 중…';
+      previewEl.appendChild(loadingMsg);
+      if (loading) return;
+      loading = true;
+      try {
+        var list = await loadComments(wordKey);
+        if (previewEl.hidden || !listPanel.hidden) return;
+        renderPreviewContent(previewEl, list);
+      } catch (e) {
+        if (!previewEl.hidden) {
+          previewEl.textContent = '';
+          var fail = document.createElement('p');
+          fail.className = 'os-cmt-preview-empty';
+          fail.textContent = '미리보기를 불러오지 못했어요.';
+          previewEl.appendChild(fail);
+        }
+      } finally {
+        loading = false;
+      }
+    }
+
+    function scheduleShow() {
+      clearHide();
+      clearShow();
+      showTimer = setTimeout(function () {
+        showPreview();
+      }, 180);
+    }
+
+    function scheduleHide() {
+      clearShow();
+      hideTimer = setTimeout(function () {
+        hidePreview();
+      }, 160);
+    }
+
+    toggle.addEventListener('mouseenter', scheduleShow);
+    toggle.addEventListener('mouseleave', scheduleHide);
+    toggle.addEventListener('focus', scheduleShow);
+    toggle.addEventListener('blur', scheduleHide);
+    previewEl.addEventListener('mouseenter', clearHide);
+    previewEl.addEventListener('mouseleave', scheduleHide);
+    toggle.addEventListener('click', hidePreview);
+  }
+
   function renderCommentList(listEl, comments, wordKey) {
     listEl.textContent = '';
     if (!comments || !comments.length) {
@@ -792,6 +922,8 @@
       }
       openFormPanel();
     });
+
+    bindCommentPreview(root, toggle, wordKey, listPanel);
 
     root.appendChild(bar);
     root.appendChild(listPanel);

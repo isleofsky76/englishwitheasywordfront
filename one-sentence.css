@@ -450,6 +450,7 @@
 
 /* 단어별 익명 댓글 */
 .os-comments-root {
+  position: relative;
   margin-top: 8px;
 }
 
@@ -457,6 +458,55 @@
   display: flex;
   align-items: center;
   gap: 10px;
+}
+
+.os-cmt-preview {
+  position: absolute;
+  left: 0;
+  top: calc(100% + 6px);
+  z-index: 40;
+  min-width: 220px;
+  max-width: min(360px, 92vw);
+  padding: 10px 12px;
+  border: 1px solid rgba(58, 56, 52, 0.14);
+  border-radius: 10px;
+  background: #fffef9;
+  box-shadow: 0 8px 24px rgba(58, 56, 52, 0.12);
+  pointer-events: auto;
+}
+
+.os-cmt-preview[hidden] {
+  display: none !important;
+}
+
+.os-cmt-preview-item {
+  margin: 0 0 6px;
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--os-ink-soft);
+  word-break: break-word;
+}
+
+.os-cmt-preview-item:last-child {
+  margin-bottom: 0;
+}
+
+.os-cmt-preview-nick {
+  font-weight: 600;
+  color: var(--os-ink);
+}
+
+.os-cmt-preview-empty,
+.os-cmt-preview-more {
+  margin: 0;
+  font-size: 12px;
+  color: var(--os-ink-muted);
+}
+
+.os-cmt-preview-more {
+  margin-top: 8px;
+  padding-top: 6px;
+  border-top: 1px solid rgba(58, 56, 52, 0.08);
 }
 
 .os-cmt-toggle,
@@ -522,7 +572,7 @@
 }
 
 .os-cmt-item {
-  padding-bottom: 8px;
+  padding: 4px 0 8px;
   border-bottom: 1px solid rgba(58, 56, 52, 0.08);
 }
 
