@@ -500,5 +500,23 @@ window.ONE_SENTENCE_FEED = [
         "_id": "6ae6bad3773e9214965d5b19"
       }
     ]
+  },
+  {
+    "word": "acidulous",
+    "pos": "형용사",
+    "meaning": "신맛이 도는, 톡 쏘는",
+    "ko": "그 레모네이드는 신맛이 도는 톡 쏘는 맛이 있었다.",
+    "en": "The lemonade had an acidulous tang.",
+    "highlight": "acidulous",
+    "ipa": "/əˈsɪdʒələs/",
+    "ipaKo": "어시줄러스",
+    "cf": [
+      {
+        "word": "acid",
+        "pos": "형용사",
+        "meaning": "신, 산성인",
+        "_id": "6ae6bb410aa2cc0ac78f6dfb"
+      }
+    ]
   }
 ];
