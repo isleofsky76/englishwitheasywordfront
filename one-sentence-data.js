@@ -27,5 +27,13 @@ window.ONE_SENTENCE_FEED = [
     ko: '바위들이 풍화되어 기이하고 멋진 형태로 변해 있다.',
     en: 'The rocks are weathered into fantastic forms.',
     highlight: 'weathered'
+  },
+  {
+    word: 'piquant',
+    pos: '형용사',
+    meaning: '톡 쏘는, 매콤한, 자극적인',
+    ko: '그는 생선에 톡 쏘는 소스를 곁들여 냈다.',
+    en: 'He served the fish with a piquant sauce.',
+    highlight: 'piquant'
   }
 ];
