@@ -69,5 +69,14 @@ window.ONE_SENTENCE_FEED = [
     en: 'She spoke in a slow and deliberate way.',
     highlight: 'deliberate',
     cf: [{ word: 'deliberate', pos: '동사', meaning: '숙고하다' }]
+  },
+  {
+    word: 'reticent',
+    pos: '형용사',
+    meaning: '과묵한, 말수가 적은',
+    ko: '그는 앞으로의 계획에 대해 말수가 적었다.',
+    en: 'He was reticent about his plans for the future.',
+    highlight: 'reticent',
+    cf: [{ word: 'reticence', pos: '명사', meaning: '과묵함' }]
   }
 ];
