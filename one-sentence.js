@@ -331,7 +331,20 @@
   }
 
   function scrollToWord(word) {
-    var el = document.getElementById(wordAnchorId(word));
+    var target = String(word || '').trim().toLowerCase();
+    if (!target) return;
+    var feed = document.getElementById('os-feed');
+    var el = null;
+    if (feed) {
+      var nodes = feed.querySelectorAll('.os-item[data-word]');
+      for (var i = 0; i < nodes.length; i += 1) {
+        if (String(nodes[i].getAttribute('data-word') || '').toLowerCase() === target) {
+          el = nodes[i];
+          break;
+        }
+      }
+    }
+    if (!el) el = document.getElementById(wordAnchorId(word));
     if (!el) return;
     el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     el.classList.add('os-item-flash');
