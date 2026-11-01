@@ -130,11 +130,23 @@
       .replace(/[^a-z0-9가-힣ㄱ-ㅎㅏ-ㅣ]+/gi, '');
   }
 
-  /** 단독 18/69/18년/6969는 허용, 1818·18놈·tlqkf·19금·섹69 등은 차단 */
+  function isEducationalEighteenContext(text) {
+    var raw = String(text || '').toLowerCase();
+    return /18\s*살|18\s*세|18\s*세기|18\s*년|2018|1918|18\s*years|age\s*of\s*18|under\s*18|over\s*18|turned\s*18|18th|18\s*century/i.test(
+      raw
+    );
+  }
+
+  /** 단독 18 은어 차단. 18살/2018 등은 허용. 1818·18놈·tlqkf·19금·섹69 차단 */
   function containsNumericAbusePatterns(text) {
+    var raw = String(text || '').trim();
     var c = normalizeKeepDigits(text);
     if (!c) return false;
     if (/(?:18){2,}/.test(c)) return true;
+    if (!isEducationalEighteenContext(raw)) {
+      if (/^18$/.test(c)) return true;
+      if (/(?:^|[^0-9])18(?:[^0-9]|$)/.test(c)) return true;
+    }
     if (/(?:18|10|108)(?:놈|넘|새끼|새기|새키|쉐끼|새끼들|뇬|련)/.test(c)) return true;
     if (/18(?:발|팔|섹|쉑)/.test(c)) return true;
     if (/시18|씨18|ㅅㅂ18|tlqkf/.test(c)) return true;
@@ -228,7 +240,7 @@
 
   async function loadBadwords() {
     try {
-      var res = await fetch('comment-badwords.json?v=20261101c10', { cache: 'no-store' });
+      var res = await fetch('comment-badwords.json?v=20261101c11', { cache: 'no-store' });
       if (!res.ok) return;
       var raw = await res.json();
       badwords = {
