@@ -348,20 +348,36 @@ body.english-directory-page .navbar.bg-primary:not(.site-masthead) {
   text-underline-offset: 2px;
 }
 
-.dir-back-menu-wrap {
-  margin: 1.25rem 0 0;
-}
-
-.dir-back-menu-btn {
-  display: inline;
-  font-size: 0.85rem;
+/* 문장 페이지 '처음으로'와 동일 — 스크롤바 근처 우측 고정 */
+.dir-back-top {
+  position: fixed;
+  right: 16px;
+  bottom: max(16px, env(safe-area-inset-bottom, 0px));
+  z-index: 120;
+  margin: 0;
+  padding: 0.5rem 1rem;
+  font-family: var(--font-sans);
+  font-size: 0.84rem;
   font-weight: 600;
-  color: var(--ink) !important;
+  line-height: 1.3;
+  color: #fff !important;
+  background: var(--accent, #3d6eb8);
+  border: none;
+  border-radius: 999px;
+  box-shadow: 0 4px 14px rgba(61, 110, 184, 0.35);
   text-decoration: none !important;
+  white-space: nowrap;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  transition: background 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
 }
 
-.dir-back-menu-btn:hover {
-  color: var(--accent) !important;
+.dir-back-top:hover {
+  color: #fff !important;
+  background: #315a99;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(61, 110, 184, 0.42);
+  text-decoration: none !important;
 }
 
 @media (max-width: 640px) {
