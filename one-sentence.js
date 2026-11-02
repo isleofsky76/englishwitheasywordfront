@@ -343,7 +343,7 @@
     }
     tags.removeAttribute('hidden');
     var html =
-      '<p class="os-tags-hint">한 번 누르면 뜻 · 두 번 누르면 예문으로 이동</p>';
+      '<p class="os-tags-hint">한 번 누르면 뜻이 보이고 · 두 번 누르면 예문으로 이동합니다.</p>';
     var lastLetter = '';
     words.forEach(function (entry) {
       var w = entry.word;
