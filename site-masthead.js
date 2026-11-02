@@ -4,7 +4,7 @@
  * nav-home-menu.js 가 로드함
  */
 (function () {
-    var VERSION = '20261102ux1';
+    var VERSION = '20261102fouc1';
   /* 시안 주 메뉴 — href는 기존 URL 유지 */
   var PRIMARY_NAV_ITEMS = [
     {
@@ -526,7 +526,10 @@
   function mount() {
     document.documentElement.classList.add('has-site-masthead');
     var base = assetBase();
-    ensureWeather(base);
+    /* 홈은 날씨/시계를 쓰지 않음 — 구형 바 삽입으로 깜빡이지 않게 */
+    if (!document.body.classList.contains('rd-home')) {
+      ensureWeather(base);
+    }
     mountNavbar(base);
     ensureScript(base + 'home-board-preview.js?v=' + VERSION, function () {
       initSearch(base);

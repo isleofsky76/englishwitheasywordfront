@@ -401,6 +401,12 @@ export function patchIndexHomePreview(sectionKey, listInnerHtml) {
   const indexPath = path.join(FRONTEND_ROOT, 'index.html');
   let html = fs.readFileSync(indexPath, 'utf8');
 
+  /* 리디자인 홈: 구형 preview-list 스냅샷을 다시 넣으면 새로고침 FOUC가 난다 */
+  if (/class="[^"]*\brd-home\b/.test(html) || /id="rd-home"/.test(html)) {
+    console.warn(`[home-preview] skip patch (${sectionKey}) — redesigned home`);
+    return indexPath;
+  }
+
   const openRe = new RegExp(`(<div id="${section.listId}"[^>]*)(>)`, 'i');
   if (!openRe.test(html)) throw new Error(`Missing #${section.listId} in index.html`);
 
