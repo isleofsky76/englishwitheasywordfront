@@ -802,7 +802,8 @@ const SITEMAP_STATIC_URLS = [
   { loc: `${SITE_ORIGIN}/economy-news-list.html`, priority: '0.9' },
   { loc: `${SITE_ORIGIN}/sports-news-list.html`, priority: '0.9' },
   { loc: `${SITE_ORIGIN}/us-news-list.html`, priority: '0.9' },
-  /* 빈·얇은 보드 목록 제외: travel/retail/ukraine/industry/cooking/ranking + empty news cats */
+  { loc: `${SITE_ORIGIN}/industry-news-list.html`, priority: '0.9' },
+  /* 빈·얇은 보드 목록 제외: travel/retail/ukraine/cooking/ranking + empty news cats */
   { loc: `${SITE_ORIGIN}/korea-news-list.html`, priority: '0.9' },
   { loc: `${SITE_ORIGIN}/shorts-bg-image-list.html`, priority: '0.8' },
   { loc: `${SITE_ORIGIN}/english-synonym-list.html`, priority: '0.8' },
