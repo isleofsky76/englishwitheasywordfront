@@ -395,7 +395,7 @@ export function buildStaticPostMainHtml(config, boardPath) {
 
 export function buildArticleJsonLd({ title, slug, boardPath, metaDescription, datePublished }) {
   const headline = String(title || '').replace(/^\[(AP|CNN|BBC)\]\s*/i, '').trim();
-  const pageUrl = `${SITE_ORIGIN}/${boardPath}/${slug}`;
+  const pageUrl = `${SITE_ORIGIN}/${boardPath}/${slug}/`;
   return {
     '@context': 'https://schema.org',
     '@type': 'Article',
@@ -588,7 +588,7 @@ export function buildSeoPageHtml(boardPath, config) {
   }
 
   const { title, slug, metaDescription } = config;
-  const pageUrl = `${SITE_ORIGIN}/${boardPath}/${slug}`;
+  const pageUrl = `${SITE_ORIGIN}/${boardPath}/${slug}/`;
   const datePublished = config.datePublished || toIsoDateOnly();
   const docTitle = `${title} | ${board.label} · 시사영단어`;
   const jsonLd = buildArticleJsonLd({ title, slug, boardPath, metaDescription, datePublished });
