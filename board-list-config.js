@@ -5,15 +5,21 @@
 (function (global) {
   'use strict';
 
-  /* 글 없는 보드 — 메뉴/탭에서 숨김. 살리려면 아래 배열에서 키를 제거하면 됩니다. */
+  /* 글 없거나 1~2건뿐인 보드 — 메뉴/탭에서 숨김. 살리려면 키를 제거하면 됩니다. */
   var HIDDEN_EMPTY_BOARDS = {
-    /* us-news / retail-news / ukraine-news: 글 올림 — 다시 노출 */
     'weather-news': true,
     'literature-news': true,
     'health-news': true,
     'politics-news': true,
     'ai-news': true,
-    'incident-news': true
+    'incident-news': true,
+    /* 얇은·빈 카테고리 (AdSense/UX) */
+    'travel-news': true,
+    'retail-news': true,
+    'industry-news': true,
+    'ukraine-news': true,
+    'ranking-news': true,
+    'cooking-voca': true
   };
 
   var NEWS_TABS_ALL = [

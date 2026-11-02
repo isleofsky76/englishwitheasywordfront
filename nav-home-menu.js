@@ -45,11 +45,7 @@
 
         { href: 'situational-english-list.html', label: '상황', pages: ['situational-english-list.html', 'situational-english.html'] },
 
-        { href: 'cooking-voca-list.html', label: '요리', pages: ['cooking-voca-list.html', 'cooking-voca.html'] },
-
         { href: 'culture-voca-list.html', label: '컬쳐', pages: ['culture-voca-list.html', 'culture-voca.html'] },
-
-        { href: 'ranking-news-list.html', label: '랭킹', pages: ['ranking-news-list.html', 'ranking-news.html'] },
 
         { href: 'photo-english-list.html', label: '포토', pages: ['photo-english-list.html', 'photo-english.html'] },
 

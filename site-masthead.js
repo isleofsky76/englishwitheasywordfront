@@ -4,7 +4,7 @@
  * nav-home-menu.js 가 로드함
  */
 (function () {
-    var VERSION = '20261101os1';
+    var VERSION = '20261102thin1';
   /* 시안 주 메뉴 — href는 기존 URL 유지 */
   var PRIMARY_NAV_ITEMS = [
     {
@@ -61,20 +61,14 @@
     { href: 'english-synonym-list.html', label: '연관단어', tone: 'syn', pages: ['english-synonym-list.html', 'english-synonym.html'] },
     { href: 'defense-news-list.html', label: '국방뉴스', tone: 'defense', pages: ['defense-news-list.html', 'defense-news.html'] },
     { href: 'economy-news-list.html', label: '경제뉴스', tone: 'news', pages: ['economy-news-list.html', 'economy-news.html'] },
-    { href: 'travel-news-list.html', label: '여행뉴스', tone: 'news', pages: ['travel-news-list.html', 'travel-news.html'] },
+    /* 얇은·빈 카테고리 숨김: travel / retail / ukraine / industry / cooking / ranking */
     { href: 'sports-news-list.html', label: '스포츠뉴스', tone: 'news', pages: ['sports-news-list.html', 'sports-news.html'] },
     { href: 'us-news-list.html', label: '미국뉴스', tone: 'news', pages: ['us-news-list.html', 'us-news.html'] },
-    { href: 'retail-news-list.html', label: '유통뉴스', tone: 'news', pages: ['retail-news-list.html', 'retail-news.html'] },
-    { href: 'ukraine-news-list.html', label: '우크라이나/러시아', tone: 'defense', pages: ['ukraine-news-list.html', 'ukraine-news.html'] },
-    /* 빈 보드 숨김 — 요청 시 복원: weather/literature/health/politics/ai/incident */
-    { href: 'industry-news-list.html', label: '산업뉴스', tone: 'news', pages: ['industry-news-list.html', 'industry-news.html'] },
     { href: 'korea-news-list.html', label: '한국뉴스', tone: 'defense', pages: ['korea-news-list.html', 'korea-news.html'] },
     { href: 'culture-voca-list.html', label: '컬쳐', tone: 'culture', pages: ['culture-voca-list.html', 'culture-voca.html'] },
     { href: 'shorts-bg-image-list.html', label: '신문읽는 이미지', tone: 'sbgi', pages: ['shorts-bg-image-list.html', 'shorts-bg-image.html'] },
     { href: 'calm-mind-list.html', label: '마음글', tone: 'calm', pages: ['calm-mind-list.html', 'calm-mind.html'] },
     { href: 'situational-english-list.html', label: '상황', tone: 'sit', pages: ['situational-english-list.html', 'situational-english.html'] },
-    { href: 'cooking-voca-list.html', label: '요리', tone: 'cook', pages: ['cooking-voca-list.html', 'cooking-voca.html'] },
-    { href: 'ranking-news-list.html', label: '랭킹', tone: 'rank', pages: ['ranking-news-list.html', 'ranking-news.html'] },
     { href: 'photo-english-list.html', label: '포토', tone: 'photo', pages: ['photo-english-list.html', 'photo-english.html'] },
     { href: 'pros-cons-list.html', label: 'Pros & Cons', tone: 'pros', pages: ['pros-cons-list.html', 'pros-cons.html'] },
     { href: 'english-quotes-list.html', label: '영어 명언', tone: 'quote', pages: ['english-quotes-list.html', 'english-quotes.html'] },

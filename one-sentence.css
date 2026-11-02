@@ -11,7 +11,6 @@
   --os-body: 17px;
   --os-alpha-h: 0px;
   margin: 0;
-  padding-top: var(--os-alpha-h);
   font-family: var(--font-sans);
   color: var(--os-ink);
   background: var(--page-bg);
@@ -107,16 +106,18 @@
   background: var(--line);
 }
 
+/* 검색창 바로 아래 문서 흐름 → 스크롤 시 sticky (masthead 위에 덮지 않음) */
 .os-alpha {
-  position: fixed;
+  position: sticky;
   top: 0;
-  left: 0;
-  right: 0;
-  z-index: 130;
+  z-index: 40;
   display: flex;
   justify-content: center;
-  margin: 0;
+  width: calc(100% + 48px);
+  max-width: none;
+  margin: 16px -24px 0;
   padding: 8px 24px 10px;
+  box-sizing: border-box;
   background: var(--page-bg);
   border-bottom: 1px solid rgba(58, 56, 52, 0.12);
   box-shadow: 0 6px 16px -12px rgba(0, 0, 0, 0.35);
@@ -220,7 +221,7 @@
   font-weight: 700;
   letter-spacing: 0.04em;
   color: var(--os-ink-soft);
-  scroll-margin-top: 72px; /* sticky 알파벳 높이 여유 */
+  scroll-margin-top: calc(var(--os-alpha-h) + 12px);
 }
 
 .os-letter-group:first-child .os-letter-head {
@@ -232,7 +233,7 @@
   padding: 26px 0 24px;
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-  scroll-margin-top: 72px; /* sticky 알파벳 높이 여유 */
+  scroll-margin-top: calc(var(--os-alpha-h) + 12px);
 }
 
 .os-letter-group .os-item:last-child {

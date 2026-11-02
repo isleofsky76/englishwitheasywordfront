@@ -346,7 +346,6 @@
       fetchEntries('/korea-news'),
       fetchEntries('/defense-news'),
       fetchEntries('/economy-news'),
-      fetchEntries('/travel-news'),
       fetchEntries('/vocabulary-quiz'),
       fetchEntries('/easy-voca'),
       fetchEntries('/opinions'),
@@ -359,18 +358,17 @@
       var korea = results[2] || [];
       var defense = results[3] || [];
       var economy = results[4] || [];
-      var travel = results[5] || [];
-      var quiz = results[6] || [];
-      var phrases = results[7] || [];
-      var opinions = results[8] || [];
-      var culture = results[9] || [];
-      var calm = results[10] || [];
-      var quotes = results[11] || [];
+      var quiz = results[5] || [];
+      var phrases = results[6] || [];
+      var opinions = results[7] || [];
+      var culture = results[8] || [];
+      var calm = results[9] || [];
+      var quotes = results[10] || [];
 
       var w = latest(wotd);
       if (w) renderHeroWord(w, wotd.length - 1);
 
-      renderNews(mixNews(intl, korea, defense, economy, travel));
+      renderNews(mixNews(intl, korea, defense, economy, []));
       renderQuiz(quiz);
       renderPhrases(phrases);
       renderReadingCol('rd-read-opinions', 'english-opinions-list.html', '오피니언', opinions, 'opinions');

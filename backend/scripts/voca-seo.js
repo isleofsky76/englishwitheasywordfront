@@ -253,6 +253,27 @@ export const BOARD_SEO = {
     listHtml: 'vocabulary-quiz-list.html',
     pageKind: 'quiz',
   },
+  'situational-english': {
+    label: '상황 영어',
+    cssFile: 'page30_viewpost_v.css',
+    cssVersion: '20260628',
+    jsFile: 'page30_viewpost_situational_english.js',
+    jsVersion: '20260630d',
+    listHtml: 'situational-english-list.html',
+    extraCss: [{ file: 'page30_situational_english.css', version: '20260630d' }],
+    articleLayout: 'header-only',
+  },
+  'pros-cons': {
+    label: 'Pros & Cons',
+    cssFile: 'page30_viewpost_v.css',
+    cssVersion: '20260628',
+    jsFile: 'page30_viewpost_pros_cons.js',
+    jsVersion: '20260905b',
+    listHtml: 'pros-cons-list.html',
+    extraCss: [{ file: 'pros-cons.css', version: '20260905b' }],
+    extraJs: [{ file: 'pros-cons-render.js', version: '20260905c' }],
+    articleLayout: 'header-only',
+  },
 };
 
 export function toIsoDateOnly(d = new Date()) {
@@ -285,9 +306,66 @@ function formatStaticMetaDateTime(datePublished) {
   return `${y}.${m}.${day}  ${h}:${min}`;
 }
 
+/** Pros & Cons JSON 메시지를 크롤러용 HTML로 변환 (TTS 버튼 제외) */
+function prosConsMessageToStaticHtml(message) {
+  const trimmed = String(message || '').trim();
+  if (!trimmed) return '';
+  if (trimmed.includes('pros-cons-wrap')) return trimmed;
+  if (trimmed.charAt(0) !== '{') return `<pre class="pros-cons-raw">${escapeHtml(trimmed)}</pre>`;
+
+  let data = null;
+  try {
+    data = JSON.parse(trimmed);
+  } catch {
+    const end = trimmed.lastIndexOf('}');
+    if (end > 0) {
+      try {
+        data = JSON.parse(trimmed.slice(0, end + 1));
+      } catch {
+        return `<pre class="pros-cons-raw">${escapeHtml(trimmed)}</pre>`;
+      }
+    }
+  }
+  if (!data || data.type !== 'pros-cons') {
+    return `<pre class="pros-cons-raw">${escapeHtml(trimmed)}</pre>`;
+  }
+
+  const itemHtml = (item, idx) => {
+    const en = escapeHtml(String(item?.en || '').trim());
+    const ko = escapeHtml(String(item?.ko || '').trim());
+    return (
+      `<div class="pros-cons-item">` +
+      `<span class="pros-cons-num">${idx + 1}.</span>` +
+      `<span class="pros-cons-en-line"><span class="pros-cons-en">${en}</span></span>` +
+      (ko ? `<span class="pros-cons-ko">${ko}</span>` : '') +
+      `</div>`
+    );
+  };
+  const block = (title, list) =>
+    `<div class="pros-cons-block${title === 'Cons' ? ' pros-cons-block--cons' : ''}">` +
+    `<h3 class="pros-cons-heading">${title}</h3>` +
+    (Array.isArray(list) && list.length
+      ? list.map(itemHtml).join('')
+      : '<div class="pros-cons-item"><em>항목 없음</em></div>') +
+    `</div>`;
+
+  const footer = data.footer
+    ? `<p class="pros-cons-footer">${escapeHtml(String(data.footer)).replace(/\n/g, '<br>')}</p>`
+    : '';
+
+  return (
+    `<div class="pros-cons-wrap">${block('Pros', data.pros)}${block('Cons', data.cons)}</div>${footer}`
+  );
+}
+
+function staticMessageHtml(boardPath, message) {
+  if (boardPath === 'pros-cons') return prosConsMessageToStaticHtml(message);
+  return String(message || '').trim();
+}
+
 /** 크롤러용: slug SEO 페이지 main 안에 제목·메타·본문 HTML 인라인 */
 export function buildStaticPostMainHtml(config, boardPath) {
-  const message = String(config.message || '').trim();
+  const message = staticMessageHtml(boardPath, config.message);
   const msgClass = BOARD_STATIC_MESSAGE_CLASS[boardPath] || 'post-message-body';
   const headingTag = boardPath === 'news-voca' || boardPath === 'ranking-news' ? 'h1' : 'h1';
 
@@ -601,6 +679,7 @@ ${buildStaticPostMainHtml(config, boardPath)}
     <script src="../../viewpost-rd-ready.js?v=20261020rd24"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../../nav-home-menu.js?v=20261020travel2"></script>
+${(board.extraJs || []).map((j) => `    <script src="../../${j.file}?v=${j.version}"></script>`).join('\n')}
     <script src="../../${board.jsFile}?v=${board.jsVersion}"></script>
     <script src="../../weather-banner.js?v=20260612e" defer></script>
     <script src="../../world-clock.js?v=20260612g" defer></script>
@@ -732,18 +811,14 @@ const SITEMAP_STATIC_URLS = [
   { loc: `${SITE_ORIGIN}/`, priority: '1.0' },
   { loc: `${SITE_ORIGIN}/index.html`, priority: '0.8' },
   { loc: `${SITE_ORIGIN}/news-voca-list.html`, priority: '0.9' },
-  { loc: `${SITE_ORIGIN}/cooking-voca-list.html`, priority: '0.8' },
   { loc: `${SITE_ORIGIN}/culture-voca-list.html`, priority: '0.8' },
   { loc: `${SITE_ORIGIN}/defense-news-list.html`, priority: '0.9' },
   { loc: `${SITE_ORIGIN}/economy-news-list.html`, priority: '0.9' },
-  { loc: `${SITE_ORIGIN}/travel-news-list.html`, priority: '0.9' },
   { loc: `${SITE_ORIGIN}/sports-news-list.html`, priority: '0.9' },
   { loc: `${SITE_ORIGIN}/us-news-list.html`, priority: '0.9' },
-  /* 빈 보드 목록은 사이트맵에서 제외 — 요청 시 복원 */
-  { loc: `${SITE_ORIGIN}/industry-news-list.html`, priority: '0.9' },
+  /* 빈·얇은 보드 목록 제외: travel/retail/ukraine/industry/cooking/ranking + empty news cats */
   { loc: `${SITE_ORIGIN}/korea-news-list.html`, priority: '0.9' },
   { loc: `${SITE_ORIGIN}/shorts-bg-image-list.html`, priority: '0.8' },
-  { loc: `${SITE_ORIGIN}/ranking-news-list.html`, priority: '0.8' },
   { loc: `${SITE_ORIGIN}/english-synonym-list.html`, priority: '0.8' },
   { loc: `${SITE_ORIGIN}/english-opinions-list.html`, priority: '0.8' },
   { loc: `${SITE_ORIGIN}/calm-mind-list.html`, priority: '0.8' },
