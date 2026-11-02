@@ -1,0 +1,278 @@
+(function () {
+  "use strict";
+
+  function getWords() {
+    return Array.isArray(window.VOCAB_QUIZ_TRACK_WORDS)
+      ? window.VOCAB_QUIZ_TRACK_WORDS
+      : [];
+  }
+
+  function $(id) {
+    return document.getElementById(id);
+  }
+
+  var mode = "en"; // en: 영어 문제 → 한글 입력
+  var bound = false;
+
+  function norm(s) {
+    return String(s || "")
+      .toLowerCase()
+      .replace(/[\s\-./·･・，、;；]+/g, "");
+  }
+
+  /** 배열·쉼표/슬래시로 이은 여러 뜻을 개별 정답으로 펼침 */
+  function expandAnswers(list) {
+    var out = [];
+    var seen = Object.create(null);
+    (Array.isArray(list) ? list : [list]).forEach(function (item) {
+      String(item || "")
+        .split(/[,，、/;；·･・|/]+/)
+        .map(function (p) {
+          return p.trim();
+        })
+        .filter(Boolean)
+        .forEach(function (p) {
+          var key = norm(p);
+          if (!key || seen[key]) return;
+          seen[key] = true;
+          out.push(p);
+        });
+    });
+    return out;
+  }
+
+  /** 포함 관계도 허용 (짧은 오답 남발 방지를 위해 최소 길이) */
+  function softMatch(userNorm, answerNorm) {
+    if (!userNorm || !answerNorm) return false;
+    if (userNorm === answerNorm) return true;
+    var minLen = /[a-z]/.test(userNorm) ? 4 : 2;
+    if (userNorm.length < minLen || answerNorm.length < minLen) return false;
+    return answerNorm.indexOf(userNorm) !== -1 || userNorm.indexOf(answerNorm) !== -1;
+  }
+
+  /** 여러 뜻 중 하나만 맞아도 true (유사·대체 표현 / 부분 일치 포함) */
+  function matchesAny(userValue, answerList) {
+    var answers = expandAnswers(answerList);
+    if (!answers.length) return false;
+    var parts = expandAnswers([userValue]);
+    if (!parts.length) parts = [String(userValue || "").trim()].filter(Boolean);
+    return parts.some(function (part) {
+      var n = norm(part);
+      return answers.some(function (a) {
+        return softMatch(n, norm(a));
+      });
+    });
+  }
+
+  function escapeHtml(s) {
+    return String(s || "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+
+  function render() {
+    var list = $("list");
+    var tot = $("tot");
+    var WORDS = getWords();
+    if (!list) return;
+
+    list.innerHTML = WORDS.map(function (w, i) {
+      var q = mode === "en" ? w.en[0] : w.ko[0];
+      var ph = mode === "en" ? "한글 뜻 입력" : "영어 단어 입력";
+      return (
+        '<li id="r' +
+        i +
+        '">' +
+        '<span class="vq-n">' +
+        String(i + 1).padStart(2, "0") +
+        "</span>" +
+        '<span class="vq-q">' +
+        escapeHtml(q) +
+        "</span>" +
+        '<input id="in' +
+        i +
+        '" data-i="' +
+        i +
+        '" type="text" enterkeyhint="go" inputmode="text" placeholder="' +
+        escapeHtml(ph) +
+        '" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="' +
+        escapeHtml(q) +
+        ' 정답">' +
+        '<span class="vq-mark" aria-live="polite"></span>' +
+        "</li>"
+      );
+    }).join("");
+
+    if (tot) tot.textContent = String(WORDS.length);
+    updateScore();
+  }
+
+  function setAnswerLine(li, answers, ok) {
+    var prev = li.querySelector(".vq-ans");
+    if (prev) prev.remove();
+    var d = document.createElement("span");
+    d.className = "vq-ans" + (ok ? " is-ok" : "");
+    d.textContent = (ok ? "인정 답: " : "정답: ") + answers.join(", ");
+    li.appendChild(d);
+  }
+
+  function check(i, showAnswer) {
+    var WORDS = getWords();
+    var li = $("r" + i);
+    var inp = $("in" + i);
+    if (!li || !inp || !WORDS[i]) return;
+
+    var v = inp.value.trim();
+    var rawAnswers = mode === "en" ? WORDS[i].ko : WORDS[i].en;
+    var answers = expandAnswers(rawAnswers);
+    var ansEl = li.querySelector(".vq-ans");
+    if (ansEl) ansEl.remove();
+
+    if (!v && !showAnswer) {
+      li.className = "";
+      var markClear = li.querySelector(".vq-mark");
+      if (markClear) markClear.textContent = "";
+      updateScore();
+      return;
+    }
+
+    var ok = v ? matchesAny(v, rawAnswers) : false;
+    var mark = li.querySelector(".vq-mark");
+
+    if (!v && showAnswer) {
+      /* 입력 없이 정답 보기 — X 없이 정답만 전체 표시 */
+      li.className = "is-revealed";
+      if (mark) mark.textContent = "";
+      setAnswerLine(li, answers, false);
+      updateScore();
+      return;
+    }
+
+    li.className = ok ? "ok" : "bad";
+    if (mark) mark.textContent = ok ? "O" : "X";
+    if (showAnswer || v) setAnswerLine(li, answers, ok);
+    updateScore();
+  }
+
+  /** 입력 여부와 관계없이 모든 문항 정답 표시 */
+  function revealAll() {
+    getWords().forEach(function (_, i) {
+      check(i, true);
+    });
+  }
+
+  function updateScore() {
+    var WORDS = getWords();
+    var n = document.querySelectorAll("#list li.ok").length;
+    var sc = $("sc");
+    var prog = $("prog");
+    if (sc) sc.textContent = String(n);
+    if (prog) {
+      prog.style.width =
+        WORDS.length > 0 ? (n / WORDS.length) * 100 + "%" : "0%";
+    }
+  }
+
+  function setMode(m) {
+    mode = m;
+    var mEn = $("m-en");
+    var mKo = $("m-ko");
+    if (mEn) mEn.setAttribute("aria-pressed", m === "en" ? "true" : "false");
+    if (mKo) mKo.setAttribute("aria-pressed", m === "ko" ? "true" : "false");
+    render();
+  }
+
+  function bind() {
+    if (bound) return;
+    var list = $("list");
+    if (!list) return;
+    bound = true;
+
+    list.addEventListener("keydown", function (e) {
+      if (e.key !== "Enter" || !e.target.dataset.i) return;
+      e.preventDefault();
+      var i = +e.target.dataset.i;
+      check(i, false);
+      var next = $("in" + (i + 1));
+      if (next) next.focus();
+      else e.target.blur();
+    });
+
+    /* 모바일: Next로만 넘어가도, 칸을 떠날 때 입력값이 있으면 채점 */
+    list.addEventListener(
+      "blur",
+      function (e) {
+        if (!e.target || !e.target.dataset || e.target.dataset.i == null) return;
+        if (!String(e.target.value || "").trim()) return;
+        check(+e.target.dataset.i, false);
+      },
+      true
+    );
+
+    list.addEventListener("input", function (e) {
+      var li = e.target.closest("li");
+      if (!li || !li.className) return;
+      li.className = "";
+      var mark = li.querySelector(".vq-mark");
+      if (mark) mark.textContent = "";
+      var ans = li.querySelector(".vq-ans");
+      if (ans) ans.remove();
+      updateScore();
+    });
+
+    var checkAll = $("checkAll");
+    var reveal = $("reveal");
+    var reset = $("reset");
+    var mEn = $("m-en");
+    var mKo = $("m-ko");
+
+    if (checkAll) {
+      checkAll.onclick = function () {
+        getWords().forEach(function (_, i) {
+          check(i, false);
+        });
+      };
+    }
+    if (reveal) {
+      reveal.onclick = function () {
+        revealAll();
+      };
+    }
+    if (reset) {
+      reset.onclick = function () {
+        render();
+        var first = $("in0");
+        if (first) first.focus();
+      };
+    }
+    if (mEn) {
+      mEn.onclick = function () {
+        setMode("en");
+      };
+    }
+    if (mKo) {
+      mKo.onclick = function () {
+        setMode("ko");
+      };
+    }
+  }
+
+  function init() {
+    if (!getWords().length) {
+      console.warn("[vocabulary-quiz-track] VOCAB_QUIZ_TRACK_WORDS is empty");
+    }
+    bound = false;
+    bind();
+    setMode("en");
+  }
+
+  window.initVocabQuizTrack = init;
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else if ($("list")) {
+    init();
+  }
+})();

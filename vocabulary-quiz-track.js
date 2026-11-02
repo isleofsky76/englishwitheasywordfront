@@ -1,15 +1,18 @@
 (function () {
   "use strict";
 
-  var WORDS = Array.isArray(window.VOCAB_QUIZ_TRACK_WORDS)
-    ? window.VOCAB_QUIZ_TRACK_WORDS
-    : [];
+  function getWords() {
+    return Array.isArray(window.VOCAB_QUIZ_TRACK_WORDS)
+      ? window.VOCAB_QUIZ_TRACK_WORDS
+      : [];
+  }
 
   function $(id) {
     return document.getElementById(id);
   }
 
   var mode = "en"; // en: 영어 문제 → 한글 입력
+  var bound = false;
 
   function norm(s) {
     return String(s || "")
@@ -72,6 +75,7 @@
   function render() {
     var list = $("list");
     var tot = $("tot");
+    var WORDS = getWords();
     if (!list) return;
 
     list.innerHTML = WORDS.map(function (w, i) {
@@ -105,11 +109,6 @@
     updateScore();
   }
 
-  function answerListFor(i) {
-    var raw = mode === "en" ? WORDS[i].ko : WORDS[i].en;
-    return expandAnswers(raw);
-  }
-
   function setAnswerLine(li, answers, ok) {
     var prev = li.querySelector(".vq-ans");
     if (prev) prev.remove();
@@ -120,6 +119,7 @@
   }
 
   function check(i, showAnswer) {
+    var WORDS = getWords();
     var li = $("r" + i);
     var inp = $("in" + i);
     if (!li || !inp || !WORDS[i]) return;
@@ -158,12 +158,13 @@
 
   /** 입력 여부와 관계없이 모든 문항 정답 표시 */
   function revealAll() {
-    WORDS.forEach(function (_, i) {
+    getWords().forEach(function (_, i) {
       check(i, true);
     });
   }
 
   function updateScore() {
+    var WORDS = getWords();
     var n = document.querySelectorAll("#list li.ok").length;
     var sc = $("sc");
     var prog = $("prog");
@@ -184,8 +185,10 @@
   }
 
   function bind() {
+    if (bound) return;
     var list = $("list");
     if (!list) return;
+    bound = true;
 
     list.addEventListener("keydown", function (e) {
       if (e.key !== "Enter" || !e.target.dataset.i) return;
@@ -198,11 +201,15 @@
     });
 
     /* 모바일: Next로만 넘어가도, 칸을 떠날 때 입력값이 있으면 채점 */
-    list.addEventListener("blur", function (e) {
-      if (!e.target || !e.target.dataset || e.target.dataset.i == null) return;
-      if (!String(e.target.value || "").trim()) return;
-      check(+e.target.dataset.i, false);
-    }, true);
+    list.addEventListener(
+      "blur",
+      function (e) {
+        if (!e.target || !e.target.dataset || e.target.dataset.i == null) return;
+        if (!String(e.target.value || "").trim()) return;
+        check(+e.target.dataset.i, false);
+      },
+      true
+    );
 
     list.addEventListener("input", function (e) {
       var li = e.target.closest("li");
@@ -223,7 +230,7 @@
 
     if (checkAll) {
       checkAll.onclick = function () {
-        WORDS.forEach(function (_, i) {
+        getWords().forEach(function (_, i) {
           check(i, false);
         });
       };
@@ -240,25 +247,32 @@
         if (first) first.focus();
       };
     }
-    if (mEn) mEn.onclick = function () {
-      setMode("en");
-    };
-    if (mKo) mKo.onclick = function () {
-      setMode("ko");
-    };
+    if (mEn) {
+      mEn.onclick = function () {
+        setMode("en");
+      };
+    }
+    if (mKo) {
+      mKo.onclick = function () {
+        setMode("ko");
+      };
+    }
   }
 
   function init() {
-    if (!WORDS.length) {
+    if (!getWords().length) {
       console.warn("[vocabulary-quiz-track] VOCAB_QUIZ_TRACK_WORDS is empty");
     }
+    bound = false;
     bind();
-    render();
+    setMode("en");
   }
+
+  window.initVocabQuizTrack = init;
 
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", init);
-  } else {
+  } else if ($("list")) {
     init();
   }
 })();
