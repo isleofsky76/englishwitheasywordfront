@@ -448,11 +448,15 @@
               );
             })
             .join('') +
-          '<label class="os-hide-meaning-toggle" title="한글 뜻을 흐리게 가립니다">' +
+          '<label class="os-hide-meaning-toggle" title="' +
+          (hideOn ? '체크 해제하면 뜻이 보입니다' : '체크하면 뜻을 가립니다') +
+          '">' +
           '<input type="checkbox" class="os-hide-meaning-input" id="os-hide-meaning"' +
           (hideOn ? ' checked' : '') +
           '>' +
-          '<span>전체 뜻 가리기</span>' +
+          '<span class="os-hide-meaning-label">' +
+          (hideOn ? '전체 뜻 해제하기' : '전체 뜻 가리기') +
+          '</span>' +
           '</label>' +
           '</div>';
         applyHideMeaning(hideOn);
@@ -549,12 +553,19 @@
   }
 
   function applyHideMeaning(on) {
-    document.body.classList.toggle('os-hide-meaning', !!on);
+    var hide = !!on;
+    document.body.classList.toggle('os-hide-meaning', hide);
     try {
-      localStorage.setItem(HIDE_MEANING_KEY, on ? '1' : '0');
+      localStorage.setItem(HIDE_MEANING_KEY, hide ? '1' : '0');
     } catch (e) { /* ignore */ }
     var cb = document.getElementById('os-hide-meaning');
-    if (cb && cb.checked !== !!on) cb.checked = !!on;
+    if (cb && cb.checked !== hide) cb.checked = hide;
+    var label = document.querySelector('.os-hide-meaning-label');
+    if (label) label.textContent = hide ? '전체 뜻 해제하기' : '전체 뜻 가리기';
+    var wrap = document.querySelector('.os-hide-meaning-toggle');
+    if (wrap) {
+      wrap.title = hide ? '체크 해제하면 뜻이 보입니다' : '체크하면 뜻을 가립니다';
+    }
   }
 
   function bindAlphaNav() {
