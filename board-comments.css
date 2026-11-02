@@ -14,8 +14,10 @@
 .rd-article-actions .board-comments-root {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  align-self: flex-start;
   margin-left: 4px;
+  /* 댓글 폼이 열려도 유튜브 버튼 높이에 영향 주지 않음 */
+  flex: 1 1 280px;
 }
 
 .nv-related-links .board-comments-root,

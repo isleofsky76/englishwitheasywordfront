@@ -1058,7 +1058,7 @@ function nvLoadStylesheet(href) {
 
 async function ensureBoardCommentsAssets() {
     const base = nvAssetBase();
-    nvLoadStylesheet(base + 'board-comments.css?v=20261102c1');
+    nvLoadStylesheet(base + 'board-comments.css?v=20261102c2');
     if (!window.BoardComments) {
         await nvLoadScript(base + 'board-comments.js?v=20261102c1');
     }
