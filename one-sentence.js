@@ -432,6 +432,7 @@
         .join('');
       if (index) {
         index.hidden = false;
+        var hideOn = isHideMeaningOn();
         index.innerHTML =
           '<div class="os-alpha-inner">' +
           groups
@@ -447,7 +448,14 @@
               );
             })
             .join('') +
+          '<label class="os-hide-meaning-toggle" title="한글 뜻을 흐리게 가립니다">' +
+          '<input type="checkbox" class="os-hide-meaning-input" id="os-hide-meaning"' +
+          (hideOn ? ' checked' : '') +
+          '>' +
+          '<span>전체 뜻 가리기</span>' +
+          '</label>' +
           '</div>';
+        applyHideMeaning(hideOn);
         if (groups[0]) setActiveAlpha(groups[0].letter);
       }
       observeLetterGroups();
@@ -528,6 +536,27 @@
     groups.forEach(function (g) { alphaObserver.observe(g); });
   }
 
+  var HIDE_MEANING_KEY = 'os-hide-meaning';
+
+  function isHideMeaningOn() {
+    try {
+      var v = localStorage.getItem(HIDE_MEANING_KEY);
+      if (v === null) return true; /* default: 뜻 가림 */
+      return v === '1';
+    } catch (e) {
+      return true;
+    }
+  }
+
+  function applyHideMeaning(on) {
+    document.body.classList.toggle('os-hide-meaning', !!on);
+    try {
+      localStorage.setItem(HIDE_MEANING_KEY, on ? '1' : '0');
+    } catch (e) { /* ignore */ }
+    var cb = document.getElementById('os-hide-meaning');
+    if (cb && cb.checked !== !!on) cb.checked = !!on;
+  }
+
   function bindAlphaNav() {
     var index = document.getElementById('os-alpha');
     if (!index || index._osBound) return;
@@ -541,6 +570,11 @@
       if (!target) return;
       setActiveAlpha(letter);
       scrollToOsAnchor(target);
+    });
+    index.addEventListener('change', function (e) {
+      var cb = e.target.closest('.os-hide-meaning-input');
+      if (!cb || !index.contains(cb)) return;
+      applyHideMeaning(cb.checked);
     });
   }
 
@@ -910,6 +944,7 @@
   }
 
   function init() {
+    applyHideMeaning(isHideMeaningOn());
     syncAdminUnlockFromUrl();
     injectAdminForm();
     bindFeed();

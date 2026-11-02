@@ -169,6 +169,50 @@
   border-color: var(--os-blue);
 }
 
+/* A–# 옆: 전체 뜻 가리기 (기본 on) */
+.os-hide-meaning-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: 4px;
+  padding: 0 0.55em 0 0.35em;
+  height: 1.85em;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+  color: #4a4a4a;
+  background: #fff;
+  border: 1px solid rgba(58, 56, 52, 0.16);
+  border-radius: 999px;
+  box-sizing: border-box;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  white-space: nowrap;
+}
+
+.os-hide-meaning-toggle:hover {
+  color: var(--os-blue);
+  border-color: var(--os-blue);
+}
+
+.os-hide-meaning-input {
+  width: 14px;
+  height: 14px;
+  margin: 0;
+  accent-color: var(--os-blue);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+body.os-hide-meaning .os-head-ko,
+body.os-hide-meaning .os-ko,
+body.os-hide-meaning .os-cf-ko {
+  filter: blur(6.5px);
+  user-select: none;
+  transition: filter 0.18s ease;
+}
+
 .os-back-top {
   position: fixed;
   right: 16px;
