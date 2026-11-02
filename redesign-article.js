@@ -5,7 +5,7 @@
 (function (global) {
   'use strict';
 
-  var ASSET_VER = '20261102c7';
+  var ASSET_VER = '20261102c8';
 
   /** SEO 경로 /board/slug/ 에서 list.html 상대링크가 깨지지 않게 */
   function seoPathPrefix() {
@@ -376,9 +376,10 @@
 
       if (koEx) koText = stripHtml(koEx.innerHTML);
       if (cfEx) cfText = stripHtml(cfEx.innerHTML);
-      if (!koText && !enHtml && sec.querySelector('.nv-narrative-text')) {
-        /* 구형 한 줄 포맷 폴백 */
-        koText = stripHtml(sec.querySelector('.nv-narrative-text').innerHTML);
+      var narrTextEl = sec.querySelector('.nv-narrative-text');
+      if (!koText && !enHtml && narrTextEl && narrTextEl !== cfEx) {
+        /* 구형 한 줄 포맷 폴백 — cf와 같은 노드면 중복 방지 */
+        koText = stripHtml(narrTextEl.innerHTML);
       }
 
       /* 구형: 한 <p>에 "영어 / 한글 cf." — 포맷 일치할 때만 EN·KO·cf로 분리 */
@@ -389,14 +390,21 @@
         else if (!enEx && !koEx && cfEx) combinedHtml = cfEx.innerHTML;
         else if (!enHtml && !koText && cfEx) combinedHtml = cfEx.innerHTML;
         else if (enHtml && !koText && !cfText) combinedHtml = enHtml;
-        else if (!enHtml && !koText && sec.querySelector('.nv-narrative-text')) {
-          combinedHtml = sec.querySelector('.nv-narrative-text').innerHTML;
+        else if (!enHtml && !koText && narrTextEl) {
+          combinedHtml = narrTextEl.innerHTML;
         }
         var splitParts = splitNarrativeEnKoCfHtml(combinedHtml);
         if (splitParts) {
           enHtml = splitParts.enHtml;
           koText = splitParts.ko;
           cfText = splitParts.cf;
+        } else if (koText && cfText) {
+          var koNorm = koText.replace(/^\d+\.\s*/, '').trim();
+          var cfNorm = cfText.replace(/^\d+\.\s*/, '').trim();
+          if (koNorm === cfNorm) {
+            /* 슬래시 없는 구형: 같은 문장 두 번 표시 방지 */
+            koText = '';
+          }
         }
       }
 

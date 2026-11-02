@@ -1088,7 +1088,7 @@ async function mountNewsVocaComments(post) {
             await nvLoadScript(base + 'board-list-config.js?v=20261020auto2');
         }
         if (!window.mountRedesignArticle) {
-            await nvLoadScript(base + 'redesign-article.js?v=20261102c7');
+            await nvLoadScript(base + 'redesign-article.js?v=20261102c8');
         }
     } catch (e) {
         console.warn('redesign deps skipped', e);
