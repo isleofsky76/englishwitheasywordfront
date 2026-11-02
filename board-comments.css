@@ -14,10 +14,12 @@
 .rd-article-actions .board-comments-root {
   display: flex;
   flex-direction: column;
-  align-self: flex-start;
-  margin-left: 4px;
-  /* 댓글 폼이 열려도 유튜브 버튼 높이에 영향 주지 않음 */
-  flex: 1 1 280px;
+  align-self: stretch;
+  margin-left: 0;
+  /* 유튜브 아래 전체 폭 — 옆 배치 시 버튼이 늘어나는 문제 방지 */
+  flex: 0 0 auto;
+  width: 100%;
+  max-width: 420px;
 }
 
 .nv-related-links .board-comments-root,
@@ -109,13 +111,22 @@
   -webkit-text-fill-color: currentColor;
 }
 
+.board-comments-root .os-cmt-form-title {
+  margin: 0 0 8px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--os-ink-soft);
+}
+
 .board-comments-root .os-cmt-panel {
   margin-top: 10px;
   padding: 12px;
   border: 1px solid rgba(58, 56, 52, 0.1);
   border-radius: 10px;
   background: rgba(58, 56, 52, 0.03);
-  width: min(100%, 420px);
+  width: 100%;
+  max-width: 420px;
+  box-sizing: border-box;
 }
 
 .board-comments-root .os-cmt-panel[hidden] {
@@ -363,13 +374,7 @@
     width: 100%;
   }
 
-  .rd-article-actions {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
   .rd-article-actions .board-comments-root {
-    margin-left: 0;
-    width: 100%;
+    max-width: none;
   }
 }
