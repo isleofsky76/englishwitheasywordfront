@@ -251,7 +251,7 @@
 body.os-hide-meaning .os-head-ko,
 body.os-hide-meaning .os-ko,
 body.os-hide-meaning .os-cf-ko {
-  filter: blur(6.5px);
+  filter: blur(3.5px);
   user-select: none;
   transition: filter 0.18s ease;
 }
