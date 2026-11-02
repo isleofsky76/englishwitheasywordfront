@@ -20,8 +20,10 @@ export const BOARD_SEO = {
     cssFile: 'news-voca.css',
     cssVersion: '20261020rd21',
     jsFile: 'news-voca.js',
-    jsVersion: '20261020auto2',
+    jsVersion: '20261102c1',
     listHtml: 'news-voca-list.html',
+    extraCss: [{ file: 'board-comments.css', version: '20261102c1' }],
+    extraJs: [{ file: 'board-comments.js', version: '20261102c1' }],
   },
   'cooking-voca': {
     label: 'Cooking Voca',

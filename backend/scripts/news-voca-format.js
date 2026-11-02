@@ -409,6 +409,7 @@ function buildRelatedLinksHtml(youtubeUrl, sourceUrl) {
     );
   }
   if (!lines.length) return '';
+  lines.push('<div class="board-comments-root nv-related-comments" data-board-comments-root></div>');
   return `<footer class="nv-related-links">\n${lines.join('\n')}\n</footer>`;
 }
 

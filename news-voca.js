@@ -829,7 +829,8 @@ async function loadPost() {
             usedRedesign = await mountRedesignArticle(postContainer, post, {
                 boardKey: 'news-voca',
                 apiBaseUrl: API_BASE_URL,
-                convertedMessage: convertedMessage
+                convertedMessage: convertedMessage,
+                enableComments: true
             });
         }
 
@@ -880,6 +881,8 @@ async function loadPost() {
                 board: 'guestbook'
             });
         }
+
+        await mountNewsVocaComments(post);
 
         // 버튼 기능 연결
         const backBtn = document.getElementById('backBtn');
@@ -1042,6 +1045,40 @@ function nvLoadScript(src) {
         s.onerror = () => reject(new Error('fail ' + src));
         document.head.appendChild(s);
     });
+}
+
+function nvLoadStylesheet(href) {
+    const name = href.replace(/^.*\//, '').split('?')[0];
+    if (document.querySelector(`link[href*="${name}"]`)) return;
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = href;
+    document.head.appendChild(link);
+}
+
+async function ensureBoardCommentsAssets() {
+    const base = nvAssetBase();
+    nvLoadStylesheet(base + 'board-comments.css?v=20261102c1');
+    if (!window.BoardComments) {
+        await nvLoadScript(base + 'board-comments.js?v=20261102c1');
+    }
+}
+
+async function mountNewsVocaComments(post) {
+    if (!post) return;
+    try {
+        await ensureBoardCommentsAssets();
+        if (!window.BoardComments || typeof window.BoardComments.mount !== 'function') return;
+        const contentKey = String(post.slug || post._id || '').trim();
+        if (!contentKey) return;
+        await window.BoardComments.mount({
+            board: 'news-voca',
+            contentKey: contentKey,
+            title: post.title || '',
+        });
+    } catch (e) {
+        console.warn('board comments mount skipped', e);
+    }
 }
 
 (async function nvBootRedesign() {

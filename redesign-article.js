@@ -581,11 +581,14 @@
         '</div>';
     }
 
-    /* 하단 CTA — 유튜브만 (원문 기사는 출처 블록에만 표시) */
+    /* 하단 CTA — 유튜브 + 댓글(뉴스 영어 등에서 BoardComments.mount) */
     var actions = '<div class="rd-article-actions">';
     if (yt) {
       actions += '<a class="rd-btn-solid" href="' + escapeAttr(yt.watch) + '" target="_blank" rel="noopener noreferrer">' +
         ytLogoSvg() + ' 유튜브로 듣기</a>';
+    }
+    if (options.enableComments) {
+      actions += '<div class="board-comments-root" data-board-comments-root></div>';
     }
     actions += '</div>';
 
@@ -758,7 +761,8 @@
       convertedMessage: options.convertedMessage,
       related: related,
       prev: options.prev,
-      next: options.next
+      next: options.next,
+      enableComments: options.enableComments
     });
     if (ok && !related.length && options.apiBaseUrl && cfg && cfg.apiPath) {
       fetch(options.apiBaseUrl + cfg.apiPath, { cache: 'no-store' })
