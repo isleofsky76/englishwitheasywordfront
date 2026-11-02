@@ -20,7 +20,7 @@ export const BOARD_SEO = {
     cssFile: 'news-voca.css',
     cssVersion: '20261102split1',
     jsFile: 'news-voca.js',
-    jsVersion: '20261102c9',
+    jsVersion: '20261102c10',
     listHtml: 'news-voca-list.html',
     extraCss: [
       { file: 'board-comments.css', version: '20261102c4' },
@@ -28,7 +28,7 @@ export const BOARD_SEO = {
     ],
     extraJs: [
       { file: 'board-comments.js', version: '20261102c4' },
-      { file: 'redesign-article.js', version: '20261102c9' },
+      { file: 'redesign-article.js', version: '20261102c10' },
     ],
   },
   'cooking-voca': {
@@ -133,8 +133,10 @@ export const BOARD_SEO = {
     cssFile: 'news-voca.css',
     cssVersion: '20261020rd21',
     jsFile: 'industry-news.js',
-    jsVersion: '20261028cat1',
+    jsVersion: '20261102c10',
     listHtml: 'industry-news-list.html',
+    extraCss: [{ file: 'redesign-article.css', version: '20261102c7' }],
+    extraJs: [{ file: 'redesign-article.js', version: '20261102c10' }],
   },
   'ai-news': {
     label: '인공지능뉴스',
@@ -597,8 +599,8 @@ ${(board.extraCss || []).map((c) => `    <link rel="stylesheet" href="../../${c.
     <link rel="stylesheet" href="../../weather-banner.css?v=20260612g">
     <link rel="stylesheet" href="../../world-clock.css?v=20260612g">
     <link rel="stylesheet" href="../../redesign-tokens.css?v=20261020rd27">
-    <link rel="stylesheet" href="../../redesign-article.css?v=20261102c6">
-    <link rel="preload" href="../../redesign-article.js?v=20261030noDupArticle" as="script">
+    <link rel="stylesheet" href="../../redesign-article.css?v=20261102c7">
+    <link rel="preload" href="../../redesign-article.js?v=20261102c10" as="script">
     <style id="rd-fouc-guard">
       /* SEO 구형 본문이 redesign 전에 깜빡이지 않도록 (!important 금지: 키프레임 fallback이 무시됨) */
       body[data-nv-board]:not(.rd-ready) #post-container {

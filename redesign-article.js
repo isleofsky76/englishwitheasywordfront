@@ -5,7 +5,7 @@
 (function (global) {
   'use strict';
 
-  var ASSET_VER = '20261102c9';
+  var ASSET_VER = '20261102c10';
 
   /** SEO 경로 /board/slug/ 에서 list.html 상대링크가 깨지지 않게 */
   function seoPathPrefix() {
@@ -298,34 +298,62 @@
     return cards;
   }
 
+  /** 한글 줄이 영어 예문 복제이거나 한글이 없으면 빈 칸 */
+  function sanitizeNarrativeKo(koText, enHtml) {
+    var ko = String(koText || '').replace(/\s+/g, ' ').trim();
+    if (!ko) return '';
+    if (!/[가-힣]/.test(ko)) return '';
+    var enPlain = stripHtml(enHtml).replace(/\s+/g, ' ').trim().toLowerCase();
+    if (enPlain && ko.toLowerCase() === enPlain) return '';
+    return ko;
+  }
+
   /**
    * "영어 / 한글 cf. word: 뜻" 한 줄 → { enHtml, ko, cf }
-   * 슬래시+cf. 포맷만 분리. 아니면 null (다른 글 형식은 건드리지 않음)
+   * 슬래시+cf. 포맷만 분리. 한글 번역은 선택(없으면 빈 칸).
    */
   function splitNarrativeEnKoCfHtml(html) {
     var raw = String(html || '').trim();
     if (!raw) return null;
     var plain = stripHtml(raw).replace(/\s+/g, ' ').trim();
-    if (!/\s\/\s/.test(plain) || !/\bcf\./i.test(plain)) return null;
+    if (!/\bcf\./i.test(plain)) return null;
 
-    var slashIdx = raw.search(/\s\/\s/);
-    if (slashIdx < 0) return null;
-    var enHtml = raw.slice(0, slashIdx).trim().replace(/^\d+\.\s*/, '');
-    var restHtml = raw.slice(slashIdx).replace(/^\s\/\s*/, '').trim();
-    var restPlain = stripHtml(restHtml).replace(/\s+/g, ' ').trim();
-    var cfAt = restPlain.search(/\s+cf\.\s+/i);
+    var enHtml = '';
     var ko = '';
     var cf = '';
-    if (cfAt >= 0) {
-      ko = restPlain.slice(0, cfAt).trim();
-      cf = restPlain.slice(cfAt).replace(/^\s+/, '').trim();
+    var slashIdx = raw.search(/\s\/\s/);
+    if (slashIdx >= 0) {
+      enHtml = raw.slice(0, slashIdx).trim().replace(/^\d+\.\s*/, '');
+      var restHtml = raw.slice(slashIdx).replace(/^\s\/\s*/, '').trim();
+      var restPlain = stripHtml(restHtml).replace(/\s+/g, ' ').trim();
+      var cfAt = restPlain.search(/\s+cf\.\s+/i);
+      if (cfAt >= 0) {
+        ko = restPlain.slice(0, cfAt).trim();
+        cf = restPlain.slice(cfAt).replace(/^\s+/, '').trim();
+      } else {
+        var cfStart = restPlain.match(/^(.*?)(\bcf\.\s+.+)$/i);
+        if (!cfStart) return null;
+        ko = cfStart[1].trim();
+        cf = cfStart[2].trim();
+      }
     } else {
-      var cfStart = restPlain.match(/^(.*?)(\bcf\.\s+.+)$/i);
-      if (!cfStart) return null;
-      ko = cfStart[1].trim();
-      cf = cfStart[2].trim();
+      /* "영어 cf. word: 뜻" — 한글 번역 없음 */
+      var cfOnly = plain.match(/^(.*?)(\bcf\.\s+.+)$/i);
+      if (!cfOnly) return null;
+      var head = cfOnly[1].replace(/^\d+\.\s*/, '').trim();
+      cf = cfOnly[2].trim();
+      if (/[가-힣]/.test(head) && !/[A-Za-z]{3,}/.test(head)) ko = head;
+      else enHtml = head;
+      /* raw HTML에서 영어 부분만 보존(마크 유지) */
+      if (enHtml) {
+        var cfHtmlAt = raw.search(/\s+cf\.\s+/i);
+        if (cfHtmlAt >= 0) {
+          enHtml = raw.slice(0, cfHtmlAt).trim().replace(/^\d+\.\s*/, '');
+        }
+      }
     }
-    if (!enHtml || !ko || !cf) return null;
+    ko = sanitizeNarrativeKo(ko, enHtml);
+    if (!enHtml || !cf) return null;
     return { enHtml: enHtml, ko: ko, cf: cf };
   }
 
@@ -405,6 +433,8 @@
         /* 구형 한 줄 포맷 폴백 — cf와 같은 노드면 중복 방지 */
         koText = stripHtml(narrTextEl.innerHTML);
       }
+      /* 한글 번역이 없으면 비움 — 영어 예문을 한글 칸에 넣지 않음 */
+      koText = sanitizeNarrativeKo(koText, enHtml);
 
       /* 구형: 한 <p>에 "영어 / 한글 cf." — 포맷 일치할 때만 EN·KO·cf로 분리 */
       if (isNarrative) {
@@ -430,6 +460,7 @@
             koText = '';
           }
         }
+        koText = sanitizeNarrativeKo(koText, enHtml);
       }
 
       /* mark 없으면 은밀한(covert) 형태에서 영어 복구 — '표현' 폴백 방지 */
