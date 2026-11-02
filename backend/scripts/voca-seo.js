@@ -44,9 +44,13 @@ export const BOARD_SEO = {
     cssFile: 'news-voca.css',
     cssVersion: '20261020rd21',
     jsFile: 'culture-voca.js',
-    jsVersion: '20261020auto2',
+    jsVersion: '20261102c10',
     listHtml: 'culture-voca-list.html',
-    extraCss: [{ file: 'culture-voca.css', version: '20260617' }],
+    extraCss: [
+      { file: 'culture-voca.css', version: '20260617' },
+      { file: 'redesign-article.css', version: '20261102c7' },
+    ],
+    extraJs: [{ file: 'redesign-article.js', version: '20261102c10' }],
   },
   'defense-news': {
     label: '국방뉴스',
