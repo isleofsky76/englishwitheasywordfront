@@ -8,74 +8,150 @@ import { uploadSynonym } from './synonym-format.js';
 
 // ========== 여기만 수정 ==========
 const article = {
-  title: '끓이다 · 우리다 · 꾸미다 #연관단어',
+  title: '아는 체하는 사람 · 지적인 · 괴짜 #연관단어',
 
-  slug: 'brew-boil-steep-ferment-bland-related-words',
+  slug: 'wiseacre-highbrow-boffin-egghead-prodigy-related-words',
 
   metaDescription:
-    'brew, boil, steep, ferment, bland, develop, plot, erupt, contrive 뜻·발음 연관단어 모음.',
+    'wiseacre, highbrow, boffin, egghead, prodigy, eccentric, mediocre, mundane 뜻·발음·예문 연관단어 모음.',
 
-  password: 'seed_synonym_brew-boil-steep-ferment-bland',
+  password: 'seed_synonym_wiseacre-highbrow-boffin-egghead',
 
-  datePublished: '2026-10-30',
+  datePublished: '2026-11-02',
 
   intro: [
-    '끓이다 · 우리다 · 꾸미다 연관단어를 정리합니다. *AI 음성과 이미지를 사용했습니다.',
+    '아는 체하는 사람 · 지적인 · 괴짜 관련 연관단어를 정리합니다. *AI 음성과 이미지를 사용했습니다.',
   ],
 
   words: [
     {
-      title: '1. 끓이다, 양조하다, 꾸미다',
-      narrative: ['**brew**(bruː / 브루)'],
+      title: '1. 아는 체하는 사람, 잘난 체하는 사람',
+      narrative: [
+        '**wiseacre**(ˈwaɪzeɪkər / 와이즈에이커)',
+        '"Don\'t stand there with that wiseacre look."',
+        '그렇게 잘난 체하는 표정으로 서 있지 마.',
+      ],
     },
     {
-      title: '2. 끓이다, 끓다',
-      narrative: ['**boil**(bɔɪl / 보일)'],
+      title: '2. 지적인, 고상한, 교양 수준이 높은',
+      narrative: [
+        '**highbrow**(ˈhaɪbraʊ / 하이브라우)',
+        '"That\'s pretty highbrow for a book group."',
+        '독서 모임치고는 꽤 수준이 높네.',
+      ],
     },
     {
-      title: '3. 우리다, 담가 두다',
-      narrative: ['**steep**(stiːp / 스티프)'],
+      title: '3. 과학자, 기술 전문가, 학구적인 사람 (영국식 비격식)',
+      narrative: [
+        '**boffin**(ˈbɒfɪn / 보핀)',
+        '"It\'ll be fun to see how you boffin types live."',
+        '너희 같은 과학자들은 어떻게 사는지 보면 재미있겠네.',
+      ],
     },
     {
-      title: '4. 발효하다, 발효시키다',
-      narrative: ['**ferment**(fərˈment / 퍼멘트)'],
+      title: '4. 지식인, 먹물, 학자 타입의 사람',
+      narrative: [
+        '**egghead**(ˈɛɡhɛd / 에그헤드)',
+        '"Don\'t listen to Egghead."',
+        '저 먹물 같은 녀석 말은 듣지 마.',
+      ],
     },
     {
-      title: '5. 싱거운, 맛이 밋밋한',
-      narrative: ['**bland**(blænd / 블랜드)'],
+      title: '5. 영재, 신동',
+      narrative: [
+        '**prodigy**(ˈprɒdɪdʒi / 프로디지)',
+        '"You\'re a child prodigy playwright."',
+        '넌 어린 나이에 뛰어난 재능을 보이는 극작가 신동이야.',
+      ],
     },
     {
-      title: '6. 형성되다, 발전하다',
-      narrative: ['**develop**(dɪˈveləp / 디벨럽)'],
+      title: '6. 별난, 괴짜인 / 괴짜',
+      narrative: [
+        '**eccentric**(ɪkˈsɛntrɪk / 익센트릭)',
+        '"He\'s very eccentric."',
+        '그는 아주 별난 사람이야.',
+      ],
     },
     {
-      title: '7. 음모를 꾸미다',
-      narrative: ['**plot**(plɑːt / 플랏)'],
+      title: '7. 그저 그런, 썩 좋지 않은',
+      narrative: [
+        '**mediocre**(ˌmiːdiˈoʊkər / 미디오커)',
+        '"His performances were oftentimes mediocre to sometimes flagrantly incompetent."',
+        '그의 업무 수행은 대체로 평범 이하였고, 때로는 노골적으로 무능한 수준이었다.',
+      ],
     },
     {
-      title: '8. 폭발하다, 갑자기 터져 나오다',
-      narrative: ['**erupt**(ɪˈrʌpt / 이러프트)'],
-    },
-    {
-      title: '9. 꾀하다, 고안하다',
-      narrative: ['**contrive**(kənˈtraɪv / 컨트라이브)'],
+      title: '8. 일상적인, 평범하고 따분한',
+      narrative: [
+        '**mundane**(mʌnˈdeɪn / 먼데인)',
+        '"I always mess up some mundane detail."',
+        '나는 항상 사소하고 일상적인 부분에서 실수를 저지른다.',
+      ],
     },
   ],
 
   wordMeta: [
-    { num: 1, expression: 'brew', meaning: '끓이다, 양조하다, 꾸미다', exampleEn: 'She brews a pot of tea every morning.', exampleKo: '' },
-    { num: 2, expression: 'boil', meaning: '끓이다, 끓다', exampleEn: 'Boil the water before you make the tea.', exampleKo: '' },
-    { num: 3, expression: 'steep', meaning: '우리다, 담가 두다', exampleEn: 'Let the tea leaves steep for three minutes.', exampleKo: '' },
-    { num: 4, expression: 'ferment', meaning: '발효하다, 발효시키다', exampleEn: 'The beer ferments for two weeks.', exampleKo: '' },
-    { num: 5, expression: 'bland', meaning: '싱거운, 맛이 밋밋한', exampleEn: 'The soup tastes a little bland.', exampleKo: '' },
-    { num: 6, expression: 'develop', meaning: '형성되다, 발전하다', exampleEn: 'A storm is developing over the sea.', exampleKo: '' },
-    { num: 7, expression: 'plot', meaning: '음모를 꾸미다', exampleEn: 'They plotted to steal the money.', exampleKo: '' },
-    { num: 8, expression: 'erupt', meaning: '폭발하다, 갑자기 터져 나오다', exampleEn: 'Anger erupted in the meeting room.', exampleKo: '' },
-    { num: 9, expression: 'contrive', meaning: '꾀하다, 고안하다', exampleEn: 'He contrived a way to escape.', exampleKo: '' },
+    {
+      num: 1,
+      expression: 'wiseacre',
+      meaning: '아는 체하는 사람, 잘난 체하는 사람',
+      exampleEn: "Don't stand there with that wiseacre look.",
+      exampleKo: '그렇게 잘난 체하는 표정으로 서 있지 마.',
+    },
+    {
+      num: 2,
+      expression: 'highbrow',
+      meaning: '지적인, 고상한, 교양 수준이 높은',
+      exampleEn: "That's pretty highbrow for a book group.",
+      exampleKo: '독서 모임치고는 꽤 수준이 높네.',
+    },
+    {
+      num: 3,
+      expression: 'boffin',
+      meaning: '과학자, 기술 전문가, 학구적인 사람 (영국식 비격식)',
+      exampleEn: "It'll be fun to see how you boffin types live.",
+      exampleKo: '너희 같은 과학자들은 어떻게 사는지 보면 재미있겠네.',
+    },
+    {
+      num: 4,
+      expression: 'egghead',
+      meaning: '지식인, 먹물, 학자 타입의 사람',
+      exampleEn: "Don't listen to Egghead.",
+      exampleKo: '저 먹물 같은 녀석 말은 듣지 마.',
+    },
+    {
+      num: 5,
+      expression: 'prodigy',
+      meaning: '영재, 신동',
+      exampleEn: "You're a child prodigy playwright.",
+      exampleKo: '넌 어린 나이에 뛰어난 재능을 보이는 극작가 신동이야.',
+    },
+    {
+      num: 6,
+      expression: 'eccentric',
+      meaning: '별난, 괴짜인 / 괴짜',
+      exampleEn: "He's very eccentric.",
+      exampleKo: '그는 아주 별난 사람이야.',
+    },
+    {
+      num: 7,
+      expression: 'mediocre',
+      meaning: '그저 그런, 썩 좋지 않은',
+      exampleEn:
+        'His performances were oftentimes mediocre to sometimes flagrantly incompetent.',
+      exampleKo: '그의 업무 수행은 대체로 평범 이하였고, 때로는 노골적으로 무능한 수준이었다.',
+    },
+    {
+      num: 8,
+      expression: 'mundane',
+      meaning: '일상적인, 평범하고 따분한',
+      exampleEn: 'I always mess up some mundane detail.',
+      exampleKo: '나는 항상 사소하고 일상적인 부분에서 실수를 저지른다.',
+    },
   ],
 
-  youtube: 'https://www.youtube.com/shorts/XdMBQPrWvDQ',
-  videoId: 'XdMBQPrWvDQ',
+  youtube: 'https://youtube.com/shorts/m2OnneDc8po',
+  videoId: 'm2OnneDc8po',
 };
 // ===============================
 
