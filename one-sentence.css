@@ -169,7 +169,7 @@
   border-color: var(--os-blue);
 }
 
-/* A–# 옆: 전체 뜻 가리기 (기본 on) */
+/* A–# 옆: 전체 뜻 가리기 (기본 on) — 가끔 할로로 눈에 띄게 */
 .os-hide-meaning-toggle {
   display: inline-flex;
   align-items: center;
@@ -180,20 +180,28 @@
   font-size: 12px;
   font-weight: 600;
   line-height: 1;
-  color: #4a4a4a;
+  color: #2f5f9e;
   background: #fff;
-  border: 1px solid rgba(58, 56, 52, 0.16);
+  border: 1.5px solid rgba(47, 95, 158, 0.55);
   border-radius: 999px;
   box-sizing: border-box;
   cursor: pointer;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
   white-space: nowrap;
+  box-shadow:
+    0 0 0 2px rgba(47, 95, 158, 0.12),
+    0 0 10px rgba(47, 95, 158, 0.28);
+  animation: os-hide-halo 7.5s ease-in-out infinite;
 }
 
 .os-hide-meaning-toggle:hover {
   color: var(--os-blue);
   border-color: var(--os-blue);
+  animation: none;
+  box-shadow:
+    0 0 0 3px rgba(47, 95, 158, 0.18),
+    0 0 14px rgba(47, 95, 158, 0.35);
 }
 
 .os-hide-meaning-input {
@@ -203,6 +211,41 @@
   accent-color: var(--os-blue);
   cursor: pointer;
   flex-shrink: 0;
+}
+
+@keyframes os-hide-halo {
+  0%,
+  72%,
+  100% {
+    box-shadow:
+      0 0 0 2px rgba(47, 95, 158, 0.1),
+      0 0 8px rgba(47, 95, 158, 0.2);
+    border-color: rgba(47, 95, 158, 0.45);
+  }
+  78% {
+    box-shadow:
+      0 0 0 5px rgba(47, 95, 158, 0.2),
+      0 0 18px rgba(47, 95, 158, 0.45);
+    border-color: rgba(47, 95, 158, 0.85);
+  }
+  84% {
+    box-shadow:
+      0 0 0 2px rgba(47, 95, 158, 0.12),
+      0 0 10px rgba(47, 95, 158, 0.28);
+    border-color: rgba(47, 95, 158, 0.55);
+  }
+  90% {
+    box-shadow:
+      0 0 0 4px rgba(47, 95, 158, 0.16),
+      0 0 14px rgba(47, 95, 158, 0.38);
+    border-color: rgba(47, 95, 158, 0.75);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .os-hide-meaning-toggle {
+    animation: none;
+  }
 }
 
 body.os-hide-meaning .os-head-ko,
