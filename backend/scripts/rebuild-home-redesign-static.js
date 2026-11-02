@@ -312,13 +312,14 @@ function patchAnchorById(html, id, href, innerHtml) {
 
 async function main() {
   console.log('홈 리디자인 정적 링크 … API:', apiBase);
-  const [wotd, intl, korea, defense, economy, quiz, phrases, opinions, culture, calm, quotes] =
+  const [wotd, intl, korea, defense, economy, industry, quiz, phrases, opinions, culture, calm, quotes] =
     await Promise.all([
       fetchEntries('/wordofday'),
       fetchEntries('/guestbook'),
       fetchEntries('/korea-news'),
       fetchEntries('/defense-news'),
       fetchEntries('/economy-news'),
+      fetchEntries('/industry-news'),
       fetchEntries('/vocabulary-quiz'),
       fetchEntries('/easy-voca'),
       fetchEntries('/opinions'),
@@ -328,10 +329,11 @@ async function main() {
     ]);
 
   const news = mixNews([
-    { entries: intl, label: '국제', postPath: 'news-voca', page: 'news-voca.html', take: 3 },
+    { entries: industry, label: '산업', postPath: 'industry-news', page: 'industry-news.html', take: 3 },
+    { entries: intl, label: '국제', postPath: 'news-voca', page: 'news-voca.html', take: 2 },
     { entries: korea, label: '한국', postPath: 'korea-news', page: 'korea-news.html', take: 2 },
     { entries: defense, label: '국방', postPath: 'defense-news', page: 'defense-news.html', take: 2 },
-    { entries: economy, label: '경제', postPath: 'economy-news', page: 'economy-news.html', take: 3 },
+    { entries: economy, label: '경제', postPath: 'economy-news', page: 'economy-news.html', take: 2 },
   ]);
 
   const indexPath = path.join(FRONTEND_ROOT, 'index.html');
