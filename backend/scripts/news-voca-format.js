@@ -479,6 +479,68 @@ function narrativeLineClass(line) {
   return 'nv-narrative-text nv-narrative-def';
 }
 
+/**
+ * "영어 / 한글 cf. word: 뜻" → 줄바꿈용 파트
+ * 가시성: 영어 · 한글 · cf. 각각 별도 줄
+ */
+function splitNarrativeEnKoCf(line) {
+  const raw = String(line ?? '').trim();
+  if (!raw) return [];
+
+  let en = '';
+  let ko = '';
+  let cf = '';
+  const slash = raw.search(/\s+\/\s+/);
+  if (slash >= 0) {
+    en = raw.slice(0, slash).trim();
+    const rest = raw.slice(slash).replace(/^\s+\/\s+/, '').trim();
+    const cfAt = rest.search(/\s+cf\.\s+/i);
+    if (cfAt >= 0) {
+      ko = rest.slice(0, cfAt).trim();
+      cf = rest.slice(cfAt).replace(/^\s+/, '').trim();
+    } else {
+      const cfStart = rest.match(/^(.*?)(\bcf\.\s+.+)$/i);
+      if (cfStart) {
+        ko = cfStart[1].trim();
+        cf = cfStart[2].trim();
+      } else {
+        ko = rest;
+      }
+    }
+  } else {
+    const cfOnly = raw.match(/^(.*?)(\bcf\.\s+.+)$/i);
+    if (cfOnly && /[A-Za-z]/.test(cfOnly[1]) && /[가-힣]/.test(cfOnly[1])) {
+      /* 슬래시 없이 영·한이 섞인 경우는 통째로 유지 */
+      return [{ className: narrativeLineClass(raw), text: raw }];
+    }
+    if (cfOnly) {
+      const head = cfOnly[1].trim();
+      cf = cfOnly[2].trim();
+      if (/[가-힣]/.test(head) && !/[A-Za-z]{3,}/.test(head)) ko = head;
+      else en = head;
+    } else {
+      return [{ className: narrativeLineClass(raw), text: raw }];
+    }
+  }
+
+  const parts = [];
+  if (en) {
+    parts.push({
+      className: 'nv-narrative-text nv-narrative-quote nv-ex-en',
+      text: en.replace(/^\d+\.\s*/, '').trim() || en,
+      keepNum: true,
+      rawEn: en,
+    });
+  }
+  if (ko) {
+    parts.push({ className: 'nv-narrative-text nv-narrative-gloss nv-ex-ko', text: ko });
+  }
+  if (cf) {
+    parts.push({ className: 'nv-narrative-text nv-narrative-def', text: cf });
+  }
+  return parts.length ? parts : [{ className: narrativeLineClass(raw), text: raw }];
+}
+
 function extractLeadingEnglishWordFromNarrative(line) {
   const t = String(line ?? '').trim();
   const m = t.match(/^\*\*([A-Za-z][A-Za-z'-]*(?:\s+[A-Za-z][A-Za-z'-]*){0,2})\*\*/);
@@ -534,9 +596,17 @@ function buildWordSectionHtml(section) {
       titleHtml = `<h2 class="nv-section-title">${escapeHtml(title)}</h2>\n  `;
     }
     const paras = lines
-      .map((t) => {
-        const html = appendSpeakButtonToNarrativeHtml(parseInline(t), t);
-        return `<p class="${narrativeLineClass(t)}">${html}</p>`;
+      .flatMap((t) => {
+        const parts = splitNarrativeEnKoCf(t);
+        return parts.map((part, idx) => {
+          const sourceForSpeak = part.rawEn || part.text;
+          let html = parseInline(part.text);
+          /* 스피커는 영어 줄에만 */
+          if (idx === 0 || /nv-ex-en/.test(part.className)) {
+            html = appendSpeakButtonToNarrativeHtml(html, sourceForSpeak);
+          }
+          return `<p class="${part.className}">${html}</p>`;
+        });
       })
       .join('\n');
     return `<section class="nv-word-section nv-narrative">

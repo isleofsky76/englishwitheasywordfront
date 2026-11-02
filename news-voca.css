@@ -159,13 +159,8 @@
   margin-top: 0.7rem;
 }
 
-#post-message .nv-narrative-def {
-  font-size: 1rem;
-  line-height: 1.75;
-  color: #333;
-}
-
-#post-message .nv-narrative-quote {
+#post-message .nv-narrative-quote,
+#post-message .nv-ex-en {
   margin-top: 0.85rem !important;
   margin-bottom: 0.15rem;
   padding: 0.6rem 0.8rem;
@@ -176,15 +171,29 @@
   line-height: 1.7;
 }
 
-#post-message .nv-narrative-gloss {
-  margin-top: 0.28rem !important;
+#post-message .nv-narrative-gloss,
+#post-message .nv-ex-ko {
+  margin-top: 0.45rem !important;
   padding-left: 0.1rem;
   font-size: 0.96rem;
   line-height: 1.7;
   color: #333;
 }
 
-#post-message .nv-narrative-quote + .nv-narrative-gloss {
+#post-message .nv-narrative-def {
+  margin-top: 0.55rem !important;
+  padding: 0.55rem 0.75rem;
+  border-radius: 8px;
+  border-left: 3px solid #0f766e;
+  background: #eef7f5;
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.55;
+  color: #1f2937;
+}
+
+#post-message .nv-narrative-quote + .nv-narrative-gloss,
+#post-message .nv-ex-en + .nv-ex-ko {
   margin-top: 0.45rem !important;
 }
 

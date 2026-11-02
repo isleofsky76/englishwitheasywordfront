@@ -328,10 +328,12 @@
       var meaning = meaningEl ? stripHtml(meaningEl.innerHTML) : (wordKo || '');
       if (!meaning && titleText && wordEn && titleText !== wordEn) meaning = titleText;
 
-      var enEx = sec.querySelector('.nv-ex-en');
-      var koEx = sec.querySelector('.nv-ex-ko, .nv-narrative-def, .nv-narrative-text');
+      var enEx = sec.querySelector('.nv-ex-en, .nv-narrative-quote');
+      var koEx = sec.querySelector('.nv-ex-ko, .nv-narrative-gloss');
+      var cfEx = sec.querySelector('.nv-narrative-def');
       var enHtml = '';
       var koText = '';
+      var cfText = '';
       var isNarrative = !!(sec.classList && sec.classList.contains('nv-narrative')) ||
         !!sec.querySelector('.nv-narrative-text, .nv-narrative-def');
 
@@ -342,13 +344,15 @@
          mark를 다시 enHtml로 만들면 staggered 가 두 번 보임 → 생략 */
 
       if (koEx) koText = stripHtml(koEx.innerHTML);
-      else if (sec.querySelector('.nv-narrative-text')) {
+      if (cfEx) cfText = stripHtml(cfEx.innerHTML);
+      if (!koText && !enHtml && sec.querySelector('.nv-narrative-text')) {
+        /* 구형 한 줄 포맷 폴백 */
         koText = stripHtml(sec.querySelector('.nv-narrative-text').innerHTML);
       }
 
       /* mark 없으면 은밀한(covert) 형태에서 영어 복구 — '표현' 폴백 방지 */
       if (isNarrative && !wordEn && !unique.length) {
-        unique = extractParenEnglish(koText);
+        unique = extractParenEnglish(koText || cfText);
       }
 
       /* 섹션당 카드 1개 — 여러 mark 를 쪼개면 같은 문장이 반복됨 */
@@ -356,7 +360,13 @@
       var moreExprs = unique.length > 1 ? unique.slice(1) : [];
       if (postMeaningHidden(meaning, wordEn)) meaning = wordKo || '';
       if (isNarrative && !meaning && unique.length === 1) {
-        meaning = extractNarrativeMeaning(koText, wordEn);
+        meaning = extractNarrativeMeaning((koText + ' ' + cfText).trim(), wordEn);
+      }
+      if (isNarrative && cfText && !meaning) {
+        var cfMeaning = cfText.replace(/^cf\.\s*/i, '');
+        var colon = cfMeaning.indexOf(':');
+        if (colon >= 0) cfMeaning = cfMeaning.slice(colon + 1);
+        meaning = cfMeaning.replace(/\([^)]*\)\s*$/, '').replace(/\s+/g, ' ').trim();
       }
 
       // Prefer highlighting expression inside English if we have raw English without marks
@@ -381,7 +391,8 @@
         meaning: meaning,
         moreExprs: moreExprs,
         enHtml: enHtml,
-        ko: koText
+        ko: koText,
+        cf: cfText
       });
     });
 
@@ -397,7 +408,8 @@
         meaning: card.meaning,
         moreExprs: card.moreExprs || [],
         enHtml: card.enHtml,
-        ko: card.ko
+        ko: card.ko,
+        cf: card.cf || ''
       };
     });
   }
@@ -495,6 +507,7 @@
           return '<span>' + escapeHtml(w) + '</span>';
         }).join('') + '</p>'
       : '';
+    var cf = String(card.cf || '').trim();
     return (
       '<article class="rd-expr" id="' + escapeAttr(card.id) + '">' +
         '<div class="rd-expr-top">' +
@@ -505,6 +518,7 @@
         moreHtml +
         (card.enHtml ? '<p class="rd-expr-en">' + card.enHtml + '</p>' : '') +
         (ko ? '<p class="rd-expr-ko">' + escapeHtml(ko) + '</p>' : '') +
+        (cf ? '<p class="rd-expr-cf">' + escapeHtml(cf) + '</p>' : '') +
       '</article>'
     );
   }
