@@ -5,7 +5,7 @@
 (function (global) {
   'use strict';
 
-  var ASSET_VER = '20261102c6';
+  var ASSET_VER = '20261102c7';
 
   /** SEO 경로 /board/slug/ 에서 list.html 상대링크가 깨지지 않게 */
   function seoPathPrefix() {
@@ -298,6 +298,37 @@
     return cards;
   }
 
+  /**
+   * "영어 / 한글 cf. word: 뜻" 한 줄 → { enHtml, ko, cf }
+   * 슬래시+cf. 포맷만 분리. 아니면 null (다른 글 형식은 건드리지 않음)
+   */
+  function splitNarrativeEnKoCfHtml(html) {
+    var raw = String(html || '').trim();
+    if (!raw) return null;
+    var plain = stripHtml(raw).replace(/\s+/g, ' ').trim();
+    if (!/\s\/\s/.test(plain) || !/\bcf\./i.test(plain)) return null;
+
+    var slashIdx = raw.search(/\s\/\s/);
+    if (slashIdx < 0) return null;
+    var enHtml = raw.slice(0, slashIdx).trim().replace(/^\d+\.\s*/, '');
+    var restHtml = raw.slice(slashIdx).replace(/^\s\/\s*/, '').trim();
+    var restPlain = stripHtml(restHtml).replace(/\s+/g, ' ').trim();
+    var cfAt = restPlain.search(/\s+cf\.\s+/i);
+    var ko = '';
+    var cf = '';
+    if (cfAt >= 0) {
+      ko = restPlain.slice(0, cfAt).trim();
+      cf = restPlain.slice(cfAt).replace(/^\s+/, '').trim();
+    } else {
+      var cfStart = restPlain.match(/^(.*?)(\bcf\.\s+.+)$/i);
+      if (!cfStart) return null;
+      ko = cfStart[1].trim();
+      cf = cfStart[2].trim();
+    }
+    if (!enHtml || !ko || !cf) return null;
+    return { enHtml: enHtml, ko: ko, cf: cf };
+  }
+
   function parseCards(root) {
     var cards = [];
     if (!root) return cards;
@@ -348,6 +379,25 @@
       if (!koText && !enHtml && sec.querySelector('.nv-narrative-text')) {
         /* 구형 한 줄 포맷 폴백 */
         koText = stripHtml(sec.querySelector('.nv-narrative-text').innerHTML);
+      }
+
+      /* 구형: 한 <p>에 "영어 / 한글 cf." — 포맷 일치할 때만 EN·KO·cf로 분리 */
+      if (isNarrative) {
+        var combinedHtml = '';
+        if (enEx && !koEx && !cfEx) combinedHtml = enEx.innerHTML;
+        else if (!enEx && koEx && !cfEx) combinedHtml = koEx.innerHTML;
+        else if (!enEx && !koEx && cfEx) combinedHtml = cfEx.innerHTML;
+        else if (!enHtml && !koText && cfEx) combinedHtml = cfEx.innerHTML;
+        else if (enHtml && !koText && !cfText) combinedHtml = enHtml;
+        else if (!enHtml && !koText && sec.querySelector('.nv-narrative-text')) {
+          combinedHtml = sec.querySelector('.nv-narrative-text').innerHTML;
+        }
+        var splitParts = splitNarrativeEnKoCfHtml(combinedHtml);
+        if (splitParts) {
+          enHtml = splitParts.enHtml;
+          koText = splitParts.ko;
+          cfText = splitParts.cf;
+        }
       }
 
       /* mark 없으면 은밀한(covert) 형태에서 영어 복구 — '표현' 폴백 방지 */
