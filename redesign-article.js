@@ -5,7 +5,7 @@
 (function (global) {
   'use strict';
 
-  var ASSET_VER = '20261102c8';
+  var ASSET_VER = '20261102c9';
 
   /** SEO 경로 /board/slug/ 에서 list.html 상대링크가 깨지지 않게 */
   function seoPathPrefix() {
@@ -329,6 +329,30 @@
     return { enHtml: enHtml, ko: ko, cf: cf };
   }
 
+  /**
+   * 구형 내러티브 꼬리 "(word)" / "(<mark>word</mark>)" —
+   * 카드 제목·본문 하이라이트와 겹치므로 영어 줄 끝에서만 제거
+   */
+  function stripTrailingExprTag(html, expression) {
+    var s = String(html || '').trim();
+    if (!s) return s;
+    var word = String(expression || '').trim();
+    if (word) {
+      var esc = word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/\s+/g, '\\s+');
+      var reWord = new RegExp(
+        '\\s*\\(\\s*(?:<mark[^>]*>\\s*)?' + esc + '(?:\\s*<\\/mark>)?\\s*\\)\\s*$',
+        'i'
+      );
+      var next = s.replace(reWord, '').trim();
+      if (next !== s) return next;
+    }
+    /* 표현을 아직 모를 때: 끝의 짧은 (영어표기) 꼬리만 제거 */
+    return s.replace(
+      /\s*\(\s*(?:<mark[^>]*>\s*)?[A-Za-z][A-Za-z0-9'’.\-]*(?:\s+[A-Za-z][A-Za-z0-9'’.\-]*){0,3}(?:\s*<\/mark>)?\s*\)\s*$/,
+      ''
+    ).trim();
+  }
+
   function parseCards(root) {
     var cards = [];
     if (!root) return cards;
@@ -427,8 +451,16 @@
         meaning = cfMeaning.replace(/\([^)]*\)\s*$/, '').replace(/\s+/g, ' ').trim();
       }
 
+      /* 영어 줄 끝 "(Astroturf)" 꼬리 — 제목·하이라이트와 중복 */
+      if (isNarrative && enHtml) {
+        enHtml = stripTrailingExprTag(enHtml, wordEn);
+      }
+
       // Prefer highlighting expression inside English if we have raw English without marks
       if (enEx && wordEn && enHtml.indexOf('<mark') === -1) {
+        enHtml = highlightPhrase(enHtml, wordEn);
+      }
+      if (isNarrative && wordEn && enHtml && enHtml.indexOf('<mark') === -1) {
         enHtml = highlightPhrase(enHtml, wordEn);
       }
 
