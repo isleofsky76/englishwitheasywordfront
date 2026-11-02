@@ -481,11 +481,22 @@
   color: #9CA0A9;
 }
 
-/* 검색 결과 페이지 톤 */
+/* 검색 결과 — 홈 본문 위에 바로 보이도록 */
+#rd-home.is-search-mode > :not(#site-search-page) {
+  display: none !important;
+}
 #site-search-page {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 32px 24px 64px;
+  padding: 24px 24px 64px;
+  outline: none;
+}
+#site-search-page .site-search-page-title {
+  margin: 0 0 18px;
+  font-size: 22px;
+  font-weight: 650;
+  line-height: 1.35;
+  color: var(--ink, #1c1917);
 }
 #site-search-page .site-search-page-list {
   list-style: none;
@@ -499,6 +510,11 @@
 #site-search-page .site-search-page-list a {
   font-size: 17px;
   font-weight: 500;
+}
+#site-search-page .site-search-empty {
+  margin: 8px 0 0;
+  color: var(--ink-muted, #78716c);
+  font-size: 15px;
 }
 
 @media (max-width: 720px) {

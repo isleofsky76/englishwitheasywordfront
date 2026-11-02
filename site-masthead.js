@@ -4,7 +4,7 @@
  * nav-home-menu.js 가 로드함
  */
 (function () {
-    var VERSION = '20261102dir1';
+    var VERSION = '20261102ux1';
   /* 시안 주 메뉴 — href는 기존 URL 유지 */
   var PRIMARY_NAV_ITEMS = [
     {
@@ -338,23 +338,49 @@
       list.hidden = false;
     }
 
+    function setHomeSearchMode(on) {
+      var wrap = document.getElementById('rd-home');
+      if (wrap) wrap.classList.toggle('is-search-mode', !!on);
+      document.body.classList.toggle('home-search-active', !!on);
+    }
+
+    function revealSearchPage(hits, emptyText) {
+      if (homePreviews) homePreviews.hidden = true;
+      setHomeSearchMode(true);
+      if (searchPage) {
+        searchPage.hidden = false;
+        searchPage.setAttribute('tabindex', '-1');
+      }
+      if (!searchPageList) return;
+      var q = String(input.value || '').trim();
+      var heading = q
+        ? '<h1 class="site-search-page-title">‘' + q.replace(/</g, '&lt;').replace(/>/g, '&gt;') + '’ 검색 결과</h1>'
+        : '<h1 class="site-search-page-title">검색 결과</h1>';
+      if (!hits || !hits.length) {
+        searchPageList.innerHTML = heading + '<p class="site-search-empty">' + emptyText + '</p>';
+      } else {
+        searchPageList.innerHTML = heading + '<ul class="site-search-page-list">' + hits.map(function (item) {
+          var title = String(item.title || '제목 없음').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+          return '<li><a href="' + String(item.href || '#') + '">' + title + '</a></li>';
+        }).join('') + '</ul>';
+      }
+      try {
+        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+      } catch (err) {
+        window.scrollTo(0, 0);
+      }
+      if (searchPage && typeof searchPage.focus === 'function') {
+        try { searchPage.focus({ preventScroll: true }); } catch (e2) { searchPage.focus(); }
+      }
+    }
+
     function renderPage(hits, emptyText) {
       hideSuggest();
       if (!onHome) {
         window.location.href = base + 'index.html?q=' + encodeURIComponent(input.value.trim());
         return;
       }
-      if (homePreviews) homePreviews.hidden = true;
-      if (searchPage) searchPage.hidden = false;
-      if (!searchPageList) return;
-      if (!hits || !hits.length) {
-        searchPageList.innerHTML = '<p class="site-search-empty">' + emptyText + '</p>';
-        return;
-      }
-      searchPageList.innerHTML = '<ul class="site-search-page-list">' + hits.map(function (item) {
-        var title = String(item.title || '제목 없음').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-        return '<li><a href="' + String(item.href || '#') + '">' + title + '</a></li>';
-      }).join('') + '</ul>';
+      revealSearchPage(hits, emptyText);
     }
 
     function previewSearch(q) {
