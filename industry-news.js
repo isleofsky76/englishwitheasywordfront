@@ -1010,7 +1010,7 @@ function rdLoadScript(src) {
 (async function rdBoot() {
     const base = rdAssetBase();
     try {
-        if (!window.BoardListConfig) await rdLoadScript(base + 'board-list-config.js?v=20261028cat1');
+        if (!window.BoardListConfig) await rdLoadScript(base + 'board-list-config.js?v=20261102ind2');
         if (!window.mountRedesignArticle) await rdLoadScript(base + 'redesign-article.js?v=20261030noDupArticle');
     } catch (e) { console.warn(e); }
     loadPost();

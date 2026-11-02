@@ -18,7 +18,6 @@ const EMPTY_LIST_PAGES = [
   'incident-news-list.html',
   'retail-news-list.html',
   'ukraine-news-list.html',
-  'industry-news-list.html',
 ];
 
 function redirectHtml(title) {
@@ -49,7 +48,6 @@ const TITLE_MAP = {
   'incident-news-list.html': '사건사고 뉴스',
   'retail-news-list.html': '유통 뉴스',
   'ukraine-news-list.html': '우크라이나/러시아 뉴스',
-  'industry-news-list.html': '산업 뉴스',
 };
 
 function main() {
