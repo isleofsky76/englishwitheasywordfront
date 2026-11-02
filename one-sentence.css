@@ -9,7 +9,9 @@
   --os-hl: #f3ecc0;
   --os-max: 680px;
   --os-body: 17px;
+  --os-alpha-h: 0px;
   margin: 0;
+  padding-top: var(--os-alpha-h);
   font-family: var(--font-sans);
   color: var(--os-ink);
   background: var(--page-bg);
@@ -106,30 +108,97 @@
 }
 
 .os-alpha {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 130;
   display: flex;
-  flex-wrap: wrap;
-  gap: 6px 10px;
-  margin: 18px 0 0;
-  padding: 0;
+  justify-content: center;
+  margin: 0;
+  padding: 8px 24px 10px;
+  background: var(--page-bg);
+  border-bottom: 1px solid rgba(58, 56, 52, 0.12);
+  box-shadow: 0 6px 16px -12px rgba(0, 0, 0, 0.35);
 }
 
 .os-alpha[hidden] {
   display: none !important;
 }
 
+.os-alpha-inner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  width: 100%;
+  max-width: var(--os-max);
+}
+
 .os-alpha-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.85em;
+  height: 1.85em;
+  padding: 0 0.35em;
   font-size: 13px;
   font-weight: 600;
-  color: #1a1a1a;
+  line-height: 1;
+  color: #4a4a4a;
   text-decoration: none;
-  min-width: 1.2em;
   text-align: center;
+  background: #fff;
+  border: 1px solid rgba(58, 56, 52, 0.16);
+  border-radius: 999px;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
 }
 
 .os-alpha-link:hover {
   color: var(--os-blue);
-  text-decoration: underline;
-  text-underline-offset: 3px;
+  border-color: var(--os-blue);
+  text-decoration: none;
+}
+
+.os-alpha-link.is-active {
+  color: #fff;
+  background: var(--os-blue);
+  border-color: var(--os-blue);
+}
+
+.os-back-top {
+  position: fixed;
+  right: 16px;
+  bottom: max(16px, env(safe-area-inset-bottom, 0px));
+  z-index: 120;
+  margin: 0;
+  padding: 0.5rem 1rem;
+  font-family: var(--font-sans);
+  font-size: 0.84rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: #fff;
+  background: var(--os-blue);
+  border: none;
+  border-radius: 999px;
+  box-shadow: 0 4px 14px rgba(61, 110, 184, 0.35);
+  cursor: pointer;
+  white-space: nowrap;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  transition: background 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.os-back-top:hover {
+  background: #315a99;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(61, 110, 184, 0.42);
+}
+
+.os-back-top[hidden] {
+  display: none !important;
 }
 
 /* 알파벳별 분류 피드 (단어 목록 아래) */
@@ -151,7 +220,7 @@
   font-weight: 700;
   letter-spacing: 0.04em;
   color: var(--os-ink-soft);
-  scroll-margin-top: 88px;
+  scroll-margin-top: 72px; /* sticky 알파벳 높이 여유 */
 }
 
 .os-letter-group:first-child .os-letter-head {
@@ -163,7 +232,7 @@
   padding: 26px 0 24px;
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-  scroll-margin-top: 88px;
+  scroll-margin-top: 72px; /* sticky 알파벳 높이 여유 */
 }
 
 .os-letter-group .os-item:last-child {
@@ -872,10 +941,19 @@
   display: none !important;
 }
 
+.os-tags-hint {
+  flex-basis: 100%;
+  margin: 0 0 4px;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.45;
+  color: var(--os-ink-muted);
+}
+
 .os-tag-letter {
   flex-basis: 100%;
   margin-top: 10px;
-  font-size: 12px;
+  font-size: 14px; /* +2 */
   font-weight: 700;
   letter-spacing: 0.08em;
   color: #888;
@@ -893,7 +971,7 @@
   border: 0;
   background: none;
   font-family: inherit;
-  font-size: 13px;
+  font-size: 15px; /* +2 */
   font-weight: 500;
   letter-spacing: 0.01em;
   color: #1a1a1a;
@@ -911,6 +989,11 @@
   z-index: 3;
 }
 
+.os-tag.is-tip-open {
+  color: var(--os-blue);
+  z-index: 4;
+}
+
 .os-tag[data-tip]::after {
   content: attr(data-tip);
   position: absolute;
@@ -925,7 +1008,7 @@
   border-radius: 8px;
   background: #2a2a2a;
   color: #fff;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 500;
   line-height: 1.45;
   letter-spacing: 0;
@@ -941,8 +1024,8 @@
   transition: opacity 0.12s ease, transform 0.12s ease, visibility 0.12s;
 }
 
-.os-tag[data-tip]:hover::after,
-.os-tag[data-tip]:focus-visible::after {
+/* 한 번 클릭 시에만 뜻 표시 (호버로는 안 띄움) */
+.os-tag[data-tip].is-tip-open::after {
   opacity: 1;
   visibility: visible;
   transform: translateX(-50%) translateY(0);

@@ -342,7 +342,8 @@
       return;
     }
     tags.removeAttribute('hidden');
-    var html = '';
+    var html =
+      '<p class="os-tags-hint">한 번 누르면 뜻 · 두 번 누르면 예문으로 이동</p>';
     var lastLetter = '';
     words.forEach(function (entry) {
       var w = entry.word;
@@ -392,6 +393,7 @@
       index.hidden = true;
       index.innerHTML = '';
     }
+    syncFixedAlphaLayout();
   }
 
   function renderFeed(items) {
@@ -405,6 +407,11 @@
         index.hidden = true;
         index.innerHTML = '';
       }
+      if (alphaObserver) {
+        alphaObserver.disconnect();
+        alphaObserver = null;
+      }
+      syncFixedAlphaLayout();
     } else {
       var groups = groupByLetter(items);
       feed.innerHTML = groups
@@ -425,23 +432,128 @@
         .join('');
       if (index) {
         index.hidden = false;
-        index.innerHTML = groups
-          .map(function (g) {
-            return (
-              '<a class="os-alpha-link" href="#os-letter-' +
-              escapeAttr(g.letter) +
-              '">' +
-              escapeHtml(g.letter) +
-              '</a>'
-            );
-          })
-          .join('');
+        index.innerHTML =
+          '<div class="os-alpha-inner">' +
+          groups
+            .map(function (g) {
+              return (
+                '<a class="os-alpha-link" href="#os-letter-' +
+                escapeAttr(g.letter) +
+                '" data-letter="' +
+                escapeAttr(g.letter) +
+                '">' +
+                escapeHtml(g.letter) +
+                '</a>'
+              );
+            })
+            .join('') +
+          '</div>';
+        if (groups[0]) setActiveAlpha(groups[0].letter);
       }
+      observeLetterGroups();
+      requestAnimationFrame(syncFixedAlphaLayout);
     }
     if (count) count.textContent = '총 ' + items.length + '개';
     if (window.OsComments && typeof window.OsComments.mountAll === 'function') {
       window.OsComments.mountAll();
     }
+  }
+
+  function syncFixedAlphaLayout() {
+    var alpha = document.getElementById('os-alpha');
+    var btn = document.getElementById('os-back-top');
+    var visible = Boolean(alpha && !alpha.hidden);
+    var h = visible ? alpha.offsetHeight : 0;
+    document.documentElement.style.setProperty('--os-alpha-h', h + 'px');
+    if (btn) btn.hidden = !visible;
+  }
+
+  function getOsScrollOffset() {
+    var alpha = document.getElementById('os-alpha');
+    var alphaH = alpha && !alpha.hidden ? alpha.offsetHeight : 0;
+    return alphaH + 10;
+  }
+
+  function scrollToOsAnchor(el) {
+    if (!el) return;
+    var y = el.getBoundingClientRect().top + window.scrollY - getOsScrollOffset();
+    window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+  }
+
+  function scrollToOsTop() {
+    var hero = document.querySelector('.os-hero') || document.getElementById('main-content');
+    if (!hero) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+    var y = hero.getBoundingClientRect().top + window.scrollY - 8;
+    window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+  }
+
+  function setActiveAlpha(letter) {
+    var index = document.getElementById('os-alpha');
+    if (!index) return;
+    var want = String(letter || '').toUpperCase();
+    index.querySelectorAll('.os-alpha-link').forEach(function (link) {
+      var L = String(link.getAttribute('data-letter') || link.textContent || '').trim().toUpperCase();
+      link.classList.toggle('is-active', Boolean(want) && L === want);
+    });
+  }
+
+  var alphaObserver = null;
+  function observeLetterGroups() {
+    if (alphaObserver) {
+      alphaObserver.disconnect();
+      alphaObserver = null;
+    }
+    if (!('IntersectionObserver' in window)) return;
+    var groups = document.querySelectorAll('.os-letter-group');
+    if (!groups.length) return;
+    alphaObserver = new IntersectionObserver(
+      function (entries) {
+        var visible = entries
+          .filter(function (e) { return e.isIntersecting; })
+          .sort(function (a, b) { return a.boundingClientRect.top - b.boundingClientRect.top; });
+        if (!visible.length) return;
+        var id = visible[0].target.id || '';
+        var letter = id.replace(/^os-letter-/, '');
+        if (letter) setActiveAlpha(letter);
+      },
+      {
+        root: null,
+        rootMargin: '-20% 0px -60% 0px',
+        threshold: [0, 0.1, 0.25],
+      }
+    );
+    groups.forEach(function (g) { alphaObserver.observe(g); });
+  }
+
+  function bindAlphaNav() {
+    var index = document.getElementById('os-alpha');
+    if (!index || index._osBound) return;
+    index._osBound = true;
+    index.addEventListener('click', function (e) {
+      var link = e.target.closest('.os-alpha-link');
+      if (!link || !index.contains(link)) return;
+      e.preventDefault();
+      var letter = String(link.getAttribute('data-letter') || link.textContent || '').trim();
+      var target = document.getElementById('os-letter-' + letter);
+      if (!target) return;
+      setActiveAlpha(letter);
+      scrollToOsAnchor(target);
+    });
+  }
+
+  function bindBackTop() {
+    var btn = document.getElementById('os-back-top');
+    if (!btn || btn._osBound) return;
+    btn._osBound = true;
+    btn.addEventListener('click', function () {
+      setActiveAlpha('');
+      scrollToOsTop();
+    });
+    window.addEventListener('resize', syncFixedAlphaLayout, { passive: true });
+    syncFixedAlphaLayout();
   }
 
   function scrollToWord(word) {
@@ -460,7 +572,7 @@
     }
     if (!el) el = document.getElementById(wordAnchorId(word));
     if (!el) return;
-    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    scrollToOsAnchor(el);
     el.classList.add('os-item-flash');
     window.setTimeout(function () {
       el.classList.remove('os-item-flash');
@@ -773,6 +885,18 @@
         var btn = e.target.closest('[data-os-jump]');
         if (!btn || !tags.contains(btn)) return;
         var word = btn.getAttribute('data-os-jump') || '';
+        var alreadyOpen = btn.classList.contains('is-tip-open');
+
+        /* 1번째 클릭: 뜻 표시 / 2번째 클릭(같은 단어): 예문으로 이동 */
+        if (!alreadyOpen) {
+          tags.querySelectorAll('.os-tag.is-tip-open').forEach(function (el) {
+            el.classList.remove('is-tip-open');
+          });
+          btn.classList.add('is-tip-open');
+          return;
+        }
+
+        btn.classList.remove('is-tip-open');
         var input = document.getElementById('os-search-input');
         if (input && input.value) {
           input.value = '';
@@ -789,6 +913,8 @@
     syncAdminUnlockFromUrl();
     injectAdminForm();
     bindFeed();
+    bindAlphaNav();
+    bindBackTop();
     var input = document.getElementById('os-search-input');
     var tags = document.getElementById('os-tags');
 
