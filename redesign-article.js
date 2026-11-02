@@ -5,7 +5,7 @@
 (function (global) {
   'use strict';
 
-  var ASSET_VER = '20261028path1';
+  var ASSET_VER = '20261102c6';
 
   /** SEO 경로 /board/slug/ 에서 list.html 상대링크가 깨지지 않게 */
   function seoPathPrefix() {
