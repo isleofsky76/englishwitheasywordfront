@@ -751,7 +751,7 @@
     writeBtn.className = 'os-cmt-write';
     writeBtn.setAttribute('data-os-cmt-write', '');
     writeBtn.setAttribute('aria-expanded', 'false');
-    writeBtn.textContent = '댓글, 글쓰기';
+    writeBtn.textContent = '글쓰기';
 
     bar.appendChild(toggle);
     bar.appendChild(writeBtn);
@@ -770,10 +770,6 @@
     formPanel.className = 'os-cmt-panel os-cmt-write-panel';
     formPanel.setAttribute('data-os-cmt-form-panel', '');
     formPanel.hidden = true;
-
-    var formTitle = document.createElement('p');
-    formTitle.className = 'os-cmt-form-title';
-    formTitle.textContent = '댓글, 글쓰기';
 
     var warn = document.createElement('p');
     warn.className = 'os-cmt-policy';
@@ -889,7 +885,6 @@
     form.appendChild(pwLabel);
     form.appendChild(formMsg);
     form.appendChild(submit);
-    formPanel.appendChild(formTitle);
     formPanel.appendChild(warn);
     formPanel.appendChild(form);
 
