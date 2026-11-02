@@ -1,0 +1,23 @@
+---
+description: Vocabulary quiz must stay track input UI (soft-match, EN↔KO)
+globs: vocabulary-quiz*/**/*,**/vocabulary-quiz*.{js,html,css},backend/scripts/**/*quiz*
+alwaysApply: false
+---
+
+# Vocabulary quiz = track only
+
+Do **not** restore click-to-reveal (`quiz-reveal-*`) or API-shell SEO pages that only load `vocabulary-quiz.js` without `VOCAB_QUIZ_TRACK_WORDS`.
+
+## Required UX
+- Typed answers with soft/similar-answer matching
+- Modes: 영어 → 한글 and 한글 → 영어 (`#m-en` / `#m-ko`)
+- SEO pages under `vocabulary-quiz/<slug>/` must embed `VOCAB_QUIZ_TRACK_WORDS` and `vocabulary-quiz-track.js`
+
+## Generation
+- `uploadVocabularyQuiz` / `buildQuizSeoPageHtml` must always pass `pairs` or `trackWords`
+- Missing track data must **throw**, never fall back to reveal/API shell HTML
+- After bulk SEO changes: `cd backend && node scripts/assert-quiz-track-format.js`
+
+## Forbidden
+- Writing SEO HTML with `vocabulary-quiz.js` as the quiz renderer
+- Re-adding `renderRevealSection` / `quiz-reveal-*` UI

@@ -4,8 +4,9 @@
  * 사용법: 아래 article 수정 →
  *   cd backend && node scripts/seed-vocabulary-quiz.js
  *
- * 클릭 공개형: format: 'reveal' + pairs[{ en, ko }]
- *   directions: ['en-ko'] 만 쓰면 영어 → 뜻 한 방향
+ * 입력형(track)만 허용: pairs[{ en, ko }] (+ 선택 trackWords)
+ *   directions: ['en-ko','ko-en'] 기본 — 영어↔한글 양방향
+ *   SEO는 항상 vocabulary-quiz-track (클릭 공개형 금지)
  *
  * narrative 국방뉴스 일괄 퀴즈:
  *   node scripts/sync-defense-review-quizzes.js

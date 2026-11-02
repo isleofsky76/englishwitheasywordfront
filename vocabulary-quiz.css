@@ -80,12 +80,10 @@ html.has-site-masthead .vocabulary-quiz-main {
   margin: 0 0 22px;
 }
 
-.quiz-youtube,
-.quiz-reveal-toolbar {
+.quiz-youtube {
   margin: 0;
 }
 
-.quiz-reveal-all-btn,
 .quiz-youtube-btn {
   display: inline-flex;
   align-items: center;
@@ -99,25 +97,6 @@ html.has-site-masthead .vocabulary-quiz-main {
   font-size: 0.95rem;
   cursor: pointer;
   text-decoration: none !important;
-}
-
-.quiz-reveal-all-btn {
-  min-width: 96px;
-  border: 1px solid var(--ink);
-  background: var(--surface);
-  color: var(--ink);
-}
-
-.quiz-reveal-all-btn:hover,
-.quiz-reveal-all-btn:focus-visible {
-  color: var(--accent);
-  border-color: var(--accent);
-  outline: none;
-}
-
-.quiz-reveal-all-btn.is-open {
-  background: var(--ink);
-  color: var(--text-on-dark);
 }
 
 .quiz-youtube-btn {
@@ -239,102 +218,6 @@ html.has-site-masthead .vocabulary-quiz-main {
   font-weight: 700;
 }
 
-/* numbered reveal — 기사 rd-expr 톤 */
-.quiz-reveal-list {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
-.quiz-reveal-row {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  padding: 18px 18px 16px;
-  border: 1px solid var(--line);
-  border-radius: 4px;
-  background: var(--page-bg);
-  scroll-margin-top: 24px;
-}
-
-.quiz-reveal-top {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 12px 14px;
-}
-
-.quiz-reveal-num {
-  flex: 0 0 auto;
-  font-family: var(--font-serif);
-  font-weight: 900;
-  font-size: 20px;
-  color: var(--accent);
-  letter-spacing: 0.02em;
-}
-
-.quiz-reveal-prompt {
-  flex: 1 1 12rem;
-  font-family: var(--font-serif);
-  font-weight: 900;
-  font-size: clamp(1.15rem, 3vw, 1.45rem);
-  line-height: 1.3;
-  color: var(--ink);
-  word-break: keep-all;
-  overflow-wrap: anywhere;
-}
-
-.quiz-reveal-answer {
-  width: 100%;
-  min-height: 48px;
-  padding: 12px 14px;
-  border: 1px dashed var(--line);
-  border-radius: 4px;
-  background: var(--surface);
-  color: var(--ink);
-  font: inherit;
-  font-weight: 600;
-  text-align: left;
-  cursor: pointer;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px 12px;
-}
-
-.quiz-reveal-answer:hover,
-.quiz-reveal-answer:focus-visible {
-  border-color: var(--accent);
-  outline: none;
-}
-
-.quiz-reveal-mask {
-  letter-spacing: 0.1em;
-  color: var(--ink-muted);
-  filter: blur(3px);
-  user-select: none;
-}
-
-.quiz-reveal-hint {
-  font-size: 0.78rem;
-  font-weight: 700;
-  color: var(--accent);
-  text-transform: lowercase;
-}
-
-.quiz-reveal-answer.is-open {
-  border-style: solid;
-  border-color: var(--accent);
-  background: #fff8f4;
-}
-
-.quiz-reveal-text {
-  color: var(--accent);
-  font-weight: 800;
-  font-size: 1.02rem;
-  line-height: 1.5;
-}
-
 @media (max-width: 520px) {
   .vocabulary-quiz-main {
     width: min(100% - 24px, 860px);
@@ -346,9 +229,5 @@ html.has-site-masthead .vocabulary-quiz-main {
 
   .quiz-choice-list {
     grid-template-columns: 1fr;
-  }
-
-  .quiz-reveal-row {
-    padding: 14px;
   }
 }

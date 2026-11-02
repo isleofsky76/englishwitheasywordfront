@@ -1,7 +1,11 @@
 (function () {
   "use strict";
 
-  var TRACK_VER = "20261102track1";
+  /**
+   * API/?slug= 진입용. 클릭 공개형(reveal) UI는 제거됨.
+   * reveal-section 데이터 → track 입력 퀴즈(유사 정답 · EN↔KO)만 렌더.
+   */
+  var TRACK_VER = "20261102track2";
 
   function createElement(tag, className, text) {
     var element = document.createElement(tag);
@@ -17,7 +21,6 @@
     return window.PAGE30_PRODUCTION_API_BASE || "";
   }
 
-  /** SEO(/vocabulary-quiz/slug/)·루트 셸 모두에서 루트 기준 로드 */
   function rootAsset(file) {
     return "/" + String(file || "").replace(/^\//, "");
   }
@@ -81,7 +84,6 @@
       .filter(Boolean);
   }
 
-  /** reveal-section → track WORDS (en[], ko[]) */
   function trackWordsFromQuizzes(quizzes) {
     var words = [];
     var seen = Object.create(null);
@@ -194,114 +196,8 @@
     }
   }
 
-  function renderChoices(choices) {
-    var list = createElement("ul", "quiz-choice-list");
-    (choices || []).forEach(function (choice) {
-      list.appendChild(createElement("li", "quiz-choice", choice));
-    });
-    return list;
-  }
-
-  function renderQuiz(quiz, index) {
-    var card = createElement("section", "vocabulary-quiz-card");
-    card.id = "quiz-" + (index + 1);
-
-    card.appendChild(
-      createElement("h3", "quiz-question", index + 1 + ". " + quiz.question)
-    );
-    card.appendChild(renderChoices(quiz.choices));
-
-    var details = createElement("details", "quiz-answer-details");
-    details.appendChild(
-      createElement("summary", "quiz-answer-toggle", "정답과 설명 펼치기")
-    );
-
-    var answer = createElement("div", "quiz-answer-content");
-    answer.appendChild(createElement("p", "quiz-answer-label", "정답 :"));
-    answer.appendChild(
-      createElement(
-        "p",
-        "quiz-word-meaning",
-        (quiz.icon ? quiz.icon + " " : "") + quiz.answer + " | " + quiz.meaning
-      )
-    );
-    if (quiz.en) answer.appendChild(createElement("p", "quiz-example-en", quiz.en));
-    if (quiz.ko) answer.appendChild(createElement("p", "quiz-example-ko", quiz.ko));
-    details.appendChild(answer);
-    card.appendChild(details);
-    return card;
-  }
-
-  function renderYoutubeButton(url, label) {
-    var wrap = createElement("p", "quiz-youtube");
-    var link = createElement("a", "quiz-youtube-btn", label || "유튜브 보기");
-    link.href = url;
-    link.target = "_blank";
-    link.rel = "noopener noreferrer";
-    link.innerHTML =
-      '<svg class="quiz-youtube-icon" viewBox="0 0 28 20" aria-hidden="true" focusable="false">' +
-      '<path fill="#FF0000" d="M27.33 3.12A3.5 3.5 0 0 0 24.86.65C22.7 0 14 0 14 0S5.3 0 3.14.65A3.5 3.5 0 0 0 .67 3.12 36.7 36.7 0 0 0 0 10a36.7 36.7 0 0 0 .67 6.88 3.5 3.5 0 0 0 2.47 2.47C5.3 20 14 20 14 20s8.7 0 10.86-.65a3.5 3.5 0 0 0 2.47-2.47A36.7 36.7 0 0 0 28 10a36.7 36.7 0 0 0-.67-6.88z"/>' +
-      '<path fill="#fff" d="M11.2 14.3V5.7L18.5 10l-7.3 4.3z"/>' +
-      "</svg>" +
-      "<span>" +
-      (label || "유튜브 보기") +
-      "</span>";
-    wrap.appendChild(link);
-    return wrap;
-  }
-
-  function renderCrumb() {
-    var nav = createElement("nav", "quiz-crumb");
-    nav.setAttribute("aria-label", "위치");
-    var home = createElement("a", "", "홈");
-    home.href = "/index.html";
-    var quiz = createElement("a", "", "퀴즈");
-    quiz.href = "/vocabulary-quiz-list.html";
-    var current = createElement("span", "is-current", "상세");
-    nav.appendChild(home);
-    nav.appendChild(createElement("span", "quiz-crumb-sep", "/"));
-    nav.appendChild(quiz);
-    nav.appendChild(createElement("span", "quiz-crumb-sep", "/"));
-    nav.appendChild(current);
-    return nav;
-  }
-
   function listHref() {
     return "/vocabulary-quiz-list.html";
-  }
-
-  function renderMcqEntry(entry) {
-    var article = createElement("article", "quiz-entry");
-    article.id = entry.slug || entry._id || "quiz-entry";
-
-    var head = createElement("div", "quiz-entry-head");
-    head.appendChild(renderCrumb());
-    head.appendChild(createElement("h1", "quiz-entry-title", entry.title));
-
-    var date = entry.date ? new Date(entry.date) : null;
-    if (date && !isNaN(date.getTime())) {
-      head.appendChild(
-        createElement("p", "quiz-entry-date", date.toLocaleDateString("ko-KR"))
-      );
-    }
-    article.appendChild(head);
-
-    var actions = createElement("div", "quiz-entry-actions");
-    if (entry.sourceUrl) {
-      actions.appendChild(
-        renderYoutubeButton(entry.sourceUrl, entry.sourceLabel || "유튜브 보기")
-      );
-    }
-    if (actions.childNodes.length) {
-      article.appendChild(actions);
-    }
-
-    (entry.quizzes || []).forEach(function (quiz, index) {
-      if (quiz && quiz.type === "reveal-section") return;
-      article.appendChild(renderQuiz(quiz, index));
-    });
-
-    return article;
   }
 
   function resolveSlug() {
@@ -379,13 +275,19 @@
       if (entry.title) document.title = entry.title + " | 시사영단어";
 
       var trackWords = trackWordsFromQuizzes(entry.quizzes);
-      if (trackWords.length) {
-        /* 입력형 + 유사 정답 + 영어↔한글 (기존 track UI) */
-        await mountTrackQuiz(container, entry, trackWords);
+      if (!trackWords.length) {
+        container.appendChild(
+          createElement(
+            "p",
+            "quiz-error",
+            "이 퀴즈는 입력형(track) 데이터가 없어 표시할 수 없습니다."
+          )
+        );
+        console.error("[vocabulary-quiz] track words empty — reveal/MCQ UI removed");
         return;
       }
 
-      container.appendChild(renderMcqEntry(entry));
+      await mountTrackQuiz(container, entry, trackWords);
     } catch (error) {
       container.replaceChildren(
         createElement(

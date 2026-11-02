@@ -1,9 +1,11 @@
 /**
  * 영어 단어 퀴즈 업로드 (vocabulary-quiz)
- * - 기존 객관식(quizzes[]) 또는 클릭 공개형(format: 'reveal') 지원
+ * - UI는 track 입력형만 허용 (유사 정답 · 영어↔한글)
+ * - API quizzes[] 는 목록/메타용 reveal-section 페어 저장 (화면 렌더는 track)
  */
 import { API_BASE, getSeedPassword, writeAuthHeaders } from './loadEnv.js';
-import { applySeoAfterUpload, toIsoDateOnly } from './voca-seo.js';
+import { applySeoAfterUpload, toIsoDateOnly, toVocabQuizTrackWords } from './voca-seo.js';
+import { enrichExistingTrackWords, enrichQuizTrackWords } from './quiz-answer-alts.js';
 
 function youtubeThumbFromUrl(url) {
   const s = String(url || '');
@@ -24,7 +26,37 @@ async function parseApiJson(res, label) {
   return JSON.parse(text);
 }
 
-function buildRevealQuizzes(config) {
+function pairsFromQuizzes(quizzes) {
+  const pairs = [];
+  const seen = new Set();
+  for (const q of quizzes || []) {
+    if (q?.type !== 'reveal-section' || !Array.isArray(q.items)) continue;
+    const dir = String(q.direction || '').trim();
+    for (const it of q.items) {
+      const show = String(it?.show || it?.en || '').trim();
+      const hide = String(it?.hide || it?.ko || '').trim();
+      if (!show || !hide) continue;
+      let en;
+      let ko;
+      if (dir === 'ko-en' || (!dir && !/[A-Za-z]/.test(show))) {
+        ko = show;
+        en = hide;
+      } else {
+        en = show;
+        ko = hide;
+      }
+      if (!/[A-Za-z]/.test(en)) continue;
+      const k = en.toLowerCase();
+      if (seen.has(k)) continue;
+      seen.add(k);
+      pairs.push({ en, ko });
+    }
+  }
+  return pairs;
+}
+
+/** API 저장용 섹션 (UI와 무관 — 단어 쌍 보관) */
+function buildPairSections(config) {
   const pairs = Array.isArray(config.pairs) ? config.pairs : [];
   if (!pairs.length) throw new Error('pairs 배열이 필요합니다.');
 
@@ -37,7 +69,6 @@ function buildRevealQuizzes(config) {
     hide: String(p.en || '').trim(),
   }));
 
-  /* directions: ['en-ko'] | ['ko-en'] | ['en-ko','ko-en'] (기본 둘 다) */
   const dirs = Array.isArray(config.directions) && config.directions.length
     ? config.directions.map((d) => String(d || '').trim())
     : ['en-ko', 'ko-en'];
@@ -46,7 +77,7 @@ function buildRevealQuizzes(config) {
   if (dirs.includes('en-ko')) {
     sections.push({
       type: 'reveal-section',
-      title: config.section1Title || '영어 → 뜻',
+      title: config.section1Title || '영어 → 한글',
       direction: 'en-ko',
       items: enKoItems,
     });
@@ -54,13 +85,40 @@ function buildRevealQuizzes(config) {
   if (dirs.includes('ko-en')) {
     sections.push({
       type: 'reveal-section',
-      title: config.section2Title || '뜻 → 영어',
+      title: config.section2Title || '한글 → 영어',
       direction: 'ko-en',
       items: koEnItems,
     });
   }
   if (!sections.length) throw new Error('directions 에 en-ko 또는 ko-en 이 필요합니다.');
   return sections;
+}
+
+function requireTrackPayload(config) {
+  let pairs = Array.isArray(config.pairs) ? config.pairs.filter((p) => p?.en && p?.ko) : [];
+  if (!pairs.length && Array.isArray(config.quizzes)) {
+    pairs = pairsFromQuizzes(config.quizzes);
+  }
+  if (!pairs.length) {
+    throw new Error(
+      '[vocabulary-quiz] track UI 전용: pairs[{ en, ko }] 가 필요합니다. 클릭 공개형 SEO/셸은 금지입니다.'
+    );
+  }
+
+  let trackWords;
+  if (Array.isArray(config.trackWords) && config.trackWords.length) {
+    trackWords = enrichExistingTrackWords(config.trackWords);
+  } else {
+    trackWords = enrichExistingTrackWords(
+      enrichQuizTrackWords(pairs, { siblingMerge: config.siblingMerge !== false })
+    );
+  }
+
+  const normalized = toVocabQuizTrackWords({ pairs, trackWords });
+  if (!normalized.length) {
+    throw new Error('[vocabulary-quiz] trackWords 변환 실패 — SEO를 쓸 수 없습니다.');
+  }
+  return { pairs, trackWords: normalized };
 }
 
 async function deleteBySlugOrId(apiBase, config, password) {
@@ -101,9 +159,11 @@ async function deleteBySlugOrId(apiBase, config, password) {
 export async function uploadVocabularyQuiz(config, apiBase = API_BASE) {
   const password = config.password || getSeedPassword();
   const datePublished = config.datePublished || toIsoDateOnly();
+  const { pairs, trackWords } = requireTrackPayload(config);
+
   const quizzes =
-    config.format === 'reveal' || Array.isArray(config.pairs)
-      ? buildRevealQuizzes(config)
+    config.format === 'reveal' || Array.isArray(config.pairs) || !config.quizzes
+      ? buildPairSections({ ...config, pairs })
       : config.quizzes;
 
   if (!Array.isArray(quizzes) || !quizzes.length) {
@@ -113,7 +173,6 @@ export async function uploadVocabularyQuiz(config, apiBase = API_BASE) {
   console.log('Vocabulary Quiz 업로드 중...', apiBase);
   await deleteBySlugOrId(apiBase, config, password);
 
-  /* 목록 섬네일 — 항상 유튜브 미리보기 (기사 URL보다 youtube 우선) */
   const youtube =
     config.youtube ||
     (/youtube\.com|youtu\.be/i.test(String(config.sourceUrl || '')) ? config.sourceUrl : '') ||
@@ -157,14 +216,14 @@ export async function uploadVocabularyQuiz(config, apiBase = API_BASE) {
       metaDescription: post.metaDescription,
       datePublished,
       message: '',
-      pairs: config.pairs,
-      trackWords: config.trackWords,
+      pairs,
+      trackWords,
       sourceUrl: post.sourceUrl,
       sourceLabel: post.sourceLabel,
       youtube: youtube || config.youtube || '',
       thumbnail,
-      eyebrow: config.eyebrow || '',
-      hint: config.hint || '',
+      eyebrow: config.eyebrow || 'Vocabulary Quiz · Review',
+      hint: config.hint || '유사·대체 표현도 정답으로 인정합니다.',
     });
     if (seo) {
       if (seo.seoPath) console.log(`  SEO 페이지: ${seo.seoPath}`);

@@ -2,10 +2,16 @@
  * API vocabulary-quiz → SEO 페이지를 입력형 track UI로 재생성 (업로드 없이 로컬 HTML만)
  *
  *   cd backend && node scripts/regenerate-quiz-seo-track.js
+ *   cd backend && npm run regenerate:quiz-seo
  */
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { spawnSync } from 'child_process';
 import { API_BASE } from './loadEnv.js';
 import { applySeoAfterUpload, toIsoDateOnly } from './voca-seo.js';
 import { enrichExistingTrackWords, enrichQuizTrackWords } from './quiz-answer-alts.js';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 function pairsFromQuizzes(quizzes) {
   const pairs = [];
@@ -90,6 +96,11 @@ async function main() {
   }
 
   console.log(`\n완료: 재생성 ${ok}, 생략 ${skip}`);
+
+  const check = spawnSync(process.execPath, [path.join(__dirname, 'assert-quiz-track-format.js')], {
+    stdio: 'inherit',
+  });
+  if (check.status !== 0) process.exit(check.status || 1);
 }
 
 main().catch((e) => {

@@ -468,16 +468,21 @@ function buildQuizSeoPageHtml(boardPath, board, config) {
   const trackWords = toVocabQuizTrackWords(config);
   const TRACK_VER = '20261102track1';
 
-  /* 최신 양식: vocabulary-quiz-track (입력·즉시 채점) */
-  if (trackWords.length) {
-    const yt = String(config.sourceUrl || config.youtube || '').trim();
-    const eyebrow = escapeHtml(config.eyebrow || 'Vocabulary Quiz · News');
-    const hintExtra = String(config.hint || '').trim();
-    const hint = hintExtra
-      ? `${escapeHtml(hintExtra)} 모바일: 입력 후 다음 칸으로 넘어가면 자동 채점. 전체 정답은 <b>정답 보기</b>. 뜻이 여러 개면 하나만 맞아도 O.`
-      : '모바일: 입력 후 다음 칸으로 넘어가면 자동 채점. 전체 정답은 <b>정답 보기</b>. 뜻이 여러 개면 하나만 맞아도 O.';
-    const ytBlock = yt
-      ? `
+  /* track UI only — 클릭 공개형/API 셸 SEO는 금지 */
+  if (!trackWords.length) {
+    throw new Error(
+      `[vocabulary-quiz] SEO는 track 입력 퀴즈만 허용합니다. pairs 또는 trackWords 가 필요합니다: ${slug}`
+    );
+  }
+
+  const yt = String(config.sourceUrl || config.youtube || '').trim();
+  const eyebrow = escapeHtml(config.eyebrow || 'Vocabulary Quiz · News');
+  const hintExtra = String(config.hint || '').trim();
+  const hint = hintExtra
+    ? `${escapeHtml(hintExtra)} 모바일: 입력 후 다음 칸으로 넘어가면 자동 채점. 전체 정답은 <b>정답 보기</b>. 뜻이 여러 개면 하나만 맞아도 O.`
+    : '모바일: 입력 후 다음 칸으로 넘어가면 자동 채점. 전체 정답은 <b>정답 보기</b>. 뜻이 여러 개면 하나만 맞아도 O.';
+  const ytBlock = yt
+    ? `
         <p class="vq-youtube">
           <a class="vq-youtube-btn" href="${escapeHtml(yt)}" target="_blank" rel="noopener noreferrer">
             <svg class="vq-youtube-icon" viewBox="0 0 28 20" aria-hidden="true" focusable="false">
@@ -487,10 +492,10 @@ function buildQuizSeoPageHtml(boardPath, board, config) {
             <span>${escapeHtml(config.sourceLabel || '유튜브 보기')}</span>
           </a>
         </p>`
-      : '';
-    const wordsJson = JSON.stringify(trackWords, null, 8).replace(/^/gm, '        ');
+    : '';
+  const wordsJson = JSON.stringify(trackWords, null, 8).replace(/^/gm, '        ');
 
-    return `<!DOCTYPE html>
+  return `<!DOCTYPE html>
 <html lang="ko">
 <head>
 <!-- Google tag (gtag.js) -->
@@ -549,33 +554,6 @@ ${head}
 ${wordsJson};
     </script>
     <script src="../../vocabulary-quiz-track.js?v=${TRACK_VER}"></script>
-</body>
-</html>
-`;
-  }
-
-  /* 구형 API 로드 셸 (pairs 없을 때만) */
-  return `<!DOCTYPE html>
-<html lang="ko">
-<head>
-${head}
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../../redesign-tokens.css?v=20261020quiz1">
-    <link rel="stylesheet" href="../../site-masthead.css?v=20261020quiz1">
-    <link rel="stylesheet" href="../../nav-home-menu.css?v=20260815j">
-    <link rel="stylesheet" href="../../${board.cssFile}?v=${board.cssVersion}">
-</head>
-<body class="rd-quiz" data-nv-slug="${escapeHtml(slug)}" data-nv-board="${escapeHtml(boardPath)}">
-    <nav id="navbar" class="navbar navbar-expand site-masthead" aria-label="주 메뉴"></nav>
-    <main class="vocabulary-quiz-main">
-        <div id="vocabulary-quiz-entries"></div>
-    </main>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../../page30-api-config.js?v=20260721"></script>
-    <script src="../../site-masthead.js?v=20261020quiz1"></script>
-    <script src="../../site-footer.js?v=20261013a"></script>
-    <script src="../../nav-home-menu.js?v=20260816d"></script>
-    <script src="../../${board.jsFile}?v=${board.jsVersion}"></script>
 </body>
 </html>
 `;

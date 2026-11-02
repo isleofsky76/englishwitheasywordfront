@@ -4,7 +4,9 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "assert:quiz-track": "node scripts/assert-quiz-track-format.js",
+    "regenerate:quiz-seo": "node scripts/regenerate-quiz-seo-track.js && node scripts/assert-quiz-track-format.js"
   },
   "dependencies": {
     "@google-cloud/text-to-speech": "7.1.0",
