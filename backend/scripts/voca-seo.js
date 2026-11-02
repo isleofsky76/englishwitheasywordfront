@@ -597,7 +597,7 @@ ${(board.extraCss || []).map((c) => `    <link rel="stylesheet" href="../../${c.
     <link rel="stylesheet" href="../../weather-banner.css?v=20260612g">
     <link rel="stylesheet" href="../../world-clock.css?v=20260612g">
     <link rel="stylesheet" href="../../redesign-tokens.css?v=20261020rd27">
-    <link rel="stylesheet" href="../../redesign-article.css?v=20261102c5">
+    <link rel="stylesheet" href="../../redesign-article.css?v=20261102c6">
     <link rel="preload" href="../../redesign-article.js?v=20261030noDupArticle" as="script">
     <style id="rd-fouc-guard">
       /* SEO 구형 본문이 redesign 전에 깜빡이지 않도록 (!important 금지: 키프레임 fallback이 무시됨) */
