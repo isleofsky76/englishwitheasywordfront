@@ -1,89 +1,74 @@
 /**
- * 경제뉴스 업로드
- *
- * 사용법: 아래 article JSON 수정 → node scripts/seed-economy-news.js
+ * 경제뉴스 — 유럽 연금 계약 위기 / WSJ
+ *   cd backend && node scripts/seed-economy-news.js
  */
 import { API_BASE } from './loadEnv.js';
 import { uploadEconomyNews } from './economy-news-format.js';
 
-// ========== 여기만 수정 ==========
-
 const article = {
-  title: 'AI 투자에서 가장 위험한 영역, 금리 상승에 직면하다',
+  title: '유럽의 연금 사회계약이 흔들리며 퍼지는 공포와 분노',
 
-  slug: 'stare-down-immune-prominent-weather-vane-related-words',
+  slug: 'covenant-sovereign-debt-demographics-statutory-rite-related-words',
 
   metaDescription:
-    'WSJ 기사에서 추출한 AI 투자·금리 상승·주식시장 관련 시사 영단어. stare down, immune, prominent, weather vane, endure, dour, whirlwind, retreat, mirror 등.',
+    'WSJ 유럽 연금·재정 기사 어휘. covenant, sovereign debt, demographics, top, statutory, rite.',
 
-  password: 'seed_finance_ai-trade-higher-rates-related-words',
+  password: 'seed_economy_covenant-sovereign-debt-demographics-statutory',
 
-  datePublished: '2026-10-15',
+  datePublished: '2026-11-01',
 
   intro: [
-    '금리 상승과 차입비용 증가가 AI 데이터센터 기업들의 주가에 미치는 영향을 분석한 월스트리트저널(WSJ) 기사에서 주요 시사 영단어를 정리합니다. 코어위브(CoreWeave)를 비롯한 AI 인프라 관련 기업들이 시장 혼란과 주가 하락을 겪으면서, 막대한 차입에 의존하는 AI 투자 구조의 위험성이 부각되고 있습니다.',
+    '빠듯한 재정과 고령화가 유럽의 연금 사회계약을 흔든다는 The Wall Street Journal 기사에서 핵심 시사 영단어를 정리합니다. *AI 음성과 이미지를 사용했습니다.',
   ],
 
   words: [
     {
       narrative: [
-        '1. 투자자들은 AI 관련 기업들의 자금조달에 부담을 주는 높은 차입비용에 직면하고(**staring down**) 있었다. cf. stare down: 맞서다, 직면하다',
+        '1. Stretched public finances and a rapidly aging population are threatening this **covenant**... / 빠듯한 국가 재정과 급속한 인구 고령화가 이러한 사회적 약속을 위협하고 있다. cf. covenant: 사회적 약속, 합의 (명)',
       ],
     },
     {
       narrative: [
-        '2. 투자자들은 AI 데이터센터 기업들이 높은 차입비용의 영향을 받지 않을(**immune**) 것이라고 믿었다. cf. immune to: ~의 영향을 받지 않는',
+        '2. This in turn is driving up **sovereign debt** and borrowing costs. / 이는 다시 국가채무와 차입 비용을 끌어올리고 있다. cf. sovereign debt: 국가채무 (명)',
       ],
     },
     {
       narrative: [
-        '3. 높은 차입비용의 영향을 받지 않을 것이라는 기대에도 예외가 있었으며, 그중 코어위브(CoreWeave)가 가장 두드러진(**prominent**) 사례였다. cf. prominent: 두드러진, 중요한',
+        '3. **Demographics** is the only science that never lies. / 인구 통계는 결코 거짓말하지 않는 유일한 과학이다. cf. demographics: 인구 통계, 인구 구조 (명)',
       ],
     },
     {
       narrative: [
-        '4. 코어위브는 AI 투자에서 가장 위험한 영역의 시장 상황을 보여주는 풍향계(**weather vane**)와 같은 존재가 됐다. cf. weather vane: 풍향계, 상황이나 변화의 방향을 보여주는 지표',
+        "4. ...requiring tens of billions in fresh borrowing for a country whose debt already **tops** 117% of GDP. / 이미 국가채무가 GDP의 117%를 넘는 나라에 수백억 규모의 추가 차입을 요구하면서. cf. top: 넘다, 초과하다 (동)",
       ],
     },
     {
       narrative: [
-        '5. 코어위브는 이번 주 주식시장에서 발생한 거센 혼란을 견뎌야(**endured**) 했다. cf. endure: 견디다, 겪다',
+        '5. French voters enjoy both one of the world\'s longest life expectancies and some of its earliest **statutory** retirement ages. / 프랑스 유권자들은 세계에서 가장 긴 수준의 기대수명과 가장 이른 편에 속하는 법정 은퇴 연령을 모두 누리고 있다. cf. statutory: 법으로 정한, 법정의 (형)',
       ],
     },
     {
       narrative: [
-        '6. 목요일에는 AI 관련 기업들에 대한 시장 분위기가 가장 침울하고 비관적인(**dour**) 상태에 이르렀다. cf. dour: 침울한, 비관적인',
-      ],
-    },
-    {
-      narrative: [
-        '7. 이번 급격한 시장 혼란(**whirlwind**)은 AI 관련 기업들의 주가가 차입비용 변화에 얼마나 민감한지를 드러냈다. cf. whirlwind: 회오리바람, 소용돌이, 급격한 혼란',
-      ],
-    },
-    {
-      narrative: [
-        '8. AI 인프라 관련 기업인 네비우스 그룹(Nebius Group)의 주가는 15% 하락했다(**retreated**). cf. retreat: 후퇴하다, 하락하다',
-      ],
-    },
-    {
-      narrative: [
-        '9. 네비우스와 아이렌(IREN)의 주가 하락은 코어위브의 15% 하락과 대체로 비슷한 양상을 보였다(**mirrored**). cf. mirror: 반영하다, 비슷한 양상을 보이다',
+        '6. Reaching pension age in the country is widely considered a **rite** of passage into a second phase of life... / 그 나라에서 연금 수급 연령에 도달하는 것은 인생의 두 번째 단계로 들어가는 통과의례로 널리 여겨진다. cf. rite: 의례, 의식 (명)',
       ],
     },
   ],
 
   source: {
-    text: 'The Wall Street Journal | The Riskiest Corner of the AI Trade Is Crashing Into Higher Rates | By David Uberti, Jack Pitcher and Sam Goldfarb',
-    url: 'https://www.wsj.com/finance/stocks/the-riskiest-corner-of-the-ai-trade-is-crashing-into-higher-rates-fcdaad37',
+    text: 'The Wall Street Journal | Panic and Anger Spread as Europe’s Great Pension Covenant Unravels | By Tom Fairless and Noemie Bisserbe | Nov. 1, 2026',
+    url: 'https://www.wsj.com/world/europe/panic-and-anger-spread-as-europes-great-pension-covenant-unravels-69a94ed7?mod=hp_trendingnow_article_pos5',
   },
 
-  youtube: 'https://youtube.com/shorts/UgfdyCx5FT0',
+  youtube: 'https://youtube.com/shorts/OX2teVqvMno',
+  videoId: 'OX2teVqvMno',
 };
-// ===============================
 
 uploadEconomyNews(article, API_BASE)
-  .then(() => console.log('완료.'))
+  .then(() => {
+    console.log('완료.');
+    console.log(`상세: https://englisheasystudy.com/economy-news/${article.slug}/`);
+  })
   .catch((e) => {
-    console.error('  오류:', e.message);
+    console.error('오류:', e.message || e);
     process.exitCode = 1;
   });
