@@ -33,11 +33,16 @@ export const BOARD_SEO = {
   },
   'cooking-voca': {
     label: 'Cooking Voca',
-    cssFile: 'cooking-voca.css',
-    cssVersion: '20260622a',
+    cssFile: 'news-voca.css',
+    cssVersion: '20261020rd21',
     jsFile: 'cooking-voca.js',
-    jsVersion: '20260903d',
+    jsVersion: '20261102c10',
     listHtml: 'cooking-voca-list.html',
+    extraCss: [
+      { file: 'cooking-voca.css', version: '20260616b' },
+      { file: 'redesign-article.css', version: '20261102c7' },
+    ],
+    extraJs: [{ file: 'redesign-article.js', version: '20261102c10' }],
   },
   'culture-voca': {
     label: 'Culture Voca',
@@ -810,7 +815,8 @@ const SITEMAP_STATIC_URLS = [
   { loc: `${SITE_ORIGIN}/us-news-list.html`, priority: '0.9' },
   { loc: `${SITE_ORIGIN}/industry-news-list.html`, priority: '0.9' },
   { loc: `${SITE_ORIGIN}/travel-news-list.html`, priority: '0.9' },
-  /* 빈·얇은 보드 목록 제외: retail/ukraine/cooking/ranking + empty news cats */
+  { loc: `${SITE_ORIGIN}/cooking-voca-list.html`, priority: '0.8' },
+  /* 빈·얇은 보드 목록 제외: retail/ukraine/ranking + empty news cats */
   { loc: `${SITE_ORIGIN}/korea-news-list.html`, priority: '0.9' },
   { loc: `${SITE_ORIGIN}/shorts-bg-image-list.html`, priority: '0.8' },
   { loc: `${SITE_ORIGIN}/english-synonym-list.html`, priority: '0.8' },

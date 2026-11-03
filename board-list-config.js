@@ -13,11 +13,10 @@
     'politics-news': true,
     'ai-news': true,
     'incident-news': true,
-    /* 얇은·빈 카테고리 (AdSense/UX) — 산업·여행은 글 생겼으므로 탭 표시 */
+    /* 얇은·빈 카테고리 (AdSense/UX) — 산업·여행·요리는 글 생겼으므로 탭 표시 */
     'retail-news': true,
     'ukraine-news': true,
-    'ranking-news': true,
-    'cooking-voca': true
+    'ranking-news': true
   };
 
   var NEWS_TABS_ALL = [
@@ -551,7 +550,7 @@
       apiPath: '/cooking-voca',
       navGroup: 'express',
       tabs: null,
-      articleLayout: 'header-only',
+      articleLayout: 'auto',
       breadcrumbParent: { label: '요리', href: 'cooking-voca-list.html' }
     }
   };

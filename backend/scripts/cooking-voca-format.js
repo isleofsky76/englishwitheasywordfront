@@ -1,15 +1,17 @@
 /**
- * 요리 어휘 — 텍스트 → HTML + SEO
+ * 요리 어휘 — JSON / text → HTML + sitemap
  *
- * slug, metaDescription — seed 시 SEO 페이지·sitemap 자동 생성
+ * JSON (seed-cooking-voca.js):
+ *   title, slug, metaDescription, password, datePublished
+ *   intro[]
+ *   words[] — narrative (서술형, 국제·컬쳐와 동일 nv-* 마크업)
+ *   source{text,url}, youtube
  *
- * text 한 블록:
- *   · 빈 줄 = 구분
- *   · 단어 줄: 영어 | 발음 | 발음기호  (3칸, | 구분)
- *     영어 뒤 (한글 뜻) 가능 — to cook (요리하다) | 쿡 | /tuː kʊk/
- *   · ※ 또는 [ 로 시작 = 참고 메모
- *   · "예문" = 예문 섹션 시작 → 영문 줄, 다음 줄 한글
+ * text 한 블록(레거시):
+ *   · 단어 줄: 영어 | 발음 | 발음기호
+ *   · 예문 / 출처 섹션
  */
+import { buildNewsVocaMessage } from './news-voca-format.js';
 import { applySeoAfterUpload, toIsoDateOnly } from './voca-seo.js';
 
 function escapeHtml(text) {
@@ -101,22 +103,24 @@ function parseTextBody(text) {
       continue;
     }
 
-    if (inSource) {
-      sourceLines.push(trimmed);
-      continue;
-    }
-
     if (isSourceStart(trimmed)) {
       flushParagraph();
       flushExample();
       inExample = false;
       inSource = true;
-      sourceLines.push(trimmed.replace(/^출처\s*[:：]?\s*/i, ''));
+      const rest = trimmed.replace(/^출처\s*[:：]?\s*/i, '').trim();
+      if (rest) sourceLines.push(rest);
+      continue;
+    }
+
+    if (inSource) {
+      sourceLines.push(trimmed);
       continue;
     }
 
     if (isExampleStart(trimmed)) {
       flushParagraph();
+      flushExample();
       inExample = true;
       continue;
     }
@@ -137,14 +141,11 @@ function parseTextBody(text) {
     if (isNoteLine(trimmed)) {
       flushParagraph();
       if (notePending) notes.push(notePending);
-      notePending = {
-        en: trimmed.replace(/^[※\[]\s*/, '').replace(/\]$/, ''),
-        ko: '',
-      };
+      notePending = { en: trimmed.replace(/^[※\[]\s*/, '').replace(/\]$/, ''), ko: '' };
       continue;
     }
 
-    if (notePending) {
+    if (notePending && !notePending.ko && /[가-힣]/.test(trimmed) && !isWordLine(trimmed)) {
       notePending.ko = trimmed;
       notes.push(notePending);
       notePending = null;
@@ -190,7 +191,7 @@ async function parseApiJson(res, label) {
   return JSON.parse(text);
 }
 
-export function buildCookingVocaMessage(config) {
+export function buildCookingVocaMessageFromText(config) {
   const text = config.text ?? '';
   const { words, notes, paragraphs, examples, sourceLines } = parseTextBody(text);
 
@@ -240,9 +241,18 @@ ${sourceHtml}
 </article>`;
 }
 
+export function buildCookingVocaMessage(config) {
+  if (Array.isArray(config.words) && config.words.length) {
+    return buildNewsVocaMessage({ ...config, sourceAtEnd: true });
+  }
+  return buildCookingVocaMessageFromText(config);
+}
+
 export async function uploadCookingVoca(config, apiBase) {
   const message = buildCookingVocaMessage(config);
+  const sectionCount = (message.match(/nv-word-section/g) || []).length;
   const wordCount = (message.match(/cv-word/g) || []).length;
+  const datePublished = config.datePublished || toIsoDateOnly();
 
   const post = {
     title: config.title,
@@ -255,16 +265,68 @@ export async function uploadCookingVoca(config, apiBase) {
   };
 
   console.log('요리 어휘 업로드 중...', apiBase);
-  console.log(`  title: ${post.title}`);
-  console.log(`  words: ${wordCount}`);
+  if (/localhost|127\.0\.0\.1/.test(apiBase)) {
+    console.warn(
+      '  ⚠️ localhost에만 올라갑니다. englisheasystudy.com 에 반영하려면 .env 의 API_BASE 를 Cloudtype URL로 바꾸고 다시 실행하세요.'
+    );
+  }
 
+  console.log(`  title: ${post.title}`);
+  if (post.slug) console.log(`  slug: ${post.slug}`);
+  console.log(`  words: ${sectionCount || wordCount}`);
+
+  const t0 = Date.now();
+  const elapsed = () => `${((Date.now() - t0) / 1000).toFixed(1)}s`;
+
+  console.log('  기존 글 삭제 중...');
+  await deleteMatchingEntries(apiBase, config);
+
+  const payloadKb = (JSON.stringify(post).length / 1024).toFixed(1);
+  console.log(`  서버에 업로드 중... (${payloadKb} KB)`);
+
+  const res = await fetch(`${apiBase}/cooking-voca`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+    body: JSON.stringify(post),
+    signal: AbortSignal.timeout(180000),
+  });
+
+  const data = await parseApiJson(res, 'POST /cooking-voca');
+  if (!res.ok) {
+    console.log('  실패:', data.error || res.status);
+    throw new Error(data.error || `HTTP ${res.status}`);
+  }
+
+  console.log(`  "${post.title}" 추가됨 (${elapsed()})`);
+
+  const seo = applySeoAfterUpload('cooking-voca', {
+    title: config.title,
+    slug: config.slug,
+    metaDescription: config.metaDescription,
+    datePublished,
+    message: post.message,
+  });
+  if (seo) {
+    if (seo.seoPath) console.log(`  SEO 페이지: ${seo.seoPath}`);
+    console.log(`  sitemap: ${seo.sitemapPath}`);
+    console.log(`  URL: ${seo.url}`);
+  }
+}
+
+async function deleteMatchingEntries(apiBase, config) {
   const listRes = await fetch(`${apiBase}/cooking-voca`, { headers: { Accept: 'application/json' } });
   const listData = await parseApiJson(listRes, 'GET /cooking-voca');
   const entries = listData.entries || listData.data || (Array.isArray(listData) ? listData : []);
-
   let deleted = 0;
   for (const entry of entries) {
     if (!entry?._id) continue;
+    const sameSlug = config.slug && entry.slug === config.slug;
+    const samePassword = config.password && entry.password === config.password;
+    if (config.slug) {
+      if (!sameSlug) continue;
+    } else if (!samePassword) {
+      continue;
+    }
     try {
       const delRes = await fetch(`${apiBase}/cooking-voca-deletepost`, {
         method: 'POST',
@@ -274,28 +336,6 @@ export async function uploadCookingVoca(config, apiBase) {
       if (delRes.ok) deleted++;
     } catch (_) {}
   }
-  if (deleted > 0) console.log(`  기존 글(동일 비밀번호) ${deleted}개 삭제됨.`);
-
-  const res = await fetch(`${apiBase}/cooking-voca`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-    body: JSON.stringify(post),
-  });
-  const data = await parseApiJson(res, 'POST /cooking-voca');
-  if (!res.ok) {
-    console.log('  실패:', data.error || res.status);
-    throw new Error(data.error || `HTTP ${res.status}`);
-  }
-  console.log(`  "${post.title}" 추가됨`);
-  const seo = applySeoAfterUpload('cooking-voca', {
-    title: config.title,
-    slug: config.slug,
-    metaDescription: config.metaDescription,
-    datePublished: config.datePublished || toIsoDateOnly(),
-    message: post.message,
-  });
-  if (seo) {
-    console.log(`  SEO 페이지: ${seo.seoPath}`);
-    console.log(`  URL: ${seo.url}`);
-  }
+  if (deleted > 0) console.log(`  기존 글 ${deleted}개 삭제됨.`);
+  else console.log('  삭제할 기존 글 없음.');
 }
