@@ -266,7 +266,10 @@
         '</div>' +
         (item.ko ? '<p class="os-ko">' + escapeHtml(item.ko) + '</p>' : '') +
         renderMemoBox(item.memo) +
-        '<div class="os-comments-root" data-os-comments-root></div>' +
+        '<div class="os-item-foot">' +
+          '<button type="button" class="os-meaning-toggle" data-os-meaning-toggle aria-pressed="false">뜻 보기</button>' +
+          '<div class="os-comments-root" data-os-comments-root></div>' +
+        '</div>' +
         renderAdminActions(item) +
       '</article>'
     );
@@ -469,6 +472,7 @@
     if (window.OsComments && typeof window.OsComments.mountAll === 'function') {
       window.OsComments.mountAll();
     }
+    syncAllMeaningToggleButtons();
   }
 
   function syncFixedAlphaLayout() {
@@ -552,12 +556,51 @@
     }
   }
 
+  function isItemMeaningVisible(itemEl) {
+    if (!itemEl) return false;
+    var globalHide = document.body.classList.contains('os-hide-meaning');
+    if (globalHide) return itemEl.classList.contains('is-meaning-shown');
+    return !itemEl.classList.contains('is-meaning-hidden');
+  }
+
+  function syncMeaningToggleButton(btn, itemEl) {
+    if (!btn || !itemEl) return;
+    var shown = isItemMeaningVisible(itemEl);
+    btn.textContent = shown ? '뜻 숨기기' : '뜻 보기';
+    btn.setAttribute('aria-pressed', shown ? 'true' : 'false');
+    btn.title = shown ? '이 단어의 뜻을 가립니다' : '이 단어의 뜻을 봅니다';
+  }
+
+  function syncAllMeaningToggleButtons() {
+    document.querySelectorAll('.os-item').forEach(function (itemEl) {
+      syncMeaningToggleButton(itemEl.querySelector('[data-os-meaning-toggle]'), itemEl);
+    });
+  }
+
+  function toggleItemMeaning(itemEl) {
+    if (!itemEl) return;
+    var globalHide = document.body.classList.contains('os-hide-meaning');
+    var shown = isItemMeaningVisible(itemEl);
+    if (globalHide) {
+      itemEl.classList.toggle('is-meaning-shown', !shown);
+      itemEl.classList.remove('is-meaning-hidden');
+    } else {
+      itemEl.classList.toggle('is-meaning-hidden', shown);
+      itemEl.classList.remove('is-meaning-shown');
+    }
+    syncMeaningToggleButton(itemEl.querySelector('[data-os-meaning-toggle]'), itemEl);
+  }
+
   function applyHideMeaning(on) {
     var hide = !!on;
     document.body.classList.toggle('os-hide-meaning', hide);
     try {
       localStorage.setItem(HIDE_MEANING_KEY, hide ? '1' : '0');
     } catch (e) { /* ignore */ }
+    /* 전체 모드가 바뀌면 개별 예외는 초기화 */
+    document.querySelectorAll('.os-item.is-meaning-shown, .os-item.is-meaning-hidden').forEach(function (el) {
+      el.classList.remove('is-meaning-shown', 'is-meaning-hidden');
+    });
     var cb = document.getElementById('os-hide-meaning');
     if (cb && cb.checked !== hide) cb.checked = hide;
     var label = document.querySelector('.os-hide-meaning-label');
@@ -566,6 +609,7 @@
     if (wrap) {
       wrap.title = hide ? '체크 해제하면 뜻이 보입니다' : '체크하면 뜻을 가립니다';
     }
+    syncAllMeaningToggleButtons();
   }
 
   function bindAlphaNav() {
@@ -906,6 +950,11 @@
     if (feed && !feed._osBound) {
       feed._osBound = true;
       feed.addEventListener('click', function (e) {
+        var meaningBtn = e.target.closest('[data-os-meaning-toggle]');
+        if (meaningBtn && feed.contains(meaningBtn)) {
+          toggleItemMeaning(meaningBtn.closest('.os-item'));
+          return;
+        }
         var tts = e.target.closest('[data-os-tts]');
         if (tts && feed.contains(tts)) {
           speakText(tts.getAttribute('data-os-tts') || '', tts);
