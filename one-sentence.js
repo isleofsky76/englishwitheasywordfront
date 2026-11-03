@@ -267,9 +267,10 @@
         (item.ko ? '<p class="os-ko">' + escapeHtml(item.ko) + '</p>' : '') +
         renderMemoBox(item.memo) +
         '<div class="os-item-foot">' +
+          '<div class="os-comments-root" data-os-comments-root></div>' +
           '<button type="button" class="os-meaning-toggle" data-os-meaning-toggle aria-pressed="false">뜻 보기</button>' +
           '<button type="button" class="os-save-toggle" data-os-save-toggle aria-pressed="false">저장</button>' +
-          '<div class="os-comments-root" data-os-comments-root></div>' +
+          '<button type="button" class="os-item-download" data-os-item-download hidden>다운로드</button>' +
         '</div>' +
         renderAdminActions(item) +
       '</article>'
@@ -595,10 +596,20 @@
     btn.title = on ? '저장 취소' : '이 탭에만 잠시 저장';
   }
 
+  function syncItemDownloadButton(itemEl, wordKey) {
+    if (!itemEl) return;
+    var btn = itemEl.querySelector('[data-os-item-download]');
+    if (!btn) return;
+    var on = isWordSaved(wordKey);
+    btn.hidden = !on;
+    btn.title = on ? '저장한 단어 전체 다운로드' : '';
+  }
+
   function syncAllSaveToggleButtons() {
     document.querySelectorAll('.os-item').forEach(function (itemEl) {
       var key = itemEl.getAttribute('data-word-key') || '';
       syncSaveToggleButton(itemEl.querySelector('[data-os-save-toggle]'), key);
+      syncItemDownloadButton(itemEl, key);
     });
   }
 
@@ -608,12 +619,14 @@
     var n = savedCount();
     if (countEl) countEl.textContent = String(n);
     if (btn) {
+      btn.hidden = n === 0;
       btn.disabled = n === 0;
       btn.title =
         n === 0
           ? '저장한 단어가 없습니다 (이 탭에서만 잠시 보관)'
           : '저장한 ' + n + '개 다운로드 (탭을 닫으면 저장 목록도 사라집니다)';
     }
+    syncAllSaveToggleButtons();
   }
 
   function toggleSaveWord(itemEl) {
@@ -638,6 +651,7 @@
     }
     writeSavedMap(map);
     syncSaveToggleButton(itemEl.querySelector('[data-os-save-toggle]'), wordKey);
+    syncItemDownloadButton(itemEl, wordKey);
     syncDownloadButton();
   }
 
@@ -1110,6 +1124,11 @@
         var saveBtn = e.target.closest('[data-os-save-toggle]');
         if (saveBtn && feed.contains(saveBtn)) {
           toggleSaveWord(saveBtn.closest('.os-item'));
+          return;
+        }
+        var itemDl = e.target.closest('[data-os-item-download]');
+        if (itemDl && feed.contains(itemDl)) {
+          downloadSavedWords();
           return;
         }
         var tts = e.target.closest('[data-os-tts]');
