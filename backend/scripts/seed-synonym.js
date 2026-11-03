@@ -1,5 +1,5 @@
 /**
- * 유의어(연관단어) 업로드 — 독재·권위주의 관련어
+ * 유의어(연관단어) 업로드 — 신랄함·질책·냉담 관련어
  *
  *   cd backend && node scripts/seed-synonym.js
  */
@@ -7,70 +7,60 @@ import { API_BASE } from './loadEnv.js';
 import { uploadSynonym } from './synonym-format.js';
 
 const article = {
-  title: '독재자 · 독재 정치 #연관단어',
+  title: '신랄함 · 혹독한 질책 #연관단어',
 
-  slug: 'autocrat-dictator-despot-authoritarian-kleptocracy-related-words',
+  slug: 'asperity-castigation-castigate-lambaste-callous-related-words',
 
   metaDescription:
-    '독재·권위주의 관련 연관단어. autocrat, dictator, despot, authoritarian, autocratic, autocracy, kleptocracy, baleful, avarice, braggart.',
+    '신랄함·질책·냉담 관련 연관단어. asperity, castigation, castigate, castigatory, lambaste, cantankerous, callous, impervious.',
 
-  password: 'seed_synonym_autocrat-dictator-despot-authoritarian',
+  password: 'seed_synonym_asperity-castigation-castigate-lambaste',
 
   datePublished: '2026-11-03',
 
   intro: [
-    '독재자·독재 정치·권위주의와 관련된 연관단어를 정리합니다. *AI 음성과 이미지를 사용했습니다.',
+    '신랄함·혹독한 질책·냉담함과 관련된 연관단어를 정리합니다. *AI 음성과 이미지를 사용했습니다.',
   ],
 
   words: [
     {
       narrative: [
-        '1. The **autocrat** ruled the country with absolute power. / 그 독재자는 절대적인 권력으로 나라를 통치했다. cf. autocrat: 독재자, 전제 군주 (명)',
+        '1. She answered my question with **asperity**. / 그녀는 내 질문에 쌀쌀맞고 날카롭게 대답했다. cf. asperity: 신랄함, 거침 (명)',
       ],
     },
     {
       narrative: [
-        '2. The **dictator** suppressed political opposition. / 그 독재자는 정치적 반대 세력을 탄압했다. cf. dictator: 독재자 (명)',
+        '2. He received a severe **castigation**. / 그는 혹독한 질책을 받았다. cf. castigation: 혹독한 질책, 호된 비난 (명)',
       ],
     },
     {
       narrative: [
-        '3. The cruel **despot** ruled through fear. / 그 잔혹한 폭군은 공포로 나라를 다스렸다. cf. despot: 폭군, 전제 군주 (명)',
+        '3. He would **castigate** me for even the slightest mistakes. / 그는 아주 사소한 실수에도 나를 호되게 질책하곤 했다. cf. castigate: 호되게 질책하다, 혹평하다 (동)',
       ],
     },
     {
       narrative: [
-        '4. The **authoritarian** government restricted civil liberties. / 그 권위주의 정부는 시민의 자유를 제한했다. cf. authoritarian: 권위주의적인, 권위주의자 (형/명)',
+        '4. There was a **castigatory** tone to his words. / 그의 말에는 질책하는 어조가 담겨 있었다. cf. castigatory: 질책하는, 징벌적인 (형)',
       ],
     },
     {
       narrative: [
-        '5. His **autocratic** leadership left little room for dissent. / 그의 독재적인 지도 방식은 반대 의견을 거의 허용하지 않았다. cf. autocratic: 독재적인, 전제적인 (형)',
+        '5. It is the media that immediately starts to sully and **lambaste** in order to end debate instantly. / 논쟁을 즉시 끝내려고 곧바로 평판을 더럽히고 맹비난하기 시작하는 것은 바로 언론이다. cf. lambaste: 맹렬히 비난하다, 혹평하다 (동)',
       ],
     },
     {
       narrative: [
-        '6. The country shifted from democracy to **autocracy**. / 그 나라는 민주주의에서 독재 정치로 전환되었다. cf. autocracy: 독재 정치, 전제 정치 (명)',
+        '6. The **cantankerous** old man won\'t pay his rent. / 그 까다롭고 시비를 거는 노인은 집세를 내려고 하지 않는다. cf. cantankerous: 성미가 고약한 (형)',
       ],
     },
     {
       narrative: [
-        '7. The regime became a **kleptocracy** under corrupt leaders. / 그 정권은 부패한 지도자들 아래 도둑 정치 체제로 변했다. cf. kleptocracy: 도둑 정치, 부패한 지배 체제 (명)',
+        '7. I am **callous** to their abuse. / 나는 그들의 학대에 무감각해져 있다. cf. callous: 냉담한, 무감각한 (형)',
       ],
     },
     {
       narrative: [
-        '8. The ruler cast a **baleful** glance at his opponents. / 그 통치자는 반대자들에게 위협적인 눈길을 보냈다. cf. baleful: 해로운, 불길한, 위협적인 (형)',
-      ],
-    },
-    {
-      narrative: [
-        "9. The ruler's **avarice** drained the nation's wealth. / 그 통치자의 탐욕은 국가의 부를 고갈시켰다. cf. avarice: 탐욕, 재물욕 (명)",
-      ],
-    },
-    {
-      narrative: [
-        '10. The **braggart** constantly boasted about his achievements. / 그 허풍쟁이는 끊임없이 자신의 업적을 자랑했다. cf. braggart: 허풍쟁이, 자랑만 늘어놓는 사람 (명)',
+        '8. This plant can grow as tall as eight feet and is **impervious** to drought. / 이 식물은 높이가 8피트까지 자랄 수 있으며 가뭄에도 끄떡없다. cf. impervious: 영향을 받지 않는, 끄떡없는 (형)',
       ],
     },
   ],
@@ -81,8 +71,8 @@ const article = {
     url: 'https://englisheasystudy.com',
   },
 
-  youtube: 'https://youtube.com/shorts/Hp5mjB-T9XA',
-  videoId: 'Hp5mjB-T9XA',
+  youtube: 'https://youtube.com/shorts/r49p_LV886M',
+  videoId: 'r49p_LV886M',
 };
 
 uploadSynonym(article, API_BASE)
