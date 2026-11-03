@@ -13,8 +13,7 @@
     'politics-news': true,
     'ai-news': true,
     'incident-news': true,
-    /* 얇은·빈 카테고리 (AdSense/UX) — 산업은 글 생겼으므로 탭 표시 */
-    'travel-news': true,
+    /* 얇은·빈 카테고리 (AdSense/UX) — 산업·여행은 글 생겼으므로 탭 표시 */
     'retail-news': true,
     'ukraine-news': true,
     'ranking-news': true,

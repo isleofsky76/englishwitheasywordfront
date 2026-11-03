@@ -1,79 +1,89 @@
 /**
- * 여행뉴스 업로드
- *
- * 사용법: 아래 article JSON 수정 → node scripts/seed-travel-news.js
+ * 여행뉴스 — 28년 세계 도보 / The Guardian
+ *   cd backend && node scripts/seed-travel-news.js
  */
 import { API_BASE } from './loadEnv.js';
 import { uploadTravelNews } from './travel-news-format.js';
 
-// ========== 여기만 수정 ==========
-
 const article = {
-  title: '그리스 펠로폰네소스 가을 자동차 여행',
+  title: '28년 세계 도보를 마친 영국인에게 쏟아진 영웅의 환영',
 
-  slug: 'hairpin-bend-causeway-circuit-pass-related-words',
+  slug: 'odyssey-expedition-journey-voyage-trek-itinerary-related-words',
 
   metaDescription:
-    'The Guardian 여행 기사에서 추출한 그리스 펠로폰네소스 자동차 여행 관련 영어 표현. hairpin bend, causeway, circuit, pass, studded with, sidetrack, shoulder season 등.',
+    'The Guardian 28년 세계 도보 기사 어휘. odyssey, expedition, journey, voyage, trek, itinerary, sojourn, pilgrimage, wayfaring.',
 
-  password: 'seed_travel_peloponnese-autumn-roadtrip-related-words',
+  password: 'seed_travel_odyssey-expedition-journey-voyage-trek',
 
-  datePublished: '2026-10-17',
+  datePublished: '2026-11-02',
 
   intro: [
-    '그리스 펠로폰네소스반도의 아름다운 가을 풍경과 해안도로, 산길, 역사적인 마을을 자동차로 여행한 The Guardian 기사에서 주요 영어 표현을 정리합니다. 칼라마타에서 출발해 타이게토스 산길과 모넴바시아 요새 섬, 폴릴림니오 폭포 등을 둘러보며 가을 여행의 매력과 비성수기 여행의 장점을 소개합니다.',
+    '28년간 세계를 걸어 돌아온 영국인에게 영웅의 환영이 쏟아졌다는 The Guardian 기사에서 여정·탐험 관련 시사 영단어를 정리합니다. *AI 음성과 이미지를 사용했습니다.',
   ],
 
   words: [
     {
       narrative: [
-        '1. 그리스 펠로폰네소스의 구불구불한 산길에서는 급커브(**hairpin bend**)를 돌 때마다 바다 풍경과 꽃, 석회암 지형이 눈앞에 펼쳐졌다. cf. hairpin bend: (특히 산길의) 급커브',
+        '1. After a 28-year **odyssey** spanning 29 countries / 29개국에 걸친 28년간의 대장정 끝에 cf. odyssey: 대장정, 긴 여정 (명)',
       ],
     },
     {
       narrative: [
-        '2. 여행자는 작은 요새 섬 모넴바시아와 펠로폰네소스 남동부 해안을 연결하는 둑길(**causeway**)을 차로 건넜다. 사방에서는 에게해가 반짝이고 있었다. cf. causeway: 둑길, 제방 위에 만든 도로',
+        '2. led a scientific **expedition** across the frozen tundra / 얼어붙은 툰드라를 가로지르는 과학 탐험을 이끌었다. cf. expedition: 탐험, 원정 (명)',
       ],
     },
     {
       narrative: [
-        '3. 여행자는 녹음이 우거진 항구도시 칼라마타에서 출발해 펠로폰네소스 해안도로를 따라 순회하는 여행 경로(**circuit**)에 올랐다. cf. circuit: 순환로, 순회 노선',
+        '3. embarked on an arduous **journey** across the continent / 대륙을 가로지르는 고된 여정에 나섰다. cf. journey: 여정, 장거리 여행 (명)',
       ],
     },
     {
       narrative: [
-        '4. 모넴바시아까지 이어지는 두 시간의 드라이브는 타이게토스 산의 고갯길(**pass**)에서 시작됐다. 길은 마을과 절벽 옆 터널을 구불구불 지나갔다. cf. pass: 고개, 산길',
+        '4. completed a solo sea **voyage** around the globe / 단독 세계 일주 항해를 마쳤다. cf. voyage: 항해, 긴 여행 (명)',
       ],
     },
     {
       narrative: [
-        '5. 펠로폰네소스의 산골짜기에는 소나무 숲과 들꽃이 펼쳐져 있었고, 드넓은 녹지 곳곳에는 소박한 석회암 집들이 점점이 들어서(**studded with**) 있었다. cf. studded with: ~이 곳곳에 박힌, ~이 여기저기 흩어져 있는',
+        '5. survived a grueling **trek** through the dense jungle / 빽빽한 밀림을 통과하는 몹시 고된 도보 여정을 견뎌냈다. cf. trek: 길고 힘든 도보 여행 (명)',
       ],
     },
     {
       narrative: [
-        '6. 여행자는 원래의 자동차 여행 경로에서 옆길로 빠져(**sidetracked**) 아름다운 폴릴림니오 폭포로 향했다. cf. sidetrack: 옆길로 새다, 본래 경로에서 벗어나다',
+        '6. mapped out a strict **itinerary** covering five major cities / 주요 도시 다섯 곳을 방문하는 엄격한 여행 일정을 짰다. cf. itinerary: 여행 일정표, 여행 경로 (명)',
       ],
     },
     {
       narrative: [
-        '7. 성수기와 비수기 사이의 여행 시기(**shoulder season**)에는 날씨가 선선해 긴 산책을 즐기기 좋고, 기온이 약 25도여서 바다에서 수영하기에도 적합했다. cf. shoulder season: 성수기와 비수기 사이 시기, 준성수기',
+        '7. cut short a brief **sojourn** in a remote mountain village / 외딴 산골 마을에서의 짧은 체류를 예정보다 일찍 끝냈다. cf. sojourn: 일시적인 체류, 체재 (명)',
+      ],
+    },
+    {
+      narrative: [
+        '8. undertook a spiritual **pilgrimage** to the sacred peak / 성스러운 산봉우리를 향해 영적인 순례에 나섰다. cf. pilgrimage: 순례, 성지 참배 (명)',
+      ],
+    },
+    {
+      narrative: [
+        '9. recounted tales from years of solitary **wayfaring** / 수년간 홀로 걸어서 여행하며 겪은 이야기들을 들려주었다. cf. wayfaring: 도보 여행, 여행하는 (명·형)',
       ],
     },
   ],
 
   source: {
-    text: 'The Guardian | A Greece for all seasons: my autumn roadtrip through the Peloponnese | By Chris Cotonou',
-    url: 'https://www.theguardian.com/travel/2026/oct/17/peloponnese-greece-road-trip-autumn',
+    text: "The Guardian | ‘It’s been a while’: hero’s welcome for UK man after 28-year walk across the world | By Josh Halliday | Mon 2 Nov 2026",
+    url: 'https://www.theguardian.com/uk-news/2026/nov/02/karl-bushby-uk-hull-28-year-walk-across-world',
   },
 
-  youtube: 'https://youtube.com/shorts/YOsCAM-nEoA',
+  youtube: 'https://youtube.com/shorts/brYK43Y4Osw',
+  videoId: 'brYK43Y4Osw',
 };
-// ===============================
 
 uploadTravelNews(article, API_BASE)
-  .then(() => console.log('완료.'))
+  .then(() => {
+    console.log('완료.');
+    console.log(`상세: https://englisheasystudy.com/travel-news/${article.slug}/`);
+  })
   .catch((e) => {
-    console.error('  오류:', e.message);
+    console.error('오류:', e.message || e);
     process.exitCode = 1;
   });
