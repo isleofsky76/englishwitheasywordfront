@@ -474,6 +474,15 @@
     if (window.OsComments && typeof window.OsComments.mountAll === 'function') {
       window.OsComments.mountAll();
     }
+    /* 댓글·등록 바로 뒤에 뜻보기·저장·다운로드를 같은 바로 합침 */
+    document.querySelectorAll('.os-item-foot').forEach(function (foot) {
+      var bar = foot.querySelector('.os-cmt-bar');
+      if (!bar) return;
+      ['[data-os-meaning-toggle]', '[data-os-save-toggle]', '[data-os-item-download]'].forEach(function (sel) {
+        var btn = foot.querySelector(sel);
+        if (btn && btn.parentElement !== bar) bar.appendChild(btn);
+      });
+    });
     syncAllMeaningToggleButtons();
     syncAllSaveToggleButtons();
     syncDownloadButton();

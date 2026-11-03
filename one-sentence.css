@@ -325,27 +325,28 @@ body.os-hide-meaning .os-item.is-meaning-shown .os-cf-ko {
 }
 
 .os-item-foot {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 10px 14px;
+  display: block;
   margin-top: 8px;
 }
 
 .os-item-foot > .os-comments-root {
   margin-top: 0;
-  flex: 0 0 auto;
-  min-width: 0;
 }
 
+/* 댓글·등록·뜻보기·저장·다운로드 — 한 줄·같은 글줄 */
 .os-item-foot .os-cmt-bar {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: 14px;
+  row-gap: 8px;
 }
 
-.os-meaning-toggle,
-.os-item-download {
+.os-item-foot .os-cmt-toggle,
+.os-item-foot .os-cmt-write,
+.os-item-foot .os-meaning-toggle,
+.os-item-foot .os-save-toggle,
+.os-item-foot .os-item-download {
   margin: 0;
   padding: 0;
   border: none;
@@ -359,12 +360,13 @@ body.os-hide-meaning .os-item.is-meaning-shown .os-cf-ko {
   text-underline-offset: 2px;
   opacity: 0.85;
   -webkit-text-fill-color: currentColor;
-  flex: 0 0 auto;
 }
 
-.os-meaning-toggle:hover,
-.os-meaning-toggle[aria-pressed="true"],
-.os-item-download:hover {
+.os-item-foot .os-meaning-toggle:hover,
+.os-item-foot .os-meaning-toggle[aria-pressed="true"],
+.os-item-foot .os-save-toggle:hover,
+.os-item-foot .os-save-toggle[aria-pressed="true"],
+.os-item-foot .os-item-download:hover {
   opacity: 1;
   color: var(--os-blue);
   -webkit-text-fill-color: currentColor;
