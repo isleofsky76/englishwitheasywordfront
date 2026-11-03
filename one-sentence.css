@@ -100,6 +100,62 @@
   white-space: nowrap;
 }
 
+.os-download-btn {
+  margin: 0;
+  flex-shrink: 0;
+  height: 36px;
+  padding: 0 12px;
+  border: 1px solid rgba(58, 56, 52, 0.18);
+  border-radius: 999px;
+  background: #fffef9;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--os-ink-soft);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.os-download-btn:hover:not(:disabled) {
+  color: var(--os-blue);
+  border-color: rgba(47, 111, 237, 0.35);
+}
+
+.os-download-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.os-saved-count {
+  display: inline-block;
+  min-width: 1.2em;
+  font-variant-numeric: tabular-nums;
+}
+
+.os-save-toggle {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  font: inherit;
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--os-ink-muted);
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  opacity: 0.85;
+  -webkit-text-fill-color: currentColor;
+  flex: 0 0 auto;
+}
+
+.os-save-toggle:hover,
+.os-save-toggle[aria-pressed="true"] {
+  opacity: 1;
+  color: var(--os-blue);
+  -webkit-text-fill-color: currentColor;
+}
+
 .os-rule {
   height: 1px;
   margin: 28px 0 8px;

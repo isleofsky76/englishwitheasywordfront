@@ -268,6 +268,7 @@
         renderMemoBox(item.memo) +
         '<div class="os-item-foot">' +
           '<button type="button" class="os-meaning-toggle" data-os-meaning-toggle aria-pressed="false">뜻 보기</button>' +
+          '<button type="button" class="os-save-toggle" data-os-save-toggle aria-pressed="false">저장</button>' +
           '<div class="os-comments-root" data-os-comments-root></div>' +
         '</div>' +
         renderAdminActions(item) +
@@ -473,6 +474,8 @@
       window.OsComments.mountAll();
     }
     syncAllMeaningToggleButtons();
+    syncAllSaveToggleButtons();
+    syncDownloadButton();
   }
 
   function syncFixedAlphaLayout() {
@@ -545,6 +548,155 @@
   }
 
   var HIDE_MEANING_KEY = 'os-hide-meaning';
+  /* 탭이 열려 있는 동안만 유지 (새로고침해도 같은 탭이면 유지, 탭 닫으면 삭제) */
+  var SAVED_WORDS_KEY = 'os-saved-words-session';
+
+  function readSavedMap() {
+    try {
+      var raw = sessionStorage.getItem(SAVED_WORDS_KEY);
+      if (!raw) return {};
+      var parsed = JSON.parse(raw);
+      return parsed && typeof parsed === 'object' ? parsed : {};
+    } catch (e) {
+      return {};
+    }
+  }
+
+  function writeSavedMap(map) {
+    try {
+      sessionStorage.setItem(SAVED_WORDS_KEY, JSON.stringify(map || {}));
+    } catch (e) { /* ignore quota */ }
+  }
+
+  function savedCount() {
+    return Object.keys(readSavedMap()).length;
+  }
+
+  function isWordSaved(wordKey) {
+    return Boolean(wordKey && readSavedMap()[wordKey]);
+  }
+
+  function findFeedItemByKey(wordKey) {
+    var key = String(wordKey || '');
+    if (!key) return null;
+    for (var i = 0; i < feedAll.length; i += 1) {
+      var it = feedAll[i];
+      if (!it) continue;
+      if (wordAnchorId(it.word, it.pos) === key) return it;
+    }
+    return null;
+  }
+
+  function syncSaveToggleButton(btn, wordKey) {
+    if (!btn) return;
+    var on = isWordSaved(wordKey);
+    btn.textContent = on ? '저장됨' : '저장';
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    btn.title = on ? '저장 취소' : '이 탭에만 잠시 저장';
+  }
+
+  function syncAllSaveToggleButtons() {
+    document.querySelectorAll('.os-item').forEach(function (itemEl) {
+      var key = itemEl.getAttribute('data-word-key') || '';
+      syncSaveToggleButton(itemEl.querySelector('[data-os-save-toggle]'), key);
+    });
+  }
+
+  function syncDownloadButton() {
+    var btn = document.getElementById('os-download-saved');
+    var countEl = document.getElementById('os-saved-count');
+    var n = savedCount();
+    if (countEl) countEl.textContent = String(n);
+    if (btn) {
+      btn.disabled = n === 0;
+      btn.title =
+        n === 0
+          ? '저장한 단어가 없습니다 (이 탭에서만 잠시 보관)'
+          : '저장한 ' + n + '개 다운로드 (탭을 닫으면 저장 목록도 사라집니다)';
+    }
+  }
+
+  function toggleSaveWord(itemEl) {
+    if (!itemEl) return;
+    var wordKey = itemEl.getAttribute('data-word-key') || '';
+    if (!wordKey) return;
+    var map = readSavedMap();
+    if (map[wordKey]) {
+      delete map[wordKey];
+    } else {
+      var it = findFeedItemByKey(wordKey) || {};
+      map[wordKey] = {
+        word: String(it.word || itemEl.getAttribute('data-word') || '').trim(),
+        pos: String(it.pos || itemEl.getAttribute('data-pos') || '').trim(),
+        meaning: String(it.meaning || '').trim(),
+        ipa: String(it.ipa || '').trim(),
+        ipaKo: String(it.ipaKo || it.reading || '').trim(),
+        en: String(it.en || '').trim(),
+        ko: String(it.ko || '').trim(),
+        savedAt: Date.now(),
+      };
+    }
+    writeSavedMap(map);
+    syncSaveToggleButton(itemEl.querySelector('[data-os-save-toggle]'), wordKey);
+    syncDownloadButton();
+  }
+
+  function downloadSavedWords() {
+    var map = readSavedMap();
+    var keys = Object.keys(map);
+    if (!keys.length) return;
+    keys.sort(function (a, b) {
+      return String(map[a].word || '').localeCompare(String(map[b].word || ''), 'en', {
+        sensitivity: 'base',
+      });
+    });
+    var lines = [
+      '단어\t품사\t뜻\t발음\t예문\t해석',
+    ];
+    keys.forEach(function (k) {
+      var it = map[k] || {};
+      var pron = [it.ipa, it.ipaKo].filter(Boolean).join(' ');
+      lines.push(
+        [
+          it.word || '',
+          it.pos || '',
+          it.meaning || '',
+          pron,
+          String(it.en || '').replace(/\s+/g, ' ').trim(),
+          String(it.ko || '').replace(/\s+/g, ' ').trim(),
+        ]
+          .map(function (cell) {
+            return String(cell).replace(/\t/g, ' ').replace(/\r?\n/g, ' ');
+          })
+          .join('\t')
+      );
+    });
+    var stamp = new Date();
+    var y = stamp.getFullYear();
+    var m = String(stamp.getMonth() + 1).padStart(2, '0');
+    var d = String(stamp.getDate()).padStart(2, '0');
+    var blob = new Blob(['\uFEFF' + lines.join('\n') + '\n'], {
+      type: 'text/tab-separated-values;charset=utf-8',
+    });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'one-sentence-saved-' + y + m + d + '.txt';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  }
+
+  function bindSavedDownload() {
+    var btn = document.getElementById('os-download-saved');
+    if (!btn || btn._osBound) return;
+    btn._osBound = true;
+    btn.addEventListener('click', function () {
+      downloadSavedWords();
+    });
+    syncDownloadButton();
+  }
 
   function isHideMeaningOn() {
     try {
@@ -955,6 +1107,11 @@
           toggleItemMeaning(meaningBtn.closest('.os-item'));
           return;
         }
+        var saveBtn = e.target.closest('[data-os-save-toggle]');
+        if (saveBtn && feed.contains(saveBtn)) {
+          toggleSaveWord(saveBtn.closest('.os-item'));
+          return;
+        }
         var tts = e.target.closest('[data-os-tts]');
         if (tts && feed.contains(tts)) {
           speakText(tts.getAttribute('data-os-tts') || '', tts);
@@ -1010,6 +1167,7 @@
     bindFeed();
     bindAlphaNav();
     bindBackTop();
+    bindSavedDownload();
     var input = document.getElementById('os-search-input');
     var tags = document.getElementById('os-tags');
 
