@@ -324,22 +324,29 @@ body.os-hide-meaning .os-item.is-meaning-shown .os-cf-ko {
   user-select: text;
 }
 
+/* 댓글·등록·뜻보기·저장·다운로드 — 한 줄 (버튼은 comments-root 밖에 둬 remount 시 안 지워짐) */
 .os-item-foot {
-  display: block;
-  margin-top: 8px;
-}
-
-.os-item-foot > .os-comments-root {
-  margin-top: 0;
-}
-
-/* 댓글·등록·뜻보기·저장·다운로드 — 한 줄·같은 글줄 */
-.os-item-foot .os-cmt-bar {
+  position: relative;
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
   column-gap: 14px;
   row-gap: 8px;
+  margin-top: 8px;
+}
+
+.os-item-foot > .os-comments-root {
+  display: contents;
+}
+
+.os-item-foot .os-cmt-bar {
+  display: contents;
+}
+
+.os-item-foot .os-cmt-panel {
+  flex: 1 1 100%;
+  width: 100%;
+  margin-top: 4px;
 }
 
 .os-item-foot .os-cmt-toggle,
@@ -360,6 +367,7 @@ body.os-hide-meaning .os-item.is-meaning-shown .os-cf-ko {
   text-underline-offset: 2px;
   opacity: 0.85;
   -webkit-text-fill-color: currentColor;
+  flex: 0 0 auto;
 }
 
 .os-item-foot .os-meaning-toggle:hover,

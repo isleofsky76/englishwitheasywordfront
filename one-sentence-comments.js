@@ -999,6 +999,10 @@
     await loadBadwords();
     await loadCounts();
     mountAll();
+    /* 피드가 먼저 그려진 뒤 늦게 remount 될 수 있음 — 저장 버튼 등 상태 재동기화 */
+    if (window.OneSentencePage && typeof window.OneSentencePage.afterCommentsMount === 'function') {
+      window.OneSentencePage.afterCommentsMount();
+    }
   }
 
   window.OsComments = {
