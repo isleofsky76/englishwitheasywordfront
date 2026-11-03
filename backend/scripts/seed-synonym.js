@@ -1,163 +1,96 @@
 /**
- * 유의어(연관단어) 업로드
+ * 유의어(연관단어) 업로드 — 독재·권위주의 관련어
  *
- * 사용법: 아래 article JSON 수정 → node scripts/seed-synonym.js
+ *   cd backend && node scripts/seed-synonym.js
  */
 import { API_BASE } from './loadEnv.js';
 import { uploadSynonym } from './synonym-format.js';
 
-// ========== 여기만 수정 ==========
 const article = {
-  title: '아는 체하는 사람 · 지적인 · 괴짜 #연관단어',
+  title: '독재자 · 독재 정치 #연관단어',
 
-  slug: 'wiseacre-highbrow-boffin-egghead-prodigy-related-words',
+  slug: 'autocrat-dictator-despot-authoritarian-kleptocracy-related-words',
 
   metaDescription:
-    'wiseacre, highbrow, boffin, egghead, prodigy, eccentric, mediocre, mundane 뜻·발음·예문 연관단어 모음.',
+    '독재·권위주의 관련 연관단어. autocrat, dictator, despot, authoritarian, autocratic, autocracy, kleptocracy, baleful, avarice, braggart.',
 
-  password: 'seed_synonym_wiseacre-highbrow-boffin-egghead',
+  password: 'seed_synonym_autocrat-dictator-despot-authoritarian',
 
-  datePublished: '2026-11-02',
+  datePublished: '2026-11-03',
 
   intro: [
-    '아는 체하는 사람 · 지적인 · 괴짜 관련 연관단어를 정리합니다. *AI 음성과 이미지를 사용했습니다.',
+    '독재자·독재 정치·권위주의와 관련된 연관단어를 정리합니다. *AI 음성과 이미지를 사용했습니다.',
   ],
 
   words: [
     {
-      title: '1. 아는 체하는 사람, 잘난 체하는 사람',
       narrative: [
-        '**wiseacre**(ˈwaɪzeɪkər / 와이즈에이커)',
-        '"Don\'t stand there with that wiseacre look."',
-        '그렇게 잘난 체하는 표정으로 서 있지 마.',
+        '1. The **autocrat** ruled the country with absolute power. / 그 독재자는 절대적인 권력으로 나라를 통치했다. cf. autocrat: 독재자, 전제 군주 (명)',
       ],
     },
     {
-      title: '2. 지적인, 고상한, 교양 수준이 높은',
       narrative: [
-        '**highbrow**(ˈhaɪbraʊ / 하이브라우)',
-        '"That\'s pretty highbrow for a book group."',
-        '독서 모임치고는 꽤 수준이 높네.',
+        '2. The **dictator** suppressed political opposition. / 그 독재자는 정치적 반대 세력을 탄압했다. cf. dictator: 독재자 (명)',
       ],
     },
     {
-      title: '3. 과학자, 기술 전문가, 학구적인 사람 (영국식 비격식)',
       narrative: [
-        '**boffin**(ˈbɒfɪn / 보핀)',
-        '"It\'ll be fun to see how you boffin types live."',
-        '너희 같은 과학자들은 어떻게 사는지 보면 재미있겠네.',
+        '3. The cruel **despot** ruled through fear. / 그 잔혹한 폭군은 공포로 나라를 다스렸다. cf. despot: 폭군, 전제 군주 (명)',
       ],
     },
     {
-      title: '4. 지식인, 먹물, 학자 타입의 사람',
       narrative: [
-        '**egghead**(ˈɛɡhɛd / 에그헤드)',
-        '"Don\'t listen to Egghead."',
-        '저 먹물 같은 녀석 말은 듣지 마.',
+        '4. The **authoritarian** government restricted civil liberties. / 그 권위주의 정부는 시민의 자유를 제한했다. cf. authoritarian: 권위주의적인, 권위주의자 (형/명)',
       ],
     },
     {
-      title: '5. 영재, 신동',
       narrative: [
-        '**prodigy**(ˈprɒdɪdʒi / 프로디지)',
-        '"You\'re a child prodigy playwright."',
-        '넌 어린 나이에 뛰어난 재능을 보이는 극작가 신동이야.',
+        '5. His **autocratic** leadership left little room for dissent. / 그의 독재적인 지도 방식은 반대 의견을 거의 허용하지 않았다. cf. autocratic: 독재적인, 전제적인 (형)',
       ],
     },
     {
-      title: '6. 별난, 괴짜인 / 괴짜',
       narrative: [
-        '**eccentric**(ɪkˈsɛntrɪk / 익센트릭)',
-        '"He\'s very eccentric."',
-        '그는 아주 별난 사람이야.',
+        '6. The country shifted from democracy to **autocracy**. / 그 나라는 민주주의에서 독재 정치로 전환되었다. cf. autocracy: 독재 정치, 전제 정치 (명)',
       ],
     },
     {
-      title: '7. 그저 그런, 썩 좋지 않은',
       narrative: [
-        '**mediocre**(ˌmiːdiˈoʊkər / 미디오커)',
-        '"His performances were oftentimes mediocre to sometimes flagrantly incompetent."',
-        '그의 업무 수행은 대체로 평범 이하였고, 때로는 노골적으로 무능한 수준이었다.',
+        '7. The regime became a **kleptocracy** under corrupt leaders. / 그 정권은 부패한 지도자들 아래 도둑 정치 체제로 변했다. cf. kleptocracy: 도둑 정치, 부패한 지배 체제 (명)',
       ],
     },
     {
-      title: '8. 일상적인, 평범하고 따분한',
       narrative: [
-        '**mundane**(mʌnˈdeɪn / 먼데인)',
-        '"I always mess up some mundane detail."',
-        '나는 항상 사소하고 일상적인 부분에서 실수를 저지른다.',
+        '8. The ruler cast a **baleful** glance at his opponents. / 그 통치자는 반대자들에게 위협적인 눈길을 보냈다. cf. baleful: 해로운, 불길한, 위협적인 (형)',
+      ],
+    },
+    {
+      narrative: [
+        "9. The ruler's **avarice** drained the nation's wealth. / 그 통치자의 탐욕은 국가의 부를 고갈시켰다. cf. avarice: 탐욕, 재물욕 (명)",
+      ],
+    },
+    {
+      narrative: [
+        '10. The **braggart** constantly boasted about his achievements. / 그 허풍쟁이는 끊임없이 자신의 업적을 자랑했다. cf. braggart: 허풍쟁이, 자랑만 늘어놓는 사람 (명)',
       ],
     },
   ],
 
-  wordMeta: [
-    {
-      num: 1,
-      expression: 'wiseacre',
-      meaning: '아는 체하는 사람, 잘난 체하는 사람',
-      exampleEn: "Don't stand there with that wiseacre look.",
-      exampleKo: '그렇게 잘난 체하는 표정으로 서 있지 마.',
-    },
-    {
-      num: 2,
-      expression: 'highbrow',
-      meaning: '지적인, 고상한, 교양 수준이 높은',
-      exampleEn: "That's pretty highbrow for a book group.",
-      exampleKo: '독서 모임치고는 꽤 수준이 높네.',
-    },
-    {
-      num: 3,
-      expression: 'boffin',
-      meaning: '과학자, 기술 전문가, 학구적인 사람 (영국식 비격식)',
-      exampleEn: "It'll be fun to see how you boffin types live.",
-      exampleKo: '너희 같은 과학자들은 어떻게 사는지 보면 재미있겠네.',
-    },
-    {
-      num: 4,
-      expression: 'egghead',
-      meaning: '지식인, 먹물, 학자 타입의 사람',
-      exampleEn: "Don't listen to Egghead.",
-      exampleKo: '저 먹물 같은 녀석 말은 듣지 마.',
-    },
-    {
-      num: 5,
-      expression: 'prodigy',
-      meaning: '영재, 신동',
-      exampleEn: "You're a child prodigy playwright.",
-      exampleKo: '넌 어린 나이에 뛰어난 재능을 보이는 극작가 신동이야.',
-    },
-    {
-      num: 6,
-      expression: 'eccentric',
-      meaning: '별난, 괴짜인 / 괴짜',
-      exampleEn: "He's very eccentric.",
-      exampleKo: '그는 아주 별난 사람이야.',
-    },
-    {
-      num: 7,
-      expression: 'mediocre',
-      meaning: '그저 그런, 썩 좋지 않은',
-      exampleEn:
-        'His performances were oftentimes mediocre to sometimes flagrantly incompetent.',
-      exampleKo: '그의 업무 수행은 대체로 평범 이하였고, 때로는 노골적으로 무능한 수준이었다.',
-    },
-    {
-      num: 8,
-      expression: 'mundane',
-      meaning: '일상적인, 평범하고 따분한',
-      exampleEn: 'I always mess up some mundane detail.',
-      exampleKo: '나는 항상 사소하고 일상적인 부분에서 실수를 저지른다.',
-    },
-  ],
+  source: {
+    text:
+      'All sentences are sourced from global news outlets for English practice. They do not reflect my personal views or financial/political advice. We constantly provide content featuring key English vocabulary from the latest issues of major news outlets such as The Guardian, BBC, CNN, WSJ, and The Economist. | englisheasystudy.com',
+    url: 'https://englisheasystudy.com',
+  },
 
-  youtube: 'https://youtube.com/shorts/m2OnneDc8po',
-  videoId: 'm2OnneDc8po',
+  youtube: 'https://youtube.com/shorts/Hp5mjB-T9XA',
+  videoId: 'Hp5mjB-T9XA',
 };
-// ===============================
 
 uploadSynonym(article, API_BASE)
-  .then(() => console.log('완료.'))
+  .then(() => {
+    console.log('완료.');
+    console.log(`상세: https://englisheasystudy.com/english-synonym/${article.slug}/`);
+  })
   .catch((e) => {
-    console.error('  오류:', e.message);
+    console.error('오류:', e.message || e);
     process.exitCode = 1;
   });
