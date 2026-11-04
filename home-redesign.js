@@ -241,6 +241,13 @@
     return items;
   }
 
+  function linkAttrs(href) {
+    if (/youtube\.com|youtu\.be/i.test(String(href || ''))) {
+      return ' target="_blank" rel="noopener noreferrer"';
+    }
+    return '';
+  }
+
   function renderNews(items) {
     var cardsEl = document.getElementById('rd-news-cards');
     var listEl = document.getElementById('rd-news-list');
@@ -250,7 +257,7 @@
     cardsEl.innerHTML = cards.map(function (item) {
       var cat = item.label + (item.source ? ' · ' + item.source : '');
       return (
-        '<a class="rd-news-card" href="' + esc(item.href) + '">' +
+        '<a class="rd-news-card" href="' + esc(item.href) + '"' + linkAttrs(item.href) + '>' +
           '<div class="rd-news-card-img">' +
             (item.image ? '<img src="' + esc(item.image) + '" alt="">' : '[이미지]') +
           '</div>' +
@@ -262,7 +269,7 @@
     listEl.innerHTML = list.map(function (item) {
       var cat = item.label + (item.source ? ' · ' + item.source : '');
       return (
-        '<a href="' + esc(item.href) + '">' +
+        '<a href="' + esc(item.href) + '"' + linkAttrs(item.href) + '>' +
           '<span class="cat">' + esc(cat) + '</span>' +
           '<span class="title">' + esc(item.title) + '</span>' +
         '</a>'
@@ -336,54 +343,132 @@
       items;
   }
 
-  function renderShortsFeed() {
-    var root = document.getElementById('rd-shorts-grid');
-    if (!root) return;
-    var feedUrl = root.getAttribute('data-feed') || 'data/youtube-shorts.json';
-    fetch(feedUrl + (feedUrl.indexOf('?') >= 0 ? '&' : '?') + 't=' + Date.now(), { cache: 'no-store' })
+  /** 홈 「최신 뉴스 어휘」로 넣는 Shorts 카테고리 */
+  var NEWS_SHORTS_LABELS = {
+    '국제': 1,
+    '한국': 1,
+    '국방': 1,
+    '경제': 1,
+    '스포츠': 1,
+    '미국': 1,
+    '산업': 1,
+    '여행': 1,
+    '유통': 1
+  };
+
+  function fetchShortsItems() {
+    var root = document.getElementById('rd-shorts-by-cat');
+    var feedUrl = (root && root.getAttribute('data-feed')) || 'data/youtube-shorts.json';
+    return fetch(feedUrl + (feedUrl.indexOf('?') >= 0 ? '&' : '?') + 't=' + Date.now(), { cache: 'no-store' })
       .then(function (r) {
         if (!r.ok) throw new Error('shorts feed HTTP ' + r.status);
         return r.json();
       })
       .then(function (data) {
-        var items = Array.isArray(data && data.items) ? data.items : [];
-        if (!items.length) {
-          root.innerHTML = '<p class="rd-shorts-empty">표시할 Shorts가 없습니다.</p>';
-          return;
-        }
-        root.innerHTML = items.slice(0, 6).map(function (item) {
-          var href = esc(item.url || item.watchUrl || '#');
-          var title = esc(item.title || 'Shorts');
-          var thumb = esc(item.thumbnail || '');
-          var id = esc(item.videoId || '');
-          var label = esc(item.label || item.category || '');
-          var labelHtml = label
-            ? '<span class="rd-shorts-cat">' + label + '</span>'
-            : '';
-          return (
-            '<a class="rd-shorts-card" href="' + href + '" target="_blank" rel="noopener noreferrer" data-video-id="' + id + '">' +
-              '<span class="rd-shorts-thumb">' +
-                (thumb ? '<img src="' + thumb + '" alt="" loading="lazy" decoding="async">' : '') +
-                '<span class="rd-shorts-play" aria-hidden="true"></span>' +
-              '</span>' +
-              labelHtml +
-              '<span class="rd-shorts-title">' + title + '</span>' +
-            '</a>'
-          );
-        }).join('');
+        return Array.isArray(data && data.items) ? data.items : [];
       })
       .catch(function (err) {
         console.warn('shorts feed load error', err);
-        root.innerHTML =
-          '<p class="rd-shorts-empty">Shorts를 불러오지 못했습니다. ' +
-          '<a href="https://www.youtube.com/@istudyeng/shorts" target="_blank" rel="noopener noreferrer">YouTube에서 보기</a></p>';
+        return [];
       });
+  }
+
+  function shortsToNewsItem(s) {
+    return {
+      label: s.label || s.category || 'Shorts',
+      title: s.title || s.rawTitle || 'Shorts',
+      source: 'Shorts',
+      href: s.url || s.watchUrl || '#',
+      image: s.thumbnail || '',
+      date: s.publishedAt || '',
+      isShorts: true
+    };
+  }
+
+  function partitionShortsByHomeCategory(items) {
+    var news = [];
+    var byCat = {};
+    (items || []).forEach(function (it) {
+      var lab = String(it.label || it.category || '').trim();
+      if (!lab) return;
+      if (NEWS_SHORTS_LABELS[lab]) {
+        news.push(shortsToNewsItem(it));
+        return;
+      }
+      if (!byCat[lab]) byCat[lab] = { label: lab, href: it.href || '', items: [] };
+      if (!byCat[lab].href && it.href) byCat[lab].href = it.href;
+      byCat[lab].items.push(it);
+    });
+    return { news: news, groups: byCat };
+  }
+
+  function renderShortsCard(item) {
+    var href = esc(item.url || item.watchUrl || '#');
+    var title = esc(item.title || 'Shorts');
+    var thumb = esc(item.thumbnail || '');
+    var id = esc(item.videoId || '');
+    return (
+      '<a class="rd-shorts-card" href="' + href + '" target="_blank" rel="noopener noreferrer" data-video-id="' + id + '">' +
+        '<span class="rd-shorts-thumb">' +
+          (thumb ? '<img src="' + thumb + '" alt="" loading="lazy" decoding="async">' : '') +
+          '<span class="rd-shorts-play" aria-hidden="true"></span>' +
+        '</span>' +
+        '<span class="rd-shorts-title">' + title + '</span>' +
+      '</a>'
+    );
+  }
+
+  /** 뉴스 외 카테고리(연관단어·문장·퀴즈…) → 카테고리별 블록 */
+  function renderShortsByCategory(groups) {
+    var root = document.getElementById('rd-shorts-by-cat');
+    if (!root) return;
+    var keys = Object.keys(groups || {});
+    if (!keys.length) {
+      root.innerHTML = '<p class="rd-shorts-empty">카테고리가 지정된 Shorts가 없습니다. 제목을 <strong>연관단어 | 제목</strong> 형식으로 올려 주세요.</p>';
+      return;
+    }
+    /* 홈 칩 순서와 비슷하게 */
+    var order = ['연관단어', '문장', '퀴즈', '단어장', '컬쳐', '요리', '표현', '이럴 땐 영어로?', '상황', '포토', '오피니언'];
+    keys.sort(function (a, b) {
+      var ia = order.indexOf(a);
+      var ib = order.indexOf(b);
+      if (ia < 0) ia = 999;
+      if (ib < 0) ib = 999;
+      if (ia !== ib) return ia - ib;
+      return a.localeCompare(b, 'ko');
+    });
+    root.innerHTML = keys.map(function (key) {
+      var g = groups[key];
+      var listHref = g.href ? esc(g.href) : '';
+      var head =
+        '<div class="rd-shorts-group-head">' +
+          '<h3 class="rd-shorts-group-title">' + esc(g.label || key) + '</h3>' +
+          (listHref ? '<a class="rd-shorts-group-link" href="' + listHref + '">카테고리 →</a>' : '') +
+        '</div>';
+      var grid =
+        '<div class="rd-shorts-grid">' +
+          g.items.slice(0, 6).map(renderShortsCard).join('') +
+        '</div>';
+      return '<div class="rd-shorts-group" data-category="' + esc(key) + '">' + head + grid + '</div>';
+    }).join('');
+  }
+
+  function mergeNewsWithShorts(boardNews, shortsNews) {
+    var merged = (boardNews || []).concat(shortsNews || []);
+    merged.sort(function (a, b) {
+      return new Date(b.date || 0) - new Date(a.date || 0);
+    });
+    return merged;
   }
 
   function boot() {
     fillDateBar();
-    renderShortsFeed();
-    if (!window.HomeBoardPreview) return;
+    if (!window.HomeBoardPreview) {
+      fetchShortsItems().then(function (shorts) {
+        renderShortsByCategory(partitionShortsByHomeCategory(shorts).groups);
+      });
+      return;
+    }
 
     Promise.all([
       fetchEntries('/wordofday'),
@@ -396,7 +481,8 @@
       fetchEntries('/opinions'),
       fetchEntries('/culture-voca'),
       fetchEntries('/calm-mind'),
-      fetchEntries('/english-quotes')
+      fetchEntries('/english-quotes'),
+      fetchShortsItems()
     ]).then(function (results) {
       var wotd = results[0] || [];
       var intl = results[1] || [];
@@ -409,11 +495,16 @@
       var culture = results[8] || [];
       var calm = results[9] || [];
       var quotes = results[10] || [];
+      var shorts = results[11] || [];
+      var parts = partitionShortsByHomeCategory(shorts);
 
       var w = latest(wotd);
       if (w) renderHeroWord(w, wotd.length - 1);
 
-      renderNews(mixNews(intl, korea, defense, economy, []));
+      /* 국제·경제 등 Shorts → 최신 뉴스 어휘 카테고리에 합침 */
+      renderNews(mergeNewsWithShorts(mixNews(intl, korea, defense, economy, []), parts.news));
+      /* 연관단어·문장·퀴즈 등 → 카테고리별 Shorts 블록 */
+      renderShortsByCategory(parts.groups);
       renderQuiz(quiz);
       renderPhrases(phrases);
       renderReadingCol('rd-read-opinions', 'english-opinions-list.html', '오피니언', opinions, 'opinions');

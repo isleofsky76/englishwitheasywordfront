@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-04T08:11:18.571Z",
+  "updatedAt": "2026-11-04T08:18:56.533Z",
   "channelId": "UC4LbF7X56QIHL3Oejt8kuyw",
   "handle": "@istudyeng",
   "source": "https://www.youtube.com/feeds/videos.xml?channel_id=UC4LbF7X56QIHL3Oejt8kuyw",
@@ -9,12 +9,25 @@
   "categorizedOnly": true,
   "items": [
     {
+      "videoId": "vYAKY1K3j6E",
+      "category": "국제",
+      "label": "국제",
+      "href": "news-voca-list.html",
+      "title": "항공기 허위 폭탄 테러",
+      "rawTitle": "국제 | 항공기 허위 폭탄 테러",
+      "publishedAt": "2026-11-04T06:00:16+00:00",
+      "publishedKst": "2026-11-04",
+      "thumbnail": "https://i.ytimg.com/vi/vYAKY1K3j6E/hqdefault.jpg",
+      "url": "https://www.youtube.com/shorts/vYAKY1K3j6E",
+      "watchUrl": "https://www.youtube.com/watch?v=vYAKY1K3j6E"
+    },
+    {
       "videoId": "B_g7aTOLaUU",
       "category": "연관단어",
       "label": "연관단어",
       "href": "english-synonym-list.html",
       "title": "꼼꼼한, 세밀한, 신중한",
-      "rawTitle": "꼼꼼한, 세밀한, 신중한 #연관단어",
+      "rawTitle": "연관단어 | 꼼꼼한, 세밀한, 신중한",
       "publishedAt": "2026-11-04T03:00:38+00:00",
       "publishedKst": "2026-11-04",
       "thumbnail": "https://i.ytimg.com/vi/B_g7aTOLaUU/hqdefault.jpg",
@@ -22,12 +35,25 @@
       "watchUrl": "https://www.youtube.com/watch?v=B_g7aTOLaUU"
     },
     {
+      "videoId": "XP6FuStdruI",
+      "category": "미국",
+      "label": "미국",
+      "href": "us-news-list.html",
+      "title": "트럼프는 중간선거 이후 이란과의 전쟁을 재개할까요?",
+      "rawTitle": "미국 | 트럼프는 중간선거 이후 이란과의 전쟁을 재개할까요?",
+      "publishedAt": "2026-11-04T01:00:29+00:00",
+      "publishedKst": "2026-11-04",
+      "thumbnail": "https://i.ytimg.com/vi/XP6FuStdruI/hqdefault.jpg",
+      "url": "https://www.youtube.com/shorts/XP6FuStdruI",
+      "watchUrl": "https://www.youtube.com/watch?v=XP6FuStdruI"
+    },
+    {
       "videoId": "EtcuOe7v53I",
       "category": "연관단어",
       "label": "연관단어",
       "href": "english-synonym-list.html",
       "title": "묵인하다 Acquiesce",
-      "rawTitle": "묵인하다 Acquiesce #연관단어",
+      "rawTitle": "연관단어 | 묵인하다 Acquiesce",
       "publishedAt": "2026-11-04T01:00:08+00:00",
       "publishedKst": "2026-11-04",
       "thumbnail": "https://i.ytimg.com/vi/EtcuOe7v53I/hqdefault.jpg",
@@ -39,8 +65,8 @@
       "category": "연관단어",
       "label": "연관단어",
       "href": "english-synonym-list.html",
-      "title": "불멸을 향한 탐구는 이제 진지한 사업이 되었다 #노화연구",
-      "rawTitle": "불멸을 향한 탐구는 이제 진지한 사업이 되었다 #노화연구 #연관단어",
+      "title": "건강 | 불멸을 향한 탐구는 이제 진지한 사업이 되었다 #노화연구",
+      "rawTitle": "건강 | 불멸을 향한 탐구는 이제 진지한 사업이 되었다 #노화연구 #연관단어",
       "publishedAt": "2026-11-03T22:00:28+00:00",
       "publishedKst": "2026-11-04",
       "thumbnail": "https://i.ytimg.com/vi/9oZMpGLPIBs/hqdefault.jpg",
@@ -85,6 +111,19 @@
       "thumbnail": "https://i.ytimg.com/vi/brYK43Y4Osw/hqdefault.jpg",
       "url": "https://www.youtube.com/shorts/brYK43Y4Osw",
       "watchUrl": "https://www.youtube.com/watch?v=brYK43Y4Osw"
+    },
+    {
+      "videoId": "LxC9rMxsma8",
+      "category": "연관단어",
+      "label": "연관단어",
+      "href": "english-synonym-list.html",
+      "title": "gambit 전략적 한 수 , 승부수",
+      "rawTitle": "gambit 전략적 한 수 , 승부수 #연관단어",
+      "publishedAt": "2026-11-02T22:00:03+00:00",
+      "publishedKst": "2026-11-03",
+      "thumbnail": "https://i.ytimg.com/vi/LxC9rMxsma8/hqdefault.jpg",
+      "url": "https://www.youtube.com/shorts/LxC9rMxsma8",
+      "watchUrl": "https://www.youtube.com/watch?v=LxC9rMxsma8"
     }
   ]
 }
