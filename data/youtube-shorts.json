@@ -1,25 +1,13 @@
 {
-  "updatedAt": "2026-11-04T08:07:24.669Z",
+  "updatedAt": "2026-11-04T08:11:18.571Z",
   "channelId": "UC4LbF7X56QIHL3Oejt8kuyw",
   "handle": "@istudyeng",
   "source": "https://www.youtube.com/feeds/videos.xml?channel_id=UC4LbF7X56QIHL3Oejt8kuyw",
   "titleFormat": "카테고리 | 제목",
   "timezone": "Asia/Seoul",
   "todayOnly": false,
+  "categorizedOnly": true,
   "items": [
-    {
-      "videoId": "vYAKY1K3j6E",
-      "category": "",
-      "label": "",
-      "href": "",
-      "title": "항공기 허위 폭탄 테러",
-      "rawTitle": "항공기 허위 폭탄 테러",
-      "publishedAt": "2026-11-04T06:00:16+00:00",
-      "publishedKst": "2026-11-04",
-      "thumbnail": "https://i.ytimg.com/vi/vYAKY1K3j6E/hqdefault.jpg",
-      "url": "https://www.youtube.com/shorts/vYAKY1K3j6E",
-      "watchUrl": "https://www.youtube.com/watch?v=vYAKY1K3j6E"
-    },
     {
       "videoId": "B_g7aTOLaUU",
       "category": "연관단어",
@@ -32,32 +20,6 @@
       "thumbnail": "https://i.ytimg.com/vi/B_g7aTOLaUU/hqdefault.jpg",
       "url": "https://www.youtube.com/shorts/B_g7aTOLaUU",
       "watchUrl": "https://www.youtube.com/watch?v=B_g7aTOLaUU"
-    },
-    {
-      "videoId": "lJJGoCBaG8g",
-      "category": "",
-      "label": "",
-      "href": "",
-      "title": "11년 금주 후 다시 중독에 빠지다",
-      "rawTitle": "11년 금주 후 다시 중독에 빠지다",
-      "publishedAt": "2026-11-04T03:00:37+00:00",
-      "publishedKst": "2026-11-04",
-      "thumbnail": "https://i.ytimg.com/vi/lJJGoCBaG8g/hqdefault.jpg",
-      "url": "https://www.youtube.com/shorts/lJJGoCBaG8g",
-      "watchUrl": "https://www.youtube.com/watch?v=lJJGoCBaG8g"
-    },
-    {
-      "videoId": "XP6FuStdruI",
-      "category": "",
-      "label": "",
-      "href": "",
-      "title": "트럼프는 중간선거 이후 이란과의 전쟁을 재개할까요?",
-      "rawTitle": "트럼프는 중간선거 이후 이란과의 전쟁을 재개할까요?",
-      "publishedAt": "2026-11-04T01:00:29+00:00",
-      "publishedKst": "2026-11-04",
-      "thumbnail": "https://i.ytimg.com/vi/XP6FuStdruI/hqdefault.jpg",
-      "url": "https://www.youtube.com/shorts/XP6FuStdruI",
-      "watchUrl": "https://www.youtube.com/watch?v=XP6FuStdruI"
     },
     {
       "videoId": "EtcuOe7v53I",
@@ -84,6 +46,45 @@
       "thumbnail": "https://i.ytimg.com/vi/9oZMpGLPIBs/hqdefault.jpg",
       "url": "https://www.youtube.com/shorts/9oZMpGLPIBs",
       "watchUrl": "https://www.youtube.com/watch?v=9oZMpGLPIBs"
+    },
+    {
+      "videoId": "Hp5mjB-T9XA",
+      "category": "연관단어",
+      "label": "연관단어",
+      "href": "english-synonym-list.html",
+      "title": "독재자",
+      "rawTitle": "독재자 #연관단어",
+      "publishedAt": "2026-11-03T12:00:32+00:00",
+      "publishedKst": "2026-11-03",
+      "thumbnail": "https://i.ytimg.com/vi/Hp5mjB-T9XA/hqdefault.jpg",
+      "url": "https://www.youtube.com/shorts/Hp5mjB-T9XA",
+      "watchUrl": "https://www.youtube.com/watch?v=Hp5mjB-T9XA"
+    },
+    {
+      "videoId": "FSXNLsigxGE",
+      "category": "연관단어",
+      "label": "연관단어",
+      "href": "english-synonym-list.html",
+      "title": "미국 선거",
+      "rawTitle": "미국 선거 #연관단어",
+      "publishedAt": "2026-11-03T12:00:02+00:00",
+      "publishedKst": "2026-11-03",
+      "thumbnail": "https://i.ytimg.com/vi/FSXNLsigxGE/hqdefault.jpg",
+      "url": "https://www.youtube.com/shorts/FSXNLsigxGE",
+      "watchUrl": "https://www.youtube.com/watch?v=FSXNLsigxGE"
+    },
+    {
+      "videoId": "brYK43Y4Osw",
+      "category": "연관단어",
+      "label": "연관단어",
+      "href": "english-synonym-list.html",
+      "title": "28년간의 세계 일주 도보 여행을 마친 영국 남성 #여정",
+      "rawTitle": "28년간의 세계 일주 도보 여행을 마친 영국 남성 #여정 #연관단어",
+      "publishedAt": "2026-11-03T06:00:25+00:00",
+      "publishedKst": "2026-11-03",
+      "thumbnail": "https://i.ytimg.com/vi/brYK43Y4Osw/hqdefault.jpg",
+      "url": "https://www.youtube.com/shorts/brYK43Y4Osw",
+      "watchUrl": "https://www.youtube.com/watch?v=brYK43Y4Osw"
     }
   ]
 }

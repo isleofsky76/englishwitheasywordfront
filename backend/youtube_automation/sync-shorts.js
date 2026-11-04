@@ -72,39 +72,16 @@ function parseArgs(argv) {
 function mapCategory(categoryKey) {
   const key = String(categoryKey || '').replace(/\s+/g, '').trim();
   const mapped = CATEGORY_MAP[key] || null;
+  if (!mapped) return null;
   return {
     category: key,
     categoryKey: key,
-    label: mapped ? mapped.label : key,
-    href: mapped ? mapped.href : '',
+    label: mapped.label,
+    href: mapped.href,
   };
 }
 
-/** "국제 | 제목" / "국제|제목" / "국제｜제목" — 없으면 #연관단어 등 해시태그 보조 */
-export function parseCategoryTitle(rawTitle) {
-  const raw = String(rawTitle || '').trim();
-  const m = raw.match(/^([^|｜\n]{1,20})\s*[|｜]\s*(.+)$/);
-  if (m) {
-    const meta = mapCategory(m[1]);
-    return {
-      ...meta,
-      title: m[2].trim() || raw,
-      rawTitle: raw,
-    };
-  }
-
-  /* 보조: 제목 끝 #연관단어 #국제 등 */
-  const hash = raw.match(/#([^\s#]{1,20})\s*$/);
-  if (hash && CATEGORY_MAP[hash[1].replace(/\s+/g, '')]) {
-    const meta = mapCategory(hash[1]);
-    const title = raw.replace(/\s*#[^\s#]+\s*$/, '').trim() || raw;
-    return {
-      ...meta,
-      title,
-      rawTitle: raw,
-    };
-  }
-
+function emptyParsed(raw) {
   return {
     category: '',
     categoryKey: '',
@@ -113,6 +90,45 @@ export function parseCategoryTitle(rawTitle) {
     title: raw,
     rawTitle: raw,
   };
+}
+
+/** "국제 | 제목" — 홈 카테고리 맵에 있는 것만 인정. 보조: #연관단어 등 */
+export function parseCategoryTitle(rawTitle) {
+  const raw = String(rawTitle || '').trim();
+  const m = raw.match(/^([^|｜\n]{1,20})\s*[|｜]\s*(.+)$/);
+  if (m) {
+    const meta = mapCategory(m[1]);
+    if (meta) {
+      return {
+        ...meta,
+        title: m[2].trim() || raw,
+        rawTitle: raw,
+      };
+    }
+  }
+
+  /* 보조: 제목 안 어느 #태그가 맵에 있으면 사용 (끝쪽 우선) */
+  const tags = [...String(raw).matchAll(/#([^\s#]{1,20})/g)].map((x) => x[1]);
+  for (let i = tags.length - 1; i >= 0; i -= 1) {
+    const meta = mapCategory(tags[i]);
+    if (!meta) continue;
+    const tagRe = new RegExp(
+      '\\s*#' + tags[i].replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '(?=\\s|#|$)',
+      'g'
+    );
+    const title = raw.replace(tagRe, '').replace(/\s+/g, ' ').trim() || raw;
+    return {
+      ...meta,
+      title,
+      rawTitle: raw,
+    };
+  }
+
+  return emptyParsed(raw);
+}
+
+function isMappedCategoryItem(item) {
+  return Boolean(item && item.category && CATEGORY_MAP[item.category]);
 }
 
 function kstDateKey(iso) {
@@ -184,12 +200,18 @@ Title format:
   });
 
   let items = (feed.videos || []).map(toItem).filter(Boolean);
+  const totalFetched = items.length;
 
   if (args.todayOnly) {
     const today = todayKstKey();
     items = items.filter((it) => it.publishedKst === today);
-    console.log(`[filter] D-day KST ${today} → ${items.length} shorts`);
+    console.log(`[filter] D-day KST ${today} → ${items.length}/${totalFetched}`);
   }
+
+  /* 홈 카테고리 맵에 매칭된 제목만 (국제 | …, #연관단어 등) */
+  const beforeCat = items.length;
+  items = items.filter(isMappedCategoryItem);
+  console.log(`[filter] categorized only → ${items.length}/${beforeCat} (from ${totalFetched} feed)`);
 
   items = items.slice(0, args.limit);
 
@@ -201,6 +223,7 @@ Title format:
     titleFormat: '카테고리 | 제목',
     timezone: 'Asia/Seoul',
     todayOnly: Boolean(args.todayOnly),
+    categorizedOnly: true,
     items,
   };
 
