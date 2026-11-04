@@ -336,8 +336,48 @@
       items;
   }
 
+  function renderShortsFeed() {
+    var root = document.getElementById('rd-shorts-grid');
+    if (!root) return;
+    var feedUrl = root.getAttribute('data-feed') || 'data/youtube-shorts.json';
+    fetch(feedUrl + (feedUrl.indexOf('?') >= 0 ? '&' : '?') + 't=' + Date.now(), { cache: 'no-store' })
+      .then(function (r) {
+        if (!r.ok) throw new Error('shorts feed HTTP ' + r.status);
+        return r.json();
+      })
+      .then(function (data) {
+        var items = Array.isArray(data && data.items) ? data.items : [];
+        if (!items.length) {
+          root.innerHTML = '<p class="rd-shorts-empty">표시할 Shorts가 없습니다.</p>';
+          return;
+        }
+        root.innerHTML = items.slice(0, 6).map(function (item) {
+          var href = esc(item.url || item.watchUrl || '#');
+          var title = esc(item.title || 'Shorts');
+          var thumb = esc(item.thumbnail || '');
+          var id = esc(item.videoId || '');
+          return (
+            '<a class="rd-shorts-card" href="' + href + '" target="_blank" rel="noopener noreferrer" data-video-id="' + id + '">' +
+              '<span class="rd-shorts-thumb">' +
+                (thumb ? '<img src="' + thumb + '" alt="" loading="lazy" decoding="async">' : '') +
+                '<span class="rd-shorts-play" aria-hidden="true"></span>' +
+              '</span>' +
+              '<span class="rd-shorts-title">' + title + '</span>' +
+            '</a>'
+          );
+        }).join('');
+      })
+      .catch(function (err) {
+        console.warn('shorts feed load error', err);
+        root.innerHTML =
+          '<p class="rd-shorts-empty">Shorts를 불러오지 못했습니다. ' +
+          '<a href="https://www.youtube.com/@istudyeng/shorts" target="_blank" rel="noopener noreferrer">YouTube에서 보기</a></p>';
+      });
+  }
+
   function boot() {
     fillDateBar();
+    renderShortsFeed();
     if (!window.HomeBoardPreview) return;
 
     Promise.all([

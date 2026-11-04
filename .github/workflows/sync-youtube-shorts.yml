@@ -1,0 +1,43 @@
+# @istudyeng 최신 Shorts → data/youtube-shorts.json
+# 홈 「최신 영어 Shorts」 섹션이 이 JSON을 읽습니다.
+name: Sync YouTube Shorts
+
+on:
+  schedule:
+    # 15분마다 (GitHub 스케줄은 지연될 수 있음)
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-youtube-shorts
+  cancel-in-progress: true
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Fetch Shorts feed
+        run: node backend/youtube_automation/sync-shorts.js --limit 6
+
+      - name: Commit if changed
+        run: |
+          if git diff --quiet -- data/youtube-shorts.json; then
+            echo "No changes"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/youtube-shorts.json
+          git commit -m "chore: sync latest YouTube Shorts for home"
+          git push

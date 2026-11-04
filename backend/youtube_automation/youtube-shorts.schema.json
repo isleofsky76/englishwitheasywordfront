@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://englisheasystudy.com/schemas/youtube-shorts.json",
+  "title": "YouTube Shorts home feed",
+  "type": "object",
+  "required": ["updatedAt", "channelId", "handle", "items"],
+  "properties": {
+    "updatedAt": { "type": "string", "format": "date-time" },
+    "channelId": { "type": "string", "pattern": "^UC[\\w-]{22}$" },
+    "handle": { "type": "string" },
+    "source": { "type": "string" },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["videoId", "title", "thumbnail", "url"],
+        "properties": {
+          "videoId": { "type": "string", "minLength": 6 },
+          "title": { "type": "string" },
+          "publishedAt": { "type": "string" },
+          "thumbnail": { "type": "string", "format": "uri" },
+          "url": { "type": "string", "format": "uri" },
+          "watchUrl": { "type": "string", "format": "uri" }
+        }
+      }
+    }
+  }
+}
