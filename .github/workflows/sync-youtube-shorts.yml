@@ -1,12 +1,29 @@
 # @istudyeng 최신 Shorts → data/youtube-shorts.json
 # 홈 「최신 영어 Shorts」 섹션이 이 JSON을 읽습니다.
+#
+# 스케줄: 매일 한국시간 오후 9시 (UTC 12:00)
+# 수동: Actions → Sync YouTube Shorts → Run workflow
+#   - D-day만: workflow_dispatch input today_only=true
 name: Sync YouTube Shorts
 
 on:
   schedule:
-    # 15분마다 (GitHub 스케줄은 지연될 수 있음)
-    - cron: '*/15 * * * *'
+    # 09:00 PM KST = 12:00 UTC
+    - cron: '0 12 * * *'
   workflow_dispatch:
+    inputs:
+      today_only:
+        description: 'D-day(한국시간 오늘) 업로드만 동기화'
+        required: false
+        default: 'false'
+        type: choice
+        options:
+          - 'false'
+          - 'true'
+      limit:
+        description: '홈에 넣을 Shorts 개수'
+        required: false
+        default: '6'
 
 permissions:
   contents: write
@@ -28,7 +45,15 @@ jobs:
           node-version: '20'
 
       - name: Fetch Shorts feed
-        run: node backend/youtube_automation/sync-shorts.js --limit 6
+        env:
+          TODAY_ONLY: ${{ github.event.inputs.today_only || 'false' }}
+          LIMIT: ${{ github.event.inputs.limit || '6' }}
+        run: |
+          ARGS=(--limit "${LIMIT}")
+          if [ "${TODAY_ONLY}" = "true" ]; then
+            ARGS+=(--today)
+          fi
+          node backend/youtube_automation/sync-shorts.js "${ARGS[@]}"
 
       - name: Commit if changed
         run: |

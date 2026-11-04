@@ -16,8 +16,13 @@
         "required": ["videoId", "title", "thumbnail", "url"],
         "properties": {
           "videoId": { "type": "string", "minLength": 6 },
-          "title": { "type": "string" },
+          "category": { "type": "string", "description": "Parsed from '카테고리 | 제목'" },
+          "label": { "type": "string" },
+          "href": { "type": "string", "description": "Optional site list page for category" },
+          "title": { "type": "string", "description": "Title after category separator" },
+          "rawTitle": { "type": "string" },
           "publishedAt": { "type": "string" },
+          "publishedKst": { "type": "string", "description": "YYYY-MM-DD in Asia/Seoul" },
           "thumbnail": { "type": "string", "format": "uri" },
           "url": { "type": "string", "format": "uri" },
           "watchUrl": { "type": "string", "format": "uri" }

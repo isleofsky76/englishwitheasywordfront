@@ -356,12 +356,17 @@
           var title = esc(item.title || 'Shorts');
           var thumb = esc(item.thumbnail || '');
           var id = esc(item.videoId || '');
+          var label = esc(item.label || item.category || '');
+          var labelHtml = label
+            ? '<span class="rd-shorts-cat">' + label + '</span>'
+            : '';
           return (
             '<a class="rd-shorts-card" href="' + href + '" target="_blank" rel="noopener noreferrer" data-video-id="' + id + '">' +
               '<span class="rd-shorts-thumb">' +
                 (thumb ? '<img src="' + thumb + '" alt="" loading="lazy" decoding="async">' : '') +
                 '<span class="rd-shorts-play" aria-hidden="true"></span>' +
               '</span>' +
+              labelHtml +
               '<span class="rd-shorts-title">' + title + '</span>' +
             '</a>'
           );

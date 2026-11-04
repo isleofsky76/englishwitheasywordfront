@@ -28,48 +28,71 @@
 | 채널 핸들 | `@istudyeng` |
 | 채널 ID | `UC4LbF7X56QIHL3Oejt8kuyw` |
 | Shorts URL 패턴 | `https://www.youtube.com/shorts/{videoId}` |
-| 수집 필드 | `videoId`, `title`, `thumbnail`, `publishedAt`, `url` |
+| 수집 필드 | `videoId`, `category`, `label`, `title`, `thumbnail`, `publishedAt`, `url` |
 | 홈 노출 개수(초안) | 최근 **6개** (설정으로 변경 가능) |
+| 제목 규칙 | `카테고리 \| 제목` (예: `국제 \| …`, `연관단어 \| …`) |
+| 자동 동기화 | **매일 오후 9시(KST)** GitHub Actions |
+| 수동(D-day) | `node …/sync-shorts.js --today` 또는 Actions에서 `today_only=true` |
 
 ---
 
-## 3. 추천 자동화 구조
+## 3. 유튜브 제목 규칙 (카테고리 인식)
+
+업로드 제목을 아래처럼 쓰면 홈 카드에 **카테고리 배지**가 붙고, 이후 학습 글 연결에도 쓸 수 있다.
 
 ```
-유튜브 채널 (UC4LbF7X56QIHL3Oejt8kuyw)
-        │  새 Shorts 공개
-        ▼
-  자동 감지 · 동기화
-  (RSS 또는 YouTube Data API)
-        │  videoId · 제목 · 썸네일 · 게시일
-        ▼
-  youtube-shorts.json  (저장소 / CDN / 정적 파일)
+국제 | 항공기 허위 폭탄 테러
+연관단어 | 묵인하다 Acquiesce
+경제 | 유럽 연금 사회계약
+```
+
+| 제목 앞 단어 | 홈 라벨 | (예비) 목록 링크 |
+|--------------|---------|-----------------|
+| 국제 | 국제 | news-voca-list.html |
+| 한국 / 국방 / 경제 / 스포츠 / 미국 / 산업 | 동일 | 각 보드 리스트 |
+| 연관단어 / 유의어 | 연관단어 | english-synonym-list.html |
+| 컬쳐 / 문화 | 컬쳐 | culture-voca-list.html |
+| 문장 / 퀴즈 / 단어장 / 표현 / 상황 / 포토 | 동일 | 각 페이지 |
+
+구분자는 `|` 또는 `｜` (전각) 모두 허용.  
+규칙이 없으면 `category`는 빈 값이고, 제목 전체를 그대로 표시한다.
+
+## 4. 추천 자동화 구조
+
+```
+유튜브 업로드 제목:  국제 | 제목
         │
         ▼
-englisheasystudy.com 홈
-  「최신 영어 Shorts」 섹션이 JSON을 읽어 자동 렌더
+  매일 21:00 KST  (또는 수동 --today)
+  RSS 동기화 → category/title 파싱
+        │
+        ▼
+  data/youtube-shorts.json
+        │
+        ▼
+  홈 「최신 영어 Shorts」
+  [국제] 제목 + 썸네일
 ```
 
 - **수동으로 `index.html`에 영상 HTML을 넣지 않는다.**
-- 홈 JS는 JSON만 읽고, 카드(썸네일·제목·링크)를 그린다.
-- 클릭 시: Shorts 페이지로 이동(1차) 또는 인페이지 임베드 재생(2차 옵션).
+- **D-day만:** `node backend/youtube_automation/sync-shorts.js --today`
+- **저녁 일괄:** Actions가 매일 21:00 KST에 최근 6개 갱신
+- 클릭 시: Shorts 페이지로 이동(1차)
 
 ---
 
-## 4. 구현 방법 비교
+## 5. 구현 방법 비교
 
 | 방법 | 반영 시점 | 난이도 | 특징 |
 |------|-----------|--------|------|
 | **A. YouTube API/RSS + 브라우저 JS** | 방문 시 조회 | 낮음~중간 | 구현 빠름. API 키를 프론트에 두면 위험. RSS면 키 불필요 |
-| **B. GitHub Actions + API/RSS → JSON** | 예: 10~15분 주기 | 중간 | **권장.** 키는 Actions secrets. 정적 JSON만 배포 |
-| **C. YouTube PubSubHubbub Webhook + 서버** | 거의 실시간 | 높음 | 콜백 URL·구독 갱신 필요. Cloudtype 백엔드와 연동 가능 |
+| **B. GitHub Actions + RSS → JSON** | **매일 21:00 KST** (+ 수동) | 중간 | **현재 채택.** 제목 카테고리 파싱 |
+| **C. YouTube Webhook + 서버** | 거의 실시간 | 높음 | 별도 수신 서버 필요 |
 
-### 1차 권장: **B**
+### 운영 선택 (현재)
 
-- 비용: Actions 무료 한도 안에서 충분
-- 보안: API 키를 프론트에 노출하지 않음
-- 운영: `youtube-shorts.json`만 보면 상태 확인 가능
-- 한계: 예약 실행은 **최소 간격·지연**이 있어 “게시 즉시”는 보장하지 않음 (보통 수분~십수분)
+- **평소:** 하루 한 번(저녁 9시) 자동 동기화 — 그날 올린 영상이 홈에 모임
+- **당장 반영:** 로컬/`Actions` 수동 실행, 필요 시 `--today`로 D-day만
 
 ### 보완 옵션
 
@@ -194,7 +217,11 @@ backend/youtube_automation/
 4. [x] 로컬에서 JSON 생성 확인
 
 ```bash
+# 최근 6개 (저녁 자동과 동일)
 node backend/youtube_automation/sync-shorts.js --limit 6
+
+# 한국시간 오늘 업로드분만
+node backend/youtube_automation/sync-shorts.js --today --limit 6
 ```
 
 ### Phase 2 — 홈 UI
@@ -254,10 +281,14 @@ node backend/youtube_automation/sync-shorts.js --limit 6
 
 ```bash
 node backend/youtube_automation/sync-shorts.js --limit 6
+# 또는 D-day만
+node backend/youtube_automation/sync-shorts.js --today
+
 git add data/youtube-shorts.json && git commit -m "chore: sync latest YouTube Shorts for home" && git push
 ```
 
-**Actions:** GitHub → Actions → “Sync YouTube Shorts” → Run workflow
+**Actions:** GitHub → Actions → “Sync YouTube Shorts” → Run workflow  
+(`today_only=true` 선택 가능)
 
 **남은 개선 (Phase 3+)**
 
