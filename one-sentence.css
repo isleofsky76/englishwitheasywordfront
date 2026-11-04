@@ -540,6 +540,12 @@ body.os-hide-meaning .os-item.is-meaning-shown .os-cf-ko {
   font-weight: 400;
 }
 
+/* 예문 다음 단어 블록 간격 */
+.os-item > .os-ko + .os-head,
+.os-item > .os-en-row + .os-head {
+  margin-top: 12px;
+}
+
 /* 방문자에게 보이는 관리자 메모 */
 .os-memo {
   margin: 10px 0 0;
