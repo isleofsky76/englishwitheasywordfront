@@ -1,23 +1,24 @@
 # YouTube Shorts → 홈페이지 자동 동기화
 
 **프로젝트명:** `youtube_automation`  
-**목표:** `@istudyeng` 채널에 새 Shorts가 공개되면, **englisheasystudy.com 홈**에 「최신 영어 Shorts」 섹션이 자동으로 갱신되게 한다.  
-**상태:** Phase 1~2 구현됨 (RSS → JSON → 홈 섹션 + GitHub Actions)  
+**목표:** `@istudyeng` Shorts가 올라오면 제목 `카테고리 | 제목`에 맞춰 **해당 카테고리 목록 페이지**에 Shorts가 자동 노출된다.  
+**상태:** Phase 1~2 구현됨 (RSS → JSON → 카테고리 목록 + GitHub Actions)  
 **관련 브랜드:** 시사영단어 · News English Lab
 
 ---
 
 ## 1. 배경 · 왜 필요한가
 
-지금은 홈의 YouTube 진입점이 상단 배너(`@istudyeng/shorts` 링크) 수준이다.  
-영상이 올라올 때마다 `index.html`을 손으로 고치지 않고, **최신 Shorts 썸네일·제목**이 홈에 보이면:
+영상이 올라올 때마다 목록 HTML을 손으로 고치지 않고, **매칭 카테고리 페이지**에 최신 Shorts 썸네일·제목이 보인다.
 
-- 방문자가 사이트에서 바로 새 학습 영상을 발견한다
-- Shorts → 뉴스 어휘 / 문장 / 연관단어 학습 페이지로 이어가기 쉽다
-- 운영자가 배포 없이도 홈 콘텐츠가 최신으로 유지된다
+| 제목 카테고리 | 노출 페이지 |
+|---------------|-------------|
+| 국제 | news-voca-list.html |
+| 미국 | us-news-list.html |
+| 경제 | economy-news-list.html |
+| 연관단어 | english-synonym-list.html |
 
-기존 「최신 뉴스 어휘」「이럴 땐 영어로?」「WORD OF THE DAY」 섹션은 **유지**하고,  
-그 옆(또는 아래)에 **「최신 영어 Shorts」** 섹션을 **추가**하는 방향을 권장한다.
+(다른 카테고리도 `CATEGORY_MAP` + `category-shorts.js`의 `data-category`로 동일하게 확장 가능)
 
 ---
 
@@ -38,7 +39,7 @@
 
 ## 3. 유튜브 제목 규칙 (카테고리 인식)
 
-업로드 제목을 아래처럼 쓰면 홈 카드에 **카테고리 배지**가 붙고, 이후 학습 글 연결에도 쓸 수 있다.
+업로드 제목을 아래처럼 쓰면 **해당 카테고리 목록**에 Shorts가 붙는다.
 
 ```
 국제 | 항공기 허위 폭탄 테러
@@ -46,13 +47,13 @@
 경제 | 유럽 연금 사회계약
 ```
 
-| 제목 앞 단어 | 홈 라벨 | (예비) 목록 링크 |
-|--------------|---------|-----------------|
+| 제목 앞 단어 | 라벨 | 목록 페이지 |
+|--------------|------|-------------|
 | 국제 | 국제 | news-voca-list.html |
-| 한국 / 국방 / 경제 / 스포츠 / 미국 / 산업 | 동일 | 각 보드 리스트 |
+| 미국 | 미국 | us-news-list.html |
+| 경제 | 경제 | economy-news-list.html |
 | 연관단어 / 유의어 | 연관단어 | english-synonym-list.html |
-| 컬쳐 / 문화 | 컬쳐 | culture-voca-list.html |
-| 문장 / 퀴즈 / 단어장 / 표현 / 상황 / 포토 | 동일 | 각 페이지 |
+| 한국 / 국방 / 스포츠 / 산업 등 | 동일 | 각 보드 리스트(+ data-category 추가 시) |
 
 구분자는 `|` 또는 `｜` (전각) 모두 허용.  
 규칙이 없으면 `category`는 빈 값이고, 제목 전체를 그대로 표시한다.
@@ -70,14 +71,14 @@
   data/youtube-shorts.json
         │
         ▼
-  홈 「최신 영어 Shorts」
-  [국제] 제목 + 썸네일
+  카테고리 목록 페이지 (category-shorts.js)
+  예: 국제 → news-voca-list.html
 ```
 
-- **수동으로 `index.html`에 영상 HTML을 넣지 않는다.**
+- **수동으로 목록 HTML에 영상 HTML을 넣지 않는다.**
 - **D-day만:** `node backend/youtube_automation/sync-shorts.js --today`
-- **저녁 일괄:** Actions가 매일 21:00 KST에 최근 6개 갱신
-- 클릭 시: Shorts 페이지로 이동(1차)
+- **저녁 일괄:** Actions가 매일 21:00 KST에 최근 항목 갱신
+- 클릭 시: YouTube Shorts 페이지로 이동
 
 ---
 
