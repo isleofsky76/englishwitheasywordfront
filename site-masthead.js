@@ -4,7 +4,46 @@
  * nav-home-menu.js 가 로드함
  */
 (function () {
-    var VERSION = '20261102ind2';
+    var VERSION = '20261104dict1';
+
+  var DICT_LOOKUP_VER = '20261104dict1';
+  var DICT_LOOKUP_CONTAINERS = [
+    '.os-en',
+    '#onesentence-feed',
+    '#post-message',
+    '.post-message-body',
+    '.rd-article-cards',
+    '.nv-body',
+    '.nv-text',
+    '.rd-expr',
+    '.rd-news-cards',
+    '.rd-news-list',
+    '.rd-hero-example',
+    '.rd-phrases',
+    '.rd-list-feature',
+    '.rd-list-card',
+    '.rd-list-side',
+    '.rd-read-col',
+    '.vq-card',
+    '.vq-prompt',
+    'article#post-content',
+    '#word-detail',
+    '.wotd-body'
+  ].join(', ');
+
+  function ensureSiteDictLookup(base) {
+    var prev = window.DICT_CONFIG || {};
+    window.DICT_CONFIG = Object.assign(
+      { container: DICT_LOOKUP_CONTAINERS },
+      prev
+    );
+    if (document.querySelector('script[data-dict-lookup="1"]')) return;
+    var s = document.createElement('script');
+    s.src = (base || '') + 'dict-lookup.js?v=' + DICT_LOOKUP_VER;
+    s.defer = true;
+    s.setAttribute('data-dict-lookup', '1');
+    document.body.appendChild(s);
+  }
   /* 시안 주 메뉴 — href는 기존 URL 유지 */
   var PRIMARY_NAV_ITEMS = [
     {
@@ -567,6 +606,7 @@
     ensureScript(base + 'home-board-preview.js?v=' + VERSION, function () {
       initSearch(base);
     });
+    ensureSiteDictLookup(base);
     /* CSS 적용 후에만 YouTube 바 삽입 — 빨간 아이콘 거대화 FOUC 방지 */
     ensureCss(base, function () {
       injectYoutubeBar();

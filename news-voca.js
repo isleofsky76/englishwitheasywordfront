@@ -417,15 +417,15 @@ function publishNewsDictWords(root) {
     window.DICT_WORDS = Object.assign(Object.create(null), window.DICT_WORDS || {}, map);
 }
 
-/** 문장 페이지와 동일한 사전 팝업 스크립트 로드 */
+/** 문장 페이지와 동일한 사전 팝업 — site-masthead 가 이미 넣으면 스킵 */
 function ensureNewsDictLookup() {
     window.DICT_CONFIG = Object.assign(
-        { container: '#post-message, .rd-article-cards, .nv-body' },
+        { container: '#post-message, .rd-article-cards, .nv-body, .rd-expr' },
         window.DICT_CONFIG || {}
     );
     if (document.querySelector('script[data-dict-lookup="1"]')) return;
     const s = document.createElement('script');
-    s.src = '/dict-lookup.js?v=20261101nv2';
+    s.src = '/dict-lookup.js?v=20261104dict1';
     s.defer = true;
     s.setAttribute('data-dict-lookup', '1');
     document.body.appendChild(s);
