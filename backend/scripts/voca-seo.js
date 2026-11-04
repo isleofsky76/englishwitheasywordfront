@@ -24,11 +24,11 @@ export const BOARD_SEO = {
     listHtml: 'news-voca-list.html',
     extraCss: [
       { file: 'board-comments.css', version: '20261102c4' },
-      { file: 'redesign-article.css', version: '20261104syn1' },
+      { file: 'redesign-article.css', version: '20261104syn2' },
     ],
     extraJs: [
       { file: 'board-comments.js', version: '20261102c4' },
-      { file: 'redesign-article.js', version: '20261104syn1' },
+      { file: 'redesign-article.js', version: '20261104syn2' },
     ],
   },
   'cooking-voca': {
@@ -40,9 +40,9 @@ export const BOARD_SEO = {
     listHtml: 'cooking-voca-list.html',
     extraCss: [
       { file: 'cooking-voca.css', version: '20260616b' },
-      { file: 'redesign-article.css', version: '20261104syn1' },
+      { file: 'redesign-article.css', version: '20261104syn2' },
     ],
-    extraJs: [{ file: 'redesign-article.js', version: '20261104syn1' }],
+    extraJs: [{ file: 'redesign-article.js', version: '20261104syn2' }],
   },
   'culture-voca': {
     label: 'Culture Voca',
@@ -53,9 +53,9 @@ export const BOARD_SEO = {
     listHtml: 'culture-voca-list.html',
     extraCss: [
       { file: 'culture-voca.css', version: '20260617' },
-      { file: 'redesign-article.css', version: '20261104syn1' },
+      { file: 'redesign-article.css', version: '20261104syn2' },
     ],
-    extraJs: [{ file: 'redesign-article.js', version: '20261104syn1' }],
+    extraJs: [{ file: 'redesign-article.js', version: '20261104syn2' }],
   },
   'defense-news': {
     label: '국방뉴스',
@@ -144,8 +144,8 @@ export const BOARD_SEO = {
     jsFile: 'industry-news.js',
     jsVersion: '20261102c10',
     listHtml: 'industry-news-list.html',
-    extraCss: [{ file: 'redesign-article.css', version: '20261104syn1' }],
-    extraJs: [{ file: 'redesign-article.js', version: '20261104syn1' }],
+    extraCss: [{ file: 'redesign-article.css', version: '20261104syn2' }],
+    extraJs: [{ file: 'redesign-article.js', version: '20261104syn2' }],
   },
   'ai-news': {
     label: '인공지능뉴스',
@@ -201,13 +201,13 @@ export const BOARD_SEO = {
     cssFile: 'page30_viewpost_v.css',
     cssVersion: '20260903e',
     jsFile: 'page30_viewpost_v.js',
-    jsVersion: '20261104syn1',
+    jsVersion: '20261104syn2',
     listHtml: 'english-synonym-list.html',
     extraCss: [
       { file: 'news-voca.css', version: '20260926barun' },
-      { file: 'redesign-article.css', version: '20261104syn1' },
+      { file: 'redesign-article.css', version: '20261104syn2' },
     ],
-    extraJs: [{ file: 'redesign-article.js', version: '20261104syn1' }],
+    extraJs: [{ file: 'redesign-article.js', version: '20261104syn2' }],
   },
   'english-opinions': {
     label: '오피니언',
@@ -612,8 +612,8 @@ ${(board.extraCss || []).map((c) => `    <link rel="stylesheet" href="../../${c.
     <link rel="stylesheet" href="../../weather-banner.css?v=20260612g">
     <link rel="stylesheet" href="../../world-clock.css?v=20260612g">
     <link rel="stylesheet" href="../../redesign-tokens.css?v=20261020rd27">
-    <link rel="stylesheet" href="../../redesign-article.css?v=20261104syn1">
-    <link rel="preload" href="../../redesign-article.js?v=20261104syn1" as="script">
+    <link rel="stylesheet" href="../../redesign-article.css?v=20261104syn2">
+    <link rel="preload" href="../../redesign-article.js?v=20261104syn2" as="script">
     <style id="rd-fouc-guard">
       /* SEO 구형 본문이 redesign 전에 깜빡이지 않도록 (!important 금지: 키프레임 fallback이 무시됨) */
       body[data-nv-board]:not(.rd-ready) #post-container {

@@ -5,7 +5,9 @@
 (function (global) {
   'use strict';
 
-  var ASSET_VER = '20261104syn1';
+  var ASSET_VER = '20261104syn2';
+  var SYN_SAVED_KEY = 'ees-synonym-saved-v1';
+  var SYN_HIDE_KEY = 'ees-synonym-hide-meaning';
 
   /** SEO 경로 /board/slug/ 에서 list.html 상대링크가 깨지지 않게 */
   function seoPathPrefix() {
@@ -709,7 +711,8 @@
 
   function renderCardHtml(card, opts) {
     opts = opts || {};
-    var showMeaning = !opts.hideMeaning && card.meaning;
+    var synonymMode = !!opts.synonymMode;
+    var showMeaning = synonymMode ? !!card.meaning : (!opts.hideMeaning && card.meaning);
     var ko = card.ko || '';
     if (opts.stripKoNum && ko) ko = stripLeadingListNum(ko);
     var more = Array.isArray(card.moreExprs) ? card.moreExprs.filter(Boolean) : [];
@@ -721,21 +724,218 @@
     var cf = String(card.cf || '').trim();
     var enLine = String(card.enHtml || '').trim();
     var isPronOnly = /rd-expr-pron/.test(enLine) || /^\s*\([^)]+\)/.test(stripHtml(enLine));
+    var wordKey = String(card.expression || '')
+      .toLowerCase()
+      .replace(/\s+/g, '-')
+      .replace(/[^a-z0-9\-']/g, '');
+    var foot = synonymMode
+      ? '<div class="rd-expr-foot">' +
+          '<button type="button" class="rd-syn-meaning-toggle" data-rd-meaning-toggle aria-pressed="false">뜻 보기</button>' +
+          '<button type="button" class="rd-syn-save-toggle" data-rd-save-toggle aria-pressed="false">저장</button>' +
+          '<button type="button" class="rd-syn-item-download" data-rd-item-download hidden>다운로드</button>' +
+        '</div>'
+      : '';
     return (
-      '<article class="rd-expr' + (isPronOnly ? ' rd-expr--synonym' : '') + '" id="' + escapeAttr(card.id) + '">' +
+      '<article class="rd-expr' +
+        (synonymMode || isPronOnly ? ' rd-expr--synonym' : '') +
+        '" id="' + escapeAttr(card.id) + '"' +
+        (synonymMode
+          ? ' data-rd-word-key="' + escapeAttr(wordKey) + '"' +
+            ' data-rd-word="' + escapeAttr(card.expression) + '"' +
+            ' data-rd-meaning="' + escapeAttr(card.meaning || '') + '"'
+          : '') +
+        '>' +
         '<div class="rd-expr-top">' +
           '<span class="rd-expr-num">' + escapeHtml(card.num) + '</span>' +
           '<span class="rd-expr-word">' + escapeHtml(card.expression) + '</span>' +
-          (showMeaning ? '<span class="rd-expr-meaning">' + escapeHtml(card.meaning) + '</span>' : '') +
+          (showMeaning
+            ? (synonymMode ? '<span class="rd-expr-colon" aria-hidden="true">:</span>' : '') +
+              '<span class="rd-expr-meaning">' + escapeHtml(card.meaning) + '</span>'
+            : '') +
         '</div>' +
         moreHtml +
         (enLine
-          ? '<p class="rd-expr-en' + (isPronOnly ? ' rd-expr-en--pron' : '') + '">' + enLine + '</p>'
+          ? '<p class="rd-expr-en' + (isPronOnly || synonymMode ? ' rd-expr-en--pron' : '') + '">' + enLine + '</p>'
           : '') +
-        (ko ? '<p class="rd-expr-ko">' + escapeHtml(ko) + '</p>' : '') +
-        (cf ? '<p class="rd-expr-cf">' + escapeHtml(cf) + '</p>' : '') +
+        (ko && !synonymMode ? '<p class="rd-expr-ko">' + escapeHtml(ko) + '</p>' : '') +
+        (cf && !synonymMode ? '<p class="rd-expr-cf">' + escapeHtml(cf) + '</p>' : '') +
+        foot +
       '</article>'
     );
+  }
+
+  function synReadSaved() {
+    try {
+      var raw = sessionStorage.getItem(SYN_SAVED_KEY);
+      var parsed = raw ? JSON.parse(raw) : {};
+      return parsed && typeof parsed === 'object' ? parsed : {};
+    } catch (e) {
+      return {};
+    }
+  }
+
+  function synWriteSaved(map) {
+    try {
+      sessionStorage.setItem(SYN_SAVED_KEY, JSON.stringify(map || {}));
+    } catch (e) { /* ignore */ }
+  }
+
+  function synHideDefault() {
+    try {
+      var v = localStorage.getItem(SYN_HIDE_KEY);
+      if (v === null) return true;
+      return v === '1';
+    } catch (e) {
+      return true;
+    }
+  }
+
+  function bindSynonymStudy(root) {
+    if (!root || root.getAttribute('data-rd-syn-bound') === '1') return;
+    root.setAttribute('data-rd-syn-bound', '1');
+
+    var toolbar =
+      '<div class="rd-syn-toolbar" role="toolbar" aria-label="연관단어 학습">' +
+        '<label class="rd-syn-hide-all">' +
+          '<input type="checkbox" id="rd-syn-hide-meaning"' + (synHideDefault() ? ' checked' : '') + '>' +
+          '<span>뜻 가리기</span>' +
+        '</label>' +
+        '<button type="button" class="rd-syn-download-all" id="rd-syn-download-saved" hidden disabled>저장 다운로드 (<span id="rd-syn-saved-count">0</span>)</button>' +
+      '</div>';
+    if (!root.querySelector('.rd-syn-toolbar')) {
+      root.insertAdjacentHTML('afterbegin', toolbar);
+    }
+
+    function isVisible(card) {
+      var globalHide = document.body.classList.contains('rd-syn-hide-meaning');
+      if (globalHide) return card.classList.contains('is-meaning-shown');
+      return !card.classList.contains('is-meaning-hidden');
+    }
+
+    function syncMeaningBtn(card) {
+      var btn = card.querySelector('[data-rd-meaning-toggle]');
+      if (!btn) return;
+      var shown = isVisible(card);
+      btn.textContent = shown ? '뜻 숨기기' : '뜻 보기';
+      btn.setAttribute('aria-pressed', shown ? 'true' : 'false');
+    }
+
+    function syncSaveBtn(card) {
+      var key = card.getAttribute('data-rd-word-key') || '';
+      var btn = card.querySelector('[data-rd-save-toggle]');
+      var dl = card.querySelector('[data-rd-item-download]');
+      var on = Boolean(key && synReadSaved()[key]);
+      if (btn) {
+        btn.textContent = on ? '저장됨' : '저장';
+        btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+      }
+      if (dl) dl.hidden = !on;
+    }
+
+    function syncDownloadAll() {
+      var n = Object.keys(synReadSaved()).length;
+      var btn = document.getElementById('rd-syn-download-saved');
+      var count = document.getElementById('rd-syn-saved-count');
+      if (count) count.textContent = String(n);
+      if (btn) {
+        btn.hidden = n === 0;
+        btn.disabled = n === 0;
+      }
+      root.querySelectorAll('.rd-expr--synonym').forEach(syncSaveBtn);
+    }
+
+    function applyHide(on) {
+      document.body.classList.toggle('rd-syn-hide-meaning', !!on);
+      try {
+        localStorage.setItem(SYN_HIDE_KEY, on ? '1' : '0');
+      } catch (e) { /* ignore */ }
+      root.querySelectorAll('.rd-expr--synonym').forEach(function (card) {
+        card.classList.remove('is-meaning-shown', 'is-meaning-hidden');
+        syncMeaningBtn(card);
+      });
+    }
+
+    function downloadSaved() {
+      var map = synReadSaved();
+      var keys = Object.keys(map);
+      if (!keys.length) return;
+      var lines = keys.map(function (k) {
+        var it = map[k] || {};
+        return (
+          String(it.word || k) +
+          (it.meaning ? ' — ' + it.meaning : '') +
+          (it.pron ? '  ' + it.pron : '')
+        );
+      });
+      var blob = new Blob([lines.join('\n') + '\n'], { type: 'text/plain;charset=utf-8' });
+      var a = document.createElement('a');
+      var d = new Date();
+      a.href = URL.createObjectURL(blob);
+      a.download =
+        'synonym-saved-' +
+        d.getFullYear() +
+        String(d.getMonth() + 1).padStart(2, '0') +
+        String(d.getDate()).padStart(2, '0') +
+        '.txt';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(function () { URL.revokeObjectURL(a.href); }, 1000);
+    }
+
+    applyHide(synHideDefault());
+    syncDownloadAll();
+    root.querySelectorAll('.rd-expr--synonym').forEach(syncMeaningBtn);
+
+    root.addEventListener('click', function (e) {
+      var meaningBtn = e.target.closest('[data-rd-meaning-toggle]');
+      if (meaningBtn) {
+        var card = meaningBtn.closest('.rd-expr--synonym');
+        if (!card) return;
+        var globalHide = document.body.classList.contains('rd-syn-hide-meaning');
+        var shown = isVisible(card);
+        if (globalHide) {
+          card.classList.toggle('is-meaning-shown', !shown);
+          card.classList.remove('is-meaning-hidden');
+        } else {
+          card.classList.toggle('is-meaning-hidden', shown);
+          card.classList.remove('is-meaning-shown');
+        }
+        syncMeaningBtn(card);
+        return;
+      }
+      var saveBtn = e.target.closest('[data-rd-save-toggle]');
+      if (saveBtn) {
+        var cardSave = saveBtn.closest('.rd-expr--synonym');
+        if (!cardSave) return;
+        var key = cardSave.getAttribute('data-rd-word-key') || '';
+        if (!key) return;
+        var map = synReadSaved();
+        if (map[key]) delete map[key];
+        else {
+          var pronEl = cardSave.querySelector('.rd-expr-pron, .rd-expr-en--pron');
+          map[key] = {
+            word: cardSave.getAttribute('data-rd-word') || '',
+            meaning: cardSave.getAttribute('data-rd-meaning') || '',
+            pron: pronEl ? stripHtml(pronEl.innerHTML).replace(/\s+/g, ' ').trim() : '',
+            savedAt: Date.now()
+          };
+        }
+        synWriteSaved(map);
+        syncDownloadAll();
+        return;
+      }
+      if (e.target.closest('[data-rd-item-download]') || e.target.closest('#rd-syn-download-saved')) {
+        downloadSaved();
+      }
+    });
+
+    var hideInput = document.getElementById('rd-syn-hide-meaning');
+    if (hideInput) {
+      hideInput.addEventListener('change', function () {
+        applyHide(hideInput.checked);
+      });
+    }
   }
 
   function renderRedesignArticle(container, post, options) {
@@ -780,6 +980,7 @@
     var heroImg = !yt ? extractHeroImage(html) : '';
     var sourceUrl = extractSourceLink(html) || (post.sourceUrl || '');
     var narrativeMode = isNarrativeCardCapable(parser, cards);
+    var synonymMode = cfg.key === 'english-synonym';
 
     var crumb =
       '<nav class="rd-article-crumb" aria-label="위치">' +
@@ -874,13 +1075,14 @@
       '<div class="rd-article-layout">' +
         '<div class="rd-article-main" id="post-content">' +
           ytBlock +
-          '<div id="post-message" class="rd-article-cards">' +
+          '<div id="post-message" class="rd-article-cards' + (synonymMode ? ' rd-article-cards--synonym' : '') + '">' +
             (cards.length
               ? cards.map(function (c) {
                   return renderCardHtml(c, {
-                    /* narrative: 01 staggered + 문장만 (뜻은 옆이 아니라 cf./문장 안) */
-                    hideMeaning: narrativeMode,
-                    stripKoNum: narrativeMode
+                    /* narrative 뉴스: 뜻은 cf./문장 안 — 연관단어는 영어 옆 뜻 + 토글 */
+                    hideMeaning: narrativeMode && !synonymMode,
+                    stripKoNum: narrativeMode,
+                    synonymMode: synonymMode
                   });
                 }).join('')
               : '<div class="rd-article-fallback">' + html + '</div>') +
@@ -897,6 +1099,11 @@
       '</div>';
 
     moveAdsense(container.querySelector('#rd-ad-host'));
+
+    if (synonymMode) {
+      var synRoot = container.querySelector('.rd-article-cards--synonym');
+      if (synRoot) bindSynonymStudy(synRoot);
+    }
 
     // Keep a hidden like control so initViewpostLike can still bind if called after
     if (typeof options.onReady === 'function') options.onReady(container);
