@@ -134,18 +134,9 @@
   min-width: 0;
 }
 
-/* 한국어 표현 — one-sentence 표제어/메타와 동일 톤 */
-.de-ko {
-  margin: 0 0 2px;
-  font-size: var(--de-body);
-  line-height: 1.55;
-  font-weight: 600;
-  color: var(--de-ink);
-}
-
 /* 영어 표현 — one-sentence .os-head-en */
 .de-en {
-  margin: 0;
+  margin: 0 0 2px;
   font-family: inherit;
   font-size: var(--de-body);
   font-weight: 700;
@@ -154,8 +145,18 @@
   color: var(--de-blue);
 }
 
+/* 한국어 표현 — one-sentence .os-ko 톤 (기본 blur) */
+.de-ko {
+  margin: 4px 0 0;
+  font-size: var(--de-body);
+  line-height: 1.7;
+  font-weight: 400;
+  color: var(--de-ink-soft);
+  transition: filter 0.18s ease;
+}
+
 .de-example-block {
-  margin-top: 8px;
+  margin-top: 10px;
 }
 
 /* 영어 예문 — one-sentence .os-en */
@@ -169,23 +170,29 @@
   color: var(--de-ink);
 }
 
-/* 예문 한글 — one-sentence .os-ko */
+/* 예문 한글 — one-sentence .os-ko (기본 blur) */
 .de-translation {
   margin: 4px 0 0;
   font-size: var(--de-body);
   font-weight: 400;
   line-height: 1.7;
   color: var(--de-ink-soft);
+  transition: filter 0.18s ease;
 }
 
-/* 기본: 예문·번역 숨김 (표현별 is-examples-shown 으로 예외) */
-.de-page.de-examples-collapsed .de-item:not(.is-examples-shown) .de-example-block,
-.de-item.is-examples-hidden .de-example-block {
-  display: none;
+/* 문장 섹션과 동일 — 한글 뜻 기본 blur, 뜻 보기로 해제 */
+body.de-hide-meaning .de-ko,
+body.de-hide-meaning .de-translation,
+body:not(.de-hide-meaning) .de-item.is-meaning-hidden .de-ko,
+body:not(.de-hide-meaning) .de-item.is-meaning-hidden .de-translation {
+  filter: blur(3.5px);
+  user-select: none;
 }
 
-.de-item.is-examples-shown .de-example-block {
-  display: block;
+body.de-hide-meaning .de-item.is-meaning-shown .de-ko,
+body.de-hide-meaning .de-item.is-meaning-shown .de-translation {
+  filter: none;
+  user-select: text;
 }
 
 /* 뜻 보기 · 저장 · 댓글 · 글쓰기 — one-sentence 와 동일 한 줄 */

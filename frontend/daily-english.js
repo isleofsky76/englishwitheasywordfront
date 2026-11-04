@@ -8,7 +8,8 @@
   var DEBOUNCE_MS = 300;
   var BOARD = 'expressions';
   var SAVED_KEY = 'de-saved-expressions-session';
-  var COLLAPSE_KEY = 'de-examples-collapsed';
+  /* 문장 섹션과 동일 — 기본 한글(뜻) blur */
+  var HIDE_MEANING_KEY = 'de-hide-meaning';
 
   var state = {
     q: '',
@@ -63,46 +64,41 @@
     return Boolean(id && readSavedMap()[id]);
   }
 
-  function isExamplesCollapsedGlobal() {
+  function isHideMeaningOn() {
     try {
-      var v = localStorage.getItem(COLLAPSE_KEY);
-      if (v === null) return true;
+      var v = localStorage.getItem(HIDE_MEANING_KEY);
+      if (v === null) return true; /* default: 한글 뜻 blur */
       return v === '1';
     } catch (e) {
       return true;
     }
   }
 
-  function applyCollapseMode(on) {
-    document.body.classList.toggle('de-examples-collapsed', !!on);
+  function applyHideMeaning(on) {
+    document.body.classList.toggle('de-hide-meaning', !!on);
     try {
-      localStorage.setItem(COLLAPSE_KEY, on ? '1' : '0');
+      localStorage.setItem(HIDE_MEANING_KEY, on ? '1' : '0');
     } catch (e) { /* ignore */ }
-    document.querySelectorAll('.de-item.is-examples-shown, .de-item.is-examples-hidden').forEach(function (el) {
-      el.classList.remove('is-examples-shown', 'is-examples-hidden');
+    document.querySelectorAll('.de-item.is-meaning-shown, .de-item.is-meaning-hidden').forEach(function (el) {
+      el.classList.remove('is-meaning-shown', 'is-meaning-hidden');
     });
     syncAllMeaningButtons();
   }
 
-  function isExamplesVisible(itemEl) {
+  function isItemMeaningVisible(itemEl) {
     if (!itemEl) return false;
-    var collapsed = document.body.classList.contains('de-examples-collapsed');
-    if (collapsed) return itemEl.classList.contains('is-examples-shown');
-    return !itemEl.classList.contains('is-examples-hidden');
+    var globalHide = document.body.classList.contains('de-hide-meaning');
+    if (globalHide) return itemEl.classList.contains('is-meaning-shown');
+    return !itemEl.classList.contains('is-meaning-hidden');
   }
 
   function syncMeaningButton(btn, itemEl) {
     if (!btn || !itemEl) return;
-    var hasEx = itemEl.getAttribute('data-has-example') === '1';
-    if (!hasEx) {
-      btn.hidden = true;
-      return;
-    }
     btn.hidden = false;
-    var shown = isExamplesVisible(itemEl);
+    var shown = isItemMeaningVisible(itemEl);
     btn.textContent = shown ? '뜻 숨기기' : '뜻 보기';
     btn.setAttribute('aria-pressed', shown ? 'true' : 'false');
-    btn.title = shown ? '예문·번역 숨기기' : '예문·번역 보기';
+    btn.title = shown ? '이 표현의 한글 뜻을 가립니다' : '이 표현의 한글 뜻을 봅니다';
   }
 
   function syncAllMeaningButtons() {
@@ -111,16 +107,16 @@
     });
   }
 
-  function toggleExamples(itemEl) {
-    if (!itemEl || itemEl.getAttribute('data-has-example') !== '1') return;
-    var collapsed = document.body.classList.contains('de-examples-collapsed');
-    var shown = isExamplesVisible(itemEl);
-    if (collapsed) {
-      itemEl.classList.toggle('is-examples-shown', !shown);
-      itemEl.classList.remove('is-examples-hidden');
+  function toggleItemMeaning(itemEl) {
+    if (!itemEl) return;
+    var globalHide = document.body.classList.contains('de-hide-meaning');
+    var shown = isItemMeaningVisible(itemEl);
+    if (globalHide) {
+      itemEl.classList.toggle('is-meaning-shown', !shown);
+      itemEl.classList.remove('is-meaning-hidden');
     } else {
-      itemEl.classList.toggle('is-examples-hidden', shown);
-      itemEl.classList.remove('is-examples-shown');
+      itemEl.classList.toggle('is-meaning-hidden', shown);
+      itemEl.classList.remove('is-meaning-shown');
     }
     syncMeaningButton(itemEl.querySelector('[data-de-meaning-toggle]'), itemEl);
   }
@@ -266,11 +262,11 @@
       escapeHtml(num) +
       '.</span>' +
       '<div class="de-body">' +
-      '<p class="de-ko">' +
-      escapeHtml(item.ko) +
-      '</p>' +
       '<p class="de-en">' +
       escapeHtml(item.en) +
+      '</p>' +
+      '<p class="de-ko">' +
+      escapeHtml(item.ko) +
       '</p>' +
       exampleBlock +
       '<div class="de-actions">' +
@@ -420,7 +416,7 @@
     feed.addEventListener('click', function (e) {
       var meaning = e.target.closest('[data-de-meaning-toggle]');
       if (meaning) {
-        toggleExamples(meaning.closest('.de-item'));
+        toggleItemMeaning(meaning.closest('.de-item'));
         return;
       }
       var save = e.target.closest('[data-de-save-toggle]');
@@ -490,7 +486,7 @@
   }
 
   function boot() {
-    applyCollapseMode(isExamplesCollapsedGlobal());
+    applyHideMeaning(isHideMeaningOn());
     bindSearch();
     bindFeedClicks();
     bindInfiniteScroll();
