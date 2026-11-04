@@ -75,13 +75,22 @@
   }
 
   function applyHideMeaning(on) {
-    document.body.classList.toggle('de-hide-meaning', !!on);
+    var hide = !!on;
+    document.body.classList.toggle('de-hide-meaning', hide);
     try {
-      localStorage.setItem(HIDE_MEANING_KEY, on ? '1' : '0');
+      localStorage.setItem(HIDE_MEANING_KEY, hide ? '1' : '0');
     } catch (e) { /* ignore */ }
     document.querySelectorAll('.de-item.is-meaning-shown, .de-item.is-meaning-hidden').forEach(function (el) {
       el.classList.remove('is-meaning-shown', 'is-meaning-hidden');
     });
+    var cb = document.getElementById('de-hide-meaning');
+    if (cb && cb.checked !== hide) cb.checked = hide;
+    var label = document.querySelector('.de-hide-meaning-label');
+    if (label) label.textContent = hide ? '전체 뜻 해제하기' : '전체 뜻 가리기';
+    var wrap = document.querySelector('.de-hide-meaning-toggle');
+    if (wrap) {
+      wrap.title = hide ? '체크 해제하면 뜻이 보입니다' : '체크하면 뜻을 가립니다';
+    }
     syncAllMeaningButtons();
   }
 
@@ -455,7 +464,19 @@
     io.observe(sentinel);
   }
 
+  function bindGlobalHideMeaning() {
+    var wrap = document.querySelector('.de-hide-meaning-toggle');
+    if (!wrap || wrap._deBound) return;
+    wrap._deBound = true;
+    wrap.addEventListener('change', function (e) {
+      var cb = e.target.closest('.de-hide-meaning-input');
+      if (!cb) return;
+      applyHideMeaning(cb.checked);
+    });
+  }
+
   function bindChrome() {
+    bindGlobalHideMeaning();
     var dl = document.getElementById('de-download-saved');
     if (dl && !dl._deBound) {
       dl._deBound = true;

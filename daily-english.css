@@ -88,6 +88,85 @@
   white-space: nowrap;
 }
 
+/* 문장 섹션과 동일 — 전체 뜻 가리기/해제하기 */
+.de-hide-meaning-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: 4px;
+  padding: 0 0.55em 0 0.35em;
+  height: 1.85em;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+  color: #2f5f9e;
+  background: #fff;
+  border: 1.5px solid rgba(47, 95, 158, 0.55);
+  border-radius: 999px;
+  box-sizing: border-box;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  white-space: nowrap;
+  box-shadow:
+    0 0 0 2px rgba(47, 95, 158, 0.12),
+    0 0 10px rgba(47, 95, 158, 0.28);
+  animation: de-hide-halo 7.5s ease-in-out infinite;
+}
+
+.de-hide-meaning-toggle:hover {
+  color: var(--de-blue);
+  border-color: var(--de-blue);
+  animation: none;
+  box-shadow:
+    0 0 0 3px rgba(47, 95, 158, 0.18),
+    0 0 14px rgba(47, 95, 158, 0.35);
+}
+
+.de-hide-meaning-input {
+  width: 14px;
+  height: 14px;
+  margin: 0;
+  accent-color: var(--de-blue);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+@keyframes de-hide-halo {
+  0%,
+  72%,
+  100% {
+    box-shadow:
+      0 0 0 2px rgba(47, 95, 158, 0.1),
+      0 0 8px rgba(47, 95, 158, 0.2);
+    border-color: rgba(47, 95, 158, 0.45);
+  }
+  78% {
+    box-shadow:
+      0 0 0 5px rgba(47, 95, 158, 0.2),
+      0 0 18px rgba(47, 95, 158, 0.45);
+    border-color: rgba(47, 95, 158, 0.85);
+  }
+  84% {
+    box-shadow:
+      0 0 0 2px rgba(47, 95, 158, 0.12),
+      0 0 10px rgba(47, 95, 158, 0.28);
+    border-color: rgba(47, 95, 158, 0.55);
+  }
+  90% {
+    box-shadow:
+      0 0 0 4px rgba(47, 95, 158, 0.16),
+      0 0 14px rgba(47, 95, 158, 0.38);
+    border-color: rgba(47, 95, 158, 0.75);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .de-hide-meaning-toggle {
+    animation: none;
+  }
+}
+
 .de-download-btn {
   height: 36px;
   padding: 0 12px;
