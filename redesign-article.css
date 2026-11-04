@@ -212,6 +212,80 @@ body.rd-article main#post-container:not(:has(.rd-article-layout)) {
   line-height: 1.3;
 }
 
+/* 연관단어: 01 + 영어 / 한글 뜻 / 발음 한 줄 */
+.rd-expr--synonym .rd-expr-top {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 12px;
+  row-gap: 2px;
+  align-items: baseline;
+}
+
+.rd-expr--synonym .rd-expr-num {
+  grid-row: 1 / span 2;
+  align-self: start;
+  margin-top: 4px;
+  margin-right: 0;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.rd-expr--synonym .rd-expr-word {
+  grid-column: 2;
+  flex: none;
+  width: auto;
+  font-family: var(--font-sans, inherit);
+  font-size: clamp(22px, 3vw, 28px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+}
+
+.rd-expr--synonym .rd-expr-meaning {
+  grid-column: 2;
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--ink-muted, #78716c);
+}
+
+.rd-expr-en--pron {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: baseline;
+  gap: 6px;
+  margin-top: 2px !important;
+  font-family: var(--font-sans, inherit) !important;
+  font-size: 15px !important;
+  font-weight: 500;
+  line-height: 1.4 !important;
+  color: var(--ink-muted, #78716c);
+  white-space: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.rd-expr-en--pron .rd-expr-pron {
+  flex: 0 0 auto;
+}
+
+.rd-expr-en--pron .vv-tts-btn,
+.rd-expr--synonym .vv-tts-btn {
+  flex: 0 0 auto;
+  margin-left: 2px !important;
+  font-size: 15px;
+  line-height: 1;
+  vertical-align: baseline;
+}
+
+.rd-expr--synonym .rd-expr-en mark,
+.rd-expr--synonym .rd-expr-en .nv-hl {
+  background: transparent;
+  padding: 0;
+}
+
 .rd-expr-more {
   display: flex;
   flex-wrap: wrap;

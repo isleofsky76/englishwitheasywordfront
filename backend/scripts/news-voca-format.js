@@ -487,6 +487,14 @@ function splitNarrativeEnKoCf(line) {
   const raw = String(line ?? '').trim();
   if (!raw) return [];
 
+  /* 연관단어 발음 줄: **word**(ipa / 한글) — 괄호 안 슬래시는 예문 분리 대상이 아님 */
+  if (
+    !/\bcf\./i.test(raw) &&
+    /^\*\*[^*]+\*\*\s*\([^)]*\/[^)]*\)\s*$/.test(raw)
+  ) {
+    return [{ className: narrativeLineClass(raw), text: raw }];
+  }
+
   let en = '';
   let ko = '';
   let cf = '';
@@ -553,7 +561,7 @@ function buildWordSpeakButtonHtml(word) {
   return `<button type="button" class="vv-tts-btn" data-vv-tts="${escapeHtml(w)}" aria-label="${escapeHtml(w)} 영어 발음 듣기" title="발음 듣기" style="margin-left:4px;padding:0;border:0;background:transparent;box-shadow:none;line-height:1;cursor:pointer;vertical-align:baseline;">🔊</button>`;
 }
 
-/** **word**(발음) — 뜻 줄에 스피커 버튼을 HTML로 직접 삽입 (클라이언트 의존 제거) */
+/** **word**(발음) — 스피커는 발음 괄호 뒤 (영어 (ipa / 한글) 🔊) */
 function appendSpeakButtonToNarrativeHtml(html, sourceLine) {
   if (/vv-tts-btn/i.test(html)) return html;
   const word = extractLeadingEnglishWordFromNarrative(sourceLine);
@@ -562,6 +570,9 @@ function appendSpeakButtonToNarrativeHtml(html, sourceLine) {
   if (!btn) return html;
   if (/<\/mark>\s*\([^)]*\)/.test(html)) {
     return html.replace(/(<\/mark>\s*\([^)]*\))/, `$1${btn}`);
+  }
+  if (/\([^)]*\)\s*$/.test(html)) {
+    return html.replace(/(\([^)]*\))\s*$/, `$1${btn}`);
   }
   if (/<\/mark>/.test(html)) {
     return html.replace(/<\/mark>/, `</mark>${btn}`);

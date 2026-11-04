@@ -5,7 +5,7 @@
 (function (global) {
   'use strict';
 
-  var ASSET_VER = '20261102c10';
+  var ASSET_VER = '20261104syn1';
 
   /** SEO 경로 /board/slug/ 에서 list.html 상대링크가 깨지지 않게 */
   function seoPathPrefix() {
@@ -308,6 +308,69 @@
     return ko;
   }
 
+  /** 깨진 `(ipa` + `한글)` → 한 줄 `(ipa / 한글)🔊` */
+  function mergeBrokenSynonymPron(enHtml, koClosing) {
+    var en = String(enHtml || '');
+    var ko = String(koClosing || '').replace(/\s+/g, ' ').trim();
+    if (!en || !ko) return '';
+    if (!/[가-힣]/.test(ko) || !/\)\s*$/.test(ko)) return '';
+    var plain = stripHtml(en).replace(/\s+/g, ' ').trim();
+    if (!/\([^)]*$/.test(plain) || /\)/.test(plain)) return '';
+    var btn = '';
+    var btnMatch = en.match(/<button\b[^>]*class="[^"]*vv-tts-btn[^"]*"[\s\S]*?<\/button>/i);
+    if (btnMatch) {
+      btn = btnMatch[0];
+      en = en.replace(btnMatch[0], '');
+    }
+    var hangul = ko.replace(/\)\s*$/, '').trim();
+    var ipa = plain.match(/\(([^)]*)$/);
+    var ipaPart = ipa ? ipa[1].replace(/\s*\/\s*$/, '').trim() : '';
+    var markMatch = en.match(/<mark\b[^>]*>[\s\S]*?<\/mark>/i);
+    var markHtml = markMatch ? markMatch[0] : '';
+    if (!ipaPart) return '';
+    return (
+      (markHtml || '') +
+      '<span class="rd-expr-pron">(' +
+      escapeHtml(ipaPart) +
+      ' / ' +
+      escapeHtml(hangul) +
+      ')</span>' +
+      (btn || '')
+    );
+  }
+
+  /**
+   * 연관단어 본문: 영어 (ipa / 한글) 🔊 — 표제어는 헤더에만, 줄바꿈 없이
+   */
+  function synonymPronLineHtml(enHtml, wordEn) {
+    var html = String(enHtml || '');
+    if (!html) return '';
+    var btn = '';
+    var btnMatch = html.match(/<button\b[^>]*class="[^"]*vv-tts-btn[^"]*"[\s\S]*?<\/button>/i);
+    if (btnMatch) {
+      btn = btnMatch[0];
+      html = html.replace(btnMatch[0], '');
+    }
+    var plain = stripHtml(html).replace(/\s+/g, ' ').trim();
+    var pron = '';
+    var m = plain.match(/\(([^)]+)\)\s*$/);
+    if (m) {
+      pron = m[1].trim();
+    } else if (/\([^)]*$/.test(plain)) {
+      return html + (btn || '');
+    }
+    if (!pron) {
+      /* 예문형이면 그대로 */
+      if (plain.split(/\s+/).length > 4) return String(enHtml || '');
+      return html + (btn || '');
+    }
+    /* 이미 표제어가 헤더에 있으면 mark 중복 제거 → 발음만 */
+    var out =
+      '<span class="rd-expr-pron">(' + escapeHtml(pron) + ')</span>' + (btn || '');
+    void wordEn;
+    return out;
+  }
+
   /**
    * "영어 / 한글 cf. word: 뜻" 한 줄 → { enHtml, ko, cf }
    * 슬래시+cf. 포맷만 분리. 한글 번역은 선택(없으면 빈 칸).
@@ -404,15 +467,14 @@
       if (enEl) wordEn = stripHtml(enEl.innerHTML);
       /* 섹션 제목(1. 불어넣다…)은 표현이 아니라 한글 묶음 — 번호는 카드 01과 중복되므로 제거 */
       var titleText = titleEl ? stripLeadingListNum(stripHtml(titleEl.innerHTML)) : '';
-      if (!wordEn && titleText) wordEn = titleText;
       if (koEl) wordKo = stripHtml(koEl.innerHTML);
 
       var meaningEl = sec.querySelector('.nv-meaning-text');
       var meaning = meaningEl ? stripHtml(meaningEl.innerHTML) : (wordKo || '');
-      if (!meaning && titleText && wordEn && titleText !== wordEn) meaning = titleText;
 
       var enEx = sec.querySelector('.nv-ex-en, .nv-narrative-quote');
-      var koEx = sec.querySelector('.nv-ex-ko, .nv-narrative-gloss');
+      var koEx = sec.querySelector('.nv-ex-ko');
+      var glossLine = sec.querySelector('.nv-narrative-gloss');
       var cfEx = sec.querySelector('.nv-narrative-def');
       var enHtml = '';
       var koText = '';
@@ -422,6 +484,9 @@
 
       if (enEx) {
         enHtml = enEx.innerHTML;
+      } else if (glossLine && !koEx) {
+        /* 연관단어 한 줄: <mark>word</mark>(ipa / 한글)🔊 */
+        enHtml = glossLine.innerHTML;
       }
       /* narrative-only: 표현은 rd-expr-word(01 staggered)에만 두고
          mark를 다시 enHtml로 만들면 staggered 가 두 번 보임 → 생략 */
@@ -432,6 +497,14 @@
       if (!koText && !enHtml && narrTextEl && narrTextEl !== cfEx) {
         /* 구형 한 줄 포맷 폴백 — cf와 같은 노드면 중복 방지 */
         koText = stripHtml(narrTextEl.innerHTML);
+      }
+      /* 깨진 발음 줄 복구: ...(ipa   +   한글) */
+      if (isNarrative && enHtml && koText) {
+        var mergedPron = mergeBrokenSynonymPron(enHtml, koText);
+        if (mergedPron) {
+          enHtml = mergedPron;
+          koText = '';
+        }
       }
       /* 한글 번역이 없으면 비움 — 영어 예문을 한글 칸에 넣지 않음 */
       koText = sanitizeNarrativeKo(koText, enHtml);
@@ -465,15 +538,32 @@
 
       /* mark 없으면 은밀한(covert) 형태에서 영어 복구 — '표현' 폴백 방지 */
       if (isNarrative && !wordEn && !unique.length) {
-        unique = extractParenEnglish(koText || cfText);
+        unique = extractParenEnglish(koText || cfText || stripHtml(enHtml));
       }
 
-      /* 섹션당 카드 1개 — 여러 mark 를 쪼개면 같은 문장이 반복됨 */
+      /* 섹션당 카드 1개 — 영어 mark 우선, 한글 제목은 뜻 */
       if (!wordEn && unique.length) wordEn = unique[0];
+      if (!wordEn && titleText && !/[가-힣]/.test(titleText)) wordEn = titleText;
+      if (!wordEn && titleText) wordEn = titleText;
       var moreExprs = unique.length > 1 ? unique.slice(1) : [];
+      if (
+        isNarrative &&
+        titleText &&
+        wordEn &&
+        titleText !== wordEn &&
+        /[가-힣]/.test(titleText) &&
+        /^[A-Za-z]/.test(wordEn)
+      ) {
+        meaning = titleText;
+      }
       if (postMeaningHidden(meaning, wordEn)) meaning = wordKo || '';
+      if (!meaning && titleText && wordEn && titleText !== wordEn) meaning = titleText;
       if (isNarrative && !meaning && unique.length === 1) {
         meaning = extractNarrativeMeaning((koText + ' ' + cfText).trim(), wordEn);
+      }
+      /* 연관단어: 본문은 발음 한 줄만 (영어 표제어는 헤더에) */
+      if (isNarrative && wordEn && enHtml) {
+        enHtml = synonymPronLineHtml(enHtml, wordEn);
       }
       if (isNarrative && cfText && !meaning) {
         var cfMeaning = cfText.replace(/^cf\.\s*/i, '');
@@ -629,15 +719,19 @@
         }).join('') + '</p>'
       : '';
     var cf = String(card.cf || '').trim();
+    var enLine = String(card.enHtml || '').trim();
+    var isPronOnly = /rd-expr-pron/.test(enLine) || /^\s*\([^)]+\)/.test(stripHtml(enLine));
     return (
-      '<article class="rd-expr" id="' + escapeAttr(card.id) + '">' +
+      '<article class="rd-expr' + (isPronOnly ? ' rd-expr--synonym' : '') + '" id="' + escapeAttr(card.id) + '">' +
         '<div class="rd-expr-top">' +
           '<span class="rd-expr-num">' + escapeHtml(card.num) + '</span>' +
           '<span class="rd-expr-word">' + escapeHtml(card.expression) + '</span>' +
           (showMeaning ? '<span class="rd-expr-meaning">' + escapeHtml(card.meaning) + '</span>' : '') +
         '</div>' +
         moreHtml +
-        (card.enHtml ? '<p class="rd-expr-en">' + card.enHtml + '</p>' : '') +
+        (enLine
+          ? '<p class="rd-expr-en' + (isPronOnly ? ' rd-expr-en--pron' : '') + '">' + enLine + '</p>'
+          : '') +
         (ko ? '<p class="rd-expr-ko">' + escapeHtml(ko) + '</p>' : '') +
         (cf ? '<p class="rd-expr-cf">' + escapeHtml(cf) + '</p>' : '') +
       '</article>'
