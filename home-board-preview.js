@@ -44,6 +44,12 @@
   }
 
   function buildEntryHref(board, entry, index, apiParam) {
+    if (board.path === '/onesentence') {
+      var word = String((entry && (entry.word || entry.highlight)) || '').trim();
+      return word
+        ? 'one-sentence.html?q=' + encodeURIComponent(word)
+        : 'one-sentence.html';
+    }
     if (board.page === 'vocabulary-quiz.html' && entry?.slug) {
       return 'vocabulary-quiz.html?slug=' + encodeURIComponent(entry.slug);
     }
@@ -59,6 +65,72 @@
     }
     if (slug) return board.page + '?slug=' + encodeURIComponent(slug) + apiParam;
     return board.page + '?index=' + index + apiParam;
+  }
+
+  function stripHtmlForSearch(html) {
+    return String(html || '')
+      .replace(/<script[\s\S]*?<\/script>/gi, ' ')
+      .replace(/<style[\s\S]*?<\/style>/gi, ' ')
+      .replace(/<[^>]+>/g, ' ')
+      .replace(/&nbsp;/gi, ' ')
+      .replace(/&amp;/gi, '&')
+      .replace(/&lt;/gi, '<')
+      .replace(/&gt;/gi, '>')
+      .replace(/&quot;/gi, '"')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  function normalizePreviewItem(board, entry, index, apiParam) {
+    if (board.path === '/onesentence') {
+      var word = String((entry && entry.word) || '').trim();
+      var meaning = String((entry && entry.meaning) || '').trim();
+      var cfWords = Array.isArray(entry && entry.cf)
+        ? entry.cf.map(function (c) {
+            return [c && c.word, c && c.meaning, c && c.pos]
+              .map(function (s) { return String(s || '').trim(); })
+              .filter(Boolean)
+              .join(' ');
+          }).filter(Boolean).join(' ')
+        : '';
+      var title = meaning ? (word + ' — ' + meaning) : word;
+      return {
+        label: board.label,
+        title: title,
+        slug: word,
+        views: entry.views || 0,
+        likes: entry.likes || 0,
+        date: entry.date,
+        href: buildEntryHref(board, entry, index, apiParam),
+        sortTime: parseEntrySortTime(entry, index),
+        searchOnly: true,
+        searchText: [word, meaning, entry && entry.ko, entry && entry.en, entry && entry.highlight, entry && entry.pos, cfWords]
+          .map(function (s) { return String(s || '').trim(); })
+          .filter(Boolean)
+          .join(' ')
+      };
+    }
+    var bodyText = stripHtmlForSearch(entry && (entry.message || entry.body || entry.content));
+    return {
+      label: board.label,
+      title: entry.title,
+      slug: entry && entry.slug ? String(entry.slug) : '',
+      views: entry.views || 0,
+      likes: entry.likes || 0,
+      date: entry.date,
+      href: buildEntryHref(board, entry, index, apiParam),
+      sortTime: parseEntrySortTime(entry, index),
+      searchOnly: !!board.searchOnly,
+      /* 제목·slug·본문까지 색인 — DB 게시글 속 단어도 검색 */
+      searchText: [
+        entry && entry.title,
+        entry && entry.slug,
+        entry && entry.subtitle,
+        entry && entry.summary,
+        entry && entry.metaDescription,
+        bodyText
+      ].map(function (s) { return String(s || '').trim(); }).filter(Boolean).join(' ')
+    };
   }
 
   function getPreviewBoards(apiMode) {
@@ -89,7 +161,9 @@
       { path: '/ranking-news', page: 'ranking-news.html', postPath: 'ranking-news', label: '랭킹' },
       { path: '/photo-english', page: 'photo-english.html', postPath: 'photo-english', label: '포토' },
       { path: '/pros-cons', page: 'pros-cons.html', postPath: 'pros-cons', label: 'Pros & Cons' },
-      { path: '/english-quotes', page: 'english-quotes.html', postPath: 'english-quotes', label: '영어 명언' }
+      { path: '/english-quotes', page: 'english-quotes.html', postPath: 'english-quotes', label: '영어 명언' },
+      /* 홈 best/recent에는 넣지 않고 검색만 — 문장 피드 단어(aback 등) */
+      { path: '/onesentence', page: 'one-sentence.html', label: '문장', searchOnly: true }
     ];
   }
 
@@ -150,16 +224,7 @@
         var boardApiMode = board.apiMode !== undefined ? board.apiMode : apiMode;
         var apiParam = boardApiMode ? '&api=' + boardApiMode : '';
         entries.forEach(function (entry, index) {
-          combined.push({
-            label: board.label,
-            title: entry.title,
-            slug: entry && entry.slug ? String(entry.slug) : '',
-            views: entry.views || 0,
-            likes: entry.likes || 0,
-            date: entry.date,
-            href: buildEntryHref(board, entry, index, apiParam),
-            sortTime: parseEntrySortTime(entry, index)
-          });
+          combined.push(normalizePreviewItem(board, entry, index, apiParam));
         });
       });
       return combined;
@@ -237,7 +302,8 @@
     '컬쳐': { badge: 'preview-badge--culture', accent: 'preview-accent--culture' },
     '랭킹': { badge: 'preview-badge--ranking', accent: 'preview-accent--ranking' },
     '포토': { badge: 'preview-badge--photo', accent: 'preview-accent--photo' },
-    'Pros & Cons': { badge: 'preview-badge--proscons', accent: 'preview-accent--proscons' }
+    'Pros & Cons': { badge: 'preview-badge--proscons', accent: 'preview-accent--proscons' },
+    '문장': { badge: 'preview-badge--popular', accent: 'preview-accent--popular' }
   };
 
   function styleForLabel(label) {
@@ -340,7 +406,7 @@
 
     fetchCombined().then(function (combined) {
       clearTimeout(timeoutId);
-      var sorted = combined.slice().sort(function (a, b) {
+      var sorted = combined.filter(function (item) { return !item.searchOnly; }).slice().sort(function (a, b) {
         var viewDiff = (b.views || 0) - (a.views || 0);
         if (viewDiff !== 0) return viewDiff;
         return b.sortTime - a.sortTime;
@@ -373,7 +439,7 @@
 
     fetchCombined().then(function (combined) {
       clearTimeout(timeoutId);
-      var sorted = combined.slice().sort(function (a, b) {
+      var sorted = combined.filter(function (item) { return !item.searchOnly; }).slice().sort(function (a, b) {
         if (b.sortTime !== a.sortTime) return b.sortTime - a.sortTime;
         return 0;
       });
@@ -403,14 +469,19 @@
   }
 
   function scoreSearchItem(item, q) {
+    if (!q) return 0;
     var title = String(item.title || '').toLowerCase();
-    if (!q || !title) return 0;
-    if (title === q) return 100;
-    if (title.indexOf(q) === 0) return 85;
+    var slug = String(item.slug || '').toLowerCase();
+    var hay = String(item.searchText || title || '').toLowerCase();
+    if (!title && !slug && !hay) return 0;
+    if (slug === q || title === q) return 100;
+    if (slug.indexOf(q) === 0 || title.indexOf(q) === 0) return 85;
     try {
-      if (new RegExp('\\b' + escapeRegex(q) + '\\b', 'i').test(title)) return 75;
+      var wordRe = new RegExp('\\b' + escapeRegex(q) + '\\b', 'i');
+      if (wordRe.test(slug) || wordRe.test(title) || wordRe.test(hay)) return 75;
     } catch (e) { /* ignore */ }
-    if (title.indexOf(q) !== -1) return 55;
+    if (slug.indexOf(q) !== -1 || title.indexOf(q) !== -1) return 55;
+    if (hay.indexOf(q) !== -1) return 40;
     return 0;
   }
 

@@ -1240,13 +1240,29 @@
       refresh();
     }
 
+    function applyQueryFromUrl() {
+      var q = new URLSearchParams(window.location.search).get('q');
+      if (!q) return;
+      q = String(q).trim();
+      if (!q) return;
+      if (input) {
+        input.value = q;
+        refresh();
+      }
+      window.setTimeout(function () {
+        scrollToWord(q);
+      }, 80);
+    }
+
     loadFeedFromApi()
       .then(function (items) {
         applyItems(items.length ? items : FALLBACK_FEED.map(normalizeEntry).filter(Boolean));
+        applyQueryFromUrl();
       })
       .catch(function (err) {
         console.warn('[one-sentence] API 로드 실패, 로컬 폴백:', err);
         applyItems(FALLBACK_FEED.map(normalizeEntry).filter(Boolean));
+        applyQueryFromUrl();
       });
   }
 
