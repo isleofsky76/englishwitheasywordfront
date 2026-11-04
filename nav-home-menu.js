@@ -242,12 +242,33 @@
         return '';
     }
 
+    var MASTHEAD_CSS_VER = '20261105fouc1';
+    var MASTHEAD_JS_VER = '20261104de2';
+
+    /** FOUC 방지: 파싱 즉시 클래스·CSS 선적용 (DOMContentLoaded 기다리지 않음) */
+    function injectMastheadCssEarly() {
+        var base = scriptDirBase();
+        document.documentElement.classList.add('has-site-masthead');
+        if (!document.querySelector('link[href*="redesign-tokens.css"]')) {
+            var tokens = document.createElement('link');
+            tokens.rel = 'stylesheet';
+            tokens.href = base + 'redesign-tokens.css?v=20261019rd4';
+            document.head.appendChild(tokens);
+        }
+        if (!document.querySelector('link[href*="site-masthead.css"]')) {
+            var link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = base + 'site-masthead.css?v=' + MASTHEAD_CSS_VER;
+            document.head.appendChild(link);
+        }
+    }
+
     function loadSiteMasthead() {
         var base = scriptDirBase();
         document.documentElement.classList.add('has-site-masthead');
         if (!document.querySelector('script[src*="site-masthead.js"]')) {
             var s = document.createElement('script');
-            s.src = base + 'site-masthead.js?v=20261102ind2';
+            s.src = base + 'site-masthead.js?v=' + MASTHEAD_JS_VER;
             document.head.appendChild(s);
         }
         if (!document.querySelector('script[src*="site-footer.js"]')) {
@@ -256,6 +277,8 @@
             document.head.appendChild(f);
         }
     }
+
+    injectMastheadCssEarly();
 
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', loadSiteMasthead);

@@ -5,6 +5,21 @@
   --yt-billboard-height: 72px;
 }
 
+/*
+ * FOUC 가드 — JS가 .site-masthead 를 붙이기 전에도
+ * Bootstrap/navbar-unified 파란바가 보이지 않게 크림톤 유지
+ */
+.navbar.bg-primary:not(.site-masthead),
+.navbar.navbar-dark:not(.site-masthead),
+.navbar.fixed-top:not(.site-masthead) {
+  background: var(--page-bg, #F6F3EC) !important;
+  background-color: var(--page-bg, #F6F3EC) !important;
+  box-shadow: none !important;
+  height: auto !important;
+  min-height: 76px !important;
+  max-height: none !important;
+}
+
 .site-masthead.navbar,
 .site-masthead.navbar.bg-primary,
 .site-masthead.navbar.fixed-top,

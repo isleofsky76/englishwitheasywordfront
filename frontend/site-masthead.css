@@ -5,6 +5,21 @@
   --yt-billboard-height: 72px;
 }
 
+/*
+ * FOUC 가드 — JS가 .site-masthead 를 붙이기 전에도
+ * Bootstrap/navbar-unified 파란바가 보이지 않게 크림톤 유지
+ */
+.navbar.bg-primary:not(.site-masthead),
+.navbar.navbar-dark:not(.site-masthead),
+.navbar.fixed-top:not(.site-masthead) {
+  background: var(--page-bg, #F6F3EC) !important;
+  background-color: var(--page-bg, #F6F3EC) !important;
+  box-shadow: none !important;
+  height: auto !important;
+  min-height: 76px !important;
+  max-height: none !important;
+}
+
 .site-masthead.navbar,
 .site-masthead.navbar.bg-primary,
 .site-masthead.navbar.fixed-top,
@@ -195,15 +210,31 @@
   z-index: 1050;
 }
 .site-masthead .site-search-results a {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
   padding: 10px 14px;
   font-size: 14px;
   color: var(--ink);
+  text-decoration: none;
 }
 .site-masthead .site-search-results a:hover,
 .site-masthead .site-search-results a.is-active {
   background: var(--surface-warm);
   color: var(--accent);
+}
+.site-masthead .site-search-label,
+.site-search-label {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 650;
+  letter-spacing: 0.02em;
+  color: var(--accent, #b45309);
+  line-height: 1.2;
+}
+.site-masthead .site-search-title,
+.site-search-title {
+  line-height: 1.35;
 }
 .site-masthead .site-search-empty {
   padding: 12px 14px;
@@ -328,6 +359,12 @@
 }
 
 @media (max-width: 900px) {
+  /* 모바일: 로고·메뉴가 화면 상단에 붙지 않도록 */
+  .site-masthead-bar {
+    padding: max(14px, env(safe-area-inset-top, 0px)) 16px 10px;
+    min-height: 0;
+    gap: 12px;
+  }
   .site-masthead-mobile-toggle {
     display: inline-flex;
     flex-direction: column;
@@ -353,10 +390,14 @@
   }
   .site-masthead .site-search-form {
     width: 100%;
+    padding: 0 4px 0 14px;
   }
-  .site-masthead .site-search-input {
-    width: 100% !important;
-    max-width: none;
+  .site-masthead .site-search-input,
+  .site-masthead .site-search-input[type="search"] {
+    width: auto !important;
+    max-width: none !important;
+    flex: 1 1 auto;
+    min-width: 0;
   }
   .site-masthead .nav-more-menu {
     position: static;

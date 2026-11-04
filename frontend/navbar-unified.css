@@ -1,0 +1,105 @@
+/*
+ * Site navbar — 구형 파란바(#2b6cb0) 대신 크림톤으로 선적용.
+ * site-masthead.js 가 장착되기 전 0.3초 FOUC 방지 (전 페이지 공통).
+ */
+:root {
+  --navbar-height: 76px;
+  --navbar-fouc-bg: #F6F3EC;
+  --navbar-fouc-ink: #1c1917;
+}
+
+.navbar,
+.navbar.bg-primary,
+.navbar.navbar-dark,
+.navbar.navbar-expand-lg,
+.navbar.navbar-custom,
+.navbar.fixed-top {
+  background-color: var(--navbar-fouc-bg) !important;
+  background: var(--navbar-fouc-bg) !important;
+  box-shadow: none !important;
+  height: auto !important;
+  min-height: var(--navbar-height) !important;
+  max-height: none !important;
+  padding: 0 !important;
+  overflow: visible;
+  z-index: 1030;
+  transition: none;
+  border-bottom: none !important;
+}
+
+html.nav-home-open .navbar.fixed-top {
+  top: 0 !important;
+}
+
+.bg-primary,
+.navbar-dark,
+.navbar-expand-lg,
+.navbar-custom {
+  background-color: var(--navbar-fouc-bg) !important;
+}
+
+.navbar .container-fluid,
+.navbar .container {
+  background-color: transparent !important;
+  align-items: center;
+  height: 100%;
+  min-height: var(--navbar-height);
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  padding-left: max(1rem, env(safe-area-inset-left)) !important;
+  padding-right: max(1rem, env(safe-area-inset-right)) !important;
+  margin: 0;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/*
+ * 마스트헤드 장착 전: 구형 브랜드·메뉴 숨김
+ * (흰 글씨/파란바 잔상 없이 크림 배경만 보임 → JS가 새 헤더로 교체)
+ */
+.navbar:not(.site-masthead) .navbar-brand,
+.navbar:not(.site-masthead) .nav-home-menu-slot,
+.navbar:not(.site-masthead) .navbar-nav,
+.navbar:not(.site-masthead) .navbar-collapse,
+.navbar:not(.site-masthead) .navbar-toggler,
+.navbar:not(.site-masthead) .dropdown {
+  visibility: hidden !important;
+}
+
+.navbar .navbar-brand:first-of-type,
+.navbar .navbar-brand:not(.dropdown-toggle):not(.nav-home-toggle) {
+  font-family: 'Noto Serif KR', 'Noto Sans KR', serif;
+  font-weight: 900 !important;
+  font-size: 1.35rem !important;
+  color: var(--navbar-fouc-ink) !important;
+  letter-spacing: -0.02em;
+  line-height: 1.2 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  margin-right: 0.75rem;
+  -webkit-font-smoothing: antialiased;
+}
+
+.navbar .navbar-brand img {
+  max-height: calc(var(--navbar-height) - 24px);
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+@media (max-width: 600px) {
+  :root {
+    --navbar-height: 64px;
+  }
+
+  .navbar .navbar-brand:first-of-type,
+  .navbar .navbar-brand:not(.dropdown-toggle):not(.nav-home-toggle) {
+    font-size: 1.15rem !important;
+  }
+
+  .nav-home-dropdown .nav-home-toggle,
+  .nav-home-dropdown .navbar-brand.dropdown-toggle {
+    font-size: 1rem !important;
+  }
+}

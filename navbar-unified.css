@@ -1,6 +1,11 @@
-/* Site navbar — index.html 기준 통일 (색 #2b6cb0, 높이 51px / 모바일 47px) */
+/*
+ * Site navbar — 구형 파란바(#2b6cb0) 대신 크림톤으로 선적용.
+ * site-masthead.js 가 장착되기 전 0.3초 FOUC 방지 (전 페이지 공통).
+ */
 :root {
-  --navbar-height: 51px;
+  --navbar-height: 76px;
+  --navbar-fouc-bg: #F6F3EC;
+  --navbar-fouc-ink: #1c1917;
 }
 
 .navbar,
@@ -9,15 +14,17 @@
 .navbar.navbar-expand-lg,
 .navbar.navbar-custom,
 .navbar.fixed-top {
-  background-color: #2b6cb0 !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  height: var(--navbar-height) !important;
-  min-height: 0 !important;
-  max-height: var(--navbar-height) !important;
+  background-color: var(--navbar-fouc-bg) !important;
+  background: var(--navbar-fouc-bg) !important;
+  box-shadow: none !important;
+  height: auto !important;
+  min-height: var(--navbar-height) !important;
+  max-height: none !important;
   padding: 0 !important;
   overflow: visible;
   z-index: 1030;
-  transition: top 0.28s ease;
+  transition: none;
+  border-bottom: none !important;
 }
 
 html.nav-home-open .navbar.fixed-top {
@@ -28,7 +35,7 @@ html.nav-home-open .navbar.fixed-top {
 .navbar-dark,
 .navbar-expand-lg,
 .navbar-custom {
-  background-color: #2b6cb0 !important;
+  background-color: var(--navbar-fouc-bg) !important;
 }
 
 .navbar .container-fluid,
@@ -36,7 +43,7 @@ html.nav-home-open .navbar.fixed-top {
   background-color: transparent !important;
   align-items: center;
   height: 100%;
-  min-height: 0;
+  min-height: var(--navbar-height);
   padding-top: 0 !important;
   padding-bottom: 0 !important;
   padding-left: max(1rem, env(safe-area-inset-left)) !important;
@@ -47,12 +54,25 @@ html.nav-home-open .navbar.fixed-top {
   box-sizing: border-box;
 }
 
+/*
+ * 마스트헤드 장착 전: 구형 브랜드·메뉴 숨김
+ * (흰 글씨/파란바 잔상 없이 크림 배경만 보임 → JS가 새 헤더로 교체)
+ */
+.navbar:not(.site-masthead) .navbar-brand,
+.navbar:not(.site-masthead) .nav-home-menu-slot,
+.navbar:not(.site-masthead) .navbar-nav,
+.navbar:not(.site-masthead) .navbar-collapse,
+.navbar:not(.site-masthead) .navbar-toggler,
+.navbar:not(.site-masthead) .dropdown {
+  visibility: hidden !important;
+}
+
 .navbar .navbar-brand:first-of-type,
 .navbar .navbar-brand:not(.dropdown-toggle):not(.nav-home-toggle) {
-  font-family: 'Noto Sans KR', 'Poppins', sans-serif;
-  font-weight: 600 !important;
-  font-size: 1.05rem !important;
-  color: #fff !important;
+  font-family: 'Noto Serif KR', 'Noto Sans KR', serif;
+  font-weight: 900 !important;
+  font-size: 1.35rem !important;
+  color: var(--navbar-fouc-ink) !important;
   letter-spacing: -0.02em;
   line-height: 1.2 !important;
   padding: 0 !important;
@@ -62,7 +82,7 @@ html.nav-home-open .navbar.fixed-top {
 }
 
 .navbar .navbar-brand img {
-  max-height: calc(var(--navbar-height) - 10px);
+  max-height: calc(var(--navbar-height) - 24px);
   width: auto;
   height: auto;
   object-fit: contain;
@@ -70,12 +90,12 @@ html.nav-home-open .navbar.fixed-top {
 
 @media (max-width: 600px) {
   :root {
-    --navbar-height: 47px;
+    --navbar-height: 64px;
   }
 
   .navbar .navbar-brand:first-of-type,
   .navbar .navbar-brand:not(.dropdown-toggle):not(.nav-home-toggle) {
-    font-size: 1rem !important;
+    font-size: 1.15rem !important;
   }
 
   .nav-home-dropdown .nav-home-toggle,

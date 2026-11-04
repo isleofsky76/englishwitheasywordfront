@@ -4,8 +4,47 @@
  * nav-home-menu.js 가 로드함
  */
 (function () {
-    var VERSION = '20261104de2';
-  /* 시안 주 메뉴 5개 — href는 기존 URL 유지 */
+    var VERSION = '20261105fouc1';
+
+  var DICT_LOOKUP_VER = '20261104dict1';
+  var DICT_LOOKUP_CONTAINERS = [
+    '.os-en',
+    '#onesentence-feed',
+    '#post-message',
+    '.post-message-body',
+    '.rd-article-cards',
+    '.nv-body',
+    '.nv-text',
+    '.rd-expr',
+    '.rd-news-cards',
+    '.rd-news-list',
+    '.rd-hero-example',
+    '.rd-phrases',
+    '.rd-list-feature',
+    '.rd-list-card',
+    '.rd-list-side',
+    '.rd-read-col',
+    '.vq-card',
+    '.vq-prompt',
+    'article#post-content',
+    '#word-detail',
+    '.wotd-body'
+  ].join(', ');
+
+  function ensureSiteDictLookup(base) {
+    var prev = window.DICT_CONFIG || {};
+    window.DICT_CONFIG = Object.assign(
+      { container: DICT_LOOKUP_CONTAINERS },
+      prev
+    );
+    if (document.querySelector('script[data-dict-lookup="1"]')) return;
+    var s = document.createElement('script');
+    s.src = (base || '') + 'dict-lookup.js?v=' + DICT_LOOKUP_VER;
+    s.defer = true;
+    s.setAttribute('data-dict-lookup', '1');
+    document.body.appendChild(s);
+  }
+  /* 시안 주 메뉴 — href는 기존 URL 유지 */
   var PRIMARY_NAV_ITEMS = [
     {
       href: 'news-voca-list.html',
@@ -15,11 +54,25 @@
         'news-voca-list.html', 'news-voca.html',
         'korea-news-list.html', 'korea-news.html',
         'defense-news-list.html', 'defense-news.html',
+        'economy-news-list.html', 'economy-news.html',
+        'travel-news-list.html', 'travel-news.html',
+        'sports-news-list.html', 'sports-news.html',
+        'us-news-list.html', 'us-news.html',
+        'weather-news-list.html', 'weather-news.html',
+        'retail-news-list.html', 'retail-news.html',
+        'literature-news-list.html', 'literature-news.html',
+        'health-news-list.html', 'health-news.html',
+        'politics-news-list.html', 'politics-news.html',
+        'industry-news-list.html', 'industry-news.html',
+        'ai-news-list.html', 'ai-news.html',
+        'incident-news-list.html', 'incident-news.html',
+        'ukraine-news-list.html', 'ukraine-news.html',
         'culture-voca-list.html', 'culture-voca.html',
         'ranking-news-list.html', 'ranking-news.html'
       ]
     },
     { href: 'word-of-the-day-list.html?api=prod', label: '단어장', tone: 'wotd', pages: ['word-of-the-day-list.html', 'word-of-the-day.html'] },
+    { href: 'one-sentence.html', label: '문장', tone: 'osent', pages: ['one-sentence.html'] },
     {
       href: 'popular-voca-list.html',
       label: '표현',
@@ -33,14 +86,10 @@
     },
     { href: 'vocabulary-quiz-list.html', label: '퀴즈', tone: 'quiz', pages: ['vocabulary-quiz-list.html', 'vocabulary-quiz.html'] },
     {
-      href: 'english-opinions-list.html',
-      label: '읽을거리',
-      tone: 'opine',
-      pages: [
-        'english-opinions-list.html', 'english-opinions.html',
-        'calm-mind-list.html', 'calm-mind.html',
-        'english-quotes-list.html', 'english-quotes.html'
-      ]
+      href: 'english-directory.html',
+      label: '학습사이트',
+      tone: 'dir',
+      pages: ['english-directory.html']
     }
   ];
   var EXTRA_NAV_ITEMS = [
@@ -48,17 +97,20 @@
     { href: 'daily-english.html', label: '생활 영어 한 줄', tone: 'daily', pages: ['daily-english.html'] },
     { href: 'english-synonym-list.html', label: '연관단어', tone: 'syn', pages: ['english-synonym-list.html', 'english-synonym.html'] },
     { href: 'defense-news-list.html', label: '국방뉴스', tone: 'defense', pages: ['defense-news-list.html', 'defense-news.html'] },
+    { href: 'economy-news-list.html', label: '경제뉴스', tone: 'news', pages: ['economy-news-list.html', 'economy-news.html'] },
+    /* 얇은·빈 카테고리 숨김: travel / retail / ukraine / cooking / ranking */
+    { href: 'sports-news-list.html', label: '스포츠뉴스', tone: 'news', pages: ['sports-news-list.html', 'sports-news.html'] },
+    { href: 'us-news-list.html', label: '미국뉴스', tone: 'news', pages: ['us-news-list.html', 'us-news.html'] },
+    { href: 'industry-news-list.html', label: '산업뉴스', tone: 'news', pages: ['industry-news-list.html', 'industry-news.html'] },
     { href: 'korea-news-list.html', label: '한국뉴스', tone: 'defense', pages: ['korea-news-list.html', 'korea-news.html'] },
     { href: 'culture-voca-list.html', label: '컬쳐', tone: 'culture', pages: ['culture-voca-list.html', 'culture-voca.html'] },
     { href: 'shorts-bg-image-list.html', label: '신문읽는 이미지', tone: 'sbgi', pages: ['shorts-bg-image-list.html', 'shorts-bg-image.html'] },
+    { href: 'english-opinions-list.html', label: '오피니언', tone: 'opine', pages: ['english-opinions-list.html', 'english-opinions.html'] },
     { href: 'calm-mind-list.html', label: '마음글', tone: 'calm', pages: ['calm-mind-list.html', 'calm-mind.html'] },
     { href: 'situational-english-list.html', label: '상황', tone: 'sit', pages: ['situational-english-list.html', 'situational-english.html'] },
-    { href: 'cooking-voca-list.html', label: '요리', tone: 'cook', pages: ['cooking-voca-list.html', 'cooking-voca.html'] },
-    { href: 'ranking-news-list.html', label: '랭킹', tone: 'rank', pages: ['ranking-news-list.html', 'ranking-news.html'] },
     { href: 'photo-english-list.html', label: '포토', tone: 'photo', pages: ['photo-english-list.html', 'photo-english.html'] },
     { href: 'pros-cons-list.html', label: 'Pros & Cons', tone: 'pros', pages: ['pros-cons-list.html', 'pros-cons.html'] },
-    { href: 'english-quotes-list.html', label: '영어 명언', tone: 'quote', pages: ['english-quotes-list.html', 'english-quotes.html'] },
-    { href: 'english-directory.html', label: '학습 사이트', tone: 'dir', pages: ['english-directory.html'] }
+    { href: 'english-quotes-list.html', label: '영어 명언', tone: 'quote', pages: ['english-quotes-list.html', 'english-quotes.html'] }
   ];
   var NAV_ITEMS = PRIMARY_NAV_ITEMS.concat(EXTRA_NAV_ITEMS);
 
@@ -76,27 +128,45 @@
   function currentPageKey() {
     var parts = (window.location.pathname || '').replace(/\\/g, '/').split('/').filter(Boolean);
     var last = parts[parts.length - 1] || 'index.html';
-    if (last === 'index.html' || last === '') {
-      var folder = parts[parts.length - 2] || '';
-      var map = {
-        'news-voca': 'news-voca.html',
-        'defense-news': 'defense-news.html',
-        'korea-news': 'korea-news.html',
-        'word-of-the-day': 'word-of-the-day.html',
-        'popular-voca': 'popular-voca.html',
-        'english-synonym': 'english-synonym.html',
-        'cooking-voca': 'cooking-voca.html',
-        'situational-english': 'situational-english.html',
-        'pros-cons': 'pros-cons.html',
-        'culture-voca': 'culture-voca.html',
-        'ranking-news': 'ranking-news.html',
-        'photo-english': 'photo-english.html',
-        'english-opinions': 'english-opinions.html',
-        'shorts-bg-image': 'shorts-bg-image.html',
-        'calm-mind': 'calm-mind.html',
-        'vocabulary-quiz': 'vocabulary-quiz.html'
-      };
-      return map[folder] || 'index.html';
+    var folderMap = {
+      'news-voca': 'news-voca.html',
+      'defense-news': 'defense-news.html',
+      'economy-news': 'economy-news.html',
+      'travel-news': 'travel-news.html',
+      'sports-news': 'sports-news.html',
+      'us-news': 'us-news.html',
+      'weather-news': 'weather-news.html',
+      'retail-news': 'retail-news.html',
+      'literature-news': 'literature-news.html',
+      'health-news': 'health-news.html',
+      'politics-news': 'politics-news.html',
+      'industry-news': 'industry-news.html',
+      'ai-news': 'ai-news.html',
+      'incident-news': 'incident-news.html',
+      'ukraine-news': 'ukraine-news.html',
+      'korea-news': 'korea-news.html',
+      'word-of-the-day': 'word-of-the-day.html',
+      'popular-voca': 'popular-voca.html',
+      'english-synonym': 'english-synonym.html',
+      'cooking-voca': 'cooking-voca.html',
+      'situational-english': 'situational-english.html',
+      'pros-cons': 'pros-cons.html',
+      'culture-voca': 'culture-voca.html',
+      'ranking-news': 'ranking-news.html',
+      'photo-english': 'photo-english.html',
+      'english-opinions': 'english-opinions.html',
+      'shorts-bg-image': 'shorts-bg-image.html',
+      'calm-mind': 'calm-mind.html',
+      'vocabulary-quiz': 'vocabulary-quiz.html'
+    };
+    /* /board/slug/ 또는 /board/slug/index.html → board html 키 */
+    if (last === 'index.html' || last === '' || !/\.html?$/i.test(last)) {
+      var folder = (last === 'index.html' || last === '')
+        ? (parts[parts.length - 2] || '')
+        : (parts[parts.length - 2] || parts[parts.length - 1] || '');
+      if (folderMap[folder]) return folderMap[folder];
+      if (folderMap[last]) return folderMap[last];
+      if (last === 'index.html' || last === '') return 'index.html';
     }
     return last.split('?')[0];
   }
@@ -105,14 +175,28 @@
     return item.pages.indexOf(page) !== -1;
   }
 
-  function ensureCss(base) {
+  /** masthead CSS가 적용된 뒤에 YouTube 바를 넣기 위해 onload 대기 */
+  function ensureCss(base, done) {
     ensureLink(base + 'redesign-tokens.css?v=' + VERSION);
-    if (!document.querySelector('link[href*="site-masthead.css"]')) {
-      var link = document.createElement('link');
-      link.rel = 'stylesheet';
-      link.href = base + 'site-masthead.css?v=' + VERSION;
-      document.head.appendChild(link);
+    var existing = document.querySelector('link[href*="site-masthead.css"]');
+    if (existing) {
+      if (done) done();
+      return;
     }
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = base + 'site-masthead.css?v=' + VERSION;
+    var settled = false;
+    var finish = function () {
+      if (settled) return;
+      settled = true;
+      if (done) done();
+    };
+    link.onload = finish;
+    link.onerror = finish;
+    document.head.appendChild(link);
+    /* 캐시 히트 등으로 onload가 안 오는 경우 대비 */
+    setTimeout(finish, 120);
   }
 
   function ensureScript(src, done) {
@@ -233,10 +317,11 @@
     bar.target = '_blank';
     bar.rel = 'noopener noreferrer';
     bar.setAttribute('aria-label', 'YouTube Shorts istudyeng 바로가기');
+    /* width/height·inline style: CSS 로드 전에 SVG가 화면 전체로 커지는 FOUC 방지 */
     bar.innerHTML =
       '<span class="yt-billboard__inner">' +
-        '<span class="yt-billboard__icon" aria-hidden="true">' +
-          '<svg viewBox="0 0 28 20" xmlns="http://www.w3.org/2000/svg" focusable="false">' +
+        '<span class="yt-billboard__icon" aria-hidden="true" style="display:inline-flex;width:22px;height:16px;flex-shrink:0;overflow:hidden;">' +
+          '<svg width="22" height="16" viewBox="0 0 28 20" xmlns="http://www.w3.org/2000/svg" focusable="false" style="width:22px;height:16px;display:block;">' +
             '<path fill="#FF0000" d="M27.33 3.12A3.5 3.5 0 0 0 24.86.65C22.7 0 14 0 14 0S5.3 0 3.14.65A3.5 3.5 0 0 0 .67 3.12 36.7 36.7 0 0 0 0 10a36.7 36.7 0 0 0 .67 6.88 3.5 3.5 0 0 0 2.47 2.47C5.3 20 14 20 14 20s8.7 0 10.86-.65a3.5 3.5 0 0 0 2.47-2.47A36.7 36.7 0 0 0 28 10a36.7 36.7 0 0 0-.67-6.88z"/>' +
             '<path fill="#fff" d="M11.2 14.3V5.7L18.5 10l-7.3 4.3z"/>' +
           '</svg>' +
@@ -279,6 +364,32 @@
       activeIndex = -1;
     }
 
+    function escapeSuggestText(s) {
+      return String(s || '').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+    function renderHitLink(item, opts) {
+      opts = opts || {};
+      var title = escapeSuggestText(item.title || '제목 없음');
+      var label = escapeSuggestText(item.label || '');
+      var href = String(item.href || '#');
+      var cls = opts.active ? ' class="is-active"' : '';
+      var labelHtml = label
+        ? '<span class="site-search-label">' + label + '</span>'
+        : '';
+      return '<li><a href="' + href + '"' + cls + '>' +
+        labelHtml +
+        '<span class="site-search-title">' + title + '</span>' +
+        '</a></li>';
+    }
+
+    function isWordSearchHit(item) {
+      if (!item) return false;
+      if (item.searchOnly) return true;
+      var label = String(item.label || '');
+      return label === '문장' || label === '단어장';
+    }
+
     function renderSuggest(hits, emptyText) {
       activeIndex = hits && hits.length ? 0 : -1;
       if (!hits || !hits.length) {
@@ -287,12 +398,54 @@
         return;
       }
       list.innerHTML = hits.map(function (item, idx) {
-        var title = String(item.title || '제목 없음').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-        var href = String(item.href || '#');
-        var cls = idx === 0 ? ' class="is-active"' : '';
-        return '<li><a href="' + href + '"' + cls + '><span class="site-search-title">' + title + '</span></a></li>';
+        return renderHitLink(item, { active: idx === 0 });
       }).join('');
       list.hidden = false;
+    }
+
+    function setHomeSearchMode(on) {
+      var wrap = document.getElementById('rd-home');
+      if (wrap) wrap.classList.toggle('is-search-mode', !!on);
+      document.body.classList.toggle('home-search-active', !!on);
+    }
+
+    function revealSearchPage(hits, emptyText) {
+      if (homePreviews) homePreviews.hidden = true;
+      setHomeSearchMode(true);
+      if (searchPage) {
+        searchPage.hidden = false;
+        searchPage.setAttribute('tabindex', '-1');
+      }
+      if (!searchPageList) return;
+      var q = String(input.value || '').trim();
+      var heading = q
+        ? '<h1 class="site-search-page-title">‘' + q.replace(/</g, '&lt;').replace(/>/g, '&gt;') + '’ 검색 결과</h1>'
+        : '<h1 class="site-search-page-title">검색 결과</h1>';
+      if (!hits || !hits.length) {
+        searchPageList.innerHTML = heading + '<p class="site-search-empty">' + emptyText + '</p>';
+      } else {
+        var wordHits = hits.filter(isWordSearchHit);
+        var postHits = hits.filter(function (item) { return !isWordSearchHit(item); });
+        function section(title, items) {
+          if (!items.length) return '';
+          return '<h2 class="site-search-section-title">' + escapeSuggestText(title) +
+            ' <span class="site-search-section-count">' + items.length + '</span></h2>' +
+            '<ul class="site-search-page-list">' + items.map(function (item) {
+              return renderHitLink(item);
+            }).join('') + '</ul>';
+        }
+        searchPageList.innerHTML = heading +
+          section('단어 · 문장', wordHits) +
+          section('관련 글', postHits);
+      }
+      try {
+        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+      } catch (err) {
+        window.scrollTo(0, 0);
+      }
+      if (searchPage && typeof searchPage.focus === 'function') {
+        try { searchPage.focus({ preventScroll: true }); } catch (e2) { searchPage.focus(); }
+      }
     }
 
     function renderPage(hits, emptyText) {
@@ -301,22 +454,12 @@
         window.location.href = base + 'index.html?q=' + encodeURIComponent(input.value.trim());
         return;
       }
-      if (homePreviews) homePreviews.hidden = true;
-      if (searchPage) searchPage.hidden = false;
-      if (!searchPageList) return;
-      if (!hits || !hits.length) {
-        searchPageList.innerHTML = '<p class="site-search-empty">' + emptyText + '</p>';
-        return;
-      }
-      searchPageList.innerHTML = '<ul class="site-search-page-list">' + hits.map(function (item) {
-        var title = String(item.title || '제목 없음').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-        return '<li><a href="' + String(item.href || '#') + '">' + title + '</a></li>';
-      }).join('') + '</ul>';
+      revealSearchPage(hits, emptyText);
     }
 
     function previewSearch(q) {
       if (!window.HomeBoardPreview) return;
-      HomeBoardPreview.search(q, 8).then(function (hits) {
+      HomeBoardPreview.search(q, 16).then(function (hits) {
         renderSuggest(hits, '검색 결과가 없습니다.');
       }).catch(function () {
         renderSuggest([], '검색 결과를 불러올 수 없습니다.');
@@ -457,13 +600,20 @@
   function mount() {
     document.documentElement.classList.add('has-site-masthead');
     var base = assetBase();
-    ensureCss(base);
-    ensureWeather(base);
+    /* 홈은 날씨/시계를 쓰지 않음 — 구형 바 삽입으로 깜빡이지 않게 */
+    if (!document.body.classList.contains('rd-home')) {
+      ensureWeather(base);
+    }
     mountNavbar(base);
-    injectYoutubeBar();
-    placeUtilityBars();
     ensureScript(base + 'home-board-preview.js?v=' + VERSION, function () {
       initSearch(base);
+    });
+    ensureSiteDictLookup(base);
+    /* CSS 적용 후에만 YouTube 바 삽입 — 빨간 아이콘 거대화 FOUC 방지 */
+    ensureCss(base, function () {
+      injectYoutubeBar();
+      placeUtilityBars();
+      syncNavbarHeight();
     });
     var tries = 0;
     var timer = setInterval(function () {
