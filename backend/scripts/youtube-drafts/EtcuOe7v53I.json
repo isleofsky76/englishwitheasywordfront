@@ -1,0 +1,133 @@
+{
+  "board": "english-synonym",
+  "videoId": "EtcuOe7v53I",
+  "title": "묵인하다 Acquiesce",
+  "rawTitle": "연관단어 | 묵인하다 Acquiesce",
+  "slug": "concede-concession-compromise-accede-acquiesce-related-words",
+  "metaDescription": "묵인하다 Acquiesce 연관단어. concede, concession, compromise, accede, acquiesce, consent 등.",
+  "password": "seed_english_synonym_concede-concession-compromise-accede-acquiesce-r",
+  "datePublished": "2026-11-04",
+  "intro": [
+    "묵인하다 Acquiesce 연관단어를 정리합니다. *AI 음성과 이미지를 사용했습니다."
+  ],
+  "words": [
+    {
+      "title": "1. 양보하다, 인정하다",
+      "narrative": [
+        "**concede**(kənˈsiːd / 컨시드)"
+      ]
+    },
+    {
+      "title": "2. 양보, 양보안",
+      "narrative": [
+        "**concession**(kənˈsɛʃən / 컨세션)"
+      ]
+    },
+    {
+      "title": "3. 타협, 타협안",
+      "narrative": [
+        "**compromise**(ˈkɒmprəmaɪz / 컴프라미즈)"
+      ]
+    },
+    {
+      "title": "4. 요구에 동의하다, 응하다",
+      "narrative": [
+        "**accede**(əkˈsiːd / 액시드)"
+      ]
+    },
+    {
+      "title": "5. 마지못해 동의하다, 묵인하다",
+      "narrative": [
+        "**acquiesce**(ˌækwɪˈɛs / 애퀴에스)"
+      ]
+    },
+    {
+      "title": "6. 동의, 허락",
+      "narrative": [
+        "**consent**(kənˈsɛnt / 컨센트)"
+      ]
+    }
+  ],
+  "wordMeta": [
+    {
+      "num": 1,
+      "expression": "concede",
+      "meaning": "양보하다, 인정하다",
+      "exampleEn": "\"The defense is willing to concede.\"",
+      "exampleKo": "변호인 측은 양보할 의향이 있다."
+    },
+    {
+      "num": 2,
+      "expression": "concession",
+      "meaning": "양보, 양보안",
+      "exampleEn": "\"The firm will be forced to make concessions if it wants to avoid a strike.\"",
+      "exampleKo": "회사가 파업을 피하려면 양보할 수밖에 없을 것이다."
+    },
+    {
+      "num": 3,
+      "expression": "compromise",
+      "meaning": "타협, 타협안",
+      "exampleEn": "\"OK, here's the compromise.\"",
+      "exampleKo": "좋아요, 타협안은 이겁니다."
+    },
+    {
+      "num": 4,
+      "expression": "accede",
+      "meaning": "요구에 동의하다, 응하다",
+      "exampleEn": "\"it's United States policy not to accede to terrorists' demands.\"",
+      "exampleKo": "테러리스트들의 요구에 응하지 않는 것이 미국의 정책이다."
+    },
+    {
+      "num": 5,
+      "expression": "acquiesce",
+      "meaning": "마지못해 동의하다, 묵인하다",
+      "exampleEn": "\"I'm disinclined to acquiesce to your request.\"",
+      "exampleKo": "당신의 요청에 응할 마음이 없습니다."
+    },
+    {
+      "num": 6,
+      "expression": "consent",
+      "meaning": "동의, 허락",
+      "exampleEn": "\"where do you get off prescribing that without my consent?\"",
+      "exampleKo": "무슨 권리로 내 동의도 없이 그걸 처방하는 거죠?"
+    }
+  ],
+  "source": {
+    "text": "",
+    "url": ""
+  },
+  "youtube": "https://www.youtube.com/shorts/EtcuOe7v53I",
+  "thumbnail": "https://i.ytimg.com/vi/EtcuOe7v53I/hqdefault.jpg",
+  "publishedAt": "2026-11-04T01:00:08+00:00",
+  "parsedWordCount": 6,
+  "pronunciations": {
+    "concede": {
+      "ipa": "kənˈsiːd",
+      "ipaKo": "컨시드"
+    },
+    "concession": {
+      "ipa": "kənˈsɛʃən",
+      "ipaKo": "컨세션"
+    },
+    "compromise": {
+      "ipa": "ˈkɒmprəmaɪz",
+      "ipaKo": "컴프라미즈"
+    },
+    "accede": {
+      "ipa": "əkˈsiːd",
+      "ipaKo": "액시드"
+    },
+    "acquiesce": {
+      "ipa": "ˌækwɪˈɛs",
+      "ipaKo": "애퀴에스"
+    },
+    "consent": {
+      "ipa": "kənˈsɛnt",
+      "ipaKo": "컨센트"
+    }
+  },
+  "status": "uploaded",
+  "createdAt": "2026-11-04T08:30:28.976Z",
+  "uploadedAt": "2026-11-04T08:31:10.228Z",
+  "quizSlug": "concede-concession-compromise-accede-acquiesce-quiz"
+}

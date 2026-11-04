@@ -22,6 +22,24 @@ const SOURCE_ALIASES = [
   { re: /\bcnn\b/i, label: 'CNN', boardHints: ['news'] },
 ];
 
+/** 제목 `카테고리 | 제목` 앞부분 → 게시판 */
+const TITLE_CATEGORY_BOARD = {
+  국제: 'news-voca',
+  미국: 'us-news',
+  경제: 'economy-news',
+  한국: 'korea-news',
+  국방: 'defense-news',
+  스포츠: 'sports-news',
+  산업: 'industry-news',
+  유통: 'retail-news',
+  여행: 'travel-news',
+  우크라이나: 'ukraine-news',
+  컬쳐: 'culture-voca',
+  문화: 'culture-voca',
+  연관단어: 'english-synonym',
+  유의어: 'english-synonym',
+};
+
 const BOARD_RULES = [
   { board: 'english-synonym', re: /#연관단어|연관\s*단어/i },
   { board: 'sports-news', re: /sport|football|ballon|축구|야구|올림픽|선수|경기/i },
@@ -30,8 +48,16 @@ const BOARD_RULES = [
   { board: 'industry-news', re: /iphone|apple|반도체|산업|제조|gadget|hinge/i },
   { board: 'travel-news', re: /travel|여행|관광|roadtrip|peloponnese/i },
   { board: 'korea-news', re: /korea|한국|seoul|서울|herald|koreatimes/i },
+  { board: 'us-news', re: /\bus\b|미국|trump|트럼프|white house|백악관/i },
   { board: 'culture-voca', re: /buffet|food|cook|art|museum|전시|뷔페|bts|\brm\b|미술/i },
 ];
+
+function boardFromTitlePrefix(title) {
+  const m = String(title || '').match(/^\s*([^|｜]{1,20})\s*[|｜]\s*/);
+  if (!m) return '';
+  const key = m[1].replace(/\s+/g, '').trim();
+  return TITLE_CATEGORY_BOARD[key] || '';
+}
 
 function pick(re, text) {
   const m = String(text || '').match(re);
@@ -163,7 +189,11 @@ export function applySynonymWordFormat(article, pronunciations = {}) {
 }
 
 function inferBoard({ title, description, sourceLabel }) {
-  /* 푸터(Economist 언급 등)로 오분류되지 않게 제목·해시태그·출처만 사용 */
+  /* 1) 제목 `국제 | …` / `미국 | …` 등 카테고리 우선 */
+  const fromPrefix = boardFromTitlePrefix(title);
+  if (fromPrefix) return fromPrefix;
+
+  /* 2) 푸터(Economist 언급 등)로 오분류되지 않게 제목·해시태그·출처만 사용 */
   const tags = String(description || '')
     .split('\n')
     .filter((l) => /#/.test(l))
@@ -187,6 +217,7 @@ function normalizeSourceLabel(raw) {
 
 function cleanTopicTitle(title) {
   return String(title || '')
+    .replace(/^\s*[^|｜]{1,20}\s*[|｜]\s*/, '')
     .replace(/#연관단어/g, '')
     .replace(/#\S+/g, '')
     .replace(/\s+/g, ' ')
@@ -211,7 +242,7 @@ export function parseYoutubeDescription(video) {
 
   const wordList = words.map((w) => w.expression).filter(Boolean).join(', ');
   const topic = cleanTopicTitle(title) || title;
-  const isSynonym = board === 'english-synonym' || /#연관단어/.test(title);
+  const isSynonym = board === 'english-synonym' || /#연관단어/.test(title + description);
 
   let metaDescription;
   let intro;
@@ -223,7 +254,7 @@ export function parseYoutubeDescription(video) {
       wordList ? ' 등.' : ''
     }`.slice(0, 160);
     intro = [
-      `${title} 주제를 다룬 ${sourceLabel} 기사에서 주요 시사 영단어를 정리합니다. *AI 음성과 이미지를 사용했습니다.`,
+      `${topic} 주제를 다룬 ${sourceLabel} 기사에서 주요 시사 영단어를 정리합니다. *AI 음성과 이미지를 사용했습니다.`,
     ];
   }
 
@@ -237,7 +268,8 @@ export function parseYoutubeDescription(video) {
   return {
     board,
     videoId: video.videoId,
-    title,
+    title: topic,
+    rawTitle: title,
     slug,
     metaDescription,
     password: `seed_${board.replace(/-/g, '_')}_${slug.slice(0, 48)}`,

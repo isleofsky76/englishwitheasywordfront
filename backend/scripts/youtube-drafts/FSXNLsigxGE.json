@@ -1,0 +1,133 @@
+{
+  "board": "english-synonym",
+  "videoId": "FSXNLsigxGE",
+  "title": "미국 선거",
+  "rawTitle": "미국 선거 #연관단어",
+  "slug": "skirmish-burrow-anoint-trope-spurious-related-words",
+  "metaDescription": "미국 선거 연관단어. skirmish, burrow, anoint, trope, spurious, adulation 등.",
+  "password": "seed_english_synonym_skirmish-burrow-anoint-trope-spurious-related-wo",
+  "datePublished": "2026-11-03",
+  "intro": [
+    "미국 선거 연관단어를 정리합니다. *AI 음성과 이미지를 사용했습니다."
+  ],
+  "words": [
+    {
+      "title": "1. 소규모 충돌, 작은 분쟁 (명)",
+      "narrative": [
+        "**skirmish**(ˈskɜːrmɪʃ / 스커미쉬)"
+      ]
+    },
+    {
+      "title": "2. 굴을 파다, 깊숙이 파고들다 (동)",
+      "narrative": [
+        "**burrow**(ˈbɜːroʊ / 버로우)"
+      ]
+    },
+    {
+      "title": "3. 선정하다, 뽑다, 성유를 바르다 (동)",
+      "narrative": [
+        "**anoint**(əˈnɔɪnt / 어노인트)"
+      ]
+    },
+    {
+      "title": "4. 상투적 표현, 반복되는 전형 (명)",
+      "narrative": [
+        "**trope**(troʊp / 트로프)"
+      ]
+    },
+    {
+      "title": "5. 허위의, 그럴듯하지만 근거 없는 (형)",
+      "narrative": [
+        "**spurious**(ˈspjʊəriəs / 스퓨리어스)"
+      ]
+    },
+    {
+      "title": "6. 과도한 찬사, 맹목적 칭송 (명)",
+      "narrative": [
+        "**adulation**(ˌædʒʊˈleɪʃən / 애줄레이션)"
+      ]
+    }
+  ],
+  "wordMeta": [
+    {
+      "num": 1,
+      "expression": "skirmish",
+      "meaning": "소규모 충돌, 작은 분쟁 (명)",
+      "exampleEn": "\"even as legal skirmishes over Ms Peltola’s campaign look set to drag on for weeks.\"",
+      "exampleKo": "펠톨라의 선거 운동을 둘러싼 법적 공방이 몇 주 동안 이어질 것으로 보이는 가운데서도."
+    },
+    {
+      "num": 2,
+      "expression": "burrow",
+      "meaning": "굴을 파다, 깊숙이 파고들다 (동)",
+      "exampleEn": "\"much more sceptical of Democrats’ ability to burrow deep into Republican terrain.\"",
+      "exampleKo": "민주당이 공화당 지지 지역에 깊숙이 파고들 수 있을지에 훨씬 더 회의적인."
+    },
+    {
+      "num": 3,
+      "expression": "anoint",
+      "meaning": "선정하다, 뽑다, 성유를 바르다 (동)",
+      "exampleEn": "\"and many of his anointed candidates, such as Ken Paxton in Texas\"",
+      "exampleKo": "그리고 텍사스의 켄 팩스턴처럼 그가 간택한 많은 후보들."
+    },
+    {
+      "num": 4,
+      "expression": "trope",
+      "meaning": "상투적 표현, 반복되는 전형 (명)",
+      "exampleEn": "\"Mr Trump’s closing argument does not follow the usual tropes of the form;\"",
+      "exampleKo": "트럼프의 선거 막판 호소는 그런 호소에서 흔히 쓰이는 전형을 따르지 않는다."
+    },
+    {
+      "num": 5,
+      "expression": "spurious",
+      "meaning": "허위의, 그럴듯하지만 근거 없는 (형)",
+      "exampleEn": "\"themes include spurious claims that Dr El-Sayed is a jihadist,\"",
+      "exampleKo": "주제에는 엘사예드 박사가 지하디스트라는 근거 없는 주장 등이 포함된다."
+    },
+    {
+      "num": 6,
+      "expression": "adulation",
+      "meaning": "과도한 찬사, 맹목적 칭송 (명)",
+      "exampleEn": "\"and adulation for Mr Husted’s posterior.\"",
+      "exampleKo": "그리고 허스티드의 엉덩이에 대한 과도한 찬사."
+    }
+  ],
+  "source": {
+    "text": "The Economist | As voters head to the polls, Democrats bet that discontent will power their victory",
+    "url": "https://www.economist.com/united-states/2026/11/02/as-voters-head-to-the-polls-democrats-bet-that-discontent-will-power-their-victory"
+  },
+  "youtube": "https://www.youtube.com/shorts/FSXNLsigxGE",
+  "thumbnail": "https://i.ytimg.com/vi/FSXNLsigxGE/hqdefault.jpg",
+  "publishedAt": "2026-11-03T12:00:02+00:00",
+  "parsedWordCount": 6,
+  "pronunciations": {
+    "skirmish": {
+      "ipa": "ˈskɜːrmɪʃ",
+      "ipaKo": "스커미쉬"
+    },
+    "burrow": {
+      "ipa": "ˈbɜːroʊ",
+      "ipaKo": "버로우"
+    },
+    "anoint": {
+      "ipa": "əˈnɔɪnt",
+      "ipaKo": "어노인트"
+    },
+    "trope": {
+      "ipa": "troʊp",
+      "ipaKo": "트로프"
+    },
+    "spurious": {
+      "ipa": "ˈspjʊəriəs",
+      "ipaKo": "스퓨리어스"
+    },
+    "adulation": {
+      "ipa": "ˌædʒʊˈleɪʃən",
+      "ipaKo": "애줄레이션"
+    }
+  },
+  "status": "uploaded",
+  "createdAt": "2026-11-04T08:30:39.178Z",
+  "uploadedAt": "2026-11-04T08:31:14.436Z",
+  "quizSlug": "skirmish-burrow-anoint-trope-spurious-quiz"
+}

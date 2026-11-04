@@ -1,0 +1,65 @@
+{
+  "board": "news-voca",
+  "videoId": "vYAKY1K3j6E",
+  "title": "항공기 허위 폭탄 테러",
+  "rawTitle": "국제 | 항공기 허위 폭탄 테러",
+  "slug": "divert-hoax-abide-by-related-words",
+  "metaDescription": "The Guardian 기사에서 추출한 시사 영단어. divert, hoax, abide by 등.",
+  "password": "seed_news_voca_divert-hoax-abide-by-related-words",
+  "datePublished": "2026-11-04",
+  "intro": [
+    "항공기 허위 폭탄 테러 주제를 다룬 The Guardian 기사에서 주요 시사 영단어를 정리합니다. *AI 음성과 이미지를 사용했습니다."
+  ],
+  "words": [
+    {
+      "narrative": [
+        "1. Seven planes across Europe have been searched or diverted after a series of bomb threats were made to passenger flights. (**divert**) / 여객기들을 겨냥한 폭탄 위협이 잇따르자 유럽 전역에서 항공기 7대가 수색을 받거나 항로를 변경했다. cf. divert: 우회시키다, 항로를 변경하다"
+      ]
+    },
+    {
+      "narrative": [
+        "2. Two UK departures – one from Heathrow and one from Manchester – were among those threatened in what Downing Street called “malicious hoaxes”, though all planes landed safely and no explosives were found. (**hoax**) / 히스로와 맨체스터에서 각각 출발한 영국발 항공편 두 편도 위협 대상에 포함됐으며, 영국 총리실은 이를 '악의적인 허위 위협'이라고 규정했다. 하지만 모든 항공기는 안전하게 착륙했고 폭발물은 발견되지 않았다. cf. hoax: 거짓말, 허위 위협"
+      ]
+    },
+    {
+      "narrative": [
+        "3. Airlines abide by a regulated process to assess and manage bomb threats, although virtually all are fake. (**abide by**) / 폭탄 위협은 사실상 거의 모두 가짜이지만, 항공사들은 이를 평가하고 대응하기 위해 규정된 절차를 따른다. cf. abide by: 준수하다, 따르다"
+      ]
+    }
+  ],
+  "wordMeta": [
+    {
+      "num": 1,
+      "expression": "divert",
+      "meaning": "우회시키다, 항로를 변경하다",
+      "exampleEn": "Seven planes across Europe have been searched or diverted after a series of bomb threats were made to passenger flights.",
+      "exampleKo": "여객기들을 겨냥한 폭탄 위협이 잇따르자 유럽 전역에서 항공기 7대가 수색을 받거나 항로를 변경했다."
+    },
+    {
+      "num": 2,
+      "expression": "hoax",
+      "meaning": "거짓말, 허위 위협",
+      "exampleEn": "Two UK departures – one from Heathrow and one from Manchester – were among those threatened in what Downing Street called “malicious hoaxes”, though all planes landed safely and no explosives were found.",
+      "exampleKo": "히스로와 맨체스터에서 각각 출발한 영국발 항공편 두 편도 위협 대상에 포함됐으며, 영국 총리실은 이를 '악의적인 허위 위협'이라고 규정했다. 하지만 모든 항공기는 안전하게 착륙했고 폭발물은 발견되지 않았다."
+    },
+    {
+      "num": 3,
+      "expression": "abide by",
+      "meaning": "준수하다, 따르다",
+      "exampleEn": "Airlines abide by a regulated process to assess and manage bomb threats, although virtually all are fake.",
+      "exampleKo": "폭탄 위협은 사실상 거의 모두 가짜이지만, 항공사들은 이를 평가하고 대응하기 위해 규정된 절차를 따른다."
+    }
+  ],
+  "source": {
+    "text": "The Guardian | Seven planes across Europe searched or diverted after ‘malicious hoax’ bomb threats | By Dan Sabbagh, Gwyn Topham and Jamie Grierson",
+    "url": "https://www.theguardian.com/world/2026/nov/03/four-planes-flying-across-europe-targeted-by-bomb-threats"
+  },
+  "youtube": "https://www.youtube.com/shorts/vYAKY1K3j6E",
+  "thumbnail": "https://i.ytimg.com/vi/vYAKY1K3j6E/hqdefault.jpg",
+  "publishedAt": "2026-11-04T06:00:16+00:00",
+  "parsedWordCount": 3,
+  "status": "uploaded",
+  "createdAt": "2026-11-04T08:30:20.813Z",
+  "uploadedAt": "2026-11-04T08:31:34.379Z",
+  "quizSlug": ""
+}

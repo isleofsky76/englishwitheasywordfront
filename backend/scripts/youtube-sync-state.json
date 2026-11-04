@@ -1,0 +1,791 @@
+{
+  "seenVideoIds": {
+    "VIDEO_ID": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.404Z"
+    },
+    "AYPfBGqY2as": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "XDTPFNUft74": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "5_Dza6e2PDg": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "hT3EwnRcMGg": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "UgfdyCx5FT0": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "SJ9Oa3BaqMg": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "nhzRfKKfoAE": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "6LkTVDi7JeQ": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "sTzUOIMuHwE": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "-7t8B_2QEhk": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "eZ8AcdFbnfI": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "nLUgYwMPoE4": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "B7O6GBJwbnI": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "VrTOygCp4C4": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "YOsCAM-nEoA": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "JlXyUds8P78": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "IqhbzjgZ6C8": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "Xm4FNCr0TDc": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "j1rIrr4gbas": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "0uulAdS2DCc": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "BoTFNfzhkXI": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "siyII6zf6SU": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "naSxjQQsWZs": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "SXaeW4wfkCc": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "Pt2-uG7gBEo": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "T88YmzKltv4": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "LxB3INU1Uyo": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "L8_o42iBetE": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "dVlmAFLq2og": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "x3IJ0L42Goc": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "b7m4yWl9ljg": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "SBLKExX9aN4": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "m3MTOEwThPw": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "Xcpk2VqGAzA": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "smRtivaoPDk": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "y2BiZYvX2TU": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "ulAl9fYiZvE": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "k3mm6DGz0SU": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "mkqMbG0k_e8": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "9KxY7BNiWKw": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "moNAns0W6ok": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "KgMg_F2mO-w": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "JyA30fLj0kk": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "7CiwWE6vcfc": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "9Ko_HUUFd-c": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "tkwXENfK-KU": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "LRXVMotNybA": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "_DQAJ2M39Vk": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "ICkppDs5-CE": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "YRkonl-h41U": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "Cvqe9DvPVKo": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "5HvLP-bF3Oc": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "KQhzinijll4": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "QMJAbMxz-ic": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "NaJFLTZNYjQ": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "A8Vot6kHG_0": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "MVmedU2O0m0": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "pvFPylFeOU0": {
+      "at": "2026-10-28T07:51:56.335Z",
+      "title": "잦은 이직은 현명한 선택일까?"
+    },
+    "CNa30imoYEw": {
+      "at": "2026-10-28T08:24:57.325Z",
+      "title": "축구스타 음바페의 사과"
+    },
+    "fswzPWSVECA": {
+      "at": "2026-10-28T08:07:48.663Z",
+      "title": "지연, 중단, 연기 #연관단어"
+    },
+    "Ycs6BL3y9XM": {
+      "at": "2026-10-28T08:10:00.214Z",
+      "title": "보다, 바라보다, 지켜보다 #연관단어"
+    },
+    "8sDrYuacFn8": {
+      "at": "2026-10-28T08:15:05.348Z",
+      "title": "분명히 표현하다 #연관단어"
+    },
+    "mr_LJWQdqic": {
+      "at": "2026-10-28T08:26:00.615Z",
+      "title": "미국인들이 새집 구매를 멈춘 이유는?"
+    },
+    "ZRC_vUj00iQ": {
+      "via": "repo-scan",
+      "at": "2026-10-28T08:38:52.278Z"
+    },
+    "gBFXlMzF7Zs": {
+      "via": "repo-scan",
+      "at": "2026-10-28T08:38:52.280Z"
+    },
+    "0yoKx3cuE1w": {
+      "at": "2026-10-28T08:38:53.063Z"
+    },
+    "0jpb5_Tzgd8": {
+      "at": "2026-10-28T08:40:27.105Z"
+    },
+    "europe-pleasant-cities-20261015": {
+      "at": "2026-10-28T08:42:20.818Z"
+    },
+    "vxrjpJaPIPE": {
+      "at": "2026-10-28T08:44:27.331Z"
+    },
+    "Tnc5Mdl8SKs": {
+      "at": "2026-10-28T08:46:32.455Z"
+    },
+    "DaiWDe438Qc": {
+      "at": "2026-10-28T08:48:40.689Z"
+    },
+    "Ykx4b3sOW0c": {
+      "via": "repo-scan",
+      "at": "2026-10-28T21:48:31.534Z"
+    },
+    "juL9WBekg7c": {
+      "via": "repo-scan",
+      "at": "2026-11-04T08:28:20.037Z"
+    },
+    "1vZOaAJNCQk": {
+      "via": "repo-scan",
+      "at": "2026-11-04T08:28:20.041Z"
+    },
+    "OX2teVqvMno": {
+      "via": "repo-scan",
+      "at": "2026-11-04T08:28:20.041Z"
+    },
+    "jv6wSNlHOQ8": {
+      "via": "repo-scan",
+      "at": "2026-11-04T08:28:20.041Z"
+    },
+    "JkSIbEqtpfU": {
+      "via": "repo-scan",
+      "at": "2026-11-04T08:28:20.041Z"
+    },
+    "hXRIui2Gr_Y": {
+      "via": "repo-scan",
+      "at": "2026-11-04T08:28:20.041Z"
+    },
+    "pKWTm8hEdcY": {
+      "via": "repo-scan",
+      "at": "2026-11-04T08:28:20.041Z"
+    },
+    "cuUz5gO41gM": {
+      "via": "repo-scan",
+      "at": "2026-11-04T08:28:20.041Z"
+    },
+    "r49p_LV886M": {
+      "via": "repo-scan",
+      "at": "2026-11-04T08:28:20.041Z"
+    },
+    "brYK43Y4Osw": {
+      "via": "repo-scan",
+      "at": "2026-11-04T08:28:20.041Z"
+    },
+    "2ThTdQFo2uM": {
+      "via": "repo-scan",
+      "at": "2026-11-04T08:28:20.041Z"
+    },
+    "NYRvSQ7YxdU": {
+      "via": "repo-scan",
+      "at": "2026-11-04T08:28:20.041Z"
+    },
+    "opd3lVItmd4": {
+      "via": "repo-scan",
+      "at": "2026-11-04T08:28:20.041Z"
+    },
+    "TQtC56XcQuc": {
+      "via": "repo-scan",
+      "at": "2026-11-04T08:28:20.041Z"
+    },
+    "T6g3PeR9qJ0": {
+      "via": "repo-scan",
+      "at": "2026-11-04T08:28:20.041Z"
+    },
+    "9H0hqxyuO04": {
+      "via": "repo-scan",
+      "at": "2026-11-04T08:28:20.041Z"
+    },
+    "vYAKY1K3j6E": {
+      "at": "2026-11-04T08:30:20.809Z",
+      "title": "국제 | 항공기 허위 폭탄 테러"
+    },
+    "B_g7aTOLaUU": {
+      "at": "2026-11-04T08:30:20.817Z",
+      "title": "연관단어 | 꼼꼼한, 세밀한, 신중한"
+    },
+    "XP6FuStdruI": {
+      "at": "2026-11-04T08:30:25.833Z",
+      "title": "미국 | 트럼프는 중간선거 이후 이란과의 전쟁을 재개할까요?"
+    },
+    "EtcuOe7v53I": {
+      "at": "2026-11-04T08:30:25.835Z",
+      "title": "연관단어 | 묵인하다 Acquiesce"
+    },
+    "9oZMpGLPIBs": {
+      "at": "2026-11-04T08:30:28.988Z",
+      "title": "건강 | 불멸을 향한 탐구는 이제 진지한 사업이 되었다 #노화연구 #연관단어"
+    },
+    "Hp5mjB-T9XA": {
+      "at": "2026-11-04T08:30:32.023Z",
+      "title": "독재자 #연관단어"
+    },
+    "FSXNLsigxGE": {
+      "at": "2026-11-04T08:30:36.643Z",
+      "title": "미국 선거 #연관단어"
+    },
+    "LxC9rMxsma8": {
+      "at": "2026-11-04T08:30:39.189Z",
+      "title": "gambit 전략적 한 수 , 승부수 #연관단어"
+    },
+    "6VY5jbq6Mpg": {
+      "at": "2026-11-04T08:30:56.562Z"
+    },
+    "USXUtO0ghQc": {
+      "at": "2026-11-04T08:31:33.889Z"
+    }
+  },
+  "uploadedVideoIds": {
+    "VIDEO_ID": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "AYPfBGqY2as": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "XDTPFNUft74": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "5_Dza6e2PDg": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "hT3EwnRcMGg": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "UgfdyCx5FT0": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "SJ9Oa3BaqMg": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "nhzRfKKfoAE": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "6LkTVDi7JeQ": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "sTzUOIMuHwE": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "-7t8B_2QEhk": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "eZ8AcdFbnfI": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "nLUgYwMPoE4": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "B7O6GBJwbnI": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "VrTOygCp4C4": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "YOsCAM-nEoA": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "JlXyUds8P78": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "IqhbzjgZ6C8": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "Xm4FNCr0TDc": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "j1rIrr4gbas": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "0uulAdS2DCc": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "BoTFNfzhkXI": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "siyII6zf6SU": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "naSxjQQsWZs": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "SXaeW4wfkCc": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "Pt2-uG7gBEo": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "T88YmzKltv4": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "LxB3INU1Uyo": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "L8_o42iBetE": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "dVlmAFLq2og": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "x3IJ0L42Goc": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "b7m4yWl9ljg": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "SBLKExX9aN4": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "m3MTOEwThPw": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "Xcpk2VqGAzA": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "smRtivaoPDk": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "y2BiZYvX2TU": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "ulAl9fYiZvE": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "k3mm6DGz0SU": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "mkqMbG0k_e8": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "9KxY7BNiWKw": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "moNAns0W6ok": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "KgMg_F2mO-w": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "JyA30fLj0kk": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "7CiwWE6vcfc": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "9Ko_HUUFd-c": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "tkwXENfK-KU": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "LRXVMotNybA": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "_DQAJ2M39Vk": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "ICkppDs5-CE": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "YRkonl-h41U": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "Cvqe9DvPVKo": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "5HvLP-bF3Oc": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "KQhzinijll4": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "QMJAbMxz-ic": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "NaJFLTZNYjQ": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "A8Vot6kHG_0": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "MVmedU2O0m0": {
+      "via": "repo-scan",
+      "at": "2026-10-28T07:51:02.422Z"
+    },
+    "fswzPWSVECA": {
+      "at": "2026-10-28T08:08:03.513Z",
+      "board": "english-synonym"
+    },
+    "Ycs6BL3y9XM": {
+      "at": "2026-10-28T08:10:16.273Z",
+      "board": "english-synonym"
+    },
+    "8sDrYuacFn8": {
+      "at": "2026-10-28T08:15:18.378Z",
+      "board": "english-synonym"
+    },
+    "CNa30imoYEw": {
+      "at": "2026-10-28T08:25:02.921Z",
+      "board": "sports-news"
+    },
+    "mr_LJWQdqic": {
+      "at": "2026-10-28T08:26:01.383Z",
+      "board": "us-news"
+    },
+    "ZRC_vUj00iQ": {
+      "via": "repo-scan",
+      "at": "2026-10-28T08:38:52.280Z"
+    },
+    "gBFXlMzF7Zs": {
+      "via": "repo-scan",
+      "at": "2026-10-28T08:38:52.280Z"
+    },
+    "0yoKx3cuE1w": {
+      "at": "2026-10-28T08:38:53.063Z",
+      "board": "korea-news"
+    },
+    "0jpb5_Tzgd8": {
+      "at": "2026-10-28T08:40:27.105Z",
+      "board": "retail-news"
+    },
+    "europe-pleasant-cities-20261015": {
+      "at": "2026-10-28T08:42:20.818Z",
+      "board": "news-voca"
+    },
+    "vxrjpJaPIPE": {
+      "at": "2026-10-28T08:45:16.463Z",
+      "board": "english-synonym"
+    },
+    "Tnc5Mdl8SKs": {
+      "at": "2026-10-28T08:46:32.455Z",
+      "board": "english-synonym"
+    },
+    "DaiWDe438Qc": {
+      "at": "2026-10-28T08:54:48.501Z",
+      "board": "ukraine-news"
+    },
+    "Ykx4b3sOW0c": {
+      "at": "2026-10-28T21:48:33.747Z",
+      "board": "news-voca"
+    },
+    "juL9WBekg7c": {
+      "via": "repo-scan",
+      "at": "2026-11-04T08:28:20.041Z"
+    },
+    "1vZOaAJNCQk": {
+      "via": "repo-scan",
+      "at": "2026-11-04T08:28:20.041Z"
+    },
+    "OX2teVqvMno": {
+      "via": "repo-scan",
+      "at": "2026-11-04T08:28:20.041Z"
+    },
+    "jv6wSNlHOQ8": {
+      "via": "repo-scan",
+      "at": "2026-11-04T08:28:20.041Z"
+    },
+    "JkSIbEqtpfU": {
+      "via": "repo-scan",
+      "at": "2026-11-04T08:28:20.041Z"
+    },
+    "hXRIui2Gr_Y": {
+      "via": "repo-scan",
+      "at": "2026-11-04T08:28:20.041Z"
+    },
+    "pKWTm8hEdcY": {
+      "via": "repo-scan",
+      "at": "2026-11-04T08:28:20.041Z"
+    },
+    "cuUz5gO41gM": {
+      "via": "repo-scan",
+      "at": "2026-11-04T08:28:20.041Z"
+    },
+    "r49p_LV886M": {
+      "via": "repo-scan",
+      "at": "2026-11-04T08:28:20.041Z"
+    },
+    "brYK43Y4Osw": {
+      "via": "repo-scan",
+      "at": "2026-11-04T08:28:20.041Z"
+    },
+    "2ThTdQFo2uM": {
+      "via": "repo-scan",
+      "at": "2026-11-04T08:28:20.041Z"
+    },
+    "NYRvSQ7YxdU": {
+      "via": "repo-scan",
+      "at": "2026-11-04T08:28:20.041Z"
+    },
+    "opd3lVItmd4": {
+      "via": "repo-scan",
+      "at": "2026-11-04T08:28:20.041Z"
+    },
+    "TQtC56XcQuc": {
+      "via": "repo-scan",
+      "at": "2026-11-04T08:28:20.041Z"
+    },
+    "T6g3PeR9qJ0": {
+      "via": "repo-scan",
+      "at": "2026-11-04T08:28:20.041Z"
+    },
+    "9H0hqxyuO04": {
+      "via": "repo-scan",
+      "at": "2026-11-04T08:28:20.041Z"
+    },
+    "6VY5jbq6Mpg": {
+      "at": "2026-11-04T08:30:56.562Z",
+      "board": "english-synonym"
+    },
+    "9oZMpGLPIBs": {
+      "at": "2026-11-04T08:31:01.437Z",
+      "board": "english-synonym"
+    },
+    "B_g7aTOLaUU": {
+      "at": "2026-11-04T08:31:05.531Z",
+      "board": "english-synonym"
+    },
+    "EtcuOe7v53I": {
+      "at": "2026-11-04T08:31:10.232Z",
+      "board": "english-synonym"
+    },
+    "FSXNLsigxGE": {
+      "at": "2026-11-04T08:31:14.440Z",
+      "board": "english-synonym"
+    },
+    "Hp5mjB-T9XA": {
+      "at": "2026-11-04T08:31:19.721Z",
+      "board": "english-synonym"
+    },
+    "LxC9rMxsma8": {
+      "at": "2026-11-04T08:31:25.991Z",
+      "board": "english-synonym"
+    },
+    "pvFPylFeOU0": {
+      "at": "2026-11-04T08:31:26.523Z",
+      "board": "economy-news"
+    },
+    "USXUtO0ghQc": {
+      "at": "2026-11-04T08:31:33.889Z",
+      "board": "english-synonym"
+    },
+    "vYAKY1K3j6E": {
+      "at": "2026-11-04T08:31:34.381Z",
+      "board": "news-voca"
+    },
+    "XP6FuStdruI": {
+      "at": "2026-11-04T08:31:34.893Z",
+      "board": "us-news"
+    }
+  },
+  "updatedAt": "2026-11-04T08:31:34.897Z"
+}

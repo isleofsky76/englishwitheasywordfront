@@ -1,0 +1,63 @@
+{
+  "board": "economy-news",
+  "videoId": "pvFPylFeOU0",
+  "title": "잦은 이직은 현명한 선택일까?",
+  "slug": "for-the-long-haul-build-underappreciated-related-words",
+  "metaDescription": "The Wall Street Journal 기사에서 추출한 시사 영단어. for the long haul, build, underappreciated 등.",
+  "password": "seed_economy_news_for-the-long-haul-build-underappreciated-related",
+  "datePublished": "2026-10-28",
+  "intro": [
+    "잦은 이직은 현명한 선택일까? 주제를 다룬 The Wall Street Journal 기사에서 주요 시사 영단어를 정리합니다. *AI 음성과 이미지를 사용했습니다."
+  ],
+  "words": [
+    {
+      "narrative": [
+        "1. The evidence suggests that sticking it out **for the long haul** can often give an employee a competitive advantage. / 증거에 따르면, 오랫동안 묵묵히 버티는 것이 직원에게 종종 경쟁 우위를 가져다줄 수 있습니다. cf. for the long haul: 긴 안목으로 보면, 결국은"
+      ]
+    },
+    {
+      "narrative": [
+        "2. The longer you are in a job, the more you get to know your colleagues and your managers, building the quality of those working relationships. (**build**) / 한 직장에 오래 있을수록 동료와 상사를 더 잘 알게 되며, 그러한 업무 관계의 질을 높이게 됩니다. cf. build: 발전시키다, 강화하다"
+      ]
+    },
+    {
+      "narrative": [
+        "3. Changing employers makes sense if you don’t enjoy what you’re doing, if you feel underpaid or otherwise **underappreciated**... / 하고 있는 일이 즐겁지 않거나, 보수가 부족하거나 다른 면에서 충분히 인정받지 못한다고 느낀다면 이직하는 것은 합리적입니다. cf. underappreciated: 충분히 인정받지 못하는"
+      ]
+    }
+  ],
+  "wordMeta": [
+    {
+      "num": 1,
+      "expression": "for the long haul",
+      "meaning": "긴 안목으로 보면, 결국은",
+      "exampleEn": "The evidence suggests that sticking it out for the long haul can often give an employee a competitive advantage.",
+      "exampleKo": "증거에 따르면, 오랫동안 묵묵히 버티는 것이 직원에게 종종 경쟁 우위를 가져다줄 수 있습니다."
+    },
+    {
+      "num": 2,
+      "expression": "build",
+      "meaning": "발전시키다, 강화하다",
+      "exampleEn": "The longer you are in a job, the more you get to know your colleagues and your managers, building the quality of those working relationships.",
+      "exampleKo": "한 직장에 오래 있을수록 동료와 상사를 더 잘 알게 되며, 그러한 업무 관계의 질을 높이게 됩니다."
+    },
+    {
+      "num": 3,
+      "expression": "underappreciated",
+      "meaning": "충분히 인정받지 못하는",
+      "exampleEn": "Changing employers makes sense if you don’t enjoy what you’re doing, if you feel underpaid or otherwise underappreciated...",
+      "exampleKo": "하고 있는 일이 즐겁지 않거나, 보수가 부족하거나 다른 면에서 충분히 인정받지 못한다고 느낀다면 이직하는 것은 합리적입니다."
+    }
+  ],
+  "source": {
+    "text": "The Wall Street Journal | Maybe Job-Hopping Isn’t the Smartest Career Move After All | By Matthew Bidwell",
+    "url": "https://www.wsj.com/lifestyle/careers/job-hopping-career-moves-89532b1c"
+  },
+  "youtube": "https://www.youtube.com/shorts/pvFPylFeOU0",
+  "publishedAt": "2026-10-28T01:00:39+00:00",
+  "parsedWordCount": 3,
+  "status": "uploaded",
+  "createdAt": "2026-10-28T07:51:56.340Z",
+  "uploadedAt": "2026-11-04T08:31:26.519Z",
+  "quizSlug": ""
+}

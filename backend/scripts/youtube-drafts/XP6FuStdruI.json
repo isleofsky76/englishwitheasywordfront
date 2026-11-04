@@ -1,0 +1,101 @@
+{
+  "board": "us-news",
+  "videoId": "XP6FuStdruI",
+  "title": "트럼프는 중간선거 이후 이란과의 전쟁을 재개할까요?",
+  "rawTitle": "미국 | 트럼프는 중간선거 이후 이란과의 전쟁을 재개할까요?",
+  "slug": "resume-retaliate-vacillate-stall-quagmire-related-words",
+  "metaDescription": "The Guardian 기사에서 추출한 시사 영단어. resume, retaliate, vacillate, stall, quagmire, hubris 등.",
+  "password": "seed_us_news_resume-retaliate-vacillate-stall-quagmire-relate",
+  "datePublished": "2026-11-04",
+  "intro": [
+    "트럼프는 중간선거 이후 이란과의 전쟁을 재개할까요? 주제를 다룬 The Guardian 기사에서 주요 시사 영단어를 정리합니다. *AI 음성과 이미지를 사용했습니다."
+  ],
+  "words": [
+    {
+      "narrative": [
+        "1. \"Will Donald Trump decide to resume a large-scale war against Iran?\" (**resume**) / 도널드 트럼프는 이란을 상대로 대규모 전쟁을 재개하기로 결정할 것인가? cf. resume: 재개하다"
+      ]
+    },
+    {
+      "narrative": [
+        "2. \"Iranian officials say they would retaliate for any new US military campaign that...\" (**retaliate**) / 이란 관리들은 미국의 새로운 군사 작전에 대해 보복할 것이라고 말한다. cf. retaliate: 보복하다, 반격하다"
+      ]
+    },
+    {
+      "narrative": [
+        "3. \"Trump makes it worse by vacillating between wanting a deal and repeatedly threatening to 'annihilate' Iran.\" (**vacillate**) / 트럼프는 합의를 원하다가도 이란을 '완전히 파괴하겠다'고 거듭 위협하는 등 오락가락하며 상황을 악화시킨다. cf. vacillate: 갈팡질팡하다, 오락가락하다"
+      ]
+    },
+    {
+      "narrative": [
+        "4. \"an 'intensive' multi-day attack would force Iran to make new concessions in stalled negotiations.\" (**stall**) / 며칠간의 집중적인 공격이 교착 상태에 빠진 협상에서 이란의 새로운 양보를 끌어낼 것이라는 것이다. cf. stall: 교착 상태에 빠지다, 진전이 멈추다"
+      ]
+    },
+    {
+      "narrative": [
+        "5. \"...he has learned from the mistakes that led him into this quagmire.\" (**quagmire**) / 그가 자신을 이 수렁에 빠뜨린 실수들로부터 교훈을 얻었는지. cf. quagmire: 수렁, 진퇴양난"
+      ]
+    },
+    {
+      "narrative": [
+        "6. \"Or if he will repeat the same mistakes – and hubris – that led him to launch this catastrophic war in the first place.\" (**hubris**) / 아니면 애초에 이 참혹한 전쟁을 시작하게 만든 똑같은 실수와 오만을 되풀이할 것인지. cf. hubris: 오만, 자만"
+      ]
+    }
+  ],
+  "wordMeta": [
+    {
+      "num": 1,
+      "expression": "resume",
+      "meaning": "재개하다",
+      "exampleEn": "\"Will Donald Trump decide to resume a large-scale war against Iran?\"",
+      "exampleKo": "도널드 트럼프는 이란을 상대로 대규모 전쟁을 재개하기로 결정할 것인가?"
+    },
+    {
+      "num": 2,
+      "expression": "retaliate",
+      "meaning": "보복하다, 반격하다",
+      "exampleEn": "\"Iranian officials say they would retaliate for any new US military campaign that...\"",
+      "exampleKo": "이란 관리들은 미국의 새로운 군사 작전에 대해 보복할 것이라고 말한다."
+    },
+    {
+      "num": 3,
+      "expression": "vacillate",
+      "meaning": "갈팡질팡하다, 오락가락하다",
+      "exampleEn": "\"Trump makes it worse by vacillating between wanting a deal and repeatedly threatening to 'annihilate' Iran.\"",
+      "exampleKo": "트럼프는 합의를 원하다가도 이란을 '완전히 파괴하겠다'고 거듭 위협하는 등 오락가락하며 상황을 악화시킨다."
+    },
+    {
+      "num": 4,
+      "expression": "stall",
+      "meaning": "교착 상태에 빠지다, 진전이 멈추다",
+      "exampleEn": "\"an 'intensive' multi-day attack would force Iran to make new concessions in stalled negotiations.\"",
+      "exampleKo": "며칠간의 집중적인 공격이 교착 상태에 빠진 협상에서 이란의 새로운 양보를 끌어낼 것이라는 것이다."
+    },
+    {
+      "num": 5,
+      "expression": "quagmire",
+      "meaning": "수렁, 진퇴양난",
+      "exampleEn": "\"...he has learned from the mistakes that led him into this quagmire.\"",
+      "exampleKo": "그가 자신을 이 수렁에 빠뜨린 실수들로부터 교훈을 얻었는지."
+    },
+    {
+      "num": 6,
+      "expression": "hubris",
+      "meaning": "오만, 자만",
+      "exampleEn": "\"Or if he will repeat the same mistakes – and hubris – that led him to launch this catastrophic war in the first place.\"",
+      "exampleKo": "아니면 애초에 이 참혹한 전쟁을 시작하게 만든 똑같은 실수와 오만을 되풀이할 것인지."
+    }
+  ],
+  "source": {
+    "text": "The Guardian | Will Trump relaunch his war on Iran after the midterm elections? | By Mohamad Bazzi",
+    "url": "https://www.theguardian.com/commentisfree/2026/nov/03/trump-iran-war-after-midterm-elections"
+  },
+  "youtube": "https://www.youtube.com/shorts/XP6FuStdruI",
+  "thumbnail": "https://i.ytimg.com/vi/XP6FuStdruI/hqdefault.jpg",
+  "publishedAt": "2026-11-04T01:00:29+00:00",
+  "parsedWordCount": 6,
+  "status": "uploaded",
+  "createdAt": "2026-11-04T08:30:25.833Z",
+  "uploadedAt": "2026-11-04T08:31:34.891Z",
+  "quizSlug": ""
+}

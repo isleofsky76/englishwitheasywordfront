@@ -1,0 +1,133 @@
+{
+  "board": "english-synonym",
+  "videoId": "9oZMpGLPIBs",
+  "title": "불멸을 향한 탐구는 이제 진지한 사업이 되었다",
+  "rawTitle": "건강 | 불멸을 향한 탐구는 이제 진지한 사업이 되었다 #노화연구 #연관단어",
+  "slug": "immortality-longevity-cryotherapy-intravenous-drip-sleep-apnoea-related-words",
+  "metaDescription": "불멸을 향한 탐구는 이제 진지한 사업이 되었다 연관단어. immortality, longevity, cryotherapy, intravenous drip, sleep apnoea, efficacy 등.",
+  "password": "seed_english_synonym_immortality-longevity-cryotherapy-intravenous-dr",
+  "datePublished": "2026-11-03",
+  "intro": [
+    "불멸을 향한 탐구는 이제 진지한 사업이 되었다 연관단어를 정리합니다. *AI 음성과 이미지를 사용했습니다."
+  ],
+  "words": [
+    {
+      "title": "1. 불멸, 영생 (명)",
+      "narrative": [
+        "**immortality**(ˌɪmɔːrˈtælɪti / 임모탈리티)"
+      ]
+    },
+    {
+      "title": "2. 장수, 긴 수명 (명)",
+      "narrative": [
+        "**longevity**(lɒnˈdʒɛvɪti / 론제비티)"
+      ]
+    },
+    {
+      "title": "3. 냉각 요법, 냉동 요법 (명)",
+      "narrative": [
+        "**cryotherapy**(ˌkraɪoʊˈθɛrəpi / 크라이오테라피)"
+      ]
+    },
+    {
+      "title": "4. 정맥 주입, 정맥 수액 (명사구)",
+      "narrative": [
+        "**intravenous drip**(ˌɪntrəˈviːnəs drɪp / 인트라비너스 드립)"
+      ]
+    },
+    {
+      "title": "5. 수면 무호흡증 (명사구)",
+      "narrative": [
+        "**sleep apnoea**(sliːp æpˈniːə / 슬립 압니아)"
+      ]
+    },
+    {
+      "title": "6. 효능, 효과 (명)",
+      "narrative": [
+        "**efficacy**(ˈɛfɪkəsi / 에피커시)"
+      ]
+    }
+  ],
+  "wordMeta": [
+    {
+      "num": 1,
+      "expression": "immortality",
+      "meaning": "불멸, 영생 (명)",
+      "exampleEn": "\"The quest for immortality has become serious business.\"",
+      "exampleKo": "불멸을 향한 탐구가 본격적인 사업이 되었다."
+    },
+    {
+      "num": 2,
+      "expression": "longevity",
+      "meaning": "장수, 긴 수명 (명)",
+      "exampleEn": "\"a longevity clinic.\"",
+      "exampleKo": "장수 전문 클리닉."
+    },
+    {
+      "num": 3,
+      "expression": "cryotherapy",
+      "meaning": "냉각 요법, 냉동 요법 (명)",
+      "exampleEn": "\"A few minutes of “cryotherapy” leave him, by his own account, invigorated.\"",
+      "exampleKo": "그의 말에 따르면 몇 분간의 ‘냉각 요법’을 받고 나면 활력이 생긴다고 한다."
+    },
+    {
+      "num": 4,
+      "expression": "intravenous drip",
+      "meaning": "정맥 주입, 정맥 수액 (명사구)",
+      "exampleEn": "\"Other clients take intravenous drips of NAD+, a molecule that cells need to turn food into energy.\"",
+      "exampleKo": "다른 고객들은 세포가 음식을 에너지로 바꾸는 데 필요한 분자인 NAD+를 정맥으로 주입받는다."
+    },
+    {
+      "num": 5,
+      "expression": "sleep apnoea",
+      "meaning": "수면 무호흡증 (명사구)",
+      "exampleEn": "\"these drugs have since been shown to help with heart disease, sleep apnoea and kidney problems\"",
+      "exampleKo": "이후 이 약물들은 심장병과 수면 무호흡증, 신장 문제에도 도움이 되는 것으로 나타났다."
+    },
+    {
+      "num": 6,
+      "expression": "efficacy",
+      "meaning": "효능, 효과 (명)",
+      "exampleEn": "\"treatments of sometimes dubious efficacy\"",
+      "exampleKo": "때로는 효능이 의심스러운 치료법."
+    }
+  ],
+  "source": {
+    "text": "The Economist | The quest for immortality has become serious business",
+    "url": "https://www.economist.com/business/2026/11/02/the-quest-for-immortality-has-become-serious-business"
+  },
+  "youtube": "https://www.youtube.com/shorts/9oZMpGLPIBs",
+  "thumbnail": "https://i.ytimg.com/vi/9oZMpGLPIBs/hqdefault.jpg",
+  "publishedAt": "2026-11-03T22:00:28+00:00",
+  "parsedWordCount": 6,
+  "pronunciations": {
+    "immortality": {
+      "ipa": "ˌɪmɔːrˈtælɪti",
+      "ipaKo": "임모탈리티"
+    },
+    "longevity": {
+      "ipa": "lɒnˈdʒɛvɪti",
+      "ipaKo": "론제비티"
+    },
+    "cryotherapy": {
+      "ipa": "ˌkraɪoʊˈθɛrəpi",
+      "ipaKo": "크라이오테라피"
+    },
+    "intravenous drip": {
+      "ipa": "ˌɪntrəˈviːnəs drɪp",
+      "ipaKo": "인트라비너스 드립"
+    },
+    "sleep apnoea": {
+      "ipa": "sliːp æpˈniːə",
+      "ipaKo": "슬립 압니아"
+    },
+    "efficacy": {
+      "ipa": "ˈɛfɪkəsi",
+      "ipaKo": "에피커시"
+    }
+  },
+  "status": "uploaded",
+  "createdAt": "2026-11-04T08:30:32.020Z",
+  "uploadedAt": "2026-11-04T08:31:01.431Z",
+  "quizSlug": "immortality-longevity-cryotherapy-intravenous-drip-sleep-apnoea-quiz"
+}
