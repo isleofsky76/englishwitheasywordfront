@@ -2,9 +2,9 @@
   "name": "englishwitheasyword-backend",
   "private": true,
   "type": "module",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node server.js",
     "assert:quiz-track": "node scripts/assert-quiz-track-format.js",
     "regenerate:quiz-seo": "node scripts/regenerate-quiz-seo-track.js && node scripts/assert-quiz-track-format.js"
   },

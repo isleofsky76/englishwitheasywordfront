@@ -1,0 +1,1302 @@
+[
+  {
+    "id": "EXP000001",
+    "ko": "말이 쉽지",
+    "en": "Easier said than done.",
+    "example": "Losing weight is easier said than done.",
+    "translation": "살을 빼는 건 말처럼 쉽지 않아.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000002",
+    "ko": "내 말이 그 말이야",
+    "en": "That's what I'm saying!",
+    "example": "That's what I'm saying! We need more time.",
+    "translation": "내 말이 그 말이야! 시간이 더 필요하다니까.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000003",
+    "ko": "그럴 줄 알았어",
+    "en": "I knew it.",
+    "example": "I knew it! He was lying.",
+    "translation": "그럴 줄 알았어! 그가 거짓말하고 있었어.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000004",
+    "ko": "너무 무리하지 마",
+    "en": "Don't push yourself too hard.",
+    "example": "Don't push yourself too hard. You need rest.",
+    "translation": "너무 무리하지 마. 쉬어야 해.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000005",
+    "ko": "별말씀을요",
+    "en": "You're welcome. / Don't mention it.",
+    "example": "Don't mention it. Happy to help.",
+    "translation": "별말씀을요. 도움이 되어서 좋아요.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000006",
+    "ko": "괜찮아요",
+    "en": "It's okay. / I'm fine.",
+    "example": "It's okay. Don't worry about it.",
+    "translation": "괜찮아요. 걱정하지 마세요.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000007",
+    "ko": "잠깐만요",
+    "en": "Hold on. / Just a second.",
+    "example": "Hold on a second. I'll be right there.",
+    "translation": "잠깐만요. 금방 갈게요.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000008",
+    "ko": "무슨 일이야?",
+    "en": "What's up? / What's going on?",
+    "example": "What's going on? You look upset.",
+    "translation": "무슨 일이야? 표정이 안 좋아.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000009",
+    "ko": "잘 지냈어요?",
+    "en": "How have you been?",
+    "example": "How have you been? Long time no see.",
+    "translation": "잘 지냈어요? 오랜만이에요.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000010",
+    "ko": "나중에 보자",
+    "en": "See you later.",
+    "example": "See you later. Text me when you get home.",
+    "translation": "나중에 보자. 집에 가면 문자해.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000011",
+    "ko": "조심해서 가요",
+    "en": "Take care.",
+    "example": "Take care on your way home.",
+    "translation": "집에 조심해서 가요.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000012",
+    "ko": "화이팅",
+    "en": "You got this. / Good luck.",
+    "example": "You got this. I believe in you.",
+    "translation": "할 수 있어. 난 너를 믿어.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000013",
+    "ko": "실례합니다",
+    "en": "Excuse me.",
+    "example": "Excuse me, is this seat taken?",
+    "translation": "실례합니다, 이 자리 비었나요?",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000014",
+    "ko": "죄송해요",
+    "en": "I'm sorry.",
+    "example": "I'm sorry I'm late.",
+    "translation": "늦어서 죄송해요.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000015",
+    "ko": "고마워요",
+    "en": "Thank you.",
+    "example": "Thank you for everything.",
+    "translation": "모든 것에 고마워요.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000016",
+    "ko": "천만에요",
+    "en": "You're welcome.",
+    "example": "You're welcome. Anytime.",
+    "translation": "천만에요. 언제든요.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000017",
+    "ko": "알겠어요",
+    "en": "Got it. / I see.",
+    "example": "Got it. I'll handle it.",
+    "translation": "알겠어요. 제가 처리할게요.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000018",
+    "ko": "모르겠어요",
+    "en": "I'm not sure. / I don't know.",
+    "example": "I'm not sure. Let me check.",
+    "translation": "모르겠어요. 확인해볼게요.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000019",
+    "ko": "상관없어요",
+    "en": "I don't mind. / It doesn't matter.",
+    "example": "I don't mind. Either is fine.",
+    "translation": "상관없어요. 둘 다 괜찮아요.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000020",
+    "ko": "당연히",
+    "en": "Of course. / Absolutely.",
+    "example": "Of course. Count me in.",
+    "translation": "당연히. 나도 끼워 줘.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000021",
+    "ko": "절대 안 돼",
+    "en": "No way. / Absolutely not.",
+    "example": "No way. That's too risky.",
+    "translation": "절대 안 돼. 너무 위험해.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000022",
+    "ko": "대단하다",
+    "en": "That's amazing.",
+    "example": "That's amazing. How did you do that?",
+    "translation": "대단하다. 어떻게 한 거야?",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000023",
+    "ko": "웃기다",
+    "en": "That's funny.",
+    "example": "That's so funny. I can't stop laughing.",
+    "translation": "너무 웃겨. 웃음이 안 멈춰.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000024",
+    "ko": "짜증 나",
+    "en": "This is so annoying.",
+    "example": "This is so annoying. The Wi-Fi keeps dropping.",
+    "translation": "짜증 나. 와이파이가 자꾸 끊겨.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000025",
+    "ko": "피곤해",
+    "en": "I'm exhausted.",
+    "example": "I'm exhausted. I need a break.",
+    "translation": "피곤해. 좀 쉬어야겠어.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000026",
+    "ko": "배고파",
+    "en": "I'm starving.",
+    "example": "I'm starving. Let's grab a bite.",
+    "translation": "배고파. 뭐 좀 먹자.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000027",
+    "ko": "목말라",
+    "en": "I'm thirsty.",
+    "example": "I'm thirsty. Can I get some water?",
+    "translation": "목말라. 물 좀 줄래?",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000028",
+    "ko": "추워",
+    "en": "It's freezing.",
+    "example": "It's freezing out here.",
+    "translation": "여기 밖이 너무 추워.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000029",
+    "ko": "더워",
+    "en": "It's boiling.",
+    "example": "It's boiling in this room.",
+    "translation": "이 방 너무 더워.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000030",
+    "ko": "비 온다",
+    "en": "It's raining.",
+    "example": "It's raining. Grab an umbrella.",
+    "translation": "비 온다. 우산 챙겨.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000031",
+    "ko": "정신없어",
+    "en": "I'm swamped.",
+    "example": "I'm swamped with work today.",
+    "translation": "오늘 일 때문에 정신없어.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000032",
+    "ko": "바쁜가 봐",
+    "en": "You seem busy.",
+    "example": "You seem busy. Want me to come back later?",
+    "translation": "바쁜가 봐. 나중에 올까?",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000033",
+    "ko": "천천히 해",
+    "en": "Take your time.",
+    "example": "Take your time. There's no rush.",
+    "translation": "천천히 해. 서두를 필요 없어.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000034",
+    "ko": "서두르자",
+    "en": "Let's hurry.",
+    "example": "Let's hurry. We're running late.",
+    "translation": "서두르자. 늦겠어.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000035",
+    "ko": "길 잃었어",
+    "en": "I'm lost.",
+    "example": "I'm lost. Can you help me find the station?",
+    "translation": "길 잃었어. 역 찾는 것 좀 도와주실래요?",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000036",
+    "ko": "맞아",
+    "en": "Exactly. / That's right.",
+    "example": "Exactly. That's what I meant.",
+    "translation": "맞아. 그게 내 말이었어.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000037",
+    "ko": "아니야",
+    "en": "No, that's not it.",
+    "example": "No, that's not what I meant.",
+    "translation": "아니야. 그게 내 뜻이 아니었어.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000038",
+    "ko": "진짜?",
+    "en": "Really? / Are you serious?",
+    "example": "Really? I can't believe it.",
+    "translation": "진짜? 믿기지가 않아.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000039",
+    "ko": "설마",
+    "en": "No way. / You've got to be kidding.",
+    "example": "You've got to be kidding me.",
+    "translation": "설마. 농담이지?",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000040",
+    "ko": "그럼 그렇지",
+    "en": "That figures.",
+    "example": "That figures. He always does that.",
+    "translation": "그럼 그렇지. 맨날 저러더라.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000041",
+    "ko": "어쩔 수 없지",
+    "en": "It can't be helped.",
+    "example": "It can't be helped. We'll try again tomorrow.",
+    "translation": "어쩔 수 없지. 내일 다시 해보자.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000042",
+    "ko": "다음에 하자",
+    "en": "Let's do it next time.",
+    "example": "Let's do it next time. I'm wiped out.",
+    "translation": "다음에 하자. 나 지쳤어.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000043",
+    "ko": "나한테 맡겨",
+    "en": "Leave it to me.",
+    "example": "Leave it to me. I've got this.",
+    "translation": "나한테 맡겨. 내가 할게.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000044",
+    "ko": "도와줄게",
+    "en": "I'll help you out.",
+    "example": "I'll help you out with that.",
+    "translation": "그거 도와줄게.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000045",
+    "ko": "신경 쓰지 마",
+    "en": "Don't worry about it.",
+    "example": "Don't worry about it. It's nothing.",
+    "translation": "신경 쓰지 마. 별거 아니야.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000046",
+    "ko": "잊어버려",
+    "en": "Just forget it.",
+    "example": "Just forget it. It's not worth it.",
+    "translation": "잊어버려. 그럴 가치 없어.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000047",
+    "ko": "잘했어",
+    "en": "Well done. / Nice job.",
+    "example": "Nice job. You nailed it.",
+    "translation": "잘했어. 완벽했어.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000048",
+    "ko": "수고했어",
+    "en": "Good work. / You did great.",
+    "example": "Good work today. Go get some rest.",
+    "translation": "오늘 수고했어. 좀 쉬어.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000049",
+    "ko": "조심해",
+    "en": "Be careful.",
+    "example": "Be careful crossing the street.",
+    "translation": "길 건널 때 조심해.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000050",
+    "ko": "믿어",
+    "en": "Trust me.",
+    "example": "Trust me. I wouldn't lie to you.",
+    "translation": "믿어. 너한테 거짓말 안 해.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000051",
+    "ko": "약속해",
+    "en": "Promise me.",
+    "example": "Promise me you'll call.",
+    "translation": "전화하겠다고 약속해.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000052",
+    "ko": "웃지 마",
+    "en": "Don't laugh.",
+    "example": "Don't laugh. I'm serious.",
+    "translation": "웃지 마. 진지해.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000053",
+    "ko": "울지 마",
+    "en": "Don't cry.",
+    "example": "Don't cry. Everything will be okay.",
+    "translation": "울지 마. 다 괜찮아질 거야.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000054",
+    "ko": "화내지 마",
+    "en": "Don't get mad.",
+    "example": "Don't get mad. Hear me out.",
+    "translation": "화내지 마. 내 말 좀 들어 봐.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000055",
+    "ko": "걱정 마",
+    "en": "Don't worry.",
+    "example": "Don't worry. I'll take care of it.",
+    "translation": "걱정 마. 내가 처리할게.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000056",
+    "ko": "기다려",
+    "en": "Hang on. / Wait up.",
+    "example": "Wait up! I'm coming.",
+    "translation": "기다려! 나도 갈게.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000057",
+    "ko": "들어와",
+    "en": "Come in.",
+    "example": "Come in. Make yourself at home.",
+    "translation": "들어와. 편하게 있어.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000058",
+    "ko": "앉아",
+    "en": "Have a seat.",
+    "example": "Have a seat. I'll be right with you.",
+    "translation": "앉아. 금방 갈게.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000059",
+    "ko": "먹어 봐",
+    "en": "Try it.",
+    "example": "Try it. It's really good.",
+    "translation": "먹어 봐. 진짜 맛있어.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000060",
+    "ko": "마셔 봐",
+    "en": "Give it a taste.",
+    "example": "Give it a taste. You'll like it.",
+    "translation": "마셔 봐. 마음에 들 거야.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000061",
+    "ko": "찍어 봐",
+    "en": "Take a picture.",
+    "example": "Take a picture. The view is perfect.",
+    "translation": "찍어 봐. 경치가 끝내줘.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000062",
+    "ko": "말해 봐",
+    "en": "Spit it out. / Tell me.",
+    "example": "Spit it out. What's on your mind?",
+    "translation": "말해 봐. 무슨 생각이야?",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000063",
+    "ko": "들어 봐",
+    "en": "Listen up.",
+    "example": "Listen up. This is important.",
+    "translation": "들어 봐. 중요한 거야.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000064",
+    "ko": "생각해 봐",
+    "en": "Think about it.",
+    "example": "Think about it. You'll see my point.",
+    "translation": "생각해 봐. 내 말 이해될 거야.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000065",
+    "ko": "다시 해 봐",
+    "en": "Try again.",
+    "example": "Try again. You're almost there.",
+    "translation": "다시 해 봐. 거의 다 왔어.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000066",
+    "ko": "포기하지 마",
+    "en": "Don't give up.",
+    "example": "Don't give up. You're so close.",
+    "translation": "포기하지 마. 거의 다 됐어.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000067",
+    "ko": "힘내",
+    "en": "Chin up. / Hang in there.",
+    "example": "Hang in there. Better days are coming.",
+    "translation": "힘내. 좋은 날이 올 거야.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000068",
+    "ko": "행운을 빌어",
+    "en": "Fingers crossed. / Good luck.",
+    "example": "Fingers crossed for your interview.",
+    "translation": "면접 잘되기를 행운을 빌게.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000069",
+    "ko": "축하해",
+    "en": "Congratulations.",
+    "example": "Congratulations on your promotion!",
+    "translation": "승진 축하해!",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000070",
+    "ko": "생일 축하해",
+    "en": "Happy birthday!",
+    "example": "Happy birthday! Make a wish.",
+    "translation": "생일 축하해! 소원 빌어.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000071",
+    "ko": "새해 복 많이 받아",
+    "en": "Happy New Year!",
+    "example": "Happy New Year! All the best.",
+    "translation": "새해 복 많이 받아!",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000072",
+    "ko": "메리 크리스마스",
+    "en": "Merry Christmas!",
+    "example": "Merry Christmas! Enjoy the holidays.",
+    "translation": "메리 크리스마스! 연휴 잘 보내.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000073",
+    "ko": "오래간만이야",
+    "en": "Long time no see.",
+    "example": "Long time no see. How have you been?",
+    "translation": "오래간만이야. 잘 지냈어?",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000074",
+    "ko": "처음 뵙겠습니다",
+    "en": "Nice to meet you.",
+    "example": "Nice to meet you. I've heard a lot about you.",
+    "translation": "처음 뵙겠습니다. 많이 들었어요.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000075",
+    "ko": "잘 부탁해",
+    "en": "Looking forward to working with you.",
+    "example": "Looking forward to working with you.",
+    "translation": "앞으로 잘 부탁드려요.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000076",
+    "ko": "또 봐요",
+    "en": "See you around.",
+    "example": "See you around. Take care.",
+    "translation": "또 봐요. 건강하세요.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000077",
+    "ko": "연락할게",
+    "en": "I'll keep in touch.",
+    "example": "I'll keep in touch. Don't be a stranger.",
+    "translation": "연락할게. 소원하게 지내지 마.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000078",
+    "ko": "문자해",
+    "en": "Text me.",
+    "example": "Text me when you arrive.",
+    "translation": "도착하면 문자해.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000079",
+    "ko": "전화해",
+    "en": "Give me a call.",
+    "example": "Give me a call tonight.",
+    "translation": "오늘 밤 전화해.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000080",
+    "ko": "카톡해",
+    "en": "Message me on KakaoTalk.",
+    "example": "Message me on KakaoTalk later.",
+    "translation": "나중에 카톡해.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000081",
+    "ko": "공유해 줘",
+    "en": "Share it with me.",
+    "example": "Share the link with me.",
+    "translation": "링크 공유해 줘.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000082",
+    "ko": "저장해 둬",
+    "en": "Save it for later.",
+    "example": "Save it for later. You might need it.",
+    "translation": "나중에 쓰게 저장해 둬.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000083",
+    "ko": "보내 줄게",
+    "en": "I'll send it over.",
+    "example": "I'll send it over in a minute.",
+    "translation": "금방 보내 줄게.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000084",
+    "ko": "확인해 볼게",
+    "en": "I'll look into it.",
+    "example": "I'll look into it and get back to you.",
+    "translation": "확인해 보고 연락할게.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000085",
+    "ko": "생각해 볼게",
+    "en": "I'll think about it.",
+    "example": "I'll think about it and let you know.",
+    "translation": "생각해 보고 알려줄게.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000086",
+    "ko": "결정했어",
+    "en": "I've made up my mind.",
+    "example": "I've made up my mind. I'm going.",
+    "translation": "결정했어. 나 갈게.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000087",
+    "ko": "마음이 바뀌었어",
+    "en": "I changed my mind.",
+    "example": "I changed my mind. Let's stay in.",
+    "translation": "마음이 바뀌었어. 집에 있자.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000088",
+    "ko": "기분이 좋아",
+    "en": "I'm in a good mood.",
+    "example": "I'm in a good mood today.",
+    "translation": "오늘 기분이 좋아.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000089",
+    "ko": "기분이 안 좋아",
+    "en": "I'm in a bad mood.",
+    "example": "I'm in a bad mood. Give me a minute.",
+    "translation": "기분이 안 좋아. 잠깐만.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000090",
+    "ko": "스트레스 받아",
+    "en": "I'm stressed out.",
+    "example": "I'm stressed out about the deadline.",
+    "translation": "마감 때문에 스트레스 받아.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000091",
+    "ko": "안심이야",
+    "en": "What a relief.",
+    "example": "What a relief. Everything worked out.",
+    "translation": "안심이야. 다 잘 됐어.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000092",
+    "ko": "실망이야",
+    "en": "I'm disappointed.",
+    "example": "I'm disappointed in the result.",
+    "translation": "결과에 실망이야.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000093",
+    "ko": "기대돼",
+    "en": "I'm looking forward to it.",
+    "example": "I'm looking forward to the trip.",
+    "translation": "여행이 기대돼.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000094",
+    "ko": "설레",
+    "en": "I'm so excited.",
+    "example": "I'm so excited for tonight.",
+    "translation": "오늘 밤이 너무 설레.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000095",
+    "ko": "심심해",
+    "en": "I'm bored.",
+    "example": "I'm bored. Want to hang out?",
+    "translation": "심심해. 놀러 갈래?",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000096",
+    "ko": "외로워",
+    "en": "I feel lonely.",
+    "example": "I feel lonely these days.",
+    "translation": "요즘 외로워.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000097",
+    "ko": "그립다",
+    "en": "I miss you.",
+    "example": "I miss you. When can we meet?",
+    "translation": "보고 싶어. 언제 만날 수 있어?",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000098",
+    "ko": "사랑해",
+    "en": "I love you.",
+    "example": "I love you more than words can say.",
+    "translation": "말로 다 못 할 만큼 사랑해.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000099",
+    "ko": "미안해",
+    "en": "My bad. / Sorry about that.",
+    "example": "My bad. I should've told you sooner.",
+    "translation": "미안해. 더 일찍 말했어야 했는데.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  },
+  {
+    "id": "EXP000100",
+    "ko": "괜찮아질 거야",
+    "en": "It'll be alright.",
+    "example": "It'll be alright. Hang in there.",
+    "translation": "괜찮아질 거야. 조금만 참아.",
+    "category": "일상 표현",
+    "tags": [
+      "일상"
+    ],
+    "level": "B1",
+    "status": "draft"
+  }
+]
