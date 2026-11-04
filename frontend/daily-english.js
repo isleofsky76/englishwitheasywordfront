@@ -274,10 +274,10 @@
       '</p>' +
       exampleBlock +
       '<div class="de-actions">' +
-      '<div class="de-comments-root" data-de-comments-root></div>' +
       '<button type="button" class="de-meaning-toggle" data-de-meaning-toggle aria-pressed="false">뜻 보기</button>' +
       '<button type="button" class="de-save-toggle" data-de-save-toggle aria-pressed="false">저장</button>' +
       '<button type="button" class="de-item-download" data-de-item-download hidden>다운로드</button>' +
+      '<div class="de-comments-root" data-de-comments-root></div>' +
       '</div>' +
       '</div>' +
       '</article>'

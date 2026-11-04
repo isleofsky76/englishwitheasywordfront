@@ -2,17 +2,17 @@
 @import url("redesign-tokens.css");
 
 .de-page {
-  --de-blue: #0000ee;
-  --de-ink: #222;
-  --de-muted: #555;
-  --de-line: #ddd;
+  --de-blue: #3d6eb8;
+  --de-ink: var(--ink, #3a3834);
+  --de-muted: var(--ink-muted, #7a756c);
+  --de-line: var(--line, #ddd);
   --de-max: 720px;
   --de-num-w: 4.5ch;
   --de-gap: 0.75rem;
   margin: 0;
   font-family: var(--font-sans, "IBM Plex Sans KR", sans-serif);
   color: var(--de-ink);
-  background: #fff;
+  background: var(--page-bg, #F6F3EC);
   -webkit-font-smoothing: antialiased;
 }
 
@@ -141,7 +141,7 @@
   margin: 4px 0 0;
   font-size: 16px;
   line-height: 1.55;
-  color: var(--de-blue);
+  color: #0000ee;
 }
 
 .de-example-block {
@@ -172,44 +172,73 @@
   display: block;
 }
 
+/* 뜻 보기 · 저장 · 댓글 · 글쓰기 — one-sentence 와 동일 한 줄 */
 .de-actions {
+  position: relative;
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
-  gap: 8px 10px;
+  align-items: baseline;
+  column-gap: 14px;
+  row-gap: 8px;
   margin-top: 10px;
 }
 
-.de-meaning-toggle,
-.de-save-toggle,
-.de-item-download {
-  height: 30px;
-  padding: 0 10px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-  background: #fff;
-  font-size: 12px;
-  color: #333;
-  cursor: pointer;
+.de-actions > .de-comments-root,
+.de-actions > .board-comments-root {
+  display: contents;
 }
 
-.de-meaning-toggle[aria-pressed="true"],
-.de-save-toggle[aria-pressed="true"] {
-  background: #f0f4ff;
-  border-color: #99a;
+.de-actions .os-cmt-bar {
+  display: contents;
+  margin: 0;
+  width: auto;
+  justify-content: flex-start;
+}
+
+.de-actions .os-cmt-panel {
+  flex: 1 1 100%;
+  width: 100%;
+  margin-top: 4px;
+}
+
+.de-actions .os-cmt-toggle,
+.de-actions .os-cmt-write,
+.de-actions .de-meaning-toggle,
+.de-actions .de-save-toggle,
+.de-actions .de-item-download {
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: none;
+  font: inherit;
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--de-muted);
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  opacity: 0.85;
+  -webkit-text-fill-color: currentColor;
+  flex: 0 0 auto;
+  height: auto;
+}
+
+.de-actions .de-meaning-toggle:hover,
+.de-actions .de-meaning-toggle[aria-pressed="true"],
+.de-actions .de-save-toggle:hover,
+.de-actions .de-save-toggle[aria-pressed="true"],
+.de-actions .de-item-download:hover,
+.de-actions .os-cmt-toggle:hover,
+.de-actions .os-cmt-write:hover {
+  opacity: 1;
+  color: var(--de-blue);
+  -webkit-text-fill-color: currentColor;
+  background: none;
 }
 
 .de-item-download[hidden] {
   display: none !important;
-}
-
-.de-comments-root {
-  flex: 1 1 100%;
-  min-width: 0;
-}
-
-.de-comments-root .os-cmt-bar {
-  margin-top: 0;
 }
 
 .de-status {
