@@ -97,19 +97,44 @@
     );
   }
 
+  var activeTtsBtn = null;
+
+  function clearTtsPlayingState(btn) {
+    if (btn) btn.classList.remove('is-playing');
+    if (activeTtsBtn === btn) activeTtsBtn = null;
+  }
+
   function speakText(text, btn) {
     if (!window.speechSynthesis || !text) return;
     try {
-      window.speechSynthesis.cancel();
+      var synth = window.speechSynthesis;
+      var isThisPlaying =
+        btn &&
+        btn.classList.contains('is-playing') &&
+        (synth.speaking || synth.pending);
+      /* 같은 스피커 다시 누르면 정지 */
+      if (isThisPlaying) {
+        synth.cancel();
+        clearTtsPlayingState(btn);
+        return;
+      }
+      synth.cancel();
+      if (activeTtsBtn && activeTtsBtn !== btn) {
+        activeTtsBtn.classList.remove('is-playing');
+      }
+      document.querySelectorAll('.os-tts.is-playing').forEach(function (el) {
+        el.classList.remove('is-playing');
+      });
       var u = new SpeechSynthesisUtterance(text);
       u.lang = 'en-US';
       u.rate = 0.95;
       if (btn) {
         btn.classList.add('is-playing');
-        u.onend = function () { btn.classList.remove('is-playing'); };
-        u.onerror = function () { btn.classList.remove('is-playing'); };
+        activeTtsBtn = btn;
+        u.onend = function () { clearTtsPlayingState(btn); };
+        u.onerror = function () { clearTtsPlayingState(btn); };
       }
-      window.speechSynthesis.speak(u);
+      synth.speak(u);
     } catch (e) { /* ignore */ }
   }
 
