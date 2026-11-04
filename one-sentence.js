@@ -278,19 +278,18 @@
       '" data-pos="' +
       escapeAttr(pos) +
       '">' +
-        /* 예문 먼저 → 단어·뜻 (학습 흐름: 문장 → 단어) */
-        '<div class="os-en-row">' +
-          '<p class="os-en">' + highlightEn(item.en, item.highlight || item.word) + '</p>' +
-          '<button type="button" class="os-tts" data-os-tts="' + escapeAttr(item.en) +
-            '" aria-label="' + escapeAttr(item.word + ' 문장 듣기') + '">' + SPEAKER_SVG + '</button>' +
-        '</div>' +
-        (item.ko ? '<p class="os-ko">' + escapeHtml(item.ko) + '</p>' : '') +
         '<p class="os-head">' +
           '<span class="os-head-en">' + escapeHtml(item.word) + '</span>' +
           renderPron(item) +
         '</p>' +
         meta +
         renderCfLines(item.cf) +
+        '<div class="os-en-row">' +
+          '<p class="os-en">' + highlightEn(item.en, item.highlight || item.word) + '</p>' +
+          '<button type="button" class="os-tts" data-os-tts="' + escapeAttr(item.en) +
+            '" aria-label="' + escapeAttr(item.word + ' 문장 듣기') + '">' + SPEAKER_SVG + '</button>' +
+        '</div>' +
+        (item.ko ? '<p class="os-ko">' + escapeHtml(item.ko) + '</p>' : '') +
         renderMemoBox(item.memo) +
         '<div class="os-item-foot">' +
           '<div class="os-comments-root" data-os-comments-root></div>' +

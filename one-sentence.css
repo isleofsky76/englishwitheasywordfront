@@ -540,11 +540,6 @@ body.os-hide-meaning .os-item.is-meaning-shown .os-cf-ko {
   font-weight: 400;
 }
 
-/* 예문 다음 단어 블록 간격 */
-.os-item > .os-ko + .os-head,
-.os-item > .os-en-row + .os-head {
-  margin-top: 12px;
-}
 
 /* 방문자에게 보이는 관리자 메모 */
 .os-memo {
@@ -1149,9 +1144,10 @@ body.os-hide-meaning .os-item.is-meaning-shown .os-cf-ko {
   flex-wrap: wrap;
   align-items: baseline;
   gap: 10px 14px;
-  margin: 0 0 8px;
-  padding: 4px 0 28px;
-  border-bottom: 1px solid var(--line);
+  margin: 36px 0 8px;
+  padding: 28px 0 8px;
+  border-top: 1px solid var(--line);
+  border-bottom: none;
   line-height: 1.5;
 }
 
