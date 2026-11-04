@@ -209,11 +209,18 @@
           return { board: board, entries: entries };
         })
         .catch(function (err) {
-          return fetchStaticFeedEntries(board).then(function (entries) {
-            console.warn('home preview: API 실패 → 정적 피드', board.path, err && err.message);
-            boardEntriesCache[board.path] = entries;
-            return { board: board, entries: entries };
-          });
+          return fetchStaticFeedEntries(board)
+            .then(function (entries) {
+              console.warn('home preview: API 실패 → 정적 피드', board.path, err && err.message);
+              boardEntriesCache[board.path] = entries;
+              return { board: board, entries: entries };
+            })
+            .catch(function () {
+              /* onesentence 등 정적 피드 없는 보드도 검색에서 빠지지 않게 빈 배열로 유지 */
+              console.warn('home preview: 보드 로드 실패', board.path, err && err.message);
+              boardEntriesCache[board.path] = [];
+              return { board: board, entries: [] };
+            });
         });
     })).then(function (results) {
       var combined = [];
@@ -468,21 +475,63 @@
     return String(str || '').replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   }
 
+  function isWordCardItem(item) {
+    if (!item) return false;
+    if (item.searchOnly) return true;
+    var label = String(item.label || '');
+    return label === '문장' || label === '단어장';
+  }
+
+  function primaryWordKey(item) {
+    var slug = String((item && item.slug) || '').trim().toLowerCase();
+    if (slug) return slug;
+    var title = String((item && item.title) || '');
+    var dash = title.indexOf('—');
+    if (dash > 0) return title.slice(0, dash).trim().toLowerCase();
+    return title.trim().toLowerCase();
+  }
+
   function scoreSearchItem(item, q) {
     if (!q) return 0;
     var title = String(item.title || '').toLowerCase();
     var slug = String(item.slug || '').toLowerCase();
+    var word = primaryWordKey(item);
     var hay = String(item.searchText || title || '').toLowerCase();
+    var wordCard = isWordCardItem(item);
     if (!title && !slug && !hay) return 0;
-    if (slug === q || title === q) return 100;
-    if (slug.indexOf(q) === 0 || title.indexOf(q) === 0) return 85;
-    try {
-      var wordRe = new RegExp('\\b' + escapeRegex(q) + '\\b', 'i');
-      if (wordRe.test(slug) || wordRe.test(title) || wordRe.test(hay)) return 75;
-    } catch (e) { /* ignore */ }
-    if (slug.indexOf(q) !== -1 || title.indexOf(q) !== -1) return 55;
-    if (hay.indexOf(q) !== -1) return 40;
-    return 0;
+
+    var score = 0;
+    if (word === q || slug === q || title === q) score = 100;
+    else if (word.indexOf(q) === 0 || slug.indexOf(q) === 0) score = 92;
+    else if (title.indexOf(q) === 0) score = 86;
+    else {
+      try {
+        var wordRe = new RegExp('\\b' + escapeRegex(q) + '\\b', 'i');
+        if (wordRe.test(word) || wordRe.test(slug)) score = 82;
+        else if (wordRe.test(title)) score = 70;
+        else if (q.length >= 3 && wordRe.test(hay)) score = wordCard ? 62 : 34;
+        else if (word.indexOf(q) !== -1 || slug.indexOf(q) !== -1) score = 58;
+        else if (title.indexOf(q) !== -1) score = 52;
+        /* 짧은 쿼리의 본문 부분일치는 노이즈 — 4글자 이상만 */
+        else if (q.length >= 4 && hay.indexOf(q) !== -1) score = wordCard ? 46 : 22;
+      } catch (e) {
+        if (title.indexOf(q) !== -1) score = 52;
+      }
+    }
+    if (score > 0 && wordCard) score = Math.min(100, score + 8);
+    return score;
+  }
+
+  function dedupeSearchHits(items) {
+    var seen = Object.create(null);
+    var out = [];
+    items.forEach(function (item) {
+      var key = String((item && (item.href || item.slug || item.title)) || '').toLowerCase();
+      if (!key || seen[key]) return;
+      seen[key] = true;
+      out.push(item);
+    });
+    return out;
   }
 
   function search(query, limit) {
@@ -498,10 +547,20 @@
         .filter(function (row) { return row.score > 0; })
         .sort(function (a, b) {
           if (b.score !== a.score) return b.score - a.score;
+          var aWord = isWordCardItem(a.item) ? 1 : 0;
+          var bWord = isWordCardItem(b.item) ? 1 : 0;
+          if (bWord !== aWord) return bWord - aWord;
           return (b.item.views || 0) - (a.item.views || 0);
         })
         .map(function (row) { return row.item; });
-      return max ? ranked.slice(0, max) : ranked;
+      ranked = dedupeSearchHits(ranked);
+      /* 자동완성: 단어카드(문장·단어장)를 먼저 채운 뒤 나머지로 보충 */
+      if (max) {
+        var wordFirst = ranked.filter(isWordCardItem);
+        var rest = ranked.filter(function (item) { return !isWordCardItem(item); });
+        ranked = wordFirst.concat(rest).slice(0, max);
+      }
+      return ranked;
     });
   }
 

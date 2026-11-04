@@ -323,6 +323,32 @@
       activeIndex = -1;
     }
 
+    function escapeSuggestText(s) {
+      return String(s || '').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+    function renderHitLink(item, opts) {
+      opts = opts || {};
+      var title = escapeSuggestText(item.title || '제목 없음');
+      var label = escapeSuggestText(item.label || '');
+      var href = String(item.href || '#');
+      var cls = opts.active ? ' class="is-active"' : '';
+      var labelHtml = label
+        ? '<span class="site-search-label">' + label + '</span>'
+        : '';
+      return '<li><a href="' + href + '"' + cls + '>' +
+        labelHtml +
+        '<span class="site-search-title">' + title + '</span>' +
+        '</a></li>';
+    }
+
+    function isWordSearchHit(item) {
+      if (!item) return false;
+      if (item.searchOnly) return true;
+      var label = String(item.label || '');
+      return label === '문장' || label === '단어장';
+    }
+
     function renderSuggest(hits, emptyText) {
       activeIndex = hits && hits.length ? 0 : -1;
       if (!hits || !hits.length) {
@@ -331,10 +357,7 @@
         return;
       }
       list.innerHTML = hits.map(function (item, idx) {
-        var title = String(item.title || '제목 없음').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-        var href = String(item.href || '#');
-        var cls = idx === 0 ? ' class="is-active"' : '';
-        return '<li><a href="' + href + '"' + cls + '><span class="site-search-title">' + title + '</span></a></li>';
+        return renderHitLink(item, { active: idx === 0 });
       }).join('');
       list.hidden = false;
     }
@@ -360,10 +383,19 @@
       if (!hits || !hits.length) {
         searchPageList.innerHTML = heading + '<p class="site-search-empty">' + emptyText + '</p>';
       } else {
-        searchPageList.innerHTML = heading + '<ul class="site-search-page-list">' + hits.map(function (item) {
-          var title = String(item.title || '제목 없음').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-          return '<li><a href="' + String(item.href || '#') + '">' + title + '</a></li>';
-        }).join('') + '</ul>';
+        var wordHits = hits.filter(isWordSearchHit);
+        var postHits = hits.filter(function (item) { return !isWordSearchHit(item); });
+        function section(title, items) {
+          if (!items.length) return '';
+          return '<h2 class="site-search-section-title">' + escapeSuggestText(title) +
+            ' <span class="site-search-section-count">' + items.length + '</span></h2>' +
+            '<ul class="site-search-page-list">' + items.map(function (item) {
+              return renderHitLink(item);
+            }).join('') + '</ul>';
+        }
+        searchPageList.innerHTML = heading +
+          section('단어 · 문장', wordHits) +
+          section('관련 글', postHits);
       }
       try {
         window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
@@ -386,7 +418,7 @@
 
     function previewSearch(q) {
       if (!window.HomeBoardPreview) return;
-      HomeBoardPreview.search(q, 8).then(function (hits) {
+      HomeBoardPreview.search(q, 16).then(function (hits) {
         renderSuggest(hits, '검색 결과가 없습니다.');
       }).catch(function () {
         renderSuggest([], '검색 결과를 불러올 수 없습니다.');
