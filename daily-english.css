@@ -3,10 +3,13 @@
 
 .de-page {
   --de-blue: #3d6eb8;
-  --de-ink: var(--ink, #3a3834);
-  --de-muted: var(--ink-muted, #7a756c);
-  --de-line: var(--line, #ddd);
-  --de-max: 720px;
+  --de-ink: #3a3834;
+  --de-ink-soft: #6a6660;
+  --de-ink-muted: #7a756c;
+  --de-muted: #7a756c;
+  --de-line: rgba(58, 56, 52, 0.12);
+  --de-max: 680px;
+  --de-body: 17px;
   --de-num-w: 4.5ch;
   --de-gap: 0.75rem;
   margin: 0;
@@ -19,30 +22,31 @@
 .de-main {
   max-width: var(--de-max);
   margin: 0 auto;
-  padding: 40px 20px 100px;
+  padding: 48px 24px 120px;
   box-sizing: border-box;
 }
 
 .de-hero {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
 }
 
 .de-title {
   margin: 0;
-  font-size: clamp(22px, 4vw, 28px);
+  font-size: clamp(20px, 3.2vw, 24px);
   font-weight: 700;
   letter-spacing: -0.02em;
-  line-height: 1.3;
-  color: #111;
+  line-height: 1.35;
+  color: var(--ink, #1c1917);
 }
 
 .de-lead {
   margin: 0;
-  font-size: 15px;
-  line-height: 1.5;
-  color: var(--de-muted);
+  max-width: 34em;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--de-ink-muted);
 }
 
 .de-toolbar {
@@ -61,25 +65,26 @@
 .de-search input {
   width: 100%;
   box-sizing: border-box;
-  height: 42px;
-  padding: 0 14px;
-  border: 1px solid #bbb;
-  border-radius: 4px;
-  background: #fff;
-  color: #111;
+  height: 44px;
+  padding: 0 16px;
+  border: 1px solid var(--line, rgba(58, 56, 52, 0.18));
+  border-radius: 10px;
+  background: var(--surface, #fff);
+  color: var(--de-ink);
   font-family: inherit;
   font-size: 15px;
 }
 
 .de-search input:focus {
-  outline: 2px solid #99b;
-  outline-offset: 1px;
+  outline: none;
+  border-color: var(--de-blue);
+  box-shadow: 0 0 0 3px rgba(61, 110, 184, 0.15);
 }
 
 .de-count {
   margin: 0;
   font-size: 13px;
-  color: var(--de-muted);
+  color: var(--de-ink-muted);
   white-space: nowrap;
 }
 
@@ -109,17 +114,17 @@
   display: grid;
   grid-template-columns: var(--de-num-w) minmax(0, 1fr);
   column-gap: var(--de-gap);
-  padding: 18px 0 16px;
-  border-bottom: 1px solid #eee;
+  padding: 22px 0 18px;
+  border-bottom: 1px solid var(--de-line);
 }
 
 .de-num {
   grid-column: 1;
   grid-row: 1 / span 20;
   font-variant-numeric: tabular-nums;
-  font-size: 14px;
+  font-size: var(--de-body);
   line-height: 1.55;
-  color: #666;
+  color: var(--de-ink-muted);
   text-align: right;
   user-select: none;
 }
@@ -129,37 +134,48 @@
   min-width: 0;
 }
 
+/* 한국어 표현 — one-sentence 표제어/메타와 동일 톤 */
 .de-ko {
-  margin: 0;
-  font-size: 16px;
+  margin: 0 0 2px;
+  font-size: var(--de-body);
   line-height: 1.55;
   font-weight: 600;
-  color: #111;
+  color: var(--de-ink);
 }
 
+/* 영어 표현 — one-sentence .os-head-en */
 .de-en {
-  margin: 4px 0 0;
-  font-size: 16px;
+  margin: 0;
+  font-family: inherit;
+  font-size: var(--de-body);
+  font-weight: 700;
   line-height: 1.55;
-  color: #0000ee;
+  letter-spacing: -0.01em;
+  color: var(--de-blue);
 }
 
 .de-example-block {
-  margin-top: 10px;
+  margin-top: 8px;
 }
 
+/* 영어 예문 — one-sentence .os-en */
 .de-example {
   margin: 0;
-  font-size: 14px;
-  line-height: 1.55;
-  color: #1a1a1a;
+  font-family: inherit;
+  font-size: var(--de-body);
+  font-weight: 400;
+  line-height: 1.7;
+  letter-spacing: 0;
+  color: var(--de-ink);
 }
 
+/* 예문 한글 — one-sentence .os-ko */
 .de-translation {
-  margin: 2px 0 0;
-  font-size: 14px;
-  line-height: 1.55;
-  color: #444;
+  margin: 4px 0 0;
+  font-size: var(--de-body);
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--de-ink-soft);
 }
 
 /* 기본: 예문·번역 숨김 (표현별 is-examples-shown 으로 예외) */
@@ -308,14 +324,10 @@
 
 @media (max-width: 480px) {
   .de-main {
-    padding: 28px 14px 90px;
+    padding: 32px 16px 100px;
   }
   .de-page {
     --de-num-w: 3.5ch;
     --de-gap: 0.55rem;
-  }
-  .de-ko,
-  .de-en {
-    font-size: 15px;
   }
 }
