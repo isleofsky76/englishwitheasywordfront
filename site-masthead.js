@@ -4,7 +4,7 @@
  * nav-home-menu.js 가 로드함
  */
 (function () {
-    var VERSION = '20261104dict1';
+    var VERSION = '20261104de1';
 
   var DICT_LOOKUP_VER = '20261104dict1';
   var DICT_LOOKUP_CONTAINERS = [
@@ -93,6 +93,7 @@
   ];
   var EXTRA_NAV_ITEMS = [
     { href: 'index.html', label: '홈', tone: 'home', pages: ['index.html', ''] },
+    { href: 'daily-english.html', label: '생활영어', tone: 'daily', pages: ['daily-english.html'] },
     { href: 'english-synonym-list.html', label: '연관단어', tone: 'syn', pages: ['english-synonym-list.html', 'english-synonym.html'] },
     { href: 'defense-news-list.html', label: '국방뉴스', tone: 'defense', pages: ['defense-news-list.html', 'defense-news.html'] },
     { href: 'economy-news-list.html', label: '경제뉴스', tone: 'news', pages: ['economy-news-list.html', 'economy-news.html'] },

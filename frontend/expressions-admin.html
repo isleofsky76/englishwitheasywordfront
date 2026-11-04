@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>생활 영어 한 줄 — 콘텐츠 관리</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 880px; margin: 0 auto; padding: 24px 16px 80px; color: #222; }
+    h1 { font-size: 1.35rem; margin: 0 0 8px; }
+    .lead { color: #555; margin: 0 0 24px; font-size: 0.95rem; }
+    fieldset { border: 1px solid #ccc; border-radius: 6px; padding: 16px; margin: 0 0 20px; }
+    legend { padding: 0 6px; font-weight: 600; }
+    label { display: block; margin: 10px 0 4px; font-size: 0.9rem; }
+    input[type="password"], select, textarea { width: 100%; box-sizing: border-box; padding: 8px 10px; font: inherit; }
+    textarea { min-height: 160px; font-family: ui-monospace, monospace; font-size: 13px; }
+    .row { display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-end; margin-top: 12px; }
+    .row > * { flex: 1 1 140px; }
+    button { height: 40px; padding: 0 16px; border: 1px solid #888; border-radius: 4px; background: #f5f5f5; cursor: pointer; font: inherit; }
+    button.primary { background: #1a3a6b; color: #fff; border-color: #1a3a6b; }
+    button:disabled { opacity: 0.5; cursor: default; }
+    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 8px; margin: 12px 0; }
+    .stat { border: 1px solid #ddd; border-radius: 4px; padding: 10px; background: #fafafa; }
+    .stat b { display: block; font-size: 1.25rem; }
+    .stat span { font-size: 0.8rem; color: #666; }
+    pre { background: #f7f7f7; border: 1px solid #e0e0e0; padding: 12px; overflow: auto; font-size: 12px; max-height: 360px; }
+    .err { color: #a00; }
+    .ok { color: #060; }
+    .hint { font-size: 0.85rem; color: #666; margin-top: 8px; }
+    .template { font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+  <h1>생활 영어 한 줄 — 콘텐츠 관리</h1>
+  <p class="lead">모드 A: 신규 표현 등록 · 모드 B: 기존 예문 업데이트. 검증 후 승인해야 MongoDB에 반영됩니다.</p>
+
+  <fieldset>
+    <legend>업로드</legend>
+    <label for="admin-pw">관리자 비밀번호</label>
+    <input id="admin-pw" type="password" autocomplete="off" placeholder="ADMIN_PASSWORD">
+
+    <label for="mode">업로드 유형</label>
+    <select id="mode">
+      <option value="insert" selected>모드 A — 신규 표현 등록</option>
+      <option value="update-examples">모드 B — 기존 예문 업데이트</option>
+    </select>
+
+    <label for="format">파일 형식</label>
+    <select id="format">
+      <option value="csv" selected>CSV UTF-8</option>
+      <option value="json">JSON</option>
+    </select>
+
+    <label for="file">파일 선택</label>
+    <input id="file" type="file" accept=".csv,.json,text/csv,application/json">
+
+    <label for="content">또는 붙여넣기</label>
+    <textarea id="content" placeholder="CSV 또는 JSON 내용"></textarea>
+
+    <p class="hint template" id="template-hint"></p>
+
+    <div class="row">
+      <button type="button" id="btn-validate">3. 파일 검증 (dry-run)</button>
+      <button type="button" class="primary" id="btn-apply" disabled>6. 승인 후 저장 (APPLY)</button>
+    </div>
+  </fieldset>
+
+  <div id="result" hidden>
+    <h2 style="font-size:1.1rem">검증 / 처리 결과</h2>
+    <div class="stats" id="stats"></div>
+    <pre id="preview"></pre>
+  </div>
+
+  <script src="page30-api-config.js?v=20261101sec1"></script>
+  <script>
+(function () {
+  function apiBase() {
+    if (typeof window.getPage30ApiBaseUrl === 'function') return window.getPage30ApiBaseUrl();
+    return 'https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app';
+  }
+
+  var lastPayload = null;
+
+  function updateHint() {
+    var mode = document.getElementById('mode').value;
+    var el = document.getElementById('template-hint');
+    if (mode === 'update-examples') {
+      el.textContent = '예문 업데이트 CSV: id,example,translation — 빈 셀은 기존 값 유지. ko/en 등은 변경하지 않습니다.';
+    } else {
+      el.textContent = '신규 등록 CSV: id,ko,en,example,translation,category,tags,level,status — 기존 ID는 건너뜁니다.';
+    }
+  }
+
+  document.getElementById('mode').addEventListener('change', updateHint);
+  updateHint();
+
+  document.getElementById('file').addEventListener('change', function (e) {
+    var f = e.target.files && e.target.files[0];
+    if (!f) return;
+    var reader = new FileReader();
+    reader.onload = function () {
+      document.getElementById('content').value = String(reader.result || '');
+      if (/\.json$/i.test(f.name)) document.getElementById('format').value = 'json';
+      else document.getElementById('format').value = 'csv';
+    };
+    reader.readAsText(f, 'UTF-8');
+  });
+
+  function showResult(data) {
+    var box = document.getElementById('result');
+    var stats = document.getElementById('stats');
+    var preview = document.getElementById('preview');
+    box.hidden = false;
+    var cards = [];
+    function card(label, val) {
+      cards.push('<div class="stat"><b>' + val + '</b><span>' + label + '</span></div>');
+    }
+    if (data.mode === 'update-examples') {
+      card('총 행', data.totalRows != null ? data.totalRows : '—');
+      card('업데이트 예정', data.wouldUpdate != null ? data.wouldUpdate : data.updated);
+      card('없음/스킵', data.missing != null ? data.missing : data.skipped);
+      card('변경 없음', data.noop != null ? data.noop : '—');
+      card('오류', data.errorCount != null ? data.errorCount : '—');
+    } else {
+      card('총 행', data.totalRows != null ? data.totalRows : '—');
+      card('신규 등록', data.wouldInsert != null ? data.wouldInsert : data.inserted);
+      card('중복', data.duplicate != null ? data.duplicate : data.skipped);
+      card('오류', data.errorCount != null ? data.errorCount : '—');
+    }
+    stats.innerHTML = cards.join('');
+    preview.textContent = JSON.stringify(data, null, 2);
+  }
+
+  async function post(path, body) {
+    var res = await fetch(apiBase().replace(/\/$/, '') + path, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
+    var data = await res.json().catch(function () { return {}; });
+    if (!res.ok) throw new Error(data.error || ('HTTP ' + res.status));
+    return data;
+  }
+
+  document.getElementById('btn-validate').addEventListener('click', async function () {
+    var btn = this;
+    btn.disabled = true;
+    document.getElementById('btn-apply').disabled = true;
+    lastPayload = null;
+    try {
+      var payload = {
+        mode: document.getElementById('mode').value,
+        format: document.getElementById('format').value,
+        content: document.getElementById('content').value,
+        adminPasswordInput: document.getElementById('admin-pw').value,
+      };
+      var data = await post('/api/expressions/admin/validate', payload);
+      lastPayload = payload;
+      showResult(data);
+      var canApply =
+        (payload.mode === 'update-examples' && data.wouldUpdate > 0) ||
+        (payload.mode !== 'update-examples' && data.wouldInsert > 0);
+      document.getElementById('btn-apply').disabled = !canApply;
+    } catch (err) {
+      showResult({ error: String(err.message || err) });
+    } finally {
+      btn.disabled = false;
+    }
+  });
+
+  document.getElementById('btn-apply').addEventListener('click', async function () {
+    if (!lastPayload) return;
+    if (!window.confirm('검증된 내용을 MongoDB에 반영할까요? (되돌리기 어렵습니다)')) return;
+    var btn = this;
+    btn.disabled = true;
+    try {
+      var payload = Object.assign({}, lastPayload, { confirm: 'APPLY' });
+      var data = await post('/api/expressions/admin/apply', payload);
+      showResult(data);
+      lastPayload = null;
+    } catch (err) {
+      showResult({ error: String(err.message || err) });
+    } finally {
+      btn.disabled = true;
+    }
+  });
+})();
+  </script>
+</body>
+</html>

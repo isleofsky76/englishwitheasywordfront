@@ -4,7 +4,7 @@
  * nav-home-menu.js 가 로드함
  */
 (function () {
-    var VERSION = '20261019rd7';
+    var VERSION = '20261104de1';
   /* 시안 주 메뉴 5개 — href는 기존 URL 유지 */
   var PRIMARY_NAV_ITEMS = [
     {
@@ -44,6 +44,7 @@
   ];
   var EXTRA_NAV_ITEMS = [
     { href: 'index.html', label: '홈', tone: 'home', pages: ['index.html', ''] },
+    { href: 'daily-english.html', label: '생활영어', tone: 'daily', pages: ['daily-english.html'] },
     { href: 'english-synonym-list.html', label: '연관단어', tone: 'syn', pages: ['english-synonym-list.html', 'english-synonym.html'] },
     { href: 'defense-news-list.html', label: '국방뉴스', tone: 'defense', pages: ['defense-news-list.html', 'defense-news.html'] },
     { href: 'korea-news-list.html', label: '한국뉴스', tone: 'defense', pages: ['korea-news-list.html', 'korea-news.html'] },
