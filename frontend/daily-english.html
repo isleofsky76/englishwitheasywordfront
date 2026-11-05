@@ -30,7 +30,7 @@
     <link rel="stylesheet" href="site-masthead.css?v=20261105search6">
     <link rel="stylesheet" href="nav-home-menu.css?v=20260617">
     <link rel="stylesheet" href="board-comments.css?v=20261102c4">
-    <link rel="stylesheet" href="daily-english.css?v=20261105cat2">
+    <link rel="stylesheet" href="daily-english.css?v=20261105hide1">
 </head>
 <body class="de-page de-hide-meaning">
     <nav id="navbar" class="navbar navbar-expand site-masthead" aria-label="주 메뉴"></nav>
@@ -53,10 +53,12 @@
             >
           </label>
           <p class="de-count" id="de-count" aria-live="polite">총 0개</p>
-          <label class="de-hide-meaning-toggle" title="체크 해제하면 뜻이 보입니다">
-            <input type="checkbox" class="de-hide-meaning-input" id="de-hide-meaning" checked>
-            <span class="de-hide-meaning-label">전체 뜻 해제하기</span>
-          </label>
+          <span class="de-hide-meaning-slot" id="de-hide-meaning-slot">
+            <label class="de-hide-meaning-toggle" title="체크 해제하면 뜻이 보입니다">
+              <input type="checkbox" class="de-hide-meaning-input" id="de-hide-meaning" checked>
+              <span class="de-hide-meaning-label">전체 뜻 해제하기</span>
+            </label>
+          </span>
           <button type="button" class="de-download-btn" id="de-download-saved" hidden disabled title="이 탭에서 저장한 표현만 잠시 보관됩니다">
             다운로드 <span class="de-saved-count" id="de-saved-count">0</span>
           </button>
@@ -93,7 +95,7 @@
     <script src="nav-home-menu.js?v=20261105menu3"></script>
     <script src="site-stats.js?v=20261105dash1"></script>
     <script src="board-comments.js?v=20261102c4"></script>
-    <script src="daily-english.js?v=20261105dash1"></script>
+    <script src="daily-english.js?v=20261105hide1"></script>
     <script>window.DICT_CONFIG = { container: '.de-en, .de-example' };</script>
 </body>
 </html>

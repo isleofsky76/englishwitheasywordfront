@@ -89,9 +89,20 @@
 .de-cats-inner {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: 6px;
   width: 100%;
   max-width: var(--de-max, 680px);
+}
+
+.de-hide-meaning-slot {
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+.de-hide-meaning-toggle.is-in-cats {
+  margin-left: auto;
+  flex-shrink: 0;
 }
 
 .de-cat-chip {

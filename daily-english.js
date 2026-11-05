@@ -482,13 +482,39 @@
     document.documentElement.style.setProperty('--de-cats-h', h + 'px');
   }
 
+  /** innerHTML로 cats를 비우기 전에 토글을 툴바 슬롯으로 대피 */
+  function rescueHideMeaningToggle() {
+    var toggle = document.querySelector('.de-hide-meaning-toggle');
+    var slot = document.getElementById('de-hide-meaning-slot');
+    if (toggle && slot && !slot.contains(toggle)) {
+      slot.appendChild(toggle);
+      toggle.classList.remove('is-in-cats');
+    }
+  }
+
+  /** sticky 카테고리 바 맨 끝으로 이동 — 스크롤 중에도 뜻 해제 가능 */
+  function placeHideMeaningToggle() {
+    var toggle = document.querySelector('.de-hide-meaning-toggle');
+    var nav = document.getElementById('de-cats');
+    var inner = nav && nav.querySelector('.de-cats-inner');
+    if (!toggle) return;
+    if (inner && nav && !nav.hidden) {
+      inner.appendChild(toggle);
+      toggle.classList.add('is-in-cats');
+      return;
+    }
+    rescueHideMeaningToggle();
+  }
+
   function renderCategoryNav() {
     var nav = document.getElementById('de-cats');
     if (!nav) return;
+    rescueHideMeaningToggle();
     var cats = Array.isArray(state.categories) ? state.categories : [];
     if (!cats.length) {
       nav.hidden = true;
       nav.innerHTML = '';
+      placeHideMeaningToggle();
       syncBackTopVisibility();
       return;
     }
@@ -535,6 +561,7 @@
     html += '</div>';
     nav.innerHTML = html;
     nav.hidden = false;
+    placeHideMeaningToggle();
     syncBackTopVisibility();
   }
 
