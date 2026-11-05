@@ -404,13 +404,57 @@
     tags.innerHTML = html;
   }
 
+  function normalizeSearchKey(s) {
+    return String(s || '')
+      .trim()
+      .toLowerCase()
+      .replace(/[“”"']/g, "'")
+      .replace(/\s+/g, ' ');
+  }
+
+  /** 결과 필터: 표제어·뜻이 쿼리와 정확히 같을 때만 */
   function filterItems(items, q) {
-    var needle = String(q || '').trim().toLowerCase();
+    var needle = normalizeSearchKey(q);
     if (!needle) return items.slice();
     return items.filter(function (it) {
-      var blob = [it.word, it.pos, it.meaning, it.ko, it.en, it.memo, it.ipaKo].join(' ').toLowerCase();
-      return blob.indexOf(needle) !== -1;
+      var word = normalizeSearchKey(it.word);
+      var highlight = normalizeSearchKey(it.highlight);
+      var meaning = normalizeSearchKey(it.meaning);
+      var ko = normalizeSearchKey(it.ko);
+      return word === needle || highlight === needle || meaning === needle || ko === needle;
     });
+  }
+
+  /** 입력 미리보기: 표제어 접두·정확 일치 */
+  function previewItems(items, q, limit) {
+    var needle = normalizeSearchKey(q);
+    var max = Number(limit) || 8;
+    if (!needle) return [];
+    var ranked = [];
+    (items || []).forEach(function (it) {
+      if (!it) return;
+      var word = normalizeSearchKey(it.word);
+      var meaning = normalizeSearchKey(it.meaning);
+      var score = 0;
+      if (word === needle) score = 100;
+      else if (meaning === needle) score = 90;
+      else if (word.indexOf(needle) === 0) score = 80;
+      else if (meaning && meaning.indexOf(needle) === 0) score = 70;
+      if (score > 0) ranked.push({ item: it, score: score });
+    });
+    ranked.sort(function (a, b) {
+      if (b.score !== a.score) return b.score - a.score;
+      return String(a.item.word || '').localeCompare(String(b.item.word || ''));
+    });
+    var seen = Object.create(null);
+    var out = [];
+    ranked.forEach(function (row) {
+      var key = normalizeSearchKey(row.item.word);
+      if (!key || seen[key]) return;
+      seen[key] = true;
+      out.push(row.item);
+    });
+    return out.slice(0, max);
   }
 
   function renderLoading() {
@@ -1221,9 +1265,68 @@
     bindBackTop();
     bindSavedDownload();
     var input = document.getElementById('os-search-input');
+    var previewEl = document.getElementById('os-search-preview');
     var tags = document.getElementById('os-tags');
+    var previewActive = -1;
+    var previewTimer = null;
 
     var searchTimer = null;
+
+    function hideSearchPreview() {
+      if (!previewEl) return;
+      previewEl.hidden = true;
+      previewEl.innerHTML = '';
+      previewActive = -1;
+    }
+
+    function selectPreviewItem(it) {
+      if (!it || !input) return;
+      input.value = String(it.word || '').trim();
+      hideSearchPreview();
+      refresh();
+      window.setTimeout(function () {
+        scrollToWord(it.word);
+      }, 40);
+    }
+
+    function renderSearchPreview(q) {
+      if (!previewEl) return;
+      var needle = normalizeSearchKey(q);
+      if (!needle) {
+        hideSearchPreview();
+        return;
+      }
+      var hits = previewItems(feedAll, needle, 8);
+      previewActive = hits.length ? 0 : -1;
+      if (!hits.length) {
+        previewEl.innerHTML = '<li class="os-search-preview-empty">정확히 일치하는 단어가 없습니다.</li>';
+        previewEl.hidden = false;
+        return;
+      }
+      previewEl.innerHTML = hits
+        .map(function (it, idx) {
+          var word = escapeHtml(it.word || '');
+          var meaning = escapeHtml(it.meaning || '');
+          var en = escapeHtml(it.en || '');
+          return (
+            '<li role="option">' +
+            '<button type="button" class="os-search-preview-item' +
+            (idx === 0 ? ' is-active' : '') +
+            '" data-os-preview-word="' +
+            escapeAttr(it.word || '') +
+            '">' +
+            '<span class="os-search-preview-word">' +
+            word +
+            '</span>' +
+            (meaning ? '<span class="os-search-preview-meaning">' + meaning + '</span>' : '') +
+            (en ? '<span class="os-search-preview-en">' + en + '</span>' : '') +
+            '</button></li>'
+          );
+        })
+        .join('');
+      previewEl.hidden = false;
+    }
+
     function refresh() {
       var q = input ? input.value : '';
       var visible = filterItems(feedAll, q);
@@ -1241,7 +1344,60 @@
     if (tags) tags._osRefresh = refresh;
 
     if (input) {
-      input.addEventListener('input', refresh);
+      input.addEventListener('input', function () {
+        refresh();
+        clearTimeout(previewTimer);
+        previewTimer = setTimeout(function () {
+          renderSearchPreview(input.value);
+        }, 120);
+      });
+      input.addEventListener('keydown', function (e) {
+        if (!previewEl || previewEl.hidden) return;
+        var buttons = previewEl.querySelectorAll('.os-search-preview-item');
+        if (!buttons.length) {
+          if (e.key === 'Escape') hideSearchPreview();
+          return;
+        }
+        if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          previewActive = Math.min(buttons.length - 1, previewActive + 1);
+          buttons.forEach(function (btn, i) {
+            btn.classList.toggle('is-active', i === previewActive);
+          });
+        } else if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          previewActive = Math.max(0, previewActive - 1);
+          buttons.forEach(function (btn, i) {
+            btn.classList.toggle('is-active', i === previewActive);
+          });
+        } else if (e.key === 'Enter' && previewActive >= 0 && buttons[previewActive]) {
+          e.preventDefault();
+          buttons[previewActive].click();
+        } else if (e.key === 'Escape') {
+          hideSearchPreview();
+        }
+      });
+      input.addEventListener('blur', function () {
+        window.setTimeout(hideSearchPreview, 160);
+      });
+    }
+
+    if (previewEl) {
+      previewEl.addEventListener('mousedown', function (e) {
+        var btn = e.target.closest('.os-search-preview-item');
+        if (!btn) return;
+        e.preventDefault();
+        var word = btn.getAttribute('data-os-preview-word') || '';
+        var needle = normalizeSearchKey(word);
+        var it = null;
+        for (var i = 0; i < feedAll.length; i += 1) {
+          if (normalizeSearchKey(feedAll[i] && feedAll[i].word) === needle) {
+            it = feedAll[i];
+            break;
+          }
+        }
+        selectPreviewItem(it || { word: word });
+      });
     }
 
     renderLoading();

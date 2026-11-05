@@ -327,6 +327,48 @@
     }).join('');
   }
 
+  function expressionsApiBase() {
+    if (typeof window.getPage30ApiBaseUrl === 'function') return window.getPage30ApiBaseUrl();
+    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+      return 'http://' + window.location.hostname + ':3000';
+    }
+    return 'https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app';
+  }
+
+  function fetchDailyExpressions(limit) {
+    var n = Number(limit) || 5;
+    return fetch(expressionsApiBase().replace(/\/$/, '') + '/api/expressions?limit=' + n, {
+      headers: { Accept: 'application/json' },
+      cache: 'no-store'
+    })
+      .then(function (r) {
+        if (!r.ok) throw new Error('expressions HTTP ' + r.status);
+        return r.json();
+      })
+      .then(function (data) {
+        return Array.isArray(data && data.items) ? data.items : [];
+      })
+      .catch(function () {
+        return [];
+      });
+  }
+
+  function renderDailyLines(items) {
+    var root = document.getElementById('rd-daily-grid');
+    if (!root || !items || !items.length) return;
+    root.innerHTML = items.slice(0, 5).map(function (it) {
+      var ko = String((it && it.ko) || '').trim() || '표현';
+      var en = String((it && it.en) || '').trim() || ko;
+      var href = 'daily-english.html?q=' + encodeURIComponent(ko);
+      return (
+        '<a class="rd-phrase-card" href="' + esc(href) + '">' +
+          '<span class="ko">' + esc(ko) + '</span>' +
+          '<span class="en">' + esc(en) + '</span>' +
+        '</a>'
+      );
+    }).join('');
+  }
+
   function renderReadingCol(elId, listHref, label, entries, board) {
     var root = document.getElementById(elId);
     if (!root) return;
@@ -358,7 +400,8 @@
       fetchEntries('/opinions'),
       fetchEntries('/culture-voca'),
       fetchEntries('/calm-mind'),
-      fetchEntries('/english-quotes')
+      fetchEntries('/english-quotes'),
+      fetchDailyExpressions(5)
     ]).then(function (results) {
       var wotd = results[0] || [];
       var intl = results[1] || [];
@@ -371,6 +414,7 @@
       var culture = results[8] || [];
       var calm = results[9] || [];
       var quotes = results[10] || [];
+      var daily = results[11] || [];
 
       var w = latest(wotd);
       if (w) renderHeroWord(w, wotd.length - 1);
@@ -378,6 +422,7 @@
       renderNews(mixNews(intl, korea, defense, economy, []));
       renderQuiz(quiz);
       renderPhrases(phrases);
+      renderDailyLines(daily);
       renderReadingCol('rd-read-opinions', 'english-opinions-list.html', '오피니언', opinions, 'opinions');
       renderReadingCol('rd-read-culture', 'culture-voca-list.html', '컬쳐', culture, 'culture-voca');
       renderReadingCol('rd-read-calm', 'calm-mind-list.html', '마음 다스리는 글', calm, 'calm-mind');

@@ -4,7 +4,7 @@
  * nav-home-menu.js 가 로드함
  */
 (function () {
-    var VERSION = '20261105dash2';
+    var VERSION = '20261105search6';
 
   var DICT_LOOKUP_VER = '20261104dict1';
   var DICT_LOOKUP_CONTAINERS = [
@@ -98,15 +98,10 @@
       pages: ['dashboard.html', 'word-ranking.html']
     }
   ];
-  /* 더보기(햄버거) — 학습 → 뉴스(라벨에 '뉴스' 생략) → 읽을거리 */
+  /* 더보기(햄버거) — 뉴스 → 단어 → 표현 → 읽을거리 → 기타(대시보드↓) */
   var EXTRA_NAV_ITEMS = [
     { href: 'index.html', label: '홈', tone: 'home', pages: ['index.html', ''] },
-    { href: 'daily-english.html', label: '생활 영어 한 줄', tone: 'daily', pages: ['daily-english.html'] },
-    { href: 'dashboard.html', label: '대시보드', tone: 'dash', pages: ['dashboard.html', 'word-ranking.html'] },
-    { href: 'english-synonym-list.html', label: '연관단어', tone: 'syn', pages: ['english-synonym-list.html', 'english-synonym.html'] },
-    { href: 'situational-english-list.html', label: '상황', tone: 'sit', pages: ['situational-english-list.html', 'situational-english.html'] },
-    { href: 'pros-cons-list.html', label: 'Pros & Cons', tone: 'pros', pages: ['pros-cons-list.html', 'pros-cons.html'] },
-    /* 얇은·빈 카테고리 숨김: travel / retail / ukraine / cooking / ranking */
+    /* 뉴스 */
     { href: 'news-voca-list.html', label: '국제', tone: 'news', pages: ['news-voca-list.html', 'news-voca.html'] },
     { href: 'defense-news-list.html', label: '국방', tone: 'defense', pages: ['defense-news-list.html', 'defense-news.html'] },
     { href: 'economy-news-list.html', label: '경제', tone: 'news', pages: ['economy-news-list.html', 'economy-news.html'] },
@@ -115,11 +110,21 @@
     { href: 'industry-news-list.html', label: '산업', tone: 'news', pages: ['industry-news-list.html', 'industry-news.html'] },
     { href: 'korea-news-list.html', label: '한국', tone: 'defense', pages: ['korea-news-list.html', 'korea-news.html'] },
     { href: 'culture-voca-list.html', label: '컬쳐', tone: 'culture', pages: ['culture-voca-list.html', 'culture-voca.html'] },
+    /* 단어 */
+    { href: 'english-synonym-list.html', label: '연관단어', tone: 'syn', pages: ['english-synonym-list.html', 'english-synonym.html'] },
+    /* 표현 */
+    { href: 'daily-english.html', label: '생활 영어 한 줄', tone: 'daily', pages: ['daily-english.html'] },
+    { href: 'situational-english-list.html', label: '상황', tone: 'sit', pages: ['situational-english-list.html', 'situational-english.html'] },
+    { href: 'pros-cons-list.html', label: 'Pros & Cons', tone: 'pros', pages: ['pros-cons-list.html', 'pros-cons.html'] },
+    /* 읽을거리 */
     { href: 'shorts-bg-image-list.html', label: '신문읽는 이미지', tone: 'sbgi', pages: ['shorts-bg-image-list.html', 'shorts-bg-image.html'] },
     { href: 'english-opinions-list.html', label: '오피니언', tone: 'opine', pages: ['english-opinions-list.html', 'english-opinions.html'] },
     { href: 'calm-mind-list.html', label: '마음글', tone: 'calm', pages: ['calm-mind-list.html', 'calm-mind.html'] },
     { href: 'photo-english-list.html', label: '포토', tone: 'photo', pages: ['photo-english-list.html', 'photo-english.html'] },
-    { href: 'english-quotes-list.html', label: '영어 명언', tone: 'quote', pages: ['english-quotes-list.html', 'english-quotes.html'] }
+    { href: 'english-quotes-list.html', label: '영어 명언', tone: 'quote', pages: ['english-quotes-list.html', 'english-quotes.html'] },
+    /* 기타 — 우선순위 아래 */
+    { href: 'english-directory.html', label: '학습사이트', tone: 'dir', pages: ['english-directory.html'] },
+    { href: 'dashboard.html', label: '대시보드', tone: 'dash', pages: ['dashboard.html', 'word-ranking.html'] }
   ];
   var NAV_ITEMS = PRIMARY_NAV_ITEMS.concat(EXTRA_NAV_ITEMS);
 
@@ -379,6 +384,9 @@
 
     function renderHitLink(item, opts) {
       opts = opts || {};
+      var word = escapeSuggestText(item.previewWord || item.slug || '');
+      var meaning = escapeSuggestText(item.previewMeaning || '');
+      var snippet = escapeSuggestText(item.previewSnippet || '');
       var title = escapeSuggestText(item.title || '제목 없음');
       var label = escapeSuggestText(item.label || '');
       var href = String(item.href || '#');
@@ -386,9 +394,20 @@
       var labelHtml = label
         ? '<span class="site-search-label">' + label + '</span>'
         : '';
+      var head = word
+        ? '<span class="site-search-word">' + word + '</span>'
+        : '<span class="site-search-title">' + title + '</span>';
+      var meaningHtml = meaning
+        ? '<span class="site-search-meaning">' + meaning + '</span>'
+        : (!word ? '' : '<span class="site-search-title">' + title + '</span>');
+      var snipHtml = snippet
+        ? '<span class="site-search-snippet">' + snippet + '</span>'
+        : '';
       return '<li><a href="' + href + '"' + cls + '>' +
         labelHtml +
-        '<span class="site-search-title">' + title + '</span>' +
+        head +
+        meaningHtml +
+        snipHtml +
         '</a></li>';
     }
 
@@ -469,7 +488,7 @@
     function previewSearch(q) {
       if (!window.HomeBoardPreview) return;
       HomeBoardPreview.search(q, 16).then(function (hits) {
-        renderSuggest(hits, '검색 결과가 없습니다.');
+        renderSuggest(hits, '일치하는 단어가 없습니다.');
       }).catch(function () {
         renderSuggest([], '검색 결과를 불러올 수 없습니다.');
       });
@@ -494,7 +513,7 @@
         return;
       }
       HomeBoardPreview.search(q, 0).then(function (hits) {
-        renderPage(hits, '검색 결과가 없습니다.');
+        renderPage(hits, '정확히 일치하는 결과가 없습니다.');
       }).catch(function () {
         renderPage([], '검색 결과를 불러올 수 없습니다.');
       });
@@ -512,6 +531,9 @@
         e.preventDefault();
         activeIndex = Math.max(0, activeIndex - 1);
         links.forEach(function (el, i) { el.classList.toggle('is-active', i === activeIndex); });
+      } else if (e.key === 'Enter' && activeIndex >= 0 && links[activeIndex]) {
+        e.preventDefault();
+        window.location.href = links[activeIndex].href;
       }
     });
 
@@ -523,7 +545,7 @@
     if (q0 && onHome && window.HomeBoardPreview) {
       input.value = q0;
       HomeBoardPreview.search(q0, 0).then(function (hits) {
-        renderPage(hits, '검색 결과가 없습니다.');
+        renderPage(hits, '정확히 일치하는 결과가 없습니다.');
       });
     }
   }

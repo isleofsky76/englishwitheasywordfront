@@ -93,42 +93,47 @@
               .join(' ');
           }).filter(Boolean).join(' ')
         : '';
+      var en = String((entry && entry.en) || '').trim();
       var title = meaning ? (word + ' — ' + meaning) : word;
       return {
         label: board.label,
         title: title,
         slug: word,
+        previewWord: word,
+        previewMeaning: meaning,
+        previewSnippet: en,
         views: entry.views || 0,
         likes: entry.likes || 0,
         date: entry.date,
         href: buildEntryHref(board, entry, index, apiParam),
         sortTime: parseEntrySortTime(entry, index),
         searchOnly: true,
-        searchText: [word, meaning, entry && entry.ko, entry && entry.en, entry && entry.highlight, entry && entry.pos, cfWords]
+        searchText: [word, meaning, entry && entry.ko, en, entry && entry.highlight, entry && entry.pos, cfWords]
           .map(function (s) { return String(s || '').trim(); })
           .filter(Boolean)
           .join(' ')
       };
     }
     var bodyText = stripHtmlForSearch(entry && (entry.message || entry.body || entry.content));
+    var titleRaw = String((entry && entry.title) || '').trim();
     return {
       label: board.label,
       title: entry.title,
       slug: entry && entry.slug ? String(entry.slug) : '',
+      previewWord: titleRaw,
+      previewMeaning: String((entry && (entry.subtitle || entry.summary || entry.metaDescription)) || '').trim(),
+      previewSnippet: bodyText.slice(0, 120),
       views: entry.views || 0,
       likes: entry.likes || 0,
       date: entry.date,
       href: buildEntryHref(board, entry, index, apiParam),
       sortTime: parseEntrySortTime(entry, index),
       searchOnly: !!board.searchOnly,
-      /* 제목·slug·본문까지 색인 — DB 게시글 속 단어도 검색 */
+      /* 제목·slug만 색인 — 본문 부분일치는 노이즈 */
       searchText: [
         entry && entry.title,
         entry && entry.slug,
-        entry && entry.subtitle,
-        entry && entry.summary,
-        entry && entry.metaDescription,
-        bodyText
+        entry && entry.subtitle
       ].map(function (s) { return String(s || '').trim(); }).filter(Boolean).join(' ')
     };
   }
@@ -471,10 +476,6 @@
     loadRecent(recentEl, limit);
   }
 
-  function escapeRegex(str) {
-    return String(str || '').replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  }
-
   function isWordCardItem(item) {
     if (!item) return false;
     if (item.searchOnly) return true;
@@ -491,33 +492,80 @@
     return title.trim().toLowerCase();
   }
 
-  function scoreSearchItem(item, q) {
+  function normalizeSearchKey(s) {
+    return String(s || '')
+      .trim()
+      .toLowerCase()
+      .replace(/[“”"']/g, "'")
+      .replace(/\s+/g, ' ');
+  }
+
+  function itemMeaningKey(item) {
+    var meaning = String((item && item.previewMeaning) || '').trim();
+    if (meaning) return normalizeSearchKey(meaning);
+    var title = String((item && item.title) || '');
+    var dash = title.indexOf('—');
+    if (dash > 0) return normalizeSearchKey(title.slice(dash + 1));
+    return '';
+  }
+
+  /** slug·표제어를 하이픈/공백 기준 토큰으로 분리 (부분문자열 금지) */
+  function wordTokens(s) {
+    return normalizeSearchKey(s)
+      .split(/[^a-z0-9']+/)
+      .filter(Boolean);
+  }
+
+  function tokensEqual(tokens, q) {
+    for (var i = 0; i < tokens.length; i += 1) {
+      if (tokens[i] === q) return true;
+    }
+    return false;
+  }
+
+  function tokensPrefix(tokens, q) {
+    for (var i = 0; i < tokens.length; i += 1) {
+      if (tokens[i].indexOf(q) === 0) return true;
+    }
+    return false;
+  }
+
+  /**
+   * 영어 쿼리: 표제어(헤드워드)만. 본문·예문·긴 slug 토큰 나열 매칭 금지.
+   * 한글 쿼리: 뜻 정확 일치(+미리보기 접두)
+   */
+  function scoreSearchItem(item, q, opts) {
+    opts = opts || {};
     if (!q) return 0;
-    var title = String(item.title || '').toLowerCase();
-    var slug = String(item.slug || '').toLowerCase();
-    var word = primaryWordKey(item);
-    var hay = String(item.searchText || title || '').toLowerCase();
+    var slug = normalizeSearchKey(item.slug);
+    var word = normalizeSearchKey(primaryWordKey(item));
+    var meaning = itemMeaningKey(item);
     var wordCard = isWordCardItem(item);
-    if (!title && !slug && !hay) return 0;
+    var isLatin = /^[a-z0-9' .-]+$/i.test(q);
+    /* 헤드워드: slug가 하이픈 나열이면 첫 토큰(또는 표제어 필드)만 */
+    var head = word;
+    if (!head || head.indexOf('-') !== -1) {
+      var slugParts = wordTokens(slug);
+      if (slugParts.length === 1) head = slugParts[0];
+      else if (word && word.indexOf('-') === -1 && /^[a-z]/i.test(word)) head = word;
+      else if (slugParts.length) head = slugParts[0];
+    }
+    head = normalizeSearchKey(head);
+    if (!head && !meaning) return 0;
 
     var score = 0;
-    if (word === q || slug === q || title === q) score = 100;
-    else if (word.indexOf(q) === 0 || slug.indexOf(q) === 0) score = 92;
-    else if (title.indexOf(q) === 0) score = 86;
-    else {
-      try {
-        var wordRe = new RegExp('\\b' + escapeRegex(q) + '\\b', 'i');
-        if (wordRe.test(word) || wordRe.test(slug)) score = 82;
-        else if (wordRe.test(title)) score = 70;
-        else if (q.length >= 3 && wordRe.test(hay)) score = wordCard ? 62 : 34;
-        else if (word.indexOf(q) !== -1 || slug.indexOf(q) !== -1) score = 58;
-        else if (title.indexOf(q) !== -1) score = 52;
-        /* 짧은 쿼리의 본문 부분일치는 노이즈 — 4글자 이상만 */
-        else if (q.length >= 4 && hay.indexOf(q) !== -1) score = wordCard ? 46 : 22;
-      } catch (e) {
-        if (title.indexOf(q) !== -1) score = 52;
+    if (isLatin) {
+      if (head === q) score = 100;
+      else if (!opts.exactOnly && opts.prefix !== false && head.indexOf(q) === 0) score = 80;
+    } else {
+      if (meaning && meaning === q) score = 96;
+      else if (head === q) score = 100;
+      else if (!opts.exactOnly && opts.prefix !== false) {
+        if (meaning && meaning.indexOf(q) === 0) score = 72;
+        else if (head.indexOf(q) === 0) score = 80;
       }
     }
+
     if (score > 0 && wordCard) score = Math.min(100, score + 8);
     return score;
   }
@@ -535,14 +583,19 @@
   }
 
   function search(query, limit) {
-    var q = String(query || '').trim().toLowerCase();
+    var q = normalizeSearchKey(query);
     var max = Number(limit);
-    if (!Number.isFinite(max) || max <= 0) max = 0;
+    if (!Number.isFinite(max) || max < 0) max = 0;
     if (!q) return Promise.resolve([]);
+    /* limit > 0 → 입력 미리보기(접두 허용) / limit 0 → 결과(정확 일치만) */
+    var previewMode = max > 0;
+    var scoreOpts = previewMode
+      ? { exactOnly: false, prefix: true }
+      : { exactOnly: true, prefix: false };
     return fetchCombined().then(function (combined) {
       var ranked = combined
         .map(function (item) {
-          return { item: item, score: scoreSearchItem(item, q) };
+          return { item: item, score: scoreSearchItem(item, q, scoreOpts) };
         })
         .filter(function (row) { return row.score > 0; })
         .sort(function (a, b) {
@@ -554,8 +607,7 @@
         })
         .map(function (row) { return row.item; });
       ranked = dedupeSearchHits(ranked);
-      /* 자동완성: 단어카드(문장·단어장)를 먼저 채운 뒤 나머지로 보충 */
-      if (max) {
+      if (previewMode) {
         var wordFirst = ranked.filter(isWordCardItem);
         var rest = ranked.filter(function (item) { return !isWordCardItem(item); });
         ranked = wordFirst.concat(rest).slice(0, max);

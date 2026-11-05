@@ -196,9 +196,9 @@
   top: calc(100% + 6px);
   right: 0;
   left: auto;
-  min-width: 280px;
-  max-width: min(420px, 92vw);
-  max-height: 360px;
+  min-width: 300px;
+  max-width: min(440px, 94vw);
+  max-height: 420px;
   overflow: auto;
   margin: 0;
   padding: 8px 0;
@@ -231,6 +231,29 @@
   letter-spacing: 0.02em;
   color: var(--accent, #b45309);
   line-height: 1.2;
+}
+.site-masthead .site-search-word,
+.site-search-word {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--ink);
+}
+.site-masthead .site-search-meaning,
+.site-search-meaning {
+  font-size: 13px;
+  line-height: 1.35;
+  color: var(--ink-soft, #5c5852);
+}
+.site-masthead .site-search-snippet,
+.site-search-snippet {
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--ink-muted, #8a857c);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 .site-masthead .site-search-title,
 .site-search-title {
