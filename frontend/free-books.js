@@ -35,28 +35,23 @@
     if (!href) return '';
     var title = String(book.title || '').trim();
     var author = String(book.author || '').trim();
-    var level = String(book.level || '').trim();
-    var blurb = String(book.blurb || '').trim();
     var tone = coverTone(book.id + title);
     return (
       '<li class="rd-free-book">' +
-      '<div class="rd-free-book-cover rd-free-book-cover--' +
+      '<a class="rd-free-book-cover rd-free-book-cover--' +
       tone +
-      '">' +
-      '<h3 class="rd-free-book-cover-title">' +
-      esc(title) +
-      '</h3>' +
-      '<p class="rd-free-book-cover-author">' +
-      esc(author) +
-      '</p>' +
-      '</div>' +
-      (level ? '<p class="rd-free-book-level">' + esc(level) + '</p>' : '') +
-      (blurb ? '<p class="rd-free-book-blurb">' + esc(blurb) + '</p>' : '') +
-      '<a class="rd-free-book-link" href="' +
+      '" href="' +
       esc(href) +
       '" target="_blank" rel="noopener noreferrer" aria-label="' +
       esc(title) +
-      ' - 외부 사이트에서 무료로 읽기">무료로 읽기 ↗</a>' +
+      ' - 외부 사이트에서 무료로 읽기">' +
+      '<span class="rd-free-book-cover-title">' +
+      esc(title) +
+      '</span>' +
+      '<span class="rd-free-book-cover-author">' +
+      esc(author) +
+      '</span>' +
+      '</a>' +
       '</li>'
     );
   }
