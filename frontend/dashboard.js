@@ -34,8 +34,16 @@
     return Number(n || 0).toLocaleString('en-US');
   }
 
-  function wordHref(term) {
-    return 'one-sentence.html?q=' + encodeURIComponent(term);
+  /** 단일 표제어 → 문장 / 구·표현 → 생활 영어 한 줄 */
+  function termHref(term, kind) {
+    var t = String(term == null ? '' : term).trim();
+    if (!t) return 'one-sentence.html';
+    var isPhrase = /\s/.test(t) || t.length > 24;
+    if (kind === 'download' || kind === 'search') {
+      if (isPhrase) return 'daily-english.html?q=' + encodeURIComponent(t);
+    }
+    if (isPhrase) return 'daily-english.html?q=' + encodeURIComponent(t);
+    return 'one-sentence.html?q=' + encodeURIComponent(t);
   }
 
   function setStatus(text) {
@@ -60,7 +68,7 @@
     if (today) today.textContent = fmt(stats.todayComments);
   }
 
-  function renderTable(tbodyId, emptyId, rows) {
+  function renderTable(tbodyId, emptyId, rows, kind) {
     var tbody = document.getElementById(tbodyId);
     var empty = document.getElementById(emptyId);
     if (!tbody) return;
@@ -78,7 +86,7 @@
           escapeHtml(String(r.rank)) +
           '</td>' +
           '<td><a class="db-term" href="' +
-          escapeAttr(wordHref(r.term)) +
+          escapeAttr(termHref(r.term, kind)) +
           '">' +
           escapeHtml(r.term) +
           '</a></td>' +
@@ -122,9 +130,9 @@
       if (!res.ok) throw new Error(data.error || 'load failed');
       renderStats(data.stats || {});
       var ranks = data.rankings || {};
-      renderTable('db-tbody-comments', 'db-empty-comments', ranks.comments || []);
-      renderTable('db-tbody-downloads', 'db-empty-downloads', ranks.downloads || []);
-      renderTable('db-tbody-searches', 'db-empty-searches', ranks.searches || []);
+      renderTable('db-tbody-comments', 'db-empty-comments', ranks.comments || [], 'comment');
+      renderTable('db-tbody-downloads', 'db-empty-downloads', ranks.downloads || [], 'download');
+      renderTable('db-tbody-searches', 'db-empty-searches', ranks.searches || [], 'search');
       setStatus('');
     } catch (err) {
       console.error(err);

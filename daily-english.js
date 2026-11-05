@@ -676,6 +676,22 @@
     });
   }
 
+  /** 홈·대시보드 딥링크: ?q=표현 */
+  function applyQueryFromUrl() {
+    var q = '';
+    try {
+      q = new URLSearchParams(window.location.search).get('q') || '';
+    } catch (e) {
+      q = '';
+    }
+    q = String(q).trim().slice(0, 100);
+    if (!q) return false;
+    var input = document.getElementById('de-search-input');
+    if (input) input.value = q;
+    state.q = q;
+    return true;
+  }
+
   function bindCategories() {
     var nav = document.getElementById('de-cats');
     if (!nav || nav._deBound) return;
@@ -752,7 +768,18 @@
     bindFeedClicks();
     bindChrome();
     syncDownloadBar();
-    loadCategories().then(reloadList);
+    applyQueryFromUrl();
+    loadCategories().then(function () {
+      return reloadList();
+    }).then(function () {
+      if (!state.q || !state.items.length) return;
+      window.setTimeout(function () {
+        var first = document.querySelector('.de-item');
+        if (first && typeof first.scrollIntoView === 'function') {
+          first.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 80);
+    });
   }
 
   if (document.readyState === 'loading') {

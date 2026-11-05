@@ -359,7 +359,7 @@
     root.innerHTML = items.slice(0, 5).map(function (it) {
       var ko = String((it && it.ko) || '').trim() || '표현';
       var en = String((it && it.en) || '').trim() || ko;
-      var href = 'daily-english.html?q=' + encodeURIComponent(ko);
+      var href = 'daily-english.html?q=' + encodeURIComponent(en || ko);
       return (
         '<a class="rd-phrase-card" href="' + esc(href) + '">' +
           '<span class="ko">' + esc(ko) + '</span>' +
