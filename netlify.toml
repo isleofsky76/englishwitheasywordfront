@@ -2,6 +2,12 @@
 # Missing SEO folders fall back to board HTML (no Netlify 404).
 
 [[redirects]]
+  from = "/free-books"
+  to = "/free-books.html"
+  status = 200
+  force = false
+
+[[redirects]]
   from = "/news-voca/*"
   to = "/news-voca.html"
   status = 200

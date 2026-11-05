@@ -1,0 +1,806 @@
+{
+  "updated": "2026-11-05",
+  "note": "Curated Project Gutenberg ebook catalog IDs only. Links must stay https://www.gutenberg.org/ebooks/{id}. Levels/genres/blurbs are site-edited for English learners, not official ratings. USA public-domain status on Gutenberg does not automatically mean free republication rights in Korea.",
+  "books": [
+    {
+      "id": "11",
+      "title": "Alice's Adventures in Wonderland",
+      "author": "Lewis Carroll",
+      "genre": "아동·청소년",
+      "level": "쉬운 영어",
+      "blurb": "토끼굴로 떨어진 앨리스의 기묘한 모험을 담은 고전입니다."
+    },
+    {
+      "id": "12",
+      "title": "Through the Looking-Glass",
+      "author": "Lewis Carroll",
+      "genre": "아동·청소년",
+      "level": "쉬운 영어",
+      "blurb": "거울 나라로 들어간 앨리스의 퍼즐 같은 이야기입니다."
+    },
+    {
+      "id": "55",
+      "title": "The Wonderful Wizard of Oz",
+      "author": "L. Frank Baum",
+      "genre": "아동·청소년",
+      "level": "쉬운 영어",
+      "blurb": "도로시가 오즈에서 집으로 돌아갈 길을 찾는 이야기입니다."
+    },
+    {
+      "id": "16",
+      "title": "Peter Pan",
+      "author": "J. M. Barrie",
+      "genre": "아동·청소년",
+      "level": "쉬운 영어",
+      "blurb": "네버랜드로 떠난 아이들의 모험과 성장을 그립니다."
+    },
+    {
+      "id": "289",
+      "title": "The Wind in the Willows",
+      "author": "Kenneth Grahame",
+      "genre": "아동·청소년",
+      "level": "쉬운 영어",
+      "blurb": "강가 동물 친구들의 우정과 모험을 담았습니다."
+    },
+    {
+      "id": "514",
+      "title": "Little Women",
+      "author": "Louisa May Alcott",
+      "genre": "아동·청소년",
+      "level": "쉬운 영어",
+      "blurb": "네 자매의 성장과 우애를 따뜻하게 그린 고전입니다."
+    },
+    {
+      "id": "113",
+      "title": "The Secret Garden",
+      "author": "Frances Hodgson Burnett",
+      "genre": "아동·청소년",
+      "level": "쉬운 영어",
+      "blurb": "버려진 정원과 함께 아이들도 치유되어 가는 이야기입니다."
+    },
+    {
+      "id": "146",
+      "title": "A Little Princess",
+      "author": "Frances Hodgson Burnett",
+      "genre": "아동·청소년",
+      "level": "쉬운 영어",
+      "blurb": "역경 속에서도 품위를 지키는 소녀의 이야기입니다."
+    },
+    {
+      "id": "45",
+      "title": "Anne of Green Gables",
+      "author": "L. M. Montgomery",
+      "genre": "아동·청소년",
+      "level": "쉬운 영어",
+      "blurb": "상상력 넘치는 앤이 그린 게이블스에서 가족을 찾아 갑니다."
+    },
+    {
+      "id": "47",
+      "title": "Anne of Avonlea",
+      "author": "L. M. Montgomery",
+      "genre": "아동·청소년",
+      "level": "쉬운 영어",
+      "blurb": "선생님이 된 앤의 새로운 일상과 성장을 그립니다."
+    },
+    {
+      "id": "51",
+      "title": "Anne of the Island",
+      "author": "L. M. Montgomery",
+      "genre": "아동·청소년",
+      "level": "쉬운 영어",
+      "blurb": "대학 생활과 우정, 사랑을 맞이하는 앤의 이야기입니다."
+    },
+    {
+      "id": "19033",
+      "title": "Pollyanna",
+      "author": "Eleanor H. Porter",
+      "genre": "아동·청소년",
+      "level": "쉬운 영어",
+      "blurb": "긍정 게임으로 마을을 밝히는 소녀의 이야기입니다."
+    },
+    {
+      "id": "74",
+      "title": "The Adventures of Tom Sawyer",
+      "author": "Mark Twain",
+      "genre": "아동·청소년",
+      "level": "쉬운 영어",
+      "blurb": "미시시피 강변 소년 톰의 장난과 모험을 그립니다."
+    },
+    {
+      "id": "3176",
+      "title": "The Prince and the Pauper",
+      "author": "Mark Twain",
+      "genre": "아동·청소년",
+      "level": "쉬운 영어",
+      "blurb": "왕자와 거지가 신분을 바꾸며 벌어지는 이야기입니다."
+    },
+    {
+      "id": "46",
+      "title": "A Christmas Carol",
+      "author": "Charles Dickens",
+      "genre": "아동·청소년",
+      "level": "쉬운 영어",
+      "blurb": "인색한 스크루지가 크리스마스에 마음을 바꾸는 이야기입니다."
+    },
+    {
+      "id": "139",
+      "title": "The Jungle Book",
+      "author": "Rudyard Kipling",
+      "genre": "아동·청소년",
+      "level": "쉬운 영어",
+      "blurb": "정글에서 자란 모글리의 성장 이야기입니다."
+    },
+    {
+      "id": "2781",
+      "title": "Just So Stories",
+      "author": "Rudyard Kipling",
+      "genre": "아동·청소년",
+      "level": "쉬운 영어",
+      "blurb": "동물과 자연의 기원을 풀어 주는 짧은 이야기 모음입니다."
+    },
+    {
+      "id": "3011",
+      "title": "The Happy Prince and Other Tales",
+      "author": "Oscar Wilde",
+      "genre": "아동·청소년",
+      "level": "쉬운 영어",
+      "blurb": "동화 형식으로 쓴 짧고 인상적인 이야기들입니다."
+    },
+    {
+      "id": "41",
+      "title": "The Legend of Sleepy Hollow",
+      "author": "Washington Irving",
+      "genre": "아동·청소년",
+      "level": "쉬운 영어",
+      "blurb": "머리 없는 기병 전설로 유명한 미국 고전입니다."
+    },
+    {
+      "id": "901",
+      "title": "The Jew of Malta",
+      "author": "Christopher Marlowe",
+      "genre": "희곡",
+      "level": "고급",
+      "blurb": "복수와 탐욕을 다룬 르네상스 시대 희곡입니다."
+    },
+    {
+      "id": "1342",
+      "title": "Pride and Prejudice",
+      "author": "Jane Austen",
+      "genre": "로맨스",
+      "level": "중급",
+      "blurb": "오해와 자존심 사이에서 자라는 엘리자베스의 사랑 이야기입니다."
+    },
+    {
+      "id": "161",
+      "title": "Sense and Sensibility",
+      "author": "Jane Austen",
+      "genre": "로맨스",
+      "level": "중급",
+      "blurb": "이성과 감성 사이에서 선택하는 자매의 이야기입니다."
+    },
+    {
+      "id": "158",
+      "title": "Emma",
+      "author": "Jane Austen",
+      "genre": "로맨스",
+      "level": "중급",
+      "blurb": "남의 연애를 주선하다 자신의 마음을 알아 가는 이야기입니다."
+    },
+    {
+      "id": "105",
+      "title": "Persuasion",
+      "author": "Jane Austen",
+      "genre": "로맨스",
+      "level": "중급",
+      "blurb": "과거의 이별과 다시 마주친 인연을 차분히 풀어 갑니다."
+    },
+    {
+      "id": "141",
+      "title": "Mansfield Park",
+      "author": "Jane Austen",
+      "genre": "로맨스",
+      "level": "중급",
+      "blurb": "계급과 도덕 사이에서 자리를 찾는 성장 이야기입니다."
+    },
+    {
+      "id": "121",
+      "title": "Northanger Abbey",
+      "author": "Jane Austen",
+      "genre": "로맨스",
+      "level": "중급",
+      "blurb": "고딕 소설을 좋아하던 소녀가 현실을 배워 가는 풍자입니다."
+    },
+    {
+      "id": "1260",
+      "title": "Jane Eyre",
+      "author": "Charlotte Brontë",
+      "genre": "로맨스",
+      "level": "중급",
+      "blurb": "고아 소녀가 독립과 사랑을 찾아가는 성장 로맨스입니다."
+    },
+    {
+      "id": "27",
+      "title": "Far from the Madding Crowd",
+      "author": "Thomas Hardy",
+      "genre": "로맨스",
+      "level": "중급",
+      "blurb": "농촌을 배경으로 한 열정과 선택의 이야기입니다."
+    },
+    {
+      "id": "84",
+      "title": "Frankenstein",
+      "author": "Mary Shelley",
+      "genre": "고딕·호러",
+      "level": "고급",
+      "blurb": "생명을 만든 과학자와 피조물의 책임과 고독을 그립니다."
+    },
+    {
+      "id": "345",
+      "title": "Dracula",
+      "author": "Bram Stoker",
+      "genre": "고딕·호러",
+      "level": "중급",
+      "blurb": "흡혈귀 전설을 서간체와 일기로 풀어 낸 고딕 소설입니다."
+    },
+    {
+      "id": "43",
+      "title": "The Strange Case of Dr. Jekyll and Mr. Hyde",
+      "author": "Robert Louis Stevenson",
+      "genre": "고딕·호러",
+      "level": "중급",
+      "blurb": "한 인간 안의 선과 악을 이중 인격으로 탐구합니다."
+    },
+    {
+      "id": "768",
+      "title": "Wuthering Heights",
+      "author": "Emily Brontë",
+      "genre": "고딕·호러",
+      "level": "고급",
+      "blurb": "황야를 배경으로 한 격렬한 사랑과 복수의 이야기입니다."
+    },
+    {
+      "id": "174",
+      "title": "The Picture of Dorian Gray",
+      "author": "Oscar Wilde",
+      "genre": "고딕·호러",
+      "level": "중급",
+      "blurb": "초상화에 죄가 새겨지는 아름다움과 타락의 이야기입니다."
+    },
+    {
+      "id": "1952",
+      "title": "The Yellow Wallpaper",
+      "author": "Charlotte Perkins Gilman",
+      "genre": "고딕·호러",
+      "level": "중급",
+      "blurb": "감금된 여성의 심리를 날카롭게 파고든 단편입니다."
+    },
+    {
+      "id": "209",
+      "title": "The Turn of the Screw",
+      "author": "Henry James",
+      "genre": "고딕·호러",
+      "level": "고급",
+      "blurb": "가정교사와 아이들, 유령 같은 존재의 긴장을 담았습니다."
+    },
+    {
+      "id": "2147",
+      "title": "The Fall of the House of Usher",
+      "author": "Edgar Allan Poe",
+      "genre": "고딕·호러",
+      "level": "중급",
+      "blurb": "몰락하는 가문과 저택의 공포를 담은 단편입니다."
+    },
+    {
+      "id": "2149",
+      "title": "The Cask of Amontillado",
+      "author": "Edgar Allan Poe",
+      "genre": "고딕·호러",
+      "level": "중급",
+      "blurb": "복수를 치밀하게 실행하는 어두운 단편입니다."
+    },
+    {
+      "id": "1064",
+      "title": "The Tell-Tale Heart",
+      "author": "Edgar Allan Poe",
+      "genre": "고딕·호러",
+      "level": "중급",
+      "blurb": "죄책감이 드러나는 짧은 공포 단편입니다."
+    },
+    {
+      "id": "1063",
+      "title": "The Purloined Letter",
+      "author": "Edgar Allan Poe",
+      "genre": "추리",
+      "level": "중급",
+      "blurb": "훔친 편지를 둘러싼 논리 추리의 고전 단편입니다."
+    },
+    {
+      "id": "2148",
+      "title": "The Raven, and The Philosophy of Composition",
+      "author": "Edgar Allan Poe",
+      "genre": "시",
+      "level": "중급",
+      "blurb": "상실과 집착을 노래한 유명한 시를 담았습니다."
+    },
+    {
+      "id": "1661",
+      "title": "The Adventures of Sherlock Holmes",
+      "author": "Arthur Conan Doyle",
+      "genre": "추리",
+      "level": "중급",
+      "blurb": "홈즈와 왓슨의 초기 단편들을 모은 추리 고전입니다."
+    },
+    {
+      "id": "244",
+      "title": "A Study in Scarlet",
+      "author": "Arthur Conan Doyle",
+      "genre": "추리",
+      "level": "중급",
+      "blurb": "홈즈와 왓슨이 처음 만나는 첫 장편입니다."
+    },
+    {
+      "id": "2852",
+      "title": "The Hound of the Baskervilles",
+      "author": "Arthur Conan Doyle",
+      "genre": "추리",
+      "level": "중급",
+      "blurb": "황무지와 저주 전설을 배경으로 한 홈즈 장편입니다."
+    },
+    {
+      "id": "834",
+      "title": "The Memoirs of Sherlock Holmes",
+      "author": "Arthur Conan Doyle",
+      "genre": "추리",
+      "level": "중급",
+      "blurb": "홈즈 시리즈의 또 다른 단편 모음입니다."
+    },
+    {
+      "id": "108",
+      "title": "The Return of Sherlock Holmes",
+      "author": "Arthur Conan Doyle",
+      "genre": "추리",
+      "level": "중급",
+      "blurb": "돌아온 홈즈가 다시 사건을 푸는 단편집입니다."
+    },
+    {
+      "id": "3289",
+      "title": "The Valley of Fear",
+      "author": "Arthur Conan Doyle",
+      "genre": "추리",
+      "level": "중급",
+      "blurb": "암호와 복수 조직이 얽힌 홈즈 장편입니다."
+    },
+    {
+      "id": "863",
+      "title": "The Mysterious Affair at Styles",
+      "author": "Agatha Christie",
+      "genre": "추리",
+      "level": "중급",
+      "blurb": "푸아로가 등장하는 초기 미스터리 장편입니다."
+    },
+    {
+      "id": "120",
+      "title": "Treasure Island",
+      "author": "Robert Louis Stevenson",
+      "genre": "모험",
+      "level": "쉬운 영어",
+      "blurb": "보물섬을 향한 항해와 해적들의 음모를 그립니다."
+    },
+    {
+      "id": "421",
+      "title": "Kidnapped",
+      "author": "Robert Louis Stevenson",
+      "genre": "모험",
+      "level": "중급",
+      "blurb": "납치당한 소년이 스코틀랜드를 가로지르는 이야기입니다."
+    },
+    {
+      "id": "76",
+      "title": "Adventures of Huckleberry Finn",
+      "author": "Mark Twain",
+      "genre": "모험",
+      "level": "중급",
+      "blurb": "허크와 짐이 강을 따라 자유를 찾아 떠납니다."
+    },
+    {
+      "id": "164",
+      "title": "Twenty Thousand Leagues under the Sea",
+      "author": "Jules Verne",
+      "genre": "모험",
+      "level": "중급",
+      "blurb": "네모 선장의 잠수함과 함께하는 심해 탐험입니다."
+    },
+    {
+      "id": "103",
+      "title": "Around the World in Eighty Days",
+      "author": "Jules Verne",
+      "genre": "모험",
+      "level": "쉬운 영어",
+      "blurb": "80일 세계 일주 내기를 둘러싼 속도감 있는 모험입니다."
+    },
+    {
+      "id": "1184",
+      "title": "The Count of Monte Cristo",
+      "author": "Alexandre Dumas",
+      "genre": "모험",
+      "level": "중급",
+      "blurb": "배신과 복수, 재기를 다룬 장대한 모험 소설입니다."
+    },
+    {
+      "id": "1257",
+      "title": "The Three Musketeers",
+      "author": "Alexandre Dumas",
+      "genre": "모험",
+      "level": "중급",
+      "blurb": "다르타냥과 삼총사의 우정과 음모를 그립니다."
+    },
+    {
+      "id": "78",
+      "title": "Tarzan of the Apes",
+      "author": "Edgar Rice Burroughs",
+      "genre": "모험",
+      "level": "쉬운 영어",
+      "blurb": "정글에서 자란 타잔의 기원과 모험을 그립니다."
+    },
+    {
+      "id": "81",
+      "title": "The Return of Tarzan",
+      "author": "Edgar Rice Burroughs",
+      "genre": "모험",
+      "level": "쉬운 영어",
+      "blurb": "문명과 정글 사이를 오가는 타잔의 속편입니다."
+    },
+    {
+      "id": "8492",
+      "title": "The Scarlet Pimpernel",
+      "author": "Baroness Orczy",
+      "genre": "모험",
+      "level": "중급",
+      "blurb": "프랑스 혁명기 비밀 구조 활동을 그린 모험 소설입니다."
+    },
+    {
+      "id": "2701",
+      "title": "Moby Dick; Or, The Whale",
+      "author": "Herman Melville",
+      "genre": "모험",
+      "level": "고급",
+      "blurb": "흰 고래를 쫓는 집요한 항해와 집착을 그립니다."
+    },
+    {
+      "id": "3207",
+      "title": "Ivanhoe",
+      "author": "Walter Scott",
+      "genre": "역사·사회",
+      "level": "중급",
+      "blurb": "중세 잉글랜드를 배경으로 한 기사와 갈등의 이야기입니다."
+    },
+    {
+      "id": "35",
+      "title": "The Time Machine",
+      "author": "H. G. Wells",
+      "genre": "SF",
+      "level": "중급",
+      "blurb": "시간 여행을 통해 인류의 미래를 상상한 SF 선구작입니다."
+    },
+    {
+      "id": "36",
+      "title": "The War of the Worlds",
+      "author": "H. G. Wells",
+      "genre": "SF",
+      "level": "중급",
+      "blurb": "화성인의 침공에 맞선 인류를 그린 고전 SF입니다."
+    },
+    {
+      "id": "5230",
+      "title": "The Invisible Man",
+      "author": "H. G. Wells",
+      "genre": "SF",
+      "level": "중급",
+      "blurb": "투명 인간이 된 과학자의 고립과 광기를 그립니다."
+    },
+    {
+      "id": "62",
+      "title": "A Princess of Mars",
+      "author": "Edgar Rice Burroughs",
+      "genre": "SF",
+      "level": "중급",
+      "blurb": "화성을 배경으로 한 초창기 행성 모험 소설입니다."
+    },
+    {
+      "id": "72",
+      "title": "Thuvia, Maid of Mars",
+      "author": "Edgar Rice Burroughs",
+      "genre": "SF",
+      "level": "중급",
+      "blurb": "화성을 배경으로 한 구출과 모험 이야기입니다."
+    },
+    {
+      "id": "64",
+      "title": "The Gods of Mars",
+      "author": "Edgar Rice Burroughs",
+      "genre": "SF",
+      "level": "중급",
+      "blurb": "화성 사후세계 신화의 진실을 파헤치는 SF 모험입니다."
+    },
+    {
+      "id": "98",
+      "title": "A Tale of Two Cities",
+      "author": "Charles Dickens",
+      "genre": "역사·사회",
+      "level": "중급",
+      "blurb": "프랑스 혁명을 배경으로 희생과 구원을 그린 역사 소설입니다."
+    },
+    {
+      "id": "1400",
+      "title": "Great Expectations",
+      "author": "Charles Dickens",
+      "genre": "사실주의",
+      "level": "중급",
+      "blurb": "예상치 못한 후원자와 함께 피프의 인생이 바뀌는 성장 소설입니다."
+    },
+    {
+      "id": "730",
+      "title": "Oliver Twist",
+      "author": "Charles Dickens",
+      "genre": "사실주의",
+      "level": "중급",
+      "blurb": "고아 올리버가 런던의 어두운 거리를 헤쳐 가는 이야기입니다."
+    },
+    {
+      "id": "766",
+      "title": "David Copperfield",
+      "author": "Charles Dickens",
+      "genre": "사실주의",
+      "level": "중급",
+      "blurb": "성장과 운명을 그린 디킨스의 대표 성장 소설입니다."
+    },
+    {
+      "id": "1023",
+      "title": "Bleak House",
+      "author": "Charles Dickens",
+      "genre": "사실주의",
+      "level": "고급",
+      "blurb": "법정 소송의 미로 속에서 얽히는 사람들의 운명을 그립니다."
+    },
+    {
+      "id": "580",
+      "title": "The Pickwick Papers",
+      "author": "Charles Dickens",
+      "genre": "유머·풍자",
+      "level": "중급",
+      "blurb": "픽윅 클럽의 유쾌한 여행과 소동을 담았습니다."
+    },
+    {
+      "id": "33",
+      "title": "The Scarlet Letter",
+      "author": "Nathaniel Hawthorne",
+      "genre": "사실주의",
+      "level": "중급",
+      "blurb": "죄와 낙인의 상징을 둘러싼 청교도 사회의 이야기입니다."
+    },
+    {
+      "id": "77",
+      "title": "The House of the Seven Gables",
+      "author": "Nathaniel Hawthorne",
+      "genre": "고딕·호러",
+      "level": "중급",
+      "blurb": "저주받은 저택과 가족의 비밀을 풀어 가는 소설입니다."
+    },
+    {
+      "id": "145",
+      "title": "Middlemarch",
+      "author": "George Eliot",
+      "genre": "사실주의",
+      "level": "고급",
+      "blurb": "작은 마을의 야망과 결혼, 이상을 세밀하게 그린 대작입니다."
+    },
+    {
+      "id": "550",
+      "title": "Silas Marner",
+      "author": "George Eliot",
+      "genre": "사실주의",
+      "level": "중급",
+      "blurb": "고립된 직조공의 삶이 아이로 인해 바뀌는 이야기입니다."
+    },
+    {
+      "id": "110",
+      "title": "Tess of the d'Urbervilles",
+      "author": "Thomas Hardy",
+      "genre": "사실주의",
+      "level": "고급",
+      "blurb": "사회와 운명에 흔들리는 테스의 비극을 그립니다."
+    },
+    {
+      "id": "153",
+      "title": "Jude the Obscure",
+      "author": "Thomas Hardy",
+      "genre": "사실주의",
+      "level": "고급",
+      "blurb": "계급과 규범에 가로막힌 야망의 비극입니다."
+    },
+    {
+      "id": "767",
+      "title": "Agnes Grey",
+      "author": "Anne Brontë",
+      "genre": "사실주의",
+      "level": "중급",
+      "blurb": "가정교사로 일하며 성장하는 젊은 여성의 이야기입니다."
+    },
+    {
+      "id": "969",
+      "title": "The Tenant of Wildfell Hall",
+      "author": "Anne Brontë",
+      "genre": "사실주의",
+      "level": "중급",
+      "blurb": "억압적 결혼에서 벗어나려는 여성의 결단을 그립니다."
+    },
+    {
+      "id": "25305",
+      "title": "The Awakening",
+      "author": "Kate Chopin",
+      "genre": "사실주의",
+      "level": "중급",
+      "blurb": "자기 삶을 되찾으려는 여성의 각성을 그린 소설입니다."
+    },
+    {
+      "id": "1399",
+      "title": "Anna Karenina",
+      "author": "Leo Tolstoy",
+      "genre": "사실주의",
+      "level": "고급",
+      "blurb": "사랑과 사회, 가정의 갈등을 깊이 있게 그린 작품입니다."
+    },
+    {
+      "id": "2600",
+      "title": "War and Peace",
+      "author": "Leo Tolstoy",
+      "genre": "역사·사회",
+      "level": "고급",
+      "blurb": "전쟁과 평화 속 수많은 인물의 삶을 아우른 대하소설입니다."
+    },
+    {
+      "id": "2554",
+      "title": "Crime and Punishment",
+      "author": "Fyodor Dostoyevsky",
+      "genre": "사실주의",
+      "level": "고급",
+      "blurb": "죄책감과 구원을 둘러싼 심리적 추적을 담았습니다."
+    },
+    {
+      "id": "28054",
+      "title": "The Brothers Karamazov",
+      "author": "Fyodor Dostoyevsky",
+      "genre": "철학·사상",
+      "level": "고급",
+      "blurb": "신앙과 자유, 가족 갈등을 파고든 대작입니다."
+    },
+    {
+      "id": "11231",
+      "title": "Notes from the Underground",
+      "author": "Fyodor Dostoyevsky",
+      "genre": "철학·사상",
+      "level": "고급",
+      "blurb": "현대적 소외를 예감한 독백체 중편입니다."
+    },
+    {
+      "id": "2638",
+      "title": "The Idiot",
+      "author": "Fyodor Dostoyevsky",
+      "genre": "사실주의",
+      "level": "고급",
+      "blurb": "순수함이 사회와 충돌하는 과정을 그린 소설입니다."
+    },
+    {
+      "id": "996",
+      "title": "Don Quixote",
+      "author": "Miguel de Cervantes",
+      "genre": "유머·풍자",
+      "level": "고급",
+      "blurb": "기사 소설에 빠진 돈키호테의 위대한 착각을 그립니다."
+    },
+    {
+      "id": "829",
+      "title": "Gulliver's Travels",
+      "author": "Jonathan Swift",
+      "genre": "유머·풍자",
+      "level": "중급",
+      "blurb": "기이한 나라 여행으로 인간 사회를 풍자한 고전입니다."
+    },
+    {
+      "id": "844",
+      "title": "The Importance of Being Earnest",
+      "author": "Oscar Wilde",
+      "genre": "유머·풍자",
+      "level": "중급",
+      "blurb": "신분과 이름을 둘러싼 위트 넘치는 희곡입니다."
+    },
+    {
+      "id": "86",
+      "title": "A Connecticut Yankee in King Arthur's Court",
+      "author": "Mark Twain",
+      "genre": "유머·풍자",
+      "level": "중급",
+      "blurb": "현대인이 아서왕 시대로 떨어진 풍자적 시간 여행담입니다."
+    },
+    {
+      "id": "204",
+      "title": "The Innocents Abroad",
+      "author": "Mark Twain",
+      "genre": "수필·전기",
+      "level": "중급",
+      "blurb": "유럽·중동 여행을 유머러스하게 기록한 기행문입니다."
+    },
+    {
+      "id": "205",
+      "title": "Walden",
+      "author": "Henry David Thoreau",
+      "genre": "수필·전기",
+      "level": "중급",
+      "blurb": "숲속 생활을 통해 단순함과 자유를 사유한 에세이입니다."
+    },
+    {
+      "id": "23",
+      "title": "Narrative of the Life of Frederick Douglass",
+      "author": "Frederick Douglass",
+      "genre": "수필·전기",
+      "level": "중급",
+      "blurb": "노예제에서 벗어난 저자의 생생한 자서전입니다."
+    },
+    {
+      "id": "6130",
+      "title": "The Story of My Life",
+      "author": "Helen Keller",
+      "genre": "수필·전기",
+      "level": "쉬운 영어",
+      "blurb": "헬렌 켈러가 직접 쓴 성장과 학습의 기록입니다."
+    },
+    {
+      "id": "2500",
+      "title": "Siddhartha",
+      "author": "Hermann Hesse",
+      "genre": "철학·사상",
+      "level": "중급",
+      "blurb": "자기 길을 찾아 떠나는 구도자의 여정을 담았습니다."
+    },
+    {
+      "id": "1232",
+      "title": "The Prince",
+      "author": "Niccolò Machiavelli",
+      "genre": "철학·사상",
+      "level": "고급",
+      "blurb": "권력과 통치의 현실을 직설적으로 논한 고전입니다."
+    },
+    {
+      "id": "5200",
+      "title": "Metamorphosis",
+      "author": "Franz Kafka",
+      "genre": "모더니즘",
+      "level": "중급",
+      "blurb": "어느 날 벌레가 된 남자의 소외를 그린 중편입니다."
+    },
+    {
+      "id": "1513",
+      "title": "Romeo and Juliet",
+      "author": "William Shakespeare",
+      "genre": "희곡",
+      "level": "중급",
+      "blurb": "가문의 갈등 속 젊은 연인의 비극을 그린 희곡입니다."
+    },
+    {
+      "id": "1524",
+      "title": "Hamlet",
+      "author": "William Shakespeare",
+      "genre": "희곡",
+      "level": "고급",
+      "blurb": "복수와 존재의 질문을 파고든 셰익스피어 비극입니다."
+    },
+    {
+      "id": "1533",
+      "title": "Macbeth",
+      "author": "William Shakespeare",
+      "genre": "희곡",
+      "level": "중급",
+      "blurb": "야망과 죄의식이 얽히는 스코틀랜드 왕가의 비극입니다."
+    }
+  ]
+}
