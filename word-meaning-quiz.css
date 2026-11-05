@@ -27,6 +27,9 @@
   color: var(--ink-muted, #6b6560);
   line-height: 1.5;
 }
+.wmq-level-row[hidden] {
+  display: none !important;
+}
 .wmq-level-row {
   display: flex;
   flex-wrap: wrap;

@@ -522,6 +522,7 @@
     } catch (err) {
       var msg =
         (err.data && err.data.error) || err.message || '아직 문제를 만들 단어가 부족해요';
+      showPanel('wmq-start-panel');
       if (errBox) {
         errBox.hidden = false;
         errBox.textContent = msg;
@@ -627,35 +628,41 @@
   }
 
   async function initPage() {
-    showPanel('wmq-start-panel');
+    var params = new URLSearchParams(window.location.search);
+    var resume = params.get('resume') === '1';
+    var autostart = params.get('autostart') === '1';
+    var levelQ = params.get('level');
+    var sid = loadSessionId();
+
+    /* 난이도 UI 미사용 — 항상 전체(또는 URL level) */
+    state.level = levelQ || 'all';
+    saveLevel(state.level);
+    var levelsBox = $('wmq-levels');
+    if (levelsBox) {
+      levelsBox.hidden = true;
+      levelsBox.innerHTML = '';
+    }
+
+    /* autostart/resume 시 시작 화면(난이도) 깜빡임 방지 */
+    if (!(autostart || (resume && sid))) {
+      showPanel('wmq-start-panel');
+    }
+
     try {
       state.meta = await fetchJson(apiBase() + '/api/word-meaning-quiz/meta');
     } catch (e) {
       state.meta = {
-        levels: [{ id: 'all', label: '전체', available: false, readyLabel: '준비 중' }],
+        levels: [{ id: 'all', label: '전체', available: true, readyLabel: null }],
       };
     }
-    state.level = loadLevel();
-    var allMeta = (state.meta.levels || []).find(function (l) {
-      return l.id === state.level;
-    });
-    if (!allMeta || !allMeta.available) state.level = 'all';
-
-    function onLevelPick(id) {
-      state.level = id;
-      saveLevel(id);
-      renderLevels('wmq-levels', state.level, onLevelPick);
-    }
-    renderLevels('wmq-levels', state.level, onLevelPick);
 
     var startBtn = $('wmq-start');
     if (startBtn) {
       startBtn.addEventListener('click', function () {
-        startQuiz(state.level);
+        startQuiz(state.level || 'all');
       });
     }
     var resumeBtn = $('wmq-resume');
-    var sid = loadSessionId();
     if (resumeBtn) {
       if (sid) {
         resumeBtn.hidden = false;
@@ -681,7 +688,7 @@
     var again = $('wmq-again');
     if (again) {
       again.addEventListener('click', function () {
-        startQuiz(state.level);
+        startQuiz(state.level || 'all');
       });
     }
     var changeLv = $('wmq-change-level');
@@ -695,18 +702,12 @@
     bindQuizKeys();
     bindWordFoot();
 
-    var params = new URLSearchParams(window.location.search);
-    var resume = params.get('resume');
-    var levelQ = params.get('level');
-    if (levelQ) {
-      state.level = levelQ;
-      saveLevel(levelQ);
-      renderLevels('wmq-levels', state.level, onLevelPick);
-    }
-    if (resume === '1' && sid) {
-      resumeSession(sid);
-    } else if (params.get('autostart') === '1') {
-      startQuiz(state.level);
+    if (resume && sid) {
+      await resumeSession(sid);
+    } else if (autostart) {
+      await startQuiz(state.level || 'all');
+    } else {
+      showPanel('wmq-start-panel');
     }
   }
 
