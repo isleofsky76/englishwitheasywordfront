@@ -5,7 +5,7 @@
 (function (global) {
   'use strict';
 
-  var ASSET_VER = '20261104syn2';
+  var ASSET_VER = '20261105hide1';
   var SYN_SAVED_KEY = 'ees-synonym-saved-v1';
   var SYN_HIDE_KEY = 'ees-synonym-hide-meaning';
 
@@ -709,7 +709,9 @@
   function renderCardHtml(card, opts) {
     opts = opts || {};
     var synonymMode = !!opts.synonymMode;
-    var showMeaning = synonymMode ? !!card.meaning : (!opts.hideMeaning && card.meaning);
+    /* 연관단어·뉴스어휘: 영어 옆 뜻 + 가리기/해제하기 토글 */
+    var studyMode = !!opts.studyMode || synonymMode;
+    var showMeaning = studyMode ? !!card.meaning : (!opts.hideMeaning && card.meaning);
     var ko = card.ko || '';
     if (opts.stripKoNum && ko) ko = stripLeadingListNum(ko);
     var more = Array.isArray(card.moreExprs) ? card.moreExprs.filter(Boolean) : [];
@@ -725,7 +727,7 @@
       .toLowerCase()
       .replace(/\s+/g, '-')
       .replace(/[^a-z0-9\-']/g, '');
-    var foot = synonymMode
+    var foot = studyMode
       ? '<div class="rd-expr-foot">' +
           '<button type="button" class="rd-syn-meaning-toggle" data-rd-meaning-toggle aria-pressed="false">뜻 보기</button>' +
           '<button type="button" class="rd-syn-save-toggle" data-rd-save-toggle aria-pressed="false">저장</button>' +
@@ -734,9 +736,9 @@
       : '';
     return (
       '<article class="rd-expr' +
-        (synonymMode || isPronOnly ? ' rd-expr--synonym' : '') +
+        (studyMode || isPronOnly ? ' rd-expr--synonym' : '') +
         '" id="' + escapeAttr(card.id) + '"' +
-        (synonymMode
+        (studyMode
           ? ' data-rd-word-key="' + escapeAttr(wordKey) + '"' +
             ' data-rd-word="' + escapeAttr(card.expression) + '"' +
             ' data-rd-meaning="' + escapeAttr(card.meaning || '') + '"'
@@ -746,7 +748,7 @@
           '<span class="rd-expr-num">' + escapeHtml(card.num) + '</span>' +
           '<span class="rd-expr-word">' + escapeHtml(card.expression) + '</span>' +
           (showMeaning
-            ? (synonymMode ? '<span class="rd-expr-colon" aria-hidden="true">:</span>' : '') +
+            ? (studyMode ? '<span class="rd-expr-colon" aria-hidden="true">:</span>' : '') +
               '<span class="rd-expr-meaning">' + escapeHtml(card.meaning) + '</span>'
             : '') +
         '</div>' +
@@ -791,11 +793,16 @@
     if (!root || root.getAttribute('data-rd-syn-bound') === '1') return;
     root.setAttribute('data-rd-syn-bound', '1');
 
+    var hideOn = synHideDefault();
     var toolbar =
-      '<div class="rd-syn-toolbar" role="toolbar" aria-label="연관단어 학습">' +
-        '<label class="rd-syn-hide-all">' +
-          '<input type="checkbox" id="rd-syn-hide-meaning"' + (synHideDefault() ? ' checked' : '') + '>' +
-          '<span>뜻 가리기</span>' +
+      '<div class="rd-syn-toolbar" role="toolbar" aria-label="뜻 가리기">' +
+        '<label class="rd-syn-hide-all" title="' +
+          (hideOn ? '체크 해제하면 뜻이 보입니다' : '체크하면 뜻을 가립니다') +
+        '">' +
+          '<input type="checkbox" id="rd-syn-hide-meaning"' + (hideOn ? ' checked' : '') + '>' +
+          '<span class="rd-syn-hide-label">' +
+            (hideOn ? '뜻 해제하기' : '뜻 가리기') +
+          '</span>' +
         '</label>' +
         '<button type="button" class="rd-syn-download-all" id="rd-syn-download-saved" hidden disabled>저장 다운로드 (<span id="rd-syn-saved-count">0</span>)</button>' +
       '</div>';
@@ -841,11 +848,25 @@
       root.querySelectorAll('.rd-expr--synonym').forEach(syncSaveBtn);
     }
 
+    function syncHideLabel(on) {
+      var hide = !!on;
+      var label = root.querySelector('.rd-syn-hide-label');
+      if (label) label.textContent = hide ? '뜻 해제하기' : '뜻 가리기';
+      var wrap = root.querySelector('.rd-syn-hide-all');
+      if (wrap) {
+        wrap.title = hide ? '체크 해제하면 뜻이 보입니다' : '체크하면 뜻을 가립니다';
+      }
+      var cb = document.getElementById('rd-syn-hide-meaning');
+      if (cb && cb.checked !== hide) cb.checked = hide;
+    }
+
     function applyHide(on) {
-      document.body.classList.toggle('rd-syn-hide-meaning', !!on);
+      var hide = !!on;
+      document.body.classList.toggle('rd-syn-hide-meaning', hide);
       try {
-        localStorage.setItem(SYN_HIDE_KEY, on ? '1' : '0');
+        localStorage.setItem(SYN_HIDE_KEY, hide ? '1' : '0');
       } catch (e) { /* ignore */ }
+      syncHideLabel(hide);
       root.querySelectorAll('.rd-expr--synonym').forEach(function (card) {
         card.classList.remove('is-meaning-shown', 'is-meaning-hidden');
         syncMeaningBtn(card);
@@ -978,6 +999,9 @@
     var sourceUrl = extractSourceLink(html) || (post.sourceUrl || '');
     var narrativeMode = isNarrativeCardCapable(parser, cards);
     var synonymMode = cfg.key === 'english-synonym';
+    var hasCardMeanings = cards.some(function (c) { return !!(c && c.meaning); });
+    /* 연관단어 + 뉴스어휘(narrative) — 뜻 가리기/해제하기 토글 */
+    var studyMode = synonymMode || (narrativeMode && hasCardMeanings && cfg.navGroup === 'news');
 
     var crumb =
       '<nav class="rd-article-crumb" aria-label="위치">' +
@@ -1072,14 +1096,15 @@
       '<div class="rd-article-layout">' +
         '<div class="rd-article-main" id="post-content">' +
           ytBlock +
-          '<div id="post-message" class="rd-article-cards' + (synonymMode ? ' rd-article-cards--synonym' : '') + '">' +
+          '<div id="post-message" class="rd-article-cards' + (studyMode ? ' rd-article-cards--synonym' : '') + '">' +
             (cards.length
               ? cards.map(function (c) {
                   return renderCardHtml(c, {
-                    /* narrative 뉴스: 뜻은 cf./문장 안 — 연관단어는 영어 옆 뜻 + 토글 */
-                    hideMeaning: narrativeMode && !synonymMode,
+                    /* study: 영어 옆 뜻 + 토글 / synonym: 예문·cf 생략 */
+                    hideMeaning: narrativeMode && !studyMode,
                     stripKoNum: narrativeMode,
-                    synonymMode: synonymMode
+                    synonymMode: synonymMode,
+                    studyMode: studyMode
                   });
                 }).join('')
               : '<div class="rd-article-fallback">' + html + '</div>') +
@@ -1097,7 +1122,7 @@
 
     moveAdsense(container.querySelector('#rd-ad-host'));
 
-    if (synonymMode) {
+    if (studyMode) {
       var synRoot = container.querySelector('.rd-article-cards--synonym');
       if (synRoot) bindSynonymStudy(synRoot);
     }
