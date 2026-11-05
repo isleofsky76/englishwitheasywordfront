@@ -327,7 +327,6 @@
     var opts = $('wmq-options');
     var fb = $('wmq-feedback');
     var detail = $('wmq-detail');
-    var nextBtn = $('wmq-next');
 
     if (wordEl) {
       wordEl.textContent = q.word;
@@ -370,13 +369,11 @@
       detail.hidden = true;
       detail.innerHTML = '';
     }
-    if (nextBtn) {
-      nextBtn.disabled = !state.answered;
-      nextBtn.textContent = state.index >= state.total - 1 ? '결과 보기' : '다음 문제';
-    }
 
     if (state.answered && state.lastAnswer) {
       applyAnswerUi(state.lastAnswer);
+    } else {
+      syncNavButtons();
     }
 
     syncWordFoot(q);
@@ -385,12 +382,23 @@
     if (panel) panel.scrollIntoView({ block: 'start' });
   }
 
+  function syncNavButtons() {
+    var prevBtn = $('wmq-prev');
+    var nextBtn = $('wmq-next');
+    if (prevBtn) {
+      prevBtn.disabled = state.index <= 0;
+    }
+    if (nextBtn) {
+      nextBtn.disabled = !state.answered;
+      nextBtn.textContent = state.index >= state.total - 1 ? '결과 보기' : '다음 문제';
+    }
+  }
+
   function applyAnswerUi(ans) {
     var opts = $('wmq-options');
     var fb = $('wmq-feedback');
     var detail = $('wmq-detail');
     var wordEl = $('wmq-word');
-    var nextBtn = $('wmq-next');
     if (!opts) return;
 
     Array.prototype.forEach.call(opts.querySelectorAll('.wmq-option'), function (btn) {
@@ -435,8 +443,8 @@
         detail.hidden = true;
       }
     }
-    if (nextBtn) nextBtn.disabled = false;
     state.answered = true;
+    syncNavButtons();
   }
 
   async function answer(key, btn) {
@@ -672,6 +680,14 @@
       } else {
         resumeBtn.hidden = true;
       }
+    }
+    var prevBtn = $('wmq-prev');
+    if (prevBtn) {
+      prevBtn.addEventListener('click', function () {
+        if (state.index <= 0) return;
+        state.index -= 1;
+        renderQuestion();
+      });
     }
     var nextBtn = $('wmq-next');
     if (nextBtn) {
