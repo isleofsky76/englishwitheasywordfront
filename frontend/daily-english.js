@@ -543,20 +543,13 @@
       return;
     }
     var catalogTotal = catalogTotalCount();
-    var searchTotal = state.q ? state.items.length : catalogTotal;
     var html = '<div class="de-cats-inner">';
 
+    // 검색 딥링크 중이어도 '전체 N(카탈로그)'을 항상 보여 주고, 누르면 전체 목록으로 전환
     if (state.q) {
       html +=
-        '<button type="button" class="de-cat-chip' +
-        (!state.activeCategory ? ' is-active' : '') +
-        '" data-de-cat="" aria-pressed="' +
-        (!state.activeCategory ? 'true' : 'false') +
-        '">검색' +
-        (searchTotal ? ' <span class="de-cat-n">' + searchTotal + '</span>' : '') +
-        '</button>' +
         '<button type="button" class="de-cat-chip de-cat-browse-all" data-de-browse-all="1" title="검색을 지우고 전체 표현을 봅니다">' +
-        '전체 목록' +
+        '전체' +
         (catalogTotal ? ' <span class="de-cat-n">' + catalogTotal + '</span>' : '') +
         '</button>';
     } else {
