@@ -5,7 +5,7 @@
 (function (global) {
   'use strict';
 
-  var ASSET_VER = '20261105dash1';
+  var ASSET_VER = '20261105gloss1';
   var SYN_SAVED_KEY = 'ees-synonym-saved-v1';
   var SYN_HIDE_KEY = 'ees-synonym-hide-meaning';
 
@@ -221,6 +221,29 @@
     return out;
   }
 
+  /** "folly: 어리석음" → "어리석음" — 표제어와 뜻 앞 영어 중복 제거 */
+  function stripLeadingWordFromMeaning(meaning, wordEn) {
+    var gloss = String(meaning || '').replace(/\s+/g, ' ').trim();
+    var word = String(wordEn || '').trim();
+    if (!gloss) return '';
+    if (word) {
+      var esc = word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      gloss = gloss
+        .replace(new RegExp('^cf\\.\\s*', 'i'), '')
+        .replace(new RegExp('^' + esc + '\\s*[:：\\-–—]\\s*', 'i'), '')
+        .replace(new RegExp('^' + esc + '\\s+', 'i'), '')
+        .trim();
+    } else {
+      gloss = gloss.replace(/^cf\.\s*/i, '').trim();
+      var colon = gloss.search(/[:：]/);
+      if (colon > 0 && colon < 48 && /^[A-Za-z]/.test(gloss)) {
+        gloss = gloss.slice(colon + 1).trim();
+      }
+    }
+    if (!gloss || (word && gloss.toLowerCase() === word.toLowerCase())) return '';
+    return gloss;
+  }
+
   /** narrative 본문에서 뜻 추출: 한글(표현) 우선, 단일 표현이면 cf. … */
   function extractNarrativeMeaning(koText, wordEn) {
     var text = String(koText || '').trim();
@@ -236,8 +259,8 @@
     var parenCount = (text.match(/\(/g) || []).length;
     var cf = text.match(/\bcf\.\s*(.+)$/i);
     if (cf && parenCount <= 1) {
-      var cfMeaning = cf[1].replace(/\s+/g, ' ').trim();
-      if (cfMeaning && cfMeaning.toLowerCase() !== word.toLowerCase()) return cfMeaning;
+      var cfMeaning = stripLeadingWordFromMeaning(cf[1], word);
+      if (cfMeaning) return cfMeaning;
     }
     return '';
   }
@@ -570,10 +593,22 @@
         enHtml = synonymPronLineHtml(enHtml, wordEn);
       }
       if (isNarrative && cfText && !meaning) {
-        var cfMeaning = cfText.replace(/^cf\.\s*/i, '');
-        var colon = cfMeaning.indexOf(':');
-        if (colon >= 0) cfMeaning = cfMeaning.slice(colon + 1);
-        meaning = cfMeaning.replace(/\([^)]*\)\s*$/, '').replace(/\s+/g, ' ').trim();
+        meaning = stripLeadingWordFromMeaning(cfText, wordEn);
+      }
+      /* 표제어 옆 뜻에 영어 단어가 또 붙지 않게 */
+      meaning = stripLeadingWordFromMeaning(meaning, wordEn);
+      /* 뜻을 cf에서 뽑았으면 아래 cf 줄 중복 숨김 */
+      if (
+        meaning &&
+        cfText &&
+        new RegExp(
+          '\\bcf\\.\\s*' +
+            String(wordEn || '').replace(/[.*+?^${}()|[\]\\]/g, '\\$&') +
+            '\\s*[:：]',
+          'i'
+        ).test(cfText)
+      ) {
+        cfText = '';
       }
 
       // Prefer highlighting expression inside English if we have raw English without marks
@@ -611,11 +646,12 @@
     }
 
     return cards.map(function (card, i) {
+      var expr = stripLeadingListNum(card.expression);
       return {
         id: 'rd-expr-' + (i + 1),
         num: padNum(i + 1),
-        expression: stripLeadingListNum(card.expression),
-        meaning: card.meaning,
+        expression: expr,
+        meaning: stripLeadingWordFromMeaning(card.meaning, expr),
         moreExprs: card.moreExprs || [],
         enHtml: card.enHtml,
         ko: card.ko,
