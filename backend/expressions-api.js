@@ -227,6 +227,31 @@ export function registerExpressionsApi(app, deps) {
     }
   });
 
+  /** 공개: 카테고리별 건수 */
+  app.get('/api/expressions/categories', async (req, res) => {
+    try {
+      if (mongoose.connection.readyState !== 1) {
+        return res.status(503).json({ error: 'MongoDB 연결이 되지 않았습니다.', categories: [] });
+      }
+      const rows = await Expression.aggregate([
+        { $match: { status: 'published' } },
+        { $group: { _id: '$category', count: { $sum: 1 } } },
+        { $sort: { count: -1, _id: 1 } },
+      ]);
+      res.json({
+        categories: rows
+          .map((r) => ({
+            category: String(r._id || '').trim(),
+            count: r.count || 0,
+          }))
+          .filter((r) => r.category),
+      });
+    } catch (error) {
+      console.error('expressions categories 오류:', error);
+      res.status(500).json({ error: 'Error retrieving categories', categories: [] });
+    }
+  });
+
   app.get('/api/expressions/:id', async (req, res) => {
     try {
       if (mongoose.connection.readyState !== 1) {

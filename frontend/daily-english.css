@@ -49,12 +49,79 @@
   color: var(--de-ink-muted);
 }
 
+.de-kicker {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--de-blue);
+}
+
 .de-toolbar {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-top: 14px;
+  gap: 14px;
+  margin-top: 16px;
   flex-wrap: wrap;
+}
+
+.de-cats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.de-cats[hidden] {
+  display: none !important;
+}
+
+.de-cat-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin: 0;
+  padding: 0 0.7em;
+  height: 1.85em;
+  border: 1px solid rgba(58, 56, 52, 0.16);
+  border-radius: 999px;
+  background: #fff;
+  color: #4a4a4a;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.de-cat-chip:hover {
+  color: var(--de-blue);
+  border-color: var(--de-blue);
+}
+
+.de-cat-chip.is-active {
+  color: #fff;
+  background: var(--de-blue);
+  border-color: var(--de-blue);
+}
+
+.de-cat-n {
+  font-weight: 500;
+  opacity: 0.75;
+}
+
+.de-cat-chip.is-active .de-cat-n {
+  opacity: 0.9;
+}
+
+.de-cat-label {
+  margin: 0 0 2px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--de-blue);
 }
 
 .de-search {
@@ -73,18 +140,24 @@
   color: var(--de-ink);
   font-family: inherit;
   font-size: 15px;
+  outline: none;
+}
+
+.de-search input::placeholder {
+  color: #9a968c;
 }
 
 .de-search input:focus {
-  outline: none;
   border-color: var(--de-blue);
-  box-shadow: 0 0 0 3px rgba(61, 110, 184, 0.15);
+  box-shadow: 0 0 0 3px rgba(47, 111, 237, 0.12);
 }
 
 .de-count {
   margin: 0;
-  font-size: 13px;
-  color: var(--de-ink-muted);
+  flex-shrink: 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink-soft, var(--de-ink-soft));
   white-space: nowrap;
 }
 
@@ -168,24 +241,42 @@
 }
 
 .de-download-btn {
+  margin: 0;
+  flex-shrink: 0;
   height: 36px;
   padding: 0 12px;
-  border: 1px solid #bbb;
-  border-radius: 4px;
-  background: #fafafa;
+  border: 1px solid rgba(58, 56, 52, 0.18);
+  border-radius: 999px;
+  background: #fffef9;
+  font: inherit;
   font-size: 13px;
+  font-weight: 600;
+  color: var(--de-ink-soft);
   cursor: pointer;
+  white-space: nowrap;
 }
 
-.de-download-btn:disabled {
-  opacity: 0.45;
-  cursor: default;
+.de-download-btn:hover:not(:disabled) {
+  color: var(--de-blue);
+  border-color: rgba(47, 111, 237, 0.35);
+}
+
+.de-download-btn:disabled,
+.de-download-btn[hidden],
+.de-item-download[hidden] {
+  display: none !important;
+}
+
+.de-saved-count {
+  display: inline-block;
+  min-width: 1.2em;
+  font-variant-numeric: tabular-nums;
 }
 
 .de-rule {
   height: 1px;
-  background: var(--de-line);
-  margin: 22px 0 8px;
+  margin: 28px 0 8px;
+  background: var(--line, var(--de-line));
 }
 
 /* Grid: 번호 | 본문 — 한국어·영어·예문·번역 시작 X 일치 */
@@ -339,10 +430,6 @@ body.de-hide-meaning .de-item.is-meaning-shown .de-translation {
   background: none;
 }
 
-.de-item-download[hidden] {
-  display: none !important;
-}
-
 .de-status {
   margin: 20px 0 0;
   font-size: 13px;
@@ -359,11 +446,19 @@ body.de-hide-meaning .de-item.is-meaning-shown .de-translation {
 .de-retry-btn {
   height: 34px;
   padding: 0 14px;
-  border: 1px solid #bbb;
-  border-radius: 4px;
-  background: #fff;
+  border: 1px solid rgba(58, 56, 52, 0.18);
+  border-radius: 999px;
+  background: #fffef9;
+  font: inherit;
   font-size: 13px;
+  font-weight: 600;
+  color: var(--de-ink-soft);
   cursor: pointer;
+}
+
+.de-retry-btn:hover {
+  color: var(--de-blue);
+  border-color: rgba(47, 111, 237, 0.35);
 }
 
 .de-sentinel {
@@ -373,32 +468,79 @@ body.de-hide-meaning .de-item.is-meaning-shown .de-translation {
 }
 
 .de-report {
-  margin-top: 48px;
   display: flex;
-  flex-direction: column;
-  gap: 4px;
-  align-items: flex-start;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 14px;
+  margin-top: 36px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line, var(--de-line));
 }
 
-.de-report-btn,
-.de-report-mail {
-  font-size: 13px;
+.de-report-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  padding: 0 14px;
+  border: 1px solid rgba(0, 0, 0, 0.16);
+  border-radius: 8px;
+  background: var(--surface, #fff);
+  color: var(--de-ink);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.de-report-btn:hover {
+  border-color: var(--de-blue);
   color: var(--de-blue);
+}
+
+.de-report-mail {
+  font-size: 14px;
+  color: var(--de-ink-soft);
+  text-decoration: none;
+  word-break: break-all;
+}
+
+.de-report-mail:hover {
+  color: var(--de-blue);
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
 
 .de-back-top {
   position: fixed;
   right: 16px;
-  bottom: 20px;
-  z-index: 40;
-  height: 36px;
-  padding: 0 12px;
-  border: 1px solid #bbb;
-  border-radius: 4px;
-  background: #fff;
-  font-size: 12px;
+  bottom: max(16px, env(safe-area-inset-bottom, 0px));
+  z-index: 120;
+  margin: 0;
+  padding: 0.5rem 1rem;
+  font-family: var(--font-sans, "IBM Plex Sans KR", sans-serif);
+  font-size: 0.84rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: #fff;
+  background: var(--de-blue);
+  border: none;
+  border-radius: 999px;
+  box-shadow: 0 4px 14px rgba(61, 110, 184, 0.35);
   cursor: pointer;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  white-space: nowrap;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  transition: background 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.de-back-top:hover {
+  background: #315a99;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(61, 110, 184, 0.42);
+}
+
+.de-back-top[hidden] {
+  display: none !important;
 }
 
 .de-empty {
@@ -408,11 +550,12 @@ body.de-hide-meaning .de-item.is-meaning-shown .de-translation {
   text-align: center;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 640px) {
   .de-main {
-    padding: 32px 16px 100px;
+    padding: 32px 18px 88px;
   }
   .de-page {
+    --de-body: 16px;
     --de-num-w: 3.5ch;
     --de-gap: 0.55rem;
   }

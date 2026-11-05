@@ -13,6 +13,7 @@
 
   var state = {
     q: '',
+    category: '',
     cursor: null,
     hasMore: true,
     loading: false,
@@ -20,6 +21,7 @@
     seenIds: Object.create(null),
     items: [],
     total: 0,
+    categories: [],
   };
 
   function apiBase() {
@@ -240,9 +242,11 @@
   function updateCount() {
     var el = document.getElementById('de-count');
     if (!el) return;
-    var q = state.q;
-    if (q) {
-      el.textContent = '검색 결과 ' + state.total + '개';
+    var bits = [];
+    if (state.category) bits.push(state.category);
+    if (state.q) bits.push('검색');
+    if (bits.length) {
+      el.textContent = bits.join(' · ') + ' ' + state.total + '개';
     } else {
       el.textContent = '총 ' + state.total + '개';
     }
@@ -271,6 +275,9 @@
       escapeHtml(num) +
       '.</span>' +
       '<div class="de-body">' +
+      (item.category
+        ? '<p class="de-cat-label">' + escapeHtml(item.category) + '</p>'
+        : '') +
       '<p class="de-en">' +
       escapeHtml(item.en) +
       '</p>' +
@@ -349,6 +356,7 @@
     var params = new URLSearchParams();
     params.set('limit', String(PAGE_SIZE));
     if (state.q) params.set('q', state.q);
+    if (state.category) params.set('category', state.category);
     if (state.cursor) params.set('cursor', state.cursor);
 
     try {
@@ -405,6 +413,84 @@
     fetchPage();
   }
 
+  function setCategory(category) {
+    var next = String(category || '').trim();
+    if (state.category === next) return;
+    state.category = next;
+    state.requestId += 1;
+    state.loading = false;
+    renderCategoryNav();
+    resetList();
+    fetchPage();
+  }
+
+  function renderCategoryNav() {
+    var nav = document.getElementById('de-cats');
+    if (!nav) return;
+    var cats = Array.isArray(state.categories) ? state.categories : [];
+    if (!cats.length) {
+      nav.hidden = true;
+      nav.innerHTML = '';
+      return;
+    }
+    var totalAll = cats.reduce(function (sum, c) {
+      return sum + (c && c.count ? c.count : 0);
+    }, 0);
+    var html =
+      '<button type="button" class="de-cat-chip' +
+      (!state.category ? ' is-active' : '') +
+      '" data-de-cat="" aria-pressed="' +
+      (!state.category ? 'true' : 'false') +
+      '">전체' +
+      (totalAll ? ' <span class="de-cat-n">' + totalAll + '</span>' : '') +
+      '</button>';
+    cats.forEach(function (c) {
+      if (!c || !c.category) return;
+      var active = state.category === c.category;
+      html +=
+        '<button type="button" class="de-cat-chip' +
+        (active ? ' is-active' : '') +
+        '" data-de-cat="' +
+        escapeAttr(c.category) +
+        '" aria-pressed="' +
+        (active ? 'true' : 'false') +
+        '">' +
+        escapeHtml(c.category) +
+        (c.count ? ' <span class="de-cat-n">' + c.count + '</span>' : '') +
+        '</button>';
+    });
+    nav.innerHTML = html;
+    nav.hidden = false;
+  }
+
+  async function loadCategories() {
+    var fromApi = null;
+    try {
+      var res = await fetch(apiBase().replace(/\/$/, '') + '/api/expressions/categories', {
+        credentials: 'omit',
+      });
+      if (res.ok) {
+        var data = await res.json();
+        if (Array.isArray(data.categories) && data.categories.length) fromApi = data.categories;
+      }
+    } catch (e) { /* fallback below */ }
+
+    if (!fromApi) {
+      try {
+        var local = await fetch('daily-english-categories.json?v=20261105cat1', {
+          credentials: 'omit',
+        });
+        if (local.ok) {
+          var parsed = await local.json();
+          if (Array.isArray(parsed) && parsed.length) fromApi = parsed;
+        }
+      } catch (e2) { /* ignore */ }
+    }
+
+    state.categories = fromApi || [];
+    renderCategoryNav();
+  }
+
   function bindSearch() {
     var input = document.getElementById('de-search-input');
     if (!input || input._deBound) return;
@@ -415,6 +501,17 @@
       timer = setTimeout(function () {
         startSearch(input.value);
       }, DEBOUNCE_MS);
+    });
+  }
+
+  function bindCategories() {
+    var nav = document.getElementById('de-cats');
+    if (!nav || nav._deBound) return;
+    nav._deBound = true;
+    nav.addEventListener('click', function (e) {
+      var btn = e.target.closest('[data-de-cat]');
+      if (!btn) return;
+      setCategory(btn.getAttribute('data-de-cat') || '');
     });
   }
 
@@ -509,10 +606,12 @@
   function boot() {
     applyHideMeaning(isHideMeaningOn());
     bindSearch();
+    bindCategories();
     bindFeedClicks();
     bindInfiniteScroll();
     bindChrome();
     syncDownloadBar();
+    loadCategories();
     fetchPage();
   }
 
@@ -525,5 +624,6 @@
   window.DailyEnglishPage = {
     apiBase: apiBase,
     startSearch: startSearch,
+    setCategory: setCategory,
   };
 })();
