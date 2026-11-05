@@ -4,7 +4,7 @@
  * nav-home-menu.js 가 로드함
  */
 (function () {
-    var VERSION = '20261105dash1';
+    var VERSION = '20261105dash2';
 
   var DICT_LOOKUP_VER = '20261104dict1';
   var DICT_LOOKUP_CONTAINERS = [
@@ -90,6 +90,12 @@
       label: '학습사이트',
       tone: 'dir',
       pages: ['english-directory.html']
+    },
+    {
+      href: 'dashboard.html',
+      label: '대시보드',
+      tone: 'dash',
+      pages: ['dashboard.html', 'word-ranking.html']
     }
   ];
   /* 더보기(햄버거) — 학습 → 뉴스(라벨에 '뉴스' 생략) → 읽을거리 */

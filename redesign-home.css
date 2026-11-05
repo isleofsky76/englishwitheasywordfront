@@ -617,7 +617,54 @@
 }
 .rd-dir-cats a:hover {
   border-color: var(--accent);
+}
+
+/* 홈 — 학습사이트 아래 대시보드 미리보기 */
+.rd-dash-preview {
+  padding-top: 8px;
+  padding-bottom: 48px;
+}
+.rd-dash-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+.rd-dash-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 16px 16px 14px;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  background: var(--surface, #fff);
+  text-decoration: none !important;
+  color: inherit;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.rd-dash-card:hover {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 6%, var(--surface, #fff));
+}
+.rd-dash-card-kicker {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
   color: var(--accent);
+}
+.rd-dash-card-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ink);
+}
+.rd-dash-card-desc {
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--ink-muted);
+}
+@media (max-width: 720px) {
+  .rd-dash-cards {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 720px) {
