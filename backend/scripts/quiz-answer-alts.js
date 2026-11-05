@@ -149,12 +149,35 @@ function uniq(list) {
   return out;
 }
 
+/**
+ * 뜻을 유사 정답 토큰으로 분할.
+ * `(과장되게·뽐내며) 활보하다` 처럼 괄호 안 · 는 쪼개지 않음.
+ */
 export function splitQuizMeanings(ko) {
-  return String(ko || '')
+  const raw = String(ko || '')
     .replace(/^\d+\.\s*/, '')
-    .split(/[,，、/;；·･・|]+/)
-    .map((s) => s.trim())
-    .filter(Boolean);
+    .trim();
+  if (!raw) return [];
+
+  const parts = [];
+  let buf = '';
+  let depth = 0;
+  for (let i = 0; i < raw.length; i += 1) {
+    const ch = raw[i];
+    if (ch === '(' || ch === '（') depth += 1;
+    else if ((ch === ')' || ch === '）') && depth > 0) depth -= 1;
+
+    if (depth === 0 && /[,，、/;；·･・|]/.test(ch)) {
+      const t = buf.trim();
+      if (t) parts.push(t);
+      buf = '';
+      continue;
+    }
+    buf += ch;
+  }
+  const tail = buf.trim();
+  if (tail) parts.push(tail);
+  return parts;
 }
 
 function hangulTokens(text) {
