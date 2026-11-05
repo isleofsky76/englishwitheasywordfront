@@ -275,7 +275,7 @@
 274,직장/업무,마감이 코앞이야,The deadline is right around the corner.,We need to finish this report; the deadline is right around the corner.,"이 보고서 끝내야 해, 마감이 코앞이야."
 275,직장/업무,회의 일정 잡을게요,I'll schedule a meeting.,"To align on project goals, I'll schedule a meeting.",프로젝트 목표를 조율하기 위해 회의 일정을 잡을게요.
 276,직장/업무,이메일로 송부드렸습니다,I sent it via email.,Please review the updated budget; I sent it via email.,"수정된 예산안 확인해 보세요, 이메일로 송부드렸습니다."
-277,직장/업무,참조에 넣어주세요,Please keep me in the loop.,"Whenever there's an update on the client, please keep me in the loop.",고객 관련 업데이트가 있을 때마다 저를 참조에 넣어주세요.
+277,직장/업무,참조에 넣어주세요,Please CC me on the email.,"Whenever there's an update on the client, please CC me on the email.",고객 관련 업데이트가 있을 때마다 저를 참조에 넣어주세요.
 278,직장/업무,첨부파일을 확인해 주세요,Please check the attached file.,"The invoice is ready, please check the attached file.",청구서가 준비되었으니 첨부파일을 확인해 주세요.
 279,직장/업무,오늘 야근해야 해,I have to work overtime today.,"With the release tomorrow, I have to work overtime today.",내일 출시 때문에 오늘 야근해야 해.
 280,직장/업무,퇴근할 시간이야,It's time to call it a day.,We made solid progress; it's time to call it a day.,"진도 많이 뺐으니, 이제 퇴근할 시간이야."
@@ -296,7 +296,7 @@
 295,식음료/식사,먹고 갈게요,"For here, please.","We'll have our lunch for here, please.",저희 점심 여기서 먹고 갈게요.
 296,식음료/식사,더치페이 하자,Let's split the bill.,"No need to treat everyone, let's split the bill.","한 사람이 다 낼 필요 없어, 더치페이 하자."
 297,식음료/식사,내가 쏠게,It's on me.,Put your wallet away; dinner tonight is on me.,"지갑 집어넣어, 오늘 저녁은 내가 쏠게."
-298,식음료/식사,영수증 버려주세요,I don't need a receipt.,"Payment complete. I don't need a receipt, thank you.",결제됐습니다. 영수증은 버려주세요.
+298,식음료/식사,영수증 버려주세요,You can throw away the receipt.,"Payment complete. You can throw away the receipt, thank you.",결제됐습니다. 영수증은 버려주세요.
 299,식음료/식사,물이 셀프인가요?,Is water self-service?,"Excuse me, is water self-service here?","실례합니다, 여기 물은 셀프인가요?"
 300,식음료/식사,간이 딱 맞아,It's seasoned perfectly.,Try this soup; it's seasoned perfectly.,"이 국물 좀 먹어봐, 간이 딱 맞아."
 301,식음료/식사,내 입맛엔 좀 짜,It's a bit too salty for me.,"The ramen broth is flavorful, but a bit too salty for me.","라면 국물이 진하긴 한데, 내 입맛엔 좀 짜."
@@ -315,7 +315,7 @@
 314,쇼핑/소비,봉투 필요하세요?,Do you need a shopping bag?,Your total is twenty dollars; do you need a shopping bag?,"총 20달러입니다, 봉투 필요하세요?"
 315,쇼핑/소비,카드로 계산할게요,I'll pay by card.,"Cash or card? I'll pay by card, please.",현금이세요 카드세요? 카드로 계산할게요.
 316,쇼핑/소비,할부로 해드릴까요?,Would you like installments?,"For larger purchases, would you like installments?",금액이 큰데 할부로 결제해 드릴까요?
-317,쇼핑/소비,일시불로 해주세요,"All at once, please.","No installments, charge it all at once, please.",할부 말고 일시불로 결제해 주세요.
+317,쇼핑/소비,일시불로 해주세요,I'd like to pay in full.,"No installments — I'd like to pay in full, please.",할부 말고 일시불로 결제해 주세요.
 318,쇼핑/소비,포인트 적립할게요,I'd like to earn reward points.,Here is my membership number; I'd like to earn reward points.,"여기 회원번호요, 포인트 적립할게요."
 319,통신/연락,배터리가 얼마 안 남았어,My battery is running low.,Can I borrow your charger? My battery is running low.,충전기 좀 빌릴 수 있어? 배터리가 얼마 안 남았어.
 320,통신/연락,핸드폰 꺼졌어,My phone died.,Sorry I missed your call; my phone died.,"전화 못 받아서 미안, 핸드폰이 꺼졌어."
@@ -365,7 +365,7 @@
 364,연애/인간관계,첫눈에 반했어,It was love at first sight.,"The moment I met her, it was love at first sight.","그녀를 만난 순간, 첫눈에 반했어."
 365,연애/인간관계,소개팅 들어왔어,I was set up on a blind date.,My coworker asked if I'm free; I was set up on a blind date.,"직장 동료가 시간 되냐고 묻더니, 소개팅 들어왔어."
 366,연애/인간관계,우리 썸 타는 중이야,There's something going on between us.,We text every night; there's something going on between us.,"매일 밤 문자해, 우리 지금 썸 타는 중이야."
-367,연애/인간관계,고백받았어,Someone asked me out.,"You won't believe it, someone asked me out yesterday!","믿기지 않겠지만, 어제 고백받았어!"
+367,연애/인간관계,고백받았어,Someone confessed their feelings to me.,"You won't believe it — someone confessed their feelings to me yesterday!","믿기지 않겠지만, 어제 고백받았어!"
 368,연애/인간관계,차였어,I got dumped.,She said we should just be friends; I got dumped.,"그냥 친구로 지내재, 나 차였어."
 369,연애/인간관계,우리 헤어졌어,We broke up.,"After dating for two years, we broke up last week.",2년 연애 끝에 지난주에 헤어졌어.
 370,연애/인간관계,다시 합쳤어,We got back together.,We talked things through and got back together.,대화로 풀고 우리 다시 합쳤어.
@@ -550,7 +550,7 @@
 549,통신/연락,팔로우했어,I gave you a follow.,Love your travel posts; I just gave you a follow!,"여행 게시물 너무 좋아요, 방금 팔로우했어요!"
 550,통신/연락,맞팔해요,Let's follow each other back.,"I love your feed too, let's follow each other back.","피드 마음에 드네요, 맞팔해요."
 551,통신/연락,좋아요 눌렀어,I liked your post.,Your food photos look delicious; I liked your post.,음식 사진 맛있어 보여서 좋아요 눌렀어.
-552,통신/연락,스토리 올렸어,I posted a story.,Tag me when you see it; I posted a story on my feed.,"보면 나 태그해 줘, 인스타 스토리 올렸어."
+552,통신/연락,인스타 스토리 올렸어,I posted a story on Instagram.,Tag me when you see it; I posted a story on Instagram.,"보면 나 태그해 줘, 인스타 스토리 올렸어."
 553,통신/연락,단톡방 만들자,Let's make a group chat.,"To coordinate the party, let's make a group chat.",파티 조율하게 단톡방 만들자.
 554,통신/연락,단톡방 알림 꺼뒀어,I muted the group chat.,"Messages keep popping up, so I muted the group chat.",카톡이 쉴 새 없이 울려서 단톡방 알림 꺼뒀어.
 555,통신/연락,보이스톡 할래?,Care for a voice call?,Typing takes too long; care for a quick voice call?,타자 치기 오래 걸리는데 보이스톡 할래?
@@ -701,7 +701,7 @@
 700,직장/업무,퇴근 도장 찍었어,I clocked out.,"My shift ended, so I clocked out.",근무 시간이 끝나서 퇴근 도장 찍었어.
 701,직장/업무,재택근무 중이야,I'm working from home.,"Every Friday, I'm working from home.",매주 금요일마다 재택근무 중이야.
 702,직장/업무,거점 오피스로 출근했어,I worked from the satellite office.,"To shorten my commute, I worked from the satellite office.",출퇴근 시간 줄이려고 거점 오피스로 출근했어.
-703,직장/업무,시말서 쓸 뻔했어,I almost had to write an apology letter.,I caught the billing error in time; I almost had to write an apology.,"청구서 오류를 제때 잡았어, 시말서 쓸 뻔했네."
+703,직장/업무,시말서 쓸 뻔했어,I almost had to write an incident report.,I caught the billing error in time; I almost had to write an incident report.,"청구서 오류를 제때 잡았어, 시말서 쓸 뻔했네."
 704,직장/업무,경비 처리해주세요,Please process this expense.,Here is the dinner receipt; please process this expense.,"여기 저녁 식사 영수증입니다, 경비 처리해주세요."
 705,직장/업무,법인카드 사용했어,I used the company card.,"To pay for the client lunch, I used the company card.",고객 점심 대접하느라 법인카드 사용했어.
 706,직장/업무,영수증 첨부했습니다,Receipt is attached.,"In my expense report, the receipt is attached.",지출결의서에 영수증 첨부했습니다.
@@ -750,7 +750,7 @@
 749,이동/교통,입국 심사 통과했어,I cleared immigration.,"Lines moved quickly, so I cleared immigration smoothly.",줄이 빨리 빠져서 입국 심사 무사히 통과했어.
 750,이동/교통,세관 신고할 거 있나요?,Do you have anything to declare?,Customs officer asked: do you have anything to declare?,세관 직원이 '신고할 물품이 있나요?'라고 물었어.
 751,이동/교통,관광 목적으로 왔어요,I'm here for tourism.,At border control: I'm here for tourism for seven days.,입국 심사대에서: 일주일간 관광 목적으로 왔어요.
-752,이동/교통,호텔 바우처 챙겼어?,Did you print the hotel voucher?,"For check-in, did you print the hotel voucher?",체크인할 때 보여주게 호텔 바우처 챙겼어?
+752,이동/교통,호텔 바우처 챙겼어?,Did you bring the hotel voucher?,"For check-in, did you bring the hotel voucher?",체크인할 때 보여주게 호텔 바우처 챙겼어?
 753,이동/교통,수영장 이용 가능한가요?,Is the pool open for use?,"Excuse me front desk, is the pool open for use today?","프런트 데스크죠, 오늘 수영장 이용 가능한가요?"
 754,이동/교통,어메니티 더 주실 수 있나요?,Could we get extra amenities?,Shampoo and toothbrushes; could we get extra amenities?,샴푸랑 칫솔 등 어메니티 좀 더 주실 수 있나요?
 755,이동/교통,짐 보관증 잃어버렸어,I lost my luggage tag.,I can describe the suitcase; I lost my luggage tag.,"가방 특징은 설명할 수 있는데, 짐 보관증을 잃어버렸어."
@@ -778,7 +778,7 @@
 777,학교/공부,재수강해야 해,I have to retake the course.,"I got a D in statistics, so I have to retake the course.",통계학 D 받아서 재수강해야 해.
 778,학교/공부,조별과제 때문에 스트레스야,Group projects stress me out.,Nobody communicates on the slide deck; group projects stress me out.,슬라이드 만드는데 소통이 안 돼서 조별과제 스트레스야.
 779,학교/공부,수강신청 망했어,I failed course registration.,"The server crashed at 9 AM, so I failed course registration.",9시에 서버가 터져서 수강신청 망했어.
-780,학교/공부,출석 체크했어?,Did you take attendance?,Professor walked in; did you take attendance?,교수님 들어오셨는데 출석 체크했어?
+780,학교/공부,출석 체크했어?,Did you check in for attendance?,Professor walked in; did you check in for attendance?,교수님 들어오셨는데 출석 체크했어?
 781,학교/공부,과제 제출 마감 언제야?,When is the assignment due?,Check the syllabus; when is the assignment due?,"강의계획서 확인해 봐, 과제 제출 마감 언제야?"
 782,학교/공부,토익 시험 점수 나왔어,My TOEIC scores came out.,I checked the portal and my TOEIC scores came out.,포털 확인해 보니 토익 시험 점수 나왔어.
 783,학교/공부,필기한 것 좀 보여줄래?,Could you share your lecture notes?,I missed Monday's lecture; could you share your notes?,월요일 강의를 놓쳤는데 필기한 것 좀 보여줄래?
@@ -980,7 +980,7 @@
 979,감정/심리,마음먹기 달렸어,It's a matter of mindset.,Whether you enjoy challenges is all a matter of mindset.,도전을 즐길 수 있을지는 마음먹기에 달렸어.
 980,감정/심리,긍정적으로 생각하자,Let's think positive thoughts.,"Even when things go sideways, let's think positive thoughts.",일이 꼬일 때일수록 긍정적으로 생각하자.
 981,감정/심리,웃으면 복이 와,Laughter brings good fortune.,Cheer up and smile; laughter brings good fortune.,"기운 내서 활짝 웃어봐, 웃으면 복이 온다잖아."
-982,감정/심리,좋은 게 좋은 거지,All's well that ends well.,Let's move past misunderstandings; all's well that ends well.,"오해는 털어버리자, 좋은 게 좋은 거지."
+982,감정/심리,좋은 게 좋은 거지,Let's not make a big deal out of it.,"Let's move past the misunderstanding — let's not make a big deal out of it.","오해는 털어버리자, 좋은 게 좋은 거지."
 983,감정/심리,누구에게나 처음은 있어,There is a first time for everyone.,Don't feel discouraged by mistakes; first time for everyone.,"실수했다고 주눅 들지 마, 누구에게나 처음은 있어."
 984,감정/심리,실패는 성공의 어머니,Failure is a stepping stone to success.,Learn from the bug; failure is a stepping stone to success.,"오류에서 배워, 실패는 성공의 어머니야."
 985,감정/심리,노력은 배신하지 않아,Hard work never betrays you.,Put in honest hours; hard work never betrays you.,"정직하게 시간을 쏟아봐, 노력은 배신하지 않아."
