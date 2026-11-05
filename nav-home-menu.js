@@ -30,6 +30,7 @@
     var MENU_ITEMS = [
         { href: 'index.html', label: '홈', pages: ['index.html', ''] },
         { href: 'daily-english.html', label: '생활 영어 한 줄', pages: ['daily-english.html'] },
+        { href: 'dashboard.html', label: '대시보드', pages: ['dashboard.html', 'word-ranking.html'] },
         { href: 'english-synonym-list.html', label: '연관단어', pages: ['english-synonym-list.html', 'english-synonym.html'] },
         { href: 'situational-english-list.html', label: '상황', pages: ['situational-english-list.html', 'situational-english.html'] },
         { href: 'pros-cons-list.html', label: 'Pros & Cons', pages: ['pros-cons-list.html', 'pros-cons.html'] },

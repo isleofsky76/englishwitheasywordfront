@@ -1,0 +1,214 @@
+@import url("redesign-tokens.css");
+
+.db-page {
+  --db-blue: #3d6eb8;
+  --db-ink: #3a3834;
+  --db-muted: #7a756c;
+  --db-line: rgba(58, 56, 52, 0.12);
+  --db-max: 920px;
+  margin: 0;
+  font-family: var(--font-sans, "IBM Plex Sans KR", sans-serif);
+  color: var(--db-ink);
+  background: var(--page-bg, #F6F3EC);
+  -webkit-font-smoothing: antialiased;
+}
+
+.db-main {
+  max-width: var(--db-max);
+  margin: 0 auto;
+  padding: 48px 24px 120px;
+  box-sizing: border-box;
+}
+
+.db-kicker {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--db-blue);
+}
+
+.db-title {
+  margin: 8px 0 0;
+  font-size: clamp(22px, 3.2vw, 28px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.db-lead {
+  margin: 8px 0 0;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--db-muted);
+  max-width: 40em;
+}
+
+.db-periods {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 20px;
+}
+
+.db-period {
+  margin: 0;
+  padding: 0 0.85em;
+  height: 2em;
+  border: 1px solid rgba(58, 56, 52, 0.16);
+  border-radius: 999px;
+  background: #fff;
+  color: #4a4a4a;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.db-period.is-active {
+  color: #fff;
+  background: var(--db-blue);
+  border-color: var(--db-blue);
+}
+
+.db-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.db-stat {
+  padding: 14px 16px;
+  background: #fff;
+  border: 1px solid var(--db-line);
+  border-radius: 12px;
+}
+
+.db-stat-label {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--db-muted);
+}
+
+.db-stat-value {
+  margin: 6px 0 0;
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--db-ink);
+}
+
+.db-panels {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 28px;
+}
+
+.db-panel {
+  background: #fff;
+  border: 1px solid var(--db-line);
+  border-radius: 14px;
+  padding: 16px 16px 10px;
+  min-width: 0;
+}
+
+.db-panel-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.db-panel-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.db-panel-sub {
+  margin: 0;
+  font-size: 12px;
+  color: var(--db-muted);
+}
+
+.db-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.db-table th,
+.db-table td {
+  padding: 8px 4px;
+  border-bottom: 1px solid var(--db-line);
+  text-align: left;
+  vertical-align: baseline;
+}
+
+.db-table th {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--db-muted);
+}
+
+.db-rank {
+  width: 2.2em;
+  color: var(--db-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.db-term {
+  font-weight: 600;
+  color: var(--db-blue);
+  text-decoration: none;
+}
+
+.db-term:hover {
+  text-decoration: underline;
+}
+
+.db-count {
+  text-align: right !important;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+.db-empty {
+  margin: 18px 0;
+  font-size: 13px;
+  color: var(--db-muted);
+  text-align: center;
+}
+
+.db-status {
+  margin: 18px 0 0;
+  font-size: 13px;
+  color: var(--db-muted);
+  text-align: center;
+  min-height: 1.2em;
+}
+
+.db-note {
+  margin: 28px 0 0;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--db-muted);
+}
+
+@media (max-width: 900px) {
+  .db-panels {
+    grid-template-columns: 1fr;
+  }
+  .db-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .db-main {
+    padding: 32px 18px 88px;
+  }
+}

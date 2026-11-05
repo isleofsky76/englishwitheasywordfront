@@ -689,6 +689,14 @@
         sensitivity: 'base',
       });
     });
+    if (window.SiteStats && typeof window.SiteStats.trackDownload === 'function') {
+      window.SiteStats.trackDownload(
+        keys.map(function (k) {
+          return (map[k] && map[k].word) || '';
+        }),
+        'one-sentence'
+      );
+    }
     var lines = [
       '단어\t품사\t뜻\t발음\t예문\t해석',
     ];
@@ -1215,10 +1223,18 @@
     var input = document.getElementById('os-search-input');
     var tags = document.getElementById('os-tags');
 
+    var searchTimer = null;
     function refresh() {
-      var visible = filterItems(feedAll, input ? input.value : '');
+      var q = input ? input.value : '';
+      var visible = filterItems(feedAll, q);
       renderFeed(visible);
       renderTags(feedAll);
+      if (String(q || '').trim().length >= 2 && window.SiteStats && typeof window.SiteStats.trackSearch === 'function') {
+        clearTimeout(searchTimer);
+        searchTimer = setTimeout(function () {
+          window.SiteStats.trackSearch(q, 'one-sentence');
+        }, 600);
+      }
     }
     refreshFeed = refresh;
 

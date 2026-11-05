@@ -208,6 +208,14 @@
     keys.sort(function (a, b) {
       return String(a).localeCompare(String(b), 'en');
     });
+    if (window.SiteStats && typeof window.SiteStats.trackDownload === 'function') {
+      window.SiteStats.trackDownload(
+        keys.map(function (k) {
+          return (map[k] && map[k].en) || '';
+        }),
+        'daily-english'
+      );
+    }
     var lines = ['번호\t한국어\t영어\t예문\t번역'];
     keys.forEach(function (k, idx) {
       var it = map[k] || {};
@@ -619,6 +627,9 @@
 
   function startSearch(q) {
     state.q = String(q || '').trim().slice(0, 100);
+    if (state.q && window.SiteStats && typeof window.SiteStats.trackSearch === 'function') {
+      window.SiteStats.trackSearch(state.q, 'daily-english');
+    }
     reloadList();
   }
 

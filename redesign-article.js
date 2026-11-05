@@ -5,7 +5,7 @@
 (function (global) {
   'use strict';
 
-  var ASSET_VER = '20261105hide1';
+  var ASSET_VER = '20261105dash1';
   var SYN_SAVED_KEY = 'ees-synonym-saved-v1';
   var SYN_HIDE_KEY = 'ees-synonym-hide-meaning';
 
@@ -877,6 +877,15 @@
       var map = synReadSaved();
       var keys = Object.keys(map);
       if (!keys.length) return;
+      if (window.SiteStats && typeof window.SiteStats.trackDownload === 'function') {
+        window.SiteStats.trackDownload(
+          keys.map(function (k) {
+            var it = map[k] || {};
+            return it.word || k;
+          }),
+          'synonym'
+        );
+      }
       var lines = keys.map(function (k) {
         var it = map[k] || {};
         return (
