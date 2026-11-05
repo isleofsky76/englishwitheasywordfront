@@ -1011,7 +1011,7 @@ function rdLoadScript(src) {
     const base = rdAssetBase();
     try {
         if (!window.BoardListConfig) await rdLoadScript(base + 'board-list-config.js?v=20261102ind2');
-        if (!window.mountRedesignArticle) await rdLoadScript(base + 'redesign-article.js?v=20261102c10');
+        if (!window.mountRedesignArticle) await rdLoadScript(base + 'redesign-article.js?v=20261105news1');
     } catch (e) { console.warn(e); }
     loadPost();
 })();

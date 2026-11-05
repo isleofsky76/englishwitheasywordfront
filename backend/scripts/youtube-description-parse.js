@@ -127,16 +127,26 @@ function parseWords(description) {
   return words;
 }
 
-/** 표제어는 항상 사전 원형. 문장 속 변화형은 그대로 두고 끝에 (**lemma**)만 붙인다. */
+/**
+ * 뉴스 서술형(dearer 양식): 예문 안에 **표제어** 하이라이트.
+ * 끝에 (**lemma**)를 붙이면 redesign이 발음줄로 오인해 예문이 사라지므로 쓰지 않음.
+ */
 function lemmaAnnotation(sentence, expression) {
-  const s = String(sentence || '')
+  const exp = String(expression || '').trim();
+  let s = String(sentence || '')
     .trim()
     .replace(/\*\*/g, '');
-  const exp = String(expression || '').trim();
   if (!exp) return s;
-  if (!s) return `(**${exp}**)`;
-  if (/\(\*\*[^*]+\*\*\)\s*$/.test(s)) return s;
-  return `${s} (**${exp}**)`;
+  if (!s) return `**${exp}**`;
+  const esc = exp.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  /* 구형 꼬리 (**lemma**) / (lemma) 제거 */
+  s = s.replace(new RegExp(`\\s*\\(\\*\\*${esc}\\*\\*\\)\\s*$`, 'i'), '').trim();
+  s = s.replace(new RegExp(`\\s*\\(${esc}\\)\\s*$`, 'i'), '').trim();
+  const re = new RegExp(`(^|[^A-Za-z*])(${esc})(?![A-Za-z*])`, 'i');
+  if (re.test(s)) {
+    return s.replace(re, (_, pre, word) => `${pre}**${word}**`);
+  }
+  return s;
 }
 
 function wordsToNarratives(words) {

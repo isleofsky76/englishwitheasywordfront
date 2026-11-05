@@ -361,12 +361,10 @@
     } else if (/\([^)]*$/.test(plain)) {
       return html + (btn || '');
     }
-    if (!pron) {
-      /* 예문형이면 그대로 */
-      if (plain.split(/\s+/).length > 4) return String(enHtml || '');
-      return html + (btn || '');
-    }
-    /* 이미 표제어가 헤더에 있으면 mark 중복 제거 → 발음만 */
+    /* 뉴스 예문(단어 5개+)은 끝에 (word)가 있어도 발음줄로 접지 않음 */
+    if (plain.split(/\s+/).length > 4) return String(enHtml || '');
+    if (!pron) return html + (btn || '');
+    /* 연관단어 짧은 줄: 표제어는 헤더, 본문은 발음만 */
     var out =
       '<span class="rd-expr-pron">(' + escapeHtml(pron) + ')</span>' + (btn || '');
     void wordEn;
@@ -563,7 +561,11 @@
       if (isNarrative && !meaning && unique.length === 1) {
         meaning = extractNarrativeMeaning((koText + ' ' + cfText).trim(), wordEn);
       }
-      /* 연관단어: 본문은 발음 한 줄만 (영어 표제어는 헤더에) */
+      /* 영어 줄 끝 "(word)" 꼬리 먼저 제거 — 발음 접기보다 앞서야 뉴스 예문이 안 사라짐 */
+      if (isNarrative && enHtml) {
+        enHtml = stripTrailingExprTag(enHtml, wordEn);
+      }
+      /* 연관단어: 짧은 발음 줄만 접기 (뉴스 예문은 synonymPronLineHtml이 그대로 둠) */
       if (isNarrative && wordEn && enHtml) {
         enHtml = synonymPronLineHtml(enHtml, wordEn);
       }
@@ -572,11 +574,6 @@
         var colon = cfMeaning.indexOf(':');
         if (colon >= 0) cfMeaning = cfMeaning.slice(colon + 1);
         meaning = cfMeaning.replace(/\([^)]*\)\s*$/, '').replace(/\s+/g, ' ').trim();
-      }
-
-      /* 영어 줄 끝 "(Astroturf)" 꼬리 — 제목·하이라이트와 중복 */
-      if (isNarrative && enHtml) {
-        enHtml = stripTrailingExprTag(enHtml, wordEn);
       }
 
       // Prefer highlighting expression inside English if we have raw English without marks
