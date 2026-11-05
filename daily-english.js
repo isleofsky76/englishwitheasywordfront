@@ -1,28 +1,26 @@
 /**
- * 생활 영어 한 줄 — 검색 · 무한 스크롤 · 뜻/저장/다운로드 · BoardComments
+ * 생활 영어 한 줄 — 카테고리 스크롤 · 검색 · 뜻/저장/다운로드 · BoardComments
  */
 (function () {
   'use strict';
 
-  var PAGE_SIZE = 50;
+  var PAGE_SIZE = 100;
   var DEBOUNCE_MS = 300;
   var BOARD = 'expressions';
   var SAVED_KEY = 'de-saved-expressions-session';
-  /* 문장 섹션과 동일 — 기본 한글(뜻) blur */
   var HIDE_MEANING_KEY = 'de-hide-meaning';
 
   var state = {
     q: '',
-    category: '',
-    cursor: null,
-    hasMore: true,
+    activeCategory: '',
     loading: false,
     requestId: 0,
-    seenIds: Object.create(null),
     items: [],
     total: 0,
     categories: [],
   };
+
+  var catObserver = null;
 
   function apiBase() {
     if (typeof window.getPage30ApiBaseUrl === 'function') return window.getPage30ApiBaseUrl();
@@ -39,6 +37,16 @@
 
   function escapeAttr(s) {
     return escapeHtml(s).replace(/'/g, '&#39;');
+  }
+
+  function catSlug(category) {
+    return encodeURIComponent(String(category || ''))
+      .replace(/%/g, '_')
+      .replace(/[^a-zA-Z0-9_\-가-힣]/g, '-');
+  }
+
+  function catSectionId(category) {
+    return 'de-cat-' + catSlug(category);
   }
 
   function readSavedMap() {
@@ -69,7 +77,7 @@
   function isHideMeaningOn() {
     try {
       var v = localStorage.getItem(HIDE_MEANING_KEY);
-      if (v === null) return true; /* default: 한글 뜻 blur */
+      if (v === null) return true;
       return v === '1';
     } catch (e) {
       return true;
@@ -144,8 +152,7 @@
     if (!itemEl) return;
     var btn = itemEl.querySelector('[data-de-item-download]');
     if (!btn) return;
-    var on = isSaved(id);
-    btn.hidden = !on;
+    btn.hidden = !isSaved(id);
   }
 
   function syncDownloadBar() {
@@ -242,23 +249,15 @@
   function updateCount() {
     var el = document.getElementById('de-count');
     if (!el) return;
-    var bits = [];
-    if (state.category) bits.push(state.category);
-    if (state.q) bits.push('검색');
-    if (bits.length) {
-      el.textContent = bits.join(' · ') + ' ' + state.total + '개';
+    if (state.q) {
+      el.textContent = '검색 결과 ' + state.total + '개';
     } else {
       el.textContent = '총 ' + state.total + '개';
     }
   }
 
-  function displayIndex(absoluteIndex) {
-    return String(absoluteIndex);
-  }
-
   function renderItem(item, listIndex) {
     var hasEx = Boolean(String(item.example || '').trim() || String(item.translation || '').trim());
-    var num = displayIndex(listIndex + 1);
     var exampleBlock = hasEx
       ? '<div class="de-example-block">' +
         (item.example ? '<p class="de-example">' + escapeHtml(item.example) + '</p>' : '') +
@@ -272,12 +271,9 @@
       (hasEx ? '1' : '0') +
       '">' +
       '<span class="de-num" aria-hidden="true">' +
-      escapeHtml(num) +
+      escapeHtml(String(listIndex + 1)) +
       '.</span>' +
       '<div class="de-body">' +
-      (item.category
-        ? '<p class="de-cat-label">' + escapeHtml(item.category) + '</p>'
-        : '') +
       '<p class="de-en">' +
       escapeHtml(item.en) +
       '</p>' +
@@ -314,19 +310,9 @@
     }
   }
 
-  function appendItems(items, startIndex) {
-    var feed = document.getElementById('de-feed');
-    if (!feed) return;
-    var html = items
-      .map(function (it, i) {
-        return renderItem(it, startIndex + i);
-      })
-      .join('');
-    var wrap = document.createElement('div');
-    wrap.innerHTML = html;
-    var nodes = Array.prototype.slice.call(wrap.children);
-    nodes.forEach(function (node) {
-      feed.appendChild(node);
+  function bindItemChrome(root) {
+    if (!root) return;
+    root.querySelectorAll('.de-item').forEach(function (node) {
       var id = node.getAttribute('data-id') || '';
       syncMeaningButton(node.querySelector('[data-de-meaning-toggle]'), node);
       syncSaveButton(node.querySelector('[data-de-save-toggle]'), id);
@@ -335,93 +321,157 @@
     });
   }
 
-  function resetList() {
-    var feed = document.getElementById('de-feed');
-    if (feed) feed.innerHTML = '';
-    state.cursor = null;
-    state.hasMore = true;
-    state.seenIds = Object.create(null);
-    state.items = [];
-    state.total = 0;
-    setRetryVisible(false);
-  }
+  function groupItems(items) {
+    var order = [];
+    var map = Object.create(null);
+    var catOrder = (state.categories || [])
+      .map(function (c) {
+        return c && c.category;
+      })
+      .filter(Boolean);
 
-  async function fetchPage() {
-    if (state.loading || !state.hasMore) return;
-    state.loading = true;
-    var reqId = ++state.requestId;
-    setStatus(state.items.length ? '불러오는 중…' : '불러오는 중…');
-    setRetryVisible(false);
-
-    var params = new URLSearchParams();
-    params.set('limit', String(PAGE_SIZE));
-    if (state.q) params.set('q', state.q);
-    if (state.category) params.set('category', state.category);
-    if (state.cursor) params.set('cursor', state.cursor);
-
-    try {
-      var res = await fetch(apiBase().replace(/\/$/, '') + '/api/expressions?' + params.toString(), {
-        credentials: 'omit',
-      });
-      var data = await res.json().catch(function () {
-        return {};
-      });
-      if (reqId !== state.requestId) return;
-      if (!res.ok) throw new Error(data.error || 'load failed');
-
-      var incoming = Array.isArray(data.items) ? data.items : [];
-      var fresh = [];
-      incoming.forEach(function (it) {
-        if (!it || !it.id || state.seenIds[it.id]) return;
-        state.seenIds[it.id] = 1;
-        fresh.push(it);
-      });
-
-      var startIndex = state.items.length;
-      state.items = state.items.concat(fresh);
-      state.total = typeof data.total === 'number' ? data.total : state.items.length;
-      state.cursor = data.nextCursor || null;
-      state.hasMore = Boolean(data.hasMore);
-
-      if (!state.items.length && !fresh.length) {
-        var feed = document.getElementById('de-feed');
-        if (feed && !feed.children.length) {
-          feed.innerHTML = '<p class="de-empty">표시할 표현이 없습니다.</p>';
-        }
-      } else {
-        appendItems(fresh, startIndex);
+    catOrder.forEach(function (cat) {
+      if (!map[cat]) {
+        map[cat] = [];
+        order.push(cat);
       }
+    });
 
-      updateCount();
-      syncDownloadBar();
-      setStatus(state.hasMore ? '' : state.items.length ? '모두 불러왔습니다.' : '');
-    } catch (err) {
-      if (reqId !== state.requestId) return;
-      console.error(err);
-      setStatus('불러오지 못했습니다.');
-      setRetryVisible(true);
-    } finally {
-      if (reqId === state.requestId) state.loading = false;
+    (items || []).forEach(function (it) {
+      var cat = String((it && it.category) || '기타').trim() || '기타';
+      if (!map[cat]) {
+        map[cat] = [];
+        order.push(cat);
+      }
+      map[cat].push(it);
+    });
+
+    return order
+      .filter(function (cat) {
+        return map[cat] && map[cat].length;
+      })
+      .map(function (cat) {
+        return { category: cat, items: map[cat] };
+      });
+  }
+
+  function renderGroupedFeed(items) {
+    var feed = document.getElementById('de-feed');
+    if (!feed) return;
+    var groups = groupItems(items);
+    if (!groups.length) {
+      feed.innerHTML = '<p class="de-empty">표시할 표현이 없습니다.</p>';
+      return;
     }
+
+    var html = '';
+    var index = 0;
+    groups.forEach(function (g) {
+      var sid = catSectionId(g.category);
+      html +=
+        '<section class="de-cat-group" id="' +
+        escapeAttr(sid) +
+        '" data-de-category="' +
+        escapeAttr(g.category) +
+        '">' +
+        '<h2 class="de-cat-head">' +
+        escapeHtml(g.category) +
+        ' <span class="de-cat-head-n">' +
+        g.items.length +
+        '</span></h2>';
+      g.items.forEach(function (it) {
+        html += renderItem(it, index);
+        index += 1;
+      });
+      html += '</section>';
+    });
+    feed.innerHTML = html;
+    bindItemChrome(feed);
+    observeCategoryGroups();
+    syncBackTopVisibility();
   }
 
-  function startSearch(q) {
-    state.q = String(q || '').trim().slice(0, 100);
-    state.requestId += 1;
-    state.loading = false;
-    resetList();
-    fetchPage();
+  function getCatsScrollOffset() {
+    var nav = document.getElementById('de-cats');
+    var h = nav && !nav.hidden ? nav.offsetHeight : 0;
+    return h + 12;
   }
 
-  function setCategory(category) {
-    var next = String(category || '').trim();
-    if (state.category === next) return;
-    state.category = next;
-    state.requestId += 1;
-    state.loading = false;
-    renderCategoryNav();
-    resetList();
-    fetchPage();
+  function scrollToCategory(category) {
+    var cat = String(category || '').trim();
+    if (!cat) {
+      scrollToTop();
+      setActiveCategory('');
+      return;
+    }
+    var target = document.getElementById(catSectionId(cat));
+    if (!target) return;
+    setActiveCategory(cat);
+    var y = target.getBoundingClientRect().top + window.scrollY - getCatsScrollOffset();
+    window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+  }
+
+  function scrollToTop() {
+    var hero = document.querySelector('.de-hero') || document.getElementById('main-content');
+    if (!hero) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+    var y = hero.getBoundingClientRect().top + window.scrollY - 8;
+    window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+  }
+
+  function setActiveCategory(category) {
+    state.activeCategory = String(category || '');
+    var nav = document.getElementById('de-cats');
+    if (!nav) return;
+    nav.querySelectorAll('[data-de-cat]').forEach(function (btn) {
+      var cat = btn.getAttribute('data-de-cat') || '';
+      var on = state.activeCategory ? cat === state.activeCategory : cat === '';
+      btn.classList.toggle('is-active', on);
+      btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+  }
+
+  function observeCategoryGroups() {
+    if (catObserver) {
+      catObserver.disconnect();
+      catObserver = null;
+    }
+    if (!('IntersectionObserver' in window)) return;
+    var groups = document.querySelectorAll('.de-cat-group');
+    if (!groups.length) return;
+    catObserver = new IntersectionObserver(
+      function (entries) {
+        var visible = entries
+          .filter(function (e) {
+            return e.isIntersecting;
+          })
+          .sort(function (a, b) {
+            return a.boundingClientRect.top - b.boundingClientRect.top;
+          });
+        if (!visible.length) return;
+        var cat = visible[0].target.getAttribute('data-de-category') || '';
+        if (cat) setActiveCategory(cat);
+      },
+      {
+        root: null,
+        rootMargin: '-20% 0px -55% 0px',
+        threshold: [0, 0.1, 0.25],
+      }
+    );
+    groups.forEach(function (g) {
+      catObserver.observe(g);
+    });
+  }
+
+  function syncBackTopVisibility() {
+    var nav = document.getElementById('de-cats');
+    var btn = document.getElementById('de-back-top');
+    var visible = Boolean(nav && !nav.hidden);
+    if (btn) btn.hidden = !visible;
+    var h = visible && nav ? nav.offsetHeight : 0;
+    document.documentElement.style.setProperty('--de-cats-h', h + 'px');
   }
 
   function renderCategoryNav() {
@@ -431,22 +481,37 @@
     if (!cats.length) {
       nav.hidden = true;
       nav.innerHTML = '';
+      syncBackTopVisibility();
       return;
     }
     var totalAll = cats.reduce(function (sum, c) {
       return sum + (c && c.count ? c.count : 0);
     }, 0);
+    if (state.q && state.items.length) {
+      totalAll = state.items.length;
+    }
     var html =
+      '<div class="de-cats-inner">' +
       '<button type="button" class="de-cat-chip' +
-      (!state.category ? ' is-active' : '') +
+      (!state.activeCategory ? ' is-active' : '') +
       '" data-de-cat="" aria-pressed="' +
-      (!state.category ? 'true' : 'false') +
+      (!state.activeCategory ? 'true' : 'false') +
       '">전체' +
       (totalAll ? ' <span class="de-cat-n">' + totalAll + '</span>' : '') +
       '</button>';
+
+    var present = Object.create(null);
+    if (state.q) {
+      state.items.forEach(function (it) {
+        if (it && it.category) present[it.category] = (present[it.category] || 0) + 1;
+      });
+    }
+
     cats.forEach(function (c) {
       if (!c || !c.category) return;
-      var active = state.category === c.category;
+      if (state.q && !present[c.category]) return;
+      var count = state.q ? present[c.category] : c.count;
+      var active = state.activeCategory === c.category;
       html +=
         '<button type="button" class="de-cat-chip' +
         (active ? ' is-active' : '') +
@@ -456,11 +521,13 @@
         (active ? 'true' : 'false') +
         '">' +
         escapeHtml(c.category) +
-        (c.count ? ' <span class="de-cat-n">' + c.count + '</span>' : '') +
+        (count ? ' <span class="de-cat-n">' + count + '</span>' : '') +
         '</button>';
     });
+    html += '</div>';
     nav.innerHTML = html;
     nav.hidden = false;
+    syncBackTopVisibility();
   }
 
   async function loadCategories() {
@@ -473,11 +540,11 @@
         var data = await res.json();
         if (Array.isArray(data.categories) && data.categories.length) fromApi = data.categories;
       }
-    } catch (e) { /* fallback below */ }
+    } catch (e) { /* fallback */ }
 
     if (!fromApi) {
       try {
-        var local = await fetch('daily-english-categories.json?v=20261105cat1', {
+        var local = await fetch('daily-english-categories.json?v=20261105cat2', {
           credentials: 'omit',
         });
         if (local.ok) {
@@ -489,6 +556,70 @@
 
     state.categories = fromApi || [];
     renderCategoryNav();
+  }
+
+  async function fetchAllMatching(q) {
+    var items = [];
+    var cursor = null;
+    var total = 0;
+    var guard = 0;
+    while (guard < 40) {
+      guard += 1;
+      var params = new URLSearchParams();
+      params.set('limit', String(PAGE_SIZE));
+      if (q) params.set('q', q);
+      if (cursor) params.set('cursor', cursor);
+      var res = await fetch(apiBase().replace(/\/$/, '') + '/api/expressions?' + params.toString(), {
+        credentials: 'omit',
+      });
+      var data = await res.json().catch(function () {
+        return {};
+      });
+      if (!res.ok) throw new Error(data.error || 'load failed');
+      var incoming = Array.isArray(data.items) ? data.items : [];
+      incoming.forEach(function (it) {
+        if (it && it.id) items.push(it);
+      });
+      total = typeof data.total === 'number' ? data.total : items.length;
+      cursor = data.nextCursor || null;
+      if (!data.hasMore || !cursor || !incoming.length) break;
+    }
+    return { items: items, total: total };
+  }
+
+  async function reloadList() {
+    if (state.loading) {
+      state.requestId += 1;
+    }
+    state.loading = true;
+    var reqId = ++state.requestId;
+    state.activeCategory = '';
+    setStatus('불러오는 중…');
+    setRetryVisible(false);
+
+    try {
+      var result = await fetchAllMatching(state.q);
+      if (reqId !== state.requestId) return;
+      state.items = result.items;
+      state.total = result.total;
+      renderCategoryNav();
+      renderGroupedFeed(state.items);
+      updateCount();
+      syncDownloadBar();
+      setStatus(state.items.length ? '' : '표시할 표현이 없습니다.');
+    } catch (err) {
+      if (reqId !== state.requestId) return;
+      console.error(err);
+      setStatus('불러오지 못했습니다.');
+      setRetryVisible(true);
+    } finally {
+      if (reqId === state.requestId) state.loading = false;
+    }
+  }
+
+  function startSearch(q) {
+    state.q = String(q || '').trim().slice(0, 100);
+    reloadList();
   }
 
   function bindSearch() {
@@ -511,7 +642,7 @@
     nav.addEventListener('click', function (e) {
       var btn = e.target.closest('[data-de-cat]');
       if (!btn) return;
-      setCategory(btn.getAttribute('data-de-cat') || '');
+      scrollToCategory(btn.getAttribute('data-de-cat') || '');
     });
   }
 
@@ -531,34 +662,8 @@
         return;
       }
       var dl = e.target.closest('[data-de-item-download]');
-      if (dl) {
-        downloadSaved();
-      }
+      if (dl) downloadSaved();
     });
-  }
-
-  function bindInfiniteScroll() {
-    var sentinel = document.getElementById('de-sentinel');
-    if (!sentinel || typeof IntersectionObserver !== 'function') {
-      window.addEventListener('scroll', function () {
-        if (state.loading || !state.hasMore) return;
-        var near =
-          window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 400;
-        if (near) fetchPage();
-      });
-      return;
-    }
-    var io = new IntersectionObserver(
-      function (entries) {
-        if (!entries.some(function (en) {
-          return en.isIntersecting;
-        }))
-          return;
-        fetchPage();
-      },
-      { root: null, rootMargin: '400px 0px', threshold: 0 }
-    );
-    io.observe(sentinel);
   }
 
   function bindGlobalHideMeaning() {
@@ -584,23 +689,19 @@
       retry._deBound = true;
       retry.addEventListener('click', function () {
         setRetryVisible(false);
-        fetchPage();
+        reloadList();
       });
     }
     var back = document.getElementById('de-back-top');
     if (back && !back._deBound) {
       back._deBound = true;
       back.addEventListener('click', function () {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        setActiveCategory('');
+        scrollToTop();
       });
-      window.addEventListener(
-        'scroll',
-        function () {
-          back.hidden = window.scrollY < 500;
-        },
-        { passive: true }
-      );
     }
+    window.addEventListener('resize', syncBackTopVisibility, { passive: true });
+    syncBackTopVisibility();
   }
 
   function boot() {
@@ -608,11 +709,9 @@
     bindSearch();
     bindCategories();
     bindFeedClicks();
-    bindInfiniteScroll();
     bindChrome();
     syncDownloadBar();
-    loadCategories();
-    fetchPage();
+    loadCategories().then(reloadList);
   }
 
   if (document.readyState === 'loading') {
@@ -624,6 +723,6 @@
   window.DailyEnglishPage = {
     apiBase: apiBase,
     startSearch: startSearch,
-    setCategory: setCategory,
+    scrollToCategory: scrollToCategory,
   };
 })();
