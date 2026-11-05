@@ -6,6 +6,8 @@
 
   var STORAGE_KEY = 'wmq-session-id';
   var LEVEL_KEY = 'wmq-level';
+  /* one-sentence 페이지와 같은 탭 저장 목록 공유 */
+  var SAVED_WORDS_KEY = 'os-saved-words-session';
 
   function apiBase() {
     if (typeof window.getPage30ApiBaseUrl === 'function') {
@@ -28,6 +30,175 @@
 
   function isMobile() {
     return window.matchMedia('(max-width: 719px)').matches;
+  }
+
+  function wordAnchorId(word, pos) {
+    var base =
+      'os-w-' +
+      String(word || '')
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '');
+    var p = String(pos || '')
+      .toLowerCase()
+      .replace(/[^a-z0-9가-힣]+/g, '-')
+      .replace(/^-+|-+$/g, '');
+    return p ? base + '-' + p : base;
+  }
+
+  function readSavedMap() {
+    try {
+      var raw = sessionStorage.getItem(SAVED_WORDS_KEY);
+      if (!raw) return {};
+      var parsed = JSON.parse(raw);
+      return parsed && typeof parsed === 'object' ? parsed : {};
+    } catch (e) {
+      return {};
+    }
+  }
+
+  function writeSavedMap(map) {
+    try {
+      sessionStorage.setItem(SAVED_WORDS_KEY, JSON.stringify(map || {}));
+    } catch (e) {
+      /* ignore quota */
+    }
+  }
+
+  function syncSaveToggleButton(btn, wordKey) {
+    if (!btn) return;
+    var on = Boolean(wordKey && readSavedMap()[wordKey]);
+    btn.textContent = on ? '저장됨' : '저장';
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    btn.title = on ? '저장 취소' : '이 탭에만 잠시 저장';
+  }
+
+  function syncItemDownloadButton(itemEl, wordKey) {
+    if (!itemEl) return;
+    var btn = itemEl.querySelector('[data-os-item-download]');
+    if (!btn) return;
+    var on = Boolean(wordKey && readSavedMap()[wordKey]);
+    btn.hidden = !on;
+    btn.title = on ? '저장한 단어 전체 다운로드' : '';
+  }
+
+  function toggleSaveCurrentWord() {
+    var itemEl = $('wmq-os-item');
+    if (!itemEl || itemEl.hidden) return;
+    var wordKey = itemEl.getAttribute('data-word-key') || '';
+    if (!wordKey) return;
+    var map = readSavedMap();
+    if (map[wordKey]) {
+      delete map[wordKey];
+    } else {
+      var q = state.questions[state.index] || {};
+      map[wordKey] = {
+        word: String(q.word || itemEl.getAttribute('data-word') || '').trim(),
+        pos: String(q.posSource || itemEl.getAttribute('data-pos') || '').trim(),
+        meaning: String(q.correctMeaning || '').trim(),
+        ipa: '',
+        ipaKo: '',
+        en: String(q.example || '').trim(),
+        ko: String(q.exampleKo || '').trim(),
+        savedAt: Date.now(),
+      };
+    }
+    writeSavedMap(map);
+    syncSaveToggleButton(itemEl.querySelector('[data-os-save-toggle]'), wordKey);
+    syncItemDownloadButton(itemEl, wordKey);
+  }
+
+  function downloadSavedWords() {
+    var map = readSavedMap();
+    var keys = Object.keys(map);
+    if (!keys.length) return;
+    keys.sort(function (a, b) {
+      return String(map[a].word || '').localeCompare(String(map[b].word || ''), 'en', {
+        sensitivity: 'base',
+      });
+    });
+    if (window.SiteStats && typeof window.SiteStats.trackDownload === 'function') {
+      window.SiteStats.trackDownload(
+        keys.map(function (k) {
+          return (map[k] && map[k].word) || '';
+        }),
+        'word-meaning-quiz'
+      );
+    }
+    var lines = ['단어\t품사\t뜻\t발음\t예문\t해석'];
+    keys.forEach(function (k) {
+      var it = map[k] || {};
+      var pron = [it.ipa, it.ipaKo].filter(Boolean).join(' ');
+      lines.push(
+        [
+          it.word || '',
+          it.pos || '',
+          it.meaning || '',
+          pron,
+          String(it.en || '')
+            .replace(/\s+/g, ' ')
+            .trim(),
+          String(it.ko || '')
+            .replace(/\s+/g, ' ')
+            .trim(),
+        ]
+          .map(function (cell) {
+            return String(cell).replace(/\t/g, ' ').replace(/\r?\n/g, ' ');
+          })
+          .join('\t')
+      );
+    });
+    var stamp = new Date();
+    var y = stamp.getFullYear();
+    var m = String(stamp.getMonth() + 1).padStart(2, '0');
+    var d = String(stamp.getDate()).padStart(2, '0');
+    var blob = new Blob(['\uFEFF' + lines.join('\n') + '\n'], {
+      type: 'text/tab-separated-values;charset=utf-8',
+    });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'one-sentence-saved-' + y + m + d + '.txt';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  }
+
+  function syncWordFoot(q) {
+    var itemEl = $('wmq-os-item');
+    if (!itemEl || !q) return;
+    var pos = String(q.posSource || '').trim();
+    var word = String(q.word || '').trim();
+    var wordKey = wordAnchorId(word, pos);
+    itemEl.hidden = !word;
+    itemEl.setAttribute('data-word', word);
+    itemEl.setAttribute('data-pos', pos);
+    itemEl.setAttribute('data-word-key', wordKey);
+    syncSaveToggleButton(itemEl.querySelector('[data-os-save-toggle]'), wordKey);
+    syncItemDownloadButton(itemEl, wordKey);
+    if (window.OsComments && typeof window.OsComments.mountAll === 'function') {
+      window.OsComments.mountAll();
+    }
+  }
+
+  function bindWordFoot() {
+    var itemEl = $('wmq-os-item');
+    if (!itemEl || itemEl.dataset.bound === '1') return;
+    itemEl.dataset.bound = '1';
+    itemEl.addEventListener('click', function (e) {
+      var saveBtn = e.target.closest('[data-os-save-toggle]');
+      if (saveBtn) {
+        e.preventDefault();
+        toggleSaveCurrentWord();
+        return;
+      }
+      var dlBtn = e.target.closest('[data-os-item-download]');
+      if (dlBtn) {
+        e.preventDefault();
+        downloadSavedWords();
+      }
+    });
   }
 
   async function fetchJson(url, options) {
@@ -183,8 +354,6 @@
           (i + 1) +
           '</span><span class="wmq-opt-text">' +
           escapeHtml(opt.text) +
-          '</span><span class="wmq-keyhint" aria-hidden="true">' +
-          (i + 1) +
           '</span>';
         btn.addEventListener('click', function () {
           answer(opt.key, btn);
@@ -209,6 +378,8 @@
     if (state.answered && state.lastAnswer) {
       applyAnswerUi(state.lastAnswer);
     }
+
+    syncWordFoot(q);
 
     var panel = $('wmq-quiz-panel');
     if (panel) panel.scrollIntoView({ block: 'start' });
@@ -296,6 +467,7 @@
       q.chosenKey = key;
       state.lastAnswer = data;
       applyAnswerUi(data);
+      syncWordFoot(q);
     } catch (err) {
       showQuizError(err.message || '연결이 불안정해요', true);
       if (opts) {
@@ -521,6 +693,7 @@
     }
 
     bindQuizKeys();
+    bindWordFoot();
 
     var params = new URLSearchParams(window.location.search);
     var resume = params.get('resume');

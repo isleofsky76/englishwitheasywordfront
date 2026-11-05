@@ -25,7 +25,8 @@
   <link rel="stylesheet" href="redesign-tokens.css?v=20261019rd4">
   <link rel="stylesheet" href="site-masthead.css?v=20261105bad1">
   <link rel="stylesheet" href="nav-home-menu.css?v=20260617">
-  <link rel="stylesheet" href="word-meaning-quiz.css?v=20261106wmq1">
+  <link rel="stylesheet" href="one-sentence.css?v=20261105search6">
+  <link rel="stylesheet" href="word-meaning-quiz.css?v=20261106wmq2">
 </head>
 <body class="wmq-page">
   <nav id="navbar" class="navbar navbar-expand site-masthead" aria-label="주 메뉴"></nav>
@@ -57,6 +58,13 @@
       <div class="wmq-options" id="wmq-options" role="group" aria-label="보기"></div>
       <p class="wmq-feedback" id="wmq-feedback" aria-live="polite"></p>
       <div id="wmq-detail" hidden></div>
+      <article class="os-item wmq-os-item" id="wmq-os-item" data-word="" data-word-key="" data-pos="" hidden>
+        <div class="os-item-foot wmq-item-foot">
+          <div class="os-comments-root" data-os-comments-root></div>
+          <button type="button" class="os-save-toggle" data-os-save-toggle aria-pressed="false">저장</button>
+          <button type="button" class="os-item-download" data-os-item-download hidden>다운로드</button>
+        </div>
+      </article>
       <div class="wmq-error" id="wmq-error" hidden></div>
       <div class="wmq-next-bar">
         <button type="button" class="wmq-btn" id="wmq-next" disabled>다음 문제</button>
@@ -81,6 +89,8 @@
   <script src="site-masthead.js?v=20261105menu2"></script>
   <script src="site-footer.js?v=20261013a"></script>
   <script src="nav-home-menu.js?v=20261105menu2"></script>
-  <script src="word-meaning-quiz.js?v=20261106wmq1"></script>
+  <script src="site-stats.js?v=20261105stats3"></script>
+  <script src="one-sentence-comments.js?v=20261103osCmt22"></script>
+  <script src="word-meaning-quiz.js?v=20261106wmq2"></script>
 </body>
 </html>

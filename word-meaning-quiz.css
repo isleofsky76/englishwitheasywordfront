@@ -152,10 +152,29 @@
   font-weight: 700;
   color: var(--ink-muted, #6b6560);
 }
-.wmq-option .wmq-keyhint {
-  margin-left: auto;
-  font-size: 11px;
-  color: var(--ink-muted, #6b6560);
+.wmq-option .wmq-opt-text {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.wmq-page {
+  --os-blue: #3d6eb8;
+  --os-ink: #3a3834;
+  --os-ink-soft: #6a6660;
+  --os-ink-muted: #7a756c;
+}
+.wmq-os-item {
+  display: block;
+  margin: 4px 0 12px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+}
+.wmq-os-item[hidden] {
+  display: none !important;
+}
+.wmq-item-foot {
+  margin-top: 4px;
 }
 .wmq-option.is-loading {
   opacity: 0.7;
@@ -257,7 +276,6 @@
   }
 }
 @media (max-width: 719px) {
-  .wmq-option .wmq-keyhint { display: none; }
   .wmq-next-bar {
     position: fixed;
     left: 0;
