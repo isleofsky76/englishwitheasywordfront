@@ -5,7 +5,7 @@
 (function (global) {
   'use strict';
 
-  var ASSET_VER = '20261105gloss1';
+  var ASSET_VER = '20261105save1';
   var SYN_SAVED_KEY = 'ees-synonym-saved-v1';
   var SYN_HIDE_KEY = 'ees-synonym-hide-meaning';
 
@@ -872,8 +872,21 @@
       if (dl) dl.hidden = !on;
     }
 
+    /** 이 글에 있는 단어만 집계 — 다른 페이지 저장분이 버튼에 안 뜨게 */
+    function pageSavedEntries() {
+      var map = synReadSaved();
+      var out = [];
+      root.querySelectorAll('.rd-expr--synonym[data-rd-word-key]').forEach(function (card) {
+        var key = card.getAttribute('data-rd-word-key') || '';
+        if (!key || !map[key]) return;
+        out.push({ key: key, item: map[key] });
+      });
+      return out;
+    }
+
     function syncDownloadAll() {
-      var n = Object.keys(synReadSaved()).length;
+      var saved = pageSavedEntries();
+      var n = saved.length;
       var btn = document.getElementById('rd-syn-download-saved');
       var count = document.getElementById('rd-syn-saved-count');
       if (count) count.textContent = String(n);
@@ -910,22 +923,20 @@
     }
 
     function downloadSaved() {
-      var map = synReadSaved();
-      var keys = Object.keys(map);
-      if (!keys.length) return;
+      var saved = pageSavedEntries();
+      if (!saved.length) return;
       if (window.SiteStats && typeof window.SiteStats.trackDownload === 'function') {
         window.SiteStats.trackDownload(
-          keys.map(function (k) {
-            var it = map[k] || {};
-            return it.word || k;
+          saved.map(function (row) {
+            return (row.item && row.item.word) || row.key;
           }),
           'synonym'
         );
       }
-      var lines = keys.map(function (k) {
-        var it = map[k] || {};
+      var lines = saved.map(function (row) {
+        var it = row.item || {};
         return (
-          String(it.word || k) +
+          String(it.word || row.key) +
           (it.meaning ? ' — ' + it.meaning : '') +
           (it.pron ? '  ' + it.pron : '')
         );
