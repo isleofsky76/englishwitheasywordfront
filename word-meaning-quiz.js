@@ -710,64 +710,37 @@
     }
   }
 
-  /** index 홈 섹션 */
+  /** index 홈 섹션 — 레벨 선택 UI 없음(전체만) */
   async function initHomeSection() {
     var root = document.getElementById('rd-wmq');
     if (!root) return;
-    try {
-      state.meta = await fetchJson(apiBase() + '/api/word-meaning-quiz/meta');
-    } catch (e) {
-      state.meta = {
-        levels: [
-          { id: 'all', label: '전체', available: false, readyLabel: '준비 중' },
-          { id: 'beginner', label: '초급', available: false, readyLabel: '준비 중' },
-          { id: 'intermediate', label: '중급', available: false, readyLabel: '준비 중' },
-          { id: 'advanced', label: '고급', available: false, readyLabel: '준비 중' },
-        ],
-      };
-    }
     state.level = 'all';
     var levelsBox = document.getElementById('rd-wmq-levels');
-    function paint() {
-      if (!levelsBox) return;
+    if (levelsBox) {
+      levelsBox.hidden = true;
       levelsBox.innerHTML = '';
-      (state.meta.levels || []).forEach(function (lv) {
-        var btn = document.createElement('button');
-        btn.type = 'button';
-        btn.className = 'rd-wmq-level';
-        btn.setAttribute('aria-pressed', lv.id === state.level ? 'true' : 'false');
-        btn.disabled = !lv.available;
-        btn.innerHTML =
-          '<span>' +
-          escapeHtml(lv.label) +
-          '</span>' +
-          (lv.available
-            ? ''
-            : '<span class="prep">' + escapeHtml(lv.readyLabel || '준비 중') + '</span>');
-        btn.addEventListener('click', function () {
-          if (!lv.available) return;
-          state.level = lv.id;
-          paint();
-          syncStartHref();
-        });
-        levelsBox.appendChild(btn);
-      });
     }
-    function syncStartHref() {
-      var a = document.getElementById('rd-wmq-start');
-      if (!a) return;
-      var lv = (state.meta.levels || []).find(function (x) {
-        return x.id === state.level;
-      });
-      var ok = lv && lv.available;
-      a.classList.toggle('is-disabled', !ok);
-      a.setAttribute('aria-disabled', ok ? 'false' : 'true');
-      a.href = ok
-        ? 'word-meaning-quiz.html?level=' + encodeURIComponent(state.level) + '&autostart=1'
-        : 'word-meaning-quiz.html';
+
+    var start = document.getElementById('rd-wmq-start');
+    if (start) {
+      start.classList.remove('is-disabled');
+      start.setAttribute('aria-disabled', 'false');
+      start.href = 'word-meaning-quiz.html?level=all&autostart=1';
     }
-    paint();
-    syncStartHref();
+
+    try {
+      state.meta = await fetchJson(apiBase() + '/api/word-meaning-quiz/meta');
+      var allLv = (state.meta.levels || []).find(function (x) {
+        return x.id === 'all';
+      });
+      if (start && allLv && !allLv.available) {
+        start.classList.add('is-disabled');
+        start.setAttribute('aria-disabled', 'true');
+        start.href = 'word-meaning-quiz.html';
+      }
+    } catch (e) {
+      /* 시작 링크는 유지 */
+    }
 
     var resume = document.getElementById('rd-wmq-resume');
     var sid = loadSessionId();

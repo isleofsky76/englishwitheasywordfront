@@ -309,6 +309,9 @@
   color: var(--ink-muted);
   line-height: 1.5;
 }
+.rd-wmq-levels[hidden] {
+  display: none !important;
+}
 .rd-wmq-levels {
   display: flex;
   flex-wrap: wrap;
