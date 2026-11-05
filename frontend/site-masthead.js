@@ -4,7 +4,7 @@
  * nav-home-menu.js 가 로드함
  */
 (function () {
-    var VERSION = '20261105fouc1';
+    var VERSION = '20261105menu2';
 
   var DICT_LOOKUP_VER = '20261104dict1';
   var DICT_LOOKUP_CONTAINERS = [
@@ -92,24 +92,26 @@
       pages: ['english-directory.html']
     }
   ];
+  /* 더보기(햄버거) — 학습 → 뉴스(라벨에 '뉴스' 생략) → 읽을거리 */
   var EXTRA_NAV_ITEMS = [
     { href: 'index.html', label: '홈', tone: 'home', pages: ['index.html', ''] },
     { href: 'daily-english.html', label: '생활 영어 한 줄', tone: 'daily', pages: ['daily-english.html'] },
     { href: 'english-synonym-list.html', label: '연관단어', tone: 'syn', pages: ['english-synonym-list.html', 'english-synonym.html'] },
-    { href: 'defense-news-list.html', label: '국방뉴스', tone: 'defense', pages: ['defense-news-list.html', 'defense-news.html'] },
-    { href: 'economy-news-list.html', label: '경제뉴스', tone: 'news', pages: ['economy-news-list.html', 'economy-news.html'] },
+    { href: 'situational-english-list.html', label: '상황', tone: 'sit', pages: ['situational-english-list.html', 'situational-english.html'] },
+    { href: 'pros-cons-list.html', label: 'Pros & Cons', tone: 'pros', pages: ['pros-cons-list.html', 'pros-cons.html'] },
     /* 얇은·빈 카테고리 숨김: travel / retail / ukraine / cooking / ranking */
-    { href: 'sports-news-list.html', label: '스포츠뉴스', tone: 'news', pages: ['sports-news-list.html', 'sports-news.html'] },
-    { href: 'us-news-list.html', label: '미국뉴스', tone: 'news', pages: ['us-news-list.html', 'us-news.html'] },
-    { href: 'industry-news-list.html', label: '산업뉴스', tone: 'news', pages: ['industry-news-list.html', 'industry-news.html'] },
-    { href: 'korea-news-list.html', label: '한국뉴스', tone: 'defense', pages: ['korea-news-list.html', 'korea-news.html'] },
+    { href: 'news-voca-list.html', label: '국제', tone: 'news', pages: ['news-voca-list.html', 'news-voca.html'] },
+    { href: 'defense-news-list.html', label: '국방', tone: 'defense', pages: ['defense-news-list.html', 'defense-news.html'] },
+    { href: 'economy-news-list.html', label: '경제', tone: 'news', pages: ['economy-news-list.html', 'economy-news.html'] },
+    { href: 'sports-news-list.html', label: '스포츠', tone: 'news', pages: ['sports-news-list.html', 'sports-news.html'] },
+    { href: 'us-news-list.html', label: '미국', tone: 'news', pages: ['us-news-list.html', 'us-news.html'] },
+    { href: 'industry-news-list.html', label: '산업', tone: 'news', pages: ['industry-news-list.html', 'industry-news.html'] },
+    { href: 'korea-news-list.html', label: '한국', tone: 'defense', pages: ['korea-news-list.html', 'korea-news.html'] },
     { href: 'culture-voca-list.html', label: '컬쳐', tone: 'culture', pages: ['culture-voca-list.html', 'culture-voca.html'] },
     { href: 'shorts-bg-image-list.html', label: '신문읽는 이미지', tone: 'sbgi', pages: ['shorts-bg-image-list.html', 'shorts-bg-image.html'] },
     { href: 'english-opinions-list.html', label: '오피니언', tone: 'opine', pages: ['english-opinions-list.html', 'english-opinions.html'] },
     { href: 'calm-mind-list.html', label: '마음글', tone: 'calm', pages: ['calm-mind-list.html', 'calm-mind.html'] },
-    { href: 'situational-english-list.html', label: '상황', tone: 'sit', pages: ['situational-english-list.html', 'situational-english.html'] },
     { href: 'photo-english-list.html', label: '포토', tone: 'photo', pages: ['photo-english-list.html', 'photo-english.html'] },
-    { href: 'pros-cons-list.html', label: 'Pros & Cons', tone: 'pros', pages: ['pros-cons-list.html', 'pros-cons.html'] },
     { href: 'english-quotes-list.html', label: '영어 명언', tone: 'quote', pages: ['english-quotes-list.html', 'english-quotes.html'] }
   ];
   var NAV_ITEMS = PRIMARY_NAV_ITEMS.concat(EXTRA_NAV_ITEMS);

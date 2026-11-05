@@ -26,41 +26,27 @@
 
 
 
+    /* site-masthead EXTRA와 동일 계열 — 학습 → 뉴스(뉴스 생략) → 읽을거리 */
     var MENU_ITEMS = [
-
-        { href: 'index.html', label: '처음으로', pages: ['index.html', ''] },
-
-        { href: 'word-of-the-day-list.html', label: '단어장', pages: ['word-of-the-day-list.html', 'word-of-the-day.html'] },
-
-        { href: 'english-synonym-list.html', label: '유의어', pages: ['english-synonym-list.html', 'english-synonym.html'] },
-
-        { href: 'defense-news-list.html', label: '국방뉴스', pages: ['defense-news-list.html', 'defense-news.html'] },
-        { href: 'korea-news-list.html', label: '한국뉴스', pages: ['korea-news-list.html', 'korea-news.html'] },
-
-        { href: 'news-voca-list.html', label: '국제', pages: ['news-voca-list.html', 'news-voca.html'] },
-
-        { href: 'vocabulary-quiz.html', label: '퀴즈', pages: ['vocabulary-quiz.html'] },
-
-        { href: 'popular-voca-list.html', label: '이럴 땐 영어로?', pages: ['popular-voca-list.html', 'popular-voca.html'] },
-
+        { href: 'index.html', label: '홈', pages: ['index.html', ''] },
+        { href: 'daily-english.html', label: '생활 영어 한 줄', pages: ['daily-english.html'] },
+        { href: 'english-synonym-list.html', label: '연관단어', pages: ['english-synonym-list.html', 'english-synonym.html'] },
         { href: 'situational-english-list.html', label: '상황', pages: ['situational-english-list.html', 'situational-english.html'] },
-
-        { href: 'culture-voca-list.html', label: '컬쳐', pages: ['culture-voca-list.html', 'culture-voca.html'] },
-
-        { href: 'photo-english-list.html', label: '포토', pages: ['photo-english-list.html', 'photo-english.html'] },
-
         { href: 'pros-cons-list.html', label: 'Pros & Cons', pages: ['pros-cons-list.html', 'pros-cons.html'] },
-
-        { href: 'english-opinions-list.html', label: '오피니언', pages: ['english-opinions-list.html', 'english-opinions.html'] },
-
+        { href: 'news-voca-list.html', label: '국제', pages: ['news-voca-list.html', 'news-voca.html'] },
+        { href: 'defense-news-list.html', label: '국방', pages: ['defense-news-list.html', 'defense-news.html'] },
+        { href: 'economy-news-list.html', label: '경제', pages: ['economy-news-list.html', 'economy-news.html'] },
+        { href: 'sports-news-list.html', label: '스포츠', pages: ['sports-news-list.html', 'sports-news.html'] },
+        { href: 'us-news-list.html', label: '미국', pages: ['us-news-list.html', 'us-news.html'] },
+        { href: 'industry-news-list.html', label: '산업', pages: ['industry-news-list.html', 'industry-news.html'] },
+        { href: 'korea-news-list.html', label: '한국', pages: ['korea-news-list.html', 'korea-news.html'] },
+        { href: 'culture-voca-list.html', label: '컬쳐', pages: ['culture-voca-list.html', 'culture-voca.html'] },
         { href: 'shorts-bg-image-list.html', label: '신문읽는 이미지', pages: ['shorts-bg-image-list.html', 'shorts-bg-image.html'] },
-
-        { href: 'calm-mind-list.html', label: '마음 다스리는 글', pages: ['calm-mind-list.html', 'calm-mind.html'] },
-
+        { href: 'english-opinions-list.html', label: '오피니언', pages: ['english-opinions-list.html', 'english-opinions.html'] },
+        { href: 'calm-mind-list.html', label: '마음글', pages: ['calm-mind-list.html', 'calm-mind.html'] },
+        { href: 'photo-english-list.html', label: '포토', pages: ['photo-english-list.html', 'photo-english.html'] },
         { href: 'english-quotes-list.html', label: '영어 명언', pages: ['english-quotes-list.html', 'english-quotes.html'] },
-
-        { href: 'english-directory.html', label: '학습 사이트 디렉터리', pages: ['english-directory.html'] }
-
+        { href: 'english-directory.html', label: '학습사이트', pages: ['english-directory.html'] }
     ];
 
 
@@ -242,8 +228,8 @@
         return '';
     }
 
-    var MASTHEAD_CSS_VER = '20261105fouc1';
-    var MASTHEAD_JS_VER = '20261104de2';
+    var MASTHEAD_CSS_VER = '20261105menu2';
+    var MASTHEAD_JS_VER = '20261105menu2';
 
     /** FOUC 방지: 파싱 즉시 클래스·CSS 선적용 (DOMContentLoaded 기다리지 않음) */
     function injectMastheadCssEarly() {
