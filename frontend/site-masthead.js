@@ -4,7 +4,7 @@
  * nav-home-menu.js 가 로드함
  */
 (function () {
-    var VERSION = '20261105search6';
+    var VERSION = '20261105stats3';
 
   var DICT_LOOKUP_VER = '20261104dict1';
   var DICT_LOOKUP_CONTAINERS = [
@@ -485,6 +485,13 @@
       revealSearchPage(hits, emptyText);
     }
 
+    function trackSiteSearch(q, source) {
+      if (!window.SiteStats || typeof window.SiteStats.trackSearch !== 'function') return;
+      var term = String(q || '').trim();
+      if (term.length < 2) return;
+      window.SiteStats.trackSearch(term, source || 'site-search');
+    }
+
     function previewSearch(q) {
       if (!window.HomeBoardPreview) return;
       HomeBoardPreview.search(q, 16).then(function (hits) {
@@ -508,6 +515,7 @@
       e.preventDefault();
       var q = String(input.value || '').trim();
       if (!q) return;
+      trackSiteSearch(q, 'site-search-submit');
       if (!onHome || !window.HomeBoardPreview) {
         window.location.href = base + 'index.html?q=' + encodeURIComponent(q);
         return;
@@ -533,8 +541,15 @@
         links.forEach(function (el, i) { el.classList.toggle('is-active', i === activeIndex); });
       } else if (e.key === 'Enter' && activeIndex >= 0 && links[activeIndex]) {
         e.preventDefault();
+        trackSiteSearch(input.value, 'site-search-suggest');
         window.location.href = links[activeIndex].href;
       }
+    });
+
+    list.addEventListener('click', function (e) {
+      var a = e.target.closest('a');
+      if (!a) return;
+      trackSiteSearch(input.value, 'site-search-suggest');
     });
 
     document.addEventListener('click', function (e) {
@@ -544,6 +559,7 @@
     var q0 = new URLSearchParams(window.location.search).get('q');
     if (q0 && onHome && window.HomeBoardPreview) {
       input.value = q0;
+      trackSiteSearch(q0, 'site-search-url');
       HomeBoardPreview.search(q0, 0).then(function (hits) {
         renderPage(hits, '정확히 일치하는 결과가 없습니다.');
       });
@@ -636,8 +652,10 @@
       ensureWeather(base);
     }
     mountNavbar(base);
-    ensureScript(base + 'home-board-preview.js?v=' + VERSION, function () {
-      initSearch(base);
+    ensureScript(base + 'site-stats.js?v=' + VERSION, function () {
+      ensureScript(base + 'home-board-preview.js?v=' + VERSION, function () {
+        initSearch(base);
+      });
     });
     ensureSiteDictLookup(base);
     /* CSS 적용 후에만 YouTube 바 삽입 — 빨간 아이콘 거대화 FOUC 방지 */
