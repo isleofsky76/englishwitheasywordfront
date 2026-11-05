@@ -210,9 +210,12 @@
     });
     if (window.SiteStats && typeof window.SiteStats.trackDownload === 'function') {
       window.SiteStats.trackDownload(
-        keys.map(function (k) {
-          return (map[k] && map[k].en) || '';
-        }),
+        keys
+          .map(function (k) {
+            var it = map[k] || {};
+            return String(it.en || it.ko || '').trim();
+          })
+          .filter(Boolean),
         'daily-english'
       );
     }

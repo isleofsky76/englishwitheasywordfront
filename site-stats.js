@@ -23,16 +23,13 @@
     try {
       var body = JSON.stringify({ kind: kind, terms: list, source: source || '' });
       var url = apiBase().replace(/\/$/, '') + '/api/stats/event';
-      if (navigator.sendBeacon) {
-        var blob = new Blob([body], { type: 'application/json' });
-        navigator.sendBeacon(url, blob);
-        return;
-      }
+      /* sendBeacon+application/json 은 교차출처에서 자주 실패 → fetch keepalive */
       fetch(url, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: body,
         credentials: 'omit',
+        mode: 'cors',
         keepalive: true,
       }).catch(function () {});
     } catch (e) { /* ignore */ }
