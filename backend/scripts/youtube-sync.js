@@ -207,6 +207,8 @@ function discoverKnownVideoIds() {
           if (ent.name === 'node_modules' || ent.name === 'youtube-drafts') continue;
           walk(full, depth + 1);
         } else if (/\.(js|html|json|md)$/i.test(ent.name)) {
+          if (/^_tmp/i.test(ent.name) || /youtube-sync-state\.json$/i.test(ent.name)) continue;
+          if (/youtube-shorts\.json$/i.test(ent.name)) continue;
           let text = '';
           try {
             text = fs.readFileSync(full, 'utf8');
