@@ -124,6 +124,7 @@
     { href: 'english-quotes-list.html', label: '영어 명언', tone: 'quote', pages: ['english-quotes-list.html', 'english-quotes.html'] },
     /* 기타 — 우선순위 아래 */
     { href: 'english-directory.html', label: '학습사이트', tone: 'dir', pages: ['english-directory.html'] },
+    { href: 'free-books.html', label: '무료 영어 원서', tone: 'books', pages: ['free-books.html'] },
     { href: 'dashboard.html', label: '대시보드', tone: 'dash', pages: ['dashboard.html', 'word-ranking.html'] }
   ];
   var NAV_ITEMS = PRIMARY_NAV_ITEMS.concat(EXTRA_NAV_ITEMS);

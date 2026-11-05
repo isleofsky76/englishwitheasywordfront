@@ -47,6 +47,7 @@
         { href: 'photo-english-list.html', label: '포토', pages: ['photo-english-list.html', 'photo-english.html'] },
         { href: 'english-quotes-list.html', label: '영어 명언', pages: ['english-quotes-list.html', 'english-quotes.html'] },
         { href: 'english-directory.html', label: '학습사이트', pages: ['english-directory.html'] },
+        { href: 'free-books.html', label: '무료 영어 원서', pages: ['free-books.html'] },
         { href: 'dashboard.html', label: '대시보드', pages: ['dashboard.html', 'word-ranking.html'] }
     ];
 

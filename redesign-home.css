@@ -619,6 +619,140 @@
   border-color: var(--accent);
 }
 
+/* 홈 — 무료 영어 원서 (외부 소개 링크만; 표지는 CSS 텍스트형) */
+.rd-free-books {
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+.rd-free-books-lead {
+  margin: -12px 0 22px;
+  max-width: 42rem;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--ink-muted);
+}
+.rd-free-books-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+}
+.rd-free-book {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+.rd-free-book-cover {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 18px 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 8px;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  background: var(--surface, #fff);
+  overflow: hidden;
+}
+.rd-free-book-cover::before {
+  content: '';
+  position: absolute;
+  inset: 10px;
+  border: 1px solid rgba(58, 56, 52, 0.14);
+  pointer-events: none;
+}
+.rd-free-book-cover-title,
+.rd-free-book-cover-author {
+  position: relative;
+  z-index: 1;
+}
+.rd-free-book-cover-title {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 1.3;
+  color: var(--ink);
+}
+.rd-free-book-cover-author {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ink-muted);
+}
+.rd-free-book-cover--alice {
+  background: linear-gradient(165deg, #f4f1ea 0%, #e8eef5 100%);
+}
+.rd-free-book-cover--oz {
+  background: linear-gradient(165deg, #f4f1ea 0%, #efe6d4 100%);
+}
+.rd-free-book-cover--pride {
+  background: linear-gradient(165deg, #f4f1ea 0%, #ebe4e8 100%);
+}
+.rd-free-book-cover--frank {
+  background: linear-gradient(165deg, #f4f1ea 0%, #e4e6e8 100%);
+}
+.rd-free-book-title {
+  margin: 4px 0 0;
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.35;
+  color: var(--ink);
+}
+.rd-free-book-author {
+  margin: 0;
+  font-size: 13px;
+  color: var(--ink-muted);
+}
+.rd-free-book-level {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--accent);
+}
+.rd-free-book-blurb {
+  margin: 0;
+  flex: 1 1 auto;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--ink-muted);
+}
+.rd-free-book-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-start;
+  min-height: 36px;
+  margin-top: 4px;
+  padding: 0 14px;
+  border: 1px solid var(--line-strong, var(--line));
+  border-radius: 2px;
+  background: var(--surface, #fff);
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none !important;
+}
+.rd-free-book-link:hover,
+.rd-free-book-link:focus-visible {
+  border-color: var(--accent);
+  color: var(--accent);
+  outline: none;
+}
+.rd-free-books-note {
+  margin: 22px 0 0;
+  max-width: 48rem;
+  font-size: 12px;
+  line-height: 1.55;
+  color: var(--ink-muted);
+}
+
 /* 홈 — 학습사이트 아래 대시보드 미리보기 */
 .rd-dash-preview {
   padding-top: 8px;
@@ -667,10 +801,29 @@
   }
 }
 
+@media (max-width: 960px) {
+  .rd-free-books-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 @media (max-width: 720px) {
   /* 모바일 — 날짜·출처 바는 공간만 차지하므로 숨김 */
   .rd-datebar {
     display: none;
+  }
+  .rd-free-books-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+  .rd-free-book-cover {
+    padding: 14px 12px;
+  }
+  .rd-free-book-cover-title {
+    font-size: 13px;
+  }
+  .rd-free-book-title {
+    font-size: 14px;
   }
   .rd-dir-grid {
     grid-template-columns: 1fr 1fr;
