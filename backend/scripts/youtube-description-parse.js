@@ -127,9 +127,41 @@ function parseWords(description) {
   return words;
 }
 
+/** blame→blamed, spur→spurred 등 — 예문 활용형 하이라이트용 */
+function inflectionAlternates(expression) {
+  const e = String(expression || '').trim();
+  if (!e) return [];
+  const out = new Set([e]);
+  const add = (x) => {
+    if (x && x.length > 1) out.add(x);
+  };
+  add(`${e}s`);
+  add(`${e}es`);
+  add(`${e}ed`);
+  add(`${e}ing`);
+  add(`${e}er`);
+  add(`${e}est`);
+  add(`${e}ly`);
+  if (/e$/i.test(e)) {
+    add(`${e}d`); /* blame → blamed */
+    add(`${e.slice(0, -1)}ing`); /* blame → blaming */
+  }
+  if (/[bcdfghjklmnpqrstvwxyz]$/i.test(e)) {
+    const c = e.slice(-1);
+    add(`${e}${c}ed`); /* spur → spurred */
+    add(`${e}${c}ing`);
+  }
+  if (/y$/i.test(e) && e.length > 2 && !/[aeiou]y$/i.test(e)) {
+    add(`${e.slice(0, -1)}ies`);
+    add(`${e.slice(0, -1)}ied`);
+  }
+  return [...out].sort((a, b) => b.length - a.length);
+}
+
 /**
  * 뉴스 서술형(dearer 양식): 예문 안에 **표제어** 하이라이트.
  * 끝에 (**lemma**)를 붙이면 redesign이 발음줄로 오인해 예문이 사라지므로 쓰지 않음.
+ * 활용형(blamed/spurred/gloated)도 표제어 원형으로 매칭.
  */
 function lemmaAnnotation(sentence, expression) {
   const exp = String(expression || '').trim();
@@ -142,9 +174,13 @@ function lemmaAnnotation(sentence, expression) {
   /* 구형 꼬리 (**lemma**) / (lemma) 제거 */
   s = s.replace(new RegExp(`\\s*\\(\\*\\*${esc}\\*\\*\\)\\s*$`, 'i'), '').trim();
   s = s.replace(new RegExp(`\\s*\\(${esc}\\)\\s*$`, 'i'), '').trim();
-  const re = new RegExp(`(^|[^A-Za-z*])(${esc})(?![A-Za-z*])`, 'i');
-  if (re.test(s)) {
-    return s.replace(re, (_, pre, word) => `${pre}**${word}**`);
+
+  for (const form of inflectionAlternates(exp)) {
+    const formEsc = form.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const re = new RegExp(`(^|[^A-Za-z*])(${formEsc})(?![A-Za-z*])`, 'i');
+    if (re.test(s)) {
+      return s.replace(re, (_, pre, word) => `${pre}**${word}**`);
+    }
   }
   return s;
 }
