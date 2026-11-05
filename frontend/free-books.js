@@ -1,5 +1,5 @@
 /**
- * 무료 영어 원서 — 작가별/장르별 보기
+ * 무료 영어 원서 — 작가별/장르별 · 제목/작가 검색 · 처음으로
  * 링크는 https://www.gutenberg.org/ebooks/{id} 만 사용
  */
 (function () {
@@ -7,7 +7,8 @@
 
   var DATA_URL = 'data/free-books.json?v=20261105n100';
   var COVER_TONES = ['alice', 'oz', 'pride', 'frank'];
-  var state = { mode: 'genre', books: [] };
+  var DEBOUNCE_MS = 200;
+  var state = { mode: 'genre', q: '', books: [] };
 
   function esc(s) {
     return String(s == null ? '' : s)
@@ -15,6 +16,15 @@
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;')
       .replace(/"/g, '&quot;');
+  }
+
+  function norm(s) {
+    return String(s || '')
+      .toLowerCase()
+      .normalize('NFKD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/\s+/g, ' ')
+      .trim();
   }
 
   function ebookUrl(id) {
@@ -56,6 +66,17 @@
     );
   }
 
+  function filteredBooks() {
+    var q = norm(state.q);
+    var list = state.books.slice(0, 100);
+    if (!q) return list;
+    return list.filter(function (b) {
+      var title = norm(b.title);
+      var author = norm(b.author);
+      return title.indexOf(q) !== -1 || author.indexOf(q) !== -1;
+    });
+  }
+
   function groupBy(books, key) {
     var map = Object.create(null);
     books.forEach(function (b) {
@@ -79,10 +100,18 @@
     var root = document.getElementById('fb-catalog');
     var countEl = document.getElementById('fb-count');
     if (!root) return;
-    var books = state.books.slice(0, 100);
-    if (countEl) countEl.textContent = '총 ' + books.length + '권';
+    var books = filteredBooks();
+    if (countEl) {
+      countEl.textContent = state.q
+        ? '검색 결과 ' + books.length + '권'
+        : '총 ' + books.length + '권';
+    }
+    if (!books.length) {
+      root.innerHTML = '<p class="fb-empty">검색 결과가 없습니다.</p>';
+      return;
+    }
     var groups = groupBy(books, state.mode === 'author' ? 'author' : 'genre');
-    var html = groups
+    root.innerHTML = groups
       .map(function (g) {
         return (
           '<section class="fb-group" aria-label="' +
@@ -100,7 +129,17 @@
         );
       })
       .join('');
-    root.innerHTML = html || '<p class="fb-empty">표시할 도서가 없습니다.</p>';
+  }
+
+  function syncUrl() {
+    try {
+      var url = new URL(window.location.href);
+      url.searchParams.set('view', state.mode);
+      if (state.q) url.searchParams.set('q', state.q);
+      else url.searchParams.delete('q');
+      var qs = url.searchParams.toString();
+      history.replaceState(null, '', url.pathname + (qs ? '?' + qs : '') + url.hash);
+    } catch (e) { /* ignore */ }
   }
 
   function setMode(mode) {
@@ -110,11 +149,15 @@
       btn.classList.toggle('is-active', on);
       btn.setAttribute('aria-pressed', on ? 'true' : 'false');
     });
-    try {
-      var url = new URL(window.location.href);
-      url.searchParams.set('view', state.mode);
-      history.replaceState(null, '', url.pathname + '?' + url.searchParams.toString() + url.hash);
-    } catch (e) { /* ignore */ }
+    syncUrl();
+    render();
+  }
+
+  function setQuery(q) {
+    state.q = String(q || '').trim().slice(0, 80);
+    var input = document.getElementById('fb-search-input');
+    if (input && input.value !== state.q) input.value = state.q;
+    syncUrl();
     render();
   }
 
@@ -129,16 +172,59 @@
     });
   }
 
-  function readModeFromUrl() {
+  function bindSearch() {
+    var input = document.getElementById('fb-search-input');
+    if (!input || input._bound) return;
+    input._bound = true;
+    var timer = null;
+    input.addEventListener('input', function () {
+      clearTimeout(timer);
+      timer = setTimeout(function () {
+        setQuery(input.value);
+      }, DEBOUNCE_MS);
+    });
+    input.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        input.value = '';
+        setQuery('');
+        input.blur();
+      }
+    });
+  }
+
+  function bindBackTop() {
+    var btn = document.getElementById('fb-back-top');
+    if (!btn || btn._bound) return;
+    btn._bound = true;
+    function sync() {
+      var y = window.scrollY || document.documentElement.scrollTop || 0;
+      btn.hidden = y < 320;
+    }
+    window.addEventListener('scroll', sync, { passive: true });
+    btn.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    sync();
+  }
+
+  function readFromUrl() {
     try {
-      var v = new URLSearchParams(window.location.search).get('view');
-      if (v === 'author' || v === 'genre') return v;
-    } catch (e) { /* ignore */ }
-    return 'genre';
+      var params = new URLSearchParams(window.location.search);
+      var v = params.get('view');
+      var q = params.get('q') || '';
+      return {
+        mode: v === 'author' || v === 'genre' ? v : 'genre',
+        q: String(q).trim().slice(0, 80),
+      };
+    } catch (e) {
+      return { mode: 'genre', q: '' };
+    }
   }
 
   async function boot() {
     bindMode();
+    bindSearch();
+    bindBackTop();
     var status = document.getElementById('fb-status');
     if (status) status.textContent = '불러오는 중…';
     try {
@@ -152,7 +238,11 @@
         })
         .slice(0, 100);
       if (status) status.textContent = '';
-      setMode(readModeFromUrl());
+      var initial = readFromUrl();
+      state.q = initial.q;
+      var input = document.getElementById('fb-search-input');
+      if (input && state.q) input.value = state.q;
+      setMode(initial.mode);
     } catch (err) {
       console.error(err);
       if (status) status.textContent = '목록을 불러오지 못했습니다.';
