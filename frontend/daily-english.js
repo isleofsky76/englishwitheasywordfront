@@ -509,6 +509,27 @@
     rescueHideMeaningToggle();
   }
 
+  function catalogTotalCount() {
+    return (Array.isArray(state.categories) ? state.categories : []).reduce(function (sum, c) {
+      return sum + (c && c.count ? Number(c.count) || 0 : 0);
+    }, 0);
+  }
+
+  function clearSearchAndBrowseAll() {
+    var input = document.getElementById('de-search-input');
+    if (input) input.value = '';
+    state.q = '';
+    try {
+      var url = new URL(window.location.href);
+      if (url.searchParams.has('q')) {
+        url.searchParams.delete('q');
+        var next = url.pathname + (url.searchParams.toString() ? '?' + url.searchParams.toString() : '') + url.hash;
+        history.replaceState(null, '', next);
+      }
+    } catch (e) { /* ignore */ }
+    reloadList();
+  }
+
   function renderCategoryNav() {
     var nav = document.getElementById('de-cats');
     if (!nav) return;
@@ -521,21 +542,33 @@
       syncBackTopVisibility();
       return;
     }
-    var totalAll = cats.reduce(function (sum, c) {
-      return sum + (c && c.count ? c.count : 0);
-    }, 0);
-    if (state.q && state.items.length) {
-      totalAll = state.items.length;
+    var catalogTotal = catalogTotalCount();
+    var searchTotal = state.q ? state.items.length : catalogTotal;
+    var html = '<div class="de-cats-inner">';
+
+    if (state.q) {
+      html +=
+        '<button type="button" class="de-cat-chip' +
+        (!state.activeCategory ? ' is-active' : '') +
+        '" data-de-cat="" aria-pressed="' +
+        (!state.activeCategory ? 'true' : 'false') +
+        '">검색' +
+        (searchTotal ? ' <span class="de-cat-n">' + searchTotal + '</span>' : '') +
+        '</button>' +
+        '<button type="button" class="de-cat-chip de-cat-browse-all" data-de-browse-all="1" title="검색을 지우고 전체 표현을 봅니다">' +
+        '전체 목록' +
+        (catalogTotal ? ' <span class="de-cat-n">' + catalogTotal + '</span>' : '') +
+        '</button>';
+    } else {
+      html +=
+        '<button type="button" class="de-cat-chip' +
+        (!state.activeCategory ? ' is-active' : '') +
+        '" data-de-cat="" aria-pressed="' +
+        (!state.activeCategory ? 'true' : 'false') +
+        '">전체' +
+        (catalogTotal ? ' <span class="de-cat-n">' + catalogTotal + '</span>' : '') +
+        '</button>';
     }
-    var html =
-      '<div class="de-cats-inner">' +
-      '<button type="button" class="de-cat-chip' +
-      (!state.activeCategory ? ' is-active' : '') +
-      '" data-de-cat="" aria-pressed="' +
-      (!state.activeCategory ? 'true' : 'false') +
-      '">전체' +
-      (totalAll ? ' <span class="de-cat-n">' + totalAll + '</span>' : '') +
-      '</button>';
 
     var present = Object.create(null);
     if (state.q) {
@@ -697,6 +730,11 @@
     if (!nav || nav._deBound) return;
     nav._deBound = true;
     nav.addEventListener('click', function (e) {
+      var browseAll = e.target.closest('[data-de-browse-all]');
+      if (browseAll) {
+        clearSearchAndBrowseAll();
+        return;
+      }
       var btn = e.target.closest('[data-de-cat]');
       if (!btn) return;
       scrollToCategory(btn.getAttribute('data-de-cat') || '');

@@ -145,6 +145,18 @@
   opacity: 0.9;
 }
 
+.de-cat-chip.de-cat-browse-all {
+  color: var(--de-blue);
+  border-color: rgba(37, 99, 235, 0.35);
+  background: rgba(37, 99, 235, 0.06);
+  font-weight: 700;
+}
+
+.de-cat-chip.de-cat-browse-all:hover {
+  background: rgba(37, 99, 235, 0.12);
+  border-color: var(--de-blue);
+}
+
 .de-cat-group {
   margin: 0;
   padding: 8px 0 4px;
