@@ -9,6 +9,7 @@ import crypto from 'crypto';
 import { validateCommentFields, isReservedAdminNickname } from './comment-filter.js';
 import { registerExpressionsApi } from './expressions-api.js';
 import { registerRankingApi } from './ranking-api.js';
+import { registerWordMeaningQuizApi } from './word-meaning-quiz-api.js';
 import { app } from './runtime.js';
 
 async function safeBcryptCompare(plain, hash) {
@@ -2790,6 +2791,8 @@ app.post('/wordofday-admin/deletepost', async (req, res) => {
 
 //================================== 생활 영어 한 줄 (expressions)
 registerExpressionsApi(app, { requireAdmin });
+
+registerWordMeaningQuizApi(app);
 
 //================================== 댓글/다운로드/검색 랭킹 대시보드
 const rankingApi = registerRankingApi(app, { getRequestIp });
