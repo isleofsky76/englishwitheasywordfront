@@ -4,7 +4,7 @@
  * nav-home-menu.js 가 로드함
  */
 (function () {
-    var VERSION = '20261105stats3';
+    var VERSION = '20261105bad1';
 
   var DICT_LOOKUP_VER = '20261104dict1';
   var DICT_LOOKUP_CONTAINERS = [
@@ -492,7 +492,32 @@
       window.SiteStats.trackSearch(term, source || 'site-search');
     }
 
+    function searchBlockMsg(q) {
+      if (window.CommentBadwords && typeof window.CommentBadwords.searchBlockMessage === 'function') {
+        return window.CommentBadwords.searchBlockMessage(q) || '';
+      }
+      return '';
+    }
+
+    function showBlocked(msg) {
+      list.innerHTML = '<li class="site-search-empty site-search-blocked">' + escapeSuggestText(msg) + '</li>';
+      list.hidden = false;
+      activeIndex = -1;
+      if (onHome && searchPageList) {
+        setHomeSearchMode(true);
+        if (searchPage) searchPage.hidden = false;
+        searchPageList.innerHTML =
+          '<h1 class="site-search-page-title">검색</h1>' +
+          '<p class="site-search-empty site-search-blocked">' + escapeSuggestText(msg) + '</p>';
+      }
+    }
+
     function previewSearch(q) {
+      var blocked = searchBlockMsg(q);
+      if (blocked) {
+        showBlocked(blocked);
+        return;
+      }
       if (!window.HomeBoardPreview) return;
       HomeBoardPreview.search(q, 16).then(function (hits) {
         renderSuggest(hits, '일치하는 단어가 없습니다.');
@@ -515,6 +540,11 @@
       e.preventDefault();
       var q = String(input.value || '').trim();
       if (!q) return;
+      var blocked = searchBlockMsg(q);
+      if (blocked) {
+        showBlocked(blocked);
+        return;
+      }
       trackSiteSearch(q, 'site-search-submit');
       if (!onHome || !window.HomeBoardPreview) {
         window.location.href = base + 'index.html?q=' + encodeURIComponent(q);
@@ -541,6 +571,11 @@
         links.forEach(function (el, i) { el.classList.toggle('is-active', i === activeIndex); });
       } else if (e.key === 'Enter' && activeIndex >= 0 && links[activeIndex]) {
         e.preventDefault();
+        var blockEnter = searchBlockMsg(input.value);
+        if (blockEnter) {
+          showBlocked(blockEnter);
+          return;
+        }
         trackSiteSearch(input.value, 'site-search-suggest');
         window.location.href = links[activeIndex].href;
       }
@@ -549,6 +584,11 @@
     list.addEventListener('click', function (e) {
       var a = e.target.closest('a');
       if (!a) return;
+      if (searchBlockMsg(input.value)) {
+        e.preventDefault();
+        showBlocked(searchBlockMsg(input.value));
+        return;
+      }
       trackSiteSearch(input.value, 'site-search-suggest');
     });
 
@@ -559,10 +599,15 @@
     var q0 = new URLSearchParams(window.location.search).get('q');
     if (q0 && onHome && window.HomeBoardPreview) {
       input.value = q0;
-      trackSiteSearch(q0, 'site-search-url');
-      HomeBoardPreview.search(q0, 0).then(function (hits) {
-        renderPage(hits, '정확히 일치하는 결과가 없습니다.');
-      });
+      var blocked0 = searchBlockMsg(q0);
+      if (blocked0) {
+        showBlocked(blocked0);
+      } else {
+        trackSiteSearch(q0, 'site-search-url');
+        HomeBoardPreview.search(q0, 0).then(function (hits) {
+          renderPage(hits, '정확히 일치하는 결과가 없습니다.');
+        });
+      }
     }
   }
 
@@ -652,9 +697,14 @@
       ensureWeather(base);
     }
     mountNavbar(base);
-    ensureScript(base + 'site-stats.js?v=' + VERSION, function () {
-      ensureScript(base + 'home-board-preview.js?v=' + VERSION, function () {
-        initSearch(base);
+    ensureScript(base + 'comment-badwords-client.js?v=' + VERSION, function () {
+      if (window.CommentBadwords && window.CommentBadwords.load) {
+        window.CommentBadwords.load();
+      }
+      ensureScript(base + 'site-stats.js?v=' + VERSION, function () {
+        ensureScript(base + 'home-board-preview.js?v=' + VERSION, function () {
+          initSearch(base);
+        });
       });
     });
     ensureSiteDictLookup(base);

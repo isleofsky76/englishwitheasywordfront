@@ -264,6 +264,11 @@
   font-size: 14px;
   color: var(--ink-muted);
 }
+.site-masthead .site-search-blocked,
+.site-search-blocked {
+  color: #b42318;
+  font-weight: 600;
+}
 
 .site-masthead .nav-more {
   position: relative;
