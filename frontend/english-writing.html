@@ -7,6 +7,7 @@
 <meta name="description" content="뉴스 문장을 구간으로 끊어 영작하고 원문과 비교합니다.">
 <link rel="canonical" href="https://englisheasystudy.com/english-writing.html">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@700&display=swap">
 <link rel="stylesheet" href="redesign-tokens.css?v=20261019rd4">
 <link rel="stylesheet" href="site-masthead.css?v=20261106ew1">
 <link rel="stylesheet" href="nav-home-menu.css?v=20260617">
@@ -97,12 +98,17 @@
   .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#111827;color:#fff;
     padding:9px 16px;border-radius:8px;font-size:.88rem;opacity:0;transition:opacity .2s;pointer-events:none}
   .toast.on{opacity:1}
+  .wrap.is-catalog{max-width:1120px}
   .back-row{margin:0 0 8px}
   .back-row a{font-size:.88rem;font-weight:700}
-  .writing-catalog{display:flex;flex-direction:column;margin-top:8px;border-top:1px solid var(--line)}
-  .writing-catalog a{display:flex;flex-direction:column;gap:4px;padding:16px 2px;border-bottom:1px solid var(--line)}
-  .writing-catalog .src{font-size:.78rem;font-weight:700;color:var(--sub)}
-  .writing-catalog .ttl{font-size:1.05rem;font-weight:650;line-height:1.45}
+  .writing-catalog{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:32px 24px;margin-top:18px}
+  .writing-catalog a{display:flex;flex-direction:column;gap:10px;color:inherit;text-decoration:none;min-width:0}
+  .writing-catalog a:hover .ttl{color:var(--accent,#B23A0B)}
+  .writing-catalog .thumb{position:relative;display:block;height:160px;background:var(--surface-warm,#EDE8DC);border-radius:2px;overflow:hidden}
+  .writing-catalog .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+  .writing-catalog .yt{position:absolute;right:12px;bottom:12px;display:inline-flex;width:42px;height:30px;align-items:center;justify-content:center;border-radius:999px;background:rgba(0,0,0,.55);box-shadow:0 6px 16px rgba(0,0,0,.28);pointer-events:none}
+  .writing-catalog .src{font-size:12px;font-weight:600;letter-spacing:1px;color:var(--accent,#B23A0B)}
+  .writing-catalog .ttl{font-family:var(--font-serif,"Noto Serif KR",serif);font-size:19px;font-weight:700;line-height:1.45}
   .page-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
   .page-links[hidden]{display:none}
   .page-links a{display:inline-flex;align-items:center;padding:8px 12px;border:1px solid var(--line);border-radius:8px;background:#fff;font-weight:700}
@@ -434,13 +440,21 @@ function parseWritingText(text){
     if(list) list.innerHTML = '';
     if(!box) return;
     box.hidden = false;
+    const wrap = document.querySelector('.wrap');
+    if(wrap) wrap.classList.add('is-catalog');
     if(!items.length){
       box.innerHTML = '<p class="lead">아직 올라온 영작이 없습니다.</p>';
       return;
     }
     box.innerHTML = items.map(function(item){
       const id = item.id || item.videoId;
-      return '<a href="english-writing.html?id=' + encodeURIComponent(id) + '">' +
+      const vid = String(item.videoId || item.id || '').trim();
+      const thumb = /^[A-Za-z0-9_-]{11}$/.test(vid) ? ('https://i.ytimg.com/vi/' + vid + '/hqdefault.jpg') : '';
+      const img = thumb
+        ? '<span class="thumb"><img src="' + esc(thumb) + '" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=\'' + esc(thumb.replace('hqdefault', 'mqdefault')) + '\'">' +
+          '<span class="yt" aria-hidden="true"><svg viewBox="0 0 28 20" width="28" height="20"><rect x="0.5" y="0.5" width="27" height="19" rx="5.5" fill="#fff"/><path fill="#e11d1d" d="M11.2 5.4v9.2L19.2 10 11.2 5.4z"/></svg></span></span>'
+        : '<span class="thumb"></span>';
+      return '<a href="english-writing.html?id=' + encodeURIComponent(id) + '">' + img +
         '<span class="src">' + esc(item.source || '영작') + '</span>' +
         '<span class="ttl">' + esc(item.title || '제목 없음') + '</span></a>';
     }).join('');
