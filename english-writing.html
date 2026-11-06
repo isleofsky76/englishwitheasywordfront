@@ -60,7 +60,7 @@
   input[type=text]{width:100%;font:inherit;font-size:.95rem;padding:7px 9px;border:1px solid var(--line);border-radius:7px;background:#fff}
   input[type=text]:focus{outline:2px solid var(--brand-soft);border-color:var(--brand)}
   .field{position:relative;display:block}
-  .field-mark{position:absolute;left:0;right:0;top:0;bottom:0;z-index:0;margin:0;padding:8px 10px;border:0;pointer-events:none;overflow:hidden;white-space:pre;font:inherit;font-size:.95rem;line-height:1.55;color:transparent}
+  .field-mark{position:absolute;left:0;right:0;top:0;z-index:0;margin:0;padding:8px 10px;border:0;pointer-events:none;overflow:visible;white-space:pre-wrap;font:inherit;font-size:.95rem;line-height:1.55;color:transparent}
   .card.reveal .field input{color:transparent;caret-color:#1f2937;background:transparent}
   .card.reveal .field-mark{color:inherit}
   .field-mark .ok{color:#059669}
@@ -491,13 +491,9 @@ function parseWritingText(text){
   function normToken(w){
     return String(w||'').toLowerCase().replace(/^[^a-z0-9']+|[^a-z0-9']+$/g,'');
   }
-  function matchedWordSet(mine, answer){
-    const parts=String(mine).split(/(\s+)/);
-    const wordAt=[];
-    const words=[];
-    parts.forEach((p,idx)=>{
-      if(p && !/^\s+$/.test(p)){ wordAt.push(idx); words.push(normToken(p)); }
-    });
+  function diffSegments(mine, answer){
+    const mineWords=String(mine).match(/\S+/g)||[];
+    const words=mineWords.map(normToken);
     const ans=String(answer).split(/\s+/).map(normToken).filter(Boolean);
     const n=words.length, m=ans.length;
     const dp=Array.from({length:n+1},()=>Array(m+1).fill(0));
@@ -506,24 +502,34 @@ function parseWritingText(text){
         dp[i][j]=words[i] && words[i]===ans[j] ? dp[i+1][j+1]+1 : Math.max(dp[i+1][j], dp[i][j+1]);
       }
     }
-    const ok=new Set();
+    const segs=[];
     let i=0, j=0;
-    while(i<n && j<m){
-      if(words[i] && words[i]===ans[j]){ ok.add(wordAt[i]); i++; j++; }
-      else if(dp[i+1][j] >= dp[i][j+1]) i++;
-      else j++;
+    while(i<n || j<m){
+      if(i<n && j<m && words[i] && words[i]===ans[j]){ segs.push({text:mineWords[i], cls:'ok'}); i++; j++; }
+      else if(i<n && j<m && dp[i+1][j+1] >= dp[i+1][j] && dp[i+1][j+1] >= dp[i][j+1]){ segs.push({text:mineWords[i], cls:'bad'}); i++; j++; }
+      else if(i<n && j<m && dp[i+1][j] >= dp[i][j+1]){ segs.push({text:mineWords[i], cls:'bad'}); i++; }
+      else if(j<m){ segs.push({text:'xx', cls:'bad'}); j++; }
+      else { segs.push({text:mineWords[i], cls:'bad'}); i++; }
     }
-    return { parts, ok };
+    return segs;
   }
   function paintMark(input){
     const mark=input.parentElement && input.parentElement.querySelector('.field-mark');
+    const field=input.parentElement;
     if(!mark) return;
     const card=input.closest('.card');
     const mine=input.value;
-    if(!card || !card.classList.contains('reveal') || !mine){ mark.innerHTML=''; return; }
-    const diff=matchedWordSet(mine, input.getAttribute('data-answer')||'');
-    mark.innerHTML=diff.parts.map((p,idx)=>/^\s+$/.test(p) ? esc(p) : `<span class="${diff.ok.has(idx)?'ok':'bad'}">${esc(p)}</span>`).join('');
-    mark.scrollLeft=input.scrollLeft;
+    if(!card || !card.classList.contains('reveal')){
+      mark.innerHTML='';
+      if(field) field.style.paddingBottom='';
+      return;
+    }
+    const segs=diffSegments(mine, input.getAttribute('data-answer')||'');
+    mark.innerHTML=segs.map(s=>`<span class="${s.cls}">${esc(s.text)}</span>`).join(' ');
+    if(field){
+      const extra=mark.scrollHeight-input.offsetHeight;
+      field.style.paddingBottom=extra>2 ? (extra+'px') : '';
+    }
   }
   function paintCard(card){
     if(!card) return;
