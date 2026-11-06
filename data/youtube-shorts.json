@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-05T13:27:08.124Z",
+  "updatedAt": "2026-11-05T19:45:37.588Z",
   "channelId": "UC4LbF7X56QIHL3Oejt8kuyw",
   "handle": "@istudyeng",
   "source": "https://www.youtube.com/feeds/videos.xml?channel_id=UC4LbF7X56QIHL3Oejt8kuyw",
@@ -48,6 +48,19 @@
       "watchUrl": "https://www.youtube.com/watch?v=V8dY-M1duc8"
     },
     {
+      "videoId": "xb_xbRFCFrs",
+      "category": "미국",
+      "label": "미국",
+      "href": "us-news-list.html",
+      "title": "미국의 세입자들은 심각한 어려움에 처해 있습니다.",
+      "rawTitle": "미국 | 미국의 세입자들은 심각한 어려움에 처해 있습니다.",
+      "publishedAt": "2026-11-05T08:00:19+00:00",
+      "publishedKst": "2026-11-05",
+      "thumbnail": "https://i.ytimg.com/vi/xb_xbRFCFrs/hqdefault.jpg",
+      "url": "https://www.youtube.com/shorts/xb_xbRFCFrs",
+      "watchUrl": "https://www.youtube.com/watch?v=xb_xbRFCFrs"
+    },
+    {
       "videoId": "WBhplbUQAS0",
       "category": "미국",
       "label": "미국",
@@ -72,45 +85,6 @@
       "thumbnail": "https://i.ytimg.com/vi/gDHQfaw_ods/hqdefault.jpg",
       "url": "https://www.youtube.com/shorts/gDHQfaw_ods",
       "watchUrl": "https://www.youtube.com/watch?v=gDHQfaw_ods"
-    },
-    {
-      "videoId": "JgMF84TGS_Q",
-      "category": "연관단어",
-      "label": "연관단어",
-      "href": "english-synonym-list.html",
-      "title": "잘 휘어지는 Pliable",
-      "rawTitle": "연관단어 | 잘 휘어지는 Pliable",
-      "publishedAt": "2026-11-05T01:00:01+00:00",
-      "publishedKst": "2026-11-05",
-      "thumbnail": "https://i.ytimg.com/vi/JgMF84TGS_Q/hqdefault.jpg",
-      "url": "https://www.youtube.com/shorts/JgMF84TGS_Q",
-      "watchUrl": "https://www.youtube.com/watch?v=JgMF84TGS_Q"
-    },
-    {
-      "videoId": "uWCuXP9I6VA",
-      "category": "미국",
-      "label": "미국",
-      "href": "us-news-list.html",
-      "title": "공화당 선거 참패의 내막",
-      "rawTitle": "미국 | 공화당 선거 참패의 내막",
-      "publishedAt": "2026-11-04T22:00:13+00:00",
-      "publishedKst": "2026-11-05",
-      "thumbnail": "https://i.ytimg.com/vi/uWCuXP9I6VA/hqdefault.jpg",
-      "url": "https://www.youtube.com/shorts/uWCuXP9I6VA",
-      "watchUrl": "https://www.youtube.com/watch?v=uWCuXP9I6VA"
-    },
-    {
-      "videoId": "K_7QVKPpHf0",
-      "category": "컬쳐",
-      "label": "컬쳐",
-      "href": "culture-voca-list.html",
-      "title": "가을,겨울을 위한 최고의 여성 코트 47종",
-      "rawTitle": "컬쳐 | 가을,겨울을 위한 최고의 여성 코트 47종",
-      "publishedAt": "2026-11-04T12:00:37+00:00",
-      "publishedKst": "2026-11-04",
-      "thumbnail": "https://i.ytimg.com/vi/K_7QVKPpHf0/hqdefault.jpg",
-      "url": "https://www.youtube.com/shorts/K_7QVKPpHf0",
-      "watchUrl": "https://www.youtube.com/watch?v=K_7QVKPpHf0"
     }
   ]
 }
