@@ -262,6 +262,7 @@ function parseWritingText(text){
       ko:      r.ko ?? r.korean ?? r.sentence_ko ?? '',
       chunks:  chunks.map(c=>({ko:c.ko ?? c.korean, en:c.en ?? c.english})).filter(c=>c.ko && c.en),
       title:   r.title ?? '', source: r.source ?? '', url: r.url ?? '',
+      youtube: r.youtube ?? '', videoId: r.videoId ?? '',
       byline:  [r.author, r.date ?? r.published_at].filter(Boolean).join(' · ')
     };
   }
@@ -322,7 +323,7 @@ function parseWritingText(text){
     if(!el) return;
     const parts = [];
     const yt = youtubeHref(s);
-    if(yt) parts.push('<a href="' + esc(yt) + '" target="_blank" rel="noopener">유튜브 보기</a>');
+    if(yt) parts.push('<a href="' + esc(yt) + '" target="_blank" rel="noopener">유튜브 바로가기</a>');
     if(s && s.url) parts.push('<a href="' + esc(s.url) + '" target="_blank" rel="noopener">원문 기사 보기</a>');
     el.innerHTML = parts.join('');
     el.hidden = !parts.length;
