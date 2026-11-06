@@ -97,7 +97,10 @@
   .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#111827;color:#fff;
     padding:9px 16px;border-radius:8px;font-size:.88rem;opacity:0;transition:opacity .2s;pointer-events:none}
   .toast.on{opacity:1}
-  .disclaimer{font-size:.78rem;color:var(--sub);margin-top:30px;border-top:1px solid var(--line);padding-top:12px}
+  .page-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+  .page-links[hidden]{display:none}
+  .page-links a{display:inline-flex;align-items:center;padding:8px 12px;border:1px solid var(--line);border-radius:8px;background:#fff;font-weight:700}
+  .disclaimer{font-size:.78rem;color:var(--sub);margin-top:18px;border-top:1px solid var(--line);padding-top:12px}
 
   @media (max-width:640px){
     table.chunks, table.chunks tbody, table.chunks tr, table.chunks td{display:block;width:100%}
@@ -116,6 +119,7 @@
   <p class="lead">한글 구간이 <b>영어 어순</b>으로 나열되어 있습니다. 각 구간을 영어로 쓰고, 이어서 전체 문장을 완성한 뒤 원문과 비교해 보세요.</p>
 
   <div id="list"></div>
+  <div class="page-links" id="page-links" hidden></div>
 
   <p class="disclaimer">
     All sentences are sourced from global news outlets for English practice. They do not reflect my personal views or financial/political advice.
@@ -160,6 +164,8 @@ const CONFIG = {
 const SAMPLE_TEXT = `
 기사 제목 : 공화당이 참패한 다섯 가지 이유
 출처 : BBC
+원본 링크 : https://www.bbc.com/news/articles/cqkgjvr00zmyo
+유튜브 : https://www.youtube.com/watch?v=uC5AAq-uxhY
 
 1. prove — 드러나다, 입증되다
 The war has proved broadly unpopular with most Americans.
@@ -197,19 +203,31 @@ Democratic Senator Jon Ossoff made the cost of living and corruption a central m
 */
 function parseWritingText(text){
   const meta = {}, items = [];
-  const META = {'출처':'source','기사 제목':'title','원본 링크':'url','저자':'author','게시일':'date'};
+  const META = {'출처':'source','기사 제목':'title','원본 링크':'url','저자':'author','게시일':'date','유튜브':'youtube','YouTube':'youtube','youtube':'youtube'};
   const hasKo = s => /[가-힣]/.test(s);
+  const ytIn = s => String(s||'').match(/https?:\/\/(?:www\.)?(?:youtube\.com\/(?:watch\?v=|shorts\/)|youtu\.be\/)[\w-]{6,}/);
+  function takeMeta(line){
+    const labeled = line.match(/^([^:：]+?)\s*[:：]\s*(.+)$/);
+    if(labeled && META[labeled[1].trim()]){
+      const key = META[labeled[1].trim()];
+      meta[key] = labeled[2].trim();
+      const yt = ytIn(labeled[2]);
+      if(key==='youtube' && yt) meta.youtube = yt[0];
+      return true;
+    }
+    const bare = ytIn(line);
+    if(bare && line.trim()===bare[0]){ meta.youtube = bare[0]; return true; }
+    return false;
+  }
   let cur = null;
   String(text).replace(/\r/g,'').split('\n').forEach(raw=>{
     const line = raw.trim(); if(!line) return;
     let m;
+    if(takeMeta(line)) return;
     if((m = line.match(/^(\d+)\.\s*(.+?)\s*[—–-]\s*(.+)$/))){
       cur = { no:+m[1], word:m[2].trim(), meaning:m[3].trim(), en:'', ko:'', chunks:[] }; items.push(cur); return;
     }
-    if(!cur){
-      if((m = line.match(/^([^:：]+?)\s*[:：]\s*(.+)$/)) && META[m[1].trim()]) meta[META[m[1].trim()]] = m[2].trim();
-      return;
-    }
+    if(!cur) return;
     if((m = line.match(/^[*•\-]\s*(.+?)\s+[:：]\s+(.+)$/))){ cur.chunks.push({ko:m[1].trim(), en:m[2].trim()}); return; }
     if(hasKo(line)){ if(!cur.ko) cur.ko = line; } else { if(!cur.en) cur.en = line; }
   });
@@ -264,7 +282,9 @@ function parseWritingText(text){
         return Object.assign({}, row, {
           title: topic || row.title || '',
           source: d.source || row.source || '',
-          url: d.url || row.url || ''
+          url: d.url || row.url || '',
+          videoId: d.videoId || row.videoId || '',
+          youtube: row.youtube || ''
         });
       });
     }
@@ -290,6 +310,22 @@ function parseWritingText(text){
       ? '출처: <a href="' + esc(s.url) + '" target="_blank" rel="noopener">' + name + '</a>'
       : '출처: ' + name;
     el.hidden = false;
+  }
+  function youtubeHref(s){
+    const raw = String((s && (s.youtube || s.videoId)) || '').trim();
+    if(!raw) return '';
+    if(/^https?:\/\//i.test(raw)) return raw;
+    return 'https://www.youtube.com/watch?v=' + raw;
+  }
+  function applyPageLinks(s){
+    const el = document.getElementById('page-links');
+    if(!el) return;
+    const parts = [];
+    const yt = youtubeHref(s);
+    if(yt) parts.push('<a href="' + esc(yt) + '" target="_blank" rel="noopener">유튜브 보기</a>');
+    if(s && s.url) parts.push('<a href="' + esc(s.url) + '" target="_blank" rel="noopener">원문 기사 보기</a>');
+    el.innerHTML = parts.join('');
+    el.hidden = !parts.length;
   }
   async function fetchRows(){
     const url = writingApiUrl();
@@ -322,8 +358,9 @@ function parseWritingText(text){
 
   function renderPractice(){
     const list=$('#list'); list.innerHTML='';
-    if(!sentences.length){ list.innerHTML='<p class="lead">불러온 문장이 없습니다.</p>'; applyPageSource(null); return; }
+    if(!sentences.length){ list.innerHTML='<p class="lead">불러온 문장이 없습니다.</p>'; applyPageSource(null); applyPageLinks(null); return; }
     applyPageSource(sentences[0]);
+    applyPageLinks(sentences[0]);
     const pageTopic = String(sentences[0].title || '').replace(/^\s*영작\s*[|｜]\s*/, '').trim();
     let last = pageTopic;
     sentences.forEach((s,i)=>{
