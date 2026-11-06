@@ -727,45 +727,6 @@
     }
   }
 
-  function previewHref(item) {
-    var url = String((item && item.url) || '').trim();
-    if (url && url.charAt(0) !== '/' && !/^https?:\/\//i.test(url) && url.indexOf('//') !== 0) return url;
-    if (url && url.charAt(0) === '/') return url;
-    if (/^https?:\/\//i.test(url)) {
-      try {
-        var u = new URL(url);
-        if (u.hostname === window.location.hostname) return u.pathname + u.search;
-      } catch (e) {
-        /* 외부 주소는 퀴즈로 */
-      }
-    }
-    return 'word-meaning-quiz.html?level=all&autostart=1';
-  }
-
-  function renderHomePreview(items) {
-    var grid = document.getElementById('rd-wmq-grid');
-    if (!grid) return;
-    var list = (items || []).filter(function (it) {
-      return it && String(it.word || '').trim() && String(it.meaning || '').trim();
-    }).slice(0, 5);
-    if (!list.length) {
-      grid.hidden = true;
-      return;
-    }
-    grid.hidden = false;
-    grid.innerHTML = list.map(function (it) {
-      var word = String(it.word).trim();
-      var meaning = String(it.meaning).trim();
-      var pos = String(it.pos || '').trim();
-      return (
-        '<a class="rd-phrase-card" href="' + escapeHtml(previewHref(it)) + '">' +
-          '<span class="ko">' + escapeHtml(meaning) + '</span>' +
-          '<span class="en">' + escapeHtml(word) + (pos ? ' <span class="pos">' + escapeHtml(pos) + '</span>' : '') + '</span>' +
-        '</a>'
-      );
-    }).join('');
-  }
-
   /** index 홈 섹션 — 레벨 선택 UI 없음(전체만) */
   async function initHomeSection() {
     var root = document.getElementById('rd-wmq');
@@ -782,13 +743,6 @@
       start.classList.remove('is-disabled');
       start.setAttribute('aria-disabled', 'false');
       start.href = 'word-meaning-quiz.html?level=all&autostart=1';
-    }
-
-    try {
-      var preview = await fetchJson(apiBase() + '/api/word-meaning-quiz/preview?limit=5');
-      renderHomePreview(preview && preview.items);
-    } catch (e) {
-      renderHomePreview([]);
     }
 
     try {
