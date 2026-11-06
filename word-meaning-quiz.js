@@ -729,6 +729,7 @@
 
   function previewHref(item) {
     var url = String((item && item.url) || '').trim();
+    if (url && url.charAt(0) !== '/' && !/^https?:\/\//i.test(url) && url.indexOf('//') !== 0) return url;
     if (url && url.charAt(0) === '/') return url;
     if (/^https?:\/\//i.test(url)) {
       try {
