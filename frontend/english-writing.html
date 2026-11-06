@@ -38,6 +38,8 @@
   .card.done{border-color:#a7f3d0}
   .card-head{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px}
   .num{font-weight:700;color:var(--brand)}
+  .ex-line{margin:0;flex:1 1 16rem;font-size:1.02rem;line-height:1.55}
+  .ex-label{font-weight:700}
   .chip{background:var(--chip);border-radius:999px;padding:2px 10px;font-size:.85rem}
   .badge{font-size:.75rem;color:var(--ok);background:var(--ok-soft);border-radius:999px;padding:2px 8px}
   .card-tools{margin-left:auto;display:flex;gap:4px}
@@ -428,10 +430,9 @@ function parseWritingText(text){
     c.innerHTML = `
       <div class="card-head">
         <span class="num">${n}.</span>
-        ${s.word?`<span class="chip"><b>${esc(s.word)}</b> — <span class="ko-text">${esc(s.wordKo)}</span></span>`:''}
+        <p class="ex-line"><span class="ex-label">예문 :</span> <span class="ko-text">${esc(s.ko)}</span></p>
         <div class="card-tools"><button data-act="reveal">원문 보기</button><button data-act="reset">지우기</button></div>
       </div>
-      <div class="ko-full"><span class="ko-text">${esc(s.ko)}</span></div>
       ${hint.length ? `<div class="word-hint" aria-label="힌트">${hint.map(w=>`<span class="hint-word">${esc(w)}</span>`).join('')}</div>` : ''}
       ${s.chunks.length?`<div class="order-note">↓ 영어 어순</div><table class="chunks"><tbody>${rows}</tbody></table>`:''}
       <div class="full">
