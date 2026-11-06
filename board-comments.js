@@ -728,6 +728,7 @@
     var board = String(opts.board || '').trim();
     var contentKey = String(opts.contentKey || '').trim();
     var title = String(opts.title || '').trim();
+    var word = String(opts.word || '').trim();
     if (!root || !board || !contentKey) return;
     var key = cacheKey(board, contentKey);
     root.textContent = '';
@@ -937,6 +938,7 @@
           board: board,
           contentKey: contentKey,
           title: title,
+          word: word,
           nickname: nickInput.value,
           body: bodyInput.value,
           password: pwInput.value,

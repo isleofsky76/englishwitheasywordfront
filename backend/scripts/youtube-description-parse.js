@@ -38,6 +38,7 @@ const TITLE_CATEGORY_BOARD = {
   문화: 'culture-voca',
   연관단어: 'english-synonym',
   유의어: 'english-synonym',
+  영작: 'english-writing',
 };
 
 const BOARD_RULES = [
@@ -314,6 +315,7 @@ export function parseYoutubeDescription(video) {
   return {
     board,
     videoId: video.videoId,
+    description,
     title: topic,
     rawTitle: title,
     slug,

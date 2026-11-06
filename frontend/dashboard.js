@@ -39,6 +39,7 @@
     var t = String(term == null ? '' : term).trim();
     if (!t) return 'one-sentence.html';
     var isPhrase = /\s/.test(t) || t.length > 24;
+    if (kind === 'view') return 'english-writing.html';
     if (kind === 'download' || kind === 'search') {
       if (isPhrase) return 'daily-english.html?q=' + encodeURIComponent(t);
     }
@@ -57,6 +58,7 @@
       'db-stat-words': stats.uniqueWords,
       'db-stat-downloads': stats.downloads,
       'db-stat-searches': stats.searches,
+      'db-stat-views': stats.views,
     };
     Object.keys(map).forEach(function (id) {
       var el = document.getElementById(id);
@@ -133,6 +135,7 @@
       renderTable('db-tbody-comments', 'db-empty-comments', ranks.comments || [], 'comment');
       renderTable('db-tbody-downloads', 'db-empty-downloads', ranks.downloads || [], 'download');
       renderTable('db-tbody-searches', 'db-empty-searches', ranks.searches || [], 'search');
+      renderTable('db-tbody-views', 'db-empty-views', ranks.views || [], 'view');
       setStatus('');
     } catch (err) {
       console.error(err);

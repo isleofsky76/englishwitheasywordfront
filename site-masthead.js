@@ -80,6 +80,7 @@
       pages: [
         'popular-voca-list.html', 'popular-voca.html',
         'daily-english.html',
+        'english-writing.html',
         'situational-english-list.html', 'situational-english.html',
         'pros-cons-list.html', 'pros-cons.html'
       ]
@@ -114,6 +115,7 @@
     { href: 'english-synonym-list.html', label: '연관단어', tone: 'syn', pages: ['english-synonym-list.html', 'english-synonym.html'] },
     /* 표현 */
     { href: 'daily-english.html', label: '생활 영어 한 줄', tone: 'daily', pages: ['daily-english.html'] },
+    { href: 'english-writing.html', label: '영작', tone: 'daily', pages: ['english-writing.html'] },
     { href: 'situational-english-list.html', label: '상황', tone: 'sit', pages: ['situational-english-list.html', 'situational-english.html'] },
     { href: 'pros-cons-list.html', label: 'Pros & Cons', tone: 'pros', pages: ['pros-cons-list.html', 'pros-cons.html'] },
     /* 읽을거리 */

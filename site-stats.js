@@ -49,8 +49,13 @@
     postEvent('download', terms, source || 'download');
   }
 
+  function trackView(terms, source) {
+    postEvent('view', terms, source || 'view');
+  }
+
   global.SiteStats = {
     trackSearch: trackSearch,
     trackDownload: trackDownload,
+    trackView: trackView,
   };
 })(window);

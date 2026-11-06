@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>영작 | English Easy Study</title>
+<meta name="description" content="뉴스 문장을 구간으로 끊어 영작하고 원문과 비교합니다.">
+<link rel="canonical" href="https://englisheasystudy.com/english-writing.html">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<link rel="stylesheet" href="redesign-tokens.css?v=20261019rd4">
+<link rel="stylesheet" href="site-masthead.css?v=20261106ew1">
+<link rel="stylesheet" href="nav-home-menu.css?v=20260617">
+<link rel="stylesheet" href="../board-comments.css?v=20261106ew1">
+<style>
+  :root{
+    --bg:#f7f8fa; --card:#fff; --ink:#1f2937; --sub:#6b7280; --line:#e5e7eb;
+    --brand:#2563eb; --brand-soft:#eff6ff; --ok:#059669; --ok-soft:#ecfdf5; --bad:#dc2626; --chip:#fef3c7;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Pretendard","Noto Sans KR","Malgun Gothic",sans-serif;line-height:1.55}
+  .wrap{max-width:880px;margin:0 auto;padding:24px 16px 80px}
+  h1{font-size:1.6rem;margin:0 0 4px}
+  .lead{color:var(--sub);margin:0 0 16px;font-size:.95rem}
+  .section-no{color:var(--brand);font-weight:700;font-size:.85rem;letter-spacing:.05em}
+
+  .toolbar{position:sticky;top:0;z-index:10;background:var(--bg);padding:10px 0;margin-bottom:8px;
+    display:flex;flex-wrap:wrap;gap:6px;border-bottom:1px solid var(--line)}
+  .toolbar button,.tabs button,.card-tools button,.card-foot > button{
+    font:inherit;font-size:.88rem;border:1px solid var(--line);background:#fff;color:var(--ink);
+    padding:7px 12px;border-radius:8px;cursor:pointer;white-space:nowrap}
+  .toolbar button:hover,.tabs button:hover,.card-tools button:hover,.card-foot > button:hover{border-color:#c7cdd6}
+  .wrap .primary{background:var(--brand);border-color:var(--brand);color:#fff}
+  .wrap .primary:hover{background:#1d4ed8}
+  .danger{color:var(--bad)}
+  .spacer{flex:1}
+  .stat{font-size:.85rem;color:var(--sub);align-self:center}
+  .tabs{display:flex;gap:4px;margin:6px 0 4px}
+  .tabs button{border-radius:999px}
+  .tabs button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+
+  .article{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:18px 0 10px}
+  .article h2{font-size:1.1rem;margin:0 0 6px}
+  .meta{font-size:.82rem;color:var(--sub)}
+  .meta a{color:var(--brand)}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:10px 0}
+  .card.done{border-color:#a7f3d0}
+  .card-head{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+  .num{font-weight:700;color:var(--brand)}
+  .chip{background:var(--chip);border-radius:999px;padding:2px 10px;font-size:.85rem}
+  .badge{font-size:.75rem;color:var(--ok);background:var(--ok-soft);border-radius:999px;padding:2px 8px}
+  .card-tools{margin-left:auto;display:flex;gap:4px}
+  .card-tools button{padding:4px 8px;font-size:.8rem}
+
+
+  table.chunks{width:100%;border-collapse:collapse}
+  table.chunks td{padding:6px 4px;border-top:1px dashed var(--line);vertical-align:middle}
+  td.ko{width:36%;font-weight:500}
+  td.inp{width:40%}
+  td.ans{width:24%;font-size:.88rem;color:#374151;padding-left:10px}
+  td.ans span{display:none}
+  body.show-en td.ans span, .card.reveal td.ans span{display:inline}
+  .ko-full{font-size:1.02rem;margin:4px 0 4px}
+  .order-note{font-size:.78rem;color:var(--sub);margin:8px 0 2px}
+  input[type=text]{width:100%;font:inherit;font-size:.95rem;padding:7px 9px;border:1px solid var(--line);border-radius:7px;background:#fff}
+  input[type=text]:focus{outline:2px solid var(--brand-soft);border-color:var(--brand)}
+
+  .full{margin-top:12px;padding-top:12px;border-top:1px solid var(--line)}
+  .full label{font-size:.85rem;color:var(--sub);display:block;margin-bottom:4px}
+  .en-full{display:none;margin-top:8px;font-weight:500;background:var(--brand-soft);padding:8px 10px;border-radius:8px}
+  body.show-en .en-full, .card.reveal .en-full{display:block}
+  .tag{font-size:.72rem;font-weight:700;color:var(--brand);margin-right:4px}
+  .card-foot{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:6px;margin-top:10px}
+  .card-foot .left{margin-right:auto;display:flex;gap:6px}
+  .comments{display:none;margin-top:12px;padding-top:12px;border-top:1px solid var(--line)}
+  .card.c-open .comments{display:block}
+  .comments textarea{width:100%;min-height:64px;font:inherit;font-size:.92rem;padding:8px 10px;border:1px solid var(--line);border-radius:8px;resize:vertical}
+  .comments textarea:focus{outline:2px solid var(--brand-soft);border-color:var(--brand)}
+  .c-row{display:flex;justify-content:flex-end;margin-top:6px}
+  .c-list{list-style:none;margin:10px 0 0;padding:0}
+  .c-list li{padding:8px 0;border-top:1px dashed var(--line);font-size:.92rem;white-space:pre-wrap}
+  .c-list .c-meta{display:flex;gap:8px;align-items:center;font-size:.75rem;color:var(--sub);margin-bottom:2px}
+  .c-list .c-meta button{padding:1px 6px;font-size:.72rem}
+  .c-empty{font-size:.85rem;color:var(--sub);margin-top:8px}
+
+  body.hide-ko .ko-text{color:transparent;background:#eef0f3;border-radius:5px;user-select:none}
+  body.hide-ko .ko-text:hover{color:inherit;background:transparent}
+
+  /* 내 영작 목록 */
+  .mine{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 18px;margin:10px 0}
+  .mine .ko-line{font-weight:600;margin-bottom:6px}
+  .pair{display:grid;grid-template-columns:auto 1fr;gap:2px 10px;font-size:.92rem;padding:4px 0;border-top:1px dashed var(--line)}
+  .pair .k{color:var(--sub)}
+  .pair .lbl{font-size:.75rem;color:var(--sub)}
+  .mine .date{font-size:.75rem;color:var(--sub)}
+
+  .notice{background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;border-radius:10px;padding:10px 14px;font-size:.85rem;margin:10px 0}
+  .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#111827;color:#fff;
+    padding:9px 16px;border-radius:8px;font-size:.88rem;opacity:0;transition:opacity .2s;pointer-events:none}
+  .toast.on{opacity:1}
+  .disclaimer{font-size:.78rem;color:var(--sub);margin-top:30px;border-top:1px solid var(--line);padding-top:12px}
+
+  @media (max-width:640px){
+    table.chunks, table.chunks tbody, table.chunks tr, table.chunks td{display:block;width:100%}
+    table.chunks tr{border-top:1px dashed var(--line);padding:6px 0}
+    table.chunks td{border:0;padding:3px 0}
+  }
+  @media print{ .toolbar,.card-tools,.card-foot,.tabs{display:none} .card,.mine{break-inside:avoid} }
+</style>
+</head>
+<body>
+<nav id="navbar" class="navbar navbar-expand site-masthead" aria-label="주 메뉴"></nav>
+<div class="wrap">
+  <div class="section-no">표현 · 영작</div>
+  <h1 id="page-title">영작</h1>
+  <p class="lead">한글 구간이 <b>영어 어순</b>으로 나열되어 있습니다. 각 구간을 영어로 쓰고, 이어서 전체 문장을 완성한 뒤 원문과 비교해 보세요.</p>
+
+  <div class="toolbar">
+    <button id="btnKo">뜻 숨기기</button>
+    <button id="btnEn">원문 보기</button>
+    <span class="spacer"></span>
+    <span class="stat" id="stat"></span>
+    <button id="btnSave">저장</button>
+    <button class="primary" id="btnDl">다운로드</button>
+  </div>
+  <div class="tabs">
+    <button data-tab="practice" class="on">영작하기</button>
+    <button data-tab="mine">내 영작 <span id="mineCount"></span></button>
+  </div>
+
+  <div id="notice"></div>
+  <div id="list"></div>
+
+  <p class="disclaimer">
+    All sentences are sourced from global news outlets for English practice. They do not reflect my personal views or financial/political advice.
+    All rights belong to the original creators.
+  </p>
+</div>
+<div class="toast" id="toast"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script src="page30-api-config.js?v=20261101sec1"></script>
+<script src="site-masthead.js?v=20261106ew1"></script>
+<script src="site-footer.js?v=20261013a"></script>
+<script src="nav-home-menu.js?v=20261106ew1"></script>
+<script src="site-stats.js?v=20261106ew1"></script>
+<script src="../board-comments.js?v=20261106ew1"></script>
+<script>
+/* =====================================================================
+   설정 — 백엔드 연결
+   apiUrl : 문장을 돌려주는 주소. 페이지 주소의 쿼리(?article=… 등)가 그대로 붙습니다.
+            응답은 JSON(아래 형식) 또는 관리자가 올린 텍스트 원본 그대로 모두 됩니다.
+   JSON 형식 (한 문장):
+   {
+     "id": 1,
+     "word": "prove", "meaning": "드러나다, 입증되다",
+     "en": "The war has proved broadly unpopular with most Americans.",
+     "ko": "그 전쟁은 대부분의 미국인들에게 대체로 인기가 없는 것으로 드러났다.",
+     "chunks": [ {"ko":"그 전쟁은","en":"The war"}, {"ko":"드러났다","en":"has proved"}, ... ],
+     "title": "...", "source": "The Guardian", "url": "https://...", "author": "...", "date": "..."
+   }
+   ===================================================================== */
+const CONFIG = {
+  apiUrl: '',             // 예: '/api/writing'
+  storageKey: 'ees_writing_v3',
+  // 댓글을 모든 방문자가 함께 보려면 백엔드 주소를 넣으세요.
+  //   GET  commentApi?sentence_id=1  → [{id, text, author, created_at}]
+  //   POST commentApi  {sentence_id, text}  → 저장된 댓글 1개
+  // 비어 있으면 댓글은 이 브라우저에만 저장됩니다.
+  commentApi: ''
+};
+
+/* 예시 데이터 (apiUrl이 비어 있거나 불러오기에 실패하면 표시) — 관리자 입력 형식 그대로 */
+const SAMPLE_TEXT = `
+기사 제목 : 공화당이 참패한 다섯 가지 이유
+출처 : BBC
+
+1. prove — 드러나다, 입증되다
+The war has proved broadly unpopular with most Americans.
+그 전쟁은 대부분의 미국인들에게 대체로 인기가 없는 것으로 드러났다.
+
+* 그 전쟁은 : The war
+* 드러났다 : has proved
+* 대체로 인기가 없는 것으로 : broadly unpopular
+* 대부분의 미국인들에게 : with most Americans
+
+2. rocket — 치솟다, 급등하다
+Many Americans wanted Trump to focus more on their concerns about rocketing prices.
+많은 미국인들은 트럼프가 치솟는 물가에 대한 자신들의 우려에 더 집중하기를 원했다.
+
+* 많은 미국인들은 : Many Americans
+* 트럼프가 ~하기를 원했다 : wanted Trump to
+* 더 집중하기를 : focus more
+* 치솟는 물가에 대한 자신들의 우려에 : on their concerns about rocketing prices
+
+3. cost of living — 생활비, 생계비
+Democratic Senator Jon Ossoff made the cost of living and corruption a central message.
+민주당 상원의원 존 오소프는 생활비와 부패 문제를 핵심 메시지로 삼았다.
+
+* 민주당 상원의원 존 오소프는 : Democratic Senator Jon Ossoff
+* 삼았다 : made
+* 생활비와 부패 문제를 : the cost of living and corruption
+* 핵심 메시지로 : a central message
+`;
+
+/* ---------- 관리자 텍스트 → 데이터 변환기 ----------
+   - "N. 단어 — 뜻" 줄로 문장이 시작
+   - 영어 줄 / 한글 줄 (순서 무관, 한글 포함 여부로 구분)
+   - "* 한글 : English" 줄이 끊어 읽기 (적힌 순서 그대로 = 영어 어순)
+   - 선택: 맨 위에 "출처 : …", "기사 제목 : …", "원본 링크 : …", "저자 : …", "게시일 : …"
+*/
+function parseWritingText(text){
+  const meta = {}, items = [];
+  const META = {'출처':'source','기사 제목':'title','원본 링크':'url','저자':'author','게시일':'date'};
+  const hasKo = s => /[가-힣]/.test(s);
+  let cur = null;
+  String(text).replace(/\r/g,'').split('\n').forEach(raw=>{
+    const line = raw.trim(); if(!line) return;
+    let m;
+    if((m = line.match(/^(\d+)\.\s*(.+?)\s*[—–-]\s*(.+)$/))){
+      cur = { no:+m[1], word:m[2].trim(), meaning:m[3].trim(), en:'', ko:'', chunks:[] }; items.push(cur); return;
+    }
+    if(!cur){
+      if((m = line.match(/^([^:：]+?)\s*[:：]\s*(.+)$/)) && META[m[1].trim()]) meta[META[m[1].trim()]] = m[2].trim();
+      return;
+    }
+    if((m = line.match(/^[*•\-]\s*(.+?)\s+[:：]\s+(.+)$/))){ cur.chunks.push({ko:m[1].trim(), en:m[2].trim()}); return; }
+    if(hasKo(line)){ if(!cur.ko) cur.ko = line; } else { if(!cur.en) cur.en = line; }
+  });
+  return items.map(it=>({ ...meta, ...it }));
+}
+
+(function(){
+  const $ = s => document.querySelector(s);
+  let sentences = [], tab = 'practice';
+  let state = loadState();
+
+  function loadState(){
+    try{ const d = JSON.parse(localStorage.getItem(CONFIG.storageKey)); if(d && d.drafts){ d.comments = d.comments || {}; return d; } }catch(e){}
+    return { drafts:{}, works:[], comments:{}, ui:{hideKo:false, showEn:false} };
+  }
+  function save(quiet){
+    try{ localStorage.setItem(CONFIG.storageKey, JSON.stringify(state)); if(!quiet) toast('저장했습니다'); }
+    catch(e){ toast('이 브라우저에서는 저장할 수 없습니다'); }
+  }
+  let t; function autosave(){ clearTimeout(t); t=setTimeout(()=>save(true),600); }
+  function esc(s){ return String(s ?? '').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+  function toast(m){ const el=$('#toast'); el.textContent=m; el.classList.add('on'); clearTimeout(el._t); el._t=setTimeout(()=>el.classList.remove('on'),1600); }
+  const now = ()=> new Date().toLocaleString('ko-KR',{dateStyle:'short',timeStyle:'short'});
+
+  /* 백엔드 행 → 화면 형식 (컬럼명이 다르면 여기만 고치세요) */
+  function mapRow(r, i){
+    const chunks = Array.isArray(r.chunks) ? r.chunks
+      : typeof r.chunks === 'string' ? (()=>{ try{ return JSON.parse(r.chunks); }catch(e){ return []; } })() : [];
+    return {
+      id:      String(r.id ?? r.no ?? r.sentence_id ?? (r.en||'').slice(0,40) ?? i),
+      word:    r.word ?? r.keyword ?? '',
+      wordKo:  r.meaning ?? r.word_ko ?? '',
+      en:      r.en ?? r.english ?? r.sentence ?? '',
+      ko:      r.ko ?? r.korean ?? r.sentence_ko ?? '',
+      chunks:  chunks.map(c=>({ko:c.ko ?? c.korean, en:c.en ?? c.english})).filter(c=>c.ko && c.en),
+      title:   r.title ?? '', source: r.source ?? '', url: r.url ?? '',
+      byline:  [r.author, r.date ?? r.published_at].filter(Boolean).join(' · ')
+    };
+  }
+
+  function writingApiUrl(){
+    if(CONFIG.apiUrl) return CONFIG.apiUrl;
+    if(typeof window.getPage30ApiBaseUrl === 'function'){
+      return String(window.getPage30ApiBaseUrl() || '').replace(/\/$/, '') + '/english-writing';
+    }
+    return '';
+  }
+  function rowsFromPayload(body){
+    let d = null;
+    try{ d = JSON.parse(body); }catch(e){ d = null; }
+    if(d && typeof d.text === 'string'){
+      const topic = String(d.title || '').replace(/^\s*영작\s*[|｜]\s*/, '').trim();
+      return parseWritingText(d.text).map(function(row){
+        return Object.assign({}, row, {
+          title: topic || row.title || '',
+          source: d.source || row.source || '',
+          url: d.url || row.url || ''
+        });
+      });
+    }
+    if(d){
+      const list = Array.isArray(d) ? d : (d.items || d.data || d.sentences || []);
+      if(Array.isArray(list) && list.length) return list;
+    }
+    return parseWritingText(body);
+  }
+  function applyPageTitle(topic){
+    const clean = String(topic || '').replace(/^\s*영작\s*[|｜]\s*/, '').trim();
+    const full = clean ? ('영작 | ' + clean) : '영작';
+    document.title = full + ' | English Easy Study';
+    const h1 = document.getElementById('page-title');
+    if(h1) h1.textContent = full;
+  }
+  async function fetchRows(){
+    const url = writingApiUrl();
+    if(!url) return { rows: parseWritingText(SAMPLE_TEXT) };
+    try{
+      const res = await fetch(url, { credentials: 'omit' });
+      if(!res.ok) throw new Error(res.status);
+      const rows = rowsFromPayload(await res.text());
+      if(!rows.length) throw new Error('empty');
+      return { rows };
+    }catch(e){
+      console.error('[영작] 불러오기 실패:', e);
+      return { rows: parseWritingText(SAMPLE_TEXT), error:true };
+    }
+  }
+
+  const draftOf = s => state.drafts[s.id] || (state.drafts[s.id] = { chunks:[], full:'' });
+
+  /* ---------- 화면 ---------- */
+  function render(){
+    document.body.classList.toggle('hide-ko', !!state.ui.hideKo);
+    document.body.classList.toggle('show-en', !!state.ui.showEn);
+    $('#btnKo').textContent = state.ui.hideKo ? '뜻 보기' : '뜻 숨기기';
+    $('#btnEn').textContent = state.ui.showEn ? '원문 숨기기' : '원문 보기';
+    $('#btnEn').style.display = tab==='practice' ? '' : 'none';
+    document.querySelectorAll('.tabs button').forEach(b=>b.classList.toggle('on', b.dataset.tab===tab));
+    $('#mineCount').textContent = state.works.length ? `(${state.works.length})` : '';
+    $('#stat').textContent = `${sentences.length}문장 · 등록 ${state.works.length}개`;
+    tab==='practice' ? renderPractice() : renderMine();
+    if(tab==='practice') mountCardComments();
+  }
+
+  function articleHead(m){
+    const a=document.createElement('div'); a.className='article';
+    a.innerHTML = `<h2>${esc(/^영작\s*[|｜]/.test(m.title) ? m.title : ('영작 | ' + m.title))}</h2><div class="meta">${m.source?'출처: '+esc(m.source):''}${m.byline?' · '+esc(m.byline):''}${m.url?` · <a href="${esc(m.url)}" target="_blank" rel="noopener">원문 보기</a>`:''}</div>`;
+    return a;
+  }
+
+  function renderPractice(){
+    const list=$('#list'); list.innerHTML='';
+    if(!sentences.length){ list.innerHTML='<p class="lead">불러온 문장이 없습니다.</p>'; return; }
+    let last=null;
+    sentences.forEach((s,i)=>{
+      if(s.title && s.title!==last) list.appendChild(articleHead(s));
+      last=s.title; list.appendChild(cardEl(s,i+1));
+    });
+  }
+
+  function cardEl(s, n){
+    const d = draftOf(s), registered = state.works.some(w=>w.sid===s.id);
+    const c=document.createElement('div'); c.className='card'+(registered?' done reveal':''); c.dataset.id=s.id;
+    const rows = s.chunks.map((ch,i)=>`<tr>
+        <td class="ko"><span class="ko-text">${esc(ch.ko)}</span></td>
+        <td class="inp"><input type="text" data-i="${i}" value="${esc(d.chunks[i]||'')}" placeholder="영어로 쓰기" autocomplete="off" spellcheck="false"></td>
+        <td class="ans"><span>${esc(ch.en)}</span></td></tr>`).join('');
+    c.innerHTML = `
+      <div class="card-head">
+        <span class="num">${n}.</span>
+        ${s.word?`<span class="chip"><b>${esc(s.word)}</b> — <span class="ko-text">${esc(s.wordKo)}</span></span>`:''}
+        ${registered?'<span class="badge">등록됨</span>':''}
+        <div class="card-tools"><button data-act="reveal">${registered?'원문 숨기기':'원문 비교'}</button><button data-act="reset">다시 쓰기</button></div>
+      </div>
+      <div class="ko-full"><span class="ko-text">${esc(s.ko)}</span></div>
+      ${s.chunks.length?`<div class="order-note">↓ 영어 어순</div><table class="chunks"><tbody>${rows}</tbody></table>`:''}
+      <div class="full">
+        <label>전체 문장 영작</label>
+        <input type="text" class="full-inp" value="${esc(d.full||'')}" placeholder="위 구간을 이어서 전체 문장을 써 보세요" autocomplete="off" spellcheck="false">
+        <div class="en-full"><span class="tag">원문</span>${esc(s.en)}</div>
+      </div>
+      <div class="card-foot">
+        <div class="left" data-ew-comments data-key="ew-${esc(s.id)}" data-word="${esc(s.word)}" data-title="${esc(s.word)}"></div>
+        <button data-act="save">저장</button>
+        <button data-act="download">다운로드</button>
+        <button class="primary" data-act="register">${registered?'다시 등록':'등록'}</button>
+      </div>`;
+    return c;
+  }
+
+  function mountCardComments(){
+    if(!window.BoardComments || typeof window.BoardComments.mount !== 'function') return;
+    document.querySelectorAll('[data-ew-comments]').forEach(function(host){
+      window.BoardComments.mount({
+        board: 'english-writing',
+        contentKey: host.getAttribute('data-key') || '',
+        title: host.getAttribute('data-title') || '',
+        word: host.getAttribute('data-word') || '',
+        root: host
+      });
+    });
+  }
+  function trackWords(kind, words){
+    if(!window.SiteStats) return;
+    const list = (words || []).map(function(w){ return String(w || '').trim(); }).filter(Boolean);
+    if(!list.length) return;
+    if(kind === 'view' && typeof window.SiteStats.trackView === 'function') window.SiteStats.trackView(list, 'english-writing');
+    if(kind === 'download' && typeof window.SiteStats.trackDownload === 'function') window.SiteStats.trackDownload(list, 'english-writing');
+  }
+  function sentenceText(s){
+    const d = draftOf(s), w = state.works.find(x=>x.sid===s.id);
+    let out = `${s.word?s.word+' — '+s.wordKo:''}\n${s.ko}\n\n`;
+    s.chunks.forEach((c,i)=>{ out += `* ${c.ko} : ${(d.chunks[i]||'').trim()||'-'}   (원문: ${c.en})\n`; });
+    out += `\n[내 영작] ${(d.full||'').trim()||'-'}\n[원문]    ${s.en}\n`;
+    if(w) out += `[등록] ${w.at}\n`;
+    const cs = state.comments[s.id]||[];
+    if(cs.length){ out += `\n[댓글]\n` + cs.map(c=>`- ${c.text} (${c.at})`).join('\n') + '\n'; }
+    return out;
+  }
+  function downloadText(name, text){
+    const a=document.createElement('a');
+    a.href=URL.createObjectURL(new Blob([text],{type:'text/plain;charset=utf-8'}));
+    a.download=name; document.body.appendChild(a); a.click();
+    setTimeout(()=>{URL.revokeObjectURL(a.href); a.remove();},500);
+  }
+
+  function renderMine(){
+    const list=$('#list'); list.innerHTML='';
+    if(!state.works.length){ list.innerHTML='<p class="lead">아직 등록한 영작이 없습니다. "영작하기"에서 쓰고 등록을 눌러 주세요.</p>'; return; }
+    [...state.works].reverse().forEach(w=>{
+      const el=document.createElement('div'); el.className='mine';
+      el.innerHTML = `
+        <div class="card-head">
+          ${w.word?`<span class="chip"><b>${esc(w.word)}</b> — <span class="ko-text">${esc(w.wordKo)}</span></span>`:''}
+          <span class="date">${esc(w.at)}</span>
+          <div class="card-tools"><button class="danger" data-del="${esc(w.wid)}">삭제</button></div>
+        </div>
+        <div class="ko-line"><span class="ko-text">${esc(w.ko)}</span></div>
+        ${w.chunks.map(p=>`<div class="pair"><span class="k ko-text">${esc(p.ko)}</span><span>${esc(p.mine)||'-'} <span class="lbl">/ 원문: ${esc(p.en)}</span></span></div>`).join('')}
+        <div class="pair"><span class="lbl">내 영작</span><span>${esc(w.full)||'-'}</span></div>
+        <div class="pair"><span class="lbl">원문</span><span>${esc(w.en)}</span></div>`;
+      list.appendChild(el);
+    });
+  }
+
+  /* ---------- 이벤트 ---------- */
+  const findS = id => sentences.find(x=>x.id===String(id));
+
+  $('#list').addEventListener('click', e=>{
+    const del=e.target.closest('[data-del]');
+    if(del){ if(!confirm('이 영작을 삭제할까요?')) return;
+      state.works=state.works.filter(w=>w.wid!==del.dataset.del); save(true); render(); return; }
+    const b=e.target.closest('button[data-act]'); if(!b) return;
+    const card=b.closest('.card'), s=findS(card.dataset.id), d=draftOf(s);
+    if(b.dataset.act==='save') save(false);
+    if(b.dataset.act==='download'){
+      const day=new Date().toISOString().slice(0,10);
+      trackWords('download', [s.word]);
+      downloadText(`writing-${(s.word||'sentence').replace(/\s+/g,'-')}-${day}.txt`,
+        `영작 — englisheasystudy.com (${day})\n\n` + sentenceText(s) +
+        '\nAll sentences are sourced from global news outlets for English practice. All rights belong to the original creators.\n');
+    }
+    if(b.dataset.act==='reveal'){ card.classList.toggle('reveal'); b.textContent=card.classList.contains('reveal')?'원문 숨기기':'원문 비교'; }
+    if(b.dataset.act==='reset'){ if(!confirm('이 문장의 작성 내용을 지울까요?')) return;
+      delete state.drafts[s.id]; autosave(); card.replaceWith(cardEl(s, sentences.indexOf(s)+1)); mountCardComments(); }
+    if(b.dataset.act==='register'){
+      const chunks=s.chunks.map((c,i)=>({ko:c.ko, en:c.en, mine:(d.chunks[i]||'').trim()}));
+      if(!chunks.some(c=>c.mine) && !d.full.trim()){ toast('영작을 먼저 써 주세요'); return; }
+      state.works=state.works.filter(w=>w.sid!==s.id);
+      state.works.push({ wid:'w'+Date.now().toString(36), sid:s.id, at:now(), ko:s.ko, en:s.en, word:s.word, wordKo:s.wordKo,
+        title:s.title, source:s.source, url:s.url, byline:s.byline, chunks, full:d.full.trim() });
+      save(true); render(); toast('등록했습니다');
+    }
+  });
+  $('#list').addEventListener('input', e=>{
+    const card=e.target.closest('.card'); if(!card) return;
+    const d=draftOf(findS(card.dataset.id));
+    if(e.target.matches('td.inp input')) d.chunks[+e.target.dataset.i]=e.target.value;
+    if(e.target.matches('.full-inp')) d.full=e.target.value;
+    autosave();
+  });
+  $('#list').addEventListener('keydown', e=>{
+    if(e.key!=='Enter' || !e.target.matches('input')) return;
+    const ins=[...e.target.closest('.card').querySelectorAll('input[type=text]')];
+    const nx=ins[ins.indexOf(e.target)+1]; if(nx) nx.focus();
+  });
+
+  document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{ tab=b.dataset.tab; render(); });
+  $('#btnKo').onclick=()=>{ state.ui.hideKo=!state.ui.hideKo; render(); autosave(); };
+  $('#btnEn').onclick=()=>{ state.ui.showEn=!state.ui.showEn; render(); autosave(); };
+  $('#btnSave').onclick=()=>save(false);
+
+  $('#btnDl').onclick=()=>{
+    if(!state.works.length){ toast('등록한 영작이 없습니다'); return; }
+    trackWords('download', state.works.map(function(w){ return w.word; }));
+    const day=new Date().toISOString().slice(0,10);
+    let out=`내 영작 — englisheasystudy.com (${day})\n\n`, last=null;
+    state.works.forEach((w,i)=>{
+      if(w.title && w.title!==last) out+=`■ ${w.title}\n${w.source?'출처: '+w.source:''}${w.byline?' · '+w.byline:''}${w.url?'\n'+w.url:''}\n\n`;
+      last=w.title;
+      out+=`${i+1}. ${w.word?w.word+' — '+w.wordKo:''}\n${w.ko}\n\n`;
+      w.chunks.forEach(c=>{ out+=`* ${c.ko} : ${c.mine||'-'}   (원문: ${c.en})\n`; });
+      out+=`\n[내 영작] ${w.full||'-'}\n[원문]    ${w.en}\n`;
+      const cs=state.comments[w.sid]||[];
+      out += (cs.length ? `[댓글]\n` + cs.map(c=>`- ${c.text} (${c.at})`).join('\n') + '\n' : '') + '\n';
+    });
+    out+='All sentences are sourced from global news outlets for English practice. All rights belong to the original creators.\n';
+    const a=document.createElement('a');
+    a.href=URL.createObjectURL(new Blob([out],{type:'text/plain;charset=utf-8'}));
+    a.download=`my-english-writing-${day}.txt`; document.body.appendChild(a); a.click();
+    setTimeout(()=>{URL.revokeObjectURL(a.href); a.remove();},500);
+  };
+
+  (async ()=>{
+    $('#list').innerHTML='<p class="lead">문장을 불러오는 중…</p>';
+    const r=await fetchRows();
+    sentences=r.rows.map(mapRow).filter(s=>s.ko && s.en);
+    applyPageTitle((sentences[0] && sentences[0].title) || '');
+    if(r.error) $('#notice').innerHTML='<div class="notice">문장을 불러오지 못해 예시 문장을 표시합니다.</div>';
+    trackWords('view', sentences.map(function(s){ return s.word; }));
+    render();
+  })();
+})();
+</script>
+</body>
+</html>

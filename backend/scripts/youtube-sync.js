@@ -34,6 +34,7 @@ import { uploadKoreaNews } from './korea-news-format.js';
 import { uploadRetailNews } from './retail-news-format.js';
 import { uploadUkraineNews } from './ukraine-news-format.js';
 import { uploadSynonym } from './synonym-format.js';
+import { uploadEnglishWriting } from './english-writing-format.js';
 import { uploadUsNews } from './us-news-format.js';
 import { uploadVocabularyQuiz } from './vocabulary-quiz-format.js';
 import { enrichQuizTrackWords } from './quiz-answer-alts.js';
@@ -56,6 +57,7 @@ const UPLOADERS = {
   'retail-news': uploadRetailNews,
   'ukraine-news': uploadUkraineNews,
   'english-synonym': uploadSynonym,
+  'english-writing': uploadEnglishWriting,
   'us-news': uploadUsNews,
 };
 
@@ -392,7 +394,9 @@ async function uploadArticle(article, options = {}) {
   if (!upload) {
     throw new Error(`보드 "${board}" 업로더가 없습니다. news-voca 등으로 board를 수정하세요.`);
   }
-  if (!prepared.parsedWordCount && !(prepared.words || []).length) {
+  const hasWritingBody =
+    board === 'english-writing' && String(prepared.description || '').trim();
+  if (!hasWritingBody && !prepared.parsedWordCount && !(prepared.words || []).length) {
     throw new Error('단어가 비어 있어 업로드할 수 없습니다. 설명란 파싱을 확인하세요.');
   }
   console.log(`\n업로드: [${board}] ${prepared.title} (${prepared.videoId})`);
