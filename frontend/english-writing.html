@@ -112,6 +112,7 @@
 <div class="wrap">
   <div class="section-no">표현 · 영작</div>
   <h1 id="page-title">영작</h1>
+  <p class="meta" id="page-source" hidden></p>
   <p class="lead">한글 구간이 <b>영어 어순</b>으로 나열되어 있습니다. 각 구간을 영어로 쓰고, 이어서 전체 문장을 완성한 뒤 원문과 비교해 보세요.</p>
 
   <div id="list"></div>
@@ -280,6 +281,16 @@ function parseWritingText(text){
     const h1 = document.getElementById('page-title');
     if(h1) h1.textContent = full;
   }
+  function applyPageSource(s){
+    const el = document.getElementById('page-source');
+    if(!el) return;
+    if(!s || (!s.source && !s.url)){ el.hidden = true; el.textContent = ''; return; }
+    const name = s.source ? esc(s.source) : '기사';
+    el.innerHTML = s.url
+      ? '출처: <a href="' + esc(s.url) + '" target="_blank" rel="noopener">' + name + '</a>'
+      : '출처: ' + name;
+    el.hidden = false;
+  }
   async function fetchRows(){
     const url = writingApiUrl();
     if(!url) return { rows: parseWritingText(SAMPLE_TEXT) };
@@ -311,11 +322,14 @@ function parseWritingText(text){
 
   function renderPractice(){
     const list=$('#list'); list.innerHTML='';
-    if(!sentences.length){ list.innerHTML='<p class="lead">불러온 문장이 없습니다.</p>'; return; }
-    let last=null;
+    if(!sentences.length){ list.innerHTML='<p class="lead">불러온 문장이 없습니다.</p>'; applyPageSource(null); return; }
+    applyPageSource(sentences[0]);
+    const pageTopic = String(sentences[0].title || '').replace(/^\s*영작\s*[|｜]\s*/, '').trim();
+    let last = pageTopic;
     sentences.forEach((s,i)=>{
-      if(s.title && s.title!==last) list.appendChild(articleHead(s));
-      last=s.title; list.appendChild(cardEl(s,i+1));
+      const topic = String(s.title || '').replace(/^\s*영작\s*[|｜]\s*/, '').trim();
+      if(topic && topic !== last){ list.appendChild(articleHead(s)); last = topic; }
+      list.appendChild(cardEl(s, i+1));
     });
   }
 
