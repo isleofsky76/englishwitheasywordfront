@@ -320,7 +320,7 @@ function parseWritingText(text){
       <div class="card-head">
         <span class="num">${n}.</span>
         ${s.word?`<span class="chip"><b>${esc(s.word)}</b> — <span class="ko-text">${esc(s.wordKo)}</span></span>`:''}
-        <div class="card-tools"><button data-act="reveal">원문 비교</button><button data-act="reset">다시 쓰기</button></div>
+        <div class="card-tools"><button data-act="reveal">원문 보기</button><button data-act="reset">지우기</button></div>
       </div>
       <div class="ko-full"><span class="ko-text">${esc(s.ko)}</span></div>
       ${s.chunks.length?`<div class="order-note">↓ 영어 어순</div><table class="chunks"><tbody>${rows}</tbody></table>`:''}
@@ -384,7 +384,7 @@ function parseWritingText(text){
         `영작 — englisheasystudy.com (${day})\n\n` + sentenceText(s) +
         '\nAll sentences are sourced from global news outlets for English practice. All rights belong to the original creators.\n');
     }
-    if(b.dataset.act==='reveal'){ card.classList.toggle('reveal'); b.textContent=card.classList.contains('reveal')?'원문 숨기기':'원문 비교'; }
+    if(b.dataset.act==='reveal'){ card.classList.toggle('reveal'); b.textContent=card.classList.contains('reveal')?'원문 숨기기':'원문 보기'; }
     if(b.dataset.act==='reset'){ if(!confirm('이 문장의 작성 내용을 지울까요?')) return;
       delete state.drafts[s.id]; autosave(); card.replaceWith(cardEl(s, sentences.indexOf(s)+1)); mountCardComments(); }
   });
