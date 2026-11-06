@@ -55,6 +55,12 @@
   .order-note{font-size:.78rem;color:var(--sub);margin:8px 0 2px}
   input[type=text]{width:100%;font:inherit;font-size:.95rem;padding:7px 9px;border:1px solid var(--line);border-radius:7px;background:#fff}
   input[type=text]:focus{outline:2px solid var(--brand-soft);border-color:var(--brand)}
+  .field{position:relative;display:block}
+  .field-mark{position:absolute;left:0;right:0;top:0;bottom:0;z-index:0;margin:0;padding:8px 10px;border:0;pointer-events:none;overflow:hidden;white-space:pre;font:inherit;font-size:.95rem;line-height:1.55;color:transparent}
+  .card.reveal .field input{color:transparent;caret-color:#1f2937;background:transparent}
+  .card.reveal .field-mark{color:inherit}
+  .field-mark .ok{color:#059669}
+  .field-mark .bad{color:#dc2626}
 
   .full{margin-top:12px;padding-top:12px;border-top:1px solid var(--line)}
   .full label{font-size:.85rem;color:var(--sub);display:block;margin-bottom:4px}
@@ -314,7 +320,7 @@ function parseWritingText(text){
     const c=document.createElement('div'); c.className='card'; c.dataset.id=s.id;
     const rows = s.chunks.map((ch,i)=>`<tr>
         <td class="ko"><span class="ko-text">${esc(ch.ko)}</span></td>
-        <td class="inp"><input type="text" data-i="${i}" value="${esc(d.chunks[i]||'')}" placeholder="영어로 쓰기" autocomplete="off" spellcheck="false"></td>
+        <td class="inp"><span class="field"><input type="text" data-i="${i}" data-answer="${esc(ch.en)}" value="${esc(d.chunks[i]||'')}" placeholder="영어로 쓰기" autocomplete="off" spellcheck="false"><span class="field-mark" aria-hidden="true"></span></span></td>
         <td class="ans"><span>${esc(ch.en)}</span></td></tr>`).join('');
     c.innerHTML = `
       <div class="card-head">
@@ -326,7 +332,7 @@ function parseWritingText(text){
       ${s.chunks.length?`<div class="order-note">↓ 영어 어순</div><table class="chunks"><tbody>${rows}</tbody></table>`:''}
       <div class="full">
         <label>전체 문장 영작</label>
-        <input type="text" class="full-inp" value="${esc(d.full||'')}" placeholder="위 구간을 이어서 전체 문장을 써 보세요" autocomplete="off" spellcheck="false">
+        <span class="field"><input type="text" class="full-inp" data-answer="${esc(s.en)}" value="${esc(d.full||'')}" placeholder="위 구간을 이어서 전체 문장을 써 보세요" autocomplete="off" spellcheck="false"><span class="field-mark" aria-hidden="true"></span></span>
         <div class="en-full"><span class="tag">원문</span>${esc(s.en)}</div>
       </div>
       <div class="card-foot">
@@ -363,6 +369,47 @@ function parseWritingText(text){
     out += `\n[내 영작] ${(d.full||'').trim()||'-'}\n[원문]    ${s.en}\n`;
     return out;
   }
+  function normToken(w){
+    return String(w||'').toLowerCase().replace(/^[^a-z0-9']+|[^a-z0-9']+$/g,'');
+  }
+  function matchedWordSet(mine, answer){
+    const parts=String(mine).split(/(\s+)/);
+    const wordAt=[];
+    const words=[];
+    parts.forEach((p,idx)=>{
+      if(p && !/^\s+$/.test(p)){ wordAt.push(idx); words.push(normToken(p)); }
+    });
+    const ans=String(answer).split(/\s+/).map(normToken).filter(Boolean);
+    const n=words.length, m=ans.length;
+    const dp=Array.from({length:n+1},()=>Array(m+1).fill(0));
+    for(let i=n-1;i>=0;i--){
+      for(let j=m-1;j>=0;j--){
+        dp[i][j]=words[i] && words[i]===ans[j] ? dp[i+1][j+1]+1 : Math.max(dp[i+1][j], dp[i][j+1]);
+      }
+    }
+    const ok=new Set();
+    let i=0, j=0;
+    while(i<n && j<m){
+      if(words[i] && words[i]===ans[j]){ ok.add(wordAt[i]); i++; j++; }
+      else if(dp[i+1][j] >= dp[i][j+1]) i++;
+      else j++;
+    }
+    return { parts, ok };
+  }
+  function paintMark(input){
+    const mark=input.parentElement && input.parentElement.querySelector('.field-mark');
+    if(!mark) return;
+    const card=input.closest('.card');
+    const mine=input.value;
+    if(!card || !card.classList.contains('reveal') || !mine){ mark.innerHTML=''; return; }
+    const diff=matchedWordSet(mine, input.getAttribute('data-answer')||'');
+    mark.innerHTML=diff.parts.map((p,idx)=>/^\s+$/.test(p) ? esc(p) : `<span class="${diff.ok.has(idx)?'ok':'bad'}">${esc(p)}</span>`).join('');
+    mark.scrollLeft=input.scrollLeft;
+  }
+  function paintCard(card){
+    if(!card) return;
+    card.querySelectorAll('input[data-answer]').forEach(paintMark);
+  }
   function downloadText(name, text){
     const a=document.createElement('a');
     a.href=URL.createObjectURL(new Blob([text],{type:'text/plain;charset=utf-8'}));
@@ -384,7 +431,7 @@ function parseWritingText(text){
         `영작 — englisheasystudy.com (${day})\n\n` + sentenceText(s) +
         '\nAll sentences are sourced from global news outlets for English practice. All rights belong to the original creators.\n');
     }
-    if(b.dataset.act==='reveal'){ card.classList.toggle('reveal'); b.textContent=card.classList.contains('reveal')?'원문 숨기기':'원문 보기'; }
+    if(b.dataset.act==='reveal'){ card.classList.toggle('reveal'); b.textContent=card.classList.contains('reveal')?'원문 숨기기':'원문 보기'; paintCard(card); }
     if(b.dataset.act==='reset'){ if(!confirm('이 문장의 작성 내용을 지울까요?')) return;
       delete state.drafts[s.id]; autosave(); card.replaceWith(cardEl(s, sentences.indexOf(s)+1)); mountCardComments(); }
   });
@@ -393,6 +440,7 @@ function parseWritingText(text){
     const d=draftOf(findS(card.dataset.id));
     if(e.target.matches('td.inp input')) d.chunks[+e.target.dataset.i]=e.target.value;
     if(e.target.matches('.full-inp')) d.full=e.target.value;
+    if(e.target.matches('input[data-answer]')) paintMark(e.target);
     autosave();
   });
   $('#list').addEventListener('keydown', e=>{
