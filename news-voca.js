@@ -1034,8 +1034,7 @@ function nvAssetBase() {
 
 function nvLoadScript(src) {
     return new Promise((resolve, reject) => {
-        const name = src.replace(/^.*\//, '').split('?')[0];
-        if (document.querySelector(`script[src*="${name}"]`)) {
+        if (document.querySelector(`script[src="${src}"]`)) {
             resolve();
             return;
         }
@@ -1058,9 +1057,18 @@ function nvLoadStylesheet(href) {
 
 async function ensureBoardCommentsAssets() {
     const base = nvAssetBase();
-    nvLoadStylesheet(base + 'board-comments.css?v=20261102c4');
-    if (!window.BoardComments) {
-        await nvLoadScript(base + 'board-comments.js?v=20261102c4');
+    nvLoadStylesheet(base + 'board-comments.css?v=20261107cmt1');
+    if (!window.BoardComments || !window.BoardComments.alwaysOpenSupported) {
+        const src = base + 'board-comments.js?v=20261107cmt1';
+        if (!document.querySelector(`script[src="${src}"]`)) {
+            await new Promise((resolve, reject) => {
+                const s = document.createElement('script');
+                s.src = src;
+                s.onload = () => resolve();
+                s.onerror = () => reject(new Error('fail ' + src));
+                document.head.appendChild(s);
+            });
+        }
     }
 }
 
@@ -1075,6 +1083,7 @@ async function mountNewsVocaComments(post) {
             board: 'news-voca',
             contentKey: contentKey,
             title: post.title || '',
+            alwaysOpen: true,
         });
     } catch (e) {
         console.warn('board comments mount skipped', e);
@@ -1087,9 +1096,7 @@ async function mountNewsVocaComments(post) {
         if (!window.BoardListConfig) {
             await nvLoadScript(base + 'board-list-config.js?v=20261020auto2');
         }
-        if (!window.mountRedesignArticle) {
-            await nvLoadScript(base + 'redesign-article.js?v=20261105save1');
-        }
+        await nvLoadScript(base + 'redesign-article.js?v=20261107cmt1');
     } catch (e) {
         console.warn('redesign deps skipped', e);
     }

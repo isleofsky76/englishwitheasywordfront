@@ -1088,13 +1088,15 @@
         '</div>';
     }
 
-    /* 하단 CTA — 유튜브 + 댓글(뉴스 영어 등에서 BoardComments.mount) */
+    /* 하단 CTA — 유튜브 + 댓글. 뉴스 영어 기사는 댓글·글쓰기를 항상 연다 */
+    var newsComments = !!(cfg && cfg.navGroup === 'news');
+    var showComments = options.enableComments === true || newsComments;
     var actions = '<div class="rd-article-actions">';
     if (yt) {
       actions += '<a class="rd-btn-solid" href="' + escapeAttr(yt.watch) + '" target="_blank" rel="noopener noreferrer">' +
         ytLogoSvg() + ' 유튜브로 듣기</a>';
     }
-    if (options.enableComments) {
+    if (showComments) {
       actions += '<div class="board-comments-root" data-board-comments-root></div>';
     }
     actions += '</div>';
@@ -1186,6 +1188,10 @@
     // Keep a hidden like control so initViewpostLike can still bind if called after
     if (typeof options.onReady === 'function') options.onReady(container);
 
+    if (showComments) {
+      mountNewsArticleComments(post, options.boardKey);
+    }
+
     markArticleReady();
     stripQuickReview();
     setTimeout(stripQuickReview, 0);
@@ -1252,6 +1258,62 @@
       if (ad && ad.parentElement) host.insertBefore(block, ad.parentElement);
       else host.appendChild(block);
     }
+  }
+
+  function redesignAssetBase() {
+    var scripts = document.querySelectorAll('script[src]');
+    var i;
+    for (i = 0; i < scripts.length; i += 1) {
+      var src = scripts[i].getAttribute('src') || '';
+      if (/redesign-article\.js/.test(src)) return src.replace(/[^/]+$/, '');
+    }
+    return '';
+  }
+
+  function loadRedesignScript(src) {
+    return new Promise(function (resolve, reject) {
+      if (document.querySelector('script[src="' + src + '"]')) {
+        resolve();
+        return;
+      }
+      var s = document.createElement('script');
+      s.src = src;
+      s.onload = function () { resolve(); };
+      s.onerror = function () { reject(new Error(src)); };
+      document.head.appendChild(s);
+    });
+  }
+
+  function loadRedesignCss(href) {
+    var name = href.replace(/^.*\//, '').split('?')[0];
+    if (document.querySelector('link[href*="' + name + '"]')) return;
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = href;
+    document.head.appendChild(link);
+  }
+
+  function mountNewsArticleComments(post, boardKey) {
+    var contentKey = String((post && (post.slug || post._id)) || '').trim();
+    var board = String(boardKey || '').trim();
+    if (!contentKey || !board) return;
+    var base = redesignAssetBase();
+    loadRedesignCss(base + 'board-comments.css?v=20261107cmt1');
+    var commentsSrc = base + 'board-comments.js?v=20261107cmt1';
+    var ready = window.BoardComments && window.BoardComments.alwaysOpenSupported
+      ? Promise.resolve()
+      : loadRedesignScript(commentsSrc);
+    ready.then(function () {
+      if (!window.BoardComments || typeof window.BoardComments.mount !== 'function') return null;
+      return window.BoardComments.mount({
+        board: board,
+        contentKey: contentKey,
+        title: (post && post.title) || '',
+        alwaysOpen: true
+      });
+    }).catch(function (err) {
+      console.warn('board comments mount skipped', err);
+    });
   }
 
   async function mountRedesignArticle(container, post, options) {

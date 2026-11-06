@@ -20,14 +20,14 @@ export const BOARD_SEO = {
     cssFile: 'news-voca.css',
     cssVersion: '20261102split1',
     jsFile: 'news-voca.js',
-    jsVersion: '20261102c10',
+    jsVersion: '20261107cmt1',
     listHtml: 'news-voca-list.html',
     extraCss: [
-      { file: 'board-comments.css', version: '20261102c4' },
+      { file: 'board-comments.css', version: '20261107cmt1' },
       { file: 'redesign-article.css', version: '20261104syn2' },
     ],
     extraJs: [
-      { file: 'board-comments.js', version: '20261102c4' },
+      { file: 'board-comments.js', version: '20261107cmt1' },
       { file: 'redesign-article.js', version: '20261104syn2' },
     ],
   },
@@ -49,7 +49,7 @@ export const BOARD_SEO = {
     cssFile: 'news-voca.css',
     cssVersion: '20261020rd21',
     jsFile: 'culture-voca.js',
-    jsVersion: '20261102c10',
+    jsVersion: '20261107cmt1',
     listHtml: 'culture-voca-list.html',
     extraCss: [
       { file: 'culture-voca.css', version: '20260617' },
@@ -62,7 +62,7 @@ export const BOARD_SEO = {
     cssFile: 'news-voca.css',
     cssVersion: '20261020rd21',
     jsFile: 'defense-news.js',
-    jsVersion: '20261020auto2',
+    jsVersion: '20261107cmt1',
     listHtml: 'defense-news-list.html',
   },
   'economy-news': {
@@ -70,7 +70,7 @@ export const BOARD_SEO = {
     cssFile: 'news-voca.css',
     cssVersion: '20261020rd21',
     jsFile: 'economy-news.js',
-    jsVersion: '20261020feed1',
+    jsVersion: '20261107cmt1',
     listHtml: 'economy-news-list.html',
   },
   'travel-news': {
@@ -78,7 +78,7 @@ export const BOARD_SEO = {
     cssFile: 'news-voca.css',
     cssVersion: '20261020rd21',
     jsFile: 'travel-news.js',
-    jsVersion: '20261020travel2',
+    jsVersion: '20261107cmt1',
     listHtml: 'travel-news-list.html',
   },
   'sports-news': {
@@ -86,7 +86,7 @@ export const BOARD_SEO = {
     cssFile: 'news-voca.css',
     cssVersion: '20261020rd21',
     jsFile: 'sports-news.js',
-    jsVersion: '20261028sports1',
+    jsVersion: '20261107cmt1',
     listHtml: 'sports-news-list.html',
   },
   'us-news': {
@@ -94,7 +94,7 @@ export const BOARD_SEO = {
     cssFile: 'news-voca.css',
     cssVersion: '20261020rd21',
     jsFile: 'us-news.js',
-    jsVersion: '20261028cat1',
+    jsVersion: '20261107cmt1',
     listHtml: 'us-news-list.html',
   },
   'weather-news': {
@@ -102,7 +102,7 @@ export const BOARD_SEO = {
     cssFile: 'news-voca.css',
     cssVersion: '20261020rd21',
     jsFile: 'weather-news.js',
-    jsVersion: '20261028cat1',
+    jsVersion: '20261107cmt1',
     listHtml: 'weather-news-list.html',
   },
   'retail-news': {
@@ -110,7 +110,7 @@ export const BOARD_SEO = {
     cssFile: 'news-voca.css',
     cssVersion: '20261020rd21',
     jsFile: 'retail-news.js',
-    jsVersion: '20261028cat1',
+    jsVersion: '20261107cmt1',
     listHtml: 'retail-news-list.html',
   },
   'literature-news': {
@@ -118,7 +118,7 @@ export const BOARD_SEO = {
     cssFile: 'news-voca.css',
     cssVersion: '20261020rd21',
     jsFile: 'literature-news.js',
-    jsVersion: '20261028cat1',
+    jsVersion: '20261107cmt1',
     listHtml: 'literature-news-list.html',
   },
   'health-news': {
@@ -126,7 +126,7 @@ export const BOARD_SEO = {
     cssFile: 'news-voca.css',
     cssVersion: '20261020rd21',
     jsFile: 'health-news.js',
-    jsVersion: '20261028cat1',
+    jsVersion: '20261107cmt1',
     listHtml: 'health-news-list.html',
   },
   'politics-news': {
@@ -134,7 +134,7 @@ export const BOARD_SEO = {
     cssFile: 'news-voca.css',
     cssVersion: '20261020rd21',
     jsFile: 'politics-news.js',
-    jsVersion: '20261028cat1',
+    jsVersion: '20261107cmt1',
     listHtml: 'politics-news-list.html',
   },
   'industry-news': {
@@ -142,7 +142,7 @@ export const BOARD_SEO = {
     cssFile: 'news-voca.css',
     cssVersion: '20261020rd21',
     jsFile: 'industry-news.js',
-    jsVersion: '20261102c10',
+    jsVersion: '20261107cmt1',
     listHtml: 'industry-news-list.html',
     extraCss: [{ file: 'redesign-article.css', version: '20261104syn2' }],
     extraJs: [{ file: 'redesign-article.js', version: '20261104syn2' }],
@@ -152,7 +152,7 @@ export const BOARD_SEO = {
     cssFile: 'news-voca.css',
     cssVersion: '20261020rd21',
     jsFile: 'ai-news.js',
-    jsVersion: '20261028cat1',
+    jsVersion: '20261107cmt1',
     listHtml: 'ai-news-list.html',
   },
   'incident-news': {
@@ -160,7 +160,7 @@ export const BOARD_SEO = {
     cssFile: 'news-voca.css',
     cssVersion: '20261020rd21',
     jsFile: 'incident-news.js',
-    jsVersion: '20261028cat1',
+    jsVersion: '20261107cmt1',
     listHtml: 'incident-news-list.html',
   },
   'ukraine-news': {
@@ -168,7 +168,7 @@ export const BOARD_SEO = {
     cssFile: 'news-voca.css',
     cssVersion: '20261020rd21',
     jsFile: 'ukraine-news.js',
-    jsVersion: '20261028cat1',
+    jsVersion: '20261107cmt1',
     listHtml: 'ukraine-news-list.html',
   },
   'korea-news': {
@@ -176,7 +176,7 @@ export const BOARD_SEO = {
     cssFile: 'news-voca.css',
     cssVersion: '20261020rd21',
     jsFile: 'korea-news.js',
-    jsVersion: '20261020auto2',
+    jsVersion: '20261107cmt1',
     listHtml: 'korea-news-list.html',
   },
   'shorts-bg-image': {

@@ -1000,8 +1000,7 @@ function rdAssetBase() {
 }
 function rdLoadScript(src) {
     return new Promise((resolve, reject) => {
-        const name = src.replace(/^.*\//, '').split('?')[0];
-        if (document.querySelector('script[src*="' + name + '"]')) { resolve(); return; }
+        if (document.querySelector('script[src="' + src + '"]')) { resolve(); return; }
         const s = document.createElement('script');
         s.src = src; s.onload = () => resolve(); s.onerror = () => reject(new Error(src));
         document.head.appendChild(s);
@@ -1011,7 +1010,7 @@ function rdLoadScript(src) {
     const base = rdAssetBase();
     try {
         if (!window.BoardListConfig) await rdLoadScript(base + 'board-list-config.js?v=20261020auto2');
-        if (!window.mountRedesignArticle) await rdLoadScript(base + 'redesign-article.js?v=20261105save1');
+        await rdLoadScript(base + 'redesign-article.js?v=20261107cmt1');
     } catch (e) { console.warn(e); }
     loadPost();
 })();

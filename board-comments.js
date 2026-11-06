@@ -729,6 +729,7 @@
     var contentKey = String(opts.contentKey || '').trim();
     var title = String(opts.title || '').trim();
     var word = String(opts.word || '').trim();
+    var alwaysOpen = opts.alwaysOpen === true;
     if (!root || !board || !contentKey) return;
     var key = cacheKey(board, contentKey);
     root.textContent = '';
@@ -736,6 +737,7 @@
     root.setAttribute('data-board-comments-root', '');
     root.setAttribute('data-board', board);
     root.setAttribute('data-content-key', contentKey);
+    if (alwaysOpen) root.setAttribute('data-comments-open', '1');
 
     var bar = document.createElement('div');
     bar.className = 'os-cmt-bar';
@@ -889,9 +891,15 @@
     formPanel.appendChild(warn);
     formPanel.appendChild(form);
 
+    function panelsStayOpen() {
+      return root.getAttribute('data-comments-open') === '1';
+    }
+
     async function openListPanel() {
-      formPanel.hidden = true;
-      writeBtn.setAttribute('aria-expanded', 'false');
+      if (!panelsStayOpen()) {
+        formPanel.hidden = true;
+        writeBtn.setAttribute('aria-expanded', 'false');
+      }
       listPanel.hidden = false;
       toggle.setAttribute('aria-expanded', 'true');
       listEl.textContent = '';
@@ -913,8 +921,10 @@
     }
 
     function openFormPanel() {
-      listPanel.hidden = true;
-      toggle.setAttribute('aria-expanded', 'false');
+      if (!panelsStayOpen()) {
+        listPanel.hidden = true;
+        toggle.setAttribute('aria-expanded', 'false');
+      }
       formPanel.hidden = false;
       writeBtn.setAttribute('aria-expanded', 'true');
       bodyInput.focus();
@@ -960,8 +970,10 @@
         adminPwLabel.hidden = true;
         counter.textContent = '0/100';
         formMsg.textContent = '';
-        formPanel.hidden = true;
-        writeBtn.setAttribute('aria-expanded', 'false');
+        if (!panelsStayOpen()) {
+          formPanel.hidden = true;
+          writeBtn.setAttribute('aria-expanded', 'false');
+        }
         delete listCache[key];
         counts[key] = (counts[key] || 0) + 1;
         setToggleLabel(toggle, counts[key]);
@@ -974,6 +986,10 @@
     });
 
     toggle.addEventListener('click', async function () {
+      if (panelsStayOpen()) {
+        if (listPanel.hidden) await openListPanel();
+        return;
+      }
       if (!listPanel.hidden) {
         listPanel.hidden = true;
         toggle.setAttribute('aria-expanded', 'false');
@@ -983,6 +999,10 @@
     });
 
     writeBtn.addEventListener('click', function () {
+      if (panelsStayOpen()) {
+        if (formPanel.hidden) openFormPanel();
+        return;
+      }
       if (!formPanel.hidden) {
         formPanel.hidden = true;
         writeBtn.setAttribute('aria-expanded', 'false');
@@ -996,6 +1016,14 @@
     root.appendChild(bar);
     root.appendChild(listPanel);
     root.appendChild(formPanel);
+
+    if (alwaysOpen) {
+      listPanel.hidden = false;
+      formPanel.hidden = false;
+      toggle.setAttribute('aria-expanded', 'true');
+      writeBtn.setAttribute('aria-expanded', 'true');
+      openListPanel();
+    }
   }
 
   function ensureHost(preferredRoot) {
@@ -1048,5 +1076,6 @@
   window.BoardComments = {
     mount: mount,
     ensureHost: ensureHost,
+    alwaysOpenSupported: true,
   };
 })();
