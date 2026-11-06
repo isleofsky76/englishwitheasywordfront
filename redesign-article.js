@@ -1088,7 +1088,7 @@
         '</div>';
     }
 
-    /* 하단 CTA — 유튜브 + 댓글. 뉴스 영어 기사는 댓글·글쓰기를 항상 연다 */
+    /* 하단 CTA — 유튜브 아래 댓글·글쓰기 버튼. 창은 버튼을 눌렀을 때만 연다 */
     var newsComments = !!(cfg && cfg.navGroup === 'news');
     var showComments = options.enableComments === true || newsComments;
     var actions = '<div class="rd-article-actions">';
@@ -1298,9 +1298,9 @@
     var board = String(boardKey || '').trim();
     if (!contentKey || !board) return;
     var base = redesignAssetBase();
-    loadRedesignCss(base + 'board-comments.css?v=20261107cmt1');
-    var commentsSrc = base + 'board-comments.js?v=20261107cmt1';
-    var ready = window.BoardComments && window.BoardComments.alwaysOpenSupported
+    loadRedesignCss(base + 'board-comments.css?v=20261107cmt2');
+    var commentsSrc = base + 'board-comments.js?v=20261107cmt2';
+    var ready = window.BoardComments
       ? Promise.resolve()
       : loadRedesignScript(commentsSrc);
     ready.then(function () {
@@ -1308,8 +1308,7 @@
       return window.BoardComments.mount({
         board: board,
         contentKey: contentKey,
-        title: (post && post.title) || '',
-        alwaysOpen: true
+        title: (post && post.title) || ''
       });
     }).catch(function (err) {
       console.warn('board comments mount skipped', err);

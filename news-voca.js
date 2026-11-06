@@ -1057,9 +1057,9 @@ function nvLoadStylesheet(href) {
 
 async function ensureBoardCommentsAssets() {
     const base = nvAssetBase();
-    nvLoadStylesheet(base + 'board-comments.css?v=20261107cmt1');
-    if (!window.BoardComments || !window.BoardComments.alwaysOpenSupported) {
-        const src = base + 'board-comments.js?v=20261107cmt1';
+    nvLoadStylesheet(base + 'board-comments.css?v=20261107cmt2');
+    if (!window.BoardComments) {
+        const src = base + 'board-comments.js?v=20261107cmt2';
         if (!document.querySelector(`script[src="${src}"]`)) {
             await new Promise((resolve, reject) => {
                 const s = document.createElement('script');
@@ -1083,7 +1083,6 @@ async function mountNewsVocaComments(post) {
             board: 'news-voca',
             contentKey: contentKey,
             title: post.title || '',
-            alwaysOpen: true,
         });
     } catch (e) {
         console.warn('board comments mount skipped', e);
@@ -1096,7 +1095,7 @@ async function mountNewsVocaComments(post) {
         if (!window.BoardListConfig) {
             await nvLoadScript(base + 'board-list-config.js?v=20261020auto2');
         }
-        await nvLoadScript(base + 'redesign-article.js?v=20261107cmt1');
+        await nvLoadScript(base + 'redesign-article.js?v=20261107cmt2');
     } catch (e) {
         console.warn('redesign deps skipped', e);
     }
