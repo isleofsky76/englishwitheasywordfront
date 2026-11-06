@@ -306,6 +306,22 @@
 }
 
 /* index 섹션 */
+#rd-wmq .rd-wmq-desc {
+  margin: 0 0 18px;
+}
+#rd-wmq .rd-phrase-grid {
+  margin-bottom: 18px;
+}
+#rd-wmq .rd-phrase-grid[hidden] {
+  display: none;
+}
+#rd-wmq .rd-phrase-card .en .pos {
+  margin-left: 8px;
+  font-family: var(--font-sans, inherit);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink-muted);
+}
 .rd-wmq-panel {
   display: flex;
   flex-direction: column;
