@@ -42,8 +42,8 @@
   .badge{font-size:.75rem;color:var(--ok);background:var(--ok-soft);border-radius:999px;padding:2px 8px}
   .card-tools{margin-left:auto;display:flex;gap:4px}
   .card-tools button{padding:4px 8px;font-size:.8rem}
-  .word-hint{margin:0 0 12px;font-size:.95rem;line-height:1.5;color:var(--ink)}
-  .word-hint .hint-k{margin-right:8px;font-size:.75rem;font-weight:700;color:var(--brand)}
+  .word-hint{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 14px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:#f8fafc}
+  .hint-word{display:inline-block;padding:3px 8px;border:1px solid var(--line);border-radius:999px;background:#fff;font-size:.88rem;line-height:1.4;color:var(--ink)}
 
 
   table.chunks{width:100%;border-collapse:collapse}
@@ -405,9 +405,17 @@ function parseWritingText(text){
     if(w.endsWith('s') && !w.endsWith('ss') && !/(?:us|is|as|os)$/.test(w)) return w.slice(0, -1);
     return w;
   }
+  function shuffleWords(list){
+    const a = list.slice();
+    for(let i=a.length-1;i>0;i--){
+      const j = Math.floor(Math.random()*(i+1));
+      const t = a[i]; a[i]=a[j]; a[j]=t;
+    }
+    return a;
+  }
   function lemmaHint(text){
     const tokens = String(text || '').match(/[A-Za-z]+(?:'[A-Za-z]+)?/g) || [];
-    return tokens.map(lemmaWord).filter(Boolean).join(' ');
+    return shuffleWords(tokens.map(lemmaWord).filter(Boolean));
   }
   function cardEl(s, n){
     const d = draftOf(s);
@@ -423,8 +431,8 @@ function parseWritingText(text){
         ${s.word?`<span class="chip"><b>${esc(s.word)}</b> — <span class="ko-text">${esc(s.wordKo)}</span></span>`:''}
         <div class="card-tools"><button data-act="reveal">원문 보기</button><button data-act="reset">지우기</button></div>
       </div>
-      ${hint ? `<p class="word-hint"><span class="hint-k">힌트</span>${esc(hint)}</p>` : ''}
       <div class="ko-full"><span class="ko-text">${esc(s.ko)}</span></div>
+      ${hint.length ? `<div class="word-hint" aria-label="힌트">${hint.map(w=>`<span class="hint-word">${esc(w)}</span>`).join('')}</div>` : ''}
       ${s.chunks.length?`<div class="order-note">↓ 영어 어순</div><table class="chunks"><tbody>${rows}</tbody></table>`:''}
       <div class="full">
         <label>전체 문장 영작</label>
