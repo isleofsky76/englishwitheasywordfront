@@ -475,22 +475,18 @@
           emptyBadge: optsEmptyBadge(cfg)
         });
     var sub = kw
-      ? '<span class="rd-list-card-sub">핵심 단어 ' +
-        Math.max((item.keywordWords || []).length, 1) +
-        '개 · 예문 해설</span>'
+      ? ''
       : (item.summary ? '<span class="rd-list-feature-summary">' + escapeHtml(item.summary) + '</span>' : '');
     return (
       '<a class="rd-list-feature' + (kw ? ' rd-list-feature--kw' : '') + '" href="' + escapeAttr(item.href) + '"' +
         cardAnalyticsAttrs(item) + '>' +
         media +
-        (metaParts.length
-          ? '<span class="rd-list-feature-meta"' +
-            (kw ? ' style="color:' + escapeAttr(categoryColor(cfg.categoryLabel)) + '"' : '') +
-            '>' + escapeHtml(metaParts.join(' · ')) + '</span>'
+        (metaParts.length && !kw
+          ? '<span class="rd-list-feature-meta">' + escapeHtml(metaParts.join(' · ')) + '</span>'
           : '') +
         titleHtml(item, 'rd-list-feature-title') +
         sub +
-        (tags ? '<div class="rd-list-tags">' + tags + '</div>' : '') +
+        (!kw && tags ? '<div class="rd-list-tags">' + tags + '</div>' : '') +
       '</a>'
     );
   }
@@ -527,26 +523,21 @@
           youtube: isYoutubeThumb(item.thumb),
           emptyBadge: optsEmptyBadge(cfg)
         });
-    var wordCount = Math.max((item.keywordWords || []).length, item.tags ? Math.min(item.tags.length, 3) : 0, 1);
     return (
       '<a class="rd-list-card' + (kw ? ' rd-list-card--kw' : '') + '" href="' + escapeAttr(item.href) + '"' +
         cardAnalyticsAttrs(item) + '>' +
         media +
-        (metaParts.length
-          ? '<span class="rd-list-card-meta"' +
-            (kw ? ' style="color:' + escapeAttr(categoryColor(cfg.categoryLabel)) + '"' : '') +
-            '>' + escapeHtml(metaParts.join(' · ')) + '</span>'
+        (metaParts.length && !kw
+          ? '<span class="rd-list-card-meta">' + escapeHtml(metaParts.join(' · ')) + '</span>'
           : '') +
         titleHtml(item, 'rd-list-card-title') +
-        (kw
-          ? '<span class="rd-list-card-sub">핵심 단어 ' + wordCount + '개 · 예문 해설</span>'
-          : (item.tags && item.tags.length
-            ? '<div class="rd-list-tags rd-list-card-tags">' +
-              item.tags.slice(0, 3).map(function (t) {
-                return '<span class="rd-list-tag">' + escapeHtml(t) + '</span>';
-              }).join('') +
-              '</div>'
-            : '')) +
+        (!kw && item.tags && item.tags.length
+          ? '<div class="rd-list-tags rd-list-card-tags">' +
+            item.tags.slice(0, 3).map(function (t) {
+              return '<span class="rd-list-tag">' + escapeHtml(t) + '</span>';
+            }).join('') +
+            '</div>'
+          : '') +
       '</a>'
     );
   }
