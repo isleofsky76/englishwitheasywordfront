@@ -1120,13 +1120,13 @@
     var source = resolveSource(post, cfg, html) || shortSourceLabel(sourceFull);
     var date = formatDate(post.date);
     var newsBoard = !!(cfg && cfg.navGroup === 'news');
-    /* 뉴스: 아래에 단어 카드가 있어 metaDescription 단어 나열 요약은 생략 */
-    var summary = newsBoard ? '' : extractSummary(post, parser);
+    var synonymMode = cfg.key === 'english-synonym';
+    /* 뉴스·연관단어: 아래에 예문/단어 카드가 있어 제목·단어 나열 요약은 생략 */
+    var summary = (newsBoard || synonymMode) ? '' : extractSummary(post, parser);
     var yt = extractYoutube(html);
     var heroImg = !yt ? extractHeroImage(html) : '';
     var sourceUrl = extractSourceLink(html) || (post.sourceUrl || '');
     var narrativeMode = isNarrativeCardCapable(parser, cards);
-    var synonymMode = cfg.key === 'english-synonym';
     var hasCardMeanings = cards.some(function (c) { return !!(c && c.meaning); });
     /* 연관단어 + 뉴스어휘(narrative) — 뜻 가리기/해제하기 토글 */
     var studyMode = synonymMode || (narrativeMode && hasCardMeanings && newsBoard);
