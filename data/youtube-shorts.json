@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-06T14:47:09.450Z",
+  "updatedAt": "2026-11-07T17:39:31.581Z",
   "channelId": "UC4LbF7X56QIHL3Oejt8kuyw",
   "handle": "@istudyeng",
   "source": "https://www.youtube.com/feeds/videos.xml?channel_id=UC4LbF7X56QIHL3Oejt8kuyw",
@@ -8,6 +8,71 @@
   "todayOnly": false,
   "categorizedOnly": true,
   "items": [
+    {
+      "videoId": "DQ2AlXIRkV8",
+      "category": "연관단어",
+      "label": "연관단어",
+      "href": "english-synonym-list.html",
+      "title": "걷다, 밟다",
+      "rawTitle": "연관단어 | 걷다, 밟다",
+      "publishedAt": "2026-11-07T15:00:28+00:00",
+      "publishedKst": "2026-11-08",
+      "thumbnail": "https://i.ytimg.com/vi/DQ2AlXIRkV8/hqdefault.jpg",
+      "url": "https://www.youtube.com/shorts/DQ2AlXIRkV8",
+      "watchUrl": "https://www.youtube.com/watch?v=DQ2AlXIRkV8"
+    },
+    {
+      "videoId": "ABvp072vaz4",
+      "category": "연관단어",
+      "label": "연관단어",
+      "href": "english-synonym-list.html",
+      "title": "부정·무효화·반박",
+      "rawTitle": "연관단어 | 부정·무효화·반박",
+      "publishedAt": "2026-11-07T12:00:30+00:00",
+      "publishedKst": "2026-11-07",
+      "thumbnail": "https://i.ytimg.com/vi/ABvp072vaz4/hqdefault.jpg",
+      "url": "https://www.youtube.com/shorts/ABvp072vaz4",
+      "watchUrl": "https://www.youtube.com/watch?v=ABvp072vaz4"
+    },
+    {
+      "videoId": "G3gh_KLuRYQ",
+      "category": "국제",
+      "label": "국제",
+      "href": "news-voca-list.html",
+      "title": "드론으로 구조된 우크라이나 병사 이야기",
+      "rawTitle": "국제 | 드론으로 구조된 우크라이나 병사 이야기",
+      "publishedAt": "2026-11-07T12:00:09+00:00",
+      "publishedKst": "2026-11-07",
+      "thumbnail": "https://i.ytimg.com/vi/G3gh_KLuRYQ/hqdefault.jpg",
+      "url": "https://www.youtube.com/shorts/G3gh_KLuRYQ",
+      "watchUrl": "https://www.youtube.com/watch?v=G3gh_KLuRYQ"
+    },
+    {
+      "videoId": "0bIKBFtv7V8",
+      "category": "연관단어",
+      "label": "연관단어",
+      "href": "english-synonym-list.html",
+      "title": "믿음과 생각",
+      "rawTitle": "연관단어 | 믿음과 생각",
+      "publishedAt": "2026-11-07T12:00:04+00:00",
+      "publishedKst": "2026-11-07",
+      "thumbnail": "https://i.ytimg.com/vi/0bIKBFtv7V8/hqdefault.jpg",
+      "url": "https://www.youtube.com/shorts/0bIKBFtv7V8",
+      "watchUrl": "https://www.youtube.com/watch?v=0bIKBFtv7V8"
+    },
+    {
+      "videoId": "o8k8wQ3YBeQ",
+      "category": "연관단어",
+      "label": "연관단어",
+      "href": "english-synonym-list.html",
+      "title": "Brittle 부러지기[깨지기] 쉬운, 불안정한",
+      "rawTitle": "연관단어 | Brittle 부러지기[깨지기] 쉬운, 불안정한",
+      "publishedAt": "2026-11-07T03:00:10+00:00",
+      "publishedKst": "2026-11-07",
+      "thumbnail": "https://i.ytimg.com/vi/o8k8wQ3YBeQ/hqdefault.jpg",
+      "url": "https://www.youtube.com/shorts/o8k8wQ3YBeQ",
+      "watchUrl": "https://www.youtube.com/watch?v=o8k8wQ3YBeQ"
+    },
     {
       "videoId": "VkiyFbWMhVE",
       "category": "연관단어",
@@ -20,71 +85,6 @@
       "thumbnail": "https://i.ytimg.com/vi/VkiyFbWMhVE/hqdefault.jpg",
       "url": "https://www.youtube.com/shorts/VkiyFbWMhVE",
       "watchUrl": "https://www.youtube.com/watch?v=VkiyFbWMhVE"
-    },
-    {
-      "videoId": "V-NlqYYexJc",
-      "category": "연관단어",
-      "label": "연관단어",
-      "href": "english-synonym-list.html",
-      "title": "출산",
-      "rawTitle": "연관단어 | 출산",
-      "publishedAt": "2026-11-06T12:00:04+00:00",
-      "publishedKst": "2026-11-06",
-      "thumbnail": "https://i.ytimg.com/vi/V-NlqYYexJc/hqdefault.jpg",
-      "url": "https://www.youtube.com/shorts/V-NlqYYexJc",
-      "watchUrl": "https://www.youtube.com/watch?v=V-NlqYYexJc"
-    },
-    {
-      "videoId": "H34kZsKeFsw",
-      "category": "미국",
-      "label": "미국",
-      "href": "us-news-list.html",
-      "title": "월가, 기술주 사상 최대폭락 사태",
-      "rawTitle": "미국 | 월가, 기술주 사상 최대폭락 사태",
-      "publishedAt": "2026-11-06T01:00:27+00:00",
-      "publishedKst": "2026-11-06",
-      "thumbnail": "https://i.ytimg.com/vi/H34kZsKeFsw/hqdefault.jpg",
-      "url": "https://www.youtube.com/shorts/H34kZsKeFsw",
-      "watchUrl": "https://www.youtube.com/watch?v=H34kZsKeFsw"
-    },
-    {
-      "videoId": "EewHBOP_wJU",
-      "category": "미국",
-      "label": "미국",
-      "href": "us-news-list.html",
-      "title": "실업수당 청구 건수 또 다시 감소",
-      "rawTitle": "미국 | 실업수당 청구 건수 또 다시 감소",
-      "publishedAt": "2026-11-06T01:00:14+00:00",
-      "publishedKst": "2026-11-06",
-      "thumbnail": "https://i.ytimg.com/vi/EewHBOP_wJU/hqdefault.jpg",
-      "url": "https://www.youtube.com/shorts/EewHBOP_wJU",
-      "watchUrl": "https://www.youtube.com/watch?v=EewHBOP_wJU"
-    },
-    {
-      "videoId": "Wn9z5QDTT0Y",
-      "category": "산업",
-      "label": "산업",
-      "href": "industry-news-list.html",
-      "title": "데이터센터 건설에 대한 반발이 유리하게 작용할 수 있는 이유는?",
-      "rawTitle": "산업 | 데이터센터 건설에 대한 반발이 유리하게 작용할 수 있는 이유는?",
-      "publishedAt": "2026-11-05T22:00:23+00:00",
-      "publishedKst": "2026-11-06",
-      "thumbnail": "https://i.ytimg.com/vi/Wn9z5QDTT0Y/hqdefault.jpg",
-      "url": "https://www.youtube.com/shorts/Wn9z5QDTT0Y",
-      "watchUrl": "https://www.youtube.com/watch?v=Wn9z5QDTT0Y"
-    },
-    {
-      "videoId": "5llwLz8y8ds",
-      "category": "미국",
-      "label": "미국",
-      "href": "us-news-list.html",
-      "title": "밴스, 중간선거 패배 원인으로 이란 전쟁 지목",
-      "rawTitle": "미국 | 밴스, 중간선거 패배 원인으로 이란 전쟁 지목",
-      "publishedAt": "2026-11-05T12:00:32+00:00",
-      "publishedKst": "2026-11-05",
-      "thumbnail": "https://i.ytimg.com/vi/5llwLz8y8ds/hqdefault.jpg",
-      "url": "https://www.youtube.com/shorts/5llwLz8y8ds",
-      "watchUrl": "https://www.youtube.com/watch?v=5llwLz8y8ds"
     }
   ]
 }
