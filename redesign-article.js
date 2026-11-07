@@ -5,7 +5,7 @@
 (function (global) {
   'use strict';
 
-  var ASSET_VER = '20261107syn6';
+  var ASSET_VER = '20261107syn7';
   var SYN_SAVED_KEY = 'ees-synonym-saved-v1';
   /* v2: 기본값을 뜻 가리기로 재설정 (이전 localStorage=0 무시) */
   var SYN_HIDE_KEY = 'ees-synonym-hide-meaning-v2';
@@ -1053,11 +1053,10 @@
       var count = document.getElementById('rd-syn-saved-count');
       if (count) count.textContent = String(n);
       if (btn) {
-        btn.hidden = false;
+        /* 뉴스어휘와 동일: 저장 후에만 다운로드 표시 */
+        btn.hidden = n === 0;
         btn.disabled = n === 0;
-        btn.title = n
-          ? '저장한 ' + n + '개 다운로드'
-          : '단어를 저장한 뒤 다운로드할 수 있습니다';
+        btn.title = n ? '저장한 ' + n + '개 다운로드' : '';
       }
       root.querySelectorAll('.rd-expr--synonym').forEach(syncSaveBtn);
     }
@@ -1319,7 +1318,7 @@
       if (showSaveTools) {
         actions +=
           '<button type="button" class="rd-article-tool-btn" data-rd-save-all>저장</button>' +
-          '<button type="button" class="rd-article-tool-btn" id="rd-syn-download-saved" data-rd-download-all disabled>' +
+          '<button type="button" class="rd-article-tool-btn" id="rd-syn-download-saved" data-rd-download-all hidden disabled>' +
             '다운로드 (<span id="rd-syn-saved-count">0</span>)' +
           '</button>';
       }

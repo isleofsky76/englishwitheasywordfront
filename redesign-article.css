@@ -533,6 +533,8 @@ body.rd-syn-hide-meaning .rd-expr--synonym.is-meaning-shown .rd-expr-meaning {
   margin-top: 4px;
 }
 
+.rd-article-action-tools .board-comments-root .os-cmt-toggle,
+.rd-article-action-tools .board-comments-root .os-cmt-write,
 .rd-article-action-tools .os-cmt-toggle,
 .rd-article-action-tools .os-cmt-write,
 .rd-article-action-tools .rd-article-tool-btn {
@@ -544,18 +546,24 @@ body.rd-syn-hide-meaning .rd-expr--synonym.is-meaning-shown .rd-expr-meaning {
   font-size: 13px;
   font-weight: 600;
   line-height: 1.4;
-  color: var(--accent, #b45309);
+  color: var(--ink-muted, #78716c);
   cursor: pointer;
   text-decoration: underline;
   text-underline-offset: 2px;
   opacity: 0.9;
   flex: 0 0 auto;
+  -webkit-text-fill-color: currentColor;
 }
 
+.rd-article-action-tools .board-comments-root .os-cmt-toggle:hover,
+.rd-article-action-tools .board-comments-root .os-cmt-write:hover,
 .rd-article-action-tools .os-cmt-toggle:hover,
 .rd-article-action-tools .os-cmt-write:hover,
-.rd-article-action-tools .rd-article-tool-btn:hover {
+.rd-article-action-tools .rd-article-tool-btn:hover,
+.rd-article-action-tools .rd-article-tool-btn[aria-pressed="true"] {
   opacity: 1;
+  color: var(--accent, #b45309);
+  -webkit-text-fill-color: currentColor;
 }
 
 .rd-article-action-tools .rd-article-tool-btn[hidden] {
