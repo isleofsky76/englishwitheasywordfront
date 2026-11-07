@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="redesign-tokens.css?v=20261019rd4">
 <link rel="stylesheet" href="site-masthead.css?v=20261106ew1">
 <link rel="stylesheet" href="nav-home-menu.css?v=20260617">
-<link rel="stylesheet" href="board-comments.css?v=20261106ew1">
+<link rel="stylesheet" href="../board-comments.css?v=20261106ew1">
 <style>
   :root{
     --bg:#f7f8fa; --card:#fff; --ink:#1f2937; --sub:#6b7280; --line:#e5e7eb;
@@ -46,7 +46,15 @@
   .card-tools{margin-left:auto;display:flex;gap:4px}
   .card-tools button{padding:4px 8px;font-size:.8rem}
   .word-hint{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 14px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:#f8fafc}
-  .hint-word{display:inline-block;padding:3px 8px;border:1px solid var(--line);border-radius:999px;background:#fff;font-size:.88rem;line-height:1.4;color:var(--ink)}
+  .word-hint-note{flex:1 0 100%;margin:0 0 2px;font-size:.78rem;color:var(--sub)}
+  .hint-word{display:inline-block;padding:3px 8px;border:1px solid var(--line);border-radius:999px;background:#fff;font-size:.88rem;line-height:1.4;color:var(--ink);cursor:grab;user-select:none;touch-action:manipulation}
+  .hint-word:hover{border-color:var(--brand);background:var(--brand-soft)}
+  .hint-word:active,.hint-word.is-dragging{cursor:grabbing;opacity:.7}
+  .hint-word.is-used{opacity:.45;text-decoration:line-through}
+  .field.is-write-ready input,
+  input.is-write-ready{border-color:var(--brand);box-shadow:0 0 0 3px var(--brand-soft);background:#f8fbff}
+  .field.is-drop-target input,
+  input.is-drop-target{border-color:var(--ok);box-shadow:0 0 0 3px var(--ok-soft)}
 
 
   table.chunks{width:100%;border-collapse:collapse}
@@ -148,7 +156,7 @@
 <script src="site-footer.js?v=20261013a"></script>
 <script src="nav-home-menu.js?v=20261106ew1"></script>
 <script src="site-stats.js?v=20261106ew1"></script>
-<script src="board-comments.js?v=20261106ew1"></script>
+<script src="../board-comments.js?v=20261106ew1"></script>
 <script>
 /* =====================================================================
    설정 — 백엔드 연결
@@ -602,7 +610,7 @@ function parseWritingText(text){
         <p class="ex-line"><span class="ex-label">예문 :</span> <span class="ko-text">${esc(s.ko)}</span></p>
         <div class="card-tools"><button data-act="reveal">원문 보기</button><button data-act="reset">지우기</button></div>
       </div>
-      ${hint.length ? `<div class="word-hint" aria-label="힌트">${hint.map(w=>`<span class="hint-word">${esc(w)}</span>`).join('')}</div>` : ''}
+      ${hint.length ? `<div class="word-hint" aria-label="힌트"><p class="word-hint-note">쓰기 칸을 선택한 뒤 단어를 클릭하거나 끌어다 놓으세요 · 타이핑도 가능</p>${hint.map(w=>`<span class="hint-word" draggable="true" role="button" tabindex="0" data-word="${esc(w)}">${esc(w)}</span>`).join('')}</div>` : ''}
       ${s.chunks.length?`<div class="order-note">↓ 영어 어순</div><table class="chunks"><tbody>${rows}</tbody></table>`:''}
       <div class="full">
         <label>전체 문장 영작</label>
@@ -699,8 +707,67 @@ function parseWritingText(text){
 
   /* ---------- 이벤트 ---------- */
   const findS = id => sentences.find(x=>x.id===String(id));
+  const writeTargets = new WeakMap(); /* card → last focused writing input */
 
+  function writingInputs(card){
+    return [...card.querySelectorAll('td.inp input, .full-inp')];
+  }
+  function clearWriteReady(card){
+    card.querySelectorAll('.is-write-ready').forEach(el=>el.classList.remove('is-write-ready'));
+  }
+  function markWriteReady(input){
+    const card = input && input.closest('.card');
+    if(!card || !input) return;
+    clearWriteReady(card);
+    input.classList.add('is-write-ready');
+    if(input.parentElement && input.parentElement.classList.contains('field')){
+      input.parentElement.classList.add('is-write-ready');
+    }
+    writeTargets.set(card, input);
+  }
+  function resolveWriteTarget(card){
+    const remembered = writeTargets.get(card);
+    if(remembered && card.contains(remembered)) return remembered;
+    const inputs = writingInputs(card);
+    return inputs.find(inp => !String(inp.value || '').trim()) || inputs[0] || null;
+  }
+  function insertHintWord(input, word){
+    if(!input || !word) return;
+    const start = typeof input.selectionStart === 'number' ? input.selectionStart : input.value.length;
+    const end = typeof input.selectionEnd === 'number' ? input.selectionEnd : start;
+    const before = input.value.slice(0, start);
+    const after = input.value.slice(end);
+    const gap = before && !/\s$/.test(before) ? ' ' : '';
+    input.value = before + gap + word + after;
+    const caret = before.length + gap.length + word.length;
+    try{ input.setSelectionRange(caret, caret); }catch(_){}
+    markWriteReady(input);
+    input.focus();
+    input.dispatchEvent(new Event('input', { bubbles:true }));
+  }
+  function applyHintWord(card, chip){
+    const word = (chip.dataset.word || chip.textContent || '').trim();
+    if(!word) return;
+    const input = resolveWriteTarget(card);
+    if(!input){
+      toast('영어로 쓰기 칸을 먼저 클릭해 주세요');
+      return;
+    }
+    insertHintWord(input, word);
+    chip.classList.add('is-used');
+  }
+
+  $('#list').addEventListener('focusin', e=>{
+    if(!e.target.matches('td.inp input, .full-inp')) return;
+    markWriteReady(e.target);
+  });
   $('#list').addEventListener('click', e=>{
+    const chip = e.target.closest('.hint-word');
+    if(chip){
+      const card = chip.closest('.card');
+      if(card) applyHintWord(card, chip);
+      return;
+    }
     const b=e.target.closest('button[data-act]'); if(!b) return;
     const card=b.closest('.card'), s=findS(card.dataset.id);
     if(b.dataset.act==='save') save(false);
@@ -715,6 +782,65 @@ function parseWritingText(text){
     if(b.dataset.act==='reset'){ if(!confirm('이 문장의 작성 내용을 지울까요?')) return;
       delete state.drafts[s.id]; autosave(); card.replaceWith(cardEl(s, sentences.indexOf(s)+1)); mountCardComments(); }
   });
+  $('#list').addEventListener('keydown', e=>{
+    const chip = e.target.closest('.hint-word');
+    if(chip && (e.key === 'Enter' || e.key === ' ')){
+      e.preventDefault();
+      const card = chip.closest('.card');
+      if(card) applyHintWord(card, chip);
+      return;
+    }
+    if(e.key!=='Enter' || !e.target.matches('input')) return;
+    const ins=[...e.target.closest('.card').querySelectorAll('input[type=text]')];
+    const nx=ins[ins.indexOf(e.target)+1]; if(nx) nx.focus();
+  });
+  $('#list').addEventListener('dragstart', e=>{
+    const chip = e.target.closest('.hint-word');
+    if(!chip || !e.dataTransfer) return;
+    const word = (chip.dataset.word || chip.textContent || '').trim();
+    e.dataTransfer.setData('text/plain', word);
+    e.dataTransfer.setData('application/x-hint-word', word);
+    e.dataTransfer.effectAllowed = 'copy';
+    chip.classList.add('is-dragging');
+  });
+  $('#list').addEventListener('dragend', e=>{
+    const chip = e.target.closest('.hint-word');
+    if(chip) chip.classList.remove('is-dragging');
+    $('#list').querySelectorAll('.is-drop-target').forEach(el=>el.classList.remove('is-drop-target'));
+  });
+  $('#list').addEventListener('dragover', e=>{
+    const input = e.target.closest('td.inp input, .full-inp');
+    if(!input) return;
+    e.preventDefault();
+    if(e.dataTransfer) e.dataTransfer.dropEffect = 'copy';
+    input.classList.add('is-drop-target');
+    if(input.parentElement && input.parentElement.classList.contains('field')){
+      input.parentElement.classList.add('is-drop-target');
+    }
+  });
+  $('#list').addEventListener('dragleave', e=>{
+    const input = e.target.closest('td.inp input, .full-inp');
+    if(!input) return;
+    if(input.contains(e.relatedTarget)) return;
+    input.classList.remove('is-drop-target');
+    if(input.parentElement) input.parentElement.classList.remove('is-drop-target');
+  });
+  $('#list').addEventListener('drop', e=>{
+    const input = e.target.closest('td.inp input, .full-inp');
+    if(!input) return;
+    e.preventDefault();
+    input.classList.remove('is-drop-target');
+    if(input.parentElement) input.parentElement.classList.remove('is-drop-target');
+    const word = ((e.dataTransfer && (e.dataTransfer.getData('application/x-hint-word') || e.dataTransfer.getData('text/plain'))) || '').trim();
+    if(!word) return;
+    insertHintWord(input, word);
+    const card = input.closest('.card');
+    if(card){
+      const chip = [...card.querySelectorAll('.hint-word')].find(el => (el.dataset.word || el.textContent || '').trim() === word && !el.classList.contains('is-used'))
+        || [...card.querySelectorAll('.hint-word')].find(el => (el.dataset.word || el.textContent || '').trim() === word);
+      if(chip) chip.classList.add('is-used');
+    }
+  });
   $('#list').addEventListener('input', e=>{
     const card=e.target.closest('.card'); if(!card) return;
     const d=draftOf(findS(card.dataset.id));
@@ -722,11 +848,6 @@ function parseWritingText(text){
     if(e.target.matches('.full-inp')) d.full=e.target.value;
     if(e.target.matches('input[data-answer]')) paintMark(e.target);
     autosave();
-  });
-  $('#list').addEventListener('keydown', e=>{
-    if(e.key!=='Enter' || !e.target.matches('input')) return;
-    const ins=[...e.target.closest('.card').querySelectorAll('input[type=text]')];
-    const nx=ins[ins.indexOf(e.target)+1]; if(nx) nx.focus();
   });
 
   (async ()=>{
@@ -739,7 +860,7 @@ function parseWritingText(text){
     const back = document.getElementById('back-row');
     if(back) back.hidden = false;
     const lead = document.getElementById('page-lead');
-    if(lead) lead.innerHTML = '한글 구간이 <b>영어 어순</b>으로 나열되어 있습니다. 각 구간을 영어로 쓰고, 이어서 전체 문장을 완성한 뒤 원문과 비교해 보세요.';
+    if(lead) lead.innerHTML = '한글 구간이 <b>영어 어순</b>으로 나열되어 있습니다. 쓰기 칸을 선택한 뒤 위 단어를 <b>클릭·드래그</b>하거나 직접 타이핑해 보세요. 전체 문장을 완성한 뒤 원문과 비교합니다.';
     $('#list').innerHTML='<p class="lead">문장을 불러오는 중…</p>';
     const article = await loadArticle(articleId);
     const rows = article ? rowsFromPayload(JSON.stringify(article)) : [];
