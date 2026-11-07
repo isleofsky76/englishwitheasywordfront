@@ -5,9 +5,10 @@
 (function (global) {
   'use strict';
 
-  var ASSET_VER = '20261107yt1';
+  var ASSET_VER = '20261107syn3';
   var SYN_SAVED_KEY = 'ees-synonym-saved-v1';
-  var SYN_HIDE_KEY = 'ees-synonym-hide-meaning';
+  /* v2: 기본값을 뜻 가리기로 재설정 (이전 localStorage=0 무시) */
+  var SYN_HIDE_KEY = 'ees-synonym-hide-meaning-v2';
 
   /** SEO 경로 /board/slug/ 에서 list.html 상대링크가 깨지지 않게 */
   function seoPathPrefix() {
@@ -888,11 +889,112 @@
   function synHideDefault() {
     try {
       var v = localStorage.getItem(SYN_HIDE_KEY);
-      if (v === null) return true;
+      if (v === null || v === '') return true; /* default: 뜻 가리기 */
       return v === '1';
     } catch (e) {
       return true;
     }
+  }
+
+  function speakEnglishWord(text, btn) {
+    var raw = String(text || '').trim();
+    if (!raw) return;
+    if (!global.speechSynthesis || typeof global.SpeechSynthesisUtterance !== 'function') {
+      try { alert('이 브라우저에서는 음성 읽기를 지원하지 않습니다.'); } catch (e) { /* ignore */ }
+      return;
+    }
+    try {
+      var synth = global.speechSynthesis;
+      synth.cancel();
+      if (synth.paused) synth.resume();
+      var speak = function () {
+        var u = new SpeechSynthesisUtterance(raw);
+        u.lang = 'en-US';
+        u.rate = 0.92;
+        u.volume = 1;
+        u.pitch = 1;
+        try {
+          var voices = synth.getVoices() || [];
+          var en =
+            voices.find(function (v) { return v.lang && /^en-US/i.test(v.lang); }) ||
+            voices.find(function (v) { return v.lang && /^en(-|$)/i.test(v.lang); });
+          if (en) u.voice = en;
+        } catch (e2) { /* ignore */ }
+        var done = function () {
+          if (btn) btn.classList.remove('vv-tts-playing');
+        };
+        u.onend = done;
+        u.onerror = done;
+        if (btn) btn.classList.add('vv-tts-playing');
+        synth.speak(u);
+        /* Chrome: idle pause 후 speak가 묵음일 수 있어 resume */
+        try { if (synth.paused) synth.resume(); } catch (e3) { /* ignore */ }
+      };
+      global.setTimeout(speak, 60);
+    } catch (e) {
+      if (btn) btn.classList.remove('vv-tts-playing');
+      console.warn('Article TTS:', e);
+    }
+  }
+
+  function ensureCardTtsButtons(root) {
+    if (!root) return;
+    root.querySelectorAll('.rd-expr--synonym').forEach(function (card) {
+      var word = (card.getAttribute('data-rd-word') || '').trim();
+      if (!word) return;
+      var existing = card.querySelector('.vv-tts-btn');
+      if (existing) {
+        if (!existing.getAttribute('data-vv-tts')) {
+          existing.setAttribute('data-vv-tts', word);
+        }
+        return;
+      }
+      var host =
+        card.querySelector('.rd-expr-en') ||
+        card.querySelector('.rd-expr-word');
+      if (!host) return;
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'vv-tts-btn';
+      btn.setAttribute('data-vv-tts', word);
+      btn.setAttribute('aria-label', word + ' 영어 발음 듣기');
+      btn.title = '발음 듣기';
+      btn.innerHTML =
+        '<svg class="vv-tts-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>';
+      host.appendChild(btn);
+    });
+  }
+
+  function bindArticleTts(root) {
+    if (!root || root.getAttribute('data-rd-tts-bound') === '1') return;
+    root.setAttribute('data-rd-tts-bound', '1');
+    try {
+      if (global.speechSynthesis) global.speechSynthesis.getVoices();
+    } catch (e) { /* ignore */ }
+    root.addEventListener('click', function (e) {
+      var btn = e.target.closest('.vv-tts-btn');
+      if (!btn || !root.contains(btn)) return;
+      e.preventDefault();
+      e.stopPropagation();
+      var raw = (btn.getAttribute('data-vv-tts') || '').trim();
+      if (!raw) {
+        var card = btn.closest('.rd-expr--synonym');
+        raw = card ? (card.getAttribute('data-rd-word') || '').trim() : '';
+      }
+      if (!raw) return;
+      var playing =
+        btn.classList.contains('vv-tts-playing') &&
+        global.speechSynthesis &&
+        (global.speechSynthesis.speaking || global.speechSynthesis.pending);
+      try {
+        if (global.speechSynthesis) global.speechSynthesis.cancel();
+      } catch (e2) { /* ignore */ }
+      root.querySelectorAll('.vv-tts-btn.vv-tts-playing').forEach(function (b) {
+        b.classList.remove('vv-tts-playing');
+      });
+      if (playing) return;
+      speakEnglishWord(raw, btn);
+    });
   }
 
   function bindSynonymStudy(root) {
@@ -1027,11 +1129,14 @@
       setTimeout(function () { URL.revokeObjectURL(a.href); }, 1000);
     }
 
-    applyHide(synHideDefault());
+    applyHide(synHideDefault()); /* default: 뜻 가리기 (v2 키로 이전 해제 상태 초기화) */
     syncDownloadAll();
     root.querySelectorAll('.rd-expr--synonym').forEach(syncMeaningBtn);
+    ensureCardTtsButtons(root);
+    bindArticleTts(root);
 
     root.addEventListener('click', function (e) {
+      if (e.target.closest('.vv-tts-btn')) return;
       var meaningBtn = e.target.closest('[data-rd-meaning-toggle]');
       if (meaningBtn) {
         var card = meaningBtn.closest('.rd-expr--synonym');

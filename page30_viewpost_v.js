@@ -127,19 +127,24 @@ function vvStartEnglishTTS(text, btn) {
     if (!text || !window.speechSynthesis) return;
     try {
         speechSynthesis.cancel();
-        const u = new SpeechSynthesisUtterance(text);
-        u.lang = 'en-US';
-        u.rate = 0.92;
-        u.volume = 1;
-        u.pitch = 1;
-        const en = vvPickEnglishVoice();
-        if (en) u.voice = en;
-        const done = () => {
-            if (btn) btn.classList.remove('vv-tts-playing');
+        if (speechSynthesis.paused) speechSynthesis.resume();
+        const run = () => {
+            const u = new SpeechSynthesisUtterance(text);
+            u.lang = 'en-US';
+            u.rate = 0.92;
+            u.volume = 1;
+            u.pitch = 1;
+            const en = vvPickEnglishVoice();
+            if (en) u.voice = en;
+            const done = () => {
+                if (btn) btn.classList.remove('vv-tts-playing');
+            };
+            u.onend = done;
+            u.onerror = done;
+            speechSynthesis.speak(u);
+            try { if (speechSynthesis.paused) speechSynthesis.resume(); } catch (_) {}
         };
-        u.onend = done;
-        u.onerror = done;
-        speechSynthesis.speak(u);
+        setTimeout(run, 60);
     } catch (e) {
         if (btn) btn.classList.remove('vv-tts-playing');
         console.warn('Vocabulary TTS:', e);
@@ -169,14 +174,30 @@ function vvAppendTtsInlineAfterEnglish(lineHtml, speak) {
 }
 
 function vvBindTtsButtons(container) {
-    if (!container || !window.speechSynthesis) return;
+    if (!container) return;
+    if (!window.speechSynthesis) {
+        container.querySelectorAll('.vv-tts-btn').forEach((btn) => {
+            if (btn.dataset.vvTtsListener === '1') return;
+            btn.dataset.vvTtsListener = '1';
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                alert('현재 브라우저에서는 음성 읽기를 지원하지 않습니다.');
+            });
+        });
+        return;
+    }
     container.querySelectorAll('.vv-tts-btn').forEach((btn) => {
         if (btn.dataset.vvTtsListener === '1') return;
         btn.dataset.vvTtsListener = '1';
         btn.addEventListener('click', (e) => {
             e.preventDefault();
             e.stopPropagation();
-            const raw = btn.getAttribute('data-vv-tts');
+            let raw = (btn.getAttribute('data-vv-tts') || '').trim();
+            if (!raw) {
+                const card = btn.closest('.rd-expr--synonym,[data-rd-word]');
+                raw = card ? (card.getAttribute('data-rd-word') || '').trim() : '';
+            }
             if (!raw) return;
 
             const playing =
@@ -195,9 +216,9 @@ function vvBindTtsButtons(container) {
 }
 
 function attachVocabularyWebTTS(container) {
-    if (!container || !window.speechSynthesis) return;
+    if (!container) return;
     try {
-        speechSynthesis.getVoices();
+        if (window.speechSynthesis) speechSynthesis.getVoices();
     } catch (_) {}
 
     const paragraphs = container.querySelectorAll('p');
@@ -218,8 +239,24 @@ function attachVocabularyWebTTS(container) {
         p.setAttribute('data-vv-tts', '1');
     });
 
+    /* 연관단어 카드: 발음줄에 한글이 있어도 표제어 TTS 버튼 보장 */
+    container.querySelectorAll('.rd-expr--synonym').forEach((card) => {
+        const word = (card.getAttribute('data-rd-word') || '').trim();
+        if (!word) return;
+        let btn = card.querySelector('.vv-tts-btn');
+        if (btn) {
+            if (!(btn.getAttribute('data-vv-tts') || '').trim()) {
+                btn.setAttribute('data-vv-tts', word);
+            }
+            return;
+        }
+        const host = card.querySelector('.rd-expr-en') || card.querySelector('.rd-expr-word');
+        if (!host) return;
+        host.insertAdjacentHTML('beforeend', vvTtsButtonHtml(word));
+    });
+
     vvBindTtsButtons(container);
-    vvAttachPlayAll(container);
+    if (window.speechSynthesis) vvAttachPlayAll(container);
 }
 
 function vvAttachPlayAll(container) {
@@ -541,7 +578,7 @@ function rdLoadScript(src) {
     const base = rdAssetBase();
     try {
         if (!window.BoardListConfig) await rdLoadScript(base + 'board-list-config.js?v=20261020auto2');
-        await rdLoadScript(base + 'redesign-article.js?v=20261107syn2');
+        await rdLoadScript(base + 'redesign-article.js?v=20261107syn3');
     } catch (e) { console.warn(e); }
     loadPost();
 })();
