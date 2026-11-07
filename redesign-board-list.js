@@ -14,6 +14,7 @@
     '사회': '#2E6B4F',
     '한국': '#2E6B4F',
     '미국': '#1F4E8C',
+    '연관단어': '#6B4F2E',
     '기타': '#B5651D'
   };
 
@@ -23,7 +24,8 @@
   }
 
   function usesKeywordCards(cfg) {
-    return !!(cfg && cfg.navGroup === 'news');
+    if (!cfg) return false;
+    return cfg.navGroup === 'news' || cfg.key === 'english-synonym';
   }
 
   function trackSelectContent(itemId) {
@@ -269,8 +271,16 @@
     }
 
     var msg = entry && entry.message ? String(entry.message) : '';
+    var m;
+    /* 연관단어 narrative: h2 뜻 → mark 영어 */
     if (msg && items.length < limit) {
-      var m;
+      var secRe = /<h2[^>]*class=["'][^"']*nv-section-title[^"']*["'][^>]*>\s*(?:\d+\.\s*)?([^<]+?)\s*<\/h2>[\s\S]{0,900}?<mark[^>]*class=["'][^"']*nv-hl[^"']*["'][^>]*>([\s\S]*?)<\/mark>/gi;
+      while ((m = secRe.exec(msg)) && items.length < limit) {
+        var meaning = stripHtml(m[1] || '').replace(/\([^)]*\)\s*$/, '').trim();
+        push(stripHtml(m[2]), meaning, '');
+      }
+    }
+    if (msg && items.length < limit) {
       var cfRe = /cf\.\s*([^:<（(]+?)\s*[:：]\s*([^<\n]+)/gi;
       while ((m = cfRe.exec(msg)) && items.length < limit) {
         push(stripHtml(m[1]), stripHtml(m[2]), '');

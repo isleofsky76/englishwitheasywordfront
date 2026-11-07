@@ -541,7 +541,7 @@ function rdLoadScript(src) {
     const base = rdAssetBase();
     try {
         if (!window.BoardListConfig) await rdLoadScript(base + 'board-list-config.js?v=20261020auto2');
-        await rdLoadScript(base + 'redesign-article.js?v=20261107yt1');
+        await rdLoadScript(base + 'redesign-article.js?v=20261107syn1');
     } catch (e) { console.warn(e); }
     loadPost();
 })();

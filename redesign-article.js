@@ -1144,9 +1144,9 @@
     if (date) metaParts.push('<span>' + escapeHtml(date) + '</span>');
     if (cards.length) metaParts.push('<span>핵심 표현 ' + cards.length + '개</span>');
 
-    /* 뉴스 어휘: 큰 섬네일/임베드 대신 「유튜브로 듣기」만 */
+    /* 뉴스·연관단어: 큰 섬네일/임베드 없이 본문 아래 「유튜브로 듣기」만 */
     var ytBlock = '';
-    if (!newsBoard) {
+    if (!newsBoard && !synonymMode) {
       if (yt) {
         ytBlock =
           '<div class="rd-yt rd-yt--lazy" data-yt-id="' + escapeAttr(yt.id) + '" data-yt-embed="' + escapeAttr(yt.embed) + '">' +
