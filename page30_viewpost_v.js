@@ -223,10 +223,15 @@ function attachVocabularyWebTTS(container) {
     const paragraphs = container.querySelectorAll('p');
     paragraphs.forEach((p) => {
         if (p.getAttribute('data-vv-tts') === '1') return;
+        /* 연관단어 발음 줄은 redesign에서 스피커 1개를 이미 붙임 */
+        if (p.classList.contains('rd-expr-en--pron') || p.closest('.rd-expr--synonym')) {
+            p.setAttribute('data-vv-tts', '1');
+            return;
+        }
 
         const lines = p.innerHTML.split(/<br\s*\/?>/i);
         const newLines = lines.map((lineHtml) => {
-            if (/class\s*=\s*["'][^"']*vv-tts-btn/i.test(lineHtml)) return lineHtml;
+            if (/vv-tts-btn/i.test(lineHtml)) return lineHtml;
             const plain = vvStripTagsToText(lineHtml);
             if (!plain) return lineHtml;
             if (!vvIsMostlyEnglish(plain)) return lineHtml;
@@ -238,30 +243,12 @@ function attachVocabularyWebTTS(container) {
         p.setAttribute('data-vv-tts', '1');
     });
 
-    /* 연관단어 카드: 스피커 1개만(🔊), SVG 중복 제거 후 TTS 보장 */
+    /* 연관단어 카드: 기존 버튼 전부 지우고 🔊 1개만 */
     container.querySelectorAll('.rd-expr--synonym').forEach((card) => {
         const word = (card.getAttribute('data-rd-word') || '').trim();
         if (!word) return;
-        const buttons = Array.from(card.querySelectorAll('.vv-tts-btn'));
-        let keep =
-            buttons.find((b) => /🔊/.test(b.textContent || '')) ||
-            buttons.find((b) => !b.querySelector('svg, .vv-tts-icon')) ||
-            buttons[0] ||
-            null;
-        buttons.forEach((b) => {
-            if (b !== keep) b.remove();
-        });
-        if (keep) {
-            if (!(keep.getAttribute('data-vv-tts') || '').trim()) {
-                keep.setAttribute('data-vv-tts', word);
-            }
-            if (keep.querySelector('svg, .vv-tts-icon')) {
-                keep.outerHTML = vvTtsButtonHtml(word);
-            }
-            return;
-        }
-        const host = card.querySelector('.rd-expr-en') || card.querySelector('.rd-expr-word');
-        if (!host) return;
+        const host = card.querySelector('.rd-expr-en') || card.querySelector('.rd-expr-word') || card;
+        Array.from(card.querySelectorAll('.vv-tts-btn')).forEach((b) => b.remove());
         host.insertAdjacentHTML('beforeend', vvTtsButtonHtml(word));
     });
 
@@ -588,7 +575,7 @@ function rdLoadScript(src) {
     const base = rdAssetBase();
     try {
         if (!window.BoardListConfig) await rdLoadScript(base + 'board-list-config.js?v=20261020auto2');
-        await rdLoadScript(base + 'redesign-article.js?v=20261107syn4');
+        await rdLoadScript(base + 'redesign-article.js?v=20261107syn5');
     } catch (e) { console.warn(e); }
     loadPost();
 })();

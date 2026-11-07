@@ -5,7 +5,7 @@
 (function (global) {
   'use strict';
 
-  var ASSET_VER = '20261107syn4';
+  var ASSET_VER = '20261107syn5';
   var SYN_SAVED_KEY = 'ees-synonym-saved-v1';
   /* v2: 기본값을 뜻 가리기로 재설정 (이전 localStorage=0 무시) */
   var SYN_HIDE_KEY = 'ees-synonym-hide-meaning-v2';
@@ -406,18 +406,12 @@
 
   /** 깨진 `(ipa` + `한글)` → 한 줄 `(ipa / 한글)🔊` */
   function mergeBrokenSynonymPron(enHtml, koClosing) {
-    var en = String(enHtml || '');
+    var en = stripAllTtsButtons(enHtml || '');
     var ko = String(koClosing || '').replace(/\s+/g, ' ').trim();
     if (!en || !ko) return '';
     if (!/[가-힣]/.test(ko) || !/\)\s*$/.test(ko)) return '';
-    var plain = stripHtml(en).replace(/\s+/g, ' ').trim();
+    var plain = stripHtml(en).replace(/\s+/g, ' ').trim().replace(/🔊/g, '').trim();
     if (!/\([^)]*$/.test(plain) || /\)/.test(plain)) return '';
-    var btn = '';
-    var btnMatch = en.match(/<button\b[^>]*class="[^"]*vv-tts-btn[^"]*"[\s\S]*?<\/button>/i);
-    if (btnMatch) {
-      btn = btnMatch[0];
-      en = en.replace(btnMatch[0], '');
-    }
     var hangul = ko.replace(/\)\s*$/, '').trim();
     var ipa = plain.match(/\(([^)]*)$/);
     var ipaPart = ipa ? ipa[1].replace(/\s*\/\s*$/, '').trim() : '';
@@ -430,39 +424,34 @@
       escapeHtml(ipaPart) +
       ' / ' +
       escapeHtml(hangul) +
-      ')</span>' +
-      (btn || '')
+      ')</span>'
     );
   }
 
   /**
    * 연관단어 본문: 영어 (ipa / 한글) 🔊 — 표제어는 헤더에만, 줄바꿈 없이
    */
+  function stripAllTtsButtons(html) {
+    return String(html || '').replace(/<button\b[^>]*class=["'][^"']*vv-tts-btn[^"']*["'][^>]*>[\s\S]*?<\/button>/gi, '');
+  }
+
   function synonymPronLineHtml(enHtml, wordEn) {
-    var html = String(enHtml || '');
+    var html = stripAllTtsButtons(enHtml || '');
     if (!html) return '';
-    var btn = '';
-    var btnMatch = html.match(/<button\b[^>]*class="[^"]*vv-tts-btn[^"]*"[\s\S]*?<\/button>/i);
-    if (btnMatch) {
-      btn = btnMatch[0];
-      html = html.replace(btnMatch[0], '');
-    }
-    var plain = stripHtml(html).replace(/\s+/g, ' ').trim();
+    var plain = stripHtml(html).replace(/\s+/g, ' ').trim().replace(/🔊/g, '').trim();
     var pron = '';
     var m = plain.match(/\(([^)]+)\)\s*$/);
     if (m) {
       pron = m[1].trim();
     } else if (/\([^)]*$/.test(plain)) {
-      return html + (btn || '');
+      return html;
     }
     /* 뉴스 예문(단어 5개+)은 끝에 (word)가 있어도 발음줄로 접지 않음 */
-    if (plain.split(/\s+/).length > 4) return String(enHtml || '');
-    if (!pron) return html + (btn || '');
-    /* 연관단어 짧은 줄: 표제어는 헤더, 본문은 발음만 */
-    var out =
-      '<span class="rd-expr-pron">(' + escapeHtml(pron) + ')</span>' + (btn || '');
+    if (plain.split(/\s+/).length > 4) return stripAllTtsButtons(enHtml || '');
+    if (!pron) return html;
+    /* 연관단어 짧은 줄: 표제어는 헤더, 본문은 발음만 — 스피커는 렌더 시 1개만 붙임 */
     void wordEn;
-    return out;
+    return '<span class="rd-expr-pron">(' + escapeHtml(pron) + ')</span>';
   }
 
   /**
@@ -828,12 +817,13 @@
         }).join('') + '</p>'
       : '';
     var cf = String(card.cf || '').trim();
-    var enLine = String(card.enHtml || '').trim();
+    var enLine = stripAllTtsButtons(String(card.enHtml || '').trim());
     var isPronOnly = /rd-expr-pron/.test(enLine) || /^\s*\([^)]+\)/.test(stripHtml(enLine));
     var wordKey = String(card.expression || '')
       .toLowerCase()
       .replace(/\s+/g, '-')
       .replace(/[^a-z0-9\-']/g, '');
+    var ttsBtn = studyMode && card.expression ? ttsEmojiButtonHtml(card.expression) : '';
     var foot = studyMode
       ? '<div class="rd-expr-foot">' +
           '<button type="button" class="rd-syn-meaning-toggle" data-rd-meaning-toggle aria-pressed="false">뜻 보기</button>' +
@@ -860,8 +850,10 @@
             : '') +
         '</div>' +
         moreHtml +
-        (enLine
-          ? '<p class="rd-expr-en' + (isPronOnly || synonymMode ? ' rd-expr-en--pron' : '') + '">' + enLine + '</p>'
+        (enLine || ttsBtn
+          ? '<p class="rd-expr-en' + (isPronOnly || synonymMode ? ' rd-expr-en--pron' : '') + '">' +
+              enLine + ttsBtn +
+            '</p>'
           : '') +
         (ko && !synonymMode ? '<p class="rd-expr-ko">' + escapeHtml(ko) + '</p>' : '') +
         (cf && !synonymMode ? '<p class="rd-expr-cf">' + escapeHtml(cf) + '</p>' : '') +
@@ -947,40 +939,19 @@
     );
   }
 
-  /** 카드당 스피커 1개만 — 기존 🔊 유지, SVG 중복 제거 */
+  /** 카드당 🔊 스피커 정확히 1개 */
   function ensureCardTtsButtons(root) {
     if (!root) return;
     root.querySelectorAll('.rd-expr--synonym').forEach(function (card) {
       var word = (card.getAttribute('data-rd-word') || '').trim();
       if (!word) return;
-      var buttons = Array.prototype.slice.call(card.querySelectorAll('.vv-tts-btn'));
-      var keep = null;
-      buttons.forEach(function (btn) {
-        var isSvg = !!btn.querySelector('svg, .vv-tts-icon');
-        var isEmoji = /🔊/.test(btn.textContent || '');
-        if (!keep && isEmoji) keep = btn;
-        if (!keep && !isSvg) keep = btn;
-      });
-      if (!keep && buttons[0]) keep = buttons[0];
-      buttons.forEach(function (btn) {
-        if (btn !== keep) btn.remove();
-      });
-      if (keep) {
-        if (!(keep.getAttribute('data-vv-tts') || '').trim()) {
-          keep.setAttribute('data-vv-tts', word);
-        }
-        /* SVG로 들어간 새 아이콘은 기존 🔊로 교체 */
-        if (keep.querySelector('svg, .vv-tts-icon')) {
-          keep.innerHTML = '🔊';
-          keep.setAttribute('style',
-            'margin-left:4px;padding:0;border:0;background:transparent;box-shadow:none;line-height:1;cursor:pointer;vertical-align:baseline;');
-        }
-        return;
-      }
       var host =
         card.querySelector('.rd-expr-en') ||
-        card.querySelector('.rd-expr-word');
-      if (!host) return;
+        card.querySelector('.rd-expr-word') ||
+        card;
+      Array.prototype.slice.call(card.querySelectorAll('.vv-tts-btn')).forEach(function (btn) {
+        btn.remove();
+      });
       host.insertAdjacentHTML('beforeend', ttsEmojiButtonHtml(word));
     });
   }
