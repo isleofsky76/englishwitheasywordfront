@@ -1142,24 +1142,28 @@
     if (date) metaParts.push('<span>' + escapeHtml(date) + '</span>');
     if (cards.length) metaParts.push('<span>핵심 표현 ' + cards.length + '개</span>');
 
+    /* 뉴스 어휘: 큰 섬네일/임베드 대신 「유튜브로 듣기」만 */
+    var newsBoard = !!(cfg && cfg.navGroup === 'news');
     var ytBlock = '';
-    if (yt) {
-      ytBlock =
-        '<div class="rd-yt rd-yt--lazy" data-yt-id="' + escapeAttr(yt.id) + '" data-yt-embed="' + escapeAttr(yt.embed) + '">' +
-          '<button type="button" class="rd-yt-play-btn" data-yt-play aria-label="영상 재생">' +
-            '<img src="' + escapeAttr(yt.thumb) + '" alt="" loading="lazy" decoding="async">' +
-            '<span class="rd-yt-play">▶ 영상 보기</span>' +
-          '</button>' +
-        '</div>';
-    } else if (heroImg) {
-      ytBlock =
-        '<div class="rd-yt rd-yt--photo">' +
-          '<img src="' + escapeAttr(heroImg) + '" alt="" loading="lazy" decoding="async">' +
-        '</div>';
+    if (!newsBoard) {
+      if (yt) {
+        ytBlock =
+          '<div class="rd-yt rd-yt--lazy" data-yt-id="' + escapeAttr(yt.id) + '" data-yt-embed="' + escapeAttr(yt.embed) + '">' +
+            '<button type="button" class="rd-yt-play-btn" data-yt-play aria-label="영상 재생">' +
+              '<img src="' + escapeAttr(yt.thumb) + '" alt="" loading="lazy" decoding="async">' +
+              '<span class="rd-yt-play">▶ 영상 보기</span>' +
+            '</button>' +
+          '</div>';
+      } else if (heroImg) {
+        ytBlock =
+          '<div class="rd-yt rd-yt--photo">' +
+            '<img src="' + escapeAttr(heroImg) + '" alt="" loading="lazy" decoding="async">' +
+          '</div>';
+      }
     }
 
-    /* 하단 CTA — 유튜브 아래 댓글·글쓰기 버튼. 창은 버튼을 눌렀을 때만 연다 */
-    var newsComments = !!(cfg && cfg.navGroup === 'news');
+    /* CTA — 댓글·글쓰기. 창은 버튼을 눌렀을 때만 연다. 뉴스는 섬네일 자리(상단)에 둠 */
+    var newsComments = newsBoard;
     var showComments = options.enableComments === true || newsComments;
     var actions = '<div class="rd-article-actions">';
     if (yt) {
@@ -1170,6 +1174,8 @@
       actions += '<div class="board-comments-root" data-board-comments-root></div>';
     }
     actions += '</div>';
+    var topActions = newsBoard ? actions : '';
+    var bottomActions = newsBoard ? '' : actions;
 
     var sourceBlock = '';
     if (sourceFull || sourceUrl) {
@@ -1224,6 +1230,7 @@
       '<div class="rd-article-layout">' +
         '<div class="rd-article-main" id="post-content">' +
           ytBlock +
+          topActions +
           '<div id="post-message" class="rd-article-cards' + (studyMode ? ' rd-article-cards--synonym' : '') + '">' +
             (cards.length
               ? cards.map(function (c) {
@@ -1238,7 +1245,7 @@
               : '<div class="rd-article-fallback">' + html + '</div>') +
           '</div>' +
           sourceBlock +
-          actions +
+          bottomActions +
           navHtml +
         '</div>' +
         '<aside class="rd-article-side">' +
