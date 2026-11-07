@@ -507,6 +507,68 @@ body.rd-syn-hide-meaning .rd-expr--synonym.is-meaning-shown .rd-expr-meaning {
   overflow: hidden;
 }
 
+/* 유튜브 아래: 댓글 · 글쓰기 · 저장 · 다운로드 */
+.rd-article-action-tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: center;
+  column-gap: 14px;
+  row-gap: 8px;
+  width: 100%;
+  max-width: 420px;
+}
+
+.rd-article-action-tools > .board-comments-root {
+  display: contents;
+}
+
+.rd-article-action-tools .os-cmt-bar {
+  display: contents;
+}
+
+.rd-article-action-tools .os-cmt-panel {
+  flex: 1 1 100%;
+  width: 100%;
+  margin-top: 4px;
+}
+
+.rd-article-action-tools .os-cmt-toggle,
+.rd-article-action-tools .os-cmt-write,
+.rd-article-action-tools .rd-article-tool-btn {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--accent, #b45309);
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  opacity: 0.9;
+  flex: 0 0 auto;
+}
+
+.rd-article-action-tools .os-cmt-toggle:hover,
+.rd-article-action-tools .os-cmt-write:hover,
+.rd-article-action-tools .rd-article-tool-btn:hover {
+  opacity: 1;
+}
+
+.rd-article-action-tools .rd-article-tool-btn[hidden] {
+  display: none !important;
+}
+
+.vv-tts-all-wrap {
+  display: flex;
+  justify-content: center;
+  margin: 8px 0 20px;
+  padding-top: 8px;
+}
+
 .rd-btn-solid {
   background: var(--ink);
   color: var(--text-on-dark) !important;

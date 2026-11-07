@@ -5,7 +5,7 @@
 (function (global) {
   'use strict';
 
-  var ASSET_VER = '20261107syn5';
+  var ASSET_VER = '20261107syn6';
   var SYN_SAVED_KEY = 'ees-synonym-saved-v1';
   /* v2: 기본값을 뜻 가리기로 재설정 (이전 localStorage=0 무시) */
   var SYN_HIDE_KEY = 'ees-synonym-hide-meaning-v2';
@@ -1003,7 +1003,6 @@
             (hideOn ? '뜻 해제하기' : '뜻 가리기') +
           '</span>' +
         '</label>' +
-        '<button type="button" class="rd-syn-download-all" id="rd-syn-download-saved" hidden disabled>저장 다운로드 (<span id="rd-syn-saved-count">0</span>)</button>' +
       '</div>';
     if (!root.querySelector('.rd-syn-toolbar')) {
       root.insertAdjacentHTML('afterbegin', toolbar);
@@ -1054,8 +1053,11 @@
       var count = document.getElementById('rd-syn-saved-count');
       if (count) count.textContent = String(n);
       if (btn) {
-        btn.hidden = n === 0;
+        btn.hidden = false;
         btn.disabled = n === 0;
+        btn.title = n
+          ? '저장한 ' + n + '개 다운로드'
+          : '단어를 저장한 뒤 다운로드할 수 있습니다';
       }
       root.querySelectorAll('.rd-expr--synonym').forEach(syncSaveBtn);
     }
@@ -1120,14 +1122,51 @@
       setTimeout(function () { URL.revokeObjectURL(a.href); }, 1000);
     }
 
+    function saveAllOnPage() {
+      var map = synReadSaved();
+      var n = 0;
+      root.querySelectorAll('.rd-expr--synonym[data-rd-word-key]').forEach(function (card) {
+        var key = card.getAttribute('data-rd-word-key') || '';
+        if (!key) return;
+        var pronEl = card.querySelector('.rd-expr-pron, .rd-expr-en--pron');
+        map[key] = {
+          word: card.getAttribute('data-rd-word') || '',
+          meaning: card.getAttribute('data-rd-meaning') || '',
+          pron: pronEl ? stripHtml(pronEl.innerHTML).replace(/\s+/g, ' ').trim() : '',
+          savedAt: Date.now()
+        };
+        n += 1;
+      });
+      synWriteSaved(map);
+      syncDownloadAll();
+      var saveAllBtn = document.querySelector('[data-rd-save-all]');
+      if (saveAllBtn) {
+        saveAllBtn.textContent = n ? '저장됨' : '저장';
+        saveAllBtn.setAttribute('aria-pressed', n ? 'true' : 'false');
+        setTimeout(function () {
+          if (saveAllBtn) saveAllBtn.textContent = '저장';
+        }, 1200);
+      }
+    }
+
     applyHide(synHideDefault()); /* default: 뜻 가리기 (v2 키로 이전 해제 상태 초기화) */
     syncDownloadAll();
     root.querySelectorAll('.rd-expr--synonym').forEach(syncMeaningBtn);
     ensureCardTtsButtons(root);
     /* TTS 클릭은 page30 attachVocabularyWebTTS / vvBindTtsButtons 한곳에서만 처리 */
 
-    root.addEventListener('click', function (e) {
+    function onStudyClick(e) {
       if (e.target.closest('.vv-tts-btn')) return;
+      if (e.target.closest('[data-rd-save-all]')) {
+        e.preventDefault();
+        saveAllOnPage();
+        return;
+      }
+      if (e.target.closest('[data-rd-download-all]') || e.target.closest('#rd-syn-download-saved')) {
+        e.preventDefault();
+        downloadSaved();
+        return;
+      }
       var meaningBtn = e.target.closest('[data-rd-meaning-toggle]');
       if (meaningBtn) {
         var card = meaningBtn.closest('.rd-expr--synonym');
@@ -1165,10 +1204,14 @@
         syncDownloadAll();
         return;
       }
-      if (e.target.closest('[data-rd-item-download]') || e.target.closest('#rd-syn-download-saved')) {
+      if (e.target.closest('[data-rd-item-download]')) {
         downloadSaved();
       }
-    });
+    }
+
+    /* 카드 영역 + 하단 유튜브 액션(저장/다운로드) 모두 처리 */
+    var main = root.closest('.rd-article-main') || root;
+    main.addEventListener('click', onStudyClick);
 
     var hideInput = document.getElementById('rd-syn-hide-meaning');
     if (hideInput) {
@@ -1259,16 +1302,28 @@
       }
     }
 
-    /* CTA — 유튜브로 듣기·댓글·글쓰기. 창은 버튼을 눌렀을 때만 연다. 뉴스도 본문 맨 아래 */
+    /* CTA — 유튜브로 듣기 → 댓글·글쓰기·저장·다운로드 (뉴스·연관단어) */
     var newsComments = newsBoard;
-    var showComments = options.enableComments === true || newsComments;
+    var showComments = options.enableComments === true || newsComments || synonymMode;
+    var showSaveTools = synonymMode || studyMode;
     var actions = '<div class="rd-article-actions">';
     if (yt) {
       actions += '<a class="rd-btn-solid" href="' + escapeAttr(yt.watch) + '" target="_blank" rel="noopener noreferrer">' +
         ytLogoSvg() + ' 유튜브로 듣기</a>';
     }
-    if (showComments) {
-      actions += '<div class="board-comments-root" data-board-comments-root></div>';
+    if (showComments || showSaveTools) {
+      actions += '<div class="rd-article-action-tools">';
+      if (showComments) {
+        actions += '<div class="board-comments-root" data-board-comments-root></div>';
+      }
+      if (showSaveTools) {
+        actions +=
+          '<button type="button" class="rd-article-tool-btn" data-rd-save-all>저장</button>' +
+          '<button type="button" class="rd-article-tool-btn" id="rd-syn-download-saved" data-rd-download-all disabled>' +
+            '다운로드 (<span id="rd-syn-saved-count">0</span>)' +
+          '</button>';
+      }
+      actions += '</div>';
     }
     actions += '</div>';
 

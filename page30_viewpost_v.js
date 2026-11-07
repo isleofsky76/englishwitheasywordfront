@@ -270,9 +270,8 @@ function vvAttachPlayAll(container) {
         '<button type="button" class="vv-tts-all-btn" aria-label="영어 예문 모두 듣기, 다시 누르면 멈춤" title="모두 듣기 / 다시 누르면 멈춤" style="display:inline-flex;align-items:center;gap:6px;margin:0 0 16px;border:1px solid #2f80ed;background:#eef5fd;color:#1d4f91;cursor:pointer;border-radius:999px;padding:6px 12px;font-size:14px;font-weight:600;line-height:1.2;">' +
         icon +
         ' 영어 예문 모두 듣기</button>';
-    const msg = container.querySelector('#post-message');
-    if (msg && msg.parentNode) msg.parentNode.insertBefore(wrap, msg);
-    else container.insertBefore(wrap, container.firstChild);
+    /* 본문·유튜브·댓글 아래 맨 마지막에 배치 */
+    container.appendChild(wrap);
 
     const allBtn = wrap.querySelector('.vv-tts-all-btn');
     allBtn.addEventListener('click', (e) => {
@@ -575,7 +574,7 @@ function rdLoadScript(src) {
     const base = rdAssetBase();
     try {
         if (!window.BoardListConfig) await rdLoadScript(base + 'board-list-config.js?v=20261020auto2');
-        await rdLoadScript(base + 'redesign-article.js?v=20261107syn5');
+        await rdLoadScript(base + 'redesign-article.js?v=20261107syn6');
     } catch (e) { console.warn(e); }
     loadPost();
 })();
