@@ -5,7 +5,7 @@
 (function (global) {
   'use strict';
 
-  var ASSET_VER = '20261105save1';
+  var ASSET_VER = '20261107yt1';
   var SYN_SAVED_KEY = 'ees-synonym-saved-v1';
   var SYN_HIDE_KEY = 'ees-synonym-hide-meaning';
 
@@ -150,15 +150,85 @@
     var m = msg.match(/youtube\.com\/embed\/([a-zA-Z0-9_-]+)/i) ||
       msg.match(/youtube\.com\/watch\?v=([a-zA-Z0-9_-]+)/i) ||
       msg.match(/youtu\.be\/([a-zA-Z0-9_-]+)/i) ||
-      msg.match(/img\.youtube\.com\/vi\/([a-zA-Z0-9_-]+)\//i);
+      msg.match(/youtube\.com\/shorts\/([a-zA-Z0-9_-]+)/i) ||
+      msg.match(/(?:img\.youtube|i\.ytimg)\.com\/vi\/([a-zA-Z0-9_-]+)\//i);
     if (!m) return null;
     var id = m[1];
     return {
       id: id,
       watch: 'https://www.youtube.com/watch?v=' + id,
-      embed: 'https://www.youtube.com/embed/' + id,
-      thumb: 'https://img.youtube.com/vi/' + id + '/hqdefault.jpg'
+      embed: 'https://www.youtube.com/embed/' + id + '?rel=0&enablejsapi=1&playsinline=1',
+      thumb: 'https://i.ytimg.com/vi/' + id + '/hqdefault.jpg'
     };
+  }
+
+  function trackVideoStart(videoId) {
+    var id = String(videoId || '').trim();
+    if (!id) return;
+    try {
+      if (typeof global.gtag === 'function') {
+        global.gtag('event', 'video_start', {
+          video_id: id,
+          video_provider: 'youtube'
+        });
+      }
+    } catch (e) { /* ignore */ }
+  }
+
+  function bindLazyYoutube(container) {
+    if (!container) return;
+    var hosts = container.querySelectorAll('.rd-yt--lazy[data-yt-id]');
+    if (!hosts.length) return;
+
+    function onYtMessage(ev) {
+      var origin = String(ev && ev.origin || '');
+      if (origin.indexOf('youtube.com') === -1) return;
+      var data = ev.data;
+      if (typeof data === 'string') {
+        try { data = JSON.parse(data); } catch (err) { return; }
+      }
+      if (!data || typeof data !== 'object') return;
+      var playing = data.event === 'video-started' ||
+        (data.event === 'onStateChange' && Number(data.info) === 1);
+      if (!playing) return;
+      var frames = document.querySelectorAll('iframe[data-yt-id]');
+      for (var i = 0; i < frames.length; i += 1) {
+        if (frames[i].contentWindow === ev.source) {
+          var vid = frames[i].getAttribute('data-yt-id');
+          if (frames[i].getAttribute('data-yt-started') === '1') return;
+          frames[i].setAttribute('data-yt-started', '1');
+          trackVideoStart(vid);
+          return;
+        }
+      }
+    }
+    if (!global.__rdYtMsgBound) {
+      global.__rdYtMsgBound = true;
+      global.addEventListener('message', onYtMessage);
+    }
+
+    hosts.forEach(function (host) {
+      if (host.getAttribute('data-yt-bound') === '1') return;
+      host.setAttribute('data-yt-bound', '1');
+      var btn = host.querySelector('[data-yt-play]');
+      if (!btn) return;
+      btn.addEventListener('click', function () {
+        var id = host.getAttribute('data-yt-id') || '';
+        var embed = host.getAttribute('data-yt-embed') || '';
+        if (!embed) return;
+        var playUrl = embed + (embed.indexOf('?') >= 0 ? '&' : '?') + 'autoplay=1';
+        host.innerHTML =
+          '<iframe src="' + escapeAttr(playUrl) + '"' +
+            ' data-yt-id="' + escapeAttr(id) + '"' +
+            ' title="YouTube video"' +
+            ' allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"' +
+            ' allowfullscreen loading="lazy"></iframe>';
+        /* 재생 시작(클릭→autoplay) 시 GA4 */
+        trackVideoStart(id);
+        var frame = host.querySelector('iframe');
+        if (frame) frame.setAttribute('data-yt-started', '1');
+      });
+    });
   }
 
   /** Word of the Day 등 — 본문 히어로 이미지 */
@@ -1075,16 +1145,16 @@
     var ytBlock = '';
     if (yt) {
       ytBlock =
-        '<div class="rd-yt">' +
-          '<a href="' + escapeAttr(yt.watch) + '" target="_blank" rel="noopener noreferrer" aria-label="유튜브 영상 보기">' +
-            '<img src="' + escapeAttr(yt.thumb) + '" alt="">' +
-            '<span class="rd-yt-play">▶ YouTube</span>' +
-          '</a>' +
+        '<div class="rd-yt rd-yt--lazy" data-yt-id="' + escapeAttr(yt.id) + '" data-yt-embed="' + escapeAttr(yt.embed) + '">' +
+          '<button type="button" class="rd-yt-play-btn" data-yt-play aria-label="영상 재생">' +
+            '<img src="' + escapeAttr(yt.thumb) + '" alt="" loading="lazy" decoding="async">' +
+            '<span class="rd-yt-play">▶ 영상 보기</span>' +
+          '</button>' +
         '</div>';
     } else if (heroImg) {
       ytBlock =
         '<div class="rd-yt rd-yt--photo">' +
-          '<img src="' + escapeAttr(heroImg) + '" alt="">' +
+          '<img src="' + escapeAttr(heroImg) + '" alt="" loading="lazy" decoding="async">' +
         '</div>';
     }
 
@@ -1187,6 +1257,8 @@
 
     // Keep a hidden like control so initViewpostLike can still bind if called after
     if (typeof options.onReady === 'function') options.onReady(container);
+
+    bindLazyYoutube(container);
 
     if (showComments) {
       mountNewsArticleComments(post, options.boardKey);

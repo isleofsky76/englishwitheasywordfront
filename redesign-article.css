@@ -158,11 +158,17 @@ body.rd-article main#post-container:not(:has(.rd-article-layout)) {
   display: block;
 }
 
-.rd-yt a {
+.rd-yt a,
+.rd-yt-play-btn {
   display: block;
   width: 100%;
   height: 100%;
   position: relative;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  min-height: 44px;
 }
 
 .rd-yt-play {
@@ -173,7 +179,14 @@ body.rd-article main#post-container:not(:has(.rd-article-layout)) {
   justify-content: center;
   background: rgba(0, 0, 0, 0.28);
   color: #fff;
-  font-size: 13px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.rd-yt-play-btn:focus-visible .rd-yt-play {
+  outline: 2px solid #fff;
+  outline-offset: -8px;
 }
 
 .rd-expr {

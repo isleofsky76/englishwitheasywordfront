@@ -7,6 +7,38 @@
 
   var PAGE_SIZE_DEFAULT = 12;
 
+  /** 카테고리 포인트 색 — 국제/경제/사회/기타 */
+  var CATEGORY_COLORS = {
+    '국제': '#A8321C',
+    '경제': '#1F4E8C',
+    '사회': '#2E6B4F',
+    '한국': '#2E6B4F',
+    '미국': '#1F4E8C',
+    '기타': '#B5651D'
+  };
+
+  function categoryColor(label) {
+    var key = String(label || '').trim();
+    return CATEGORY_COLORS[key] || CATEGORY_COLORS['기타'];
+  }
+
+  function usesKeywordCards(cfg) {
+    return !!(cfg && cfg.navGroup === 'news');
+  }
+
+  function trackSelectContent(itemId) {
+    var id = String(itemId || '').trim();
+    if (!id) return;
+    try {
+      if (typeof global.gtag === 'function') {
+        global.gtag('event', 'select_content', {
+          content_type: 'post_card',
+          item_id: id
+        });
+      }
+    } catch (e) { /* ignore */ }
+  }
+
   function escapeHtml(text) {
     if (!text) return '';
     var div = document.createElement('div');
@@ -190,6 +222,129 @@
     return tags.slice(0, limit);
   }
 
+  /**
+   * 대표 단어 + 뜻/발음(선택). 기존 글 구조는 유지하고 message/wordMeta에서만 파싱.
+   * @returns {{expression:string, meaning:string, ipa:string}[]}
+   */
+  function extractWordItems(entry, limit) {
+    limit = limit || 3;
+    var items = [];
+    var seen = {};
+
+    function push(expr, meaning, ipa) {
+      var en = String(expr || '').replace(/\s+/g, ' ').trim();
+      var key = en.toLowerCase();
+      if (!en || seen[key] || en.length > 48 || items.length >= limit) return;
+      if (!/[A-Za-z]/.test(en)) return;
+      seen[key] = true;
+      items.push({
+        expression: en,
+        meaning: String(meaning || '').replace(/\s+/g, ' ').trim(),
+        ipa: String(ipa || '').replace(/^\/+|\/+$/g, '').trim()
+      });
+    }
+
+    if (entry && Array.isArray(entry.wordMeta)) {
+      entry.wordMeta.forEach(function (w) {
+        if (!w) return;
+        var ipa = w.ipa || w.phonetic || '';
+        if (!ipa && w.pronunciation && typeof w.pronunciation === 'object') {
+          ipa = w.pronunciation.ipa || '';
+        }
+        push(w.expression || w.en || w.word, w.meaning || w.ko || w.meaningKo, ipa);
+      });
+    }
+    if (entry && Array.isArray(entry.words) && items.length < limit) {
+      entry.words.forEach(function (w) {
+        if (!w) return;
+        if (typeof w === 'string') push(w, '', '');
+        else push(w.expression || w.en || w.word, w.meaning || w.ko, w.ipa || w.phonetic || '');
+      });
+    }
+    if (entry && Array.isArray(entry.keywords) && items.length < limit) {
+      entry.keywords.forEach(function (w) {
+        if (typeof w === 'string') push(w, '', '');
+        else if (w) push(w.expression || w.en || w.word, w.meaning || w.ko, w.ipa || '');
+      });
+    }
+
+    var msg = entry && entry.message ? String(entry.message) : '';
+    if (msg && items.length < limit) {
+      var m;
+      var cfRe = /cf\.\s*([^:<（(]+?)\s*[:：]\s*([^<\n]+)/gi;
+      while ((m = cfRe.exec(msg)) && items.length < limit) {
+        push(stripHtml(m[1]), stripHtml(m[2]), '');
+      }
+    }
+    if (msg && items.length < limit) {
+      var glossRe = /<mark[^>]*class=["'][^"']*nv-hl[^"']*["'][^>]*>([\s\S]*?)<\/mark>\s*\(([^)]+)\)/gi;
+      while ((m = glossRe.exec(msg)) && items.length < limit) {
+        var raw = stripHtml(m[2] || '');
+        var ipaPart = '';
+        var meaningPart = '';
+        var slash = raw.split(/\s*\/\s*/);
+        if (slash.length >= 2 && /[ˈˌɪəɔʊɑæʌθðʃʒŋ]/.test(slash[0])) {
+          ipaPart = slash[0].trim();
+          meaningPart = '';
+        }
+        push(stripHtml(m[1]), meaningPart, ipaPart);
+      }
+    }
+    if (msg && items.length < limit) {
+      var re = /<mark[^>]*class=["'][^"']*nv-hl[^"']*["'][^>]*>([\s\S]*?)<\/mark>/gi;
+      while ((m = re.exec(msg)) && items.length < limit) {
+        push(stripHtml(m[1]), '', '');
+      }
+    }
+
+    return items.slice(0, limit);
+  }
+
+  function keywordSubline(word) {
+    if (!word) return '';
+    var parts = [];
+    if (word.ipa) parts.push('/' + word.ipa + '/');
+    if (word.meaning) parts.push(word.meaning);
+    if (!parts.length) return '';
+    return '<p class="rd-kw-sub">' + escapeHtml(parts.join(' · ')) + '</p>';
+  }
+
+  function keywordCardThumbHtml(item, cfg) {
+    var words = (item && item.keywordWords) || [];
+    var hero = words[0] || null;
+    var chips = words.slice(1, 3);
+    var cat = (cfg && cfg.categoryLabel) || '기타';
+    var color = categoryColor(cat);
+    var count = Math.max(words.length, hero ? 1 : 0);
+    var countLabel = count > 0 ? String(count) : '3';
+
+    var chipHtml = chips.map(function (w) {
+      return '<span class="rd-kw-chip">+ ' + escapeHtml(w.expression) + '</span>';
+    }).join('');
+
+    return (
+      '<div class="rd-kw-thumb" style="--rd-kw-accent:' + escapeAttr(color) + '">' +
+        '<div class="rd-kw-top">' +
+          '<span class="rd-kw-top-left">' +
+            '<span class="rd-kw-cat">' + escapeHtml(cat) + '</span>' +
+            '<span class="rd-kw-top-sep" aria-hidden="true"> · </span>' +
+            '<span class="rd-kw-today">오늘의 단어 ' + escapeHtml(countLabel) + '</span>' +
+          '</span>' +
+          '<span class="rd-kw-brand">시사영단어</span>' +
+        '</div>' +
+        '<div class="rd-kw-hero">' +
+          (hero
+            ? '<p class="rd-kw-word">' + escapeHtml(hero.expression) + '</p>' + keywordSubline(hero)
+            : '<p class="rd-kw-word rd-kw-word--fallback">' + escapeHtml(monoFromTitle(item) || 'NEWS') + '</p>') +
+        '</div>' +
+        '<div class="rd-kw-bottom">' +
+          '<div class="rd-kw-chips">' + chipHtml + '</div>' +
+          '<span class="rd-kw-badge">▶ 영상 + 해설</span>' +
+        '</div>' +
+      '</div>'
+    );
+  }
+
   function titleHtml(item, className) {
     if (item && item.bilingual && item.titleEn && item.titleKo) {
       return (
@@ -301,8 +456,13 @@
     var bi = typeof Config.splitBilingualTitle === 'function'
       ? Config.splitBilingualTitle(cleaned)
       : { display: cleaned, en: '', ko: '', bilingual: false };
+    var keywordWords = usesKeywordCards(cfg) ? extractWordItems(entry, 3) : [];
+    var tags = keywordWords.length
+      ? keywordWords.map(function (w) { return w.expression; })
+      : extractTags(entry, 4);
     return {
       entry: entry,
+      id: String((entry && (entry._id || entry.id || entry.slug)) || '').trim(),
       href: buildHref(entry, originalIndex, cfg, apiMode),
       title: bi.bilingual ? bi.display : cleaned,
       titleEn: bi.en || '',
@@ -312,25 +472,46 @@
       date: formatDate(entry.date),
       thumb: extractThumb(entry),
       summary: extractSummary(entry),
-      tags: extractTags(entry, 4)
+      tags: tags,
+      keywordWords: keywordWords
     };
+  }
+
+  function cardAnalyticsAttrs(item) {
+    return ' data-content-type="post_card" data-item-id="' + escapeAttr(item.id || '') + '"';
   }
 
   function renderFeature(item, cfg) {
     if (!item) return '';
-    var metaParts = [cfg.categoryLabel, item.source, item.date].filter(Boolean);
-    var tags = item.tags.map(function (t) {
+    var kw = usesKeywordCards(cfg);
+    var metaParts = kw
+      ? [cfg.categoryLabel]
+      : [cfg.categoryLabel, item.source, item.date].filter(Boolean);
+    var tags = (!kw && item.tags) ? item.tags.map(function (t) {
       return '<span class="rd-list-tag">' + escapeHtml(t) + '</span>';
-    }).join('');
-    return (
-      '<a class="rd-list-feature" href="' + escapeAttr(item.href) + '">' +
-        imgHtml(item.thumb, 'rd-list-feature-img', monoFromTitle(item), {
+    }).join('') : '';
+    var media = kw
+      ? keywordCardThumbHtml(item, cfg)
+      : imgHtml(item.thumb, 'rd-list-feature-img', monoFromTitle(item), {
           youtube: isYoutubeThumb(item.thumb),
           emptyBadge: optsEmptyBadge(cfg)
-        }) +
-        '<span class="rd-list-feature-meta">' + escapeHtml(metaParts.join(' · ')) + '</span>' +
+        });
+    var sub = kw
+      ? '<span class="rd-list-card-sub">핵심 단어 ' +
+        Math.max((item.keywordWords || []).length, 1) +
+        '개 · 예문 해설</span>'
+      : (item.summary ? '<span class="rd-list-feature-summary">' + escapeHtml(item.summary) + '</span>' : '');
+    return (
+      '<a class="rd-list-feature' + (kw ? ' rd-list-feature--kw' : '') + '" href="' + escapeAttr(item.href) + '"' +
+        cardAnalyticsAttrs(item) + '>' +
+        media +
+        (metaParts.length
+          ? '<span class="rd-list-feature-meta"' +
+            (kw ? ' style="color:' + escapeAttr(categoryColor(cfg.categoryLabel)) + '"' : '') +
+            '>' + escapeHtml(metaParts.join(' · ')) + '</span>'
+          : '') +
         titleHtml(item, 'rd-list-feature-title') +
-        (item.summary ? '<span class="rd-list-feature-summary">' + escapeHtml(item.summary) + '</span>' : '') +
+        sub +
         (tags ? '<div class="rd-list-tags">' + tags + '</div>' : '') +
       '</a>'
     );
@@ -358,24 +539,48 @@
   }
 
   function renderCard(item, cfg) {
-    var metaParts = [cfg.categoryLabel, item.source].filter(Boolean);
-    return (
-      '<a class="rd-list-card" href="' + escapeAttr(item.href) + '">' +
-        imgHtml(item.thumb, 'rd-list-card-img', monoFromTitle(item), {
+    var kw = usesKeywordCards(cfg);
+    var metaParts = kw
+      ? [cfg.categoryLabel]
+      : [cfg.categoryLabel, item.source].filter(Boolean);
+    var media = kw
+      ? keywordCardThumbHtml(item, cfg)
+      : imgHtml(item.thumb, 'rd-list-card-img', monoFromTitle(item), {
           youtube: isYoutubeThumb(item.thumb),
           emptyBadge: optsEmptyBadge(cfg)
-        }) +
-        (metaParts.length ? '<span class="rd-list-card-meta">' + escapeHtml(metaParts.join(' · ')) + '</span>' : '') +
-        titleHtml(item, 'rd-list-card-title') +
-        (item.tags && item.tags.length
-          ? '<div class="rd-list-tags rd-list-card-tags">' +
-            item.tags.slice(0, 3).map(function (t) {
-              return '<span class="rd-list-tag">' + escapeHtml(t) + '</span>';
-            }).join('') +
-            '</div>'
+        });
+    var wordCount = Math.max((item.keywordWords || []).length, item.tags ? Math.min(item.tags.length, 3) : 0, 1);
+    return (
+      '<a class="rd-list-card' + (kw ? ' rd-list-card--kw' : '') + '" href="' + escapeAttr(item.href) + '"' +
+        cardAnalyticsAttrs(item) + '>' +
+        media +
+        (metaParts.length
+          ? '<span class="rd-list-card-meta"' +
+            (kw ? ' style="color:' + escapeAttr(categoryColor(cfg.categoryLabel)) + '"' : '') +
+            '>' + escapeHtml(metaParts.join(' · ')) + '</span>'
           : '') +
+        titleHtml(item, 'rd-list-card-title') +
+        (kw
+          ? '<span class="rd-list-card-sub">핵심 단어 ' + wordCount + '개 · 예문 해설</span>'
+          : (item.tags && item.tags.length
+            ? '<div class="rd-list-tags rd-list-card-tags">' +
+              item.tags.slice(0, 3).map(function (t) {
+                return '<span class="rd-list-tag">' + escapeHtml(t) + '</span>';
+              }).join('') +
+              '</div>'
+            : '')) +
       '</a>'
     );
+  }
+
+  function bindCardAnalytics(container) {
+    if (!container || container.getAttribute('data-rd-analytics') === '1') return;
+    container.setAttribute('data-rd-analytics', '1');
+    container.addEventListener('click', function (e) {
+      var a = e.target.closest('a[data-content-type="post_card"]');
+      if (!a || !container.contains(a)) return;
+      trackSelectContent(a.getAttribute('data-item-id'));
+    });
   }
 
   function renderTabs(cfg, apiMode) {
@@ -405,6 +610,10 @@
       container.innerHTML = '<div class="rd-list-empty">알 수 없는 게시판입니다.</div>';
       return;
     }
+
+    var keywordMode = usesKeywordCards(cfg);
+    document.body.classList.toggle('rd-list--keyword-cards', keywordMode);
+    if (cfg.key) document.body.setAttribute('data-rd-board', cfg.key);
 
     var apiMode = options.apiMode || null;
     var pageSize = options.pageSize || PAGE_SIZE_DEFAULT;
@@ -458,6 +667,8 @@
         '</div>' +
         renderPager(page, totalPages) +
       '</div>';
+
+    bindCardAnalytics(container);
   }
 
   global.renderRedesignBoardList = renderRedesignBoardList;
