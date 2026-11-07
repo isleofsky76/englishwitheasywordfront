@@ -154,9 +154,8 @@ function vvStartEnglishTTS(text, btn) {
 function vvTtsButtonHtml(speakText) {
     const t = String(speakText || '').trim();
     if (!t) return '';
-    const icon =
-        '<svg class="vv-tts-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>';
-    return `<button type="button" class="vv-tts-btn" data-vv-tts="${vvEscapeAttr(t)}" aria-label="영어 읽기, 다시 누르면 멈춤" title="듣기 / 다시 누르면 멈춤" style="margin-left:6px;border:0;background:transparent;cursor:pointer;vertical-align:middle;color:#2f80ed;padding:0;">${icon}</button>`;
+    /* 연관단어·어휘: 기존 🔊 이모지 유지 (SVG 아이콘 사용 안 함) */
+    return `<button type="button" class="vv-tts-btn" data-vv-tts="${vvEscapeAttr(t)}" aria-label="영어 읽기, 다시 누르면 멈춤" title="듣기 / 다시 누르면 멈춤" style="margin-left:4px;padding:0;border:0;background:transparent;box-shadow:none;line-height:1;cursor:pointer;vertical-align:baseline;">🔊</button>`;
 }
 
 function vvAppendTtsInlineAfterEnglish(lineHtml, speak) {
@@ -239,14 +238,25 @@ function attachVocabularyWebTTS(container) {
         p.setAttribute('data-vv-tts', '1');
     });
 
-    /* 연관단어 카드: 발음줄에 한글이 있어도 표제어 TTS 버튼 보장 */
+    /* 연관단어 카드: 스피커 1개만(🔊), SVG 중복 제거 후 TTS 보장 */
     container.querySelectorAll('.rd-expr--synonym').forEach((card) => {
         const word = (card.getAttribute('data-rd-word') || '').trim();
         if (!word) return;
-        let btn = card.querySelector('.vv-tts-btn');
-        if (btn) {
-            if (!(btn.getAttribute('data-vv-tts') || '').trim()) {
-                btn.setAttribute('data-vv-tts', word);
+        const buttons = Array.from(card.querySelectorAll('.vv-tts-btn'));
+        let keep =
+            buttons.find((b) => /🔊/.test(b.textContent || '')) ||
+            buttons.find((b) => !b.querySelector('svg, .vv-tts-icon')) ||
+            buttons[0] ||
+            null;
+        buttons.forEach((b) => {
+            if (b !== keep) b.remove();
+        });
+        if (keep) {
+            if (!(keep.getAttribute('data-vv-tts') || '').trim()) {
+                keep.setAttribute('data-vv-tts', word);
+            }
+            if (keep.querySelector('svg, .vv-tts-icon')) {
+                keep.outerHTML = vvTtsButtonHtml(word);
             }
             return;
         }
@@ -578,7 +588,7 @@ function rdLoadScript(src) {
     const base = rdAssetBase();
     try {
         if (!window.BoardListConfig) await rdLoadScript(base + 'board-list-config.js?v=20261020auto2');
-        await rdLoadScript(base + 'redesign-article.js?v=20261107syn3');
+        await rdLoadScript(base + 'redesign-article.js?v=20261107syn4');
     } catch (e) { console.warn(e); }
     loadPost();
 })();

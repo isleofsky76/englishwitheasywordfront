@@ -5,7 +5,7 @@
 (function (global) {
   'use strict';
 
-  var ASSET_VER = '20261107syn3';
+  var ASSET_VER = '20261107syn4';
   var SYN_SAVED_KEY = 'ees-synonym-saved-v1';
   /* v2: 기본값을 뜻 가리기로 재설정 (이전 localStorage=0 무시) */
   var SYN_HIDE_KEY = 'ees-synonym-hide-meaning-v2';
@@ -937,15 +937,43 @@
     }
   }
 
+  function ttsEmojiButtonHtml(word) {
+    var w = String(word || '').trim();
+    if (!w) return '';
+    return (
+      '<button type="button" class="vv-tts-btn" data-vv-tts="' + escapeAttr(w) + '"' +
+      ' aria-label="' + escapeAttr(w) + ' 영어 발음 듣기" title="발음 듣기"' +
+      ' style="margin-left:4px;padding:0;border:0;background:transparent;box-shadow:none;line-height:1;cursor:pointer;vertical-align:baseline;">🔊</button>'
+    );
+  }
+
+  /** 카드당 스피커 1개만 — 기존 🔊 유지, SVG 중복 제거 */
   function ensureCardTtsButtons(root) {
     if (!root) return;
     root.querySelectorAll('.rd-expr--synonym').forEach(function (card) {
       var word = (card.getAttribute('data-rd-word') || '').trim();
       if (!word) return;
-      var existing = card.querySelector('.vv-tts-btn');
-      if (existing) {
-        if (!existing.getAttribute('data-vv-tts')) {
-          existing.setAttribute('data-vv-tts', word);
+      var buttons = Array.prototype.slice.call(card.querySelectorAll('.vv-tts-btn'));
+      var keep = null;
+      buttons.forEach(function (btn) {
+        var isSvg = !!btn.querySelector('svg, .vv-tts-icon');
+        var isEmoji = /🔊/.test(btn.textContent || '');
+        if (!keep && isEmoji) keep = btn;
+        if (!keep && !isSvg) keep = btn;
+      });
+      if (!keep && buttons[0]) keep = buttons[0];
+      buttons.forEach(function (btn) {
+        if (btn !== keep) btn.remove();
+      });
+      if (keep) {
+        if (!(keep.getAttribute('data-vv-tts') || '').trim()) {
+          keep.setAttribute('data-vv-tts', word);
+        }
+        /* SVG로 들어간 새 아이콘은 기존 🔊로 교체 */
+        if (keep.querySelector('svg, .vv-tts-icon')) {
+          keep.innerHTML = '🔊';
+          keep.setAttribute('style',
+            'margin-left:4px;padding:0;border:0;background:transparent;box-shadow:none;line-height:1;cursor:pointer;vertical-align:baseline;');
         }
         return;
       }
@@ -953,15 +981,7 @@
         card.querySelector('.rd-expr-en') ||
         card.querySelector('.rd-expr-word');
       if (!host) return;
-      var btn = document.createElement('button');
-      btn.type = 'button';
-      btn.className = 'vv-tts-btn';
-      btn.setAttribute('data-vv-tts', word);
-      btn.setAttribute('aria-label', word + ' 영어 발음 듣기');
-      btn.title = '발음 듣기';
-      btn.innerHTML =
-        '<svg class="vv-tts-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>';
-      host.appendChild(btn);
+      host.insertAdjacentHTML('beforeend', ttsEmojiButtonHtml(word));
     });
   }
 
@@ -1133,7 +1153,7 @@
     syncDownloadAll();
     root.querySelectorAll('.rd-expr--synonym').forEach(syncMeaningBtn);
     ensureCardTtsButtons(root);
-    bindArticleTts(root);
+    /* TTS 클릭은 page30 attachVocabularyWebTTS / vvBindTtsButtons 한곳에서만 처리 */
 
     root.addEventListener('click', function (e) {
       if (e.target.closest('.vv-tts-btn')) return;
