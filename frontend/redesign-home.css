@@ -279,6 +279,39 @@
   height: 100%;
   object-fit: cover;
 }
+
+/* 홈 뉴스 미리보기: 단어 + 뜻만 */
+.rd-news-kw {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  min-height: 150px;
+  padding: 18px 16px;
+  box-sizing: border-box;
+  background: #FFFDF8;
+  border: 1px solid #E2DACB;
+  border-radius: 10px;
+}
+.rd-news-kw-word {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-weight: 900;
+  font-size: clamp(26px, 3.2vw, 36px);
+  line-height: 1.15;
+  color: #1E1B16;
+  word-break: break-word;
+}
+.rd-news-kw-sub {
+  margin: 10px 0 0;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: #4A443A;
+}
 .rd-news-card .cat {
   font-size: 12px;
   font-weight: 600;

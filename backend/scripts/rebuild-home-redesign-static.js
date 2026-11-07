@@ -71,18 +71,74 @@ function stripHtml(html) {
     .trim();
 }
 
+function extractHeroKeyword(entry) {
+  let word = '';
+  let meaning = '';
+  const take = (expr, ko) => {
+    const en = String(expr || '').replace(/\s+/g, ' ').trim();
+    if (!en || !/[A-Za-z]/.test(en) || en.length > 48) return false;
+    word = en;
+    meaning = String(ko || '').replace(/\s+/g, ' ').trim();
+    return true;
+  };
+  if (Array.isArray(entry?.wordMeta)) {
+    for (const w of entry.wordMeta) {
+      if (w && take(w.expression || w.en || w.word, w.meaning || w.ko || w.meaningKo)) break;
+    }
+  }
+  if (!word && Array.isArray(entry?.words)) {
+    for (const w of entry.words) {
+      if (!w) continue;
+      if (typeof w === 'string') {
+        if (take(w, '')) break;
+      } else if (take(w.expression || w.en || w.word, w.meaning || w.ko)) {
+        break;
+      }
+    }
+  }
+  const msg = entry?.message ? String(entry.message) : '';
+  if (!word && msg) {
+    const cf = /cf\.\s*([^:<（(]+?)\s*[:：]\s*([^<\n]+)/i.exec(msg);
+    if (cf) take(stripHtml(cf[1]), stripHtml(cf[2]));
+  }
+  if (!word && msg) {
+    const mark = /<mark[^>]*class=["'][^"']*nv-hl[^"']*["'][^>]*>([\s\S]*?)<\/mark>/i.exec(msg);
+    if (mark) take(stripHtml(mark[1]), '');
+  }
+  if (!word) return null;
+  return { expression: word, meaning };
+}
+
+function newsKeywordThumbHtml(item) {
+  let word = item?.word || '';
+  const meaning = item?.meaning || '';
+  if (!word) {
+    const en = String(item?.title || '').match(/[A-Za-z][A-Za-z0-9'\/.\s-]{1,40}/);
+    word = en ? en[0].trim() : 'NEWS';
+  }
+  return (
+    `<div class="rd-news-kw">` +
+    `<p class="rd-news-kw-word">${esc(word)}</p>` +
+    (meaning ? `<p class="rd-news-kw-sub">${esc(meaning)}</p>` : '') +
+    `</div>`
+  );
+}
+
 function mixNews(boards) {
   const items = [];
   for (const { entries, label, postPath, page, take } of boards) {
     reverseSlice(entries, take).forEach((entry, i) => {
       const origIdx = entries.length - 1 - i;
       const parts = parseTitleParts(entry.title);
+      const hero = extractHeroKeyword(entry);
       items.push({
         label,
         title: parts.title,
         source: parts.source,
         href: hrefFor(postPath, page, entry, origIdx),
         image: extractImage(entry.message),
+        word: hero ? hero.expression : '',
+        meaning: hero ? hero.meaning : '',
         date: entry.date,
       });
     });
@@ -95,11 +151,10 @@ function newsCardsHtml(items) {
   return items
     .slice(0, 4)
     .map((item) => {
-      const cat = item.label + (item.source ? ` · ${item.source}` : '');
       return (
-        `<a class="rd-news-card" href="${esc(item.href)}">` +
-        `<div class="rd-news-card-img">${item.image ? `<img src="${esc(item.image)}" alt="">` : '[이미지]'}</div>` +
-        `<span class="cat">${esc(cat)}</span>` +
+        `<a class="rd-news-card rd-news-card--kw" href="${esc(item.href)}">` +
+        newsKeywordThumbHtml(item) +
+        `<span class="cat">${esc(item.label)}</span>` +
         `<span class="title">${esc(item.title)}</span>` +
         `</a>`
       );

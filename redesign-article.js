@@ -1162,7 +1162,7 @@
       }
     }
 
-    /* CTA — 댓글·글쓰기. 창은 버튼을 눌렀을 때만 연다. 뉴스는 섬네일 자리(상단)에 둠 */
+    /* CTA — 유튜브로 듣기·댓글·글쓰기. 창은 버튼을 눌렀을 때만 연다. 뉴스도 본문 맨 아래 */
     var newsComments = newsBoard;
     var showComments = options.enableComments === true || newsComments;
     var actions = '<div class="rd-article-actions">';
@@ -1174,8 +1174,6 @@
       actions += '<div class="board-comments-root" data-board-comments-root></div>';
     }
     actions += '</div>';
-    var topActions = newsBoard ? actions : '';
-    var bottomActions = newsBoard ? '' : actions;
 
     var sourceBlock = '';
     if (sourceFull || sourceUrl) {
@@ -1230,7 +1228,6 @@
       '<div class="rd-article-layout">' +
         '<div class="rd-article-main" id="post-content">' +
           ytBlock +
-          topActions +
           '<div id="post-message" class="rd-article-cards' + (studyMode ? ' rd-article-cards--synonym' : '') + '">' +
             (cards.length
               ? cards.map(function (c) {
@@ -1245,7 +1242,7 @@
               : '<div class="rd-article-fallback">' + html + '</div>') +
           '</div>' +
           sourceBlock +
-          bottomActions +
+          actions +
           navHtml +
         '</div>' +
         '<aside class="rd-article-side">' +
