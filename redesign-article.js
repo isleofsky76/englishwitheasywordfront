@@ -1119,7 +1119,9 @@
     var sourceFull = extractSourceFull(html);
     var source = resolveSource(post, cfg, html) || shortSourceLabel(sourceFull);
     var date = formatDate(post.date);
-    var summary = extractSummary(post, parser);
+    var newsBoard = !!(cfg && cfg.navGroup === 'news');
+    /* 뉴스: 아래에 단어 카드가 있어 metaDescription 단어 나열 요약은 생략 */
+    var summary = newsBoard ? '' : extractSummary(post, parser);
     var yt = extractYoutube(html);
     var heroImg = !yt ? extractHeroImage(html) : '';
     var sourceUrl = extractSourceLink(html) || (post.sourceUrl || '');
@@ -1127,7 +1129,7 @@
     var synonymMode = cfg.key === 'english-synonym';
     var hasCardMeanings = cards.some(function (c) { return !!(c && c.meaning); });
     /* 연관단어 + 뉴스어휘(narrative) — 뜻 가리기/해제하기 토글 */
-    var studyMode = synonymMode || (narrativeMode && hasCardMeanings && cfg.navGroup === 'news');
+    var studyMode = synonymMode || (narrativeMode && hasCardMeanings && newsBoard);
 
     var crumb =
       '<nav class="rd-article-crumb" aria-label="위치">' +
@@ -1143,7 +1145,6 @@
     if (cards.length) metaParts.push('<span>핵심 표현 ' + cards.length + '개</span>');
 
     /* 뉴스 어휘: 큰 섬네일/임베드 대신 「유튜브로 듣기」만 */
-    var newsBoard = !!(cfg && cfg.navGroup === 'news');
     var ytBlock = '';
     if (!newsBoard) {
       if (yt) {
