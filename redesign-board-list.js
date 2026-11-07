@@ -300,46 +300,24 @@
     return items.slice(0, limit);
   }
 
-  function keywordSubline(word) {
-    if (!word) return '';
-    var parts = [];
-    if (word.ipa) parts.push('/' + word.ipa + '/');
-    if (word.meaning) parts.push(word.meaning);
-    if (!parts.length) return '';
-    return '<p class="rd-kw-sub">' + escapeHtml(parts.join(' · ')) + '</p>';
+  function keywordMeaningLine(word) {
+    if (!word || !word.meaning) return '';
+    return '<p class="rd-kw-sub">' + escapeHtml(word.meaning) + '</p>';
   }
 
+  /** 썸네일: 대표 단어 1개 + 뜻만 */
   function keywordCardThumbHtml(item, cfg) {
     var words = (item && item.keywordWords) || [];
     var hero = words[0] || null;
-    var chips = words.slice(1, 3);
     var cat = (cfg && cfg.categoryLabel) || '기타';
     var color = categoryColor(cat);
-    var count = Math.max(words.length, hero ? 1 : 0);
-    var countLabel = count > 0 ? String(count) : '3';
-
-    var chipHtml = chips.map(function (w) {
-      return '<span class="rd-kw-chip">+ ' + escapeHtml(w.expression) + '</span>';
-    }).join('');
 
     return (
       '<div class="rd-kw-thumb" style="--rd-kw-accent:' + escapeAttr(color) + '">' +
-        '<div class="rd-kw-top">' +
-          '<span class="rd-kw-top-left">' +
-            '<span class="rd-kw-cat">' + escapeHtml(cat) + '</span>' +
-            '<span class="rd-kw-top-sep" aria-hidden="true"> · </span>' +
-            '<span class="rd-kw-today">오늘의 단어 ' + escapeHtml(countLabel) + '</span>' +
-          '</span>' +
-          '<span class="rd-kw-brand">시사영단어</span>' +
-        '</div>' +
         '<div class="rd-kw-hero">' +
           (hero
-            ? '<p class="rd-kw-word">' + escapeHtml(hero.expression) + '</p>' + keywordSubline(hero)
+            ? '<p class="rd-kw-word">' + escapeHtml(hero.expression) + '</p>' + keywordMeaningLine(hero)
             : '<p class="rd-kw-word rd-kw-word--fallback">' + escapeHtml(monoFromTitle(item) || 'NEWS') + '</p>') +
-        '</div>' +
-        '<div class="rd-kw-bottom">' +
-          '<div class="rd-kw-chips">' + chipHtml + '</div>' +
-          '<span class="rd-kw-badge">▶ 영상 + 해설</span>' +
         '</div>' +
       '</div>'
     );
