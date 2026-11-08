@@ -4,7 +4,7 @@
  * nav-home-menu.js 가 로드함
  */
 (function () {
-    var VERSION = '20261108wx4';
+    var VERSION = '20261108wx5';
 
   var DICT_LOOKUP_VER = '20261104dict1';
   var DICT_LOOKUP_CONTAINERS = [
@@ -44,11 +44,12 @@
     s.setAttribute('data-dict-lookup', '1');
     document.body.appendChild(s);
   }
-  /* 시안 주 메뉴 — children은 모바일에서 부모 아래 들여쓰기 (index 칩 순서) */
+  /* 시안 주 메뉴 — groupLabel은 모바일 그룹 제목 (index 경로 카드와 동일) */
   var PRIMARY_NAV_ITEMS = [
     {
       href: 'news-voca-list.html',
       label: '뉴스 영어',
+      groupLabel: '뉴스로 배우기',
       tone: 'news',
       pages: [
         'news-voca-list.html', 'news-voca.html',
@@ -84,6 +85,7 @@
     {
       href: 'word-of-the-day-list.html?api=prod',
       label: '단어장',
+      groupLabel: '단어 다지기',
       tone: 'wotd',
       pages: [
         'word-of-the-day-list.html', 'word-of-the-day.html',
@@ -101,6 +103,7 @@
     {
       href: 'popular-voca-list.html',
       label: '표현',
+      groupLabel: '표현 익히기',
       tone: 'popular',
       pages: [
         'popular-voca-list.html', 'popular-voca.html',
@@ -123,26 +126,30 @@
       href: 'english-directory.html',
       label: '학습사이트',
       tone: 'dir',
-      pages: ['english-directory.html']
+      pages: ['english-directory.html'],
+      desktopOnly: true
     },
     {
       href: 'dashboard.html',
       label: '대시보드',
       tone: 'dash',
-      pages: ['dashboard.html', 'word-ranking.html']
+      pages: ['dashboard.html', 'word-ranking.html'],
+      desktopOnly: true
     }
   ];
-  /* 더보기 — 데스크톱용. mobileDup는 모바일에서 하위메뉴와 겹치므로 숨김 */
+  /* 더보기 — 데스크톱용. mobileDup는 모바일 하위메뉴와 겹침 */
   var EXTRA_NAV_ITEMS = [
-    { href: 'index.html', label: '홈', tone: 'home', pages: ['index.html', ''] },
     { href: 'english-synonym-list.html', label: '연관단어', tone: 'syn', pages: ['english-synonym-list.html', 'english-synonym.html'], mobileDup: true },
     { href: 'one-sentence.html', label: '문장', tone: 'osent', pages: ['one-sentence.html'], mobileDup: true },
     { href: 'vocabulary-quiz-list.html', label: '퀴즈', tone: 'quiz', pages: ['vocabulary-quiz-list.html', 'vocabulary-quiz.html'], mobileDup: true },
-    { href: 'shorts-bg-image-list.html', label: '신문읽는 이미지', tone: 'sbgi', pages: ['shorts-bg-image-list.html', 'shorts-bg-image.html'] },
-    { href: 'english-opinions-list.html', label: '오피니언', tone: 'opine', pages: ['english-opinions-list.html', 'english-opinions.html'] },
-    { href: 'calm-mind-list.html', label: '마음글', tone: 'calm', pages: ['calm-mind-list.html', 'calm-mind.html'] },
-    { href: 'english-quotes-list.html', label: '영어 명언', tone: 'quote', pages: ['english-quotes-list.html', 'english-quotes.html'] },
-    { href: 'free-books.html', label: '무료 영어 원서', tone: 'books', pages: ['free-books.html'] }
+    { href: 'shorts-bg-image-list.html', label: '신문읽는 이미지', tone: 'sbgi', pages: ['shorts-bg-image-list.html', 'shorts-bg-image.html'], group: '천천히 읽을거리' },
+    { href: 'english-opinions-list.html', label: '오피니언', tone: 'opine', pages: ['english-opinions-list.html', 'english-opinions.html'], group: '천천히 읽을거리' },
+    { href: 'calm-mind-list.html', label: '마음글', tone: 'calm', pages: ['calm-mind-list.html', 'calm-mind.html'], group: '천천히 읽을거리' },
+    { href: 'english-quotes-list.html', label: '영어 명언', tone: 'quote', pages: ['english-quotes-list.html', 'english-quotes.html'], group: '천천히 읽을거리' },
+    { href: 'index.html', label: '홈', tone: 'home', pages: ['index.html', ''], group: '기타' },
+    { href: 'english-directory.html', label: '학습사이트', tone: 'dir', pages: ['english-directory.html'], group: '기타', mobileOnly: true },
+    { href: 'dashboard.html', label: '대시보드', tone: 'dash', pages: ['dashboard.html', 'word-ranking.html'], group: '기타', mobileOnly: true },
+    { href: 'free-books.html', label: '무료 영어 원서', tone: 'books', pages: ['free-books.html'], group: '기타' }
   ];
   var NAV_ITEMS = PRIMARY_NAV_ITEMS.concat(EXTRA_NAV_ITEMS);
 
@@ -280,6 +287,8 @@
     var active = isActive(item, page);
     var cls = 'nav-link nav-tone-' + item.tone + (active ? ' active' : '');
     if (item.mobileDup) cls += ' nav-dup';
+    if (item.desktopOnly) cls += ' nav-desktop-only';
+    if (item.mobileOnly) cls += ' nav-mobile-only';
     var aria = active ? ' aria-current="page"' : '';
     return '<a class="' + cls + '" href="' + base + item.href + '"' + aria + '>' + item.label + '</a>';
   }
@@ -295,13 +304,37 @@
     );
   }
 
+  function navGroupLabelHtml(text) {
+    if (!text) return '';
+    return '<span class="nav-group-label">' + text + '</span>';
+  }
+
+  /** 더보기 목록 — 그룹 헤더를 끼워 넣음 */
+  function buildExtraMenuHtml(base, page, extra) {
+    var html = '';
+    var lastGroup = null;
+    extra.forEach(function (item) {
+      var g = item.group || '';
+      if (g && g !== lastGroup) {
+        html += '<li class="nav-more-group" role="presentation">' + navGroupLabelHtml(g) + '</li>';
+        lastGroup = g;
+      }
+      html +=
+        '<li' + (item.mobileDup ? ' class="nav-dup-item"' : '') + '>' +
+          navItemHtml(base, page, item) +
+        '</li>';
+    });
+    return html;
+  }
+
   function buildNavHtml(base, page) {
     var primary = PRIMARY_NAV_ITEMS;
     var extra = EXTRA_NAV_ITEMS;
     var html = primary.map(function (item) {
       var hasSub = item.children && item.children.length;
       return (
-        '<li class="nav-item' + (hasSub ? ' has-subnav' : '') + '">' +
+        '<li class="nav-item' + (hasSub ? ' has-subnav' : '') + (item.groupLabel ? ' nav-group' : '') + '">' +
+          navGroupLabelHtml(item.groupLabel) +
           navItemHtml(base, page, item) +
           navChildrenHtml(base, page, item.children) +
         '</li>'
@@ -315,9 +348,7 @@
           '<span class="nav-more-icon" aria-hidden="true"><span></span><span></span><span></span></span>' +
         '</button>' +
         '<ul class="nav-more-menu" hidden>' +
-          extra.map(function (item) {
-            return '<li>' + navItemHtml(base, page, item) + '</li>';
-          }).join('') +
+          buildExtraMenuHtml(base, page, extra) +
         '</ul>' +
       '</li>';
     return html;

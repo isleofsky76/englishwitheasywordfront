@@ -270,6 +270,31 @@
   font-weight: 600;
 }
 
+/* 그룹 제목 — 데스크톱 주메뉴에서는 숨김, 더보기·모바일에서만 */
+.site-masthead .nav-group-label {
+  display: none;
+  font-family: var(--font-ui, inherit);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: rgba(22, 24, 29, 0.48);
+  line-height: 1.3;
+}
+.site-masthead .nav-more-menu .nav-group-label {
+  display: block;
+  padding: 10px 14px 4px;
+}
+.site-masthead .nav-more-menu .nav-more-group {
+  list-style: none;
+  pointer-events: none;
+}
+.site-masthead .nav-more-menu .nav-more-group + li .nav-link {
+  padding-top: 4px;
+}
+.site-masthead .nav-link.nav-mobile-only {
+  display: none !important;
+}
+
 /* 하위 메뉴 — 데스크톱은 숨기고, 모바일 펼침 목록에서만 표시 */
 .site-masthead .nav-sub {
   display: none;
@@ -419,22 +444,55 @@
     gap: 12px;
     width: 100%;
   }
+  .site-masthead.is-nav-open .nav-item.nav-group {
+    width: 100%;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(22, 24, 29, 0.08);
+  }
+  .site-masthead.is-nav-open .nav-item.nav-group:first-child {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: none;
+  }
+  .site-masthead.is-nav-open .nav-group-label {
+    display: block;
+    margin: 0 0 8px;
+  }
+  /* 하위가 있는 그룹만 부모 링크(뉴스 영어 등) 숨김 */
+  .site-masthead.is-nav-open .nav-item.nav-group.has-subnav > .nav-link {
+    display: none !important;
+  }
   .site-masthead.is-nav-open .nav-sub {
     display: flex;
     flex-direction: column;
     gap: 10px;
     width: 100%;
-    margin: 6px 0 4px;
-    padding: 0 0 0 14px;
-    border-left: 2px solid rgba(22, 24, 29, 0.12);
+    margin: 0;
+    padding: 0 0 0 2px;
+    border-left: none;
   }
   .site-masthead.is-nav-open .nav-sub .nav-link {
-    font-size: 15px;
-    font-weight: 500;
-    opacity: 0.92;
+    font-size: 16px;
+    font-weight: 600;
+    opacity: 1;
   }
-  .site-masthead.is-nav-open .nav-item.has-subnav > .nav-link {
-    font-weight: 700;
+  .site-masthead.is-nav-open .nav-more-menu .nav-group-label {
+    display: block;
+    margin: 14px 0 8px;
+    padding: 0;
+  }
+  .site-masthead.is-nav-open .nav-more-menu .nav-more-group:first-child .nav-group-label {
+    margin-top: 10px;
+  }
+  .site-masthead.is-nav-open .nav-dup-item {
+    display: none !important;
+  }
+  .site-masthead.is-nav-open .nav-link.nav-desktop-only {
+    display: none !important;
+  }
+  .site-masthead.is-nav-open .nav-link.nav-mobile-only {
+    display: block !important;
   }
   .site-masthead .site-masthead-search {
     width: 100%;
