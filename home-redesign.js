@@ -42,6 +42,15 @@
     return entries.slice().reverse().slice(0, n);
   }
 
+  /** 방문마다 다른 항목 — 원본 인덱스 유지(링크용) */
+  function randomIndexed(entries, n) {
+    var list = (entries || []).map(function (entry, index) {
+      return { entry: entry, index: index };
+    });
+    if (!list.length) return [];
+    return shuffleInPlace(list).slice(0, Math.max(0, Number(n) || 0));
+  }
+
   function parseTitleParts(title) {
     var raw = String(title || '').trim();
     var m = raw.match(/^\[([^\]]+)\]\s*(.*)$/);
@@ -461,10 +470,10 @@
   function renderReadingCol(elId, listHref, label, entries, board) {
     var root = document.getElementById(elId);
     if (!root) return;
-    var list = reverseSlice(entries, 2);
-    var items = list.map(function (entry, i) {
-      var total = entries.length;
-      var origIdx = total - 1 - i;
+    var list = randomIndexed(entries, 2);
+    var items = list.map(function (row) {
+      var entry = row.entry;
+      var origIdx = row.index;
       var parts = parseTitleParts(entry.title);
       var cls = board === 'english-quotes' ? 'item quote-en' : 'item';
       return '<a class="' + cls + '" href="' + esc(boardHref(board, entry, origIdx)) + '">' + esc(parts.title) + '</a>';
@@ -615,8 +624,8 @@
       var quotes = results[10] || [];
       var daily = results[11] || [];
 
-      var w = latest(wotd);
-      if (w) renderHeroWord(w, wotd.length - 1);
+      var wPick = randomIndexed(wotd, 1)[0];
+      if (wPick) renderHeroWord(wPick.entry, wPick.index);
 
       renderNews(mixNews(intl, korea, defense, economy, []));
       renderQuiz(quiz);
