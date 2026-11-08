@@ -848,7 +848,7 @@
     pwInput.placeholder = '삭제 시 필요';
     pwInput.autocomplete = 'new-password';
     pwInput.addEventListener('input', function () {
-      pwInput.value = pwInput.value.replace(/\s/g, '').slice(0, 14);
+      pwInput.value = pwInput.value.replace(/\s/g, '').slice(0, 25);
     });
     pwLabel.appendChild(pwSpan);
     pwLabel.appendChild(pwInput);
