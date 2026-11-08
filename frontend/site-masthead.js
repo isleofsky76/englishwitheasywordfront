@@ -4,7 +4,7 @@
  * nav-home-menu.js 가 로드함
  */
 (function () {
-    var VERSION = '20261108wx1';
+    var VERSION = '20261108wx2';
 
   var DICT_LOOKUP_VER = '20261104dict1';
   var DICT_LOOKUP_CONTAINERS = [
@@ -247,16 +247,16 @@
   }
 
   function ensureWeather(base) {
-    ensureLink(base + 'weather-banner.css?v=20261108wx1');
-    ensureLink(base + 'world-clock.css?v=20261108wx1');
+    ensureLink(base + 'weather-banner.css?v=' + VERSION);
+    ensureLink(base + 'world-clock.css?v=' + VERSION);
     if (!document.querySelector('script[src*="weather-banner.js"]')) {
       var w = document.createElement('script');
-      w.src = base + 'weather-banner.js?v=20261108wx1';
+      w.src = base + 'weather-banner.js?v=' + VERSION;
       document.head.appendChild(w);
     }
     if (!document.querySelector('script[src*="world-clock.js"]')) {
       var c = document.createElement('script');
-      c.src = base + 'world-clock.js?v=20261108wx1';
+      c.src = base + 'world-clock.js?v=' + VERSION;
       document.head.appendChild(c);
     }
   }
@@ -695,8 +695,11 @@
   function mount() {
     document.documentElement.classList.add('has-site-masthead');
     var base = assetBase();
-    /* 홈은 날씨/시계를 쓰지 않음 — 구형 바 삽입으로 깜빡이지 않게 */
-    if (!document.body.classList.contains('rd-home')) {
+    /* 홈(index)만 날씨/시계 제외 — free-books 등 rd-home 레이아웃은 적용 */
+    var skipWeather =
+      document.body.classList.contains('rd-home') &&
+      !document.body.classList.contains('fb-page');
+    if (!skipWeather) {
       ensureWeather(base);
     }
     mountNavbar(base);

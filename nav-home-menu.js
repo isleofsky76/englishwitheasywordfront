@@ -231,8 +231,8 @@
         return '';
     }
 
-    var MASTHEAD_CSS_VER = '20261105menu2';
-    var MASTHEAD_JS_VER = '20261105menu2';
+    var MASTHEAD_CSS_VER = '20261108wx2';
+    var MASTHEAD_JS_VER = '20261108wx2';
 
     /** FOUC 방지: 파싱 즉시 클래스·CSS 선적용 (DOMContentLoaded 기다리지 않음) */
     function injectMastheadCssEarly() {
