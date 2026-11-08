@@ -532,7 +532,7 @@ ${head}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Noto+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@500&display=swap">
     <link rel="stylesheet" href="../../redesign-tokens.css?v=20261020quiz1">
-    <link rel="stylesheet" href="../../site-masthead.css?v=20261020quiz1">
+    <link rel="stylesheet" href="../../site-masthead.css?v=20261108wx1">
     <link rel="stylesheet" href="../../nav-home-menu.css?v=20260815j">
     <link rel="stylesheet" href="../../vocabulary-quiz-track.css?v=${TRACK_VER}">
 </head>
@@ -566,7 +566,7 @@ ${head}
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../../page30-api-config.js?v=20260721"></script>
-    <script src="../../site-masthead.js?v=20261105menu2"></script>
+    <script src="../../site-masthead.js?v=20261108wx1"></script>
     <script src="../../site-footer.js?v=20261013a"></script>
     <script src="../../nav-home-menu.js?v=20261105menu2"></script>
     <script>
@@ -608,10 +608,8 @@ ${(board.extraCss || []).map((c) => `    <link rel="stylesheet" href="../../${c.
     <link rel="stylesheet" href="../../title-text-sharp.css?v=20260610">
     <link rel="stylesheet" href="../../viewpost-like.css?v=20260906gray">
     <link rel="stylesheet" href="../../nav-home-menu.css?v=20260617">
-    <link rel="stylesheet" href="../../navbar-unified.css?v=20260612c">
-    <link rel="stylesheet" href="../../weather-banner.css?v=20260612g">
-    <link rel="stylesheet" href="../../world-clock.css?v=20260612g">
     <link rel="stylesheet" href="../../redesign-tokens.css?v=20261020rd27">
+    <link rel="stylesheet" href="../../site-masthead.css?v=20261108wx1">
     <link rel="stylesheet" href="../../redesign-article.css?v=20261104syn2">
     <link rel="preload" href="../../redesign-article.js?v=20261108tts1" as="script">
     <style id="rd-fouc-guard">
@@ -619,10 +617,8 @@ ${(board.extraCss || []).map((c) => `    <link rel="stylesheet" href="../../${c.
       body[data-nv-board]:not(.rd-ready) #post-container {
         visibility: hidden;
       }
-      /* 구형 파란 Bootstrap navbar — JS/rd-word 전에 먼저 보이지 않게 */
-      body[data-nv-board]:not(.rd-ready) .navbar.bg-primary:not(.site-masthead),
-      body[data-nv-board]:not(.rd-ready) .weather-banner,
-      body[data-nv-board]:not(.rd-ready) .world-clock-bar {
+      /* 구형 파란 Bootstrap navbar만 숨김 — 날씨·시계는 site-masthead와 동일 위치 */
+      body[data-nv-board]:not(.rd-ready) .navbar.bg-primary:not(.site-masthead) {
         display: none !important;
       }
       /* QUICK REVIEW 배너 강제 숨김 */
@@ -664,12 +660,7 @@ ${(board.extraCss || []).map((c) => `    <link rel="stylesheet" href="../../${c.
     <noscript><style>body[data-nv-board] #post-container{visibility:visible!important}</style></noscript>
 </head>
 <body class="${board.articleLayout === 'header-only' ? 'rd-article rd-article--header-only' : ''}" data-nv-slug="${escapeHtml(slug)}" data-nv-board="${escapeHtml(boardPath)}">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" aria-label="주 메뉴">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="../../${board.listHtml}">${escapeHtml(board.label)}</a>
-            <div data-nav-home-menu class="nav-home-menu-slot ms-auto"></div>
-        </div>
-    </nav>
+    <nav id="navbar" class="navbar navbar-expand site-masthead" aria-label="주 메뉴"></nav>
     <main id="post-container" role="main">
 ${buildStaticPostMainHtml(config, boardPath)}
     </main>
@@ -679,11 +670,10 @@ ${buildStaticPostMainHtml(config, boardPath)}
     <script src="../../viewpost-like.js?v=20260906gray"></script>
     <script src="../../viewpost-rd-ready.js?v=20261020rd24"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../site-masthead.js?v=20261108wx1"></script>
     <script src="../../nav-home-menu.js?v=20261105menu2"></script>
 ${(board.extraJs || []).map((j) => `    <script src="../../${j.file}?v=${j.version}"></script>`).join('\n')}
     <script src="../../${board.jsFile}?v=${board.jsVersion}"></script>
-    <script src="../../weather-banner.js?v=20260612e" defer></script>
-    <script src="../../world-clock.js?v=20260612g" defer></script>
 </body>
 </html>
 `;

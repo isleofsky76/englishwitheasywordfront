@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>단어 팝업 데모</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;1,8..60,400&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="site-head">
+    <span class="brand">시사영단어</span>
+    <span class="badge">단어 팝업 데모</span>
+  </header>
+
+  <section class="intro">
+    <span class="eyebrow">ONE SENTENCE · ONE WORD</span>
+    <h1>문장 속 단어에 마우스를 올려 보세요</h1>
+    <p>잠깐 머물면 내 사이트의 뜻이 먼저 뜨고, 네이버·Cambridge 사전 링크는 팝업 맨 아래에 있어요. <b>decided</b>, <b>sought</b>처럼 변형된 단어도 기본형으로 찾아 줍니다. 휴대폰에서는 단어를 길게 눌러 선택하세요. <kbd>Esc</kbd>로 닫을 수 있어요.</p>
+  </section>
+
+  <div class="layout">
+    <main class="sentence-list">
+      <article class="card">
+        <div class="card-meta"><b>012</b><span>postpone · 연기하다, 미루다</span></div>
+        <p class="sentence">The company decided to postpone the launch until next spring.</p>
+        <p class="translation">회사는 출시를 내년 봄까지 연기하기로 결정했다.</p>
+      </article>
+      <article class="card">
+        <div class="card-meta"><b>013</b><span>scrutiny · 정밀 조사, 감시</span></div>
+        <p class="sentence">The proposal came under intense scrutiny from regulators.</p>
+        <p class="translation">그 제안은 규제 당국의 강도 높은 조사를 받았다.</p>
+      </article>
+      <article class="card">
+        <div class="card-meta"><b>014</b><span>mitigate · 완화하다</span></div>
+        <p class="sentence">Officials sought to mitigate the impact of rising prices.</p>
+        <p class="translation">당국자들은 물가 상승의 영향을 완화하려고 했다.</p>
+      </article>
+      <article class="card">
+        <div class="card-meta"><b>015</b><span>resume · 재개하다</span></div>
+        <p class="sentence">The two leaders agreed to resume talks next month.</p>
+        <p class="translation">두 정상은 다음 달 회담을 재개하기로 합의했다.</p>
+      </article>
+    </main>
+
+    <aside class="side">
+      <section class="panel" aria-labelledby="saved-title">
+        <h2 id="saved-title">내 단어장</h2>
+        <p class="hint" id="saved-empty">팝업에서 ‘단어장에 저장’을 누르면 여기에 쌓여요.</p>
+        <ul class="saved-list" id="saved-list"></ul>
+        <div class="saved-actions" id="saved-actions" hidden>
+          <button type="button" class="btn" id="btn-download">텍스트로 내려받기</button>
+          <button type="button" class="btn btn-quiet" id="btn-copy">복사</button>
+        </div>
+        <p class="hint" id="saved-status" aria-live="polite"></p>
+      </section>
+      <section class="panel" aria-labelledby="log-title">
+        <h2 id="log-title">방금 일어난 일</h2>
+        <ul class="log" id="log" aria-live="polite">
+          <li>아직 없음 — 단어에 마우스를 올려 보세요.</li>
+        </ul>
+      </section>
+    </aside>
+  </div>
+
+  <section class="howto">
+    <h2>내 사이트에 넣는 법</h2>
+    <p>아래 두 파일을 사이트에 올리고, 문장이 있는 페이지의 <code>&lt;/body&gt;</code> 바로 위에 이 세 줄을 넣으면 끝이에요. <code>container</code>는 팝업을 켤 영역이라 광고 근처에서는 뜨지 않아요.</p>
+    <pre class="code">&lt;script&gt;window.DICT_CONFIG = { container: '.sentence-list' };&lt;/script&gt;
+&lt;script src="/words-data.js"&gt;&lt;/script&gt;
+&lt;script src="/dict-lookup.js" defer&gt;&lt;/script&gt;</pre>
+    <ul class="files">
+      <li><code>words-data.js</code> — 단어와 뜻 목록. 사이트 단어장 데이터를 이 형식으로 바꿔 넣으면 됩니다.</li>
+      <li><code>dict-lookup.js</code> — 팝업 동작과 디자인 전부. 단어장 페이지 어디에든 <code>&lt;button onclick="DictLookup.downloadText()"&gt;텍스트로 내려받기&lt;/button&gt;</code>을 넣으면 저장한 단어가 .txt로 내려받아져요.</li>
+    </ul>
+  </section>
+</div>
+
+<script>
+  // 데모용: 실제 사이트라면 /word/단어 페이지로 이동하지만, 여기서는 기록만 남깁니다.
+  window.DICT_CONFIG = { container: '.sentence-list' };
+</script>
+<script src="words-data.js"></script>
+<script src="dict-lookup.js"></script>
+<script>
+  (function () {
+    var logEl = document.getElementById('log');
+    var listEl = document.getElementById('saved-list');
+    var emptyEl = document.getElementById('saved-empty');
+    var first = true;
+
+    function log(html) {
+      if (first) { logEl.innerHTML = ''; first = false; }
+      var li = document.createElement('li');
+      li.innerHTML = html;
+      logEl.insertBefore(li, logEl.firstChild);
+      while (logEl.children.length > 6) logEl.removeChild(logEl.lastChild);
+    }
+
+    var actionsEl = document.getElementById('saved-actions');
+    var statusEl = document.getElementById('saved-status');
+
+    document.getElementById('btn-download').addEventListener('click', function () {
+      window.DictLookup.downloadText();
+      statusEl.textContent = '내단어장-날짜.txt 파일로 저장돼요. 파일이 안 생기면 ‘복사’를 써 주세요.';
+    });
+    document.getElementById('btn-copy').addEventListener('click', function () {
+      var text = window.DictLookup.exportText();
+      function done() { statusEl.textContent = '복사했어요. 메모장 등에 붙여 넣으세요.'; }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done, function () {
+          statusEl.textContent = '이 화면에서는 복사가 막혀 있어요. 내려받기를 써 주세요.';
+        });
+      } else {
+        statusEl.textContent = '이 브라우저에서는 복사를 쓸 수 없어요.';
+      }
+    });
+
+    function renderSaved(list) {
+      listEl.innerHTML = '';
+      emptyEl.hidden = list.length > 0;
+      actionsEl.hidden = list.length === 0;
+      if (!list.length) statusEl.textContent = '';
+      list.forEach(function (x) {
+        var li = document.createElement('li');
+        var a = document.createElement('span'); a.className = 'w'; a.textContent = x.word;
+        var b = document.createElement('span'); b.className = 'm'; b.textContent = x.meaning || '';
+        li.appendChild(a); li.appendChild(b);
+        listEl.appendChild(li);
+      });
+    }
+
+    document.addEventListener('dict:show', function (e) {
+      log(e.detail.found
+        ? '<code>' + e.detail.word + '</code> 팝업 — 내 사이트 뜻 표시'
+        : '<code>' + e.detail.word + '</code> 팝업 — 사전 링크만 표시');
+    });
+    document.addEventListener('dict:open-word', function (e) {
+      e.preventDefault();
+      log('실제 사이트라면 <code>' + e.detail.url + '</code> 페이지로 이동');
+    });
+    document.addEventListener('dict:saved', function (e) {
+      log('<code>' + e.detail.word + '</code> ' + (e.detail.saved ? '단어장에 저장' : '단어장에서 뺌'));
+      renderSaved(e.detail.list);
+    });
+    document.addEventListener('dict:external', function (e) {
+      log(e.detail.dictionary + '에서 <code>' + e.detail.word + '</code> 열기 (새 탭)');
+    });
+
+    if (window.DictLookup) renderSaved(window.DictLookup.getSaved());
+  })();
+</script>
+</body>
+</html>

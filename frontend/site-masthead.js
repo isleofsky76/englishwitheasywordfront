@@ -4,7 +4,7 @@
  * nav-home-menu.js 가 로드함
  */
 (function () {
-    var VERSION = '20261105bad1';
+    var VERSION = '20261108wx1';
 
   var DICT_LOOKUP_VER = '20261104dict1';
   var DICT_LOOKUP_CONTAINERS = [
@@ -247,16 +247,16 @@
   }
 
   function ensureWeather(base) {
-    ensureLink(base + 'weather-banner.css?v=20261019rd7');
-    ensureLink(base + 'world-clock.css?v=20261019rd6');
+    ensureLink(base + 'weather-banner.css?v=20261108wx1');
+    ensureLink(base + 'world-clock.css?v=20261108wx1');
     if (!document.querySelector('script[src*="weather-banner.js"]')) {
       var w = document.createElement('script');
-      w.src = base + 'weather-banner.js?v=20261019rd7';
+      w.src = base + 'weather-banner.js?v=20261108wx1';
       document.head.appendChild(w);
     }
     if (!document.querySelector('script[src*="world-clock.js"]')) {
       var c = document.createElement('script');
-      c.src = base + 'world-clock.js?v=20261019rd6';
+      c.src = base + 'world-clock.js?v=20261108wx1';
       document.head.appendChild(c);
     }
   }
