@@ -759,30 +759,6 @@
       /* 시작 링크는 유지 */
     }
 
-    var resume = document.getElementById('rd-wmq-resume');
-    var sid = loadSessionId();
-    if (resume) {
-      if (!sid) {
-        resume.hidden = true;
-        return;
-      }
-      resume.hidden = false;
-      resume.href = 'word-meaning-quiz.html?resume=1';
-      fetchJson(apiBase() + '/api/word-meaning-quiz/session/' + encodeURIComponent(sid))
-        .then(function (data) {
-          var n = (data.nextIndex || 0) + 1;
-          var total = data.total || 10;
-          if (data.done) {
-            resume.textContent = '결과 보기';
-          } else {
-            resume.textContent = '이어서 풀기 (' + n + ' / ' + total + ')';
-          }
-        })
-        .catch(function () {
-          resume.hidden = true;
-          saveSessionId('');
-        });
-    }
   }
 
   if (document.body && document.body.classList.contains('wmq-page')) {
