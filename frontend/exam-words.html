@@ -79,15 +79,19 @@
   .status{text-align:center;color:var(--muted);font-size:13px;padding:4px 16px 0;min-height:0}
   .status:empty{display:none}
   .exam-tools{max-width:760px;margin:0 auto 56px;padding:16px 16px 8px}
-  .exam-action-tools{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:center;column-gap:14px;row-gap:8px;width:100%}
-  .exam-action-tools > .board-comments-root{display:contents}
-  .exam-action-tools .os-cmt-bar{display:contents}
-  .exam-action-tools .os-cmt-panel{flex:1 1 100%;width:100%;margin-top:4px}
+  .exam-action-tools{display:flex;flex-direction:column;align-items:center;width:100%}
+  .exam-action-tools > .board-comments-root{display:block;width:100%}
+  .exam-action-tools .os-cmt-bar{
+    display:flex!important;flex-wrap:wrap;align-items:center;justify-content:center;
+    gap:14px;width:100%;row-gap:8px
+  }
+  .exam-action-tools .os-cmt-panel{width:100%;margin-top:8px}
   .exam-action-tools .board-comments-root .os-cmt-toggle,
   .exam-action-tools .board-comments-root .os-cmt-write,
   .exam-action-tools .exam-tool-btn{
     margin:0;padding:0;border:none;background:none;font:inherit;font-size:13px;font-weight:600;line-height:1.4;
-    color:#6B7280;cursor:pointer;text-decoration:underline;text-underline-offset:2px;opacity:.9;flex:0 0 auto
+    color:#6B7280;cursor:pointer;text-decoration:underline;text-underline-offset:2px;opacity:.9;flex:0 0 auto;
+    white-space:nowrap
   }
   .exam-action-tools .board-comments-root .os-cmt-toggle:hover,
   .exam-action-tools .board-comments-root .os-cmt-write:hover,
@@ -129,8 +133,11 @@
 <section class="exam-tools" id="exam-tools" aria-label="댓글·저장">
   <div class="exam-action-tools">
     <div class="board-comments-root" id="exam-comments" data-board-comments-root></div>
-    <button type="button" class="exam-tool-btn" id="exam-save" aria-pressed="false">저장</button>
-    <button type="button" class="exam-tool-btn" id="exam-download" hidden disabled>다운로드 (<span id="exam-saved-count">0</span>)</button>
+    <!-- 저장·다운로드는 마운트 후 .os-cmt-bar(댓글|글쓰기) 옆으로 이동 -->
+    <div id="exam-tool-stash" hidden>
+      <button type="button" class="exam-tool-btn" id="exam-save" aria-pressed="false">저장</button>
+      <button type="button" class="exam-tool-btn" id="exam-download" hidden disabled>다운로드 (<span id="exam-saved-count">0</span>)</button>
+    </div>
   </div>
 </section>
 
@@ -609,11 +616,31 @@ function syncSaveUi() {
 function contentKeyForSet() {
   return 'exam-' + level + '-' + order + '-p' + page;
 }
+function placeToolsInCommentBar() {
+  const bar = commentsRoot.querySelector('.os-cmt-bar');
+  if (!bar) return;
+  if (btnSave.parentElement !== bar) bar.appendChild(btnSave);
+  if (btnDownload.parentElement !== bar) bar.appendChild(btnDownload);
+}
+
 async function mountSetComments() {
-  if (!window.BoardComments || typeof window.BoardComments.mount !== 'function') return;
   const my = ++commentsGen;
+  const stash = document.getElementById('exam-tool-stash');
+  if (stash) {
+    if (btnSave.parentElement !== stash) stash.appendChild(btnSave);
+    if (btnDownload.parentElement !== stash) stash.appendChild(btnDownload);
+  }
   commentsRoot.textContent = '';
   commentsRoot.removeAttribute('data-mounted');
+  if (!window.BoardComments || typeof window.BoardComments.mount !== 'function') {
+    if (stash) {
+      stash.hidden = false;
+      stash.style.display = 'flex';
+      stash.style.justifyContent = 'center';
+      stash.style.gap = '14px';
+    }
+    return;
+  }
   try {
     await window.BoardComments.mount({
       board: BOARD,
@@ -622,8 +649,16 @@ async function mountSetComments() {
       root: commentsRoot
     });
     if (my !== commentsGen) return;
+    placeToolsInCommentBar();
+    if (stash) stash.hidden = true;
   } catch (e) {
     console.warn('[수험영어] 댓글 마운트 실패', e);
+    if (stash) {
+      stash.hidden = false;
+      stash.style.display = 'flex';
+      stash.style.justifyContent = 'center';
+      stash.style.gap = '14px';
+    }
   }
 }
 function downloadSaved() {
