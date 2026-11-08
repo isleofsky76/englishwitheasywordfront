@@ -13,7 +13,14 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { updateSitemap, FRONTEND_ROOT, SITE_ORIGIN, buildStaticPostMainHtml } from './voca-seo.js';
+import {
+  updateSitemap,
+  FRONTEND_ROOT,
+  SITE_ORIGIN,
+  writeSeoPage,
+  buildSeoPageHtml,
+  applySeoAfterUpload,
+} from './voca-seo.js';
 
 function escapeHtml(text) {
   return String(text ?? '')
@@ -756,79 +763,20 @@ ${sourceHtml}
   return message;
 }
 
+/** 공통 redesign SEO (FOUC 가드) — 구형 섬네일·스피커가 먼저 보이지 않게 */
 export function buildNewsVocaSeoPageHtml(config) {
-  const { title, slug, metaDescription } = config;
-  const pageUrl = `${SITE_ORIGIN}/news-voca/${slug}/`;
-  const datePublished = config.datePublished || toIsoDateOnly();
-  const docTitle = `${title} | News Voca · 시사영단어`;
-  const jsonLd = buildArticleJsonLd({ title, slug, metaDescription, datePublished });
-
-  return `<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${escapeHtml(docTitle)}</title>
-    <meta name="description" content="${escapeHtml(metaDescription)}">
-    <meta name="robots" content="index, follow">
-    <meta name="author" content="시사영단어">
-    <link rel="canonical" href="${escapeHtml(pageUrl)}">
-    <meta property="og:type" content="article">
-    <meta property="og:locale" content="ko_KR">
-    <meta property="og:site_name" content="시사영단어">
-    <meta property="og:title" content="${escapeHtml(title)}">
-    <meta property="og:description" content="${escapeHtml(metaDescription)}">
-    <meta property="og:url" content="${escapeHtml(pageUrl)}">
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="${escapeHtml(title)}">
-    <meta name="twitter:description" content="${escapeHtml(metaDescription)}">
-    <meta name="google-adsense-account" content="ca-pub-6108574897789788">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6108574897789788" crossorigin="anonymous"></script>
-    <script type="application/ld+json">${JSON.stringify(jsonLd)}</script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../../page30_viewpost.css?v=20260702e">
-    <link rel="stylesheet" href="../../news-voca.css?v=20260821blog">
-    <link rel="stylesheet" href="../../title-text-sharp.css?v=20260610">
-    <link rel="stylesheet" href="../../viewpost-like.css?v=20260625">
-    <link rel="stylesheet" href="../../nav-home-menu.css?v=20260617">
-    <link rel="stylesheet" href="../../navbar-unified.css?v=20260612c">
-    <link rel="stylesheet" href="../../weather-banner.css?v=20260612g">
-    <link rel="stylesheet" href="../../world-clock.css?v=20260612g">
-</head>
-<body data-nv-slug="${escapeHtml(slug)}">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" aria-label="주 메뉴">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="../../news-voca-list.html">뉴스 어휘</a>
-            <div data-nav-home-menu class="nav-home-menu-slot ms-auto"></div>
-        </div>
-    </nav>
-    <main id="post-container" role="main">
-${buildStaticPostMainHtml(config, 'news-voca')}
-    </main>
-    <script src="../../page30-api-config.js"></script>
-    <script src="../../viewpost-meta.js?v=20260627"></script>
-    <script src="../../viewpost-like.js?v=20260627"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../../nav-home-menu.js?v=20260618"></script>
-    <script src="../../news-voca.js?v=20260702e"></script>
-    <script src="../../weather-banner.js?v=20260612e" defer></script>
-    <script src="../../world-clock.js?v=20260612g" defer></script>
-</body>
-</html>
-`;
+  return buildSeoPageHtml('news-voca', {
+    ...config,
+    datePublished: config.datePublished || toIsoDateOnly(),
+  });
 }
 
 export function writeNewsVocaSeoPage(config) {
-  const slug = config.slug;
-  if (!slug) return null;
-
-  const dir = path.join(FRONTEND_ROOT, 'news-voca', slug);
-  fs.mkdirSync(dir, { recursive: true });
-  const filePath = path.join(dir, 'index.html');
-  fs.writeFileSync(filePath, buildNewsVocaSeoPageHtml(config), 'utf8');
-  return filePath;
+  if (!config?.slug) return null;
+  return writeSeoPage('news-voca', {
+    ...config,
+    datePublished: config.datePublished || toIsoDateOnly(),
+  });
 }
 
 async function parseApiJson(res, label) {
@@ -948,16 +896,10 @@ export async function uploadNewsVoca(config, apiBase) {
   console.log(`  "${post.title}" 추가됨 (${elapsed()})`);
 
   if (config.slug && config.metaDescription) {
-    const seoPagePath = writeNewsVocaSeoPage({ ...config, message });
-    if (seoPagePath) console.log(`  SEO page: ${seoPagePath}`);
-
-    const sitemapPath = updateSitemap({
-      boardPath: 'news-voca',
-      slug: config.slug,
-      lastmod: datePublished,
-    });
-    console.log(`  sitemap: ${sitemapPath}`);
-    console.log(`  URL: ${SITE_ORIGIN}/news-voca/${encodeURIComponent(config.slug)}/`);
+    const seo = applySeoAfterUpload('news-voca', { ...config, message });
+    if (seo?.seoPath) console.log(`  SEO page: ${seo.seoPath}`);
+    if (seo?.sitemapPath) console.log(`  sitemap: ${seo.sitemapPath}`);
+    if (seo?.url) console.log(`  URL: ${seo.url}`);
     console.log('  → sitemap.xml에 URL이 추가되었습니다. frontend를 배포하면 Google이 sitemap으로 자동 수집합니다.');
     console.log('     Search Console 사이트맵 등록은 최초 1회만: https://englisheasystudy.com/sitemap.xml');
   }
