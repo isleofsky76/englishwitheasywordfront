@@ -474,8 +474,118 @@
       items;
   }
 
+  function pickRandom(arr, n) {
+    return shuffleInPlace((arr || []).slice()).slice(0, n);
+  }
+
+  function siteFavicon(url) {
+    try {
+      var host = new URL(url).hostname.replace(/^www\./i, '');
+      if (!host) return '';
+      return 'https://www.google.com/s2/favicons?domain=' + encodeURIComponent(host) + '&sz=64';
+    } catch (e) {
+      return '';
+    }
+  }
+
+  /** 방문마다 학습사이트 미리보기 8개 랜덤 */
+  function renderDirPreviewRandom() {
+    var root = document.getElementById('rd-dir-grid');
+    if (!root) return;
+    var sites = (window.EnglishDirectory && window.EnglishDirectory.SITES) || [];
+    if (!sites.length) {
+      var kids = Array.prototype.slice.call(root.children);
+      if (kids.length < 2) return;
+      shuffleInPlace(kids).forEach(function (el) {
+        root.appendChild(el);
+      });
+      return;
+    }
+    root.innerHTML = pickRandom(sites, 8)
+      .map(function (site) {
+        var thumb = siteFavicon(site.url);
+        var meta = [site.category, site.level].filter(Boolean).join(' · ');
+        return (
+          '<a class="rd-dir-item" href="' +
+          esc(site.url) +
+          '" target="_blank" rel="noopener noreferrer">' +
+          (thumb
+            ? '<img class="rd-dir-favicon" src="' +
+              esc(thumb) +
+              '" alt="" width="28" height="28" loading="lazy" decoding="async">'
+            : '') +
+          '<span class="rd-dir-name">' +
+          esc(site.name) +
+          '</span>' +
+          '<span class="rd-dir-meta">' +
+          esc(meta) +
+          '</span>' +
+          '</a>'
+        );
+      })
+      .join('');
+  }
+
+  function freeBookCoverTone(seed) {
+    var tones = ['alice', 'oz', 'pride', 'frank'];
+    var s = String(seed || '');
+    var sum = 0;
+    for (var i = 0; i < s.length; i += 1) sum += s.charCodeAt(i);
+    return tones[sum % tones.length];
+  }
+
+  /** 방문마다 무료 영어 원서 미리보기 4권 랜덤 */
+  function renderFreeBooksRandom() {
+    var root =
+      document.getElementById('rd-free-books-grid') ||
+      document.querySelector('.rd-free-books .rd-free-books-grid');
+    if (!root) return Promise.resolve();
+    return fetch('data/free-books.json?v=20261105n100', { cache: 'no-store' })
+      .then(function (r) {
+        if (!r.ok) throw new Error('free-books HTTP ' + r.status);
+        return r.json();
+      })
+      .then(function (data) {
+        var books = data && Array.isArray(data.books) ? data.books : [];
+        if (!books.length) return;
+        root.innerHTML = pickRandom(books, 4)
+          .map(function (book) {
+            var id = String(book.id || '').trim();
+            if (!/^\d+$/.test(id)) return '';
+            var title = String(book.title || '').trim();
+            var author = String(book.author || '').trim();
+            var href = 'https://www.gutenberg.org/ebooks/' + id;
+            var tone = freeBookCoverTone(id + title);
+            return (
+              '<li class="rd-free-book">' +
+              '<a class="rd-free-book-cover rd-free-book-cover--' +
+              tone +
+              '" href="' +
+              esc(href) +
+              '" target="_blank" rel="noopener noreferrer" aria-label="' +
+              esc(title) +
+              ' - 외부 사이트에서 무료로 읽기">' +
+              '<span class="rd-free-book-cover-title">' +
+              esc(title) +
+              '</span>' +
+              '<span class="rd-free-book-cover-author">' +
+              esc(author) +
+              '</span>' +
+              '</a>' +
+              '</li>'
+            );
+          })
+          .join('');
+      })
+      .catch(function () {
+        /* 정적 폴백 유지 */
+      });
+  }
+
   function boot() {
     fillDateBar();
+    renderDirPreviewRandom();
+    renderFreeBooksRandom();
     if (!window.HomeBoardPreview) return;
 
     Promise.all([
