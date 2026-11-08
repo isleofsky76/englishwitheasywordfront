@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>수험영어 단어 테스트 | 시사영단어</title>
-<meta name="description" content="초등·중등·고등 영어 단어를 4지선다로 끝없이 풀어 보는 단어 테스트">
+<title>04 수험영어 | 시사영단어</title>
+<meta name="description" content="초등·중등·고등 기본 어휘를 10문제씩 4지선다로 푸는 수험영어 테스트">
 <link rel="canonical" href="https://englisheasystudy.com/exam-words.html">
 <meta name="google-adsense-account" content="ca-pub-6108574897789788">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6108574897789788" crossorigin="anonymous"></script>
@@ -35,10 +35,15 @@
   .score{display:flex;gap:14px;align-items:center;font-size:14px;color:var(--muted);flex-wrap:wrap}
   .score b{color:var(--ink)}
   .score .o b{color:var(--ok)} .score .x b{color:var(--no)}
+  .score .pts b{color:var(--blue);font-size:16px}
   .score button{margin-left:auto;min-height:36px;padding:0 12px;border:1px solid #D1D5DB;background:#fff;border-radius:8px;
                 font:inherit;font-size:13px;cursor:pointer;color:var(--ink)}
+  .modes{display:flex;gap:6px}
+  .modes button{min-height:36px;padding:0 14px;border:1px solid #D1D5DB;background:#fff;border-radius:8px;
+                font:inherit;font-size:13px;cursor:pointer;color:#374151}
+  .modes button[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink);font-weight:700}
 
-  main{max-width:760px;margin:0 auto;padding:16px 16px 80px;display:flex;flex-direction:column;gap:12px}
+  main{max-width:760px;margin:0 auto;padding:16px 16px 40px;display:flex;flex-direction:column;gap:12px}
   .q{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;position:relative}
   .q-head{display:flex;align-items:center;gap:10px;margin-bottom:12px;padding-right:44px}
   .num{font-size:13px;font-weight:700;color:var(--muted);min-width:28px}
@@ -65,7 +70,13 @@
     .opts{grid-template-columns:repeat(4,minmax(0,1fr))}
     .word{font-size:30px}
   }
-  #more{text-align:center;color:var(--muted);font-size:13px;padding:16px}
+  .pager{max-width:760px;margin:0 auto 48px;padding:8px 16px 24px;display:flex;flex-wrap:wrap;gap:6px;justify-content:center;align-items:center}
+  .pager button,.pager span{min-width:40px;min-height:40px;padding:0 10px;border:1px solid #D1D5DB;background:#fff;border-radius:10px;
+                            font:inherit;font-size:14px;cursor:pointer;color:var(--ink)}
+  .pager button[aria-current="page"]{background:var(--blue);color:#fff;border-color:var(--blue);font-weight:900}
+  .pager button:disabled{opacity:.4;cursor:default}
+  .pager .ellipsis{border:none;background:transparent;min-width:24px;cursor:default;color:var(--muted)}
+  .status{text-align:center;color:var(--muted);font-size:13px;padding:4px 16px 0}
   .sr{position:absolute;left:-9999px}
 </style>
 </head>
@@ -75,23 +86,28 @@
 <header class="top">
   <div class="top-in">
     <div class="brand">
-      <a href="index.html">시사영단어 · 04 수험영어</a>
-      <span>뜻을 골라 보세요</span>
+      <a href="index.html">04 수험영어</a>
+      <span>10문제 · 100점</span>
     </div>
-    <nav class="tabs" aria-label="학년 선택">
-      <!-- 탭은 DB의 분류(exam_categories)로 자동 생성됩니다 -->
+    <nav class="tabs" aria-label="분류 선택">
+      <!-- 탭은 DB 분류(+ 랜덤)로 자동 생성 -->
     </nav>
+    <div class="modes" role="group" aria-label="출제 순서">
+      <button type="button" id="orderSeq" aria-pressed="false">순서대로</button>
+      <button type="button" id="orderRand" aria-pressed="true">랜덤</button>
+    </div>
     <div class="score" aria-live="polite">
       <span class="o">맞음 <b id="sO">0</b></span>
       <span class="x">틀림 <b id="sX">0</b></span>
-      <span>정답률 <b id="sR">-</b></span>
-      <button type="button" id="reset">처음부터</button>
+      <span class="pts">점수 <b id="sPts">0</b>/100</span>
+      <button type="button" id="reset">이 세트 다시</button>
     </div>
   </div>
 </header>
 
 <main id="list"></main>
-<div id="more">스크롤하면 문제가 계속 나와요</div>
+<p class="status" id="status">불러오는 중…</p>
+<nav class="pager" id="pager" aria-label="문제 세트 페이지"></nav>
 
 <script src="page30-api-config.js?v=20260721"></script>
 <script src="site-masthead.js?v=20261108wx5"></script>
@@ -474,88 +490,160 @@ withdraw|철회하다, 인출하다`
 const API_BASE = (typeof window.getPage30ApiBaseUrl === 'function'
   ? window.getPage30ApiBaseUrl()
   : 'https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app') + '/api/exam';
-const FETCH_SIZE = 40;            // 한 번에 DB에서 가져올 랜덤 단어 수
-const BATCH      = 10;            // 스크롤마다 붙는 문제 수
+const PAGE_SIZE = 10;             // 한 세트 = 10문제 = 100점
+const POINT_EACH = 10;
 const FALLBACK_CATS = [
-  { slug: 'elem', name: '초등영어' }, { slug: 'middle', name: '중등영어' }, { slug: 'high', name: '고등영어' }
+  { slug: 'elem', name: '초등' },
+  { slug: 'middle', name: '중등' },
+  { slug: 'high', name: '고등' },
+  { slug: 'all', name: '랜덤' }
 ];
 
 const FALLBACK = {};
 for (const k in DATA) {
   FALLBACK[k] = DATA[k].split('\n').map(l => l.trim()).filter(Boolean).map(l => {
-    const i = l.indexOf('|'); return { id: k + ':' + l.slice(0, i).trim(), word: l.slice(0, i).trim(), meaning: l.slice(i + 1).trim() };
+    const i = l.indexOf('|');
+    return { id: k + ':' + l.slice(0, i).trim(), word: l.slice(0, i).trim(), meaning: l.slice(i + 1).trim() };
   });
 }
+FALLBACK.all = [].concat(FALLBACK.elem || [], FALLBACK.middle || [], FALLBACK.high || []);
 
-const list = document.getElementById('list'), more = document.getElementById('more'), nav = document.querySelector('.tabs');
-const sO = document.getElementById('sO'), sX = document.getElementById('sX'), sR = document.getElementById('sR');
-let cats = [], level, pool, queue, recent, qn, ok, no, gen = 0, useApi = true, loading = null, adding = false;
+const list = document.getElementById('list');
+const statusEl = document.getElementById('status');
+const pager = document.getElementById('pager');
+const nav = document.querySelector('.tabs');
+const sO = document.getElementById('sO');
+const sX = document.getElementById('sX');
+const sPts = document.getElementById('sPts');
+const btnSeq = document.getElementById('orderSeq');
+const btnRand = document.getElementById('orderRand');
 
-function shuffle(a) { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+let cats = [];
+let level = 'elem';
+let order = 'random';   // seq | random
+let page = 1;
+let pages = 1;
+let pool = [];
+let ok = 0;
+let no = 0;
+let gen = 0;
+let useApi = true;
+let loading = false;
+
+function shuffle(a) {
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+function shortName(name) {
+  return String(name || '').replace(/영어\s*$/u, '').trim() || name;
+}
 async function getJSON(url) {
   const r = await fetch(url, { headers: { Accept: 'application/json' } });
   if (!r.ok) throw new Error('HTTP ' + r.status);
   return r.json();
 }
+function parseHash() {
+  const raw = (location.hash || '').replace(/^#/, '').trim();
+  if (!raw) return { cat: '', page: 1 };
+  const parts = raw.split(/[/?&]/);
+  const cat = parts[0] || '';
+  let p = 1;
+  const m = raw.match(/(?:^|[/?&])p(?:age)?=(\d+)/i) || raw.match(/\/(\d+)$/);
+  if (m) p = Math.max(1, parseInt(m[1], 10) || 1);
+  return { cat, page: p };
+}
+function setHash(cat, p) {
+  const h = '#' + cat + (p > 1 ? '/p=' + p : '');
+  if (location.hash !== h) history.replaceState(null, '', h);
+}
+function updateScore() {
+  sO.textContent = ok;
+  sX.textContent = no;
+  sPts.textContent = ok * POINT_EACH;
+}
+function syncOrderButtons() {
+  btnSeq.setAttribute('aria-pressed', order === 'seq' ? 'true' : 'false');
+  btnRand.setAttribute('aria-pressed', order === 'random' ? 'true' : 'false');
+}
 
-/* 분류 목록: DB의 exam_categories → 탭 */
 async function loadCategories() {
   try {
     const d = await getJSON(API_BASE + '/categories');
-    cats = (Array.isArray(d) ? d : d.categories || []).filter(c => c && c.slug && c.name);
+    cats = (Array.isArray(d) ? d : d.categories || [])
+      .filter(c => c && c.slug && c.name)
+      .map(c => ({ slug: c.slug, name: shortName(c.name) }));
     if (!cats.length) throw new Error('empty');
   } catch (e) {
-    console.warn('[수험영어] 분류 API 연결 실패, 예비 단어 사용:', e.message);
-    useApi = false; cats = FALLBACK_CATS;
+    console.warn('[수험영어] 분류 API 실패, 예비 사용:', e.message);
+    useApi = false;
+    cats = FALLBACK_CATS.slice();
   }
+  if (!cats.some(c => c.slug === 'all')) cats.push({ slug: 'all', name: '랜덤' });
   nav.innerHTML = '';
   for (const c of cats) {
     const a = document.createElement('a');
-    a.href = '#' + c.slug; a.dataset.level = c.slug; a.textContent = c.name;
+    a.href = '#' + c.slug;
+    a.dataset.level = c.slug;
+    a.textContent = c.name;
     nav.appendChild(a);
   }
   nav.style.overflowX = 'auto';
 }
 
-/* 랜덤 단어 가져오기: DB → 실패하면 예비 단어 */
-function fetchWords() {
-  if (loading) return loading;
-  const my = gen;
-  loading = (async () => {
-    let words = null;
-    if (useApi) {
-      try {
-        const d = await getJSON(API_BASE + '/words?cat=' + encodeURIComponent(level) + '&limit=' + FETCH_SIZE);
-        words = Array.isArray(d) ? d : d.words;
-      } catch (e) { console.warn('[수험영어] 단어 API 실패:', e.message); }
-    }
-    if (!words) words = shuffle((FALLBACK[level] || []).slice()).slice(0, FETCH_SIZE);
-    if (my !== gen) return;
-    const fresh = words.filter(w => w && w.word && w.meaning)
-      .map(w => ({ id: String(w.id ?? (w.word + '|' + w.meaning)), en: w.word, ko: w.meaning }));
-    const before = queue.length;
-    for (const w of fresh) {
-      if (!pool.some(p => p.id === w.id)) pool.push(w);
-      if (!recent.includes(w.id) && !queue.some(q => q.id === w.id)) queue.push(w);
-    }
-    if (queue.length === before) queue.push(...fresh);   // 단어가 적은 분류: 최근 것도 다시 출제
-  })().finally(() => { loading = null; });
-  return loading;
+function fallbackPage(cat, p, ord) {
+  let src = (FALLBACK[cat] || []).slice();
+  if (ord === 'seq') {
+    src.sort((a, b) => a.word.localeCompare(b.word) || a.id.localeCompare(b.id));
+  } else {
+    src = shuffle(src);
+  }
+  const total = src.length;
+  const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
+  const safe = Math.min(Math.max(1, p), totalPages);
+  const slice = ord === 'seq'
+    ? src.slice((safe - 1) * PAGE_SIZE, safe * PAGE_SIZE)
+    : src.slice(0, PAGE_SIZE);
+  return { words: slice, total, page: safe, pages: totalPages };
 }
 
-function nextWord() {
-  const w = queue.shift();
-  recent.push(w.id);
-  const keep = Math.min(30, Math.floor(pool.length / 2));
-  while (recent.length > keep) recent.shift();
-  return w;
+async function fetchSet(cat, p) {
+  if (useApi) {
+    try {
+      const q = new URLSearchParams({
+        cat,
+        limit: String(PAGE_SIZE),
+        page: String(p),
+        order,
+        mode: 'en2ko'
+      });
+      const d = await getJSON(API_BASE + '/words?' + q.toString());
+      const words = Array.isArray(d) ? d : d.words;
+      return {
+        words: words || [],
+        total: d.total || (words || []).length,
+        page: d.page || p,
+        pages: d.pages || 1
+      };
+    } catch (e) {
+      console.warn('[수험영어] 단어 API 실패:', e.message);
+    }
+  }
+  return fallbackPage(cat, p, order);
 }
 
 function choices(answer) {
-  const seen = new Set([answer.ko]), picked = [];
-  const cands = shuffle(pool.slice()).concat(shuffle(Object.values(FALLBACK).flat().map(w => ({ ko: w.meaning }))));
+  const seen = new Set([answer.ko]);
+  const picked = [];
+  const cands = shuffle(pool.slice()).concat(
+    shuffle(Object.values(FALLBACK).flat().map(w => ({ ko: w.meaning })))
+  );
   for (const w of cands) {
-    if (!seen.has(w.ko)) { seen.add(w.ko); picked.push(w.ko); }
+    if (!w.ko || seen.has(w.ko)) continue;
+    seen.add(w.ko);
+    picked.push(w.ko);
     if (picked.length === 3) break;
   }
   return shuffle([answer.ko, ...picked]);
@@ -564,17 +652,18 @@ function choices(answer) {
 function speak(text) {
   if (!('speechSynthesis' in window)) return;
   speechSynthesis.cancel();
-  const u = new SpeechSynthesisUtterance(text); u.lang = 'en-US'; u.rate = 0.9;
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = 'en-US';
+  u.rate = 0.9;
   speechSynthesis.speak(u);
 }
 
-function makeCard(w) {
+function makeCard(w, num) {
   const opts = choices(w);
-  qn++;
   const card = document.createElement('article');
   card.className = 'q';
   card.innerHTML =
-    '<div class="q-head"><span class="num">' + qn + '</span>' +
+    '<div class="q-head"><span class="num">' + num + '</span>' +
     '<span class="word"></span>' +
     '<button type="button" class="say" aria-label="발음 듣기"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg></button></div>' +
     '<ol class="opts"></ol>';
@@ -584,12 +673,14 @@ function makeCard(w) {
   const btns = opts.map((ko, i) => {
     const li = document.createElement('li');
     const b = document.createElement('button');
-    b.type = 'button'; b.className = 'opt';
+    b.type = 'button';
+    b.className = 'opt';
     b.innerHTML = '<span class="n">' + (i + 1) + '.</span><span class="t"></span><span class="ox" aria-hidden="true"></span>';
     b.querySelector('.t').textContent = ko;
     b.dataset.right = ko === w.ko ? '1' : '';
     b.onclick = () => answer(card, btns, b, ko === w.ko, w);
-    li.appendChild(b); ol.appendChild(li);
+    li.appendChild(b);
+    ol.appendChild(li);
     return b;
   });
   list.appendChild(card);
@@ -600,51 +691,142 @@ function answer(card, btns, chosen, right, w) {
   card.classList.add('done');
   btns.forEach(b => { b.disabled = true; });
   const correctBtn = btns.find(b => b.dataset.right);
-  correctBtn.classList.add('correct'); correctBtn.querySelector('.ox').textContent = 'O';
-  if (!right) { chosen.classList.add('wrong'); chosen.querySelector('.ox').textContent = 'X'; }
+  correctBtn.classList.add('correct');
+  correctBtn.querySelector('.ox').textContent = 'O';
+  if (!right) {
+    chosen.classList.add('wrong');
+    chosen.querySelector('.ox').textContent = 'X';
+  }
   const m = document.createElement('span');
-  m.className = 'mark ' + (right ? 'o' : 'x'); m.textContent = right ? 'O' : 'X';
+  m.className = 'mark ' + (right ? 'o' : 'x');
+  m.textContent = right ? 'O' : 'X';
   m.setAttribute('aria-label', right ? '정답' : '오답, 정답은 ' + w.ko);
   card.appendChild(m);
   right ? ok++ : no++;
-  sO.textContent = ok; sX.textContent = no;
-  sR.textContent = Math.round(ok / (ok + no) * 100) + '%';
+  updateScore();
 }
 
-async function addBatch() {
-  if (adding) return;
-  adding = true;
-  const my = gen;
-  try {
-    for (let i = 0; i < BATCH; i++) {
-      if (!queue.length) await fetchWords();
-      if (my !== gen) return;
-      if (!queue.length) break;
-      makeCard(nextWord());
+function pageWindow(cur, total) {
+  if (total <= 9) {
+    const a = [];
+    for (let i = 1; i <= total; i++) a.push(i);
+    return a;
+  }
+  const set = new Set([1, total, cur, cur - 1, cur + 1, cur - 2, cur + 2]);
+  const nums = [...set].filter(n => n >= 1 && n <= total).sort((a, b) => a - b);
+  const out = [];
+  for (let i = 0; i < nums.length; i++) {
+    if (i && nums[i] - nums[i - 1] > 1) out.push('…');
+    out.push(nums[i]);
+  }
+  return out;
+}
+
+function renderPager() {
+  pager.innerHTML = '';
+  if (pages < 1) return;
+  const prev = document.createElement('button');
+  prev.type = 'button';
+  prev.textContent = '이전';
+  prev.disabled = page <= 1;
+  prev.onclick = () => goPage(page - 1);
+  pager.appendChild(prev);
+
+  for (const item of pageWindow(page, pages)) {
+    if (item === '…') {
+      const span = document.createElement('span');
+      span.className = 'ellipsis';
+      span.textContent = '…';
+      pager.appendChild(span);
+      continue;
     }
-    if (queue.length < 15) fetchWords();          // 미리 다음 단어 받아 두기
-    more.textContent = qn ? '스크롤하면 문제가 계속 나와요' : '이 분류에는 아직 단어가 없어요';
-  } finally { adding = false; }
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.textContent = String(item);
+    if (item === page) b.setAttribute('aria-current', 'page');
+    b.onclick = () => goPage(item);
+    pager.appendChild(b);
+  }
+
+  const next = document.createElement('button');
+  next.type = 'button';
+  next.textContent = '다음';
+  next.disabled = page >= pages;
+  next.onclick = () => goPage(page + 1);
+  pager.appendChild(next);
 }
 
-async function start(lv) {
-  gen++; loading = null; adding = false;
-  level = cats.some(c => c.slug === lv) ? lv : cats[0].slug;
-  pool = []; queue = []; recent = []; qn = 0; ok = 0; no = 0;
-  sO.textContent = 0; sX.textContent = 0; sR.textContent = '-';
-  list.innerHTML = ''; more.textContent = '단어를 불러오는 중…';
+function goPage(p) {
+  const safe = Math.min(Math.max(1, p), pages || 1);
+  setHash(level, safe);
+  loadSet(level, safe);
+}
+
+async function loadSet(cat, p) {
+  const my = ++gen;
+  level = cats.some(c => c.slug === cat) ? cat : (cats[0] && cats[0].slug) || 'elem';
+  page = Math.max(1, p || 1);
+  ok = 0;
+  no = 0;
+  updateScore();
+  list.innerHTML = '';
+  statusEl.textContent = '불러오는 중…';
+  pager.innerHTML = '';
   nav.querySelectorAll('a').forEach(a => {
-    if (a.dataset.level === level) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
+    if (a.dataset.level === level) a.setAttribute('aria-current', 'page');
+    else a.removeAttribute('aria-current');
   });
+  setHash(level, page);
+  syncOrderButtons();
   window.scrollTo(0, 0);
-  await addBatch(); await addBatch();
+
+  loading = true;
+  try {
+    const data = await fetchSet(level, page);
+    if (my !== gen) return;
+    page = data.page || page;
+    pages = data.pages || 1;
+    const words = (data.words || [])
+      .filter(w => w && w.word && w.meaning)
+      .map(w => ({ id: String(w.id ?? (w.word + '|' + w.meaning)), en: w.word, ko: w.meaning }));
+    pool = words.slice();
+    if (!words.length) {
+      statusEl.textContent = '이 분류에는 아직 단어가 없어요';
+      return;
+    }
+    words.forEach((w, i) => makeCard(w, i + 1));
+    statusEl.textContent =
+      (order === 'seq' ? '순서대로' : '랜덤') +
+      ' · ' + page + ' / ' + pages + '세트 · 맞으면 +' + POINT_EACH + '점';
+    renderPager();
+  } finally {
+    loading = false;
+  }
 }
 
-new IntersectionObserver(es => { if (es[0].isIntersecting && level) addBatch(); }, { rootMargin: '800px' })
-  .observe(more);
-window.addEventListener('hashchange', () => start(location.hash.slice(1)));
-document.getElementById('reset').onclick = () => start(level);
-loadCategories().then(() => start(location.hash.slice(1)));
+function onHash() {
+  const { cat, page: p } = parseHash();
+  loadSet(cat, p);
+}
+
+btnSeq.onclick = () => {
+  order = 'seq';
+  syncOrderButtons();
+  loadSet(level, 1);
+};
+btnRand.onclick = () => {
+  order = 'random';
+  syncOrderButtons();
+  loadSet(level, 1);
+};
+document.getElementById('reset').onclick = () => loadSet(level, page);
+window.addEventListener('hashchange', onHash);
+
+loadCategories().then(() => {
+  const { cat, page: p } = parseHash();
+  const startCat = cats.some(c => c.slug === cat) ? cat : cats[0].slug;
+  loadSet(startCat, cat ? p : 1);
+});
 </script>
 </body>
 </html>

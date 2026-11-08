@@ -4,7 +4,7 @@
  * nav-home-menu.js 가 로드함
  */
 (function () {
-    var VERSION = '20261108exam1';
+    var VERSION = '20261108exam2';
 
   var DICT_LOOKUP_VER = '20261104dict1';
   var DICT_LOOKUP_CONTAINERS = [
@@ -129,9 +129,10 @@
       tone: 'exam',
       pages: ['exam-words.html'],
       children: [
-        { href: 'exam-words.html#elem', label: '초등영어', tone: 'exam', pages: ['exam-words.html'] },
-        { href: 'exam-words.html#middle', label: '중등영어', tone: 'exam', pages: ['exam-words.html'] },
-        { href: 'exam-words.html#high', label: '고등영어', tone: 'exam', pages: ['exam-words.html'] }
+        { href: 'exam-words.html#elem', label: '초등', tone: 'exam', pages: ['exam-words.html'] },
+        { href: 'exam-words.html#middle', label: '중등', tone: 'exam', pages: ['exam-words.html'] },
+        { href: 'exam-words.html#high', label: '고등', tone: 'exam', pages: ['exam-words.html'] },
+        { href: 'exam-words.html#all', label: '랜덤', tone: 'exam', pages: ['exam-words.html'] }
       ]
     },
     {
