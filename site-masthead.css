@@ -270,6 +270,13 @@
   font-weight: 600;
 }
 
+/* 하위 메뉴 — 데스크톱은 숨기고, 모바일 펼침 목록에서만 표시 */
+.site-masthead .nav-sub {
+  display: none;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
 .site-masthead .nav-more {
   position: relative;
 }
@@ -412,6 +419,23 @@
     gap: 12px;
     width: 100%;
   }
+  .site-masthead.is-nav-open .nav-sub {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    margin: 6px 0 4px;
+    padding: 0 0 0 14px;
+    border-left: 2px solid rgba(22, 24, 29, 0.12);
+  }
+  .site-masthead.is-nav-open .nav-sub .nav-link {
+    font-size: 15px;
+    font-weight: 500;
+    opacity: 0.92;
+  }
+  .site-masthead.is-nav-open .nav-item.has-subnav > .nav-link {
+    font-weight: 700;
+  }
   .site-masthead .site-masthead-search {
     width: 100%;
     order: 3;
@@ -455,6 +479,9 @@
     padding: 0 !important;
     font-size: inherit !important;
     white-space: normal;
+  }
+  .site-masthead.is-nav-open .nav-more-menu .nav-link.nav-dup {
+    display: none !important;
   }
 }
 

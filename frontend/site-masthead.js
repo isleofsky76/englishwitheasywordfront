@@ -4,7 +4,7 @@
  * nav-home-menu.js 가 로드함
  */
 (function () {
-    var VERSION = '20261108wx3';
+    var VERSION = '20261108wx4';
 
   var DICT_LOOKUP_VER = '20261104dict1';
   var DICT_LOOKUP_CONTAINERS = [
@@ -44,7 +44,7 @@
     s.setAttribute('data-dict-lookup', '1');
     document.body.appendChild(s);
   }
-  /* 시안 주 메뉴 — href는 기존 URL 유지 */
+  /* 시안 주 메뉴 — children은 모바일에서 부모 아래 들여쓰기 (index 칩 순서) */
   var PRIMARY_NAV_ITEMS = [
     {
       href: 'news-voca-list.html',
@@ -69,10 +69,35 @@
         'ukraine-news-list.html', 'ukraine-news.html',
         'culture-voca-list.html', 'culture-voca.html',
         'ranking-news-list.html', 'ranking-news.html'
+      ],
+      children: [
+        { href: 'news-voca-list.html', label: '국제', tone: 'news', pages: ['news-voca-list.html', 'news-voca.html'] },
+        { href: 'korea-news-list.html', label: '한국', tone: 'defense', pages: ['korea-news-list.html', 'korea-news.html'] },
+        { href: 'defense-news-list.html', label: '국방', tone: 'defense', pages: ['defense-news-list.html', 'defense-news.html'] },
+        { href: 'economy-news-list.html', label: '경제', tone: 'news', pages: ['economy-news-list.html', 'economy-news.html'] },
+        { href: 'sports-news-list.html', label: '스포츠', tone: 'news', pages: ['sports-news-list.html', 'sports-news.html'] },
+        { href: 'us-news-list.html', label: '미국', tone: 'news', pages: ['us-news-list.html', 'us-news.html'] },
+        { href: 'industry-news-list.html', label: '산업', tone: 'news', pages: ['industry-news-list.html', 'industry-news.html'] },
+        { href: 'culture-voca-list.html', label: '컬쳐', tone: 'culture', pages: ['culture-voca-list.html', 'culture-voca.html'] }
       ]
     },
-    { href: 'word-of-the-day-list.html?api=prod', label: '단어장', tone: 'wotd', pages: ['word-of-the-day-list.html', 'word-of-the-day.html'] },
-    { href: 'one-sentence.html', label: '문장', tone: 'osent', pages: ['one-sentence.html'] },
+    {
+      href: 'word-of-the-day-list.html?api=prod',
+      label: '단어장',
+      tone: 'wotd',
+      pages: [
+        'word-of-the-day-list.html', 'word-of-the-day.html',
+        'english-synonym-list.html', 'english-synonym.html',
+        'one-sentence.html',
+        'vocabulary-quiz-list.html', 'vocabulary-quiz.html'
+      ],
+      children: [
+        { href: 'english-synonym-list.html', label: '연관단어', tone: 'syn', pages: ['english-synonym-list.html', 'english-synonym.html'] },
+        { href: 'one-sentence.html', label: '문장', tone: 'osent', pages: ['one-sentence.html'] },
+        { href: 'vocabulary-quiz-list.html', label: '퀴즈', tone: 'quiz', pages: ['vocabulary-quiz-list.html', 'vocabulary-quiz.html'] },
+        { href: 'word-of-the-day-list.html?api=prod', label: '단어장', tone: 'wotd', pages: ['word-of-the-day-list.html', 'word-of-the-day.html'] }
+      ]
+    },
     {
       href: 'popular-voca-list.html',
       label: '표현',
@@ -82,10 +107,18 @@
         'daily-english.html',
         'english-writing.html',
         'situational-english-list.html', 'situational-english.html',
-        'pros-cons-list.html', 'pros-cons.html'
+        'pros-cons-list.html', 'pros-cons.html',
+        'photo-english-list.html', 'photo-english.html'
+      ],
+      children: [
+        { href: 'popular-voca-list.html', label: '이럴 땐 영어로?', tone: 'popular', pages: ['popular-voca-list.html', 'popular-voca.html'] },
+        { href: 'daily-english.html', label: '생활 영어 한 줄', tone: 'daily', pages: ['daily-english.html'] },
+        { href: 'english-writing.html', label: '영작', tone: 'daily', pages: ['english-writing.html'] },
+        { href: 'situational-english-list.html', label: '상황', tone: 'sit', pages: ['situational-english-list.html', 'situational-english.html'] },
+        { href: 'pros-cons-list.html', label: 'Pros & Cons', tone: 'pros', pages: ['pros-cons-list.html', 'pros-cons.html'] },
+        { href: 'photo-english-list.html', label: '포토', tone: 'photo', pages: ['photo-english-list.html', 'photo-english.html'] }
       ]
     },
-    { href: 'vocabulary-quiz-list.html', label: '퀴즈', tone: 'quiz', pages: ['vocabulary-quiz-list.html', 'vocabulary-quiz.html'] },
     {
       href: 'english-directory.html',
       label: '학습사이트',
@@ -99,35 +132,17 @@
       pages: ['dashboard.html', 'word-ranking.html']
     }
   ];
-  /* 더보기(햄버거) — 뉴스 → 단어 → 표현 → 읽을거리 → 기타(대시보드↓) */
+  /* 더보기 — 데스크톱용. mobileDup는 모바일에서 하위메뉴와 겹치므로 숨김 */
   var EXTRA_NAV_ITEMS = [
     { href: 'index.html', label: '홈', tone: 'home', pages: ['index.html', ''] },
-    /* 뉴스 */
-    { href: 'news-voca-list.html', label: '국제', tone: 'news', pages: ['news-voca-list.html', 'news-voca.html'] },
-    { href: 'defense-news-list.html', label: '국방', tone: 'defense', pages: ['defense-news-list.html', 'defense-news.html'] },
-    { href: 'economy-news-list.html', label: '경제', tone: 'news', pages: ['economy-news-list.html', 'economy-news.html'] },
-    { href: 'sports-news-list.html', label: '스포츠', tone: 'news', pages: ['sports-news-list.html', 'sports-news.html'] },
-    { href: 'us-news-list.html', label: '미국', tone: 'news', pages: ['us-news-list.html', 'us-news.html'] },
-    { href: 'industry-news-list.html', label: '산업', tone: 'news', pages: ['industry-news-list.html', 'industry-news.html'] },
-    { href: 'korea-news-list.html', label: '한국', tone: 'defense', pages: ['korea-news-list.html', 'korea-news.html'] },
-    { href: 'culture-voca-list.html', label: '컬쳐', tone: 'culture', pages: ['culture-voca-list.html', 'culture-voca.html'] },
-    /* 단어 */
-    { href: 'english-synonym-list.html', label: '연관단어', tone: 'syn', pages: ['english-synonym-list.html', 'english-synonym.html'] },
-    /* 표현 */
-    { href: 'daily-english.html', label: '생활 영어 한 줄', tone: 'daily', pages: ['daily-english.html'] },
-    { href: 'english-writing.html', label: '영작', tone: 'daily', pages: ['english-writing.html'] },
-    { href: 'situational-english-list.html', label: '상황', tone: 'sit', pages: ['situational-english-list.html', 'situational-english.html'] },
-    { href: 'pros-cons-list.html', label: 'Pros & Cons', tone: 'pros', pages: ['pros-cons-list.html', 'pros-cons.html'] },
-    /* 읽을거리 */
+    { href: 'english-synonym-list.html', label: '연관단어', tone: 'syn', pages: ['english-synonym-list.html', 'english-synonym.html'], mobileDup: true },
+    { href: 'one-sentence.html', label: '문장', tone: 'osent', pages: ['one-sentence.html'], mobileDup: true },
+    { href: 'vocabulary-quiz-list.html', label: '퀴즈', tone: 'quiz', pages: ['vocabulary-quiz-list.html', 'vocabulary-quiz.html'], mobileDup: true },
     { href: 'shorts-bg-image-list.html', label: '신문읽는 이미지', tone: 'sbgi', pages: ['shorts-bg-image-list.html', 'shorts-bg-image.html'] },
     { href: 'english-opinions-list.html', label: '오피니언', tone: 'opine', pages: ['english-opinions-list.html', 'english-opinions.html'] },
     { href: 'calm-mind-list.html', label: '마음글', tone: 'calm', pages: ['calm-mind-list.html', 'calm-mind.html'] },
-    { href: 'photo-english-list.html', label: '포토', tone: 'photo', pages: ['photo-english-list.html', 'photo-english.html'] },
     { href: 'english-quotes-list.html', label: '영어 명언', tone: 'quote', pages: ['english-quotes-list.html', 'english-quotes.html'] },
-    /* 기타 — 우선순위 아래 */
-    { href: 'english-directory.html', label: '학습사이트', tone: 'dir', pages: ['english-directory.html'] },
-    { href: 'free-books.html', label: '무료 영어 원서', tone: 'books', pages: ['free-books.html'] },
-    { href: 'dashboard.html', label: '대시보드', tone: 'dash', pages: ['dashboard.html', 'word-ranking.html'] }
+    { href: 'free-books.html', label: '무료 영어 원서', tone: 'books', pages: ['free-books.html'] }
   ];
   var NAV_ITEMS = PRIMARY_NAV_ITEMS.concat(EXTRA_NAV_ITEMS);
 
@@ -264,15 +279,33 @@
   function navItemHtml(base, page, item) {
     var active = isActive(item, page);
     var cls = 'nav-link nav-tone-' + item.tone + (active ? ' active' : '');
+    if (item.mobileDup) cls += ' nav-dup';
     var aria = active ? ' aria-current="page"' : '';
     return '<a class="' + cls + '" href="' + base + item.href + '"' + aria + '>' + item.label + '</a>';
+  }
+
+  function navChildrenHtml(base, page, children) {
+    if (!children || !children.length) return '';
+    return (
+      '<ul class="nav-sub">' +
+      children.map(function (child) {
+        return '<li class="nav-sub-item">' + navItemHtml(base, page, child) + '</li>';
+      }).join('') +
+      '</ul>'
+    );
   }
 
   function buildNavHtml(base, page) {
     var primary = PRIMARY_NAV_ITEMS;
     var extra = EXTRA_NAV_ITEMS;
     var html = primary.map(function (item) {
-      return '<li class="nav-item">' + navItemHtml(base, page, item) + '</li>';
+      var hasSub = item.children && item.children.length;
+      return (
+        '<li class="nav-item' + (hasSub ? ' has-subnav' : '') + '">' +
+          navItemHtml(base, page, item) +
+          navChildrenHtml(base, page, item.children) +
+        '</li>'
+      );
     }).join('');
     if (!extra.length) return html;
     var extraActive = extra.some(function (item) { return isActive(item, page); });
