@@ -4,7 +4,7 @@
  * nav-home-menu.js 가 로드함
  */
 (function () {
-    var VERSION = '20261108wx2';
+    var VERSION = '20261108wx3';
 
   var DICT_LOOKUP_VER = '20261104dict1';
   var DICT_LOOKUP_CONTAINERS = [
@@ -614,6 +614,10 @@
     }
   }
 
+  function isMobileNav() {
+    return window.matchMedia && window.matchMedia('(max-width: 900px)').matches;
+  }
+
   function bindMoreMenu(nav) {
     var more = nav.querySelector('.nav-more');
     if (!more || more.dataset.bound === '1') return;
@@ -625,22 +629,34 @@
     function setOpen(open) {
       more.classList.toggle('is-open', open);
       toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-      menu.hidden = !open;
+      /* 모바일에서는 CSS로 항상 펼치므로 hidden만 데스크톱 드롭다운에 사용 */
+      menu.hidden = isMobileNav() ? false : !open;
+    }
+
+    function syncMobileMore() {
+      if (isMobileNav()) setOpen(true);
+      else if (!more.classList.contains('is-open')) menu.hidden = true;
     }
 
     toggle.addEventListener('click', function (e) {
       e.preventDefault();
       e.stopPropagation();
+      if (isMobileNav()) return; /* 모바일은 상단 햄버거만 사용 */
       setOpen(menu.hidden);
     });
 
     document.addEventListener('click', function (e) {
+      if (isMobileNav()) return;
       if (!more.contains(e.target)) setOpen(false);
     });
 
     document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') setOpen(false);
+      if (e.key === 'Escape' && !isMobileNav()) setOpen(false);
     });
+
+    window.addEventListener('resize', syncMobileMore);
+    syncMobileMore();
+    more._syncMobileMore = syncMobileMore;
   }
 
   function bindMobileToggle(nav) {
@@ -651,6 +667,8 @@
       var open = !nav.classList.contains('is-nav-open');
       nav.classList.toggle('is-nav-open', open);
       btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      var more = nav.querySelector('.nav-more');
+      if (more && typeof more._syncMobileMore === 'function') more._syncMobileMore();
       syncNavbarHeight();
     });
   }
