@@ -27,8 +27,8 @@ export const BOARD_SEO = {
       { file: 'redesign-article.css', version: '20261104syn2' },
     ],
     extraJs: [
-      { file: 'board-comments.js', version: '20261107cmt2' },
-      { file: 'redesign-article.js', version: '20261104syn2' },
+      { file: 'board-comments.js', version: '20261108pw25' },
+      { file: 'redesign-article.js', version: '20261108tts1' },
     ],
   },
   'cooking-voca': {
@@ -42,7 +42,7 @@ export const BOARD_SEO = {
       { file: 'cooking-voca.css', version: '20260616b' },
       { file: 'redesign-article.css', version: '20261104syn2' },
     ],
-    extraJs: [{ file: 'redesign-article.js', version: '20261104syn2' }],
+    extraJs: [{ file: 'redesign-article.js', version: '20261108tts1' }],
   },
   'culture-voca': {
     label: 'Culture Voca',
@@ -55,7 +55,7 @@ export const BOARD_SEO = {
       { file: 'culture-voca.css', version: '20260617' },
       { file: 'redesign-article.css', version: '20261104syn2' },
     ],
-    extraJs: [{ file: 'redesign-article.js', version: '20261104syn2' }],
+    extraJs: [{ file: 'redesign-article.js', version: '20261108tts1' }],
   },
   'defense-news': {
     label: '국방뉴스',
@@ -145,7 +145,7 @@ export const BOARD_SEO = {
     jsVersion: '20261107cmt2',
     listHtml: 'industry-news-list.html',
     extraCss: [{ file: 'redesign-article.css', version: '20261104syn2' }],
-    extraJs: [{ file: 'redesign-article.js', version: '20261104syn2' }],
+    extraJs: [{ file: 'redesign-article.js', version: '20261108tts1' }],
   },
   'ai-news': {
     label: '인공지능뉴스',
@@ -207,7 +207,7 @@ export const BOARD_SEO = {
       { file: 'news-voca.css', version: '20260926barun' },
       { file: 'redesign-article.css', version: '20261104syn2' },
     ],
-    extraJs: [{ file: 'redesign-article.js', version: '20261104syn2' }],
+    extraJs: [{ file: 'redesign-article.js', version: '20261108tts1' }],
   },
   'english-opinions': {
     label: '오피니언',
@@ -613,7 +613,7 @@ ${(board.extraCss || []).map((c) => `    <link rel="stylesheet" href="../../${c.
     <link rel="stylesheet" href="../../world-clock.css?v=20260612g">
     <link rel="stylesheet" href="../../redesign-tokens.css?v=20261020rd27">
     <link rel="stylesheet" href="../../redesign-article.css?v=20261104syn2">
-    <link rel="preload" href="../../redesign-article.js?v=20261105hide1" as="script">
+    <link rel="preload" href="../../redesign-article.js?v=20261108tts1" as="script">
     <style id="rd-fouc-guard">
       /* SEO 구형 본문이 redesign 전에 깜빡이지 않도록 (!important 금지: 키프레임 fallback이 무시됨) */
       body[data-nv-board]:not(.rd-ready) #post-container {

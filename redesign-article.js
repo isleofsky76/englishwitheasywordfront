@@ -823,7 +823,11 @@
       .toLowerCase()
       .replace(/\s+/g, '-')
       .replace(/[^a-z0-9\-']/g, '');
-    var ttsBtn = studyMode && card.expression ? ttsEmojiButtonHtml(card.expression) : '';
+    var speakText =
+      studyMode && card.expression
+        ? ttsTextForCard(card.expression, isPronOnly ? '' : enLine)
+        : '';
+    var ttsBtn = speakText ? ttsEmojiButtonHtml(speakText) : '';
     var foot = studyMode
       ? '<div class="rd-expr-foot">' +
           '<button type="button" class="rd-syn-meaning-toggle" data-rd-meaning-toggle aria-pressed="false">뜻 보기</button>' +
@@ -929,30 +933,59 @@
     }
   }
 
+  function plainEnglishForTts(html) {
+    return stripHtml(stripAllTtsButtons(String(html || '')))
+      .replace(/\s+/g, ' ')
+      .replace(/\s*\([^)]{0,80}\)\s*$/, '')
+      .trim();
+  }
+
+  /** 예문(문장)이면 전체, 아니면 단어만 */
+  function isExampleSentence(text, expression) {
+    var t = String(text || '').trim();
+    if (!t) return false;
+    var words = t.match(/[A-Za-z]+(?:'[A-Za-z]+)?/g) || [];
+    if (words.length >= 5) return true;
+    if (words.length >= 3 && /[.!?…]/.test(t)) return true;
+    var exp = String(expression || '').trim().toLowerCase();
+    if (exp && t.toLowerCase() !== exp && words.length >= 3) return true;
+    return false;
+  }
+
+  function ttsTextForCard(expression, enHtml) {
+    var sentence = plainEnglishForTts(enHtml);
+    if (isExampleSentence(sentence, expression)) return sentence;
+    return String(expression || '').trim();
+  }
+
   function ttsEmojiButtonHtml(word) {
     var w = String(word || '').trim();
     if (!w) return '';
+    var label = w.length > 48 ? '예문 영어 발음 듣기' : w + ' 영어 발음 듣기';
     return (
       '<button type="button" class="vv-tts-btn" data-vv-tts="' + escapeAttr(w) + '"' +
-      ' aria-label="' + escapeAttr(w) + ' 영어 발음 듣기" title="발음 듣기"' +
+      ' aria-label="' + escapeAttr(label) + '" title="발음 듣기"' +
       ' style="margin-left:4px;padding:0;border:0;background:transparent;box-shadow:none;line-height:1;cursor:pointer;vertical-align:baseline;">🔊</button>'
     );
   }
 
-  /** 카드당 🔊 스피커 정확히 1개 */
+  /** 카드당 🔊 스피커 정확히 1개 — 예문 있으면 문장 전체 */
   function ensureCardTtsButtons(root) {
     if (!root) return;
     root.querySelectorAll('.rd-expr--synonym').forEach(function (card) {
       var word = (card.getAttribute('data-rd-word') || '').trim();
       if (!word) return;
-      var host =
-        card.querySelector('.rd-expr-en') ||
-        card.querySelector('.rd-expr-word') ||
-        card;
+      var enEl = card.querySelector('.rd-expr-en');
+      var speak = word;
+      if (enEl) {
+        var sent = plainEnglishForTts(enEl.innerHTML);
+        if (isExampleSentence(sent, word)) speak = sent;
+      }
+      var host = enEl || card.querySelector('.rd-expr-word') || card;
       Array.prototype.slice.call(card.querySelectorAll('.vv-tts-btn')).forEach(function (btn) {
         btn.remove();
       });
-      host.insertAdjacentHTML('beforeend', ttsEmojiButtonHtml(word));
+      host.insertAdjacentHTML('beforeend', ttsEmojiButtonHtml(speak));
     });
   }
 

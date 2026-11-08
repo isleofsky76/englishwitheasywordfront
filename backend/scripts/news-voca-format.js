@@ -562,15 +562,37 @@ function extractLeadingEnglishWordFromNarrative(line) {
 function buildWordSpeakButtonHtml(word) {
   const w = String(word || '').trim();
   if (!w) return '';
-  return `<button type="button" class="vv-tts-btn" data-vv-tts="${escapeHtml(w)}" aria-label="${escapeHtml(w)} 영어 발음 듣기" title="발음 듣기" style="margin-left:4px;padding:0;border:0;background:transparent;box-shadow:none;line-height:1;cursor:pointer;vertical-align:baseline;">🔊</button>`;
+  const label = w.length > 48 ? '예문 영어 발음 듣기' : `${w} 영어 발음 듣기`;
+  return `<button type="button" class="vv-tts-btn" data-vv-tts="${escapeHtml(w)}" aria-label="${escapeHtml(label)}" title="발음 듣기" style="margin-left:4px;padding:0;border:0;background:transparent;box-shadow:none;line-height:1;cursor:pointer;vertical-align:baseline;">🔊</button>`;
 }
 
-/** **word**(발음) — 스피커는 발음 괄호 뒤 (영어 (ipa / 한글) 🔊) */
+/** 예문이 있으면 문장 전체, 단어(+발음)만 있으면 단어 */
+function speakTextFromNarrativeLine(sourceLine, fallbackWord) {
+  const word = String(fallbackWord || '').trim();
+  let t = String(sourceLine || '')
+    .replace(/\*\*/g, '')
+    .replace(/^\d+\.\s*/, '')
+    .trim();
+  /* 발음 줄: word(ipa / 한글) */
+  if (/^[A-Za-z][A-Za-z'-]*(?:\s+[A-Za-z][A-Za-z'-]*){0,2}\s*\([^)]*\)\s*$/.test(t)) {
+    return word || t.replace(/\s*\([^)]*\)\s*$/, '').trim();
+  }
+  if (/^[A-Za-z][A-Za-z'-]*(?:\s+[A-Za-z][A-Za-z'-]*){0,2}\s*$/.test(t)) {
+    return word || t;
+  }
+  t = t.replace(/\s*\([^)]{1,40}\)\s*$/, '').trim();
+  const words = t.match(/[A-Za-z]+(?:'[A-Za-z]+)?/g) || [];
+  if (words.length >= 3) return t || word;
+  return word || t;
+}
+
+/** **word**(발음) — 스피커는 발음 괄호 뒤; 예문이면 문장 전체 TTS */
 function appendSpeakButtonToNarrativeHtml(html, sourceLine) {
   if (/vv-tts-btn/i.test(html)) return html;
   const word = extractLeadingEnglishWordFromNarrative(sourceLine);
-  if (!word) return html;
-  const btn = buildWordSpeakButtonHtml(word);
+  const speak = speakTextFromNarrativeLine(sourceLine, word);
+  if (!speak) return html;
+  const btn = buildWordSpeakButtonHtml(speak);
   if (!btn) return html;
   if (/<\/mark>\s*\([^)]*\)/.test(html)) {
     return html.replace(/(<\/mark>\s*\([^)]*\))/, `$1${btn}`);
