@@ -14,9 +14,6 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import {
-  updateSitemap,
-  FRONTEND_ROOT,
-  SITE_ORIGIN,
   writeSeoPage,
   buildSeoPageHtml,
   applySeoAfterUpload,
@@ -706,23 +703,6 @@ function resolveArticleData(config) {
 
 function toIsoDateOnly(d = new Date()) {
   return d.toISOString().slice(0, 10);
-}
-
-function buildArticleJsonLd({ title, slug, metaDescription, datePublished }) {
-  const headline = String(title || '').replace(/^\[AP\]\s*/, '').trim();
-  const pageUrl = `${SITE_ORIGIN}/news-voca/${slug}/`;
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'Article',
-    headline,
-    description: metaDescription,
-    author: { '@type': 'Organization', name: '시사영단어', alternateName: 'News English Lab' },
-    publisher: { '@type': 'Organization', name: '시사영단어', alternateName: 'News English Lab', url: SITE_ORIGIN },
-    datePublished: datePublished || toIsoDateOnly(),
-    dateModified: datePublished || toIsoDateOnly(),
-    mainEntityOfPage: { '@type': 'WebPage', '@id': pageUrl },
-    inLanguage: ['ko', 'en'],
-  };
 }
 
 export function buildNewsVocaMessage(config) {
