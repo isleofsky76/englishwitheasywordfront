@@ -4,7 +4,7 @@
  * nav-home-menu.js 가 로드함
  */
 (function () {
-    var VERSION = '20261108wx5';
+    var VERSION = '20261108exam1';
 
   var DICT_LOOKUP_VER = '20261104dict1';
   var DICT_LOOKUP_CONTAINERS = [
@@ -120,6 +120,18 @@
         { href: 'situational-english-list.html', label: '상황', tone: 'sit', pages: ['situational-english-list.html', 'situational-english.html'] },
         { href: 'pros-cons-list.html', label: 'Pros & Cons', tone: 'pros', pages: ['pros-cons-list.html', 'pros-cons.html'] },
         { href: 'photo-english-list.html', label: '포토', tone: 'photo', pages: ['photo-english-list.html', 'photo-english.html'] }
+      ]
+    },
+    {
+      href: 'exam-words.html',
+      label: '수험영어',
+      groupLabel: '수험영어',
+      tone: 'exam',
+      pages: ['exam-words.html'],
+      children: [
+        { href: 'exam-words.html#elem', label: '초등영어', tone: 'exam', pages: ['exam-words.html'] },
+        { href: 'exam-words.html#middle', label: '중등영어', tone: 'exam', pages: ['exam-words.html'] },
+        { href: 'exam-words.html#high', label: '고등영어', tone: 'exam', pages: ['exam-words.html'] }
       ]
     },
     {

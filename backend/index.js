@@ -10,6 +10,7 @@ import { validateCommentFields, isReservedAdminNickname } from './comment-filter
 import { registerExpressionsApi } from './expressions-api.js';
 import { registerRankingApi } from './ranking-api.js';
 import { registerWordMeaningQuizApi } from './word-meaning-quiz-api.js';
+import { registerExamApi } from './exam-api.js';
 import { app } from './runtime.js';
 
 async function safeBcryptCompare(plain, hash) {
@@ -2830,6 +2831,7 @@ app.post('/wordofday-admin/deletepost', async (req, res) => {
 registerExpressionsApi(app, { requireAdmin });
 
 registerWordMeaningQuizApi(app);
+registerExamApi(app);
 
 //================================== 댓글/다운로드/검색 랭킹 대시보드
 const rankingApi = registerRankingApi(app, { getRequestIp });

@@ -1,0 +1,650 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>수험영어 단어 테스트 | 시사영단어</title>
+<meta name="description" content="초등·중등·고등 영어 단어를 4지선다로 끝없이 풀어 보는 단어 테스트">
+<link rel="canonical" href="https://englisheasystudy.com/exam-words.html">
+<meta name="google-adsense-account" content="ca-pub-6108574897789788">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6108574897789788" crossorigin="anonymous"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="redesign-tokens.css?v=20261019rd4">
+<link rel="stylesheet" href="site-masthead.css?v=20261108wx5">
+<link rel="stylesheet" href="site-footer.css?v=20261013a">
+<style>
+  :root{
+    --ink:#111827; --muted:#4B5563; --line:#E5E7EB; --bg:#F7F8FA;
+    --blue:#1D4ED8; --yellow:#FDE68A;
+    --ok:#15803D; --okbg:#F0FDF4; --no:#B91C1C; --nobg:#FEF2F2;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:'Noto Sans KR',system-ui,sans-serif;-webkit-tap-highlight-color:transparent}
+  a{color:var(--blue)}
+
+  .top{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid var(--line)}
+  .top-in{max-width:760px;margin:0 auto;padding:12px 16px;display:flex;flex-direction:column;gap:10px}
+  .brand{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+  .brand a{font-weight:900;font-size:18px;color:var(--ink);text-decoration:none}
+  .brand span{font-size:13px;color:var(--muted)}
+  .tabs{display:flex;gap:6px;background:#EEF0F3;padding:4px;border-radius:12px}
+  .tabs a{flex:1 0 auto;padding:0 12px;white-space:nowrap;min-height:44px;display:flex;align-items:center;justify-content:center;border-radius:9px;
+          text-decoration:none;color:#374151;font-weight:500;font-size:15px}
+  .tabs a[aria-current="page"]{background:#fff;color:var(--ink);font-weight:900;box-shadow:0 1px 2px rgba(0,0,0,.08)}
+  .score{display:flex;gap:14px;align-items:center;font-size:14px;color:var(--muted);flex-wrap:wrap}
+  .score b{color:var(--ink)}
+  .score .o b{color:var(--ok)} .score .x b{color:var(--no)}
+  .score button{margin-left:auto;min-height:36px;padding:0 12px;border:1px solid #D1D5DB;background:#fff;border-radius:8px;
+                font:inherit;font-size:13px;cursor:pointer;color:var(--ink)}
+
+  main{max-width:760px;margin:0 auto;padding:16px 16px 80px;display:flex;flex-direction:column;gap:12px}
+  .q{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;position:relative}
+  .q-head{display:flex;align-items:center;gap:10px;margin-bottom:12px;padding-right:44px}
+  .num{font-size:13px;font-weight:700;color:var(--muted);min-width:28px}
+  .word{font-size:26px;font-weight:900;letter-spacing:-.3px;word-break:break-all}
+  .say{width:36px;height:36px;border-radius:999px;border:1px solid #D1D5DB;background:#fff;display:flex;align-items:center;
+       justify-content:center;cursor:pointer;flex:none;color:var(--ink)}
+  .mark{position:absolute;top:12px;right:14px;font-size:30px;font-weight:900;line-height:1}
+  .mark.o{color:var(--ok)} .mark.x{color:var(--no)}
+
+  .opts{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .opt{width:100%;min-height:52px;text-align:left;padding:8px 12px;border:1px solid #D1D5DB;border-radius:12px;background:#fff;
+       font:inherit;font-size:15px;color:var(--ink);cursor:pointer;display:flex;align-items:center;gap:8px}
+  .opt .n{font-weight:700;color:var(--muted);flex:none}
+  .opt .ox{margin-left:auto;font-weight:900;font-size:18px;flex:none}
+  .opt:hover:not(:disabled){border-color:var(--ink)}
+  .opt:disabled{cursor:default}
+  .opt.correct{border:2px solid var(--ok);background:var(--okbg);color:#14532D;font-weight:700}
+  .opt.correct .ox{color:var(--ok)}
+  .opt.wrong{border:2px solid var(--no);background:var(--nobg);color:#7F1D1D}
+  .opt.wrong .ox{color:var(--no)}
+  .q.done .opt:not(.correct):not(.wrong){opacity:.55}
+
+  @media (min-width:700px){
+    .opts{grid-template-columns:repeat(4,minmax(0,1fr))}
+    .word{font-size:30px}
+  }
+  #more{text-align:center;color:var(--muted);font-size:13px;padding:16px}
+  .sr{position:absolute;left:-9999px}
+</style>
+</head>
+<body>
+<nav id="navbar" class="navbar navbar-expand site-masthead" aria-label="주 메뉴"></nav>
+
+<header class="top">
+  <div class="top-in">
+    <div class="brand">
+      <a href="index.html">시사영단어 · 04 수험영어</a>
+      <span>뜻을 골라 보세요</span>
+    </div>
+    <nav class="tabs" aria-label="학년 선택">
+      <!-- 탭은 DB의 분류(exam_categories)로 자동 생성됩니다 -->
+    </nav>
+    <div class="score" aria-live="polite">
+      <span class="o">맞음 <b id="sO">0</b></span>
+      <span class="x">틀림 <b id="sX">0</b></span>
+      <span>정답률 <b id="sR">-</b></span>
+      <button type="button" id="reset">처음부터</button>
+    </div>
+  </div>
+</header>
+
+<main id="list"></main>
+<div id="more">스크롤하면 문제가 계속 나와요</div>
+
+<script src="page30-api-config.js?v=20260721"></script>
+<script src="site-masthead.js?v=20261108wx5"></script>
+<script src="site-footer.js?v=20261013a"></script>
+<script>
+/* ===== 예비 단어: API(DB)에 연결되지 않았을 때만 사용. 형식 "영어|뜻" ===== */
+const DATA = {
+elem: `smile|미소 짓다
+happy|행복한
+sad|슬픈
+big|큰
+small|작은
+tall|키가 큰
+long|긴
+hot|뜨거운
+cold|차가운
+fast|빠른
+slow|느린
+new|새로운
+old|오래된
+young|어린
+pretty|예쁜
+kind|친절한
+busy|바쁜
+hungry|배고픈
+tired|피곤한
+sleepy|졸린
+angry|화난
+sick|아픈
+brave|용감한
+clean|깨끗한
+dirty|더러운
+quiet|조용한
+run|달리다
+walk|걷다
+jump|뛰어오르다
+swim|수영하다
+sing|노래하다
+dance|춤추다
+read|읽다
+write|쓰다
+draw|그리다
+cook|요리하다
+eat|먹다
+drink|마시다
+sleep|자다
+open|열다
+close|닫다
+help|돕다
+like|좋아하다
+want|원하다
+know|알다
+buy|사다
+give|주다
+come|오다
+sit|앉다
+stand|서다
+listen|듣다
+speak|말하다
+learn|배우다
+teach|가르치다
+play|놀다
+wash|씻다
+apple|사과
+bread|빵
+milk|우유
+water|물
+rice|밥, 쌀
+flower|꽃
+tree|나무
+river|강
+mountain|산
+sea|바다
+sky|하늘
+rain|비
+snow|눈 (날씨)
+wind|바람
+sun|태양
+moon|달
+star|별
+school|학교
+teacher|선생님
+student|학생
+friend|친구
+family|가족
+mother|어머니
+father|아버지
+brother|남자 형제
+sister|여자 형제
+baby|아기
+doctor|의사
+desk|책상
+chair|의자
+window|창문
+door|문
+bag|가방
+pencil|연필
+eraser|지우개
+clock|시계
+umbrella|우산
+shoes|신발
+hat|모자
+bird|새
+rabbit|토끼
+tiger|호랑이
+lion|사자
+monkey|원숭이
+elephant|코끼리
+horse|말 (동물)
+chicken|닭
+park|공원
+library|도서관
+hospital|병원
+zoo|동물원
+store|가게
+kitchen|부엌
+morning|아침
+night|밤
+today|오늘
+tomorrow|내일
+yesterday|어제
+birthday|생일
+color|색깔
+red|빨간색
+blue|파란색
+yellow|노란색
+green|초록색
+white|흰색
+black|검은색
+head|머리
+hand|손
+foot|발
+eye|눈 (신체)
+nose|코
+mouth|입
+ear|귀
+face|얼굴
+weather|날씨
+spring|봄
+summer|여름
+fall|가을
+winter|겨울`,
+
+middle: `achieve|성취하다
+advice|충고
+afraid|두려워하는
+allow|허락하다
+almost|거의
+among|~ 사이에
+ancient|고대의
+announce|발표하다
+appear|나타나다
+argue|논쟁하다
+arrive|도착하다
+avoid|피하다
+borrow|빌리다
+breathe|숨 쉬다
+careful|조심하는
+celebrate|축하하다
+century|세기, 100년
+chance|기회
+choose|선택하다
+climate|기후
+collect|모으다
+common|흔한, 공통의
+compare|비교하다
+complete|완성하다
+culture|문화
+curious|호기심 많은
+decide|결정하다
+delicious|맛있는
+describe|묘사하다
+destroy|파괴하다
+develop|발달시키다
+difference|차이
+disappear|사라지다
+discover|발견하다
+education|교육
+effort|노력
+enemy|적
+environment|환경
+escape|탈출하다
+event|행사, 사건
+exercise|운동
+expect|기대하다
+experience|경험
+explain|설명하다
+express|표현하다
+famous|유명한
+favorite|가장 좋아하는
+fear|두려움
+foreign|외국의
+forget|잊다
+freedom|자유
+future|미래
+gather|모이다
+goal|목표
+habit|습관
+harvest|수확
+healthy|건강한
+history|역사
+honest|정직한
+imagine|상상하다
+important|중요한
+improve|향상시키다
+include|포함하다
+information|정보
+invent|발명하다
+invite|초대하다
+journey|여정
+judge|판단하다
+language|언어
+lend|빌려주다
+lonely|외로운
+machine|기계
+memory|기억
+mistake|실수
+nature|자연
+necessary|필요한
+neighbor|이웃
+nervous|긴장한
+ocean|대양
+opinion|의견
+ordinary|평범한
+patient|참을성 있는
+perhaps|아마도
+polite|공손한
+pollution|오염
+popular|인기 있는
+possible|가능한
+practice|연습하다
+prepare|준비하다
+prevent|막다, 예방하다
+protect|보호하다
+proud|자랑스러운
+prove|증명하다
+quite|꽤, 상당히
+reason|이유
+receive|받다
+remember|기억하다
+repeat|반복하다
+respect|존경하다
+result|결과
+secret|비밀
+serious|심각한
+solve|해결하다
+special|특별한
+spend|(돈·시간을) 쓰다
+suddenly|갑자기
+support|지지하다
+surprise|놀라게 하다
+temperature|온도
+tradition|전통
+travel|여행하다
+trust|믿다
+understand|이해하다
+useful|유용한
+vacation|방학, 휴가
+village|마을
+volunteer|자원봉사자
+worry|걱정하다`,
+
+high: `abandon|버리다, 포기하다
+abundant|풍부한
+accelerate|가속하다
+accommodate|수용하다
+accurate|정확한
+acquire|습득하다
+adapt|적응하다
+adequate|적절한, 충분한
+advocate|옹호하다
+allocate|할당하다
+ambiguous|모호한
+analyze|분석하다
+anticipate|예상하다
+apparent|명백한
+arbitrary|임의의
+assess|평가하다
+assume|가정하다
+attribute|~의 탓으로 돌리다
+authority|권위, 당국
+bias|편견
+capacity|수용력, 능력
+coherent|일관성 있는
+coincide|동시에 일어나다
+collapse|붕괴하다
+compensate|보상하다
+comprehensive|포괄적인
+conceal|숨기다
+consensus|합의
+consequence|결과, 영향
+conserve|아끼다, 보존하다
+contemporary|동시대의, 현대의
+contradict|모순되다
+crucial|결정적인
+deceive|속이다
+decline|감소하다
+deficiency|결핍
+deliberate|고의적인
+deprive|빼앗다
+derive|끌어내다, 유래하다
+deteriorate|악화되다
+diminish|줄어들다
+discipline|규율, 훈련
+distinguish|구별하다
+diverse|다양한
+dominant|지배적인
+eliminate|제거하다
+emerge|나타나다, 부상하다
+emphasize|강조하다
+enhance|향상시키다
+essential|필수적인
+evident|분명한
+exaggerate|과장하다
+exploit|착취하다, 이용하다
+facilitate|촉진하다
+flexible|유연한
+fragile|깨지기 쉬운
+fundamental|근본적인
+generate|생성하다
+hypothesis|가설
+identical|동일한
+implement|시행하다
+imply|암시하다
+incentive|장려책, 동기
+inevitable|피할 수 없는
+inherent|고유한, 내재된
+inhibit|억제하다
+innovation|혁신
+integrate|통합하다
+interpret|해석하다
+intervene|개입하다
+intrinsic|본질적인
+justify|정당화하다
+legitimate|합법적인, 정당한
+manipulate|조작하다
+mediate|중재하다
+modify|수정하다
+neglect|소홀히 하다
+notion|개념, 생각
+obscure|잘 알려지지 않은
+obstacle|장애물
+obtain|얻다
+offend|기분 상하게 하다
+perceive|인지하다
+persist|지속되다
+phenomenon|현상
+plausible|그럴듯한
+precede|앞서다
+prohibit|금지하다
+prominent|저명한, 두드러진
+pursue|추구하다
+radical|급진적인
+reinforce|강화하다
+reluctant|꺼리는
+resemble|닮다
+resolve|해결하다
+restrict|제한하다
+retain|유지하다, 보유하다
+reveal|드러내다
+scarce|부족한, 드문
+scrutinize|면밀히 조사하다
+simultaneous|동시의
+sophisticated|정교한
+spontaneous|자발적인
+substantial|상당한
+sufficient|충분한
+suppress|억압하다
+sustain|지속시키다
+tendency|경향
+transform|변형시키다
+undergo|겪다
+utilize|활용하다
+vulnerable|취약한
+withdraw|철회하다, 인출하다`
+};
+/* ===== 데이터 끝 (API에 연결되지 않을 때만 쓰는 예비 단어) ===== */
+
+/* ===== 설정 ===== */
+const API_BASE = (typeof window.getPage30ApiBaseUrl === 'function'
+  ? window.getPage30ApiBaseUrl()
+  : 'https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app') + '/api/exam';
+const FETCH_SIZE = 40;            // 한 번에 DB에서 가져올 랜덤 단어 수
+const BATCH      = 10;            // 스크롤마다 붙는 문제 수
+const FALLBACK_CATS = [
+  { slug: 'elem', name: '초등영어' }, { slug: 'middle', name: '중등영어' }, { slug: 'high', name: '고등영어' }
+];
+
+const FALLBACK = {};
+for (const k in DATA) {
+  FALLBACK[k] = DATA[k].split('\n').map(l => l.trim()).filter(Boolean).map(l => {
+    const i = l.indexOf('|'); return { id: k + ':' + l.slice(0, i).trim(), word: l.slice(0, i).trim(), meaning: l.slice(i + 1).trim() };
+  });
+}
+
+const list = document.getElementById('list'), more = document.getElementById('more'), nav = document.querySelector('.tabs');
+const sO = document.getElementById('sO'), sX = document.getElementById('sX'), sR = document.getElementById('sR');
+let cats = [], level, pool, queue, recent, qn, ok, no, gen = 0, useApi = true, loading = null, adding = false;
+
+function shuffle(a) { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+async function getJSON(url) {
+  const r = await fetch(url, { headers: { Accept: 'application/json' } });
+  if (!r.ok) throw new Error('HTTP ' + r.status);
+  return r.json();
+}
+
+/* 분류 목록: DB의 exam_categories → 탭 */
+async function loadCategories() {
+  try {
+    const d = await getJSON(API_BASE + '/categories');
+    cats = (Array.isArray(d) ? d : d.categories || []).filter(c => c && c.slug && c.name);
+    if (!cats.length) throw new Error('empty');
+  } catch (e) {
+    console.warn('[수험영어] 분류 API 연결 실패, 예비 단어 사용:', e.message);
+    useApi = false; cats = FALLBACK_CATS;
+  }
+  nav.innerHTML = '';
+  for (const c of cats) {
+    const a = document.createElement('a');
+    a.href = '#' + c.slug; a.dataset.level = c.slug; a.textContent = c.name;
+    nav.appendChild(a);
+  }
+  nav.style.overflowX = 'auto';
+}
+
+/* 랜덤 단어 가져오기: DB → 실패하면 예비 단어 */
+function fetchWords() {
+  if (loading) return loading;
+  const my = gen;
+  loading = (async () => {
+    let words = null;
+    if (useApi) {
+      try {
+        const d = await getJSON(API_BASE + '/words?cat=' + encodeURIComponent(level) + '&limit=' + FETCH_SIZE);
+        words = Array.isArray(d) ? d : d.words;
+      } catch (e) { console.warn('[수험영어] 단어 API 실패:', e.message); }
+    }
+    if (!words) words = shuffle((FALLBACK[level] || []).slice()).slice(0, FETCH_SIZE);
+    if (my !== gen) return;
+    const fresh = words.filter(w => w && w.word && w.meaning)
+      .map(w => ({ id: String(w.id ?? (w.word + '|' + w.meaning)), en: w.word, ko: w.meaning }));
+    const before = queue.length;
+    for (const w of fresh) {
+      if (!pool.some(p => p.id === w.id)) pool.push(w);
+      if (!recent.includes(w.id) && !queue.some(q => q.id === w.id)) queue.push(w);
+    }
+    if (queue.length === before) queue.push(...fresh);   // 단어가 적은 분류: 최근 것도 다시 출제
+  })().finally(() => { loading = null; });
+  return loading;
+}
+
+function nextWord() {
+  const w = queue.shift();
+  recent.push(w.id);
+  const keep = Math.min(30, Math.floor(pool.length / 2));
+  while (recent.length > keep) recent.shift();
+  return w;
+}
+
+function choices(answer) {
+  const seen = new Set([answer.ko]), picked = [];
+  const cands = shuffle(pool.slice()).concat(shuffle(Object.values(FALLBACK).flat().map(w => ({ ko: w.meaning }))));
+  for (const w of cands) {
+    if (!seen.has(w.ko)) { seen.add(w.ko); picked.push(w.ko); }
+    if (picked.length === 3) break;
+  }
+  return shuffle([answer.ko, ...picked]);
+}
+
+function speak(text) {
+  if (!('speechSynthesis' in window)) return;
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text); u.lang = 'en-US'; u.rate = 0.9;
+  speechSynthesis.speak(u);
+}
+
+function makeCard(w) {
+  const opts = choices(w);
+  qn++;
+  const card = document.createElement('article');
+  card.className = 'q';
+  card.innerHTML =
+    '<div class="q-head"><span class="num">' + qn + '</span>' +
+    '<span class="word"></span>' +
+    '<button type="button" class="say" aria-label="발음 듣기"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg></button></div>' +
+    '<ol class="opts"></ol>';
+  card.querySelector('.word').textContent = w.en;
+  card.querySelector('.say').onclick = () => speak(w.en);
+  const ol = card.querySelector('.opts');
+  const btns = opts.map((ko, i) => {
+    const li = document.createElement('li');
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'opt';
+    b.innerHTML = '<span class="n">' + (i + 1) + '.</span><span class="t"></span><span class="ox" aria-hidden="true"></span>';
+    b.querySelector('.t').textContent = ko;
+    b.dataset.right = ko === w.ko ? '1' : '';
+    b.onclick = () => answer(card, btns, b, ko === w.ko, w);
+    li.appendChild(b); ol.appendChild(li);
+    return b;
+  });
+  list.appendChild(card);
+}
+
+function answer(card, btns, chosen, right, w) {
+  if (card.classList.contains('done')) return;
+  card.classList.add('done');
+  btns.forEach(b => { b.disabled = true; });
+  const correctBtn = btns.find(b => b.dataset.right);
+  correctBtn.classList.add('correct'); correctBtn.querySelector('.ox').textContent = 'O';
+  if (!right) { chosen.classList.add('wrong'); chosen.querySelector('.ox').textContent = 'X'; }
+  const m = document.createElement('span');
+  m.className = 'mark ' + (right ? 'o' : 'x'); m.textContent = right ? 'O' : 'X';
+  m.setAttribute('aria-label', right ? '정답' : '오답, 정답은 ' + w.ko);
+  card.appendChild(m);
+  right ? ok++ : no++;
+  sO.textContent = ok; sX.textContent = no;
+  sR.textContent = Math.round(ok / (ok + no) * 100) + '%';
+}
+
+async function addBatch() {
+  if (adding) return;
+  adding = true;
+  const my = gen;
+  try {
+    for (let i = 0; i < BATCH; i++) {
+      if (!queue.length) await fetchWords();
+      if (my !== gen) return;
+      if (!queue.length) break;
+      makeCard(nextWord());
+    }
+    if (queue.length < 15) fetchWords();          // 미리 다음 단어 받아 두기
+    more.textContent = qn ? '스크롤하면 문제가 계속 나와요' : '이 분류에는 아직 단어가 없어요';
+  } finally { adding = false; }
+}
+
+async function start(lv) {
+  gen++; loading = null; adding = false;
+  level = cats.some(c => c.slug === lv) ? lv : cats[0].slug;
+  pool = []; queue = []; recent = []; qn = 0; ok = 0; no = 0;
+  sO.textContent = 0; sX.textContent = 0; sR.textContent = '-';
+  list.innerHTML = ''; more.textContent = '단어를 불러오는 중…';
+  nav.querySelectorAll('a').forEach(a => {
+    if (a.dataset.level === level) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
+  });
+  window.scrollTo(0, 0);
+  await addBatch(); await addBatch();
+}
+
+new IntersectionObserver(es => { if (es[0].isIntersecting && level) addBatch(); }, { rootMargin: '800px' })
+  .observe(more);
+window.addEventListener('hashchange', () => start(location.hash.slice(1)));
+document.getElementById('reset').onclick = () => start(level);
+loadCategories().then(() => start(location.hash.slice(1)));
+</script>
+</body>
+</html>
