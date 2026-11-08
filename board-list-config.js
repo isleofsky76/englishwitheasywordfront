@@ -504,11 +504,11 @@
     },
     'vocabulary-quiz': {
       key: 'vocabulary-quiz',
-      labelEn: 'VOCABULARY QUIZ',
-      title: '퀴즈',
-      description: '핵심 표현을 클릭해 뜻을 확인하고, 객관식으로 복습합니다.',
-      tabLabel: '퀴즈',
-      categoryLabel: '퀴즈',
+      labelEn: 'CURRENT AFFAIRS VOCAB QUIZ',
+      title: '시사 어휘 퀴즈',
+      description: '시사 어휘를 입력·채점하며 복습합니다. 유사·대체 표현도 정답으로 인정합니다.',
+      tabLabel: '시사 어휘 퀴즈',
+      categoryLabel: '시사 어휘 퀴즈',
       listPage: 'vocabulary-quiz-list.html',
       postPage: 'vocabulary-quiz.html',
       postPath: 'vocabulary-quiz',
@@ -517,7 +517,7 @@
       navGroup: 'quiz',
       tabs: null,
       articleLayout: 'header-only',
-      breadcrumbParent: { label: '퀴즈', href: 'vocabulary-quiz-list.html' }
+      breadcrumbParent: { label: '시사 어휘 퀴즈', href: 'vocabulary-quiz-list.html' }
     },
     'shorts-bg-image': {
       key: 'shorts-bg-image',
@@ -583,9 +583,25 @@
     return '';
   }
 
-  function cleanTitle(entry) {
+  function formatVocabQuizTitle(title) {
+    var t = String(title || '').trim();
+    if (!t) return '시사 어휘 퀴즈';
+    if (/시사\s*어휘\s*퀴즈\s*$/.test(t)) {
+      return t.replace(/\s*시사\s*어휘\s*퀴즈\s*$/, ' 시사 어휘 퀴즈').replace(/^\s+/, '');
+    }
+    if (/\s*퀴즈\s*$/.test(t)) {
+      return t.replace(/\s*퀴즈\s*$/, '') + ' 시사 어휘 퀴즈';
+    }
+    return t;
+  }
+
+  function cleanTitle(entry, boardKey) {
     var title = String((entry && entry.title) || '제목 없음');
-    return title.replace(/^\[([^\]]+)\]\s*/, '').trim() || title;
+    title = title.replace(/^\[([^\]]+)\]\s*/, '').trim() || title;
+    if (boardKey === 'vocabulary-quiz') {
+      return formatVocabQuizTitle(title);
+    }
+    return title;
   }
 
   /** "한글 | English" / "English | 한글" → { en, ko, display: "English : 한글" } */

@@ -116,6 +116,18 @@
       '</div>';
   }
 
+  function formatVocabQuizTitle(title) {
+    var t = String(title || '').trim();
+    if (!t) return '시사 어휘 퀴즈';
+    if (/시사\s*어휘\s*퀴즈\s*$/.test(t)) {
+      return t.replace(/\s*시사\s*어휘\s*퀴즈\s*$/, ' 시사 어휘 퀴즈').replace(/^\s+/, '');
+    }
+    if (/\s*퀴즈\s*$/.test(t)) {
+      return t.replace(/\s*퀴즈\s*$/, '') + ' 시사 어휘 퀴즈';
+    }
+    return t;
+  }
+
   window.renderGuestbookTable = function (container, messages, options) {
     if (!container) return;
 
@@ -127,6 +139,10 @@
     // 목록(더보기) 테이블은 조회수/추천수를 기본으로 보여준다.
     // 과거 일부 페이지에서 hideViewsAndLikes 옵션을 넣었더라도, 테이블 UI가 항상 숫자를 표시하도록 무시한다.
     var hideViewsAndLikes = false;
+    var isVocabQuiz =
+      options.board === 'vocabulary-quiz' ||
+      postPath === 'vocabulary-quiz' ||
+      /vocabulary-quiz/i.test(String(postPage || ''));
 
     if (options.apiBaseUrl) {
       window._gbTableLikeConfig = {
@@ -149,6 +165,7 @@
 
       var number = total - idx;
       var rawTitle = entry.title || '제목 없음';
+      if (isVocabQuiz) rawTitle = formatVocabQuizTitle(rawTitle);
       var parts = splitSourceTitle(rawTitle);
       var safeTitle = escapeHtml(parts.title);
       var safeSource = escapeHtml(parts.source);

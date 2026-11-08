@@ -7,6 +7,19 @@
    */
   var TRACK_VER = "20261102track2";
 
+  /** "출산 퀴즈" → "출산 시사 어휘 퀴즈" (이미 시사 어휘 퀴즈면 유지) */
+  function formatQuizTitle(title) {
+    var t = String(title || "").trim();
+    if (!t) return "시사 어휘 퀴즈";
+    if (/시사\s*어휘\s*퀴즈\s*$/.test(t)) {
+      return t.replace(/\s*시사\s*어휘\s*퀴즈\s*$/, " 시사 어휘 퀴즈").replace(/^\s+/, "");
+    }
+    if (/\s*퀴즈\s*$/.test(t)) {
+      return t.replace(/\s*퀴즈\s*$/, "") + " 시사 어휘 퀴즈";
+    }
+    return t;
+  }
+
   function createElement(tag, className, text) {
     var element = document.createElement(tag);
     if (className) element.className = className;
@@ -150,12 +163,15 @@
   }
 
   function renderTrackShell(entry) {
-    var title = entry.title || "어휘 퀴즈";
+    var title = formatQuizTitle(entry.title || "시사 어휘 퀴즈");
     var yt = youtubeButtonHtml(entry.sourceUrl, entry.sourceLabel);
+    try {
+      document.title = title + " | 시사 어휘 퀴즈 · 시사영단어";
+    } catch (e) { /* ignore */ }
     return (
       '<main class="vq-track" id="vq-track">' +
       '<header class="vq-header">' +
-      '<span class="vq-eyebrow">Vocabulary Quiz · Review</span>' +
+      '<span class="vq-eyebrow">시사 어휘 퀴즈</span>' +
       '<h1 class="vq-title">' +
       escapeHtml(title) +
       "</h1>" +

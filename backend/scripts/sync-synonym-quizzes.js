@@ -90,9 +90,9 @@ function quizFromDraft(draft) {
   return {
     format: 'reveal',
     directions: ['en-ko', 'ko-en'],
-    title: `${baseTitle || '연관단어'} 퀴즈`,
+    title: `${baseTitle || '연관단어'} 시사 어휘 퀴즈`,
     slug,
-    metaDescription: `${baseTitle} 연관단어 퀴즈. ${wordList}${wordList ? ' 등.' : ''}`.slice(0, 160),
+    metaDescription: `${baseTitle} 시사 어휘 퀴즈. ${wordList}${wordList ? ' 등.' : ''}`.slice(0, 160),
     sourceUrl: draft.youtube || '',
     sourceLabel: draft.youtube ? '유튜브 보기' : '',
     datePublished: draft.datePublished || toIsoDateOnly(),
@@ -124,9 +124,13 @@ function quizFromSeoPage(slug) {
   return {
     format: 'reveal',
     directions: ['en-ko', 'ko-en'],
-    title: /퀴즈$/.test(titleRaw) ? titleRaw : `${titleRaw} 퀴즈`,
+    title: /시사\s*어휘\s*퀴즈$/.test(titleRaw)
+      ? titleRaw
+      : /\s*퀴즈$/.test(titleRaw)
+        ? titleRaw.replace(/\s*퀴즈$/, '') + ' 시사 어휘 퀴즈'
+        : `${titleRaw} 시사 어휘 퀴즈`,
     slug: quizSlug,
-    metaDescription: `${titleRaw} 연관단어 퀴즈. ${wordList}${wordList ? ' 등.' : ''}`.slice(0, 160),
+    metaDescription: `${titleRaw} 시사 어휘 퀴즈. ${wordList}${wordList ? ' 등.' : ''}`.slice(0, 160),
     sourceUrl: yt,
     sourceLabel: yt ? '유튜브 보기' : '',
     datePublished: dateFromHtml(html),

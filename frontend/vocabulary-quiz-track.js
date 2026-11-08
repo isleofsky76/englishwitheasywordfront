@@ -259,10 +259,39 @@
     }
   }
 
+  function formatQuizTitle(title) {
+    var t = String(title || "").trim();
+    if (!t) return "시사 어휘 퀴즈";
+    if (/시사\s*어휘\s*퀴즈\s*$/.test(t)) {
+      return t.replace(/\s*시사\s*어휘\s*퀴즈\s*$/, " 시사 어휘 퀴즈").replace(/^\s+/, "");
+    }
+    if (/\s*퀴즈\s*$/.test(t)) {
+      return t.replace(/\s*퀴즈\s*$/, "") + " 시사 어휘 퀴즈";
+    }
+    return t;
+  }
+
+  function normalizePageTitles() {
+    var h1 = document.querySelector(".vq-title");
+    if (h1) {
+      var next = formatQuizTitle(h1.textContent);
+      if (next && next !== h1.textContent.trim()) h1.textContent = next;
+    }
+    var eye = document.querySelector(".vq-eyebrow");
+    if (eye) eye.textContent = "시사 어휘 퀴즈";
+    var cur = document.title || "";
+    var main = cur.split("|")[0].trim();
+    var formatted = formatQuizTitle(main);
+    if (formatted) {
+      document.title = formatted + " | 시사 어휘 퀴즈 · 시사영단어";
+    }
+  }
+
   function init() {
     if (!getWords().length) {
       console.warn("[vocabulary-quiz-track] VOCAB_QUIZ_TRACK_WORDS is empty");
     }
+    normalizePageTitles();
     bound = false;
     bind();
     setMode("en");

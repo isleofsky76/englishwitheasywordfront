@@ -440,7 +440,7 @@
   function enrich(entry, index, total, cfg, apiMode) {
     var Config = global.BoardListConfig;
     var originalIndex = total - 1 - index;
-    var cleaned = Config.cleanTitle(entry);
+    var cleaned = Config.cleanTitle(entry, cfg && cfg.key);
     var bi = typeof Config.splitBilingualTitle === 'function'
       ? Config.splitBilingualTitle(cleaned)
       : { display: cleaned, en: '', ko: '', bilingual: false };

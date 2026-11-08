@@ -4,7 +4,7 @@
  * nav-home-menu.js 가 로드함
  */
 (function () {
-    var VERSION = '20261108util1';
+    var VERSION = '20261108quiz1';
 
   var DICT_LOOKUP_VER = '20261104dict1';
   var DICT_LOOKUP_CONTAINERS = [
@@ -96,7 +96,7 @@
       children: [
         { href: 'english-synonym-list.html', label: '연관단어', tone: 'syn', pages: ['english-synonym-list.html', 'english-synonym.html'] },
         { href: 'one-sentence.html', label: '문장', tone: 'osent', pages: ['one-sentence.html'] },
-        { href: 'vocabulary-quiz-list.html', label: '퀴즈', tone: 'quiz', pages: ['vocabulary-quiz-list.html', 'vocabulary-quiz.html'] },
+        { href: 'vocabulary-quiz-list.html', label: '시사 어휘 퀴즈', tone: 'quiz', pages: ['vocabulary-quiz-list.html', 'vocabulary-quiz.html'] },
         { href: 'word-of-the-day-list.html?api=prod', label: '단어장', tone: 'wotd', pages: ['word-of-the-day-list.html', 'word-of-the-day.html'] }
       ]
     },
@@ -154,7 +154,7 @@
   var EXTRA_NAV_ITEMS = [
     { href: 'english-synonym-list.html', label: '연관단어', tone: 'syn', pages: ['english-synonym-list.html', 'english-synonym.html'], mobileDup: true },
     { href: 'one-sentence.html', label: '문장', tone: 'osent', pages: ['one-sentence.html'], mobileDup: true },
-    { href: 'vocabulary-quiz-list.html', label: '퀴즈', tone: 'quiz', pages: ['vocabulary-quiz-list.html', 'vocabulary-quiz.html'], mobileDup: true },
+    { href: 'vocabulary-quiz-list.html', label: '시사 어휘 퀴즈', tone: 'quiz', pages: ['vocabulary-quiz-list.html', 'vocabulary-quiz.html'], mobileDup: true },
     { href: 'shorts-bg-image-list.html', label: '신문읽는 이미지', tone: 'sbgi', pages: ['shorts-bg-image-list.html', 'shorts-bg-image.html'], group: '천천히 읽을거리' },
     { href: 'english-opinions-list.html', label: '오피니언', tone: 'opine', pages: ['english-opinions-list.html', 'english-opinions.html'], group: '천천히 읽을거리' },
     { href: 'calm-mind-list.html', label: '마음글', tone: 'calm', pages: ['calm-mind-list.html', 'calm-mind.html'], group: '천천히 읽을거리' },

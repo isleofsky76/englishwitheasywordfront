@@ -202,7 +202,7 @@
       'economy-news': { page: 'economy-news.html', postPath: 'economy-news', label: '경제' },
       'travel-news': { page: 'travel-news.html', postPath: 'travel-news', label: '여행' },
       wordofday: { page: 'word-of-the-day.html', postPath: 'word-of-the-day', label: '단어장' },
-      'vocabulary-quiz': { page: 'vocabulary-quiz.html', label: '퀴즈' },
+      'vocabulary-quiz': { page: 'vocabulary-quiz.html', label: '시사 어휘 퀴즈' },
       'easy-voca': { page: 'popular-voca.html', postPath: 'popular-voca', label: '표현' },
       opinions: { page: 'english-opinions.html', postPath: 'english-opinions', label: '오피니언' },
       'culture-voca': { page: 'culture-voca.html', postPath: 'culture-voca', label: '컬쳐' },
@@ -346,18 +346,30 @@
     }).join('');
   }
 
+  function formatQuizTitle(title) {
+    var t = String(title || '').trim();
+    if (!t) return '시사 어휘 퀴즈';
+    if (/시사\s*어휘\s*퀴즈\s*$/.test(t)) {
+      return t.replace(/\s*시사\s*어휘\s*퀴즈\s*$/, ' 시사 어휘 퀴즈').replace(/^\s+/, '');
+    }
+    if (/\s*퀴즈\s*$/.test(t)) {
+      return t.replace(/\s*퀴즈\s*$/, '') + ' 시사 어휘 퀴즈';
+    }
+    return t;
+  }
+
   function renderQuiz(entries) {
     var root = document.getElementById('rd-quiz-banner');
     if (!root) return;
     var entry = latest(entries);
-    var words = '오늘의 단어 퀴즈';
+    var words = '오늘의 시사 어휘 퀴즈';
     var href = 'vocabulary-quiz-list.html';
     if (entry) {
       var parts = parseTitleParts(entry.title);
       words = (parts.title || words).replace(/\s*\|\s*/g, ' · ');
       if (parts.meaning) words = words + ' · ' + parts.meaning.replace(/\s*\|\s*/g, ' · ');
       /* title이 "만병통치약 | 현실도피 | 기진맥진" 형태면 전체를 · 로 */
-      words = String(entry.title || words).replace(/\s*\|\s*/g, ' · ');
+      words = formatQuizTitle(String(entry.title || words)).replace(/\s*\|\s*/g, ' · ');
       var idx = entries.length - 1;
       href = boardHref('vocabulary-quiz', entry, idx);
     }
@@ -367,7 +379,7 @@
         '<span class="words">' + esc(words) + '</span>' +
         '<span class="desc">세 단어, 영어로 알고 있나요? 1분이면 확인할 수 있어요.</span>' +
       '</div>' +
-      '<a class="rd-btn" href="' + esc(href) + '">퀴즈 시작하기</a>';
+      '<a class="rd-btn" href="' + esc(href) + '">시사 어휘 퀴즈 시작</a>';
   }
 
   function slugToPhraseEn(slug) {

@@ -1286,7 +1286,7 @@
     ensureCss();
     document.body.classList.add('rd-article', 'rd-article-like-hidden');
 
-    var title = Config ? Config.cleanTitle(post) : String(post.title || '제목 없음');
+    var title = Config ? Config.cleanTitle(post, cfg && cfg.key) : String(post.title || '제목 없음');
     var sourceFull = extractSourceFull(html);
     var source = resolveSource(post, cfg, html) || shortSourceLabel(sourceFull);
     var date = formatDate(post.date);
@@ -1485,7 +1485,7 @@
         var thumbMatch = String(e.message || '').match(/img\.youtube\.com\/vi\/([a-zA-Z0-9_-]+)\//i);
         return {
           href: href,
-          title: global.BoardListConfig.cleanTitle(e),
+          title: global.BoardListConfig.cleanTitle(e, cfg && cfg.key),
           thumb: thumbMatch ? 'https://img.youtube.com/vi/' + thumbMatch[1] + '/hqdefault.jpg' : ''
         };
       });
