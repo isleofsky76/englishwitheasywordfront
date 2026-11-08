@@ -3208,8 +3208,8 @@ app.post('/onesentence/comments/delete', async (req, res) => {
   const { id, password } = req.body || {};
   if (!id) return res.status(400).json({ error: 'id is required' });
   const pw = String(password == null ? '' : password);
-  if (!pw || pw.length < 4 || pw.length > 14 || /\s/.test(pw)) {
-    return res.status(400).json({ error: '비밀번호는 4~14자로 입력해 주세요.' });
+  if (!pw || pw.length < 4 || pw.length > 25 || /\s/.test(pw)) {
+    return res.status(400).json({ error: '비밀번호는 4~25자로 입력해 주세요.' });
   }
   try {
     const doc = await OneSentenceComment.findById(id);
@@ -3394,8 +3394,8 @@ app.post('/board-comments/delete', async (req, res) => {
   const { id, password } = req.body || {};
   if (!id) return res.status(400).json({ error: 'id is required' });
   const pw = String(password == null ? '' : password);
-  if (!pw || pw.length < 4 || pw.length > 14 || /\s/.test(pw)) {
-    return res.status(400).json({ error: '비밀번호는 4~14자로 입력해 주세요.' });
+  if (!pw || pw.length < 4 || pw.length > 25 || /\s/.test(pw)) {
+    return res.status(400).json({ error: '비밀번호는 4~25자로 입력해 주세요.' });
   }
   try {
     const doc = await BoardComment.findById(id);

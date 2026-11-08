@@ -210,8 +210,8 @@
     if (!text) return '댓글 내용을 입력해 주세요.';
     var contentErr = clientValidateContent(nickname, body);
     if (contentErr) return contentErr;
-    if (!pw || pw.length < 4 || pw.length > 14 || /\s/.test(pw)) {
-      return '비밀번호는 4~14자로 입력해 주세요. (공백 불가)';
+    if (!pw || pw.length < 4 || pw.length > 25 || /\s/.test(pw)) {
+      return '비밀번호는 4~25자로 입력해 주세요. (공백 불가)';
     }
     if (/^(.)\1+$/.test(pw)) return '비밀번호가 너무 단순해요.';
     return '';
@@ -538,7 +538,7 @@
 
     var input = document.createElement('input');
     input.type = 'password';
-    input.maxLength = 14;
+    input.maxLength = 25;
     input.placeholder = '비밀번호';
     input.className = 'os-cmt-del-pw';
     input.setAttribute('aria-label', '삭제 비밀번호');
@@ -553,8 +553,8 @@
     ok.textContent = '확인';
     ok.addEventListener('click', async function () {
       var pw = input.value;
-      if (!pw || pw.length < 4 || pw.length > 14 || /\s/.test(pw)) {
-        msg.textContent = '비밀번호는 4~14자로 입력해 주세요. (공백 불가)';
+      if (!pw || pw.length < 4 || pw.length > 25 || /\s/.test(pw)) {
+        msg.textContent = '비밀번호는 4~25자로 입력해 주세요. (공백 불가)';
         return;
       }
       ok.disabled = true;
@@ -623,7 +623,7 @@
 
     var pwInput = document.createElement('input');
     pwInput.type = 'password';
-    pwInput.maxLength = 14;
+    pwInput.maxLength = 25;
     pwInput.className = 'os-cmt-del-pw';
     pwInput.placeholder = '비밀번호';
     pwInput.autocomplete = 'new-password';
@@ -839,10 +839,10 @@
     var pwLabel = document.createElement('label');
     pwLabel.className = 'os-cmt-field';
     var pwSpan = document.createElement('span');
-    pwSpan.textContent = '비밀번호 (4~14자, 영문·숫자·특수문자)';
+    pwSpan.textContent = '비밀번호 (4~25자, 영문·숫자·특수문자)';
     var pwInput = document.createElement('input');
     pwInput.type = 'password';
-    pwInput.maxLength = 14;
+    pwInput.maxLength = 25;
     pwInput.required = true;
     pwInput.name = 'password';
     pwInput.placeholder = '삭제 시 필요';
