@@ -242,32 +242,34 @@ async function generateEntryContent(word) {
   const apiKey = process.env.OPENAI_API_KEY;
   if (!apiKey) throw new Error('OPENAI_API_KEY 가 .env 에 없습니다.');
   const openai = new OpenAI({ apiKey });
-  const userPrompt = `Create a Word of the Day lesson for the English word or phrase: "${word}".
-Audience: Korean adults studying practical English (news, work, daily life).
+  const userPrompt = `Create a SHORT Word of the Day card for: "${word}".
+Audience: Korean adults. Keep it minimal — do NOT pad with extra examples or long synonym essays.
 Return JSON with exactly these keys:
 {
   "word": "canonical English form, usually lowercase unless a proper noun",
   "ipa": "IPA with slashes like /prɪˈkɔːʃən/",
-  "ipaKo": "Korean approximation of the pronunciation, hangul only",
+  "ipaKo": "Korean approximation, hangul only",
   "pos": "품사 in Korean (명사/동사/형용사/부사/숙어 등)",
-  "meaning": "short primary Korean meaning",
-  "meaningExtra": "one or two extra Korean glosses, comma-separated, no HTML",
+  "meaning": "short primary Korean meaning (max ~20 chars if possible)",
+  "meaningExtra": "optional one short extra gloss, or empty string",
   "collocations": [
     {"en": "natural collocation containing the word", "ko": "짧은 한국어 뜻"}
   ],
-  "meaningHighlight": "한 줄 핵심 뜻 (한국어)",
-  "nuance": "2 sentences in Korean explaining the nuance. Mention the word and 1-2 collocations in plain text (no HTML). Start after an implied '→'. Do not include the '→' character.",
+  "meaningHighlight": "one short Korean gloss (same idea as meaning)",
+  "nuance": "ONE short Korean sentence on nuance. No HTML. No synonym dictionary dump.",
   "examples": [
-    {"en": "natural example sentence using the word", "ko": "자연스러운 한국어 번역"}
+    {"en": "one natural example sentence", "ko": "한국어 번역"}
   ],
-  "coreNuance": "1-2 Korean sentences. Start with the English word, then ' → ', then the key nuance, then say that the collocations are commonly used.",
-  "metaDescription": "Korean SEO sentence: '{word} 뜻과 예문. meaning, collocations.'"
+  "coreNuance": "ONE short Korean line: '{word} → …'. Do not list synonyms with explanations.",
+  "synonyms": ["up to 3 English synonym words only, no Korean glosses"],
+  "metaDescription": "Korean SEO: '{word} 뜻과 예문. meaning.'"
 }
 Rules:
-- collocations: exactly 3 items, high-frequency, exam/news useful
-- examples: exactly 3 items, intermediate, no slang abuse, no sexual/violent content
+- collocations: exactly 2 items
+- examples: exactly 1 item
+- synonyms: max 3 bare English words (no definitions)
 - Do not use HTML tags
-- Keep Korean natural and concise`;
+- Keep everything concise; avoid repeating the same idea`;
   const models = [process.env.WOTD_MODEL, 'gpt-4o-mini', 'gpt-3.5-turbo'].filter(
     (m, i, arr) => m && arr.indexOf(m) === i
   );
@@ -302,11 +304,21 @@ Rules:
     .replace(/\s*```\s*$/, '')
     .trim();
   const data = JSON.parse(jsonText);
-  if (!data.word || !data.meaning || !Array.isArray(data.examples) || data.examples.length < 3) {
+  if (!data.word || !data.meaning || !Array.isArray(data.examples) || data.examples.length < 1) {
     throw new Error('GPT JSON 형식이 올바르지 않습니다.');
   }
-  if (!Array.isArray(data.collocations) || data.collocations.length < 3) {
-    throw new Error('GPT collocations 가 3개 미만입니다.');
+  if (!Array.isArray(data.collocations) || data.collocations.length < 1) {
+    throw new Error('GPT collocations 가 없습니다.');
+  }
+  data.examples = data.examples.slice(0, 1);
+  data.collocations = data.collocations.slice(0, 2);
+  if (Array.isArray(data.synonyms)) {
+    data.synonyms = data.synonyms
+      .map((s) => String(s || '').trim())
+      .filter(Boolean)
+      .slice(0, 3);
+  } else {
+    data.synonyms = [];
   }
   return data;
 }

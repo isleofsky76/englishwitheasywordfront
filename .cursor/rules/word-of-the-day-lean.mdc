@@ -1,0 +1,14 @@
+---
+description: Word of the Day / 단어장 작성·자동화 시 짧게 유지
+globs: backend/scripts/*wordofday*,backend/scripts/wordofday-format.js,word-of-the-day/**,redesign-word.js
+alwaysApply: false
+---
+
+# Word of the Day — keep it short
+
+When creating or drafting a Word of the Day entry (단어장):
+
+- Include only: word, POS, short Korean meaning, IPA (+ hangul), **2 collocations**, **1 example** (EN+KO), optional **up to 3 bare synonym words**.
+- Do **not** dump dictionary essays, 3+ examples, long synonym explanations (fable/allegory style), or multi-paragraph English definitions.
+- Prefer the lean auto pipeline: `backend/scripts/auto-wordofday.js` + `wordofday-format.js`.
+- If the user asks to “word of day”, draft the short card first — do not paste a full thesaurus page.
