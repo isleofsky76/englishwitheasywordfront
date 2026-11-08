@@ -70,15 +70,33 @@
     .opts{grid-template-columns:repeat(4,minmax(0,1fr))}
     .word{font-size:30px}
   }
-  .pager{max-width:760px;margin:0 auto 48px;padding:8px 16px 24px;display:flex;flex-wrap:wrap;gap:6px;justify-content:center;align-items:center}
+  .pager{max-width:760px;margin:0 auto;padding:8px 16px 8px;display:flex;flex-wrap:wrap;gap:6px;justify-content:center;align-items:center}
   .pager button,.pager span{min-width:40px;min-height:40px;padding:0 10px;border:1px solid #D1D5DB;background:#fff;border-radius:10px;
                             font:inherit;font-size:14px;cursor:pointer;color:var(--ink)}
   .pager button[aria-current="page"]{background:var(--blue);color:#fff;border-color:var(--blue);font-weight:900}
   .pager button:disabled{opacity:.4;cursor:default}
   .pager .ellipsis{border:none;background:transparent;min-width:24px;cursor:default;color:var(--muted)}
-  .status{text-align:center;color:var(--muted);font-size:13px;padding:4px 16px 0}
+  .status{text-align:center;color:var(--muted);font-size:13px;padding:4px 16px 0;min-height:0}
+  .status:empty{display:none}
+  .exam-tools{max-width:760px;margin:0 auto 56px;padding:16px 16px 8px}
+  .exam-action-tools{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:center;column-gap:14px;row-gap:8px;width:100%}
+  .exam-action-tools > .board-comments-root{display:contents}
+  .exam-action-tools .os-cmt-bar{display:contents}
+  .exam-action-tools .os-cmt-panel{flex:1 1 100%;width:100%;margin-top:4px}
+  .exam-action-tools .board-comments-root .os-cmt-toggle,
+  .exam-action-tools .board-comments-root .os-cmt-write,
+  .exam-action-tools .exam-tool-btn{
+    margin:0;padding:0;border:none;background:none;font:inherit;font-size:13px;font-weight:600;line-height:1.4;
+    color:#6B7280;cursor:pointer;text-decoration:underline;text-underline-offset:2px;opacity:.9;flex:0 0 auto
+  }
+  .exam-action-tools .board-comments-root .os-cmt-toggle:hover,
+  .exam-action-tools .board-comments-root .os-cmt-write:hover,
+  .exam-action-tools .exam-tool-btn:hover,
+  .exam-action-tools .exam-tool-btn[aria-pressed="true"]{opacity:1;color:var(--blue)}
+  .exam-action-tools .exam-tool-btn[hidden]{display:none!important}
   .sr{position:absolute;left:-9999px}
 </style>
+<link rel="stylesheet" href="board-comments.css?v=20261102c4">
 </head>
 <body>
 <nav id="navbar" class="navbar navbar-expand site-masthead" aria-label="주 메뉴"></nav>
@@ -106,12 +124,21 @@
 </header>
 
 <main id="list"></main>
-<p class="status" id="status">불러오는 중…</p>
+<p class="status" id="status" hidden></p>
 <nav class="pager" id="pager" aria-label="문제 세트 페이지"></nav>
+<section class="exam-tools" id="exam-tools" aria-label="댓글·저장">
+  <div class="exam-action-tools">
+    <div class="board-comments-root" id="exam-comments" data-board-comments-root></div>
+    <button type="button" class="exam-tool-btn" id="exam-save" aria-pressed="false">저장</button>
+    <button type="button" class="exam-tool-btn" id="exam-download" hidden disabled>다운로드 (<span id="exam-saved-count">0</span>)</button>
+  </div>
+</section>
 
 <script src="page30-api-config.js?v=20260721"></script>
-<script src="site-masthead.js?v=20261108wx5"></script>
+<script src="site-masthead.js?v=20261108exam2"></script>
 <script src="site-footer.js?v=20261013a"></script>
+<script src="board-comments.js?v=20261102c4"></script>
+<script src="site-stats.js?v=20261105a"></script>
 <script>
 /* ===== 예비 단어: API(DB)에 연결되지 않았을 때만 사용. 형식 "영어|뜻" ===== */
 const DATA = {
@@ -517,6 +544,13 @@ const sX = document.getElementById('sX');
 const sPts = document.getElementById('sPts');
 const btnSeq = document.getElementById('orderSeq');
 const btnRand = document.getElementById('orderRand');
+const btnSave = document.getElementById('exam-save');
+const btnDownload = document.getElementById('exam-download');
+const savedCountEl = document.getElementById('exam-saved-count');
+const commentsRoot = document.getElementById('exam-comments');
+
+const BOARD = 'exam-words';
+const SAVE_KEY = 'exam-words-saved-v1';
 
 let cats = [];
 let level = 'elem';
@@ -529,6 +563,93 @@ let no = 0;
 let gen = 0;
 let useApi = true;
 let loading = false;
+let commentsGen = 0;
+
+function setStatus(msg) {
+  if (!msg) {
+    statusEl.hidden = true;
+    statusEl.textContent = '';
+    return;
+  }
+  statusEl.hidden = false;
+  statusEl.textContent = msg;
+}
+
+function loadSavedMap() {
+  try {
+    return JSON.parse(sessionStorage.getItem(SAVE_KEY) || '{}') || {};
+  } catch (e) {
+    return {};
+  }
+}
+function persistSavedMap(map) {
+  try {
+    sessionStorage.setItem(SAVE_KEY, JSON.stringify(map));
+  } catch (e) { /* ignore */ }
+}
+function savedEntries() {
+  const map = loadSavedMap();
+  return Object.keys(map).map(function (k) { return map[k]; }).filter(Boolean);
+}
+function syncSaveUi() {
+  const map = loadSavedMap();
+  const n = Object.keys(map).length;
+  const allOn = pool.length > 0 && pool.every(function (w) { return !!map[w.id]; });
+  btnSave.setAttribute('aria-pressed', allOn ? 'true' : 'false');
+  btnSave.textContent = allOn ? '저장됨' : '저장';
+  savedCountEl.textContent = String(n);
+  if (n > 0) {
+    btnDownload.hidden = false;
+    btnDownload.disabled = false;
+  } else {
+    btnDownload.hidden = true;
+    btnDownload.disabled = true;
+  }
+}
+function contentKeyForSet() {
+  return 'exam-' + level + '-' + order + '-p' + page;
+}
+async function mountSetComments() {
+  if (!window.BoardComments || typeof window.BoardComments.mount !== 'function') return;
+  const my = ++commentsGen;
+  commentsRoot.textContent = '';
+  commentsRoot.removeAttribute('data-mounted');
+  try {
+    await window.BoardComments.mount({
+      board: BOARD,
+      contentKey: contentKeyForSet(),
+      title: '수험영어 ' + level + ' p' + page,
+      root: commentsRoot
+    });
+    if (my !== commentsGen) return;
+  } catch (e) {
+    console.warn('[수험영어] 댓글 마운트 실패', e);
+  }
+}
+function downloadSaved() {
+  const rows = savedEntries();
+  if (!rows.length) return;
+  const text = rows.map(function (w) {
+    return (w.en || w.word || '') + '\t' + (w.ko || w.meaning || '');
+  }).join('\n');
+  const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+  const a = document.createElement('a');
+  const day = new Date().toISOString().slice(0, 10);
+  a.href = URL.createObjectURL(blob);
+  a.download = 'exam-words-' + day + '.txt';
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(function () { URL.revokeObjectURL(a.href); }, 1000);
+  if (window.SiteStats && typeof window.SiteStats.trackDownload === 'function') {
+    try {
+      window.SiteStats.trackDownload(
+        rows.map(function (w) { return w.en || w.word; }).filter(Boolean),
+        BOARD
+      );
+    } catch (e) { /* ignore */ }
+  }
+}
 
 function shuffle(a) {
   for (let i = a.length - 1; i > 0; i--) {
@@ -770,7 +891,7 @@ async function loadSet(cat, p) {
   no = 0;
   updateScore();
   list.innerHTML = '';
-  statusEl.textContent = '불러오는 중…';
+  setStatus('');
   pager.innerHTML = '';
   nav.querySelectorAll('a').forEach(a => {
     if (a.dataset.level === level) a.setAttribute('aria-current', 'page');
@@ -791,14 +912,14 @@ async function loadSet(cat, p) {
       .map(w => ({ id: String(w.id ?? (w.word + '|' + w.meaning)), en: w.word, ko: w.meaning }));
     pool = words.slice();
     if (!words.length) {
-      statusEl.textContent = '이 분류에는 아직 단어가 없어요';
+      setStatus('이 분류에는 아직 단어가 없어요');
+      syncSaveUi();
       return;
     }
     words.forEach((w, i) => makeCard(w, i + 1));
-    statusEl.textContent =
-      (order === 'seq' ? '순서대로' : '랜덤') +
-      ' · ' + page + ' / ' + pages + '세트 · 맞으면 +' + POINT_EACH + '점';
     renderPager();
+    syncSaveUi();
+    mountSetComments();
   } finally {
     loading = false;
   }
@@ -820,7 +941,22 @@ btnRand.onclick = () => {
   loadSet(level, 1);
 };
 document.getElementById('reset').onclick = () => loadSet(level, page);
+btnSave.onclick = () => {
+  const map = loadSavedMap();
+  const allOn = pool.length > 0 && pool.every(function (w) { return !!map[w.id]; });
+  if (allOn) {
+    pool.forEach(function (w) { delete map[w.id]; });
+  } else {
+    pool.forEach(function (w) {
+      map[w.id] = { id: w.id, en: w.en, ko: w.ko };
+    });
+  }
+  persistSavedMap(map);
+  syncSaveUi();
+};
+btnDownload.onclick = () => downloadSaved();
 window.addEventListener('hashchange', onHash);
+syncSaveUi();
 
 loadCategories().then(() => {
   const { cat, page: p } = parseHash();
