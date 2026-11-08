@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="redesign-tokens.css?v=20261019rd4">
-<link rel="stylesheet" href="site-masthead.css?v=20261108wx5">
+<link rel="stylesheet" href="site-masthead.css?v=20261108exam3">
 <link rel="stylesheet" href="site-footer.css?v=20261013a">
 <style>
   :root{
@@ -23,6 +23,8 @@
   body{margin:0;background:var(--bg);color:var(--ink);font-family:'Noto Sans KR',system-ui,sans-serif;-webkit-tap-highlight-color:transparent}
   a{color:var(--blue)}
 
+  /* 공통 마스트헤드 바로 아래 퀴즈 헤더 — 유틸바 삽입으로 밀리지 않음 */
+  body.exam-words-page{margin:0}
   .top{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid var(--line)}
   .top-in{max-width:760px;margin:0 auto;padding:12px 16px;display:flex;flex-direction:column;gap:10px}
   .brand{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
@@ -102,10 +104,10 @@
 </style>
 <link rel="stylesheet" href="board-comments.css?v=20261102c4">
 </head>
-<body>
+<body class="exam-words-page">
 <nav id="navbar" class="navbar navbar-expand site-masthead" aria-label="주 메뉴"></nav>
 
-<header class="top">
+<header class="top" id="exam-top">
   <div class="top-in">
     <div class="brand">
       <a href="index.html">04 수험영어</a>
@@ -142,7 +144,7 @@
 </section>
 
 <script src="page30-api-config.js?v=20260721"></script>
-<script src="site-masthead.js?v=20261108exam2"></script>
+<script src="site-masthead.js?v=20261108exam3"></script>
 <script src="site-footer.js?v=20261013a"></script>
 <script src="board-comments.js?v=20261102c4"></script>
 <script src="site-stats.js?v=20261105a"></script>

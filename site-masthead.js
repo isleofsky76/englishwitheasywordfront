@@ -4,7 +4,7 @@
  * nav-home-menu.js 가 로드함
  */
 (function () {
-    var VERSION = '20261108exam2';
+    var VERSION = '20261108exam3';
 
   var DICT_LOOKUP_VER = '20261104dict1';
   var DICT_LOOKUP_CONTAINERS = [
@@ -790,11 +790,14 @@
   function mount() {
     document.documentElement.classList.add('has-site-masthead');
     var base = assetBase();
-    /* 홈(index)만 날씨/시계 제외 — free-books 등 rd-home 레이아웃은 적용 */
-    var skipWeather =
-      document.body.classList.contains('rd-home') &&
-      !document.body.classList.contains('fb-page');
-    if (!skipWeather) {
+    /* 홈(index)·수험영어 퀴즈는 날씨/시계/유튜브 제외 — 상단 여백·레이아웃 시프트 방지 */
+    var pathKey = currentPageKey();
+    var skipUtilities =
+      document.body.classList.contains('exam-words-page') ||
+      pathKey === 'exam-words.html' ||
+      (document.body.classList.contains('rd-home') &&
+        !document.body.classList.contains('fb-page'));
+    if (!skipUtilities) {
       ensureWeather(base);
     }
     mountNavbar(base);
@@ -811,20 +814,24 @@
     ensureSiteDictLookup(base);
     /* CSS 적용 후에만 YouTube 바 삽입 — 빨간 아이콘 거대화 FOUC 방지 */
     ensureCss(base, function () {
-      injectYoutubeBar();
-      placeUtilityBars();
+      if (!skipUtilities) {
+        injectYoutubeBar();
+        placeUtilityBars();
+      }
       syncNavbarHeight();
     });
-    var tries = 0;
-    var timer = setInterval(function () {
-      tries += 1;
-      if (!document.getElementById('yt-billboard-bar')) injectYoutubeBar();
-      var ready = placeUtilityBars();
-      syncNavbarHeight();
-      if ((ready && document.getElementById('weather-banner')) || tries > 20) {
-        clearInterval(timer);
-      }
-    }, 200);
+    if (!skipUtilities) {
+      var tries = 0;
+      var timer = setInterval(function () {
+        tries += 1;
+        if (!document.getElementById('yt-billboard-bar')) injectYoutubeBar();
+        var ready = placeUtilityBars();
+        syncNavbarHeight();
+        if ((ready && document.getElementById('weather-banner')) || tries > 20) {
+          clearInterval(timer);
+        }
+      }, 200);
+    }
   }
 
   window.SiteMasthead = { mount: mount };
