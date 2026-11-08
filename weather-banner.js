@@ -179,7 +179,15 @@
   }
 
   function createBanner() {
-    if (document.getElementById('weather-banner')) return null;
+    var existing = document.getElementById('weather-banner');
+    if (existing) {
+      existing.classList.remove('weather-banner--shell');
+      document.documentElement.classList.add('has-weather-banner');
+      if (document.querySelector('.main-content')) {
+        document.documentElement.classList.add('page-with-main-content');
+      }
+      return existing;
+    }
     var nav = document.querySelector('.site-masthead') ||
       document.querySelector('.navbar.fixed-top') ||
       document.querySelector('.navbar');
@@ -190,7 +198,7 @@
     banner.className = 'weather-banner';
     banner.setAttribute('aria-live', 'polite');
     banner.innerHTML = '<span class="weather-banner__inner weather-banner__text">날씨 불러오는 중…</span>';
-    var yt = document.getElementById('yt-billboard-bar');
+    var yt = document.getElementById('yt-billboard-bar') || document.getElementById('yt-billboard-slot');
     (yt || nav).insertAdjacentElement('afterend', banner);
     document.documentElement.classList.add('has-weather-banner');
     if (document.querySelector('.main-content')) {

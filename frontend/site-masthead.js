@@ -4,7 +4,7 @@
  * nav-home-menu.js 가 로드함
  */
 (function () {
-    var VERSION = '20261108exam3';
+    var VERSION = '20261108util1';
 
   var DICT_LOOKUP_VER = '20261104dict1';
   var DICT_LOOKUP_CONTAINERS = [
@@ -769,7 +769,9 @@
   /** 문서 순서: 헤더 → YouTube → 날씨 → 시계 */
   function placeUtilityBars() {
     var nav = document.querySelector('.site-masthead') || document.querySelector('#navbar');
-    var yt = document.getElementById('yt-billboard-bar');
+    var yt =
+      document.getElementById('yt-billboard-bar') ||
+      document.getElementById('yt-billboard-slot');
     var weather = document.getElementById('weather-banner');
     var clock = document.getElementById('world-clock-bar');
     if (!nav) return false;
@@ -787,20 +789,82 @@
     return !!(yt || weather || clock);
   }
 
+  /**
+   * 유틸 바 자리를 동기적으로 먼저 확보 — 날씨/시계 스크립트 로드 후 끼워 넣으며
+   * 본문이 아래로 밀리는 CLS를 막는다.
+   */
+  function ensureUtilityShell() {
+    var nav =
+      document.querySelector('.site-masthead') ||
+      document.querySelector('#navbar') ||
+      document.querySelector('.navbar.fixed-top');
+    if (!nav) return;
+
+    if (!document.getElementById('yt-billboard-bar') && !document.getElementById('yt-billboard-slot')) {
+      var ytSlot = document.createElement('div');
+      ytSlot.id = 'yt-billboard-slot';
+      ytSlot.className = 'yt-billboard-slot';
+      ytSlot.setAttribute('aria-hidden', 'true');
+      nav.insertAdjacentElement('afterend', ytSlot);
+      document.documentElement.classList.add('has-yt-billboard');
+    }
+
+    var afterYt =
+      document.getElementById('yt-billboard-bar') ||
+      document.getElementById('yt-billboard-slot') ||
+      nav;
+
+    if (!document.getElementById('weather-banner')) {
+      var weather = document.createElement('div');
+      weather.id = 'weather-banner';
+      weather.className = 'weather-banner weather-banner--shell';
+      weather.setAttribute('aria-live', 'polite');
+      weather.innerHTML =
+        '<span class="weather-banner__inner weather-banner__text">날씨 불러오는 중…</span>';
+      afterYt.insertAdjacentElement('afterend', weather);
+      document.documentElement.classList.add('has-weather-banner');
+    }
+
+    var weatherEl = document.getElementById('weather-banner');
+    if (weatherEl && !document.getElementById('world-clock-bar')) {
+      var clock = document.createElement('div');
+      clock.id = 'world-clock-bar';
+      clock.className = 'world-clock-bar world-clock-bar--shell';
+      clock.setAttribute('aria-label', '세계 주요 도시 시각');
+      clock.innerHTML =
+        '<div class="world-clock-bar__list">' +
+          '<span class="world-clock-bar__prefix">' +
+            '<span class="world-clock-bar__icon" aria-hidden="true">🕐</span>' +
+            '<span class="world-clock-bar__label">현재 시간</span>' +
+          '</span>' +
+          '<span class="world-clock-bar__slot" role="status" aria-live="polite"></span>' +
+        '</div>';
+      weatherEl.insertAdjacentElement('afterend', clock);
+      document.documentElement.classList.add('has-world-clock');
+    }
+
+    if (document.querySelector('.main-content')) {
+      document.documentElement.classList.add('page-with-main-content');
+    }
+    placeUtilityBars();
+  }
+
   function mount() {
     document.documentElement.classList.add('has-site-masthead');
     var base = assetBase();
-    /* 홈(index)·수험영어 퀴즈는 날씨/시계/유튜브 제외 — 상단 여백·레이아웃 시프트 방지 */
+    /* 홈(index)·수험영어 퀴즈는 날씨/시계/유튜브 제외 */
     var pathKey = currentPageKey();
     var skipUtilities =
       document.body.classList.contains('exam-words-page') ||
       pathKey === 'exam-words.html' ||
       (document.body.classList.contains('rd-home') &&
         !document.body.classList.contains('fb-page'));
+    mountNavbar(base);
     if (!skipUtilities) {
+      /* 자리부터 잡고 → 스크립트가 내용만 채움 */
+      ensureUtilityShell();
       ensureWeather(base);
     }
-    mountNavbar(base);
     ensureScript(base + 'comment-badwords-client.js?v=' + VERSION, function () {
       if (window.CommentBadwords && window.CommentBadwords.load) {
         window.CommentBadwords.load();
@@ -812,7 +876,7 @@
       });
     });
     ensureSiteDictLookup(base);
-    /* CSS 적용 후에만 YouTube 바 삽입 — 빨간 아이콘 거대화 FOUC 방지 */
+    /* CSS 적용 후에만 YouTube 바 실내용 교체 — 빨간 아이콘 거대화 FOUC 방지 */
     ensureCss(base, function () {
       if (!skipUtilities) {
         injectYoutubeBar();
@@ -825,9 +889,9 @@
       var timer = setInterval(function () {
         tries += 1;
         if (!document.getElementById('yt-billboard-bar')) injectYoutubeBar();
-        var ready = placeUtilityBars();
+        placeUtilityBars();
         syncNavbarHeight();
-        if ((ready && document.getElementById('weather-banner')) || tries > 20) {
+        if (document.getElementById('weather-banner') || tries > 20) {
           clearInterval(timer);
         }
       }, 200);

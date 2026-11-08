@@ -374,6 +374,20 @@
   border-radius: 1px;
 }
 
+/* YouTube/날씨/시계 자리 예약 — 스크립트 로드 전 CLS 방지 */
+#yt-billboard-slot {
+  display: block;
+  min-height: var(--yt-billboard-height);
+  margin-top: 10px;
+  background: var(--ink, #16181d);
+  box-sizing: border-box;
+}
+.weather-banner.weather-banner--shell,
+.world-clock-bar.world-clock-bar--shell {
+  min-height: 32px;
+  box-sizing: border-box;
+}
+
 /* YouTube bar — 시안 톤에 맞춤 */
 #yt-billboard-bar,
 .yt-billboard {

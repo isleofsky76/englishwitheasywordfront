@@ -98,8 +98,25 @@
   }
 
   function createWorldClock() {
+    var existing = document.getElementById('world-clock-bar');
+    if (existing) {
+      existing.classList.remove('world-clock-bar--shell');
+      document.documentElement.classList.add('has-world-clock');
+      var readySlot = existing.querySelector('.world-clock-bar__slot');
+      if (readySlot) return readySlot;
+      existing.innerHTML =
+        '<div class="world-clock-bar__list">' +
+        '<span class="world-clock-bar__prefix">' +
+        '<span class="world-clock-bar__icon" aria-hidden="true">🕐</span>' +
+        '<span class="world-clock-bar__label">현재 시간</span>' +
+        '</span>' +
+        '<span class="world-clock-bar__slot" role="status" aria-live="polite"></span>' +
+        '</div>';
+      return existing.querySelector('.world-clock-bar__slot');
+    }
+
     var weather = document.getElementById('weather-banner');
-    if (!weather || document.getElementById('world-clock-bar')) return null;
+    if (!weather) return null;
 
     var bar = document.createElement('div');
     bar.id = 'world-clock-bar';
