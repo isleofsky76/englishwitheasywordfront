@@ -39,6 +39,7 @@ const TITLE_CATEGORY_BOARD = {
   연관단어: 'english-synonym',
   유의어: 'english-synonym',
   영작: 'english-writing',
+  영어작문: 'english-writing',
 };
 
 const BOARD_RULES = [
@@ -124,6 +125,20 @@ function parseWords(description) {
       exampleEn,
       exampleKo,
     });
+  }
+  /* 번호 없는 연관단어 목록: conceive — 임신하다 */
+  if (!words.length) {
+    const looseRe =
+      /^(?:\*\*)?([A-Za-z][A-Za-z0-9\-'\s]{0,48}?)(?:\*\*)?\s+[—–\-]\s+(?:\*\*)?([^\n]+?)(?:\*\*)?\s*$/gm;
+    let n = 0;
+    while ((m = looseRe.exec(text)) !== null) {
+      const expression = m[1].replace(/\*\*/g, '').trim();
+      const meaning = m[2].replace(/\*\*/g, '').trim();
+      if (!expression || !meaning) continue;
+      if (/^(출처|기사|원본|저자|게시|All rights)/i.test(expression)) continue;
+      n += 1;
+      words.push({ num: n, expression, meaning, exampleEn: '', exampleKo: '' });
+    }
   }
   return words;
 }

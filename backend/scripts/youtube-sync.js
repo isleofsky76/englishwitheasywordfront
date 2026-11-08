@@ -564,7 +564,14 @@ async function main() {
         article.password = `seed_${args.board.replace(/-/g, '_')}_${article.slug.slice(0, 48)}`;
       }
       state.seenVideoIds[v.videoId] = { at: new Date().toISOString(), title: v.title };
-      if (!article.parsedWordCount) {
+      /* 제목에 `카테고리 |` 없으면 분류 불가 → 건너뜀 */
+      if (!/^\s*[^|｜]{1,20}\s*[|｜]\s*/.test(String(v.title || ''))) {
+        console.log(`건너뜀(카테고리 없음): ${v.videoId} | ${v.title}`);
+        continue;
+      }
+      const isWriting = article.board === 'english-writing';
+      const hasWritingBody = isWriting && String(article.description || '').trim();
+      if (!article.parsedWordCount && !hasWritingBody) {
         console.log(`건너뜀(단어없음): ${v.videoId} | ${v.title}`);
         continue;
       }

@@ -4,7 +4,7 @@
  */
 export async function uploadEnglishWriting(config, apiBase) {
   const title = String(config.title || '')
-    .replace(/^\s*영작\s*[|｜]\s*/, '')
+    .replace(/^\s*(?:영작|영어작문)\s*[|｜]\s*/, '')
     .trim();
   const text = String(config.description || '').trim();
   if (!title) throw new Error('영작 제목이 없습니다.');
