@@ -841,7 +841,26 @@ function clearIpAuthFail(ip) {
 }
 
 function getAdminPassword() {
-  return process.env.ADMIN_PASSWORD || process.env.admin_password || '';
+  return String(process.env.ADMIN_PASSWORD || process.env.admin_password || '').trim();
+}
+
+/** 예약 닉네임(admin/관리자/주인장)용 — Cloudtype ADMIN_PASSWORD와 비교 */
+function verifyReservedAdminPassword(adminPasswordInput, res, ip) {
+  const adminPw = getAdminPassword();
+  const inputPw = String(adminPasswordInput == null ? '' : adminPasswordInput).trim();
+  if (!adminPw) {
+    res.status(503).json({
+      error: '서버에 ADMIN_PASSWORD(또는 admin_password)가 없습니다. Cloudtype 환경변수를 설정한 뒤 재배포하세요.',
+    });
+    return false;
+  }
+  if (!inputPw || !safeEqualString(inputPw, adminPw)) {
+    if (ip) recordIpAuthFail(ip, { maxFails: AUTH_ADMIN_MAX_FAILS, lockMs: AUTH_LOCK_MS });
+    res.status(403).json({ error: 'admin / 관리자 / 주인장 닉네임은 관리자 비밀번호가 필요해요.' });
+    return false;
+  }
+  if (ip) clearIpAuthFail(ip);
+  return true;
 }
 
 /** 모든 관리자 변이 API 공통: timing-safe 비교 + IP 실패 잠금 */
@@ -850,7 +869,14 @@ function requireAdmin(req, res) {
   if (rejectIfIpAuthLocked(ip, res)) return false;
   const { adminPasswordInput } = req.body || {};
   const adminPassword = getAdminPassword();
-  if (!adminPassword || !safeEqualString(adminPasswordInput, adminPassword)) {
+  const inputPw = String(adminPasswordInput == null ? '' : adminPasswordInput).trim();
+  if (!adminPassword) {
+    res.status(503).json({
+      error: '서버에 ADMIN_PASSWORD(또는 admin_password)가 없습니다. Cloudtype 환경변수를 설정한 뒤 재배포하세요.',
+    });
+    return false;
+  }
+  if (!inputPw || !safeEqualString(inputPw, adminPassword)) {
     recordIpAuthFail(ip, { maxFails: AUTH_ADMIN_MAX_FAILS, lockMs: AUTH_LOCK_MS });
     res.status(403).json({ error: 'Invalid admin password' });
     return false;
@@ -3130,12 +3156,7 @@ app.post('/onesentence/comments', async (req, res) => {
   if (rejectIfIpAuthLocked(ip, res)) return;
 
   if (checked.reservedNick || isReservedAdminNickname(checked.nickname)) {
-    const adminPw = getAdminPassword();
-    if (!adminPw || !safeEqualString(adminPasswordInput, adminPw)) {
-      recordIpAuthFail(ip, { maxFails: AUTH_ADMIN_MAX_FAILS, lockMs: AUTH_LOCK_MS });
-      return res.status(403).json({ error: 'admin / 관리자 / 주인장 닉네임은 관리자 비밀번호가 필요해요.' });
-    }
-    clearIpAuthFail(ip);
+    if (!verifyReservedAdminPassword(adminPasswordInput, res, ip)) return;
   }
 
   const last = oneSentenceCommentIpCooldown.get(ip) || 0;
@@ -3235,12 +3256,7 @@ app.post('/onesentence/comments/edit', async (req, res) => {
   const checked = validateCommentFields({ nickname, body, password });
   if (!checked.ok) return res.status(400).json({ error: checked.error });
   if (checked.reservedNick || isReservedAdminNickname(checked.nickname)) {
-    const adminPw = getAdminPassword();
-    if (!adminPw || !safeEqualString(adminPasswordInput, adminPw)) {
-      recordIpAuthFail(ip, { maxFails: AUTH_ADMIN_MAX_FAILS, lockMs: AUTH_LOCK_MS });
-      return res.status(403).json({ error: 'admin / 관리자 / 주인장 닉네임은 관리자 비밀번호가 필요해요.' });
-    }
-    clearIpAuthFail(ip);
+    if (!verifyReservedAdminPassword(adminPasswordInput, res, ip)) return;
   }
   try {
     const doc = await OneSentenceComment.findById(id);
@@ -3336,12 +3352,7 @@ app.post('/board-comments', async (req, res) => {
   if (rejectIfIpAuthLocked(ip, res)) return;
 
   if (checked.reservedNick || isReservedAdminNickname(checked.nickname)) {
-    const adminPw = getAdminPassword();
-    if (!adminPw || !safeEqualString(adminPasswordInput, adminPw)) {
-      recordIpAuthFail(ip, { maxFails: AUTH_ADMIN_MAX_FAILS, lockMs: AUTH_LOCK_MS });
-      return res.status(403).json({ error: 'admin / 관리자 / 주인장 닉네임은 관리자 비밀번호가 필요해요.' });
-    }
-    clearIpAuthFail(ip);
+    if (!verifyReservedAdminPassword(adminPasswordInput, res, ip)) return;
   }
 
   const limitKey = `${boardKey}::${key}`;
@@ -3421,12 +3432,7 @@ app.post('/board-comments/edit', async (req, res) => {
   const checked = validateCommentFields({ nickname, body, password });
   if (!checked.ok) return res.status(400).json({ error: checked.error });
   if (checked.reservedNick || isReservedAdminNickname(checked.nickname)) {
-    const adminPw = getAdminPassword();
-    if (!adminPw || !safeEqualString(adminPasswordInput, adminPw)) {
-      recordIpAuthFail(ip, { maxFails: AUTH_ADMIN_MAX_FAILS, lockMs: AUTH_LOCK_MS });
-      return res.status(403).json({ error: 'admin / 관리자 / 주인장 닉네임은 관리자 비밀번호가 필요해요.' });
-    }
-    clearIpAuthFail(ip);
+    if (!verifyReservedAdminPassword(adminPasswordInput, res, ip)) return;
   }
   try {
     const doc = await BoardComment.findById(id);

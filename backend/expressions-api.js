@@ -206,10 +206,26 @@ export function registerExpressionsApi(app, deps) {
         countFilter.$or = [{ ko: rx }, { en: rx }, { example: rx }, { translation: rx }, { tags: rx }];
       }
 
-      const [items, total] = await Promise.all([
-        Expression.find(filter).sort({ id: 1 }).limit(limit + 1).lean(),
-        Expression.countDocuments(countFilter),
-      ]);
+      const total = await Expression.countDocuments(countFilter);
+      const wantRandom = String(req.query.random || '') === '1' && !q && !cursor;
+
+      /* 홈 등: 방문마다 다른 N개 — $sample (검색·커서와 병행하지 않음) */
+      if (wantRandom) {
+        const sampleSize = Math.min(20, Math.max(1, limit));
+        const sampled = await Expression.aggregate([
+          { $match: filter },
+          { $sample: { size: sampleSize } },
+        ]);
+        return res.json({
+          items: sampled.map(publicItem),
+          nextCursor: null,
+          hasMore: false,
+          total,
+          random: true,
+        });
+      }
+
+      const items = await Expression.find(filter).sort({ id: 1 }).limit(limit + 1).lean();
 
       const hasMore = items.length > limit;
       const page = hasMore ? items.slice(0, limit) : items;

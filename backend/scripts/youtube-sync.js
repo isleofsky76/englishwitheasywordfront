@@ -377,10 +377,17 @@ function fillHangulPronunciations(pronunciations, expressions) {
 async function prepareArticle(article) {
   let next = { ...article };
   if (next.board === 'english-synonym') {
-    const expressions = (next.wordMeta || []).map((w) => w.expression);
-    console.log(`  연관단어 발음 생성 중... (${expressions.length}개)`);
-    let pronunciations = await fetchPronunciations(expressions);
-    pronunciations = fillHangulPronunciations(pronunciations, expressions);
+    const meta = next.wordMeta || [];
+    const expressions = meta.map((w) => w.expression);
+    const needPron = meta.some((w) => !String(w.exampleEn || '').trim());
+    let pronunciations = next.pronunciations || {};
+    if (needPron) {
+      console.log(`  연관단어 발음 생성 중... (${expressions.length}개)`);
+      pronunciations = await fetchPronunciations(expressions);
+      pronunciations = fillHangulPronunciations(pronunciations, expressions);
+    } else {
+      console.log(`  예문 있음 → 뉴스형 섹션 (${expressions.length}개, 발음 API 생략)`);
+    }
     next = applySynonymWordFormat(next, pronunciations);
     next.pronunciations = pronunciations;
   }

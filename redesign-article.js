@@ -1526,7 +1526,7 @@
     if (!contentKey || !board) return;
     var base = redesignAssetBase();
     loadRedesignCss(base + 'board-comments.css?v=20261107cmt2');
-    var commentsSrc = base + 'board-comments.js?v=20261107cmt2';
+    var commentsSrc = base + 'board-comments.js?v=20261108pw25';
     var ready = window.BoardComments
       ? Promise.resolve()
       : loadRedesignScript(commentsSrc);

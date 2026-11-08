@@ -395,9 +395,21 @@
     return 'https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app';
   }
 
+  function shuffleInPlace(arr) {
+    for (var i = arr.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = arr[i];
+      arr[i] = arr[j];
+      arr[j] = t;
+    }
+    return arr;
+  }
+
+  /** 방문(로드)마다 다른 N개. 서버 random 지원 시 그대로, 아니면 풀에서 셔플. */
   function fetchDailyExpressions(limit) {
     var n = Number(limit) || 5;
-    return fetch(expressionsApiBase().replace(/\/$/, '') + '/api/expressions?limit=' + n, {
+    var base = expressionsApiBase().replace(/\/$/, '');
+    return fetch(base + '/api/expressions?limit=' + n + '&random=1', {
       headers: { Accept: 'application/json' },
       cache: 'no-store'
     })
@@ -406,7 +418,24 @@
         return r.json();
       })
       .then(function (data) {
-        return Array.isArray(data && data.items) ? data.items : [];
+        var items = Array.isArray(data && data.items) ? data.items.slice() : [];
+        if (data && data.random) return items.slice(0, n);
+        /* 구 API: 앞쪽 고정 목록만 오므로 더 받아 셔플 */
+        if (items.length <= n) {
+          return fetch(base + '/api/expressions?limit=100', {
+            headers: { Accept: 'application/json' },
+            cache: 'no-store'
+          })
+            .then(function (r2) {
+              if (!r2.ok) return items;
+              return r2.json();
+            })
+            .then(function (data2) {
+              var pool = Array.isArray(data2 && data2.items) ? data2.items.slice() : items;
+              return shuffleInPlace(pool).slice(0, n);
+            });
+        }
+        return shuffleInPlace(items).slice(0, n);
       })
       .catch(function () {
         return [];

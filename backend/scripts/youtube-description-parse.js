@@ -213,15 +213,31 @@ function wordsToNarratives(words) {
 }
 
 /**
- * 기존 연관단어 seed 양식:
- *   title: '1. 마구 뒤지다·난장판으로 만들다'
- *   narrative: ['**ransack**(ˈrænˌsæk / 랜색)']
+ * 연관단어 seed 양식:
+ *   예문 있음 (뉴스영어와 동일):
+ *     title: '1. 무자녀 상태 (명)'
+ *     narrative: ['**Childlessness** is … / 무자녀는 …']
+ *   예문 없음:
+ *     title: '1. 마구 뒤지다·난장판으로 만들다'
+ *     narrative: ['**ransack**(ˈrænˌsæk / 랜색)']
  */
 export function wordsToSynonymSections(words, pronunciations = {}) {
   return (words || []).map((w, i) => {
     const n = w.num || i + 1;
     const expression = String(w.expression || '').trim();
     const meaning = String(w.meaning || '').trim() || expression;
+    const exampleEn = String(w.exampleEn || '').trim();
+    const exampleKo = String(w.exampleKo || '').trim();
+
+    /* 예문 있으면 뉴스영어처럼: 번호.뜻 → 예문 → 번역 */
+    if (exampleEn) {
+      const en = lemmaAnnotation(exampleEn, expression);
+      return {
+        title: `${n}. ${meaning}`,
+        narrative: exampleKo ? [`${en} / ${exampleKo}`] : [en],
+      };
+    }
+
     const key = expression.toLowerCase();
     const p = pronunciations[key] || pronunciations[expression] || {};
     const ipa = String(p.ipa || '')

@@ -1059,7 +1059,7 @@ async function ensureBoardCommentsAssets() {
     const base = nvAssetBase();
     nvLoadStylesheet(base + 'board-comments.css?v=20261107cmt2');
     if (!window.BoardComments) {
-        const src = base + 'board-comments.js?v=20261107cmt2';
+        const src = base + 'board-comments.js?v=20261108pw25';
         if (!document.querySelector(`script[src="${src}"]`)) {
             await new Promise((resolve, reject) => {
                 const s = document.createElement('script');
