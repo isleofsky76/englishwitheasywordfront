@@ -199,7 +199,7 @@ function nvResolveSlug() {
 function nvPostPageUrl(post, index) {
     if (window.ViewpostSeo) return window.ViewpostSeo.postPageUrl(post, window.VIEWPOST_SEO, index);
     if (post && post.slug) {
-        return `${NV_SITE_ORIGIN}/news-voca/${encodeURIComponent(post.slug)}/`;
+        return `${NV_SITE_ORIGIN}/news-voca.html?slug=${encodeURIComponent(post.slug)}`;
     }
     const idx = index ?? new URLSearchParams(window.location.search).get('index');
     if (idx != null && idx !== '') {
@@ -354,6 +354,83 @@ function vvBindTtsButtons(container) {
     });
 }
 
+/** cf. 뒤 뜻만 남기고 다음 번호·다음 단어 조각은 제거 */
+function cleanNewsCfMeaning(raw) {
+    let s = String(raw || '').replace(/\s+/g, ' ').trim();
+    if (!s) return '';
+    s = s.split(/\s*cf\./i)[0];
+    s = s.split(/※/)[0];
+    s = s.split(/\s+\d{1,2}\.\s+/)[0];
+    const withPos = s.match(
+        /^(.*?)(?:\s*[\(（]\s*(?:명|동|형|부|숙|관|감|형용사|동사|명사|부사)[^\)）]*[\)）])/
+    );
+    if (withPos) s = withPos[1];
+    else s = s.replace(/\s*[\(（][^\)）]{0,12}[\)）]\s*$/u, '');
+    return s.replace(/^[,，、.\s]+|[,，、.\s]+$/g, '').trim();
+}
+
+/** 뉴스 본문에서 단어→뜻을 모아 사전 팝업(DICT_WORDS)에 넣음 */
+function publishNewsDictWords(root) {
+    const map = Object.create(null);
+    function put(rawWord, rawMeaning) {
+        const word = String(rawWord || '')
+            .replace(/<[^>]+>/g, '')
+            .replace(/[’']/g, "'")
+            .replace(/\s+/g, ' ')
+            .trim()
+            .toLowerCase();
+        const meaning = cleanNewsCfMeaning(rawMeaning);
+        if (!word || !meaning || !/[a-z]/.test(word)) return;
+        if (!map[word]) map[word] = { meaning: meaning, pos: '' };
+    }
+
+    if (root) {
+        root.querySelectorAll('.rd-expr').forEach((card) => {
+            const w = card.querySelector('.rd-expr-word');
+            const m = card.querySelector('.rd-expr-meaning');
+            put(w && w.textContent, m && m.textContent);
+        });
+
+        /* 섹션 단위로만 파싱 — 전체 textContent면 다음 항목이 붙음 */
+        root.querySelectorAll('.nv-word-section, .rd-expr, p.nv-narrative-text, p.nv-narrative-def').forEach((sec) => {
+            const text = String(sec.textContent || '');
+            const cfRe = /\bcf\.\s*([^:：]+?)\s*[:：]\s*(.+)$/i;
+            const m = text.match(cfRe);
+            if (m) put(m[1], m[2]);
+        });
+
+        root.querySelectorAll('mark.nv-hl, .nv-hl').forEach((mark) => {
+            const host =
+                mark.closest('.nv-word-section, .rd-expr, p, .nv-narrative-text') ||
+                mark.parentElement;
+            if (!host) return;
+            const text = host.textContent || '';
+            const word = (mark.textContent || '').trim();
+            const escaped = word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            const cf = text.match(
+                new RegExp('cf\\.\\s*' + escaped + '\\s*[:：]\\s*(.+)$', 'i')
+            );
+            if (cf) put(word, cf[1]);
+        });
+    }
+
+    window.DICT_WORDS = Object.assign(Object.create(null), window.DICT_WORDS || {}, map);
+}
+
+/** 문장 페이지와 동일한 사전 팝업 — site-masthead 가 이미 넣으면 스킵 */
+function ensureNewsDictLookup() {
+    window.DICT_CONFIG = Object.assign(
+        { container: '#post-message, .rd-article-cards, .nv-body, .rd-expr' },
+        window.DICT_CONFIG || {}
+    );
+    if (document.querySelector('script[data-dict-lookup="1"]')) return;
+    const s = document.createElement('script');
+    s.src = '/dict-lookup.js?v=20261104dict1';
+    s.defer = true;
+    s.setAttribute('data-dict-lookup', '1');
+    document.body.appendChild(s);
+}
+
 function attachVocabularyWebTTS(container) {
     if (!container) return;
     try {
@@ -392,13 +469,13 @@ function buildMediaHtmlForUrl(url) {
     const youtubeMatch = url.match(youtubeRegex);
     if (youtubeMatch) {
         const videoId = youtubeMatch[1];
-        const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+        const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
         const youtubeUrl = `https://www.youtube.com/watch?v=${videoId}`;
         return `<div class="video-preview-container" style="position: relative; max-width: 100%; margin: 10px 0; cursor: pointer; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); z-index: 1;">
                 <a href="${youtubeUrl}" target="_blank" rel="noopener noreferrer" style="text-decoration: none; display: block; -webkit-tap-highlight-color: rgba(0, 0, 0, 0.3); touch-action: manipulation; position: relative; z-index: 10;">
                     <div class="video-thumbnail" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; background: #000;">
-                        <img src="${thumbnailUrl}" alt="YouTube Video" loading="lazy" decoding="async" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="this.src='https://img.youtube.com/vi/${videoId}/hqdefault.jpg'">
-                        <div class="play-button" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 68px; height: 48px; background: rgba(23, 35, 34, 0.9); border-radius: 14px; display: flex; align-items: center; justify-content: center; cursor: pointer; pointer-events: none; z-index: 2;">
+                        <img src="${thumbnailUrl}" alt="YouTube Video" loading="eager" fetchpriority="high" decoding="async" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onload="var p=this.nextElementSibling;if(p)p.style.opacity='1'" onerror="this.onerror=null;this.src='https://img.youtube.com/vi/${videoId}/mqdefault.jpg';var p=this.nextElementSibling;if(p)p.style.opacity='1'">
+                        <div class="play-button" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 68px; height: 48px; background: rgba(23, 35, 34, 0.9); border-radius: 14px; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity:0; transition: opacity 0.2s; pointer-events: none; z-index: 2;">
                             <div style="width: 0; height: 0; border-left: 24px solid white; border-top: 14px solid transparent; border-bottom: 14px solid transparent; margin-left: 6px;"></div>
                         </div>
                     </div>
@@ -500,14 +577,22 @@ function isLikelyKoreanTranslation(text) {
     return hangul > 0 && latin <= Math.max(3, Math.floor(hangul * 0.2));
 }
 
-/** 표시 순서: 출처 → 기사 배경 → 단어 블록 → 유튜브 */
+/** 표시 순서: 기사 배경 → 단어 블록 → 관련 링크(유튜브·기사) */
 function enforceNewsVocaSectionOrder(article) {
+    const related = article.querySelector(':scope > .nv-related-links, .nv-related-links');
     const source = article.querySelector(':scope > .nv-source, .nv-source');
     const lead = article.querySelector(':scope > .nv-lead, .nv-lead');
     const body = article.querySelector(':scope > .nv-body, .nv-body');
     const youtube = article.querySelector(':scope > .nv-youtube, .nv-youtube');
 
-    for (const el of [source, lead, body, youtube]) {
+    for (const el of [lead, body]) {
+        if (el) article.appendChild(el);
+    }
+    if (related) {
+        article.appendChild(related);
+        return;
+    }
+    for (const el of [youtube, source]) {
         if (el) article.appendChild(el);
     }
 }
@@ -547,11 +632,13 @@ function fixLegacyNewsVocaLayout(html) {
 function showLoading() {
     const postContainer = document.getElementById('post-container');
     postContainer.innerHTML = `
-        <div style="text-align: center; padding: 40px;">
-            <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;">
-                <span class="visually-hidden">Loading...</span>
-            </div>
-            <p style="margin-top: 15px; color: #666;">게시글을 불러오는 중...</p>
+        <div class="vp-skeleton" aria-hidden="true" style="padding: 8px 0 24px;">
+            <div style="height: 22px; width: 72%; max-width: 420px; border-radius: 6px; background: #e8edf2; margin-bottom: 14px;"></div>
+            <div style="height: 12px; width: 40%; max-width: 180px; border-radius: 6px; background: #eef2f6; margin-bottom: 28px;"></div>
+            <div style="height: 12px; width: 100%; border-radius: 6px; background: #eef2f6; margin-bottom: 10px;"></div>
+            <div style="height: 12px; width: 96%; border-radius: 6px; background: #eef2f6; margin-bottom: 10px;"></div>
+            <div style="height: 12px; width: 88%; border-radius: 6px; background: #eef2f6; margin-bottom: 10px;"></div>
+            <div style="height: 12px; width: 92%; border-radius: 6px; background: #eef2f6;"></div>
         </div>
     `;
 }
@@ -737,15 +824,28 @@ async function loadPost() {
 
         updatePageSeo(post, formattedDate);
 
-        postContainer.innerHTML = `
-            <header id="post-header">
-                <h1 id="post-title">${escapeHtml(post.title || '제목 없음')}</h1>
-                ${metaHtml}
-            </header>
-            <article id="post-content">
-                <div id="post-message" class="post-message-body">${convertedMessage || '<p class="nv-empty">내용이 없습니다.</p>'}</div>
-            </article>
-        `;
+        let usedRedesign = false;
+        if (typeof mountRedesignArticle === 'function') {
+            usedRedesign = await mountRedesignArticle(postContainer, post, {
+                boardKey: 'news-voca',
+                apiBaseUrl: API_BASE_URL,
+                convertedMessage: convertedMessage,
+                enableComments: true
+            });
+        }
+
+        if (!usedRedesign) {
+            postContainer.innerHTML = `
+                <header id="post-header">
+                    <h1 id="post-title">${escapeHtml(post.title || '제목 없음')}</h1>
+                    ${metaHtml}
+                </header>
+                <article id="post-content">
+                    <div id="post-message" class="post-message-body">${convertedMessage || '<p class="nv-empty">내용이 없습니다.</p>'}</div>
+                </article>
+            `;
+        }
+        if (typeof markArticleReady === 'function') markArticleReady();
         
         // 게시글 내용 복사 시 HTML 태그 제거하고 순수 텍스트만 복사
         const postMessage = document.getElementById('post-message');
@@ -765,6 +865,13 @@ async function loadPost() {
         }
         const postContent = document.getElementById('post-content');
         if (postContent) attachVocabularyWebTTS(postContent);
+        if (postMessage) {
+            publishNewsDictWords(postMessage);
+            ensureNewsDictLookup();
+        } else if (postContent) {
+            publishNewsDictWords(postContent);
+            ensureNewsDictLookup();
+        }
 
         if (typeof initViewpostLike === 'function') {
             initViewpostLike({
@@ -774,6 +881,8 @@ async function loadPost() {
                 board: 'guestbook'
             });
         }
+
+        await mountNewsVocaComments(post);
 
         // 버튼 기능 연결
         const backBtn = document.getElementById('backBtn');
@@ -914,4 +1023,81 @@ async function loadPost() {
     }
 }
 
-loadPost();
+function nvAssetBase() {
+    const scripts = document.querySelectorAll('script[src]');
+    for (let i = 0; i < scripts.length; i += 1) {
+        const src = scripts[i].getAttribute('src') || '';
+        if (/news-voca\.js/.test(src)) return src.replace(/[^/]+$/, '');
+    }
+    return '';
+}
+
+function nvLoadScript(src) {
+    return new Promise((resolve, reject) => {
+        if (document.querySelector(`script[src="${src}"]`)) {
+            resolve();
+            return;
+        }
+        const s = document.createElement('script');
+        s.src = src;
+        s.onload = () => resolve();
+        s.onerror = () => reject(new Error('fail ' + src));
+        document.head.appendChild(s);
+    });
+}
+
+function nvLoadStylesheet(href) {
+    const name = href.replace(/^.*\//, '').split('?')[0];
+    if (document.querySelector(`link[href*="${name}"]`)) return;
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = href;
+    document.head.appendChild(link);
+}
+
+async function ensureBoardCommentsAssets() {
+    const base = nvAssetBase();
+    nvLoadStylesheet(base + 'board-comments.css?v=20261108adminPw1');
+    if (!window.BoardComments) {
+        const src = base + 'board-comments.js?v=20261108pw25';
+        if (!document.querySelector(`script[src="${src}"]`)) {
+            await new Promise((resolve, reject) => {
+                const s = document.createElement('script');
+                s.src = src;
+                s.onload = () => resolve();
+                s.onerror = () => reject(new Error('fail ' + src));
+                document.head.appendChild(s);
+            });
+        }
+    }
+}
+
+async function mountNewsVocaComments(post) {
+    if (!post) return;
+    try {
+        await ensureBoardCommentsAssets();
+        if (!window.BoardComments || typeof window.BoardComments.mount !== 'function') return;
+        const contentKey = String(post.slug || post._id || '').trim();
+        if (!contentKey) return;
+        await window.BoardComments.mount({
+            board: 'news-voca',
+            contentKey: contentKey,
+            title: post.title || '',
+        });
+    } catch (e) {
+        console.warn('board comments mount skipped', e);
+    }
+}
+
+(async function nvBootRedesign() {
+    const base = nvAssetBase();
+    try {
+        if (!window.BoardListConfig) {
+            await nvLoadScript(base + 'board-list-config.js?v=20261020auto2');
+        }
+        await nvLoadScript(base + 'redesign-article.js?v=20261107listen3');
+    } catch (e) {
+        console.warn('redesign deps skipped', e);
+    }
+    loadPost();
+})();

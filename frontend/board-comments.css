@@ -303,6 +303,12 @@
   color: var(--os-ink-muted);
 }
 
+/* display:flex가 [hidden]을 덮어쓰지 않도록 */
+.board-comments-root .os-cmt-admin-pw-field[hidden],
+.board-comments-root .os-cmt-edit-nick[hidden] {
+  display: none !important;
+}
+
 .board-comments-root .os-cmt-field input,
 .board-comments-root .os-cmt-field textarea {
   width: 100%;

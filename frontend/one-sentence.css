@@ -1080,6 +1080,12 @@ body.os-hide-meaning .os-item.is-meaning-shown .os-cf-ko {
   color: var(--os-ink-muted);
 }
 
+/* display:flex가 [hidden]을 덮어쓰지 않도록 — admin/관리자/주인장 닉네임일 때만 표시 */
+.os-cmt-admin-pw-field[hidden],
+.os-cmt-edit-nick[hidden] {
+  display: none !important;
+}
+
 .os-cmt-field input,
 .os-cmt-field textarea {
   width: 100%;
