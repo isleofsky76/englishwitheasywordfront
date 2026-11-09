@@ -18,6 +18,13 @@
   /** 다른 vocabulary-quiz 항목의 한글 뜻 풀 (동의어 퀴즈 오답용) */
   var globalMcPool = null;
   var globalMcPoolPromise = null;
+  /** 뉴스영어 등 임베드 옵션 */
+  var trackOptions = {
+    comments: true,
+    hideModeTabs: false,
+    forceMode: "",
+    skipDocumentTitle: false,
+  };
 
   function norm(s) {
     return String(s || "")
@@ -558,7 +565,8 @@
 
   function updateScore() {
     var WORDS = getWords();
-    var n = document.querySelectorAll("#list li.ok").length;
+    var list = $("list");
+    var n = list ? list.querySelectorAll("li.ok").length : 0;
     var sc = $("sc");
     var prog = $("prog");
     if (sc) sc.textContent = String(n);
@@ -716,13 +724,57 @@
       if (next && next !== h1.textContent.trim()) h1.textContent = next;
     }
     var eye = document.querySelector(".vq-eyebrow");
-    if (eye) eye.textContent = "시사 어휘 퀴즈";
+    if (eye && !trackOptions.hideModeTabs) eye.textContent = "시사 어휘 퀴즈";
+    if (trackOptions.skipDocumentTitle) return;
     var cur = document.title || "";
     var main = cur.split("|")[0].trim();
     var formatted = formatQuizTitle(main);
     if (formatted) {
       document.title = formatted + " | 시사 어휘 퀴즈 · 시사영단어";
     }
+  }
+
+  function applyModeChrome() {
+    var track = document.getElementById("vq-track") || document.querySelector(".vq-track");
+    if (!track) return;
+    if (trackOptions.hideModeTabs) track.classList.add("vq-track--mc-only");
+    else track.classList.remove("vq-track--mc-only");
+    var seg = track.querySelector(".vq-seg");
+    if (seg) seg.hidden = !!trackOptions.hideModeTabs;
+  }
+
+  function renderEmbedShell(title) {
+    return (
+      '<div class="vq-track vq-track--embed' +
+      (trackOptions.hideModeTabs ? " vq-track--mc-only" : "") +
+      '" id="vq-track">' +
+      '<header class="vq-header">' +
+      '<span class="vq-eyebrow">단어퀴즈</span>' +
+      '<h2 class="vq-title">' +
+      escapeHtml(title || "이 글 복습 퀴즈") +
+      "</h2>" +
+      '<p class="vq-sub">영어 단어를 보고 알맞은 뜻을 고르세요.</p>' +
+      "</header>" +
+      '<div class="vq-bar">' +
+      '<div class="vq-seg" role="group" aria-label="퀴즈 방향"' +
+      (trackOptions.hideModeTabs ? " hidden" : "") +
+      ">" +
+      '<button type="button" id="m-en" aria-pressed="false">영어 → 한글</button>' +
+      '<button type="button" id="m-ko" aria-pressed="false">한글 → 영어</button>' +
+      '<button type="button" id="m-mc" aria-pressed="true">객관식</button>' +
+      "</div>" +
+      '<div class="vq-score"><b id="sc">0</b> / <span id="tot">0</span> 정답</div>' +
+      "</div>" +
+      '<div class="vq-progress"><i id="prog"></i></div>' +
+      '<ol class="vq-list" id="list"></ol>' +
+      '<div class="vq-actions" id="vq-actions">' +
+      '<button type="button" class="vq-btn primary" id="checkAll">전체 채점</button>' +
+      '<button type="button" class="vq-btn" id="reveal">정답 보기</button>' +
+      '<button type="button" class="vq-btn" id="reset">다시 하기</button>' +
+      "</div>" +
+      '<p class="vq-hint" id="vq-hint" hidden></p>' +
+      "</div>"
+    );
   }
 
   function assetBase() {
@@ -863,20 +915,60 @@
     }
   }
 
-  function init() {
+  function init(opts) {
+    opts = opts || {};
+    trackOptions = {
+      comments: opts.comments !== false,
+      hideModeTabs: !!opts.hideModeTabs,
+      forceMode: String(opts.forceMode || opts.mode || "").trim(),
+      skipDocumentTitle: !!opts.skipDocumentTitle,
+    };
+    if (Array.isArray(opts.words) && opts.words.length) {
+      window.VOCAB_QUIZ_TRACK_WORDS = opts.words;
+    }
     if (!getWords().length) {
       console.warn("[vocabulary-quiz-track] VOCAB_QUIZ_TRACK_WORDS is empty");
     }
     normalizePageTitles();
+    applyModeChrome();
     bound = false;
     mcCache = null;
     bind();
-    setMode("en");
+    var startMode = trackOptions.forceMode || "en";
+    if (startMode !== "en" && startMode !== "ko" && startMode !== "mc") startMode = "en";
+    setMode(startMode);
     ensureGlobalMcPool();
-    mountQuizComments();
+    if (trackOptions.comments) mountQuizComments();
+  }
+
+  /**
+   * 뉴스영어 등 페이지에 객관식 퀴즈 임베드.
+   * opts: { root, words, title, mode='mc', comments=false, hideModeTabs=true }
+   */
+  function mount(opts) {
+    opts = opts || {};
+    var root = opts.root;
+    if (!root) return Promise.reject(new Error("mount root required"));
+    var words = Array.isArray(opts.words) ? opts.words : [];
+    if (!words.length) return Promise.reject(new Error("mount words empty"));
+    root.innerHTML = renderEmbedShell(opts.title || "이 글 복습 퀴즈");
+    root.hidden = false;
+    root.removeAttribute("hidden");
+    init({
+      words: words,
+      forceMode: opts.mode || opts.forceMode || "mc",
+      hideModeTabs: opts.hideModeTabs !== false,
+      comments: opts.comments === true,
+      skipDocumentTitle: true,
+    });
+    return ensureMcCache(false).then(function () {
+      if (mode === "mc") render();
+      return root;
+    });
   }
 
   window.initVocabQuizTrack = init;
+  window.mountVocabQuizTrack = mount;
 
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", init);

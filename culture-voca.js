@@ -996,7 +996,7 @@ function rdLoadScript(src) {
     const base = rdAssetBase();
     try {
         if (!window.BoardListConfig) await rdLoadScript(base + 'board-list-config.js?v=20261020auto2');
-        await rdLoadScript(base + 'redesign-article.js?v=20261107listen3');
+        await rdLoadScript(base + 'redesign-article.js?v=20261109quiz1');
     } catch (e) { console.warn(e); }
     loadPost();
 })();

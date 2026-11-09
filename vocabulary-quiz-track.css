@@ -1,5 +1,6 @@
 /* quiztest track-lane quiz — scoped under body.rd-quiz-track .vq-track */
-body.rd-quiz-track {
+body.rd-quiz-track,
+.rd-word-quiz {
   --vq-bg: #f3f5f8;
   --vq-surface: #ffffff;
   --vq-fg: #17202e;
@@ -150,6 +151,10 @@ html.has-site-masthead .vq-track {
   border-radius: 12px;
   padding: 12px 14px;
   margin-bottom: 14px;
+}
+
+.vq-track.vq-track--mc-only .vq-seg {
+  display: none !important;
 }
 
 .vq-track .vq-seg {

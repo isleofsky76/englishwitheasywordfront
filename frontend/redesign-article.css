@@ -488,6 +488,17 @@ body.rd-syn-hide-meaning .rd-expr--synonym.is-meaning-shown .rd-expr-meaning {
   padding: 8px 0 16px;
 }
 
+.rd-article-actions-primary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.rd-article-actions-primary > a.rd-btn-solid,
+.rd-article-actions-primary > button.rd-btn-outline,
 .rd-article-actions > a.rd-btn-solid,
 .rd-article-actions > a.rd-btn-outline {
   display: inline-flex;
@@ -505,6 +516,72 @@ body.rd-syn-hide-meaning .rd-expr--synonym.is-meaning-shown .rd-expr-meaning {
   box-sizing: border-box;
   /* 댓글 패널이 열려도 유튜브 버튼 높이 고정 */
   overflow: hidden;
+}
+
+.rd-article-actions-primary > button.rd-btn-outline {
+  border: 1.5px solid var(--ink, #1c1917);
+  background: transparent;
+  color: var(--ink, #1c1917);
+  cursor: pointer;
+  font: inherit;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.rd-article-actions-primary > button.rd-btn-outline:hover,
+.rd-article-actions-primary > button.rd-btn-outline.is-active,
+.rd-article-actions-primary > button.rd-btn-outline[aria-expanded="true"] {
+  border-color: var(--accent, #b45309);
+  color: var(--accent, #b45309);
+}
+
+.rd-word-quiz {
+  --vq-bg: #f3f5f8;
+  --vq-surface: #ffffff;
+  --vq-fg: #17202e;
+  --vq-muted: #5d6878;
+  --vq-line: #d9dee6;
+  --vq-accent: #2453a6;
+  --vq-accent-soft: #e3ebf8;
+  --vq-ok: #1d8a52;
+  --vq-ok-soft: #e1f3e9;
+  --vq-bad: #d23b3b;
+  --vq-bad-soft: #fbe5e5;
+  --vq-display: "Do Hyeon", "Noto Sans KR", system-ui, sans-serif;
+  --vq-body: "Noto Sans KR", system-ui, -apple-system, sans-serif;
+  --vq-mono: "IBM Plex Mono", ui-monospace, monospace;
+  width: 100%;
+  max-width: 680px;
+  margin: 4px auto 0;
+  padding: 8px 0 4px;
+  border-top: 1px solid var(--line, #e7e5e4);
+  color: var(--vq-fg);
+  font-family: var(--vq-body);
+  font-size: 15px;
+  line-height: 1.5;
+  text-align: left;
+}
+
+.rd-word-quiz[hidden] {
+  display: none !important;
+}
+
+.rd-word-quiz .vq-track {
+  max-width: none;
+  margin: 0;
+  padding: 12px 0 8px;
+}
+
+.rd-word-quiz .vq-track--mc-only .vq-seg {
+  display: none !important;
+}
+
+.rd-word-quiz .vq-title {
+  font-size: clamp(22px, 5vw, 30px);
+}
+
+.rd-word-quiz .vq-hint[hidden] {
+  display: none !important;
 }
 
 /* 유튜브 아래: 댓글 · 글쓰기 · 저장 · 다운로드 */

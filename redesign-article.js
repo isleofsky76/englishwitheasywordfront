@@ -5,7 +5,8 @@
 (function (global) {
   'use strict';
 
-  var ASSET_VER = '20261109ytpromo1';
+  var ASSET_VER = '20261109quiz1';
+  var QUIZ_TRACK_VER = '20261109quiz1';
   var SYN_SAVED_KEY = 'ees-synonym-saved-v1';
   /* v2: 기본값을 뜻 가리기로 재설정 (이전 localStorage=0 무시) */
   var SYN_HIDE_KEY = 'ees-synonym-hide-meaning-v2';
@@ -1264,6 +1265,144 @@
     }
   }
 
+  function splitKoMeanings(raw) {
+    return String(raw || '')
+      .replace(/\s*\((?:형|명|동|부|관|감|전|접|구동사|명사구|동사구|형용구)\)\s*/g, ' ')
+      .split(/[,，、/;；·･・|/]+/)
+      .map(function (p) { return p.replace(/\s+/g, ' ').trim(); })
+      .filter(Boolean);
+  }
+
+  function cardsToQuizWords(cards) {
+    var out = [];
+    var seen = Object.create(null);
+    (cards || []).forEach(function (c) {
+      if (!c) return;
+      var en = String(c.expression || '').replace(/\s+/g, ' ').trim();
+      if (!en || en === '표현') return;
+      var key = en.toLowerCase();
+      if (seen[key]) return;
+      var koList = splitKoMeanings(c.meaning);
+      if (!koList.length && c.ko) koList = splitKoMeanings(c.ko);
+      if (!koList.length && c.cf) {
+        var cf = String(c.cf || '').replace(/^cf\.\s*/i, '');
+        var colon = cf.indexOf(':');
+        if (colon >= 0) koList = splitKoMeanings(cf.slice(colon + 1));
+      }
+      if (!koList.length) return;
+      seen[key] = true;
+      out.push({ en: [en], ko: koList });
+    });
+    return out;
+  }
+
+  function loadStylesheetOnce(href) {
+    var pathOnly = String(href || '').split('?')[0];
+    if (document.querySelector('link[rel="stylesheet"][href*="' + pathOnly.replace(/^\//, '') + '"]')) {
+      return Promise.resolve();
+    }
+    return new Promise(function (resolve) {
+      var link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = href;
+      link.onload = function () { resolve(); };
+      link.onerror = function () { resolve(); };
+      document.head.appendChild(link);
+      setTimeout(resolve, 800);
+    });
+  }
+
+  function loadScriptOnce(src) {
+    return new Promise(function (resolve, reject) {
+      var file = String(src || '').split('?')[0].split('/').pop();
+      var existing = file
+        ? document.querySelector('script[src*="' + file + '"]')
+        : null;
+      if (existing) {
+        if (typeof global.mountVocabQuizTrack === 'function') {
+          resolve();
+          return;
+        }
+        existing.addEventListener('load', function () { resolve(); });
+        existing.addEventListener('error', reject);
+        setTimeout(function () {
+          if (typeof global.mountVocabQuizTrack === 'function') resolve();
+        }, 50);
+        return;
+      }
+      var s = document.createElement('script');
+      s.src = src;
+      s.onload = function () { resolve(); };
+      s.onerror = reject;
+      document.body.appendChild(s);
+    });
+  }
+
+  function ensureQuizTrackAssets() {
+    var base = assetBase();
+    if (!base) base = '/';
+    return loadStylesheetOnce(base + 'vocabulary-quiz-track.css?v=' + QUIZ_TRACK_VER).then(function () {
+      if (typeof global.mountVocabQuizTrack === 'function') return;
+      return loadScriptOnce(base + 'vocabulary-quiz-track.js?v=' + QUIZ_TRACK_VER);
+    });
+  }
+
+  function bindArticleWordQuiz(container, cards, title) {
+    var btn = container.querySelector('[data-rd-word-quiz]');
+    var host = container.querySelector('#rd-word-quiz');
+    if (!btn || !host) return;
+    var words = cardsToQuizWords(cards);
+    if (words.length < 2) {
+      btn.hidden = true;
+      return;
+    }
+    var opening = false;
+    btn.addEventListener('click', function () {
+      var open = btn.getAttribute('aria-expanded') === 'true';
+      if (open) {
+        host.hidden = true;
+        host.setAttribute('hidden', '');
+        btn.setAttribute('aria-expanded', 'false');
+        btn.classList.remove('is-active');
+        return;
+      }
+      if (opening) return;
+      opening = true;
+      btn.disabled = true;
+      ensureQuizTrackAssets()
+        .then(function () {
+          if (typeof global.mountVocabQuizTrack !== 'function') {
+            throw new Error('mountVocabQuizTrack missing');
+          }
+          return global.mountVocabQuizTrack({
+            root: host,
+            words: words,
+            title: (title || '이 글') + ' 복습',
+            mode: 'mc',
+            hideModeTabs: true,
+            comments: false,
+          });
+        })
+        .then(function () {
+          host.hidden = false;
+          host.removeAttribute('hidden');
+          btn.setAttribute('aria-expanded', 'true');
+          btn.classList.add('is-active');
+          try {
+            host.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          } catch (e) { /* ignore */ }
+        })
+        .catch(function (err) {
+          console.warn('[redesign-article] word quiz mount failed', err);
+          btn.setAttribute('aria-expanded', 'false');
+        })
+        .then(function () {
+          opening = false;
+          btn.disabled = false;
+        });
+    });
+  }
+
   function renderRedesignArticle(container, post, options) {
     if (!container || !post) return false;
     options = options || {};
@@ -1345,14 +1484,24 @@
       }
     }
 
-    /* CTA — 유튜브로 듣기 → 댓글·글쓰기·저장·다운로드 (뉴스·연관단어) */
+    /* CTA — 유튜브로 듣기 · 단어퀴즈 → 댓글·글쓰기·저장·다운로드 (뉴스·연관단어) */
     var newsComments = newsBoard;
     var showComments = options.enableComments === true || newsComments || synonymMode;
     var showSaveTools = synonymMode || studyMode;
+    var showWordQuiz = (newsBoard || synonymMode || studyMode) && cards.length >= 2;
     var actions = '<div class="rd-article-actions">';
-    if (yt) {
-      actions += '<a class="rd-btn-solid" href="' + escapeAttr(yt.watch) + '" target="_blank" rel="noopener noreferrer">' +
-        ytLogoSvg() + ' 유튜브로 듣기</a>';
+    if (yt || showWordQuiz) {
+      actions += '<div class="rd-article-actions-primary">';
+      if (yt) {
+        actions += '<a class="rd-btn-solid" href="' + escapeAttr(yt.watch) + '" target="_blank" rel="noopener noreferrer">' +
+          ytLogoSvg() + ' 유튜브로 듣기</a>';
+      }
+      if (showWordQuiz) {
+        actions +=
+          '<button type="button" class="rd-btn-outline rd-word-quiz-btn" data-rd-word-quiz aria-expanded="false" aria-controls="rd-word-quiz">' +
+          '단어퀴즈</button>';
+      }
+      actions += '</div>';
     }
     if (showComments || showSaveTools) {
       actions += '<div class="rd-article-action-tools">';
@@ -1367,6 +1516,9 @@
           '</button>';
       }
       actions += '</div>';
+    }
+    if (showWordQuiz) {
+      actions += '<div id="rd-word-quiz" class="rd-word-quiz rd-quiz-track" hidden></div>';
     }
     actions += '</div>';
 
@@ -1458,6 +1610,10 @@
     if (typeof options.onReady === 'function') options.onReady(container);
 
     bindLazyYoutube(container);
+
+    if (showWordQuiz) {
+      bindArticleWordQuiz(container, cards, title);
+    }
 
     if (showComments) {
       mountNewsArticleComments(post, options.boardKey);
