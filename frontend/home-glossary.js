@@ -116,7 +116,7 @@
     return hay.indexOf(q) !== -1;
   }
 
-  function loadSaved() {
+  function loadSavedList() {
     try {
       var raw = localStorage.getItem(SAVE_KEY);
       var arr = raw ? JSON.parse(raw) : [];
@@ -126,29 +126,35 @@
     }
   }
 
-  function writeSaved(list) {
+  function writeSavedList(list) {
     try {
       localStorage.setItem(SAVE_KEY, JSON.stringify(list));
     } catch (e) { /* ignore */ }
   }
 
-  function isSaved(word) {
-    var key = String(word || '').toLowerCase();
-    return loadSaved().some(function (x) {
-      return String(x.word || '').toLowerCase() === key;
+  function isListSaved(words) {
+    var saved = loadSavedList();
+    if (!words.length || saved.length !== words.length) return false;
+    var map = Object.create(null);
+    saved.forEach(function (x) {
+      map[String(x.word || '').toLowerCase()] = true;
+    });
+    return words.every(function (w) {
+      return map[String(w.word || '').toLowerCase()];
     });
   }
 
-  function toggleSave(word, meaning) {
-    var key = String(word || '').toLowerCase();
-    var list = loadSaved();
-    var idx = list.findIndex(function (x) {
-      return String(x.word || '').toLowerCase() === key;
-    });
-    if (idx >= 0) list.splice(idx, 1);
-    else list.push({ word: word, meaning: meaning || '', at: Date.now() });
-    writeSaved(list);
-    return idx < 0;
+  function toggleSaveList(words) {
+    if (isListSaved(words)) {
+      writeSavedList([]);
+      return false;
+    }
+    writeSavedList(
+      words.map(function (w) {
+        return { word: w.word, meaning: w.meaning || '', at: Date.now() };
+      })
+    );
+    return true;
   }
 
   function downloadText(filename, text) {
@@ -175,9 +181,8 @@
       var href = SECTION_HREF[sec] || '#rd-glossary';
       return '<a class="rd-gloss-sec" href="' + href + '">' + escapeHtml(sec) + '</a>';
     }).join('');
-    var saved = isSaved(w.word);
     return (
-      '<li class="rd-gloss-row" data-gloss-word="' + escapeAttr(w.word) + '" data-gloss-meaning="' + escapeAttr(w.meaning) + '">' +
+      '<li class="rd-gloss-row">' +
         '<div class="rd-gloss-row-main">' +
           '<span class="rd-gloss-word">' + escapeHtml(w.word) + '</span>' +
           (w.pos ? '<span class="rd-gloss-pos">' + escapeHtml(w.pos) + '</span>' : '') +
@@ -186,16 +191,23 @@
         (chips
           ? '<div class="rd-gloss-secs"><span class="rd-gloss-secs-label">사용 섹션</span>' + chips + '</div>'
           : '') +
+      '</li>'
+    );
+  }
+
+  function renderFooterTools(savedOn) {
+    return (
+      '<div class="rd-gloss-footer-tools" data-rd-gloss-footer-tools>' +
         '<div class="rd-gloss-tools">' +
           '<button type="button" class="rd-gloss-tool" data-gloss-cmt>댓글</button>' +
           '<button type="button" class="rd-gloss-tool" data-gloss-write>글쓰기</button>' +
-          '<button type="button" class="rd-gloss-tool' + (saved ? ' is-on' : '') + '" data-gloss-save aria-pressed="' + (saved ? 'true' : 'false') + '">' +
-            (saved ? '저장됨' : '저장') +
+          '<button type="button" class="rd-gloss-tool' + (savedOn ? ' is-on' : '') + '" data-gloss-save aria-pressed="' + (savedOn ? 'true' : 'false') + '">' +
+            (savedOn ? '저장됨' : '저장') +
           '</button>' +
           '<button type="button" class="rd-gloss-tool" data-gloss-dl>다운로드</button>' +
         '</div>' +
         '<div class="rd-gloss-cmt-host" data-gloss-cmt-host hidden></div>' +
-      '</li>'
+      '</div>'
     );
   }
 
@@ -279,8 +291,7 @@
     return commentsAssetsPromise;
   }
 
-  async function ensureRowComments(row) {
-    var host = row.querySelector('[data-gloss-cmt-host]');
+  async function ensurePageComments(host) {
     if (!host) return null;
     if (host.getAttribute('data-gloss-cmt-ready') === '1') {
       host.hidden = false;
@@ -288,12 +299,10 @@
     }
     await ensureCommentAssets();
     if (!window.BoardComments || typeof window.BoardComments.mount !== 'function') return null;
-    var word = row.getAttribute('data-gloss-word') || '';
     await window.BoardComments.mount({
       board: CMT_BOARD,
-      contentKey: wordKey(word) || word.toLowerCase(),
-      title: word,
-      word: word,
+      contentKey: 'glossary',
+      title: '단어 한눈에 보기',
       root: host
     });
     host.setAttribute('data-gloss-cmt-ready', '1');
@@ -301,16 +310,15 @@
     return host;
   }
 
-  function bindRowActions(root) {
+  function bindFooterActions(root, getWords) {
     root.addEventListener('click', function (e) {
-      var row = e.target.closest('.rd-gloss-row');
-      if (!row || !root.contains(row)) return;
-      var word = row.getAttribute('data-gloss-word') || '';
-      var meaning = row.getAttribute('data-gloss-meaning') || '';
+      var footer = e.target.closest('[data-rd-gloss-footer-tools]');
+      if (!footer || !root.contains(footer)) return;
+      var words = typeof getWords === 'function' ? getWords() : [];
 
       var saveBtn = e.target.closest('[data-gloss-save]');
       if (saveBtn) {
-        var on = toggleSave(word, meaning);
+        var on = toggleSaveList(words);
         saveBtn.classList.toggle('is-on', on);
         saveBtn.setAttribute('aria-pressed', on ? 'true' : 'false');
         saveBtn.textContent = on ? '저장됨' : '저장';
@@ -319,16 +327,24 @@
 
       var dlBtn = e.target.closest('[data-gloss-dl]');
       if (dlBtn) {
-        downloadText(word + '.txt', word + '\t' + meaning + '\n');
+        var list = loadSavedList();
+        if (!list.length) list = words;
+        var text = list
+          .map(function (w) {
+            return String(w.word || '') + '\t' + String(w.meaning || '');
+          })
+          .join('\n') + '\n';
+        downloadText('home-glossary.txt', text);
         return;
       }
 
       var cmtBtn = e.target.closest('[data-gloss-cmt]');
       var writeBtn = e.target.closest('[data-gloss-write]');
       if (cmtBtn || writeBtn) {
-        ensureRowComments(row).then(function (host) {
-          if (!host) return;
-          var real = host.querySelector(writeBtn ? '[data-os-cmt-write]' : '[data-os-cmt-toggle]');
+        var host = footer.querySelector('[data-gloss-cmt-host]');
+        ensurePageComments(host).then(function (h) {
+          if (!h) return;
+          var real = h.querySelector(writeBtn ? '[data-os-cmt-write]' : '[data-os-cmt-toggle]');
           if (real) real.click();
         }).catch(function (err) {
           console.warn('[home-glossary] comments failed', err);
@@ -349,9 +365,12 @@
     var topBtn = document.getElementById('rd-gloss-top');
     var rail = document.getElementById('rd-gloss-rail') || document.querySelector('[data-rd-gloss-rail]');
 
+    var currentWords = all.slice();
+
     function paint(query) {
       var q = String(query || '').trim().toLowerCase();
       var filtered = all.filter(function (w) { return matchesQuery(w, q); });
+      currentWords = filtered;
       var groups = groupByLetter(filtered);
       var present = Object.create(null);
       var activeLetters = [];
@@ -385,12 +404,16 @@
         return;
       }
       if (empty) empty.hidden = true;
-      if (body) body.innerHTML = renderGroups(groups, activeLetters);
+      if (body) {
+        body.innerHTML =
+          renderGroups(groups, activeLetters) +
+          renderFooterTools(isListSaved(filtered));
+      }
       updateRailActive(rail);
     }
 
     paint('');
-    bindRowActions(root);
+    bindFooterActions(root, function () { return currentWords; });
 
     if (rail) {
       var railTick = false;

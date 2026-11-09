@@ -1375,12 +1375,15 @@ a.rd-gloss-rail-btn:hover,
   border-color: var(--accent);
   color: var(--accent);
 }
+.rd-gloss-footer-tools {
+  margin-top: 28px;
+  padding-top: 18px;
+  border-top: 2px solid var(--line-strong);
+}
 .rd-gloss-tools {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
-  grid-column: 1 / -1;
-  margin-top: 2px;
+  gap: 8px;
 }
 .rd-gloss-tool {
   display: inline-flex;
@@ -1406,8 +1409,7 @@ a.rd-gloss-rail-btn:hover,
   outline-offset: 2px;
 }
 .rd-gloss-cmt-host {
-  grid-column: 1 / -1;
-  margin-top: 4px;
+  margin-top: 10px;
 }
 .rd-gloss-cmt-host .os-cmt-bar {
   display: none;
