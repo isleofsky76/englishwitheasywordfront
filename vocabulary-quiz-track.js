@@ -576,6 +576,144 @@
     }
   }
 
+  function assetBase() {
+    var scripts = document.querySelectorAll("script[src]");
+    for (var i = 0; i < scripts.length; i += 1) {
+      var src = scripts[i].getAttribute("src") || "";
+      if (/vocabulary-quiz-track\.js/.test(src)) {
+        return src.replace(/[^/]+$/, "");
+      }
+    }
+    return "/";
+  }
+
+  function ensureStylesheet(href) {
+    var pathOnly = href.split("?")[0];
+    var links = document.querySelectorAll('link[rel="stylesheet"]');
+    for (var i = 0; i < links.length; i += 1) {
+      var cur = links[i].getAttribute("href") || "";
+      if (cur.indexOf(pathOnly) !== -1) return Promise.resolve();
+    }
+    return new Promise(function (resolve) {
+      var link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.href = href;
+      link.onload = function () {
+        resolve();
+      };
+      link.onerror = function () {
+        resolve();
+      };
+      document.head.appendChild(link);
+      setTimeout(resolve, 800);
+    });
+  }
+
+  function loadScriptOnce(src) {
+    return new Promise(function (resolve, reject) {
+      var key = src.split("?")[0];
+      var existing = document.querySelector('script[src*="' + key.replace(/^\//, "") + '"]');
+      if (existing) {
+        if (window.BoardComments) {
+          resolve();
+          return;
+        }
+        existing.addEventListener("load", function () {
+          resolve();
+        });
+        existing.addEventListener("error", reject);
+        return;
+      }
+      var s = document.createElement("script");
+      s.src = src;
+      s.onload = function () {
+        resolve();
+      };
+      s.onerror = reject;
+      document.body.appendChild(s);
+    });
+  }
+
+  function quizContentKey() {
+    var bodySlug = document.body && document.body.dataset.nvSlug;
+    if (bodySlug) return String(bodySlug).trim();
+    try {
+      var q = new URLSearchParams(window.location.search).get("slug");
+      if (q) return String(q).trim();
+    } catch (e) { /* ignore */ }
+    var parts = (window.location.pathname || "").replace(/\/+$/, "").split("/");
+    var last = parts[parts.length - 1] || "";
+    if (last && last !== "vocabulary-quiz.html" && last !== "vocabulary-quiz") {
+      try {
+        return decodeURIComponent(last);
+      } catch (e2) {
+        return last;
+      }
+    }
+    return "vocabulary-quiz";
+  }
+
+  function ensureCommentsHost() {
+    var host = document.getElementById("vq-comments");
+    if (host) return host;
+    var actions = document.getElementById("vq-actions") || document.querySelector(".vq-actions");
+    host = document.createElement("div");
+    host.id = "vq-comments";
+    host.className = "vq-quiz-comments board-comments-root";
+    host.setAttribute("data-board-comments-root", "");
+    if (actions && actions.parentNode) {
+      actions.parentNode.insertBefore(host, actions.nextSibling);
+    } else {
+      var track = document.getElementById("vq-track") || document.querySelector(".vq-track");
+      if (track) track.appendChild(host);
+    }
+    return host;
+  }
+
+  function placeCommentButtonsInActions(host) {
+    var actions = document.getElementById("vq-actions") || document.querySelector(".vq-actions");
+    if (!actions || !host) return;
+    var toggle = host.querySelector(".os-cmt-toggle");
+    var write = host.querySelector(".os-cmt-write");
+    if (toggle) {
+      toggle.classList.add("vq-btn");
+      actions.appendChild(toggle);
+    }
+    if (write) {
+      write.classList.add("vq-btn");
+      actions.appendChild(write);
+    }
+    var bar = host.querySelector(".os-cmt-bar");
+    if (bar && !bar.children.length) bar.style.display = "none";
+  }
+
+  async function mountQuizComments() {
+    var host = ensureCommentsHost();
+    var base = assetBase();
+    var ver = "20261109cmt1";
+    try {
+      await ensureStylesheet(base + "board-comments.css?v=" + ver);
+      await loadScriptOnce(base + "board-comments.js?v=" + ver);
+    } catch (e) {
+      console.warn("[vocabulary-quiz-track] board-comments load failed", e);
+      return;
+    }
+    if (!window.BoardComments || typeof window.BoardComments.mount !== "function") return;
+    var titleEl = document.querySelector(".vq-title");
+    var title = titleEl ? titleEl.textContent.trim() : "시사 어휘 퀴즈";
+    try {
+      await window.BoardComments.mount({
+        board: "vocabulary-quiz",
+        contentKey: quizContentKey(),
+        title: title,
+        root: host,
+      });
+      placeCommentButtonsInActions(host);
+    } catch (err) {
+      console.warn("[vocabulary-quiz-track] comments mount failed", err);
+    }
+  }
+
   function init() {
     if (!getWords().length) {
       console.warn("[vocabulary-quiz-track] VOCAB_QUIZ_TRACK_WORDS is empty");
@@ -585,6 +723,7 @@
     mcCache = null;
     bind();
     setMode("en");
+    mountQuizComments();
   }
 
   window.initVocabQuizTrack = init;

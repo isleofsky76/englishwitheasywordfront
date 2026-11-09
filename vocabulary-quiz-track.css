@@ -316,6 +316,7 @@ html.has-site-masthead .vq-track {
   flex-wrap: wrap;
   gap: 8px;
   margin-top: 18px;
+  align-items: center;
 }
 
 .vq-track .vq-btn {
@@ -334,8 +335,47 @@ html.has-site-masthead .vq-track {
   color: var(--vq-surface);
 }
 
+/* 댓글·글쓰기 — 전체 채점/정답 보기/다시 하기와 같은 버튼 줄 */
+.vq-track .vq-actions .os-cmt-toggle,
+.vq-track .vq-actions .os-cmt-write {
+  font: 600 14px var(--vq-body);
+  border-radius: 8px;
+  padding: 10px 16px;
+  cursor: pointer;
+  border: 1px solid var(--vq-line);
+  background: var(--vq-surface);
+  color: var(--vq-fg);
+  text-decoration: none;
+  opacity: 1;
+  margin: 0;
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+.vq-track .vq-actions .os-cmt-toggle:hover,
+.vq-track .vq-actions .os-cmt-write:hover,
+.vq-track .vq-actions .os-cmt-toggle[aria-expanded="true"],
+.vq-track .vq-actions .os-cmt-write[aria-expanded="true"] {
+  border-color: var(--vq-accent);
+  color: var(--vq-accent);
+}
+
+.vq-track .vq-quiz-comments {
+  margin-top: 8px;
+}
+
+.vq-track .vq-quiz-comments .os-cmt-bar {
+  display: none;
+}
+
+.vq-track .vq-quiz-comments .os-cmt-panel {
+  margin-top: 10px;
+}
+
 .vq-track .vq-btn:focus-visible,
-.vq-track .vq-seg button:focus-visible {
+.vq-track .vq-seg button:focus-visible,
+.vq-track .vq-actions .os-cmt-toggle:focus-visible,
+.vq-track .vq-actions .os-cmt-write:focus-visible {
   outline: 2px solid var(--vq-accent);
   outline-offset: 2px;
 }
