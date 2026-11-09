@@ -65,7 +65,7 @@
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600&family=Noto+Serif+KR:wght@600;700;900&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="redesign-tokens.css?v=20261019rd">
     <link rel="stylesheet" href="site-masthead.css?v=20261109bw1">
-    <link rel="stylesheet" href="redesign-home.css?v=20261109path2">
+    <link rel="stylesheet" href="redesign-home.css?v=20261109gloss1">
     <link rel="stylesheet" href="word-meaning-quiz.css?v=20261106wmq7">
     <link rel="stylesheet" href="title-text-sharp.css?v=20260818i">
     
@@ -215,7 +215,7 @@
       <!-- GA: YouTube·퀴즈 재방문이 강함 → 경로/퀴즈를 먼저, 오늘의 단어는 하단 -->
       <section class="rd-paths" aria-label="학습 경로">
         <div class="rd-paths-inner">
-          <div class="rd-path-card">
+          <div class="rd-path-card" id="rd-path-01">
             <a class="rd-path-head" href="news-voca-list.html">
               <span class="rd-path-num">01</span>
               <h2>뉴스 영단어</h2>
@@ -232,7 +232,7 @@
               <a class="rd-chip" href="culture-voca-list.html">컬쳐</a>
             </div>
           </div>
-          <div class="rd-path-card">
+          <div class="rd-path-card" id="rd-path-02">
             <a class="rd-path-head" href="english-synonym-list.html">
               <span class="rd-path-num">02</span>
               <h2>단어 다지기</h2>
@@ -245,7 +245,7 @@
               <a class="rd-chip" href="word-of-the-day-list.html?api=prod">단어장</a>
             </div>
           </div>
-          <div class="rd-path-card">
+          <div class="rd-path-card" id="rd-path-03">
             <a class="rd-path-head" href="popular-voca-list.html">
               <span class="rd-path-num">03</span>
               <h2>표현 익히기</h2>
@@ -260,7 +260,7 @@
               <a class="rd-chip" href="photo-english-list.html">포토</a>
             </div>
           </div>
-          <div class="rd-path-card">
+          <div class="rd-path-card" id="rd-path-04">
             <a class="rd-path-head" href="exam-words.html">
               <span class="rd-path-num">04</span>
               <h2>수험 영단어</h2>
@@ -273,8 +273,55 @@
               <a class="rd-chip" href="exam-words.html#all">랜덤</a>
             </div>
           </div>
+          <div class="rd-path-card" id="rd-path-05">
+            <a class="rd-path-head" href="#rd-glossary">
+              <span class="rd-path-num">05</span>
+              <h2>단어 한눈에 보기</h2>
+            </a>
+            <p>홈페이지에 쓰인 영어 단어를 A부터 Z까지 모아 한눈에 살펴봅니다.</p>
+            <div class="rd-chips">
+              <a class="rd-chip" href="#rd-glossary">용어집</a>
+              <a class="rd-chip" href="#rd-gloss-search">검색</a>
+              <a class="rd-chip" href="#letter-A">A–Z</a>
+            </div>
+          </div>
         </div>
       </section>
+
+      <section class="rd-glossary" id="rd-glossary" aria-labelledby="rd-gloss-title">
+        <header class="rd-gloss-head">
+          <div>
+            <span class="rd-gloss-kicker">05 — GLOSSARY</span>
+            <h2 class="rd-gloss-title" id="rd-gloss-title">단어 한눈에 보기</h2>
+            <p class="rd-gloss-desc">홈페이지 곳곳에 쓰인 영어 단어를 A부터 Z까지 순서대로 모았습니다. 아래로 스크롤하며 살펴보거나, 알파벳을 눌러 바로 이동하세요.</p>
+          </div>
+          <div class="rd-gloss-stats" data-rd-gloss-stats aria-live="polite"></div>
+        </header>
+
+        <div class="rd-gloss-search-wrap">
+          <label class="rd-gloss-search-label" for="rd-gloss-search">단어 검색</label>
+          <input
+            type="search"
+            id="rd-gloss-search"
+            class="rd-gloss-search"
+            placeholder="영어 단어 또는 한글 뜻 검색"
+            autocomplete="off"
+            enterkeyhint="search"
+          >
+        </div>
+
+        <div class="rd-gloss-az-wrap" data-rd-gloss-az></div>
+        <div data-rd-gloss-body></div>
+        <p class="rd-gloss-empty" data-rd-gloss-empty hidden>검색어에 맞는 단어가 없습니다.</p>
+      </section>
+
+      <button type="button" class="rd-gloss-top" id="rd-gloss-top" aria-hidden="true" tabindex="-1">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 19V5"></path>
+          <path d="m5 12 7-7 7 7"></path>
+        </svg>
+        처음으로
+      </button>
 
       <div class="rd-quiz-banner-wrap">
         <div class="rd-quiz-banner" id="rd-quiz-banner">
@@ -550,6 +597,8 @@
     <script src="home-board-preview.js?v=20261105search6"></script>
     <script src="english-directory.js?v=20261108home1"></script>
     <script src="home-redesign.js?v=20261109wotd1"></script>
+    <script src="home-glossary-words.js?v=20261109gloss1"></script>
+    <script src="home-glossary.js?v=20261109gloss1"></script>
     <script src="page30-api-config.js?v=20260721"></script>
     <script src="word-meaning-quiz.js?v=20261108wmq1"></script>
     <script>
