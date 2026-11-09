@@ -483,12 +483,24 @@ body.rd-list .world-clock-bar {
 }
 
 @media (max-width: 720px) {
+  /* 모바일: 소개보다 본문(피처·목록)을 먼저 — 히어로·탭 압축 */
   .rd-list-hero {
-    padding: 36px 16px 24px;
+    padding: 14px 16px 8px;
+    gap: 4px;
+  }
+
+  .rd-list-kicker {
+    font-size: 11px;
+    letter-spacing: 1px;
+  }
+
+  .rd-list-hero h1 {
+    font-size: 22px;
+    letter-spacing: -0.5px;
   }
 
   .rd-list-hero p {
-    font-size: 16px;
+    display: none;
   }
 
   .rd-list-tabs-wrap,
@@ -498,9 +510,30 @@ body.rd-list .world-clock-bar {
     padding-right: 16px;
   }
 
+  .rd-list-tabs {
+    flex-wrap: nowrap;
+    gap: 6px;
+    padding-bottom: 12px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .rd-list-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .rd-list-tab {
+    flex: 0 0 auto;
+    min-height: 34px;
+    padding: 0 12px;
+    font-size: 13px;
+  }
+
   .rd-list-featured {
-    gap: 28px;
-    padding-top: 28px;
+    gap: 20px;
+    padding-top: 16px;
+    padding-bottom: 16px;
   }
 
   .rd-list-feature-img {
@@ -615,18 +648,26 @@ body.rd-list--keyword-cards .rd-list-feature--kw .rd-kw-thumb {
 @media (max-width: 720px) {
   body.rd-list--keyword-cards .rd-list-grid {
     grid-template-columns: 1fr;
-    gap: 32px;
+    gap: 20px;
+  }
+
+  body.rd-list--keyword-cards .rd-list-card-title,
+  body.rd-list--keyword-cards .rd-list-feature-title {
+    font-size: 17px;
   }
 
   .rd-kw-thumb {
-    padding: 16px 18px;
+    aspect-ratio: 2 / 1;
+    padding: 14px 14px;
+    border-radius: 6px;
   }
 
   .rd-kw-word {
-    font-size: clamp(30px, 8vw, 40px);
+    font-size: clamp(24px, 7vw, 32px);
   }
 
   .rd-kw-sub {
-    font-size: 14px;
+    margin-top: 6px;
+    font-size: 13px;
   }
 }
