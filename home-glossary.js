@@ -99,19 +99,6 @@
     }).join('');
   }
 
-  function renderAzBar(present) {
-    return (
-      '<nav class="rd-gloss-az" aria-label="알파벳으로 이동">' +
-        LETTERS.map(function (L) {
-          if (present[L]) {
-            return '<a class="rd-gloss-az-btn is-active" href="#letter-' + L + '">' + L + '</a>';
-          }
-          return '<span class="rd-gloss-az-btn is-empty" aria-disabled="true">' + L + '</span>';
-        }).join('') +
-      '</nav>'
-    );
-  }
-
   function mount() {
     var root = document.getElementById('rd-glossary');
     if (!root) return;
@@ -127,13 +114,9 @@
       var q = String(query || '').trim().toLowerCase();
       var filtered = all.filter(function (w) { return matchesQuery(w, q); });
       var groups = groupByLetter(filtered);
-      var present = Object.create(null);
       var activeLetters = [];
       LETTERS.forEach(function (L) {
-        if (groups[L] && groups[L].length) {
-          present[L] = true;
-          activeLetters.push(L);
-        }
+        if (groups[L] && groups[L].length) activeLetters.push(L);
       });
 
       if (stats) {
@@ -141,9 +124,6 @@
           '<span>전체 단어 <b>' + filtered.length + '</b></span>' +
           '<span>알파벳 <b>' + activeLetters.length + '</b>/26</span>';
       }
-
-      var azHost = root.querySelector('[data-rd-gloss-az]');
-      if (azHost) azHost.innerHTML = renderAzBar(present);
 
       if (!filtered.length) {
         if (body) body.innerHTML = '';

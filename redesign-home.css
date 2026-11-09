@@ -1260,13 +1260,7 @@ a.rd-free-book-cover:focus-visible {
   outline-offset: 1px;
 }
 .rd-gloss-az-wrap {
-  position: sticky;
-  top: calc(var(--navbar-height, 76px) + 4px);
-  z-index: 20;
-  margin: 0 -4px 20px;
-  padding: 8px 4px;
-  background: color-mix(in srgb, var(--page-bg) 92%, transparent);
-  backdrop-filter: blur(6px);
+  display: none;
 }
 .rd-gloss-az {
   display: flex;
@@ -1299,7 +1293,7 @@ a.rd-free-book-cover:focus-visible {
   pointer-events: none;
 }
 .rd-gloss-letter {
-  scroll-margin-top: calc(var(--navbar-height, 76px) + 64px);
+  scroll-margin-top: calc(var(--navbar-height, 76px) + 12px);
   margin-bottom: 36px;
 }
 .rd-gloss-letter-head {
