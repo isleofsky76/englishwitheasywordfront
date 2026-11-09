@@ -118,5 +118,5 @@
     Referrer-Policy = "strict-origin-when-cross-origin"
     X-Content-Type-Options = "nosniff"
 
-# redeploy 2026-11-09 glossary page split (home-glossary.html)
+# redeploy 2026-11-09 glossary expand news+exam+expr, drop A-Z float
 
