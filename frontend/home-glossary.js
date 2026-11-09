@@ -28,12 +28,20 @@
     return /[A-Z]/.test(ch) ? ch : '#';
   }
 
+  function isSingleWord(word) {
+    var w = String(word || '').trim();
+    if (!w || /\s/.test(w) || /[.!?:,;]/.test(w) || /[가-힣]/.test(w)) return false;
+    return /^[A-Za-z][A-Za-z'’\-]*$/.test(w) && w.length <= 40;
+  }
+
   function normalizeWords(raw) {
     return (Array.isArray(raw) ? raw : [])
       .map(function (item) {
         if (!item || !item.word) return null;
+        var word = String(item.word).trim();
+        if (!isSingleWord(word)) return null;
         return {
-          word: String(item.word).trim(),
+          word: word,
           pos: String(item.pos || '').trim(),
           meaning: String(item.meaning || '').trim(),
           sections: Array.isArray(item.sections)
