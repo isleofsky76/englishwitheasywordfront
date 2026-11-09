@@ -169,13 +169,6 @@
     setTimeout(function () { URL.revokeObjectURL(url); }, 500);
   }
 
-  function wordKey(word) {
-    return String(word || '')
-      .toLowerCase()
-      .replace(/\s+/g, '-')
-      .replace(/[^a-z0-9\-']/g, '');
-  }
-
   function renderWordRow(w) {
     var chips = (w.sections || []).map(function (sec) {
       var href = SECTION_HREF[sec] || '#rd-glossary';
