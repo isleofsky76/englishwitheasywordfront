@@ -6,11 +6,11 @@
   'use strict';
 
   var SECTION_HREF = {
-    '01': '#rd-path-01',
-    '02': '#rd-path-02',
-    '03': '#rd-path-03',
-    '04': '#rd-path-04',
-    '05': '#rd-glossary'
+    '01': 'index.html#rd-path-01',
+    '02': 'index.html#rd-path-02',
+    '03': 'index.html#rd-path-03',
+    '04': 'index.html#rd-path-04',
+    '05': 'home-glossary.html'
   };
 
   var LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
