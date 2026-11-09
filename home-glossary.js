@@ -34,16 +34,55 @@
     return /^[A-Za-z][A-Za-z'’\-]*$/.test(w) && w.length <= 40;
   }
 
+  function shortenGloss(part) {
+    var p = String(part || '').replace(/\s+/g, ' ').trim();
+    if (!p) return '';
+    p = p.split(/[A-Za-z\/\[\{]|📺|유튜브|출처|원문|cf\./i)[0].trim();
+    p = p.replace(/\([^)]{0,16}\)/g, ' ').replace(/\s+/g, ' ').trim();
+    if (!/[가-힣]/.test(p)) return '';
+    var m = p.match(/^([가-힣]+(?:하다|되다|시키다|지다|리다|기다|나다|이다|우다|키다|내다|주다|받다|보다|가다|오다|쓰다))/);
+    if (m) return m[1];
+    m = p.match(/^([가-힣]+(?:한|운|은|인|된|는|임|음|기|성|력|감|자)(?:\s+[가-힣]{1,8}(?:한|운|은|인|된|는)?)?)/);
+    if (m && m[1].length <= 24) return m[1].trim();
+    var toks = p.split(/\s+/).filter(function (t) { return /^[가-힣0-9~\-·]+$/.test(t); });
+    if (!toks.length) return '';
+    var out = toks[0];
+    if (toks[1] && (out + ' ' + toks[1]).length <= 16) out += ' ' + toks[1];
+    if (out.length > 20) out = out.slice(0, 20);
+    return out.trim();
+  }
+
+  /** 뜻 최대 2개, 짧은 한글만 */
+  function cleanMeaning(raw) {
+    var s = String(raw || '').replace(/\s+/g, ' ').trim();
+    if (!s) return '';
+    s = s.split(/\s*cf\./i)[0];
+    s = s.split(/📺|유튜브|출처|원문/)[0];
+    s = s.replace(/\((?:명|동|형|부|숙|관|감|명사|동사|형용사|부사)[^)]{0,8}\)/g, ' ');
+    s = s.replace(/\s+/g, ' ').trim();
+    var parts = s.split(/[,，、·]/);
+    var glosses = [];
+    for (var i = 0; i < parts.length; i++) {
+      var g = shortenGloss(parts[i]);
+      if (!g || glosses.indexOf(g) !== -1) continue;
+      glosses.push(g);
+      if (glosses.length >= 2) break;
+    }
+    return glosses.join(', ');
+  }
+
   function normalizeWords(raw) {
     return (Array.isArray(raw) ? raw : [])
       .map(function (item) {
         if (!item || !item.word) return null;
         var word = String(item.word).trim();
         if (!isSingleWord(word)) return null;
+        var meaning = cleanMeaning(item.meaning);
+        if (!meaning) return null;
         return {
           word: word,
           pos: String(item.pos || '').trim(),
-          meaning: String(item.meaning || '').trim(),
+          meaning: meaning,
           sections: Array.isArray(item.sections)
             ? item.sections.map(function (s) { return String(s).padStart(2, '0'); })
             : []
