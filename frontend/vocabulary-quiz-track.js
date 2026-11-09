@@ -11,8 +11,10 @@
     return document.getElementById(id);
   }
 
-  var mode = "en"; // en: 영어 문제 → 한글 입력
+  var mode = "en"; // en | ko | mc
   var bound = false;
+  /** 객관식 보기 캐시 — 모드 유지 중엔 섞지 않음, 다시 하기에서만 갱신 */
+  var mcCache = null;
 
   function norm(s) {
     return String(s || "")
@@ -72,38 +74,204 @@
       .replace(/"/g, "&quot;");
   }
 
+  function mulberry32(a) {
+    return function () {
+      var t = (a += 0x6d2b79f5);
+      t = Math.imul(t ^ (t >>> 15), t | 1);
+      t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+
+  function shuffleWith(rng, arr) {
+    var a = arr.slice();
+    for (var i = a.length - 1; i > 0; i -= 1) {
+      var j = Math.floor(rng() * (i + 1));
+      var tmp = a[i];
+      a[i] = a[j];
+      a[j] = tmp;
+    }
+    return a;
+  }
+
+  /**
+   * 객관식 보기: 같은 퀴즈의 다른 단어 뜻에서 오답 추출.
+   * 문항 = 영어 단어, 보기 = 한글 뜻 최대 4개 (정답 1 + 오답).
+   */
+  function buildMcOptions(words, correctIndex, sessionSeed) {
+    var w = words[correctIndex];
+    if (!w) return { choices: [], correctNorm: "" };
+    var correctLabel = String((w.ko && w.ko[0]) || "").trim();
+    var correctNorm = norm(correctLabel);
+    var pool = [];
+    var seen = Object.create(null);
+    if (correctNorm) seen[correctNorm] = true;
+
+    words.forEach(function (other, idx) {
+      if (idx === correctIndex || !other) return;
+      expandAnswers(other.ko).forEach(function (label) {
+        var key = norm(label);
+        if (!key || seen[key]) return;
+        seen[key] = true;
+        pool.push(label);
+      });
+    });
+
+    /* 오답이 부족하면 같은 단어의 다른 뜻은 쓰지 않음(혼동) — 보기 수만 줄임 */
+    var need = Math.min(3, pool.length);
+    var rng = mulberry32((sessionSeed ^ ((correctIndex + 1) * 2654435761)) >>> 0);
+    var distractors = shuffleWith(rng, pool).slice(0, need);
+    var choices = shuffleWith(rng, [correctLabel].concat(distractors).filter(Boolean));
+    return { choices: choices, correctNorm: correctNorm, correctLabel: correctLabel };
+  }
+
+  function ensureMcCache(force) {
+    var WORDS = getWords();
+    if (!force && mcCache && mcCache.length === WORDS.length) return mcCache;
+    var seed = (Date.now() ^ (WORDS.length * 9973)) >>> 0;
+    mcCache = WORDS.map(function (_, i) {
+      return buildMcOptions(WORDS, i, seed);
+    });
+    return mcCache;
+  }
+
+  function updateChrome() {
+    var sub = document.querySelector(".vq-sub");
+    var hint = $("vq-hint");
+    if (mode === "mc") {
+      if (sub) {
+        sub.innerHTML =
+          "영어 단어를 보고 알맞은 뜻을 고르세요. 같은 퀴즈의 다른 단어 뜻이 보기로 나옵니다.";
+      }
+      if (hint) {
+        hint.textContent =
+          "객관식 보기는 이 퀴즈에 나온 단어 뜻만 사용합니다. 고르면 바로 채점됩니다.";
+      }
+    } else {
+      if (sub) {
+        sub.innerHTML =
+          "뜻을 입력한 뒤 키보드의 이동/완료를 누르거나, 아래 <b>정답 보기</b>를 탭하세요.";
+      }
+      if (hint) {
+        hint.textContent =
+          "유사·대체 표현도 정답으로 인정합니다. 모바일: 입력 후 다음 칸으로 넘어가면 자동 채점. 뜻이 여러 개면 하나만 맞아도 O.";
+      }
+    }
+  }
+
+  var SAY_SVG =
+    '<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>';
+
+  function speakEn(text) {
+    if (!("speechSynthesis" in window)) return;
+    try {
+      window.speechSynthesis.cancel();
+      var u = new SpeechSynthesisUtterance(String(text || ""));
+      u.lang = "en-US";
+      u.rate = 0.9;
+      window.speechSynthesis.speak(u);
+    } catch (e) { /* ignore */ }
+  }
+
+  function renderMcItem(w, i, opt) {
+    var q = w.en[0];
+    var choices = (opt && opt.choices) || [];
+    var buttons = choices
+      .map(function (label, ci) {
+        return (
+          '<button type="button" class="vq-choice" data-i="' +
+          i +
+          '" data-c="' +
+          ci +
+          '" data-v="' +
+          escapeHtml(label) +
+          '">' +
+          '<span class="vq-choice-key">' +
+          (ci + 1) +
+          ".</span>" +
+          '<span class="vq-choice-text">' +
+          escapeHtml(label) +
+          "</span>" +
+          '<span class="vq-choice-ox" aria-hidden="true"></span>' +
+          "</button>"
+        );
+      })
+      .join("");
+
+    return (
+      '<li class="is-mc" id="r' +
+      i +
+      '">' +
+      '<div class="vq-mc-head">' +
+      '<span class="vq-n">' +
+      String(i + 1).padStart(2, "0") +
+      "</span>" +
+      '<span class="vq-q">' +
+      escapeHtml(q) +
+      "</span>" +
+      '<button type="button" class="vq-say" data-say="' +
+      escapeHtml(q) +
+      '" aria-label="' +
+      escapeHtml(q) +
+      ' 발음 듣기">' +
+      SAY_SVG +
+      "</button>" +
+      "</div>" +
+      '<span class="vq-mark" aria-live="polite"></span>' +
+      '<div class="vq-choices" role="radiogroup" aria-label="' +
+      escapeHtml(q) +
+      ' 뜻 고르기">' +
+      buttons +
+      "</div>" +
+      "</li>"
+    );
+  }
+
+  function renderInputItem(w, i) {
+    var q = mode === "en" ? w.en[0] : w.ko[0];
+    var ph = mode === "en" ? "한글 뜻 입력" : "영어 단어 입력";
+    return (
+      '<li id="r' +
+      i +
+      '">' +
+      '<span class="vq-n">' +
+      String(i + 1).padStart(2, "0") +
+      "</span>" +
+      '<span class="vq-q">' +
+      escapeHtml(q) +
+      "</span>" +
+      '<input id="in' +
+      i +
+      '" data-i="' +
+      i +
+      '" type="text" enterkeyhint="go" inputmode="text" placeholder="' +
+      escapeHtml(ph) +
+      '" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="' +
+      escapeHtml(q) +
+      ' 정답">' +
+      '<span class="vq-mark" aria-live="polite"></span>' +
+      "</li>"
+    );
+  }
+
   function render() {
     var list = $("list");
     var tot = $("tot");
     var WORDS = getWords();
     if (!list) return;
 
-    list.innerHTML = WORDS.map(function (w, i) {
-      var q = mode === "en" ? w.en[0] : w.ko[0];
-      var ph = mode === "en" ? "한글 뜻 입력" : "영어 단어 입력";
-      return (
-        '<li id="r' +
-        i +
-        '">' +
-        '<span class="vq-n">' +
-        String(i + 1).padStart(2, "0") +
-        "</span>" +
-        '<span class="vq-q">' +
-        escapeHtml(q) +
-        "</span>" +
-        '<input id="in' +
-        i +
-        '" data-i="' +
-        i +
-        '" type="text" enterkeyhint="go" inputmode="text" placeholder="' +
-        escapeHtml(ph) +
-        '" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="' +
-        escapeHtml(q) +
-        ' 정답">' +
-        '<span class="vq-mark" aria-live="polite"></span>' +
-        "</li>"
-      );
-    }).join("");
+    updateChrome();
+
+    if (mode === "mc") {
+      var cache = ensureMcCache(false);
+      list.innerHTML = WORDS.map(function (w, i) {
+        return renderMcItem(w, i, cache[i]);
+      }).join("");
+    } else {
+      list.innerHTML = WORDS.map(function (w, i) {
+        return renderInputItem(w, i);
+      }).join("");
+    }
 
     if (tot) tot.textContent = String(WORDS.length);
     updateScore();
@@ -118,7 +286,91 @@
     li.appendChild(d);
   }
 
+  function checkMc(i, showAnswer) {
+    var WORDS = getWords();
+    var li = $("r" + i);
+    var opt = (mcCache && mcCache[i]) || ensureMcCache(false)[i];
+    if (!li || !WORDS[i] || !opt) return;
+
+    var selected = li.querySelector(".vq-choice.is-selected");
+    var mark = li.querySelector(".vq-mark");
+    var ansEl = li.querySelector(".vq-ans");
+    if (ansEl) ansEl.remove();
+
+    var answers = expandAnswers(WORDS[i].ko);
+
+    function oxOf(btn) {
+      return btn.querySelector(".vq-choice-ox");
+    }
+
+    if (!selected && !showAnswer) {
+      li.className = "is-mc";
+      if (mark) {
+        mark.textContent = "";
+        mark.className = "vq-mark";
+      }
+      li.querySelectorAll(".vq-choice").forEach(function (btn) {
+        btn.classList.remove("is-correct", "is-wrong", "is-selected");
+        btn.disabled = false;
+        var ox = oxOf(btn);
+        if (ox) ox.textContent = "";
+      });
+      updateScore();
+      return;
+    }
+
+    var ok = selected
+      ? norm(selected.getAttribute("data-v")) === opt.correctNorm ||
+        matchesAny(selected.getAttribute("data-v"), WORDS[i].ko)
+      : false;
+
+    if (!selected && showAnswer) {
+      li.className = "is-mc is-revealed done";
+      if (mark) {
+        mark.textContent = "";
+        mark.className = "vq-mark";
+      }
+      li.querySelectorAll(".vq-choice").forEach(function (btn) {
+        btn.disabled = true;
+        var ox = oxOf(btn);
+        if (norm(btn.getAttribute("data-v")) === opt.correctNorm) {
+          btn.classList.add("is-correct");
+          if (ox) ox.textContent = "O";
+        }
+      });
+      setAnswerLine(li, answers, false);
+      updateScore();
+      return;
+    }
+
+    li.className = "is-mc done " + (ok ? "ok" : "bad");
+    if (mark) {
+      mark.textContent = ok ? "O" : "X";
+      mark.className = "vq-mark " + (ok ? "is-o" : "is-x");
+    }
+    li.querySelectorAll(".vq-choice").forEach(function (btn) {
+      btn.disabled = true;
+      var isRight = norm(btn.getAttribute("data-v")) === opt.correctNorm;
+      var ox = oxOf(btn);
+      if (isRight) {
+        btn.classList.add("is-correct");
+        if (ox) ox.textContent = "O";
+      }
+      if (btn.classList.contains("is-selected") && !isRight) {
+        btn.classList.add("is-wrong");
+        if (ox) ox.textContent = "X";
+      }
+    });
+    if (showAnswer || selected) setAnswerLine(li, answers, ok);
+    updateScore();
+  }
+
   function check(i, showAnswer) {
+    if (mode === "mc") {
+      checkMc(i, showAnswer);
+      return;
+    }
+
     var WORDS = getWords();
     var li = $("r" + i);
     var inp = $("in" + i);
@@ -179,8 +431,11 @@
     mode = m;
     var mEn = $("m-en");
     var mKo = $("m-ko");
+    var mMc = $("m-mc");
     if (mEn) mEn.setAttribute("aria-pressed", m === "en" ? "true" : "false");
     if (mKo) mKo.setAttribute("aria-pressed", m === "ko" ? "true" : "false");
+    if (mMc) mMc.setAttribute("aria-pressed", m === "mc" ? "true" : "false");
+    if (m === "mc") ensureMcCache(false);
     render();
   }
 
@@ -191,6 +446,7 @@
     bound = true;
 
     list.addEventListener("keydown", function (e) {
+      if (mode === "mc") return;
       if (e.key !== "Enter" || !e.target.dataset.i) return;
       e.preventDefault();
       var i = +e.target.dataset.i;
@@ -204,6 +460,7 @@
     list.addEventListener(
       "blur",
       function (e) {
+        if (mode === "mc") return;
         if (!e.target || !e.target.dataset || e.target.dataset.i == null) return;
         if (!String(e.target.value || "").trim()) return;
         check(+e.target.dataset.i, false);
@@ -212,6 +469,7 @@
     );
 
     list.addEventListener("input", function (e) {
+      if (mode === "mc") return;
       var li = e.target.closest("li");
       if (!li || !li.className) return;
       li.className = "";
@@ -222,11 +480,34 @@
       updateScore();
     });
 
+    list.addEventListener("click", function (e) {
+      var say = e.target.closest(".vq-say");
+      if (say) {
+        e.preventDefault();
+        speakEn(say.getAttribute("data-say") || "");
+        return;
+      }
+      var btn = e.target.closest(".vq-choice");
+      if (!btn || mode !== "mc") return;
+      if (btn.disabled) return;
+      var i = +btn.getAttribute("data-i");
+      var li = $("r" + i);
+      if (!li || li.classList.contains("done") || li.classList.contains("ok") || li.classList.contains("bad")) {
+        return;
+      }
+      li.querySelectorAll(".vq-choice").forEach(function (b) {
+        b.classList.remove("is-selected");
+      });
+      btn.classList.add("is-selected");
+      checkMc(i, false);
+    });
+
     var checkAll = $("checkAll");
     var reveal = $("reveal");
     var reset = $("reset");
     var mEn = $("m-en");
     var mKo = $("m-ko");
+    var mMc = $("m-mc");
 
     if (checkAll) {
       checkAll.onclick = function () {
@@ -242,9 +523,12 @@
     }
     if (reset) {
       reset.onclick = function () {
+        if (mode === "mc") ensureMcCache(true);
         render();
-        var first = $("in0");
-        if (first) first.focus();
+        if (mode !== "mc") {
+          var first = $("in0");
+          if (first) first.focus();
+        }
       };
     }
     if (mEn) {
@@ -255,6 +539,11 @@
     if (mKo) {
       mKo.onclick = function () {
         setMode("ko");
+      };
+    }
+    if (mMc) {
+      mMc.onclick = function () {
+        setMode("mc");
       };
     }
   }
@@ -293,6 +582,7 @@
     }
     normalizePageTitles();
     bound = false;
+    mcCache = null;
     bind();
     setMode("en");
   }

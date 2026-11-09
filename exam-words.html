@@ -567,6 +567,8 @@ let order = 'random';   // seq | random
 let page = 1;
 let pages = 1;
 let pool = [];
+/** 같은 세트에서 오답 재사용을 줄이기 위한 추적 */
+let usedDistractors = new Set();
 let ok = 0;
 let no = 0;
 let gen = 0;
@@ -792,19 +794,61 @@ async function fetchSet(cat, p) {
   return fallbackPage(cat, p, order);
 }
 
+function normKo(s) {
+  return String(s || '').replace(/\s+/g, '').toLowerCase();
+}
+
+/** 현재 분류(초등/중등/고등/랜덤) 전체 뜻 풀 — 페이지 10개만 쓰면 오답이 일률적으로 반복됨 */
+function meaningBank() {
+  const key = level === 'all' ? 'all' : level;
+  const rows = FALLBACK[key] || FALLBACK.all || [];
+  return rows.map(function (w) {
+    return { ko: w.meaning, en: w.word };
+  }).concat(pool.map(function (w) {
+    return { ko: w.ko, en: w.en };
+  }));
+}
+
+/**
+ * 오답 3개: 같은 분류 전체에서 뽑고, 길이 비슷한 뜻을 우선.
+ * 이번 세트에서 이미 쓴 오답은 뒤로 미뤄 반복을 줄임.
+ */
 function choices(answer) {
-  const seen = new Set([answer.ko]);
+  const answerKo = String(answer.ko || '').trim();
+  const seen = new Set([normKo(answerKo)]);
   const picked = [];
-  const cands = shuffle(pool.slice()).concat(
-    shuffle(Object.values(FALLBACK).flat().map(w => ({ ko: w.meaning })))
-  );
-  for (const w of cands) {
-    if (!w.ko || seen.has(w.ko)) continue;
-    seen.add(w.ko);
-    picked.push(w.ko);
+  const targetLen = answerKo.length || 4;
+  const similarLimit = Math.max(2, Math.round(targetLen * 0.6));
+
+  const scored = [];
+  const bankSeen = new Set();
+  meaningBank().forEach(function (w) {
+    const ko = String(w.ko || '').trim();
+    const key = normKo(ko);
+    if (!ko || !key || seen.has(key) || bankSeen.has(key)) return;
+    bankSeen.add(key);
+    scored.push({
+      ko: ko,
+      lenDiff: Math.abs(ko.length - targetLen),
+      used: usedDistractors.has(key)
+    });
+  });
+
+  const freshSimilar = shuffle(scored.filter(function (w) { return !w.used && w.lenDiff <= similarLimit; }));
+  const freshRest = shuffle(scored.filter(function (w) { return !w.used && w.lenDiff > similarLimit; }));
+  const reused = shuffle(scored.filter(function (w) { return w.used; }));
+  const ordered = freshSimilar.concat(freshRest, reused);
+
+  for (let i = 0; i < ordered.length; i++) {
+    const ko = ordered[i].ko;
+    const key = normKo(ko);
+    if (seen.has(key)) continue;
+    seen.add(key);
+    usedDistractors.add(key);
+    picked.push(ko);
     if (picked.length === 3) break;
   }
-  return shuffle([answer.ko, ...picked]);
+  return shuffle([answerKo].concat(picked));
 }
 
 function speak(text) {
@@ -948,6 +992,7 @@ async function loadSet(cat, p) {
       .filter(w => w && w.word && w.meaning)
       .map(w => ({ id: String(w.id ?? (w.word + '|' + w.meaning)), en: w.word, ko: w.meaning }));
     pool = words.slice();
+    usedDistractors = new Set();
     if (!words.length) {
       setStatus('이 분류에는 아직 단어가 없어요');
       syncSaveUi();

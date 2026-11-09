@@ -705,6 +705,75 @@ body.rd-syn-hide-meaning .rd-expr--synonym.is-meaning-shown .rd-expr-meaning {
   justify-content: center;
 }
 
+/* AdSense 승인 전 — 300×250 슬롯 전용 유튜브 CTA */
+.rd-ad-slot--yt {
+  background: transparent;
+  border: none;
+  padding: 0;
+  display: block;
+}
+
+.rd-yt-promo {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+  box-sizing: border-box;
+  width: 300px;
+  max-width: 100%;
+  height: 250px;
+  min-height: 250px;
+  padding: 28px;
+  background: var(--surface-dark);
+  color: var(--text-on-dark);
+  border-radius: 4px;
+}
+
+.rd-yt-promo:hover {
+  color: var(--text-on-dark);
+}
+
+.rd-yt-promo-play {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 40px;
+  border-radius: 10px;
+  background: #FF0033;
+}
+
+.rd-yt-promo-kicker {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: var(--accent-soft);
+}
+
+.rd-yt-promo-title {
+  font-family: var(--font-serif);
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 1.35;
+}
+
+.rd-yt-promo-handle {
+  font-size: 14px;
+  color: var(--text-on-dark-muted);
+}
+
+.rd-yt-promo-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  border-radius: 999px;
+  background: var(--page-bg);
+  color: var(--ink);
+  font-weight: 600;
+  font-size: 15px;
+}
+
 body.rd-article .post-meta-views-num,
 body.rd-article .post-meta-likes-num,
 body.rd-article .post-meta-part,

@@ -5,7 +5,7 @@
 (function (global) {
   'use strict';
 
-  var ASSET_VER = '20261107syn7';
+  var ASSET_VER = '20261109ytpromo1';
   var SYN_SAVED_KEY = 'ees-synonym-saved-v1';
   /* v2: 기본값을 뜻 가리기로 재설정 (이전 localStorage=0 무시) */
   var SYN_HIDE_KEY = 'ees-synonym-hide-meaning-v2';
@@ -743,29 +743,40 @@
       '</svg>';
   }
 
+  /** AdSense 승인 전 — 300×250 빈 슬롯만 유튜브 CTA로 채움 */
+  function ytPromoHtml() {
+    return '<a class="rd-yt-promo" href="https://www.youtube.com/@istudyeng" target="_blank" rel="noopener noreferrer" aria-label="시사영단어 유튜브 채널 @istudyeng 바로가기">' +
+      '<div class="rd-yt-promo-play">' +
+        '<svg width="20" height="20" viewBox="0 0 24 24" fill="#FFFFFF" aria-hidden="true"><path d="M8 5v14l11-7z"></path></svg>' +
+      '</div>' +
+      '<div>' +
+        '<div class="rd-yt-promo-kicker">YOUTUBE</div>' +
+        '<div class="rd-yt-promo-title">유튜브로 학습하기</div>' +
+        '<div class="rd-yt-promo-handle">@istudyeng</div>' +
+      '</div>' +
+      '<span class="rd-yt-promo-cta">채널 보러 가기 ↗</span>' +
+      '</a>';
+  }
+
   function moveAdsense(into) {
     if (!into) return;
     var existing = document.querySelector('.rd-ad-slot');
     if (existing) return;
     var slot = document.createElement('div');
-    slot.className = 'rd-ad-slot';
-    slot.setAttribute('aria-label', '광고');
+    slot.className = 'rd-ad-slot rd-ad-slot--yt';
+    slot.setAttribute('aria-label', '유튜브 채널');
+    /* 페이지에 남은 빈 AdSense 유닛은 숨김 (승인 전 빈 박스 방지) */
     var ads = document.querySelectorAll('ins.adsbygoogle');
-    if (ads.length) {
-      var first = ads[0];
-      var parent = first.parentElement;
-      slot.appendChild(first);
-      if (parent && parent !== document.body && !parent.querySelector('ins.adsbygoogle') &&
-          parent.children.length === 0) {
+    for (var i = 0; i < ads.length; i += 1) {
+      var parent = ads[i].parentElement;
+      ads[i].style.display = 'none';
+      if (parent && parent !== document.body && !parent.querySelector('ins.adsbygoogle:not([style*="display: none"])') &&
+          parent.children.length <= 1) {
         parent.style.display = 'none';
       }
-    } else {
-      slot.innerHTML = '<ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-6108574897789788" data-ad-slot=""></ins>';
     }
+    slot.innerHTML = ytPromoHtml();
     into.appendChild(slot);
-    try {
-      if (global.adsbygoogle) (global.adsbygoogle = global.adsbygoogle || []).push({});
-    } catch (e) { /* ignore */ }
   }
 
   /** narrative 카드: 본문 앞 번호(1. ) 제거 — 헤더 01 과 중복 방지 */

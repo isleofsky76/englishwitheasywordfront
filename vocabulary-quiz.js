@@ -5,7 +5,7 @@
    * API/?slug= 진입용. 클릭 공개형(reveal) UI는 제거됨.
    * reveal-section 데이터 → track 입력 퀴즈(유사 정답 · EN↔KO)만 렌더.
    */
-  var TRACK_VER = "20261102track2";
+  var TRACK_VER = "20261109mc2";
 
   /** "출산 퀴즈" → "출산 시사 어휘 퀴즈" (이미 시사 어휘 퀴즈면 유지) */
   function formatQuizTitle(title) {
@@ -182,6 +182,7 @@
       '<div class="vq-seg" role="group" aria-label="퀴즈 방향">' +
       '<button type="button" id="m-en" aria-pressed="true">영어 → 한글</button>' +
       '<button type="button" id="m-ko" aria-pressed="false">한글 → 영어</button>' +
+      '<button type="button" id="m-mc" aria-pressed="false">객관식</button>' +
       "</div>" +
       '<div class="vq-score"><b id="sc">0</b> / <span id="tot">0</span> 정답</div>' +
       "</div>" +
@@ -192,7 +193,7 @@
       '<button type="button" class="vq-btn" id="reveal">정답 보기</button>' +
       '<button type="button" class="vq-btn" id="reset">다시 하기</button>' +
       "</div>" +
-      '<p class="vq-hint">유사·대체 표현도 정답으로 인정합니다. 모바일: 입력 후 다음 칸으로 넘어가면 자동 채점. 뜻이 여러 개면 하나만 맞아도 O.</p>' +
+      '<p class="vq-hint" id="vq-hint">유사·대체 표현도 정답으로 인정합니다. 모바일: 입력 후 다음 칸으로 넘어가면 자동 채점. 뜻이 여러 개면 하나만 맞아도 O.</p>' +
       "</main>"
     );
   }

@@ -346,6 +346,167 @@ html.has-site-masthead .vq-track {
   margin-top: 14px;
 }
 
+/* 객관식 — 수험영어(exam-words) 4지선다 카드 톤 */
+.vq-track .vq-list > li.is-mc {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: stretch;
+  padding: 16px;
+  border-radius: 16px;
+}
+
+.vq-track .vq-mc-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-right: 44px;
+}
+
+.vq-track .vq-list > li.is-mc .vq-n {
+  font-size: 13px;
+  font-weight: 700;
+  min-width: 28px;
+}
+
+.vq-track .vq-list > li.is-mc .vq-q {
+  font-size: clamp(22px, 5vw, 30px);
+  font-weight: 900;
+  letter-spacing: -0.3px;
+  line-height: 1.2;
+  word-break: break-word;
+}
+
+.vq-track .vq-say {
+  width: 36px;
+  height: 36px;
+  flex: none;
+  border-radius: 999px;
+  border: 1px solid var(--vq-line);
+  background: var(--vq-surface);
+  color: var(--vq-fg);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+}
+
+.vq-track .vq-say:hover {
+  border-color: var(--vq-fg);
+}
+
+.vq-track .vq-list > li.is-mc .vq-mark {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  font-size: 30px;
+  font-weight: 900;
+  line-height: 1;
+  width: auto;
+}
+
+.vq-track .vq-list > li.is-mc .vq-mark.is-o {
+  color: var(--vq-ok);
+}
+
+.vq-track .vq-list > li.is-mc .vq-mark.is-x {
+  color: var(--vq-bad);
+}
+
+.vq-track .vq-choices {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.vq-track .vq-choice {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-align: left;
+  width: 100%;
+  min-height: 52px;
+  box-sizing: border-box;
+  padding: 8px 12px;
+  border: 1px solid var(--vq-line);
+  border-radius: 12px;
+  background: var(--vq-surface);
+  color: var(--vq-fg);
+  font: 500 15px var(--vq-body);
+  cursor: pointer;
+}
+
+.vq-track .vq-choice:hover:not(:disabled) {
+  border-color: var(--vq-fg);
+}
+
+.vq-track .vq-choice:disabled {
+  cursor: default;
+}
+
+.vq-track .vq-choice-key {
+  flex: none;
+  font-weight: 700;
+  color: var(--vq-muted);
+}
+
+.vq-track .vq-choice-text {
+  flex: 1 1 auto;
+  min-width: 0;
+  line-height: 1.35;
+}
+
+.vq-track .vq-choice-ox {
+  margin-left: auto;
+  flex: none;
+  font-weight: 900;
+  font-size: 18px;
+}
+
+.vq-track .vq-choice.is-selected:not(.is-correct):not(.is-wrong) {
+  border-color: var(--vq-fg);
+}
+
+.vq-track .vq-choice.is-correct {
+  border: 2px solid var(--vq-ok);
+  background: var(--vq-ok-soft);
+  color: var(--vq-ok);
+  font-weight: 700;
+}
+
+.vq-track .vq-choice.is-correct .vq-choice-ox {
+  color: var(--vq-ok);
+}
+
+.vq-track .vq-choice.is-wrong {
+  border: 2px solid var(--vq-bad);
+  background: var(--vq-bad-soft);
+  color: var(--vq-bad);
+}
+
+.vq-track .vq-choice.is-wrong .vq-choice-ox {
+  color: var(--vq-bad);
+}
+
+.vq-track .vq-list > li.is-mc.done .vq-choice:not(.is-correct):not(.is-wrong) {
+  opacity: 0.55;
+}
+
+.vq-track .vq-list > li.is-mc .vq-ans {
+  margin-top: 2px;
+}
+
+@media (min-width: 700px) {
+  .vq-track .vq-choices {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
 @media (max-width: 480px) {
   .vq-track .vq-list > li {
     grid-template-columns: 22px minmax(0, 1fr) 36px;
@@ -357,6 +518,17 @@ html.has-site-masthead .vq-track {
   .vq-track .vq-list > li .vq-mark {
     grid-row: 1 / 3;
     grid-column: 3;
+  }
+  .vq-track .vq-list > li.is-mc {
+    display: flex;
+  }
+  .vq-track .vq-list > li.is-mc .vq-mark {
+    grid-row: auto;
+    grid-column: auto;
+  }
+  .vq-track .vq-seg button {
+    padding: 7px 10px;
+    font-size: 13px;
   }
 }
 
