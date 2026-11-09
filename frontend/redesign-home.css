@@ -196,11 +196,22 @@
   background: var(--surface);
   border-radius: 4px;
 }
+.rd-path-head {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-decoration: none;
+  color: inherit;
+}
+.rd-path-head:hover h2 {
+  color: var(--accent);
+}
 .rd-path-num {
   font-family: var(--font-serif);
   font-weight: 900;
   font-size: 40px;
   color: var(--accent);
+  line-height: 1;
 }
 .rd-path-card h2 {
   margin: 0;
@@ -888,6 +899,34 @@ a.rd-free-book-cover:focus-visible {
   .rd-paths-inner {
     padding-left: 16px;
     padding-right: 16px;
+  }
+  /* 모바일 학습 경로: 헤드라인만 — 설명·칩 숨김, 여백 축소 */
+  .rd-paths-inner {
+    padding-top: 10px;
+    padding-bottom: 12px;
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .rd-path-card {
+    padding: 12px 14px;
+    gap: 0;
+  }
+  .rd-path-head {
+    flex-direction: row;
+    align-items: baseline;
+    gap: 10px;
+  }
+  .rd-path-num {
+    font-size: 18px;
+    min-width: 1.6em;
+  }
+  .rd-path-card h2 {
+    font-size: 18px;
+    font-weight: 700;
+  }
+  .rd-path-card > p,
+  .rd-path-card > .rd-chips {
+    display: none !important;
   }
   .rd-section-head h2 {
     font-size: 28px;
