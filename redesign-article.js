@@ -6,7 +6,7 @@
   'use strict';
 
   var ASSET_VER = '20261109quiz1';
-  var QUIZ_TRACK_VER = '20261109quiz1';
+  var QUIZ_TRACK_VER = '20261109quiz2';
   /* news-voca.js 등이 구버전 redesign을 덮어쓰지 않도록 */
   global.__RD_ARTICLE_WORD_QUIZ = true;
   var SYN_SAVED_KEY = 'ees-synonym-saved-v1';
@@ -1275,6 +1275,22 @@
       .filter(Boolean);
   }
 
+  function stripLemmaPrefix(label) {
+    return String(label || '')
+      .replace(/^(?:cf\.\s*)?[A-Za-z][A-Za-z0-9\s\-']{0,40}:\s*/i, '')
+      .replace(/\s*\((?:형|명|동|부|관|감|전|접|구동사|명사구|동사구|형용구)\)\s*/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  function pushKoMeanings(list, raw) {
+    splitKoMeanings(raw).forEach(function (part) {
+      var cleaned = stripLemmaPrefix(part);
+      if (!cleaned || !/[가-힣]/.test(cleaned)) return;
+      if (list.indexOf(cleaned) === -1) list.push(cleaned);
+    });
+  }
+
   function cardsToQuizWords(cards) {
     var out = [];
     var seen = Object.create(null);
@@ -1284,12 +1300,13 @@
       if (!en || en === '표현') return;
       var key = en.toLowerCase();
       if (seen[key]) return;
-      var koList = splitKoMeanings(c.meaning);
-      if (!koList.length && c.ko) koList = splitKoMeanings(c.ko);
-      if (!koList.length && c.cf) {
+      var koList = [];
+      pushKoMeanings(koList, c.meaning);
+      pushKoMeanings(koList, c.ko);
+      if (c.cf) {
         var cf = String(c.cf || '').replace(/^cf\.\s*/i, '');
         var colon = cf.indexOf(':');
-        if (colon >= 0) koList = splitKoMeanings(cf.slice(colon + 1));
+        pushKoMeanings(koList, colon >= 0 ? cf.slice(colon + 1) : cf);
       }
       if (!koList.length) return;
       seen[key] = true;
@@ -1349,6 +1366,51 @@
     });
   }
 
+  function syncArticleCommentButtonsToQuiz(container, quizHost, restore) {
+    var cmtRoot = container.querySelector(
+      '.rd-article-action-tools .board-comments-root, .rd-article-action-tools [data-board-comments-root]'
+    );
+    var actions = quizHost && quizHost.querySelector('#vq-actions, .vq-actions');
+    if (!cmtRoot) return;
+    var toggle = cmtRoot.querySelector('.os-cmt-toggle');
+    var write = cmtRoot.querySelector('.os-cmt-write');
+    var bar = cmtRoot.querySelector('.os-cmt-bar');
+    if (restore) {
+      if (bar) {
+        if (toggle) bar.insertBefore(toggle, bar.firstChild);
+        if (write) {
+          if (toggle && toggle.nextSibling) bar.insertBefore(write, toggle.nextSibling);
+          else bar.appendChild(write);
+        }
+        bar.style.display = '';
+      }
+      if (toggle) toggle.classList.remove('vq-btn');
+      if (write) write.classList.remove('vq-btn');
+      return;
+    }
+    if (!actions) return;
+    if (!toggle && !write) {
+      var tries = Number(quizHost.getAttribute('data-rd-cmt-sync-tries') || '0');
+      if (tries < 8) {
+        quizHost.setAttribute('data-rd-cmt-sync-tries', String(tries + 1));
+        setTimeout(function () {
+          syncArticleCommentButtonsToQuiz(container, quizHost, false);
+        }, 200);
+      }
+      return;
+    }
+    quizHost.removeAttribute('data-rd-cmt-sync-tries');
+    if (toggle) {
+      toggle.classList.add('vq-btn');
+      actions.appendChild(toggle);
+    }
+    if (write) {
+      write.classList.add('vq-btn');
+      actions.appendChild(write);
+    }
+    if (bar && !bar.children.length) bar.style.display = 'none';
+  }
+
   function bindArticleWordQuiz(container, cards, title) {
     var btn = container.querySelector('[data-rd-word-quiz]');
     var host = container.querySelector('#rd-word-quiz');
@@ -1362,6 +1424,7 @@
     btn.addEventListener('click', function () {
       var open = btn.getAttribute('aria-expanded') === 'true';
       if (open) {
+        syncArticleCommentButtonsToQuiz(container, host, true);
         host.hidden = true;
         host.setAttribute('hidden', '');
         btn.setAttribute('aria-expanded', 'false');
@@ -1390,6 +1453,7 @@
           host.removeAttribute('hidden');
           btn.setAttribute('aria-expanded', 'true');
           btn.classList.add('is-active');
+          syncArticleCommentButtonsToQuiz(container, host, false);
           try {
             host.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
           } catch (e) { /* ignore */ }

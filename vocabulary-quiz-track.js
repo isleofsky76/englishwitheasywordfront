@@ -132,7 +132,9 @@
 
   function cleanKoLabel(label) {
     return String(label || "")
-      .replace(/\s*\((?:형|명|동|부|관|감|전|접)\)\s*$/g, "")
+      /* cf./lemma 접두 — "airlift: 항공 수송하다" → "항공 수송하다" */
+      .replace(/^(?:cf\.\s*)?[A-Za-z][A-Za-z0-9\s\-']{0,40}:\s*/i, "")
+      .replace(/\s*\((?:형|명|동|부|관|감|전|접|구동사|명사구|동사구|형용구)\)\s*$/g, "")
       .trim();
   }
 
