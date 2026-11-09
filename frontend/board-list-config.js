@@ -595,11 +595,40 @@
     return t;
   }
 
+  function pickWordOfDayLemma(entry) {
+    var msg = String((entry && entry.message) || '');
+    var strong = msg.match(/<strong[^>]*>\s*([A-Za-z][A-Za-z'-]{0,39})\s*<\/strong>/i);
+    if (strong) return strong[1];
+    var slug = String((entry && entry.slug) || '')
+      .trim()
+      .toLowerCase()
+      .replace(/^\/+|\/+$/g, '');
+    if (
+      slug &&
+      /^[a-z][a-z0-9'-]{0,39}$/.test(slug) &&
+      !/-(?:wsj|cnn|bbc|guardian|nyt|ft|economist|koreaherald|koreatimes|yonhap|politico|reuters)$/i.test(slug)
+    ) {
+      return slug;
+    }
+    var title = String((entry && entry.title) || '')
+      .replace(/^\[([^\]]+)\]\s*/, '')
+      .split(/\s*[|｜]\s*/)[0]
+      .trim();
+    var one = title.match(/^([A-Za-z][A-Za-z'-]{0,39})$/);
+    if (one) return one[1];
+    var first = title.match(/[A-Za-z][A-Za-z'-]{0,39}/);
+    return first ? first[0] : title || 'Word';
+  }
+
   function cleanTitle(entry, boardKey) {
     var title = String((entry && entry.title) || '제목 없음');
     title = title.replace(/^\[([^\]]+)\]\s*/, '').trim() || title;
     if (boardKey === 'vocabulary-quiz') {
       return formatVocabQuizTitle(title);
+    }
+    /* 단어장 목록·카드: 영어 표제어만 (뜻·예문 문장 미리보기 방지) */
+    if (boardKey === 'word-of-the-day') {
+      return pickWordOfDayLemma(entry);
     }
     return title;
   }

@@ -160,36 +160,47 @@
     return '';
   }
 
+  /**
+   * 홈·목록 미리보기용 — 영어 표제어 한 단어만.
+   * parable처럼 본문에 예문·뜻이 많아도 문장 전체를 끌어오지 않음.
+   */
+  function pickWotdLemma(entry) {
+    var msg = String((entry && entry.message) || '');
+    var strong = msg.match(/<strong[^>]*>\s*([A-Za-z][A-Za-z'-]{0,39})\s*<\/strong>/i);
+    if (strong) return strong[1];
+
+    var slug = String((entry && entry.slug) || '')
+      .trim()
+      .toLowerCase()
+      .replace(/^\/+|\/+$/g, '');
+    if (
+      slug &&
+      /^[a-z][a-z0-9'-]{0,39}$/.test(slug) &&
+      !/-(?:wsj|cnn|bbc|guardian|nyt|ft|economist|koreaherald|koreatimes|yonhap|politico|reuters)$/i.test(slug)
+    ) {
+      return slug;
+    }
+
+    var title = String((entry && entry.title) || '')
+      .replace(/^\[([^\]]+)\]\s*/, '')
+      .split(/\s*[|｜]\s*/)[0]
+      .trim();
+    var one = title.match(/^([A-Za-z][A-Za-z'-]{0,39})$/);
+    if (one) return one[1];
+    var first = title.match(/[A-Za-z][A-Za-z'-]{0,39}/);
+    return first ? first[0] : 'Word';
+  }
+
   function extractWotdFields(entry) {
-    var parts = parseTitleParts(entry.title);
-    var word = parts.title || 'Word';
-    var meaning = parts.meaning || '';
-    var msg = String(entry.message || '');
-    var text = stripHtml(msg);
-    if (!meaning) {
-      var mm = text.match(/뜻(?:\(명사\)|\(동사\)|\(형용사\)|\(부사\))?\s*[:：]\s*([^\n.]+)/);
-      if (!mm) mm = text.match(/명사\s*[:：]\s*([^\n/]+)/);
-      if (mm) meaning = mm[1].trim();
-    }
-    var example = '';
-    var ex = msg.match(/예문\s*1[\s\S]*?<p[^>]*>([^<]+)<\/p>/i);
-    if (!ex) ex = msg.match(/wotd-example-heading[\s\S]*?<span[^>]*>[\s\S]*?([A-Za-z][^<]{20,160})/i);
-    if (ex) example = stripHtml(ex[1] || ex[0]).slice(0, 180);
-    if (!example) {
-      var enLine = text.match(/\b([A-Z][^.]{30,160}\.)/);
-      if (enLine) example = enLine[1];
-    }
-    var pos = '';
-    if (/명사|noun/i.test(text)) pos = 'noun';
-    else if (/동사|verb/i.test(text)) pos = 'verb';
-    else if (/형용사|adjective/i.test(text)) pos = 'adjective';
+    var word = pickWotdLemma(entry);
+    var msg = String((entry && entry.message) || '');
     return {
       word: word,
-      meaning: meaning || '오늘의 단어',
-      pos: pos,
-      example: example || '기사와 예문으로 의미를 확인해 보세요.',
+      meaning: '',
+      pos: '',
+      example: '',
       image: extractImage(msg),
-      slug: entry.slug || word.toLowerCase().replace(/\s+/g, '-')
+      slug: (entry && entry.slug) || word.toLowerCase().replace(/\s+/g, '-')
     };
   }
 
@@ -246,14 +257,10 @@
     if (!root || !entry) return;
     var f = extractWotdFields(entry);
     var href = boardHref('wordofday', entry, index);
+    /* 미리보기: 영어 단어 + 이미지 + CTA만 — 뜻·예문은 상세에서 */
     root.innerHTML =
       '<span class="rd-kicker">WORD OF THE DAY · 오늘의 단어</span>' +
       '<h1>' + esc(f.word) + '</h1>' +
-      '<div class="rd-hero-meta">' +
-        (f.pos ? '<span class="pos">' + esc(f.pos) + '</span>' : '') +
-        '<span class="meaning">' + esc(f.meaning) + '</span>' +
-      '</div>' +
-      '<p class="rd-hero-example">' + esc(f.example) + '</p>' +
       '<div class="rd-hero-actions">' +
         '<a class="rd-btn rd-btn-solid" href="' + esc(href) + '">단어 자세히 보기</a>' +
       '</div>';
