@@ -333,17 +333,22 @@
     );
   }
 
-  function titleHtml(item, className) {
+  function titleHtml(item, className, opts) {
+    opts = opts || {};
+    var prefix = (opts.index != null)
+      ? '<span class="rd-list-index-prefix" aria-hidden="true">' + escapeHtml(String(opts.index) + '. ') + '</span>'
+      : '';
     if (item && item.bilingual && item.titleEn && item.titleKo) {
       return (
         '<span class="' + className + ' rd-list-title-bi">' +
+          prefix +
           '<span class="rd-list-title-en">' + escapeHtml(item.titleEn) + '</span>' +
           '<span class="rd-list-title-sep" aria-hidden="true"> : </span>' +
           '<span class="rd-list-title-ko">' + escapeHtml(item.titleKo) + '</span>' +
         '</span>'
       );
     }
-    return '<span class="' + className + '">' + escapeHtml(item.title) + '</span>';
+    return '<span class="' + className + '">' + prefix + escapeHtml(item.title) + '</span>';
   }
 
   function monoFromTitle(item) {
@@ -494,7 +499,7 @@
         (metaParts.length && !kw
           ? '<span class="rd-list-feature-meta">' + escapeHtml(metaParts.join(' · ')) + '</span>'
           : '') +
-        titleHtml(item, 'rd-list-feature-title') +
+        titleHtml(item, 'rd-list-feature-title', { index: 0 }) +
         sub +
         (!kw && tags ? '<div class="rd-list-tags">' + tags + '</div>' : '') +
       '</a>'
