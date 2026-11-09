@@ -15,6 +15,9 @@
   var bound = false;
   /** 객관식 보기 캐시 — 모드 유지 중엔 섞지 않음, 다시 하기에서만 갱신 */
   var mcCache = null;
+  /** 다른 vocabulary-quiz 항목의 한글 뜻 풀 (동의어 퀴즈 오답용) */
+  var globalMcPool = null;
+  var globalMcPoolPromise = null;
 
   function norm(s) {
     return String(s || "")
@@ -94,45 +97,151 @@
     return a;
   }
 
+  function getApiBase() {
+    if (typeof window.getPage30ApiBaseUrl === "function") {
+      return window.getPage30ApiBaseUrl();
+    }
+    return window.PAGE30_PRODUCTION_API_BASE || "";
+  }
+
+  function currentQuizSlug() {
+    var bodySlug = document.body && document.body.dataset.nvSlug;
+    if (bodySlug) return String(bodySlug).trim();
+    try {
+      var q = new URLSearchParams(window.location.search).get("slug");
+      if (q) return String(q).trim();
+    } catch (e) { /* ignore */ }
+    var parts = (window.location.pathname || "").replace(/\/+$/, "").split("/");
+    var last = parts[parts.length - 1] || "";
+    if (last && last !== "vocabulary-quiz.html" && last !== "vocabulary-quiz") {
+      try {
+        return decodeURIComponent(last);
+      } catch (e2) {
+        return last;
+      }
+    }
+    return "";
+  }
+
+  function cleanKoLabel(label) {
+    return String(label || "")
+      .replace(/\s*\((?:형|명|동|부|관|감|전|접)\)\s*$/g, "")
+      .trim();
+  }
+
+  function conflictsWithAny(label, forbidden) {
+    var n = norm(label);
+    if (!n) return true;
+    return forbidden.some(function (f) {
+      return softMatch(n, norm(f));
+    });
+  }
+
+  function pushUniqueLabel(pool, seen, label) {
+    var cleaned = cleanKoLabel(label) || String(label || "").trim();
+    var key = norm(cleaned);
+    if (!key || key.length < 2 || seen[key]) return;
+    seen[key] = true;
+    pool.push(cleaned);
+  }
+
+  /** 다른 시사 어휘 퀴즈들의 한글 뜻 — 동의어 묶음 퀴즈에서 오답이 비슷해지는 문제 완화 */
+  function ensureGlobalMcPool() {
+    if (globalMcPool && globalMcPool.length) return Promise.resolve(globalMcPool);
+    if (globalMcPoolPromise) return globalMcPoolPromise;
+    var apiBase = getApiBase();
+    if (!apiBase) {
+      globalMcPool = [];
+      return Promise.resolve(globalMcPool);
+    }
+    var slug = currentQuizSlug();
+    globalMcPoolPromise = fetch(apiBase + "/vocabulary-quiz", { cache: "no-store" })
+      .then(function (res) {
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        return res.json();
+      })
+      .then(function (data) {
+        var entries = Array.isArray(data) ? data : data.entries || [];
+        var seen = Object.create(null);
+        var pool = [];
+        entries.forEach(function (entry) {
+          if (!entry) return;
+          if (slug && entry.slug && String(entry.slug) === slug) return;
+          (entry.quizzes || []).forEach(function (qz) {
+            (qz.items || []).forEach(function (it) {
+              if (!it) return;
+              expandAnswers([it.hide || ""]).forEach(function (label) {
+                pushUniqueLabel(pool, seen, label);
+              });
+            });
+          });
+        });
+        globalMcPool = pool;
+        return globalMcPool;
+      })
+      .catch(function (err) {
+        console.warn("[vocabulary-quiz-track] global MC pool load failed", err);
+        globalMcPool = globalMcPool || [];
+        return globalMcPool;
+      });
+    return globalMcPoolPromise;
+  }
+
   /**
-   * 객관식 보기: 같은 퀴즈의 다른 단어 뜻에서 오답 추출.
-   * 문항 = 영어 단어, 보기 = 한글 뜻 최대 4개 (정답 1 + 오답).
+   * 객관식 보기: 정답 1 + 오답 최대 3.
+   * 오답은 다른 vocabulary-quiz 뜻 풀을 우선 사용(유사 동의어 퀴즈에서 보기가 너무 비슷·쉬운 문제 방지).
+   * 풀이 부족할 때만 같은 퀴즈의 비유사 뜻을 보조로 채움.
    */
-  function buildMcOptions(words, correctIndex, sessionSeed) {
+  function buildMcOptions(words, correctIndex, sessionSeed, externalPool) {
     var w = words[correctIndex];
     if (!w) return { choices: [], correctNorm: "" };
-    var correctLabel = String((w.ko && w.ko[0]) || "").trim();
+    var correctLabel = cleanKoLabel((w.ko && w.ko[0]) || "") || String((w.ko && w.ko[0]) || "").trim();
     var correctNorm = norm(correctLabel);
-    var pool = [];
+    var forbidden = expandAnswers(w.ko).map(cleanKoLabel).filter(Boolean);
+    if (correctLabel && forbidden.indexOf(correctLabel) === -1) forbidden.unshift(correctLabel);
+
     var seen = Object.create(null);
     if (correctNorm) seen[correctNorm] = true;
 
+    var primary = [];
+    (externalPool || []).forEach(function (label) {
+      if (conflictsWithAny(label, forbidden)) return;
+      pushUniqueLabel(primary, seen, label);
+    });
+
+    var local = [];
     words.forEach(function (other, idx) {
       if (idx === correctIndex || !other) return;
       expandAnswers(other.ko).forEach(function (label) {
-        var key = norm(label);
-        if (!key || seen[key]) return;
-        seen[key] = true;
-        pool.push(label);
+        if (conflictsWithAny(label, forbidden)) return;
+        pushUniqueLabel(local, seen, label);
       });
     });
 
-    /* 오답이 부족하면 같은 단어의 다른 뜻은 쓰지 않음(혼동) — 보기 수만 줄임 */
-    var need = Math.min(3, pool.length);
+    var need = 3;
     var rng = mulberry32((sessionSeed ^ ((correctIndex + 1) * 2654435761)) >>> 0);
-    var distractors = shuffleWith(rng, pool).slice(0, need);
+    var distractors = shuffleWith(rng, primary).slice(0, need);
+    if (distractors.length < need) {
+      distractors = distractors.concat(
+        shuffleWith(rng, local).slice(0, need - distractors.length)
+      );
+    }
     var choices = shuffleWith(rng, [correctLabel].concat(distractors).filter(Boolean));
     return { choices: choices, correctNorm: correctNorm, correctLabel: correctLabel };
   }
 
   function ensureMcCache(force) {
     var WORDS = getWords();
-    if (!force && mcCache && mcCache.length === WORDS.length) return mcCache;
-    var seed = (Date.now() ^ (WORDS.length * 9973)) >>> 0;
-    mcCache = WORDS.map(function (_, i) {
-      return buildMcOptions(WORDS, i, seed);
+    if (!force && mcCache && mcCache.length === WORDS.length) {
+      return Promise.resolve(mcCache);
+    }
+    return ensureGlobalMcPool().then(function (pool) {
+      var seed = (Date.now() ^ (WORDS.length * 9973) ^ ((pool && pool.length) || 0)) >>> 0;
+      mcCache = WORDS.map(function (_, i) {
+        return buildMcOptions(WORDS, i, seed, pool || []);
+      });
+      return mcCache;
     });
-    return mcCache;
   }
 
   function updateChrome() {
@@ -141,11 +250,11 @@
     if (mode === "mc") {
       if (sub) {
         sub.innerHTML =
-          "영어 단어를 보고 알맞은 뜻을 고르세요. 같은 퀴즈의 다른 단어 뜻이 보기로 나옵니다.";
+          "영어 단어를 보고 알맞은 뜻을 고르세요. 오답은 다른 시사 어휘 퀴즈 뜻에서 가져옵니다.";
       }
       if (hint) {
         hint.textContent =
-          "객관식 보기는 이 퀴즈에 나온 단어 뜻만 사용합니다. 고르면 바로 채점됩니다.";
+          "객관식 오답은 다른 vocabulary-quiz 항목의 뜻으로 채웁니다. 고르면 바로 채점됩니다.";
       }
     } else {
       if (sub) {
@@ -263,7 +372,7 @@
     updateChrome();
 
     if (mode === "mc") {
-      var cache = ensureMcCache(false);
+      var cache = mcCache || [];
       list.innerHTML = WORDS.map(function (w, i) {
         return renderMcItem(w, i, cache[i]);
       }).join("");
@@ -289,7 +398,7 @@
   function checkMc(i, showAnswer) {
     var WORDS = getWords();
     var li = $("r" + i);
-    var opt = (mcCache && mcCache[i]) || ensureMcCache(false)[i];
+    var opt = mcCache && mcCache[i];
     if (!li || !WORDS[i] || !opt) return;
 
     var selected = li.querySelector(".vq-choice.is-selected");
@@ -435,7 +544,12 @@
     if (mEn) mEn.setAttribute("aria-pressed", m === "en" ? "true" : "false");
     if (mKo) mKo.setAttribute("aria-pressed", m === "ko" ? "true" : "false");
     if (mMc) mMc.setAttribute("aria-pressed", m === "mc" ? "true" : "false");
-    if (m === "mc") ensureMcCache(false);
+    if (m === "mc") {
+      ensureMcCache(false).then(function () {
+        if (mode === "mc") render();
+      });
+      return;
+    }
     render();
   }
 
@@ -523,12 +637,15 @@
     }
     if (reset) {
       reset.onclick = function () {
-        if (mode === "mc") ensureMcCache(true);
-        render();
-        if (mode !== "mc") {
-          var first = $("in0");
-          if (first) first.focus();
+        if (mode === "mc") {
+          ensureMcCache(true).then(function () {
+            render();
+          });
+          return;
         }
+        render();
+        var first = $("in0");
+        if (first) first.focus();
       };
     }
     if (mEn) {
@@ -723,6 +840,7 @@
     mcCache = null;
     bind();
     setMode("en");
+    ensureGlobalMcPool();
     mountQuizComments();
   }
 

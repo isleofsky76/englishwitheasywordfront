@@ -5,7 +5,7 @@
    * API/?slug= 진입용. 클릭 공개형(reveal) UI는 제거됨.
    * reveal-section 데이터 → track 입력 퀴즈(유사 정답 · EN↔KO)만 렌더.
    */
-  var TRACK_VER = "20261109cmt1";
+  var TRACK_VER = "20261109mc3";
 
   /** "출산 퀴즈" → "출산 시사 어휘 퀴즈" (이미 시사 어휘 퀴즈면 유지) */
   function formatQuizTitle(title) {
