@@ -5,7 +5,8 @@
   'use strict';
 
   var MSG = '사용할 수 없는 표현이 포함되어 있어요.';
-  var BADWORDS_URL = 'comment-badwords.json?v=20261101c11';
+  /* 루트 절대경로 — /news-voca/... 등 하위 URL에서 상대경로면 HTML(404 SPA)이 내려와 JSON 파싱 실패함 */
+  var BADWORDS_URL = '/comment-badwords.json?v=20261101c11';
   var badwords = {
     blockedA: [],
     blockedB: [],

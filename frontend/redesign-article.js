@@ -6,7 +6,7 @@
   'use strict';
 
   var ASSET_VER = '20261109quiz1';
-  var QUIZ_TRACK_VER = '20261109quiz2';
+  var QUIZ_TRACK_VER = '20261109quiz3';
   /* news-voca.js 등이 구버전 redesign을 덮어쓰지 않도록 */
   global.__RD_ARTICLE_WORD_QUIZ = true;
   var SYN_SAVED_KEY = 'ees-synonym-saved-v1';

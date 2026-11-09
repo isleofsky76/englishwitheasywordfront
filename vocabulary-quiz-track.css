@@ -157,6 +157,36 @@ html.has-site-masthead .vq-track {
   display: none !important;
 }
 
+/* 기사 임베드 — 반복 헤더 숨김, 본문 영·한글 크기 ≈ rd-expr */
+.vq-track.vq-track--embed {
+  padding-top: 8px;
+}
+.vq-track.vq-track--embed .vq-header {
+  display: none !important;
+}
+.vq-track.vq-track--embed .vq-bar {
+  margin-bottom: 10px;
+}
+.vq-track.vq-track--embed .vq-list > li.is-mc .vq-q {
+  font-family: var(--font-sans, inherit);
+  font-size: clamp(20px, 2.8vw, 26px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+}
+.vq-track.vq-track--embed .vq-choice {
+  font: 500 15px var(--vq-body);
+  min-height: 48px;
+}
+.vq-track.vq-track--embed .vq-choice-text {
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+.vq-track.vq-track--embed .vq-choice.is-correct .vq-choice-text {
+  font-weight: 700;
+}
+
 .vq-track .vq-seg {
   display: inline-flex;
   background: var(--vq-accent-soft);

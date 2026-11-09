@@ -750,13 +750,7 @@
       '<div class="vq-track vq-track--embed' +
       (trackOptions.hideModeTabs ? " vq-track--mc-only" : "") +
       '" id="vq-track">' +
-      '<header class="vq-header">' +
-      '<span class="vq-eyebrow">단어퀴즈</span>' +
-      '<h2 class="vq-title">' +
-      escapeHtml(title || "이 글 복습 퀴즈") +
-      "</h2>" +
-      '<p class="vq-sub">영어 단어를 보고 알맞은 뜻을 고르세요.</p>' +
-      "</header>" +
+      /* 기사 임베드: 반복 안내 문구(단어퀴즈/복습/고르세요) 생략 */
       '<div class="vq-bar">' +
       '<div class="vq-seg" role="group" aria-label="퀴즈 방향"' +
       (trackOptions.hideModeTabs ? " hidden" : "") +
