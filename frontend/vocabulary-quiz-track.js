@@ -129,6 +129,18 @@
       .trim();
   }
 
+  /** 객관식 보기용 — 한글 뜻만 허용 (영단어·영문 구 제외) */
+  function isKoOptionLabel(label) {
+    var s = cleanKoLabel(label);
+    if (!s || s.length < 2) return false;
+    if (!/[가-힣]/.test(s)) return false;
+    /* 라틴 문자가 한글보다 많으면 영어 위주 라벨로 보고 제외 */
+    var latin = (s.match(/[A-Za-z]/g) || []).join("").length;
+    var hangul = (s.match(/[가-힣]/g) || []).join("").length;
+    if (latin > 0 && latin >= hangul) return false;
+    return true;
+  }
+
   function conflictsWithAny(label, forbidden) {
     var n = norm(label);
     if (!n) return true;
@@ -139,10 +151,27 @@
 
   function pushUniqueLabel(pool, seen, label) {
     var cleaned = cleanKoLabel(label) || String(label || "").trim();
+    if (!isKoOptionLabel(cleaned)) return;
     var key = norm(cleaned);
     if (!key || key.length < 2 || seen[key]) return;
     seen[key] = true;
     pool.push(cleaned);
+  }
+
+  /** 퀴즈 아이템에서 한글 뜻만 추출 (en-ko → hide, ko-en → show) */
+  function koreanLabelsFromItem(qz, it) {
+    if (!it) return [];
+    var dir = String((qz && qz.direction) || "").toLowerCase();
+    var raw = "";
+    if (dir === "ko-en") raw = it.show || "";
+    else if (dir === "en-ko") raw = it.hide || "";
+    else {
+      /* direction 없으면 한글이 있는 쪽 */
+      var hide = String(it.hide || "");
+      var show = String(it.show || "");
+      raw = /[가-힣]/.test(hide) ? hide : /[가-힣]/.test(show) ? show : hide;
+    }
+    return expandAnswers([raw]).filter(isKoOptionLabel);
   }
 
   /** 다른 시사 어휘 퀴즈들의 한글 뜻 — 동의어 묶음 퀴즈에서 오답이 비슷해지는 문제 완화 */
@@ -169,8 +198,7 @@
           if (slug && entry.slug && String(entry.slug) === slug) return;
           (entry.quizzes || []).forEach(function (qz) {
             (qz.items || []).forEach(function (it) {
-              if (!it) return;
-              expandAnswers([it.hide || ""]).forEach(function (label) {
+              koreanLabelsFromItem(qz, it).forEach(function (label) {
                 pushUniqueLabel(pool, seen, label);
               });
             });
@@ -195,17 +223,21 @@
   function buildMcOptions(words, correctIndex, sessionSeed, externalPool) {
     var w = words[correctIndex];
     if (!w) return { choices: [], correctNorm: "" };
-    var correctLabel = cleanKoLabel((w.ko && w.ko[0]) || "") || String((w.ko && w.ko[0]) || "").trim();
+    var koAnswers = expandAnswers(w.ko).map(cleanKoLabel).filter(isKoOptionLabel);
+    var correctLabel = koAnswers[0] || cleanKoLabel((w.ko && w.ko[0]) || "");
+    if (!isKoOptionLabel(correctLabel)) {
+      return { choices: [], correctNorm: "", correctLabel: correctLabel };
+    }
     var correctNorm = norm(correctLabel);
-    var forbidden = expandAnswers(w.ko).map(cleanKoLabel).filter(Boolean);
-    if (correctLabel && forbidden.indexOf(correctLabel) === -1) forbidden.unshift(correctLabel);
+    var forbidden = koAnswers.slice();
+    if (forbidden.indexOf(correctLabel) === -1) forbidden.unshift(correctLabel);
 
     var seen = Object.create(null);
     if (correctNorm) seen[correctNorm] = true;
 
     var primary = [];
     (externalPool || []).forEach(function (label) {
-      if (conflictsWithAny(label, forbidden)) return;
+      if (!isKoOptionLabel(label) || conflictsWithAny(label, forbidden)) return;
       pushUniqueLabel(primary, seen, label);
     });
 
@@ -213,7 +245,7 @@
     words.forEach(function (other, idx) {
       if (idx === correctIndex || !other) return;
       expandAnswers(other.ko).forEach(function (label) {
-        if (conflictsWithAny(label, forbidden)) return;
+        if (!isKoOptionLabel(label) || conflictsWithAny(label, forbidden)) return;
         pushUniqueLabel(local, seen, label);
       });
     });
@@ -226,7 +258,7 @@
         shuffleWith(rng, local).slice(0, need - distractors.length)
       );
     }
-    var choices = shuffleWith(rng, [correctLabel].concat(distractors).filter(Boolean));
+    var choices = shuffleWith(rng, [correctLabel].concat(distractors).filter(isKoOptionLabel));
     return { choices: choices, correctNorm: correctNorm, correctLabel: correctLabel };
   }
 
