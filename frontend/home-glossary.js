@@ -14,6 +14,9 @@
   };
 
   var LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+  var SAVE_KEY = 'home-glossary-saved-v1';
+  var CMT_BOARD = 'home-glossary';
+  var commentsAssetsPromise = null;
 
   function escapeHtml(s) {
     return String(s == null ? '' : s)
@@ -21,6 +24,10 @@
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;')
       .replace(/"/g, '&quot;');
+  }
+
+  function escapeAttr(s) {
+    return escapeHtml(s).replace(/'/g, '&#39;');
   }
 
   function letterOf(word) {
@@ -52,7 +59,6 @@
     return out.trim();
   }
 
-  /** 뜻 최대 2개, 짧은 한글만 */
   function cleanMeaning(raw) {
     var s = String(raw || '').replace(/\s+/g, ' ').trim();
     if (!s) return '';
@@ -110,13 +116,68 @@
     return hay.indexOf(q) !== -1;
   }
 
+  function loadSaved() {
+    try {
+      var raw = localStorage.getItem(SAVE_KEY);
+      var arr = raw ? JSON.parse(raw) : [];
+      return Array.isArray(arr) ? arr : [];
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function writeSaved(list) {
+    try {
+      localStorage.setItem(SAVE_KEY, JSON.stringify(list));
+    } catch (e) { /* ignore */ }
+  }
+
+  function isSaved(word) {
+    var key = String(word || '').toLowerCase();
+    return loadSaved().some(function (x) {
+      return String(x.word || '').toLowerCase() === key;
+    });
+  }
+
+  function toggleSave(word, meaning) {
+    var key = String(word || '').toLowerCase();
+    var list = loadSaved();
+    var idx = list.findIndex(function (x) {
+      return String(x.word || '').toLowerCase() === key;
+    });
+    if (idx >= 0) list.splice(idx, 1);
+    else list.push({ word: word, meaning: meaning || '', at: Date.now() });
+    writeSaved(list);
+    return idx < 0;
+  }
+
+  function downloadText(filename, text) {
+    var blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(function () { URL.revokeObjectURL(url); }, 500);
+  }
+
+  function wordKey(word) {
+    return String(word || '')
+      .toLowerCase()
+      .replace(/\s+/g, '-')
+      .replace(/[^a-z0-9\-']/g, '');
+  }
+
   function renderWordRow(w) {
     var chips = (w.sections || []).map(function (sec) {
       var href = SECTION_HREF[sec] || '#rd-glossary';
       return '<a class="rd-gloss-sec" href="' + href + '">' + escapeHtml(sec) + '</a>';
     }).join('');
+    var saved = isSaved(w.word);
     return (
-      '<li class="rd-gloss-row">' +
+      '<li class="rd-gloss-row" data-gloss-word="' + escapeAttr(w.word) + '" data-gloss-meaning="' + escapeAttr(w.meaning) + '">' +
         '<div class="rd-gloss-row-main">' +
           '<span class="rd-gloss-word">' + escapeHtml(w.word) + '</span>' +
           (w.pos ? '<span class="rd-gloss-pos">' + escapeHtml(w.pos) + '</span>' : '') +
@@ -125,6 +186,15 @@
         (chips
           ? '<div class="rd-gloss-secs"><span class="rd-gloss-secs-label">사용 섹션</span>' + chips + '</div>'
           : '') +
+        '<div class="rd-gloss-tools">' +
+          '<button type="button" class="rd-gloss-tool" data-gloss-cmt>댓글</button>' +
+          '<button type="button" class="rd-gloss-tool" data-gloss-write>글쓰기</button>' +
+          '<button type="button" class="rd-gloss-tool' + (saved ? ' is-on' : '') + '" data-gloss-save aria-pressed="' + (saved ? 'true' : 'false') + '">' +
+            (saved ? '저장됨' : '저장') +
+          '</button>' +
+          '<button type="button" class="rd-gloss-tool" data-gloss-dl>다운로드</button>' +
+        '</div>' +
+        '<div class="rd-gloss-cmt-host" data-gloss-cmt-host hidden></div>' +
       '</li>'
     );
   }
@@ -144,6 +214,102 @@
         '</section>'
       );
     }).join('');
+  }
+
+  function loadScriptOnce(src) {
+    return new Promise(function (resolve, reject) {
+      var existing = document.querySelector('script[src="' + src + '"]');
+      if (existing) {
+        if (window.BoardComments) return resolve();
+        existing.addEventListener('load', function () { resolve(); });
+        existing.addEventListener('error', reject);
+        return;
+      }
+      var s = document.createElement('script');
+      s.src = src;
+      s.async = true;
+      s.onload = function () { resolve(); };
+      s.onerror = reject;
+      document.head.appendChild(s);
+    });
+  }
+
+  function loadCssOnce(href) {
+    if (document.querySelector('link[href="' + href + '"]')) return;
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = href;
+    document.head.appendChild(link);
+  }
+
+  function ensureCommentAssets() {
+    if (window.BoardComments) return Promise.resolve();
+    if (commentsAssetsPromise) return commentsAssetsPromise;
+    var ver = '20261109gloss8';
+    loadCssOnce('board-comments.css?v=' + ver);
+    commentsAssetsPromise = loadScriptOnce('board-comments.js?v=' + ver).catch(function (e) {
+      commentsAssetsPromise = null;
+      throw e;
+    });
+    return commentsAssetsPromise;
+  }
+
+  async function ensureRowComments(row) {
+    var host = row.querySelector('[data-gloss-cmt-host]');
+    if (!host) return null;
+    if (host.getAttribute('data-gloss-cmt-ready') === '1') {
+      host.hidden = false;
+      return host;
+    }
+    await ensureCommentAssets();
+    if (!window.BoardComments || typeof window.BoardComments.mount !== 'function') return null;
+    var word = row.getAttribute('data-gloss-word') || '';
+    await window.BoardComments.mount({
+      board: CMT_BOARD,
+      contentKey: wordKey(word) || word.toLowerCase(),
+      title: word,
+      word: word,
+      root: host
+    });
+    host.setAttribute('data-gloss-cmt-ready', '1');
+    host.hidden = false;
+    return host;
+  }
+
+  function bindRowActions(root) {
+    root.addEventListener('click', function (e) {
+      var row = e.target.closest('.rd-gloss-row');
+      if (!row || !root.contains(row)) return;
+      var word = row.getAttribute('data-gloss-word') || '';
+      var meaning = row.getAttribute('data-gloss-meaning') || '';
+
+      var saveBtn = e.target.closest('[data-gloss-save]');
+      if (saveBtn) {
+        var on = toggleSave(word, meaning);
+        saveBtn.classList.toggle('is-on', on);
+        saveBtn.setAttribute('aria-pressed', on ? 'true' : 'false');
+        saveBtn.textContent = on ? '저장됨' : '저장';
+        return;
+      }
+
+      var dlBtn = e.target.closest('[data-gloss-dl]');
+      if (dlBtn) {
+        downloadText(word + '.txt', word + '\t' + meaning + '\n');
+        return;
+      }
+
+      var cmtBtn = e.target.closest('[data-gloss-cmt]');
+      var writeBtn = e.target.closest('[data-gloss-write]');
+      if (cmtBtn || writeBtn) {
+        ensureRowComments(row).then(function (host) {
+          if (!host) return;
+          var real = host.querySelector(writeBtn ? '[data-os-cmt-write]' : '[data-os-cmt-toggle]');
+          if (real) real.click();
+        }).catch(function (err) {
+          console.warn('[home-glossary] comments failed', err);
+        });
+      }
+    });
   }
 
   function mount() {
@@ -182,6 +348,7 @@
     }
 
     paint('');
+    bindRowActions(root);
 
     if (search) {
       search.addEventListener('input', function () {
