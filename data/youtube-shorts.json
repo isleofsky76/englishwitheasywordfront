@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-08T17:49:11.403Z",
+  "updatedAt": "2026-11-09T22:10:10.070Z",
   "channelId": "UC4LbF7X56QIHL3Oejt8kuyw",
   "handle": "@istudyeng",
   "source": "https://www.youtube.com/feeds/videos.xml?channel_id=UC4LbF7X56QIHL3Oejt8kuyw",
@@ -8,6 +8,71 @@
   "todayOnly": false,
   "categorizedOnly": true,
   "items": [
+    {
+      "videoId": "t3mmI8n4eiY",
+      "category": "미국",
+      "label": "미국",
+      "href": "us-news-list.html",
+      "title": "선거 참패로 밴스가 2028년 대선 출마 여부를 결정하는 데 어려움이 생겼다",
+      "rawTitle": "미국 | 선거 참패로 밴스가 2028년 대선 출마 여부를 결정하는 데 어려움이 생겼다",
+      "publishedAt": "2026-11-09T03:00:43+00:00",
+      "publishedKst": "2026-11-09",
+      "thumbnail": "https://i.ytimg.com/vi/t3mmI8n4eiY/hqdefault.jpg",
+      "url": "https://www.youtube.com/shorts/t3mmI8n4eiY",
+      "watchUrl": "https://www.youtube.com/watch?v=t3mmI8n4eiY"
+    },
+    {
+      "videoId": "RKYKiiolPkQ",
+      "category": "산업",
+      "label": "산업",
+      "href": "industry-news-list.html",
+      "title": "데이터센터 반발이 빅테크 기업에 유리하게 작용할 수 있는 이유는 무엇일까요?",
+      "rawTitle": "산업 | 데이터센터 반발이 빅테크 기업에 유리하게 작용할 수 있는 이유는 무엇일까요?",
+      "publishedAt": "2026-11-09T03:00:06+00:00",
+      "publishedKst": "2026-11-09",
+      "thumbnail": "https://i.ytimg.com/vi/RKYKiiolPkQ/hqdefault.jpg",
+      "url": "https://www.youtube.com/shorts/RKYKiiolPkQ",
+      "watchUrl": "https://www.youtube.com/watch?v=RKYKiiolPkQ"
+    },
+    {
+      "videoId": "GJIqt9gKB3o",
+      "category": "미국",
+      "label": "미국",
+      "href": "us-news-list.html",
+      "title": "엔비디아 이사회, CEO의 불륜 후 스파이 행위 의혹 조사 착수.",
+      "rawTitle": "미국 | 엔비디아 이사회, CEO의 불륜 후 스파이 행위 의혹 조사 착수.",
+      "publishedAt": "2026-11-09T03:00:04+00:00",
+      "publishedKst": "2026-11-09",
+      "thumbnail": "https://i.ytimg.com/vi/GJIqt9gKB3o/hqdefault.jpg",
+      "url": "https://www.youtube.com/shorts/GJIqt9gKB3o",
+      "watchUrl": "https://www.youtube.com/watch?v=GJIqt9gKB3o"
+    },
+    {
+      "videoId": "T2tYE68srIw",
+      "category": "연관단어",
+      "label": "연관단어",
+      "href": "english-synonym-list.html",
+      "title": "정치적 위기와 물락",
+      "rawTitle": "연관단어 | 정치적 위기와 물락",
+      "publishedAt": "2026-11-09T01:00:21+00:00",
+      "publishedKst": "2026-11-09",
+      "thumbnail": "https://i.ytimg.com/vi/T2tYE68srIw/hqdefault.jpg",
+      "url": "https://www.youtube.com/shorts/T2tYE68srIw",
+      "watchUrl": "https://www.youtube.com/watch?v=T2tYE68srIw"
+    },
+    {
+      "videoId": "pWrwJQwFClI",
+      "category": "미국",
+      "label": "미국",
+      "href": "us-news-list.html",
+      "title": "파멸을 불러온 장본인은 트럼프 #핵심어휘",
+      "rawTitle": "미국 | 파멸을 불러온 장본인은 트럼프 #핵심어휘",
+      "publishedAt": "2026-11-09T01:00:19+00:00",
+      "publishedKst": "2026-11-09",
+      "thumbnail": "https://i.ytimg.com/vi/pWrwJQwFClI/hqdefault.jpg",
+      "url": "https://www.youtube.com/shorts/pWrwJQwFClI",
+      "watchUrl": "https://www.youtube.com/watch?v=pWrwJQwFClI"
+    },
     {
       "videoId": "6kKkLFVMMHc",
       "category": "국제",
@@ -20,71 +85,6 @@
       "thumbnail": "https://i.ytimg.com/vi/6kKkLFVMMHc/hqdefault.jpg",
       "url": "https://www.youtube.com/shorts/6kKkLFVMMHc",
       "watchUrl": "https://www.youtube.com/watch?v=6kKkLFVMMHc"
-    },
-    {
-      "videoId": "oTjXgmq1JfA",
-      "category": "국제",
-      "label": "국제",
-      "href": "news-voca-list.html",
-      "title": "영국의 집주인들도 존중받아야 마땅하다",
-      "rawTitle": "국제 | 영국의 집주인들도 존중받아야 마땅하다",
-      "publishedAt": "2026-11-08T12:00:26+00:00",
-      "publishedKst": "2026-11-08",
-      "thumbnail": "https://i.ytimg.com/vi/oTjXgmq1JfA/hqdefault.jpg",
-      "url": "https://www.youtube.com/shorts/oTjXgmq1JfA",
-      "watchUrl": "https://www.youtube.com/watch?v=oTjXgmq1JfA"
-    },
-    {
-      "videoId": "kg3WXhSvh38",
-      "category": "연관단어",
-      "label": "연관단어",
-      "href": "english-synonym-list.html",
-      "title": "신생아의 행동, 반응",
-      "rawTitle": "연관단어 | 신생아의 행동, 반응",
-      "publishedAt": "2026-11-08T12:00:24+00:00",
-      "publishedKst": "2026-11-08",
-      "thumbnail": "https://i.ytimg.com/vi/kg3WXhSvh38/hqdefault.jpg",
-      "url": "https://www.youtube.com/shorts/kg3WXhSvh38",
-      "watchUrl": "https://www.youtube.com/watch?v=kg3WXhSvh38"
-    },
-    {
-      "videoId": "Ihvybqr7rFY",
-      "category": "컬쳐",
-      "label": "컬쳐",
-      "href": "culture-voca-list.html",
-      "title": "포켓몬 카드 수집이 어떻게 되팔이와의 경쟁으로 변모했는지",
-      "rawTitle": "컬쳐 | 포켓몬 카드 수집이 어떻게 되팔이와의 경쟁으로 변모했는지",
-      "publishedAt": "2026-11-08T08:00:30+00:00",
-      "publishedKst": "2026-11-08",
-      "thumbnail": "https://i.ytimg.com/vi/Ihvybqr7rFY/hqdefault.jpg",
-      "url": "https://www.youtube.com/shorts/Ihvybqr7rFY",
-      "watchUrl": "https://www.youtube.com/watch?v=Ihvybqr7rFY"
-    },
-    {
-      "videoId": "nWyHSXP7uoc",
-      "category": "미국",
-      "label": "미국",
-      "href": "us-news-list.html",
-      "title": "텍사스에서의 정치 혁명",
-      "rawTitle": "미국 | 텍사스에서의 정치 혁명",
-      "publishedAt": "2026-11-08T06:41:34+00:00",
-      "publishedKst": "2026-11-08",
-      "thumbnail": "https://i.ytimg.com/vi/nWyHSXP7uoc/hqdefault.jpg",
-      "url": "https://www.youtube.com/shorts/nWyHSXP7uoc",
-      "watchUrl": "https://www.youtube.com/watch?v=nWyHSXP7uoc"
-    },
-    {
-      "videoId": "qo98EriHOHk",
-      "category": "연관단어",
-      "label": "연관단어",
-      "href": "english-synonym-list.html",
-      "title": "지역적인, 좁은, 편협한.",
-      "rawTitle": "연관단어 | 지역적인, 좁은, 편협한.",
-      "publishedAt": "2026-11-08T03:07:16+00:00",
-      "publishedKst": "2026-11-08",
-      "thumbnail": "https://i.ytimg.com/vi/qo98EriHOHk/hqdefault.jpg",
-      "url": "https://www.youtube.com/shorts/qo98EriHOHk",
-      "watchUrl": "https://www.youtube.com/watch?v=qo98EriHOHk"
     }
   ]
 }
