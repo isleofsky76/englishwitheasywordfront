@@ -281,12 +281,11 @@
     var hint = $("vq-hint");
     if (mode === "mc") {
       if (sub) {
-        sub.innerHTML =
-          "영어 단어를 보고 알맞은 뜻을 고르세요. 오답은 다른 시사 어휘 퀴즈 뜻에서 가져옵니다.";
+        sub.innerHTML = "영어 단어를 보고 알맞은 뜻을 고르세요.";
       }
       if (hint) {
-        hint.textContent =
-          "객관식 오답은 다른 vocabulary-quiz 항목의 뜻으로 채웁니다. 고르면 바로 채점됩니다.";
+        hint.textContent = "";
+        hint.hidden = true;
       }
     } else {
       if (sub) {
@@ -294,6 +293,7 @@
           "뜻을 입력한 뒤 키보드의 이동/완료를 누르거나, 아래 <b>정답 보기</b>를 탭하세요.";
       }
       if (hint) {
+        hint.hidden = false;
         hint.textContent =
           "유사·대체 표현도 정답으로 인정합니다. 모바일: 입력 후 다음 칸으로 넘어가면 자동 채점. 뜻이 여러 개면 하나만 맞아도 O.";
       }
