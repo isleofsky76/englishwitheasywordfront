@@ -14,17 +14,11 @@ const oneSentenceCommentSchema = new mongoose.Schema(
   { wordKey: String, word: String, body: String, date: Date },
   { collection: 'onesentencecomments' }
 );
-const boardCommentSchema = new mongoose.Schema(
-  { board: String, body: String, date: Date },
-  { collection: 'boardcomments' }
-);
 const OneSentenceComment =
   mongoose.models.OneSentenceComment ||
   mongoose.model('OneSentenceComment', oneSentenceCommentSchema);
-const BoardComment =
-  mongoose.models.BoardComment || mongoose.model('BoardComment', boardCommentSchema);
 
 const api = registerRankingApi({ get: () => {}, post: () => {} }, {});
-const n = await api.backfillFromComments({ OneSentenceComment, BoardComment });
-console.log({ backfilled: n });
+const n = await api.rebuildCommentEventsFromViewedWords({ OneSentenceComment });
+console.log({ rebuiltFromViewedWords: n });
 await mongoose.disconnect();

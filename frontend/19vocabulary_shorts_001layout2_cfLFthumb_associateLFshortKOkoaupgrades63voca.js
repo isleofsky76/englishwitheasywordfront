@@ -8,31 +8,31 @@
 
 /** 영어 TTS 음성 목록 */
 const EN_TTS_VOICE_IDS = {
-  1: "en-US-Chirp-HD-D",                 // 남 · 미국
-  2: "en-US-Chirp3-HD-Algenib",          // 남 · 미국 허스키
-  3: "en-US-Chirp3-HD-Enceladus",        // 남 · 미국 허스키
-  4: "en-US-Chirp-HD-F",                 // 여 · 미국
-  5: "en-US-Chirp3-HD-Despina",          // 여 · 미국
-  6: "en-US-Chirp3-HD-Gacrux",           // 여 · 미국 허스키
+  // 1: "en-US-Chirp-HD-D",                 // 남 · 미국
+  // 2: "en-US-Chirp3-HD-Algenib",          // 남 · 미국 허스키
+  // 3: "en-US-Chirp3-HD-Enceladus",        // 남 · 미국 허스키
+  // 4: "en-US-Chirp-HD-F",                 // 여 · 미국
+  // 5: "en-US-Chirp3-HD-Despina",          // 여 · 미국
+  // 6: "en-US-Chirp3-HD-Gacrux",           // 여 · 미국 허스키
   7: "en-GB-Chirp3-HD-Zubenelgenubi",    // 남 · 영국
-  8: "en-GB-Chirp-HD-D",                 // 남 · 영국
-  9: "en-GB-Neural2-B",                  // 남 · 영국
-  10: "en-GB-Wavenet-N",                 // 여 · 영국
+  // 8: "en-GB-Chirp-HD-D",                 // 남 · 영국
+  // 9: "en-GB-Neural2-B",                  // 남 · 영국
+  // 10: "en-GB-Wavenet-N",                 // 여 · 영국
 };
 
 /** 한글 TTS 음성 목록 */
 const KO_TTS_VOICE_IDS = {
   1: "ko-KR-Chirp3-HD-Zephyr",           // 여 · 부드러운
-  2: "ko-KR-Neural2-C",                  // 남 · Neural2
-  3: "ko-KR-Chirp3-HD-Achernar",         // 여 · 차분
-  4: "ko-KR-Chirp3-HD-Achird",           // 여 · 밝은
-  5: "ko-KR-Chirp3-HD-Vindemiatrix",     // 여 · 성숙
-  6: "ko-KR-Chirp3-HD-Zubenelgenubi",    // 남 · Chirp3
-  7: "ko-KR-Chirp3-HD-Charon",           // 남 · Chirp3
-  8: "ko-KR-Chirp3-HD-Gacrux",           // 여 · 차분
-  9: "ko-KR-Chirp3-HD-Gacrux",           // 여 · 차분
-  10: "ko-KR-Chirp3-HD-Gacrux",           // 여 · 차분
-  11: "ko-KR",                            // 기본
+  // 2: "ko-KR-Neural2-C",                  // 남 · Neural2
+  // 3: "ko-KR-Chirp3-HD-Achernar",         // 여 · 차분
+  // 4: "ko-KR-Chirp3-HD-Achird",           // 여 · 밝은
+  // 5: "ko-KR-Chirp3-HD-Vindemiatrix",     // 여 · 성숙
+  // 6: "ko-KR-Chirp3-HD-Zubenelgenubi",    // 남 · Chirp3
+  // 7: "ko-KR-Chirp3-HD-Charon",           // 남 · Chirp3
+  // 8: "ko-KR-Chirp3-HD-Gacrux",           // 여 · 차분
+  // 9: "ko-KR-Chirp3-HD-Gacrux",           // 여 · 차분
+  // 10: "ko-KR-Chirp3-HD-Gacrux",           // 여 · 차분
+  // 11: "ko-KR",                            // 기본
 };
 
 /**
@@ -54,13 +54,29 @@ const DISPLAY_CONFIG = {
 
 /**
  * 학습 패스 on/off
- * pass1 — true: 한글 숨김 → 영어 읽기 → 한글 노출·읽기
- * pass2 — true: 영어 숨김 → 한글 읽기 → 영어(+발음·예문) 노출·읽기
+ * pass1 — true: 한글 숨김 → 영어 읽기 → 한글 노출(·읽기)
+ * pass2 — true: 영어 숨김 → 한글(·읽기) → 영어(+발음·예문) 노출·읽기
+ * speakKo — false면 한글은 화면에만 보이고 TTS로 읽지 않음
+ * runSummary — false면 summary·quiz 없이 단어 패스 후 멈춤
  * 둘 다 true면 1 → 2 순서로 진행
  */
 const PASS_CONFIG = {
   pass1: true,
   pass2: false,
+  speakKo: false,
+  runSummary: false,
+};
+
+/**
+ * 타이밍 (초)
+ * wordGapSec     — 단어 → 다음 단어로 넘어가기 전 대기
+ * koHoldSec      — 한글(KO) 노출 후 유지 시간 (speakKo여도 TTS 끝난 뒤 추가 대기)
+ * enRepeatGapSec — enRepeat 반복 낭독 사이 간격 (기본 1)
+ */
+const TIMING_CONFIG = {
+  wordGapSec: 2,
+  koHoldSec: 2,
+  enRepeatGapSec: 1,
 };
 
 /* =====================================================================
@@ -75,197 +91,119 @@ const WORDS = {
   badge: "시사 영단어",
 
   title: [
-    { hl: "교도소에 의존하는 영국" },
-    { hl: "무너지는 보호관찰 서비스" },
+    { hl: "허리 통증, 뜻밖의 원인들" },
+    { hl: "#연관단어" },
   ],
 
-  source: "출처 : 가디언",
+  source: "출처 : The Guardian",
   sourceMark: "추출 어휘",
   outro: "오늘의 단어 {n}개 끝! ☺",
 
-  /* colourchange cardData.words 와 동일 구조 */
+  /* colourchange cardData.words 와 동일 구조 — 허리통증·생활습관 연관어 */
   words: [
     {
-      en: "pretence",
-      ko: "…인 체함, 주장, 과시",
-      pos: "명",
-      reading: "프리텐스",
-      ipa: "/prɪˈtens/",
-      defs: ["사실이 아닌 것을 사실인 것처럼 꾸미는 태도", "실상과 다른 겉치레나 가장"],
-      example: "..it would take unprecedented political bravery for the lord chancellor to dare end the pretence that prison works.(...법무장관이 교도소가 효과가 있다는 허위 가장을 감히 끝내려면 전례 없는 정치적 용기가 필요할 것이다.)",
-      cf: "",
-      enRepeat: 2,
-      highlight: "pretence",
-      translation: "다가오는 보호관찰관 대회 연설에서 법무장관이<br>교도소가 효과 있다는 가장을 감히 끝내려면<br>전례 없는 정치적 용기가 필요할 것이다.",
-      image: "resources/pretence.png",
-      icon: "🎭",
-      spark: "yellow",
-      note: {
-        phrase: "the pretence<br>that prison works",
-        text: "교도소가 효과 있는 것처럼<br>꾸미는 태도"
-      }
+      "en": "disc bulge",
+      "ko": "디스크 돌출",
+      "pos": "명사구",
+      "reading": "디스크 벌지",
+      "ipa": "/dɪsk bʌldʒ/",
+      "defs": "",
+      "example": "Disc bulges and joint wear can all show up in people with no pain at all.",
+      "cf": "(1) joint wear(관절 마모) (2) MRI",
+      "enRepeat": 1,
+      "highlight": "Disc bulges",
+      "translation": "디스크 돌출과 관절 마모는<br>통증이 전혀 없는 사람에게서도<br>나타날 수 있다.",
+      "image": "",
+      "icon": "",
+      "spark": "yellow",
+      "note": ""
     },
     {
-      en: "quench",
-      ko: "갈증·욕구를 해소하다",
-      pos: "동",
-      reading: "퀜치",
-      ipa: "/kwentʃ/",
-      defs: ["갈증을 해소하다", "강한 욕구나 열망을 충족시키다"],
-      example: "The current system is unable to quench the public thirst for locking people up.(범죄자를 가두고 싶어 하는 대중의 욕구를 해소하지 못한다는 의미)",
-      cf: "",
-      enRepeat: 2,
-      highlight: "quench",
-      translation: "현재 시스템은 사람들을 가두려는 대중의 갈증을 해소하지 못하며,<br>석방된 이들에 대한 적절한 돌봄도 분명 보장하지 못한다.",
-      image: "resources/quench.png",
-      icon: "💧",
-      spark: "yellow",
-      note: {
-        phrase: "quench<br>the public thirst",
-        text: "대중의 갈증이나 욕구를<br>해소하다"
-      }
+      "en": "twinge",
+      "ko": "찌릿한 통증, 순간적 통증",
+      "pos": "명",
+      "reading": "트윈지",
+      "ipa": "/twɪndʒ/",
+      "defs": "",
+      "example": "A twinge isn’t a sign of damage.",
+      "cf": "(1) damage(손상)",
+      "enRepeat": 1,
+      "highlight": "twinge",
+      "translation": "순간적으로 찌릿한 통증이<br>반드시 신체 손상을 의미하지는 않는다.",
+      "image": "",
+      "icon": "",
+      "spark": "yellow",
+      "note": ""
     },
     {
-      en: "probation",
-      ko: "보호관찰",
-      pos: "명",
-      reading: "프러베이션",
-      ipa: "/proʊˈbeɪʃən/",
-      defs: ["범죄자가 사회에서 생활하며 감독과 지도를 받는 제도", "보호관찰 기간이나 상태"],
-      example: "",
-      cf: "",
-      enRepeat: 2,
-      highlight: "probation",
-      translation: "영국은 교도소에 중독돼 있다.<br>무너져가는 보호관찰 서비스는 교도소가 효과 없음을 보여준다.",
-      image: "resources/probation.png",
-      icon: "⚖️",
-      spark: "yellow",
-      note: {
-        phrase: "probation<br>service",
-        text: "보호관찰 대상자의 감독과<br>사회 복귀를 지원하는 기관"
-      }
+      "en": "sedentary",
+      "ko": "오래 앉아 있는, 좌식의",
+      "pos": "형",
+      "reading": "세덴터리",
+      "ipa": "/ˈsednteri/",
+      "defs": "",
+      "example": "Both extremes – too active or too sedentary – can cause back pain.",
+      "cf": "(1) active(활동적인)",
+      "enRepeat": 1,
+      "highlight": "sedentary",
+      "translation": "너무 활동적이거나<br>너무 앉아 있기만 해도<br>허리 통증이 날 수 있다.",
+      "image": "",
+      "icon": "",
+      "spark": "yellow",
+      "note": ""
+    },
+    
+   
+    {
+      "en": "correlate",
+      "ko": "상관관계를 갖다",
+      "pos": "동",
+      "reading": "코릴레이트",
+      "ipa": "/ˈkɔːrəleɪt/",
+      "defs": "",
+      "example": "An MRI can seem like a route to getting answers, but in most cases findings don’t correlate with the degree of pain felt, Bush says.",
+      "cf": "(1) MRI (2) disc bulge(디스크 돌출)",
+      "enRepeat": 1,
+      "highlight": "correlate",
+      "translation": "대부분의 경우 검사 소견은<br>통증 정도와 상관이 없다",
+      "image": "",
+      "icon": "",
+      "spark": "yellow",
+      "note": ""
     },
     {
-      en: "besieged",
-      ko: "포위된",
-      pos: "형(과거분사)",
-      reading: "비시지드",
-      ipa: "/bɪˈsiːdʒd/",
-      defs: ["요구나 문제에 끊임없이 시달리는", "적군에 둘러싸여 포위된"],
-      example: "A chancellor approaching a budget is besieged by need.(예산안 편성을 앞둔 재무장관은 각종 요구들로 둘러싸여 (시달리)고 있다)",
-      cf: "",
-      enRepeat: 2,
-      highlight: "besieged",
-      translation: "예산안 편성을 앞둔 재무장관은<br>각종 지원 요구에 시달린다.",
-      image: "resources/besieged.png",
-      icon: "📋",
-      spark: "red",
-      note: {
-        phrase: "besieged<br>by need",
-        text: "쏟아지는 지원 요구에<br>시달리는"
-      }
+      "en": "undulating",
+      "ko": "올라갔다 내려갔다 하는",
+      "pos": "형",
+      "reading": "언듈레이팅",
+      "ipa": "/ˈʌndʒəleɪtɪŋ/",
+      "defs": "",
+      "example": "Back pain is a part of the undulating highway of being a human being",
+      "cf": "",
+      "enRepeat": 1,
+      "highlight": "undulating",
+      "translation": "허리 통증은 사람으로서<br>기복 있는 여정의 일부다",
+      "image": "",
+      "icon": "",
+      "spark": "yellow",
+      "note": ""
     },
     {
-      en: "thrust upon",
-      ko: "억지로 떠맡기다",
-      pos: "동사구",
-      reading: "쓰러스트 어폰",
-      ipa: "/θrʌst əˈpɑːn/",
-      defs: ["원하지 않는 책임이나 일을 강제로 맡기다", "준비되지 않은 상대에게 부담을 떠넘기다"],
-      example: "Their caseloads(담당건수) overflowed long ago, but now thousands of prisoners released early have been thrust upon them.(보호관찰관들에게 조기 석방된 수감자들까지 떠넘겨짐)",
-      cf: "",
-      enRepeat: 2,
-      highlight: "thrust upon",
-      translation: "담당 사건 수는 오래전에 한계를 넘었지만,<br>이제 조기 석방된 수천 명의 수감자들까지 떠맡게 됐다.<br>이번 달에만 2,000명이다.",
-      image: "resources/thrust-upon.png",
-      icon: "📚",
-      spark: "red",
-      note: {
-        phrase: "have been thrust<br>upon them",
-        text: "그들에게 강제로<br>떠맡겨졌다"
-      }
-    },
-  
-    {
-      en: "prune",
-      ko: "가지치기하다, 줄이다",
-      pos: "동",
-      reading: "프룬",
-      ipa: "/pruːn/",
-      defs: ["나뭇가지 등을 잘라 다듬다", "불필요한 부분을 덜어 규모를 줄이다"],
-      example: "What probation officers need immediately is reduced workloads, pruned to the riskiest cases, leaving less serious cases unallocated.(가장 위험한 사건들로 가지치기 정리되어 줄어든 업무량이 필요)",
-      cf: "",
-      enRepeat: 2,
-      highlight: "pruned",
-      translation: "보호관찰관들에게 당장 필요한 것은 덜 심각한 사건은 배정하지 않고,<br>가장 위험한 사건만 맡도록 업무량을 줄이는 것이다.",
-      image: "resources/prune.png",
-      icon: "✂️",
-      spark: "yellow",
-      note: {
-        phrase: "pruned to<br>the riskiest cases",
-        text: "가장 위험한 사건만 남도록<br>줄인"
-      }
-    },
-    {
-      en: "belie",
-      ko: "...과 모순되다",
-      pos: "동",
-      reading: "빌라이",
-      ipa: "/bɪˈlaɪ/",
-      defs: ["실제 사실과 어긋나거나 모순되다", "실상을 가려 잘못된 인상을 주다"],
-      example: "A news and drama fixation on horrific crime stirs primal fears that belie these facts.(끔찍한 범죄에 집착하는 뉴스와 드라마는 이러한 진실과 모순되는(사실이 아님을 드러내는) 원초적인 공포를 불러일으킨다.)",
-      cf: "",
-      enRepeat: 2,
-      highlight: "belie",
-      translation: "끔찍한 범죄에 집착하는 뉴스와 드라마는<br>이러한 사실과 어긋나는 원초적 공포를 자극한다.",
-      image: "resources/belie.png",
-      icon: "🎭",
-      spark: "yellow",
-      note: {
-        phrase: "fears that<br>belie these facts",
-        text: "이러한 사실과<br>어긋나는 공포"
-      }
-    },
-  
-    {
-      en: "wretched",
-      ko: "비참한, 몸이 안 좋은",
-      pos: "형",
-      reading: "레치드",
-      ipa: "/ˈretʃɪd/",
-      defs: ["매우 불행하거나 비참한", "몹시 나쁘거나 끔찍한"],
-      example: "Every day, another wretched story.",
-      cf: "",
-      enRepeat: 2,
-      highlight: "wretched",
-      translation: "매일같이 또 하나의<br>끔찍한 이야기가 이어진다.",
-      image: "resources/wretched.png",
-      icon: "😞",
-      spark: "red",
-      note: {
-        phrase: "another<br>wretched story",
-        text: "또 하나의<br>비참하고 끔찍한 이야기"
-      }
-    },
-    {
-      en: "hard-pressed",
-      ko: "몹시 쪼들리는",
-      pos: "형",
-      reading: "하드 프레스트",
-      ipa: "/ˌhɑːrd ˈprest/",
-      defs: ["돈·인력·시간 등이 부족해 어려움을 겪는", "과중한 요구나 업무로 압박받는"],
-      example: "When I last visited a hard-pressed prison, I asked the governor what she most needed...",
-      cf: "",
-      enRepeat: 2,
-      highlight: "hard-pressed",
-      translation: "최근 어려움에 시달리는 교도소를 방문해 소장에게<br>가장 필요한 것을 물었다. 그녀가 교도소가 아니라<br>‘문제가 생기기 전, 출발점인 영유아기’에 투자하겠다고 해 놀랐다.",
-      image: "resources/hard-pressed.png",
-      icon: "⏳",
-      spark: "red",
-      note: {
-        phrase: "a hard-pressed<br>prison",
-        text: "자원 부족과 업무 압박에<br>시달리는 교도소"
-      }
+      "en": "turn up",
+      "ko": "(볼륨·강도 등을) 높이다",
+      "pos": "구동사",
+      "reading": "턴 업",
+      "ipa": "/tɜːrn ʌp/",
+      "defs": "",
+      "example": "Stress essentially turns up the volume of pain.",
+      "cf": "(1) turn down(낮추다)",
+      "enRepeat": 1,
+      "highlight": "turns up",
+      "translation": "스트레스는 본질적으로<br>통증의 볼륨을 높인다.",
+      "image": "",
+      "icon": "",
+      "spark": "yellow",
+      "note": ""
     },
     
   ],
@@ -274,22 +212,22 @@ const WORDS = {
    * Review 퀴즈 — 최신 words 기준 2문제
    * { en, ko, answer, answerKo, image }
    */
-  quiz: [
-    {
-      en: "The system cannot que___ the public thirst<br> for locking people up.",
-      ko: "현재 시스템은 사람들을 가두려는<br>  대중의 갈증을 (해소하지) 못한다.",
-      answer: "quench",
-      answerKo: "갈증·욕구를 해소하다",
-      image: "quench.png",
-    },
-    {
-      en: "It would take bravery to end the pre_____<br> that prison works.",
-      ko: "교도소가 효과 있다는 (가장)을<br>  끝내려면 용기가 필요하다.",
-      answer: "pretence",
-      answerKo: "…인 체함, 주장, 과시",
-      image: "pretence.png",
-    },
-  ],
+  // quiz: [
+  //   {
+  //     en: "The system cannot que___ the public thirst<br> for locking people up.",
+  //     ko: "현재 시스템은 사람들을 가두려는<br>  대중의 갈증을 (해소하지) 못한다.",
+  //     answer: "quench",
+  //     answerKo: "갈증·욕구를 해소하다",
+  //     image: "quench.png",
+  //   },
+  //   {
+  //     en: "It would take bravery to end the pre_____<br> that prison works.",
+  //     ko: "교도소가 효과 있다는 (가장)을<br>  끝내려면 용기가 필요하다.",
+  //     answer: "pretence",
+  //     answerKo: "…인 체함, 주장, 과시",
+  //     image: "pretence.png",
+  //   },
+  // ],
 };
 
 const WORD_COLORS = ["#e06a4f", "#3e6fd8", "#3a9a6b", "#c23b3b", "#8b5cf6", "#0d9488"];
@@ -336,12 +274,140 @@ function wrapExampleKoParens(html) {
   );
 }
 
+function normalizeExampleToken(word) {
+  return String(word || "")
+    .replace(/^[^A-Za-z0-9$%']+|[^A-Za-z0-9$%']+$/g, "")
+    .toLowerCase();
+}
+
+function isThousandsComma(raw, index) {
+  return (
+    raw[index] === "," &&
+    /\d/.test(raw[index - 1] || "") &&
+    /\d/.test(raw[index + 1] || "")
+  );
+}
+
+function splitByBreathMarks(sentence) {
+  const raw = String(sentence || "")
+    .replace(/<br\s*\/?>/gi, "|")
+    .replace(/\s*\|\s*/g, " | ")
+    .replace(/\s+/g, " ")
+    .trim();
+  if (!raw) return [];
+  const parts = [];
+  let buf = "";
+  for (let i = 0; i < raw.length; i += 1) {
+    const ch = raw[i];
+    if (ch === "|") {
+      const t = buf.trim();
+      if (t) parts.push(t);
+      buf = "";
+      continue;
+    }
+    buf += ch;
+    if ((ch === "," || ch === ";" || ch === ":") && !isThousandsComma(raw, i)) {
+      const t = buf.trim();
+      if (t) parts.push(t);
+      buf = "";
+      continue;
+    }
+    if (ch === "—" || ch === "–") {
+      const t = buf.trim();
+      if (t) parts.push(t);
+      buf = "";
+    }
+  }
+  const tail = buf.trim();
+  if (tail) parts.push(tail);
+  return parts.length ? parts : [raw];
+}
+
+const READ_PHRASE_BOUNDARY_RE =
+  /^(?:and|but|or|nor|yet|so|that|which|who|whom|whose|when|where|while|because|although|though|if|unless|than|to|of|for|with|from|into|onto|upon|by|at|in|on|as|about|over|under|after|before|without|within|through|during|against|between|among)$/i;
+const READ_PHRASE_MAX_WORDS = 1;
+
+function mergeTinyReadPhrases(chunks) {
+  const out = [];
+  for (const chunk of chunks) {
+    const n = (String(chunk).match(/\S+/g) || []).length;
+    if (!out.length) {
+      out.push(chunk);
+      continue;
+    }
+    const prevN = (out[out.length - 1].match(/\S+/g) || []).length;
+    if (n === 1 && prevN + n <= READ_PHRASE_MAX_WORDS) {
+      out[out.length - 1] = `${out[out.length - 1]} ${chunk}`;
+    } else {
+      out.push(chunk);
+    }
+  }
+  return out;
+}
+
+function splitClauseIntoReadPhrases(part) {
+  const words = String(part || "").match(/\S+/g) || [];
+  if (!words.length) return [];
+  if (words.length <= 2) return [words.join(" ")];
+  const chunks = [];
+  let cur = [];
+  for (let i = 0; i < words.length; i += 1) {
+    const w = words[i];
+    const core = normalizeExampleToken(w);
+    const startNew =
+      cur.length > 0 &&
+      (READ_PHRASE_BOUNDARY_RE.test(core) || cur.length >= READ_PHRASE_MAX_WORDS);
+    if (startNew) {
+      chunks.push(cur.join(" "));
+      cur = [w];
+    } else {
+      cur.push(w);
+    }
+  }
+  if (cur.length) chunks.push(cur.join(" "));
+  return mergeTinyReadPhrases(chunks);
+}
+
+function splitExampleSpeechSegments(sentence) {
+  const breathParts = splitByBreathMarks(sentence);
+  if (!breathParts.length) return [];
+  const out = [];
+  for (const part of breathParts) out.push(...splitClauseIntoReadPhrases(part));
+  return out.length ? out : breathParts;
+}
+
+/** 읽는 구간 span + 핵심 단어 mark */
+function renderExampleHtml(sentence, highlight) {
+  const chunks = splitExampleSpeechSegments(sentence);
+  if (!chunks.length) return "";
+  return chunks
+    .map((chunk) => {
+      const inner = highlightSentence(chunk, highlight);
+      return `<span class="ex-phrase">${wrapExampleKoParens(inner)}</span>`;
+    })
+    .join(" ");
+}
+
+/** en 글자 수 + ko(공백 제외) — 이 값 이상이면 화살표·뜻을 영어 아래 줄에
+ * word.stack === true 강제 아래 / false 강제 한 줄
+ */
+const STACK_EN_KO_CHAR_LIMIT = 18;
+
+function needsStackedMeaning(en, ko, word) {
+  if (word && word.stack === true) return true;
+  if (word && word.stack === false) return false;
+  const enLen = String(en || "").trim().length;
+  const koLen = String(ko || "").replace(/\s+/g, "").length;
+  return enLen + koLen >= STACK_EN_KO_CHAR_LIMIT;
+}
+
 function getWordList() {
   return Array.isArray(WORDS.words) ? WORDS.words : [];
 }
 
 function renderHoles() {
   const holes = document.getElementById("holes");
+  if (!holes) return;
   for (let i = 0; i < 14; i++) holes.appendChild(document.createElement("span"));
 }
 
@@ -413,8 +479,18 @@ function renderWords() {
     const hlClass = w.hl || (i % 2 === 0 ? "hl" : "hlpink");
     /* 하이라이트는 낭독 시 칠해짐 — 처음엔 미도포 */
     row.appendChild(el("span", "en " + hlClass, w.en));
-    row.insertAdjacentHTML("beforeend", ARROW_SVG);
-    row.appendChild(el("span", "meaning", w.ko));
+    if (needsStackedMeaning(w.en, w.ko, w)) {
+      /* en+ko ≥ 한도 — → 화살표·뜻을 영어 아래 줄에 */
+      row.classList.add("is-compound");
+      li.classList.add("is-compound");
+      const meaningRow = el("div", "word-meaning-row");
+      meaningRow.insertAdjacentHTML("beforeend", ARROW_SVG);
+      meaningRow.appendChild(el("span", "meaning", w.ko));
+      row.appendChild(meaningRow);
+    } else {
+      row.insertAdjacentHTML("beforeend", ARROW_SVG);
+      row.appendChild(el("span", "meaning", w.ko));
+    }
     li.appendChild(row);
 
     const pron = el("div", "pron");
@@ -425,15 +501,13 @@ function renderWords() {
     }
     li.appendChild(pron);
 
-    /* 발음 바로 아래 — ex. + example */
+    /* 발음 바로 아래 — ex. + example (읽는 구문 span → TTS 밑줄 sync) */
     if (w.example) {
       const exBlock = el("div", "example-block");
       const ex = el("p", "example");
       const label = el("span", "ex-label", "ex. ");
       const inner = el("span", "example-inner");
-      inner.innerHTML = wrapExampleKoParens(
-        highlightSentence(w.example, w.highlight || w.en)
-      );
+      inner.innerHTML = renderExampleHtml(w.example, w.highlight || w.en);
       ex.appendChild(label);
       ex.appendChild(inner);
       exBlock.appendChild(ex);
@@ -773,9 +847,37 @@ const TTS_RETRY_BASE_MS = 800;
 /* ---------- 리듬 타이밍 (빈 대기만 짧게, TTS는 그대로) ---------- */
 const AUTOPLAY_START_WAIT_MS = 1900;
 const EN_TO_KO_GAP_MS = 250;
-const WORD_GAP_MS = 200;
+const WORD_GAP_MS = 200; /* TIMING_CONFIG.wordGapSec 없을 때 폴백 */
 const MEANING_REVEAL_WAIT_MS = 0; /* 노출과 동시에 읽기 */
 const EN_REVEAL_WAIT_MS = 0; /* 노출과 동시에 읽기 */
+
+/** TIMING_CONFIG 초 → ms (기본 1초) */
+function timingSecToMs(key, fallbackSec = 1) {
+  const sec = Number(TIMING_CONFIG?.[key]);
+  const n = Number.isFinite(sec) && sec >= 0 ? sec : fallbackSec;
+  return Math.round(n * 1000);
+}
+
+function getWordGapMs() {
+  if (TIMING_CONFIG && Object.prototype.hasOwnProperty.call(TIMING_CONFIG, "wordGapSec")) {
+    return timingSecToMs("wordGapSec", 1);
+  }
+  return WORD_GAP_MS;
+}
+
+function getKoHoldMs() {
+  if (TIMING_CONFIG && Object.prototype.hasOwnProperty.call(TIMING_CONFIG, "koHoldSec")) {
+    return timingSecToMs("koHoldSec", 1);
+  }
+  return 1000;
+}
+
+function getEnRepeatGapMs() {
+  if (TIMING_CONFIG && Object.prototype.hasOwnProperty.call(TIMING_CONFIG, "enRepeatGapSec")) {
+    return timingSecToMs("enRepeatGapSec", 1);
+  }
+  return 1000;
+}
 const PAGE_ENTER_FIRST_MS = 200;
 const PAGE_ENTER_MS = 350;
 /** 1–3 → 4–6 → 7–9 페이지 넘김 대기 */
@@ -1030,7 +1132,7 @@ async function loadBackendTTSAudio(text, languageKey) {
   return loadPromise;
 }
 
-async function playAudioElement(audio, playbackRate = 1) {
+async function playAudioElement(audio, playbackRate = 1, phraseEls = null) {
   try {
     if (window.__shortsCurrentAudio && typeof window.__shortsCurrentAudio.pause === "function") {
       window.__shortsCurrentAudio.pause();
@@ -1042,9 +1144,11 @@ async function playAudioElement(audio, playbackRate = 1) {
   audio.playbackRate = Number.isFinite(rate) && rate > 0 ? rate : 1;
   audio.currentTime = 0;
 
+  const stopHighlight = startPhraseHighlightSync(audio, phraseEls);
   try {
     await audio.play();
   } catch (_) {
+    stopHighlight();
     if (window.__shortsCurrentAudio === audio) window.__shortsCurrentAudio = null;
     return false;
   }
@@ -1054,15 +1158,19 @@ async function playAudioElement(audio, playbackRate = 1) {
     audio.onerror = () => resolve();
   });
 
+  stopHighlight();
   if (window.__shortsCurrentAudio === audio) window.__shortsCurrentAudio = null;
   return true;
 }
 
-async function playBackendTTS(text, languageKey, playbackRate = 1) {
+async function playBackendTTS(text, languageKey, playbackRate = 1, phraseEls = null) {
   try {
     const audio = await loadBackendTTSAudio(text, languageKey);
     if (!audio) return;
-    await playAudioElement(audio, playbackRate);
+    if (Array.isArray(phraseEls) && phraseEls.length) {
+      await detectSpeechBoundsFromAudio(audio).catch(() => null);
+    }
+    await playAudioElement(audio, playbackRate, phraseEls);
   } catch (err) {
     console.warn("[63voca] TTS play failed", err);
   }
@@ -1103,6 +1211,7 @@ function preloadAutoplayAudio(words) {
   (words || []).forEach((word, i) => {
     const en = stripHtml(word?.en);
     const ko = getKoSpeakText(word?.ko);
+    const example = getExampleSpeakText(word);
     const enVoice = enPool[i % enPool.length];
     const koVoice = koPool[i % koPool.length];
     if (en) {
@@ -1112,13 +1221,312 @@ function preloadAutoplayAudio(words) {
         loadBackendTTSAudio(en, enPool[(i + words.length) % enPool.length]).catch(() => {});
       }
     }
-    if (ko) {
+    if (example) loadBackendTTSAudio(example, enVoice).catch(() => {});
+    if (ko && PASS_CONFIG?.speakKo === true) {
       loadBackendTTSAudio(ko, koVoice).catch(() => {});
       if (koPool.length > 1) {
         loadBackendTTSAudio(ko, koPool[(i + words.length) % koPool.length]).catch(() => {});
       }
     }
   });
+}
+
+/** enRepeat — 1~3회 (없으면 1) */
+function getWordEnRepeatCount(word) {
+  const n = Number(word?.enRepeat);
+  if (!Number.isFinite(n) || n < 1) return 1;
+  return Math.max(1, Math.min(3, Math.round(n)));
+}
+
+/** 예문 TTS 텍스트 */
+function getExampleSpeakText(word) {
+  return stripHtml(word?.exampleTts || word?.example || "").trim();
+}
+
+function getExamplePhraseEls(wordEl) {
+  if (!wordEl) return [];
+  return [...wordEl.querySelectorAll(".example .ex-phrase")];
+}
+
+/**
+ * TTS 버퍼 RMS로 발화 시작·끝 측정 → 밑줄 sync
+ */
+async function detectSpeechBoundsFromAudio(audio) {
+  if (!audio) return null;
+  if (audio.__speechBounds) return audio.__speechBounds;
+  if (audio.__speechBoundsPromise) return audio.__speechBoundsPromise;
+
+  audio.__speechBoundsPromise = (async () => {
+    try {
+      const src = audio.currentSrc || audio.src;
+      if (!src) return null;
+      const res = await fetch(src);
+      if (!res.ok) return null;
+      const ab = await res.arrayBuffer();
+      const AC = window.AudioContext || window.webkitAudioContext;
+      if (!AC) return null;
+      const ctx = new AC();
+      let decoded;
+      try {
+        decoded = await ctx.decodeAudioData(ab.slice(0));
+      } finally {
+        try {
+          await ctx.close();
+        } catch (_) {}
+      }
+      const ch = decoded.numberOfChannels > 0 ? decoded.getChannelData(0) : null;
+      if (!ch || !ch.length) return null;
+      const sr = decoded.sampleRate || 24000;
+      const win = Math.max(1, Math.floor(sr * 0.01));
+      let peak = 0;
+      for (let i = 0; i < ch.length; i += Math.max(1, Math.floor(win / 2))) {
+        const a = Math.abs(ch[i]);
+        if (a > peak) peak = a;
+      }
+      if (peak < 1e-5) return null;
+      const thrOn = peak * 0.028;
+      const thrOff = peak * 0.022;
+      const windowRms = (from, to) => {
+        let sum = 0;
+        const a = Math.max(0, from);
+        const b = Math.min(ch.length, to);
+        if (b <= a) return 0;
+        for (let j = a; j < b; j += 1) sum += Math.abs(ch[j]);
+        return sum / (b - a);
+      };
+      let onsetSamp = 0;
+      for (let i = 0; i < ch.length; i += win) {
+        if (windowRms(i, i + win) >= thrOn) {
+          onsetSamp = Math.max(0, i - win);
+          break;
+        }
+      }
+      let offsetSamp = ch.length;
+      for (let i = ch.length; i > 0; i -= win) {
+        const start = Math.max(0, i - win);
+        if (windowRms(start, i) >= thrOff) {
+          offsetSamp = Math.min(ch.length, i + win);
+          break;
+        }
+      }
+      const dur = decoded.duration || ch.length / sr;
+      const lead = Math.max(0, Math.min(onsetSamp / sr, dur * 0.35));
+      const spokenEnd = Math.max(lead + 0.05, Math.min(offsetSamp / sr, dur));
+      const trail = Math.max(0, Math.min(dur - spokenEnd, dur * 0.35));
+      const bounds = { lead, trail, spokenEnd, duration: dur };
+      audio.__speechBounds = bounds;
+      return bounds;
+    } catch (_) {
+      return null;
+    }
+  })();
+
+  return audio.__speechBoundsPromise;
+}
+
+function countSyllablesEn(word) {
+  let w = String(word || "").toLowerCase().replace(/[^a-z']/g, "");
+  if (!w) return 1;
+  w = w.replace(/'/g, "");
+  if (w.length <= 3) return 1;
+  w = w.replace(/(?:[^laeiouy]es|[^laeiouy]ed)$/, "");
+  if (/[aeiouy][^aeiouy]e$/.test(w)) w = w.slice(0, -1);
+  w = w.replace(/^y/, "");
+  const groups = w.match(/[aeiouy]+/g);
+  return Math.max(1, groups ? groups.length : 1);
+}
+
+function spokenTextTimingWeight(spoken) {
+  const words = String(spoken || "")
+    .toLowerCase()
+    .match(/[a-z']+/g);
+  if (!words || !words.length) return 1;
+  return Math.max(
+    1,
+    words.reduce((sum, w) => sum + countSyllablesEn(w) * 3.55 + Math.min(1.1, w.length * 0.1), 0)
+  );
+}
+
+function punctuationPauseWeight(text) {
+  const t = String(text || "").trim();
+  if (!t) return 0;
+  if (/(\.\.\.|…)$/.test(t)) return 3.2;
+  if (/[,;:]$/.test(t)) return 2.4;
+  if (/[—–-]$/.test(t)) return 2.0;
+  if (/[.!?]$/.test(t)) return 3.6;
+  return 0;
+}
+
+const SHORT_FUNCTION_WORD_RE =
+  /^(a|an|the|of|to|in|on|at|for|and|or|but|as|by|from|with|is|are|was|were|be|been|being|that|this|these|those|it|its|than|then|so|if|or)$/i;
+
+function stripExampleTokenPunct(text) {
+  return String(text || "").replace(/^[^A-Za-z0-9$£€¥%]+|[^A-Za-z0-9$£€¥%]+$/g, "");
+}
+
+function estimateSpokenHighlightWeight(text) {
+  const raw = String(text || "")
+    .replace(/\([^)]*[\uAC00-\uD7A3][^)]*\)/g, " ")
+    .trim();
+  if (!raw) return 1;
+  const token = stripExampleTokenPunct(raw);
+  if (SHORT_FUNCTION_WORD_RE.test(token)) return 1.6;
+  let weight = 0;
+  let remaining = raw;
+  remaining = remaining.replace(/\b[\d,]+(?:\.\d+)?\b/g, (m) => {
+    weight += Math.max(2, String(m).replace(/,/g, "").length * 1.2);
+    return " ";
+  });
+  const words = remaining.match(/[A-Za-z']+/g) || [];
+  if (words.length) weight += spokenTextTimingWeight(words.join(" "));
+  else if (!weight) weight = 1;
+  return Math.max(1, weight);
+}
+
+function phraseHighlightWeightText(el) {
+  if (!el) return "";
+  const ko = el.querySelectorAll?.(".ex-ko");
+  if (!ko || !ko.length) return el.textContent || "";
+  const clone = el.cloneNode(true);
+  clone.querySelectorAll(".ex-ko").forEach((n) => n.remove());
+  return clone.textContent || "";
+}
+
+const PHRASE_HL_LEAD_IN_SEC = 0.05;
+const PHRASE_HL_TRAIL_SEC = 0.08;
+const PHRASE_HL_LOOKAHEAD_SEC = 0;
+const PHRASE_HL_WORD_GAP = 0.12;
+
+function estimatePhraseHighlightWeights(texts) {
+  const n = texts.length;
+  return texts.map((text, i) => {
+    let w = estimateSpokenHighlightWeight(text);
+    w += punctuationPauseWeight(text);
+    if (i < n - 1) w += PHRASE_HL_WORD_GAP;
+    return Math.max(0.8, w);
+  });
+}
+
+function startPhraseHighlightSync(audio, phraseEls) {
+  if (!audio || !Array.isArray(phraseEls) || !phraseEls.length) return () => {};
+  const texts = phraseEls.map((el) => phraseHighlightWeightText(el));
+  const weights = estimatePhraseHighlightWeights(texts);
+  const total = weights.reduce((a, b) => a + b, 0) || 1;
+  const ends = new Array(weights.length);
+  let run = 0;
+  for (let i = 0; i < weights.length; i += 1) {
+    run += weights[i] / total;
+    ends[i] = run;
+  }
+  let current = -1;
+  let raf = 0;
+  let spokenStart = PHRASE_HL_LEAD_IN_SEC;
+  let spokenEnd = null;
+  let trailFallback = PHRASE_HL_TRAIL_SEC;
+  let stopped = false;
+
+  const setActive = (idx) => {
+    if (idx === current) return;
+    if (current >= 0 && phraseEls[current]) phraseEls[current].classList.remove("is-reading");
+    current = idx;
+    if (current >= 0 && phraseEls[current]) phraseEls[current].classList.add("is-reading");
+  };
+  const clear = () => {
+    phraseEls.forEach((el) => el.classList.remove("is-reading"));
+    current = -1;
+  };
+  const indexAtProgress = (progress) => {
+    const p = Math.min(0.999999, Math.max(0, progress));
+    let lo = 0;
+    let hi = ends.length - 1;
+    while (lo < hi) {
+      const mid = (lo + hi) >> 1;
+      if (p < ends[mid]) hi = mid;
+      else lo = mid + 1;
+    }
+    return lo;
+  };
+  const applyMeasuredBounds = (measured) => {
+    if (!measured || stopped) return;
+    const mediaDur = Number(audio.duration);
+    const measDur = Number(measured.duration);
+    const scale =
+      Number.isFinite(mediaDur) && mediaDur > 0 && Number.isFinite(measDur) && measDur > 0
+        ? mediaDur / measDur
+        : 1;
+    const cap = Number.isFinite(mediaDur) && mediaDur > 0 ? mediaDur * 0.4 : 0.5;
+    const lead = Math.min(Math.max(0, (Number(measured.lead) || 0) * scale), cap);
+    let end = Number.isFinite(measured.spokenEnd)
+      ? measured.spokenEnd * scale
+      : (Number.isFinite(mediaDur) ? mediaDur : measDur * scale) -
+        Math.min(Math.max(0, (Number(measured.trail) || 0) * scale), cap);
+    spokenStart = lead;
+    spokenEnd = Math.max(lead + 0.05, end);
+    trailFallback = Math.min(Math.max(0, (Number(measured.trail) || 0) * scale), cap);
+  };
+
+  if (audio.__speechBounds) applyMeasuredBounds(audio.__speechBounds);
+  else detectSpeechBoundsFromAudio(audio).then(applyMeasuredBounds).catch(() => null);
+
+  const update = () => {
+    raf = 0;
+    const dur = Number(audio.duration);
+    if (Number.isFinite(dur) && dur > 0) {
+      const start = Math.min(spokenStart, dur * 0.4);
+      const end =
+        spokenEnd != null && Number.isFinite(spokenEnd)
+          ? Math.min(Math.max(start + 0.05, spokenEnd), dur)
+          : Math.max(start + 0.05, dur - Math.min(trailFallback, dur * 0.4));
+      const effective = Math.max(0.08, end - start);
+      const rate = Number(audio.playbackRate);
+      const look = PHRASE_HL_LOOKAHEAD_SEC * (Number.isFinite(rate) && rate > 0 ? rate : 1);
+      const t = audio.currentTime + look;
+      if (t < start) {
+        if (current >= 0) clear();
+      } else {
+        setActive(indexAtProgress(Math.min(1, Math.max(0, (t - start) / effective))));
+      }
+    } else if (current < 0) {
+      setActive(0);
+    }
+    if (!stopped && !audio.paused && !audio.ended) raf = requestAnimationFrame(update);
+  };
+
+  const onTimeUpdate = () => {
+    if (!raf && !stopped) raf = requestAnimationFrame(update);
+  };
+  clear();
+  audio.addEventListener("timeupdate", onTimeUpdate);
+  audio.addEventListener("playing", onTimeUpdate);
+  raf = requestAnimationFrame(update);
+  return () => {
+    stopped = true;
+    cancelAnimationFrame(raf);
+    raf = 0;
+    audio.removeEventListener("timeupdate", onTimeUpdate);
+    audio.removeEventListener("playing", onTimeUpdate);
+    clear();
+  };
+}
+
+/** 예문을 enRepeat회 낭독 + 읽는 위치 노란 밑줄 */
+async function speakExampleTimes(text, times, voiceId, wordEl) {
+  const enText = String(text || "").trim();
+  if (!enText) return;
+  const n = Math.max(1, Math.min(3, Math.round(Number(times)) || 1));
+  const voice = voiceId || activeEnTtsVoiceId || EN_TTS_VOICE_IDS[1];
+  const exampleEl = wordEl?.querySelector?.(".example");
+  const phraseEls = getExamplePhraseEls(wordEl);
+  exampleEl?.classList.add("is-reading-example");
+  try {
+    for (let i = 0; i < n; i += 1) {
+      await playBackendTTS(enText, voice, 1, phraseEls);
+      if (i < n - 1) await sleep(getEnRepeatGapMs());
+    }
+  } finally {
+    exampleEl?.classList.remove("is-reading-example");
+    phraseEls.forEach((el) => el.classList.remove("is-reading"));
+  }
 }
 
 /** 1회차용: 영어 낭독 + 하이라이트 칠하기 */
@@ -1197,13 +1605,24 @@ async function runPass1OnPage(pageEls, pageItems) {
     const ko = item.ko || wordEl.querySelector(".meaning")?.textContent || "";
 
     await paintAndSpeakEn(wordEl, en);
+    /* enRepeat — 같은 EN을 추가 낭독 (같은 음성, enRepeatGapSec 간격) */
+    const times = getWordEnRepeatCount(item);
+    const enVoice = activeEnTtsVoiceId;
+    for (let r = 1; r < times; r += 1) {
+      await sleep(getEnRepeatGapMs());
+      if (en) await playBackendTTS(en, enVoice, 1);
+    }
     await sleep(EN_TO_KO_GAP_MS);
 
-    /* 한글 노출과 동시에 낭독 */
+    /* 한글 노출 — speakKo일 때만 낭독, 이후 koHoldSec 유지 */
     revealMeaning(wordEl);
     if (MEANING_REVEAL_WAIT_MS > 0) await sleep(MEANING_REVEAL_WAIT_MS);
-    await playKoTTS(ko);
-    await sleep(WORD_GAP_MS);
+    if (PASS_CONFIG?.speakKo === true) await playKoTTS(ko);
+    /* ex — enRepeat 횟수만큼 낭독 + 밑줄 sync */
+    const exampleSpeak = getExampleSpeakText(item);
+    if (exampleSpeak) await speakExampleTimes(exampleSpeak, times, enVoice, wordEl);
+    await sleep(getKoHoldMs());
+    await sleep(getWordGapMs());
   }
 }
 
@@ -1216,7 +1635,8 @@ async function runPass2OnPage(pageEls, pageItems) {
     const en = item.en || wordEl.querySelector(".en")?.textContent || "";
     const ko = item.ko || wordEl.querySelector(".meaning")?.textContent || "";
 
-    await playKoTTS(ko);
+    if (PASS_CONFIG?.speakKo === true) await playKoTTS(ko);
+    await sleep(getKoHoldMs());
     await sleep(EN_TO_KO_GAP_MS);
 
     /* 영어·발음·예문 노출과 동시에 낭독 */
@@ -1224,8 +1644,17 @@ async function runPass2OnPage(pageEls, pageItems) {
     if (EN_REVEAL_WAIT_MS > 0) await sleep(EN_REVEAL_WAIT_MS);
     wordEl.classList.add("is-speaking");
     await playEnTTS(en);
+    const times = getWordEnRepeatCount(item);
+    const enVoice = activeEnTtsVoiceId;
+    for (let r = 1; r < times; r += 1) {
+      await sleep(getEnRepeatGapMs());
+      if (en) await playBackendTTS(en, enVoice, 1);
+    }
+    /* ex — enRepeat 횟수만큼 낭독 + 밑줄 sync */
+    const exampleSpeak = getExampleSpeakText(item);
+    if (exampleSpeak) await speakExampleTimes(exampleSpeak, times, enVoice, wordEl);
     wordEl.classList.remove("is-speaking");
-    await sleep(WORD_GAP_MS);
+    await sleep(getWordGapMs());
   }
 }
 
@@ -1290,17 +1719,19 @@ async function runAutoplay() {
     }
   }
 
-  /* 마지막 단어 부드럽게 페이드 → 요약 → quiz(종료 후 유지) */
-  await fadeOutWordsOnly();
-  syncOverlayTop();
-  await sleep(SECTION_GAP_MS);
+  /* summary·quiz — runSummary true일 때만 */
+  if (PASS_CONFIG?.runSummary === true) {
+    await fadeOutWordsOnly();
+    syncOverlayTop();
+    await sleep(SECTION_GAP_MS);
 
-  await playSummaryScreen({ animateChecks: true });
+    await playSummaryScreen({ animateChecks: true });
 
-  await sleep(SUMMARY_TO_QUIZ_MS);
-  await fadeOutSummary();
-  await startReviewQuiz();
-  /* quiz 화면 유지 — 더 이상 넘어가지 않음 */
+    await sleep(SUMMARY_TO_QUIZ_MS);
+    await fadeOutSummary();
+    await startReviewQuiz();
+    /* quiz 화면 유지 — 더 이상 넘어가지 않음 */
+  }
 }
 
 const QUIZ_COUNTDOWN_SEC = 3;

@@ -1010,7 +1010,10 @@ function rdLoadScript(src) {
     const base = rdAssetBase();
     try {
         if (!window.BoardListConfig) await rdLoadScript(base + 'board-list-config.js?v=20261020auto2');
-        await rdLoadScript(base + 'redesign-article.js?v=20261109quiz1');
+                /* SEO 페이지가 이미 최신 redesign을 넣었으면 구버전을 다시 받지 않음 */
+        if (!window.__RD_ARTICLE_WORD_QUIZ) {
+            await rdLoadScript(base + 'redesign-article.js?v=20261109quiz1');
+        }
     } catch (e) { console.warn(e); }
     loadPost();
 })();

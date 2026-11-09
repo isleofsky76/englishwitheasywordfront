@@ -100,9 +100,9 @@ function quizConfigFromArticle(article) {
   return {
     format: 'reveal',
     directions: ['en-ko', 'ko-en'],
-    title: `${baseTitle || '시사 영단어'} 퀴즈`,
+    title: `${baseTitle || '시사 영단어'} 시사 어휘 퀴즈`,
     slug,
-    metaDescription: `${baseTitle} 어휘 퀴즈. ${wordList}${wordList ? ' 등.' : ''}`.slice(0, 160),
+    metaDescription: `${baseTitle} 시사 어휘 퀴즈. ${wordList}${wordList ? ' 등.' : ''}`.slice(0, 160),
     sourceUrl: article.youtube || '',
     sourceLabel: article.youtube ? '유튜브 보기' : '',
     datePublished: article.datePublished || new Date().toISOString().slice(0, 10),

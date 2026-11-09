@@ -7,6 +7,8 @@
 
   var ASSET_VER = '20261109quiz1';
   var QUIZ_TRACK_VER = '20261109quiz1';
+  /* news-voca.js 등이 구버전 redesign을 덮어쓰지 않도록 */
+  global.__RD_ARTICLE_WORD_QUIZ = true;
   var SYN_SAVED_KEY = 'ees-synonym-saved-v1';
   /* v2: 기본값을 뜻 가리기로 재설정 (이전 localStorage=0 무시) */
   var SYN_HIDE_KEY = 'ees-synonym-hide-meaning-v2';
