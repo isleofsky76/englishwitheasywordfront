@@ -216,6 +216,31 @@
     }).join('');
   }
 
+  function renderRail(present) {
+    return LETTERS.map(function (L) {
+      if (present[L]) {
+        return '<a class="rd-gloss-rail-btn" href="#letter-' + L + '" data-rail-letter="' + L + '">' + L + '</a>';
+      }
+      return '<span class="rd-gloss-rail-btn is-empty" aria-disabled="true">' + L + '</span>';
+    }).join('');
+  }
+
+  function updateRailActive(rail) {
+    if (!rail) return;
+    var sections = document.querySelectorAll('.rd-gloss-letter');
+    if (!sections.length) return;
+    var marker = (window.innerHeight || 0) * 0.28;
+    var current = '';
+    for (var i = 0; i < sections.length; i++) {
+      var rect = sections[i].getBoundingClientRect();
+      if (rect.top <= marker) current = sections[i].id.replace('letter-', '');
+    }
+    if (!current && sections[0]) current = sections[0].id.replace('letter-', '');
+    rail.querySelectorAll('[data-rail-letter]').forEach(function (btn) {
+      btn.classList.toggle('is-current', btn.getAttribute('data-rail-letter') === current);
+    });
+  }
+
   function loadScriptOnce(src) {
     return new Promise(function (resolve, reject) {
       var existing = document.querySelector('script[src="' + src + '"]');
@@ -322,20 +347,36 @@
     var search = root.querySelector('#rd-gloss-search');
     var empty = root.querySelector('[data-rd-gloss-empty]');
     var topBtn = document.getElementById('rd-gloss-top');
+    var rail = document.getElementById('rd-gloss-rail') || document.querySelector('[data-rd-gloss-rail]');
 
     function paint(query) {
       var q = String(query || '').trim().toLowerCase();
       var filtered = all.filter(function (w) { return matchesQuery(w, q); });
       var groups = groupByLetter(filtered);
+      var present = Object.create(null);
       var activeLetters = [];
       LETTERS.forEach(function (L) {
-        if (groups[L] && groups[L].length) activeLetters.push(L);
+        if (groups[L] && groups[L].length) {
+          present[L] = true;
+          activeLetters.push(L);
+        }
       });
 
       if (stats) {
         stats.innerHTML =
           '<span>전체 단어 <b>' + filtered.length + '</b></span>' +
           '<span>알파벳 <b>' + activeLetters.length + '</b>/26</span>';
+      }
+
+      if (rail) {
+        if (!filtered.length) {
+          rail.hidden = true;
+          rail.innerHTML = '';
+        } else {
+          rail.hidden = false;
+          rail.innerHTML = renderRail(present);
+          updateRailActive(rail);
+        }
       }
 
       if (!filtered.length) {
@@ -345,10 +386,31 @@
       }
       if (empty) empty.hidden = true;
       if (body) body.innerHTML = renderGroups(groups, activeLetters);
+      updateRailActive(rail);
     }
 
     paint('');
     bindRowActions(root);
+
+    if (rail) {
+      var railTick = false;
+      window.addEventListener('scroll', function () {
+        if (railTick) return;
+        railTick = true;
+        requestAnimationFrame(function () {
+          railTick = false;
+          updateRailActive(rail);
+        });
+      }, { passive: true });
+      rail.addEventListener('click', function (e) {
+        var btn = e.target.closest('[data-rail-letter]');
+        if (!btn) return;
+        var target = document.getElementById('letter-' + btn.getAttribute('data-rail-letter'));
+        if (!target) return;
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    }
 
     if (search) {
       search.addEventListener('input', function () {
