@@ -86,7 +86,7 @@ const TIMING_CONFIG = {
   enRepeatGapSec: 1,
 };
 
-/** 영어 미리보기: 단어 앞 ___ + 앞 3글자 */
+/** 영어 미리보기: 앞 3글자 + 나머지 _ , 괄호 표시. 3글자 이하는 미리보기 없음 */
 const EN_PREVIEW_LETTERS = 3;
 
 /* =====================================================================
@@ -710,14 +710,13 @@ function showAllWords(wordEls) {
   wordEls.forEach((wordEl) => wordEl.classList.remove("is-page-hidden"));
 }
 
-/** 영어 미리보기: ___ + 앞 3글자 (예: ___sue / ___law) */
+/** 영어 미리보기: (law_____) — 앞 3글자 + 나머지 _. 3글자 이하(sue 등)는 빈 문자열 */
 function buildEnPreviewHint(en) {
   const raw = String(en || "").trim();
-  let letters = "";
-  for (let i = 0; i < raw.length && letters.length < EN_PREVIEW_LETTERS; i += 1) {
-    if (/[A-Za-z]/.test(raw[i])) letters += raw[i];
-  }
-  return "___" + letters;
+  const total = countEnLetters(raw);
+  if (total <= EN_PREVIEW_LETTERS) return "";
+  const body = buildEnPartialReveal(raw, EN_PREVIEW_LETTERS);
+  return "(" + body + ")";
 }
 
 /** 글자 단위로 n개 영어 알파벳까지 노출, 나머지는 _ */
@@ -763,7 +762,9 @@ function renderWords() {
 
     const hlClass = w.hl || (i % 2 === 0 ? "hl" : "hlpink");
     const enWrap = el("span", "en-wrap");
-    const preview = el("span", "en-preview", buildEnPreviewHint(w.en));
+    const hint = buildEnPreviewHint(w.en);
+    const preview = el("span", "en-preview", hint);
+    if (!hint) preview.hidden = true;
     const enFull = el("span", "en " + hlClass, w.en);
     enFull.dataset.full = w.en;
     enWrap.appendChild(preview);
@@ -1927,8 +1928,9 @@ async function runPass1OnPage(pageEls, pageItems) {
       enEl.classList.remove("is-hl-on", "is-hl-painting");
     }
     if (previewEl) {
-      previewEl.hidden = false;
-      previewEl.textContent = buildEnPreviewHint(full);
+      const hint = buildEnPreviewHint(full);
+      previewEl.textContent = hint;
+      previewEl.hidden = !hint;
     }
   });
 
