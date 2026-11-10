@@ -414,6 +414,11 @@
     return url.pathname + url.search + url.hash;
   }
 
+  /** 뉴스 영어(국제·한국·국방…)는 글 수가 적어 페이지 없이 전체 스크롤 */
+  function usesContinuousScroll(cfg) {
+    return !!(cfg && cfg.navGroup === 'news');
+  }
+
   function renderPager(page, totalPages) {
     if (totalPages <= 1) return '';
     var html = '<nav class="rd-list-pager" aria-label="페이지">';
@@ -433,6 +438,27 @@
     html += '<a class="' + nextCls.trim() + '" href="' + escapeAttr(pageHref(Math.min(totalPages, page + 1))) + '" aria-label="다음">다음</a>';
     html += '</nav>';
     return html;
+  }
+
+  function renderBackToTop() {
+    return (
+      '<button type="button" class="rd-list-top" id="rd-list-top" aria-label="처음으로">' +
+        '처음으로' +
+      '</button>'
+    );
+  }
+
+  function bindBackToTop(container) {
+    var btn = container && container.querySelector('#rd-list-top');
+    if (!btn || btn.getAttribute('data-bound') === '1') return;
+    btn.setAttribute('data-bound', '1');
+    btn.addEventListener('click', function () {
+      try {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } catch (e) {
+        window.scrollTo(0, 0);
+      }
+    });
   }
 
   function normalizeEntries(messages) {
@@ -499,7 +525,7 @@
         (metaParts.length && !kw
           ? '<span class="rd-list-feature-meta">' + escapeHtml(metaParts.join(' · ')) + '</span>'
           : '') +
-        titleHtml(item, 'rd-list-feature-title', { index: 0 }) +
+        titleHtml(item, 'rd-list-feature-title', { index: 1 }) +
         sub +
         (!kw && tags ? '<div class="rd-list-tags">' + tags + '</div>' : '') +
       '</a>'
@@ -511,7 +537,7 @@
     var rows = items.map(function (item, i) {
       return (
         '<a class="rd-list-side-item" href="' + escapeAttr(item.href) + '">' +
-          '<span class="rd-list-side-num">' + (i + 1) + '</span>' +
+          '<span class="rd-list-side-num">' + (i + 2) + '</span>' +
           '<span class="rd-list-side-body">' +
             (item.source ? '<span class="rd-list-side-source">' + escapeHtml(item.source) + '</span>' : '') +
             titleHtml(item, 'rd-list-side-title') +
@@ -603,7 +629,8 @@
     if (cfg.key) document.body.setAttribute('data-rd-board', cfg.key);
 
     var apiMode = options.apiMode || null;
-    var pageSize = options.pageSize || PAGE_SIZE_DEFAULT;
+    var continuous = usesContinuousScroll(cfg);
+    var pageSize = continuous ? Number.MAX_SAFE_INTEGER : (options.pageSize || PAGE_SIZE_DEFAULT);
     var raw = normalizeEntries(messages);
     var newestFirst = raw.slice().reverse();
     var total = newestFirst.length;
@@ -616,7 +643,9 @@
           '</div>' +
           renderTabs(cfg, apiMode) +
           '<div class="rd-list-empty">게시글이 없습니다.</div>' +
+          (continuous ? renderBackToTop() : '') +
         '</div>';
+      bindBackToTop(container);
       fitKwWordsInThumbs(container);
       return;
     }
@@ -627,14 +656,14 @@
 
     var feature = items[0];
     var side = items.slice(1, 5);
-    var page = currentPageFromHash();
-    var totalPages = Math.max(1, Math.ceil(items.length / pageSize));
+    var page = continuous ? 1 : currentPageFromHash();
+    var totalPages = continuous ? 1 : Math.max(1, Math.ceil(items.length / pageSize));
     if (page > totalPages) page = totalPages;
-    var start = (page - 1) * pageSize;
-    var gridItems = items.slice(start, start + pageSize);
+    var start = continuous ? 0 : (page - 1) * pageSize;
+    var gridItems = continuous ? items : items.slice(start, start + pageSize);
 
     container.innerHTML =
-      '<div class="rd-list-wrap">' +
+      '<div class="rd-list-wrap' + (continuous ? ' rd-list-wrap--continuous' : '') + '">' +
         '<div class="rd-list-hero">' +
           '<h1 class="rd-list-kicker">' + escapeHtml(cfg.labelEn) + '</h1>' +
         '</div>' +
@@ -649,10 +678,12 @@
             gridItems.map(function (it) { return renderCard(it, cfg); }).join('') +
           '</div>' +
         '</div>' +
-        renderPager(page, totalPages) +
+        (continuous ? '' : renderPager(page, totalPages)) +
+        (continuous ? renderBackToTop() : '') +
       '</div>';
 
     bindCardAnalytics(container);
+    bindBackToTop(container);
     fitKwWordsInThumbs(container);
   }
 

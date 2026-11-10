@@ -320,6 +320,14 @@ body.rd-list .world-clock-bar {
   line-height: 1.2;
 }
 
+/* 대표 글 번호(1.) — 최신 글 2~5와 같은 포인트 색 */
+.rd-list-index-prefix {
+  font-family: var(--font-serif);
+  font-weight: 900;
+  color: var(--accent);
+  margin-right: 0.12em;
+}
+
 .rd-list-side-body {
   display: flex;
   flex-direction: column;
@@ -464,6 +472,35 @@ body.rd-list .world-clock-bar {
 .rd-list-pager .is-disabled {
   opacity: 0.4;
   pointer-events: none;
+}
+
+/* 뉴스 영어: 페이지 없이 스크롤 + 항상 보이는 처음으로 */
+.rd-list-top {
+  position: fixed;
+  right: max(16px, env(safe-area-inset-right));
+  bottom: max(20px, env(safe-area-inset-bottom));
+  z-index: 60;
+  min-height: 44px;
+  padding: 0 16px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--ink);
+  color: var(--text-on-dark);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+  cursor: pointer;
+}
+
+.rd-list-top:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.rd-list-wrap--continuous .rd-list-pager {
+  display: none;
 }
 
 .rd-list-empty {
