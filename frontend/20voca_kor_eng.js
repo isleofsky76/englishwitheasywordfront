@@ -478,9 +478,7 @@ const WORDS = {
 
 const WORD_COLORS = ["#e06a4f", "#3e6fd8", "#3a9a6b", "#c23b3b", "#8b5cf6", "#0d9488"];
 
-const ARROW_SVG =
-  '<svg class="arrow" width="34" height="24" viewBox="0 0 34 24" aria-hidden="true">' +
-  '<path d="M3 12 H 28 M20 4 L 29 12 L 20 20" fill="none" stroke="#2d4f9e" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+const ARROW_SVG = '<span class="ko-en-sep" aria-hidden="true">:</span>';
 
 function el(tag, className, text) {
   const node = document.createElement(tag);
@@ -710,13 +708,12 @@ function showAllWords(wordEls) {
   wordEls.forEach((wordEl) => wordEl.classList.remove("is-page-hidden"));
 }
 
-/** 영어 미리보기: (law_____) — 앞 3글자 + 나머지 _. 3글자 이하(sue 등)는 빈 문자열 */
+/** 영어 미리보기: law_____ — 앞 3글자 + 나머지 _. 3글자 이하(sue 등)는 빈 문자열 */
 function buildEnPreviewHint(en) {
   const raw = String(en || "").trim();
   const total = countEnLetters(raw);
   if (total <= EN_PREVIEW_LETTERS) return "";
-  const body = buildEnPartialReveal(raw, EN_PREVIEW_LETTERS);
-  return "(" + body + ")";
+  return buildEnPartialReveal(raw, EN_PREVIEW_LETTERS);
 }
 
 /** 글자 단위로 n개 영어 알파벳까지 노출, 나머지는 _ */

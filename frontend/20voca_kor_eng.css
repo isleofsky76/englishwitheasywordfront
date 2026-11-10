@@ -364,6 +364,15 @@ html, body {
   -moz-osx-font-smoothing: grayscale;
 }
 .arrow { flex-shrink: 0; }
+.ko-en-sep {
+  flex-shrink: 0;
+  margin: 0 10px;
+  font-family: var(--font-ko);
+  font-weight: 700;
+  font-size: 52px;
+  line-height: 1;
+  color: #1f45b8;
+}
 .meaning {
   font-family: var(--font-ko); /* Pretendard — 선명한 한글 뜻 */
   font-weight: var(--ko-weight);
@@ -399,11 +408,11 @@ html, body {
   font-family: var(--font-en, "Andika", "Poppins", sans-serif);
   font-weight: 700;
   font-size: 64px;
-  letter-spacing: 0.04em;
-  color: #8a9099;
+  letter-spacing: 0.06em;
+  color: #3d6eb8;
 }
-.word.is-answer-hidden .en-preview {
-  display: inline;
+.word.is-answer-hidden .en-preview:not([hidden]) {
+  display: inline !important;
 }
 .word.is-answer-hidden .en,
 .word.is-answer-hidden .en-wrap .en {
