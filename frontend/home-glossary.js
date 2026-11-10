@@ -41,24 +41,7 @@
     return /^[A-Za-z][A-Za-z'’\-]*$/.test(w) && w.length <= 40;
   }
 
-  function shortenGloss(part) {
-    var p = String(part || '').replace(/\s+/g, ' ').trim();
-    if (!p) return '';
-    p = p.split(/[A-Za-z\/\[\{]|📺|유튜브|출처|원문|cf\./i)[0].trim();
-    p = p.replace(/\([^)]{0,16}\)/g, ' ').replace(/\s+/g, ' ').trim();
-    if (!/[가-힣]/.test(p)) return '';
-    var m = p.match(/^([가-힣]+(?:하다|되다|시키다|지다|리다|기다|나다|이다|우다|키다|내다|주다|받다|보다|가다|오다|쓰다))/);
-    if (m) return m[1];
-    m = p.match(/^([가-힣]+(?:한|운|은|인|된|는|임|음|기|성|력|감|자)(?:\s+[가-힣]{1,8}(?:한|운|은|인|된|는)?)?)/);
-    if (m && m[1].length <= 24) return m[1].trim();
-    var toks = p.split(/\s+/).filter(function (t) { return /^[가-힣0-9~\-·]+$/.test(t); });
-    if (!toks.length) return '';
-    var out = toks[0];
-    if (toks[1] && (out + ' ' + toks[1]).length <= 16) out += ' ' + toks[1];
-    if (out.length > 20) out = out.slice(0, 20);
-    return out.trim();
-  }
-
+  /** 검수된 뜻은 글자수로 중간 절단하지 않음. 숫자·오염만 제거. */
   function cleanMeaning(raw) {
     var s = String(raw || '').replace(/\s+/g, ' ').trim();
     if (!s) return '';
@@ -66,13 +49,25 @@
     s = s.split(/📺|유튜브|출처|원문/)[0];
     s = s.replace(/\((?:명|동|형|부|숙|관|감|명사|동사|형용사|부사)[^)]{0,8}\)/g, ' ');
     s = s.replace(/\s+/g, ' ').trim();
-    var parts = s.split(/[,，、·]/);
+    /* 뜻 끝·중간 단독 숫자 혼입 제거 (소비 8, 비탈면 11) */
+    s = s.replace(/\s+\d+(?=\s*[,，、]|$)/g, '');
+    s = s.replace(/\s+/g, ' ').trim();
+    if (!/[가-힣]/.test(s)) return '';
+
+    var parts = s.split(/[,，、]/).map(function (p) {
+      return String(p || '').replace(/\s+/g, ' ').trim();
+    }).filter(Boolean);
+
     var glosses = [];
     for (var i = 0; i < parts.length; i++) {
-      var g = shortenGloss(parts[i]);
-      if (!g || glosses.indexOf(g) !== -1) continue;
+      var g = parts[i]
+        .replace(/[A-Za-z\/\[\{].*$/, '')
+        .replace(/\s+/g, ' ')
+        .trim();
+      if (!g || !/[가-힣]/.test(g)) continue;
+      if (glosses.indexOf(g) !== -1) continue;
       glosses.push(g);
-      if (glosses.length >= 2) break;
+      if (glosses.length >= 3) break;
     }
     return glosses.join(', ');
   }
