@@ -62,7 +62,7 @@ const DISPLAY_CONFIG = {
 
 /**
  * 학습 패스 on/off
- * pass1 — true: 한글 숨김 → 영어 읽기 → 한글 노출 → ex 바로 낭독
+ * pass1 — true: 한글 숨김 → 영어 읽기 → 한글 노출(·읽기)
  * pass2 — true: 영어 숨김 → 한글(·읽기) → 영어(+발음·예문) 노출·읽기
  * speakKo — false면 한글은 화면에만 보이고 TTS로 읽지 않음
  * runSummary — false면 summary·quiz 없이 단어 패스 후 멈춤
@@ -83,7 +83,7 @@ const PASS_CONFIG = {
  */
 const TIMING_CONFIG = {
   wordGapSec: 2,
-  koHoldSec: 0.4,
+  koHoldSec: 2,
   enRepeatGapSec: 1,
 };
 
@@ -99,7 +99,7 @@ const WORDS = {
   badge: "시사 영단어",
 
   title: [
-    { hl: "자녀 성적 때문에 학교를 고소하는 부모들 #핵심어휘" },
+    { hl: "자녀 성적 때문에 학교를 고소하는 부모들 #갈등 #소송 #연관단어" },
     { hl: "" },
   ],
 
@@ -107,24 +107,92 @@ const WORDS = {
   sourceMark: "추출 어휘",
   outro: "오늘의 단어 {n}개 끝! ☺",
 
-  /* WSJ — The Parents Suing Schools Because Their Kids Got Bad Grades (예문=원문 그대로) */
+  /* WSJ — 갈등·소송 어휘 20 (예문=원문) */
   words: [
     {
-      "en": "escalate",
-      "ko": "악화되다, 격화되다",
+      "en": "sue",
+      "ko": "고소하다, 소송을 제기하다",
       "pos": "동",
-      "reading": "에스컬레이트",
-      "ipa": "/ˈeskəleɪt/",
+      "reading": "수",
+      "ipa": "/suː/",
       "defs": "",
-      "example": "What began last fall as a playground spat between third-graders has now escalated into a courtroom brawl...",
-      "cf": "(1) spat(말다툼·티격태격) (2) courtroom brawl(법정 공방)",
+      "example": "The Parents Suing Schools Because Their Kids Got Bad Grades",
+      "cf": "(1) sue for(…을 이유로 고소하다)",
       "enRepeat": 1,
-      "highlight": "escalated",
-      "translation": "작년 가을 초등 3학년 아이들 사이의<br>운동장 티격태격에서 시작된 일이<br>이제는 법정 공방으로 격화됐다.",
+      "highlight": "Suing",
+      "translation": "자녀가 나쁜 성적을 받았다고<br>학교를 고소하는 부모들",
       "image": "",
       "icon": "",
       "spark": "yellow",
       "stack": false,
+      "note": ""
+    },
+    {
+      "en": "lawsuit",
+      "ko": "소송, 고소",
+      "pos": "명",
+      "reading": "로수트",
+      "ipa": "/ˈlɔːsuːt/",
+      "defs": "",
+      "example": "In a lawsuit filed in October, Luo calls the teacher’s comments “inaccurate and unsubstantiated”...",
+      "cf": "(1) file a lawsuit(소송을 제기하다)",
+      "enRepeat": 1,
+      "highlight": "lawsuit",
+      "translation": "10월에 제기된 소송에서 루오는<br>교사 평가를 “부정확하고<br>근거 없다”고 주장한다.",
+      "image": "",
+      "icon": "",
+      "spark": "yellow",
+      "note": ""
+    },
+    {
+      "en": "spat",
+      "ko": "말다툼, 티격태격",
+      "pos": "명",
+      "reading": "스팻",
+      "ipa": "/spæt/",
+      "defs": "",
+      "example": "What began last fall as a playground spat between third-graders has now escalated into a courtroom brawl...",
+      "cf": "(1) escalate(격화되다) (2) courtroom brawl(법정 공방)",
+      "enRepeat": 1,
+      "highlight": "spat",
+      "translation": "작년 가을 초등 3학년들의<br>운동장 티격태격에서 시작된 일이<br>이제는 법정 공방으로 번졌다.",
+      "image": "",
+      "icon": "",
+      "spark": "yellow",
+      "note": ""
+    },
+    {
+      "en": "escalate",
+      "ko": "격화되다, 악화되다",
+      "pos": "동",
+      "reading": "에스컬레이트",
+      "ipa": "/ˈeskəleɪt/",
+      "defs": "",
+      "example": "...has now escalated into a courtroom brawl: In a lawsuit filed in October...",
+      "cf": "(1) escalate into(…으로 번지다)",
+      "enRepeat": 1,
+      "highlight": "escalated",
+      "translation": "이제는 법정 공방으로 격화됐다.<br>10월에 제기된 소송에서…",
+      "image": "",
+      "icon": "",
+      "spark": "yellow",
+      "note": ""
+    },
+    {
+      "en": "courtroom brawl",
+      "ko": "법정 공방, 법정 다툼",
+      "pos": "명",
+      "reading": "코트룸 브롤",
+      "ipa": "/ˈkɔːrtruːm brɔːl/",
+      "defs": "",
+      "example": "...has now escalated into a courtroom brawl...",
+      "cf": "(1) brawl(싸움·격렬한 다툼)",
+      "enRepeat": 1,
+      "highlight": "courtroom brawl",
+      "translation": "이제는 법정 공방으로 번졌다.",
+      "image": "",
+      "icon": "",
+      "spark": "yellow",
       "note": ""
     },
     {
@@ -134,28 +202,130 @@ const WORDS = {
       "reading": "애드버세리얼",
       "ipa": "/ˌædvərˈseriəl/",
       "defs": "",
-      "example": "Today, they often take a more adversarial approach, educators say, leaning on teachers and administrators to change grades...",
-      "cf": "(1) lean on(압박하다) (2) approach(접근·태도)",
+      "example": "Today, they often take a more adversarial approach, educators say...",
+      "cf": "(1) approach(태도·접근)",
       "enRepeat": 1,
       "highlight": "adversarial",
-      "translation": "오늘날 부모들은 더 적대적인 태도를<br>취한다고 교육자들은 말한다.<br>교사·행정가에게 성적 변경을 압박하며.",
+      "translation": "오늘날 부모들은 더 적대적인<br>태도를 취한다고 교육자들은 말한다.",
       "image": "",
       "icon": "",
       "spark": "yellow",
       "note": ""
     },
     {
-      "en": "scrutinize",
-      "ko": "면밀히 살펴보다",
-      "pos": "동",
-      "reading": "스크루터나이즈",
-      "ipa": "/ˈskruːtənaɪz/",
+      "en": "lean on",
+      "ko": "압박하다, 압력을 넣다",
+      "pos": "구",
+      "reading": "린 온",
+      "ipa": "/liːn ɑːn/",
       "defs": "",
-      "example": "That includes scrutinizing how teachers evaluate their children.",
-      "cf": "(1) evaluate(평가하다)",
+      "example": "...leaning on teachers and administrators to change grades in disputes that can even spill into court.",
+      "cf": "(1) dispute(분쟁) (2) spill into(…으로 번지다)",
       "enRepeat": 1,
-      "highlight": "scrutinizing",
-      "translation": "여기에는 교사가 자녀를<br>어떻게 평가하는지를<br>면밀히 살피는 것도 포함된다.",
+      "highlight": "leaning on",
+      "translation": "교사·행정가에게 성적 변경을 압박하며,<br>그 분쟁은 법정으로까지 번질 수 있다.",
+      "image": "",
+      "icon": "",
+      "spark": "yellow",
+      "note": ""
+    },
+    {
+      "en": "dispute",
+      "ko": "분쟁, 다툼",
+      "pos": "명",
+      "reading": "디스퓨트",
+      "ipa": "/dɪˈspjuːt/",
+      "defs": "",
+      "example": "...to change grades in disputes that can even spill into court.",
+      "cf": "(1) resolve a dispute(분쟁을 해결하다)",
+      "enRepeat": 1,
+      "highlight": "disputes",
+      "translation": "법정으로까지 번질 수 있는<br>성적 변경 분쟁에서…",
+      "image": "",
+      "icon": "",
+      "spark": "yellow",
+      "note": ""
+    },
+    {
+      "en": "spill into",
+      "ko": "(갈등 등이) …로 번지다",
+      "pos": "구",
+      "reading": "스필 인투",
+      "ipa": "/spɪl ˈɪntuː/",
+      "defs": "",
+      "example": "...in disputes that can even spill into court.",
+      "cf": "(1) spill over(확산되다)",
+      "enRepeat": 1,
+      "highlight": "spill into",
+      "translation": "법정으로까지 번질 수 있는 분쟁에서…",
+      "image": "",
+      "icon": "",
+      "spark": "yellow",
+      "note": ""
+    },
+    {
+      "en": "pressure",
+      "ko": "압력, 압박",
+      "pos": "명",
+      "reading": "프레셔",
+      "ipa": "/ˈpreʃər/",
+      "defs": "",
+      "example": "Four in 10 American teachers report facing pressure from moms and dads to change grades...",
+      "cf": "(1) face pressure(압력에 직면하다)",
+      "enRepeat": 1,
+      "highlight": "pressure",
+      "translation": "미국 교사 10명 중 4명이<br>성적 변경을 요구하는<br>학부모 압력에 시달린다고 답했다.",
+      "image": "",
+      "icon": "",
+      "spark": "yellow",
+      "note": ""
+    },
+    {
+      "en": "go to battle",
+      "ko": "싸움을 걸다, 맞서 싸우다",
+      "pos": "구",
+      "reading": "고 투 배틀",
+      "ipa": "/ɡoʊ tə ˈbætl/",
+      "defs": "",
+      "example": "“Especially if they get a bad grade,” she added, “the parents go to battle for them.”",
+      "cf": "(1) go to bat for(~을 위해 나서다)",
+      "enRepeat": 1,
+      "highlight": "go to battle",
+      "translation": "“특히 나쁜 성적을 받으면<br>부모들이 아이들을 위해<br>싸움을 건다”고 그녀는 덧붙였다.",
+      "image": "",
+      "icon": "",
+      "spark": "yellow",
+      "note": ""
+    },
+    {
+      "en": "accuse",
+      "ko": "비난하다, 고발하다",
+      "pos": "동",
+      "reading": "어큐즈",
+      "ipa": "/əˈkjuːz/",
+      "defs": "",
+      "example": "Her resignation letter accused district officials of fabricating a grade to “appease an irate parent”...",
+      "cf": "(1) accuse A of B(A를 B로 비난하다)",
+      "enRepeat": 1,
+      "highlight": "accused",
+      "translation": "사직서에서 그녀는 교육구 관계자들이<br>성적을 조작했다고 비난했다.",
+      "image": "",
+      "icon": "",
+      "spark": "yellow",
+      "note": ""
+    },
+    {
+      "en": "fabricate",
+      "ko": "조작하다, 날조하다",
+      "pos": "동",
+      "reading": "패브리케이트",
+      "ipa": "/ˈfæbrɪkeɪt/",
+      "defs": "",
+      "example": "...accused district officials of fabricating a grade to “appease an irate parent”...",
+      "cf": "(1) fabricate evidence(증거를 조작하다)",
+      "enRepeat": 1,
+      "highlight": "fabricating",
+      "translation": "화난 학부모를 달래려고<br>성적을 조작했다고 비난했다.",
       "image": "",
       "icon": "",
       "spark": "yellow",
@@ -168,11 +338,11 @@ const WORDS = {
       "reading": "어피즈",
       "ipa": "/əˈpiːz/",
       "defs": "",
-      "example": "Her resignation letter accused district officials of fabricating a grade to “appease an irate parent”...",
-      "cf": "(1) fabricate(조작하다) (2) irate(분노한)",
+      "example": "...fabricating a grade to “appease an irate parent”...",
+      "cf": "(1) appease anger(분노를 가라앉히다)",
       "enRepeat": 1,
       "highlight": "appease",
-      "translation": "사직서에서 그녀는 교육구 관계자들이<br>“화난 학부모를 달래기 위해” 성적을<br>조작했다고 비난했다.",
+      "translation": "“격노한 학부모를 달래기 위해”<br>성적을 조작했다는 내용이다.",
       "image": "",
       "icon": "",
       "spark": "yellow",
@@ -185,11 +355,45 @@ const WORDS = {
       "reading": "아이레이트",
       "ipa": "/aɪˈreɪt/",
       "defs": "",
-      "example": "...fabricating a grade to “appease an irate parent” whose child had repeatedly failed to turn in an art assignment...",
-      "cf": "(1) turn in(제출하다) (2) assignment(과제)",
+      "example": "...to “appease an irate parent” whose child had repeatedly failed to turn in an art assignment...",
+      "cf": "(1) an irate customer(화난 고객)",
       "enRepeat": 1,
       "highlight": "irate",
-      "translation": "미술 과제를 반복해서 내지 않은<br>자녀를 둔 “격노한 학부모를 달래기 위해”<br>성적을 조작했다는 내용이다.",
+      "translation": "과제를 반복해 내지 않은<br>자녀를 둔 격노한 학부모를<br>달래려 했다는 것이다.",
+      "image": "",
+      "icon": "",
+      "spark": "yellow",
+      "note": ""
+    },
+    {
+      "en": "accountability",
+      "ko": "책임, 책임성",
+      "pos": "명",
+      "reading": "어카운터빌리티",
+      "ipa": "/əˌkaʊntəˈbɪləti/",
+      "defs": "",
+      "example": "“There’s no accountability, so they learn that it doesn’t matter what their work ethic is,” Hardcastle told The Wall Street Journal.",
+      "cf": "(1) hold someone accountable(책임을 묻다)",
+      "enRepeat": 1,
+      "highlight": "accountability",
+      "translation": "“책임이 없으니 아이들은<br>노력 윤리가 중요하지 않다고<br>배운다”고 하드캐슬은 말했다.",
+      "image": "",
+      "icon": "",
+      "spark": "yellow",
+      "note": ""
+    },
+    {
+      "en": "litigation",
+      "ko": "소송, 법적 공방",
+      "pos": "명",
+      "reading": "리티게이션",
+      "ipa": "/ˌlɪtɪˈɡeɪʃn/",
+      "defs": "",
+      "example": "After months of litigation, Kato dropped the suit in September.",
+      "cf": "(1) drop the suit(소송을 취하하다)",
+      "enRepeat": 1,
+      "highlight": "litigation",
+      "translation": "수개월간의 법적 공방 끝에<br>카토는 9월에 소송을 취하했다.",
       "image": "",
       "icon": "",
       "spark": "yellow",
@@ -202,11 +406,45 @@ const WORDS = {
       "reading": "듀 프로세스",
       "ipa": "/ˌduː ˈprɑːses/",
       "defs": "",
-      "example": "If you’re going to accuse a student of using AI you need to understand the impact it has on the student and give them the proper due process.",
-      "cf": "(1) accuse(고발·비난하다) (2) impact(영향)",
+      "example": "If you’re going to accuse a student of using AI you need to ... give them the proper due process.",
+      "cf": "(1) accuse(비난·고발하다)",
       "enRepeat": 1,
       "highlight": "due process",
-      "translation": "학생이 AI를 썼다고 비난하려면<br>그 영향이 얼마나 큰지 이해하고<br>적절한 적법 절차를 보장해야 한다.",
+      "translation": "학생이 AI를 썼다고 비난하려면<br>적절한 적법 절차를 보장해야 한다.",
+      "image": "",
+      "icon": "",
+      "spark": "yellow",
+      "note": ""
+    },
+    {
+      "en": "unsubstantiated",
+      "ko": "근거 없는, 입증되지 않은",
+      "pos": "형",
+      "reading": "언섭스탠시에이티드",
+      "ipa": "/ˌʌnsəbˈstænʃieɪtɪd/",
+      "defs": "",
+      "example": "...Luo calls the teacher’s comments “inaccurate and unsubstantiated,” and is asking a judge to order the district to rehear her case.",
+      "cf": "(1) inaccurate(부정확한) (2) rehear(재심하다)",
+      "enRepeat": 1,
+      "highlight": "unsubstantiated",
+      "translation": "루오는 교사 평가가 “부정확하고<br>근거 없다”며 판사에게<br>재심을 명령해 달라고 요청한다.",
+      "image": "",
+      "icon": "",
+      "spark": "yellow",
+      "note": ""
+    },
+    {
+      "en": "petition",
+      "ko": "청원, 신청서",
+      "pos": "명",
+      "reading": "퍼티션",
+      "ipa": "/pəˈtɪʃn/",
+      "defs": "",
+      "example": "“The district follows that process and will respond to the petition in court,” White said.",
+      "cf": "(1) challenge grades(성적에 이의를 제기하다)",
+      "enRepeat": 1,
+      "highlight": "petition",
+      "translation": "“교육구는 그 절차를 따르며<br>법정에서 청원에 답변할 것”이라고<br>화이트는 말했다.",
       "image": "",
       "icon": "",
       "spark": "yellow",
@@ -1188,9 +1426,8 @@ async function playBackendTTS(text, languageKey, playbackRate = 1, phraseEls = n
   try {
     const audio = await loadBackendTTSAudio(text, languageKey);
     if (!audio) return;
-    /* 밑줄 sync용 bounds는 재생과 병렬 — KO 노출 직후 ex가 바로 나오도록 대기하지 않음 */
     if (Array.isArray(phraseEls) && phraseEls.length) {
-      detectSpeechBoundsFromAudio(audio).catch(() => null);
+      await detectSpeechBoundsFromAudio(audio).catch(() => null);
     }
     await playAudioElement(audio, playbackRate, phraseEls);
   } catch (err) {
@@ -1636,10 +1873,11 @@ async function runPass1OnPage(pageEls, pageItems) {
     }
     await sleep(EN_TO_KO_GAP_MS);
 
-    /* 한글 노출 → 바로 ex 낭독 (speakKo일 때만 KO TTS) */
+    /* 한글 노출 — speakKo일 때만 낭독, 이후 koHoldSec 유지 */
     revealMeaning(wordEl);
     if (MEANING_REVEAL_WAIT_MS > 0) await sleep(MEANING_REVEAL_WAIT_MS);
     if (PASS_CONFIG?.speakKo === true) await playKoTTS(ko);
+    /* ex — enRepeat 횟수만큼 낭독 + 밑줄 sync */
     const exampleSpeak = getExampleSpeakText(item);
     if (exampleSpeak) await speakExampleTimes(exampleSpeak, times, enVoice, wordEl);
     await sleep(getKoHoldMs());
