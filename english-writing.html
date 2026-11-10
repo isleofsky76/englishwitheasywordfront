@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@700&display=swap">
 <link rel="stylesheet" href="redesign-tokens.css?v=20261019rd4">
 <link rel="stylesheet" href="site-masthead.css?v=20261108wx1">
+<link rel="stylesheet" href="redesign-board-list.css?v=20261110express1">
 <link rel="stylesheet" href="nav-home-menu.css?v=20260617">
 <link rel="stylesheet" href="../board-comments.css?v=20261106ew1">
 <style>
@@ -22,6 +23,9 @@
     font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Pretendard","Noto Sans KR","Malgun Gothic",sans-serif;line-height:1.55}
   .wrap{max-width:880px;margin:0 auto;padding:24px 16px 80px}
   h1{font-size:1.6rem;margin:0 0 4px}
+  .ew-express-tabs{margin:8px 0 12px}
+  .ew-express-tabs .rd-list-tabs-wrap{max-width:none;margin:0;padding:0}
+  .ew-express-tabs .rd-list-tabs{padding-bottom:8px}
   .lead{color:var(--sub);margin:0 0 16px;font-size:.95rem}
   .section-no{color:var(--brand);font-weight:700;font-size:.85rem;letter-spacing:.05em}
 
@@ -136,6 +140,7 @@
   <div class="section-no">표현 · 영작</div>
   <p class="back-row" id="back-row" hidden><a href="english-writing.html">← 영작 목록</a></p>
   <h1 id="page-title">영작</h1>
+  <div id="ew-express-tabs" class="ew-express-tabs" hidden></div>
   <p class="meta" id="page-source" hidden></p>
   <p class="lead" id="page-lead">제목을 누르면 그 기사의 영작을 시작합니다.</p>
   <nav class="writing-catalog" id="catalog" hidden></nav>
@@ -152,11 +157,22 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <script src="page30-api-config.js?v=20261101sec1"></script>
+<script src="board-list-config.js?v=20261110express1"></script>
+<script src="redesign-board-list.js?v=20261110express1"></script>
 <script src="site-masthead.js?v=20261108wx1"></script>
 <script src="site-footer.js?v=20261013a"></script>
 <script src="nav-home-menu.js?v=20261106ew1"></script>
 <script src="site-stats.js?v=20261106ew1"></script>
 <script src="../board-comments.js?v=20261106ew1"></script>
+<script>
+  if (typeof mountBoardSiblingTabs === 'function') {
+    mountBoardSiblingTabs(document.getElementById('ew-express-tabs'), {
+      boardKey: 'english-writing',
+      activeKey: 'english-writing',
+      tabs: (window.BoardListConfig && window.BoardListConfig.EXPRESS_TABS) || null
+    });
+  }
+</script>
 <script>
 /* =====================================================================
    설정 — 백엔드 연결

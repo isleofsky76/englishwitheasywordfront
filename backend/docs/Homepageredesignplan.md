@@ -29,7 +29,7 @@
 - [x] 02에서 시사 어휘 퀴즈 분리 → 05, 용어집 → 06
 - [x] 연관단어 목록 탭 = 연관단어 \| 문장 \| 단어장
 - [ ] `popular-voca` / `word-of-the-day` / `situational` / `pros-cons` / `photo` 목록을 **리디자인 목록**으로 통일
-- [ ] `one-sentence`·`daily-english`·`english-writing`에도 같은 탭 스트립
+- [x] `one-sentence`·`daily-english`·`english-writing`에도 같은 탭 스트립 (`EXPRESS_TABS` · 2026-11-10)
 - [ ] 모바일에서 01~06 확인
 - [ ] 햄버거 `mobileDup` 중복 정리
 

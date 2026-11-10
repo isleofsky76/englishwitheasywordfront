@@ -103,7 +103,7 @@ html, body {
   to { background-size: 100% 100%; }
 }
 
-.content { position: absolute; left: 70px; top: 150px; right: 80px; display: flex; flex-direction: column; }
+.content { position: absolute; left: 90px; top: 150px; right: 100px; display: flex; flex-direction: column; }
 /* 뱃지·제목·출처·추출 어휘 — quiz/summary 중에도 고정 */
 .content-head {
   position: relative;
@@ -305,6 +305,13 @@ html, body {
   min-width: 0;
   width: 100%;
 }
+.word-row.word-row--ko-first {
+  flex-wrap: wrap;
+  height: auto;
+  min-height: 108px;
+  overflow: visible;
+  row-gap: 8px;
+}
 /* en+ko 길면 — EN 한 줄, → 뜻은 아래 */
 .word-row.is-compound {
   display: grid;
@@ -393,26 +400,35 @@ html, body {
 .hide-meaning .word:not(.is-revealed) .meaning { color: transparent; }
 .hide-meaning .word.is-revealed .meaning { color: #1f45b8; }
 
-/* kor_eng: KO 먼저, 영어는 ___+3글자 미리보기 */
+/* kor_eng: KO : law____ 미리보기 — meaning이 한 줄 전체를 먹지 않게 */
 .word-row--ko-first .meaning {
   flex: 0 1 auto;
-  max-width: 100%;
+  max-width: min(52%, 14em);
+  overflow: visible;
 }
 .en-wrap {
   display: inline-flex;
   align-items: baseline;
+  flex: 0 0 auto;
   min-width: 0;
 }
+/* 미리보기(___)와 완성 EN — 동일 폰트·크기, 검정 계열 */
 .en-preview {
   display: none;
-  font-family: var(--font-en, "Andika", "Poppins", sans-serif);
+  font-family: var(--font-en-word); /* .en 과 동일 */
   font-weight: 700;
-  font-size: 64px;
-  letter-spacing: 0.06em;
-  color: #3d6eb8;
+  font-size: 82px;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: #14161f;
+  flex-shrink: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 .word.is-answer-hidden .en-preview:not([hidden]) {
   display: inline !important;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 .word.is-answer-hidden .en,
 .word.is-answer-hidden .en-wrap .en {
@@ -421,20 +437,51 @@ html, body {
 .word:not(.is-answer-hidden) .en-preview {
   display: none !important;
 }
+/* 글자 채우는 동안 EN 위치 고정 — 폭 변화 떨림 방지 */
+.word.is-revealing-answer .en {
+  color: #14161f;
+  will-change: contents;
+}
 .word.is-ex-hidden .example-block,
-.word.is-ex-hidden .translation {
+.word.is-ex-hidden .translation,
+.word.is-pron-hidden .pron {
   visibility: hidden !important;
   opacity: 0 !important;
   pointer-events: none;
 }
+/* 발음·예문·번역 부드러운 페이드 인 (EN 재애니 없음) */
+.word.is-bundle-soft .pron,
+.word.is-bundle-soft .example-block {
+  visibility: visible !important;
+  opacity: 0;
+  animation: bundle-soft-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.word.is-bundle-soft .example-block {
+  animation-delay: 0.08s;
+}
+@keyframes bundle-soft-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 10px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
 .translation {
   margin: 8px 0 0;
   padding: 0;
-  font-family: var(--font-ko);
-  font-weight: 600;
-  font-size: 28px;
-  line-height: 1.45;
-  color: #3a4250;
+  width: 100%;
+  font-family: "Andika", "Pretendard", "Noto Sans KR", sans-serif;
+  font-size: 38px;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0.01em;
+  color: #5a5a66;
+  -webkit-font-smoothing: antialiased;
+  word-break: keep-all;
+  overflow-wrap: break-word;
 }
 
 /* 2회차: 영어·발음·예문 숨김 (화살표 → 유지) → 공개 시 부드럽게 */
@@ -462,14 +509,21 @@ html, body {
   visibility: hidden !important;
   opacity: 0 !important;
 }
+/* 2회차: 숨겼던 EN+발음+예문만 페이드 (1회차 글자채우기 후엔 EN 재애니 금지) */
 .word.is-en-revealing:not(.is-en-hidden) .en,
 .word.is-en-revealing:not(.is-en-hidden) .example-block,
 .word.is-en-revealing:not(.is-pron-hidden) .pron {
   visibility: visible;
   animation: en-ipa-reveal 1.05s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
+.word.is-en-revealing.is-bundle-soft .en {
+  animation: none !important;
+  opacity: 1;
+  transform: none;
+  color: #14161f;
+}
 @keyframes en-ipa-reveal {
-  from { opacity: 0; transform: translate3d(0, 14px, 0); }
+  from { opacity: 0; transform: translate3d(0, 10px, 0); }
   to { opacity: 1; transform: none; }
 }
 
@@ -514,7 +568,7 @@ html, body {
   width: 100%;
   /* Andika — 영어 가독성용 본문체 */
   font-family: "Andika", "Pretendard", "Noto Sans KR", sans-serif;
-  font-size: 42px; /* +2px */
+  font-size: 44px;
   font-weight: 500;
   line-height: 1.45;
   letter-spacing: 0.015em;

@@ -32,6 +32,18 @@
   gap: 12px;
 }
 
+.de-express-tabs {
+  margin-top: 4px;
+}
+.de-express-tabs .rd-list-tabs-wrap {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+.de-express-tabs .rd-list-tabs {
+  padding-bottom: 8px;
+}
+
 .de-title {
   margin: 0;
   font-size: clamp(20px, 3.2vw, 24px);
