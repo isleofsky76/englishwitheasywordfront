@@ -18,6 +18,7 @@
 | 5 | `VOCAB_TABS` / `EXPRESS_TABS` 추가 및 연관단어·퀴즈 보드 연결 | 완료 | 2026-11-10 | `board-list-config.js`, cache `?v=20261110tabs1` |
 | 6 | `renderTabs` — 기존 `?` 있는 href에 api 쿼리 중복 방지 | 완료 | 2026-11-10 | 단어장 `?api=prod` 깨짐 방지 |
 | 7 | `WorkCompleteLog.md` 신설 (번호·action·상태·완료일·remark) | 완료 | 2026-11-10 | docs 작업완료 시 이 표에 추가 |
+| 8 | 요청 작업 항상 커밋·푸시 규칙 확정 + 탭/문서 `main` 배포 | 완료 | 2026-11-10 | `ebfe0b0d` → origin/main (Netlify) |
 
 ---
 
