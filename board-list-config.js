@@ -9,7 +9,6 @@
   var HIDDEN_EMPTY_BOARDS = {
     'weather-news': true,
     'literature-news': true,
-    'health-news': true,
     'politics-news': true,
     'ai-news': true,
     'incident-news': true,
@@ -30,13 +29,13 @@
     { key: 'weather-news', label: '날씨/환경', href: 'weather-news-list.html' },
     { key: 'retail-news', label: '유통', href: 'retail-news-list.html' },
     { key: 'literature-news', label: '문학', href: 'literature-news-list.html' },
-    { key: 'health-news', label: '헬스', href: 'health-news-list.html' },
     { key: 'politics-news', label: '정치', href: 'politics-news-list.html' },
     { key: 'industry-news', label: '산업', href: 'industry-news-list.html' },
     { key: 'ai-news', label: '인공지능', href: 'ai-news-list.html' },
     { key: 'incident-news', label: '사건과 사고', href: 'incident-news-list.html' },
     { key: 'ukraine-news', label: '우크라이나/러시아', href: 'ukraine-news-list.html' },
     { key: 'culture-voca', label: '컬쳐', href: 'culture-voca-list.html' },
+    { key: 'health-news', label: '건강', href: 'health-news-list.html' },
     { key: 'ranking-news', label: '랭킹', href: 'ranking-news-list.html' }
   ];
   var NEWS_TABS = NEWS_TABS_ALL.filter(function (t) { return !HIDDEN_EMPTY_BOARDS[t.key]; });
@@ -238,10 +237,10 @@
     'health-news': {
       key: 'health-news',
       labelEn: 'HEALTH NEWS',
-      title: '헬스 뉴스',
+      title: '건강 뉴스',
       description: '건강·의료·웰빙 영문 기사의 핵심 표현을 원문과 함께 읽습니다.',
-      tabLabel: '헬스',
-      categoryLabel: '헬스',
+      tabLabel: '건강',
+      categoryLabel: '건강',
       listPage: 'health-news-list.html',
       postPage: 'health-news.html',
       postPath: 'health-news',

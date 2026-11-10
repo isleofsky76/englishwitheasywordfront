@@ -37,6 +37,7 @@
         { href: 'industry-news-list.html', label: '산업', pages: ['industry-news-list.html', 'industry-news.html'] },
         { href: 'korea-news-list.html', label: '한국', pages: ['korea-news-list.html', 'korea-news.html'] },
         { href: 'culture-voca-list.html', label: '컬쳐', pages: ['culture-voca-list.html', 'culture-voca.html'] },
+        { href: 'health-news-list.html', label: '건강', pages: ['health-news-list.html', 'health-news.html'] },
         { href: 'english-synonym-list.html', label: '연관단어', pages: ['english-synonym-list.html', 'english-synonym.html'] },
         { href: 'daily-english.html', label: '생활 영어 한 줄', pages: ['daily-english.html'] },
         { href: 'english-writing.html', label: '영작', pages: ['english-writing.html'] },

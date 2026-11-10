@@ -122,7 +122,7 @@ export const BOARD_SEO = {
     listHtml: 'literature-news-list.html',
   },
   'health-news': {
-    label: '헬스뉴스',
+    label: '건강 뉴스',
     cssFile: 'news-voca.css',
     cssVersion: '20261020rd21',
     jsFile: 'health-news.js',
@@ -739,7 +739,7 @@ export const BOARD_API_ENDPOINTS = [
   { apiPath: '/weather-news', boardPath: 'weather-news', label: '날씨환경뉴스' },
   { apiPath: '/retail-news', boardPath: 'retail-news', label: '유통뉴스' },
   { apiPath: '/literature-news', boardPath: 'literature-news', label: '문학뉴스' },
-  { apiPath: '/health-news', boardPath: 'health-news', label: '헬스뉴스' },
+  { apiPath: '/health-news', boardPath: 'health-news', label: '건강 뉴스' },
   { apiPath: '/politics-news', boardPath: 'politics-news', label: '정치뉴스' },
   { apiPath: '/industry-news', boardPath: 'industry-news', label: '산업뉴스' },
   { apiPath: '/ai-news', boardPath: 'ai-news', label: '인공지능뉴스' },

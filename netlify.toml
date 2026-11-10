@@ -7,6 +7,19 @@
   status = 200
   force = false
 
+# 건강 글로 재분류된 구 국제 URL
+[[redirects]]
+  from = "/news-voca/neuropathy-ischemic-impairment-underlying-clinical-trial-data-related-words/*"
+  to = "/health-news/neuropathy-ischemic-impairment-underlying-clinical-trial-data-related-words/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/news-voca/disc-bulge-twinge-sedentary-correlate-undulating-related-words/*"
+  to = "/health-news/disc-bulge-twinge-sedentary-correlate-undulating-related-words/"
+  status = 301
+  force = true
+
 [[redirects]]
   from = "/news-voca/*"
   to = "/news-voca.html"

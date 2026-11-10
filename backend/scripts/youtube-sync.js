@@ -36,6 +36,7 @@ import { uploadUkraineNews } from './ukraine-news-format.js';
 import { uploadSynonym } from './synonym-format.js';
 import { uploadEnglishWriting } from './english-writing-format.js';
 import { uploadUsNews } from './us-news-format.js';
+import { uploadHealthNews } from './health-news-format.js';
 import { uploadVocabularyQuiz } from './vocabulary-quiz-format.js';
 import { enrichQuizTrackWords } from './quiz-answer-alts.js';
 
@@ -59,6 +60,7 @@ const UPLOADERS = {
   'english-synonym': uploadSynonym,
   'english-writing': uploadEnglishWriting,
   'us-news': uploadUsNews,
+  'health-news': uploadHealthNews,
 };
 
 /** 업로드된 글의 wordMeta → 퀴즈 pairs */

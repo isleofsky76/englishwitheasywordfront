@@ -40,7 +40,7 @@ function redirectHtml(title) {
 }
 
 const TITLE_MAP = {
-  'health-news-list.html': '헬스 뉴스',
+  'health-news-list.html': '건강 뉴스',
   'weather-news-list.html': '날씨/환경 뉴스',
   'literature-news-list.html': '문학 뉴스',
   'politics-news-list.html': '정치 뉴스',
