@@ -10,7 +10,7 @@ Do **not** restore click-to-reveal (`quiz-reveal-*`) or API-shell SEO pages that
 
 ## Required UX
 - Typed answers with soft/similar-answer matching
-- Modes: 영어 → 한글 and 한글 → 영어 (`#m-en` / `#m-ko`)
+- Modes: 영어 → 한글, 한글 → 영어, and 객관식 (`#m-en` / `#m-ko` / `#m-mc`) — all three required on every quiz page
 - SEO pages under `vocabulary-quiz/<slug>/` must embed `VOCAB_QUIZ_TRACK_WORDS` and `vocabulary-quiz-track.js`
 
 ## Generation

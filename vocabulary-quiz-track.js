@@ -736,6 +736,29 @@
     }
   }
 
+  /** 영→한 / 한→영 / 객관식 — 마크업에 빠져 있으면 런타임에 보강 */
+  function ensureModeTabsButtons() {
+    if (trackOptions.hideModeTabs) return;
+    var track = document.getElementById("vq-track") || document.querySelector(".vq-track");
+    if (!track) return;
+    var seg = track.querySelector(".vq-seg");
+    if (!seg) return;
+    var specs = [
+      { id: "m-en", label: "영어 → 한글" },
+      { id: "m-ko", label: "한글 → 영어" },
+      { id: "m-mc", label: "객관식" },
+    ];
+    specs.forEach(function (spec) {
+      if (document.getElementById(spec.id)) return;
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.id = spec.id;
+      btn.setAttribute("aria-pressed", "false");
+      btn.textContent = spec.label;
+      seg.appendChild(btn);
+    });
+  }
+
   function applyModeChrome() {
     var track = document.getElementById("vq-track") || document.querySelector(".vq-track");
     if (!track) return;
@@ -927,6 +950,7 @@
     }
     normalizePageTitles();
     applyModeChrome();
+    ensureModeTabsButtons();
     bound = false;
     mcCache = null;
     bind();

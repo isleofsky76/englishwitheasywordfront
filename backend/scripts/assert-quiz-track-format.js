@@ -28,6 +28,7 @@ const REQUIRED = [
   { re: /vocabulary-quiz-track\.js/i, why: 'vocabulary-quiz-track.js' },
   { re: /id=["']m-en["']/, why: '영어 → 한글 버튼' },
   { re: /id=["']m-ko["']/, why: '한글 → 영어 버튼' },
+  { re: /id=["']m-mc["']/, why: '객관식 버튼' },
 ];
 
 function listIndexHtml(dir) {
