@@ -670,3 +670,44 @@ body.rd-list--keyword-cards .rd-list-feature--kw .rd-kw-thumb {
     font-size: 13px;
   }
 }
+
+/* 모바일「전체 글」키워드 카드만 — 섬네일 1/2 가로형 (대표·사이드는 유지) */
+@media (max-width: 767px) {
+  body.rd-list--keyword-cards .rd-list-card.rd-list-card--kw {
+    flex-direction: row;
+    align-items: center;
+    gap: 14px;
+  }
+
+  body.rd-list--keyword-cards .rd-list-card--kw .rd-kw-thumb {
+    flex: 0 0 50%;
+    width: 50%;
+    max-width: 50%;
+    aspect-ratio: 2 / 1;
+    padding: 10px 12px;
+  }
+
+  body.rd-list--keyword-cards .rd-list-card--kw .rd-kw-word {
+    font-size: 20px;
+  }
+
+  body.rd-list--keyword-cards .rd-list-card--kw .rd-kw-word--fallback {
+    font-size: 18px;
+  }
+
+  body.rd-list--keyword-cards .rd-list-card--kw .rd-kw-sub {
+    margin-top: 4px;
+    font-size: 11px;
+  }
+
+  body.rd-list--keyword-cards .rd-list-card--kw .rd-list-card-title {
+    flex: 1 1 auto;
+    min-width: 0;
+    font-size: 15px;
+    line-height: 1.45;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
