@@ -444,12 +444,8 @@
   function optsEmptyBadge(cfg) {
     if (!cfg) return 'NEWS';
     if (cfg.quiz || cfg.key === 'vocabulary-quiz' || /quiz/i.test(cfg.postPath || '')) return 'QUIZ';
-    if (cfg.navGroup === 'express') {
-      return String(cfg.tabLabel || cfg.categoryLabel || cfg.title || '표현').trim() || '표현';
-    }
-    if (cfg.navGroup === 'vocab') {
-      return String(cfg.tabLabel || cfg.categoryLabel || '단어').trim() || '단어';
-    }
+    /* 표현·단어 목록은 탭/메타에 이미 카테고리가 있어 섬네일 배지(상황 등)는 반복만 됨 */
+    if (cfg.navGroup === 'express' || cfg.navGroup === 'vocab') return '';
     return 'NEWS';
   }
 
@@ -474,9 +470,13 @@
         '</div>'
       );
     }
+    var badgeLabel = opts.emptyBadge == null ? 'NEWS' : String(opts.emptyBadge);
+    var badgeHtml = badgeLabel
+      ? '<span class="rd-list-empty-badge">' + escapeHtml(badgeLabel) + '</span>'
+      : '';
     return (
       '<div class="' + className + ' rd-list-img-empty" aria-hidden="true">' +
-        '<span class="rd-list-empty-badge">' + escapeHtml(opts.emptyBadge || 'NEWS') + '</span>' +
+        badgeHtml +
         '<span class="rd-list-empty-letter">' + escapeHtml(placeholder || '') + '</span>' +
       '</div>'
     );
