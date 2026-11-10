@@ -26,6 +26,7 @@
 | 13 | 모바일 키워드 목록 카드: 섬네일 50% 가로형 + 제목 우측 4줄 | 완료 | 2026-11-10 | `.rd-list-card--kw` only ≤767px, `?v=20261110kwcard1`, `b7b3e486` deployed |
 | 14 | 규칙 재확인: 요청 작업은 같은 턴에 항상 커밋+푸시(배포) | 완료 | 2026-11-10 | always-deploy preference 강화 |
 | 15 | PC 키워드 섬네일: 긴 영단어 cqw+fit JS로 상자 맞춤 | 완료 | 2026-11-10 | `?v=20261110fit1` vulnerability 줄바꿈 삐침 방지 |
+| 16 | 홈 TODAY'S QUIZ 배너 제거 (05 시사 어휘 퀴즈와 중복) | 완료 | 2026-11-10 | index `rd-quiz-banner-wrap` 삭제 |
 
 ---
 
