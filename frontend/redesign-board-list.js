@@ -612,9 +612,7 @@
       container.innerHTML =
         '<div class="rd-list-wrap">' +
           '<div class="rd-list-hero">' +
-            '<span class="rd-list-kicker">' + escapeHtml(cfg.labelEn) + '</span>' +
-            '<h1>' + escapeHtml(cfg.title) + '</h1>' +
-            '<p>' + escapeHtml(cfg.description) + '</p>' +
+            '<h1 class="rd-list-kicker">' + escapeHtml(cfg.labelEn) + '</h1>' +
           '</div>' +
           renderTabs(cfg, apiMode) +
           '<div class="rd-list-empty">게시글이 없습니다.</div>' +
@@ -637,9 +635,7 @@
     container.innerHTML =
       '<div class="rd-list-wrap">' +
         '<div class="rd-list-hero">' +
-          '<span class="rd-list-kicker">' + escapeHtml(cfg.labelEn) + '</span>' +
-          '<h1>' + escapeHtml(cfg.title) + '</h1>' +
-          '<p>' + escapeHtml(cfg.description) + '</p>' +
+          '<h1 class="rd-list-kicker">' + escapeHtml(cfg.labelEn) + '</h1>' +
         '</div>' +
         renderTabs(cfg, apiMode) +
         '<div class="rd-list-featured">' +

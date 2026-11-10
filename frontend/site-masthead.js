@@ -140,7 +140,7 @@
       tone: 'quiz',
       pages: ['vocabulary-quiz-list.html', 'vocabulary-quiz.html'],
       children: [
-        { href: 'vocabulary-quiz-list.html', label: '퀴즈 목록', tone: 'quiz', pages: ['vocabulary-quiz-list.html', 'vocabulary-quiz.html'] }
+        { href: 'vocabulary-quiz-list.html', label: '시사 어휘 퀴즈', tone: 'quiz', pages: ['vocabulary-quiz-list.html', 'vocabulary-quiz.html'] }
       ]
     },
     {

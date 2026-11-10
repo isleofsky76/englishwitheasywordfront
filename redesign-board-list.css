@@ -31,35 +31,34 @@ body.rd-list .world-clock-bar {
 .rd-list-hero {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 56px 24px 32px;
+  padding: 28px 24px 16px;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 0;
 }
 
-.rd-list-kicker {
-  font-size: 13px;
+/* 영문 라벨만 제목으로 — 모바일 우측 여백·한글 대형 h1 제거 */
+.rd-list-kicker,
+.rd-list-hero h1.rd-list-kicker {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 15px; /* 13px + 2 */
   font-weight: 600;
   letter-spacing: 2px;
+  line-height: 1.3;
   color: var(--accent);
   text-transform: uppercase;
 }
 
-.rd-list-hero h1 {
-  margin: 0;
-  font-family: var(--font-serif);
-  font-weight: 900;
-  font-size: clamp(36px, 6vw, 56px);
-  line-height: 1.15;
-  letter-spacing: -1px;
-}
+@media (min-width: 768px) {
+  .rd-list-hero {
+    padding: 40px 24px 20px;
+  }
 
-.rd-list-hero p {
-  margin: 0;
-  max-width: 640px;
-  font-size: 18px;
-  line-height: 1.7;
-  color: var(--ink-muted);
+  .rd-list-kicker,
+  .rd-list-hero h1.rd-list-kicker {
+    font-size: 16px;
+  }
 }
 
 .rd-list-tabs-wrap {
