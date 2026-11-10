@@ -41,6 +41,24 @@
   ];
   var NEWS_TABS = NEWS_TABS_ALL.filter(function (t) { return !HIDDEN_EMPTY_BOARDS[t.key]; });
 
+  /* index 02「단어 다지기」·마스트헤드 children과 동일 — 뉴스 NEWS_TABS처럼 목록 상단 탭으로 노출 */
+  var VOCAB_TABS = [
+    { key: 'english-synonym', label: '연관단어', href: 'english-synonym-list.html' },
+    { key: 'one-sentence', label: '문장', href: 'one-sentence.html' },
+    { key: 'vocabulary-quiz', label: '시사 어휘 퀴즈', href: 'vocabulary-quiz-list.html' },
+    { key: 'word-of-the-day', label: '단어장', href: 'word-of-the-day-list.html?api=prod' }
+  ];
+
+  /* index 03「표현 익히기」·마스트헤드 children과 동일 */
+  var EXPRESS_TABS = [
+    { key: 'popular-voca', label: '이럴 땐 영어로?', href: 'popular-voca-list.html' },
+    { key: 'daily-english', label: '생활 영어 한 줄', href: 'daily-english.html' },
+    { key: 'english-writing', label: '영작', href: 'english-writing.html' },
+    { key: 'situational-english', label: '상황', href: 'situational-english-list.html' },
+    { key: 'pros-cons', label: 'Pros & Cons', href: 'pros-cons-list.html' },
+    { key: 'photo-english', label: '포토', href: 'photo-english-list.html' }
+  ];
+
   var BOARDS = {
     'news-voca': {
       key: 'news-voca',
@@ -379,9 +397,9 @@
       board: 'vocabulary',
       apiPath: '/vocabulary',
       navGroup: 'vocab',
-      tabs: null,
+      tabs: VOCAB_TABS,
       articleLayout: 'auto',
-      breadcrumbParent: { label: '연관단어', href: 'english-synonym-list.html' }
+      breadcrumbParent: { label: '단어 다지기', href: 'english-synonym-list.html' }
     },
     'word-of-the-day': {
       key: 'word-of-the-day',
@@ -395,10 +413,10 @@
       postPath: 'word-of-the-day',
       board: 'wordofday',
       apiPath: '/wordofday',
-      navGroup: 'wotd',
-      tabs: null,
+      navGroup: 'vocab',
+      tabs: VOCAB_TABS,
       articleLayout: 'word-detail',
-      breadcrumbParent: { label: '단어장', href: 'word-of-the-day-list.html?api=prod' }
+      breadcrumbParent: { label: '단어 다지기', href: 'english-synonym-list.html' }
     },
     'popular-voca': {
       key: 'popular-voca',
@@ -413,9 +431,9 @@
       board: 'easy-voca',
       apiPath: '/easy-voca',
       navGroup: 'express',
-      tabs: null,
+      tabs: EXPRESS_TABS,
       articleLayout: 'header-only',
-      breadcrumbParent: { label: '표현', href: 'popular-voca-list.html' }
+      breadcrumbParent: { label: '표현 익히기', href: 'popular-voca-list.html' }
     },
     'situational-english': {
       key: 'situational-english',
@@ -430,9 +448,9 @@
       board: 'situational-english',
       apiPath: '/situational-english',
       navGroup: 'express',
-      tabs: null,
+      tabs: EXPRESS_TABS,
       articleLayout: 'header-only',
-      breadcrumbParent: { label: '표현', href: 'popular-voca-list.html' }
+      breadcrumbParent: { label: '표현 익히기', href: 'popular-voca-list.html' }
     },
     'pros-cons': {
       key: 'pros-cons',
@@ -447,9 +465,9 @@
       board: 'pros-cons',
       apiPath: '/pros-cons',
       navGroup: 'express',
-      tabs: null,
+      tabs: EXPRESS_TABS,
       articleLayout: 'header-only',
-      breadcrumbParent: { label: '표현', href: 'popular-voca-list.html' }
+      breadcrumbParent: { label: '표현 익히기', href: 'popular-voca-list.html' }
     },
     'photo-english': {
       key: 'photo-english',
@@ -464,9 +482,9 @@
       board: 'photo-english',
       apiPath: '/photo-english',
       navGroup: 'express',
-      tabs: null,
+      tabs: EXPRESS_TABS,
       articleLayout: 'header-only',
-      breadcrumbParent: { label: '포토', href: 'photo-english-list.html' }
+      breadcrumbParent: { label: '표현 익히기', href: 'popular-voca-list.html' }
     },
     'calm-mind': {
       key: 'calm-mind',
@@ -514,10 +532,10 @@
       postPath: 'vocabulary-quiz',
       board: 'vocabulary-quiz',
       apiPath: '/vocabulary-quiz',
-      navGroup: 'quiz',
-      tabs: null,
+      navGroup: 'vocab',
+      tabs: VOCAB_TABS,
       articleLayout: 'header-only',
-      breadcrumbParent: { label: '시사 어휘 퀴즈', href: 'vocabulary-quiz-list.html' }
+      breadcrumbParent: { label: '단어 다지기', href: 'english-synonym-list.html' }
     },
     'shorts-bg-image': {
       key: 'shorts-bg-image',
@@ -531,7 +549,7 @@
       postPath: 'shorts-bg-image',
       board: 'shorts-bg-image',
       apiPath: '/shorts-bg-image',
-      navGroup: 'express',
+      navGroup: 'read',
       tabs: null,
       articleLayout: 'header-only',
       breadcrumbParent: { label: '신문읽는 이미지', href: 'shorts-bg-image-list.html' }
@@ -549,9 +567,9 @@
       board: 'cooking-voca',
       apiPath: '/cooking-voca',
       navGroup: 'express',
-      tabs: null,
+      tabs: EXPRESS_TABS,
       articleLayout: 'auto',
-      breadcrumbParent: { label: '요리', href: 'cooking-voca-list.html' }
+      breadcrumbParent: { label: '표현 익히기', href: 'popular-voca-list.html' }
     }
   };
 
@@ -662,6 +680,8 @@
     BOARDS: BOARDS,
     NEWS_TABS: NEWS_TABS,
     NEWS_TABS_ALL: NEWS_TABS_ALL,
+    VOCAB_TABS: VOCAB_TABS,
+    EXPRESS_TABS: EXPRESS_TABS,
     HIDDEN_EMPTY_BOARDS: HIDDEN_EMPTY_BOARDS,
     get: getBoardConfig,
     resolveSource: resolveSource,

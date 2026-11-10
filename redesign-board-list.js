@@ -569,10 +569,13 @@
 
   function renderTabs(cfg, apiMode) {
     if (!cfg.tabs || !cfg.tabs.length) return '';
-    var apiQ = apiMode ? '?api=' + encodeURIComponent(apiMode) : '';
     var links = cfg.tabs.map(function (tab) {
       var active = tab.key === cfg.key ? ' is-active' : '';
-      var href = tab.href + apiQ;
+      var href = String(tab.href || '');
+      /* 이미 ?api=prod 등이 있으면 붙이지 않음 (단어장 탭 깨짐 방지) */
+      if (apiMode && href.indexOf('?') === -1) {
+        href += '?api=' + encodeURIComponent(apiMode);
+      }
       return '<a class="rd-list-tab' + active + '" href="' + escapeAttr(href) + '"' +
         (active ? ' aria-current="page"' : '') + '>' + escapeHtml(tab.label) + '</a>';
     }).join('');

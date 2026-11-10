@@ -1,0 +1,39 @@
+# 작업완료 목록 (Work Complete Log)
+
+규칙: 문서·기능 작업이 **완료되면** 이 표에 한 줄 추가한다.  
+컬럼: **번호 | action | 상태 | 완료일 | remark**
+
+상태 값: `완료` / `부분완료` / `보류` / `취소`
+
+관련 계획: [Homepageredesignplan.md](./Homepageredesignplan.md)
+
+---
+
+| 번호 | action | 상태 | 완료일 | remark |
+|------|--------|------|--------|--------|
+| 1 | 오늘의 단어·퀴즈·최신 어휘 유입 방식 점검, JS-only 영역 목록 | 완료 | 2026-10-23 | 30일 계획 1주차 |
+| 2 | 구글 서치 콘솔·네이버 서치어드바이저 등록, 사이트맵 제출 | 완료 | 2026-10-26 | 30일 계획 1주차 |
+| 3 | `Homepageredesignplan.md` 사업계획서로 전면 교체 (홈·30일·Pain·체크리스트 100) | 완료 | 2026-11-10 | 쇼츠(20sentence) 초안 대체 |
+| 4 | 01~05 메뉴 불일치 진단 (뉴스만 `NEWS_TABS`, 단어/표현 `tabs:null`) | 완료 | 2026-11-10 | 모바일·목록 탭 일관성 |
+| 5 | `VOCAB_TABS` / `EXPRESS_TABS` 추가 및 연관단어·퀴즈 보드 연결 | 완료 | 2026-11-10 | `board-list-config.js`, cache `?v=20261110tabs1` |
+| 6 | `renderTabs` — 기존 `?` 있는 href에 api 쿼리 중복 방지 | 완료 | 2026-11-10 | 단어장 `?api=prod` 깨짐 방지 |
+| 7 | `WorkCompleteLog.md` 신설 (번호·action·상태·완료일·remark) | 완료 | 2026-11-10 | docs 작업완료 시 이 표에 추가 |
+
+---
+
+## 사용 방법
+
+1. 작업이 끝나면 **맨 아래 번호 +1** 로 행을 추가한다.  
+2. `Homepageredesignplan.md` 체크박스를 `[x]`로 바꾼 뒤, **같은 날** 이 로그에도 남긴다.  
+3. 부분만 끝냈으면 상태 `부분완료`, remark에 남은 일을 적는다.  
+4. 배포가 필요하면 remark에 커밋/캐시 버전을 적는다.
+
+## 다음 후보 (아직 미완료 — 끝나면 위로 옮김)
+
+| 예정 action | remark |
+|-------------|--------|
+| 표현·단어장 목록 리디자인 + `EXPRESS_TABS`/`VOCAB_TABS` 노출 | 구형 Bootstrap navbar |
+| `one-sentence`·`daily-english`·`english-writing` 탭 스트립 | 공통 partial |
+| 햄버거 `mobileDup` 중복 정리 | 개선 10가지 #8 |
+| 사이트 검색 JSON + `search.html` | 11/10 오늘 할 일 |
+| 홈 퀴즈 오타 물락→몰락 | 5분 |
