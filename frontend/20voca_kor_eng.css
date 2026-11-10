@@ -384,6 +384,50 @@ html, body {
 .hide-meaning .word:not(.is-revealed) .meaning { color: transparent; }
 .hide-meaning .word.is-revealed .meaning { color: #1f45b8; }
 
+/* kor_eng: KO 먼저, 영어는 ___+3글자 미리보기 */
+.word-row--ko-first .meaning {
+  flex: 0 1 auto;
+  max-width: 100%;
+}
+.en-wrap {
+  display: inline-flex;
+  align-items: baseline;
+  min-width: 0;
+}
+.en-preview {
+  display: none;
+  font-family: var(--font-en, "Andika", "Poppins", sans-serif);
+  font-weight: 700;
+  font-size: 64px;
+  letter-spacing: 0.04em;
+  color: #8a9099;
+}
+.word.is-answer-hidden .en-preview {
+  display: inline;
+}
+.word.is-answer-hidden .en,
+.word.is-answer-hidden .en-wrap .en {
+  display: none !important;
+}
+.word:not(.is-answer-hidden) .en-preview {
+  display: none !important;
+}
+.word.is-ex-hidden .example-block,
+.word.is-ex-hidden .translation {
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none;
+}
+.translation {
+  margin: 8px 0 0;
+  padding: 0;
+  font-family: var(--font-ko);
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 1.45;
+  color: #3a4250;
+}
+
 /* 2회차: 영어·발음·예문 숨김 (화살표 → 유지) → 공개 시 부드럽게 */
 .word.is-en-hidden .en,
 .word.is-en-hidden .example-block {

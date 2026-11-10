@@ -57,28 +57,27 @@ const TTS_CONFIG = {
  * wordsPerPage — 한 화면에 보이는 단어 수 (예: 5 → 1~5, 다음 6~10)
  */
 const DISPLAY_CONFIG = {
-  wordsPerPage: 5,
+  wordsPerPage: 1,
 };
 
 /**
- * 학습 패스 on/off
- * pass1 — true: 한글 숨김 → 영어 읽기 → 한글 노출(·읽기)
- * pass2 — true: 영어 숨김 → 한글(·읽기) → 영어(+발음·예문) 노출·읽기
- * speakKo — false면 한글은 화면에만 보이고 TTS로 읽지 않음
+ * 학습 패스 on/off — 20voca_kor_eng: 한글 → 영어
+ * pass1 — true: 한글 낭독 → 1.5초 → 영어(+예문·번역) 노출·낭독
+ * pass2 — 미사용
+ * speakKo — true면 한글 TTS
  * runSummary — false면 summary·quiz 없이 단어 패스 후 멈춤
- * 둘 다 true면 1 → 2 순서로 진행
  */
 const PASS_CONFIG = {
   pass1: true,
   pass2: false,
-  speakKo: false,
+  speakKo: true,
   runSummary: false,
 };
 
 /**
  * 타이밍 (초)
  * wordGapSec     — 단어 → 다음 단어로 넘어가기 전 대기
- * koHoldSec      — 한글(KO) 노출 후 유지 시간 (speakKo여도 TTS 끝난 뒤 추가 대기)
+ * koHoldSec      — 한글 낭독 후 → 영어 노출 전 대기 (1.5초)
  * enRepeatGapSec — enRepeat 반복 낭독 사이 간격 (기본 1)
  */
 const TIMING_CONFIG = {
@@ -86,6 +85,9 @@ const TIMING_CONFIG = {
   koHoldSec: 1.5,
   enRepeatGapSec: 1,
 };
+
+/** 영어 미리보기: 단어 앞 ___ + 앞 3글자 */
+const EN_PREVIEW_LETTERS = 3;
 
 /* =====================================================================
    ✏️ 콘텐츠 — colourchange words[] + upgrades6 REVIEW_QUIZ 동일 JSON
@@ -111,13 +113,13 @@ const WORDS = {
   words: [
     {
       "en": "sue",
-      "ko": "고소하다, 소송을 제기하다",
+      "ko": "고소하다",
       "pos": "동",
       "reading": "수",
       "ipa": "/suː/",
       "defs": "",
-      "example": "",
-      "cf": "",
+      "example": "The Parents Suing Schools Because Their Kids Got Bad Grades",
+      "cf": "(1) sue for(…을 이유로 고소하다)",
       "enRepeat": 1,
       "highlight": "Suing",
       "translation": "자녀가 나쁜 성적을 받았다고<br>학교를 고소하는 부모들",
@@ -134,8 +136,8 @@ const WORDS = {
       "reading": "로수트",
       "ipa": "/ˈlɔːsuːt/",
       "defs": "",
-      "example": "",
-      "cf": "",
+      "example": "In a lawsuit filed in October, Luo calls the teacher’s comments “inaccurate and unsubstantiated”...",
+      "cf": "(1) file a lawsuit(소송을 제기하다)",
       "enRepeat": 1,
       "highlight": "lawsuit",
       "translation": "10월에 제기된 소송에서 루오는<br>교사 평가를 “부정확하고<br>근거 없다”고 주장한다.",
@@ -151,8 +153,8 @@ const WORDS = {
       "reading": "스팻",
       "ipa": "/spæt/",
       "defs": "",
-      "example": "",
-      "cf": "",
+      "example": "What began last fall as a playground spat between third-graders has now escalated into a courtroom brawl...",
+      "cf": "(1) escalate(격화되다) (2) courtroom brawl(법정 공방)",
       "enRepeat": 1,
       "highlight": "spat",
       "translation": "작년 가을 초등 3학년들의<br>운동장 티격태격에서 시작된 일이<br>이제는 법정 공방으로 번졌다.",
@@ -168,8 +170,8 @@ const WORDS = {
       "reading": "에스컬레이트",
       "ipa": "/ˈeskəleɪt/",
       "defs": "",
-      "example": "",
-      "cf": "",
+      "example": "...has now escalated into a courtroom brawl: In a lawsuit filed in October...",
+      "cf": "(1) escalate into(…으로 번지다)",
       "enRepeat": 1,
       "highlight": "escalated",
       "translation": "이제는 법정 공방으로 격화됐다.<br>10월에 제기된 소송에서…",
@@ -185,8 +187,8 @@ const WORDS = {
       "reading": "코트룸 브롤",
       "ipa": "/ˈkɔːrtruːm brɔːl/",
       "defs": "",
-      "example": "",
-      "cf": "",
+      "example": "...has now escalated into a courtroom brawl...",
+      "cf": "(1) brawl(싸움·격렬한 다툼)",
       "enRepeat": 1,
       "highlight": "courtroom brawl",
       "translation": "이제는 법정 공방으로 번졌다.",
@@ -202,8 +204,8 @@ const WORDS = {
       "reading": "애드버세리얼",
       "ipa": "/ˌædvərˈseriəl/",
       "defs": "",
-      "example": "",
-      "cf": "",
+      "example": "Today, they often take a more adversarial approach, educators say...",
+      "cf": "(1) approach(태도·접근)",
       "enRepeat": 1,
       "highlight": "adversarial",
       "translation": "오늘날 부모들은 더 적대적인<br>태도를 취한다고 교육자들은 말한다.",
@@ -219,8 +221,8 @@ const WORDS = {
       "reading": "린 온",
       "ipa": "/liːn ɑːn/",
       "defs": "",
-      "example": "",
-      "cf": "",
+      "example": "...leaning on teachers and administrators to change grades in disputes that can even spill into court.",
+      "cf": "(1) dispute(분쟁) (2) spill into(…으로 번지다)",
       "enRepeat": 1,
       "highlight": "leaning on",
       "translation": "교사·행정가에게 성적 변경을 압박하며,<br>그 분쟁은 법정으로까지 번질 수 있다.",
@@ -236,8 +238,8 @@ const WORDS = {
       "reading": "디스퓨트",
       "ipa": "/dɪˈspjuːt/",
       "defs": "",
-      "example": "",
-      "cf": "",
+      "example": "...to change grades in disputes that can even spill into court.",
+      "cf": "(1) resolve a dispute(분쟁을 해결하다)",
       "enRepeat": 1,
       "highlight": "disputes",
       "translation": "법정으로까지 번질 수 있는<br>성적 변경 분쟁에서…",
@@ -253,8 +255,8 @@ const WORDS = {
       "reading": "스필 인투",
       "ipa": "/spɪl ˈɪntuː/",
       "defs": "",
-      "example": "",
-      "cf": "",
+      "example": "...in disputes that can even spill into court.",
+      "cf": "(1) spill over(확산되다)",
       "enRepeat": 1,
       "highlight": "spill into",
       "translation": "법정으로까지 번질 수 있는 분쟁에서…",
@@ -270,8 +272,8 @@ const WORDS = {
       "reading": "프레셔",
       "ipa": "/ˈpreʃər/",
       "defs": "",
-      "example": "",
-      "cf": "",
+      "example": "Four in 10 American teachers report facing pressure from moms and dads to change grades...",
+      "cf": "(1) face pressure(압력에 직면하다)",
       "enRepeat": 1,
       "highlight": "pressure",
       "translation": "미국 교사 10명 중 4명이<br>성적 변경을 요구하는<br>학부모 압력에 시달린다고 답했다.",
@@ -287,8 +289,8 @@ const WORDS = {
       "reading": "고 투 배틀",
       "ipa": "/ɡoʊ tə ˈbætl/",
       "defs": "",
-      "example": "",
-      "cf": "",
+      "example": "“Especially if they get a bad grade,” she added, “the parents go to battle for them.”",
+      "cf": "(1) go to bat for(~을 위해 나서다)",
       "enRepeat": 1,
       "highlight": "go to battle",
       "translation": "“특히 나쁜 성적을 받으면<br>부모들이 아이들을 위해<br>싸움을 건다”고 그녀는 덧붙였다.",
@@ -304,8 +306,8 @@ const WORDS = {
       "reading": "어큐즈",
       "ipa": "/əˈkjuːz/",
       "defs": "",
-      "example": "",
-      "cf": "",
+      "example": "Her resignation letter accused district officials of fabricating a grade to “appease an irate parent”...",
+      "cf": "(1) accuse A of B(A를 B로 비난하다)",
       "enRepeat": 1,
       "highlight": "accused",
       "translation": "사직서에서 그녀는 교육구 관계자들이<br>성적을 조작했다고 비난했다.",
@@ -321,8 +323,8 @@ const WORDS = {
       "reading": "패브리케이트",
       "ipa": "/ˈfæbrɪkeɪt/",
       "defs": "",
-      "example": "",
-      "cf": "",
+      "example": "...accused district officials of fabricating a grade to “appease an irate parent”...",
+      "cf": "(1) fabricate evidence(증거를 조작하다)",
       "enRepeat": 1,
       "highlight": "fabricating",
       "translation": "화난 학부모를 달래려고<br>성적을 조작했다고 비난했다.",
@@ -338,8 +340,8 @@ const WORDS = {
       "reading": "어피즈",
       "ipa": "/əˈpiːz/",
       "defs": "",
-      "example": "",
-      "cf": "",
+      "example": "...fabricating a grade to “appease an irate parent”...",
+      "cf": "(1) appease anger(분노를 가라앉히다)",
       "enRepeat": 1,
       "highlight": "appease",
       "translation": "“격노한 학부모를 달래기 위해”<br>성적을 조작했다는 내용이다.",
@@ -355,8 +357,8 @@ const WORDS = {
       "reading": "아이레이트",
       "ipa": "/aɪˈreɪt/",
       "defs": "",
-      "example": "",
-      "cf": "",
+      "example": "...to “appease an irate parent” whose child had repeatedly failed to turn in an art assignment...",
+      "cf": "(1) an irate customer(화난 고객)",
       "enRepeat": 1,
       "highlight": "irate",
       "translation": "과제를 반복해 내지 않은<br>자녀를 둔 격노한 학부모를<br>달래려 했다는 것이다.",
@@ -372,8 +374,8 @@ const WORDS = {
       "reading": "어카운터빌리티",
       "ipa": "/əˌkaʊntəˈbɪləti/",
       "defs": "",
-      "example": "",
-      "cf": "",
+      "example": "“There’s no accountability, so they learn that it doesn’t matter what their work ethic is,” Hardcastle told The Wall Street Journal.",
+      "cf": "(1) hold someone accountable(책임을 묻다)",
       "enRepeat": 1,
       "highlight": "accountability",
       "translation": "“책임이 없으니 아이들은<br>노력 윤리가 중요하지 않다고<br>배운다”고 하드캐슬은 말했다.",
@@ -389,8 +391,8 @@ const WORDS = {
       "reading": "리티게이션",
       "ipa": "/ˌlɪtɪˈɡeɪʃn/",
       "defs": "",
-      "example": "",
-      "cf": "",
+      "example": "After months of litigation, Kato dropped the suit in September.",
+      "cf": "(1) drop the suit(소송을 취하하다)",
       "enRepeat": 1,
       "highlight": "litigation",
       "translation": "수개월간의 법적 공방 끝에<br>카토는 9월에 소송을 취하했다.",
@@ -406,8 +408,8 @@ const WORDS = {
       "reading": "듀 프로세스",
       "ipa": "/ˌduː ˈprɑːses/",
       "defs": "",
-      "example": "",
-      "cf": "",
+      "example": "If you’re going to accuse a student of using AI you need to ... give them the proper due process.",
+      "cf": "(1) accuse(비난·고발하다)",
       "enRepeat": 1,
       "highlight": "due process",
       "translation": "학생이 AI를 썼다고 비난하려면<br>적절한 적법 절차를 보장해야 한다.",
@@ -423,8 +425,8 @@ const WORDS = {
       "reading": "언섭스탠시에이티드",
       "ipa": "/ˌʌnsəbˈstænʃieɪtɪd/",
       "defs": "",
-      "example": "",
-      "cf": "",
+      "example": "...Luo calls the teacher’s comments “inaccurate and unsubstantiated,” and is asking a judge to order the district to rehear her case.",
+      "cf": "(1) inaccurate(부정확한) (2) rehear(재심하다)",
       "enRepeat": 1,
       "highlight": "unsubstantiated",
       "translation": "루오는 교사 평가가 “부정확하고<br>근거 없다”며 판사에게<br>재심을 명령해 달라고 요청한다.",
@@ -440,8 +442,8 @@ const WORDS = {
       "reading": "퍼티션",
       "ipa": "/pəˈtɪʃn/",
       "defs": "",
-      "example": "",
-      "cf": "",
+      "example": "“The district follows that process and will respond to the petition in court,” White said.",
+      "cf": "(1) challenge grades(성적에 이의를 제기하다)",
       "enRepeat": 1,
       "highlight": "petition",
       "translation": "“교육구는 그 절차를 따르며<br>법정에서 청원에 답변할 것”이라고<br>화이트는 말했다.",
@@ -708,6 +710,37 @@ function showAllWords(wordEls) {
   wordEls.forEach((wordEl) => wordEl.classList.remove("is-page-hidden"));
 }
 
+/** 영어 미리보기: ___ + 앞 3글자 (예: ___sue / ___law) */
+function buildEnPreviewHint(en) {
+  const raw = String(en || "").trim();
+  let letters = "";
+  for (let i = 0; i < raw.length && letters.length < EN_PREVIEW_LETTERS; i += 1) {
+    if (/[A-Za-z]/.test(raw[i])) letters += raw[i];
+  }
+  return "___" + letters;
+}
+
+/** 글자 단위로 n개 영어 알파벳까지 노출, 나머지는 _ */
+function buildEnPartialReveal(en, letterCount) {
+  const raw = String(en || "");
+  let seen = 0;
+  let out = "";
+  for (let i = 0; i < raw.length; i += 1) {
+    const ch = raw[i];
+    if (/[A-Za-z]/.test(ch)) {
+      seen += 1;
+      out += seen <= letterCount ? ch : "_";
+    } else {
+      out += ch;
+    }
+  }
+  return out;
+}
+
+function countEnLetters(en) {
+  return (String(en || "").match(/[A-Za-z]/g) || []).length;
+}
+
 function renderWords() {
   const list = document.getElementById("words");
   if (!list) return;
@@ -715,30 +748,27 @@ function renderWords() {
 
   const pageSize = getWordsPerPage();
   getWordList().forEach((w, i) => {
-    const li = el("li", "word");
+    const li = el("li", "word is-answer-hidden is-ex-hidden is-pron-hidden is-revealed");
     /* 처음엔 1~n만 표시 */
     if (i >= pageSize) li.classList.add("is-page-hidden");
 
-    const row = el("div", "word-row");
+    const row = el("div", "word-row word-row--ko-first");
     const num = el("span", "num", String(i + 1));
     num.style.background = w.color || WORD_COLORS[i % WORD_COLORS.length];
     row.appendChild(num);
 
+    /* KO 먼저 (질문) */
+    row.appendChild(el("span", "meaning", w.ko));
+    row.insertAdjacentHTML("beforeend", ARROW_SVG);
+
     const hlClass = w.hl || (i % 2 === 0 ? "hl" : "hlpink");
-    /* 하이라이트는 낭독 시 칠해짐 — 처음엔 미도포 */
-    row.appendChild(el("span", "en " + hlClass, w.en));
-    if (needsStackedMeaning(w.en, w.ko, w)) {
-      /* en+ko ≥ 한도 — → 화살표·뜻을 영어 아래 줄에 */
-      row.classList.add("is-compound");
-      li.classList.add("is-compound");
-      const meaningRow = el("div", "word-meaning-row");
-      meaningRow.insertAdjacentHTML("beforeend", ARROW_SVG);
-      meaningRow.appendChild(el("span", "meaning", w.ko));
-      row.appendChild(meaningRow);
-    } else {
-      row.insertAdjacentHTML("beforeend", ARROW_SVG);
-      row.appendChild(el("span", "meaning", w.ko));
-    }
+    const enWrap = el("span", "en-wrap");
+    const preview = el("span", "en-preview", buildEnPreviewHint(w.en));
+    const enFull = el("span", "en " + hlClass, w.en);
+    enFull.dataset.full = w.en;
+    enWrap.appendChild(preview);
+    enWrap.appendChild(enFull);
+    row.appendChild(enWrap);
     li.appendChild(row);
 
     const pron = el("div", "pron");
@@ -749,9 +779,10 @@ function renderWords() {
     }
     li.appendChild(pron);
 
-    /* 발음 바로 아래 — ex. + example + cf(표시만, TTS 없음) */
+    /* 예문 + 번역 — 영어 노출과 함께 표시 */
     const cfText = String(w.cf || "").trim();
-    if (w.example || cfText) {
+    const translation = String(w.translation || "").trim();
+    if (w.example || cfText || translation) {
       const exBlock = el("div", "example-block");
       if (w.example) {
         const ex = el("p", "example");
@@ -769,6 +800,11 @@ function renderWords() {
         cfBody.innerHTML = allowBreakTags(escapeHtml(cfText));
         cf.appendChild(cfBody);
         exBlock.appendChild(cf);
+      }
+      if (translation) {
+        const tr = el("p", "translation");
+        tr.innerHTML = allowBreakTags(escapeHtml(translation));
+        exBlock.appendChild(tr);
       }
       li.appendChild(exBlock);
     }
@@ -1847,40 +1883,82 @@ function prepareSecondPass(wordEls) {
   });
 }
 
-/** 페이지(최대 5개) 1회차: 한글 숨김 → 영어 → 한글 (자리 유지) */
+/** 미리보기(___ + 3글자) → 나머지 글자 채우며 마지막 글자 노출 (+예문·번역 동시) */
+async function revealEnLettersFromPreview(wordEl, en) {
+  const enEl = wordEl.querySelector(".en");
+  const previewEl = wordEl.querySelector(".en-preview");
+  if (!enEl) return;
+  const total = countEnLetters(en);
+  const start = Math.min(EN_PREVIEW_LETTERS, total);
+  /* 미리보기 종료 — 영어·예문·번역·발음 함께 노출 시작 */
+  wordEl.classList.add("is-revealing-answer");
+  wordEl.classList.remove("is-answer-hidden", "is-ex-hidden", "is-pron-hidden");
+  if (previewEl) previewEl.hidden = true;
+  for (let n = start; n <= total; n += 1) {
+    enEl.textContent = buildEnPartialReveal(en, n);
+    if (n < total) await sleep(55);
+  }
+  enEl.textContent = en;
+  wordEl.classList.remove("is-revealing-answer");
+}
+
+/** 영어·발음·예문·번역 함께 노출 */
+function revealAnswerBundle(wordEl) {
+  wordEl.classList.remove("is-answer-hidden", "is-ex-hidden", "is-pron-hidden");
+  wordEl.classList.add("is-en-revealing");
+  const enEl = wordEl.querySelector(".en");
+  if (enEl && !enEl.classList.contains("is-hl-on")) {
+    enEl.classList.add("is-hl-on");
+  }
+}
+
+/** 페이지 1회차: 한글 낭독 → 1.5초 → 영어(+예문·번역) 노출·낭독 */
 async function runPass1OnPage(pageEls, pageItems) {
   const stage = document.getElementById("stage");
-  stage?.classList.add("hide-meaning");
+  stage?.classList.remove("hide-meaning");
   pageEls.forEach((wordEl) => {
-    wordEl.classList.remove("is-revealed", "is-en-hidden", "is-pron-hidden", "is-en-revealing");
+    wordEl.classList.add("is-answer-hidden", "is-ex-hidden", "is-pron-hidden", "is-revealed");
+    wordEl.classList.remove("is-en-hidden", "is-en-revealing", "is-revealing-answer");
     const enEl = wordEl.querySelector(".en");
-    enEl?.classList.remove("is-hl-on", "is-hl-painting");
+    const previewEl = wordEl.querySelector(".en-preview");
+    const full = enEl?.dataset?.full || enEl?.textContent || "";
+    if (enEl) {
+      enEl.textContent = full;
+      enEl.classList.remove("is-hl-on", "is-hl-painting");
+    }
+    if (previewEl) {
+      previewEl.hidden = false;
+      previewEl.textContent = buildEnPreviewHint(full);
+    }
   });
 
   for (let i = 0; i < pageEls.length; i += 1) {
     const wordEl = pageEls[i];
     const item = pageItems[i] || {};
-    const en = item.en || wordEl.querySelector(".en")?.textContent || "";
+    const en = item.en || wordEl.querySelector(".en")?.dataset?.full || "";
     const ko = item.ko || wordEl.querySelector(".meaning")?.textContent || "";
 
-    await paintAndSpeakEn(wordEl, en);
-    /* enRepeat — 같은 EN을 추가 낭독 (같은 음성, enRepeatGapSec 간격) */
+    /* 1) 한글 읽기 */
+    if (PASS_CONFIG?.speakKo !== false) await playKoTTS(ko);
+    /* 2) 1.5초 대기 */
+    await sleep(getKoHoldMs());
+
+    /* 3) 마지막 글자까지 채우며 영어 노출 + 예문·번역 함께 */
+    await revealEnLettersFromPreview(wordEl, en);
+    revealAnswerBundle(wordEl);
+    if (EN_REVEAL_WAIT_MS > 0) await sleep(EN_REVEAL_WAIT_MS);
+
+    /* 4) 영어 낭독 → 예문 낭독 */
     const times = getWordEnRepeatCount(item);
     const enVoice = activeEnTtsVoiceId;
+    await paintAndSpeakEn(wordEl, en);
     for (let r = 1; r < times; r += 1) {
       await sleep(getEnRepeatGapMs());
       if (en) await playBackendTTS(en, enVoice, 1);
     }
-    await sleep(EN_TO_KO_GAP_MS);
-
-    /* 한글 노출 — speakKo일 때만 낭독, 이후 koHoldSec 유지 */
-    revealMeaning(wordEl);
-    if (MEANING_REVEAL_WAIT_MS > 0) await sleep(MEANING_REVEAL_WAIT_MS);
-    if (PASS_CONFIG?.speakKo === true) await playKoTTS(ko);
-    /* ex — enRepeat 횟수만큼 낭독 + 밑줄 sync */
     const exampleSpeak = getExampleSpeakText(item);
     if (exampleSpeak) await speakExampleTimes(exampleSpeak, times, enVoice, wordEl);
-    await sleep(getKoHoldMs());
+
     await sleep(getWordGapMs());
   }
 }
@@ -1925,7 +2003,8 @@ async function runAutoplay() {
   }
 
   const stage = document.getElementById("stage");
-  stage.classList.add("hide-meaning");
+  /* kor_eng: 한글은 처음부터 보임 */
+  stage.classList.remove("hide-meaning");
 
   resolveConfiguredEnVoice();
   resolveConfiguredKoVoice();
@@ -1941,7 +2020,7 @@ async function runAutoplay() {
   const doPass1 = PASS_CONFIG?.pass1 !== false;
   const doPass2 = PASS_CONFIG?.pass2 !== false;
 
-  /* path1: 한글 숨김 → EN → KO */
+  /* path1: KO 낭독 → 1.5초 → EN(+예문·번역) */
   if (doPass1) {
     for (let page = 0; page < pageCount; page += 1) {
       const start = page * pageSize;
