@@ -272,6 +272,20 @@
 
     var msg = entry && entry.message ? String(entry.message) : '';
     var m;
+    /* 중요 단어 섹션: <span class="nv-en">rescind</span><span class="nv-ko">취소하다</span> */
+    if (msg && items.length < limit) {
+      var enKoRe = /<span[^>]*class=["'][^"']*\bnv-en\b[^"']*["'][^>]*>([\s\S]*?)<\/span>\s*<span[^>]*class=["'][^"']*\bnv-ko\b[^"']*["'][^>]*>([\s\S]*?)<\/span>/gi;
+      while ((m = enKoRe.exec(msg)) && items.length < limit) {
+        push(stripHtml(m[1]), stripHtml(m[2]), '');
+      }
+    }
+    /* h2 제목만 있는 경우: 중요 단어 1. rescind */
+    if (msg && items.length < limit) {
+      var titleWordRe = /<h2[^>]*class=["'][^"']*nv-section-title[^"']*["'][^>]*>\s*(?:중요\s*단어\s*)?\d+\.\s*([^<]+?)\s*<\/h2>/gi;
+      while ((m = titleWordRe.exec(msg)) && items.length < limit) {
+        push(stripHtml(m[1]), '', '');
+      }
+    }
     /* 연관단어 narrative: h2 뜻 → mark 영어 */
     if (msg && items.length < limit) {
       var secRe = /<h2[^>]*class=["'][^"']*nv-section-title[^"']*["'][^>]*>\s*(?:\d+\.\s*)?([^<]+?)\s*<\/h2>[\s\S]{0,900}?<mark[^>]*class=["'][^"']*nv-hl[^"']*["'][^>]*>([\s\S]*?)<\/mark>/gi;
