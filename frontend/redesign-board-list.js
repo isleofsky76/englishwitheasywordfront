@@ -416,20 +416,40 @@
     return '<span class="' + className + '">' + prefix + escapeHtml(item.title) + '</span>';
   }
 
+  /** 섬네일 플레이스홀더 — 한 글자 대신 제목의 짧은 핵심어 */
   function monoFromTitle(item) {
     var src = (item && (item.titleEn || item.title)) || '';
-    var words = String(src).replace(/[^A-Za-z\s]/g, ' ').trim().split(/\s+/).filter(Boolean);
-    if (words.length >= 2) {
-      return (words[0].charAt(0) + words[1].charAt(0)).toUpperCase();
+    var enWords = String(src).replace(/[^A-Za-z\s]/g, ' ').trim().split(/\s+/).filter(Boolean);
+    if (enWords.length >= 2) {
+      return (enWords[0].charAt(0) + enWords[1].charAt(0)).toUpperCase();
     }
-    if (words[0]) return words[0].slice(0, 2).toUpperCase();
-    var ko = String((item && item.titleKo) || src).trim();
-    return ko ? ko.charAt(0) : '·';
+    if (enWords[0]) return enWords[0].slice(0, 2).toUpperCase();
+
+    var ko = String((item && (item.titleKo || item.title)) || src).trim();
+    if (!ko) return '·';
+
+    /* "박물관/미술관에서", "슈퍼마켓 영어 표현" → 앞쪽 핵심 명사 */
+    ko = ko
+      .replace(/\s*(영어\s*)?표현\s*$/g, '')
+      .replace(/(에서|에|의|으로|로|이란|라는)\s*$/g, '')
+      .trim();
+    var head = ko.split(/[\/·|,，、]/)[0].trim();
+    if (!head) head = ko;
+    var firstToken = head.split(/\s+/)[0] || head;
+    /* 너무 길면 6글자까지 (카드 안 맞춤) */
+    if (firstToken.length > 6) firstToken = firstToken.slice(0, 6);
+    return firstToken || '·';
   }
 
   function optsEmptyBadge(cfg) {
     if (!cfg) return 'NEWS';
     if (cfg.quiz || cfg.key === 'vocabulary-quiz' || /quiz/i.test(cfg.postPath || '')) return 'QUIZ';
+    if (cfg.navGroup === 'express') {
+      return String(cfg.tabLabel || cfg.categoryLabel || cfg.title || '표현').trim() || '표현';
+    }
+    if (cfg.navGroup === 'vocab') {
+      return String(cfg.tabLabel || cfg.categoryLabel || '단어').trim() || '단어';
+    }
     return 'NEWS';
   }
 
