@@ -565,13 +565,19 @@
     return ' data-content-type="post_card" data-item-id="' + escapeAttr(item.id || '') + '"';
   }
 
+  /** 단어장: 이미지 아래 영어 표제어만 (카테고리·출처·태그 중복 숨김) */
+  function isLemmaOnlyCard(cfg) {
+    return !!(cfg && (cfg.key === 'word-of-the-day' || cfg.articleLayout === 'word-detail'));
+  }
+
   function renderFeature(item, cfg) {
     if (!item) return '';
     var kw = usesKeywordCards(cfg);
-    var metaParts = kw
-      ? [cfg.categoryLabel]
+    var lemmaOnly = isLemmaOnlyCard(cfg);
+    var metaParts = kw || lemmaOnly
+      ? []
       : [cfg.categoryLabel, item.source, item.date].filter(Boolean);
-    var tags = (!kw && item.tags) ? item.tags.map(function (t) {
+    var tags = (!kw && !lemmaOnly && item.tags) ? item.tags.map(function (t) {
       return '<span class="rd-list-tag">' + escapeHtml(t) + '</span>';
     }).join('') : '';
     var media = kw
@@ -580,19 +586,19 @@
           youtube: isYoutubeThumb(item.thumb),
           emptyBadge: optsEmptyBadge(cfg)
         });
-    var sub = kw
+    var sub = kw || lemmaOnly
       ? ''
       : (item.summary ? '<span class="rd-list-feature-summary">' + escapeHtml(item.summary) + '</span>' : '');
     return (
       '<a class="rd-list-feature' + (kw ? ' rd-list-feature--kw' : '') + '" href="' + escapeAttr(item.href) + '"' +
         cardAnalyticsAttrs(item) + '>' +
         media +
-        (metaParts.length && !kw
+        (metaParts.length
           ? '<span class="rd-list-feature-meta">' + escapeHtml(metaParts.join(' · ')) + '</span>'
           : '') +
         titleHtml(item, 'rd-list-feature-title', { index: 1 }) +
         sub +
-        (!kw && tags ? '<div class="rd-list-tags">' + tags + '</div>' : '') +
+        (tags ? '<div class="rd-list-tags">' + tags + '</div>' : '') +
       '</a>'
     );
   }
@@ -620,8 +626,9 @@
 
   function renderCard(item, cfg) {
     var kw = usesKeywordCards(cfg);
-    var metaParts = kw
-      ? [cfg.categoryLabel]
+    var lemmaOnly = isLemmaOnlyCard(cfg);
+    var metaParts = kw || lemmaOnly
+      ? []
       : [cfg.categoryLabel, item.source].filter(Boolean);
     var media = kw
       ? keywordCardThumbHtml(item, cfg)
@@ -633,11 +640,11 @@
       '<a class="rd-list-card' + (kw ? ' rd-list-card--kw' : '') + '" href="' + escapeAttr(item.href) + '"' +
         cardAnalyticsAttrs(item) + '>' +
         media +
-        (metaParts.length && !kw
+        (metaParts.length
           ? '<span class="rd-list-card-meta">' + escapeHtml(metaParts.join(' · ')) + '</span>'
           : '') +
         titleHtml(item, 'rd-list-card-title') +
-        (!kw && item.tags && item.tags.length
+        (!kw && !lemmaOnly && item.tags && item.tags.length
           ? '<div class="rd-list-tags rd-list-card-tags">' +
             item.tags.slice(0, 3).map(function (t) {
               return '<span class="rd-list-tag">' + escapeHtml(t) + '</span>';

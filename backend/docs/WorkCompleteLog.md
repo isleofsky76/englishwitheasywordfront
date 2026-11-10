@@ -34,6 +34,7 @@
 | 21 | 목록 JS: `#message` 없는 페이지에서 editor null addEventListener 크래시 가드 | 완료 | 2026-11-10 | defense/korea/news-voca/culture, `?v=20261110editor1` |
 | 22 | 단어 다지기 탭(연관단어·문장·단어장) 문장·단어장에도 상시 노출 | 완료 | 2026-11-10 | `mountBoardSiblingTabs`, `?v=20261110vocabbar1` |
 | 23 | 단어장·연관단어: 페이지 제거·전체 스크롤 + 처음으로 고정 | 완료 | 2026-11-10 | `navGroup=vocab`, `?v=20261110wotdscroll1` |
+| 24 | 단어장 카드: 이미지 아래 카테고리·태그 제거, 영어 표제어만 | 완료 | 2026-11-10 | `isLemmaOnlyCard`, `?v=20261110wotdmeta1` |
 
 ---
 
