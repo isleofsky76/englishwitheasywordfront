@@ -1,0 +1,90 @@
+{
+  "board": "news-voca",
+  "videoId": "zSxEDhY96Wk",
+  "description": "#시사영단어 #영어듣기 #영어공부 #영어단어\n\n*AI 음성과 이미지를 사용했습니다.\n\n출처 : The Guardian \n\n기사 제목 : Hot fridges, a fake nuclear alert and a $6bn heist: are we in the foothills of a hacking epidemic?\n\n원본 링크 : https://www.theguardian.com/news/ng-interactive/2026/nov/08/hot-fridges-a-fake-nuclear-alert-and-a-6bn-heist-are-we-in-the-foothills-of-a-hacking-epidemic\n\n게시일 :  Sun 8 Nov 2026 06.00 GMT\n\nAll rights belong to the original creator. \n\n------\n\n1. vulnerability — 취약점 (명)\n\nThere are so many vulnerabilities out there that …\n\n악용되기를 기다리는 취약점이 너무 많다.\n\n연관어: vuln(취약점의 줄임말), flaw(결함)\n\n2. exploit — (취약점을) 악용하다 (동)\n\na flaw in an IT system that a hacker can exploit\n\n해커가 악용할 수 있는 IT 시스템의 결함\n\n연관어: vulnerability(취약점)\n\n3. foray — 새로운 분야로의 진출, 첫 시도 (명)\n\n...a trial run for the more expansive foray this week.\n\n이번 주 더 광범위한 공격을 위한 예행연습이었을 수 있다.\n\n연관어: trial run(예행연습), expansive(광범위한)\n\n4. concerted — 합심한, 조율된 (형)\n\nThis was not the first time the world had faced a concerted threat.\n\n세계가 조직적인 위협에 직면한 것은 이번이 처음이 아니었다.\n\n5. mercenary — 용병 (명)\n\nSome are mercenaries, in it for money.\n\n-----\n\n\"All sentences are sourced from global news outlets for English practice. They do not reflect my personal views or financial/political advice.\" Thank you.\n\n-----\n\n\"We constantly provide content featuring key English vocabulary from the latest issues of major news outlets such as The Guardian, BBC, CNN, WSJ, and The Economist. \"\n\nhttps://englisheasystudy.com",
+  "title": "냉장고가 과열되고, 가짜 핵 경보가 발령되고, 60억 달러 규모의 해킹 사건이 발생했습니다. 해킹 대유행의 초기 단계에 접어든 것일까요?",
+  "rawTitle": "국제 | 냉장고가 과열되고, 가짜 핵 경보가 발령되고, 60억 달러 규모의 해킹 사건이 발생했습니다. 해킹 대유행의 초기 단계에 접어든 것일까요?",
+  "slug": "vulnerability-exploit-foray-concerted-mercenary-related-words",
+  "metaDescription": "The Guardian 기사에서 추출한 시사 영단어. vulnerability, exploit, foray, concerted, mercenary 등.",
+  "password": "seed_news_voca_vulnerability-exploit-foray-concerted-mercenary-",
+  "datePublished": "2026-11-09",
+  "intro": [
+    "냉장고가 과열되고, 가짜 핵 경보가 발령되고, 60억 달러 규모의 해킹 사건이 발생했습니다. 해킹 대유행의 초기 단계에 접어든 것일까요? 주제를 다룬 The Guardian 기사에서 주요 시사 영단어를 정리합니다. *AI 음성과 이미지를 사용했습니다."
+  ],
+  "words": [
+    {
+      "narrative": [
+        "1. There are so many **vulnerabilities** out there that … / 악용되기를 기다리는 취약점이 너무 많다. cf. vulnerability: 취약점 (명)"
+      ]
+    },
+    {
+      "narrative": [
+        "2. a flaw in an IT system that a hacker can **exploit** / 해커가 악용할 수 있는 IT 시스템의 결함 cf. exploit: (취약점을) 악용하다 (동)"
+      ]
+    },
+    {
+      "narrative": [
+        "3. ...a trial run for the more expansive **foray** this week. / 이번 주 더 광범위한 공격을 위한 예행연습이었을 수 있다. cf. foray: 새로운 분야로의 진출, 첫 시도 (명)"
+      ]
+    },
+    {
+      "narrative": [
+        "4. This was not the first time the world had faced a **concerted** threat. / 세계가 조직적인 위협에 직면한 것은 이번이 처음이 아니었다. cf. concerted: 합심한, 조율된 (형)"
+      ]
+    },
+    {
+      "narrative": [
+        "5. Some are **mercenaries**, in it for money. cf. mercenary: 용병 (명)"
+      ]
+    }
+  ],
+  "wordMeta": [
+    {
+      "num": 1,
+      "expression": "vulnerability",
+      "meaning": "취약점 (명)",
+      "exampleEn": "There are so many vulnerabilities out there that …",
+      "exampleKo": "악용되기를 기다리는 취약점이 너무 많다."
+    },
+    {
+      "num": 2,
+      "expression": "exploit",
+      "meaning": "(취약점을) 악용하다 (동)",
+      "exampleEn": "a flaw in an IT system that a hacker can exploit",
+      "exampleKo": "해커가 악용할 수 있는 IT 시스템의 결함"
+    },
+    {
+      "num": 3,
+      "expression": "foray",
+      "meaning": "새로운 분야로의 진출, 첫 시도 (명)",
+      "exampleEn": "...a trial run for the more expansive foray this week.",
+      "exampleKo": "이번 주 더 광범위한 공격을 위한 예행연습이었을 수 있다."
+    },
+    {
+      "num": 4,
+      "expression": "concerted",
+      "meaning": "합심한, 조율된 (형)",
+      "exampleEn": "This was not the first time the world had faced a concerted threat.",
+      "exampleKo": "세계가 조직적인 위협에 직면한 것은 이번이 처음이 아니었다."
+    },
+    {
+      "num": 5,
+      "expression": "mercenary",
+      "meaning": "용병 (명)",
+      "exampleEn": "Some are mercenaries, in it for money.",
+      "exampleKo": ""
+    }
+  ],
+  "source": {
+    "text": "The Guardian | Hot fridges, a fake nuclear alert and a $6bn heist: are we in the foothills of a hacking epidemic?",
+    "url": "https://www.theguardian.com/news/ng-interactive/2026/nov/08/hot-fridges-a-fake-nuclear-alert-and-a-6bn-heist-are-we-in-the-foothills-of-a-hacking-epidemic"
+  },
+  "youtube": "https://www.youtube.com/shorts/zSxEDhY96Wk",
+  "thumbnail": "https://i.ytimg.com/vi/zSxEDhY96Wk/hqdefault.jpg",
+  "publishedAt": "2026-11-09T04:00:26-08:00",
+  "parsedWordCount": 5,
+  "status": "uploaded",
+  "createdAt": "2026-11-10T05:03:55.944Z",
+  "uploadedAt": "2026-11-10T05:04:31.953Z",
+  "quizSlug": ""
+}

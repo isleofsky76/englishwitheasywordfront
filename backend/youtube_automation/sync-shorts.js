@@ -40,6 +40,8 @@ const CATEGORY_MAP = {
   여행: { label: '여행', href: 'travel-news-list.html' },
   컬쳐: { label: '컬쳐', href: 'culture-voca-list.html' },
   문화: { label: '컬쳐', href: 'culture-voca-list.html' },
+  건강: { label: '국제', href: 'news-voca-list.html' },
+  테크: { label: '산업', href: 'industry-news-list.html' },
   요리: { label: '요리', href: 'cooking-voca-list.html' },
   연관단어: { label: '연관단어', href: 'english-synonym-list.html' },
   유의어: { label: '연관단어', href: 'english-synonym-list.html' },

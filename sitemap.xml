@@ -2,17 +2,17 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://englisheasystudy.com/</loc>
-    <lastmod>2026-11-08</lastmod>
+    <lastmod>2026-11-10</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://englisheasystudy.com/about.html</loc>
-    <lastmod>2026-11-08</lastmod>
+    <lastmod>2026-11-10</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://englisheasystudy.com/calm-mind-list.html</loc>
-    <lastmod>2026-11-08</lastmod>
+    <lastmod>2026-11-10</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
@@ -57,7 +57,7 @@
   </url>
   <url>
     <loc>https://englisheasystudy.com/cooking-voca-list.html</loc>
-    <lastmod>2026-11-08</lastmod>
+    <lastmod>2026-11-10</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
@@ -67,7 +67,7 @@
   </url>
   <url>
     <loc>https://englisheasystudy.com/culture-voca-list.html</loc>
-    <lastmod>2026-11-08</lastmod>
+    <lastmod>2026-11-10</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
@@ -91,6 +91,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://englisheasystudy.com/culture-voca/postapocalyptic-dabble-bona-fide-looming-unanimous-related-words/</loc>
+    <lastmod>2026-11-09</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://englisheasystudy.com/culture-voca/roundel-candelabra-drapery-alloy-relief-related-words/</loc>
     <lastmod>2026-10-30</lastmod>
     <priority>0.7</priority>
@@ -106,13 +111,8 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://englisheasystudy.com/exam-words.html</loc>
-    <lastmod>2026-11-08</lastmod>
-    <priority>0.9</priority>
-  </url>
-  <url>
     <loc>https://englisheasystudy.com/defense-news-list.html</loc>
-    <lastmod>2026-11-08</lastmod>
+    <lastmod>2026-11-10</lastmod>
     <priority>0.9</priority>
   </url>
   <url>
@@ -172,7 +172,7 @@
   </url>
   <url>
     <loc>https://englisheasystudy.com/economy-news-list.html</loc>
-    <lastmod>2026-11-08</lastmod>
+    <lastmod>2026-11-10</lastmod>
     <priority>0.9</priority>
   </url>
   <url>
@@ -197,7 +197,7 @@
   </url>
   <url>
     <loc>https://englisheasystudy.com/english-opinions-list.html</loc>
-    <lastmod>2026-11-08</lastmod>
+    <lastmod>2026-11-10</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
@@ -222,7 +222,7 @@
   </url>
   <url>
     <loc>https://englisheasystudy.com/english-quotes-list.html</loc>
-    <lastmod>2026-11-08</lastmod>
+    <lastmod>2026-11-10</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
@@ -232,7 +232,7 @@
   </url>
   <url>
     <loc>https://englisheasystudy.com/english-synonym-list.html</loc>
-    <lastmod>2026-11-08</lastmod>
+    <lastmod>2026-11-10</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
@@ -431,14 +431,24 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://englisheasystudy.com/english-synonym/repudiation-decadent-debacle-sleazy-moneygrubbing-related-words/</loc>
+    <lastmod>2026-11-08</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://englisheasystudy.com/english-synonym/robust-related-words/</loc>
     <lastmod>2026-09-04</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://englisheasystudy.com/english-synonym/scowl-twitch-agency-feed-premature-baby-related-words/</loc>
+    <lastmod>2026-11-08</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://englisheasystudy.com/english-synonym/see-look-watch-glimpse-notice-related-words/</loc>
     <lastmod>2026-10-27</lastmod>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://englisheasystudy.com/english-synonym/skirmish-burrow-anoint-trope-spurious-related-words/</loc>
@@ -466,13 +476,18 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://englisheasystudy.com/index.html</loc>
+    <loc>https://englisheasystudy.com/exam-words.html</loc>
     <lastmod>2026-11-08</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://englisheasystudy.com/index.html</loc>
+    <lastmod>2026-11-10</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://englisheasystudy.com/industry-news-list.html</loc>
-    <lastmod>2026-11-08</lastmod>
+    <lastmod>2026-11-10</lastmod>
     <priority>0.9</priority>
   </url>
   <url>
@@ -486,6 +501,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://englisheasystudy.com/industry-news/scarcity-value-play-into-the-hands-of-shakeout-roadblocks-ratchet-down-related-words/</loc>
+    <lastmod>2026-11-08</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://englisheasystudy.com/industry-news/shakeout-down-the-road-credit-fierce-related-words/</loc>
     <lastmod>2026-11-05</lastmod>
     <priority>0.7</priority>
@@ -496,13 +516,18 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://englisheasystudy.com/industry-news/thermostat-hydronic-loft-heating-bill-anonymised-related-words/</loc>
+    <lastmod>2026-11-08</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://englisheasystudy.com/industry-news/undermine-sway-disrupt-related-words/</loc>
     <lastmod>2026-11-01</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://englisheasystudy.com/korea-news-list.html</loc>
-    <lastmod>2026-11-08</lastmod>
+    <lastmod>2026-11-10</lastmod>
     <priority>0.9</priority>
   </url>
   <url>
@@ -592,7 +617,7 @@
   </url>
   <url>
     <loc>https://englisheasystudy.com/news-voca-list.html</loc>
-    <lastmod>2026-11-08</lastmod>
+    <lastmod>2026-11-10</lastmod>
     <priority>0.9</priority>
   </url>
   <url>
@@ -661,6 +686,16 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://englisheasystudy.com/news-voca/crack-foolhardy-fractious-exodus-successive-related-words/</loc>
+    <lastmod>2026-11-08</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://englisheasystudy.com/news-voca/creak-filter-in-craggy-bushwhacking-shelter-related-words/</loc>
+    <lastmod>2026-11-08</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://englisheasystudy.com/news-voca/data-center-boom-third-wave-inflation-ai-memory-chip-prices-wsj/</loc>
     <lastmod>2026-06-25</lastmod>
     <priority>0.7</priority>
@@ -668,6 +703,11 @@
   <url>
     <loc>https://englisheasystudy.com/news-voca/deadly-earthquakes-rock-venezuelan-capital-wsj/</loc>
     <lastmod>2026-06-25</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://englisheasystudy.com/news-voca/disc-bulge-twinge-sedentary-correlate-undulating-related-words/</loc>
+    <lastmod>2026-11-09</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
@@ -786,6 +826,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://englisheasystudy.com/news-voca/neuropathy-ischemic-impairment-underlying-clinical-trial-data-related-words/</loc>
+    <lastmod>2026-11-09</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://englisheasystudy.com/news-voca/novice-polling-error-partisan-pundit-pollster-generic-ballot-augury-impregnable/</loc>
     <lastmod>2026-10-30</lastmod>
     <priority>0.7</priority>
@@ -828,6 +873,11 @@
   <url>
     <loc>https://englisheasystudy.com/news-voca/rising-trucking-rates-drive-us-companies-back-to-railroad-wsj/</loc>
     <lastmod>2026-06-24</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://englisheasystudy.com/news-voca/sobriety-abstinence-relapse-withdrawal-denial-related-words/</loc>
+    <lastmod>2026-11-04</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
@@ -881,6 +931,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://englisheasystudy.com/news-voca/vulnerability-exploit-foray-concerted-mercenary-related-words/</loc>
+    <lastmod>2026-11-09</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://englisheasystudy.com/news-voca/walmart-automation-robots-warehouses-struggle-wsj/</loc>
     <lastmod>2026-10-10</lastmod>
     <priority>0.7</priority>
@@ -897,7 +952,7 @@
   </url>
   <url>
     <loc>https://englisheasystudy.com/photo-english-list.html</loc>
-    <lastmod>2026-11-08</lastmod>
+    <lastmod>2026-11-10</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
@@ -907,7 +962,7 @@
   </url>
   <url>
     <loc>https://englisheasystudy.com/popular-voca-list.html</loc>
-    <lastmod>2026-11-08</lastmod>
+    <lastmod>2026-11-10</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
@@ -947,12 +1002,12 @@
   </url>
   <url>
     <loc>https://englisheasystudy.com/privacy.html</loc>
-    <lastmod>2026-11-08</lastmod>
+    <lastmod>2026-11-10</lastmod>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://englisheasystudy.com/pros-cons-list.html</loc>
-    <lastmod>2026-11-08</lastmod>
+    <lastmod>2026-11-10</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
@@ -1002,7 +1057,7 @@
   </url>
   <url>
     <loc>https://englisheasystudy.com/shorts-bg-image-list.html</loc>
-    <lastmod>2026-11-08</lastmod>
+    <lastmod>2026-11-10</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
@@ -1092,7 +1147,7 @@
   </url>
   <url>
     <loc>https://englisheasystudy.com/situational-english-list.html</loc>
-    <lastmod>2026-11-08</lastmod>
+    <lastmod>2026-11-10</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
@@ -1152,17 +1207,17 @@
   </url>
   <url>
     <loc>https://englisheasystudy.com/sports-news-list.html</loc>
-    <lastmod>2026-11-08</lastmod>
+    <lastmod>2026-11-10</lastmod>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://englisheasystudy.com/terms.html</loc>
-    <lastmod>2026-11-08</lastmod>
+    <lastmod>2026-11-10</lastmod>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://englisheasystudy.com/travel-news-list.html</loc>
-    <lastmod>2026-11-08</lastmod>
+    <lastmod>2026-11-10</lastmod>
     <priority>0.9</priority>
   </url>
   <url>
@@ -1177,12 +1232,17 @@
   </url>
   <url>
     <loc>https://englisheasystudy.com/us-news-list.html</loc>
-    <lastmod>2026-11-08</lastmod>
+    <lastmod>2026-11-10</lastmod>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://englisheasystudy.com/us-news/blame-spur-drubbing-gloat-related-words/</loc>
     <lastmod>2026-11-05</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://englisheasystudy.com/us-news/blue-wave-cohort-gender-parity-seismic-lopsided-related-words/</loc>
+    <lastmod>2026-11-09</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
@@ -1196,6 +1256,16 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://englisheasystudy.com/us-news/deportation-at-odds-with-ensnare-receptive-emphatic-related-words/</loc>
+    <lastmod>2026-11-09</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://englisheasystudy.com/us-news/espionage-unfaithful-compromised-be-suspected-of-oversight-related-words/</loc>
+    <lastmod>2026-11-08</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://englisheasystudy.com/us-news/flout-static-related-words/</loc>
     <lastmod>2026-11-06</lastmod>
     <priority>0.7</priority>
@@ -1206,8 +1276,23 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://englisheasystudy.com/us-news/national-repudiation-come-apart-cast-blame-vulgarity-related-words/</loc>
+    <lastmod>2026-11-08</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://englisheasystudy.com/us-news/quip-confidant-sit-out-drubbing-be-in-flux-related-words/</loc>
+    <lastmod>2026-11-08</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://englisheasystudy.com/us-news/rebuke-staunchly-upheaval-subpoena-related-words/</loc>
     <lastmod>2026-11-04</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://englisheasystudy.com/us-news/renter-gauge-utility-expense-debt-related-words/</loc>
+    <lastmod>2026-11-05</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
@@ -1237,7 +1322,7 @@
   </url>
   <url>
     <loc>https://englisheasystudy.com/vocabulary-quiz-list.html</loc>
-    <lastmod>2026-11-08</lastmod>
+    <lastmod>2026-11-10</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
@@ -1446,6 +1531,16 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://englisheasystudy.com/vocabulary-quiz/repudiation-decadent-debacle-sleazy-moneygrubbing-quiz/</loc>
+    <lastmod>2026-11-08</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://englisheasystudy.com/vocabulary-quiz/scowl-twitch-agency-feed-premature-baby-quiz/</loc>
+    <lastmod>2026-11-08</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://englisheasystudy.com/vocabulary-quiz/see-look-watch-glimpse-notice-quiz/</loc>
     <lastmod>2026-10-28</lastmod>
     <priority>0.7</priority>
@@ -1482,7 +1577,7 @@
   </url>
   <url>
     <loc>https://englisheasystudy.com/word-of-the-day-list.html</loc>
-    <lastmod>2026-11-08</lastmod>
+    <lastmod>2026-11-10</lastmod>
     <priority>0.8</priority>
   </url>
   <url>

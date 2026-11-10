@@ -36,6 +36,8 @@ const TITLE_CATEGORY_BOARD = {
   우크라이나: 'ukraine-news',
   컬쳐: 'culture-voca',
   문화: 'culture-voca',
+  건강: 'news-voca',
+  테크: 'industry-news',
   연관단어: 'english-synonym',
   유의어: 'english-synonym',
   영작: 'english-writing',
