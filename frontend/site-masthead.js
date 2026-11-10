@@ -90,13 +90,11 @@
       pages: [
         'word-of-the-day-list.html', 'word-of-the-day.html',
         'english-synonym-list.html', 'english-synonym.html',
-        'one-sentence.html',
-        'vocabulary-quiz-list.html', 'vocabulary-quiz.html'
+        'one-sentence.html'
       ],
       children: [
         { href: 'english-synonym-list.html', label: '연관단어', tone: 'syn', pages: ['english-synonym-list.html', 'english-synonym.html'] },
         { href: 'one-sentence.html', label: '문장', tone: 'osent', pages: ['one-sentence.html'] },
-        { href: 'vocabulary-quiz-list.html', label: '시사 어휘 퀴즈', tone: 'quiz', pages: ['vocabulary-quiz-list.html', 'vocabulary-quiz.html'] },
         { href: 'word-of-the-day-list.html?api=prod', label: '단어장', tone: 'wotd', pages: ['word-of-the-day-list.html', 'word-of-the-day.html'] }
       ]
     },
@@ -136,6 +134,27 @@
       ]
     },
     {
+      href: 'vocabulary-quiz-list.html',
+      label: '퀴즈',
+      groupLabel: '시사 어휘 퀴즈',
+      tone: 'quiz',
+      pages: ['vocabulary-quiz-list.html', 'vocabulary-quiz.html'],
+      children: [
+        { href: 'vocabulary-quiz-list.html', label: '퀴즈 목록', tone: 'quiz', pages: ['vocabulary-quiz-list.html', 'vocabulary-quiz.html'] }
+      ]
+    },
+    {
+      href: 'home-glossary.html',
+      label: '용어집',
+      groupLabel: '단어 한눈에 보기',
+      tone: 'gloss',
+      pages: ['home-glossary.html'],
+      children: [
+        { href: 'home-glossary.html', label: '용어집', tone: 'gloss', pages: ['home-glossary.html'] },
+        { href: 'home-glossary.html#rd-gloss-search', label: '검색', tone: 'gloss', pages: ['home-glossary.html'] }
+      ]
+    },
+    {
       href: 'english-directory.html',
       label: '학습사이트',
       tone: 'dir',
@@ -155,6 +174,7 @@
     { href: 'english-synonym-list.html', label: '연관단어', tone: 'syn', pages: ['english-synonym-list.html', 'english-synonym.html'], mobileDup: true },
     { href: 'one-sentence.html', label: '문장', tone: 'osent', pages: ['one-sentence.html'], mobileDup: true },
     { href: 'vocabulary-quiz-list.html', label: '시사 어휘 퀴즈', tone: 'quiz', pages: ['vocabulary-quiz-list.html', 'vocabulary-quiz.html'], mobileDup: true },
+    { href: 'home-glossary.html', label: '용어집', tone: 'gloss', pages: ['home-glossary.html'], mobileDup: true },
     { href: 'shorts-bg-image-list.html', label: '신문읽는 이미지', tone: 'sbgi', pages: ['shorts-bg-image-list.html', 'shorts-bg-image.html'], group: '천천히 읽을거리' },
     { href: 'english-opinions-list.html', label: '오피니언', tone: 'opine', pages: ['english-opinions-list.html', 'english-opinions.html'], group: '천천히 읽을거리' },
     { href: 'calm-mind-list.html', label: '마음글', tone: 'calm', pages: ['calm-mind-list.html', 'calm-mind.html'], group: '천천히 읽을거리' },

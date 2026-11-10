@@ -41,12 +41,16 @@
   ];
   var NEWS_TABS = NEWS_TABS_ALL.filter(function (t) { return !HIDDEN_EMPTY_BOARDS[t.key]; });
 
-  /* index 02「단어 다지기」·마스트헤드 children과 동일 — 뉴스 NEWS_TABS처럼 목록 상단 탭으로 노출 */
+  /* index 02「단어 다지기」— 연관단어·문장·단어장만 (퀴즈는 05로 분리) */
   var VOCAB_TABS = [
     { key: 'english-synonym', label: '연관단어', href: 'english-synonym-list.html' },
     { key: 'one-sentence', label: '문장', href: 'one-sentence.html' },
-    { key: 'vocabulary-quiz', label: '시사 어휘 퀴즈', href: 'vocabulary-quiz-list.html' },
     { key: 'word-of-the-day', label: '단어장', href: 'word-of-the-day-list.html?api=prod' }
+  ];
+
+  /* index 05「시사 어휘 퀴즈」 */
+  var QUIZ_TABS = [
+    { key: 'vocabulary-quiz', label: '시사 어휘 퀴즈', href: 'vocabulary-quiz-list.html' }
   ];
 
   /* index 03「표현 익히기」·마스트헤드 children과 동일 */
@@ -532,10 +536,10 @@
       postPath: 'vocabulary-quiz',
       board: 'vocabulary-quiz',
       apiPath: '/vocabulary-quiz',
-      navGroup: 'vocab',
-      tabs: VOCAB_TABS,
+      navGroup: 'quiz',
+      tabs: QUIZ_TABS,
       articleLayout: 'header-only',
-      breadcrumbParent: { label: '단어 다지기', href: 'english-synonym-list.html' }
+      breadcrumbParent: { label: '시사 어휘 퀴즈', href: 'vocabulary-quiz-list.html' }
     },
     'shorts-bg-image': {
       key: 'shorts-bg-image',
@@ -682,6 +686,7 @@
     NEWS_TABS_ALL: NEWS_TABS_ALL,
     VOCAB_TABS: VOCAB_TABS,
     EXPRESS_TABS: EXPRESS_TABS,
+    QUIZ_TABS: QUIZ_TABS,
     HIDDEN_EMPTY_BOARDS: HIDDEN_EMPTY_BOARDS,
     get: getBoardConfig,
     resolveSource: resolveSource,

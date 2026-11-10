@@ -1,5 +1,5 @@
 /**
- * 홈 05 — 단어 한눈에 보기
+ * 홈 06 — 단어 한눈에 보기
  * 데이터: home-glossary-words.js → window.HOME_GLOSSARY_WORDS
  */
 (function () {
@@ -10,7 +10,8 @@
     '02': 'index.html#rd-path-02',
     '03': 'index.html#rd-path-03',
     '04': 'index.html#rd-path-04',
-    '05': 'home-glossary.html'
+    '05': 'index.html#rd-path-05',
+    '06': 'home-glossary.html'
   };
 
   var LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
