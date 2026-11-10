@@ -704,7 +704,7 @@ body.rd-list--keyword-cards .rd-list-feature--kw .rd-kw-thumb {
 
   body.rd-list--keyword-cards .rd-list-card--kw .rd-kw-sub {
     margin-top: 4px;
-    font-size: 11px;
+    font-size: 13px; /* 11px + 2 — 모바일 가로형 섬네일 가독성 */
   }
 
   body.rd-list--keyword-cards .rd-list-card--kw .rd-list-card-title {
