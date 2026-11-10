@@ -55,6 +55,21 @@
   color: var(--ink-muted);
 }
 
+/* 단어 다지기: 연관단어 · 문장 · 단어장 탭 (목록과 동일) */
+.os-vocab-tabs {
+  margin-top: 8px;
+}
+
+.os-vocab-tabs .rd-list-tabs-wrap {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+.os-vocab-tabs .rd-list-tabs {
+  padding-bottom: 16px;
+}
+
 .os-toolbar {
   display: flex;
   align-items: center;

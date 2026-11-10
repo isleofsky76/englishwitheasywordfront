@@ -673,6 +673,24 @@
     return '<div class="rd-list-tabs-wrap"><nav class="rd-list-tabs" aria-label="카테고리">' + links + '</nav></div>';
   }
 
+  /**
+   * 목록이 아닌 페이지(문장 등)에도 형제 탭(연관단어·문장·단어장)을 붙인다.
+   * @param {Element} target
+   * @param {{boardKey?:string, activeKey?:string, tabs?:Array, apiMode?:string|null}} options
+   */
+  function mountBoardSiblingTabs(target, options) {
+    if (!target) return;
+    options = options || {};
+    var Config = global.BoardListConfig;
+    if (!Config) return;
+    var cfg = options.boardKey ? Config.get(options.boardKey) : null;
+    var tabs = (cfg && cfg.tabs) || options.tabs || Config.VOCAB_TABS || [];
+    if (!tabs.length) return;
+    var activeKey = options.activeKey || (cfg && cfg.key) || '';
+    target.innerHTML = renderTabs({ key: activeKey, tabs: tabs }, options.apiMode || null);
+    target.hidden = false;
+  }
+
   function renderRedesignBoardList(container, messages, options) {
     if (!container) return;
     options = options || {};
@@ -790,5 +808,6 @@
   }
 
   global.renderRedesignBoardList = renderRedesignBoardList;
+  global.mountBoardSiblingTabs = mountBoardSiblingTabs;
   global.fitKwWordsInThumbs = fitKwWordsInThumbs;
 })(typeof window !== 'undefined' ? window : globalThis);

@@ -405,6 +405,23 @@
       articleLayout: 'auto',
       breadcrumbParent: { label: '단어 다지기', href: 'english-synonym-list.html' }
     },
+    'one-sentence': {
+      key: 'one-sentence',
+      labelEn: 'ONE SENTENCE',
+      title: '문장',
+      description: '한 문장씩 읽으며 단어를 자연스럽게 익힙니다.',
+      tabLabel: '문장',
+      categoryLabel: '문장',
+      listPage: 'one-sentence.html',
+      postPage: 'one-sentence.html',
+      postPath: 'one-sentence',
+      board: 'one-sentence',
+      apiPath: null,
+      navGroup: 'vocab',
+      tabs: VOCAB_TABS,
+      articleLayout: 'auto',
+      breadcrumbParent: { label: '단어 다지기', href: 'english-synonym-list.html' }
+    },
     'word-of-the-day': {
       key: 'word-of-the-day',
       labelEn: 'WORD OF THE DAY',
