@@ -18,7 +18,8 @@
 | 5 | `VOCAB_TABS` / `EXPRESS_TABS` 추가 및 연관단어·퀴즈 보드 연결 | 완료 | 2026-11-10 | `board-list-config.js`, cache `?v=20261110tabs1` |
 | 6 | `renderTabs` — 기존 `?` 있는 href에 api 쿼리 중복 방지 | 완료 | 2026-11-10 | 단어장 `?api=prod` 깨짐 방지 |
 | 7 | `WorkCompleteLog.md` 신설 (번호·action·상태·완료일·remark) | 완료 | 2026-11-10 | docs 작업완료 시 이 표에 추가 |
-| 8 | 요청 작업 항상 커밋·푸시 규칙 확정 + 탭/문서 `main` 배포 | 완료 | 2026-11-10 | `ebfe0b0d` → origin/main (Netlify) |
+| 8 | 요청 작업 항상 커밋·푸시 규칙 확정 + 탭/문서 `main` 배포 | 완료 | 2026-11-10 | `ebfe0b0d` / `49826641` → origin/main (Netlify) |
+| 9 | 홈 개선 #1 신청 박스 우선순위 철회 → 콘텐츠(PDF) 선행으로 재배치 | 완료 | 2026-11-10 | 박스는 개선 10번·11/14 PDF #1 이후. 검색·오타 등이 앞순위 |
 
 ---
 
@@ -36,5 +37,7 @@
 | 표현·단어장 목록 리디자인 + `EXPRESS_TABS`/`VOCAB_TABS` 노출 | 구형 Bootstrap navbar |
 | `one-sentence`·`daily-english`·`english-writing` 탭 스트립 | 공통 partial |
 | 햄버거 `mobileDup` 중복 정리 | 개선 10가지 #8 |
-| 사이트 검색 JSON + `search.html` | 11/10 오늘 할 일 |
+| 사이트 검색 JSON + `search.html` | 개선 1순위 |
 | 홈 퀴즈 오타 물락→몰락 | 5분 |
+| 주간 복습 PDF #1 콘텐츠 | 신청 박스 **선행 조건** |
+| 무료 자료 신청 박스 UI | PDF #1 완료 후 |
