@@ -33,6 +33,7 @@
 | 20 | 이전 글 섬네일: `nv-vocab`·주요표현·레거시 어휘정리·영문 highlight 파싱 | 완료 | 2026-11-10 | qualify/plunge 등, `?v=20261110legacy1` |
 | 21 | 목록 JS: `#message` 없는 페이지에서 editor null addEventListener 크래시 가드 | 완료 | 2026-11-10 | defense/korea/news-voca/culture, `?v=20261110editor1` |
 | 22 | 단어 다지기 탭(연관단어·문장·단어장) 문장·단어장에도 상시 노출 | 완료 | 2026-11-10 | `mountBoardSiblingTabs`, `?v=20261110vocabbar1` |
+| 23 | 단어장·연관단어: 페이지 제거·전체 스크롤 + 처음으로 고정 | 완료 | 2026-11-10 | `navGroup=vocab`, `?v=20261110wotdscroll1` |
 
 ---
 

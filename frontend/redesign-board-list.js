@@ -479,9 +479,9 @@
     return url.pathname + url.search + url.hash;
   }
 
-  /** 뉴스 영어(국제·한국·국방…)는 글 수가 적어 페이지 없이 전체 스크롤 */
+  /** 뉴스 영어·단어 다지기(연관단어·단어장)는 페이지 없이 전체 스크롤 + 처음으로 */
   function usesContinuousScroll(cfg) {
-    return !!(cfg && cfg.navGroup === 'news');
+    return !!(cfg && (cfg.navGroup === 'news' || cfg.navGroup === 'vocab'));
   }
 
   function renderPager(page, totalPages) {
