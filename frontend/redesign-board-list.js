@@ -272,6 +272,15 @@
 
     var msg = entry && entry.message ? String(entry.message) : '';
     var m;
+
+    /* 핵심 3문장형: <li class="nv-vocab-item"><strong>qualify</strong> - 뜻</li> */
+    if (msg && items.length < limit) {
+      var vocabItemRe = /<li[^>]*class=["'][^"']*nv-vocab-item[^"']*["'][^>]*>\s*<strong>([\s\S]*?)<\/strong>\s*[-–—:：]\s*([^<]+)/gi;
+      while ((m = vocabItemRe.exec(msg)) && items.length < limit) {
+        push(stripHtml(m[1]), stripHtml(m[2]), '');
+      }
+    }
+
     /* 중요 단어 섹션: <span class="nv-en">rescind</span><span class="nv-ko">취소하다</span> */
     if (msg && items.length < limit) {
       var enKoRe = /<span[^>]*class=["'][^"']*\bnv-en\b[^"']*["'][^>]*>([\s\S]*?)<\/span>\s*<span[^>]*class=["'][^"']*\bnv-ko\b[^"']*["'][^>]*>([\s\S]*?)<\/span>/gi;
@@ -279,6 +288,7 @@
         push(stripHtml(m[1]), stripHtml(m[2]), '');
       }
     }
+
     /* h2 제목만 있는 경우: 중요 단어 1. rescind */
     if (msg && items.length < limit) {
       var titleWordRe = /<h2[^>]*class=["'][^"']*nv-section-title[^"']*["'][^>]*>\s*(?:중요\s*단어\s*)?\d+\.\s*([^<]+?)\s*<\/h2>/gi;
@@ -286,6 +296,31 @@
         push(stripHtml(m[1]), '', '');
       }
     }
+
+    /* 3문장/레거시: 🟡 주요 표현 · suggest : 시사하다 */
+    if (msg && items.length < limit) {
+      var bulletRe = /(?:^|[\n>•]|<br\s*\/?>)\s*([A-Za-z][A-Za-z0-9'’\-\s]{0,36}?)\s*[:：]\s*([가-힣][^<\n]{0,60})/g;
+      while ((m = bulletRe.exec(msg)) && items.length < limit) {
+        push(m[1], m[2], '');
+      }
+    }
+
+    /* 레거시 어휘 정리: Uptick (업틱)<br> - 소폭 증가 */
+    if (msg && items.length < limit) {
+      var legacyParenRe = /([A-Za-z][A-Za-z0-9'’\-\s]{0,36}?)\s*\([^)]{0,40}\)\s*(?:<br\s*\/?>|\n)\s*[-–—]\s*([가-힣][^<\n]{0,60})/g;
+      while ((m = legacyParenRe.exec(msg)) && items.length < limit) {
+        push(m[1], m[2], '');
+      }
+    }
+
+    /* 레거시 어휘 정리: Crude oil surplus – 원유 공급 과잉 */
+    if (msg && items.length < limit) {
+      var legacyDashRe = /([A-Za-z][A-Za-z0-9'’\-\s]{0,36}?)\s*[–—]\s*([가-힣][^<\n]{0,60})/g;
+      while ((m = legacyDashRe.exec(msg)) && items.length < limit) {
+        push(m[1], m[2], '');
+      }
+    }
+
     /* 연관단어 narrative: h2 뜻 → mark 영어 */
     if (msg && items.length < limit) {
       var secRe = /<h2[^>]*class=["'][^"']*nv-section-title[^"']*["'][^>]*>\s*(?:\d+\.\s*)?([^<]+?)\s*<\/h2>[\s\S]{0,900}?<mark[^>]*class=["'][^"']*nv-hl[^"']*["'][^>]*>([\s\S]*?)<\/mark>/gi;
@@ -318,6 +353,22 @@
       var re = /<mark[^>]*class=["'][^"']*nv-hl[^"']*["'][^>]*>([\s\S]*?)<\/mark>/gi;
       while ((m = re.exec(msg)) && items.length < limit) {
         push(stripHtml(m[1]), '', '');
+      }
+    }
+
+    /* 폴백: 영문 핵심 문장의 nv-highlight만 (한글 mark 제외) */
+    if (msg && items.length < limit) {
+      var enSentRe = /<p[^>]*class=["'][^"']*nv-sentence-en[^"']*["'][^>]*>([\s\S]*?)<\/p>/gi;
+      var markHlRe = /<mark[^>]*class=["'][^"']*nv-highlight[^"']*["'][^>]*>([\s\S]*?)<\/mark>/gi;
+      var sent;
+      while ((sent = enSentRe.exec(msg)) && items.length < limit) {
+        markHlRe.lastIndex = 0;
+        while ((m = markHlRe.exec(sent[1])) && items.length < limit) {
+          var phrase = stripHtml(m[1]);
+          if (!/^[A-Za-z]/.test(phrase)) continue;
+          if ((phrase.match(/[A-Za-z]+/g) || []).length > 4) continue;
+          push(phrase, '', '');
+        }
       }
     }
 
