@@ -617,6 +617,7 @@
           renderTabs(cfg, apiMode) +
           '<div class="rd-list-empty">게시글이 없습니다.</div>' +
         '</div>';
+      fitKwWordsInThumbs(container);
       return;
     }
 
@@ -652,7 +653,46 @@
       '</div>';
 
     bindCardAnalytics(container);
+    fitKwWordsInThumbs(container);
+  }
+
+  /** 섬네일 안 영단어가 상자 너비·높이를 넘치면 font-size를 줄임 (PC 긴 단어 대응) */
+  function fitKwWordsInThumbs(root) {
+    if (!root || !root.querySelectorAll) return;
+    var words = root.querySelectorAll('.rd-kw-thumb .rd-kw-word');
+    if (!words.length) return;
+
+    Array.prototype.forEach.call(words, function (el) {
+      var thumb = el.closest('.rd-kw-thumb');
+      if (!thumb) return;
+      el.style.fontSize = '';
+      var padX = 8;
+      var maxW = Math.max(40, thumb.clientWidth - padX * 2);
+      var hero = el.parentElement;
+      var sub = hero ? hero.querySelector('.rd-kw-sub') : null;
+      var maxH = Math.max(24, thumb.clientHeight - (sub ? sub.offsetHeight + 16 : 16));
+      var size = parseFloat(window.getComputedStyle(el).fontSize) || 40;
+      var min = 12;
+      var guard = 40;
+      while (guard-- > 0 && size > min && (el.scrollWidth > maxW + 1 || el.scrollHeight > maxH + 1)) {
+        size -= 1;
+        el.style.fontSize = size + 'px';
+      }
+    });
+  }
+
+  var kwFitTimer = null;
+  function scheduleKwFit() {
+    if (kwFitTimer) clearTimeout(kwFitTimer);
+    kwFitTimer = setTimeout(function () {
+      var root = document.querySelector('.rd-list-wrap');
+      if (root) fitKwWordsInThumbs(root);
+    }, 120);
+  }
+  if (typeof window !== 'undefined') {
+    window.addEventListener('resize', scheduleKwFit);
   }
 
   global.renderRedesignBoardList = renderRedesignBoardList;
+  global.fitKwWordsInThumbs = fitKwWordsInThumbs;
 })(typeof window !== 'undefined' ? window : globalThis);
