@@ -62,7 +62,7 @@ const DISPLAY_CONFIG = {
 
 /**
  * 학습 패스 on/off
- * pass1 — true: 한글 숨김 → 영어 읽기 → 한글 노출(·읽기)
+ * pass1 — true: 한글 숨김 → 영어 읽기 → 한글 노출 → ex 바로 낭독
  * pass2 — true: 영어 숨김 → 한글(·읽기) → 영어(+발음·예문) 노출·읽기
  * speakKo — false면 한글은 화면에만 보이고 TTS로 읽지 않음
  * runSummary — false면 summary·quiz 없이 단어 패스 후 멈춤
@@ -83,7 +83,7 @@ const PASS_CONFIG = {
  */
 const TIMING_CONFIG = {
   wordGapSec: 2,
-  koHoldSec: 2,
+  koHoldSec: 0.4,
   enRepeatGapSec: 1,
 };
 
@@ -1188,8 +1188,9 @@ async function playBackendTTS(text, languageKey, playbackRate = 1, phraseEls = n
   try {
     const audio = await loadBackendTTSAudio(text, languageKey);
     if (!audio) return;
+    /* 밑줄 sync용 bounds는 재생과 병렬 — KO 노출 직후 ex가 바로 나오도록 대기하지 않음 */
     if (Array.isArray(phraseEls) && phraseEls.length) {
-      await detectSpeechBoundsFromAudio(audio).catch(() => null);
+      detectSpeechBoundsFromAudio(audio).catch(() => null);
     }
     await playAudioElement(audio, playbackRate, phraseEls);
   } catch (err) {
@@ -1635,11 +1636,10 @@ async function runPass1OnPage(pageEls, pageItems) {
     }
     await sleep(EN_TO_KO_GAP_MS);
 
-    /* 한글 노출 — speakKo일 때만 낭독, 이후 koHoldSec 유지 */
+    /* 한글 노출 → 바로 ex 낭독 (speakKo일 때만 KO TTS) */
     revealMeaning(wordEl);
     if (MEANING_REVEAL_WAIT_MS > 0) await sleep(MEANING_REVEAL_WAIT_MS);
     if (PASS_CONFIG?.speakKo === true) await playKoTTS(ko);
-    /* ex — enRepeat 횟수만큼 낭독 + 밑줄 sync */
     const exampleSpeak = getExampleSpeakText(item);
     if (exampleSpeak) await speakExampleTimes(exampleSpeak, times, enVoice, wordEl);
     await sleep(getKoHoldMs());
