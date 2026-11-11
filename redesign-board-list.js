@@ -7,6 +7,30 @@
 
   var PAGE_SIZE_DEFAULT = 12;
 
+  /** 탭·목록 링크를 /로 시작하는 clean URL로 통일 */
+  function toSitePath(href) {
+    var h = String(href || '').trim();
+    if (!h) return h;
+    if (/^(https?:|mailto:|tel:|#)/i.test(h)) return h;
+    var hash = '';
+    var q = '';
+    var hm = h.match(/#.*$/);
+    if (hm) {
+      hash = hm[0];
+      h = h.slice(0, -hash.length);
+    }
+    var qm = h.match(/\?.*$/);
+    if (qm) {
+      q = qm[0];
+      h = h.slice(0, -q.length);
+    }
+    h = h.replace(/\\/g, '/').replace(/^\.\//, '').replace(/^(\.\.\/)+/, '');
+    if (h.charAt(0) === '/') h = h.slice(1);
+    if (!h || h === 'index.html') return '/' + q + hash;
+    h = h.replace(/\.html$/i, '');
+    return '/' + h + q + hash;
+  }
+
   /** 카테고리 포인트 색 — 국제/경제/사회/기타 */
   var CATEGORY_COLORS = {
     '국제': '#A8321C',
@@ -691,7 +715,7 @@
     if (!cfg.tabs || !cfg.tabs.length) return '';
     var links = cfg.tabs.map(function (tab) {
       var active = tab.key === cfg.key ? ' is-active' : '';
-      var href = String(tab.href || '');
+      var href = toSitePath(String(tab.href || ''));
       /* 이미 ?api=prod 등이 있으면 붙이지 않음 (단어장 탭 깨짐 방지) */
       if (apiMode && href.indexOf('?') === -1) {
         href += '?api=' + encodeURIComponent(apiMode);

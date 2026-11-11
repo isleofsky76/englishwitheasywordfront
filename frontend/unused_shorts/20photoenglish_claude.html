@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>20photoenglish_claude</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Noto+Sans+KR:wght@400;500;600;700;800&family=Outfit:wght@600;700;800&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="resources/1.jpg">
+  <link rel="stylesheet" href="20photoenglish_claude.css?v=145">
+  <script src="20photoenglish_claude.js?v=145" defer></script>
+</head>
+<body>
+  <section class="quiz-intro" id="quiz-intro" aria-label="퀴즈 시작 화면">
+    <div class="quiz-intro-inner">
+      <span class="quiz-intro-badge">SHORTS QUIZ</span>
+
+      <div class="quiz-intro-icon" aria-hidden="true">
+        <span class="quiz-intro-qmark">?</span>
+      </div>
+
+      <h2 class="quiz-intro-title">영단어 퀴즈</h2>
+      <p class="quiz-intro-sub"><span class="intro-num">3</span>문제 도전! 다 맞힐 수 있을까요?</p>
+
+      <div class="quiz-intro-cta">
+        <span class="quiz-intro-cta-text">지금 시작</span>
+        <span class="quiz-intro-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 4v14"/>
+            <path d="M6 14l6 6 6-6"/>
+          </svg>
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <main class="quiz-screen is-behind-intro">
+    <header class="quiz-header">
+      <h1 class="quiz-label" id="quiz-label"></h1>
+    </header>
+
+    <div class="quiz-stage" id="quiz-stage">
+      <div class="quiz-example-preview" id="quiz-example-preview">
+        <p class="quiz-meaning-prompt" id="quiz-meaning-prompt">밑줄 친 단어는 무슨 뜻일까요?</p>
+        <p class="quiz-example-en" id="quiz-example-en"></p>
+      </div>
+
+      <figure class="quiz-image-wrap">
+        <img id="quiz-image-a" class="quiz-image-layer is-active" src="" alt="Quiz image" decoding="async">
+        <img id="quiz-image-b" class="quiz-image-layer" src="" alt="" decoding="async" aria-hidden="true">
+        <div class="countdown-wrap" id="countdown-wrap" hidden>
+          <div class="countdown-stage" data-mode="pop">
+            <svg class="countdown-ring" viewBox="0 0 120 120" aria-hidden="true">
+              <circle class="countdown-ring-track" cx="60" cy="60" r="52"></circle>
+              <circle class="countdown-ring-progress" id="countdown-ring-progress" cx="60" cy="60" r="52"
+                pathLength="100" stroke-dasharray="100" stroke-dashoffset="0"></circle>
+            </svg>
+            <span class="countdown-num" id="countdown-num" aria-hidden="true">5</span>
+            <div class="countdown-bars" id="countdown-bars" aria-hidden="true">
+              <i></i><i></i><i></i><i></i><i></i>
+            </div>
+          </div>
+        </div>
+        <div class="image-meaning-wrap" id="image-meaning-wrap" hidden>
+          <p class="image-meaning" id="image-meaning" aria-hidden="true"></p>
+        </div>
+      </figure>
+
+      <div class="quiz-choices" id="quiz-choices" role="listbox" aria-label="보기"></div>
+
+      <div class="quiz-translation" id="quiz-translation" aria-hidden="true">
+        <span class="quiz-translation-label">번역 :</span>
+        <p class="quiz-example-ko" id="quiz-translation-ko"></p>
+      </div>
+    </div>
+  </main>
+
+  <div class="quiz-controls" id="quiz-controls">
+    <button id="autoplay-btn" type="button">auto play</button>
+  </div>
+</body>
+</html>

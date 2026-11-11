@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="ko" data-theme="green">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>영어작문 · 문장</title>
+<style>html,body{background:#1F4735}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Roboto:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" crossorigin="anonymous">
+<link rel="stylesheet" href="20sentence.css?v=20261110prog1">
+</head>
+<body>
+<div class="viewport">
+  <main class="stage" id="stage">
+    <div class="content-head" id="content-head">
+      <div class="head-row">
+        <span class="head-badge" id="badge">영어작문</span>
+        <span class="date" id="dateLabel"></span>
+      </div>
+      <div class="title-row">
+        <h1 class="title" id="title"></h1>
+      </div>
+      <div class="source-row">
+        <span id="sourceLabel"></span>
+        <span class="circled" id="sourceMark" hidden></span>
+        <svg width="70" height="40" viewBox="0 0 70 40" aria-hidden="true"><path d="M4 22 C 20 12, 40 30, 62 18 M50 8 L64 18 L52 30" fill="none" stroke="#FF6B75" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+    </div>
+
+    <section class="block example-box">
+      <p class="example" id="example"></p>
+    </section>
+
+    <section class="block">
+      <ol class="phrases" id="phrases"></ol>
+    </section>
+
+    <section class="block" id="full-block">
+      <span class="badge">영작</span>
+      <p class="full-en" id="full-en"></p>
+    </section>
+
+    <p class="progress" id="progress"></p>
+
+    <div id="review-root" class="review-root" hidden>
+      <div class="rv-panel">
+        <div class="rv-countdown-slot">
+          <div class="countdown-wrap" id="countdown-wrap" hidden>
+            <div class="countdown-stage" data-mode="ring">
+              <svg class="countdown-ring" viewBox="0 0 120 120" aria-hidden="true">
+                <circle class="countdown-ring-track" cx="60" cy="60" r="52"></circle>
+                <circle class="countdown-ring-progress" id="countdown-ring-progress" cx="60" cy="60" r="52"
+                  pathLength="100" stroke-dasharray="100" stroke-dashoffset="0"></circle>
+              </svg>
+              <span class="countdown-num" id="countdown-num" aria-hidden="true">5</span>
+            </div>
+          </div>
+        </div>
+        <div id="rv-title" class="rv-title"></div>
+        <div id="rv-en" class="rv-en"></div>
+        <div id="rv-choices" class="rv-choices" role="list"></div>
+        <div id="rv-ko" class="rv-ko"></div>
+      </div>
+    </div>
+  </main>
+</div>
+<button class="palette-toggle" id="palette-toggle" type="button" aria-expanded="false" aria-controls="color-palette">팔레트</button>
+<aside class="color-palette" id="color-palette" hidden aria-label="색상 팔레트">
+  <div class="palette-head">
+    <span>색상 · hex</span>
+    <button type="button" class="palette-close" id="palette-close" aria-label="닫기">닫기</button>
+  </div>
+  <label class="palette-row">
+    <span>테마</span>
+    <select id="theme-select">
+      <option value="green">green</option>
+      <option value="current">current</option>
+    </select>
+  </label>
+  <div class="palette-presets" id="green-presets" title="배경 프리셋"></div>
+  <label class="palette-row"><span>bg</span><input type="color" data-color-key="bg"><input type="text" data-hex-key="bg" maxlength="7"></label>
+  <label class="palette-row"><span>ink</span><input type="color" data-color-key="ink"><input type="text" data-hex-key="ink" maxlength="7"></label>
+  <label class="palette-row"><span>title</span><input type="color" data-color-key="title"><input type="text" data-hex-key="title" maxlength="7"></label>
+  <label class="palette-row"><span>hl</span><input type="color" data-color-key="titleHl"><input type="text" data-hex-key="titleHl" maxlength="7"></label>
+  <label class="palette-row"><span>accent</span><input type="color" data-color-key="accent"><input type="text" data-hex-key="accent" maxlength="7"></label>
+  <label class="palette-row"><span>line</span><input type="color" data-color-key="underline"><input type="text" data-hex-key="underline" maxlength="7"></label>
+  <p class="palette-hint">autoplay 시 사라짐</p>
+</aside>
+<button class="autoplay-btn" id="autoplay" type="button">auto play</button>
+<script src="20sentence.js?v=20261110typevoice1"></script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>19vocabulary_shorts_grouping2cloud</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Noto+Sans+KR:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700&family=Nanum+Gothic&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="19vocabulary_shorts_grouping2cloud.css">
+
+  <link rel="preload" as="image" href="resources/bg.jpeg">
+
+  <script src="19vocabulary_shorts_grouping2cloud.js" defer></script>
+
+</head>
+
+<body>
+
+  <div id="page-bg" aria-hidden="true"></div>
+
+  <section class="quiz-intro" id="quiz-intro" aria-label="퀴즈 시작 화면">
+    <div class="quiz-intro-inner">
+      <span class="quiz-intro-badge">SHORTS QUIZ</span>
+
+      <div class="quiz-intro-icon" aria-hidden="true">
+        <span class="quiz-intro-qmark">?</span>
+      </div>
+
+      <h2 class="quiz-intro-title">시사 어휘</h2>
+      <p class="quiz-intro-sub"><span class="intro-num">5</span>문제 도전! 다 맞힐 수 있을까요?</p>
+
+      <div class="quiz-intro-cta">
+        <span class="quiz-intro-cta-text">지금 시작</span>
+        <span class="quiz-intro-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 4v14"/>
+            <path d="M6 14l6 6 6-6"/>
+          </svg>
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <main class="wrapper is-behind-intro">
+
+    <section class="content">
+
+      <header class="page-header">
+
+        <h1 id="page-title"></h1>
+
+      </header>
+
+      <div id="word-cloud" class="word-cloud" aria-live="polite"></div>
+
+    </section>
+
+  </main>
+
+  <div class="controls is-intro-visible" id="quiz-controls">
+
+    <button id="autoplay-btn" type="button">auto play</button>
+
+  </div>
+
+</body>
+
+</html>

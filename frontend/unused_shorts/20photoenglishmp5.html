@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>영어퀴즈 (MP4)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="20photoenglishmp5.css">
+  <script src="20photoenglishmp5.js" defer></script>
+</head>
+<body>
+  <main class="quiz-screen">
+    <h1 class="quiz-header">영어 단어 퀴즈</h1>
+    <div class="quiz-stage" id="quiz-stage">
+      <p class="question-intro" id="question-intro"></p>
+      <div class="quiz-choices" id="quiz-choices" role="listbox" aria-label="보기"></div>
+
+      <figure class="quiz-image-wrap">
+        <video id="quiz-video-a" class="quiz-video-layer is-active" loop playsinline preload="auto"></video>
+        <video id="quiz-video-b" class="quiz-video-layer" loop playsinline preload="auto" aria-hidden="true"></video>
+        <div class="video-prompt-wrap" id="video-prompt-wrap" hidden>
+          <p class="video-prompt" id="video-prompt" aria-hidden="true"></p>
+        </div>
+        <div class="countdown-wrap" id="countdown-wrap" hidden>
+          <span class="countdown-num" id="countdown-num" aria-hidden="true">5</span>
+        </div>
+        <div class="image-meaning-wrap" id="image-meaning-wrap" hidden>
+          <p class="image-meaning" id="image-meaning" aria-hidden="true"></p>
+        </div>
+      </figure>
+      <div class="video-example-wrap" id="video-example-wrap" hidden>
+        <p class="video-example-banner" id="video-example-banner">예문</p>
+        <p class="video-example-en" id="video-example-en" aria-hidden="true"></p>
+        <p class="video-example-ko" id="video-example-ko" aria-hidden="true"></p>
+      </div>
+    </div>
+
+    <div class="quiz-controls">
+      <button id="autoplay-btn" type="button">auto play</button>
+    </div>
+  </main>
+</body>
+</html>

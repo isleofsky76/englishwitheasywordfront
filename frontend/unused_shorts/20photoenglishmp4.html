@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>영어퀴즈 (MP4)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="20photoenglishmp4.css">
+  <script src="20photoenglishmp4.js" defer></script>
+</head>
+<body>
+  <main class="quiz-screen">
+    <header class="quiz-header">
+      <h1 class="quiz-label">단어 퀴즈</h1>
+    </header>
+
+    <div class="quiz-stage" id="quiz-stage">
+      <section class="quiz-question-block" aria-labelledby="quiz-question">
+        <span class="question-banner">문제</span>
+        <p class="quiz-question" id="quiz-question"></p>
+      </section>
+
+      <figure class="quiz-image-wrap">
+        <video id="quiz-video-a" class="quiz-video-layer is-active" loop playsinline preload="auto"></video>
+        <video id="quiz-video-b" class="quiz-video-layer" loop playsinline preload="auto" aria-hidden="true"></video>
+        <div class="countdown-wrap" id="countdown-wrap" hidden>
+          <span class="countdown-num" id="countdown-num" aria-hidden="true">3</span>
+        </div>
+        <div class="image-meaning-wrap" id="image-meaning-wrap" hidden>
+          <p class="image-meaning" id="image-meaning" aria-hidden="true"></p>
+        </div>
+      </figure>
+
+      <div class="quiz-choices" id="quiz-choices" role="listbox" aria-label="보기"></div>
+    </div>
+
+    <div class="quiz-controls">
+      <button id="autoplay-btn" type="button">auto play</button>
+    </div>
+  </main>
+</body>
+</html>

@@ -5,7 +5,7 @@
 (function (global) {
   'use strict';
 
-  var ASSET_VER = '20261109quiz1';
+  var ASSET_VER = '20261111abs1';
   var QUIZ_TRACK_VER = '20261109quiz3';
   /* news-voca.js 등이 구버전 redesign을 덮어쓰지 않도록 */
   global.__RD_ARTICLE_WORD_QUIZ = true;
@@ -14,27 +14,28 @@
   /* v2: 기본값을 뜻 가리기로 재설정 (이전 localStorage=0 무시) */
   var SYN_HIDE_KEY = 'ees-synonym-hide-meaning-v2';
 
-  /** SEO 경로 /board/slug/ 에서 list.html 상대링크가 깨지지 않게 */
-  function seoPathPrefix() {
-    try {
-      var parts = String(window.location.pathname || '')
-        .replace(/\\/g, '/')
-        .split('/')
-        .filter(Boolean);
-      if (parts.length && /index\.html$/i.test(parts[parts.length - 1])) parts.pop();
-      if (parts.length >= 2 && !/\.html?$/i.test(parts[parts.length - 1])) {
-        return '../'.repeat(parts.length);
-      }
-    } catch (e) { /* ignore */ }
-    return '';
-  }
-
+  /** SEO 경로에서도 깨지지 않게 루트 절대경로 + .html 제거 */
   function siteHref(href) {
     var h = String(href || '').trim();
     if (!h) return h;
-    if (/^(https?:|mailto:|tel:|#|\/)/i.test(h)) return h;
-    if (/^\.\.\//.test(h)) return h;
-    return seoPathPrefix() + h.replace(/^\.\//, '');
+    if (/^(https?:|mailto:|tel:|#)/i.test(h)) return h;
+    var hash = '';
+    var q = '';
+    var hm = h.match(/#.*$/);
+    if (hm) {
+      hash = hm[0];
+      h = h.slice(0, -hash.length);
+    }
+    var qm = h.match(/\?.*$/);
+    if (qm) {
+      q = qm[0];
+      h = h.slice(0, -q.length);
+    }
+    h = h.replace(/\\/g, '/').replace(/^\.\//, '').replace(/^(\.\.\/)+/, '');
+    if (h.charAt(0) === '/') h = h.slice(1);
+    if (!h || h === 'index.html') return '/' + q + hash;
+    h = h.replace(/\.html$/i, '');
+    return '/' + h + q + hash;
   }
 
   /** 캐시된 구버전 JS가 그려도 QUICK REVIEW 즉시 제거 */

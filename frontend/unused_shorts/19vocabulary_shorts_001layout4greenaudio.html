@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>layout4green — 음성 카탈로그</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" crossorigin="anonymous">
+  <style>
+    :root {
+      --bg: #2F3543;
+      --card: rgba(0, 0, 0, 0.22);
+      --line: rgba(255, 255, 255, 0.1);
+      --text: #EFE9E1;
+      --muted: rgba(239, 233, 225, 0.62);
+      --gold: #F5C842;
+      --mint: #C8E6C9;
+      --pink: #ff9f8f;
+      --title: #C5E070;
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
+    }
+    .page { max-width: 720px; margin: 0 auto; padding: 22px 16px 56px; }
+    h1 { margin: 0 0 8px; font-size: 1.35rem; color: #F5EFE7; }
+    .lead { margin: 0 0 22px; font-size: 0.9rem; line-height: 1.55; color: var(--muted); }
+    .lead code { color: var(--gold); font-size: 0.84em; }
+    .section { margin-bottom: 28px; }
+    .section h2 {
+      margin: 0 0 10px;
+      font-size: 1rem;
+      color: #FFF8E1;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 8px;
+    }
+    .hint { margin: 0 0 12px; font-size: 0.8rem; color: var(--muted); }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin-bottom: 10px;
+    }
+    .card.is-selected { border-color: rgba(245, 200, 66, 0.55); background: rgba(245, 200, 66, 0.08); }
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px 10px;
+    }
+    .meta { flex: 1 1 220px; min-width: 0; }
+    .id {
+      display: inline-block;
+      min-width: 1.6em;
+      font-weight: 800;
+      color: var(--pink);
+      font-family: 'Poppins', sans-serif;
+    }
+    .name { font-size: 0.92rem; word-break: break-all; }
+    .badge {
+      display: inline-block;
+      margin-left: 6px;
+      padding: 2px 7px;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      background: rgba(245, 200, 66, 0.18);
+      color: var(--gold);
+    }
+    .note { font-size: 0.78rem; color: var(--muted); margin-top: 4px; }
+    button, .btn {
+      appearance: none;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+      border-radius: 8px;
+      padding: 7px 12px;
+      font-size: 0.84rem;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    button:hover { background: rgba(255, 255, 255, 0.14); }
+    button:disabled { opacity: 0.45; cursor: wait; }
+    button.play-en { border-color: rgba(245, 200, 66, 0.45); color: var(--gold); }
+    button.play-ko { border-color: rgba(200, 230, 201, 0.45); color: var(--mint); }
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+      align-items: center;
+    }
+    .toolbar label { font-size: 0.8rem; color: var(--muted); }
+    .toolbar input, .toolbar select {
+      background: rgba(0, 0, 0, 0.28);
+      border: 1px solid var(--line);
+      color: var(--text);
+      border-radius: 8px;
+      padding: 7px 10px;
+      font-size: 0.88rem;
+      min-width: 160px;
+    }
+    .status {
+      min-height: 1.3em;
+      font-size: 0.8rem;
+      color: var(--title);
+      margin-bottom: 12px;
+    }
+    .status.is-err { color: #ff8fab; }
+    .kv { font-size: 0.82rem; color: var(--muted); line-height: 1.55; }
+    .kv strong { color: var(--gold); font-weight: 700; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <h1>layout4green 음성 카탈로그</h1>
+    <p class="lead">
+      <code>19vocabulary_shorts_001layout4greenaudio.js</code> 설정값을 불러와 미리 듣습니다.<br>
+      TTS는 백엔드 <code>:3000/generate-audio</code> 가 켜져 있어야 합니다.
+    </p>
+
+    <div class="toolbar">
+      <label>EN 샘플
+        <input id="en-sample" type="text" value="vulnerable">
+      </label>
+      <label>KO 샘플
+        <input id="ko-sample" type="text" value="취약한">
+      </label>
+      <label>속도
+        <select id="rate">
+          <option value="0.85">0.85</option>
+          <option value="1" selected>1.0</option>
+          <option value="1.1">1.1</option>
+        </select>
+      </label>
+      <button type="button" id="stop-btn">■ 정지</button>
+    </div>
+    <div class="status" id="status">준비됨</div>
+
+    <section class="section">
+      <h2>BGM / Tick</h2>
+      <div class="card" id="bgm-card">
+        <div class="row">
+          <div class="meta">
+            <div class="name">BGM <span class="badge" id="bgm-badge">—</span></div>
+            <div class="note" id="bgm-note"></div>
+          </div>
+          <button type="button" id="bgm-play">▶ BGM</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="row">
+          <div class="meta">
+            <div class="name">Countdown Tick</div>
+            <div class="note" id="tick-note"></div>
+          </div>
+          <button type="button" id="tick-play">▶ Tick</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>한글 TTS (KO)</h2>
+      <p class="hint">현재 선택: <code id="ko-selected">—</code></p>
+      <div id="ko-list"></div>
+    </section>
+
+    <section class="section">
+      <h2>영어 TTS (EN)</h2>
+      <p class="hint">현재 선택: <code id="en-selected">—</code> · rate <code id="en-rate">1</code></p>
+      <div id="en-list"></div>
+    </section>
+
+    <section class="section">
+      <h2>적용 방법</h2>
+      <div class="card kv">
+        고정 음성: <code>19vocabulary_shorts_001layout4greenaudio.js</code> 에서<br>
+        <strong>KO_TTS_VOICE = 번호</strong> · <strong>EN_TTS_VOICE = 번호</strong> 또는 <strong>"random"</strong>
+      </div>
+    </section>
+  </div>
+
+  <script src="19vocabulary_shorts_001layout4greenaudio.js"></script>
+  <script>
+    const BACKEND_PORT = 3000;
+    const protocol = location.protocol === "file:" ? "http:" : location.protocol;
+    const host = location.hostname || "localhost";
+    const backendBaseUrl = `${protocol}//${host}:${BACKEND_PORT}`;
+
+    const statusEl = document.getElementById("status");
+    const enSample = document.getElementById("en-sample");
+    const koSample = document.getElementById("ko-sample");
+    const rateEl = document.getElementById("rate");
+    let currentAudio = null;
+
+    const EN_NOTES = {
+      6: "차분 저음",
+      7: "바리톤 · 심야 FM",
+      8: "낮고 허스키",
+      9: "깊고 잔잔",
+      10: "따뜻한 대화형",
+      11: "성숙·안정"
+    };
+
+    function setStatus(msg, isErr = false) {
+      statusEl.textContent = msg;
+      statusEl.classList.toggle("is-err", !!isErr);
+    }
+
+    function stopAudio() {
+      if (currentAudio) {
+        try { currentAudio.pause(); } catch (_) {}
+        currentAudio = null;
+      }
+    }
+
+    function playUrl(url, playbackRate = 1) {
+      stopAudio();
+      return new Promise((resolve, reject) => {
+        const audio = new Audio(url);
+        currentAudio = audio;
+        audio.playbackRate = playbackRate;
+        audio.onended = () => { if (currentAudio === audio) currentAudio = null; resolve(); };
+        audio.onerror = () => { if (currentAudio === audio) currentAudio = null; reject(new Error("재생 실패")); };
+        audio.play().catch(reject);
+      });
+    }
+
+    async function playTts(text, languageId, rate) {
+      const raw = String(text || "").trim();
+      if (!raw) throw new Error("샘플 텍스트가 비어 있습니다");
+      const url = `${backendBaseUrl}/generate-audio?text=${encodeURIComponent(raw)}&language=${encodeURIComponent(languageId)}`;
+      setStatus(`요청 중… ${languageId}`);
+      const res = await fetch(url);
+      if (!res.ok) {
+        const detail = await res.text().catch(() => "");
+        throw new Error(`TTS HTTP ${res.status}${detail ? ` — ${detail.slice(0, 120)}` : ""}`);
+      }
+      const blob = await res.blob();
+      const objUrl = URL.createObjectURL(blob);
+      setStatus(`재생 중… ${languageId}`);
+      try {
+        await playUrl(objUrl, rate);
+        setStatus(`완료 · ${languageId}`);
+      } finally {
+        URL.revokeObjectURL(objUrl);
+      }
+    }
+
+    function renderVoiceList(rootId, voices, selected, kind) {
+      const root = document.getElementById(rootId);
+      root.innerHTML = "";
+      voices.forEach(({ id, name }) => {
+        const card = document.createElement("div");
+        card.className = "card" + (String(selected) === String(id) ? " is-selected" : "");
+        const note = kind === "en" && EN_NOTES[id] ? `<div class="note">${EN_NOTES[id]}</div>` : "";
+        const badge = String(selected) === String(id) ? `<span class="badge">선택</span>` : "";
+        card.innerHTML = `
+          <div class="row">
+            <div class="meta">
+              <div class="name"><span class="id">${id}.</span> ${name}${badge}</div>
+              ${note}
+            </div>
+            <button type="button" class="${kind === "en" ? "play-en" : "play-ko"}" data-voice="${name}">▶ 듣기</button>
+          </div>`;
+        card.querySelector("button").addEventListener("click", async (e) => {
+          const btn = e.currentTarget;
+          btn.disabled = true;
+          try {
+            const text = kind === "en" ? enSample.value : koSample.value;
+            const rate = Number(rateEl.value) || 1;
+            await playTts(text, name, rate);
+          } catch (err) {
+            setStatus(err.message || String(err), true);
+          } finally {
+            btn.disabled = false;
+          }
+        });
+        root.appendChild(card);
+      });
+    }
+
+    function init() {
+      const cat = window.LAYOUT4GREEN_AUDIO_CATALOG;
+      if (!cat) {
+        setStatus("layout4greenaudio.js 로드 실패", true);
+        return;
+      }
+
+      document.getElementById("bgm-badge").textContent = cat.bgm.enabled ? "ON" : "OFF";
+      document.getElementById("bgm-note").textContent =
+        `${cat.bgm.src} · vol ${cat.bgm.volume} · start ${cat.bgm.startSec}s`;
+      document.getElementById("tick-note").textContent =
+        `${cat.tick.src} · vol ${cat.tick.volume}`;
+      document.getElementById("ko-selected").textContent = String(cat.ko.selected);
+      document.getElementById("en-selected").textContent = String(cat.en.selected);
+      document.getElementById("en-rate").textContent = String(cat.en.rate);
+      rateEl.value = String(cat.en.rate || 1);
+
+      renderVoiceList("ko-list", cat.ko.voices, cat.ko.selected, "ko");
+      renderVoiceList("en-list", cat.en.voices, cat.en.selected, "en");
+
+      document.getElementById("stop-btn").addEventListener("click", () => {
+        stopAudio();
+        setStatus("정지");
+      });
+
+      document.getElementById("bgm-play").addEventListener("click", async () => {
+        try {
+          stopAudio();
+          const audio = new Audio(encodeURI(cat.bgm.src));
+          currentAudio = audio;
+          audio.volume = Math.max(0.05, Number(cat.bgm.volume) || 0.02);
+          if (Number.isFinite(cat.bgm.startSec)) audio.currentTime = cat.bgm.startSec;
+          setStatus("BGM 재생…");
+          await audio.play();
+          audio.onended = () => setStatus("BGM 종료");
+        } catch (err) {
+          setStatus(err.message || String(err), true);
+        }
+      });
+
+      document.getElementById("tick-play").addEventListener("click", async () => {
+        try {
+          stopAudio();
+          const audio = new Audio(cat.tick.src);
+          currentAudio = audio;
+          audio.volume = Number(cat.tick.volume) || 0.275;
+          setStatus("Tick 재생…");
+          await audio.play();
+          setTimeout(() => { stopAudio(); setStatus("Tick 정지"); }, 1800);
+        } catch (err) {
+          setStatus(err.message || String(err), true);
+        }
+      });
+    }
+
+    init();
+  </script>
+</body>
+</html>

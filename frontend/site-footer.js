@@ -8,7 +8,24 @@
   if (window.__eesSiteFooterLoaded) return;
   window.__eesSiteFooterLoaded = true;
 
-  var FOOTER_VER = '20261111contact1';
+  var FOOTER_VER = '20261111abs1';
+
+  function toSitePath(href) {
+    var h = String(href || '').trim();
+    if (!h) return h;
+    if (/^(https?:|mailto:|tel:|#)/i.test(h)) return h;
+    var hash = '';
+    var q = '';
+    var hm = h.match(/#.*$/);
+    if (hm) { hash = hm[0]; h = h.slice(0, -hash.length); }
+    var qm = h.match(/\?.*$/);
+    if (qm) { q = qm[0]; h = h.slice(0, -q.length); }
+    h = h.replace(/\\/g, '/').replace(/^\.\//, '').replace(/^(\.\.\/)+/, '');
+    if (h.charAt(0) === '/') h = h.slice(1);
+    if (!h || h === 'index.html') return '/' + q + hash;
+    h = h.replace(/\.html$/i, '');
+    return '/' + h + q + hash;
+  }
 
   function scriptBase() {
     var scripts = document.querySelectorAll('script[src]');
@@ -49,13 +66,13 @@
       '<div class="site-legal-footer-inner">' +
       '<nav aria-label="법적 고지">' +
       '<ul class="site-legal-footer-nav">' +
-      '<li><a href="' + prefix + 'about.html">사이트 소개</a></li>' +
+      '<li><a href="' + toSitePath('about.html') + '">사이트 소개</a></li>' +
       '<li class="sep" aria-hidden="true">·</li>' +
-      '<li><a href="' + prefix + 'privacy.html">개인정보처리방침</a></li>' +
+      '<li><a href="' + toSitePath('privacy.html') + '">개인정보처리방침</a></li>' +
       '<li class="sep" aria-hidden="true">·</li>' +
-      '<li><a href="' + prefix + 'terms.html">이용약관</a></li>' +
+      '<li><a href="' + toSitePath('terms.html') + '">이용약관</a></li>' +
       '<li class="sep" aria-hidden="true">·</li>' +
-      '<li><a href="' + prefix + 'contact">문의</a></li>' +
+      '<li><a href="' + toSitePath('contact') + '">문의</a></li>' +
       '</ul></nav>' +
       '<p class="site-legal-footer-copy">© ' +
       year +
@@ -75,7 +92,8 @@
     ensureCss();
     var wrap = document.createElement('div');
     wrap.id = 'site-legal-footer';
-    wrap.innerHTML = buildFooterHtml(rootPrefix());
+    void rootPrefix;
+    wrap.innerHTML = buildFooterHtml('');
     document.body.appendChild(wrap.firstChild);
   }
 

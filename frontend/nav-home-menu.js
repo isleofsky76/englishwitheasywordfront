@@ -8,15 +8,39 @@
 
 (function () {
 
-    var NAV_HOME_MENU_VERSION = '20261013legal';
+    var NAV_HOME_MENU_VERSION = '20261111abs1';
+
+    /** SEO 하위 경로에서도 깨지지 않게 /로 시작하는 주소로 통일 */
+    function toSitePath(href) {
+        var h = String(href || '').trim();
+        if (!h) return h;
+        if (/^(https?:|mailto:|tel:|#)/i.test(h)) return h;
+        var hash = '';
+        var q = '';
+        var hm = h.match(/#.*$/);
+        if (hm) { hash = hm[0]; h = h.slice(0, -hash.length); }
+        var qm = h.match(/\?.*$/);
+        if (qm) { q = qm[0]; h = h.slice(0, -q.length); }
+        h = h.replace(/\\/g, '/').replace(/^\.\//, '').replace(/^(\.\.\/)+/, '');
+        if (h.charAt(0) === '/') h = h.slice(1);
+        if (!h || h === 'index.html') return '/' + q + hash;
+        h = h.replace(/\.html$/i, '');
+        return '/' + h + q + hash;
+    }
 
     var PRIMARY_BAR_HREFS = {
         'index.html': true,
+        '/': true,
         'word-of-the-day-list.html': true,
+        '/word-of-the-day-list': true,
         'vocabulary-quiz.html': true,
+        '/vocabulary-quiz': true,
         'english-synonym-list.html': true,
+        '/english-synonym-list': true,
         'calm-mind-list.html': true,
-        'english-quotes-list.html': true
+        '/calm-mind-list': true,
+        'english-quotes-list.html': true,
+        '/english-quotes-list': true
     };
 
     var HOME_SECTION_LINKS = [
@@ -85,7 +109,7 @@
             var active = onIndex && hash === item.hash;
             var cls = 'dropdown-item nav-home-section-link' + (active ? ' active' : '');
             var aria = active ? ' aria-current="true"' : '';
-            return '<li><a class="' + cls + '" href="' + item.href + '"' + aria + '>' + item.label + '</a></li>';
+            return '<li><a class="' + cls + '" href="' + toSitePath(item.href) + '"' + aria + '>' + item.label + '</a></li>';
         }).join('');
     }
 
@@ -107,7 +131,7 @@
 
             var aria = active ? ' aria-current="page"' : '';
 
-            return '<li><a class="' + cls + '" href="' + item.href + '"' + aria + '>' + item.label + '</a></li>';
+            return '<li><a class="' + cls + '" href="' + toSitePath(item.href) + '"' + aria + '>' + item.label + '</a></li>';
 
         }).join('');
 
@@ -234,7 +258,7 @@
     }
 
     var MASTHEAD_CSS_VER = '20261108wx4';
-    var MASTHEAD_JS_VER = '20261108wx4';
+    var MASTHEAD_JS_VER = '20261111abs1';
 
     /** FOUC 방지: 파싱 즉시 클래스·CSS 선적용 (DOMContentLoaded 기다리지 않음) */
     function injectMastheadCssEarly() {
@@ -264,7 +288,7 @@
         }
         if (!document.querySelector('script[src*="site-footer.js"]')) {
             var f = document.createElement('script');
-            f.src = base + 'site-footer.js?v=20261013a';
+            f.src = base + 'site-footer.js?v=20261111abs1';
             document.head.appendChild(f);
         }
     }

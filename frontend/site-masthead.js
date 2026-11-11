@@ -4,7 +4,34 @@
  * nav-home-menu.js 가 로드함
  */
 (function () {
-    var VERSION = '20261111search1';
+    var VERSION = '20261111abs1';
+
+  /**
+   * SEO 글 경로(/board/slug/)에서도 깨지지 않게 루트 절대경로로 통일.
+   * news-voca-list.html → /news-voca-list
+   */
+  function toSitePath(href) {
+    var h = String(href || '').trim();
+    if (!h) return h;
+    if (/^(https?:|mailto:|tel:|#)/i.test(h)) return h;
+    var hash = '';
+    var q = '';
+    var hm = h.match(/#.*$/);
+    if (hm) {
+      hash = hm[0];
+      h = h.slice(0, -hash.length);
+    }
+    var qm = h.match(/\?.*$/);
+    if (qm) {
+      q = qm[0];
+      h = h.slice(0, -q.length);
+    }
+    h = h.replace(/\\/g, '/').replace(/^\.\//, '').replace(/^(\.\.\/)+/, '');
+    if (h.charAt(0) === '/') h = h.slice(1);
+    if (!h || h === 'index.html') return '/' + q + hash;
+    h = h.replace(/\.html$/i, '');
+    return '/' + h + q + hash;
+  }
 
   var DICT_LOOKUP_VER = '20261104dict1';
   var DICT_LOOKUP_CONTAINERS = [
@@ -325,7 +352,8 @@
     if (item.desktopOnly) cls += ' nav-desktop-only';
     if (item.mobileOnly) cls += ' nav-mobile-only';
     var aria = active ? ' aria-current="page"' : '';
-    return '<a class="' + cls + '" href="' + base + item.href + '"' + aria + '>' + item.label + '</a>';
+    void base;
+    return '<a class="' + cls + '" href="' + toSitePath(item.href) + '"' + aria + '>' + item.label + '</a>';
   }
 
   function navChildrenHtml(base, page, children) {
@@ -393,7 +421,7 @@
     return (
       '<div class="site-masthead-bar">' +
         '<div class="site-masthead-brand">' +
-          '<a href="' + base + 'index.html">' +
+          '<a href="' + toSitePath('index.html') + '">' +
             '<span class="site-title-ko">시사영단어</span>' +
             '<span class="site-title-en">News English Lab</span>' +
           '</a>' +
@@ -491,7 +519,7 @@
       var snippet = escapeSuggestText(item.previewSnippet || '');
       var title = escapeSuggestText(item.title || '제목 없음');
       var label = escapeSuggestText(item.label || '');
-      var href = String(item.href || '#');
+      var href = toSitePath(String(item.href || '#'));
       var cls = opts.active ? ' class="is-active"' : '';
       var labelHtml = label
         ? '<span class="site-search-label">' + label + '</span>'
@@ -581,7 +609,7 @@
     function renderPage(hits, emptyText) {
       hideSuggest();
       if (!onHome) {
-        window.location.href = base + 'index.html?q=' + encodeURIComponent(input.value.trim());
+        window.location.href = '/?q=' + encodeURIComponent(input.value.trim());
         return;
       }
       revealSearchPage(hits, emptyText);
@@ -649,7 +677,7 @@
       }
       trackSiteSearch(q, 'site-search-submit');
       if (!onHome || !window.HomeBoardPreview) {
-        window.location.href = base + 'index.html?q=' + encodeURIComponent(q);
+        window.location.href = '/?q=' + encodeURIComponent(q);
         return;
       }
       HomeBoardPreview.search(q, 0).then(function (hits) {

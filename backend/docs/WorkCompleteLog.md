@@ -42,6 +42,7 @@
 | 29 | 연관단어 TTS 예문·cast blame·예문만 읽기 | 완료 | 2026-11-11 | 단어 TTS 덮어쓰기 수정, 구동사 활용형, 하단 예문만 읽기, `?v=20261111tts3` |
 | 30 | 문의 페이지 /contact + 푸터 연결 | 완료 | 2026-11-11 | `contact.html`, Netlify `/contact`, 푸터 문의 링크 |
 | 31 | 목록 작성일 + Article JSON-LD 보강 | 완료 | 2026-11-11 | 목록 카드 날짜, viewpost-seo Article 통일, `?v=20261111date1` |
+| 32 | GSC 404·중복URL 코드 수정 | 완료 | 2026-11-11 | 절대 `/` + `.html` 제거, nested list 301, `?v=20261111abs1`; 콘솔 검증은 배포 후 |
 
 ---
 

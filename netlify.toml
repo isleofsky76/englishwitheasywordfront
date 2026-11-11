@@ -1,18 +1,6 @@
 # Static SEO files win when present.
 # Missing SEO folders fall back to board HTML (no Netlify 404).
 
-[[redirects]]
-  from = "/free-books"
-  to = "/free-books.html"
-  status = 200
-  force = false
-
-[[redirects]]
-  from = "/contact"
-  to = "/contact.html"
-  status = 200
-  force = false
-
 # 건강 글로 재분류된 구 국제 URL
 [[redirects]]
   from = "/news-voca/neuropathy-ischemic-impairment-underlying-clinical-trial-data-related-words/*"
@@ -26,6 +14,1138 @@
   status = 301
   force = true
 
+# 상대경로 메뉴 크롤 404 수정: /board/slug/xxx-list.html → /xxx-list
+[[redirects]]
+  from = "/:board/:slug/about.html"
+  to = "/about"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/:board/:slug/privacy.html"
+  to = "/privacy"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/:board/:slug/terms.html"
+  to = "/terms"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/:board/:slug/contact.html"
+  to = "/contact"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/:board/:slug/free-books.html"
+  to = "/free-books"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/:board/:slug/dashboard.html"
+  to = "/dashboard"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/:board/:slug/exam-words.html"
+  to = "/exam-words"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/:board/:slug/home-glossary.html"
+  to = "/home-glossary"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/:board/:slug/english-directory.html"
+  to = "/english-directory"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/:board/:slug/english-writing.html"
+  to = "/english-writing"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/:board/:slug/daily-english.html"
+  to = "/daily-english"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/:board/:slug/one-sentence.html"
+  to = "/one-sentence"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/:board/:slug/news-voca-list.html"
+  to = "/news-voca-list"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/:board/:slug/korea-news-list.html"
+  to = "/korea-news-list"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/:board/:slug/defense-news-list.html"
+  to = "/defense-news-list"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/:board/:slug/economy-news-list.html"
+  to = "/economy-news-list"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/:board/:slug/travel-news-list.html"
+  to = "/travel-news-list"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/:board/:slug/sports-news-list.html"
+  to = "/sports-news-list"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/:board/:slug/us-news-list.html"
+  to = "/us-news-list"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/:board/:slug/industry-news-list.html"
+  to = "/industry-news-list"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/:board/:slug/culture-voca-list.html"
+  to = "/culture-voca-list"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/:board/:slug/health-news-list.html"
+  to = "/health-news-list"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/:board/:slug/weather-news-list.html"
+  to = "/weather-news-list"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/:board/:slug/retail-news-list.html"
+  to = "/retail-news-list"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/:board/:slug/literature-news-list.html"
+  to = "/literature-news-list"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/:board/:slug/politics-news-list.html"
+  to = "/politics-news-list"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/:board/:slug/ai-news-list.html"
+  to = "/ai-news-list"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/:board/:slug/incident-news-list.html"
+  to = "/incident-news-list"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/:board/:slug/ukraine-news-list.html"
+  to = "/ukraine-news-list"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/:board/:slug/ranking-news-list.html"
+  to = "/ranking-news-list"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/:board/:slug/english-synonym-list.html"
+  to = "/english-synonym-list"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/:board/:slug/word-of-the-day-list.html"
+  to = "/word-of-the-day-list"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/:board/:slug/popular-voca-list.html"
+  to = "/popular-voca-list"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/:board/:slug/situational-english-list.html"
+  to = "/situational-english-list"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/:board/:slug/pros-cons-list.html"
+  to = "/pros-cons-list"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/:board/:slug/photo-english-list.html"
+  to = "/photo-english-list"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/:board/:slug/vocabulary-quiz-list.html"
+  to = "/vocabulary-quiz-list"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/:board/:slug/shorts-bg-image-list.html"
+  to = "/shorts-bg-image-list"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/:board/:slug/english-opinions-list.html"
+  to = "/english-opinions-list"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/:board/:slug/calm-mind-list.html"
+  to = "/calm-mind-list"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/:board/:slug/english-quotes-list.html"
+  to = "/english-quotes-list"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/:board/:slug/cooking-voca-list.html"
+  to = "/cooking-voca-list"
+  status = 301
+  force = true
+
+# .html → clean URL (canonical 통합)
+[[redirects]]
+  from = "/about.html"
+  to = "/about"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/privacy.html"
+  to = "/privacy"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/terms.html"
+  to = "/terms"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/contact.html"
+  to = "/contact"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/free-books.html"
+  to = "/free-books"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/dashboard.html"
+  to = "/dashboard"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/exam-words.html"
+  to = "/exam-words"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/home-glossary.html"
+  to = "/home-glossary"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/english-directory.html"
+  to = "/english-directory"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/english-writing.html"
+  to = "/english-writing"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/daily-english.html"
+  to = "/daily-english"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/one-sentence.html"
+  to = "/one-sentence"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/word-ranking.html"
+  to = "/word-ranking"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/news-voca-list.html"
+  to = "/news-voca-list"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/korea-news-list.html"
+  to = "/korea-news-list"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/defense-news-list.html"
+  to = "/defense-news-list"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/economy-news-list.html"
+  to = "/economy-news-list"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/travel-news-list.html"
+  to = "/travel-news-list"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/sports-news-list.html"
+  to = "/sports-news-list"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/us-news-list.html"
+  to = "/us-news-list"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/industry-news-list.html"
+  to = "/industry-news-list"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/culture-voca-list.html"
+  to = "/culture-voca-list"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/health-news-list.html"
+  to = "/health-news-list"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/weather-news-list.html"
+  to = "/weather-news-list"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/retail-news-list.html"
+  to = "/retail-news-list"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/literature-news-list.html"
+  to = "/literature-news-list"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/politics-news-list.html"
+  to = "/politics-news-list"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/ai-news-list.html"
+  to = "/ai-news-list"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/incident-news-list.html"
+  to = "/incident-news-list"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/ukraine-news-list.html"
+  to = "/ukraine-news-list"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/ranking-news-list.html"
+  to = "/ranking-news-list"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/english-synonym-list.html"
+  to = "/english-synonym-list"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/word-of-the-day-list.html"
+  to = "/word-of-the-day-list"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/popular-voca-list.html"
+  to = "/popular-voca-list"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/situational-english-list.html"
+  to = "/situational-english-list"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/pros-cons-list.html"
+  to = "/pros-cons-list"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/photo-english-list.html"
+  to = "/photo-english-list"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/vocabulary-quiz-list.html"
+  to = "/vocabulary-quiz-list"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/shorts-bg-image-list.html"
+  to = "/shorts-bg-image-list"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/english-opinions-list.html"
+  to = "/english-opinions-list"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/calm-mind-list.html"
+  to = "/calm-mind-list"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/english-quotes-list.html"
+  to = "/english-quotes-list"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/cooking-voca-list.html"
+  to = "/cooking-voca-list"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/news-voca.html"
+  to = "/news-voca"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/korea-news.html"
+  to = "/korea-news"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/defense-news.html"
+  to = "/defense-news"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/economy-news.html"
+  to = "/economy-news"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/travel-news.html"
+  to = "/travel-news"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/sports-news.html"
+  to = "/sports-news"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/us-news.html"
+  to = "/us-news"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/industry-news.html"
+  to = "/industry-news"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/culture-voca.html"
+  to = "/culture-voca"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/health-news.html"
+  to = "/health-news"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/weather-news.html"
+  to = "/weather-news"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/retail-news.html"
+  to = "/retail-news"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/literature-news.html"
+  to = "/literature-news"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/politics-news.html"
+  to = "/politics-news"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/ai-news.html"
+  to = "/ai-news"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/incident-news.html"
+  to = "/incident-news"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/ukraine-news.html"
+  to = "/ukraine-news"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/ranking-news.html"
+  to = "/ranking-news"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/english-synonym.html"
+  to = "/english-synonym"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/word-of-the-day.html"
+  to = "/word-of-the-day"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/popular-voca.html"
+  to = "/popular-voca"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/situational-english.html"
+  to = "/situational-english"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/pros-cons.html"
+  to = "/pros-cons"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/photo-english.html"
+  to = "/photo-english"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/vocabulary-quiz.html"
+  to = "/vocabulary-quiz"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/shorts-bg-image.html"
+  to = "/shorts-bg-image"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/english-opinions.html"
+  to = "/english-opinions"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/calm-mind.html"
+  to = "/calm-mind"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/english-quotes.html"
+  to = "/english-quotes"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/cooking-voca.html"
+  to = "/cooking-voca"
+  status = 301
+  force = true
+
+# clean URL → .html 서빙
+[[redirects]]
+  from = "/about"
+  to = "/about.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/privacy"
+  to = "/privacy.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/terms"
+  to = "/terms.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/contact"
+  to = "/contact.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/free-books"
+  to = "/free-books.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/dashboard"
+  to = "/dashboard.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/exam-words"
+  to = "/exam-words.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/home-glossary"
+  to = "/home-glossary.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/english-directory"
+  to = "/english-directory.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/english-writing"
+  to = "/english-writing.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/daily-english"
+  to = "/daily-english.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/one-sentence"
+  to = "/one-sentence.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/word-ranking"
+  to = "/word-ranking.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/news-voca-list"
+  to = "/news-voca-list.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/korea-news-list"
+  to = "/korea-news-list.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/defense-news-list"
+  to = "/defense-news-list.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/economy-news-list"
+  to = "/economy-news-list.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/travel-news-list"
+  to = "/travel-news-list.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/sports-news-list"
+  to = "/sports-news-list.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/us-news-list"
+  to = "/us-news-list.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/industry-news-list"
+  to = "/industry-news-list.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/culture-voca-list"
+  to = "/culture-voca-list.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/health-news-list"
+  to = "/health-news-list.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/weather-news-list"
+  to = "/weather-news-list.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/retail-news-list"
+  to = "/retail-news-list.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/literature-news-list"
+  to = "/literature-news-list.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/politics-news-list"
+  to = "/politics-news-list.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/ai-news-list"
+  to = "/ai-news-list.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/incident-news-list"
+  to = "/incident-news-list.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/ukraine-news-list"
+  to = "/ukraine-news-list.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/ranking-news-list"
+  to = "/ranking-news-list.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/english-synonym-list"
+  to = "/english-synonym-list.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/word-of-the-day-list"
+  to = "/word-of-the-day-list.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/popular-voca-list"
+  to = "/popular-voca-list.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/situational-english-list"
+  to = "/situational-english-list.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/pros-cons-list"
+  to = "/pros-cons-list.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/photo-english-list"
+  to = "/photo-english-list.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/vocabulary-quiz-list"
+  to = "/vocabulary-quiz-list.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/shorts-bg-image-list"
+  to = "/shorts-bg-image-list.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/english-opinions-list"
+  to = "/english-opinions-list.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/calm-mind-list"
+  to = "/calm-mind-list.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/english-quotes-list"
+  to = "/english-quotes-list.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/cooking-voca-list"
+  to = "/cooking-voca-list.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/news-voca"
+  to = "/news-voca.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/korea-news"
+  to = "/korea-news.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/defense-news"
+  to = "/defense-news.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/economy-news"
+  to = "/economy-news.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/travel-news"
+  to = "/travel-news.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/sports-news"
+  to = "/sports-news.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/us-news"
+  to = "/us-news.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/industry-news"
+  to = "/industry-news.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/culture-voca"
+  to = "/culture-voca.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/health-news"
+  to = "/health-news.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/weather-news"
+  to = "/weather-news.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/retail-news"
+  to = "/retail-news.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/literature-news"
+  to = "/literature-news.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/politics-news"
+  to = "/politics-news.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/ai-news"
+  to = "/ai-news.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/incident-news"
+  to = "/incident-news.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/ukraine-news"
+  to = "/ukraine-news.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/ranking-news"
+  to = "/ranking-news.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/english-synonym"
+  to = "/english-synonym.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/word-of-the-day"
+  to = "/word-of-the-day.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/popular-voca"
+  to = "/popular-voca.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/situational-english"
+  to = "/situational-english.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/pros-cons"
+  to = "/pros-cons.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/photo-english"
+  to = "/photo-english.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/vocabulary-quiz"
+  to = "/vocabulary-quiz.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/shorts-bg-image"
+  to = "/shorts-bg-image.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/english-opinions"
+  to = "/english-opinions.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/calm-mind"
+  to = "/calm-mind.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/english-quotes"
+  to = "/english-quotes.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/cooking-voca"
+  to = "/cooking-voca.html"
+  status = 200
+  force = false
+
+# SEO 폴더 없을 때 보드 HTML 폴백
 [[redirects]]
   from = "/news-voca/*"
   to = "/news-voca.html"
@@ -35,6 +1155,24 @@
 [[redirects]]
   from = "/korea-news/*"
   to = "/korea-news.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/defense-news/*"
+  to = "/defense-news.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/economy-news/*"
+  to = "/economy-news.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/travel-news/*"
+  to = "/travel-news.html"
   status = 200
   force = false
 
@@ -116,6 +1254,78 @@
   status = 200
   force = false
 
+[[redirects]]
+  from = "/popular-voca/*"
+  to = "/popular-voca.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/english-synonym/*"
+  to = "/english-synonym.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/word-of-the-day/*"
+  to = "/word-of-the-day.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/culture-voca/*"
+  to = "/culture-voca.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/ranking-news/*"
+  to = "/ranking-news.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/photo-english/*"
+  to = "/photo-english.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/english-opinions/*"
+  to = "/english-opinions.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/shorts-bg-image/*"
+  to = "/shorts-bg-image.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/calm-mind/*"
+  to = "/calm-mind.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/vocabulary-quiz/*"
+  to = "/vocabulary-quiz.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/cooking-voca/*"
+  to = "/cooking-voca.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/english-quotes/*"
+  to = "/english-quotes.html"
+  status = 200
+  force = false
+
 # HTML은 항상 최신, CSS/JS는 버전 쿼리(?v=)로 캐시 무효화
 [[headers]]
   for = "/*.html"
@@ -137,5 +1347,4 @@
     Referrer-Policy = "strict-origin-when-cross-origin"
     X-Content-Type-Options = "nosniff"
 
-# redeploy 2026-11-09 glossary tools footer only
-
+# redeploy 2026-11-11 absolute clean URLs + nested list 301

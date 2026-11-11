@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>영어퀴즈</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="resources/1.jpg">
+  <link rel="stylesheet" href="20photoenglish.css?v=89">
+  <script src="20photoenglish.js?v=89" defer></script>
+</head>
+<body>
+  <main class="quiz-screen">
+    <header class="quiz-header">
+      <h1 class="quiz-label" id="quiz-label"></h1>
+      <div class="quiz-question-wrap">
+        <p class="quiz-question" id="quiz-question"></p>
+        <p class="quiz-question-suffix" aria-hidden="true">의미의 단어는?</p>
+      </div>
+    </header>
+
+    <div class="quiz-stage" id="quiz-stage">
+      <figure class="quiz-image-wrap">
+        <img id="quiz-image-a" class="quiz-image-layer is-active" src="" alt="Quiz image" decoding="async">
+        <img id="quiz-image-b" class="quiz-image-layer" src="" alt="" decoding="async" aria-hidden="true">
+        <div class="countdown-wrap" id="countdown-wrap" hidden>
+          <div class="countdown-stage" data-mode="pop">
+            <svg class="countdown-ring" viewBox="0 0 120 120" aria-hidden="true">
+              <circle class="countdown-ring-track" cx="60" cy="60" r="52"></circle>
+              <circle class="countdown-ring-progress" id="countdown-ring-progress" cx="60" cy="60" r="52"
+                pathLength="100" stroke-dasharray="100" stroke-dashoffset="0"></circle>
+            </svg>
+            <span class="countdown-num" id="countdown-num" aria-hidden="true">5</span>
+            <div class="countdown-bars" id="countdown-bars" aria-hidden="true">
+              <i></i><i></i><i></i><i></i><i></i>
+            </div>
+          </div>
+        </div>
+        <div class="image-meaning-wrap" id="image-meaning-wrap" hidden>
+          <p class="image-meaning" id="image-meaning" aria-hidden="true"></p>
+        </div>
+      </figure>
+
+      <div class="quiz-choices" id="quiz-choices" role="listbox" aria-label="보기"></div>
+    </div>
+
+    <div class="quiz-controls">
+      <button id="autoplay-btn" type="button">auto play</button>
+    </div>
+  </main>
+</body>
+</html>
