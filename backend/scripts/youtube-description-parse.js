@@ -150,10 +150,10 @@ function parseWords(description) {
   return words;
 }
 
-/** blame→blamed, spur→spurred 등 — 예문 활용형 하이라이트용 */
-function inflectionAlternates(expression) {
-  const e = String(expression || '').trim();
-  if (!e) return [];
+/** 단일 단어 활용형 — blame→blamed, spur→spurred, cast→casting */
+function singleWordInflections(word) {
+  const e = String(word || '').trim();
+  if (!e || /\s/.test(e)) return e ? [e] : [];
   const out = new Set([e]);
   const add = (x) => {
     if (x && x.length > 1) out.add(x);
@@ -177,6 +177,24 @@ function inflectionAlternates(expression) {
   if (/y$/i.test(e) && e.length > 2 && !/[aeiou]y$/i.test(e)) {
     add(`${e.slice(0, -1)}ies`);
     add(`${e.slice(0, -1)}ied`);
+  }
+  return [...out];
+}
+
+/** blame→blamed, cast blame→casting blame 등 — 예문 활용형 하이라이트용 */
+function inflectionAlternates(expression) {
+  const e = String(expression || '').trim();
+  if (!e) return [];
+  const out = new Set([e]);
+  const parts = e.split(/\s+/).filter(Boolean);
+  if (parts.length === 1) {
+    singleWordInflections(e).forEach((x) => out.add(x));
+  } else {
+    /* 구(cast blame): 첫 동사만 활용 → casting blame */
+    const rest = parts.slice(1).join(' ');
+    singleWordInflections(parts[0]).forEach((form) => {
+      if (form) out.add(`${form} ${rest}`);
+    });
   }
   return [...out].sort((a, b) => b.length - a.length);
 }

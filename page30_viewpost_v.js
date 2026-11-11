@@ -243,13 +243,31 @@ function attachVocabularyWebTTS(container) {
         p.setAttribute('data-vv-tts', '1');
     });
 
-    /* 연관단어 카드: 기존 버튼 전부 지우고 🔊 1개만 */
+    /* 연관단어 카드: 🔊 1개 — 예문이면 문장 전체, 아니면 표제어 */
     container.querySelectorAll('.rd-expr--synonym').forEach((card) => {
         const word = (card.getAttribute('data-rd-word') || '').trim();
         if (!word) return;
-        const host = card.querySelector('.rd-expr-en') || card.querySelector('.rd-expr-word') || card;
+        const enEl = card.querySelector('.rd-expr-en');
+        let speak = word;
+        if (enEl) {
+            const sent = vvStripTagsToText(enEl.innerHTML)
+                .replace(/\s+/g, ' ')
+                .replace(/\s*\([^)]{0,80}\)\s*$/, '')
+                .trim();
+            const words = sent.match(/[A-Za-z]+(?:'[A-Za-z]+)?/g) || [];
+            if (
+                sent &&
+                sent.toLowerCase() !== word.toLowerCase() &&
+                (words.length >= 5 ||
+                    (words.length >= 3 && /[.!?…]/.test(sent)) ||
+                    words.length >= 3)
+            ) {
+                speak = sent;
+            }
+        }
+        const host = enEl || card.querySelector('.rd-expr-word') || card;
         Array.from(card.querySelectorAll('.vv-tts-btn')).forEach((b) => b.remove());
-        host.insertAdjacentHTML('beforeend', vvTtsButtonHtml(word));
+        host.insertAdjacentHTML('beforeend', vvTtsButtonHtml(speak));
     });
 
     vvBindTtsButtons(container);
@@ -267,9 +285,9 @@ function vvAttachPlayAll(container) {
     const wrap = document.createElement('p');
     wrap.className = 'vv-tts-all-wrap';
     wrap.innerHTML =
-        '<button type="button" class="vv-tts-all-btn" aria-label="영어 예문 모두 듣기, 다시 누르면 멈춤" title="모두 듣기 / 다시 누르면 멈춤" style="display:inline-flex;align-items:center;gap:6px;margin:0 0 16px;border:1px solid #2f80ed;background:#eef5fd;color:#1d4f91;cursor:pointer;border-radius:999px;padding:6px 12px;font-size:14px;font-weight:600;line-height:1.2;">' +
+        '<button type="button" class="vv-tts-all-btn" aria-label="예문만 읽기, 다시 누르면 멈춤" title="예문만 읽기 / 다시 누르면 멈춤" style="display:inline-flex;align-items:center;gap:6px;margin:12px 0 16px;border:1px solid #2f80ed;background:#eef5fd;color:#1d4f91;cursor:pointer;border-radius:999px;padding:6px 12px;font-size:14px;font-weight:600;line-height:1.2;">' +
         icon +
-        ' 영어 예문 모두 듣기</button>';
+        ' 예문만 읽기</button>';
     /* 본문·유튜브·댓글 아래 맨 마지막에 배치 */
     container.appendChild(wrap);
 

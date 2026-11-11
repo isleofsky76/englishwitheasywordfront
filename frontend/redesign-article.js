@@ -9,6 +9,7 @@
   var QUIZ_TRACK_VER = '20261109quiz3';
   /* news-voca.js 등이 구버전 redesign을 덮어쓰지 않도록 */
   global.__RD_ARTICLE_WORD_QUIZ = true;
+  global.__RD_ARTICLE_TTS3 = true;
   var SYN_SAVED_KEY = 'ees-synonym-saved-v1';
   /* v2: 기본값을 뜻 가리기로 재설정 (이전 localStorage=0 무시) */
   var SYN_HIDE_KEY = 'ees-synonym-hide-meaning-v2';
@@ -1013,6 +1014,82 @@
     });
   }
 
+  /** 하단 「예문만 읽기」 — 카드 예문을 순서대로 재생 */
+  function attachExamplesOnlyButton(container, cards) {
+    if (!container || !global.speechSynthesis) return;
+    var main = container.querySelector('.rd-article-main') || container;
+    if (main.querySelector('.vv-tts-all-btn, .rd-examples-only-btn')) return;
+    var texts = [];
+    (cards || []).forEach(function (c) {
+      if (!c) return;
+      var sent = plainEnglishForTts(c.enHtml || '');
+      if (isExampleSentence(sent, c.expression)) texts.push(sent);
+    });
+    if (texts.length < 2) {
+      /* 렌더 후 DOM 기준 폴백 */
+      texts = [];
+      main.querySelectorAll('.rd-expr .vv-tts-btn').forEach(function (btn) {
+        var t = (btn.getAttribute('data-vv-tts') || '').trim();
+        if (t && isExampleSentence(t, '')) texts.push(t);
+      });
+    }
+    if (texts.length < 2) return;
+
+    var wrap = document.createElement('p');
+    wrap.className = 'vv-tts-all-wrap rd-examples-only-wrap';
+    wrap.innerHTML =
+      '<button type="button" class="vv-tts-all-btn rd-examples-only-btn" aria-label="예문만 읽기, 다시 누르면 멈춤" title="예문만 읽기 / 다시 누르면 멈춤"' +
+      ' style="display:inline-flex;align-items:center;gap:6px;margin:12px 0 16px;border:1px solid #2f80ed;background:#eef5fd;color:#1d4f91;cursor:pointer;border-radius:999px;padding:6px 12px;font-size:14px;font-weight:600;line-height:1.2;">' +
+      '🔊 예문만 읽기</button>';
+    main.appendChild(wrap);
+
+    var allBtn = wrap.querySelector('.rd-examples-only-btn');
+    var token = 0;
+    allBtn.addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      var playing =
+        allBtn.classList.contains('vv-tts-playing') &&
+        (global.speechSynthesis.speaking || global.speechSynthesis.pending);
+      try { global.speechSynthesis.cancel(); } catch (err) { /* ignore */ }
+      main.querySelectorAll('.vv-tts-btn.vv-tts-playing, .vv-tts-all-btn.vv-tts-playing').forEach(function (b) {
+        b.classList.remove('vv-tts-playing');
+      });
+      if (playing) return;
+      token += 1;
+      var my = token;
+      allBtn.classList.add('vv-tts-playing');
+      var i = 0;
+      var playNext = function () {
+        if (my !== token) return;
+        if (i >= texts.length) {
+          allBtn.classList.remove('vv-tts-playing');
+          return;
+        }
+        var u = new SpeechSynthesisUtterance(texts[i]);
+        i += 1;
+        u.lang = 'en-US';
+        u.rate = 0.92;
+        try {
+          var voices = global.speechSynthesis.getVoices() || [];
+          var en =
+            voices.find(function (v) { return v.lang && /^en-US/i.test(v.lang); }) ||
+            voices.find(function (v) { return v.lang && /^en(-|$)/i.test(v.lang); });
+          if (en) u.voice = en;
+        } catch (e2) { /* ignore */ }
+        u.onend = function () {
+          if (my !== token) return;
+          global.setTimeout(playNext, 420);
+        };
+        u.onerror = function () {
+          if (my === token) playNext();
+        };
+        global.speechSynthesis.speak(u);
+      };
+      playNext();
+    });
+  }
+
   function bindArticleTts(root) {
     if (!root || root.getAttribute('data-rd-tts-bound') === '1') return;
     root.setAttribute('data-rd-tts-bound', '1');
@@ -1694,6 +1771,11 @@
     if (typeof options.onReady === 'function') options.onReady(container);
 
     bindLazyYoutube(container);
+
+    /* 시사영단어·연관단어: 하단 예문만 읽기 */
+    if (studyMode || newsBoard || synonymMode) {
+      attachExamplesOnlyButton(container, cards);
+    }
 
     if (showWordQuiz) {
       bindArticleWordQuiz(container, cards, title);

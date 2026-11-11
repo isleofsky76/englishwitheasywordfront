@@ -1096,8 +1096,8 @@ async function mountNewsVocaComments(post) {
             await nvLoadScript(base + 'board-list-config.js?v=20261020auto2');
         }
         /* SEO 페이지가 이미 최신 redesign을 넣었으면 구버전을 다시 받지 않음 */
-        if (!window.__RD_ARTICLE_WORD_QUIZ) {
-            await nvLoadScript(base + 'redesign-article.js?v=20261109quiz3');
+        if (!window.__RD_ARTICLE_TTS3) {
+            await nvLoadScript(base + 'redesign-article.js?v=20261111tts3');
         }
     } catch (e) {
         console.warn('redesign deps skipped', e);
