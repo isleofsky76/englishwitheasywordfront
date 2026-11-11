@@ -568,7 +568,7 @@ ${head}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../../page30-api-config.js?v=20260721"></script>
     <script src="../../site-masthead.js?v=20261108wx1"></script>
-    <script src="../../site-footer.js?v=20261013a"></script>
+    <script src="../../site-footer.js?v=20261111contact1"></script>
     <script src="../../nav-home-menu.js?v=20261105menu2"></script>
     <script>
       /* ko: 명사·동사 등 품사별 뜻을 모두 인정 (하나만 맞아도 O) */

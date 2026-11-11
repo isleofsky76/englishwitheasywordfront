@@ -1,5 +1,5 @@
 /**
- * 사이트 공통 푸터 — About / 개인정보처리방침 / 이용약관
+ * 사이트 공통 푸터 — About / 개인정보처리방침 / 이용약관 / 문의
  * nav-home-menu.js 또는 페이지에서 직접 로드
  */
 (function () {
@@ -7,6 +7,8 @@
 
   if (window.__eesSiteFooterLoaded) return;
   window.__eesSiteFooterLoaded = true;
+
+  var FOOTER_VER = '20261111contact1';
 
   function scriptBase() {
     var scripts = document.querySelectorAll('script[src]');
@@ -36,7 +38,7 @@
     if (document.querySelector('link[href*="site-footer.css"]')) return;
     var link = document.createElement('link');
     link.rel = 'stylesheet';
-    link.href = scriptBase() + 'site-footer.css?v=20261013a';
+    link.href = scriptBase() + 'site-footer.css?v=' + FOOTER_VER;
     document.head.appendChild(link);
   }
 
@@ -53,7 +55,7 @@
       '<li class="sep" aria-hidden="true">·</li>' +
       '<li><a href="' + prefix + 'terms.html">이용약관</a></li>' +
       '<li class="sep" aria-hidden="true">·</li>' +
-      '<li><a href="mailto:everydayalittlehelp@gmail.com">문의</a></li>' +
+      '<li><a href="' + prefix + 'contact">문의</a></li>' +
       '</ul></nav>' +
       '<p class="site-legal-footer-copy">© ' +
       year +
