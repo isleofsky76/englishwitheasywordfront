@@ -236,12 +236,14 @@ export function wordsToSynonymSections(words, pronunciations = {}) {
     const exampleEn = String(w.exampleEn || '').trim();
     const exampleKo = String(w.exampleKo || '').trim();
 
-    /* 예문 있으면 뉴스영어처럼: 번호.뜻 → 예문 → 번역 */
+    /* 예문 있으면 뉴스영어처럼: 번호.뜻 → 예문 → 번역 → cf. 원형
+       (예문 mark는 pilloried 등 활용형일 수 있어, 표제어는 cf. lemma로 고정) */
     if (exampleEn) {
       const en = lemmaAnnotation(exampleEn, expression);
+      const cf = `cf. ${expression}: ${meaning}`;
       return {
         title: `${n}. ${meaning}`,
-        narrative: exampleKo ? [`${en} / ${exampleKo}`] : [en],
+        narrative: exampleKo ? [`${en} / ${exampleKo} ${cf}`] : [`${en} ${cf}`],
       };
     }
 

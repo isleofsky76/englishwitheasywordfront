@@ -38,6 +38,7 @@
 | 25 | 홈 01 탭명 통일: `뉴스 영단어`/`뉴스 영어` → `시사 영단어` | 완료 | 2026-11-11 | index·masthead·board-list-config, `?v=20261111sisa1` |
 | 26 | 사이트 검색 통합 인덱스 + smitten 오탐 수정 | 완료 | 2026-11-11 | `site-search-index.json`(1592), build script, badwords 검색 완화, `?v=20261111search1` |
 | 27 | 한국 보드 YouTube 자동화 업로드 2건 | 완료 | 2026-11-11 | `micI6bp9HRw`(남준잉), `odv-z2mwqR8`(호르무즈) |
+| 28 | 연관단어 표제어 동사원형 복구 | 완료 | 2026-11-11 | `cf.` lemma 우선, synonym 재업로드(pillory), `?v=20261111lemma1` |
 
 ---
 

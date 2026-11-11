@@ -627,7 +627,17 @@
         unique = extractParenEnglish(koText || cfText || stripHtml(enHtml));
       }
 
-      /* 섹션당 카드 1개 — 영어 mark 우선, 한글 제목은 뜻 */
+      /* cf. pillory: 뜻 — 예문 mark(pilloried)보다 원형 표제어 우선 */
+      var cfLemma = '';
+      if (cfText) {
+        var cfLemmaMatch = String(cfText).match(/\bcf\.\s*([^:：\n]+?)\s*[:：]/i);
+        if (cfLemmaMatch) {
+          cfLemma = stripHtml(cfLemmaMatch[1]).replace(/\s+/g, ' ').trim();
+        }
+      }
+
+      /* 섹션당 카드 1개 — nv-en → cf 원형 → mark → 제목 */
+      if (cfLemma && !enEl) wordEn = cfLemma;
       if (!wordEn && unique.length) wordEn = unique[0];
       if (!wordEn && titleText && !/[가-힣]/.test(titleText)) wordEn = titleText;
       if (!wordEn && titleText) wordEn = titleText;
@@ -1492,6 +1502,14 @@
           enHtml: w.exampleEn ? highlightPhrase(escapeHtml(w.exampleEn), w.en || w.expression || '') : '',
           ko: (w.exampleKo || w.koSentence || '').trim()
         };
+      });
+    }
+    /* wordMeta 원형으로 표제어 보정 (예문 활용형 mark 덮어쓰기) */
+    if (Array.isArray(post.wordMeta) && post.wordMeta.length && cards.length) {
+      cards.forEach(function (c, i) {
+        var meta = post.wordMeta[i];
+        var lemma = meta && String(meta.expression || meta.en || meta.word || '').trim();
+        if (lemma) c.expression = lemma;
       });
     }
 
