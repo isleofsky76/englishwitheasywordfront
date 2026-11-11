@@ -106,6 +106,14 @@
         const id = 'nv-article-jsonld';
         const old = document.getElementById(id);
         if (old) old.remove();
+        /* SEO 정적 HTML의 Article JSON-LD와 중복되지 않게 정리 */
+        Array.from(document.querySelectorAll('script[type="application/ld+json"]')).forEach((el) => {
+            if (el.id === id) return;
+            try {
+                const data = JSON.parse(el.textContent || '{}');
+                if (data && data['@type'] === 'Article') el.remove();
+            } catch (_) { /* ignore */ }
+        });
         const script = document.createElement('script');
         script.id = id;
         script.type = 'application/ld+json';
@@ -113,17 +121,23 @@
         const headline = (post.title || (cfg && cfg.defaultTitle) || 'Article')
             .replace(/^\[(AP|CNN|BBC)\]\s*/i, '')
             .trim();
+        const day = isoDate ? String(isoDate).slice(0, 10) : undefined;
         const payload = {
             '@context': 'https://schema.org',
             '@type': 'Article',
             headline: headline,
             description: description,
-            datePublished: isoDate || undefined,
-            dateModified: isoDate || undefined,
-            author: { '@type': 'Organization', name: 'English Easy Study' },
+            datePublished: day || undefined,
+            dateModified: day || undefined,
+            author: {
+                '@type': 'Organization',
+                name: '시사영단어',
+                alternateName: 'News English Lab',
+            },
             publisher: {
                 '@type': 'Organization',
-                name: 'English Easy Study',
+                name: '시사영단어',
+                alternateName: 'News English Lab',
                 url: SITE_ORIGIN,
             },
             mainEntityOfPage: { '@type': 'WebPage', '@id': pageUrl },

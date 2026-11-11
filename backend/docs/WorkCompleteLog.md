@@ -41,6 +41,7 @@
 | 28 | 연관단어 표제어 동사원형 복구 | 완료 | 2026-11-11 | `cf.` lemma 우선, synonym 재업로드(pillory), `?v=20261111lemma1` |
 | 29 | 연관단어 TTS 예문·cast blame·예문만 읽기 | 완료 | 2026-11-11 | 단어 TTS 덮어쓰기 수정, 구동사 활용형, 하단 예문만 읽기, `?v=20261111tts3` |
 | 30 | 문의 페이지 /contact + 푸터 연결 | 완료 | 2026-11-11 | `contact.html`, Netlify `/contact`, 푸터 문의 링크 |
+| 31 | 목록 작성일 + Article JSON-LD 보강 | 완료 | 2026-11-11 | 목록 카드 날짜, viewpost-seo Article 통일, `?v=20261111date1` |
 
 ---
 

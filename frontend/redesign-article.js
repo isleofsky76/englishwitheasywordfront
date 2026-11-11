@@ -1911,6 +1911,17 @@
   async function mountRedesignArticle(container, post, options) {
     options = options || {};
     var cfg = global.BoardListConfig && global.BoardListConfig.get(options.boardKey);
+    /* Article JSON-LD 보강 — VIEWPOST_SEO가 있을 때만 (중복 호출 OK) */
+    try {
+      if (
+        post &&
+        global.VIEWPOST_SEO &&
+        global.ViewpostSeo &&
+        typeof global.ViewpostSeo.updatePageSeo === 'function'
+      ) {
+        global.ViewpostSeo.updatePageSeo(post, global.VIEWPOST_SEO);
+      }
+    } catch (e) { /* ignore */ }
     /* classic: 기존 본문/헤더 유지 (카드형 redesign·chrome 모두 생략) */
     if (cfg && cfg.articleLayout === 'classic') {
       markArticleReady();

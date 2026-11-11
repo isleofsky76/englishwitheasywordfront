@@ -594,8 +594,9 @@
     if (!item) return '';
     var kw = usesKeywordCards(cfg);
     var lemmaOnly = isLemmaOnlyCard(cfg);
+    /* 작성일은 모든 카드에 표시 (키워드·단어장도 날짜만) */
     var metaParts = kw || lemmaOnly
-      ? []
+      ? [item.date].filter(Boolean)
       : [cfg.categoryLabel, item.source, item.date].filter(Boolean);
     var tags = (!kw && !lemmaOnly && item.tags) ? item.tags.map(function (t) {
       return '<span class="rd-list-tag">' + escapeHtml(t) + '</span>';
@@ -626,11 +627,12 @@
   function renderSide(items) {
     if (!items.length) return '';
     var rows = items.map(function (item, i) {
+      var sideMeta = [item.source, item.date].filter(Boolean).join(' · ');
       return (
         '<a class="rd-list-side-item" href="' + escapeAttr(item.href) + '">' +
           '<span class="rd-list-side-num">' + (i + 2) + '</span>' +
           '<span class="rd-list-side-body">' +
-            (item.source ? '<span class="rd-list-side-source">' + escapeHtml(item.source) + '</span>' : '') +
+            (sideMeta ? '<span class="rd-list-side-source">' + escapeHtml(sideMeta) + '</span>' : '') +
             titleHtml(item, 'rd-list-side-title') +
           '</span>' +
         '</a>'
@@ -648,8 +650,8 @@
     var kw = usesKeywordCards(cfg);
     var lemmaOnly = isLemmaOnlyCard(cfg);
     var metaParts = kw || lemmaOnly
-      ? []
-      : [cfg.categoryLabel, item.source].filter(Boolean);
+      ? [item.date].filter(Boolean)
+      : [cfg.categoryLabel, item.source, item.date].filter(Boolean);
     var media = kw
       ? keywordCardThumbHtml(item, cfg)
       : imgHtml(item.thumb, 'rd-list-card-img', monoFromTitle(item), {
