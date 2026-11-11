@@ -5,7 +5,7 @@
 (function (global) {
   'use strict';
 
-  var ASSET_VER = '20261111wotdspace1';
+  var ASSET_VER = '20261112footer1';
   var SPEAKER_SVG =
     '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M15.5 8.5a5 5 0 0 1 0 7"></path></svg>';
   var SPEAKER_FULL_SVG =
@@ -307,26 +307,8 @@
   }
 
   function renderFooter() {
-    return (
-      '<div class="rd-word-spacer"></div>' +
-      '<footer class="rd-word-footer" role="contentinfo">' +
-        '<div class="rd-word-footer-inner">' +
-          '<div class="rd-word-footer-brand">' +
-            '<span class="name">시사영단어</span>' +
-            '<span class="desc">뉴스로 배우는 시사 영어. 뉴스 어휘, 오늘의 단어, 유의어, 퀴즈를 무료로.</span>' +
-          '</div>' +
-          '<div class="rd-word-footer-links">' +
-            '<a href="https://www.youtube.com/@istudyeng">YouTube</a>' +
-            '<a href="https://x.com/istudyengli">X</a>' +
-            '<a href="/about">사이트 소개</a>' +
-            '<a href="/privacy">개인정보처리방침</a>' +
-            '<a href="/terms">이용약관</a>' +
-            '<a href="/home-glossary">용어집</a>' +
-          '</div>' +
-        '</div>' +
-        '<div class="rd-word-footer-copy">© 2026 시사영단어 · News English Lab</div>' +
-      '</footer>'
-    );
+    /* 공통 site-legal-footer(site-footer.js) 사용 — 페이지별 푸터 중복 방지 */
+    return '<div class="rd-word-spacer"></div>';
   }
 
   function renderWordPage(container, post, data, options) {

@@ -723,10 +723,6 @@ body.rd-word main#post-container {
   color: #9CA0A9;
 }
 
-body.rd-word .site-legal-footer {
-  display: none;
-}
-
 @media (max-width: 720px) {
   .rd-word-hero {
     padding: 10px 16px 16px;

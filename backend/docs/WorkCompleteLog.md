@@ -50,6 +50,7 @@
 | 37 | 단어 다지기: SSR 텍스트 깜빡임 제거 + 탭 순서 단어장·연관단어·문장 | 완료 | 2026-11-11 | `.rd-list-ssr` 숨김·목록 밖 이동, `VOCAB_TABS`/`index`/`masthead`, `?v=20261111vocaborder1` |
 | 38 | WOTD 상세 상단 공백 축소 + 목록 섬네일 1:1 | 완료 | 2026-11-11 | `rd-word-hero` 패딩·갭, `rd-list--wotd` 1:1 cover, `?v=20261111wotdspace1` |
 | 39 | WOTD 구형 본문 167건 → 최신 wotd-* 구조 마이그레이션 | 완료 | 2026-11-12 | `migrate-wotd-to-latest.mjs`, SEO 페이지 생성, 날짜 유지 |
+| 40 | 공통 푸터 통일 (소개·개인정보·약관·문의) | 완료 | 2026-11-12 | index/단어장 커스텀 푸터 제거, `site-legal-footer`, `?v=20261112footer1` |
 
 ---
 

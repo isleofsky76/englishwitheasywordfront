@@ -253,7 +253,7 @@ export const BOARD_SEO = {
     listHtml: 'word-of-the-day-list.html',
     articleLayout: 'word-detail',
     extraCss: [
-      { file: 'redesign-word.css', version: '20261111wotdspace1' },
+      { file: 'redesign-word.css', version: '20261112footer1' },
       { file: 'site-masthead.css', version: '20261101endef3' },
     ],
   },
@@ -568,7 +568,7 @@ ${head}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../../page30-api-config.js?v=20260721"></script>
     <script src="../../site-masthead.js?v=20261111abs1"></script>
-    <script src="../../site-footer.js?v=20261111abs1"></script>
+    <script src="../../site-footer.js?v=20261112footer1"></script>
     <script src="../../nav-home-menu.js?v=20261111abs1"></script>
     <script>
       /* ko: 명사·동사 등 품사별 뜻을 모두 인정 (하나만 맞아도 O) */

@@ -1,6 +1,6 @@
 /**
- * 사이트 공통 푸터 — About / 개인정보처리방침 / 이용약관 / 문의
- * nav-home-menu.js 또는 페이지에서 직접 로드
+ * 사이트 공통 푸터 — 사이트 소개 / 개인정보처리방침 / 이용약관 / 문의
+ * 페이지별(.rd-footer, .rd-word-footer 등) 다른 푸터는 제거하고 이 마크업으로 통일
  */
 (function () {
   'use strict';
@@ -8,7 +8,7 @@
   if (window.__eesSiteFooterLoaded) return;
   window.__eesSiteFooterLoaded = true;
 
-  var FOOTER_VER = '20261111abs1';
+  var FOOTER_VER = '20261112footer1';
 
   function toSitePath(href) {
     var h = String(href || '').trim();
@@ -17,9 +17,15 @@
     var hash = '';
     var q = '';
     var hm = h.match(/#.*$/);
-    if (hm) { hash = hm[0]; h = h.slice(0, -hash.length); }
+    if (hm) {
+      hash = hm[0];
+      h = h.slice(0, -hash.length);
+    }
     var qm = h.match(/\?.*$/);
-    if (qm) { q = qm[0]; h = h.slice(0, -q.length); }
+    if (qm) {
+      q = qm[0];
+      h = h.slice(0, -q.length);
+    }
     h = h.replace(/\\/g, '/').replace(/^\.\//, '').replace(/^(\.\.\/)+/, '');
     if (h.charAt(0) === '/') h = h.slice(1);
     if (!h || h === 'index.html') return '/' + q + hash;
@@ -38,19 +44,6 @@
     return '';
   }
 
-  function rootPrefix() {
-    var parts = (window.location.pathname || '/')
-      .split('/')
-      .filter(function (p) {
-        return p && p.length;
-      });
-    if (parts.length && /\.html?$/i.test(parts[parts.length - 1])) {
-      parts.pop();
-    }
-    if (!parts.length) return '';
-    return '../'.repeat(parts.length);
-  }
-
   function ensureCss() {
     if (document.querySelector('link[href*="site-footer.css"]')) return;
     var link = document.createElement('link');
@@ -59,10 +52,10 @@
     document.head.appendChild(link);
   }
 
-  function buildFooterHtml(prefix) {
+  function buildFooterHtml() {
     var year = new Date().getFullYear();
     return (
-      '<footer class="site-legal-footer" role="contentinfo" aria-label="사이트 정보">' +
+      '<footer class="site-legal-footer" id="site-legal-footer" role="contentinfo" aria-label="사이트 정보">' +
       '<div class="site-legal-footer-inner">' +
       '<nav aria-label="법적 고지">' +
       '<ul class="site-legal-footer-nav">' +
@@ -81,25 +74,54 @@
     );
   }
 
+  function removeLegacyFooters() {
+    document.querySelectorAll('.rd-footer, .rd-word-footer').forEach(function (el) {
+      el.parentNode && el.parentNode.removeChild(el);
+    });
+  }
+
+  var injecting = false;
+
   function injectFooter() {
-    if (
-      document.getElementById('site-legal-footer') ||
-      document.querySelector('.site-legal-footer') ||
-      document.querySelector('.rd-footer')
-    ) {
-      return;
+    if (injecting) return;
+    injecting = true;
+    try {
+      ensureCss();
+      var hadLegacy = !!document.querySelector('.rd-footer, .rd-word-footer');
+      removeLegacyFooters();
+
+      var existing = document.getElementById('site-legal-footer') || document.querySelector('.site-legal-footer');
+      if (existing) {
+        /* 문의 링크 없는 옛 푸터만 교체 */
+        var needsContact = !existing.querySelector('a[href*="contact"]');
+        if (!needsContact && !hadLegacy) return;
+        var wrap = document.createElement('div');
+        wrap.innerHTML = buildFooterHtml();
+        existing.parentNode.replaceChild(wrap.firstChild, existing);
+        return;
+      }
+
+      var wrap = document.createElement('div');
+      wrap.innerHTML = buildFooterHtml();
+      document.body.appendChild(wrap.firstChild);
+    } finally {
+      injecting = false;
     }
-    ensureCss();
-    var wrap = document.createElement('div');
-    wrap.id = 'site-legal-footer';
-    void rootPrefix;
-    wrap.innerHTML = buildFooterHtml('');
-    document.body.appendChild(wrap.firstChild);
   }
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', injectFooter);
   } else {
     injectFooter();
+  }
+
+  /* 단어장 등이 나중에 커스텀 푸터를 넣으면 다시 통일 */
+  try {
+    var mo = new MutationObserver(function () {
+      if (document.querySelector('.rd-footer, .rd-word-footer')) injectFooter();
+    });
+    mo.observe(document.documentElement, { childList: true, subtree: true });
+  } catch (e) {
+    /* ignore */
   }
 })();
