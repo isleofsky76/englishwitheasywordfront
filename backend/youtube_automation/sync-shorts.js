@@ -41,7 +41,6 @@ const CATEGORY_MAP = {
   스포츠: { label: '스포츠', href: 'sports-news-list.html' },
   미국: { label: '미국', href: 'us-news-list.html' },
   산업: { label: '산업', href: 'industry-news-list.html' },
-  유통: { label: '유통', href: 'retail-news-list.html' },
   컬쳐: { label: '컬쳐', href: 'culture-voca-list.html' },
   문화: { label: '컬쳐', href: 'culture-voca-list.html' },
   건강: { label: '건강', href: 'health-news-list.html' },

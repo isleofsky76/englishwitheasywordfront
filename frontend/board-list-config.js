@@ -12,12 +12,13 @@
     'politics-news': true,
     'ai-news': true,
     'incident-news': true,
-    /* 얇은·빈 카테고리 (AdSense/UX) — 유통은 다시 표시 */
+    /* 얇은·빈 카테고리 (AdSense/UX) — 유통 탭 숨김 */
+    'retail-news': true,
     'ukraine-news': true,
     'ranking-news': true
   };
 
-  /* 01뉴스 영단어 표시 순서: 국제·한국·국방·경제·여행·스포츠·미국·산업·유통·컬쳐·건강 */
+  /* 01뉴스 영단어 표시 순서: 국제·한국·국방·경제·여행·스포츠·미국·산업·컬쳐·건강 */
   var NEWS_TABS_ALL = [
     { key: 'news-voca', label: '국제', href: 'news-voca-list.html' },
     { key: 'korea-news', label: '한국', href: 'korea-news-list.html' },
@@ -27,10 +28,10 @@
     { key: 'sports-news', label: '스포츠', href: 'sports-news-list.html' },
     { key: 'us-news', label: '미국', href: 'us-news-list.html' },
     { key: 'industry-news', label: '산업', href: 'industry-news-list.html' },
-    { key: 'retail-news', label: '유통', href: 'retail-news-list.html' },
     { key: 'culture-voca', label: '컬쳐', href: 'culture-voca-list.html' },
     { key: 'health-news', label: '건강', href: 'health-news-list.html' },
     { key: 'weather-news', label: '날씨/환경', href: 'weather-news-list.html' },
+    { key: 'retail-news', label: '유통', href: 'retail-news-list.html' },
     { key: 'literature-news', label: '문학', href: 'literature-news-list.html' },
     { key: 'politics-news', label: '정치', href: 'politics-news-list.html' },
     { key: 'ai-news', label: '인공지능', href: 'ai-news-list.html' },

@@ -37,7 +37,6 @@
         { href: 'sports-news-list.html', label: '스포츠', pages: ['sports-news-list.html', 'sports-news.html'] },
         { href: 'us-news-list.html', label: '미국', pages: ['us-news-list.html', 'us-news.html'] },
         { href: 'industry-news-list.html', label: '산업', pages: ['industry-news-list.html', 'industry-news.html'] },
-        { href: 'retail-news-list.html', label: '유통', pages: ['retail-news-list.html', 'retail-news.html'] },
         { href: 'culture-voca-list.html', label: '컬쳐', pages: ['culture-voca-list.html', 'culture-voca.html'] },
         { href: 'health-news-list.html', label: '건강', pages: ['health-news-list.html', 'health-news.html'] },
         { href: 'english-synonym-list.html', label: '연관단어', pages: ['english-synonym-list.html', 'english-synonym.html'] },

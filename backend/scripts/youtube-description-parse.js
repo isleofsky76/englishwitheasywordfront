@@ -37,7 +37,6 @@ const TITLE_CATEGORY_BOARD = {
   스포츠: 'sports-news',
   미국: 'us-news',
   산업: 'industry-news',
-  유통: 'retail-news',
   컬쳐: 'culture-voca',
   문화: 'culture-voca',
   건강: 'health-news',

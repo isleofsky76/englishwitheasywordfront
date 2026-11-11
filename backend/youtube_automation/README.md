@@ -41,7 +41,6 @@
 | 스포츠 | sports-news | sports-news-list.html |
 | 미국 | us-news | us-news-list.html |
 | 산업 | industry-news | industry-news-list.html |
-| 유통 | retail-news | retail-news-list.html |
 | 컬쳐 / 문화 | culture-voca | culture-voca-list.html |
 | 여행 | travel-news | travel-news-list.html |
 | 건강 | health-news | health-news-list.html |
