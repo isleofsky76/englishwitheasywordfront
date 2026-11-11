@@ -35,9 +35,18 @@
 | 제목 카테고리 | board | 목록 |
 |---------------|-------|------|
 | 국제 | news-voca | news-voca-list.html |
-| 미국 | us-news | us-news-list.html |
+| 한국 | korea-news | korea-news-list.html |
+| 국방 | defense-news | defense-news-list.html |
 | 경제 | economy-news | economy-news-list.html |
+| 스포츠 | sports-news | sports-news-list.html |
+| 미국 | us-news | us-news-list.html |
+| 산업 | industry-news | industry-news-list.html |
+| 유통 | retail-news | retail-news-list.html |
+| 컬쳐 / 문화 | culture-voca | culture-voca-list.html |
+| 여행 | travel-news | travel-news-list.html |
+| 건강 | health-news | health-news-list.html |
 | 연관단어 / #연관단어 | english-synonym | english-synonym-list.html |
+| (그 외 `… \| 제목`) | news-voca | news-voca-list.html |
 
 ---
 

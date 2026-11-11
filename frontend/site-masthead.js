@@ -76,9 +76,11 @@
         { href: 'korea-news-list.html', label: '한국', tone: 'defense', pages: ['korea-news-list.html', 'korea-news.html'] },
         { href: 'defense-news-list.html', label: '국방', tone: 'defense', pages: ['defense-news-list.html', 'defense-news.html'] },
         { href: 'economy-news-list.html', label: '경제', tone: 'news', pages: ['economy-news-list.html', 'economy-news.html'] },
+        { href: 'travel-news-list.html', label: '여행', tone: 'news', pages: ['travel-news-list.html', 'travel-news.html'] },
         { href: 'sports-news-list.html', label: '스포츠', tone: 'news', pages: ['sports-news-list.html', 'sports-news.html'] },
         { href: 'us-news-list.html', label: '미국', tone: 'news', pages: ['us-news-list.html', 'us-news.html'] },
         { href: 'industry-news-list.html', label: '산업', tone: 'news', pages: ['industry-news-list.html', 'industry-news.html'] },
+        { href: 'retail-news-list.html', label: '유통', tone: 'news', pages: ['retail-news-list.html', 'retail-news.html'] },
         { href: 'culture-voca-list.html', label: '컬쳐', tone: 'culture', pages: ['culture-voca-list.html', 'culture-voca.html'] },
         { href: 'health-news-list.html', label: '건강', tone: 'news', pages: ['health-news-list.html', 'health-news.html'] }
       ]

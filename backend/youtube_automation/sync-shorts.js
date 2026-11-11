@@ -27,22 +27,24 @@ const __dirname = path.dirname(__filename);
 const REPO_ROOT = path.resolve(__dirname, '..', '..');
 const DEFAULT_OUT = path.join(REPO_ROOT, 'data', 'youtube-shorts.json');
 
-/** 제목 앞 카테고리 → 홈 라벨·목록 링크 */
+/**
+ * 제목 앞 카테고리 → 홈 라벨·목록 링크
+ * 권장: 국제|한국|국방|경제|스포츠|미국|산업|컬쳐 (+사이트: 여행·건강)
+ * 맵에 없는 접두사 → 뉴스 영단어(국제 목록)
+ */
 const CATEGORY_MAP = {
   국제: { label: '국제', href: 'news-voca-list.html' },
   한국: { label: '한국', href: 'korea-news-list.html' },
   국방: { label: '국방', href: 'defense-news-list.html' },
   경제: { label: '경제', href: 'economy-news-list.html' },
+  여행: { label: '여행', href: 'travel-news-list.html' },
   스포츠: { label: '스포츠', href: 'sports-news-list.html' },
   미국: { label: '미국', href: 'us-news-list.html' },
   산업: { label: '산업', href: 'industry-news-list.html' },
   유통: { label: '유통', href: 'retail-news-list.html' },
-  여행: { label: '여행', href: 'travel-news-list.html' },
   컬쳐: { label: '컬쳐', href: 'culture-voca-list.html' },
   문화: { label: '컬쳐', href: 'culture-voca-list.html' },
   건강: { label: '건강', href: 'health-news-list.html' },
-  테크: { label: '산업', href: 'industry-news-list.html' },
-  요리: { label: '요리', href: 'cooking-voca-list.html' },
   연관단어: { label: '연관단어', href: 'english-synonym-list.html' },
   유의어: { label: '연관단어', href: 'english-synonym-list.html' },
   문장: { label: '문장', href: 'one-sentence.html' },
@@ -53,6 +55,8 @@ const CATEGORY_MAP = {
   포토: { label: '포토', href: 'photo-english-list.html' },
   오피니언: { label: '오피니언', href: 'english-opinions-list.html' },
 };
+
+const NEWS_VOCA_FALLBACK = { label: '국제', href: 'news-voca-list.html' };
 
 function parseArgs(argv) {
   const args = { limit: 6, out: DEFAULT_OUT, dryRun: false, todayOnly: false };
@@ -71,15 +75,27 @@ function parseArgs(argv) {
   return args;
 }
 
-function mapCategory(categoryKey) {
+function mapCategory(categoryKey, opts = {}) {
   const key = String(categoryKey || '').replace(/\s+/g, '').trim();
-  const mapped = CATEGORY_MAP[key] || null;
-  if (!mapped) return null;
+  if (!key) return null;
+  const mapped = CATEGORY_MAP[key];
+  if (mapped) {
+    const categoryKeyNorm = key === '문화' ? '컬쳐' : key === '유의어' ? '연관단어' : key;
+    return {
+      category: categoryKeyNorm,
+      categoryKey: categoryKeyNorm,
+      label: mapped.label,
+      href: mapped.href,
+    };
+  }
+  /* `미분류 | 제목` 접두사만 뉴스 영단어로 (해시태그 폴백은 제외) */
+  if (!opts.allowFallback) return null;
   return {
-    category: key,
-    categoryKey: key,
-    label: mapped.label,
-    href: mapped.href,
+    category: '국제',
+    categoryKey: '국제',
+    label: NEWS_VOCA_FALLBACK.label,
+    href: NEWS_VOCA_FALLBACK.href,
+    unmappedPrefix: key,
   };
 }
 
@@ -99,7 +115,7 @@ export function parseCategoryTitle(rawTitle) {
   const raw = String(rawTitle || '').trim();
   const m = raw.match(/^([^|｜\n]{1,20})\s*[|｜]\s*(.+)$/);
   if (m) {
-    const meta = mapCategory(m[1]);
+    const meta = mapCategory(m[1], { allowFallback: true });
     if (meta) {
       return {
         ...meta,
@@ -130,7 +146,7 @@ export function parseCategoryTitle(rawTitle) {
 }
 
 function isMappedCategoryItem(item) {
-  return Boolean(item && item.category && CATEGORY_MAP[item.category]);
+  return Boolean(item && item.category && item.href);
 }
 
 function kstDateKey(iso) {

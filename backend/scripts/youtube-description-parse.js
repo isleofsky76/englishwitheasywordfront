@@ -22,22 +22,25 @@ const SOURCE_ALIASES = [
   { re: /\bcnn\b/i, label: 'CNN', boardHints: ['news'] },
 ];
 
-/** 제목 `카테고리 | 제목` 앞부분 → 게시판 */
+/**
+ * 제목 `카테고리 | 제목` 앞부분 → 게시판
+ * 사이트 01뉴스 영단어: 국제·한국·국방·경제·여행·스포츠·미국·산업·컬쳐·건강
+ * 유튜브 권장 접두사: 국제·한국·국방·경제·스포츠·미국·산업·컬쳐
+ * 맵에 없는 접두사 → news-voca (아래 boardFromTitlePrefix)
+ */
 const TITLE_CATEGORY_BOARD = {
   국제: 'news-voca',
-  미국: 'us-news',
-  경제: 'economy-news',
   한국: 'korea-news',
   국방: 'defense-news',
+  경제: 'economy-news',
+  여행: 'travel-news',
   스포츠: 'sports-news',
+  미국: 'us-news',
   산업: 'industry-news',
   유통: 'retail-news',
-  여행: 'travel-news',
-  우크라이나: 'ukraine-news',
   컬쳐: 'culture-voca',
   문화: 'culture-voca',
   건강: 'health-news',
-  테크: 'industry-news',
   연관단어: 'english-synonym',
   유의어: 'english-synonym',
   영작: 'english-writing',
@@ -60,7 +63,10 @@ function boardFromTitlePrefix(title) {
   const m = String(title || '').match(/^\s*([^|｜]{1,20})\s*[|｜]\s*/);
   if (!m) return '';
   const key = m[1].replace(/\s+/g, '').trim();
-  return TITLE_CATEGORY_BOARD[key] || '';
+  if (!key) return '';
+  if (TITLE_CATEGORY_BOARD[key]) return TITLE_CATEGORY_BOARD[key];
+  /* 분류에 없는 접두사 → 뉴스 영단어 */
+  return 'news-voca';
 }
 
 function pick(re, text) {
