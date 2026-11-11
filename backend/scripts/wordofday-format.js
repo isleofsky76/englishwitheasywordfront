@@ -1,5 +1,5 @@
 /**
- * Word of the Day 본문 HTML — send-wordofday-entry.js 와 동일한 레이아웃
+ * Word of the Day 본문 HTML — redesign-word.js 가 읽는 wotd-* 구조
  */
 
 export function escapeHtml(text) {
@@ -8,39 +8,6 @@ export function escapeHtml(text) {
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;');
-}
-
-export const hl = (text) =>
-  `<span style="font-weight:700;color:#1a1a1a;padding:0.06em 0.2em;border-radius:3px;background:#ffe566;">${escapeHtml(text)}</span>`;
-
-export const hlSoft = (text) =>
-  `<span style="font-weight:700;color:#1a1a1a;padding:0.06em 0.2em;border-radius:3px;background:rgba(255,229,102,0.72);border-bottom:2.5px solid #f0b429;">${escapeHtml(text)}</span>`;
-
-function highlightPhrases(text, { word, collocations = [] }) {
-  const tokens = [
-    [word, 'hard'],
-    ...collocations.map((c) => [c, 'soft']),
-  ]
-    .filter(([p]) => String(p || '').trim())
-    .sort((a, b) => b[0].length - a[0].length);
-
-  const src = String(text || '');
-  if (!tokens.length) return escapeHtml(src);
-
-  const escaped = tokens.map(([p]) => p.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
-  const re = new RegExp(`(${escaped.join('|')})`, 'gi');
-  let last = 0;
-  let out = '';
-  let m;
-  while ((m = re.exec(src))) {
-    out += escapeHtml(src.slice(last, m.index));
-    const matched = m[1];
-    const kind = tokens.find(([p]) => p.toLowerCase() === matched.toLowerCase())?.[1];
-    out += kind === 'soft' ? hlSoft(matched) : hl(matched);
-    last = m.index + matched.length;
-  }
-  out += escapeHtml(src.slice(last));
-  return out;
 }
 
 export function toSlug(word) {
@@ -53,41 +20,150 @@ export function toSlug(word) {
 }
 
 export function imageSrcFromFilename(filename) {
-  return `/resources/${encodeURIComponent(filename)}`;
+  const name = String(filename || '').replace(/^\/?resources\//, '');
+  return `/resources/${encodeURIComponent(name)}`;
 }
 
+function markWord(en, word) {
+  const src = String(en || '');
+  const w = String(word || '').trim();
+  if (!w) return escapeHtml(src);
+  const re = new RegExp(`\\b(${w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})\\b`, 'gi');
+  let out = '';
+  let last = 0;
+  let m;
+  while ((m = re.exec(src))) {
+    out += escapeHtml(src.slice(last, m.index));
+    out += `<mark>${escapeHtml(m[1])}</mark>`;
+    last = m.index + m[1].length;
+  }
+  out += escapeHtml(src.slice(last));
+  return out;
+}
+
+function asList(arr, max) {
+  return (Array.isArray(arr) ? arr : [])
+    .map((x) => String(x || '').trim())
+    .filter(Boolean)
+    .slice(0, max);
+}
+
+/**
+ * @param {object} d
+ * @param {string} d.word
+ * @param {string} d.imageSrc
+ * @param {string} [d.ipa]
+ * @param {string} [d.ipaKo]
+ * @param {string} [d.pos]
+ * @param {string} d.meaning
+ * @param {string} [d.meaningExtra]
+ * @param {string} [d.core] 핵심 의미 한 줄
+ * @param {string} [d.nuance]
+ * @param {Array<{en:string,ko:string,active?:boolean}>} [d.compares]
+ * @param {Array<{en:string,ko:string}>} [d.collocations]
+ * @param {Array<{en:string,ko:string}>} [d.examples]
+ * @param {string|string[]} [d.endef] 영영 정의
+ * @param {string} [d.takeaway]
+ * @param {string[]} [d.synonyms]
+ * @param {string[]} [d.antonyms]
+ * @param {string} [d.where] 자주 나오는 곳
+ */
 export function buildWordofdayMessage(d) {
-  const word = d.word;
-  const collocations = Array.isArray(d.collocations) ? d.collocations.slice(0, 2) : [];
-  const examples = Array.isArray(d.examples) ? d.examples.slice(0, 1) : [];
-  const synonyms = Array.isArray(d.synonyms)
-    ? d.synonyms.map((s) => String(s || '').trim()).filter(Boolean).slice(0, 3)
-    : [];
-  const extra = d.meaningExtra ? `, ${escapeHtml(d.meaningExtra)}` : '';
-  const phrases = { word, collocations: collocations.map((c) => c.en).filter(Boolean) };
+  const word = String(d.word || '').trim();
+  const imageSrc = String(d.imageSrc || '').trim();
+  const ipa = String(d.ipa || '').trim();
+  const ipaKo = String(d.ipaKo || '').trim();
+  const pos = String(d.pos || '단어').trim();
+  const meaning = String(d.meaning || '').trim();
+  const meaningExtra = String(d.meaningExtra || '').trim();
+  const collocations = Array.isArray(d.collocations) ? d.collocations.slice(0, 3) : [];
+  const examples = Array.isArray(d.examples) ? d.examples.filter((ex) => ex && ex.en).slice(0, 3) : [];
+  const synonyms = asList(d.synonyms, 5);
+  const antonyms = asList(d.antonyms, 5);
+  const compares = Array.isArray(d.compares) ? d.compares.slice(0, 2) : [];
+  const endefParts = Array.isArray(d.endef)
+    ? d.endef.map((p) => String(p || '').trim()).filter(Boolean).slice(0, 3)
+    : String(d.endef || '').trim()
+      ? [String(d.endef).trim()]
+      : [];
+  const core =
+    String(d.core || '').trim() ||
+    `${meaning}을/를 나타내는 말` + (collocations[0]?.en ? `. 자주 ${collocations[0].en}` : '');
+  const nuance = String(d.nuance || '').trim();
+  const takeaway =
+    String(d.takeaway || '').trim() ||
+    `${word}은/는 ‘${meaning}’의 뜻으로 쓴다.`;
+  const where = String(d.where || '뉴스·일상·업무').trim();
 
-  const collocationHtml = collocations
+  const posHtml =
+    `<div class="wotd-pos" data-pos="${escapeHtml(pos)}" data-primary="1">` +
+    `<span class="wotd-meaning">${escapeHtml(meaning)}</span>` +
+    (meaningExtra ? `<span class="wotd-meaning-sub">${escapeHtml(meaningExtra)}</span>` : '') +
+    `</div>`;
+
+  const compareHtml = compares
     .map((c, i) => {
-      const margin = i === collocations.length - 1 ? '0 0 0.85rem' : '0 0 0.35rem';
-      return `<p style="margin:${margin};padding:0;">${hlSoft(c.en)}: ${escapeHtml(c.ko)}</p>`;
+      const active = c.active || i === compares.length - 1 ? ' data-active="1"' : '';
+      return (
+        `<div class="wotd-compare"${active}>` +
+        `<span class="wotd-cmp-en">${escapeHtml(c.en)}</span>` +
+        `<span class="wotd-cmp-ko">${escapeHtml(c.ko)}</span>` +
+        `</div>`
+      );
     })
     .join('');
 
-  const exampleHtml = examples
-    .map((ex) => {
-      return `<p style="margin:0 0 0.45rem;padding:0;font-weight:700;color:#1a365d;">예문</p><p style="margin:0 0 0.2rem;padding:0;">${escapeHtml(ex.en)}</p><p style="margin:0 0 0.85rem;padding:0;color:#4b5563;">${escapeHtml(ex.ko)}</p>`;
-    })
+  const coloHtml = collocations
+    .map(
+      (c) =>
+        `<div class="wotd-col"><span class="wotd-col-en">${escapeHtml(c.en)}</span>` +
+        `<span class="wotd-col-ko">${escapeHtml(c.ko)}</span></div>`
+    )
     .join('');
 
-  const synonymHtml = synonyms.length
-    ? `<p style="margin:0;padding:0;"><strong>유의어:</strong> ${escapeHtml(synonyms.join(', '))}</p>`
+  const exHtml = examples
+    .map(
+      (ex) =>
+        `<section class="wotd-ex"><p class="wotd-ex-en">${markWord(ex.en, word)}</p>` +
+        (ex.ko ? `<p class="wotd-ex-ko">${escapeHtml(ex.ko)}</p>` : '') +
+        `</section>`
+    )
+    .join('');
+
+  const endefHtml = endefParts.length
+    ? `<div class="wotd-endef">${endefParts.map((p) => `<p>${escapeHtml(p)}</p>`).join('')}</div>`
     : '';
 
-  const nuanceLine = d.nuance
-    ? `<p style="margin:0 0 0.85rem;padding:0;">→ ${highlightPhrases(d.nuance, phrases)}</p>`
-    : '';
+  const glance =
+    `<div class="wotd-glance">` +
+    `<div><dt>품사</dt><dd>${escapeHtml(pos)}</dd></div>` +
+    (synonyms.length
+      ? `<div><dt>비슷한 말</dt><dd>${escapeHtml(synonyms.join(', '))}</dd></div>`
+      : '') +
+    (antonyms.length
+      ? `<div><dt>반대 말</dt><dd>${escapeHtml(antonyms.join(', '))}</dd></div>`
+      : '') +
+    `<div><dt>자주 나오는 곳</dt><dd>${escapeHtml(where)}</dd></div>` +
+    `</div>`;
 
-  return `<div style="max-width:36rem;width:100%;margin:0 auto;box-sizing:border-box;color:#374151;font-size:0.95rem;line-height:2.05;"><p style="margin:0;padding:0;text-align:left;"><img src="${d.imageSrc}" alt="${escapeHtml(word)}" loading="lazy" class="wotd-hero-image" style="max-width:100%;height:auto;border-radius:8px;display:block;margin:0 0 0.85rem 0;"></p><p style="margin:0 0 0.85rem;padding:0;font-size:1.35rem;font-weight:700;color:#1a365d;line-height:1.6;">${escapeHtml(word)}</p><p style="margin:0 0 0.35rem;padding:0;">발음: ${hl(d.ipa)} (${escapeHtml(d.ipaKo)})</p><p style="margin:0 0 0.85rem;padding:0;">${escapeHtml(d.pos)}: ${hl(d.meaning)}${extra}</p>${collocationHtml}${nuanceLine}${exampleHtml}${synonymHtml}</div>`;
+  return (
+    `<div class="wotd-word">` +
+    (imageSrc
+      ? `<img class="wotd-hero-image" src="${escapeHtml(imageSrc)}" alt="${escapeHtml(word)}" loading="lazy">`
+      : '') +
+    (ipa ? `<span class="wotd-ipa">${escapeHtml(ipa)}</span>` : '') +
+    (ipaKo ? `<span class="wotd-ipa-ko">${escapeHtml(ipaKo)}</span>` : '') +
+    posHtml +
+    `<p class="wotd-core">${escapeHtml(core)}</p>` +
+    (nuance ? `<p class="wotd-nuance">${escapeHtml(nuance)}</p>` : '') +
+    compareHtml +
+    coloHtml +
+    exHtml +
+    endefHtml +
+    `<p class="wotd-takeaway">${escapeHtml(takeaway)}</p>` +
+    glance +
+    `</div>`
+  );
 }
 
 export function buildTitle(word, meaning) {
@@ -97,5 +173,8 @@ export function buildTitle(word, meaning) {
 export function buildMetaDescription(d) {
   if (d.metaDescription) return d.metaDescription;
   const collos = (d.collocations || []).map((c) => c.en).filter(Boolean).join(', ');
-  return `${d.word} 뜻과 예문. ${d.meaning}${d.meaningExtra ? `, ${d.meaningExtra}` : ''}${collos ? `, ${collos}` : ''}.`;
+  const ex = (d.examples || []).map((e) => e.en).filter(Boolean)[0];
+  return `${d.word} 뜻과 예문. ${d.meaning}${d.meaningExtra ? `, ${d.meaningExtra}` : ''}${
+    collos ? `, ${collos}` : ''
+  }${ex ? `. 예: ${ex}` : ''}`.slice(0, 160);
 }

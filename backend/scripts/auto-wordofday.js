@@ -1,17 +1,16 @@
 /**
  * Word of the Day 자동 게시
  *
- * 1) 이미 올라간 글은 건너뛰고
- * 2) GitHub(또는 로컬) resources/ 에서 단어 이미지 선택
- * 3) GPT로 뜻·예문 생성
- * 4) prod API 업로드 + SEO 페이지 + git push
+ * 준비: resources/ 에 이미지 넣기 (예: resources/smitten.jpg)
+ * 입력: 단어 + 이미지(+ 예문은 선택). 뜻·발음 등은 GPT가 채움.
  *
  * 사용법 (backend 폴더):
- *   node scripts/send-wordofday-entry.js --auto
- *   node scripts/send-wordofday-entry.js --auto --dry-run
- *   node scripts/send-wordofday-entry.js --auto --no-git
- *   node scripts/send-wordofday-entry.js --auto --word admonish
  *   node scripts/send-wordofday-entry.js --auto --list
+ *   node scripts/send-wordofday-entry.js --auto --word smitten --image smitten.jpg
+ *   node scripts/send-wordofday-entry.js --auto --word smitten --image smitten.jpg --example "He was smitten with her." --example-ko "그는 그녀에게 홀딱 반했다."
+ *   node scripts/send-wordofday-entry.js --auto --from scripts/wotd-batch.sample.json
+ *   node scripts/send-wordofday-entry.js --auto --dry-run --word smitten --image smitten.jpg
+ *   node scripts/send-wordofday-entry.js --auto --no-git --word smitten --image smitten.jpg
  */
 
 import fs from 'fs';
@@ -19,7 +18,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { execSync } from 'child_process';
 import OpenAI from 'openai';
-import { API_BASE } from './loadEnv.js';
+import { API_BASE, writeAuthHeaders } from './loadEnv.js';
 import { applySeoAfterUpload, toIsoDateOnly, SITE_ORIGIN } from './voca-seo.js';
 import {
   buildWordofdayMessage,
@@ -106,8 +105,62 @@ function argValue(flag) {
   return next;
 }
 
+function argValues(flag) {
+  const out = [];
+  for (let i = 0; i < process.argv.length; i += 1) {
+    if (process.argv[i] !== flag) continue;
+    const next = process.argv[i + 1];
+    if (!next || next.startsWith('--')) continue;
+    out.push(next);
+  }
+  return out;
+}
+
 function hasFlag(flag) {
   return process.argv.includes(flag);
+}
+
+/** CLI --example / --example-ko 쌍 → [{en,ko}] */
+function examplesFromCli() {
+  const ens = argValues('--example');
+  const kos = argValues('--example-ko');
+  if (!ens.length) return [];
+  return ens.map((en, i) => ({
+    en: String(en || '').trim(),
+    ko: String(kos[i] || '').trim(),
+  })).filter((ex) => ex.en);
+}
+
+function resolveLocalImage(filename) {
+  const name = path.basename(String(filename || '').replace(/^\/?resources\//, ''));
+  if (!name) throw new Error('--image 파일명이 필요합니다. 예: --image smitten.jpg');
+  const full = path.join(RESOURCES_DIR, name);
+  if (!fs.existsSync(full)) {
+    throw new Error(`resources/ 에 이미지가 없습니다: ${name} (경로: ${full})`);
+  }
+  return name;
+}
+
+function loadBatchFile(filePath) {
+  const abs = path.isAbsolute(filePath) ? filePath : path.join(process.cwd(), filePath);
+  if (!fs.existsSync(abs)) throw new Error(`배치 파일이 없습니다: ${abs}`);
+  const raw = JSON.parse(fs.readFileSync(abs, 'utf8'));
+  const list = Array.isArray(raw) ? raw : Array.isArray(raw.items) ? raw.items : [raw];
+  return list.map((item, idx) => {
+    const word = String(item.word || '').trim();
+    const image = String(item.image || item.filename || '').trim();
+    if (!word) throw new Error(`배치 ${idx + 1}번째: word 가 없습니다.`);
+    if (!image) throw new Error(`배치 ${idx + 1}번째 (${word}): image 가 없습니다.`);
+    const examples = Array.isArray(item.examples)
+      ? item.examples
+          .map((ex) => ({
+            en: String(ex?.en || ex?.example || '').trim(),
+            ko: String(ex?.ko || ex?.meaning || '').trim(),
+          }))
+          .filter((ex) => ex.en)
+      : [];
+    return { word, image, examples };
+  });
 }
 
 export function normalizeWord(s) {
@@ -252,22 +305,29 @@ Return JSON with exactly these keys:
   "pos": "품사 in Korean (명사/동사/형용사/부사/숙어 등)",
   "meaning": "short primary Korean meaning (max ~20 chars if possible)",
   "meaningExtra": "optional one short extra gloss, or empty string",
+  "core": "one short Korean core-meaning sentence (no HTML)",
   "collocations": [
     {"en": "natural collocation containing the word", "ko": "짧은 한국어 뜻"}
   ],
-  "meaningHighlight": "one short Korean gloss (same idea as meaning)",
+  "compares": [
+    {"en": "near synonym or contrast word", "ko": "짧은 비교 설명", "active": false},
+    {"en": "${word}", "ko": "이 단어의 핵심 뉘앙스", "active": true}
+  ],
   "nuance": "ONE short Korean sentence on nuance. No HTML. No synonym dictionary dump.",
   "examples": [
     {"en": "one natural example sentence", "ko": "한국어 번역"}
   ],
-  "coreNuance": "ONE short Korean line: '{word} → …'. Do not list synonyms with explanations.",
+  "endef": ["1-2 short English definition sentences for learners"],
+  "takeaway": "ONE short Korean takeaway line",
   "synonyms": ["up to 3 English synonym words only, no Korean glosses"],
+  "antonyms": ["up to 3 English antonym words only"],
+  "where": "짧은 사용 맥락 (예: 뉴스·일상)",
   "metaDescription": "Korean SEO: '{word} 뜻과 예문. meaning.'"
 }
 Rules:
-- collocations: exactly 2 items
-- examples: exactly 1 item
-- synonyms: max 3 bare English words (no definitions)
+- collocations: exactly 2–3 items
+- examples: 1–2 items (natural, not textbooky)
+- synonyms/antonyms: bare English words only
 - Do not use HTML tags
 - Keep everything concise; avoid repeating the same idea`;
   const models = [process.env.WOTD_MODEL, 'gpt-4o-mini', 'gpt-3.5-turbo'].filter(
@@ -310,8 +370,8 @@ Rules:
   if (!Array.isArray(data.collocations) || data.collocations.length < 1) {
     throw new Error('GPT collocations 가 없습니다.');
   }
-  data.examples = data.examples.slice(0, 1);
-  data.collocations = data.collocations.slice(0, 2);
+  data.examples = data.examples.slice(0, 3);
+  data.collocations = data.collocations.slice(0, 3);
   if (Array.isArray(data.synonyms)) {
     data.synonyms = data.synonyms
       .map((s) => String(s || '').trim())
@@ -320,6 +380,17 @@ Rules:
   } else {
     data.synonyms = [];
   }
+  if (Array.isArray(data.antonyms)) {
+    data.antonyms = data.antonyms
+      .map((s) => String(s || '').trim())
+      .filter(Boolean)
+      .slice(0, 3);
+  } else {
+    data.antonyms = [];
+  }
+  if (!Array.isArray(data.compares)) data.compares = [];
+  if (!Array.isArray(data.endef) && data.endef) data.endef = [String(data.endef)];
+  if (!Array.isArray(data.endef)) data.endef = [];
   return data;
 }
 
@@ -367,12 +438,118 @@ function gitCommitAndPush(slug, word) {
   git('git push origin main');
 }
 
+async function publishOne({ word: inputWord, image, examples = [], dryRun, noGit, usedKeys }) {
+  const filename = resolveLocalImage(image);
+  const pickedWord = String(inputWord || basenameToWord(path.basename(filename, path.extname(filename)))).trim();
+  console.log(`\n── ${pickedWord}`);
+  console.log(`  이미지: /resources/${filename}`);
+  if (examples.length) console.log(`  예문(사용자): ${examples.length}개`);
+
+  const generated = await generateEntryContent(pickedWord);
+  if (examples.length) {
+    generated.examples = examples.slice(0, 3);
+  }
+  const word = generated.word || pickedWord;
+  const slug = toSlug(word);
+  const imageSrc = imageSrcFromFilename(filename);
+  const title = buildTitle(word, generated.meaning);
+  const message = buildWordofdayMessage({
+    ...generated,
+    word,
+    imageSrc,
+  });
+  const metaDescription = buildMetaDescription({ ...generated, word, examples: generated.examples });
+  const password = `seed_password_${slug}`;
+  const datePublished = toIsoDateOnly();
+
+  console.log(`  제목: ${title}`);
+  console.log(`  slug: ${slug}`);
+
+  if (usedKeys) {
+    usedKeys.add(normalizeWord(word));
+    usedKeys.add(normalizeWord(slug));
+  }
+
+  if (dryRun) {
+    console.log('  [dry-run] API/git 생략. 본문 미리보기 (앞 360자):');
+    console.log(message.slice(0, 360));
+    return { title, slug, dryRun: true };
+  }
+
+  if (!noGit) {
+    console.log('  Git pull...');
+    gitPull();
+  }
+
+  await deleteMatching({ title, slug, password });
+
+  const res = await fetch(`${API_BASE}/wordofday`, {
+    method: 'POST',
+    headers: writeAuthHeaders({ 'Content-Type': 'application/json' }),
+    body: JSON.stringify({
+      title,
+      message,
+      nickname: 'admin',
+      password,
+      isSecret: false,
+      slug,
+      metaDescription,
+    }),
+  });
+  const data = await res.json();
+  if (!res.ok) {
+    console.log('  실패:', data.error || res.status);
+    return { title, slug, error: data.error || res.status };
+  }
+  console.log('  추가됨:', title);
+
+  const seo = applySeoAfterUpload('word-of-the-day', {
+    title,
+    slug,
+    metaDescription,
+    datePublished,
+    message,
+  });
+  if (seo?.seoPath) console.log('  SEO page:', seo.seoPath);
+  if (seo?.sitemapPath) console.log('  sitemap:', seo.sitemapPath);
+  console.log(`  URL: ${seo?.url || `${SITE_ORIGIN}/word-of-the-day/${encodeURIComponent(slug)}/`}`);
+
+  if (noGit) {
+    console.log('  Git 생략. 나중에:');
+    console.log(
+      `  cd C:\\langchain; git add word-of-the-day/${slug}/ sitemap.xml resources/${filename}; git commit -m "Add word of the day: ${word}"; git push origin main`
+    );
+  } else {
+    console.log('  Git 배포 중...');
+    const seoDir = path.join('word-of-the-day', slug).replace(/\\/g, '/');
+    const imgRel = path.join('resources', filename).replace(/\\/g, '/');
+    try {
+      git(`git add "${seoDir}" sitemap.xml "${imgRel}"`);
+    } catch {
+      git(`git add "${seoDir}" sitemap.xml`);
+    }
+    try {
+      git(`git commit -m "Add word of the day: ${word}"`);
+      git('git push origin main');
+      console.log('  git push 완료.');
+    } catch (err) {
+      const msg = `${err.stdout || ''}${err.stderr || ''}${err.message || ''}`;
+      if (/nothing to commit/i.test(msg)) console.log('  git: 커밋할 변경 없음.');
+      else throw err;
+    }
+  }
+
+  return { title, slug, url: seo?.url };
+}
+
 export async function runAuto() {
   const dryRun = hasFlag('--dry-run');
   const listOnly = hasFlag('--list');
   const noGit = hasFlag('--no-git') || dryRun;
   const forcedWord = argValue('--word');
   const forcedImage = argValue('--image');
+  const fromFile = argValue('--from');
+  const cliExamples = examplesFromCli();
 
   console.log('Word of the Day 자동 처리...', API_BASE);
 
@@ -392,97 +569,54 @@ export async function runAuto() {
     return;
   }
 
-  let picked;
-  if (forcedImage) {
-    const filename = path.basename(forcedImage);
-    const ext = path.extname(filename);
-    const base = path.basename(filename, ext);
-    picked = {
-      key: normalizeWord(basenameToWord(base)),
-      word: forcedWord || basenameToWord(base),
-      filename,
-    };
-  } else {
-    picked = pickCandidate(candidates, usedKeys, forcedWord);
+  /** 배치 파일 */
+  if (fromFile) {
+    const batch = loadBatchFile(fromFile);
+    console.log(`  배치: ${batch.length}건 (${fromFile})`);
+    const results = [];
+    for (const item of batch) {
+      const r = await publishOne({
+        word: item.word,
+        image: item.image,
+        examples: item.examples,
+        dryRun,
+        noGit,
+        usedKeys,
+      });
+      results.push(r);
+    }
+    console.log('\n완료.', results.length, '건');
+    return results;
   }
 
-  console.log(`  선택 단어: ${picked.word}`);
-  console.log(`  선택 이미지: /resources/${picked.filename}`);
-
-  const generated = await generateEntryContent(picked.word);
-  const word = generated.word || picked.word;
-  const slug = toSlug(word);
-  const imageSrc = imageSrcFromFilename(picked.filename);
-  const title = buildTitle(word, generated.meaning);
-  const message = buildWordofdayMessage({
-    ...generated,
-    word,
-    imageSrc,
-  });
-  const metaDescription = buildMetaDescription(generated);
-  const password = `seed_password_${slug}`;
-  const datePublished = toIsoDateOnly();
-
-  console.log(`  제목: ${title}`);
-  console.log(`  slug: ${slug}`);
-
-  if (dryRun) {
-    console.log('\n[dry-run] API/git 생략. 본문 미리보기 (앞 400자):');
-    console.log(message.slice(0, 400));
-    return { title, slug, dryRun: true };
-  }
-
-  if (!noGit) {
-    console.log('\nGit pull...');
-    gitPull();
-  }
-
-  await deleteMatching({ title, slug, password });
-
-  const res = await fetch(`${API_BASE}/wordofday`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      title,
-      message,
-      nickname: 'admin',
-      password,
-      isSecret: false,
-      slug,
-      metaDescription,
-    }),
-  });
-  const data = await res.json();
-  if (!res.ok) {
-    console.log('  실패:', data.error || res.status);
-    return;
-  }
-  console.log('  추가됨:', title);
-
-  const seo = applySeoAfterUpload('word-of-the-day', {
-    title,
-    slug,
-    metaDescription,
-    datePublished,
-    message,
-  });
-  if (seo?.seoPath) console.log('  SEO page:', seo.seoPath);
-  if (seo?.sitemapPath) console.log('  sitemap:', seo.sitemapPath);
-  console.log(`  URL: ${seo?.url || `${SITE_ORIGIN}/word-of-the-day/${encodeURIComponent(slug)}/`}`);
-
-  if (noGit) {
-    console.log('\nGit 배포 생략. 직접 배포하려면:');
-    console.log(
-      `cd C:\\langchain; git pull origin main --no-edit; git add word-of-the-day/${slug}/ sitemap.xml; git commit -m "Add word of the day: ${word}"; git push origin main`
+  /** 단일: --word/--image 또는 미게시 랜덤 */
+  let word = forcedWord;
+  let image = forcedImage;
+  if (!image && !word) {
+    const picked = pickCandidate(candidates, usedKeys, null);
+    word = picked.word;
+    image = picked.filename;
+  } else if (!image && word) {
+    const hit = candidates.find(
+      (c) => c.key === normalizeWord(word) || c.word.toLowerCase() === word.toLowerCase()
     );
-  } else {
-    console.log('\nGit 배포 중...');
-    gitCommitAndPush(slug, word);
-    console.log('  git push 완료. Netlify 배포까지 1~2분 기다리세요.');
+    if (!hit) throw new Error(`resources/ 에 "${word}" 이미지가 없습니다. --image 파일명을 지정하세요.`);
+    image = hit.filename;
+  } else if (image && !word) {
+    const base = path.basename(image, path.extname(image));
+    word = basenameToWord(base);
   }
 
-  console.log('완료.');
-  return { title, slug, url: seo?.url };
+  const result = await publishOne({
+    word,
+    image,
+    examples: cliExamples,
+    dryRun,
+    noGit,
+    usedKeys,
+  });
+  console.log('\n완료.');
+  return result;
 }
 
 if (process.argv[1] && path.normalize(process.argv[1]) === path.normalize(__filename)) {

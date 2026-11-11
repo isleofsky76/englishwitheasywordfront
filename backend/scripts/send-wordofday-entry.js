@@ -1,9 +1,16 @@
 /**
  * 수동: 아래 entry 수정 후
  *   cd C:\langchain\backend; node scripts/send-wordofday-entry.js
- *   cd C:\langchain; git pull origin main --no-edit; git add word-of-the-day/{slug}/ sitemap.xml resources/{word}.jpg backend/scripts/send-wordofday-entry.js redesign-word.js redesign-word.css; git commit -m "Add word of the day: {word}"; git push origin main
  *
- * 자동: node scripts/send-wordofday-entry.js --auto
+ * 자동 (권장) — resources/ 에 이미지 넣고:
+ *   cd C:\langchain\backend
+ *   node scripts/send-wordofday-entry.js --auto --word smitten --image smitten.jpg
+ *   node scripts/send-wordofday-entry.js --auto --word smitten --image smitten.jpg --example "He was smitten with her." --example-ko "그는 그녀에게 홀딱 반했다."
+ *   node scripts/send-wordofday-entry.js --auto --from scripts/wotd-batch.sample.json
+ *   node scripts/send-wordofday-entry.js --auto --list
+ *   node scripts/send-wordofday-entry.js --auto --dry-run --word smitten --image smitten.jpg
+ *
+ * 입력: 이미지(resources/) + 단어 + 예문(선택). 뜻·발음 등은 GPT.
  */
 
 import { API_BASE, writeAuthHeaders } from './loadEnv.js';
