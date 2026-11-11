@@ -4,6 +4,48 @@
   var cachedCombined = null;
   var cachePromise = null;
   var boardEntriesCache = {};
+  var searchIndexCache = null;
+  var searchIndexPromise = null;
+  var SEARCH_INDEX_URL = '/site-search-index.json?v=20261111search1';
+
+  function fetchSiteSearchIndex() {
+    if (searchIndexCache) return Promise.resolve(searchIndexCache);
+    if (searchIndexPromise) return searchIndexPromise;
+    searchIndexPromise = fetch(SEARCH_INDEX_URL, { cache: 'default' })
+      .then(function (r) {
+        if (!r.ok) throw new Error('search index HTTP ' + r.status);
+        return r.json();
+      })
+      .then(function (data) {
+        var words = (data && data.words) || [];
+        searchIndexCache = words.map(function (w) {
+          return {
+            label: w.label || '시사 영단어',
+            title: w.meaning ? (w.word + ' — ' + w.meaning) : w.word,
+            slug: String(w.word || ''),
+            previewWord: String(w.word || ''),
+            previewMeaning: String(w.meaning || ''),
+            previewSnippet: '',
+            views: 0,
+            likes: 0,
+            date: data.generatedAt || '',
+            href: w.href || '#',
+            sortTime: 0,
+            searchOnly: true,
+            searchText: String(w.searchText || [w.word, w.meaning, w.label].filter(Boolean).join(' ')),
+            fromSearchIndex: true
+          };
+        });
+        return searchIndexCache;
+      })
+      .catch(function (err) {
+        console.warn('site-search-index load failed', err && err.message);
+        searchIndexPromise = null;
+        searchIndexCache = [];
+        return searchIndexCache;
+      });
+    return searchIndexPromise;
+  }
 
   function escapeHtml(str) {
     return String(str || '')
@@ -558,15 +600,17 @@
       if (head === q) score = 100;
       else if (!opts.exactOnly && opts.prefix !== false && head.indexOf(q) === 0) score = 80;
     } else {
+      /* 한글: 뜻 정확·포함·접두 매칭 */
       if (meaning && meaning === q) score = 96;
       else if (head === q) score = 100;
+      else if (meaning && meaning.indexOf(q) !== -1) score = opts.exactOnly ? 88 : 78;
       else if (!opts.exactOnly && opts.prefix !== false) {
         if (meaning && meaning.indexOf(q) === 0) score = 72;
         else if (head.indexOf(q) === 0) score = 80;
       }
     }
 
-    if (score > 0 && wordCard) score = Math.min(100, score + 8);
+    if (score > 0 && (wordCard || item.fromSearchIndex)) score = Math.min(100, score + 8);
     return score;
   }
 
@@ -592,24 +636,32 @@
     var scoreOpts = previewMode
       ? { exactOnly: false, prefix: true }
       : { exactOnly: true, prefix: false };
-    return fetchCombined().then(function (combined) {
-      var ranked = combined
+    return Promise.all([fetchSiteSearchIndex(), fetchCombined()]).then(function (parts) {
+      var indexItems = parts[0] || [];
+      var combined = parts[1] || [];
+      /* 통합 인덱스 우선 + 기존 보드 결과 보조 */
+      var pool = indexItems.concat(combined);
+      var ranked = pool
         .map(function (item) {
           return { item: item, score: scoreSearchItem(item, q, scoreOpts) };
         })
         .filter(function (row) { return row.score > 0; })
         .sort(function (a, b) {
           if (b.score !== a.score) return b.score - a.score;
-          var aWord = isWordCardItem(a.item) ? 1 : 0;
-          var bWord = isWordCardItem(b.item) ? 1 : 0;
+          var aWord = (isWordCardItem(a.item) || a.item.fromSearchIndex) ? 1 : 0;
+          var bWord = (isWordCardItem(b.item) || b.item.fromSearchIndex) ? 1 : 0;
           if (bWord !== aWord) return bWord - aWord;
           return (b.item.views || 0) - (a.item.views || 0);
         })
         .map(function (row) { return row.item; });
       ranked = dedupeSearchHits(ranked);
       if (previewMode) {
-        var wordFirst = ranked.filter(isWordCardItem);
-        var rest = ranked.filter(function (item) { return !isWordCardItem(item); });
+        var wordFirst = ranked.filter(function (item) {
+          return isWordCardItem(item) || item.fromSearchIndex;
+        });
+        var rest = ranked.filter(function (item) {
+          return !(isWordCardItem(item) || item.fromSearchIndex);
+        });
         ranked = wordFirst.concat(rest).slice(0, max);
       }
       return ranked;

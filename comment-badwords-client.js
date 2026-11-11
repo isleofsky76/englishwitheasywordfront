@@ -184,6 +184,25 @@
     var text = String(q || '').trim();
     if (!text) return '';
     if (hasLink(text)) return '링크는 포함할 수 없어요.';
+    /*
+     * 단일 영단어 검색(smitten 등):
+     * sm調教 → normalize 시 "sm"이 되어 부분일치로 오탐하므로
+     * ASCII 금칙는 3글자 이상 + 단어 경계만 적용
+     */
+    if (/^[a-zA-Z][a-zA-Z'-]*$/.test(text) && text.length >= 3) {
+      var lower = stripAllowlist(text);
+      var terms = autoBlockTerms();
+      var i;
+      for (i = 0; i < terms.length; i += 1) {
+        var ascii = String(terms[i] || '')
+          .toLowerCase()
+          .replace(/[^a-z]/g, '');
+        if (!ascii || ascii.length < 3) continue;
+        if (englishWordBoundaryHit(lower, ascii)) return MSG;
+      }
+      if (containsNumericAbusePatterns(lower)) return MSG;
+      return '';
+    }
     if (containsBadWords(text)) return MSG;
     return '';
   }
