@@ -2,3 +2,5 @@ User-agent: *
 Disallow:
 
 Sitemap: https://englisheasystudy.com/sitemap.xml
+
+#DaumWebMasterTool:99a77fbb9e5a6bd0eb1329c903a96dd6569a820de5d494d0d5d0d148a8674235:rbSFXQUyqc9N1qm+e2U/ew==
