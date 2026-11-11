@@ -639,6 +639,8 @@ body.rd-list--keyword-cards .rd-list-feature-meta {
 body.rd-list--keyword-cards .rd-list-media-stack .rd-list-card-meta,
 body.rd-list--keyword-cards .rd-list-media-stack .rd-list-feature-meta {
   margin: 0;
+  text-align: center;
+  width: 100%;
 }
 
 body.rd-list--keyword-cards .rd-list-card-sub {
