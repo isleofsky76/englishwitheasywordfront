@@ -30,8 +30,8 @@ const EN_TTS_VOICE_IDS = {
 
 /** 한글 TTS 음성 목록 */
 const KO_TTS_VOICE_IDS = {
-  1: "ko-KR-Chirp3-HD-Zephyr",           // 여 · 부드러운
-  // 2: "ko-KR-Neural2-C",                  // 남 · Neural2
+  // 1: "ko-KR-Chirp3-HD-Zephyr",           // 여 · 부드러운
+  2: "ko-KR-Neural2-C",                  // 남 · Neural2
   // 3: "ko-KR-Chirp3-HD-Achernar",         // 여 · 차분
   // 4: "ko-KR-Chirp3-HD-Achird",           // 여 · 밝은
   // 5: "ko-KR-Chirp3-HD-Vindemiatrix",     // 여 · 성숙
@@ -81,8 +81,8 @@ const PASS_CONFIG = {
  * enRepeatGapSec — enRepeat 반복 낭독 사이 간격 (기본 1)
  */
 const TIMING_CONFIG = {
-  wordGapSec: 1,
-  koHoldSec: 1.5,
+  wordGapSec: 1.5,
+  koHoldSec: 2.0,
   enRepeatGapSec: 1,
 };
 
@@ -103,360 +103,139 @@ const WORDS = {
   /* 날짜 — ★ 여기 문자열만 바꾸세요 (예: "Oct. 18, 2026")
    * 비우면("") 오늘 날짜 자동
    */
-  date: "Nov. 9, 2026",
+  date: "Nov. 10, 2026",
 
   /* [강조]=노랑, (강조)=미백, 그 밖=라임(녹색)
    * titleSize — 제목 글자 크기(px)
    */
-  titleSize: 70,
+  titleSize: 64,
   title: [
-    { text: "[검열당한 영화 ‘The Devils’, ]" },
-    { text: "(재개봉 대박) #시사어휘 #영화" },
+    { text: "[내각, 호르무즈 인근 해군 작전 확대,] " },
+    { text: "(국회 표결 앞둬) #시사어휘 " },
   ],
 
   titlePhoto: "",
 
-  source: "The Wall Street Journal",
+  source: "The Korea Herald",
   sourceMark: "기사 추출",
   outro: "오늘의 단어 {n}개 끝! ☺",
 
-  /* WSJ — The Devils 재개봉 기사 추출 어휘 */
+  /* Korea Herald — Cabinet approves wider naval operations closer to Hormuz */
   words: [
     {
-      en: "pillory",
-      ko: "맹비난하다, 조롱하다",
+      en: "approve",
+      ko: "승인하다",
       pos: "동",
-      reading: "필러리",
-      ipa: "/ˈpɪləri/",
+      reading: "어프루브",
+      ipa: "/əˈpruːv/",
       defs: "",
-      example: "“The Devils,” directed by Ken Russell, was pilloried, censured and quickly forgotten after its release in 1971.",
-      cf: "(1) pillory(공개적으로 비난하다)",
+      example: "South Korea's Cabinet on Tuesday approved a plan to expand the operational area of its Cheonghae anti-piracy unit...",
+      cf: "approval(승인)",
       enRepeat: 1,
-      highlight: "pilloried",
-      translation: "켄 러셀 감독의 ‘The Devils’는 1971년 개봉 후 맹비난·규탄을 받고 금방 잊혔다.",
+      highlight: "approved",
+      translation: "화요일 한국 내각은 청해 부대의 작전 구역을 확대하는 안을 승인했다.",
       image: "",
       icon: "",
       spark: "yellow",
       note: ""
     },
     {
-      en: "censure",
-      ko: "규탄하다, 비난하다",
+      en: "expand",
+      ko: "확대하다",
       pos: "동",
-      reading: "센셔",
-      ipa: "/ˈsenʃər/",
+      reading: "익스팬드",
+      ipa: "/ɪkˈspænd/",
       defs: "",
-      example: "“The Devils” was pilloried, censured and quickly forgotten after its release in 1971.",
-      cf: "(1) censure(공식적으로 비난하다) (2) censor(검열하다)",
+      example: "...expand the operational area of its Cheonghae anti-piracy unit closer to the Strait of Hormuz...",
+      cf: "expansion(확대)",
       enRepeat: 1,
-      highlight: "censured",
-      translation: "‘The Devils’는 맹비난·규탄을 받고 금방 잊혔다.",
+      highlight: "expand",
+      translation: "청해 부대의 작전 구역을 호르무즈 해협에 더 가깝게 확대한다.",
       image: "",
       icon: "",
       spark: "yellow",
       note: ""
     },
     {
-      en: "out of nowhere",
-      ko: "느닷없이, 갑자기",
-      pos: "구",
-      reading: "아웃 어브 노웨어",
-      ipa: "/aʊt əv ˈnoʊwer/",
-      defs: "",
-      example: "But seemingly out of nowhere, the movie reappeared this fall in theaters in New York.",
-      cf: "(1) out of the blue(갑자기)",
-      enRepeat: 1,
-      highlight: "out of nowhere",
-      translation: "그런데 느닷없이, 그 영화가 올가을 뉴욕 극장에 다시 나타났다.",
-      image: "",
-      icon: "",
-      spark: "yellow",
-      note: ""
-    },
-    {
-      en: "rerelease",
-      ko: "재개봉, 재출시",
+      en: "consent",
+      ko: "동의, 승인",
       pos: "명",
-      reading: "리릴리스",
-      ipa: "/ˌriːrɪˈliːs/",
+      reading: "컨센트",
+      ipa: "/kənˈsent/",
       defs: "",
-      example: "The rerelease was such a hit the distributor scrapped its original plan to keep it in theaters for a week.",
-      cf: "(1) release(개봉) (2) restore(복원하다)",
+      example: "...with the proposal now awaiting National Assembly consent.",
+      cf: "consent to(~에 동의하다)",
       enRepeat: 1,
-      highlight: "rerelease",
-      translation: "재개봉이 대박이라 배급사는 일주일만 상영하려던 원래 계획을 철회했다.",
+      highlight: "consent",
+      translation: "그 안은 지금 국회 동의를 기다리고 있다.",
       image: "",
       icon: "",
       spark: "yellow",
       note: ""
     },
     {
-      en: "scrap",
-      ko: "(계획을) 폐기하다, 철회하다",
-      pos: "동",
-      reading: "스크랩",
-      ipa: "/skræp/",
-      defs: "",
-      example: "The distributor scrapped its original plan to keep it in theaters for a week and instead extended its theatrical run indefinitely.",
-      cf: "(1) abandon(포기하다) (2) cancel(취소하다)",
-      enRepeat: 1,
-      highlight: "scrapped",
-      translation: "배급사는 일주일 상영 계획을 폐기하고 극장 상영을 무기한 연장했다.",
-      image: "",
-      icon: "",
-      spark: "yellow",
-      note: ""
-    },
-    {
-      en: "indefinite",
-      ko: "무기한의, 불명확한",
+      en: "strategic",
+      ko: "전략적인",
       pos: "형",
-      reading: "인데퍼닛",
-      ipa: "/ɪnˈdefɪnət/",
+      reading: "스트래티직",
+      ipa: "/strəˈtiːdʒɪk/",
       defs: "",
-      example: "...and instead extended its theatrical run indefinitely.",
-      cf: "(1) indefinitely(무기한으로)",
+      example: "...Washington's calls for allies and partners to help secure the strategic waterway...",
+      cf: "strategy(전략)",
       enRepeat: 1,
-      highlight: "indefinitely",
-      translation: "대신 극장 상영을 무기한 연장했다.",
+      highlight: "strategic",
+      translation: "워싱턴이 동맹·파트너에 그 전략 수로 확보를 도와 달라고 요청한 가운데.",
       image: "",
       icon: "",
       spark: "yellow",
       note: ""
     },
     {
-      en: "per-screen average",
-      ko: "스크린당 평균 매출",
+      en: "deployment",
+      ko: "(병력) 배치",
       pos: "명",
-      reading: "퍼 스크린 애버리지",
-      ipa: "/pər skriːn ˈævərɪdʒ/",
+      reading: "디플로이먼트",
+      ipa: "/dɪˈplɔɪmənt/",
       defs: "",
-      example: "...where over Halloween weekend it had the highest per-screen average gross of any film.",
-      cf: "(1) box-office gross(흥행 수익)",
+      example: "The plan also provides for the deployment of an additional 75 personnel...",
+      cf: "deploy(배치하다)",
       enRepeat: 1,
-      highlight: "per-screen average",
-      translation: "할로윈 주말에는 어떤 영화보다도 스크린당 평균 매출이 가장 높았다.",
+      highlight: "deployment",
+      translation: "그 안은 추가 인력 75명의 배치도 포함한다.",
       image: "",
       icon: "",
       spark: "yellow",
       note: ""
     },
     {
-      en: "bootleg",
-      ko: "불법 복제, 비공식",
-      pos: "형",
-      reading: "부트렉",
-      ipa: "/ˈbuːtleɡ/",
-      defs: "",
-      example: "...a booming market for merchandise—both official and bootleg.",
-      cf: "(1) pirated(불법 복제된)",
-      enRepeat: 1,
-      highlight: "bootleg",
-      translation: "공식·비공식(불법) 상품 시장이 모두 호황이다.",
-      image: "",
-      icon: "",
-      spark: "yellow",
-      note: ""
-    },
-    {
-      en: "promiscuous",
-      ko: "난잡한, 문란한",
-      pos: "형",
-      reading: "프로미스큐어스",
-      ipa: "/prəˈmɪskjuəs/",
-      defs: "",
-      example: "...a 55-year-old movie about 17th-century France that features a sexually promiscuous priest...",
-      cf: "(1) promiscuity(문란함)",
-      enRepeat: 1,
-      highlight: "promiscuous",
-      translation: "성적으로 문란한 신부가 등장하는 55년 된 영화다.",
-      image: "",
-      icon: "",
-      spark: "yellow",
-      note: ""
-    },
-    {
-      en: "fornicate",
-      ko: "(혼외) 성관계를 맺다",
+      en: "refrain from",
+      ko: "~을 삼가다",
       pos: "동",
-      reading: "포니케이트",
-      ipa: "/ˈfɔːrnɪkeɪt/",
+      reading: "리프레인 프롬",
+      ipa: "/rɪˈfreɪn frəm/",
       defs: "",
-      example: "...a mustachioed priest who runs the town of Loudun and freely fornicates despite his status as a man of the cloth.",
-      cf: "(1) man of the cloth(성직자)",
+      example: "...urged South Korea to “refrain from deploying military forces” to help reopen the Strait of Hormuz...",
+      cf: "",
       enRepeat: 1,
-      highlight: "fornicates",
-      translation: "성직자임에도 거리낌 없이 성관계를 맺는 신부다.",
+      highlight: "refrain from",
+      translation: "한국에 호르무즈 해협 재개방을 돕는 군사력 투입을 삼가 달라고 촉구했다.",
       image: "",
       icon: "",
       spark: "yellow",
       note: ""
     },
     {
-      en: "brainwash",
-      ko: "세뇌하다",
+      en: "intervene",
+      ko: "개입하다",
       pos: "동",
-      reading: "브레인워시",
-      ipa: "/ˈbreɪnwɑːʃ/",
+      reading: "인터빈",
+      ipa: "/ˌɪntərˈviːn/",
       defs: "",
-      example: "“To me, it was about brainwashing, about the state taking over,” he said.",
-      cf: "(1) brainwashing(세뇌) (2) indoctrination(주입)",
+      example: "...the unit will never become involved in or intervene in the war...",
+      cf: "intervention(개입)",
       enRepeat: 1,
-      highlight: "brainwashing",
-      translation: "“내게 이 영화는 세뇌, 국가가 장악하는 이야기다”라고 그는 말했다.",
-      image: "",
-      icon: "",
-      spark: "yellow",
-      note: ""
-    },
-    {
-      en: "picket",
-      ko: "피켓 시위하다",
-      pos: "동",
-      reading: "피킷",
-      ipa: "/ˈpɪkɪt/",
-      defs: "",
-      example: "British Christian conservative group the Nationwide Festival of Light picketed it, according to Russell...",
-      cf: "(1) protest(시위하다)",
-      enRepeat: 1,
-      highlight: "picketed",
-      translation: "영국 기독교 보수 단체가 이 영화를 피켓 시위했다고 러셀은 전한다.",
-      image: "",
-      icon: "",
-      spark: "yellow",
-      note: ""
-    },
-    {
-      en: "censor",
-      ko: "검열하다",
-      pos: "동",
-      reading: "센서",
-      ipa: "/ˈsensər/",
-      defs: "",
-      example: "The original British and U.S. releases of the film were heavily censored, and two key sequences were removed.",
-      cf: "(1) censored cut(검열판) (2) uncut(무삭제판)",
-      enRepeat: 1,
-      highlight: "censored",
-      translation: "영국·미국 원개봉판은 심하게 검열되었고 핵심 장면 두 개가 잘렸다.",
-      image: "",
-      icon: "",
-      spark: "yellow",
-      note: ""
-    },
-    {
-      en: "melee",
-      ko: "난투, 혼전",
-      pos: "명",
-      reading: "메이레이",
-      ipa: "/ˈmeɪleɪ/",
-      defs: "",
-      example: "...a frantic melee breaks out in a cathedral and nude nuns act possessed...",
-      cf: "(1) brawl(격렬한 싸움)",
-      enRepeat: 1,
-      highlight: "melee",
-      translation: "성당에서 광란의 난투가 벌어지고 수녀들이 빙의된 듯 행동한다.",
-      image: "",
-      icon: "",
-      spark: "yellow",
-      note: ""
-    },
-    {
-      en: "restore",
-      ko: "복원하다",
-      pos: "동",
-      reading: "리스토어",
-      ipa: "/rɪˈstɔːr/",
-      defs: "",
-      example: "For years, Russell believed these scenes to be lost. Both are in the new restoration.",
-      cf: "(1) restoration(복원·복원판)",
-      enRepeat: 1,
-      highlight: "restoration",
-      translation: "러셀은 오랫동안 그 장면들이 소실됐다고 믿었다. 둘 다 새 복원판에 들어 있다.",
-      image: "",
-      icon: "",
-      spark: "yellow",
-      note: ""
-    },
-    {
-      en: "prestige",
-      ko: "권위, 명성",
-      pos: "명",
-      reading: "프레스티지",
-      ipa: "/preˈstiːʒ/",
-      defs: "",
-      example: "Clockwork marketed the film with that prestige, but also with a trailer that featured hypnotic flashing images...",
-      cf: "(1) reputation(평판)",
-      enRepeat: 1,
-      highlight: "prestige",
-      translation: "클락워크는 그 권위를 내세워 마케팅했고, 최면적인 트레일러도 내보냈다.",
-      image: "",
-      icon: "",
-      spark: "yellow",
-      note: ""
-    },
-    {
-      en: "hypnotic",
-      ko: "최면적인, 황홀한",
-      pos: "형",
-      reading: "힙나틱",
-      ipa: "/hɪpˈnɑːtɪk/",
-      defs: "",
-      example: "...a trailer that featured hypnotic flashing images and a pulsing score.",
-      cf: "(1) mesmerizing(매혹적인)",
-      enRepeat: 1,
-      highlight: "hypnotic",
-      translation: "최면처럼 깜빡이는 이미지와 맥박 같은 음악의 트레일러였다.",
-      image: "",
-      icon: "",
-      spark: "yellow",
-      note: ""
-    },
-    {
-      en: "blasphemous",
-      ko: "신성모독적인",
-      pos: "형",
-      reading: "블래스퍼머스",
-      ipa: "/ˈblæsfəməs/",
-      defs: "",
-      example: "“It still was very shocking and a little blasphemous,” she said...",
-      cf: "(1) blasphemy(신성모독)",
-      enRepeat: 1,
-      highlight: "blasphemous",
-      translation: "“여전히 매우 충격적이고 조금 신성모독적이에요”라고 그녀는 말했다.",
-      image: "",
-      icon: "",
-      spark: "yellow",
-      note: ""
-    },
-    {
-      en: "hypocrisy",
-      ko: "위선",
-      pos: "명",
-      reading: "히파크리시",
-      ipa: "/hɪˈpɑːkrəsi/",
-      defs: "",
-      example: "If you only talk about whether it’s offensive you can miss what it’s saying about hypocrisy and religion...",
-      cf: "(1) hypocrite(위선자)",
-      enRepeat: 1,
-      highlight: "hypocrisy",
-      translation: "불쾌한지만 따지면 위선과 종교에 대한 메시지를 놓칠 수 있다.",
-      image: "",
-      icon: "",
-      spark: "yellow",
-      note: ""
-    },
-    {
-      en: "bracing",
-      ko: "상쾌한, 기운을 돋우는",
-      pos: "형",
-      reading: "브레이싱",
-      ipa: "/ˈbreɪsɪŋ/",
-      defs: "",
-      example: "...which is why the sets and costumes look bracingly modern even today.",
-      cf: "(1) bracingly(상쾌할 정도로·날카롭게)",
-      enRepeat: 1,
-      highlight: "bracingly",
-      translation: "그래서 세트와 의상이 오늘날에도 날카롭게 현대적으로 보인다.",
+      highlight: "intervene",
+      translation: "부대는 전쟁에 관여하거나 개입하지 않는다.",
       image: "",
       icon: "",
       spark: "yellow",
@@ -492,13 +271,14 @@ function escapeHtml(s) {
     .replace(/"/g, "&quot;");
 }
 
-/** 예문 — highlight 단어 mark */
+/** 예문 — EN과 동일한 단어만 mark (노랑) */
 function highlightSentence(sentence, target) {
   const raw = String(sentence || "").trim();
   if (!raw) return "";
   const safe = escapeHtml(raw);
   const t = String(target || "").trim();
   if (!t) return safe;
+  /* 구(refer to)도 허용 — 단어 경계 기준 첫 일치만 */
   const re = new RegExp(`\\b(${escapeRegExp(t)})\\b`, "i");
   return safe.replace(re, "<mark>$1</mark>");
 }
@@ -623,9 +403,32 @@ function splitExampleSpeechSegments(sentence) {
   return out.length ? out : breathParts;
 }
 
+/** 구(refer to)가 TTS 분절로 쪼개져도 하이라이트되도록 연속 chunk 병합 */
+function mergeChunksForHighlight(chunks, highlight) {
+  const hl = String(highlight || "").trim();
+  if (!hl || !/\s/.test(hl) || !chunks.length) return chunks.slice();
+  const out = chunks.slice();
+  const re = new RegExp(`\\b${escapeRegExp(hl)}\\b`, "i");
+  for (let i = 0; i < out.length; i += 1) {
+    let acc = out[i];
+    for (let j = i + 1; j < out.length; j += 1) {
+      acc = `${acc} ${out[j]}`;
+      if (re.test(acc)) {
+        out.splice(i, j - i + 1, acc);
+        return out;
+      }
+      if (acc.length > hl.length + 24) break;
+    }
+  }
+  return out;
+}
+
 /** 읽는 구간 span + 핵심 단어 mark */
 function renderExampleHtml(sentence, highlight) {
-  const chunks = splitExampleSpeechSegments(sentence);
+  const chunks = mergeChunksForHighlight(
+    splitExampleSpeechSegments(sentence),
+    highlight
+  );
   if (!chunks.length) return "";
   return chunks
     .map((chunk) => {
@@ -767,16 +570,16 @@ function showAllWords(wordEls) {
 /**
  * 영어 미리보기
  * - sue(≤3글자): 미리보기 없음
- * - lawsuit: law____
+ * - outlook: out + 글자 수만큼 얇은 밑줄 (out____)
  */
 function buildEnPreviewHint(en) {
   const raw = String(en || "").trim();
   const total = countEnLetters(raw);
   if (total <= EN_PREVIEW_LETTERS) return "";
-  return buildEnPartialReveal(raw, EN_PREVIEW_LETTERS);
+  return buildEnPartialRevealHtml(raw, EN_PREVIEW_LETTERS);
 }
 
-/** 글자 단위로 n개 영어 알파벳까지 노출, 나머지는 _ */
+/** 글자 단위로 n개 영어 알파벳까지 노출, 나머지는 _ (plain) */
 function buildEnPartialReveal(en, letterCount) {
   const raw = String(en || "");
   let seen = 0;
@@ -793,8 +596,39 @@ function buildEnPartialReveal(en, letterCount) {
   return out;
 }
 
+/** 미리보기/채우기용 HTML — 남은 글자마다 얇은 밑줄 슬롯 */
+function buildEnPartialRevealHtml(en, letterCount) {
+  const raw = String(en || "");
+  let seen = 0;
+  let out = "";
+  for (let i = 0; i < raw.length; i += 1) {
+    const ch = raw[i];
+    if (/[A-Za-z]/.test(ch)) {
+      seen += 1;
+      if (seen <= letterCount) out += escapeHtml(ch);
+      else out += '<span class="en-blank" aria-hidden="true"></span>';
+    } else if (ch === " ") {
+      out += '<span class="en-blank-space"> </span>';
+    } else {
+      out += escapeHtml(ch);
+    }
+  }
+  return out;
+}
+
 function countEnLetters(en) {
   return (String(en || "").match(/[A-Za-z]/g) || []).length;
+}
+
+function setEnPartialHtml(node, en, letterCount) {
+  if (!node) return;
+  const full = String(en || "");
+  const total = countEnLetters(full);
+  if (!total) {
+    node.textContent = full;
+    return;
+  }
+  node.innerHTML = buildEnPartialRevealHtml(full, letterCount);
 }
 
 function renderWords() {
@@ -819,9 +653,10 @@ function renderWords() {
 
     const hlClass = w.hl || (i % 2 === 0 ? "hl" : "hlpink");
     const enWrap = el("span", "en-wrap");
-    const hint = buildEnPreviewHint(w.en);
-    const preview = el("span", "en-preview", hint);
-    if (!hint) preview.hidden = true;
+    const hintHtml = buildEnPreviewHint(w.en);
+    const preview = el("span", "en-preview");
+    if (hintHtml) preview.innerHTML = hintHtml;
+    else preview.hidden = true;
     const enFull = el("span", "en " + hlClass, w.en);
     enFull.dataset.full = w.en;
     enWrap.appendChild(preview);
@@ -845,13 +680,15 @@ function renderWords() {
       if (w.example) {
         const ex = el("p", "example");
         const inner = el("span", "example-inner");
+        /* 예문에서 EN(또는 highlight 형태)과 같은 단어만 노랑 */
         inner.innerHTML = renderExampleHtml(w.example, w.highlight || w.en);
         ex.appendChild(inner);
         exBlock.appendChild(ex);
       }
       if (translation) {
         const tr = el("p", "translation");
-        tr.innerHTML = allowBreakTags(escapeHtml(translation));
+        const bare = translation.replace(/^\(+/, "").replace(/\)+$/, "").trim();
+        tr.innerHTML = allowBreakTags(escapeHtml(`(${bare})`));
         exBlock.appendChild(tr);
       }
       if (cfText) {
@@ -1973,11 +1810,11 @@ async function revealEnLettersFromPreview(wordEl, en) {
   enEl.textContent = full;
   void enEl.offsetWidth;
   enEl.style.minWidth = `${Math.ceil(enEl.getBoundingClientRect().width)}px`;
-  enEl.textContent = total ? buildEnPartialReveal(full, start) : full;
+  setEnPartialHtml(enEl, full, start);
   enEl.style.visibility = "";
 
   for (let n = start; n <= total; n += 1) {
-    enEl.textContent = buildEnPartialReveal(full, n);
+    setEnPartialHtml(enEl, full, n);
     if (n < total) await sleep(70);
   }
   enEl.textContent = full;
@@ -2012,9 +1849,14 @@ async function runPass1OnPage(pageEls, pageItems) {
       enEl.classList.remove("is-hl-on", "is-hl-painting");
     }
     if (previewEl) {
-      const hint = buildEnPreviewHint(full);
-      previewEl.textContent = hint;
-      previewEl.hidden = !hint;
+      const hintHtml = buildEnPreviewHint(full);
+      if (hintHtml) {
+        previewEl.innerHTML = hintHtml;
+        previewEl.hidden = false;
+      } else {
+        previewEl.textContent = "";
+        previewEl.hidden = true;
+      }
     }
   });
 

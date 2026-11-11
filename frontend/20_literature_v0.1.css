@@ -31,9 +31,11 @@
   --bg: #2F3543;
   --bg-lines: none;
   --ink: #F5F1E8;
-  --ink-sub: #B8B2A4;
-  /* ex. 예문 */
+  --ink-sub: #D4CFC3;
+  /* ex. 예문 — 남색 배경 위 흰색 계열 */
   --example: #FFFFFF;
+  --example-soft: #FFFFFF;
+  --example-meta: #F2F2F2;
   --meaning: #B5EBE3;
   --accent-red: #FF6B75;
   --yellow: #FFE45C; /* 단어 칩 — colourchange와 동일 */
@@ -620,7 +622,7 @@ body::-webkit-scrollbar {
   display: inline-block;
   font-family: var(--font-en-word);
   font-weight: 700;
-  font-size: 78px;
+  font-size: 76px;
   line-height: 1.1;
   letter-spacing: -0.01em;
   white-space: nowrap;
@@ -630,7 +632,7 @@ body::-webkit-scrollbar {
 .en {
   font-family: var(--font-en-word); /* Roboto */
   font-weight: 700;
-  font-size: 78px;
+  font-size: 76px;
   line-height: 1.1;
   letter-spacing: -0.01em;
   color: var(--ink);
@@ -794,19 +796,19 @@ body::-webkit-scrollbar {
   overflow: visible;
   /* 나눔바른펜 — 손글씨 노트 느낌의 영어 예문 */
   font-family: "NanumBarunPen", var(--font-en-body);
-  font-size: 48px;
+  font-size: 50px;
   font-weight: 700;
   line-height: 1.45;
   letter-spacing: 0.015em;
-  color: var(--example);
+  color: var(--example-soft);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
 }
 .ex-label {
-  font-size: 46px;
+  font-size: 48px;
   font-weight: 700;
-  color: var(--example);
+  color: var(--example-soft);
   margin-right: 4px;
 }
 .example-inner {
@@ -818,11 +820,11 @@ body::-webkit-scrollbar {
   padding: 0;
   width: 100%;
   font-family: "NanumBarunPen", "Nanum Barun Pen", sans-serif;
-  font-size: 36px;
-  font-weight: 400;
+  font-size: 40px;
+  font-weight: 500;
   line-height: 1.4;
   letter-spacing: -0.01em;
-  color: rgba(255, 255, 255, 0.72);
+  color: var(--example-meta);
   -webkit-font-smoothing: antialiased;
   word-break: keep-all;
   overflow-wrap: break-word;
@@ -851,19 +853,19 @@ body::-webkit-scrollbar {
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
 }
-/* example 괄호 안 한글 — 영어(48px)보다 6px 작게 */
+/* example 괄호 안 한글 — 영어보다 6px 작게 */
 .example .ex-ko {
   font-family: var(--font-ko);
-  font-size: 42px;
+  font-size: 44px;
   font-weight: 600;
   letter-spacing: -0.02em;
-  color: var(--example);
+  color: var(--example-soft);
 }
-/* 핵심어 — default 밑줄 없음 (읽을 때 .ex-phrase.is-reading으로 칠함) */
+/* 핵심어(EN과 동일 단어) — 노랑 */
 .example mark {
   background: none;
   background-image: none;
-  color: inherit;
+  color: var(--yellow);
   font-weight: 700;
   padding: 0 1px;
   text-decoration: none;
@@ -1425,7 +1427,8 @@ body::-webkit-scrollbar {
   --card-bg: rgba(255, 255, 255, 0.045);
   --card-bg-active: rgba(255, 255, 255, 0.09);
   --card-ring: rgba(255, 228, 92, 0.75);
-  --example-soft: #D6D1C4;
+  --example-soft: #FFFFFF;
+  --example-meta: #F2F2F2;
   --dim-opacity: 0.38;
 }
 
@@ -1502,9 +1505,16 @@ body::-webkit-scrollbar {
 /* ---------- 영어 단어 ---------- */
 .word-row { height: 112px; gap: 20px; }
 .num { width: 64px; height: 64px; font-size: 40px; font-weight: 800; }
-.en, .en-ghost { font-size: 88px; font-weight: 800; letter-spacing: -0.02em; }
+.en,
+.en-ghost,
+.en-preview {
+  font-size: 86px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
 .word-row.is-compound .en-ghost,
-.word-row.is-compound .en { font-size: 66px; }
+.word-row.is-compound .en,
+.word-row.is-compound .en-preview { font-size: 64px; }
 
 /* 화살표 크게 */
 .word-row .arrow { width: 44px; height: 30px; }
@@ -1556,20 +1566,20 @@ body::-webkit-scrollbar {
 /* ---------- 예문 — 한 단계 낮춤, 핵심어만 노랗게 ---------- */
 .example-block { margin: 0 0 0 84px; width: calc(100% - 84px); }
 .example {
-  font-size: 48px;
+  font-size: 50px;
   line-height: 1.38;
   font-weight: 600;
   color: var(--example-soft);
 }
 .ex-label {
-  font-size: 36px;
+  font-size: 38px;
   font-weight: 800;
-  color: var(--ink-sub);
+  color: var(--example-meta);
   margin-right: 8px;
 }
-.example .ex-ko { font-size: 34px; font-weight: 500; color: var(--ink-sub); }
+.example .ex-ko { font-size: 36px; font-weight: 500; color: var(--example-meta); }
 .example mark {
-  color: inherit;
+  color: var(--yellow);
   font-weight: 700;
   background: none;
   background-image: none;
@@ -1577,7 +1587,7 @@ body::-webkit-scrollbar {
 }
 /* v0.3 — 자동으로 아래 줄로 내린 단어는 영어 크기 유지 */
 .word-row.is-compound.is-auto-stacked .en-ghost,
-.word-row.is-compound.is-auto-stacked .en { font-size: 88px; }
+.word-row.is-compound.is-auto-stacked .en { font-size: 86px; }
 .word-row.is-compound.is-auto-stacked { row-gap: 2px; }
 /* v0.3 — 세로 공간 타이트하게 (4개 + 줄바꿈 단어도 1920 안에) */
 .words { margin-top: 14px; gap: 12px; }
@@ -1619,14 +1629,34 @@ body::-webkit-scrollbar {
 .en-preview {
   display: none;
   font-family: var(--font-en-word);
-  font-weight: 700;
-  font-size: 78px;
+  font-weight: 800;
+  font-size: 86px;
   line-height: 1.1;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
   color: var(--ink);
   flex-shrink: 0;
+  white-space: nowrap;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+/* out____ — 남은 글자마다 밑줄 (굵은 _ 문자 대신, 적당 두께) */
+.en-blank {
+  display: inline-block;
+  width: 0.5em;
+  height: 0.78em;
+  margin: 0 0.04em;
+  border-bottom: 5px solid currentColor;
+  vertical-align: baseline;
+  box-sizing: border-box;
+  opacity: 0.95;
+}
+.en-blank-space {
+  display: inline-block;
+  width: 0.35em;
+}
+.en .en-blank,
+.en-preview .en-blank {
+  border-bottom-width: 5px;
 }
 .word.is-answer-hidden .en-preview:not([hidden]) {
   display: inline !important;
@@ -1669,11 +1699,11 @@ body::-webkit-scrollbar {
   padding: 0;
   width: 100%;
   font-family: "NanumBarunPen", "Nanum Barun Pen", var(--font-ko), sans-serif;
-  font-size: 38px;
-  font-weight: 400;
+  font-size: 40px;
+  font-weight: 500;
   line-height: 1.4;
   letter-spacing: -0.01em;
-  color: rgba(255, 255, 255, 0.72);
+  color: var(--example-meta);
   -webkit-font-smoothing: antialiased;
   word-break: keep-all;
   overflow-wrap: break-word;
