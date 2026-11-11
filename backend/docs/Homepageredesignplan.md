@@ -159,7 +159,7 @@
 - [x] `.html` ↔ clean 301/200 + 깨진 `/board/slug/*-list.html` 301 (`netlify.toml`)
 - [x] canonical/og:url `.html` 제거 (용어집 포함 고정·목록 페이지)
 - [x] 용어집 SSR: Ctrl+U에 단어·뜻·`/word-of-the-day/` 링크 노출 (`home-glossary`)
-- [x] WOTD 보강: 미니 퀴즈 2문항 + 관련 링크(유의어·용어집·뉴스 검색) — `/words/` 신설 없음
+- [ ] WOTD 미니 퀴즈·관련 링크 — 보류(품질 이슈로 제거, `wotd3`)
 - [ ] Search Console: 404·대체페이지 사유별 **수정 결과 확인** (배포 반영 후)
 - [ ] 뉴스 핵심어 → WOTD 발행·양방향 링크 운영 루틴 (콘텐츠)
 
