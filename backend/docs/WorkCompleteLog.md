@@ -37,6 +37,7 @@
 | 24 | 단어장 카드: 이미지 아래 카테고리·태그 제거, 영어 표제어만 | 완료 | 2026-11-10 | `isLemmaOnlyCard`, `?v=20261110wotdmeta1` |
 | 25 | 홈 01 탭명 통일: `뉴스 영단어`/`뉴스 영어` → `시사 영단어` | 완료 | 2026-11-11 | index·masthead·board-list-config, `?v=20261111sisa1` |
 | 26 | 사이트 검색 통합 인덱스 + smitten 오탐 수정 | 완료 | 2026-11-11 | `site-search-index.json`(1592), build script, badwords 검색 완화, `?v=20261111search1` |
+| 27 | 한국 보드 YouTube 자동화 업로드 2건 | 완료 | 2026-11-11 | `micI6bp9HRw`(남준잉), `odv-z2mwqR8`(호르무즈) |
 
 ---
 
