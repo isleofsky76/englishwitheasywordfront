@@ -769,6 +769,7 @@
 
     var keywordMode = usesKeywordCards(cfg);
     document.body.classList.toggle('rd-list--keyword-cards', keywordMode);
+    document.body.classList.toggle('rd-list--wotd', isLemmaOnlyCard(cfg));
     if (cfg.key) document.body.setAttribute('data-rd-board', cfg.key);
 
     var apiMode = options.apiMode || null;

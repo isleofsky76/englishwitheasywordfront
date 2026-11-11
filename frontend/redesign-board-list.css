@@ -599,6 +599,13 @@ body.rd-list .world-clock-bar {
     height: 200px;
   }
 
+  /* 단어장: 모바일에서도 1:1 유지 (위 200px 가로형 덮어쓰기) */
+  body.rd-list--wotd .rd-list-feature-img,
+  body.rd-list--wotd .rd-list-card-img {
+    height: auto;
+    aspect-ratio: 1 / 1;
+  }
+
   .rd-list-grid {
     grid-template-columns: 1fr;
     gap: 28px;
@@ -641,6 +648,19 @@ body.rd-list--keyword-cards .rd-list-feature-title {
   flex-direction: column;
   gap: 8px;
   min-width: 0;
+}
+
+/* 단어장 사진 섬네일 1:1 — 가로 크롭으로 머리 잘림 완화 */
+body.rd-list--wotd .rd-list-feature-img,
+body.rd-list--wotd .rd-list-card-img {
+  height: auto;
+  aspect-ratio: 1 / 1;
+}
+
+body.rd-list--wotd .rd-list-feature-img img,
+body.rd-list--wotd .rd-list-card-img img {
+  object-fit: cover;
+  object-position: center 20%;
 }
 
 body.rd-list--keyword-cards .rd-list-card-meta,

@@ -36,10 +36,10 @@ body.rd-word main#post-container {
 .rd-word-hero {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 40px 24px 48px;
+  padding: 24px 24px 32px;
   display: flex;
   flex-direction: column;
-  gap: 28px;
+  gap: 16px;
 }
 
 .rd-word-crumb {
@@ -75,8 +75,8 @@ body.rd-word main#post-container {
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  justify-content: center;
+  gap: 12px;
+  justify-content: flex-start;
 }
 
 .rd-word-kicker {
@@ -123,8 +123,8 @@ body.rd-word main#post-container {
 .rd-word-pos-block {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  padding-top: 20px;
+  gap: 8px;
+  padding-top: 14px;
   border-top: 1px solid var(--ink);
 }
 
@@ -171,7 +171,8 @@ body.rd-word main#post-container {
 .rd-word-hero-media {
   flex: 1 1 420px;
   min-width: 0;
-  min-height: 360px;
+  aspect-ratio: 1 / 1;
+  max-height: 480px;
   border-radius: 4px;
   background: #E3DDD0;
   overflow: hidden;
@@ -183,8 +184,8 @@ body.rd-word main#post-container {
 .rd-word-hero-media img {
   width: 100%;
   height: 100%;
-  min-height: 360px;
   object-fit: cover;
+  object-position: center 20%;
   display: block;
 }
 
@@ -728,19 +729,43 @@ body.rd-word .site-legal-footer {
 
 @media (max-width: 720px) {
   .rd-word-hero {
-    padding: 28px 16px 36px;
+    padding: 10px 16px 16px;
+    gap: 10px;
+  }
+
+  .rd-word-hero-row {
+    gap: 16px;
+  }
+
+  .rd-word-hero-copy {
+    gap: 10px;
+  }
+
+  .rd-word-title {
+    font-size: clamp(40px, 11vw, 56px);
+    letter-spacing: -1.5px;
+  }
+
+  .rd-word-ipa-btn {
+    height: 42px;
+    font-size: 16px;
+  }
+
+  .rd-word-pos-block {
+    padding-top: 12px;
   }
 
   .rd-word-hero-media {
-    min-height: 240px;
+    max-height: none;
+    aspect-ratio: 1 / 1;
   }
 
   .rd-word-hero-media img {
-    min-height: 240px;
+    object-position: center 20%;
   }
 
   .rd-word-body {
-    padding: 40px 16px 0;
+    padding: 28px 16px 0;
     gap: 36px;
   }
 
