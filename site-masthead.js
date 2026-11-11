@@ -122,9 +122,9 @@
         'one-sentence.html'
       ],
       children: [
+        { href: 'word-of-the-day-list.html?api=prod', label: '단어장', tone: 'wotd', pages: ['word-of-the-day-list.html', 'word-of-the-day.html'] },
         { href: 'english-synonym-list.html', label: '연관단어', tone: 'syn', pages: ['english-synonym-list.html', 'english-synonym.html'] },
-        { href: 'one-sentence.html', label: '문장', tone: 'osent', pages: ['one-sentence.html'] },
-        { href: 'word-of-the-day-list.html?api=prod', label: '단어장', tone: 'wotd', pages: ['word-of-the-day-list.html', 'word-of-the-day.html'] }
+        { href: 'one-sentence.html', label: '문장', tone: 'osent', pages: ['one-sentence.html'] }
       ]
     },
     {

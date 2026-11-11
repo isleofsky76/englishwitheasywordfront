@@ -1,6 +1,20 @@
 /* 목록 페이지 리디자인 — design/redesign-list.html */
 @import url("redesign-tokens.css");
 
+/* SSR 텍스트 목록은 크롤러용 — 사용자에게 이전 텍스트 UI가 잠깐이라도 보이면 안 됨 */
+.rd-list-ssr {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  clip-path: inset(50%) !important;
+  border: 0 !important;
+  white-space: nowrap !important;
+}
+
 body.rd-list {
   margin: 0;
   font-family: var(--font-sans);

@@ -41,11 +41,11 @@
   ];
   var NEWS_TABS = NEWS_TABS_ALL.filter(function (t) { return !HIDDEN_EMPTY_BOARDS[t.key]; });
 
-  /* index 02「단어 다지기」— 연관단어·문장·단어장만 (퀴즈는 05로 분리) */
+  /* index 02「단어 다지기」— 단어장·연관단어·문장 (퀴즈는 05로 분리) */
   var VOCAB_TABS = [
+    { key: 'word-of-the-day', label: '단어장', href: 'word-of-the-day-list.html?api=prod' },
     { key: 'english-synonym', label: '연관단어', href: 'english-synonym-list.html' },
-    { key: 'one-sentence', label: '문장', href: 'one-sentence.html' },
-    { key: 'word-of-the-day', label: '단어장', href: 'word-of-the-day-list.html?api=prod' }
+    { key: 'one-sentence', label: '문장', href: 'one-sentence.html' }
   ];
 
   /* index 05「시사 어휘 퀴즈」 */
@@ -403,7 +403,7 @@
       navGroup: 'vocab',
       tabs: VOCAB_TABS,
       articleLayout: 'auto',
-      breadcrumbParent: { label: '단어 다지기', href: 'english-synonym-list.html' }
+      breadcrumbParent: { label: '단어 다지기', href: 'word-of-the-day-list.html?api=prod' }
     },
     'one-sentence': {
       key: 'one-sentence',
@@ -420,7 +420,7 @@
       navGroup: 'vocab',
       tabs: VOCAB_TABS,
       articleLayout: 'auto',
-      breadcrumbParent: { label: '단어 다지기', href: 'english-synonym-list.html' }
+      breadcrumbParent: { label: '단어 다지기', href: 'word-of-the-day-list.html?api=prod' }
     },
     'word-of-the-day': {
       key: 'word-of-the-day',
@@ -437,7 +437,7 @@
       navGroup: 'vocab',
       tabs: VOCAB_TABS,
       articleLayout: 'word-detail',
-      breadcrumbParent: { label: '단어 다지기', href: 'english-synonym-list.html' }
+      breadcrumbParent: { label: '단어 다지기', href: 'word-of-the-day-list.html?api=prod' }
     },
     'popular-voca': {
       key: 'popular-voca',
