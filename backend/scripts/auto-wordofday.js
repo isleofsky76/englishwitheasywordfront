@@ -206,7 +206,9 @@ function loadBatchFile(filePath) {
           }))
           .filter((ex) => ex.en)
       : [];
-    return { word, image, examples };
+    const meaning = String(item.meaning || '').trim();
+    const meaningExtra = String(item.meaningExtra || '').trim();
+    return { word, image, examples, meaning, meaningExtra };
   });
 }
 
@@ -338,12 +340,33 @@ function pickCandidate(candidates, usedKeys, forcedWord) {
   return unused[Math.floor(Math.random() * unused.length)];
 }
 
-async function generateEntryContent(word) {
+export async function generateEntryContent(word, hints = {}) {
   const apiKey = process.env.OPENAI_API_KEY;
   if (!apiKey) throw new Error('OPENAI_API_KEY 가 .env 에 없습니다.');
   const openai = new OpenAI({ apiKey });
+  const meaningHint = String(hints.meaning || '').trim();
+  const meaningExtraHint = String(hints.meaningExtra || '').trim();
+  const exampleHints = Array.isArray(hints.examples)
+    ? hints.examples.filter((ex) => ex && ex.en).slice(0, 3)
+    : [];
+  const hintParts = [];
+  if (meaningHint) {
+    hintParts.push(`Preferred Korean meaning (use closely): "${meaningHint}"`);
+  }
+  if (meaningExtraHint) {
+    hintParts.push(`Preferred meaningExtra: "${meaningExtraHint}"`);
+  }
+  if (exampleHints.length) {
+    hintParts.push(
+      'Prefer these example sentences (keep wording; translate ko if missing):\n' +
+        exampleHints
+          .map((ex, i) => `${i + 1}. EN: ${ex.en}${ex.ko ? ` / KO: ${ex.ko}` : ''}`)
+          .join('\n')
+    );
+  }
+  const hintBlock = hintParts.length ? `\n${hintParts.join('\n')}\n` : '';
   const userPrompt = `Create a SHORT Word of the Day card for: "${word}".
-Audience: Korean adults. Keep it minimal — do NOT pad with extra examples or long synonym essays.
+Audience: Korean adults. Keep it minimal — do NOT pad with extra examples or long synonym essays.${hintBlock}
 Return JSON with exactly these keys:
 {
   "word": "canonical English form, usually lowercase unless a proper noun",
@@ -357,7 +380,7 @@ Return JSON with exactly these keys:
     {"en": "natural collocation containing the word", "ko": "짧은 한국어 뜻"}
   ],
   "compares": [
-    {"en": "near synonym or contrast word", "ko": "짧은 비교 설명", "active": false},
+    {"en": "near synonym or contrast word", "ko": "그 단어 자체의 짧은 뜻 (예: 일반적인 편지). '~와의 차이' 같은 메타 문구 금지", "active": false},
     {"en": "${word}", "ko": "이 단어의 핵심 뉘앙스", "active": true}
   ],
   "nuance": "ONE short Korean sentence on nuance. No HTML. No synonym dictionary dump.",
@@ -375,9 +398,10 @@ Rules:
 - collocations: exactly 2–3 items
 - examples: 1–2 items (natural, not textbooky)
 - synonyms/antonyms: bare English words only
+- compares[].ko: short gloss of that English word itself (e.g. letter → 일반적인 편지). Never write meta phrases like '~와의 차이', '차이점', '비교'
 - Do not use HTML tags
 - Keep everything concise; avoid repeating the same idea`;
-  const models = [process.env.WOTD_MODEL, 'gpt-4o-mini', 'gpt-3.5-turbo'].filter(
+  const models = [process.env.WOTD_MODEL, 'gpt-4o-mini', 'gpt-4o'].filter(
     (m, i, arr) => m && arr.indexOf(m) === i
   );
   let raw;
@@ -485,17 +509,28 @@ function gitCommitAndPush(slug, word) {
   git('git push origin main');
 }
 
-async function publishOne({ word: inputWord, image, examples = [], dryRun, noGit, usedKeys }) {
+async function publishOne({
+  word: inputWord,
+  image,
+  examples = [],
+  meaning = '',
+  meaningExtra = '',
+  dryRun,
+  noGit,
+  usedKeys,
+}) {
   const filename = resolveLocalImage(image || inputWord);
   const pickedWord = String(inputWord || basenameToWord(path.basename(filename, path.extname(filename)))).trim();
   console.log(`\n── ${pickedWord}`);
   console.log(`  이미지: /resources/${filename}`);
   if (examples.length) console.log(`  예문(사용자): ${examples.length}개`);
 
-  const generated = await generateEntryContent(pickedWord);
+  const generated = await generateEntryContent(pickedWord, { meaning, meaningExtra });
   if (examples.length) {
     generated.examples = examples.slice(0, 3);
   }
+  if (meaning) generated.meaning = meaning;
+  if (meaningExtra) generated.meaningExtra = meaningExtra;
   const word = generated.word || pickedWord;
   const slug = toSlug(word);
   const imageSrc = imageSrcFromFilename(filename);
@@ -626,6 +661,8 @@ export async function runAuto() {
         word: item.word,
         image: item.image,
         examples: item.examples,
+        meaning: item.meaning,
+        meaningExtra: item.meaningExtra,
         dryRun,
         noGit,
         usedKeys,
