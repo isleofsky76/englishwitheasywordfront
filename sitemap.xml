@@ -11,11 +11,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://englisheasystudy.com/contact</loc>
-    <lastmod>2026-11-11</lastmod>
-    <priority>0.5</priority>
-  </url>
-  <url>
     <loc>https://englisheasystudy.com/calm-mind-list.html</loc>
     <lastmod>2026-11-11</lastmod>
     <priority>0.8</priority>
@@ -58,6 +53,11 @@
   <url>
     <loc>https://englisheasystudy.com/calm-mind/when-korean-society-feels-cold/</loc>
     <lastmod>2026-08-28</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://englisheasystudy.com/contact</loc>
+    <lastmod>2026-11-11</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
@@ -1603,7 +1603,7 @@
   <url>
     <loc>https://englisheasystudy.com/vocabulary-quiz/repudiation-decadent-debacle-sleazy-moneygrubbing-quiz/</loc>
     <lastmod>2026-11-08</lastmod>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://englisheasystudy.com/vocabulary-quiz/scowl-twitch-agency-feed-premature-baby-quiz/</loc>
@@ -1669,6 +1669,11 @@
     <loc>https://englisheasystudy.com/word-of-the-day/leafy/</loc>
     <lastmod>2026-10-20</lastmod>
     <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://englisheasystudy.com/word-of-the-day/missive/</loc>
+    <lastmod>2026-11-11</lastmod>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://englisheasystudy.com/word-of-the-day/palpable/</loc>
