@@ -742,7 +742,7 @@ body.rd-list--keyword-cards .rd-list-feature--kw .rd-kw-thumb {
 @media (max-width: 767px) {
   body.rd-list--keyword-cards .rd-list-card.rd-list-card--kw {
     flex-direction: row;
-    align-items: flex-start;
+    align-items: center; /* 오른쪽 제목 블록을 섬네일+날짜 기준 세로 가운데 */
     gap: 14px;
   }
 
@@ -782,6 +782,7 @@ body.rd-list--keyword-cards .rd-list-feature--kw .rd-kw-thumb {
     min-width: 0;
     font-size: 15px;
     line-height: 1.45;
+    text-align: left;
     display: -webkit-box;
     -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
