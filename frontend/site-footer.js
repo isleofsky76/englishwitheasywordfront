@@ -1,5 +1,5 @@
 /**
- * 사이트 공통 푸터 — 사이트 소개 / 개인정보처리방침 / 이용약관 / 문의
+ * 사이트 공통 푸터 — 검은색 브랜드 + YouTube/X + 소개/개인정보/약관/문의
  * 페이지별(.rd-footer, .rd-word-footer 등) 다른 푸터는 제거하고 이 마크업으로 통일
  */
 (function () {
@@ -8,7 +8,7 @@
   if (window.__eesSiteFooterLoaded) return;
   window.__eesSiteFooterLoaded = true;
 
-  var FOOTER_VER = '20261112footer1';
+  var FOOTER_VER = '20261112dark1';
 
   function toSitePath(href) {
     var h = String(href || '').trim();
@@ -45,10 +45,17 @@
   }
 
   function ensureCss() {
-    if (document.querySelector('link[href*="site-footer.css"]')) return;
+    var existing = document.querySelector('link[href*="site-footer.css"]');
+    var href = scriptBase() + 'site-footer.css?v=' + FOOTER_VER;
+    if (existing) {
+      if ((existing.getAttribute('href') || '').indexOf(FOOTER_VER) === -1) {
+        existing.setAttribute('href', href);
+      }
+      return;
+    }
     var link = document.createElement('link');
     link.rel = 'stylesheet';
-    link.href = scriptBase() + 'site-footer.css?v=' + FOOTER_VER;
+    link.href = href;
     document.head.appendChild(link);
   }
 
@@ -57,20 +64,24 @@
     return (
       '<footer class="site-legal-footer" id="site-legal-footer" role="contentinfo" aria-label="사이트 정보">' +
       '<div class="site-legal-footer-inner">' +
-      '<nav aria-label="법적 고지">' +
+      '<div class="site-legal-footer-brand">' +
+      '<span class="name">시사영단어</span>' +
+      '<span class="desc">뉴스로 배우는 시사 영어. 뉴스 어휘, 오늘의 단어, 유의어, 퀴즈를 무료로.</span>' +
+      '</div>' +
+      '<nav aria-label="사이트 링크">' +
       '<ul class="site-legal-footer-nav">' +
+      '<li><a href="https://www.youtube.com/@istudyeng" target="_blank" rel="noopener noreferrer">YouTube</a></li>' +
+      '<li><a href="https://x.com/istudyengli" target="_blank" rel="noopener noreferrer">X</a></li>' +
       '<li><a href="' + toSitePath('about.html') + '">사이트 소개</a></li>' +
-      '<li class="sep" aria-hidden="true">·</li>' +
       '<li><a href="' + toSitePath('privacy.html') + '">개인정보처리방침</a></li>' +
-      '<li class="sep" aria-hidden="true">·</li>' +
       '<li><a href="' + toSitePath('terms.html') + '">이용약관</a></li>' +
-      '<li class="sep" aria-hidden="true">·</li>' +
       '<li><a href="' + toSitePath('contact') + '">문의</a></li>' +
       '</ul></nav>' +
+      '</div>' +
       '<p class="site-legal-footer-copy">© ' +
       year +
       ' 시사영단어 · News English Lab. All rights reserved.</p>' +
-      '</div></footer>'
+      '</footer>'
     );
   }
 
@@ -82,28 +93,33 @@
 
   var injecting = false;
 
+  function needsUpgrade(el) {
+    if (!el) return true;
+    if (!el.querySelector('.site-legal-footer-brand')) return true;
+    if (!el.querySelector('a[href*="youtube.com"]')) return true;
+    if (!el.querySelector('a[href*="contact"]')) return true;
+    return false;
+  }
+
   function injectFooter() {
     if (injecting) return;
     injecting = true;
     try {
       ensureCss();
-      var hadLegacy = !!document.querySelector('.rd-footer, .rd-word-footer');
       removeLegacyFooters();
 
       var existing = document.getElementById('site-legal-footer') || document.querySelector('.site-legal-footer');
+      var wrap = document.createElement('div');
+      wrap.innerHTML = buildFooterHtml();
+      var next = wrap.firstChild;
+
       if (existing) {
-        /* 문의 링크 없는 옛 푸터만 교체 */
-        var needsContact = !existing.querySelector('a[href*="contact"]');
-        if (!needsContact && !hadLegacy) return;
-        var wrap = document.createElement('div');
-        wrap.innerHTML = buildFooterHtml();
-        existing.parentNode.replaceChild(wrap.firstChild, existing);
+        if (!needsUpgrade(existing)) return;
+        existing.parentNode.replaceChild(next, existing);
         return;
       }
 
-      var wrap = document.createElement('div');
-      wrap.innerHTML = buildFooterHtml();
-      document.body.appendChild(wrap.firstChild);
+      document.body.appendChild(next);
     } finally {
       injecting = false;
     }
@@ -115,7 +131,6 @@
     injectFooter();
   }
 
-  /* 단어장 등이 나중에 커스텀 푸터를 넣으면 다시 통일 */
   try {
     var mo = new MutationObserver(function () {
       if (document.querySelector('.rd-footer, .rd-word-footer')) injectFooter();
