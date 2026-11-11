@@ -622,6 +622,9 @@
     var metaParts = kw || lemmaOnly
       ? [item.date].filter(Boolean)
       : [cfg.categoryLabel, item.source, item.date].filter(Boolean);
+    var metaHtml = metaParts.length
+      ? '<span class="rd-list-feature-meta">' + escapeHtml(metaParts.join(' · ')) + '</span>'
+      : '';
     var tags = (!kw && !lemmaOnly && item.tags) ? item.tags.map(function (t) {
       return '<span class="rd-list-tag">' + escapeHtml(t) + '</span>';
     }).join('') : '';
@@ -634,13 +637,14 @@
     var sub = kw || lemmaOnly
       ? ''
       : (item.summary ? '<span class="rd-list-feature-summary">' + escapeHtml(item.summary) + '</span>' : '');
+    /* 키워드·단어장: 날짜를 섬네일 바로 아래에 붙여 제목과 떨어뜨림 */
+    var mediaBlock = (kw || lemmaOnly)
+      ? '<div class="rd-list-media-stack">' + media + metaHtml + '</div>'
+      : media + metaHtml;
     return (
       '<a class="rd-list-feature' + (kw ? ' rd-list-feature--kw' : '') + '" href="' + escapeAttr(item.href) + '"' +
         cardAnalyticsAttrs(item) + '>' +
-        media +
-        (metaParts.length
-          ? '<span class="rd-list-feature-meta">' + escapeHtml(metaParts.join(' · ')) + '</span>'
-          : '') +
+        mediaBlock +
         titleHtml(item, 'rd-list-feature-title', { index: 1 }) +
         sub +
         (tags ? '<div class="rd-list-tags">' + tags + '</div>' : '') +
@@ -676,19 +680,22 @@
     var metaParts = kw || lemmaOnly
       ? [item.date].filter(Boolean)
       : [cfg.categoryLabel, item.source, item.date].filter(Boolean);
+    var metaHtml = metaParts.length
+      ? '<span class="rd-list-card-meta">' + escapeHtml(metaParts.join(' · ')) + '</span>'
+      : '';
     var media = kw
       ? keywordCardThumbHtml(item, cfg)
       : imgHtml(item.thumb, 'rd-list-card-img', monoFromTitle(item), {
           youtube: isYoutubeThumb(item.thumb),
           emptyBadge: optsEmptyBadge(cfg)
         });
+    var mediaBlock = (kw || lemmaOnly)
+      ? '<div class="rd-list-media-stack">' + media + metaHtml + '</div>'
+      : media + metaHtml;
     return (
       '<a class="rd-list-card' + (kw ? ' rd-list-card--kw' : '') + '" href="' + escapeAttr(item.href) + '"' +
         cardAnalyticsAttrs(item) + '>' +
-        media +
-        (metaParts.length
-          ? '<span class="rd-list-card-meta">' + escapeHtml(metaParts.join(' · ')) + '</span>'
-          : '') +
+        mediaBlock +
         titleHtml(item, 'rd-list-card-title') +
         (!kw && !lemmaOnly && item.tags && item.tags.length
           ? '<div class="rd-list-tags rd-list-card-tags">' +

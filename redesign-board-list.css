@@ -622,11 +622,23 @@ body.rd-list--keyword-cards .rd-list-feature-title {
   color: #1E1B16;
 }
 
+.rd-list-media-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
 body.rd-list--keyword-cards .rd-list-card-meta,
 body.rd-list--keyword-cards .rd-list-feature-meta {
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.02em;
+}
+
+body.rd-list--keyword-cards .rd-list-media-stack .rd-list-card-meta,
+body.rd-list--keyword-cards .rd-list-media-stack .rd-list-feature-meta {
+  margin: 0;
 }
 
 body.rd-list--keyword-cards .rd-list-card-sub {
@@ -728,14 +740,20 @@ body.rd-list--keyword-cards .rd-list-feature--kw .rd-kw-thumb {
 @media (max-width: 767px) {
   body.rd-list--keyword-cards .rd-list-card.rd-list-card--kw {
     flex-direction: row;
-    align-items: center;
+    align-items: flex-start;
     gap: 14px;
   }
 
-  body.rd-list--keyword-cards .rd-list-card--kw .rd-kw-thumb {
+  body.rd-list--keyword-cards .rd-list-card--kw .rd-list-media-stack {
     flex: 0 0 50%;
     width: 50%;
     max-width: 50%;
+    gap: 6px;
+  }
+
+  body.rd-list--keyword-cards .rd-list-card--kw .rd-kw-thumb {
+    width: 100%;
+    max-width: none;
     aspect-ratio: 2 / 1;
     padding: 10px 12px;
   }
@@ -751,6 +769,10 @@ body.rd-list--keyword-cards .rd-list-feature--kw .rd-kw-thumb {
   body.rd-list--keyword-cards .rd-list-card--kw .rd-kw-sub {
     margin-top: 4px;
     font-size: 13px; /* 11px + 2 — 모바일 가로형 섬네일 가독성 */
+  }
+
+  body.rd-list--keyword-cards .rd-list-card--kw .rd-list-card-meta {
+    font-size: 12px;
   }
 
   body.rd-list--keyword-cards .rd-list-card--kw .rd-list-card-title {
