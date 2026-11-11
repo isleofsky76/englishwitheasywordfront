@@ -738,22 +738,25 @@ body.rd-list--keyword-cards .rd-list-feature--kw .rd-kw-thumb {
   }
 }
 
-/* 모바일「전체 글」키워드 카드만 — 섬네일 1/2 가로형 (대표·사이드는 유지) */
+/* 모바일「전체 글」키워드 카드만 — 섬네일 1/2 가로형 (대표·사이드는 유지)
+   제목은 섬네일(1행) 기준 세로 가운데, 날짜는 섬네일 아래(2행) */
 @media (max-width: 767px) {
   body.rd-list--keyword-cards .rd-list-card.rd-list-card--kw {
-    flex-direction: row;
-    align-items: center; /* 오른쪽 제목 블록을 섬네일+날짜 기준 세로 가운데 */
-    gap: 14px;
+    display: grid;
+    grid-template-columns: minmax(0, 50%) minmax(0, 1fr);
+    grid-template-rows: auto auto;
+    column-gap: 14px;
+    row-gap: 6px;
+    align-items: center;
   }
 
   body.rd-list--keyword-cards .rd-list-card--kw .rd-list-media-stack {
-    flex: 0 0 50%;
-    width: 50%;
-    max-width: 50%;
-    gap: 6px;
+    display: contents;
   }
 
   body.rd-list--keyword-cards .rd-list-card--kw .rd-kw-thumb {
+    grid-column: 1;
+    grid-row: 1;
     width: 100%;
     max-width: none;
     aspect-ratio: 2 / 1;
@@ -774,11 +777,17 @@ body.rd-list--keyword-cards .rd-list-feature--kw .rd-kw-thumb {
   }
 
   body.rd-list--keyword-cards .rd-list-card--kw .rd-list-card-meta {
+    grid-column: 1;
+    grid-row: 2;
     font-size: 12px;
+    text-align: center;
+    width: 100%;
   }
 
   body.rd-list--keyword-cards .rd-list-card--kw .rd-list-card-title {
-    flex: 1 1 auto;
+    grid-column: 2;
+    grid-row: 1;
+    align-self: center;
     min-width: 0;
     font-size: 15px;
     line-height: 1.45;
