@@ -51,6 +51,7 @@
 | 38 | WOTD 상세 상단 공백 축소 + 목록 섬네일 1:1 | 완료 | 2026-11-11 | `rd-word-hero` 패딩·갭, `rd-list--wotd` 1:1 cover, `?v=20261111wotdspace1` |
 | 39 | WOTD 구형 본문 167건 → 최신 wotd-* 구조 마이그레이션 | 완료 | 2026-11-12 | `migrate-wotd-to-latest.mjs`, SEO 페이지 생성, 날짜 유지 |
 | 40 | 공통 푸터 통일 (소개·개인정보·약관·문의) | 완료 | 2026-11-12 | index/단어장 커스텀 푸터 제거, `site-legal-footer`, `?v=20261112footer1` |
+| 41 | WOTD 히어로 압축 + 오염된 뜻/부제 정리 | 완료 | 2026-11-12 | 발음 옆배치, meaning-sub·예문 유출 제거, `clean-wotd-glosses`, `?v=20261112compact1` |
 
 ---
 

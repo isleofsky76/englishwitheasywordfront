@@ -86,28 +86,37 @@ body.rd-word main#post-container {
   color: var(--accent);
 }
 
+.rd-word-title-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 14px;
+}
+
 .rd-word-title {
   margin: 0;
   font-family: var(--font-serif);
   font-weight: 900;
-  font-size: clamp(56px, 12vw, 104px);
-  line-height: 1;
-  letter-spacing: -2px;
+  font-size: clamp(40px, 9vw, 72px);
+  line-height: 1.05;
+  letter-spacing: -1.5px;
 }
 
 .rd-word-ipa-btn {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  height: 48px;
-  padding: 0 20px 0 14px;
+  gap: 8px;
+  height: 40px;
+  padding: 0 14px 0 12px;
   border-radius: 999px;
   border: 1px solid var(--ink);
   background: var(--surface);
   color: var(--ink);
   font: inherit;
-  font-size: 18px;
+  font-size: 15px;
   cursor: pointer;
+  flex: 0 1 auto;
+  max-width: 100%;
 }
 
 .rd-word-ipa-btn:hover {
@@ -737,14 +746,29 @@ body.rd-word main#post-container {
     gap: 10px;
   }
 
+  .rd-word-title-row {
+    gap: 8px 10px;
+  }
+
   .rd-word-title {
-    font-size: clamp(40px, 11vw, 56px);
-    letter-spacing: -1.5px;
+    font-size: clamp(32px, 9vw, 44px);
+    letter-spacing: -1px;
   }
 
   .rd-word-ipa-btn {
-    height: 42px;
-    font-size: 16px;
+    height: 36px;
+    font-size: 13px;
+    padding: 0 10px 0 8px;
+    gap: 6px;
+  }
+
+  .rd-word-ipa-btn svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .rd-word-ipa-btn .ko {
+    font-size: 12px;
   }
 
   .rd-word-pos-block {

@@ -5,7 +5,7 @@
 (function (global) {
   'use strict';
 
-  var ASSET_VER = '20261112footer1';
+  var ASSET_VER = '20261112compact1';
   var SPEAKER_SVG =
     '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M15.5 8.5a5 5 0 0 1 0 7"></path></svg>';
   var SPEAKER_FULL_SVG =
@@ -137,11 +137,13 @@
     var pos = Array.from(box.querySelectorAll('.wotd-pos')).map(function (el) {
       var meaning = el.querySelector('.wotd-meaning');
       var sub = el.querySelector('.wotd-meaning-sub');
+      var meaningText = cleanGlossText(meaning ? stripTags(meaning.innerHTML) : stripTags(el.innerHTML));
+      var subText = usableMeaningSub(meaningText, sub ? stripTags(sub.innerHTML) : '');
       return {
         pos: el.getAttribute('data-pos') || '',
         primary: el.getAttribute('data-primary') === '1',
-        meaning: meaning ? stripTags(meaning.innerHTML) : stripTags(el.innerHTML),
-        sub: sub ? stripTags(sub.innerHTML) : ''
+        meaning: meaningText,
+        sub: subText
       };
     }).filter(function (p) { return p.pos || p.meaning; });
 
@@ -234,13 +236,39 @@
     return raw.split(/\s*[|｜]\s*/)[0].trim() || raw;
   }
 
+  function cleanGlossText(s) {
+    var t = String(s || '').trim();
+    if (!t) return '';
+    t = t.split(/예문\s*\d*/i)[0].trim();
+    t = t.split(/📌|💡|→/)[0].trim();
+    t = t.replace(/\s*(동사|형용사|명사|부사)\s*[:：].*$/i, '').trim();
+    t = t.replace(/\s*[·•]\s*$/, '').trim();
+    if (t.length > 42) {
+      var cut = t.slice(0, 42);
+      var lastSep = Math.max(cut.lastIndexOf('·'), cut.lastIndexOf(','), cut.lastIndexOf('，'));
+      t = (lastSep > 12 ? cut.slice(0, lastSep) : cut).replace(/[,，·\s]+$/g, '');
+    }
+    return t;
+  }
+
   function wordGloss(post) {
     var Config = global.BoardListConfig;
     var raw = Config ? Config.cleanTitle(post) : String((post && post.title) || '');
     var bi = Config && Config.splitBilingualTitle ? Config.splitBilingualTitle(raw) : null;
-    if (bi && bi.bilingual && bi.ko) return bi.ko;
+    if (bi && bi.bilingual && bi.ko) return cleanGlossText(bi.ko);
     var parts = raw.split(/\s*[|｜]\s*/);
-    return parts.length > 1 ? parts[1].trim() : '';
+    return parts.length > 1 ? cleanGlossText(parts[1]) : '';
+  }
+
+  /** 부제(meaning-sub)가 기본 뜻 중복·예문 유출이면 숨김 */
+  function usableMeaningSub(meaning, sub) {
+    var m = String(meaning || '').trim();
+    var s = String(sub || '').trim();
+    if (!s) return '';
+    if (/예문\s*\d*|The |He |She |They |I /i.test(s)) return '';
+    if (s.length > 56) return '';
+    if (m && (s === m || s.indexOf(m) === 0)) return '';
+    return s;
   }
 
   function entryHref(entry, cfg) {
@@ -321,11 +349,12 @@
 
     var posHtml = data.pos.map(function (p, i) {
       var primary = p.primary || (i === 0 && data.pos.length);
+      var sub = usableMeaningSub(p.meaning, p.sub);
       return (
         '<div class="rd-word-pos-row' + (primary ? '' : ' is-secondary') + '">' +
           '<span class="rd-word-pos-badge' + (primary ? '' : ' is-outline') + '">' + escapeHtml(p.pos) + '</span>' +
           '<span class="rd-word-pos-main">' + escapeHtml(p.meaning) + '</span>' +
-          (p.sub ? '<span class="rd-word-pos-sub">' + escapeHtml(p.sub) + '</span>' : '') +
+          (sub ? '<span class="rd-word-pos-sub">' + escapeHtml(sub) + '</span>' : '') +
         '</div>'
       );
     }).join('');
@@ -434,14 +463,16 @@
           '<div class="rd-word-hero-row">' +
             '<div class="rd-word-hero-copy">' +
               '<span class="rd-word-kicker">WORD OF THE DAY · 단어장</span>' +
-              '<h1 class="rd-word-title" id="post-title">' + escapeHtml(word) + '</h1>' +
-              (data.ipa
-                ? '<div><button type="button" class="rd-word-ipa-btn" data-rd-tts="' + escapeAttr(word) + '" aria-label="' + escapeAttr(word) + ' 발음 듣기">' +
-                    SPEAKER_FULL_SVG +
-                    '<span>' + escapeHtml(data.ipa) + '</span>' +
-                    (data.ipaKo ? '<span class="ko">' + escapeHtml(data.ipaKo) + '</span>' : '') +
-                  '</button></div>'
-                : '') +
+              '<div class="rd-word-title-row">' +
+                '<h1 class="rd-word-title" id="post-title">' + escapeHtml(word) + '</h1>' +
+                (data.ipa
+                  ? '<button type="button" class="rd-word-ipa-btn" data-rd-tts="' + escapeAttr(word) + '" aria-label="' + escapeAttr(word) + ' 발음 듣기">' +
+                      SPEAKER_FULL_SVG +
+                      '<span>' + escapeHtml(data.ipa) + '</span>' +
+                      (data.ipaKo ? '<span class="ko">' + escapeHtml(data.ipaKo) + '</span>' : '') +
+                    '</button>'
+                  : '') +
+              '</div>' +
               (posHtml ? '<div class="rd-word-pos-block">' + posHtml + '</div>' : '') +
             '</div>' +
             '<div class="rd-word-hero-media">' + mediaHtml + '</div>' +

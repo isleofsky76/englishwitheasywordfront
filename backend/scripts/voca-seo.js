@@ -253,7 +253,7 @@ export const BOARD_SEO = {
     listHtml: 'word-of-the-day-list.html',
     articleLayout: 'word-detail',
     extraCss: [
-      { file: 'redesign-word.css', version: '20261112footer1' },
+      { file: 'redesign-word.css', version: '20261112compact1' },
       { file: 'site-masthead.css', version: '20261101endef3' },
     ],
   },
