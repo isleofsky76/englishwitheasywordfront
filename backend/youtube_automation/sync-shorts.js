@@ -30,7 +30,7 @@ const DEFAULT_OUT = path.join(REPO_ROOT, 'data', 'youtube-shorts.json');
 /**
  * 제목 앞 카테고리 → 홈 라벨·목록 링크
  * 권장: 국제|한국|국방|경제|스포츠|미국|산업|컬쳐 (+사이트: 여행·건강)
- * 맵에 없는 접두사 → 뉴스 영단어(국제 목록)
+ * 맵에 없는 접두사 → 시사 영단어(국제 목록)
  */
 const CATEGORY_MAP = {
   국제: { label: '국제', href: 'news-voca-list.html' },
@@ -87,7 +87,7 @@ function mapCategory(categoryKey, opts = {}) {
       href: mapped.href,
     };
   }
-  /* `미분류 | 제목` 접두사만 뉴스 영단어로 (해시태그 폴백은 제외) */
+  /* `미분류 | 제목` 접두사만 시사 영단어로 (해시태그 폴백은 제외) */
   if (!opts.allowFallback) return null;
   return {
     category: '국제',

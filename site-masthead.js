@@ -4,7 +4,7 @@
  * nav-home-menu.js 가 로드함
  */
 (function () {
-    var VERSION = '20261109bw1';
+    var VERSION = '20261111sisa1';
 
   var DICT_LOOKUP_VER = '20261104dict1';
   var DICT_LOOKUP_CONTAINERS = [
@@ -48,7 +48,7 @@
   var PRIMARY_NAV_ITEMS = [
     {
       href: 'news-voca-list.html',
-      label: '뉴스 영어',
+      label: '시사 영단어',
       groupLabel: '뉴스로 배우기',
       tone: 'news',
       pages: [

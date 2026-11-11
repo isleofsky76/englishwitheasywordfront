@@ -24,7 +24,7 @@ const SOURCE_ALIASES = [
 
 /**
  * 제목 `카테고리 | 제목` 앞부분 → 게시판
- * 사이트 01뉴스 영단어: 국제·한국·국방·경제·여행·스포츠·미국·산업·컬쳐·건강
+ * 사이트 01 시사 영단어: 국제·한국·국방·경제·여행·스포츠·미국·산업·컬쳐·건강
  * 유튜브 권장 접두사: 국제·한국·국방·경제·스포츠·미국·산업·컬쳐
  * 맵에 없는 접두사 → news-voca (아래 boardFromTitlePrefix)
  */
@@ -64,7 +64,7 @@ function boardFromTitlePrefix(title) {
   const key = m[1].replace(/\s+/g, '').trim();
   if (!key) return '';
   if (TITLE_CATEGORY_BOARD[key]) return TITLE_CATEGORY_BOARD[key];
-  /* 분류에 없는 접두사 → 뉴스 영단어 */
+  /* 분류에 없는 접두사 → 시사 영단어 */
   return 'news-voca';
 }
 

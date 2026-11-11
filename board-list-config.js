@@ -18,7 +18,7 @@
     'ranking-news': true
   };
 
-  /* 01뉴스 영단어 표시 순서: 국제·한국·국방·경제·여행·스포츠·미국·산업·컬쳐·건강 */
+  /* 01 시사 영단어 표시 순서: 국제·한국·국방·경제·여행·스포츠·미국·산업·컬쳐·건강 */
   var NEWS_TABS_ALL = [
     { key: 'news-voca', label: '국제', href: 'news-voca-list.html' },
     { key: 'korea-news', label: '한국', href: 'korea-news-list.html' },
@@ -67,7 +67,7 @@
     'news-voca': {
       key: 'news-voca',
       labelEn: 'NEWS VOCABULARY',
-      title: '뉴스 영어',
+      title: '시사 영단어',
       description: 'WSJ, Economist, CNN, Korea Herald 기사 속 핵심 어휘를 원문 문장과 함께 읽습니다.',
       tabLabel: '국제',
       categoryLabel: '국제',
@@ -80,7 +80,7 @@
       tabs: NEWS_TABS,
       /* auto: nv-narrative(staggered) 구조일 때만 카드형 redesign */
       articleLayout: 'auto',
-      breadcrumbParent: { label: '뉴스 영어', href: 'news-voca-list.html' }
+      breadcrumbParent: { label: '시사 영단어', href: 'news-voca-list.html' }
     },
     'korea-news': {
       key: 'korea-news',
@@ -97,7 +97,7 @@
       navGroup: 'news',
       tabs: NEWS_TABS,
       articleLayout: 'auto',
-      breadcrumbParent: { label: '뉴스 영어', href: 'news-voca-list.html' }
+      breadcrumbParent: { label: '시사 영단어', href: 'news-voca-list.html' }
     },
     'defense-news': {
       key: 'defense-news',
@@ -114,7 +114,7 @@
       navGroup: 'news',
       tabs: NEWS_TABS,
       articleLayout: 'auto',
-      breadcrumbParent: { label: '뉴스 영어', href: 'news-voca-list.html' }
+      breadcrumbParent: { label: '시사 영단어', href: 'news-voca-list.html' }
     },
     'economy-news': {
       key: 'economy-news',
@@ -131,7 +131,7 @@
       navGroup: 'news',
       tabs: NEWS_TABS,
       articleLayout: 'auto',
-      breadcrumbParent: { label: '뉴스 영어', href: 'news-voca-list.html' }
+      breadcrumbParent: { label: '시사 영단어', href: 'news-voca-list.html' }
     },
     'travel-news': {
       key: 'travel-news',
@@ -148,7 +148,7 @@
       navGroup: 'news',
       tabs: NEWS_TABS,
       articleLayout: 'auto',
-      breadcrumbParent: { label: '뉴스 영어', href: 'news-voca-list.html' }
+      breadcrumbParent: { label: '시사 영단어', href: 'news-voca-list.html' }
     },
     'sports-news': {
       key: 'sports-news',
@@ -165,7 +165,7 @@
       navGroup: 'news',
       tabs: NEWS_TABS,
       articleLayout: 'auto',
-      breadcrumbParent: { label: '뉴스 영어', href: 'news-voca-list.html' }
+      breadcrumbParent: { label: '시사 영단어', href: 'news-voca-list.html' }
     },
     'us-news': {
       key: 'us-news',
@@ -182,7 +182,7 @@
       navGroup: 'news',
       tabs: NEWS_TABS,
       articleLayout: 'auto',
-      breadcrumbParent: { label: '뉴스 영어', href: 'news-voca-list.html' }
+      breadcrumbParent: { label: '시사 영단어', href: 'news-voca-list.html' }
     },
     'weather-news': {
       key: 'weather-news',
@@ -199,7 +199,7 @@
       navGroup: 'news',
       tabs: NEWS_TABS,
       articleLayout: 'auto',
-      breadcrumbParent: { label: '뉴스 영어', href: 'news-voca-list.html' }
+      breadcrumbParent: { label: '시사 영단어', href: 'news-voca-list.html' }
     },
     'retail-news': {
       key: 'retail-news',
@@ -216,7 +216,7 @@
       navGroup: 'news',
       tabs: NEWS_TABS,
       articleLayout: 'auto',
-      breadcrumbParent: { label: '뉴스 영어', href: 'news-voca-list.html' }
+      breadcrumbParent: { label: '시사 영단어', href: 'news-voca-list.html' }
     },
     'literature-news': {
       key: 'literature-news',
@@ -233,7 +233,7 @@
       navGroup: 'news',
       tabs: NEWS_TABS,
       articleLayout: 'auto',
-      breadcrumbParent: { label: '뉴스 영어', href: 'news-voca-list.html' }
+      breadcrumbParent: { label: '시사 영단어', href: 'news-voca-list.html' }
     },
     'health-news': {
       key: 'health-news',
@@ -250,7 +250,7 @@
       navGroup: 'news',
       tabs: NEWS_TABS,
       articleLayout: 'auto',
-      breadcrumbParent: { label: '뉴스 영어', href: 'news-voca-list.html' }
+      breadcrumbParent: { label: '시사 영단어', href: 'news-voca-list.html' }
     },
     'politics-news': {
       key: 'politics-news',
@@ -267,7 +267,7 @@
       navGroup: 'news',
       tabs: NEWS_TABS,
       articleLayout: 'auto',
-      breadcrumbParent: { label: '뉴스 영어', href: 'news-voca-list.html' }
+      breadcrumbParent: { label: '시사 영단어', href: 'news-voca-list.html' }
     },
     'industry-news': {
       key: 'industry-news',
@@ -284,7 +284,7 @@
       navGroup: 'news',
       tabs: NEWS_TABS,
       articleLayout: 'auto',
-      breadcrumbParent: { label: '뉴스 영어', href: 'news-voca-list.html' }
+      breadcrumbParent: { label: '시사 영단어', href: 'news-voca-list.html' }
     },
     'ai-news': {
       key: 'ai-news',
@@ -301,7 +301,7 @@
       navGroup: 'news',
       tabs: NEWS_TABS,
       articleLayout: 'auto',
-      breadcrumbParent: { label: '뉴스 영어', href: 'news-voca-list.html' }
+      breadcrumbParent: { label: '시사 영단어', href: 'news-voca-list.html' }
     },
     'incident-news': {
       key: 'incident-news',
@@ -318,7 +318,7 @@
       navGroup: 'news',
       tabs: NEWS_TABS,
       articleLayout: 'auto',
-      breadcrumbParent: { label: '뉴스 영어', href: 'news-voca-list.html' }
+      breadcrumbParent: { label: '시사 영단어', href: 'news-voca-list.html' }
     },
     'ukraine-news': {
       key: 'ukraine-news',
@@ -335,7 +335,7 @@
       navGroup: 'news',
       tabs: NEWS_TABS,
       articleLayout: 'auto',
-      breadcrumbParent: { label: '뉴스 영어', href: 'news-voca-list.html' }
+      breadcrumbParent: { label: '시사 영단어', href: 'news-voca-list.html' }
     },
     'culture-voca': {
       key: 'culture-voca',
@@ -352,7 +352,7 @@
       navGroup: 'news',
       tabs: NEWS_TABS,
       articleLayout: 'auto',
-      breadcrumbParent: { label: '뉴스 영어', href: 'news-voca-list.html' }
+      breadcrumbParent: { label: '시사 영단어', href: 'news-voca-list.html' }
     },
     'ranking-news': {
       key: 'ranking-news',
@@ -369,7 +369,7 @@
       navGroup: 'news',
       tabs: NEWS_TABS,
       articleLayout: 'auto',
-      breadcrumbParent: { label: '뉴스 영어', href: 'news-voca-list.html' }
+      breadcrumbParent: { label: '시사 영단어', href: 'news-voca-list.html' }
     },
     'english-opinions': {
       key: 'english-opinions',
