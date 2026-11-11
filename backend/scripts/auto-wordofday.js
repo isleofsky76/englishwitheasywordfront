@@ -6,11 +6,13 @@
  *
  * 사용법 (backend 폴더):
  *   node scripts/send-wordofday-entry.js --auto --list
- *   node scripts/send-wordofday-entry.js --auto --word smitten --image smitten.jpg
- *   node scripts/send-wordofday-entry.js --auto --word smitten --image smitten.jpg --example "He was smitten with her." --example-ko "그는 그녀에게 홀딱 반했다."
+ *   node scripts/send-wordofday-entry.js --auto --word smitten
+ *     → resources/smitten.jpg|png|webp|gif 중 1개 자동 선택
+ *   node scripts/send-wordofday-entry.js --auto --word smitten --image smitten.webp
+ *   node scripts/send-wordofday-entry.js --auto --word smitten --example "He was smitten with her." --example-ko "그는 그녀에게 홀딱 반했다."
  *   node scripts/send-wordofday-entry.js --auto --from scripts/wotd-batch.sample.json
- *   node scripts/send-wordofday-entry.js --auto --dry-run --word smitten --image smitten.jpg
- *   node scripts/send-wordofday-entry.js --auto --no-git --word smitten --image smitten.jpg
+ *   node scripts/send-wordofday-entry.js --auto --dry-run --word smitten
+ *   node scripts/send-wordofday-entry.js --auto --no-git --word smitten
  */
 
 import fs from 'fs';
@@ -131,14 +133,59 @@ function examplesFromCli() {
   })).filter((ex) => ex.en);
 }
 
-function resolveLocalImage(filename) {
-  const name = path.basename(String(filename || '').replace(/^\/?resources\//, ''));
-  if (!name) throw new Error('--image 파일명이 필요합니다. 예: --image smitten.jpg');
-  const full = path.join(RESOURCES_DIR, name);
-  if (!fs.existsSync(full)) {
-    throw new Error(`resources/ 에 이미지가 없습니다: ${name} (경로: ${full})`);
+/** 확장자 우선순위: jpg → jpeg → png → webp → gif 중 하나만 */
+const EXT_ORDER = ['.jpg', '.jpeg', '.png', '.webp', '.gif'];
+
+function stemVariants(raw) {
+  const s = String(raw || '')
+    .replace(/^\/?resources\//, '')
+    .trim();
+  if (!s) return [];
+  const base = path.basename(s, path.extname(s) || undefined);
+  const cleaned = base.replace(/['’]/g, '');
+  const set = new Set([
+    cleaned,
+    cleaned.toLowerCase(),
+    cleaned.replace(/\s+/g, '-'),
+    cleaned.replace(/\s+/g, '_'),
+    cleaned.toLowerCase().replace(/\s+/g, '-'),
+    cleaned.toLowerCase().replace(/\s+/g, '_'),
+    cleaned.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, ''),
+  ]);
+  return [...set].filter(Boolean);
+}
+
+/**
+ * resources/ 에서 단어·파일명으로 jpg/png/webp/gif 조회 후 1개 선택.
+ * --image smitten.jpg / smitten.webp / smitten (확장자 없음) / --word smitten 모두 가능.
+ */
+function resolveLocalImage(filenameOrWord) {
+  const raw = String(filenameOrWord || '').replace(/^\/?resources\//, '').trim();
+  if (!raw) throw new Error('이미지 또는 단어가 필요합니다. 예: --image smitten.jpg 또는 --word smitten');
+
+  const exact = path.basename(raw);
+  const exactFull = path.join(RESOURCES_DIR, exact);
+  if (path.extname(exact) && fs.existsSync(exactFull)) return exact;
+
+  const stems = stemVariants(raw);
+  const hits = [];
+  for (const stem of stems) {
+    for (const ext of EXT_ORDER) {
+      const name = stem + ext;
+      if (fs.existsSync(path.join(RESOURCES_DIR, name))) hits.push(name);
+    }
   }
-  return name;
+  if (!hits.length) {
+    throw new Error(
+      `resources/ 에 이미지가 없습니다: ${raw} (조회: ${stems.join(', ')} + ${EXT_ORDER.join('/')})`
+    );
+  }
+  /* 같은 stem이면 EXT_ORDER 우선, 이미 hits가 그 순서로 쌓임 */
+  const picked = hits[0];
+  if (hits.length > 1) {
+    console.log(`  이미지 후보 ${hits.length}개 중 선택: ${picked}  (다른 후보: ${hits.slice(1).join(', ')})`);
+  }
+  return picked;
 }
 
 function loadBatchFile(filePath) {
@@ -148,9 +195,9 @@ function loadBatchFile(filePath) {
   const list = Array.isArray(raw) ? raw : Array.isArray(raw.items) ? raw.items : [raw];
   return list.map((item, idx) => {
     const word = String(item.word || '').trim();
-    const image = String(item.image || item.filename || '').trim();
+    const image = String(item.image || item.filename || word || '').trim();
     if (!word) throw new Error(`배치 ${idx + 1}번째: word 가 없습니다.`);
-    if (!image) throw new Error(`배치 ${idx + 1}번째 (${word}): image 가 없습니다.`);
+    if (!image) throw new Error(`배치 ${idx + 1}번째 (${word}): image 또는 word 로 찾을 파일이 없습니다.`);
     const examples = Array.isArray(item.examples)
       ? item.examples
           .map((ex) => ({
@@ -439,7 +486,7 @@ function gitCommitAndPush(slug, word) {
 }
 
 async function publishOne({ word: inputWord, image, examples = [], dryRun, noGit, usedKeys }) {
-  const filename = resolveLocalImage(image);
+  const filename = resolveLocalImage(image || inputWord);
   const pickedWord = String(inputWord || basenameToWord(path.basename(filename, path.extname(filename)))).trim();
   console.log(`\n── ${pickedWord}`);
   console.log(`  이미지: /resources/${filename}`);
@@ -589,7 +636,8 @@ export async function runAuto() {
     return results;
   }
 
-  /** 단일: --word/--image 또는 미게시 랜덤 */
+  /** 단일: --word/--image 또는 미게시 랜덤
+   *  이미지 확장자는 jpg/png/webp/gif 아무거나 → 이름만 맞으면 1개 자동 선택 */
   let word = forcedWord;
   let image = forcedImage;
   if (!image && !word) {
@@ -597,14 +645,11 @@ export async function runAuto() {
     word = picked.word;
     image = picked.filename;
   } else if (!image && word) {
-    const hit = candidates.find(
-      (c) => c.key === normalizeWord(word) || c.word.toLowerCase() === word.toLowerCase()
-    );
-    if (!hit) throw new Error(`resources/ 에 "${word}" 이미지가 없습니다. --image 파일명을 지정하세요.`);
-    image = hit.filename;
+    image = word; /* resolveLocalImage 가 확장자별 조회 */
   } else if (image && !word) {
-    const base = path.basename(image, path.extname(image));
-    word = basenameToWord(base);
+    const resolved = resolveLocalImage(image);
+    word = basenameToWord(path.basename(resolved, path.extname(resolved)));
+    image = resolved;
   }
 
   const result = await publishOne({
