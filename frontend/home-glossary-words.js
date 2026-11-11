@@ -5,6 +5,8 @@
 (function (global) {
   'use strict';
 
+  global.HOME_GLOSSARY_WOTD_SLUGS = ["commit","discernment","eloquent","epicenter","leafy","palpable","perpetual","precaution","requite","scrape","smitten","tackle","thwart","weathered"];
+
   global.HOME_GLOSSARY_WORDS = [
     { word: "Abandon", pos: "명사", meaning: "버리다, 포기하다", sections: ["04"] },
     { word: "Abate", pos: "명사", meaning: "약해지다, 누그러지다", sections: ["01"] },

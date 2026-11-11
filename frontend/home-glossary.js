@@ -6,12 +6,12 @@
   'use strict';
 
   var SECTION_HREF = {
-    '01': 'index.html#rd-path-01',
-    '02': 'index.html#rd-path-02',
-    '03': 'index.html#rd-path-03',
-    '04': 'index.html#rd-path-04',
-    '05': 'index.html#rd-path-05',
-    '06': 'home-glossary.html'
+    '01': '/#rd-path-01',
+    '02': '/#rd-path-02',
+    '03': '/#rd-path-03',
+    '04': '/#rd-path-04',
+    '05': '/#rd-path-05',
+    '06': '/home-glossary'
   };
 
   var LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
@@ -165,6 +165,15 @@
     setTimeout(function () { URL.revokeObjectURL(url); }, 500);
   }
 
+  function wotdPageHref(word) {
+    var slug = String(word || '').trim().toLowerCase();
+    var set = window.HOME_GLOSSARY_WOTD_SLUGS;
+    if (Array.isArray(set) && set.indexOf(slug) !== -1) {
+      return '/word-of-the-day/' + encodeURIComponent(slug) + '/';
+    }
+    return '';
+  }
+
   function renderWordRow(w) {
     var chips = (w.sections || []).map(function (sec) {
       var href = SECTION_HREF[sec] || '#rd-glossary';
@@ -173,7 +182,13 @@
     return (
       '<li class="rd-gloss-row">' +
         '<div class="rd-gloss-row-main">' +
-          '<span class="rd-gloss-word">' + escapeHtml(w.word) + '</span>' +
+          (function () {
+          var href = wotdPageHref(w.word);
+          if (href) {
+            return '<a class="rd-gloss-word" href="' + href + '">' + escapeHtml(w.word) + '</a>';
+          }
+          return '<span class="rd-gloss-word">' + escapeHtml(w.word) + '</span>';
+        })() +
           (w.pos ? '<span class="rd-gloss-pos">' + escapeHtml(w.pos) + '</span>' : '') +
         '</div>' +
         '<p class="rd-gloss-meaning">' + escapeHtml(w.meaning) + '</p>' +

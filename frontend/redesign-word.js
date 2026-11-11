@@ -5,7 +5,12 @@
 (function (global) {
   'use strict';
 
-  var ASSET_VER = '20261108wotdLean1';
+  var ASSET_VER = '20261111wotd2';
+  var KNOWN_WOTD_LEMMAS = [
+    'commit', 'discernment', 'eloquent', 'epicenter', 'leafy', 'palpable',
+    'perpetual', 'precaution', 'requite', 'scrape', 'smitten', 'tackle',
+    'thwart', 'weathered'
+  ];
   var SPEAKER_SVG =
     '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M15.5 8.5a5 5 0 0 1 0 7"></path></svg>';
   var SPEAKER_FULL_SVG =
@@ -261,6 +266,181 @@
     };
   }
 
+  function cleanListHref(href) {
+    var h = String(href || '').trim();
+    if (!h) return '/word-of-the-day-list?api=prod';
+    if (/^(https?:|mailto:|#)/i.test(h)) return h;
+    h = h.replace(/^\.\//, '').replace(/^(\.\.\/)+/, '');
+    if (h.charAt(0) === '/') h = h.slice(1);
+    h = h.replace(/\.html(?=(\?|#|$))/i, '');
+    return '/' + h;
+  }
+
+  function lemmaHref(word) {
+    var slug = String(word || '').trim().toLowerCase().replace(/\s+/g, '-');
+    if (!slug) return '';
+    if (KNOWN_WOTD_LEMMAS.indexOf(slug) !== -1) {
+      return '/word-of-the-day/' + encodeURIComponent(slug) + '/';
+    }
+    return '';
+  }
+
+  function splitCsvWords(v) {
+    return String(v || '')
+      .split(/[,，、]/)
+      .map(function (x) { return String(x || '').trim(); })
+      .filter(Boolean);
+  }
+
+  function glanceValue(glance, keys) {
+    for (var i = 0; i < glance.length; i += 1) {
+      var k = String(glance[i].k || '');
+      for (var j = 0; j < keys.length; j += 1) {
+        if (k.indexOf(keys[j]) !== -1) return glance[i].v;
+      }
+    }
+    return '';
+  }
+
+  function buildMiniQuizHtml(word, data) {
+    var meaning = (data.pos && data.pos[0] && data.pos[0].meaning) || '';
+    if (!meaning) {
+      var m = glanceValue(data.glance || [], ['뜻', '의미']);
+      if (m) meaning = m;
+    }
+    if (!meaning) return '';
+    var syns = splitCsvWords(glanceValue(data.glance || [], ['비슷한', '유의']));
+    var ants = splitCsvWords(glanceValue(data.glance || [], ['반대', '반의']));
+    var distractors = ants.concat(syns).filter(function (x) {
+      return x && x.toLowerCase() !== String(word || '').toLowerCase();
+    });
+    var pool = distractors.slice();
+    while (pool.length < 3) {
+      pool.push(['무시하다', '반대하다', '늦추다', '숨기다', '약화하다'][pool.length % 5]);
+    }
+    function shuffle(arr) {
+      var a = arr.slice();
+      for (var i = a.length - 1; i > 0; i -= 1) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var t = a[i]; a[i] = a[j]; a[j] = t;
+      }
+      return a;
+    }
+    var q1opts = shuffle([meaning].concat(pool.slice(0, 3))).slice(0, 4);
+    var q2prompt = syns[0] ? ('다음 중 ' + word + '와 뜻이 가까운 말은?') : ('다음 중 ' + word + '의 반대 느낌에 가까운 말은?');
+    var q2answer = syns[0] || ants[0] || pool[0];
+    var q2wrong = (syns[0] ? ants : syns).concat(pool).filter(function (x) {
+      return x && x !== q2answer;
+    });
+    while (q2wrong.length < 3) q2wrong.push(pool[q2wrong.length % pool.length]);
+    var q2opts = shuffle([q2answer].concat(q2wrong.slice(0, 3))).slice(0, 4);
+
+    function optHtml(opts, answer) {
+      return opts.map(function (o) {
+        var ok = o === answer ? '1' : '0';
+        return '<button type="button" class="rd-word-quiz-opt" data-ok="' + ok + '">' + escapeHtml(o) + '</button>';
+      }).join('');
+    }
+
+    return (
+      '<section class="rd-word-section rd-word-mini-quiz" aria-label="미니 퀴즈">' +
+        '<h2 class="rd-word-h2">미니 퀴즈</h2>' +
+        '<div class="rd-word-quiz-card" data-rd-mini-q="1">' +
+          '<p class="rd-word-quiz-q">1. <strong>' + escapeHtml(word) + '</strong>의 뜻으로 알맞은 것은?</p>' +
+          '<div class="rd-word-quiz-opts">' + optHtml(q1opts, meaning) + '</div>' +
+          '<p class="rd-word-quiz-fb" hidden></p>' +
+        '</div>' +
+        '<div class="rd-word-quiz-card" data-rd-mini-q="2">' +
+          '<p class="rd-word-quiz-q">2. ' + escapeHtml(q2prompt) + '</p>' +
+          '<div class="rd-word-quiz-opts">' + optHtml(q2opts, q2answer) + '</div>' +
+          '<p class="rd-word-quiz-fb" hidden></p>' +
+        '</div>' +
+      '</section>'
+    );
+  }
+
+  function buildRelatedHtml(word, data, relatedNews) {
+    var syns = splitCsvWords(glanceValue(data.glance || [], ['비슷한', '유의']));
+    var links = [];
+    syns.slice(0, 4).forEach(function (s) {
+      var href = lemmaHref(s);
+      if (href) links.push({ href: href, label: s, kind: '비슷한 단어' });
+      else links.push({ href: '/?q=' + encodeURIComponent(s), label: s, kind: '검색' });
+    });
+    (relatedNews || []).slice(0, 3).forEach(function (n) {
+      links.push({ href: n.href, label: n.label, kind: '뉴스에서' });
+    });
+    links.push({ href: '/home-glossary', label: '용어집 A–Z', kind: '목차' });
+    links.push({ href: '/word-of-the-day-list?api=prod', label: '단어장 목록', kind: '목록' });
+    if (!links.length) return '';
+    return (
+      '<section class="rd-word-section rd-word-related" aria-label="관련 링크">' +
+        '<h2 class="rd-word-h2">관련 링크</h2>' +
+        '<ul class="rd-word-related-list">' +
+          links.map(function (l) {
+            return (
+              '<li><span class="rd-word-related-kind">' + escapeHtml(l.kind) + '</span> ' +
+              '<a href="' + escapeAttr(l.href) + '">' + escapeHtml(l.label) + '</a></li>'
+            );
+          }).join('') +
+        '</ul>' +
+      '</section>'
+    );
+  }
+
+  function bindMiniQuiz(container) {
+    var cards = container.querySelectorAll('.rd-word-quiz-card');
+    cards.forEach(function (card) {
+      if (card.dataset.bound === '1') return;
+      card.dataset.bound = '1';
+      var fb = card.querySelector('.rd-word-quiz-fb');
+      card.querySelectorAll('.rd-word-quiz-opt').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var ok = btn.getAttribute('data-ok') === '1';
+          card.querySelectorAll('.rd-word-quiz-opt').forEach(function (b) {
+            b.disabled = true;
+            if (b.getAttribute('data-ok') === '1') b.classList.add('is-correct');
+          });
+          if (!ok) btn.classList.add('is-wrong');
+          if (fb) {
+            fb.hidden = false;
+            fb.textContent = ok ? '정답입니다.' : '다시 한 번 본문을 확인해 보세요.';
+            fb.className = 'rd-word-quiz-fb ' + (ok ? 'is-ok' : 'is-no');
+          }
+        });
+      });
+    });
+  }
+
+  function loadRelatedNews(word) {
+    var base = assetBase();
+    return fetch(base + 'site-search-index.json', { cache: 'force-cache' })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (payload) {
+        var list = payload && Array.isArray(payload.words) ? payload.words : [];
+        var q = String(word || '').toLowerCase();
+        if (!q) return [];
+        var hits = [];
+        for (var i = 0; i < list.length; i += 1) {
+          var item = list[i];
+          if (!item || !item.href) continue;
+          if (String(item.source || '') === 'word-of-the-day') continue;
+          var hay = String(item.searchText || item.word || '').toLowerCase();
+          if (hay.indexOf(q) === -1) continue;
+          var href = String(item.href);
+          if (href.charAt(0) !== '/') href = '/' + href.replace(/^\.\//, '');
+          if (href.slice(-1) !== '/' && href.indexOf('?') === -1) href += '/';
+          hits.push({
+            href: href,
+            label: String(item.word || item.label || href).slice(0, 80)
+          });
+          if (hits.length >= 3) break;
+        }
+        return hits;
+      })
+      .catch(function () { return []; });
+  }
+
   function speakText(text, btn) {
     if (!global.speechSynthesis || !text) return;
     try {
@@ -308,9 +488,10 @@
           '<div class="rd-word-footer-links">' +
             '<a href="https://www.youtube.com/@istudyeng">YouTube</a>' +
             '<a href="https://x.com/istudyengli">X</a>' +
-            '<a href="/about.html">사이트 소개</a>' +
-            '<a href="/privacy.html">개인정보처리방침</a>' +
-            '<a href="/terms.html">이용약관</a>' +
+            '<a href="/about">사이트 소개</a>' +
+            '<a href="/privacy">개인정보처리방침</a>' +
+            '<a href="/terms">이용약관</a>' +
+            '<a href="/home-glossary">용어집</a>' +
           '</div>' +
         '</div>' +
         '<div class="rd-word-footer-copy">© 2026 시사영단어 · News English Lab</div>' +
@@ -322,8 +503,11 @@
     options = options || {};
     var cfg = global.BoardListConfig && global.BoardListConfig.get(options.boardKey || 'word-of-the-day');
     var word = wordHead(post);
-    var listHref = (cfg && cfg.breadcrumbParent && cfg.breadcrumbParent.href) || 'word-of-the-day-list.html?api=prod';
-    if (listHref.indexOf('/') !== 0 && listHref.indexOf('http') !== 0) listHref = '/' + listHref;
+    var listHref = cleanListHref(
+      (cfg && cfg.breadcrumbParent && cfg.breadcrumbParent.href) || 'word-of-the-day-list.html?api=prod'
+    );
+    var miniQuizHtml = buildMiniQuizHtml(word, data);
+    var relatedHtml = buildRelatedHtml(word, data, options.relatedNews || []);
 
     var posHtml = data.pos.map(function (p, i) {
       var primary = p.primary || (i === 0 && data.pos.length);
@@ -433,7 +617,7 @@
       '<div class="rd-word-page">' +
         '<div class="rd-word-hero">' +
           '<nav class="rd-word-crumb" aria-label="위치">' +
-            '<a href="/index.html">홈</a><span aria-hidden="true">/</span>' +
+            '<a href="/">홈</a><span aria-hidden="true">/</span>' +
             '<a href="' + escapeAttr(listHref) + '">단어장</a><span aria-hidden="true">/</span>' +
             '<span class="is-current">' + escapeHtml(word) + '</span>' +
           '</nav>' +
@@ -498,6 +682,8 @@
                   '<p class="rd-word-takeaway-text">' + escapeHtml(data.takeaway) + '</p>' +
                 '</div>'
               : '') +
+            miniQuizHtml +
+            '<div id="rd-word-related-host">' + relatedHtml + '</div>' +
             '<div id="rd-word-nav-host">' + navHtml + '</div>' +
           '</div>' +
           '<aside class="rd-word-side">' +
@@ -598,12 +784,20 @@
     /* CSS가 붙은 뒤에만 rd-ready — 구형/unstyled 깜빡임 방지 */
     await ensureCss();
     renderWordPage(container, post, data, options);
+    bindMiniQuiz(container);
     markReady();
 
     ensureScript('site-masthead.js?v=' + ASSET_VER).then(function () {
       if (global.SiteMasthead && typeof global.SiteMasthead.mount === 'function') {
         try { global.SiteMasthead.mount(); } catch (e) { /* ignore */ }
       }
+    });
+
+    loadRelatedNews(wordHead(post)).then(function (news) {
+      if (!news.length) return;
+      var host = container.querySelector('#rd-word-related-host');
+      if (!host) return;
+      host.innerHTML = buildRelatedHtml(wordHead(post), data, news);
     });
 
     if (options.apiBaseUrl && cfg.apiPath) {
