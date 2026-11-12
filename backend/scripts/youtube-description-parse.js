@@ -347,11 +347,12 @@ export function parseYoutubeDescription(video) {
 
   const wordList = words.map((w) => w.expression).filter(Boolean).join(', ');
   const topic = cleanTopicTitle(title) || title;
-  const isSynonym = board === 'english-synonym' || /#연관단어/.test(title + description);
+  /* 보드가 연관단어일 때만 연관단어 양식 — 설명란 해시태그 #연관단어만으로는 뉴스 양식을 덮지 않음 */
+  const isSynonym = board === 'english-synonym';
 
   let metaDescription;
   let intro;
-  if (!hasSource || isSynonym) {
+  if (isSynonym || !hasSource) {
     metaDescription = `${topic} 연관단어${wordList ? `. ${wordList} 등.` : '.'}`.slice(0, 160);
     intro = [`${topic} 연관단어를 정리합니다. *AI 음성과 이미지를 사용했습니다.`];
   } else {
