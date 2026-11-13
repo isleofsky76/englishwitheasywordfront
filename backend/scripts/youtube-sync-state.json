@@ -655,6 +655,42 @@
     "huXLmZrJdps": {
       "at": "2026-11-12T09:24:55.593Z",
       "title": "국제 | 헤지펀드에게 비참했던 한 달에서 얻은 교훈"
+    },
+    "SJCPEFPNV1U": {
+      "at": "2026-11-13T08:21:20.015Z",
+      "title": "한국 | 노래방이 끝이 다가오나?"
+    },
+    "o3ya_qRm3Ag": {
+      "at": "2026-11-13T08:21:20.046Z",
+      "title": "연관단어 | 회식·노래방 감소"
+    },
+    "S_NAAV1HbGg": {
+      "at": "2026-11-13T08:21:20.169Z",
+      "title": "연관단어 | 시장·인파·혼잡"
+    },
+    "dH_J7f4pxmA": {
+      "at": "2026-11-13T08:21:20.293Z",
+      "title": "한국 | 남대문 스카프 아저씨 II"
+    },
+    "BidYaret8nQ": {
+      "at": "2026-11-13T08:21:20.329Z",
+      "title": "한국 | 남대문 스카프 아저씨"
+    },
+    "LxY6fFfCNyg": {
+      "at": "2026-11-13T08:21:20.396Z",
+      "title": "산업 | 엔비디아 위기 01 - 젠슨 황 CEO 교체 움직임"
+    },
+    "PbqMu9pdams": {
+      "at": "2026-11-13T08:21:20.481Z",
+      "title": "산업 | 엔비디아 위기 02 - 젠슨 황을 둘러싼 중국 스파이 의혹"
+    },
+    "xIP0g734PMQ": {
+      "at": "2026-11-13T08:21:20.563Z",
+      "title": "국제 | 스페인에서 주택 문제에 대한 분노가 거세지면서 수백만 명의 국민이 14년 만에 처음으로 총파업에 돌입했습니다."
+    },
+    "eaBt0OKj6RU": {
+      "at": "2026-11-13T08:21:20.654Z",
+      "title": "연관단어 | 책임·직무·태만"
     }
   },
   "uploadedVideoIds": {
@@ -1317,7 +1353,43 @@
     "huXLmZrJdps": {
       "at": "2026-11-12T09:28:00.720Z",
       "board": "news-voca"
+    },
+    "SJCPEFPNV1U": {
+      "at": "2026-11-13T08:21:41.149Z",
+      "board": "korea-news"
+    },
+    "o3ya_qRm3Ag": {
+      "at": "2026-11-13T08:21:50.312Z",
+      "board": "english-synonym"
+    },
+    "S_NAAV1HbGg": {
+      "at": "2026-11-13T08:21:58.548Z",
+      "board": "english-synonym"
+    },
+    "dH_J7f4pxmA": {
+      "at": "2026-11-13T08:22:06.162Z",
+      "board": "korea-news"
+    },
+    "BidYaret8nQ": {
+      "at": "2026-11-13T08:22:13.192Z",
+      "board": "korea-news"
+    },
+    "LxY6fFfCNyg": {
+      "at": "2026-11-13T08:22:18.425Z",
+      "board": "industry-news"
+    },
+    "PbqMu9pdams": {
+      "at": "2026-11-13T08:22:21.299Z",
+      "board": "industry-news"
+    },
+    "xIP0g734PMQ": {
+      "at": "2026-11-13T08:22:24.960Z",
+      "board": "news-voca"
+    },
+    "eaBt0OKj6RU": {
+      "at": "2026-11-13T08:22:29.426Z",
+      "board": "english-synonym"
     }
   },
-  "updatedAt": "2026-11-12T09:30:14.319Z"
+  "updatedAt": "2026-11-13T08:22:29.427Z"
 }
