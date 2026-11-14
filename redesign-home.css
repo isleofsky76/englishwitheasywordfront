@@ -431,6 +431,38 @@
   border-radius: 4px;
   background: var(--surface);
 }
+.rd-phrase-card--thumb {
+  padding: 0;
+  overflow: hidden;
+  gap: 0;
+}
+.rd-phrase-card-img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  background: #E3DDD0;
+  overflow: hidden;
+}
+.rd-phrase-card-img.is-empty {
+  min-height: 120px;
+}
+.rd-phrase-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.rd-phrase-card--thumb .ko,
+.rd-phrase-card--thumb .en {
+  padding-left: 16px;
+  padding-right: 16px;
+}
+.rd-phrase-card--thumb .ko {
+  padding-top: 12px;
+}
+.rd-phrase-card--thumb .en {
+  padding-bottom: 16px;
+}
 .rd-phrase-card .ko {
   font-size: 15px;
   color: var(--ink-muted);
@@ -986,6 +1018,24 @@ a.rd-free-book-cover:focus-visible {
   .rd-phrase-card {
     padding: 12px 14px;
     gap: 4px;
+  }
+  .rd-phrase-card--thumb {
+    padding: 0;
+    gap: 0;
+  }
+  .rd-phrase-card-img {
+    aspect-ratio: 16 / 10;
+  }
+  .rd-phrase-card--thumb .ko,
+  .rd-phrase-card--thumb .en {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+  .rd-phrase-card--thumb .ko {
+    padding-top: 8px;
+  }
+  .rd-phrase-card--thumb .en {
+    padding-bottom: 12px;
   }
   .rd-phrase-card .ko {
     font-size: 13px;

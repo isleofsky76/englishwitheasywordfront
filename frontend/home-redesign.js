@@ -397,6 +397,20 @@
       .replace(/\bIm\b/g, "I'm");
   }
 
+  /** popular-voca 섬네일 — 본문 img → /resources/{slug_}.jpg */
+  function resolvePhraseThumb(entry) {
+    var fromMsg = extractImage(entry && entry.message);
+    if (fromMsg) return fromMsg;
+    var slug = String((entry && entry.slug) || '')
+      .trim()
+      .toLowerCase()
+      .replace(/^\/+|\/+$/g, '')
+      .replace(/[^a-z0-9_-]+/g, '-')
+      .replace(/-/g, '_');
+    if (slug) return '/resources/' + slug + '.jpg';
+    return '';
+  }
+
   function renderPhrases(entries) {
     var root = document.getElementById('rd-phrase-grid');
     if (!root) return;
@@ -407,8 +421,18 @@
       var origIdx = row.index;
       var ko = String(entry.title || '').replace(/\s*영어로\??\s*$/i, '').trim() || '표현';
       var en = entry.slug ? slugToPhraseEn(entry.slug) : ko;
+      var img = resolvePhraseThumb(entry);
+      var thumb = img
+        ? (
+          '<span class="rd-phrase-card-img">' +
+            '<img src="' + esc(img) + '" alt="' + esc(en) + '" loading="lazy" decoding="async" ' +
+              'onerror="this.onerror=null;this.closest(\'.rd-phrase-card-img\').classList.add(\'is-empty\');this.remove();">' +
+          '</span>'
+        )
+        : '<span class="rd-phrase-card-img is-empty"></span>';
       return (
-        '<a class="rd-phrase-card" href="' + esc(boardHref('easy-voca', entry, origIdx)) + '">' +
+        '<a class="rd-phrase-card rd-phrase-card--thumb" href="' + esc(boardHref('easy-voca', entry, origIdx)) + '">' +
+          thumb +
           '<span class="ko">' + esc(ko) + '</span>' +
           '<span class="en">' + esc(en) + '</span>' +
         '</a>'
