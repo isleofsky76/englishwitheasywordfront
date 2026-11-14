@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-13T19:27:31.727Z",
+  "updatedAt": "2026-11-14T15:03:40.359Z",
   "channelId": "UC4LbF7X56QIHL3Oejt8kuyw",
   "handle": "@istudyeng",
   "source": "https://www.youtube.com/feeds/videos.xml?channel_id=UC4LbF7X56QIHL3Oejt8kuyw",
@@ -8,6 +8,97 @@
   "todayOnly": false,
   "categorizedOnly": true,
   "items": [
+    {
+      "videoId": "4VroAA68trQ",
+      "category": "연관단어",
+      "label": "연관단어",
+      "href": "english-synonym-list.html",
+      "title": "책, 서적, 출판",
+      "rawTitle": "연관단어 | 책, 서적, 출판",
+      "publishedAt": "2026-11-14T12:00:35+00:00",
+      "publishedKst": "2026-11-14",
+      "thumbnail": "https://i.ytimg.com/vi/4VroAA68trQ/hqdefault.jpg",
+      "url": "https://www.youtube.com/shorts/4VroAA68trQ",
+      "watchUrl": "https://www.youtube.com/watch?v=4VroAA68trQ"
+    },
+    {
+      "videoId": "1HFCvhO0on0",
+      "category": "국제",
+      "label": "국제",
+      "href": "news-voca-list.html",
+      "title": "베이비붐 세대에게 경제 호황기는 끝났습니다.",
+      "rawTitle": "핵심어휘 | 베이비붐 세대에게 경제 호황기는 끝났습니다.",
+      "publishedAt": "2026-11-14T12:00:28+00:00",
+      "publishedKst": "2026-11-14",
+      "thumbnail": "https://i.ytimg.com/vi/1HFCvhO0on0/hqdefault.jpg",
+      "url": "https://www.youtube.com/shorts/1HFCvhO0on0",
+      "watchUrl": "https://www.youtube.com/watch?v=1HFCvhO0on0"
+    },
+    {
+      "videoId": "fnkhxNRio68",
+      "category": "국제",
+      "label": "국제",
+      "href": "news-voca-list.html",
+      "title": "베이비붐 세대에게 경제 호황기는 끝났습니다.",
+      "rawTitle": "국제 | 베이비붐 세대에게 경제 호황기는 끝났습니다.",
+      "publishedAt": "2026-11-14T12:00:04+00:00",
+      "publishedKst": "2026-11-14",
+      "thumbnail": "https://i.ytimg.com/vi/fnkhxNRio68/hqdefault.jpg",
+      "url": "https://www.youtube.com/shorts/fnkhxNRio68",
+      "watchUrl": "https://www.youtube.com/watch?v=fnkhxNRio68"
+    },
+    {
+      "videoId": "_OeKRM-hdhg",
+      "category": "연관단어",
+      "label": "연관단어",
+      "href": "english-synonym-list.html",
+      "title": "고령층, 부의 이동",
+      "rawTitle": "연관단어 | 고령층, 부의 이동",
+      "publishedAt": "2026-11-14T03:00:44+00:00",
+      "publishedKst": "2026-11-14",
+      "thumbnail": "https://i.ytimg.com/vi/_OeKRM-hdhg/hqdefault.jpg",
+      "url": "https://www.youtube.com/shorts/_OeKRM-hdhg",
+      "watchUrl": "https://www.youtube.com/watch?v=_OeKRM-hdhg"
+    },
+    {
+      "videoId": "Mtz6CnjE8As",
+      "category": "미국",
+      "label": "미국",
+      "href": "us-news-list.html",
+      "title": "미 전역 항공기 이륙 중단",
+      "rawTitle": "미국 | 미 전역 항공기 이륙 중단",
+      "publishedAt": "2026-11-14T01:00:39+00:00",
+      "publishedKst": "2026-11-14",
+      "thumbnail": "https://i.ytimg.com/vi/Mtz6CnjE8As/hqdefault.jpg",
+      "url": "https://www.youtube.com/shorts/Mtz6CnjE8As",
+      "watchUrl": "https://www.youtube.com/watch?v=Mtz6CnjE8As"
+    },
+    {
+      "videoId": "Olp59mi70G0",
+      "category": "국제",
+      "label": "국제",
+      "href": "news-voca-list.html",
+      "title": "미 전역 항공기 이륙중단",
+      "rawTitle": "핵심어휘 | 미 전역 항공기 이륙중단",
+      "publishedAt": "2026-11-14T01:00:33+00:00",
+      "publishedKst": "2026-11-14",
+      "thumbnail": "https://i.ytimg.com/vi/Olp59mi70G0/hqdefault.jpg",
+      "url": "https://www.youtube.com/shorts/Olp59mi70G0",
+      "watchUrl": "https://www.youtube.com/watch?v=Olp59mi70G0"
+    },
+    {
+      "videoId": "Qlim699OiD8",
+      "category": "연관단어",
+      "label": "연관단어",
+      "href": "english-synonym-list.html",
+      "title": "노후화, 구식, 낙후",
+      "rawTitle": "연관단어 | 노후화, 구식, 낙후",
+      "publishedAt": "2026-11-14T01:00:28+00:00",
+      "publishedKst": "2026-11-14",
+      "thumbnail": "https://i.ytimg.com/vi/Qlim699OiD8/hqdefault.jpg",
+      "url": "https://www.youtube.com/shorts/Qlim699OiD8",
+      "watchUrl": "https://www.youtube.com/watch?v=Qlim699OiD8"
+    },
     {
       "videoId": "_9gsUAN1SZs",
       "category": "산업",
@@ -72,19 +163,6 @@
       "thumbnail": "https://i.ytimg.com/vi/o3ya_qRm3Ag/hqdefault.jpg",
       "url": "https://www.youtube.com/shorts/o3ya_qRm3Ag",
       "watchUrl": "https://www.youtube.com/watch?v=o3ya_qRm3Ag"
-    },
-    {
-      "videoId": "S_NAAV1HbGg",
-      "category": "연관단어",
-      "label": "연관단어",
-      "href": "english-synonym-list.html",
-      "title": "시장·인파·혼잡",
-      "rawTitle": "연관단어 | 시장·인파·혼잡",
-      "publishedAt": "2026-11-13T01:49:07+00:00",
-      "publishedKst": "2026-11-13",
-      "thumbnail": "https://i.ytimg.com/vi/S_NAAV1HbGg/hqdefault.jpg",
-      "url": "https://www.youtube.com/shorts/S_NAAV1HbGg",
-      "watchUrl": "https://www.youtube.com/watch?v=S_NAAV1HbGg"
     }
   ]
 }
