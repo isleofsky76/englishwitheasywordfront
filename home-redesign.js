@@ -397,47 +397,42 @@
       .replace(/\bIm\b/g, "I'm");
   }
 
-  /** popular-voca 섬네일 — 본문 img → /resources/{slug_}.jpg */
+  /** popular-voca 섬네일 — 본문에 실제 img가 있을 때만 (파일 없는 slug 추정 금지) */
   function resolvePhraseThumb(entry) {
-    var fromMsg = extractImage(entry && entry.message);
-    if (fromMsg) return fromMsg;
-    var slug = String((entry && entry.slug) || '')
-      .trim()
-      .toLowerCase()
-      .replace(/^\/+|\/+$/g, '')
-      .replace(/[^a-z0-9_-]+/g, '-')
-      .replace(/-/g, '_');
-    if (slug) return '/resources/' + slug + '.jpg';
-    return '';
+    return extractImage(entry && entry.message) || '';
+  }
+
+  function phraseCardHtml(row) {
+    var entry = row.entry;
+    var origIdx = row.index;
+    var ko = String(entry.title || '').replace(/\s*영어로\??\s*$/i, '').trim() || '표현';
+    var en = entry.slug ? slugToPhraseEn(entry.slug) : ko;
+    var img = row.img || resolvePhraseThumb(entry);
+    if (!img) return '';
+    return (
+      '<a class="rd-phrase-card rd-phrase-card--thumb" href="' + esc(boardHref('easy-voca', entry, origIdx)) + '">' +
+        '<span class="rd-phrase-card-img">' +
+          '<img src="' + esc(img) + '" alt="' + esc(en) + '" loading="lazy" decoding="async" ' +
+            'onerror="this.closest(\'.rd-phrase-card\').remove();">' +
+        '</span>' +
+        '<span class="ko">' + esc(ko) + '</span>' +
+        '<span class="en">' + esc(en) + '</span>' +
+      '</a>'
+    );
   }
 
   function renderPhrases(entries) {
     var root = document.getElementById('rd-phrase-grid');
     if (!root) return;
-    /* 방문마다 랜덤 N개 — WORD OF THE DAY와 동일 */
-    var list = randomIndexed(entries, 5);
-    root.innerHTML = list.map(function (row) {
-      var entry = row.entry;
-      var origIdx = row.index;
-      var ko = String(entry.title || '').replace(/\s*영어로\??\s*$/i, '').trim() || '표현';
-      var en = entry.slug ? slugToPhraseEn(entry.slug) : ko;
+    var n = 5;
+    /* 본문에 이미지가 있는 글만 — 없으면 홈에 미리 보이지 않음 */
+    var withImg = [];
+    (entries || []).forEach(function (entry, index) {
       var img = resolvePhraseThumb(entry);
-      var thumb = img
-        ? (
-          '<span class="rd-phrase-card-img">' +
-            '<img src="' + esc(img) + '" alt="' + esc(en) + '" loading="lazy" decoding="async" ' +
-              'onerror="this.onerror=null;this.closest(\'.rd-phrase-card-img\').classList.add(\'is-empty\');this.remove();">' +
-          '</span>'
-        )
-        : '<span class="rd-phrase-card-img is-empty"></span>';
-      return (
-        '<a class="rd-phrase-card rd-phrase-card--thumb" href="' + esc(boardHref('easy-voca', entry, origIdx)) + '">' +
-          thumb +
-          '<span class="ko">' + esc(ko) + '</span>' +
-          '<span class="en">' + esc(en) + '</span>' +
-        '</a>'
-      );
-    }).join('');
+      if (img) withImg.push({ entry: entry, index: index, img: img });
+    });
+    var list = shuffleInPlace(withImg).slice(0, n);
+    root.innerHTML = list.map(phraseCardHtml).filter(Boolean).join('');
   }
 
   function expressionsApiBase() {
