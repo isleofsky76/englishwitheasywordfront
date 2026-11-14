@@ -400,10 +400,11 @@
   function renderPhrases(entries) {
     var root = document.getElementById('rd-phrase-grid');
     if (!root) return;
-    var list = reverseSlice(entries, 5);
-    root.innerHTML = list.map(function (entry, i) {
-      var total = entries.length;
-      var origIdx = total - 1 - i;
+    /* 방문마다 랜덤 N개 — WORD OF THE DAY와 동일 */
+    var list = randomIndexed(entries, 5);
+    root.innerHTML = list.map(function (row) {
+      var entry = row.entry;
+      var origIdx = row.index;
       var ko = String(entry.title || '').replace(/\s*영어로\??\s*$/i, '').trim() || '표현';
       var en = entry.slug ? slugToPhraseEn(entry.slug) : ko;
       return (
