@@ -28,7 +28,7 @@ export const BOARD_SEO = {
     ],
     extraJs: [
       { file: 'board-comments.js', version: '20261108pw25' },
-      { file: 'redesign-article.js', version: '20261111date1' },
+      { file: 'redesign-article.js', version: '20261112footer1' },
     ],
   },
   'cooking-voca': {
@@ -42,7 +42,7 @@ export const BOARD_SEO = {
       { file: 'cooking-voca.css', version: '20260616b' },
       { file: 'redesign-article.css', version: '20261104syn2' },
     ],
-    extraJs: [{ file: 'redesign-article.js', version: '20261111date1' }],
+    extraJs: [{ file: 'redesign-article.js', version: '20261112footer1' }],
   },
   'culture-voca': {
     label: 'Culture Voca',
@@ -55,7 +55,7 @@ export const BOARD_SEO = {
       { file: 'culture-voca.css', version: '20260617' },
       { file: 'redesign-article.css', version: '20261104syn2' },
     ],
-    extraJs: [{ file: 'redesign-article.js', version: '20261111date1' }],
+    extraJs: [{ file: 'redesign-article.js', version: '20261112footer1' }],
   },
   'defense-news': {
     label: '국방뉴스',
@@ -145,7 +145,7 @@ export const BOARD_SEO = {
     jsVersion: '20261111tts3',
     listHtml: 'industry-news-list.html',
     extraCss: [{ file: 'redesign-article.css', version: '20261104syn2' }],
-    extraJs: [{ file: 'redesign-article.js', version: '20261111date1' }],
+    extraJs: [{ file: 'redesign-article.js', version: '20261112footer1' }],
   },
   'ai-news': {
     label: '인공지능뉴스',
@@ -207,7 +207,7 @@ export const BOARD_SEO = {
       { file: 'news-voca.css', version: '20260926barun' },
       { file: 'redesign-article.css', version: '20261104syn2' },
     ],
-    extraJs: [{ file: 'redesign-article.js', version: '20261111date1' }],
+    extraJs: [{ file: 'redesign-article.js', version: '20261112footer1' }],
   },
   'english-opinions': {
     label: '오피니언',
@@ -249,12 +249,17 @@ export const BOARD_SEO = {
     cssFile: 'page30_viewpost_wordofday.css',
     cssVersion: '20261020pad1',
     jsFile: 'page30_viewpost_wordofday.js',
-    jsVersion: '20261031fouc1',
+    jsVersion: '20261112cmt1',
     listHtml: 'word-of-the-day-list.html',
     articleLayout: 'word-detail',
     extraCss: [
-      { file: 'redesign-word.css', version: '20261112compact1' },
+      { file: 'redesign-word.css', version: '20261112cmt1' },
       { file: 'site-masthead.css', version: '20261101endef3' },
+      { file: 'board-comments.css', version: '20261108adminPw1' },
+      { file: 'site-footer.css', version: '20261112dark2' },
+    ],
+    extraJs: [
+      { file: 'board-comments.js', version: '20261108pw25' },
     ],
   },
   'photo-english': {
@@ -568,8 +573,8 @@ ${head}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../../page30-api-config.js?v=20260721"></script>
     <script src="../../site-masthead.js?v=20261111abs1"></script>
-    <script src="../../site-footer.js?v=20261112dark1"></script>
-    <script src="../../nav-home-menu.js?v=20261111abs1"></script>
+    <script src="../../site-footer.js?v=20261112dark2"></script>
+    <script src="../../nav-home-menu.js?v=20261112footer1"></script>
     <script>
       /* ko: 명사·동사 등 품사별 뜻을 모두 인정 (하나만 맞아도 O) */
       window.VOCAB_QUIZ_TRACK_WORDS =
@@ -612,7 +617,7 @@ ${(board.extraCss || []).map((c) => `    <link rel="stylesheet" href="../../${c.
     <link rel="stylesheet" href="../../redesign-tokens.css?v=20261020rd27">
     <link rel="stylesheet" href="../../site-masthead.css?v=20261108wx1">
     <link rel="stylesheet" href="../../redesign-article.css?v=20261104syn2">
-    <link rel="preload" href="../../redesign-article.js?v=20261111abs1" as="script">
+    <link rel="preload" href="../../redesign-article.js?v=20261115tts1" as="script">
     <style id="rd-fouc-guard">
       /* SEO 구형 본문이 redesign 전에 깜빡이지 않도록 (!important 금지: 키프레임 fallback이 무시됨) */
       body[data-nv-board]:not(.rd-ready) #post-container {
@@ -672,7 +677,8 @@ ${buildStaticPostMainHtml(config, boardPath)}
     <script src="../../viewpost-rd-ready.js?v=20261020rd24"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../../site-masthead.js?v=20261111abs1"></script>
-    <script src="../../nav-home-menu.js?v=20261111abs1"></script>
+    <script src="../../site-footer.js?v=20261112dark2"></script>
+    <script src="../../nav-home-menu.js?v=20261112footer1"></script>
 ${(board.extraJs || []).map((j) => `    <script src="../../${j.file}?v=${j.version}"></script>`).join('\n')}
     <script src="../../${board.jsFile}?v=${board.jsVersion}"></script>
 </body>

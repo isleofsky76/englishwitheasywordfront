@@ -5,8 +5,9 @@
 (function (global) {
   'use strict';
 
-  var ASSET_VER = '20261111abs1';
+  var ASSET_VER = '20261112footer1';
   var QUIZ_TRACK_VER = '20261109quiz3';
+  var SITE_FOOTER_VER = '20261112dark2';
   /* news-voca.js 등이 구버전 redesign을 덮어쓰지 않도록 */
   global.__RD_ARTICLE_WORD_QUIZ = true;
   global.__RD_ARTICLE_TTS3 = true;
@@ -1071,6 +1072,8 @@
         i += 1;
         u.lang = 'en-US';
         u.rate = 0.92;
+        u.volume = 1;
+        u.pitch = 1;
         try {
           var voices = global.speechSynthesis.getVoices() || [];
           var en =
@@ -1083,11 +1086,20 @@
           global.setTimeout(playNext, 420);
         };
         u.onerror = function () {
-          if (my === token) playNext();
+          if (my === token) global.setTimeout(playNext, 80);
         };
-        global.speechSynthesis.speak(u);
+        /* Chrome: cancel() 직후 speak는 묵음 — 짧게 기다린 뒤 speak + resume */
+        global.setTimeout(function () {
+          if (my !== token) return;
+          try {
+            global.speechSynthesis.speak(u);
+            if (global.speechSynthesis.paused) global.speechSynthesis.resume();
+          } catch (e3) {
+            if (my === token) playNext();
+          }
+        }, 80);
       };
-      playNext();
+      global.setTimeout(playNext, 80);
     });
   }
 
@@ -1786,6 +1798,7 @@
       mountNewsArticleComments(post, options.boardKey);
     }
 
+    ensureSiteFooter();
     markArticleReady();
     stripQuickReview();
     setTimeout(stripQuickReview, 0);
@@ -1800,6 +1813,7 @@
   function applyRedesignChrome(boardKey) {
     document.body.classList.add('rd-article', 'rd-article--header-only');
     if (boardKey) document.body.setAttribute('data-rd-board', boardKey);
+    ensureSiteFooter();
   }
 
   /**
@@ -1885,6 +1899,30 @@
     link.rel = 'stylesheet';
     link.href = href;
     document.head.appendChild(link);
+  }
+
+  /** 어떤 보드 트리로 들어와도 공통 검은 푸터 강제 */
+  function ensureSiteFooter() {
+    var base = redesignAssetBase() || assetBase();
+    loadRedesignCss(base + 'site-footer.css?v=' + SITE_FOOTER_VER);
+    if (window.__eesSiteFooterApi && typeof window.__eesSiteFooterApi.inject === 'function') {
+      try { window.__eesSiteFooterApi.inject(); } catch (e) { /* ignore */ }
+      return;
+    }
+    var existing = document.querySelector('script[src*="site-footer.js"]');
+    if (existing) {
+      var src = existing.getAttribute('src') || '';
+      if (src.indexOf(SITE_FOOTER_VER) === -1) {
+        try { existing.parentNode && existing.parentNode.removeChild(existing); } catch (e2) { /* ignore */ }
+        window.__eesSiteFooterLoaded = false;
+        window.__eesSiteFooterApi = null;
+      } else {
+        return;
+      }
+    }
+    var s = document.createElement('script');
+    s.src = base + 'site-footer.js?v=' + SITE_FOOTER_VER;
+    document.head.appendChild(s);
   }
 
   function mountNewsArticleComments(post, boardKey) {

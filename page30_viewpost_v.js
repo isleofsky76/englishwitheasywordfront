@@ -331,11 +331,20 @@ function vvAttachPlayAll(container) {
                 setTimeout(playNext, 420);
             };
             u.onerror = () => {
-                if (container._vvAllToken === my) playNext();
+                if (container._vvAllToken === my) setTimeout(playNext, 80);
             };
-            speechSynthesis.speak(u);
+            /* Chrome: cancel() 직후 speak 묵음 방지 */
+            setTimeout(() => {
+                if (container._vvAllToken !== my) return;
+                try {
+                    speechSynthesis.speak(u);
+                    if (speechSynthesis.paused) speechSynthesis.resume();
+                } catch (_) {
+                    if (container._vvAllToken === my) playNext();
+                }
+            }, 80);
         };
-        playNext();
+        setTimeout(playNext, 80);
     });
 }
 
