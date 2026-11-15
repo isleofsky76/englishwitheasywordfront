@@ -1,0 +1,22 @@
+[
+  {
+    "word": "lap",
+    "image": "lap.png",
+    "meaning": "찰랑거리다, (물·파도가) 가볍게 치다",
+    "meaningExtra": "파도나 물이 부드럽게 부딪치거나 넘칠 때",
+    "examples": [
+      {
+        "en": "The waves lapped around our feet.",
+        "ko": "파도가 우리 발 주위로 찰랑거렸다."
+      },
+      {
+        "en": "The waves lapped gently against the shore.",
+        "ko": "파도가 해안에 부드럽게 밀려와 찰랑거렸다."
+      },
+      {
+        "en": "The water lapped over the edge of the pool.",
+        "ko": "물이 수영장 가장자리 위로 찰랑거리며 넘쳤다."
+      }
+    ]
+  }
+]
