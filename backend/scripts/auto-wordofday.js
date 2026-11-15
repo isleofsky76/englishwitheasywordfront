@@ -396,7 +396,7 @@ Return JSON with exactly these keys:
 }
 Rules:
 - collocations: exactly 2–3 items
-- examples: 1–2 items (natural, not textbooky)
+- examples: exactly 3 items (use preferred examples if provided; otherwise write 3 natural ones)
 - synonyms/antonyms: bare English words only
 - compares[].ko: short gloss of that English word itself (e.g. letter → 일반적인 편지). Never write meta phrases like '~와의 차이', '차이점', '비교'
 - Do not use HTML tags
@@ -528,9 +528,12 @@ async function publishOne({
   const generated = await generateEntryContent(pickedWord, { meaning, meaningExtra, examples });
   if (examples.length) {
     generated.examples = examples.slice(0, 3);
+  } else if (Array.isArray(generated.examples)) {
+    generated.examples = generated.examples.slice(0, 3);
   }
   if (meaning) generated.meaning = meaning;
-  if (meaningExtra) generated.meaningExtra = meaningExtra;
+  /* 부제(meaningExtra)는 사용자가 준 경우만 — GPT 덧붙임 제거 */
+  generated.meaningExtra = meaningExtra || '';
   const word = generated.word || pickedWord;
   const slug = toSlug(word);
   const imageSrc = imageSrcFromFilename(filename);
