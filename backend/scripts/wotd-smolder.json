@@ -1,0 +1,22 @@
+[
+  {
+    "word": "smolder",
+    "image": "smolder.png",
+    "meaning": "불꽃 없이 서서히 타다; 속에서 들끓다",
+    "meaningExtra": "",
+    "examples": [
+      {
+        "en": "The bonfire was still smouldering the next day.",
+        "ko": "모닥불은 다음 날에도 여전히 불꽃 없이 서서히 타고 있었다."
+      },
+      {
+        "en": "His eyes smouldered with anger.",
+        "ko": "그의 두 눈에는 분노가 이글거렸다."
+      },
+      {
+        "en": "The dispute is still smouldering, five years after the negotiations began.",
+        "ko": "협상이 시작된 지 5년이 지났지만, 그 분쟁은 여전히 수면 아래에서 계속되고 있다."
+      }
+    ]
+  }
+]
