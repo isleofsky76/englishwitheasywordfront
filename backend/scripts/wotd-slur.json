@@ -1,0 +1,22 @@
+[
+  {
+    "word": "slur",
+    "image": "slur.png",
+    "meaning": "어눌하게 말하다; 어눌한 발음; (비방·중상하는) 모욕",
+    "meaningExtra": "",
+    "examples": [
+      {
+        "en": "She had drunk too much and her speech was slurred.",
+        "ko": "그녀는 술을 너무 많이 마셔서 말이 어눌했다."
+      },
+      {
+        "en": "The drug affected her vision and made her speak with a slur.",
+        "ko": "그 약은 그녀의 시력에 영향을 주었고, 말도 어눌하게 만들었다."
+      },
+      {
+        "en": "Her letter contained several outrageous slurs against/on her former colleagues.",
+        "ko": "그녀의 편지에는 전 동료들에 대한 터무니없는 비방·모욕이 여러 번 담겨 있었다."
+      }
+    ]
+  }
+]
