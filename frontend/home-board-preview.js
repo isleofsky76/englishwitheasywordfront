@@ -307,9 +307,40 @@
   }
 
   function fetchBoardEntries(apiPath) {
-    return fetchCombined().then(function () {
-      return boardEntriesCache[apiPath] || [];
-    });
+    var path = String(apiPath || '');
+    if (boardEntriesCache[path]) {
+      return Promise.resolve(boardEntriesCache[path]);
+    }
+    /* 홈 섹션 1개만 필요할 때 전체 보드 prefetch 하지 않음 */
+    var board = getPreviewBoards(new URLSearchParams(window.location.search).get('api'))
+      .find(function (b) { return b.path === path; });
+    if (!board) {
+      return fetchCombined().then(function () {
+        return boardEntriesCache[path] || [];
+      });
+    }
+    var apiBase = getApiBase();
+    return fetch(apiBase + board.path)
+      .then(function (r) {
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        return r.json();
+      })
+      .then(function (data) {
+        var entries = parseEntries(data);
+        boardEntriesCache[path] = entries;
+        return entries;
+      })
+      .catch(function () {
+        return fetchStaticFeedEntries(board)
+          .then(function (entries) {
+            boardEntriesCache[path] = entries;
+            return entries;
+          })
+          .catch(function () {
+            boardEntriesCache[path] = [];
+            return [];
+          });
+      });
   }
 
   function buildSkeletonListHtml(count, listClass) {
@@ -679,7 +710,16 @@
     search: search
   };
 
-  if (document.getElementById('home-previews')) {
+  /*
+   * 홈에 #home-previews 가 있어도 hidden 이면 미리 25보드 API를 치지 않음.
+   * (검색·loadBest/Recent 시에만 fetchCombined)
+   */
+  var homePreviewsEl = document.getElementById('home-previews');
+  if (
+    homePreviewsEl &&
+    !homePreviewsEl.hasAttribute('hidden') &&
+    homePreviewsEl.getAttribute('aria-hidden') !== 'true'
+  ) {
     fetchCombined();
   }
 
