@@ -599,11 +599,13 @@ body.rd-syn-hide-meaning .rd-expr--synonym.is-meaning-shown .rd-expr-meaning {
 
 .rd-article-action-tools > .board-comments-root,
 .rd-article-action-tools > .rd-word-comments-host {
-  display: contents;
+  display: contents !important;
 }
 
-.rd-article-action-tools .os-cmt-bar {
-  display: contents;
+.rd-article-action-tools .os-cmt-bar,
+.rd-article-action-tools .board-comments-root .os-cmt-bar {
+  display: contents !important;
+  width: auto !important;
 }
 
 .rd-article-action-tools .os-cmt-panel {
