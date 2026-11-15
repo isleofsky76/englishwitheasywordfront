@@ -125,6 +125,7 @@
         오늘 댓글 <strong id="db-stat-today">0</strong> · 참여 학습자 <strong id="db-stat-learners">0</strong><br>
         단어 클릭 시 문장 섹션 검색으로 이동합니다. 금지어·차단 댓글은 집계에서 제외됩니다.
       </p>
+      <div class="vp-engage-bar rd-article-action-tools" data-vp-engage-bar id="db-engage" aria-label="댓글·조회·추천"></div>
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
@@ -132,6 +133,22 @@
     <script src="site-masthead.js?v=20261111abs1"></script>
     <script src="site-footer.js?v=20261112dark2"></script>
     <script src="nav-home-menu.js?v=20261112footer1"></script>
+    <link rel="stylesheet" href="viewpost-like.css?v=20261115engage4">
+    <link rel="stylesheet" href="board-comments.css?v=20261115engage4">
+    <script src="viewpost-like.js?v=20261115engage4"></script>
     <script src="dashboard.js?v=20261106ew1"></script>
+    <script>
+      if (typeof initViewpostLike === 'function') {
+        initViewpostLike({
+          entryId: '',
+          likes: 0,
+          views: 0,
+          board: 'dashboard',
+          commentsBoard: 'dashboard',
+          contentKey: 'dashboard',
+          title: '학습 대시보드'
+        });
+      }
+    </script>
 </body>
 </html>

@@ -146,6 +146,7 @@
     <footer class="dir-footer">
       <p>혹시 오류가 있으면 <a href="mailto:everydayalittlehelp@gmail.com">everydayalittlehelp@gmail.com</a>으로 알려주시면 감사하겠습니다.</p>
     </footer>
+    <div class="vp-engage-bar rd-article-action-tools" data-vp-engage-bar id="dir-engage" aria-label="댓글·조회·추천"></div>
   </main>
 
   <a href="#dir-menu" class="dir-back-top" id="dir-back-top" aria-label="필터·맨 위로 이동">처음으로</a>
@@ -154,6 +155,22 @@
   <script src="site-masthead.js?v=20261111abs1"></script>
   <script src="site-footer.js?v=20261112dark2"></script>
   <script src="nav-home-menu.js?v=20261112footer1"></script>
+  <link rel="stylesheet" href="viewpost-like.css?v=20261115engage4">
+  <link rel="stylesheet" href="board-comments.css?v=20261115engage4">
+  <script src="viewpost-like.js?v=20261115engage4"></script>
   <script src="english-directory.js?v=20261102back1"></script>
+  <script>
+    if (typeof initViewpostLike === 'function') {
+      initViewpostLike({
+        entryId: '',
+        likes: 0,
+        views: 0,
+        board: 'english-directory',
+        commentsBoard: 'english-directory',
+        contentKey: 'english-directory',
+        title: '학습사이트'
+      });
+    }
+  </script>
 </body>
 </html>

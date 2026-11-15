@@ -262,11 +262,15 @@ async function loadPost() {
 
     if (typeof initViewpostLike === 'function') {
       initViewpostLike({
-        entryId: post._id,
-        likes: post.likes,
-        apiBaseUrl: API_BASE_URL,
-        board: 'pros-cons'
-      });
+                entryId: post._id,
+                likes: post.likes,
+                views: post.views,
+                apiBaseUrl: API_BASE_URL,
+                board: 'pros-cons',
+                commentsBoard: (document.body && document.body.dataset.nvBoard) || 'pros-cons',
+                contentKey: post.slug || post._id,
+                title: post.title || ''
+            });
     }
   } catch (error) {
     console.error('Error while loading post:', error);

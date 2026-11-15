@@ -5,7 +5,7 @@
 (function (global) {
   'use strict';
 
-  var ASSET_VER = '20261115engage2';
+  var ASSET_VER = '20261115engage4';
   var QUIZ_TRACK_VER = '20261109quiz3';
   var SITE_FOOTER_VER = '20261112dark2';
   /* news-voca.js 등이 구버전 redesign을 덮어쓰지 않도록 */
@@ -1659,8 +1659,8 @@
     }
 
     /* CTA — 유튜브로 듣기 · 단어퀴즈 → 댓글·글쓰기·저장·다운로드 (뉴스·연관단어) */
-    var newsComments = newsBoard;
-    var showComments = options.enableComments === true || newsComments || synonymMode;
+    /* 모든 redesign 글: 댓글·글쓰기 + 조회·추천 */
+    var showComments = options.enableComments !== false;
     var showSaveTools = synonymMode || studyMode;
     var showWordQuiz = (newsBoard || synonymMode || studyMode) && cards.length >= 2;
     var actions = '<div class="rd-article-actions">';
@@ -1943,7 +1943,7 @@
     var board = String(boardKey || '').trim();
     if (!contentKey || !board) return;
     var base = redesignAssetBase();
-    loadRedesignCss(base + 'board-comments.css?v=20261115engage2');
+    loadRedesignCss(base + 'board-comments.css?v=20261115engage4');
     var commentsSrc = base + 'board-comments.js?v=20261108pw25';
     var ready = window.BoardComments
       ? Promise.resolve()

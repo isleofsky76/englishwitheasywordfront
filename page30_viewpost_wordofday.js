@@ -564,8 +564,12 @@ async function loadPost() {
             initViewpostLike({
                 entryId: post._id,
                 likes: post.likes,
+                views: post.views,
                 apiBaseUrl: API_BASE_URL,
-                board: 'wordofday'
+                board: 'wordofday',
+                commentsBoard: (document.body && document.body.dataset.nvBoard) || 'wordofday',
+                contentKey: post.slug || post._id,
+                title: post.title || ''
             });
         }
     } catch (error) {

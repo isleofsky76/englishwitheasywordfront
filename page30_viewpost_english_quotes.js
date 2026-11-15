@@ -485,8 +485,12 @@ async function loadPost() {
             initViewpostLike({
                 entryId: post._id,
                 likes: post.likes,
+                views: post.views,
                 apiBaseUrl: API_BASE_URL,
-                board: 'english-quotes'
+                board: 'english-quotes',
+                commentsBoard: (document.body && document.body.dataset.nvBoard) || 'english-quotes',
+                contentKey: post.slug || post._id,
+                title: post.title || ''
             });
         }
 

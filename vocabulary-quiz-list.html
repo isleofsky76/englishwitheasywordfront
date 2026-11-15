@@ -31,6 +31,7 @@
   <main class="guestbook-container" id="main-content">
     <h1 class="visually-hidden">시사 어휘 퀴즈 목록</h1>
     <div class="guestbook-list" id="guestbook-list"></div>
+    <div class="vp-engage-bar rd-article-action-tools" data-vp-engage-bar id="quiz-list-engage" aria-label="댓글·조회·추천"></div>
   </main>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="page30-api-config.js?v=20260721"></script>
@@ -41,5 +42,21 @@
   <script src="nav-home-menu.js?v=20261112footer1"></script>
   <script src="guestbook-list-table.js?v=20261108quiz1"></script>
   <script src="vocabulary-quiz-list.js?v=20261020quiz1"></script>
+  <link rel="stylesheet" href="viewpost-like.css?v=20261115engage4">
+  <link rel="stylesheet" href="board-comments.css?v=20261115engage4">
+  <script src="viewpost-like.js?v=20261115engage4"></script>
+  <script>
+    if (typeof initViewpostLike === 'function') {
+      initViewpostLike({
+        entryId: '',
+        likes: 0,
+        views: 0,
+        board: 'vocabulary-quiz',
+        commentsBoard: 'vocabulary-quiz',
+        contentKey: 'vocabulary-quiz-list',
+        title: '시사 어휘 퀴즈'
+      });
+    }
+  </script>
 </body>
 </html>

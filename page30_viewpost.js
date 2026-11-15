@@ -633,8 +633,12 @@ async function loadPost() {
             initViewpostLike({
                 entryId: post._id,
                 likes: post.likes,
+                views: post.views,
                 apiBaseUrl: API_BASE_URL,
-                board: 'guestbook'
+                board: 'guestbook',
+                commentsBoard: (document.body && document.body.dataset.nvBoard) || 'guestbook',
+                contentKey: post.slug || post._id,
+                title: post.title || ''
             });
         }
 

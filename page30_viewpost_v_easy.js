@@ -507,8 +507,12 @@ async function loadPost() {
             initViewpostLike({
                 entryId: post._id,
                 likes: post.likes,
+                views: post.views,
                 apiBaseUrl: API_BASE_URL,
-                board: 'easy-voca'
+                board: 'easy-voca',
+                commentsBoard: 'popular-voca',
+                contentKey: post.slug || post._id,
+                title: post.title || ''
             });
         }
 
@@ -543,7 +547,7 @@ function rdLoadScript(src) {
     try {
         if (!window.markViewpostReady) await rdLoadScript(base + 'viewpost-rd-ready.js?v=20261020rd24');
         if (!window.BoardListConfig) await rdLoadScript(base + 'board-list-config.js?v=20261020rd24');
-        if (!window.mountRedesignArticle) await rdLoadScript(base + 'redesign-article.js?v=20261020rd24');
+        if (!window.mountRedesignArticle) await rdLoadScript(base + 'redesign-article.js?v=20261115engage4');
     } catch (e) { console.warn(e); }
     loadPost();
 })();

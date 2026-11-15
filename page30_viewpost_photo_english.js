@@ -963,8 +963,12 @@ async function loadPost() {
             initViewpostLike({
                 entryId: post._id,
                 likes: post.likes,
+                views: post.views,
                 apiBaseUrl: API_BASE_URL,
-                board: 'photo-english'
+                board: 'photo-english',
+                commentsBoard: (document.body && document.body.dataset.nvBoard) || 'photo-english',
+                contentKey: post.slug || post._id,
+                title: post.title || ''
             });
         }
     } catch (error) {

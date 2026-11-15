@@ -721,8 +721,12 @@ async function loadPost() {
             initViewpostLike({
                 entryId: post._id,
                 likes: post.likes,
+                views: post.views,
                 apiBaseUrl: API_BASE_URL,
-                board: 'ranking-news'
+                board: 'ranking-news',
+                commentsBoard: (document.body && document.body.dataset.nvBoard) || 'ranking-news',
+                contentKey: post.slug || post._id,
+                title: post.title || ''
             });
         }
 

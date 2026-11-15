@@ -689,8 +689,12 @@ async function loadPost() {
             initViewpostLike({
                 entryId: post._id,
                 likes: post.likes,
+                views: post.views,
                 apiBaseUrl: API_BASE_URL,
-                board: 'situational-english'
+                board: 'situational-english',
+                commentsBoard: (document.body && document.body.dataset.nvBoard) || 'situational-english',
+                contentKey: post.slug || post._id,
+                title: post.title || ''
             });
         }
 

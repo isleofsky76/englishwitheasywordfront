@@ -763,6 +763,7 @@
     </div>
       <p class="rd-gloss-empty" data-rd-gloss-empty hidden>검색어에 맞는 단어가 없습니다.</p>
     </section>
+    <div class="vp-engage-bar rd-article-action-tools" data-vp-engage-bar id="gloss-engage" aria-label="댓글·조회·추천"></div>
   </main>
 
   <nav class="rd-gloss-rail" id="rd-gloss-rail" data-rd-gloss-rail aria-label="알파벳으로 이동" hidden></nav>
@@ -780,7 +781,23 @@
   <script src="nav-home-menu.js?v=20261112footer1"></script>
   <script src="site-masthead.js?v=20261111abs1"></script>
   <script src="site-footer.js?v=20261112dark2"></script>
+  <link rel="stylesheet" href="viewpost-like.css?v=20261115engage4">
+  <link rel="stylesheet" href="board-comments.css?v=20261115engage4">
+  <script src="viewpost-like.js?v=20261115engage4"></script>
   <script src="home-glossary-words.js?v=20261111ssr1"></script>
   <script src="home-glossary.js?v=20261111ssr1"></script>
+  <script>
+    if (typeof initViewpostLike === 'function') {
+      initViewpostLike({
+        entryId: '',
+        likes: 0,
+        views: 0,
+        board: 'home-glossary',
+        commentsBoard: 'home-glossary',
+        contentKey: 'home-glossary',
+        title: '단어 한눈에 보기'
+      });
+    }
+  </script>
 </body>
 </html>

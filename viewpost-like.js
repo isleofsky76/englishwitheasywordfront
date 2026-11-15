@@ -1,8 +1,13 @@
 /**
- * 글 상세 페이지 — 추천(좋아요) 박스
- * initViewpostLike({ entryId, likes, apiBaseUrl, board })
+ * 글 상세 — 댓글 · 글쓰기 · 조회 · 추천
+ * initViewpostLike({ entryId, likes, views, apiBaseUrl, board, commentsBoard, contentKey, title })
  */
 (function () {
+    var ENGAGE_VER = '20261115engage4';
+    var COMMENTS_JS = 'board-comments.js?v=20261108pw25';
+    var COMMENTS_CSS = 'board-comments.css?v=' + ENGAGE_VER;
+    var ARTICLE_CSS = 'redesign-article.css?v=' + ENGAGE_VER;
+
     function isValidObjectId(id) {
         return /^[a-f0-9]{24}$/i.test(String(id || ''));
     }
@@ -11,8 +16,41 @@
         return localStorage.getItem('gb-like-' + entryId) === '1';
     }
 
+    function assetBase() {
+        var likeScript = document.querySelector('script[src*="viewpost-like"]');
+        if (likeScript && likeScript.src) {
+            return likeScript.src.replace(/[^/]+$/, '');
+        }
+        return '/';
+    }
+
+    function ensureCss(href) {
+        var file = String(href || '').split('?')[0].replace(/^.*\//, '');
+        if (!file) return;
+        if (document.querySelector('link[href*="' + file + '"]')) return;
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = href;
+        document.head.appendChild(link);
+    }
+
+    function loadScript(src) {
+        return new Promise(function (resolve, reject) {
+            var name = src.replace(/^.*\//, '').split('?')[0];
+            if (document.querySelector('script[src*="' + name + '"]')) {
+                resolve();
+                return;
+            }
+            var s = document.createElement('script');
+            s.src = src;
+            s.onload = function () { resolve(); };
+            s.onerror = function () { reject(new Error(src)); };
+            document.head.appendChild(s);
+        });
+    }
+
     function resolveRelatedScriptSrc() {
-        const likeScript = document.querySelector('script[src*="viewpost-like"]');
+        var likeScript = document.querySelector('script[src*="viewpost-like"]');
         if (likeScript && likeScript.src) {
             return likeScript.src.replace(/viewpost-like[^/]*\.js(\?.*)?$/, 'viewpost-related.js?v=20261019norel');
         }
@@ -20,8 +58,8 @@
     }
 
     function loadRelatedPosts(options) {
-        const board = String((options && options.board) || '').trim();
-        const seoBoard = document.body && document.body.dataset.nvBoard;
+        var board = String((options && options.board) || '').trim();
+        var seoBoard = document.body && document.body.dataset.nvBoard;
         if (!board && !seoBoard) return;
 
         function run() {
@@ -43,7 +81,7 @@
             return;
         }
 
-        const script = document.createElement('script');
+        var script = document.createElement('script');
         script.src = resolveRelatedScriptSrc();
         script.dataset.viewpostRelated = '1';
         script.onload = run;
@@ -53,21 +91,120 @@
         document.body.appendChild(script);
     }
 
-    function mountLikeBox() {
-        /* 우선: 댓글·글쓰기·저장 아래 engagement host */
-        const engagement = document.getElementById('rd-engagement-host');
-        const postContainer = document.getElementById('post-container');
-        const host = engagement || postContainer;
+    function readViews(options) {
+        var n = parseInt(options && options.views, 10);
+        if (Number.isFinite(n) && n >= 0) return n;
+        var meta = document.querySelector('#post-meta .post-meta-views-num, [data-rd-views]');
+        if (meta) {
+            var m = parseInt(meta.textContent, 10);
+            if (Number.isFinite(m) && m >= 0) return m;
+        }
+        return 0;
+    }
+
+    function resolveContentKey(options) {
+        var key = String((options && options.contentKey) || '').trim();
+        if (key) return key;
+        if (document.body && document.body.dataset.nvSlug) {
+            return String(document.body.dataset.nvSlug).trim();
+        }
+        if (document.body && document.body.dataset.vpEngageKey) {
+            return String(document.body.dataset.vpEngageKey).trim();
+        }
+        var entryId = String((options && options.entryId) || '').trim();
+        return entryId;
+    }
+
+    function resolveCommentsBoard(options) {
+        var b = String((options && (options.commentsBoard || options.boardKey)) || '').trim();
+        if (b) return b;
+        if (document.body && document.body.dataset.nvBoard) {
+            return String(document.body.dataset.nvBoard).trim();
+        }
+        if (document.body && document.body.dataset.vpEngageBoard) {
+            return String(document.body.dataset.vpEngageBoard).trim();
+        }
+        return String((options && options.board) || '').trim();
+    }
+
+    function findMountParent() {
+        return (
+            document.getElementById('post-container') ||
+            document.getElementById('post-content') ||
+            document.querySelector('[data-vp-engage-host]') ||
+            document.querySelector('main') ||
+            document.body
+        );
+    }
+
+    /** 없으면 본문 맨 끝에 댓글·조회·추천 줄 생성 */
+    function ensureEngagementShell(options) {
+        ensureCss(assetBase() + ARTICLE_CSS);
+        ensureCss(assetBase() + COMMENTS_CSS);
+
+        var engagement = document.getElementById('rd-engagement-host');
+        if (engagement) {
+            var viewsEl = engagement.querySelector('[data-rd-views]');
+            if (viewsEl && !viewsEl.textContent.trim()) {
+                viewsEl.textContent = String(readViews(options));
+            }
+            return engagement;
+        }
+
+        var tools = document.querySelector('[data-vp-engage-bar]');
+        if (!tools) {
+            var parent = findMountParent();
+            if (!parent) return null;
+            tools = document.createElement('div');
+            tools.className = 'rd-article-action-tools vp-engage-bar';
+            tools.setAttribute('data-vp-engage-bar', '');
+            parent.appendChild(tools);
+        } else {
+            tools.classList.add('rd-article-action-tools', 'vp-engage-bar');
+        }
+
+        var commentsHost =
+            tools.querySelector('[data-board-comments-root]') ||
+            document.getElementById('vp-comments-host');
+        if (!commentsHost) {
+            commentsHost = document.createElement('div');
+            commentsHost.id = 'vp-comments-host';
+            commentsHost.className = 'board-comments-root';
+            commentsHost.setAttribute('data-board-comments-root', '');
+            tools.appendChild(commentsHost);
+        }
+
+        engagement = document.createElement('div');
+        engagement.className = 'rd-article-stats';
+        engagement.id = 'rd-engagement-host';
+        engagement.setAttribute('aria-label', '조회와 추천');
+        engagement.innerHTML =
+            '<span class="rd-article-stat">조회 <strong class="rd-stat-views" data-rd-views>' +
+            readViews(options) +
+            '</strong></span>' +
+            '<div class="viewpost-like-row rd-article-stats-like">' +
+            '<div id="viewpost-like-box" class="viewpost-like-box" aria-live="polite"></div>' +
+            '</div>' +
+            '<span class="post-meta-likes-num" hidden>' +
+            (parseInt(options && options.likes, 10) || 0) +
+            '</span>';
+
+        tools.appendChild(engagement);
+        return engagement;
+    }
+
+    function mountLikeBox(engagement) {
+        var host = engagement || document.getElementById('rd-engagement-host');
         if (!host) return null;
 
-        let row = host.querySelector('.viewpost-like-row');
+        var row = host.querySelector('.viewpost-like-row');
         if (!row) {
             row = document.createElement('div');
-            row.className = 'viewpost-like-row';
+            row.className = 'viewpost-like-row rd-article-stats-like';
             host.appendChild(row);
         }
 
-        let container = row.querySelector('#viewpost-like-box');
+        var container = row.querySelector('#viewpost-like-box');
         if (!container) {
             container = document.createElement('div');
             container.id = 'viewpost-like-box';
@@ -76,25 +213,72 @@
             row.appendChild(container);
         }
 
-        const external = document.body.querySelector(':scope > .text-center #viewpost-like-box, :scope > #viewpost-like-box');
+        var external = document.body.querySelector(
+            ':scope > .text-center #viewpost-like-box, :scope > #viewpost-like-box'
+        );
         if (external && external !== container) {
-            external.closest('.text-center')?.remove();
+            var wrap = external.closest('.text-center');
+            if (wrap) wrap.remove();
+            else external.remove();
         }
 
         return container;
     }
 
+    function mountComments(options) {
+        var commentsBoard = resolveCommentsBoard(options);
+        var contentKey = resolveContentKey(options);
+        if (!commentsBoard || !contentKey) return;
+
+        var root =
+            document.getElementById('vp-comments-host') ||
+            document.getElementById('rd-word-comments-host') ||
+            document.querySelector(
+              '.rd-article-action-tools [data-board-comments-root], .exam-action-tools [data-board-comments-root], [data-board-comments-root]'
+            );
+        if (!root) return;
+        if (root.getAttribute('data-vp-comments-mounted') === '1') return;
+        if (root.querySelector('.os-cmt-bar, .os-cmt-toggle')) return;
+
+        var base = assetBase();
+        ensureCss(base + COMMENTS_CSS);
+        var ready = window.BoardComments
+            ? Promise.resolve()
+            : loadScript(base + COMMENTS_JS);
+
+        ready
+            .then(function () {
+                if (!window.BoardComments || typeof window.BoardComments.mount !== 'function') return null;
+                root.setAttribute('data-vp-comments-mounted', '1');
+                return window.BoardComments.mount({
+                    board: commentsBoard,
+                    contentKey: contentKey,
+                    root: root,
+                    title: (options && options.title) || document.title || contentKey
+                });
+            })
+            .catch(function (err) {
+                console.warn('board comments mount skipped', err);
+            });
+    }
+
     window.initViewpostLike = function (options) {
-        const container = mountLikeBox();
+        options = options || {};
+        var engagement = ensureEngagementShell(options);
+        mountComments(options);
+
+        var container = mountLikeBox(engagement);
         if (!container) return;
 
-        options = options || {};
-        const entryId = String(options.entryId || '');
-        const apiBase = options.apiBaseUrl || '';
-        const board = options.board || 'guestbook';
-        const canLike = isValidObjectId(entryId);
-        const liked = canLike && hasUserLiked(entryId);
-        let count = parseInt(options.likes, 10) || 0;
+        var entryId = String(options.entryId || '');
+        var apiBase = options.apiBaseUrl || '';
+        var board = options.board || 'guestbook';
+        var canLike = isValidObjectId(entryId);
+        var liked = canLike && hasUserLiked(entryId);
+        var count = parseInt(options.likes, 10) || 0;
+
+        var viewsEl = document.querySelector('#rd-engagement-host [data-rd-views]');
+        if (viewsEl) viewsEl.textContent = String(readViews(options));
 
         container.innerHTML =
             '<button type="button" class="vp-like-btn' + (liked ? ' is-active' : '') + '"' +
@@ -106,8 +290,8 @@
 
         loadRelatedPosts({ apiBaseUrl: apiBase, board: board });
 
-        const btn = container.querySelector('.vp-like-btn');
-        const countEl = container.querySelector('.vp-like-count');
+        var btn = container.querySelector('.vp-like-btn');
+        var countEl = container.querySelector('.vp-like-count');
         if (!btn || !canLike || !apiBase) return;
 
         function applyLikedState(likes) {
@@ -137,7 +321,7 @@
                     if (!result.ok) {
                         throw new Error((result.data && result.data.error) || 'Like request failed');
                     }
-                    const likes = result.data.likes != null ? result.data.likes : count + 1;
+                    var likes = result.data.likes != null ? result.data.likes : count + 1;
                     applyLikedState(likes);
                 })
                 .catch(function (err) {
@@ -147,4 +331,26 @@
                 });
         });
     };
+
+    /** 정적 페이지: body[data-vp-engage-page] 가 있으면 맨 아래 자동 장착 */
+    function bootStaticEngage() {
+        var body = document.body;
+        if (!body || body.getAttribute('data-vp-engage-page') !== '1') return;
+        if (document.getElementById('rd-engagement-host')) return;
+        window.initViewpostLike({
+            entryId: '',
+            likes: 0,
+            views: 0,
+            board: body.dataset.vpEngageBoard || 'page',
+            commentsBoard: body.dataset.vpEngageBoard || 'page',
+            contentKey: body.dataset.vpEngageKey || (location.pathname.replace(/\/+$/, '') || '/'),
+            title: document.title
+        });
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', bootStaticEngage);
+    } else {
+        bootStaticEngage();
+    }
 })();

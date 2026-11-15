@@ -910,10 +910,12 @@
   async function mountQuizComments() {
     var host = ensureCommentsHost();
     var base = assetBase();
-    var ver = "20261109cmt1";
+    var ver = "20261115engage4";
     try {
       await ensureStylesheet(base + "board-comments.css?v=" + ver);
-      await loadScriptOnce(base + "board-comments.js?v=" + ver);
+      await ensureStylesheet(base + "viewpost-like.css?v=" + ver);
+      await loadScriptOnce(base + "board-comments.js?v=20261108pw25");
+      await loadScriptOnce(base + "viewpost-like.js?v=" + ver);
     } catch (e) {
       console.warn("[vocabulary-quiz-track] board-comments load failed", e);
       return;
@@ -921,16 +923,42 @@
     if (!window.BoardComments || typeof window.BoardComments.mount !== "function") return;
     var titleEl = document.querySelector(".vq-title");
     var title = titleEl ? titleEl.textContent.trim() : "시사 어휘 퀴즈";
+    var key = quizContentKey();
     try {
       await window.BoardComments.mount({
         board: "vocabulary-quiz",
-        contentKey: quizContentKey(),
+        contentKey: key,
         title: title,
         root: host,
       });
       placeCommentButtonsInActions(host);
     } catch (err) {
       console.warn("[vocabulary-quiz-track] comments mount failed", err);
+    }
+    var actions = document.getElementById("vq-actions") || document.querySelector(".vq-actions");
+    if (actions && !document.getElementById("rd-engagement-host")) {
+      var stats = document.createElement("div");
+      stats.className = "rd-article-stats";
+      stats.id = "rd-engagement-host";
+      stats.setAttribute("aria-label", "조회와 추천");
+      stats.innerHTML =
+        '<span class="rd-article-stat">조회 <strong class="rd-stat-views" data-rd-views>0</strong></span>' +
+        '<div class="viewpost-like-row rd-article-stats-like">' +
+        '<div id="viewpost-like-box" class="viewpost-like-box" aria-live="polite"></div>' +
+        "</div>";
+      actions.appendChild(stats);
+      actions.classList.add("rd-article-action-tools");
+    }
+    if (typeof window.initViewpostLike === "function") {
+      window.initViewpostLike({
+        entryId: "",
+        likes: 0,
+        views: 0,
+        board: "vocabulary-quiz",
+        commentsBoard: "vocabulary-quiz",
+        contentKey: key,
+        title: title,
+      });
     }
   }
 
