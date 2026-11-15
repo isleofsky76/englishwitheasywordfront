@@ -1,0 +1,22 @@
+[
+  {
+    "word": "sober",
+    "image": "sober.png",
+    "meaning": "술에 취하지 않은, 맑은 정신의",
+    "meaningExtra": "",
+    "examples": [
+      {
+        "en": "I hadn't drunk a thing - I was completely sober.",
+        "ko": "나는 아무것도 마시지 않았다. 완전히 맑은 정신이었다."
+      },
+      {
+        "en": "He remained sober throughout the party.",
+        "ko": "그는 파티 내내 술을 마시지 않고 맑은 정신을 유지했다."
+      },
+      {
+        "en": "I promised him that I'd stay sober tonight.",
+        "ko": "나는 오늘 밤 술을 마시지 않겠다고 그에게 약속했다."
+      }
+    ]
+  }
+]

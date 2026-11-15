@@ -2538,7 +2538,7 @@
   <url>
     <loc>https://englisheasystudy.com/word-of-the-day/slur/</loc>
     <lastmod>2026-11-15</lastmod>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://englisheasystudy.com/word-of-the-day/smitten/</loc>
@@ -2554,6 +2554,11 @@
     <loc>https://englisheasystudy.com/word-of-the-day/sneak/</loc>
     <lastmod>2026-04-22</lastmod>
     <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://englisheasystudy.com/word-of-the-day/sober/</loc>
+    <lastmod>2026-11-15</lastmod>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://englisheasystudy.com/word-of-the-day/specious/</loc>
