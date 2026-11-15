@@ -106,9 +106,9 @@ function generateStaticHtml(data, htmlContent) {
         </article>
     </main>
     <script src="../../page30-api-config.js"></script>
-    <script src="../../viewpost-seo.js?v=20260622a"></script>
+    <script src="../../viewpost-seo.js?v=20261111date1"></script>
     <script src="../../viewpost-meta.js?v=20260627"></script>
-    <script src="../../viewpost-like.js?v=20260906gray"></script>
+    <script src="../../viewpost-like.js?v=20261115engage1"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../../nav-home-menu.js?v=20260720a"></script>
     <script src="../../page30_viewpost_wordofday.js?v=20260908tts"></script>

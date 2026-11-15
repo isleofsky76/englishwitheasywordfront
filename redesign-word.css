@@ -671,8 +671,28 @@ body.rd-word main#post-container {
   font-size: 15px;
 }
 
+.rd-word-comments-host {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 8px 24px 0;
+  box-sizing: border-box;
+}
+
+.rd-word-comments-host .board-comments-root,
+.rd-word-comments-host[data-board-comments-root] {
+  width: 100%;
+}
+
+/* 댓글·글쓰기 아래 — 조회 · 추천 */
+.rd-word-stats.rd-article-stats {
+  max-width: var(--max-width);
+  margin: 12px auto 0;
+  padding: 0 24px;
+  box-sizing: border-box;
+}
+
 .rd-word-spacer {
-  height: 80px;
+  height: 48px;
 }
 
 .rd-word-footer {

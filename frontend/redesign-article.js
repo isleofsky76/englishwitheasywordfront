@@ -5,7 +5,7 @@
 (function (global) {
   'use strict';
 
-  var ASSET_VER = '20261112footer1';
+  var ASSET_VER = '20261115engage1';
   var QUIZ_TRACK_VER = '20261109quiz3';
   var SITE_FOOTER_VER = '20261112dark2';
   /* news-voca.js 등이 구버전 redesign을 덮어쓰지 않도록 */
@@ -1691,6 +1691,22 @@
       }
       actions += '</div>';
     }
+    /* 댓글·글쓰기·저장 바로 아래 — 조회 · 추천 */
+    var viewsN = parseInt(post && post.views, 10);
+    if (!Number.isFinite(viewsN) || viewsN < 0) viewsN = 0;
+    var likesN = parseInt(post && post.likes, 10);
+    if (!Number.isFinite(likesN) || likesN < 0) likesN = 0;
+    actions +=
+      '<div class="rd-article-stats" id="rd-engagement-host" aria-label="조회와 추천">' +
+        '<span class="rd-article-stat">조회 <strong class="rd-stat-views" data-rd-views>' +
+          viewsN +
+        '</strong></span>' +
+        '<span class="rd-article-stat-sep" aria-hidden="true">·</span>' +
+        '<div class="viewpost-like-row rd-article-stats-like">' +
+          '<div id="viewpost-like-box" class="viewpost-like-box" aria-live="polite"></div>' +
+        '</div>' +
+        '<span class="post-meta-likes-num" hidden>' + likesN + '</span>' +
+      '</div>';
     if (showWordQuiz) {
       actions += '<div id="rd-word-quiz" class="rd-word-quiz rd-quiz-track" hidden></div>';
     }

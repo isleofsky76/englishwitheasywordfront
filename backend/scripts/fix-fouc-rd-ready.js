@@ -69,8 +69,8 @@ for (const b of boards) {
     const o = t;
     if (!t.includes('viewpost-rd-ready')) {
       t = t.replace(
-        '<script src="../../viewpost-like.js?v=20260906gray"></script>',
-        '<script src="../../viewpost-like.js?v=20260906gray"></script>\n    <script src="../../viewpost-rd-ready.js?v=20261020rd24"></script>'
+        '<script src="../../viewpost-like.js?v=20261115engage1"></script>',
+        '<script src="../../viewpost-like.js?v=20261115engage1"></script>\n    <script src="../../viewpost-rd-ready.js?v=20261020rd24"></script>'
       );
     }
     t = t.replaceAll(

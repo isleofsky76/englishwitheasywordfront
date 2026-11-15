@@ -5,11 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>시사 영단어 · Literature</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Noto+Sans+KR:wght@400;500;700;800&family=Black+Han+Sans&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Noto+Sans+KR:wght@400;500;700;800&family=Black+Han+Sans&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" crossorigin="anonymous">
-<link rel="stylesheet" href="20_literature_v0.1.css?v=20261111exsafe">
+<link rel="stylesheet" href="20_literature_v0.1.css?v=20261112exserif">
 </head>
-<body>
+<body data-bg-theme="linen">
 <div class="viewport">
   <main class="stage paper" id="stage">
     <div class="margin-line"></div>
@@ -61,8 +61,78 @@
   </main>
 </div>
 
-<button class="autoplay-btn" id="autoplay" type="button">auto play</button>
+<div class="stage-controls" id="stage-controls">
+  <button id="bgm-btn" type="button" class="bgm-btn is-on" aria-pressed="true" title="With You - Everet Almond on (클릭=끔)">BGM on</button>
+  <label id="bgm-start-wrap" class="bgm-start-wrap" title="BGM 시작 시간(초) — With You - Everet Almond">
+    <span class="bgm-start-caption">start</span>
+    <input id="bgm-start-sec" class="bgm-start-sec" type="number" min="0" step="1" value="20" inputmode="numeric" aria-label="BGM 시작 초">
+    <span id="bgm-start-label" class="bgm-start-label">0:20</span>
+  </label>
+  <div class="bg-palette" id="bg-palette">
+    <button class="bg-palette-btn" id="bg-palette-btn" type="button" aria-expanded="false" aria-controls="bg-palette-panel" title="배경 선택" aria-label="배경 선택">
+      <svg class="bg-palette-icon" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+        <path fill="currentColor" d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.9 0 1.5-.7 1.5-1.5 0-.4-.1-.7-.3-1-.2-.3-.2-.6-.2-.9 0-.8.7-1.5 1.5-1.5H16c3.3 0 6-2.7 6-6 0-4.4-4.5-8.1-10-8.1zm-5.5 11c-.8 0-1.5-.7-1.5-1.5S5.7 10 6.5 10s1.5.7 1.5 1.5S7.3 13 6.5 13zm3-4c-.8 0-1.5-.7-1.5-1.5S8.7 6 9.5 6s1.5.7 1.5 1.5S10.3 9 9.5 9zm5 0c-.8 0-1.5-.7-1.5-1.5S13.7 6 14.5 6s1.5.7 1.5 1.5S15.3 9 14.5 9zm3 4c-.8 0-1.5-.7-1.5-1.5S16.7 10 17.5 10s1.5.7 1.5 1.5-.7 1.5-1.5 1.5z"/>
+      </svg>
+    </button>
+    <div class="bg-palette-panel" id="bg-palette-panel" hidden role="listbox" aria-label="배경 테마">
+      <button type="button" class="bg-swatch is-active" data-bg="linen" role="option" aria-selected="true" title="linen — 고급 리넨 (기본)">
+        <span class="bg-swatch-preview bg-swatch-preview--linen"></span>
+        <span class="bg-swatch-label">linen</span>
+      </button>
+      <button type="button" class="bg-swatch" data-bg="verdant_linen" role="option" aria-selected="false" title="verdant_linen — 선명한 그린 리넨">
+        <span class="bg-swatch-preview bg-swatch-preview--verdant_linen"></span>
+        <span class="bg-swatch-label">verdant_linen</span>
+      </button>
+      <button type="button" class="bg-swatch" data-bg="moss_silk" role="option" aria-selected="false" title="moss_silk — 따뜻한 모스 실크">
+        <span class="bg-swatch-preview bg-swatch-preview--moss_silk"></span>
+        <span class="bg-swatch-label">moss_silk</span>
+      </button>
+      <button type="button" class="bg-swatch" data-bg="jade_veil" role="option" aria-selected="false" title="jade_veil — 쿨 제이드 베일">
+        <span class="bg-swatch-preview bg-swatch-preview--jade_veil"></span>
+        <span class="bg-swatch-label">jade_veil</span>
+      </button>
+      <button type="button" class="bg-swatch" data-bg="velvet_glow" role="option" aria-selected="false" title="velvet_glow — 첫 화면·썸네일">
+        <span class="bg-swatch-preview bg-swatch-preview--velvet_glow"></span>
+        <span class="bg-swatch-label">velvet_glow</span>
+      </button>
+      <button type="button" class="bg-swatch" data-bg="chalkboard" role="option" aria-selected="false" title="chalkboard — 문법·비교 설명">
+        <span class="bg-swatch-preview bg-swatch-preview--chalkboard"></span>
+        <span class="bg-swatch-label">chalkboard</span>
+      </button>
+      <button type="button" class="bg-swatch" data-bg="forest_wallpaper" role="option" aria-selected="false" title="forest_wallpaper — 딥 포레스트 벽지">
+        <span class="bg-swatch-preview bg-swatch-preview--forest_wallpaper"></span>
+        <span class="bg-swatch-label">forest</span>
+      </button>
+      <button type="button" class="bg-swatch" data-bg="forest2" role="option" aria-selected="false" title="forest2 — 매끄러운 포레스트 (질감 없음)">
+        <span class="bg-swatch-preview bg-swatch-preview--forest2"></span>
+        <span class="bg-swatch-label">forest2</span>
+      </button>
+      <button type="button" class="bg-swatch" data-bg="forest2_bright" role="option" aria-selected="false" title="forest2_bright — forest2보다 한 단계 밝음 #2A4F3C">
+        <span class="bg-swatch-preview bg-swatch-preview--forest2_bright"></span>
+        <span class="bg-swatch-label">forest2+</span>
+      </button>
+      <button type="button" class="bg-swatch" data-bg="custom" role="option" aria-selected="false" title="custom — 직접 조정">
+        <span class="bg-swatch-preview bg-swatch-preview--custom" id="bg-custom-preview"></span>
+        <span class="bg-swatch-label">custom</span>
+      </button>
+      <div class="bg-custom-controls" id="bg-custom-controls">
+        <div class="bg-custom-title">주위 색 조정</div>
+        <label class="bg-custom-row" for="bg-custom-color">
+          <span>색</span>
+          <input type="color" id="bg-custom-color" value="#2A4F3C" aria-label="배경 색">
+          <input type="text" id="bg-custom-hex" value="#2A4F3C" maxlength="7" spellcheck="false" aria-label="배경 HEX">
+        </label>
+        <label class="bg-custom-row" for="bg-custom-brightness">
+          <span>밝기</span>
+          <input type="range" id="bg-custom-brightness" min="-30" max="40" value="0" step="1" aria-label="배경 밝기">
+          <output id="bg-custom-brightness-val" for="bg-custom-brightness">0</output>
+        </label>
+      </div>
+    </div>
+  </div>
+  <button class="autoplay-btn" id="autoplay" type="button">auto play</button>
+</div>
 
-<script src="20_literature_v0.1.js?v=20261111yt15"></script>
+<script src="20_literature_v0.1.js?v=20261112beside"></script>
 </body>
 </html>

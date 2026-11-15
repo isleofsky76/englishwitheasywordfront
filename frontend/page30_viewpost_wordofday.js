@@ -560,7 +560,7 @@ async function loadPost() {
             attachWordOfDayWebTTS();
         }
 
-        if (typeof initViewpostLike === 'function' && !document.body.classList.contains('rd-word')) {
+        if (typeof initViewpostLike === 'function') {
             initViewpostLike({
                 entryId: post._id,
                 likes: post.likes,
@@ -596,7 +596,7 @@ function rdLoadScript(src) {
     try {
         if (!window.markViewpostReady) await rdLoadScript(base + 'viewpost-rd-ready.js?v=20261020rd30');
         if (!window.BoardListConfig) await rdLoadScript(base + 'board-list-config.js?v=20261020rd30');
-        if (!window.mountRedesignWord) await rdLoadScript(base + 'redesign-word.js?v=20261112compact1');
+        if (!window.mountRedesignWord) await rdLoadScript(base + 'redesign-word.js?v=20261115engage1');
         if (!window.mountRedesignArticle) await rdLoadScript(base + 'redesign-article.js?v=20261020rd30');
     } catch (e) { console.warn(e); }
     loadPost();

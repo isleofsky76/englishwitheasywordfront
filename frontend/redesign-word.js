@@ -5,7 +5,8 @@
 (function (global) {
   'use strict';
 
-  var ASSET_VER = '20261112compact1';
+  var ASSET_VER = '20261115engage1';
+  var COMMENTS_VER = '20261108pw25';
   var SPEAKER_SVG =
     '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M15.5 8.5a5 5 0 0 1 0 7"></path></svg>';
   var SPEAKER_FULL_SVG =
@@ -334,9 +335,63 @@
     });
   }
 
-  function renderFooter() {
+  function renderFooter(post) {
     /* 공통 site-legal-footer(site-footer.js) 사용 — 페이지별 푸터 중복 방지 */
-    return '<div class="rd-word-spacer"></div>';
+    var viewsN = parseInt(post && post.views, 10);
+    if (!Number.isFinite(viewsN) || viewsN < 0) viewsN = 0;
+    var likesN = parseInt(post && post.likes, 10);
+    if (!Number.isFinite(likesN) || likesN < 0) likesN = 0;
+    return (
+      '<div id="rd-word-comments-host" class="rd-word-comments-host" data-board-comments-root></div>' +
+      '<div class="rd-word-stats rd-article-stats" id="rd-engagement-host" aria-label="조회와 추천">' +
+        '<span class="rd-article-stat">조회 <strong class="rd-stat-views" data-rd-views>' +
+          viewsN +
+        '</strong></span>' +
+        '<span class="rd-article-stat-sep" aria-hidden="true">·</span>' +
+        '<div class="viewpost-like-row rd-article-stats-like">' +
+          '<div id="viewpost-like-box" class="viewpost-like-box" aria-live="polite"></div>' +
+        '</div>' +
+        '<span class="post-meta-likes-num" hidden>' + likesN + '</span>' +
+      '</div>' +
+      '<div class="rd-word-spacer"></div>'
+    );
+  }
+
+  function mountWordComments(post) {
+    var contentKey = String((post && (post.slug || post._id)) || '').trim();
+    if (!contentKey) return;
+    var host = document.getElementById('rd-word-comments-host');
+    if (!host) return;
+    var base = assetBase();
+    ensureCssFile(base + 'board-comments.css?v=20261108adminPw1');
+    var ready = global.BoardComments
+      ? Promise.resolve()
+      : ensureScript('board-comments.js?v=' + COMMENTS_VER);
+    ready
+      .then(function () {
+        if (!global.BoardComments || typeof global.BoardComments.mount !== 'function') return null;
+        return global.BoardComments.mount({
+          board: 'word-of-the-day',
+          contentKey: contentKey,
+          root: host,
+          title: (post && (post.title || post.word)) || contentKey
+        });
+      })
+      .catch(function (err) {
+        console.warn('wotd board comments mount skipped', err);
+      });
+  }
+
+  function ensureCssFile(href) {
+    var file = String(href || '').split('?')[0].replace(/^.*\//, '');
+    if (!file) return;
+    if (document.querySelector('link[rel="stylesheet"][href*="' + file + '"]')) return;
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = href.indexOf('http') === 0 || href.charAt(0) === '/' || href.indexOf('../') === 0
+      ? href
+      : assetBase() + href;
+    document.head.appendChild(link);
   }
 
   function renderWordPage(container, post, data, options) {
@@ -539,7 +594,7 @@
             '</a>' +
           '</aside>' +
         '</div>' +
-        renderFooter() +
+        renderFooter(post) +
       '</div>';
 
     bindTts(container);
@@ -630,6 +685,8 @@
         try { global.SiteMasthead.mount(); } catch (e) { /* ignore */ }
       }
     });
+    ensureScript('site-footer.js?v=20261112dark2');
+    mountWordComments(post);
 
     if (options.apiBaseUrl && cfg.apiPath) {
       fetch(options.apiBaseUrl + cfg.apiPath, { cache: 'no-store' })

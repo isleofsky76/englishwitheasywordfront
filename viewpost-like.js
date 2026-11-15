@@ -54,14 +54,17 @@
     }
 
     function mountLikeBox() {
+        /* 우선: 댓글·글쓰기·저장 아래 engagement host */
+        const engagement = document.getElementById('rd-engagement-host');
         const postContainer = document.getElementById('post-container');
-        if (!postContainer) return null;
+        const host = engagement || postContainer;
+        if (!host) return null;
 
-        let row = postContainer.querySelector('.viewpost-like-row');
+        let row = host.querySelector('.viewpost-like-row');
         if (!row) {
             row = document.createElement('div');
             row.className = 'viewpost-like-row';
-            postContainer.appendChild(row);
+            host.appendChild(row);
         }
 
         let container = row.querySelector('#viewpost-like-box');
@@ -112,8 +115,9 @@
             btn.classList.add('is-active');
             btn.disabled = true;
             if (countEl) countEl.textContent = likes;
-            const metaLikesEl = document.querySelector('#post-meta .post-meta-likes-num');
-            if (metaLikesEl) metaLikesEl.textContent = likes;
+            document.querySelectorAll('#post-meta .post-meta-likes-num, #rd-engagement-host .post-meta-likes-num').forEach(function (el) {
+                el.textContent = likes;
+            });
         }
 
         btn.addEventListener('click', function () {
