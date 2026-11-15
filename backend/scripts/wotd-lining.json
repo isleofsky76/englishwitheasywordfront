@@ -1,0 +1,22 @@
+[
+  {
+    "word": "lining",
+    "image": "lining.png",
+    "meaning": "안감, (장기 등의) 내벽",
+    "meaningExtra": "",
+    "examples": [
+      {
+        "en": "One rainy afternoon, he noticed a small envelope hidden inside its lining.",
+        "ko": "비가 내리던 어느 오후, 그는 가방 안감 속에 숨겨진 작은 봉투 하나를 발견했다."
+      },
+      {
+        "en": "The drugs were secreted in the lining of his case.",
+        "ko": "그 마약들은 그의 가방 안쪽 받침 천 안에 감춰져 있었다."
+      },
+      {
+        "en": "Some drugs can irritate the lining of the stomach.",
+        "ko": "일부 약물은 위벽을 자극할 수가 있다."
+      }
+    ]
+  }
+]
