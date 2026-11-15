@@ -671,10 +671,13 @@ body.rd-word main#post-container {
   font-size: 15px;
 }
 
-.rd-word-action-tools.rd-article-action-tools {
-  max-width: var(--max-width);
-  margin: 8px auto 0;
-  padding: 0 24px;
+/* 핵심 뉘앙스 아래 · 이전/다음 단어 위 */
+.rd-word-main .rd-word-action-tools.rd-article-action-tools {
+  max-width: none;
+  width: 100%;
+  margin: 18px 0 8px;
+  padding: 0;
+  justify-content: flex-start;
   box-sizing: border-box;
 }
 
@@ -700,8 +703,8 @@ body.rd-word main#post-container {
 }
 
 @media (max-width: 480px) {
-  .rd-word-action-tools.rd-article-action-tools {
-    padding: 0 12px;
+  .rd-word-main .rd-word-action-tools.rd-article-action-tools {
+    margin: 14px 0 6px;
     column-gap: 10px;
   }
 }

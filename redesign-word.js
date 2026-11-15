@@ -5,7 +5,7 @@
 (function (global) {
   'use strict';
 
-  var ASSET_VER = '20261115engage2';
+  var ASSET_VER = '20261115engage3';
   var COMMENTS_VER = '20261108pw25';
   var SPEAKER_SVG =
     '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M15.5 8.5a5 5 0 0 1 0 7"></path></svg>';
@@ -335,8 +335,8 @@
     });
   }
 
-  function renderFooter(post) {
-    /* 공통 site-legal-footer(site-footer.js) 사용 — 페이지별 푸터 중복 방지 */
+  /* 핵심 뉘앙스 아래 · 이전/다음 단어 위 */
+  function renderEngagementBar(post) {
     var viewsN = parseInt(post && post.views, 10);
     if (!Number.isFinite(viewsN) || viewsN < 0) viewsN = 0;
     var likesN = parseInt(post && post.likes, 10);
@@ -353,8 +353,7 @@
           '</div>' +
           '<span class="post-meta-likes-num" hidden>' + likesN + '</span>' +
         '</div>' +
-      '</div>' +
-      '<div class="rd-word-spacer"></div>'
+      '</div>'
     );
   }
 
@@ -364,7 +363,7 @@
     var host = document.getElementById('rd-word-comments-host');
     if (!host) return;
     var base = assetBase();
-    ensureCssFile(base + 'board-comments.css?v=20261115engage2');
+    ensureCssFile(base + 'board-comments.css?v=20261115engage3');
     var ready = global.BoardComments
       ? Promise.resolve()
       : ensureScript('board-comments.js?v=' + COMMENTS_VER);
@@ -579,6 +578,7 @@
                   '<p class="rd-word-takeaway-text">' + escapeHtml(data.takeaway) + '</p>' +
                 '</div>'
               : '') +
+            renderEngagementBar(post) +
             '<div id="rd-word-nav-host">' + navHtml + '</div>' +
           '</div>' +
           '<aside class="rd-word-side">' +
@@ -595,7 +595,7 @@
             '</a>' +
           '</aside>' +
         '</div>' +
-        renderFooter(post) +
+        '<div class="rd-word-spacer"></div>' +
       '</div>';
 
     bindTts(container);
