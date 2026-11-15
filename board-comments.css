@@ -97,8 +97,7 @@
   line-height: 1.4;
   color: var(--os-ink-muted);
   cursor: pointer;
-  text-decoration: underline;
-  text-underline-offset: 2px;
+  text-decoration: none;
   opacity: 0.85;
   -webkit-text-fill-color: currentColor;
 }

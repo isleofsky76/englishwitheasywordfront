@@ -671,24 +671,39 @@ body.rd-word main#post-container {
   font-size: 15px;
 }
 
-.rd-word-comments-host {
+.rd-word-action-tools.rd-article-action-tools {
   max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 8px 24px 0;
+  margin: 8px auto 0;
+  padding: 0 24px;
   box-sizing: border-box;
+}
+
+.rd-word-comments-host {
+  display: contents;
 }
 
 .rd-word-comments-host .board-comments-root,
 .rd-word-comments-host[data-board-comments-root] {
-  width: 100%;
+  display: contents;
 }
 
-/* 댓글·글쓰기 아래 — 조회 · 추천 */
+.rd-word-action-tools .os-cmt-panel {
+  flex: 1 1 100%;
+  width: 100%;
+  margin-top: 4px;
+  order: 99;
+}
+
+/* 조회 · 추천 — 댓글·글쓰기와 같은 줄 */
 .rd-word-stats.rd-article-stats {
-  max-width: var(--max-width);
-  margin: 12px auto 0;
-  padding: 0 24px;
-  box-sizing: border-box;
+  display: contents;
+}
+
+@media (max-width: 480px) {
+  .rd-word-action-tools.rd-article-action-tools {
+    padding: 0 12px;
+    column-gap: 10px;
+  }
 }
 
 .rd-word-spacer {

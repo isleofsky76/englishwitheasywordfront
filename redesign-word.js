@@ -5,7 +5,7 @@
 (function (global) {
   'use strict';
 
-  var ASSET_VER = '20261115engage1';
+  var ASSET_VER = '20261115engage2';
   var COMMENTS_VER = '20261108pw25';
   var SPEAKER_SVG =
     '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M15.5 8.5a5 5 0 0 1 0 7"></path></svg>';
@@ -342,16 +342,17 @@
     var likesN = parseInt(post && post.likes, 10);
     if (!Number.isFinite(likesN) || likesN < 0) likesN = 0;
     return (
-      '<div id="rd-word-comments-host" class="rd-word-comments-host" data-board-comments-root></div>' +
-      '<div class="rd-word-stats rd-article-stats" id="rd-engagement-host" aria-label="조회와 추천">' +
-        '<span class="rd-article-stat">조회 <strong class="rd-stat-views" data-rd-views>' +
-          viewsN +
-        '</strong></span>' +
-        '<span class="rd-article-stat-sep" aria-hidden="true">·</span>' +
-        '<div class="viewpost-like-row rd-article-stats-like">' +
-          '<div id="viewpost-like-box" class="viewpost-like-box" aria-live="polite"></div>' +
+      '<div class="rd-word-action-tools rd-article-action-tools">' +
+        '<div id="rd-word-comments-host" class="rd-word-comments-host" data-board-comments-root></div>' +
+        '<div class="rd-word-stats rd-article-stats" id="rd-engagement-host" aria-label="조회와 추천">' +
+          '<span class="rd-article-stat">조회 <strong class="rd-stat-views" data-rd-views>' +
+            viewsN +
+          '</strong></span>' +
+          '<div class="viewpost-like-row rd-article-stats-like">' +
+            '<div id="viewpost-like-box" class="viewpost-like-box" aria-live="polite"></div>' +
+          '</div>' +
+          '<span class="post-meta-likes-num" hidden>' + likesN + '</span>' +
         '</div>' +
-        '<span class="post-meta-likes-num" hidden>' + likesN + '</span>' +
       '</div>' +
       '<div class="rd-word-spacer"></div>'
     );
@@ -363,7 +364,7 @@
     var host = document.getElementById('rd-word-comments-host');
     if (!host) return;
     var base = assetBase();
-    ensureCssFile(base + 'board-comments.css?v=20261108adminPw1');
+    ensureCssFile(base + 'board-comments.css?v=20261115engage2');
     var ready = global.BoardComments
       ? Promise.resolve()
       : ensureScript('board-comments.js?v=' + COMMENTS_VER);

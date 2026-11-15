@@ -5,7 +5,7 @@
 (function (global) {
   'use strict';
 
-  var ASSET_VER = '20261115engage1';
+  var ASSET_VER = '20261115engage2';
   var QUIZ_TRACK_VER = '20261109quiz3';
   var SITE_FOOTER_VER = '20261112dark2';
   /* news-voca.js 등이 구버전 redesign을 덮어쓰지 않도록 */
@@ -1677,36 +1677,33 @@
       }
       actions += '</div>';
     }
-    if (showComments || showSaveTools) {
-      actions += '<div class="rd-article-action-tools">';
-      if (showComments) {
-        actions += '<div class="board-comments-root" data-board-comments-root></div>';
-      }
-      if (showSaveTools) {
-        actions +=
-          '<button type="button" class="rd-article-tool-btn" data-rd-save-all>저장</button>' +
-          '<button type="button" class="rd-article-tool-btn" id="rd-syn-download-saved" data-rd-download-all hidden disabled>' +
-            '다운로드 (<span id="rd-syn-saved-count">0</span>)' +
-          '</button>';
-      }
-      actions += '</div>';
-    }
-    /* 댓글·글쓰기·저장 바로 아래 — 조회 · 추천 */
+    /* 댓글 · 글쓰기 · 저장 · 조회 · 추천 — 같은 줄 */
     var viewsN = parseInt(post && post.views, 10);
     if (!Number.isFinite(viewsN) || viewsN < 0) viewsN = 0;
     var likesN = parseInt(post && post.likes, 10);
     if (!Number.isFinite(likesN) || likesN < 0) likesN = 0;
+    actions += '<div class="rd-article-action-tools">';
+    if (showComments) {
+      actions += '<div class="board-comments-root" data-board-comments-root></div>';
+    }
+    if (showSaveTools) {
+      actions +=
+        '<button type="button" class="rd-article-tool-btn" data-rd-save-all>저장</button>' +
+        '<button type="button" class="rd-article-tool-btn" id="rd-syn-download-saved" data-rd-download-all hidden disabled>' +
+          '다운로드 (<span id="rd-syn-saved-count">0</span>)' +
+        '</button>';
+    }
     actions +=
       '<div class="rd-article-stats" id="rd-engagement-host" aria-label="조회와 추천">' +
         '<span class="rd-article-stat">조회 <strong class="rd-stat-views" data-rd-views>' +
           viewsN +
         '</strong></span>' +
-        '<span class="rd-article-stat-sep" aria-hidden="true">·</span>' +
         '<div class="viewpost-like-row rd-article-stats-like">' +
           '<div id="viewpost-like-box" class="viewpost-like-box" aria-live="polite"></div>' +
         '</div>' +
         '<span class="post-meta-likes-num" hidden>' + likesN + '</span>' +
       '</div>';
+    actions += '</div>';
     if (showWordQuiz) {
       actions += '<div id="rd-word-quiz" class="rd-word-quiz rd-quiz-track" hidden></div>';
     }
@@ -1946,7 +1943,7 @@
     var board = String(boardKey || '').trim();
     if (!contentKey || !board) return;
     var base = redesignAssetBase();
-    loadRedesignCss(base + 'board-comments.css?v=20261108adminPw1');
+    loadRedesignCss(base + 'board-comments.css?v=20261115engage2');
     var commentsSrc = base + 'board-comments.js?v=20261108pw25';
     var ready = window.BoardComments
       ? Promise.resolve()

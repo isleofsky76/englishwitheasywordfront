@@ -584,19 +584,21 @@ body.rd-syn-hide-meaning .rd-expr--synonym.is-meaning-shown .rd-expr-meaning {
   display: none !important;
 }
 
-/* 유튜브 아래: 댓글 · 글쓰기 · 저장 · 다운로드 */
+/* 유튜브 아래: 댓글 · 글쓰기 · 저장 · 조회 · 추천 (한 줄) */
 .rd-article-action-tools {
   display: flex;
   flex-wrap: wrap;
-  align-items: baseline;
+  align-items: center;
   justify-content: center;
-  column-gap: 14px;
-  row-gap: 8px;
+  column-gap: 12px;
+  row-gap: 6px;
   width: 100%;
-  max-width: 420px;
+  max-width: 560px;
+  margin: 0 auto;
 }
 
-.rd-article-action-tools > .board-comments-root {
+.rd-article-action-tools > .board-comments-root,
+.rd-article-action-tools > .rd-word-comments-host {
   display: contents;
 }
 
@@ -608,6 +610,7 @@ body.rd-syn-hide-meaning .rd-expr--synonym.is-meaning-shown .rd-expr-meaning {
   flex: 1 1 100%;
   width: 100%;
   margin-top: 4px;
+  order: 99;
 }
 
 .rd-article-action-tools .board-comments-root .os-cmt-toggle,
@@ -622,13 +625,13 @@ body.rd-syn-hide-meaning .rd-expr--synonym.is-meaning-shown .rd-expr-meaning {
   font: inherit;
   font-size: 13px;
   font-weight: 600;
-  line-height: 1.4;
+  line-height: 1.35;
   color: var(--ink-muted, #78716c);
   cursor: pointer;
-  text-decoration: underline;
-  text-underline-offset: 2px;
+  text-decoration: none;
   opacity: 0.9;
   flex: 0 0 auto;
+  white-space: nowrap;
   -webkit-text-fill-color: currentColor;
 }
 
@@ -640,6 +643,7 @@ body.rd-syn-hide-meaning .rd-expr--synonym.is-meaning-shown .rd-expr-meaning {
 .rd-article-action-tools .rd-article-tool-btn[aria-pressed="true"] {
   opacity: 1;
   color: var(--accent, #b45309);
+  text-decoration: none;
   -webkit-text-fill-color: currentColor;
 }
 
@@ -647,25 +651,32 @@ body.rd-syn-hide-meaning .rd-expr--synonym.is-meaning-shown .rd-expr-meaning {
   display: none !important;
 }
 
-/* 댓글·글쓰기·저장 아래 — 조회 · 추천 */
+/* 조회 · 추천 — 액션 줄에 인라인 */
+.rd-article-action-tools > .rd-article-stats {
+  display: contents;
+}
+
 .rd-article-stats {
-  display: flex;
-  flex-wrap: wrap;
+  display: inline-flex;
+  flex-wrap: nowrap;
   align-items: center;
   justify-content: center;
-  gap: 10px 14px;
-  width: 100%;
-  max-width: 420px;
-  margin: 10px auto 0;
+  gap: 12px;
+  margin: 0;
   padding: 0;
   font-size: 13px;
   font-weight: 600;
-  line-height: 1.4;
+  line-height: 1.35;
   color: var(--ink-muted, #78716c);
 }
 
+.rd-article-stat {
+  white-space: nowrap;
+  flex: 0 0 auto;
+}
+
 .rd-article-stat-sep {
-  opacity: 0.45;
+  display: none;
 }
 
 .rd-article-stats .rd-stat-views,
@@ -681,12 +692,13 @@ body.rd-syn-hide-meaning .rd-expr--synonym.is-meaning-shown .rd-expr-meaning {
   padding: 0 !important;
   display: inline-flex;
   align-items: center;
+  flex: 0 0 auto;
 }
 
 .rd-article-stats .viewpost-like-box {
   margin: 0;
   padding: 0;
-  gap: 6px;
+  gap: 4px;
   font-size: 13px;
   font-weight: 600;
   color: inherit;
@@ -695,13 +707,33 @@ body.rd-syn-hide-meaning .rd-expr--synonym.is-meaning-shown .rd-expr-meaning {
 .rd-article-stats .vp-like-btn {
   gap: 4px;
   color: inherit;
-  text-decoration: underline;
-  text-underline-offset: 2px;
+  text-decoration: none;
+  white-space: nowrap;
 }
 
 .rd-article-stats .vp-like-btn:hover:not(:disabled),
 .rd-article-stats .vp-like-btn.is-active {
   color: var(--accent, #b45309);
+  text-decoration: none;
+}
+
+@media (max-width: 480px) {
+  .rd-article-action-tools {
+    column-gap: 10px;
+    row-gap: 4px;
+    max-width: 100%;
+    padding: 0 4px;
+  }
+
+  .rd-article-action-tools .board-comments-root .os-cmt-toggle,
+  .rd-article-action-tools .board-comments-root .os-cmt-write,
+  .rd-article-action-tools .os-cmt-toggle,
+  .rd-article-action-tools .os-cmt-write,
+  .rd-article-action-tools .rd-article-tool-btn,
+  .rd-article-stats,
+  .rd-article-stats .viewpost-like-box {
+    font-size: 12px;
+  }
 }
 
 .vv-tts-all-wrap {
