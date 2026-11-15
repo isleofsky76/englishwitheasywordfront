@@ -381,3 +381,22 @@
     max-width: none;
   }
 }
+
+/* 댓글·글쓰기·조회·추천 한 줄 — action tools 안에서는 bar가 전체 너비를 차지하지 않음 */
+.rd-article-action-tools .board-comments-root .os-cmt-bar,
+.vp-engage-bar .board-comments-root .os-cmt-bar,
+[data-vp-engage-bar] .board-comments-root .os-cmt-bar,
+.exam-action-tools .board-comments-root .os-cmt-bar {
+  display: contents !important;
+  width: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  gap: 0 !important;
+}
+
+.rd-article-action-tools .board-comments-root,
+.vp-engage-bar > .board-comments-root,
+[data-vp-engage-bar] > .board-comments-root,
+.exam-action-tools > .board-comments-root {
+  display: contents !important;
+}
