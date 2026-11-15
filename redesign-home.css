@@ -38,7 +38,8 @@
   padding-top: 40px;
   border-top: 1px solid var(--line, rgba(0, 0, 0, 0.08));
 }
-.rd-hero--bottom .rd-hero-word h1 {
+.rd-hero--bottom .rd-hero-word h1,
+.rd-hero--bottom .rd-hero-word h2.rd-hero-word-title {
   font-size: clamp(36px, 7vw, 64px);
 }
 .rd-hero-word {
@@ -61,13 +62,25 @@
   color: var(--accent);
   text-transform: uppercase;
 }
-.rd-hero-word h1 {
+.rd-hero-word h1,
+.rd-hero-word h2.rd-hero-word-title {
   margin: 0;
   font-family: var(--font-serif);
   font-weight: 900;
   font-size: clamp(48px, 9vw, 96px);
   line-height: 1;
   letter-spacing: -2px;
+}
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
 }
 .rd-hero-meta {
   display: flex;
@@ -267,6 +280,11 @@
 .rd-section-head a {
   font-size: 14px;
   font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 8px 4px;
+  box-sizing: border-box;
 }
 
 .rd-news-cards {
@@ -1092,7 +1110,9 @@ a.rd-free-book-cover:focus-visible {
     letter-spacing: 1px;
   }
   .rd-hero-word h1,
-  .rd-hero--bottom .rd-hero-word h1 {
+  .rd-hero-word h2.rd-hero-word-title,
+  .rd-hero--bottom .rd-hero-word h1,
+  .rd-hero--bottom .rd-hero-word h2.rd-hero-word-title {
     font-size: 36px;
     letter-spacing: -1px;
   }

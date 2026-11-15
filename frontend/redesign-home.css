@@ -267,6 +267,11 @@
 .rd-section-head a {
   font-size: 14px;
   font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 8px 4px;
+  box-sizing: border-box;
 }
 
 .rd-news-cards {

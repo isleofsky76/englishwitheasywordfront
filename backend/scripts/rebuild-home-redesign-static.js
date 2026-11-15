@@ -272,7 +272,7 @@ function heroWordHtml(entry, index) {
   const href = hrefFor('word-of-the-day', 'word-of-the-day.html', entry, index);
   return (
     `\n          <span class="rd-kicker">WORD OF THE DAY · 오늘의 단어</span>\n` +
-    `          <h1>${esc(f.word)}</h1>\n` +
+    `          <h2 class="rd-hero-word-title">${esc(f.word)}</h2>\n` +
     `          <div class="rd-hero-meta">` +
     (f.pos ? `<span class="pos">${esc(f.pos)}</span>` : '') +
     `<span class="meaning">${esc(f.meaning)}</span></div>\n` +
@@ -412,7 +412,9 @@ async function main() {
   html = patchElementById(html, 'rd-news-cards', newsCardsHtml(news));
   html = patchElementById(html, 'rd-news-list', newsListHtml(news));
   html = patchElementById(html, 'rd-phrase-grid', phrasesHtml(phrases));
-  html = patchElementById(html, 'rd-quiz-banner', quizBannerHtml(quiz));
+  if (/id="rd-quiz-banner"/.test(html)) {
+    html = patchElementById(html, 'rd-quiz-banner', quizBannerHtml(quiz));
+  }
   html = patchElementById(
     html,
     'rd-read-opinions',

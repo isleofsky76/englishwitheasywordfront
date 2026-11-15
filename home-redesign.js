@@ -221,17 +221,16 @@
       'english-quotes': { page: 'english-quotes.html', postPath: 'english-quotes', label: '명언' }
     };
     var b = boards[board] || { page: 'index.html' };
-    var apiParam = '';
-    if (board === 'wordofday') apiParam = '&api=prod';
-    if (window.ViewpostSeo && window.ViewpostSeo.buildListPostHref) {
-      return window.ViewpostSeo.buildListPostHref(entry, b.page, index, apiParam, b.postPath);
-    }
     var slug = entry && String(entry.slug || '').trim();
+    /* 공개 링크는 깔끔한 SEO 경로 우선 — ?api=prod / .html?index= 지양 */
     if (b.page === 'vocabulary-quiz.html' && slug) {
-      return 'vocabulary-quiz.html?slug=' + encodeURIComponent(slug);
+      return 'vocabulary-quiz/' + encodeURIComponent(slug) + '/';
     }
     if (slug && b.postPath) return b.postPath + '/' + encodeURIComponent(slug) + '/';
-    if (slug) return b.page + '?slug=' + encodeURIComponent(slug);
+    if (window.ViewpostSeo && window.ViewpostSeo.buildListPostHref) {
+      return window.ViewpostSeo.buildListPostHref(entry, b.page, index, '', b.postPath);
+    }
+    if (slug) return b.page.replace(/\.html$/, '') + '?slug=' + encodeURIComponent(slug);
     return b.page + '?index=' + index;
   }
 
@@ -260,7 +259,7 @@
     /* 미리보기: 영어 단어 + 이미지 + CTA만 — 뜻·예문은 상세에서 */
     root.innerHTML =
       '<span class="rd-kicker">WORD OF THE DAY · 오늘의 단어</span>' +
-      '<h1>' + esc(f.word) + '</h1>' +
+      '<h2 class="rd-hero-word-title">' + esc(f.word) + '</h2>' +
       '<div class="rd-hero-actions">' +
         '<a class="rd-btn rd-btn-solid" href="' + esc(href) + '">단어 자세히 보기</a>' +
       '</div>';
@@ -493,17 +492,21 @@
   function renderDailyLines(items) {
     var root = document.getElementById('rd-daily-grid');
     if (!root || !items || !items.length) return;
-    root.innerHTML = items.slice(0, 5).map(function (it) {
+    var cards = items.slice(0, 12).map(function (it) {
       var ko = String((it && it.ko) || '').trim() || '표현';
-      var en = String((it && it.en) || '').trim() || ko;
-      var href = 'daily-english.html?q=' + encodeURIComponent(en || ko);
+      var en = String((it && it.en) || '').trim();
+      /* 영어가 없거나 한글과 같으면 카드 제외 — 두 줄 한글 반복 방지 */
+      if (!en || en === ko) return '';
+      var href = 'daily-english.html?q=' + encodeURIComponent(en);
       return (
         '<a class="rd-phrase-card" href="' + esc(href) + '">' +
           '<span class="ko">' + esc(ko) + '</span>' +
           '<span class="en">' + esc(en) + '</span>' +
         '</a>'
       );
-    }).join('');
+    }).filter(Boolean).slice(0, 5);
+    if (!cards.length) return;
+    root.innerHTML = cards.join('');
   }
 
   function renderReadingCol(elId, listHref, label, entries, board) {
@@ -630,50 +633,90 @@
       });
   }
 
+  function hasStaticLinks(id) {
+    var el = document.getElementById(id);
+    return !!(el && el.querySelector('a[href]'));
+  }
+
   function boot() {
     fillDateBar();
     renderDirPreviewRandom();
     renderFreeBooksRandom();
     if (!window.HomeBoardPreview) return;
 
-    Promise.all([
-      fetchEntries('/wordofday'),
-      fetchEntries('/guestbook'),
-      fetchEntries('/korea-news'),
-      fetchEntries('/defense-news'),
-      fetchEntries('/economy-news'),
-      fetchEntries('/vocabulary-quiz'),
-      fetchEntries('/easy-voca'),
-      fetchEntries('/opinions'),
-      fetchEntries('/culture-voca'),
-      fetchEntries('/calm-mind'),
-      fetchEntries('/english-quotes'),
-      fetchDailyExpressions(5)
-    ]).then(function (results) {
-      var wotd = results[0] || [];
-      var intl = results[1] || [];
-      var korea = results[2] || [];
-      var defense = results[3] || [];
-      var economy = results[4] || [];
-      var quiz = results[5] || [];
-      var phrases = results[6] || [];
-      var opinions = results[7] || [];
-      var culture = results[8] || [];
-      var calm = results[9] || [];
-      var quotes = results[10] || [];
-      var daily = results[11] || [];
+    /*
+     * 정적 HTML이 이미 채워져 있으면 API로 덮어쓰지 않음.
+     * (콜드스타트 28요청·깜빡임·SEO 불일치 방지)
+     */
+    var needNews = !hasStaticLinks('rd-news-cards');
+    var needPhrases = !hasStaticLinks('rd-phrase-grid');
+    var needDaily = !hasStaticLinks('rd-daily-grid');
+    var needReading =
+      !hasStaticLinks('rd-read-opinions') ||
+      !hasStaticLinks('rd-read-culture') ||
+      !hasStaticLinks('rd-read-calm') ||
+      !hasStaticLinks('rd-read-quotes');
+    var needHero = !document.querySelector('#rd-hero-word .rd-hero-word-title, #rd-hero-word h1, #rd-hero-word h2');
+    var needQuiz = !hasStaticLinks('rd-quiz-banner');
 
-      var wPick = randomIndexed(wotd, 1)[0];
-      if (wPick) renderHeroWord(wPick.entry, wPick.index);
+    if (!needNews && !needPhrases && !needDaily && !needReading && !needHero && !needQuiz) {
+      return;
+    }
 
-      renderNews(mixNews(intl, korea, defense, economy, []));
-      renderQuiz(quiz);
-      renderPhrases(phrases);
-      renderDailyLines(daily);
-      renderReadingCol('rd-read-opinions', 'english-opinions-list.html', '오피니언', opinions, 'opinions');
-      renderReadingCol('rd-read-culture', 'culture-voca-list.html', '컬쳐', culture, 'culture-voca');
-      renderReadingCol('rd-read-calm', 'calm-mind-list.html', '마음 다스리는 글', calm, 'calm-mind');
-      renderReadingCol('rd-read-quotes', 'english-quotes-list.html', '영어 명언', quotes, 'english-quotes');
+    var jobs = [];
+    var keys = [];
+    function add(path, key) {
+      keys.push(key);
+      jobs.push(fetchEntries(path));
+    }
+    if (needHero) add('/wordofday', 'wotd');
+    if (needNews) {
+      add('/guestbook', 'intl');
+      add('/korea-news', 'korea');
+      add('/defense-news', 'defense');
+      add('/economy-news', 'economy');
+    }
+    if (needQuiz) add('/vocabulary-quiz', 'quiz');
+    if (needPhrases) add('/easy-voca', 'phrases');
+    if (needReading) {
+      add('/opinions', 'opinions');
+      add('/culture-voca', 'culture');
+      add('/calm-mind', 'calm');
+      add('/english-quotes', 'quotes');
+    }
+    if (needDaily) {
+      keys.push('daily');
+      jobs.push(fetchDailyExpressions(5));
+    }
+
+    Promise.all(jobs).then(function (results) {
+      var map = {};
+      keys.forEach(function (k, i) { map[k] = results[i] || []; });
+
+      if (needHero && map.wotd) {
+        var wPick = randomIndexed(map.wotd, 1)[0];
+        if (wPick) renderHeroWord(wPick.entry, wPick.index);
+      }
+      if (needNews) {
+        renderNews(mixNews(map.intl || [], map.korea || [], map.defense || [], map.economy || [], []));
+      }
+      if (needQuiz) renderQuiz(map.quiz || []);
+      if (needPhrases) renderPhrases(map.phrases || []);
+      if (needDaily) renderDailyLines(map.daily || []);
+      if (needReading) {
+        if (!hasStaticLinks('rd-read-opinions')) {
+          renderReadingCol('rd-read-opinions', 'english-opinions-list.html', '오피니언', map.opinions || [], 'opinions');
+        }
+        if (!hasStaticLinks('rd-read-culture')) {
+          renderReadingCol('rd-read-culture', 'culture-voca-list.html', '컬쳐', map.culture || [], 'culture-voca');
+        }
+        if (!hasStaticLinks('rd-read-calm')) {
+          renderReadingCol('rd-read-calm', 'calm-mind-list.html', '마음 다스리는 글', map.calm || [], 'calm-mind');
+        }
+        if (!hasStaticLinks('rd-read-quotes')) {
+          renderReadingCol('rd-read-quotes', 'english-quotes-list.html', '영어 명언', map.quotes || [], 'english-quotes');
+        }
+      }
     }).catch(function (err) {
       console.warn('home-redesign load error', err);
     });

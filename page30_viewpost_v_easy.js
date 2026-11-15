@@ -4,23 +4,28 @@ let API_BASE_URL;
 const urlParams = new URLSearchParams(window.location.search);
 const apiMode = urlParams.get('api'); // 'local' 또는 'prod'로 강제 설정 가능
 
+const VIEWPOST_DEBUG = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+function vlog() {
+    if (VIEWPOST_DEBUG && typeof console !== 'undefined' && console.log) {
+        console.log.apply(console, arguments);
+    }
+}
+
 if (apiMode === 'prod') {
     // URL 파라미터로 프로덕션 강제 지정
     API_BASE_URL = 'https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app';
-    console.log('🟢 Production 모드 (강제) - API_BASE_URL:', API_BASE_URL);
+    vlog('Production 모드 (강제)');
 } else if (apiMode === 'local') {
     // URL 파라미터로 로컬 강제 지정
     API_BASE_URL = `http://${window.location.hostname}:3000`;
-    console.log('🔵 Localhost 모드 (강제) - API_BASE_URL:', API_BASE_URL);
-} else if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+    vlog('Localhost 모드 (강제)');
+} else if (VIEWPOST_DEBUG) {
     // 자동 감지: 로컬 호스트면 로컬 API 사용
     API_BASE_URL = `http://${window.location.hostname}:3000`;
-    console.log('🔵 Localhost 모드 (자동) - API_BASE_URL:', API_BASE_URL);
-    console.log('💡 프로덕션 API를 사용하려면 URL에 ?api=prod 를 추가하세요');
+    vlog('Localhost 모드 (자동)');
 } else {
     // 자동 감지: 프로덕션 호스트면 프로덕션 API 사용
     API_BASE_URL = 'https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app';
-    console.log('🟢 Production 모드 (자동) - API_BASE_URL:', API_BASE_URL);
 }
 
 window.VIEWPOST_SEO = {
@@ -49,6 +54,7 @@ function sanitizeHtml(html) {
     const allowedTags = ['p', 'br', 'strong', 'b', 'em', 'i', 'u', 'span', 'div', 'a', 'img', 'button'];
     const allowedAttributes = [
         'style', 'href', 'target', 'rel', 'src', 'alt', 'loading', 'decoding', 'onerror',
+        'width', 'height',
         'type', 'class', 'aria-label', 'title', 'data-pv-tts',
     ];
     
@@ -438,7 +444,7 @@ async function loadPost() {
                 // 조회수가 업데이트된 경우 게시글 정보 업데이트
                 if (viewData.entry && viewData.entry.views !== undefined) {
                     post.views = viewData.entry.views;
-                    console.log('👁️ 조회수 업데이트:', post.views);
+                    vlog('조회수 업데이트:', post.views);
                 }
             }
         } catch (viewError) {
@@ -446,8 +452,8 @@ async function loadPost() {
             // 조회수 증가 실패해도 게시글은 표시
         }
 
-        console.log('📝 로드된 게시글:', post);
-        console.log('📅 게시글 날짜 정보:', post.date, typeof post.date);
+        vlog('로드된 게시글:', post && post._id, post && post.slug);
+        vlog('게시글 날짜:', post && post.date);
 
         // 게시글 표시 - HTML 구조를 다시 생성
         const postContainer = document.getElementById('post-container');
@@ -455,8 +461,7 @@ async function loadPost() {
         // 이미지/동영상 링크 변환하여 표시
         const messageRaw = repairBrokenLinks(post.message || '');
         const convertedMessage = convertMediaLinks(messageRaw);
-        console.log('원본 메시지:', post.message);
-        console.log('변환된 메시지:', convertedMessage);
+        vlog('메시지 길이:', (post.message || '').length, '→', (convertedMessage || '').length);
 
         const metaHtml = typeof buildPostMetaHtml === 'function'
             ? buildPostMetaHtml(post)

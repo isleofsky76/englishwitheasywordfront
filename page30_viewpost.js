@@ -1,5 +1,7 @@
 // API 베이스 URL 설정 (로컬/프로덕션 자동 전환)
 // URL 파라미터로 강제 설정 가능: ?api=local 또는 ?api=prod
+const VIEWPOST_DEBUG = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+function vlog(){ if (VIEWPOST_DEBUG && console && console.log) console.log.apply(console, arguments); }
 let API_BASE_URL;
 const urlParams = new URLSearchParams(window.location.search);
 const apiMode = urlParams.get('api'); // 'local' 또는 'prod'로 강제 설정 가능
@@ -7,20 +9,20 @@ const apiMode = urlParams.get('api'); // 'local' 또는 'prod'로 강제 설정 
 if (apiMode === 'prod') {
     // URL 파라미터로 프로덕션 강제 지정
     API_BASE_URL = 'https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app';
-    console.log('🟢 Production 모드 (강제) - API_BASE_URL:', API_BASE_URL);
+    vlog('🟢 Production 모드 (강제) - API_BASE_URL:', API_BASE_URL);
 } else if (apiMode === 'local') {
     // URL 파라미터로 로컬 강제 지정
     API_BASE_URL = `http://${window.location.hostname}:3000`;
-    console.log('🔵 Localhost 모드 (강제) - API_BASE_URL:', API_BASE_URL);
+    vlog('🔵 Localhost 모드 (강제) - API_BASE_URL:', API_BASE_URL);
 } else if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
     // 자동 감지: 로컬 호스트면 로컬 API 사용
     API_BASE_URL = `http://${window.location.hostname}:3000`;
-    console.log('🔵 Localhost 모드 (자동) - API_BASE_URL:', API_BASE_URL);
-    console.log('💡 프로덕션 API를 사용하려면 URL에 ?api=prod 를 추가하세요');
+    vlog('🔵 Localhost 모드 (자동) - API_BASE_URL:', API_BASE_URL);
+    vlog('💡 프로덕션 API를 사용하려면 URL에 ?api=prod 를 추가하세요');
 } else {
     // 자동 감지: 프로덕션 호스트면 프로덕션 API 사용
     API_BASE_URL = 'https://port-0-englishwitheasyword-backend-1272llwoib16o.sel5.cloudtype.app';
-    console.log('🟢 Production 모드 (자동) - API_BASE_URL:', API_BASE_URL);
+    vlog('🟢 Production 모드 (자동) - API_BASE_URL:', API_BASE_URL);
 }
 
 // HTML 이스케이프 헬퍼 함수 (전역)
@@ -41,6 +43,7 @@ const NV_ALLOWED_TAGS = [
 ];
 const NV_ALLOWED_ATTRS = [
     'class', 'id', 'href', 'target', 'rel', 'src', 'alt', 'loading', 'decoding',
+    'width', 'height',
     'datetime', 'role', 'aria-label', 'aria-hidden', 'aria-labelledby', 'title',
     'itemscope', 'itemtype', 'itemprop', 'data-vv-tts',
     'style', 'onerror',
@@ -461,9 +464,9 @@ async function loadPost() {
 
     try {
         const url = `${API_BASE_URL}/guestbook`;
-        console.log('📡 API 요청 URL:', url);
+        vlog('📡 API 요청 URL:', url);
         const response = await fetch(url);
-        console.log('📥 응답 상태:', response.status, response.statusText);
+        vlog('📥 응답 상태:', response.status, response.statusText);
 
         if (!response.ok) {
             if (response.status === 503) {
@@ -480,7 +483,7 @@ async function loadPost() {
         }
 
         const messages = await response.json();
-        console.log('📦 응답 데이터:', messages);
+        vlog('📦 응답 데이터:', messages);
 
         // API 응답 형식 확인 및 정규화
         let entries = [];
@@ -516,7 +519,7 @@ async function loadPost() {
             return;
         }
         
-        console.log(`📌 인덱스 ${indexNum}로 게시글 찾기 (총 ${entries.length}개)`);
+        vlog(`📌 인덱스 ${indexNum}로 게시글 찾기 (총 ${entries.length}개)`);
 
         // 조회수 증가 API 호출
         try {
@@ -532,7 +535,7 @@ async function loadPost() {
                 // 조회수가 업데이트된 경우 게시글 정보 업데이트
                 if (viewData.entry && viewData.entry.views !== undefined) {
                     post.views = viewData.entry.views;
-                    console.log('👁️ 조회수 업데이트:', post.views);
+                    vlog('👁️ 조회수 업데이트:', post.views);
                 }
             }
         } catch (viewError) {
@@ -540,8 +543,8 @@ async function loadPost() {
             // 조회수 증가 실패해도 게시글은 표시
         }
 
-        console.log('📝 로드된 게시글:', post);
-        console.log('📅 게시글 날짜 정보:', post.date, typeof post.date);
+        vlog('📝 로드된 게시글:', post);
+        vlog('📅 게시글 날짜 정보:', post.date, typeof post.date);
 
         // 게시글 표시 - HTML 구조를 다시 생성
         const postContainer = document.getElementById('post-container');
@@ -552,7 +555,7 @@ async function loadPost() {
         if (post.date) {
             try {
                 postDate = new Date(post.date);
-                console.log('📅 파싱된 날짜:', postDate);
+                vlog('📅 파싱된 날짜:', postDate);
                 // 유효한 날짜인지 확인
                 if (isNaN(postDate.getTime())) {
                     console.warn('유효하지 않은 날짜:', post.date);
@@ -565,7 +568,7 @@ async function loadPost() {
                     const hours = ('0' + postDate.getHours()).slice(-2);
                     const minutes = ('0' + postDate.getMinutes()).slice(-2);
                     formattedDate = `${year}.${month}.${day}  ${hours}:${minutes}`;
-                    console.log('📅 포맷된 날짜:', formattedDate);
+                    vlog('📅 포맷된 날짜:', formattedDate);
                 }
             } catch (e) {
                 console.error('날짜 파싱 오류:', e, post.date);
@@ -585,8 +588,8 @@ async function loadPost() {
 
         // 이미지/동영상 링크 변환하여 표시
         const convertedMessage = convertMediaLinks(post.message || '');
-        console.log('원본 메시지:', post.message);
-        console.log('변환된 메시지:', convertedMessage);
+        vlog('원본 메시지:', post.message);
+        vlog('변환된 메시지:', convertedMessage);
         
         const isAdmin = (post.nickname || '').toLowerCase() === 'admin';
         let isoMeta = '';

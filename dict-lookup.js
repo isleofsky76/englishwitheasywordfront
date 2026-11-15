@@ -177,6 +177,7 @@
   const elCard = bubble.querySelector('.dl-card');
   const elMeaning = bubble.querySelector('.dl-meaning');
   const elFoot = bubble.querySelector('.dl-foot');
+  elFoot.hidden = true;
   const extLinks = CONFIG.dictionaries.map(function (d, i) {
     if (i > 0) {
       const sep = document.createElement('span');
@@ -191,6 +192,7 @@
     a.textContent = d.label;
     a.target = '_blank';
     a.rel = 'noopener noreferrer';
+    a.hidden = true;
     elFoot.appendChild(a);
     return a;
   });
@@ -220,7 +222,9 @@
     }
     CONFIG.dictionaries.forEach(function (d, i) {
       extLinks[i].href = d.url(q);
+      extLinks[i].hidden = false;
     });
+    elFoot.hidden = false;
 
     bubble.classList.remove('dl-above', 'dl-in');
     bubble.classList.add('dl-show');

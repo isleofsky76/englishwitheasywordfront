@@ -26,7 +26,7 @@ function sanitizeHtml(html) {
     div.innerHTML = html;
     const allowedTags = ['p', 'br', 'strong', 'b', 'em', 'i', 'u', 'span', 'div', 'a', 'img', 'article', 'section', 'h2', 'h3', 'ul', 'ol', 'li', 'footer', 'button', 'header'];
     // Word of the Day 전용 카드(wotd-card 등)를 위해 class 속성 허용
-    const allowedAttributes = ['class', 'style', 'href', 'target', 'rel', 'src', 'alt', 'loading', 'decoding', 'onerror', 'type', 'aria-label', 'title', 'data-wotd-tts', 'aria-hidden'];
+    const allowedAttributes = ['class', 'style', 'href', 'target', 'rel', 'src', 'alt', 'loading', 'decoding', 'onerror', 'width', 'height', 'type', 'aria-label', 'title', 'data-wotd-tts', 'aria-hidden'];
     div.querySelectorAll('*').forEach(el => {
         if (!allowedTags.includes(el.tagName.toLowerCase())) {
             // 태그 제거해도 자식 HTML은 유지 (textContent로 통째로 평탄화하지 않음)

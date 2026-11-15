@@ -26,7 +26,7 @@ function sanitizeHtml(html) {
     div.innerHTML = html;
     const allowedTags = ['p', 'br', 'strong', 'b', 'em', 'i', 'u', 'span', 'div', 'a', 'img', 'figure', 'ol', 'li'];
     // 포토영어 전용 카드(wotd-card 등)를 위해 class 속성 허용
-    const allowedAttributes = ['class', 'style', 'href', 'target', 'rel', 'src', 'alt', 'loading', 'decoding', 'onerror'];
+    const allowedAttributes = ['class', 'style', 'href', 'target', 'rel', 'src', 'alt', 'loading', 'decoding', 'onerror', 'width', 'height'];
     div.querySelectorAll('*').forEach(el => {
         if (!allowedTags.includes(el.tagName.toLowerCase())) {
             el.replaceWith(el.textContent);
