@@ -525,7 +525,7 @@ async function publishOne({
   console.log(`  이미지: /resources/${filename}`);
   if (examples.length) console.log(`  예문(사용자): ${examples.length}개`);
 
-  const generated = await generateEntryContent(pickedWord, { meaning, meaningExtra });
+  const generated = await generateEntryContent(pickedWord, { meaning, meaningExtra, examples });
   if (examples.length) {
     generated.examples = examples.slice(0, 3);
   }

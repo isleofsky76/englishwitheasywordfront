@@ -1,0 +1,22 @@
+[
+  {
+    "word": "gallivant",
+    "image": "gallivant.png",
+    "meaning": "싸돌아다니다, 유흥삼아 돌아다니다",
+    "meaningExtra": "일·책임은 제쳐 두고 재미로 여기저기 다니는 뉘앙스",
+    "examples": [
+      {
+        "en": "Stop gallivanting around and get back to work.",
+        "ko": "그만 싸돌아다니고 일이나 해."
+      },
+      {
+        "en": "He's been gallivanting around Europe for weeks.",
+        "ko": "그는 몇 주째 유럽 곳곳을 놀러 다니고 있다."
+      },
+      {
+        "en": "While I was working, she was gallivanting around town.",
+        "ko": "내가 일하는 동안 그녀는 시내를 싸돌아다니고 있었다."
+      }
+    ]
+  }
+]
