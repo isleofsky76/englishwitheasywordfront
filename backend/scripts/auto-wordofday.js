@@ -2,7 +2,8 @@
  * Word of the Day 자동 게시
  *
  * 준비: resources/ 에 이미지 넣기 (예: resources/smitten.jpg)
- * 입력: 단어 + 이미지(+ 예문은 선택). 뜻·발음 등은 GPT가 채움.
+ * 입력: 단어 + 이미지(+ 예문 최대 3개). 뜻·발음 등은 GPT가 채움.
+ * 예문: 사용자가 준 개수만큼(최대 3) 그대로 게시. 화면에서도 3개까지 표시.
  *
  * 사용법 (backend 폴더):
  *   node scripts/send-wordofday-entry.js --auto --list
@@ -385,7 +386,9 @@ Return JSON with exactly these keys:
   ],
   "nuance": "ONE short Korean sentence on nuance. No HTML. No synonym dictionary dump.",
   "examples": [
-    {"en": "one natural example sentence", "ko": "한국어 번역"}
+    {"en": "example sentence 1", "ko": "한국어 번역 1"},
+    {"en": "example sentence 2", "ko": "한국어 번역 2"},
+    {"en": "example sentence 3", "ko": "한국어 번역 3"}
   ],
   "endef": ["1-2 short English definition sentences for learners"],
   "takeaway": "ONE short Korean takeaway line",
@@ -396,7 +399,7 @@ Return JSON with exactly these keys:
 }
 Rules:
 - collocations: exactly 2–3 items
-- examples: exactly 3 items (use preferred examples if provided; otherwise write 3 natural ones)
+- examples: ALWAYS exactly 3 items (never 1 or 2). If preferred examples are provided, use all of them up to 3; otherwise write 3 natural ones yourself
 - synonyms/antonyms: bare English words only
 - compares[].ko: short gloss of that English word itself (e.g. letter → 일반적인 편지). Never write meta phrases like '~와의 차이', '차이점', '비교'
 - Do not use HTML tags

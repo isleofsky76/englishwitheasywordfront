@@ -5,7 +5,9 @@
 (function (global) {
   'use strict';
 
-  var ASSET_VER = '20261115ex3';
+  var ASSET_VER = '20261115ex3fix';
+  /** 사용자가 준 예문은 항상 최대 3개까지 표시 (2개로 자르지 않음) */
+  var EXAMPLE_LIMIT = 3;
   var COMMENTS_VER = '20261108pw25';
   var SPEAKER_SVG =
     '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M15.5 8.5a5 5 0 0 1 0 7"></path></svg>';
@@ -181,7 +183,7 @@
         ko: ko ? stripTags(ko.innerHTML) : '',
         tag: el.getAttribute('data-tag') || ''
       };
-    }).filter(function (ex) { return ex.enHtml; }).slice(0, 3);
+    }).filter(function (ex) { return ex.enHtml; }).slice(0, EXAMPLE_LIMIT);
 
     var takeawayEl = box.querySelector('.wotd-takeaway');
     var takeaway = takeawayEl ? stripTags(takeawayEl.innerHTML) : '';

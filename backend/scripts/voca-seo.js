@@ -249,11 +249,11 @@ export const BOARD_SEO = {
     cssFile: 'page30_viewpost_wordofday.css',
     cssVersion: '20261020pad1',
     jsFile: 'page30_viewpost_wordofday.js',
-    jsVersion: '20261112cmt1',
+    jsVersion: '20261115ex3fix',
     listHtml: 'word-of-the-day-list.html',
     articleLayout: 'word-detail',
     extraCss: [
-      { file: 'redesign-word.css', version: '20261112cmt1' },
+      { file: 'redesign-word.css', version: '20261115ex3fix' },
       { file: 'site-masthead.css', version: '20261101endef3' },
       { file: 'board-comments.css', version: '20261108adminPw1' },
       { file: 'site-footer.css', version: '20261112dark2' },
