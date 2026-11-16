@@ -743,6 +743,30 @@
     "sbZW8Idvxm0": {
       "at": "2026-11-15T01:12:02.154Z",
       "title": "연관단어 | 식품 물가 인플레이션"
+    },
+    "qWcFvg-SVQA": {
+      "at": "2026-11-16T01:19:45.122Z",
+      "title": "핵심어휘 | 컴퓨터 신종 사기 주의"
+    },
+    "DVt3wJL6gvk": {
+      "at": "2026-11-16T01:19:45.150Z",
+      "title": "연관단어 | 악성코드, 신종사기"
+    },
+    "UJ0aRmwH2ps": {
+      "at": "2026-11-16T01:19:45.163Z",
+      "title": "국제 | 청년 취업 미래가 두렵다"
+    },
+    "ubq-WX4crqk": {
+      "at": "2026-11-16T01:19:45.171Z",
+      "title": "핵심어휘 | 구직 활동으로 인한 스트레스와 절망감을 겪는 젊은이들."
+    },
+    "E4NnOvgzvvI": {
+      "at": "2026-11-16T01:19:45.183Z",
+      "title": "연관단어 | swashbuclking 대담하고 모험적인"
+    },
+    "3nfhBrN7NrQ": {
+      "at": "2026-11-16T01:19:45.206Z",
+      "title": "연관단어 | 록키 50주년"
     }
   },
   "uploadedVideoIds": {
@@ -1481,7 +1505,27 @@
     "sbZW8Idvxm0": {
       "at": "2026-11-15T01:12:10.254Z",
       "board": "english-synonym"
+    },
+    "qWcFvg-SVQA": {
+      "at": "2026-11-16T01:19:53.972Z",
+      "board": "news-voca"
+    },
+    "DVt3wJL6gvk": {
+      "at": "2026-11-16T01:19:57.147Z",
+      "board": "english-synonym"
+    },
+    "ubq-WX4crqk": {
+      "at": "2026-11-16T01:20:02.383Z",
+      "board": "news-voca"
+    },
+    "E4NnOvgzvvI": {
+      "at": "2026-11-16T01:20:09.003Z",
+      "board": "english-synonym"
+    },
+    "3nfhBrN7NrQ": {
+      "at": "2026-11-16T01:20:12.572Z",
+      "board": "english-synonym"
     }
   },
-  "updatedAt": "2026-11-15T01:12:10.254Z"
+  "updatedAt": "2026-11-16T01:20:12.573Z"
 }
