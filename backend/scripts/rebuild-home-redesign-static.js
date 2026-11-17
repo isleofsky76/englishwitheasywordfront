@@ -144,7 +144,15 @@ function mixNews(boards) {
     });
   }
   items.sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0));
-  return items;
+  /* 보드 이동 직후 같은 slug가 두 보드에 남을 수 있음 → href slug 기준 중복 제거 */
+  const seen = new Set();
+  return items.filter((item) => {
+    const m = String(item.href || '').match(/\/([^/]+)\/?$/);
+    const key = m ? m[1] : item.href;
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
 }
 
 function newsCardsHtml(items) {
@@ -367,7 +375,7 @@ function patchAnchorById(html, id, href, innerHtml) {
 
 async function main() {
   console.log('홈 리디자인 정적 링크 … API:', apiBase);
-  const [wotd, intl, korea, defense, economy, industry, quiz, phrases, opinions, culture, calm, quotes] =
+  const [wotd, intl, korea, defense, economy, industry, usNews, quiz, phrases, opinions, culture, calm, quotes] =
     await Promise.all([
       fetchEntries('/wordofday'),
       fetchEntries('/guestbook'),
@@ -375,6 +383,7 @@ async function main() {
       fetchEntries('/defense-news'),
       fetchEntries('/economy-news'),
       fetchEntries('/industry-news'),
+      fetchEntries('/us-news'),
       fetchEntries('/vocabulary-quiz'),
       fetchEntries('/easy-voca'),
       fetchEntries('/opinions'),
@@ -386,6 +395,7 @@ async function main() {
   const news = mixNews([
     { entries: industry, label: '산업', postPath: 'industry-news', page: 'industry-news.html', take: 3 },
     { entries: intl, label: '국제', postPath: 'news-voca', page: 'news-voca.html', take: 2 },
+    { entries: usNews, label: '미국', postPath: 'us-news', page: 'us-news.html', take: 2 },
     { entries: korea, label: '한국', postPath: 'korea-news', page: 'korea-news.html', take: 2 },
     { entries: defense, label: '국방', postPath: 'defense-news', page: 'defense-news.html', take: 2 },
     { entries: economy, label: '경제', postPath: 'economy-news', page: 'economy-news.html', take: 2 },

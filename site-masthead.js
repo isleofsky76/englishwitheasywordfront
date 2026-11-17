@@ -447,8 +447,18 @@
   function syncNavbarHeight() {
     var nav = document.querySelector('.navbar.fixed-top');
     if (!nav) return;
-    var h = Math.ceil(nav.getBoundingClientRect().height);
-    if (h > 0) document.documentElement.style.setProperty('--navbar-height', h + 'px');
+    /* UX-054: 메뉴 펼침 높이(1000px+)로 --navbar-height를 올리지 않음 — 바 높이만 사용 */
+    var bar = nav.querySelector('.site-masthead-bar');
+    var measureEl = bar || nav;
+    var h = Math.ceil(measureEl.getBoundingClientRect().height);
+    /* 열린 메뉴가 바 안에 포함되면 닫힌 높이로 클램프 */
+    if (nav.classList.contains('is-nav-open') && bar) {
+      var brand = bar.querySelector('.site-masthead-brand');
+      var brandH = brand ? Math.ceil(brand.getBoundingClientRect().height) : 0;
+      var closedGuess = Math.max(64, brandH + 28);
+      if (h > closedGuess + 80) h = closedGuess;
+    }
+    if (h > 0) document.documentElement.style.setProperty('--navbar-height', Math.min(h, 120) + 'px');
   }
 
   function injectYoutubeBar() {
@@ -658,11 +668,10 @@
 
     input.addEventListener('input', function () {
       clearTimeout(debounceId);
+      /* UX-035: 입력 바뀌면 이전 자동완성(activeIndex·링크) 즉시 비움 — Enter가 옛 결과로 이동하지 않게 */
+      hideSuggest();
       var q = String(input.value || '').trim();
-      if (!q) {
-        hideSuggest();
-        return;
-      }
+      if (!q) return;
       debounceId = setTimeout(function () { previewSearch(q); }, 180);
     });
 
@@ -704,6 +713,16 @@
         var blockEnter = searchBlockMsg(input.value);
         if (blockEnter) {
           showBlocked(blockEnter);
+          return;
+        }
+        /* 제안 목록이 현재 입력과 무관하면(레이스) form submit 경로로 */
+        var suggestWord = (links[activeIndex].querySelector('.site-search-word') || {}).textContent || '';
+        var qNow = String(input.value || '').trim().toLowerCase();
+        if (qNow && suggestWord && suggestWord.toLowerCase().indexOf(qNow) === -1 &&
+            qNow.indexOf(suggestWord.toLowerCase()) === -1) {
+          hideSuggest();
+          if (form.requestSubmit) form.requestSubmit();
+          else form.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }));
           return;
         }
         trackSiteSearch(input.value, 'site-search-suggest');
@@ -790,13 +809,26 @@
     var btn = nav.querySelector('.site-masthead-mobile-toggle');
     if (!btn || btn.dataset.bound === '1') return;
     btn.dataset.bound = '1';
-    btn.addEventListener('click', function () {
-      var open = !nav.classList.contains('is-nav-open');
+
+    function setNavOpen(open) {
       nav.classList.toggle('is-nav-open', open);
       btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      document.documentElement.classList.toggle('site-nav-drawer-open', open);
       var more = nav.querySelector('.nav-more');
       if (more && typeof more._syncMobileMore === 'function') more._syncMobileMore();
       syncNavbarHeight();
+    }
+
+    btn.addEventListener('click', function () {
+      setNavOpen(!nav.classList.contains('is-nav-open'));
+    });
+
+    /* UX-054: Esc로 모바일 메뉴 닫기 */
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && nav.classList.contains('is-nav-open')) {
+        setNavOpen(false);
+        btn.focus();
+      }
     });
   }
 

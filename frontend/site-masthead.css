@@ -435,6 +435,7 @@
 @media (max-width: 900px) {
   /* 모바일: 로고·메뉴가 화면 상단에 붙지 않도록 */
   .site-masthead-bar {
+    position: relative;
     padding: max(14px, env(safe-area-inset-top, 0px)) 16px 10px;
     min-height: 0;
     gap: 12px;
@@ -449,8 +450,29 @@
     order: 4;
     padding-bottom: 12px;
   }
+  /* UX-054: 메뉴는 오버레이 — 본문을 수백~수천 px 밀어내지 않음 */
+  .site-masthead.is-nav-open {
+    position: relative;
+    z-index: 1200;
+  }
   .site-masthead.is-nav-open .site-masthead-nav-wrap {
     display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    max-height: min(72vh, calc(100dvh - 5rem));
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 12px 16px 20px;
+    box-sizing: border-box;
+    background: var(--page-bg, #F6F3EC);
+    border-bottom: 1px solid rgba(22, 24, 29, 0.1);
+    box-shadow: 0 12px 28px rgba(22, 24, 29, 0.12);
+    z-index: 1210;
+  }
+  html.site-nav-drawer-open {
+    overflow: hidden;
   }
   .site-masthead .site-primary-nav {
     flex-direction: column !important;

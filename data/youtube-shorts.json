@@ -10,9 +10,9 @@
   "items": [
     {
       "videoId": "BN8b5Nto-EU",
-      "category": "국제",
-      "label": "국제",
-      "href": "news-voca-list.html",
+      "category": "한국",
+      "label": "한국",
+      "href": "korea-news-list.html",
       "title": "수능 AI 부정행위",
       "rawTitle": "핵심어휘 | 수능 AI 부정행위",
       "publishedAt": "2026-11-16T12:30:21+00:00",
