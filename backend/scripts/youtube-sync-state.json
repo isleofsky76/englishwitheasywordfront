@@ -791,6 +791,34 @@
     "cpCD3SrgpU8": {
       "at": "2026-11-16T14:08:10.696Z",
       "title": "연관단어 | 경의, 존중"
+    },
+    "KMcziK8Z7FI": {
+      "at": "2026-11-17T16:44:06.904Z",
+      "title": "컬쳐 | 1년 동안 보관할 수 있는 특별한 빵, 프리셀레"
+    },
+    "IIG3x8eSEic": {
+      "at": "2026-11-17T16:44:06.922Z",
+      "title": "미국 | 오마바 추종자들의 부상"
+    },
+    "TbRLfCaVQqU": {
+      "at": "2026-11-17T16:44:06.964Z",
+      "title": "연관단어 | 시종, 조수, 추종자"
+    },
+    "fidszFR3xAA": {
+      "at": "2026-11-17T16:44:07.004Z",
+      "title": "연관단어 | 제임스 본드 캐릭터"
+    },
+    "JhW4bNexNqs": {
+      "at": "2026-11-17T16:44:07.041Z",
+      "title": "컬쳐 | 007 제임스 본드 확정"
+    },
+    "3XFDLYuHO50": {
+      "at": "2026-11-17T16:44:07.060Z",
+      "title": "연관단어 | 속세를 초월한, 딴세상의"
+    },
+    "VvNpJHabxdk": {
+      "at": "2026-11-17T16:44:07.141Z",
+      "title": "컬쳐 | 2027년 여행 트렌드"
     }
   },
   "uploadedVideoIds": {
@@ -1573,7 +1601,35 @@
     "cpCD3SrgpU8": {
       "at": "2026-11-16T14:09:06.729Z",
       "board": "english-synonym"
+    },
+    "KMcziK8Z7FI": {
+      "at": "2026-11-17T16:44:21.099Z",
+      "board": "culture-voca"
+    },
+    "IIG3x8eSEic": {
+      "at": "2026-11-17T16:44:24.373Z",
+      "board": "us-news"
+    },
+    "TbRLfCaVQqU": {
+      "at": "2026-11-17T16:44:30.911Z",
+      "board": "english-synonym"
+    },
+    "fidszFR3xAA": {
+      "at": "2026-11-17T16:44:33.495Z",
+      "board": "english-synonym"
+    },
+    "JhW4bNexNqs": {
+      "at": "2026-11-17T16:44:35.134Z",
+      "board": "culture-voca"
+    },
+    "3XFDLYuHO50": {
+      "at": "2026-11-17T16:44:37.475Z",
+      "board": "english-synonym"
+    },
+    "VvNpJHabxdk": {
+      "at": "2026-11-17T16:44:39.093Z",
+      "board": "culture-voca"
     }
   },
-  "updatedAt": "2026-11-17T00:50:21.088Z"
+  "updatedAt": "2026-11-17T16:44:47.036Z"
 }
