@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-17T16:44:45.866Z",
+  "updatedAt": "2026-11-17T20:42:01.105Z",
   "channelId": "UC4LbF7X56QIHL3Oejt8kuyw",
   "handle": "@istudyeng",
   "source": "https://www.youtube.com/feeds/videos.xml?channel_id=UC4LbF7X56QIHL3Oejt8kuyw",
@@ -85,84 +85,6 @@
       "thumbnail": "https://i.ytimg.com/vi/3XFDLYuHO50/hqdefault.jpg",
       "url": "https://www.youtube.com/shorts/3XFDLYuHO50",
       "watchUrl": "https://www.youtube.com/watch?v=3XFDLYuHO50"
-    },
-    {
-      "videoId": "VvNpJHabxdk",
-      "category": "컬쳐",
-      "label": "컬쳐",
-      "href": "culture-voca-list.html",
-      "title": "2027년 여행 트렌드",
-      "rawTitle": "컬쳐 | 2027년 여행 트렌드",
-      "publishedAt": "2026-11-17T01:00:00+00:00",
-      "publishedKst": "2026-11-17",
-      "thumbnail": "https://i.ytimg.com/vi/VvNpJHabxdk/hqdefault.jpg",
-      "url": "https://www.youtube.com/shorts/VvNpJHabxdk",
-      "watchUrl": "https://www.youtube.com/watch?v=VvNpJHabxdk"
-    },
-    {
-      "videoId": "BN8b5Nto-EU",
-      "category": "국제",
-      "label": "국제",
-      "href": "news-voca-list.html",
-      "title": "수능 AI 부정행위",
-      "rawTitle": "핵심어휘 | 수능 AI 부정행위",
-      "publishedAt": "2026-11-16T12:30:21+00:00",
-      "publishedKst": "2026-11-16",
-      "thumbnail": "https://i.ytimg.com/vi/BN8b5Nto-EU/hqdefault.jpg",
-      "url": "https://www.youtube.com/shorts/BN8b5Nto-EU",
-      "watchUrl": "https://www.youtube.com/watch?v=BN8b5Nto-EU"
-    },
-    {
-      "videoId": "WUFJN82zRfY",
-      "category": "연관단어",
-      "label": "연관단어",
-      "href": "english-synonym-list.html",
-      "title": "시험 감독관",
-      "rawTitle": "연관단어 | 시험 감독관",
-      "publishedAt": "2026-11-16T12:24:17+00:00",
-      "publishedKst": "2026-11-16",
-      "thumbnail": "https://i.ytimg.com/vi/WUFJN82zRfY/hqdefault.jpg",
-      "url": "https://www.youtube.com/shorts/WUFJN82zRfY",
-      "watchUrl": "https://www.youtube.com/watch?v=WUFJN82zRfY"
-    },
-    {
-      "videoId": "AtyuFH1QQMI",
-      "category": "연관단어",
-      "label": "연관단어",
-      "href": "english-synonym-list.html",
-      "title": "궤멸, 초토화",
-      "rawTitle": "연관단어 | 궤멸, 초토화",
-      "publishedAt": "2026-11-16T12:00:06+00:00",
-      "publishedKst": "2026-11-16",
-      "thumbnail": "https://i.ytimg.com/vi/AtyuFH1QQMI/hqdefault.jpg",
-      "url": "https://www.youtube.com/shorts/AtyuFH1QQMI",
-      "watchUrl": "https://www.youtube.com/watch?v=AtyuFH1QQMI"
-    },
-    {
-      "videoId": "cpCD3SrgpU8",
-      "category": "연관단어",
-      "label": "연관단어",
-      "href": "english-synonym-list.html",
-      "title": "경의, 존중",
-      "rawTitle": "연관단어 | 경의, 존중",
-      "publishedAt": "2026-11-16T12:00:05+00:00",
-      "publishedKst": "2026-11-16",
-      "thumbnail": "https://i.ytimg.com/vi/cpCD3SrgpU8/hqdefault.jpg",
-      "url": "https://www.youtube.com/shorts/cpCD3SrgpU8",
-      "watchUrl": "https://www.youtube.com/watch?v=cpCD3SrgpU8"
-    },
-    {
-      "videoId": "MJKSPf0IzRk",
-      "category": "미국",
-      "label": "미국",
-      "href": "us-news-list.html",
-      "title": "젠슨 황 스캔들 트럼프 내각으로 번져",
-      "rawTitle": "미국 | 젠슨 황 스캔들 트럼프 내각으로 번져",
-      "publishedAt": "2026-11-16T08:00:30+00:00",
-      "publishedKst": "2026-11-16",
-      "thumbnail": "https://i.ytimg.com/vi/MJKSPf0IzRk/hqdefault.jpg",
-      "url": "https://www.youtube.com/shorts/MJKSPf0IzRk",
-      "watchUrl": "https://www.youtube.com/watch?v=MJKSPf0IzRk"
     }
   ]
 }
