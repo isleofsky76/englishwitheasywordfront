@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-17T16:44:45.866Z",
+  "updatedAt": "2026-11-18T02:34:41.169Z",
   "channelId": "UC4LbF7X56QIHL3Oejt8kuyw",
   "handle": "@istudyeng",
   "source": "https://www.youtube.com/feeds/videos.xml?channel_id=UC4LbF7X56QIHL3Oejt8kuyw",
@@ -8,6 +8,45 @@
   "todayOnly": false,
   "categorizedOnly": true,
   "items": [
+    {
+      "videoId": "b89Dm224DNY",
+      "category": "국제",
+      "label": "국제",
+      "href": "news-voca-list.html",
+      "title": "K드라마 로맨타지",
+      "rawTitle": "핵심어휘 | K드라마 로맨타지",
+      "publishedAt": "2026-11-18T02:25:40+00:00",
+      "publishedKst": "2026-11-18",
+      "thumbnail": "https://i.ytimg.com/vi/b89Dm224DNY/hqdefault.jpg",
+      "url": "https://www.youtube.com/shorts/b89Dm224DNY",
+      "watchUrl": "https://www.youtube.com/watch?v=b89Dm224DNY"
+    },
+    {
+      "videoId": "ovRmTyssCMw",
+      "category": "연관단어",
+      "label": "연관단어",
+      "href": "english-synonym-list.html",
+      "title": "K드라마 로맨타지",
+      "rawTitle": "연관단어 | K드라마 로맨타지",
+      "publishedAt": "2026-11-18T02:00:07+00:00",
+      "publishedKst": "2026-11-18",
+      "thumbnail": "https://i.ytimg.com/vi/ovRmTyssCMw/hqdefault.jpg",
+      "url": "https://www.youtube.com/shorts/ovRmTyssCMw",
+      "watchUrl": "https://www.youtube.com/watch?v=ovRmTyssCMw"
+    },
+    {
+      "videoId": "NZ5X6P9_KZU",
+      "category": "한국",
+      "label": "한국",
+      "href": "korea-news-list.html",
+      "title": "찜질방, 사우나키트 남대문 목욕용품 열풍",
+      "rawTitle": "한국 | 찜질방, 사우나키트 남대문 목욕용품 열풍",
+      "publishedAt": "2026-11-18T01:00:18+00:00",
+      "publishedKst": "2026-11-18",
+      "thumbnail": "https://i.ytimg.com/vi/NZ5X6P9_KZU/hqdefault.jpg",
+      "url": "https://www.youtube.com/shorts/NZ5X6P9_KZU",
+      "watchUrl": "https://www.youtube.com/watch?v=NZ5X6P9_KZU"
+    },
     {
       "videoId": "KMcziK8Z7FI",
       "category": "컬쳐",
@@ -124,45 +163,6 @@
       "thumbnail": "https://i.ytimg.com/vi/WUFJN82zRfY/hqdefault.jpg",
       "url": "https://www.youtube.com/shorts/WUFJN82zRfY",
       "watchUrl": "https://www.youtube.com/watch?v=WUFJN82zRfY"
-    },
-    {
-      "videoId": "AtyuFH1QQMI",
-      "category": "연관단어",
-      "label": "연관단어",
-      "href": "english-synonym-list.html",
-      "title": "궤멸, 초토화",
-      "rawTitle": "연관단어 | 궤멸, 초토화",
-      "publishedAt": "2026-11-16T12:00:06+00:00",
-      "publishedKst": "2026-11-16",
-      "thumbnail": "https://i.ytimg.com/vi/AtyuFH1QQMI/hqdefault.jpg",
-      "url": "https://www.youtube.com/shorts/AtyuFH1QQMI",
-      "watchUrl": "https://www.youtube.com/watch?v=AtyuFH1QQMI"
-    },
-    {
-      "videoId": "cpCD3SrgpU8",
-      "category": "연관단어",
-      "label": "연관단어",
-      "href": "english-synonym-list.html",
-      "title": "경의, 존중",
-      "rawTitle": "연관단어 | 경의, 존중",
-      "publishedAt": "2026-11-16T12:00:05+00:00",
-      "publishedKst": "2026-11-16",
-      "thumbnail": "https://i.ytimg.com/vi/cpCD3SrgpU8/hqdefault.jpg",
-      "url": "https://www.youtube.com/shorts/cpCD3SrgpU8",
-      "watchUrl": "https://www.youtube.com/watch?v=cpCD3SrgpU8"
-    },
-    {
-      "videoId": "MJKSPf0IzRk",
-      "category": "미국",
-      "label": "미국",
-      "href": "us-news-list.html",
-      "title": "젠슨 황 스캔들 트럼프 내각으로 번져",
-      "rawTitle": "미국 | 젠슨 황 스캔들 트럼프 내각으로 번져",
-      "publishedAt": "2026-11-16T08:00:30+00:00",
-      "publishedKst": "2026-11-16",
-      "thumbnail": "https://i.ytimg.com/vi/MJKSPf0IzRk/hqdefault.jpg",
-      "url": "https://www.youtube.com/shorts/MJKSPf0IzRk",
-      "watchUrl": "https://www.youtube.com/watch?v=MJKSPf0IzRk"
     }
   ]
 }

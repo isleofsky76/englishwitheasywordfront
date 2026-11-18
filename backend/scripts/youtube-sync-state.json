@@ -819,6 +819,18 @@
     "VvNpJHabxdk": {
       "at": "2026-11-17T16:44:07.141Z",
       "title": "컬쳐 | 2027년 여행 트렌드"
+    },
+    "b89Dm224DNY": {
+      "at": "2026-11-18T02:27:01.629Z",
+      "title": "핵심어휘 | K드라마 로맨타지"
+    },
+    "ovRmTyssCMw": {
+      "at": "2026-11-18T02:27:02.717Z",
+      "title": "연관단어 | K드라마 로맨타지"
+    },
+    "NZ5X6P9_KZU": {
+      "at": "2026-11-18T02:27:03.032Z",
+      "title": "한국 | 찜질방, 사우나키트 남대문 목욕용품 열풍"
     }
   },
   "uploadedVideoIds": {
@@ -1629,7 +1641,19 @@
     "VvNpJHabxdk": {
       "at": "2026-11-17T16:44:39.093Z",
       "board": "culture-voca"
+    },
+    "b89Dm224DNY": {
+      "at": "2026-11-18T02:27:23.739Z",
+      "board": "news-voca"
+    },
+    "ovRmTyssCMw": {
+      "at": "2026-11-18T02:27:37.982Z",
+      "board": "english-synonym"
+    },
+    "NZ5X6P9_KZU": {
+      "at": "2026-11-18T02:27:44.920Z",
+      "board": "korea-news"
     }
   },
-  "updatedAt": "2026-11-17T16:44:47.036Z"
+  "updatedAt": "2026-11-18T02:27:44.920Z"
 }

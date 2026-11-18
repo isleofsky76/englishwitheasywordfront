@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-17T20:42:01.105Z",
+  "updatedAt": "2026-11-18T02:34:41.169Z",
   "channelId": "UC4LbF7X56QIHL3Oejt8kuyw",
   "handle": "@istudyeng",
   "source": "https://www.youtube.com/feeds/videos.xml?channel_id=UC4LbF7X56QIHL3Oejt8kuyw",
@@ -8,6 +8,45 @@
   "todayOnly": false,
   "categorizedOnly": true,
   "items": [
+    {
+      "videoId": "b89Dm224DNY",
+      "category": "국제",
+      "label": "국제",
+      "href": "news-voca-list.html",
+      "title": "K드라마 로맨타지",
+      "rawTitle": "핵심어휘 | K드라마 로맨타지",
+      "publishedAt": "2026-11-18T02:25:40+00:00",
+      "publishedKst": "2026-11-18",
+      "thumbnail": "https://i.ytimg.com/vi/b89Dm224DNY/hqdefault.jpg",
+      "url": "https://www.youtube.com/shorts/b89Dm224DNY",
+      "watchUrl": "https://www.youtube.com/watch?v=b89Dm224DNY"
+    },
+    {
+      "videoId": "ovRmTyssCMw",
+      "category": "연관단어",
+      "label": "연관단어",
+      "href": "english-synonym-list.html",
+      "title": "K드라마 로맨타지",
+      "rawTitle": "연관단어 | K드라마 로맨타지",
+      "publishedAt": "2026-11-18T02:00:07+00:00",
+      "publishedKst": "2026-11-18",
+      "thumbnail": "https://i.ytimg.com/vi/ovRmTyssCMw/hqdefault.jpg",
+      "url": "https://www.youtube.com/shorts/ovRmTyssCMw",
+      "watchUrl": "https://www.youtube.com/watch?v=ovRmTyssCMw"
+    },
+    {
+      "videoId": "NZ5X6P9_KZU",
+      "category": "한국",
+      "label": "한국",
+      "href": "korea-news-list.html",
+      "title": "찜질방, 사우나키트 남대문 목욕용품 열풍",
+      "rawTitle": "한국 | 찜질방, 사우나키트 남대문 목욕용품 열풍",
+      "publishedAt": "2026-11-18T01:00:18+00:00",
+      "publishedKst": "2026-11-18",
+      "thumbnail": "https://i.ytimg.com/vi/NZ5X6P9_KZU/hqdefault.jpg",
+      "url": "https://www.youtube.com/shorts/NZ5X6P9_KZU",
+      "watchUrl": "https://www.youtube.com/watch?v=NZ5X6P9_KZU"
+    },
     {
       "videoId": "KMcziK8Z7FI",
       "category": "컬쳐",
@@ -85,6 +124,45 @@
       "thumbnail": "https://i.ytimg.com/vi/3XFDLYuHO50/hqdefault.jpg",
       "url": "https://www.youtube.com/shorts/3XFDLYuHO50",
       "watchUrl": "https://www.youtube.com/watch?v=3XFDLYuHO50"
+    },
+    {
+      "videoId": "VvNpJHabxdk",
+      "category": "컬쳐",
+      "label": "컬쳐",
+      "href": "culture-voca-list.html",
+      "title": "2027년 여행 트렌드",
+      "rawTitle": "컬쳐 | 2027년 여행 트렌드",
+      "publishedAt": "2026-11-17T01:00:00+00:00",
+      "publishedKst": "2026-11-17",
+      "thumbnail": "https://i.ytimg.com/vi/VvNpJHabxdk/hqdefault.jpg",
+      "url": "https://www.youtube.com/shorts/VvNpJHabxdk",
+      "watchUrl": "https://www.youtube.com/watch?v=VvNpJHabxdk"
+    },
+    {
+      "videoId": "BN8b5Nto-EU",
+      "category": "국제",
+      "label": "국제",
+      "href": "news-voca-list.html",
+      "title": "수능 AI 부정행위",
+      "rawTitle": "핵심어휘 | 수능 AI 부정행위",
+      "publishedAt": "2026-11-16T12:30:21+00:00",
+      "publishedKst": "2026-11-16",
+      "thumbnail": "https://i.ytimg.com/vi/BN8b5Nto-EU/hqdefault.jpg",
+      "url": "https://www.youtube.com/shorts/BN8b5Nto-EU",
+      "watchUrl": "https://www.youtube.com/watch?v=BN8b5Nto-EU"
+    },
+    {
+      "videoId": "WUFJN82zRfY",
+      "category": "연관단어",
+      "label": "연관단어",
+      "href": "english-synonym-list.html",
+      "title": "시험 감독관",
+      "rawTitle": "연관단어 | 시험 감독관",
+      "publishedAt": "2026-11-16T12:24:17+00:00",
+      "publishedKst": "2026-11-16",
+      "thumbnail": "https://i.ytimg.com/vi/WUFJN82zRfY/hqdefault.jpg",
+      "url": "https://www.youtube.com/shorts/WUFJN82zRfY",
+      "watchUrl": "https://www.youtube.com/watch?v=WUFJN82zRfY"
     }
   ]
 }
