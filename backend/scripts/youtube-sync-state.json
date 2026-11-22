@@ -891,6 +891,30 @@
     "kzqETvTpCrQ": {
       "at": "2026-11-21T10:01:51.760Z",
       "title": "연관단어 | 불화, 반목, 복수"
+    },
+    "qo4GrUC-B5I": {
+      "at": "2026-11-22T05:02:38.779Z",
+      "title": "연관단어 | 허영, 자만"
+    },
+    "nwLjjqp9oYM": {
+      "at": "2026-11-22T05:02:38.792Z",
+      "title": "미국 | 트럼프 백악관 기자 회견을 대선 승계 오디션으로"
+    },
+    "8ywBEj0w_Hc": {
+      "at": "2026-11-22T05:02:38.798Z",
+      "title": "연관단어 | 고립, 배척, 소외"
+    },
+    "62lgMyyNRJQ": {
+      "at": "2026-11-22T05:02:38.811Z",
+      "title": "연관단어 | 아첨과 비위"
+    },
+    "oJAgKf7Ic9Q": {
+      "at": "2026-11-22T05:02:38.827Z",
+      "title": "연관단어 | 난리, 법석"
+    },
+    "xzDCij2R7zg": {
+      "at": "2026-11-22T05:02:38.842Z",
+      "title": "미국 | 최근 미국에서 발생한 정전의 원인은 무엇일까요?"
     }
   },
   "uploadedVideoIds": {
@@ -1789,7 +1813,31 @@
     "kzqETvTpCrQ": {
       "at": "2026-11-21T10:02:12.989Z",
       "board": "english-synonym"
+    },
+    "qo4GrUC-B5I": {
+      "at": "2026-11-22T05:02:51.530Z",
+      "board": "english-synonym"
+    },
+    "nwLjjqp9oYM": {
+      "at": "2026-11-22T05:02:53.383Z",
+      "board": "us-news"
+    },
+    "8ywBEj0w_Hc": {
+      "at": "2026-11-22T05:03:00.306Z",
+      "board": "english-synonym"
+    },
+    "62lgMyyNRJQ": {
+      "at": "2026-11-22T05:03:09.294Z",
+      "board": "english-synonym"
+    },
+    "oJAgKf7Ic9Q": {
+      "at": "2026-11-22T05:03:18.106Z",
+      "board": "english-synonym"
+    },
+    "xzDCij2R7zg": {
+      "at": "2026-11-22T05:03:30.339Z",
+      "board": "us-news"
     }
   },
-  "updatedAt": "2026-11-21T10:02:12.990Z"
+  "updatedAt": "2026-11-22T05:03:30.340Z"
 }
