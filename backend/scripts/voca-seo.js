@@ -94,7 +94,8 @@ export const BOARD_SEO = {
     cssFile: 'news-voca.css',
     cssVersion: '20261020rd21',
     jsFile: 'us-news.js',
-    jsVersion: '20261111tts3',
+    jsVersion: '20261122tts1',
+    extraJs: [{ file: 'redesign-article.js', version: '20261122tts1' }],
     listHtml: 'us-news-list.html',
   },
   'weather-news': {
@@ -617,7 +618,7 @@ ${(board.extraCss || []).map((c) => `    <link rel="stylesheet" href="../../${c.
     <link rel="stylesheet" href="../../redesign-tokens.css?v=20261020rd27">
     <link rel="stylesheet" href="../../site-masthead.css?v=20261108wx1">
     <link rel="stylesheet" href="../../redesign-article.css?v=20261115engage1">
-    <link rel="preload" href="../../redesign-article.js?v=20261115engage1" as="script">
+${(board.extraJs || []).some((j) => j.file === 'redesign-article.js') ? `    <link rel="preload" href="../../redesign-article.js?v=${(board.extraJs || []).find((j) => j.file === 'redesign-article.js').version}" as="script">` : ''}
     <style id="rd-fouc-guard">
       /* SEO 구형 본문이 redesign 전에 깜빡이지 않도록 (!important 금지: 키프레임 fallback이 무시됨) */
       body[data-nv-board]:not(.rd-ready) #post-container {

@@ -266,22 +266,28 @@ function vvStartEnglishTTS(text, btn) {
     if (!text || !window.speechSynthesis) return;
     try {
         speechSynthesis.cancel();
-        const u = new SpeechSynthesisUtterance(text);
-        u.lang = 'en-US';
-        u.rate = 0.92;
-        u.volume = 1;
-        u.pitch = 1;
-        const voices = speechSynthesis.getVoices();
-        const en =
-            voices.find((v) => v.lang && /^en-US/i.test(v.lang)) ||
-            voices.find((v) => v.lang && /^en(-|$)/i.test(v.lang));
-        if (en) u.voice = en;
-        const done = () => {
-            if (btn) btn.classList.remove('vv-tts-playing');
+        if (speechSynthesis.paused) speechSynthesis.resume();
+        const speak = () => {
+            const u = new SpeechSynthesisUtterance(text);
+            u.lang = 'en-US';
+            u.rate = 0.92;
+            u.volume = 1;
+            u.pitch = 1;
+            const voices = speechSynthesis.getVoices();
+            const en =
+                voices.find((v) => v.lang && /^en-US/i.test(v.lang)) ||
+                voices.find((v) => v.lang && /^en(-|$)/i.test(v.lang));
+            if (en) u.voice = en;
+            const done = () => {
+                if (btn) btn.classList.remove('vv-tts-playing');
+            };
+            u.onend = done;
+            u.onerror = done;
+            speechSynthesis.speak(u);
+            if (speechSynthesis.paused) speechSynthesis.resume();
         };
-        u.onend = done;
-        u.onerror = done;
-        speechSynthesis.speak(u);
+        /* Chrome: cancel() 직후 speak는 묵음 */
+        setTimeout(speak, 60);
     } catch (e) {
         if (btn) btn.classList.remove('vv-tts-playing');
         console.warn('Guestbook TTS:', e);
