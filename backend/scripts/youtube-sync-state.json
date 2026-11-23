@@ -915,6 +915,22 @@
     "xzDCij2R7zg": {
       "at": "2026-11-22T05:02:38.842Z",
       "title": "미국 | 최근 미국에서 발생한 정전의 원인은 무엇일까요?"
+    },
+    "qWzXTIpNvw8": {
+      "at": "2026-11-23T12:31:20.075Z",
+      "title": "연관단어 | 식품, 농산물 수출"
+    },
+    "7S6xoJMbmBM": {
+      "at": "2026-11-23T12:31:20.156Z",
+      "title": "연관단어 | AI와 이별"
+    },
+    "_QTRWR8h9BE": {
+      "at": "2026-11-23T12:31:20.300Z",
+      "title": "연관단어 | 미국 화물열차 절도 사건"
+    },
+    "idMRIgcvfAg": {
+      "at": "2026-11-23T12:31:20.606Z",
+      "title": "연관단어 |  AI 부정행위 파문에 교육부 장관 사임"
     }
   },
   "uploadedVideoIds": {
@@ -1837,7 +1853,23 @@
     "xzDCij2R7zg": {
       "at": "2026-11-22T05:03:30.339Z",
       "board": "us-news"
+    },
+    "qWzXTIpNvw8": {
+      "at": "2026-11-23T12:31:34.846Z",
+      "board": "english-synonym"
+    },
+    "7S6xoJMbmBM": {
+      "at": "2026-11-23T12:31:43.171Z",
+      "board": "english-synonym"
+    },
+    "_QTRWR8h9BE": {
+      "at": "2026-11-23T12:32:03.892Z",
+      "board": "english-synonym"
+    },
+    "idMRIgcvfAg": {
+      "at": "2026-11-23T12:32:17.500Z",
+      "board": "english-synonym"
     }
   },
-  "updatedAt": "2026-11-22T05:03:30.340Z"
+  "updatedAt": "2026-11-23T12:32:17.501Z"
 }
