@@ -17,23 +17,23 @@ import { applySeoAfterUpload, toIsoDateOnly, SITE_ORIGIN } from './voca-seo.js';
 
 // ========== 여기만 수정 ==========
 
-const imageSrc = '/resources/journey-of-a-thousand-miles.jpg';
+const imageSrc = '/resources/key.png';
 
 const quote = {
-  title: '천 리 길도 한 걸음부터: 노자가 전하는 시작의 힘',
+  title: '자신감의 열쇠는 준비: 아서 애시의 성공 공식',
   intro:
-    '새로운 프로젝트를 시작하거나, 외국어를 공부하거나, 운동 습관을 만들 때 우리는 종종 목표의 거대함에 압도되어 주저앉곤 합니다. 그럴 때 마음에 새겨두면 좋은 문장이 있습니다.',
-  en: 'A journey of a thousand miles begins with a single step.',
-  ko: '천 리 길도 한 걸음부터 시작된다.',
-  authorKo: '노자 (Lao Tzu)',
-  originTitle: '명언 속 깊은 유래: 도덕경 64장',
+    '시험, 면접, 발표처럼 중요한 순간이 다가올수록 자신감이 흔들리기 쉽습니다. 그럴 때 기억해 두면 좋은 문장이 있습니다.',
+  en: 'One important key to success is self-confidence. An important key to self-confidence is preparation.',
+  ko: '성공으로 가는 중요한 열쇠 한가지는 자신감이고 자신감을 얻는 중요한 열쇠는 준비성이다.',
+  authorKo: '아서 애시 (Arthur Ashe)',
+  originTitle: '명언 속 배경: 테니스 전설 아서 애시',
   originBody:
-    '이 문장은 중국 춘추시대의 대철학자 노자(老子)가 쓴 《도덕경(道德經)》 64장에 나오는 구절에서 비롯되었습니다.',
-  classic: '千里之行 始於足下 (천리지행 시어족하)',
-  classicKo: '천 리에 이르는 먼 길도 지금 내 발밑의 첫걸음에서 시작된다.',
+    '이 문장은 미국 테니스 선수 아서 애시(Arthur Ashe)의 말로 알려져 있습니다. 그는 흑인 선수로서 장벽을 넘으며 그랜드슬램을 우승했고, 코트 안팎에서 준비와 품격을 강조했습니다. 성공을 자신감만의 문제로 보지 않고, 그 자신감이 철저한 준비에서 나온다고 본 점이 이 문장의 핵심입니다.',
+  classic: 'Preparation → Self-confidence → Success',
+  classicKo: '준비가 자신감을 만들고, 자신감이 성공으로 이어진다.',
   closing:
-    '이것이 바로 우리가 흔히 쓰는 “천 리 길도 한 걸음부터”의 원형입니다. 노자는 거대한 나무도 작은 싹에서 자라고, 높은 누대도 한 삼태기의 흙에서 시작된다고 비유합니다. 결국 어떤 위대한 성취나 거대한 계획도, 지금 당장 디딜 수 있는 가장 작은 행동들의 모임으로 완성된다는 뜻입니다.',
-  tip: '이번 주도 작은 한 걸음부터 가볍게 시작해 보세요!',
+    '막연히 “자신감을 가져야지”라고 다짐하기보다, 오늘 할 수 있는 준비를 하나씩 쌓는 편이 더 실질적입니다. 준비가 쌓일수록 마음이 단단해지고, 그 단단함이 중요한 순간에 실력으로 드러납니다.',
+  tip: '큰 목표 앞에서 막막하다면, 지금 바로 할 수 있는 작은 준비 한 가지부터 시작해 보세요!',
 };
 
 function escapeHtml(text) {
@@ -76,16 +76,16 @@ const entry = {
 
   nickname: 'admin',
 
-  password: 'seed_password_journey-of-a-thousand-miles',
+  password: 'seed_password_key-to-self-confidence',
 
   isSecret: false,
 
-  slug: 'journey-of-a-thousand-miles',
+  slug: 'key-to-self-confidence',
 
   metaDescription:
-    '천 리 길도 한 걸음부터. Lao Tzu 영어 명언 뜻과 도덕경 64장 유래, 千里之行 始於足下 해설.',
+    'One important key to success is self-confidence. Arthur Ashe 영어 명언 뜻과 자신감·준비의 관계 해설.',
 
-  datePublished: '2026-10-13',
+  datePublished: '2026-11-23',
 };
 // =================================
 
