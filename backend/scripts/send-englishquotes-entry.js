@@ -17,23 +17,23 @@ import { applySeoAfterUpload, toIsoDateOnly, SITE_ORIGIN } from './voca-seo.js';
 
 // ========== 여기만 수정 ==========
 
-const imageSrc = '/resources/arthur.png';
+const imageSrc = '/resources/new-vigor.png';
 
 const quote = {
-  title: '자신감의 열쇠는 준비: 아서 애시의 성공 공식',
+  title: '여행이 주는 활력: 세네카가 전하는 장소의 힘',
   intro:
-    '시험, 면접, 발표처럼 중요한 순간이 다가올수록 자신감이 흔들리기 쉽습니다. 그럴 때 기억해 두면 좋은 문장이 있습니다.',
-  en: 'One important key to success is self-confidence. An important key to self-confidence is preparation.',
-  ko: '성공으로 가는 중요한 열쇠 한가지는 자신감이고 자신감을 얻는 중요한 열쇠는 준비성이다.',
-  authorKo: '아서 애시 (Arthur Ashe)',
-  originTitle: '명언 속 배경: 테니스 전설 아서 애시',
+    '같은 자리, 같은 루틴에 오래 머물다 보면 생각도 굳어지기 쉽습니다. 그때 마음에 새겨두면 좋은 문장이 있습니다.',
+  en: 'Travel and change of place impart new vigor to the mind.',
+  ko: '여행과 장소의 변화는 정신에 활력을 준다.',
+  authorKo: '세네카 (Seneca)',
+  originTitle: '명언 속 배경: 스토아 철학자 세네카',
   originBody:
-    '이 문장은 미국 테니스 선수 아서 애시(Arthur Ashe)의 말로 알려져 있습니다. 그는 흑인 선수로서 장벽을 넘으며 그랜드슬램을 우승했고, 코트 안팎에서 준비와 품격을 강조했습니다. 성공을 자신감만의 문제로 보지 않고, 그 자신감이 철저한 준비에서 나온다고 본 점이 이 문장의 핵심입니다.',
-  classic: 'Preparation → Self-confidence → Success',
-  classicKo: '준비가 자신감을 만들고, 자신감이 성공으로 이어진다.',
+    '이 문장은 로마의 스토아 철학자 세네카(Lucius Annaeus Seneca)의 사상과 맞닿아 있는 말로 알려져 있습니다. 그는 마음의 평정을 중시하면서도, 환경을 바꾸는 경험이 사고를 깨우고 시선을 새롭게 한다고 보았습니다. 여행은 단순한 이동이 아니라, 정신에 다시 힘을 불어넣는 자극이 될 수 있다는 뜻입니다.',
+  classic: 'Travel · Change of place · New vigor',
+  classicKo: '장소를 바꾸는 여행이 마음에 새로운 활력을 불어넣는다.',
   closing:
-    '막연히 “자신감을 가져야지”라고 다짐하기보다, 오늘 할 수 있는 준비를 하나씩 쌓는 편이 더 실질적입니다. 준비가 쌓일수록 마음이 단단해지고, 그 단단함이 중요한 순간에 실력으로 드러납니다.',
-  tip: '큰 목표 앞에서 막막하다면, 지금 바로 할 수 있는 작은 준비 한 가지부터 시작해 보세요!',
+    '멀리 떠나지 못해도 좋습니다. 익숙한 길 대신 다른 골목을 걷거나, 잠시 풍경을 바꿔 보는 것만으로도 생각이 환기될 수 있습니다. 변화는 도피가 아니라, 정신을 다시 깨우는 한 방법이 될 수 있습니다.',
+  tip: '이번 주에는 평소와 다른 장소에서 잠시 머물러 보며 마음에 활력을 더해 보세요!',
 };
 
 function escapeHtml(text) {
@@ -76,16 +76,16 @@ const entry = {
 
   nickname: 'admin',
 
-  password: 'seed_password_key-to-self-confidence',
+  password: 'seed_password_travel-new-vigor',
 
   isSecret: false,
 
-  slug: 'key-to-self-confidence',
+  slug: 'travel-new-vigor',
 
   metaDescription:
-    'One important key to success is self-confidence. Arthur Ashe 영어 명언 뜻과 자신감·준비의 관계 해설.',
+    'Travel and change of place impart new vigor to the mind. Seneca 영어 명언 뜻과 여행·장소 변화의 힘 해설.',
 
-  datePublished: '2026-11-23',
+  datePublished: '2016-07-13',
 };
 // =================================
 
