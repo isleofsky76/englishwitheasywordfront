@@ -50,7 +50,7 @@ function sanitizeHtml(html) {
     // 허용된 태그와 속성
     const allowedTags = ['p', 'br', 'strong', 'b', 'em', 'i', 'u', 'span', 'div', 'a', 'img', 'button', 'mark', 'h2', 'h3', 'blockquote', 'hr', 'footer'];
     const allowedAttributes = [
-        'style', 'href', 'target', 'rel', 'src', 'alt', 'loading', 'decoding', 'onerror', 'width', 'height',
+        'style', 'href', 'target', 'rel', 'src', 'alt', 'loading', 'decoding', 'fetchpriority', 'onerror', 'width', 'height',
         'type', 'class', 'aria-label', 'title', 'data-vv-tts',
     ];
     
@@ -492,6 +492,18 @@ async function loadPost() {
         }
         const postContent = document.getElementById('post-content');
         if (postContent) attachVocabularyWebTTS(postContent);
+        /* innerHTML 재삽입 후 lazy 히어로 이미지가 안 뜨는 경우 복구 */
+        document.querySelectorAll('#post-message img.eq-hero-image, #post-message > .eq-card > p:first-child img').forEach((img) => {
+            img.loading = 'eager';
+            img.setAttribute('fetchpriority', 'high');
+            if (!img.complete || img.naturalWidth === 0) {
+                const src = img.getAttribute('src');
+                if (src) {
+                    img.removeAttribute('src');
+                    img.src = src;
+                }
+            }
+        });
 
         if (typeof markViewpostReady === 'function') markViewpostReady();
         else if (typeof markArticleReady === 'function') markArticleReady();
