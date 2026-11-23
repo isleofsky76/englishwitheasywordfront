@@ -17,23 +17,23 @@ import { applySeoAfterUpload, toIsoDateOnly, SITE_ORIGIN } from './voca-seo.js';
 
 // ========== 여기만 수정 ==========
 
-const imageSrc = '/resources/new-vigor.png';
+const imageSrc = '/resources/perfect.png';
 
 const quote = {
-  title: '여행이 주는 활력: 세네카가 전하는 장소의 힘',
+  title: '완벽한 연습만이 완벽을 만든다: 빈스 롬바르디',
   intro:
-    '같은 자리, 같은 루틴에 오래 머물다 보면 생각도 굳어지기 쉽습니다. 그때 마음에 새겨두면 좋은 문장이 있습니다.',
-  en: 'Travel and change of place impart new vigor to the mind.',
-  ko: '여행과 장소의 변화는 정신에 활력을 준다.',
-  authorKo: '세네카 (Seneca)',
-  originTitle: '명언 속 배경: 스토아 철학자 세네카',
+    '같은 동작을 그저 많이 반복한다고 해서 실력이 늘지는 않습니다. 그럴 때 마음에 새겨두면 좋은 문장이 있습니다.',
+  en: 'Practice does not make perfect. Only perfect practice makes perfect.',
+  ko: '연습이 완벽함을 만들어주지는 않습니다. 완벽한 연습만이 완벽하게 해줍니다.',
+  authorKo: '빈스 롬바르디 (Vince Lombardi)',
+  originTitle: '명언 속 배경: 전설의 미식축구 코치 빈스 롬바르디',
   originBody:
-    '이 문장은 로마의 스토아 철학자 세네카(Lucius Annaeus Seneca)의 사상과 맞닿아 있는 말로 알려져 있습니다. 그는 마음의 평정을 중시하면서도, 환경을 바꾸는 경험이 사고를 깨우고 시선을 새롭게 한다고 보았습니다. 여행은 단순한 이동이 아니라, 정신에 다시 힘을 불어넣는 자극이 될 수 있다는 뜻입니다.',
-  classic: 'Travel → Change of place → New vigor',
-  classicKo: '여행으로 자리를 바꾸면, 마음에 새 활력이 생긴다.',
+    '이 문장은 미국 미식축구 코치 빈스 롬바르디(Vince Lombardi)의 말로 알려져 있습니다. 그는 그린베이 패커스를 이끌며 엄격한 훈련과 정확한 실행을 강조했습니다. 연습의 양이 아니라, 올바른 방식으로 반복하는 질이 실력을 만든다는 점이 이 문장의 핵심입니다.',
+  classic: 'Practice alone → Not enough | Perfect practice → Perfect',
+  classicKo: '그냥 반복만으로는 부족하다. 제대로 한 연습만이 완벽으로 이어진다.',
   closing:
-    '멀리 떠나지 못해도 좋습니다. 익숙한 길 대신 다른 골목을 걷거나, 잠시 풍경을 바꿔 보는 것만으로도 생각이 환기될 수 있습니다. 변화는 도피가 아니라, 정신을 다시 깨우는 한 방법이 될 수 있습니다.',
-  tip: '이번 주에는 평소와 다른 장소에서 잠시 머물러 보며 마음에 활력을 더해 보세요!',
+    '공부든 운동이든, “얼마나 했느냐”보다 “어떻게 했느냐”가 결과를 가릅니다. 대충 여러 번 하는 연습은 나쁜 습관만 굳힐 수 있습니다. 한 번을 하더라도 집중해서, 올바른 방식으로 연습하는 편이 더 멀리 갑니다.',
+  tip: '오늘 연습할 때, 횟수보다 한 번의 정확도에 먼저 집중해 보세요!',
 };
 
 function escapeHtml(text) {
@@ -76,16 +76,16 @@ const entry = {
 
   nickname: 'admin',
 
-  password: 'seed_password_travel-new-vigor',
+  password: 'seed_password_perfect-practice',
 
   isSecret: false,
 
-  slug: 'travel-new-vigor',
+  slug: 'perfect-practice',
 
   metaDescription:
-    'Travel and change of place impart new vigor to the mind. Seneca 영어 명언 뜻과 여행·장소 변화의 힘 해설.',
+    'Practice does not make perfect. Only perfect practice makes perfect. Vince Lombardi 영어 명언 뜻과 완벽한 연습의 힘 해설.',
 
-  datePublished: '2016-07-13',
+  datePublished: '2026-11-23',
 };
 // =================================
 
