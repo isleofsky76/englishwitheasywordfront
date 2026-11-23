@@ -17,7 +17,7 @@ import { applySeoAfterUpload, toIsoDateOnly, SITE_ORIGIN } from './voca-seo.js';
 
 // ========== 여기만 수정 ==========
 
-const imageSrc = '/resources/key.png';
+const imageSrc = '/resources/arthur.png';
 
 const quote = {
   title: '자신감의 열쇠는 준비: 아서 애시의 성공 공식',
