@@ -232,9 +232,11 @@ export const BOARD_SEO = {
     cssFile: 'page30_viewpost_english_quotes.css',
     cssVersion: '20261013a',
     jsFile: 'page30_viewpost_english_quotes.js',
-    jsVersion: '20261013a',
+    jsVersion: '20261123rel1',
     listHtml: 'english-quotes-list.html',
     articleLayout: 'header-only',
+    extraCss: [{ file: 'redesign-article.css', version: '20261115engage1' }],
+    extraJs: [{ file: 'redesign-article.js', version: '20261123rel1' }],
   },
   'popular-voca': {
     label: '이럴 땐 영어로?',

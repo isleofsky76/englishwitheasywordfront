@@ -447,8 +447,17 @@ async function loadPost() {
         const metaHtml = typeof buildPostMetaHtml === 'function'
             ? buildPostMetaHtml(post)
             : '';
-        // HTML 구조 재생성
-        postContainer.innerHTML = `
+        let usedRedesign = false;
+        if (typeof mountRedesignArticle === 'function') {
+            usedRedesign = await mountRedesignArticle(postContainer, post, {
+                boardKey: 'english-quotes',
+                apiBaseUrl: API_BASE_URL,
+                convertedMessage: convertedMessage,
+                enableRelated: true
+            });
+        }
+        if (!usedRedesign) {
+            postContainer.innerHTML = `
             <div id="post-header">
                 <h2 id="post-title">${escapeHtml(post.title || '제목 없음')}</h2>
                 ${metaHtml}
@@ -457,7 +466,8 @@ async function loadPost() {
                 <div id="post-message" class="post-message-body cm-blog">${convertedMessage || '<span style="color: #999;">내용이 없습니다.</span>'}</div>
             </div>
         `;
-        
+        }
+
         // 게시글 내용 복사 시 HTML 태그 제거하고 순수 텍스트만 복사
         const postMessage = document.getElementById('post-message');
         if (postMessage) {
@@ -465,12 +475,9 @@ async function loadPost() {
                 const selection = window.getSelection();
                 if (selection.rangeCount > 0) {
                     const range = selection.getRangeAt(0);
-                    // 선택된 영역의 순수 텍스트만 추출
                     const selectedText = range.toString();
-                    
-                    // 클립보드에 순수 텍스트만 넣기
                     e.clipboardData.setData('text/plain', selectedText);
-                    e.preventDefault(); // 기본 동작 방지 (HTML 복사 방지)
+                    e.preventDefault();
                 }
             });
         }
@@ -478,6 +485,7 @@ async function loadPost() {
         if (postContent) attachVocabularyWebTTS(postContent);
 
         if (typeof markViewpostReady === 'function') markViewpostReady();
+        else if (typeof markArticleReady === 'function') markArticleReady();
         else {
             document.documentElement.classList.add('rd-ready');
             if (document.body) document.body.classList.add('rd-ready');
@@ -505,5 +513,34 @@ async function loadPost() {
     }
 }
 
-loadPost();
+function eqAssetBase() {
+    const scripts = document.querySelectorAll('script[src]');
+    for (let i = 0; i < scripts.length; i += 1) {
+        const src = scripts[i].getAttribute('src') || '';
+        if (/page30_viewpost_english_quotes\.js/.test(src)) return src.replace(/[^/]+$/, '');
+    }
+    return '';
+}
+function eqLoadScript(src) {
+    return new Promise((resolve, reject) => {
+        if (document.querySelector('script[src="' + src + '"]')) { resolve(); return; }
+        const s = document.createElement('script');
+        s.src = src;
+        s.onload = () => resolve();
+        s.onerror = () => reject(new Error(src));
+        document.head.appendChild(s);
+    });
+}
+(async function eqBoot() {
+    const base = eqAssetBase();
+    try {
+        if (!window.BoardListConfig) await eqLoadScript(base + 'board-list-config.js?v=20261020auto2');
+        if (typeof mountRedesignArticle !== 'function') {
+            await eqLoadScript(base + 'redesign-article.js?v=20261123rel1');
+        }
+    } catch (e) {
+        console.warn(e);
+    }
+    loadPost();
+})();
 

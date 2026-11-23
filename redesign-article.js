@@ -1832,6 +1832,14 @@
   /**
    * Fetch related + render. Returns true if redesign applied.
    */
+  function relatedThumbFromMessage(message) {
+    var raw = String(message || '');
+    var yt = raw.match(/img\.youtube\.com\/vi\/([a-zA-Z0-9_-]+)\//i);
+    if (yt) return 'https://img.youtube.com/vi/' + yt[1] + '/hqdefault.jpg';
+    var img = raw.match(/<img[^>]+src=["']([^"']+)["']/i);
+    return img ? img[1] : '';
+  }
+
   function mapRelatedEntries(entries, post, cfg) {
     var newest = (entries || []).slice().reverse();
     return newest
@@ -1843,13 +1851,66 @@
           ? '/' + String(cfg.postPath).replace(/^\/+|\/+$/g, '') + '/' + encodeURIComponent(slug) + '/'
           : '/' + String(cfg.postPage || '').replace(/^\//, '') +
             (slug ? ('?slug=' + encodeURIComponent(slug)) : '');
-        var thumbMatch = String(e.message || '').match(/img\.youtube\.com\/vi\/([a-zA-Z0-9_-]+)\//i);
         return {
           href: href,
           title: global.BoardListConfig.cleanTitle(e, cfg && cfg.key),
-          thumb: thumbMatch ? 'https://img.youtube.com/vi/' + thumbMatch[1] + '/hqdefault.jpg' : ''
+          thumb: relatedThumbFromMessage(e.message)
         };
       });
+  }
+
+  function relatedLinksHtml(related) {
+    return (related || []).slice(0, 3).map(function (r) {
+      var thumb = r.thumb
+        ? '<div class="rd-side-related-img"><img src="' + escapeAttr(r.thumb) + '" alt=""></div>'
+        : '<div class="rd-side-related-img"></div>';
+      return '<a href="' + escapeAttr(r.href) + '">' + thumb +
+        '<span class="rd-side-related-title">' + escapeHtml(r.title) + '</span></a>';
+    }).join('');
+  }
+
+  /** header-only(영어 명언 등): 본문 유지 + 함께 읽기 사이드바 */
+  function renderHeaderOnlyWithRelated(container, post, options) {
+    if (!container || !post) return false;
+    options = options || {};
+    var title = post.title || '';
+    var metaHtml = typeof global.buildPostMetaHtml === 'function'
+      ? global.buildPostMetaHtml(post)
+      : '';
+    var bodyHtml = options.convertedMessage != null
+      ? options.convertedMessage
+      : String(post.message || '');
+    var relatedBlock = '<div class="rd-side-block"><h2>함께 읽기</h2><div class="rd-side-related">' +
+      relatedLinksHtml(options.related || []) +
+      '</div></div>';
+    container.innerHTML =
+      '<div class="rd-article-head">' +
+        '<h1 id="post-title">' + escapeHtml(title) + '</h1>' +
+        '<div class="rd-article-meta" id="post-meta">' + metaHtml + '<div id="rd-like-host" hidden></div></div>' +
+      '</div>' +
+      '<div class="rd-article-layout">' +
+        '<div class="rd-article-main" id="post-content">' +
+          '<div id="post-message" class="rd-article-fallback post-message-body cm-blog">' +
+            (bodyHtml || '<span style="color:#999;">내용이 없습니다.</span>') +
+          '</div>' +
+        '</div>' +
+        '<aside class="rd-article-side">' + relatedBlock +
+          '<div class="rd-side-block" id="rd-ad-host"></div>' +
+        '</aside>' +
+      '</div>';
+    return true;
+  }
+
+  function fetchRelatedSidebar(post, options, cfg) {
+    if (!options || !options.apiBaseUrl || !cfg || !cfg.apiPath || !post) return;
+    fetch(options.apiBaseUrl + cfg.apiPath, { cache: 'no-store' })
+      .then(function (res) { return res.ok ? res.json() : null; })
+      .then(function (data) {
+        if (!data) return;
+        var entries = Array.isArray(data) ? data : (data.entries || []);
+        fillRelatedSidebar(mapRelatedEntries(entries, post, cfg));
+      })
+      .catch(function () { /* ignore */ });
   }
 
   function fillRelatedSidebar(related) {
@@ -1979,9 +2040,30 @@
       markArticleReady();
       return false;
     }
-    /* header-only 등: 크롬만 */
+    /* header-only: 본문 유지 + 함께 읽기 (영어 명언 등) */
     if (!wantsExpressionCards(cfg)) {
       applyRedesignChrome(options.boardKey);
+      var wantRelatedShell =
+        options.convertedMessage != null ||
+        options.boardKey === 'english-quotes' ||
+        options.enableRelated === true;
+      if (wantRelatedShell && container && post) {
+        var existingMsg = container.querySelector('#post-message');
+        var body =
+          options.convertedMessage != null
+            ? options.convertedMessage
+            : (existingMsg ? existingMsg.innerHTML : String(post.message || ''));
+        renderHeaderOnlyWithRelated(container, post, {
+          convertedMessage: body,
+          related: options.related || []
+        });
+        if (!(options.related && options.related.length)) {
+          fetchRelatedSidebar(post, options, cfg);
+        }
+        ensureSiteFooter();
+        markArticleReady();
+        return true;
+      }
       markArticleReady();
       return false;
     }
@@ -1995,15 +2077,8 @@
       next: options.next,
       enableComments: options.enableComments
     });
-    if (ok && !related.length && options.apiBaseUrl && cfg && cfg.apiPath) {
-      fetch(options.apiBaseUrl + cfg.apiPath, { cache: 'no-store' })
-        .then(function (res) { return res.ok ? res.json() : null; })
-        .then(function (data) {
-          if (!data) return;
-          var entries = Array.isArray(data) ? data : (data.entries || []);
-          fillRelatedSidebar(mapRelatedEntries(entries, post, cfg));
-        })
-        .catch(function () { /* ignore */ });
+    if (ok && !related.length) {
+      fetchRelatedSidebar(post, options, cfg);
     }
     if (!ok) markArticleReady();
     return ok;
