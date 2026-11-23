@@ -200,6 +200,15 @@ function attachVocabularyWebTTS(container) {
     const paragraphs = container.querySelectorAll('p');
     paragraphs.forEach((p) => {
         if (p.getAttribute('data-vv-tts') === '1') return;
+        /* 핵심 공식(→) 칸은 읽지 않음 */
+        if (
+            p.classList.contains('eq-classic') ||
+            p.classList.contains('eq-classic-ko') ||
+            p.closest('.eq-classic-block')
+        ) {
+            p.setAttribute('data-vv-tts', '1');
+            return;
+        }
 
         const lines = p.innerHTML.split(/<br\s*\/?>/i);
         const newLines = lines.map((lineHtml) => {
