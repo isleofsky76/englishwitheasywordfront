@@ -5,7 +5,7 @@
 (function (global) {
   'use strict';
 
-  var ASSET_VER = '20261115engage4';
+  var ASSET_VER = '20261125photo1';
   var QUIZ_TRACK_VER = '20261109quiz3';
   var SITE_FOOTER_VER = '20261112dark2';
   /* news-voca.js 등이 구버전 redesign을 덮어쓰지 않도록 */

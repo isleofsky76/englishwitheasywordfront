@@ -142,11 +142,15 @@ body.rd-article main#post-container:not(:has(.rd-article-layout)) {
   overflow: hidden;
 }
 .rd-yt--photo {
+  /* PC에서 width 100% + max-height만 있으면 가로로 찌그러져 얼굴이 잘림 → 비율 유지 */
+  width: min(100%, 336px); /* 420 × 4/5 */
+  max-width: 100%;
   aspect-ratio: 4 / 5;
   max-height: 420px;
 }
 .rd-yt--photo img {
   object-fit: cover;
+  object-position: top center; /* 인물 얼굴(상단) 우선 */
 }
 
 .rd-yt iframe,
