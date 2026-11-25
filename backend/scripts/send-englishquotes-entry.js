@@ -17,23 +17,23 @@ import { applySeoAfterUpload, toIsoDateOnly, SITE_ORIGIN } from './voca-seo.js';
 
 // ========== 여기만 수정 ==========
 
-const imageSrc = '/resources/perfect.png';
+const imageSrc = '/resources/mark.png';
 
 const quote = {
-  title: '완벽한 연습만이 완벽을 만든다: 빈스 롬바르디',
+  title: '앞서 나가는 비결은 시작: 마크 트웨인',
   intro:
-    '같은 동작을 그저 많이 반복한다고 해서 실력이 늘지는 않습니다. 그럴 때 마음에 새겨두면 좋은 문장이 있습니다.',
-  en: 'Practice does not make perfect. Only perfect practice makes perfect.',
-  ko: '연습이 완벽함을 만들어주지는 않습니다. 완벽한 연습만이 완벽하게 해줍니다.',
-  authorKo: '빈스 롬바르디 (Vince Lombardi)',
-  originTitle: '명언 속 배경: 전설의 미식축구 코치 빈스 롬바르디',
+    '큰 목표를 앞에 두고 계획만 세우다 보면, 정작 첫걸음은 자꾸 미뤄지기 쉽습니다. 그럴 때 마음에 새겨두면 좋은 문장이 있습니다.',
+  en: 'The secret of getting ahead is getting started.',
+  ko: '앞서 나가는 비결은 시작하는 것이다.',
+  authorKo: '마크 트웨인 (Mark Twain)',
+  originTitle: '명언 속 배경: 미국 작가 마크 트웨인',
   originBody:
-    '이 문장은 미국 미식축구 코치 빈스 롬바르디(Vince Lombardi)의 말로 알려져 있습니다. 그는 그린베이 패커스를 이끌며 엄격한 훈련과 정확한 실행을 강조했습니다. 연습의 양이 아니라, 올바른 방식으로 반복하는 질이 실력을 만든다는 점이 이 문장의 핵심입니다.',
-  classic: 'Practice alone → Not enough | Perfect practice → Perfect',
-  classicKo: '그냥 반복만으로는 부족하다. 제대로 한 연습만이 완벽으로 이어진다.',
+    '이 문장은 미국 작가 마크 트웨인(Mark Twain)의 말로 널리 알려져 있습니다. 그는 재치 있는 문장으로 삶의 진실을 짚어 내는 데 능했습니다. 앞서 가려면 완벽한 준비가 아니라, 지금 당장 시작하는 용기가 먼저라는 점이 이 문장의 핵심입니다.',
+  classic: 'Getting started → Getting ahead',
+  classicKo: '시작해야 앞서 나갈 수 있다.',
   closing:
-    '공부든 운동이든, “얼마나 했느냐”보다 “어떻게 했느냐”가 결과를 가릅니다. 대충 여러 번 하는 연습은 나쁜 습관만 굳힐 수 있습니다. 한 번을 하더라도 집중해서, 올바른 방식으로 연습하는 편이 더 멀리 갑니다.',
-  tip: '오늘 연습할 때, 횟수보다 한 번의 정확도에 먼저 집중해 보세요!',
+    '완벽한 타이밍을 기다리다 보면 기회는 자꾸 뒤로 밀립니다. 공부든 일이든, 작은 시작 하나가 방향을 만들고 속도를 붙여 줍니다. 앞서 가고 싶다면, 오늘 할 수 있는 첫 행동부터 하면 됩니다.',
+  tip: '오늘 미뤄 둔 일 중에서, 5분만 걸리는 시작 한 가지를 바로 해보세요!',
 };
 
 function escapeHtml(text) {
@@ -76,16 +76,16 @@ const entry = {
 
   nickname: 'admin',
 
-  password: 'seed_password_perfect-practice',
+  password: 'seed_password_getting-ahead-getting-started',
 
   isSecret: false,
 
-  slug: 'perfect-practice',
+  slug: 'getting-ahead-getting-started',
 
   metaDescription:
-    'Practice does not make perfect. Only perfect practice makes perfect. Vince Lombardi 영어 명언 뜻과 완벽한 연습의 힘 해설.',
+    'The secret of getting ahead is getting started. Mark Twain 영어 명언 뜻과 시작의 힘 해설.',
 
-  datePublished: '2026-11-23',
+  datePublished: '2026-11-25',
 };
 // =================================
 
