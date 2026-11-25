@@ -3,7 +3,7 @@
  * initViewpostLike({ entryId, likes, views, apiBaseUrl, board, commentsBoard, contentKey, title })
  */
 (function () {
-    var ENGAGE_VER = '20261115engage6';
+    var ENGAGE_VER = '20261125photo1';
     var COMMENTS_JS = 'board-comments.js?v=20261108pw25';
     var COMMENTS_CSS = 'board-comments.css?v=20261115engage6';
     var ARTICLE_CSS = 'redesign-article.css?v=' + ENGAGE_VER;
