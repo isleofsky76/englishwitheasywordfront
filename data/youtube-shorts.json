@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-25T09:56:28.882Z",
+  "updatedAt": "2026-11-25T21:27:45.188Z",
   "channelId": "UC4LbF7X56QIHL3Oejt8kuyw",
   "handle": "@istudyeng",
   "source": "https://www.youtube.com/feeds/videos.xml?channel_id=UC4LbF7X56QIHL3Oejt8kuyw",
@@ -8,6 +8,32 @@
   "todayOnly": false,
   "categorizedOnly": true,
   "items": [
+    {
+      "videoId": "eBrHJv1iMB0",
+      "category": "연관단어",
+      "label": "연관단어",
+      "href": "english-synonym-list.html",
+      "title": "젠슨황과 면책의 시대",
+      "rawTitle": "연관단어 | 젠슨황과 면책의 시대",
+      "publishedAt": "2026-11-25T12:00:31+00:00",
+      "publishedKst": "2026-11-25",
+      "thumbnail": "https://i.ytimg.com/vi/eBrHJv1iMB0/hqdefault.jpg",
+      "url": "https://www.youtube.com/shorts/eBrHJv1iMB0",
+      "watchUrl": "https://www.youtube.com/watch?v=eBrHJv1iMB0"
+    },
+    {
+      "videoId": "KEEDpFOoXIc",
+      "category": "연관단어",
+      "label": "연관단어",
+      "href": "english-synonym-list.html",
+      "title": "stun 망연자실하게 하다",
+      "rawTitle": "연관단어 | stun 망연자실하게 하다",
+      "publishedAt": "2026-11-25T12:00:00+00:00",
+      "publishedKst": "2026-11-25",
+      "thumbnail": "https://i.ytimg.com/vi/KEEDpFOoXIc/hqdefault.jpg",
+      "url": "https://www.youtube.com/shorts/KEEDpFOoXIc",
+      "watchUrl": "https://www.youtube.com/watch?v=KEEDpFOoXIc"
+    },
     {
       "videoId": "uIBbeyk5uao",
       "category": "연관단어",
@@ -59,110 +85,6 @@
       "thumbnail": "https://i.ytimg.com/vi/hoGUz8oR_ao/hqdefault.jpg",
       "url": "https://www.youtube.com/shorts/hoGUz8oR_ao",
       "watchUrl": "https://www.youtube.com/watch?v=hoGUz8oR_ao"
-    },
-    {
-      "videoId": "RmMcbemLnCk",
-      "category": "국제",
-      "label": "국제",
-      "href": "news-voca-list.html",
-      "title": "impinge, embroil, beneficiary",
-      "rawTitle": "오늘 뉴스에서 배운 단어 | impinge, embroil, beneficiary",
-      "publishedAt": "2026-11-25T01:00:22+00:00",
-      "publishedKst": "2026-11-25",
-      "thumbnail": "https://i.ytimg.com/vi/RmMcbemLnCk/hqdefault.jpg",
-      "url": "https://www.youtube.com/shorts/RmMcbemLnCk",
-      "watchUrl": "https://www.youtube.com/watch?v=RmMcbemLnCk"
-    },
-    {
-      "videoId": "2oy4IDOF6Og",
-      "category": "연관단어",
-      "label": "연관단어",
-      "href": "english-synonym-list.html",
-      "title": "온라인 부 과시",
-      "rawTitle": "연관단어 | 온라인 부 과시",
-      "publishedAt": "2026-11-25T01:00:03+00:00",
-      "publishedKst": "2026-11-25",
-      "thumbnail": "https://i.ytimg.com/vi/2oy4IDOF6Og/hqdefault.jpg",
-      "url": "https://www.youtube.com/shorts/2oy4IDOF6Og",
-      "watchUrl": "https://www.youtube.com/watch?v=2oy4IDOF6Og"
-    },
-    {
-      "videoId": "dCkZeKf6E00",
-      "category": "국제",
-      "label": "국제",
-      "href": "news-voca-list.html",
-      "title": "ripple, opaque, profligacy",
-      "rawTitle": "뉴스에서 배운 단어 | ripple, opaque, profligacy",
-      "publishedAt": "2026-11-24T12:00:43+00:00",
-      "publishedKst": "2026-11-24",
-      "thumbnail": "https://i.ytimg.com/vi/dCkZeKf6E00/hqdefault.jpg",
-      "url": "https://www.youtube.com/shorts/dCkZeKf6E00",
-      "watchUrl": "https://www.youtube.com/watch?v=dCkZeKf6E00"
-    },
-    {
-      "videoId": "Hwfof3uuXQI",
-      "category": "국제",
-      "label": "국제",
-      "href": "news-voca-list.html",
-      "title": "mooring, onset, unanswered",
-      "rawTitle": "뉴스에서 배운 단어 | mooring, onset, unanswered",
-      "publishedAt": "2026-11-24T07:04:25+00:00",
-      "publishedKst": "2026-11-24",
-      "thumbnail": "https://i.ytimg.com/vi/Hwfof3uuXQI/hqdefault.jpg",
-      "url": "https://www.youtube.com/shorts/Hwfof3uuXQI",
-      "watchUrl": "https://www.youtube.com/watch?v=Hwfof3uuXQI"
-    },
-    {
-      "videoId": "IAu0l1cj-eo",
-      "category": "연관단어",
-      "label": "연관단어",
-      "href": "english-synonym-list.html",
-      "title": "부모 요양",
-      "rawTitle": "연관단어 | 부모 요양",
-      "publishedAt": "2026-11-24T03:00:39+00:00",
-      "publishedKst": "2026-11-24",
-      "thumbnail": "https://i.ytimg.com/vi/IAu0l1cj-eo/hqdefault.jpg",
-      "url": "https://www.youtube.com/shorts/IAu0l1cj-eo",
-      "watchUrl": "https://www.youtube.com/watch?v=IAu0l1cj-eo"
-    },
-    {
-      "videoId": "T0UchPoHGqY",
-      "category": "연관단어",
-      "label": "연관단어",
-      "href": "english-synonym-list.html",
-      "title": "젠슨 황 복귀",
-      "rawTitle": "연관단어 | 젠슨 황 복귀",
-      "publishedAt": "2026-11-24T01:00:34+00:00",
-      "publishedKst": "2026-11-24",
-      "thumbnail": "https://i.ytimg.com/vi/T0UchPoHGqY/hqdefault.jpg",
-      "url": "https://www.youtube.com/shorts/T0UchPoHGqY",
-      "watchUrl": "https://www.youtube.com/watch?v=T0UchPoHGqY"
-    },
-    {
-      "videoId": "IjPk9Uwq1y8",
-      "category": "국제",
-      "label": "국제",
-      "href": "news-voca-list.html",
-      "title": "리비아에 정박 중이던 러시아 군함을 침몰시킨 우크라이나군의 공격 내막",
-      "rawTitle": "국제 | 리비아에 정박 중이던 러시아 군함을 침몰시킨 우크라이나군의 공격 내막",
-      "publishedAt": "2026-11-24T01:00:23+00:00",
-      "publishedKst": "2026-11-24",
-      "thumbnail": "https://i.ytimg.com/vi/IjPk9Uwq1y8/hqdefault.jpg",
-      "url": "https://www.youtube.com/shorts/IjPk9Uwq1y8",
-      "watchUrl": "https://www.youtube.com/watch?v=IjPk9Uwq1y8"
-    },
-    {
-      "videoId": "zxkSw7Ei2vY",
-      "category": "연관단어",
-      "label": "연관단어",
-      "href": "english-synonym-list.html",
-      "title": "군함, 초계함, 화물선",
-      "rawTitle": "연관단어 | 군함, 초계함, 화물선",
-      "publishedAt": "2026-11-24T01:00:06+00:00",
-      "publishedKst": "2026-11-24",
-      "thumbnail": "https://i.ytimg.com/vi/zxkSw7Ei2vY/hqdefault.jpg",
-      "url": "https://www.youtube.com/shorts/zxkSw7Ei2vY",
-      "watchUrl": "https://www.youtube.com/watch?v=zxkSw7Ei2vY"
     }
   ]
 }
