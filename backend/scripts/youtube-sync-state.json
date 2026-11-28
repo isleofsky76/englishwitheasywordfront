@@ -955,6 +955,50 @@
     "2oy4IDOF6Og": {
       "at": "2026-11-25T09:55:52.621Z",
       "title": "연관단어 | 온라인 부 과시"
+    },
+    "QRJgjz-ZhsM": {
+      "at": "2026-11-28T01:21:41.136Z",
+      "title": "연관단어 | 로봇"
+    },
+    "HpKgw3ZKAYc": {
+      "at": "2026-11-28T01:21:41.224Z",
+      "title": "연관단어 | 온화한, 평온한"
+    },
+    "ig-R6tTDD8k": {
+      "at": "2026-11-28T01:21:41.261Z",
+      "title": "연관단어 | 스트리밍 구독자 증가세 정체"
+    },
+    "5dOwYFQHRXs": {
+      "at": "2026-11-28T01:21:41.276Z",
+      "title": "산업 | 휴머노이드 로봇"
+    },
+    "YZA9RVAH6tY": {
+      "at": "2026-11-28T01:21:41.303Z",
+      "title": "연관단어 | 난독증"
+    },
+    "0_ZJ0w_d4Zg": {
+      "at": "2026-11-28T01:21:41.391Z",
+      "title": "연관단어 | 거들먹거리는, 거만한"
+    },
+    "8JTjvxFmkxQ": {
+      "at": "2026-11-28T01:21:41.548Z",
+      "title": "연관단어 | 욕구, 금욕"
+    },
+    "QDQV5qRYWps": {
+      "at": "2026-11-28T01:21:41.593Z",
+      "title": "연관단어 | 징조, 지표"
+    },
+    "K21yUDpXzos": {
+      "at": "2026-11-28T01:21:41.650Z",
+      "title": "연관단어 | 만족감"
+    },
+    "OwJobgANDZM": {
+      "at": "2026-11-28T01:21:41.753Z",
+      "title": "연관단어 | 침입 intrusion"
+    },
+    "tnFyxTeG7Sg": {
+      "at": "2026-11-28T01:22:08.090Z",
+      "title": "산업 | 젠슨 황의 복귀"
     }
   },
   "uploadedVideoIds": {
@@ -1905,7 +1949,51 @@
     "2oy4IDOF6Og": {
       "at": "2026-11-25T09:56:23.319Z",
       "board": "english-synonym"
+    },
+    "QRJgjz-ZhsM": {
+      "at": "2026-11-28T01:22:20.427Z",
+      "board": "english-synonym"
+    },
+    "HpKgw3ZKAYc": {
+      "at": "2026-11-28T01:22:35.995Z",
+      "board": "english-synonym"
+    },
+    "ig-R6tTDD8k": {
+      "at": "2026-11-28T01:22:53.518Z",
+      "board": "english-synonym"
+    },
+    "5dOwYFQHRXs": {
+      "at": "2026-11-28T01:23:06.382Z",
+      "board": "industry-news"
+    },
+    "YZA9RVAH6tY": {
+      "at": "2026-11-28T01:23:18.053Z",
+      "board": "english-synonym"
+    },
+    "0_ZJ0w_d4Zg": {
+      "at": "2026-11-28T01:23:29.992Z",
+      "board": "english-synonym"
+    },
+    "8JTjvxFmkxQ": {
+      "at": "2026-11-28T01:23:40.475Z",
+      "board": "english-synonym"
+    },
+    "QDQV5qRYWps": {
+      "at": "2026-11-28T01:23:52.416Z",
+      "board": "english-synonym"
+    },
+    "K21yUDpXzos": {
+      "at": "2026-11-28T01:24:05.509Z",
+      "board": "english-synonym"
+    },
+    "OwJobgANDZM": {
+      "at": "2026-11-28T01:24:19.778Z",
+      "board": "english-synonym"
+    },
+    "tnFyxTeG7Sg": {
+      "at": "2026-11-28T01:24:37.900Z",
+      "board": "industry-news"
     }
   },
-  "updatedAt": "2026-11-25T09:56:23.319Z"
+  "updatedAt": "2026-11-28T01:24:37.900Z"
 }

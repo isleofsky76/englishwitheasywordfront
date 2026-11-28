@@ -1,0 +1,109 @@
+{
+  "board": "english-synonym",
+  "videoId": "YZA9RVAH6tY",
+  "description": "*AI 음성과 이미지를 사용했습니다.\n\n1. **dyslexic — 난독증이 있는, 난독증이 있는 사람**  \n   He's **dyslexic**, so he has to memorize everything.  \n   그는 난독증이 있어서 모든 걸 외워야 한다.\n\n2. **dyscalculia — 수학 학습장애, 계산장애**  \n   Okay, I have **dyscalculia**.  \n   알겠어. 나한테는 계산장애가 있어.\n\n3. **literacy — 문해력, 읽고 쓰는 능력**  \n   Immigrants, protests, budget cuts, and **literacy** program.  \n   이민자, 시위, 예산 삭감, 그리고 문해 교육 프로그램.\n\n4. **aphasia — 실어증**  \n   numbness, **aphasia** and dysarthria  \n   감각 저하, 실어증, 그리고 구음장애\n\n5. **edification — 교화, 지적·도덕적 향상**  \n   I'm just telling you this for your own **edification**.  \n   그저 당신에게 도움이 되라고 이 이야기를 하는 거예요.\n\n6. **alexia — 실독증, 독서불능증 (=word blindness)**  \n   I had **alexia** as a child.  \n   나는 어릴 때 실독증이 있었다.\n\n------\n\n\"All sentences are sourced from global news outlets for English practice. They do not reflect my personal views or financial/political advice.\" Thank you.\n\n-----\n\n\"We constantly provide content featuring key English vocabulary from the latest issues of major news outlets such as The Guardian, BBC, CNN, WSJ, and The Economist. \"\n\nhttps://englisheasystudy.com\n\n#시사영단어 #영어듣기 #영어공부 #영어단어 #연관단어 #영어 #american #english #korean",
+  "title": "난독증",
+  "rawTitle": "연관단어 | 난독증",
+  "slug": "dyslexic-dyscalculia-literacy-aphasia-edification-related-words",
+  "metaDescription": "난독증 연관단어. dyslexic, dyscalculia, literacy, aphasia, edification, alexia 등.",
+  "password": "seed_english_synonym_dyslexic-dyscalculia-literacy-aphasia-edificatio",
+  "datePublished": "2026-11-27",
+  "intro": [
+    "난독증 연관단어를 정리합니다. *AI 음성과 이미지를 사용했습니다."
+  ],
+  "words": [
+    {
+      "title": "1. 난독증이 있는, 난독증이 있는 사람",
+      "narrative": [
+        "He's **dyslexic**, so he has to memorize everything. / 그는 난독증이 있어서 모든 걸 외워야 한다. cf. dyslexic: 난독증이 있는, 난독증이 있는 사람"
+      ]
+    },
+    {
+      "title": "2. 수학 학습장애, 계산장애",
+      "narrative": [
+        "Okay, I have **dyscalculia**. / 알겠어. 나한테는 계산장애가 있어. cf. dyscalculia: 수학 학습장애, 계산장애"
+      ]
+    },
+    {
+      "title": "3. 문해력, 읽고 쓰는 능력",
+      "narrative": [
+        "Immigrants, protests, budget cuts, and **literacy** program. / 이민자, 시위, 예산 삭감, 그리고 문해 교육 프로그램. cf. literacy: 문해력, 읽고 쓰는 능력"
+      ]
+    },
+    {
+      "title": "4. 실어증",
+      "narrative": [
+        "numbness, **aphasia** and dysarthria / 감각 저하, 실어증, 그리고 구음장애 cf. aphasia: 실어증"
+      ]
+    },
+    {
+      "title": "5. 교화, 지적·도덕적 향상",
+      "narrative": [
+        "I'm just telling you this for your own **edification**. / 그저 당신에게 도움이 되라고 이 이야기를 하는 거예요. cf. edification: 교화, 지적·도덕적 향상"
+      ]
+    },
+    {
+      "title": "6. 실독증, 독서불능증 (=word blindness)",
+      "narrative": [
+        "I had **alexia** as a child. / 나는 어릴 때 실독증이 있었다. cf. alexia: 실독증, 독서불능증 (=word blindness)"
+      ]
+    }
+  ],
+  "wordMeta": [
+    {
+      "num": 1,
+      "expression": "dyslexic",
+      "meaning": "난독증이 있는, 난독증이 있는 사람",
+      "exampleEn": "He's **dyslexic**, so he has to memorize everything.",
+      "exampleKo": "그는 난독증이 있어서 모든 걸 외워야 한다."
+    },
+    {
+      "num": 2,
+      "expression": "dyscalculia",
+      "meaning": "수학 학습장애, 계산장애",
+      "exampleEn": "Okay, I have **dyscalculia**.",
+      "exampleKo": "알겠어. 나한테는 계산장애가 있어."
+    },
+    {
+      "num": 3,
+      "expression": "literacy",
+      "meaning": "문해력, 읽고 쓰는 능력",
+      "exampleEn": "Immigrants, protests, budget cuts, and **literacy** program.",
+      "exampleKo": "이민자, 시위, 예산 삭감, 그리고 문해 교육 프로그램."
+    },
+    {
+      "num": 4,
+      "expression": "aphasia",
+      "meaning": "실어증",
+      "exampleEn": "numbness, **aphasia** and dysarthria",
+      "exampleKo": "감각 저하, 실어증, 그리고 구음장애"
+    },
+    {
+      "num": 5,
+      "expression": "edification",
+      "meaning": "교화, 지적·도덕적 향상",
+      "exampleEn": "I'm just telling you this for your own **edification**.",
+      "exampleKo": "그저 당신에게 도움이 되라고 이 이야기를 하는 거예요."
+    },
+    {
+      "num": 6,
+      "expression": "alexia",
+      "meaning": "실독증, 독서불능증 (=word blindness)",
+      "exampleEn": "I had **alexia** as a child.",
+      "exampleKo": "나는 어릴 때 실독증이 있었다."
+    }
+  ],
+  "source": {
+    "text": "",
+    "url": ""
+  },
+  "youtube": "https://www.youtube.com/shorts/YZA9RVAH6tY",
+  "thumbnail": "https://i.ytimg.com/vi/YZA9RVAH6tY/hqdefault.jpg",
+  "publishedAt": "2026-11-27T01:00:29+00:00",
+  "parsedWordCount": 6,
+  "pronunciations": {},
+  "status": "uploaded",
+  "createdAt": "2026-11-28T01:21:41.316Z",
+  "uploadedAt": "2026-11-28T01:23:18.038Z",
+  "quizSlug": "dyslexic-dyscalculia-literacy-aphasia-edification-quiz"
+}
